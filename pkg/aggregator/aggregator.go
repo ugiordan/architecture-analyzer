@@ -63,7 +63,7 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 		components = append(components, data)
 	}
 
-	// Build aggregated structures
+	// Build aggregated structures with deduplication
 	var (
 		allCRDs             []map[string]interface{}
 		allServices         []map[string]interface{}
@@ -74,57 +74,95 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 	)
 	crdOwners := make(map[string]string)
 
+	// Dedup tracking maps
+	seenComponents := make(map[string]bool)
+	seenCRDs := make(map[string]bool)       // key: "owner|group|version|kind"
+	seenServices := make(map[string]bool)   // key: "owner|name|type"
+	seenSecrets := make(map[string]bool)    // key: "owner|name"
+	seenRBACRoles := make(map[string]bool)  // key: "owner|name"
+	seenDepEdges := make(map[string]bool)   // key: "from|to|type"
+
 	for _, compData := range components {
 		compName := getString(compData, "component", "unknown")
-		componentNames = append(componentNames, compName)
+		if !seenComponents[compName] {
+			seenComponents[compName] = true
+			componentNames = append(componentNames, compName)
+		}
 
-		// CRDs
+		// CRDs: dedup on (owner, group, version, kind)
 		for _, crd := range getSliceOfMaps(compData, "crds") {
+			kind := getString(crd, "kind", "")
+			key := compName + "|" + getString(crd, "group", "") + "|" + getString(crd, "version", "") + "|" + kind
+			if seenCRDs[key] {
+				continue
+			}
+			seenCRDs[key] = true
 			crdWithOwner := copyMap(crd)
 			crdWithOwner["owner"] = compName
 			allCRDs = append(allCRDs, crdWithOwner)
-			if kind := getString(crd, "kind", ""); kind != "" {
+			if kind != "" {
 				crdOwners[kind] = compName
 			}
 		}
 
-		// Services
+		// Services: dedup on (owner, name, type)
 		for _, svc := range getSliceOfMaps(compData, "services") {
+			key := compName + "|" + getString(svc, "name", "") + "|" + getString(svc, "type", "")
+			if seenServices[key] {
+				continue
+			}
+			seenServices[key] = true
 			s := copyMap(svc)
 			s["owner"] = compName
 			allServices = append(allServices, s)
 		}
 
-		// Secrets
+		// Secrets: dedup on (owner, name)
 		for _, secret := range getSliceOfMaps(compData, "secrets_referenced") {
+			key := compName + "|" + getString(secret, "name", "")
+			if seenSecrets[key] {
+				continue
+			}
+			seenSecrets[key] = true
 			s := copyMap(secret)
 			s["owner"] = compName
 			allSecrets = append(allSecrets, s)
 		}
 
-		// RBAC cluster roles
+		// RBAC cluster roles: dedup on (owner, name)
 		rbac, _ := compData["rbac"].(map[string]interface{})
 		if rbac != nil {
 			for _, cr := range getSliceOfMaps(rbac, "cluster_roles") {
+				key := compName + "|" + getString(cr, "name", "")
+				if seenRBACRoles[key] {
+					continue
+				}
+				seenRBACRoles[key] = true
 				c := copyMap(cr)
 				c["owner"] = compName
 				allRBACClusterRoles = append(allRBACClusterRoles, c)
 			}
 		}
 
-		// Dependencies (internal ODH)
+		// Dependencies (internal ODH): dedup on (from, to, type)
 		deps, _ := compData["dependencies"].(map[string]interface{})
 		if deps != nil {
 			for _, odh := range getSliceOfMaps(deps, "internal_odh") {
+				to := getString(odh, "component", "")
+				key := compName + "|" + to + "|go-module"
+				if seenDepEdges[key] {
+					continue
+				}
+				seenDepEdges[key] = true
 				dependencyGraph = append(dependencyGraph, map[string]string{
 					"from": compName,
-					"to":   getString(odh, "component", ""),
+					"to":   to,
 					"type": "go-module",
 				})
 			}
 		}
 
-		// Cross-component watches
+		// Cross-component watches: dedup on (from, to, type)
 		for _, watch := range getSliceOfMaps(compData, "controller_watches") {
 			if getString(watch, "type", "") != "For" {
 				continue
@@ -135,10 +173,16 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 				kind = gvk[idx+1:]
 			}
 			if owner, ok := crdOwners[kind]; ok && owner != compName {
+				edgeType := "watches-crd:" + kind
+				key := compName + "|" + owner + "|" + edgeType
+				if seenDepEdges[key] {
+					continue
+				}
+				seenDepEdges[key] = true
 				dependencyGraph = append(dependencyGraph, map[string]string{
 					"from": compName,
 					"to":   owner,
-					"type": "watches-crd:" + kind,
+					"type": edgeType,
 				})
 			}
 		}
@@ -174,8 +218,19 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 		compNamesIface[i] = n
 	}
 
-	compDataIface := make([]interface{}, len(components))
-	for i, c := range components {
+	// Dedup component_data: keep first occurrence per component name
+	seenCompData := make(map[string]bool)
+	var dedupedComponents []map[string]interface{}
+	for _, c := range components {
+		name := getString(c, "component", "unknown")
+		if seenCompData[name] {
+			continue
+		}
+		seenCompData[name] = true
+		dedupedComponents = append(dedupedComponents, c)
+	}
+	compDataIface := make([]interface{}, len(dedupedComponents))
+	for i, c := range dedupedComponents {
 		compDataIface[i] = c
 	}
 
@@ -183,7 +238,7 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 		"platform":           "OpenShift AI",
 		"aggregated_at":      time.Now().UTC().Format(time.RFC3339),
 		"components":         compNamesIface,
-		"component_count":    len(components),
+		"component_count":    len(dedupedComponents),
 		"crds":               toIfaceSlice(allCRDs),
 		"crd_ownership":      crdOwnershipIface,
 		"services":           toIfaceSlice(allServices),

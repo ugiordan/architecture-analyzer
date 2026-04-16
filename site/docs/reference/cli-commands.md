@@ -80,6 +80,21 @@ rhoai-analyzer aggregate <results-dir> --output-dir <dir>
 
 Discovers all `component-architecture.json` files in the results directory recursively.
 
+## rhoai-analyzer docs
+
+Generate browsable documentation pages from architecture JSON.
+
+```bash
+rhoai-analyzer docs --output-dir <dir> <json-file>
+```
+
+| Flag | Description |
+|------|-------------|
+| `--output-dir` | Directory for generated markdown pages (default: `docs`) |
+| `--prefix` | Path prefix for the nav snippet output |
+
+Auto-detects whether the input is a single component or aggregated platform JSON. For platform data, generates per-component deep-dive pages under `components/`. Outputs a mkdocs.yml nav snippet for integration.
+
 ## rhoai-analyzer extract-schema
 
 Extract CRD JSON schemas for contract validation.

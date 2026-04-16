@@ -1,0 +1,30 @@
+# kuberay: Network
+
+## Service Map
+
+```mermaid
+graph LR
+    classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
+
+    kuberay["kuberay"]:::component
+    kuberay --> svc_0["kuberay-operator\nClusterIP: 8080/TCP"]:::svc
+    kuberay --> svc_1["webhook-service\nClusterIP: 443/TCP"]:::svc
+```
+
+### Services
+
+| Name | Type | Ports | Source |
+|------|------|-------|--------|
+| kuberay-operator | ClusterIP | 8080/TCP | `ray-operator/config/manager/service.yaml` |
+| webhook-service | ClusterIP | 443/TCP | `ray-operator/config/webhook/service.yaml` |
+
+### Ingress / Routing
+
+| Kind | Name | Hosts | Paths | TLS | Source |
+|------|------|-------|-------|-----|--------|
+| Ingress | rayclient-ingress | localhost | / | no | `ray-operator/config/samples/ingress-rayclient-tls.yaml` |
+
+!!! warning "No Network Policies"
+    No NetworkPolicy resources found. All pod-to-pod traffic is allowed by default.
+

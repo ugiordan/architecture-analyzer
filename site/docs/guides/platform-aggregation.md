@@ -59,8 +59,26 @@ Cross-component network policies showing which components can communicate and th
 The aggregator produces:
 
 - `platform-architecture.json`: Merged data with cross-references
-- `platform-report.md`: Platform-level report with all cross-component findings
+- `PLATFORM.md`: Platform-level report with all cross-component findings
 - Mermaid diagrams showing the full platform topology
+
+### Generating browsable documentation
+
+The `docs` command generates a full set of markdown pages with embedded mermaid diagrams from the aggregated JSON, ready to drop into any mkdocs site:
+
+```bash
+rhoai-analyzer docs --output-dir site/docs/platform platform-output/platform-architecture.json
+```
+
+This produces:
+
+- Platform overview with dependency graph
+- Network topology with service map diagrams
+- RBAC surface with permission scope visualization
+- Secrets inventory with distribution diagrams
+- Per-component deep-dive pages (overview, network, RBAC, security, dataflow) with inline mermaid
+
+See the [RHOAI Platform](../rhoai-platform/index.md) section for a live example generated from 11 RHOAI repositories.
 
 ## Batch analysis with scan config
 

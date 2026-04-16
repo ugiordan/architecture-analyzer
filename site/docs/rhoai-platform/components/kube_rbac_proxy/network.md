@@ -1,0 +1,22 @@
+# kube-rbac-proxy: Network
+
+## Service Map
+
+```mermaid
+graph LR
+    classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
+
+    kube_rbac_proxy["kube-rbac-proxy"]:::component
+    kube_rbac_proxy --> svc_0["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
+```
+
+### Services
+
+| Name | Type | Ports | Source |
+|------|------|-------|--------|
+| kube-rbac-proxy | ClusterIP | 8443/TCP | `test/kubetest/testtemplates/data/service.yaml` |
+
+!!! warning "No Network Policies"
+    No NetworkPolicy resources found. All pod-to-pod traffic is allowed by default.
+

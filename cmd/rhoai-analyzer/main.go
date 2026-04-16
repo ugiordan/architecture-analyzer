@@ -64,6 +64,8 @@ func main() {
 		err = cmdGraph(args)
 	case "domains":
 		err = cmdDomains()
+	case "docs":
+		err = cmdDocs(args)
 	case "full-analysis":
 		err = cmdFullAnalysis(args)
 	case "version":
@@ -92,6 +94,7 @@ Architecture commands:
   render <json-file>                   Render diagrams from architecture JSON
   analyze <repo-path>                  Extract + render in one step
   aggregate <results-dir>              Aggregate multiple component JSONs into platform view
+  docs <json-file>                     Generate browsable documentation site from architecture JSON
 
 Contract validation commands:
   extract-schema <repo-path>           Extract CRD JSON schemas from a repository
@@ -233,6 +236,46 @@ func cmdAggregate(args []string) error {
 		return err
 	}
 	fmt.Printf("Rendered %d platform diagram(s) to: %s\n", len(diagrams), diagramsDir)
+	return nil
+}
+
+// cmdDocs generates a browsable documentation site from architecture JSON.
+func cmdDocs(args []string) error {
+	fs := flag.NewFlagSet("docs", flag.ExitOnError)
+	outputDir := fs.String("output-dir", "docs", "Output directory for generated docs")
+	prefix := fs.String("prefix", "", "Path prefix for nav snippet (e.g. 'rhoai-platform')")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: rhoai-analyzer docs <json-file> [--output-dir dir] [--prefix path]")
+	}
+
+	data, err := loadJSON(fs.Arg(0))
+	if err != nil {
+		return err
+	}
+
+	pages := renderer.RenderDocs(data)
+
+	for _, page := range pages {
+		outPath := filepath.Join(*outputDir, page.Path)
+		if err := os.MkdirAll(filepath.Dir(outPath), 0o755); err != nil {
+			return fmt.Errorf("creating directory for %s: %w", outPath, err)
+		}
+		if err := os.WriteFile(outPath, []byte(page.Content), 0o644); err != nil {
+			return fmt.Errorf("writing %s: %w", outPath, err)
+		}
+	}
+
+	fmt.Printf("Generated %d documentation pages to: %s\n", len(pages), *outputDir)
+
+	// Print nav snippet
+	navSnippet := renderer.NavSnippet(pages, *prefix)
+	if navSnippet != "" {
+		fmt.Println("\nmkdocs.yml nav snippet:")
+		fmt.Println(navSnippet)
+	}
+
 	return nil
 }
 

@@ -115,6 +115,80 @@ func TestAggregate_SingleComponent(t *testing.T) {
 	}
 }
 
+func TestAggregate_DeduplicatesSameComponent(t *testing.T) {
+	dir := t.TempDir()
+
+	// Write the same component JSON in two subdirectories (simulates
+	// duplicate discovery from nested output dirs)
+	compData := map[string]interface{}{
+		"component": "comp-a",
+		"crds": []interface{}{
+			map[string]interface{}{"kind": "Widget", "group": "example.io", "version": "v1"},
+		},
+		"services": []interface{}{
+			map[string]interface{}{"name": "svc-a", "type": "ClusterIP"},
+		},
+		"secrets_referenced": []interface{}{
+			map[string]interface{}{"name": "secret-a", "type": "Opaque"},
+		},
+		"rbac": map[string]interface{}{
+			"cluster_roles": []interface{}{
+				map[string]interface{}{"name": "comp-a-role", "rules": []interface{}{}},
+			},
+		},
+		"dependencies": map[string]interface{}{
+			"internal_odh": []interface{}{
+				map[string]interface{}{"component": "comp-b"},
+			},
+		},
+		"controller_watches": []interface{}{},
+	}
+	raw, _ := json.Marshal(compData)
+
+	for _, sub := range []string{"dir1", "dir2"} {
+		d := filepath.Join(dir, sub)
+		os.MkdirAll(d, 0o755)
+		os.WriteFile(filepath.Join(d, "component-architecture.json"), raw, 0o644)
+	}
+
+	result, err := Aggregate(dir)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Component should appear once
+	components := result["components"].([]interface{})
+	if len(components) != 1 {
+		t.Errorf("expected 1 unique component, got %d", len(components))
+	}
+
+	// Each collection should be deduplicated
+	crds := result["crds"].([]interface{})
+	if len(crds) != 1 {
+		t.Errorf("expected 1 CRD after dedup, got %d", len(crds))
+	}
+
+	services := result["services"].([]interface{})
+	if len(services) != 1 {
+		t.Errorf("expected 1 service after dedup, got %d", len(services))
+	}
+
+	secrets := result["secrets_referenced"].([]interface{})
+	if len(secrets) != 1 {
+		t.Errorf("expected 1 secret after dedup, got %d", len(secrets))
+	}
+
+	rbac := result["rbac_cluster_roles"].([]interface{})
+	if len(rbac) != 1 {
+		t.Errorf("expected 1 RBAC role after dedup, got %d", len(rbac))
+	}
+
+	deps := result["dependency_graph"].([]interface{})
+	if len(deps) != 1 {
+		t.Errorf("expected 1 dependency edge after dedup, got %d", len(deps))
+	}
+}
+
 func TestAggregate_MultipleComponents(t *testing.T) {
 	dir := t.TempDir()
 
