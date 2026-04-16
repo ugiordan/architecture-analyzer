@@ -1,8 +1,28 @@
 # odh-dashboard: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (147 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| odh-dashboard | ClusterRole | 40 |  |
+| servingruntimes-config-updater | Role | 2 |  |
+| odh-dashboard | Role | 17 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| odh-dashboard-auth-delegator | ClusterRoleBinding | system:auth-delegator | ServiceAccount/odh-dashboard |
+| odh-dashboard-monitoring | ClusterRoleBinding | cluster-monitoring-view | ServiceAccount/odh-dashboard |
+| odh-dashboard | ClusterRoleBinding | odh-dashboard | ServiceAccount/odh-dashboard |
+| cluster-image-pullers | RoleBinding | system:image-puller | Group/system:serviceaccounts |
+| servingruntimes-config-updater | RoleBinding | servingruntimes-config-updater | Group/system:authenticated |
+| odh-dashboard | RoleBinding | odh-dashboard | ServiceAccount/odh-dashboard |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -154,6 +174,8 @@ graph TD
     r_odh_dashboard -->|get, list, watch, create, update, patch, delete| res_71["nim.opendatahub.io: accounts"]
     class res_71 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

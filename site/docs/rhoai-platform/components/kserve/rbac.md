@@ -1,8 +1,25 @@
 # kserve: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (119 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| kserve-proxy-role | ClusterRole | 2 |  |
+| kserve-manager-role | ClusterRole | 45 |  |
+| kserve-leader-election-role | Role | 4 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| kserve-proxy-rolebinding | ClusterRoleBinding | kserve-proxy-role | ServiceAccount/kserve-controller-manager |
+| kserve-manager-rolebinding | ClusterRoleBinding | kserve-manager-role | ServiceAccount/kserve-controller-manager |
+| kserve-leader-election-rolebinding | RoleBinding | kserve-leader-election-role | ServiceAccount/kserve-controller-manager |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -126,6 +143,8 @@ graph TD
     r_kserve_leader_election_role -->|create| res_57["core: events"]
     class res_57 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

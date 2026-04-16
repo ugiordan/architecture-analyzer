@@ -1,8 +1,29 @@
 # model-registry-operator: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (93 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| metrics-reader | ClusterRole | 0 |  |
+| proxy-role | ClusterRole | 2 |  |
+| modelregistry-admin-role | ClusterRole | 2 | yes |
+| modelregistry-editor-role | ClusterRole | 2 |  |
+| modelregistry-viewer-role | ClusterRole | 2 |  |
+| manager-role | ClusterRole | 27 |  |
+| leader-election-role | Role | 3 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| proxy-rolebinding | ClusterRoleBinding | proxy-role | ServiceAccount/controller-manager |
+| manager-rolebinding | ClusterRoleBinding | manager-role | ServiceAccount/controller-manager |
+| leader-election-rolebinding | RoleBinding | leader-election-role | ServiceAccount/controller-manager |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -100,6 +121,8 @@ graph TD
     r_leader_election_role -->|create, patch| res_44["core: events"]
     class res_44 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

@@ -1,8 +1,31 @@
 # odh-model-controller: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (131 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| account-editor-role | ClusterRole | 2 |  |
+| account-viewer-role | ClusterRole | 2 |  |
+| proxy-role | ClusterRole | 2 |  |
+| kserve-prometheus-k8s | ClusterRole | 3 |  |
+| metrics-auth-role | ClusterRole | 2 |  |
+| metrics-reader | ClusterRole | 0 |  |
+| odh-model-controller-role | ClusterRole | 41 |  |
+| leader-election-role | Role | 3 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| proxy-rolebinding | ClusterRoleBinding | proxy-role | ServiceAccount/odh-model-controller |
+| metrics-auth-rolebinding | ClusterRoleBinding | metrics-auth-role | ServiceAccount/controller-manager |
+| odh-model-controller-rolebinding-opendatahub | ClusterRoleBinding | odh-model-controller-role | ServiceAccount/odh-model-controller |
+| leader-election-rolebinding | RoleBinding | leader-election-role | ServiceAccount/odh-model-controller |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -138,6 +161,8 @@ graph TD
     r_leader_election_role -->|create, patch| res_63["core: events"]
     class res_63 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

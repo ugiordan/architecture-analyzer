@@ -1,8 +1,43 @@
 # opendatahub-operator: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (97 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| metrics-reader | ClusterRole | 0 |  |
+| dashboard-editor-role | ClusterRole | 2 |  |
+| dashboard-viewer-role | ClusterRole | 2 |  |
+| datasciencepipelines-editor-role | ClusterRole | 2 |  |
+| datasciencepipelines-viewer-role | ClusterRole | 2 |  |
+| kserve-editor-role | ClusterRole | 2 |  |
+| kserve-viewer-role | ClusterRole | 2 |  |
+| kueue-editor-role | ClusterRole | 2 |  |
+| kueue-viewer-role | ClusterRole | 2 |  |
+| modelregistry-editor-role | ClusterRole | 2 |  |
+| modelregistry-viewer-role | ClusterRole | 2 |  |
+| ray-editor-role | ClusterRole | 2 |  |
+| ray-viewer-role | ClusterRole | 2 |  |
+| trainingoperator-editor-role | ClusterRole | 2 |  |
+| trainingoperator-viewer-role | ClusterRole | 2 |  |
+| trustyai-editor-role | ClusterRole | 2 |  |
+| trustyai-viewer-role | ClusterRole | 2 |  |
+| workbenches-editor-role | ClusterRole | 2 |  |
+| workbenches-viewer-role | ClusterRole | 2 |  |
+| auth-editor-role | ClusterRole | 2 |  |
+| auth-viewer-role | ClusterRole | 2 |  |
+| monitoring-editor-role | ClusterRole | 2 |  |
+| monitoring-viewer-role | ClusterRole | 2 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| controller-manager-rolebinding | ClusterRoleBinding | controller-manager-role | ServiceAccount/controller-manager |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -104,6 +139,8 @@ graph TD
     cr_monitoring_viewer_role -->|get| res_46["services.platform.opendatahub.io: monitorings/status"]
     class res_46 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

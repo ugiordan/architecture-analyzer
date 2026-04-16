@@ -2,23 +2,16 @@
 
 ## Service Map
 
+*1 unique services (11 total, duplicates from test fixtures collapsed).*
+
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef component fill:#3498db,stroke:#2980b9,color:#fff
 
     kube_auth_proxy["kube-auth-proxy"]:::component
-    kube_auth_proxy --> svc_0["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_1["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_2["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_3["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_4["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_5["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_6["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_7["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_8["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_9["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
-    kube_auth_proxy --> svc_10["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::svc
+    kube_auth_proxy --> svc_0["kube-rbac-proxy\nClusterIP: 8443/TCP"]:::test
 ```
 
 ### Services

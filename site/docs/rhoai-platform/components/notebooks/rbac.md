@@ -1,14 +1,6 @@
 # notebooks: RBAC
 
-## RBAC Hierarchy
-
-ServiceAccount bindings, roles, and resource permissions.
-
-```mermaid
-graph TD
-    %% RBAC hierarchy for notebooks
-    classDef sa fill:#4a90d9,stroke:#2c5f8a,color:#fff
-    classDef role fill:#e8a838,stroke:#b07828,color:#fff
-    classDef resource fill:#5cb85c,stroke:#3d8b3d,color:#fff
-```
+!!! info "No RBAC Resources"
+    This component does not define any ClusterRoles, Roles, or RoleBindings.
+    It may operate as a sidecar or library used by other components that define their own RBAC.
 

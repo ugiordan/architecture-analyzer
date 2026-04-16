@@ -5,6 +5,7 @@
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef component fill:#3498db,stroke:#2980b9,color:#fff
 
     odh_dashboard["odh-dashboard"]:::component

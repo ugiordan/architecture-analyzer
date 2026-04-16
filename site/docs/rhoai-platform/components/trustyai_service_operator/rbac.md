@@ -1,8 +1,34 @@
 # trustyai-service-operator: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (151 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| metrics-reader | ClusterRole | 0 |  |
+| proxy-role | ClusterRole | 2 |  |
+| evalhub-proxy-role | ClusterRole | 4 |  |
+| nemoguardrail-editor-role | ClusterRole | 2 |  |
+| nemoguardrail-viewer-role | ClusterRole | 2 |  |
+| lmeval-user-role | ClusterRole | 2 |  |
+| manager-role | ClusterRole | 44 |  |
+| trustyaiservice-editor-role | ClusterRole | 2 |  |
+| trustyaiservice-viewer-role | ClusterRole | 2 |  |
+| leader-election-role | Role | 3 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| proxy-rolebinding | ClusterRoleBinding | proxy-role | ServiceAccount/controller-manager |
+| default-lmeval-user-rolebinding | ClusterRoleBinding | lmeval-user-role | Group/system:authenticated |
+| manager-rolebinding | ClusterRoleBinding | manager-role | ServiceAccount/controller-manager |
+| manager-auth-delegator | ClusterRoleBinding | system:auth-delegator | ServiceAccount/controller-manager |
+| leader-election-rolebinding | RoleBinding | leader-election-role | ServiceAccount/controller-manager |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -158,6 +184,8 @@ graph TD
     r_leader_election_role -->|create, patch| res_73["core: events"]
     class res_73 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

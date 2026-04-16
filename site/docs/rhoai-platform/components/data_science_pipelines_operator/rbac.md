@@ -1,8 +1,27 @@
 # data-science-pipelines-operator: RBAC
 
-## RBAC Hierarchy
+## RBAC Summary
 
-ServiceAccount bindings, roles, and resource permissions.
+This component defines a large RBAC surface (193 rules). The table below summarizes permissions by role.
+
+| Role | Kind | Resources | Wildcard |
+|------|------|-----------|----------|
+| aggregate-dspa-admin-edit | ClusterRole | 4 |  |
+| aggregate-dspa-admin-view | ClusterRole | 4 |  |
+| manager-argo-role | ClusterRole | 22 |  |
+| manager-role | ClusterRole | 55 | yes |
+| leader-election-role | Role | 3 |  |
+
+### Bindings
+
+| Binding | Type | Role | Subject |
+|---------|------|------|---------|
+| manager-argo-rolebinding | ClusterRoleBinding | manager-argo-role | ServiceAccount/controller-manager |
+| manager-rolebinding | ClusterRoleBinding | manager-role | ServiceAccount/controller-manager |
+| leader-election-rolebinding | RoleBinding | leader-election-role | ServiceAccount/controller-manager |
+
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
 
 ```mermaid
 graph TD
@@ -200,6 +219,8 @@ graph TD
     r_leader_election_role -->|create, patch| res_94["core: events"]
     class res_94 resource
 ```
+
+</details>
 
 ### Cluster Roles
 

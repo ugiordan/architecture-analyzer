@@ -5,11 +5,12 @@
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef component fill:#3498db,stroke:#2980b9,color:#fff
 
     data_science_pipelines_operator["data-science-pipelines-operator"]:::component
     data_science_pipelines_operator --> svc_0["mariadb\nClusterIP: 3306/TCP"]:::svc
-    data_science_pipelines_operator --> svc_1["minio\nClusterIP: 9000/TCP, 9001/TCP"]:::svc
+    data_science_pipelines_operator --> svc_1["minio\nClusterIP: 9000/TCP,9001/TCP"]:::svc
     data_science_pipelines_operator --> svc_2["pypi-server\nClusterIP: 8080/TCP"]:::svc
 ```
 

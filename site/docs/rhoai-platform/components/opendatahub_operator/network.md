@@ -2,26 +2,24 @@
 
 ## Service Map
 
+*9 unique services (14 total, duplicates from test fixtures collapsed).*
+
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef component fill:#3498db,stroke:#2980b9,color:#fff
 
     opendatahub_operator["opendatahub-operator"]:::component
     opendatahub_operator --> svc_0["webhook-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_1["webhook-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_2["webhook-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_3["odh-dashboard\nClusterIP: 8443/TCP"]:::svc
-    opendatahub_operator --> svc_4["kserve-controller-manager-service\nClusterIP: 8443/TCP"]:::svc
-    opendatahub_operator --> svc_5["kserve-webhook-server-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_6["odh-model-controller-webhook-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_7["webhook-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_8["kuberay-operator\nClusterIP: 8080/TCP"]:::svc
-    opendatahub_operator --> svc_9["webhook-service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_10["training-operator\nClusterIP: 8080/TCP, 443/TCP"]:::svc
-    opendatahub_operator --> svc_11["service\nClusterIP: 443/TCP"]:::svc
-    opendatahub_operator --> svc_12["service\nClusterIP: 8080/TCP"]:::svc
-    opendatahub_operator --> svc_13["webhook-service\nClusterIP: 443/TCP"]:::svc
+    opendatahub_operator --> svc_1["odh-dashboard\nClusterIP: 8443/TCP"]:::svc
+    opendatahub_operator --> svc_2["kserve-controller-manager-service\nClusterIP: 8443/TCP"]:::svc
+    opendatahub_operator --> svc_3["kserve-webhook-server-service\nClusterIP: 443/TCP"]:::svc
+    opendatahub_operator --> svc_4["odh-model-controller-webhook-service\nClusterIP: 443/TCP"]:::svc
+    opendatahub_operator --> svc_5["kuberay-operator\nClusterIP: 8080/TCP"]:::svc
+    opendatahub_operator --> svc_6["training-operator\nClusterIP: 8080/TCP,443/TCP"]:::svc
+    opendatahub_operator --> svc_7["service\nClusterIP: 443/TCP"]:::svc
+    opendatahub_operator --> svc_8["service\nClusterIP: 8080/TCP"]:::svc
 ```
 
 ### Services

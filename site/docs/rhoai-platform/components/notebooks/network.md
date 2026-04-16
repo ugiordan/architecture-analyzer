@@ -2,20 +2,16 @@
 
 ## Service Map
 
+*1 unique services (8 total, duplicates from test fixtures collapsed).*
+
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef component fill:#3498db,stroke:#2980b9,color:#fff
 
     notebooks["notebooks"]:::component
     notebooks --> svc_0["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_1["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_2["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_3["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_4["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_5["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_6["notebook\nClusterIP: 8888/TCP"]:::svc
-    notebooks --> svc_7["notebook\nClusterIP: 8888/TCP"]:::svc
 ```
 
 ### Services
