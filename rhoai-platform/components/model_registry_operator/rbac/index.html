@@ -1864,16 +1864,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rbac-hierarchy" class="md-nav__link">
+  <a href="#rbac-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        RBAC Hierarchy
+        RBAC Summary
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="RBAC Hierarchy">
+    <nav class="md-nav" aria-label="RBAC Summary">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#cluster-roles" class="md-nav__link">
@@ -3867,16 +3878,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rbac-hierarchy" class="md-nav__link">
+  <a href="#rbac-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        RBAC Hierarchy
+        RBAC Summary
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="RBAC Hierarchy">
+    <nav class="md-nav" aria-label="RBAC Summary">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bindings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#cluster-roles" class="md-nav__link">
@@ -3926,8 +3948,96 @@
 
 
 <h1 id="model-registry-operator-rbac">model-registry-operator: RBAC<a class="headerlink" href="#model-registry-operator-rbac" title="Permanent link">&para;</a></h1>
-<h2 id="rbac-hierarchy">RBAC Hierarchy<a class="headerlink" href="#rbac-hierarchy" title="Permanent link">&para;</a></h2>
-<p>ServiceAccount bindings, roles, and resource permissions.</p>
+<h2 id="rbac-summary">RBAC Summary<a class="headerlink" href="#rbac-summary" title="Permanent link">&para;</a></h2>
+<p>This component defines a large RBAC surface (93 rules). The table below summarizes permissions by role.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Kind</th>
+<th>Resources</th>
+<th>Wildcard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>metrics-reader</td>
+<td>ClusterRole</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>proxy-role</td>
+<td>ClusterRole</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>modelregistry-admin-role</td>
+<td>ClusterRole</td>
+<td>2</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>modelregistry-editor-role</td>
+<td>ClusterRole</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>modelregistry-viewer-role</td>
+<td>ClusterRole</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>manager-role</td>
+<td>ClusterRole</td>
+<td>27</td>
+<td></td>
+</tr>
+<tr>
+<td>leader-election-role</td>
+<td>Role</td>
+<td>3</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="bindings">Bindings<a class="headerlink" href="#bindings" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Binding</th>
+<th>Type</th>
+<th>Role</th>
+<th>Subject</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>proxy-rolebinding</td>
+<td>ClusterRoleBinding</td>
+<td>proxy-role</td>
+<td>ServiceAccount/controller-manager</td>
+</tr>
+<tr>
+<td>manager-rolebinding</td>
+<td>ClusterRoleBinding</td>
+<td>manager-role</td>
+<td>ServiceAccount/controller-manager</td>
+</tr>
+<tr>
+<td>leader-election-rolebinding</td>
+<td>RoleBinding</td>
+<td>leader-election-role</td>
+<td>ServiceAccount/controller-manager</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Full RBAC hierarchy diagram</summary>
+
 <pre class="mermaid"><code>graph TD
     %% RBAC hierarchy for model-registry-operator
     classDef sa fill:#4a90d9,stroke:#2c5f8a,color:#fff
@@ -4022,6 +4132,9 @@
     class res_43 resource
     r_leader_election_role --&gt;|create, patch| res_44["core: events"]
     class res_44 resource</code></pre>
+
+</details>
+
 <h3 id="cluster-roles">Cluster Roles<a class="headerlink" href="#cluster-roles" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4221,7 +4334,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:37:57 UTC">April 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 16:03:36 UTC">April 16, 2026</span>
   </span>
 
     
