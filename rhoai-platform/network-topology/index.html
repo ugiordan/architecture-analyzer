@@ -3912,8 +3912,8 @@
 <h1 id="network-topology">Network Topology<a class="headerlink" href="#network-topology" title="Permanent link">&para;</a></h1>
 <p>29 Kubernetes services across the platform.</p>
 <h2 id="service-map">Service Map<a class="headerlink" href="#service-map" title="Permanent link">&para;</a></h2>
+<p>Services grouped by owning component. Dashed arrows show cross-component references (component A deploys or references a service defined by component B).</p>
 <pre class="mermaid"><code>graph LR
-    classDef component fill:#3498db,stroke:#2980b9,color:#fff,stroke-width:2px
     classDef webhook fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef metrics fill:#f39c12,stroke:#e67e22,color:#fff
     classDef data fill:#2ecc71,stroke:#27ae60,color:#fff
@@ -3966,7 +3966,14 @@
         svc_27["kuberay-operator\n8080"]:::data
         svc_28["training-operator\n8080,443"]:::webhook
         svc_29["service\n443"]:::webhook
-    end</code></pre>
+    end
+
+    %% Cross-component service references
+    svc_26 -.-&gt;|"refs odh-model-controller-webhook-service"| svc_21
+    svc_23 -.-&gt;|"refs odh-dashboard"| svc_16
+    svc_25 -.-&gt;|"refs kserve-webhook-server-service"| svc_8
+    svc_27 -.-&gt;|"refs kuberay-operator"| svc_12
+    svc_24 -.-&gt;|"refs kserve-controller-manager-service"| svc_5</code></pre>
 <h2 id="services-by-component">Services by Component<a class="headerlink" href="#services-by-component" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4157,7 +4164,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:37:57 UTC">April 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:51:20 UTC">April 16, 2026</span>
   </span>
 
     

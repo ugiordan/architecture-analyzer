@@ -3912,166 +3912,106 @@
 <h1 id="secrets-inventory">Secrets Inventory<a class="headerlink" href="#secrets-inventory" title="Permanent link">&para;</a></h1>
 <p>25 secrets referenced across the platform. No secret values are extracted, only names, types, and which component references them.</p>
 <h2 id="secret-distribution">Secret Distribution<a class="headerlink" href="#secret-distribution" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph TD
-    classDef tls fill:#e74c3c,stroke:#c0392b,color:#fff
-    classDef opaque fill:#f39c12,stroke:#e67e22,color:#fff
-    classDef component fill:#3498db,stroke:#2980b9,color:#fff
-
-    data_science_pipelines_operator["data-science-pipelines-operator\n4 secrets"]:::component
-    data_science_pipelines_operator --&gt; sec_1["mariadb-certs\nds-pipeline-db-test\nminio-certs\nminio"]:::opaque
-    kserve["kserve\n3 secrets"]:::component
-    kserve --&gt; sec_2["llmisvc-webhook-server-cert\nlocalmodel-webhook-server-cert\nkserve-webhook-server-cert"]:::opaque
-    kube_auth_proxy["kube-auth-proxy\n2 secrets"]:::component
-    kube_auth_proxy --&gt; sec_3["kube-auth-proxy-secret\nkube-rbac-proxy-client-certificates"]:::opaque
-    kuberay["kuberay\n1 secrets"]:::component
-    kuberay --&gt; sec_4["webhook-server-cert"]:::opaque
-    model_registry_operator["model-registry-operator\n2 secrets"]:::component
-    model_registry_operator --&gt; sec_5["webhook-server-cert\ncontroller-manager-metrics-service"]:::opaque
-    odh_dashboard["odh-dashboard\n2 secrets"]:::component
-    odh_dashboard --&gt; sec_6["dashboard-proxy-tls"]:::tls
-    odh_dashboard --&gt; sec_7["webhook-server-cert"]:::opaque
-    odh_model_controller["odh-model-controller\n1 secrets"]:::component
-    odh_model_controller --&gt; sec_8["odh-model-controller-webhook-cert"]:::tls
-    opendatahub_operator["opendatahub-operator\n10 secrets"]:::component
-    opendatahub_operator --&gt; sec_9["odh-model-controller-webhook-cert\nodh-notebook-controller-webhook-cert\nopendatahub-operator-controller-webhook-cert\nredhat-ods-operator-controller-webhook-cert\ndashboard-proxy-tls"]:::tls
-    opendatahub_operator --&gt; sec_10["webhook-server-cert\ncontroller-manager-metrics-service\nkserve-webhook-server-cert\nkubeflow-training-operator-webhook-cert\ntraining-operator-webhook-cert"]:::opaque</code></pre>
+<pre class="mermaid"><code>%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
+xychart-beta
+    title "Secrets per Component"
+    x-axis ["data-science-pipel..", "kserve", "kube-auth-proxy", "kuberay", "model-registry-ope..", "odh-dashboard", "odh-model-controller", "opendatahub-operator"]
+    y-axis "Secrets" 0 --&gt; 12
+    bar [4, 3, 2, 1, 2, 2, 1, 10]</code></pre>
 <h2 id="secrets-by-component">Secrets by Component<a class="headerlink" href="#secrets-by-component" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Owner</th>
-<th>Secret</th>
-<th>Type</th>
+<th>Component</th>
+<th>TLS</th>
+<th>Opaque</th>
+<th>Total</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>data-science-pipelines-operator</td>
-<td>mariadb-certs</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>data-science-pipelines-operator</td>
-<td>ds-pipeline-db-test</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>data-science-pipelines-operator</td>
-<td>minio-certs</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>data-science-pipelines-operator</td>
-<td>minio</td>
-<td>Opaque</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
 </tr>
 <tr>
 <td>kserve</td>
-<td>llmisvc-webhook-server-cert</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>kserve</td>
-<td>localmodel-webhook-server-cert</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>kserve</td>
-<td>kserve-webhook-server-cert</td>
-<td>Opaque</td>
+<td>0</td>
+<td>3</td>
+<td>3</td>
 </tr>
 <tr>
 <td>kube-auth-proxy</td>
-<td>kube-auth-proxy-secret</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>kube-auth-proxy</td>
-<td>kube-rbac-proxy-client-certificates</td>
-<td>Opaque</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
 </tr>
 <tr>
 <td>kuberay</td>
-<td>webhook-server-cert</td>
-<td>Opaque</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
 </tr>
 <tr>
 <td>model-registry-operator</td>
-<td>webhook-server-cert</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>model-registry-operator</td>
-<td>controller-manager-metrics-service</td>
-<td>Opaque</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
 </tr>
 <tr>
 <td>odh-dashboard</td>
-<td>dashboard-proxy-tls</td>
-<td>kubernetes.io/tls</td>
-</tr>
-<tr>
-<td>odh-dashboard</td>
-<td>webhook-server-cert</td>
-<td>Opaque</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
 </tr>
 <tr>
 <td>odh-model-controller</td>
-<td>odh-model-controller-webhook-cert</td>
-<td>kubernetes.io/tls</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
 </tr>
 <tr>
 <td>opendatahub-operator</td>
-<td>odh-model-controller-webhook-cert</td>
-<td>kubernetes.io/tls</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>webhook-server-cert</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>controller-manager-metrics-service</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>odh-notebook-controller-webhook-cert</td>
-<td>kubernetes.io/tls</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>opendatahub-operator-controller-webhook-cert</td>
-<td>kubernetes.io/tls</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>redhat-ods-operator-controller-webhook-cert</td>
-<td>kubernetes.io/tls</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>kserve-webhook-server-cert</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>kubeflow-training-operator-webhook-cert</td>
-<td>Opaque</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>dashboard-proxy-tls</td>
-<td>kubernetes.io/tls</td>
-</tr>
-<tr>
-<td>opendatahub-operator</td>
-<td>training-operator-webhook-cert</td>
-<td>Opaque</td>
+<td>5</td>
+<td>5</td>
+<td>10</td>
 </tr>
 </tbody>
 </table>
+<details>
+<summary>Full secret inventory</summary>
+
+| Owner | Secret | Type |
+|-------|--------|------|
+| data-science-pipelines-operator | mariadb-certs | Opaque |
+| data-science-pipelines-operator | ds-pipeline-db-test | Opaque |
+| data-science-pipelines-operator | minio-certs | Opaque |
+| data-science-pipelines-operator | minio | Opaque |
+| kserve | llmisvc-webhook-server-cert | Opaque |
+| kserve | localmodel-webhook-server-cert | Opaque |
+| kserve | kserve-webhook-server-cert | Opaque |
+| kube-auth-proxy | kube-auth-proxy-secret | Opaque |
+| kube-auth-proxy | kube-rbac-proxy-client-certificates | Opaque |
+| kuberay | webhook-server-cert | Opaque |
+| model-registry-operator | webhook-server-cert | Opaque |
+| model-registry-operator | controller-manager-metrics-service | Opaque |
+| odh-dashboard | dashboard-proxy-tls | kubernetes.io/tls |
+| odh-dashboard | webhook-server-cert | Opaque |
+| odh-model-controller | odh-model-controller-webhook-cert | kubernetes.io/tls |
+| opendatahub-operator | odh-model-controller-webhook-cert | kubernetes.io/tls |
+| opendatahub-operator | webhook-server-cert | Opaque |
+| opendatahub-operator | controller-manager-metrics-service | Opaque |
+| opendatahub-operator | odh-notebook-controller-webhook-cert | kubernetes.io/tls |
+| opendatahub-operator | opendatahub-operator-controller-webhook-cert | kubernetes.io/tls |
+| opendatahub-operator | redhat-ods-operator-controller-webhook-cert | kubernetes.io/tls |
+| opendatahub-operator | kserve-webhook-server-cert | Opaque |
+| opendatahub-operator | kubeflow-training-operator-webhook-cert | Opaque |
+| opendatahub-operator | dashboard-proxy-tls | kubernetes.io/tls |
+| opendatahub-operator | training-operator-webhook-cert | Opaque |
+
+</details>
+
 <h2 id="patterns">Patterns<a class="headerlink" href="#patterns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Webhook certs</strong> are the dominant secret type (18 of 25 secrets).</li>
@@ -4099,7 +4039,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:37:57 UTC">April 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:51:20 UTC">April 16, 2026</span>
   </span>
 
     

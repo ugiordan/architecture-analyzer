@@ -3867,37 +3867,23 @@
 </tbody>
 </table>
 <h2 id="component-dependency-graph">Component Dependency Graph<a class="headerlink" href="#component-dependency-graph" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph TD
-    classDef operator fill:#3498db,stroke:#2980b9,color:#fff
-    classDef serving fill:#9b59b6,stroke:#8e44ad,color:#fff
-    classDef data fill:#e74c3c,stroke:#c0392b,color:#fff
-    classDef infra fill:#95a5a6,stroke:#7f8c8d,color:#fff
-    classDef ui fill:#2ecc71,stroke:#27ae60,color:#fff
+<pre class="mermaid"><code>graph LR
+    classDef internal fill:#3498db,stroke:#2980b9,color:#fff
+    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
 
-    data_science_pipelines_operator["data-science-pipelines-operator\n(4 CRDs)"]
-    kserve["kserve\n(14 CRDs)"]
-    kube_auth_proxy["kube-auth-proxy"]
-    kube_rbac_proxy["kube-rbac-proxy"]
-    kuberay["kuberay"]
-    model_registry_operator["model-registry-operator\n(2 CRDs)"]
-    notebooks["notebooks"]
-    odh_dashboard["odh-dashboard"]
-    odh_model_controller["odh-model-controller\n(1 CRDs)"]
-    opendatahub_operator["opendatahub-operator\n(23 CRDs)"]
-    trustyai_service_operator["trustyai-service-operator\n(6 CRDs)"]
+    kserve["kserve\n14 CRDs"]:::internal
+    llama_stack_k8s_operator["llama-stack-k8s-operator"]:::external
+    mlflow_go["mlflow-go"]:::external
+    models_as_a_service["models-as-a-service"]:::external
+    odh_dashboard["odh-dashboard"]:::internal
+    odh_model_controller["odh-model-controller\n1 CRDs"]:::internal
+    opendatahub_operator["opendatahub-operator\n23 CRDs"]:::internal
 
-    llama_stack_k8s_operator["llama-stack-k8s-operator"]
     odh_dashboard -.-&gt;|"go-module"| llama_stack_k8s_operator
-    mlflow_go["mlflow-go"]
     odh_dashboard -.-&gt;|"go-module"| mlflow_go
     odh_model_controller -.-&gt;|"go-module"| kserve
-    odh_model_controller --&gt;|"watches InferenceGraph"| kserve
-    odh_model_controller --&gt;|"watches InferenceService"| kserve
-    odh_model_controller --&gt;|"watches LLMInferenceService"| kserve
-    odh_model_controller --&gt;|"watches ServingRuntime"| kserve
-    models_as_a_service["models-as-a-service"]
-    opendatahub_operator -.-&gt;|"go-module"| models_as_a_service
-    opendatahub_operator -.-&gt;|"go-module"| opendatahub_operator</code></pre>
+    odh_model_controller ==&gt;|"watches 4 CRDs"| kserve
+    opendatahub_operator -.-&gt;|"go-module"| models_as_a_service</code></pre>
 <h2 id="components-analyzed">Components Analyzed<a class="headerlink" href="#components-analyzed" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3975,7 +3961,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:37:57 UTC">April 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 15:51:20 UTC">April 16, 2026</span>
   </span>
 
     
