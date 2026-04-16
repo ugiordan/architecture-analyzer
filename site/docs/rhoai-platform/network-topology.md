@@ -4,9 +4,10 @@
 
 ## Service Map
 
+Services grouped by owning component. Dashed arrows show cross-component references (component A deploys or references a service defined by component B).
+
 ```mermaid
 graph LR
-    classDef component fill:#3498db,stroke:#2980b9,color:#fff,stroke-width:2px
     classDef webhook fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef metrics fill:#f39c12,stroke:#e67e22,color:#fff
     classDef data fill:#2ecc71,stroke:#27ae60,color:#fff
@@ -60,6 +61,13 @@ graph LR
         svc_28["training-operator\n8080,443"]:::webhook
         svc_29["service\n443"]:::webhook
     end
+
+    %% Cross-component service references
+    svc_26 -.->|"refs odh-model-controller-webhook-service"| svc_21
+    svc_23 -.->|"refs odh-dashboard"| svc_16
+    svc_25 -.->|"refs kserve-webhook-server-service"| svc_8
+    svc_27 -.->|"refs kuberay-operator"| svc_12
+    svc_24 -.->|"refs kserve-controller-manager-service"| svc_5
 ```
 
 ## Services by Component

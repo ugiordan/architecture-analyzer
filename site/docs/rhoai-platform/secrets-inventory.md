@@ -5,32 +5,29 @@
 ## Secret Distribution
 
 ```mermaid
-graph TD
-    classDef tls fill:#e74c3c,stroke:#c0392b,color:#fff
-    classDef opaque fill:#f39c12,stroke:#e67e22,color:#fff
-    classDef component fill:#3498db,stroke:#2980b9,color:#fff
-
-    data_science_pipelines_operator["data-science-pipelines-operator\n4 secrets"]:::component
-    data_science_pipelines_operator --> sec_1["mariadb-certs\nds-pipeline-db-test\nminio-certs\nminio"]:::opaque
-    kserve["kserve\n3 secrets"]:::component
-    kserve --> sec_2["llmisvc-webhook-server-cert\nlocalmodel-webhook-server-cert\nkserve-webhook-server-cert"]:::opaque
-    kube_auth_proxy["kube-auth-proxy\n2 secrets"]:::component
-    kube_auth_proxy --> sec_3["kube-auth-proxy-secret\nkube-rbac-proxy-client-certificates"]:::opaque
-    kuberay["kuberay\n1 secrets"]:::component
-    kuberay --> sec_4["webhook-server-cert"]:::opaque
-    model_registry_operator["model-registry-operator\n2 secrets"]:::component
-    model_registry_operator --> sec_5["webhook-server-cert\ncontroller-manager-metrics-service"]:::opaque
-    odh_dashboard["odh-dashboard\n2 secrets"]:::component
-    odh_dashboard --> sec_6["dashboard-proxy-tls"]:::tls
-    odh_dashboard --> sec_7["webhook-server-cert"]:::opaque
-    odh_model_controller["odh-model-controller\n1 secrets"]:::component
-    odh_model_controller --> sec_8["odh-model-controller-webhook-cert"]:::tls
-    opendatahub_operator["opendatahub-operator\n10 secrets"]:::component
-    opendatahub_operator --> sec_9["odh-model-controller-webhook-cert\nodh-notebook-controller-webhook-cert\nopendatahub-operator-controller-webhook-cert\nredhat-ods-operator-controller-webhook-cert\ndashboard-proxy-tls"]:::tls
-    opendatahub_operator --> sec_10["webhook-server-cert\ncontroller-manager-metrics-service\nkserve-webhook-server-cert\nkubeflow-training-operator-webhook-cert\ntraining-operator-webhook-cert"]:::opaque
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
+xychart-beta
+    title "Secrets per Component"
+    x-axis ["data-science-pipel..", "kserve", "kube-auth-proxy", "kuberay", "model-registry-ope..", "odh-dashboard", "odh-model-controller", "opendatahub-operator"]
+    y-axis "Secrets" 0 --> 12
+    bar [4, 3, 2, 1, 2, 2, 1, 10]
 ```
 
 ## Secrets by Component
+
+| Component | TLS | Opaque | Total |
+|-----------|-----|--------|-------|
+| data-science-pipelines-operator | 0 | 4 | 4 |
+| kserve | 0 | 3 | 3 |
+| kube-auth-proxy | 0 | 2 | 2 |
+| kuberay | 0 | 1 | 1 |
+| model-registry-operator | 0 | 2 | 2 |
+| odh-dashboard | 1 | 1 | 2 |
+| odh-model-controller | 1 | 0 | 1 |
+| opendatahub-operator | 5 | 5 | 10 |
+
+<details>
+<summary>Full secret inventory</summary>
 
 | Owner | Secret | Type |
 |-------|--------|------|
@@ -59,6 +56,8 @@ graph TD
 | opendatahub-operator | kubeflow-training-operator-webhook-cert | Opaque |
 | opendatahub-operator | dashboard-proxy-tls | kubernetes.io/tls |
 | opendatahub-operator | training-operator-webhook-cert | Opaque |
+
+</details>
 
 ## Patterns
 
