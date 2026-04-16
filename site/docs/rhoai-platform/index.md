@@ -11,7 +11,7 @@
 | Services | 29 |
 | Secrets | 25 |
 | Cluster Roles | 52 |
-| Cross-Component Dependencies | 9 |
+| Cross-Component Dependencies | 14 |
 
 ## Component Dependency Graph
 
@@ -21,6 +21,8 @@ graph LR
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
 
     kserve["kserve\n14 CRDs"]:::internal
+    kube_auth_proxy["kube-auth-proxy"]:::internal
+    kube_rbac_proxy["kube-rbac-proxy"]:::internal
     llama_stack_k8s_operator["llama-stack-k8s-operator"]:::external
     mlflow_go["mlflow-go"]:::external
     models_as_a_service["models-as-a-service"]:::external
@@ -33,6 +35,11 @@ graph LR
     odh_model_controller -.->|"go-module"| kserve
     odh_model_controller ==>|"watches 4 CRDs"| kserve
     opendatahub_operator -.->|"go-module"| models_as_a_service
+    kserve -->|"sidecar"| kube_rbac_proxy
+    kube_auth_proxy -->|"sidecar"| kube_rbac_proxy
+    odh_dashboard -->|"sidecar"| kube_rbac_proxy
+    opendatahub_operator -->|"sidecar"| kube_rbac_proxy
+    opendatahub_operator -->|"sidecar"| kserve
 ```
 
 ## Components Analyzed

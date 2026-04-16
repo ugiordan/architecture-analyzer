@@ -234,6 +234,102 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 		compDataIface[i] = c
 	}
 
+	// Sidecar image references: detect when component A embeds component B's
+	// image as a sidecar container (e.g., kube-rbac-proxy used by kserve).
+	compImagePatterns := make(map[string][]string) // component -> list of image base names
+	for _, compData := range dedupedComponents {
+		compName := getString(compData, "component", "unknown")
+		for _, dep := range getSliceOfMaps(compData, "deployments") {
+			for _, c := range getSliceOfMaps(dep, "containers") {
+				img := getString(c, "image", "")
+				if img == "" {
+					continue
+				}
+				base := img
+				if idx := strings.LastIndex(base, ":"); idx > 0 {
+					base = base[:idx]
+				}
+				if idx := strings.LastIndex(base, "@"); idx > 0 {
+					base = base[:idx]
+				}
+				if idx := strings.LastIndex(base, "/"); idx >= 0 {
+					base = base[idx+1:]
+				}
+				// Match if the image base is specific enough and matches the component name.
+				// Skip generic bases that cause false positives.
+				if len(base) < 5 || isGenericImageBase(base) {
+					continue
+				}
+				normalizedComp := strings.ReplaceAll(compName, "-", "")
+				normalizedBase := strings.ReplaceAll(base, "-", "")
+				if normalizedBase == normalizedComp || strings.Contains(normalizedBase, normalizedComp) {
+					compImagePatterns[compName] = append(compImagePatterns[compName], base)
+				}
+			}
+		}
+	}
+	for comp, patterns := range compImagePatterns {
+		seen := make(map[string]bool)
+		var unique []string
+		for _, p := range patterns {
+			if !seen[p] {
+				seen[p] = true
+				unique = append(unique, p)
+			}
+		}
+		compImagePatterns[comp] = unique
+	}
+	for _, compData := range dedupedComponents {
+		compName := getString(compData, "component", "unknown")
+		for _, dep := range getSliceOfMaps(compData, "deployments") {
+			for _, c := range getSliceOfMaps(dep, "containers") {
+				img := getString(c, "image", "")
+				cName := getString(c, "name", "")
+				if img == "" && cName == "" {
+					continue
+				}
+				for otherComp, patterns := range compImagePatterns {
+					if otherComp == compName {
+						continue
+					}
+					for _, pattern := range patterns {
+						// Match on container name or image path component
+						matched := cName == pattern
+						if !matched && img != "" {
+							// Check if pattern appears as a path segment in the image reference
+							// e.g., "quay.io/brancz/kube-rbac-proxy:v0.18.0" contains "/kube-rbac-proxy:"
+							matched = strings.Contains(img, "/"+pattern+":") ||
+								strings.Contains(img, "/"+pattern+"@") ||
+								strings.HasSuffix(img, "/"+pattern)
+						}
+						if matched {
+							key := compName + "|" + otherComp + "|uses-image"
+							if !seenDepEdges[key] {
+								seenDepEdges[key] = true
+								dependencyGraph = append(dependencyGraph, map[string]string{
+									"from": compName,
+									"to":   otherComp,
+									"type": "uses-image",
+								})
+							}
+							break
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Rebuild depGraphIface with new sidecar edges
+	depGraphIface = make([]interface{}, len(dependencyGraph))
+	for i, d := range dependencyGraph {
+		m := make(map[string]interface{}, len(d))
+		for k, v := range d {
+			m[k] = v
+		}
+		depGraphIface[i] = m
+	}
+
 	return map[string]interface{}{
 		"platform":           "OpenShift AI",
 		"aggregated_at":      time.Now().UTC().Format(time.RFC3339),
@@ -276,6 +372,19 @@ func getSliceOfMaps(m map[string]interface{}, key string) []map[string]interface
 		return out
 	}
 	return nil
+}
+
+// isGenericImageBase returns true for image base names that are too generic
+// to use for cross-component matching (e.g., "controller", "manager", "proxy").
+func isGenericImageBase(base string) bool {
+	generic := []string{"controller", "manager", "proxy", "server", "operator", "agent", "sidecar", "init", "busybox", "alpine", "nginx", "redis"}
+	lower := strings.ToLower(base)
+	for _, g := range generic {
+		if lower == g {
+			return true
+		}
+	}
+	return false
 }
 
 func copyMap(m map[string]interface{}) map[string]interface{} {

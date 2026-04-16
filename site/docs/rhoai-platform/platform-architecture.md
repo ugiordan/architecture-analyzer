@@ -27,6 +27,11 @@ Relationships detected through Go module imports and CRD watch patterns.
 | odh-model-controller | kserve | watches-crd:ServingRuntime |
 | opendatahub-operator | models-as-a-service | go-module |
 | opendatahub-operator | opendatahub-operator | go-module |
+| kserve | kube-rbac-proxy | uses-image |
+| kube-auth-proxy | kube-rbac-proxy | uses-image |
+| odh-dashboard | kube-rbac-proxy | uses-image |
+| opendatahub-operator | kube-rbac-proxy | uses-image |
+| opendatahub-operator | kserve | uses-image |
 
 **Tightest coupling:** `odh-model-controller -> kserve` (5 dependency edges).
 

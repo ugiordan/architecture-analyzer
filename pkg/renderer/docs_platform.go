@@ -189,15 +189,18 @@ func renderPlatformDepGraphMermaid(data map[string]interface{}) string {
 		fromID := sanitizeID(pair.from)
 		toID := sanitizeID(pair.to)
 
-		// Count watches and go-module separately
+		// Count watches, go-module, and uses-image separately
 		watches := make([]string, 0)
 		hasGoMod := false
+		hasUsesImage := false
 		other := make([]string, 0)
 		for _, t := range types {
 			if strings.HasPrefix(t, "watches-crd:") {
 				watches = append(watches, t[len("watches-crd:"):])
 			} else if t == "go-module" {
 				hasGoMod = true
+			} else if t == "uses-image" {
+				hasUsesImage = true
 			} else {
 				other = append(other, t)
 			}
@@ -205,6 +208,9 @@ func renderPlatformDepGraphMermaid(data map[string]interface{}) string {
 
 		if hasGoMod {
 			b.WriteString(fmt.Sprintf("    %s -.->|\"go-module\"| %s\n", fromID, toID))
+		}
+		if hasUsesImage {
+			b.WriteString(fmt.Sprintf("    %s -->|\"sidecar\"| %s\n", fromID, toID))
 		}
 		if len(watches) > 0 {
 			label := fmt.Sprintf("watches %d CRDs", len(watches))

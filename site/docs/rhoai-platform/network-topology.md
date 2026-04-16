@@ -63,11 +63,11 @@ graph LR
     end
 
     %% Cross-component service references
-    svc_26 -.->|"refs odh-model-controller-webhook-service"| svc_21
+    svc_24 -.->|"refs kserve-controller-manager-service"| svc_5
     svc_23 -.->|"refs odh-dashboard"| svc_16
+    svc_26 -.->|"refs odh-model-controller-webhook-service"| svc_21
     svc_25 -.->|"refs kserve-webhook-server-service"| svc_8
     svc_27 -.->|"refs kuberay-operator"| svc_12
-    svc_24 -.->|"refs kserve-controller-manager-service"| svc_5
 ```
 
 ## Services by Component
