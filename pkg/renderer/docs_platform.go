@@ -6,6 +6,52 @@ import (
 	"strings"
 )
 
+// abbreviateComponent creates a short code from a component name for chart labels.
+// e.g. "data-science-pipelines-operator" -> "DSPO", "kserve" -> "KSR"
+func abbreviateComponent(name string) string {
+	// Known abbreviations for common RHOAI components
+	abbrevs := map[string]string{
+		"data-science-pipelines-operator": "DSPO",
+		"opendatahub-operator":            "ODH-OP",
+		"odh-model-controller":            "ODH-MC",
+		"odh-dashboard":                   "ODH-DB",
+		"model-registry-operator":         "MR-OP",
+		"trustyai-service-operator":       "TRUST",
+		"kserve":                           "KSR",
+		"kuberay":                          "KRAY",
+		"kube-auth-proxy":                  "KAUTH",
+		"modelmesh-serving":                "MMESH",
+		"codeflare-operator":               "CFLR",
+		"training-operator":                "TRAIN",
+	}
+	if abbr, ok := abbrevs[name]; ok {
+		return abbr
+	}
+	// Fallback: take first letter of each word (split on -)
+	parts := strings.Split(name, "-")
+	code := ""
+	for _, p := range parts {
+		if len(p) > 0 {
+			code += strings.ToUpper(p[:1])
+		}
+	}
+	if len(code) > 5 {
+		code = code[:5]
+	}
+	return code
+}
+
+// renderChartLegend writes a markdown table mapping abbreviations to full component names.
+func renderChartLegend(b *strings.Builder, owners []string) {
+	b.WriteString("\n<details markdown>\n<summary>Component abbreviations</summary>\n\n")
+	b.WriteString("| Code | Component |\n")
+	b.WriteString("|------|-----------|\n")
+	for _, owner := range owners {
+		b.WriteString(fmt.Sprintf("| %s | %s |\n", abbreviateComponent(owner), owner))
+	}
+	b.WriteString("\n</details>\n\n")
+}
+
 // renderPlatformDocs generates a complete docs site from aggregated platform data.
 func renderPlatformDocs(data map[string]interface{}) []DocsPage {
 	var pages []DocsPage
@@ -512,18 +558,17 @@ func renderPlatformRBACDocPage(data map[string]interface{}) string {
 		b.WriteString("## Permission Scope by Component\n\n")
 		b.WriteString("Each bar shows the widest role (by resource type count). Scope: ")
 		b.WriteString("\U0001F534 wide (>30), \U0001F7E0 medium (10-30), \U0001F7E2 narrow (<10).\n\n")
-		// Compute chart height based on number of components (40px per bar + padding)
-		chartHeight := len(owners)*40 + 100
-		if chartHeight < 300 {
-			chartHeight = 300
+		// Chart width scales with number of components (100px per bar + margins)
+		chartWidth := len(owners)*100 + 200
+		if chartWidth < 500 {
+			chartWidth = 500
 		}
 		b.WriteString("```mermaid\n")
-		b.WriteString(fmt.Sprintf("%%%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 700, 'height': %d}}}%%%%\n", chartHeight))
-		b.WriteString("xychart-beta horizontal\n")
+		b.WriteString(fmt.Sprintf("%%%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': %d, 'height': 400, 'plotReservedSpacePercent': 60}}}%%%%\n", chartWidth))
+		b.WriteString("xychart-beta\n")
 		b.WriteString("    title \"Widest Role Scope (resource types)\"\n")
 		b.WriteString("    x-axis [")
 
-		// Build x-axis labels using full names (horizontal layout has room)
 		labels := make([]string, 0, len(owners))
 		values := make([]int, 0, len(owners))
 		for _, owner := range owners {
@@ -534,7 +579,7 @@ func renderPlatformRBACDocPage(data map[string]interface{}) string {
 					maxRes = r.ResourceCount
 				}
 			}
-			labels = append(labels, fmt.Sprintf("\"%s\"", owner))
+			labels = append(labels, fmt.Sprintf("\"%s\"", abbreviateComponent(owner)))
 			values = append(values, maxRes)
 		}
 		b.WriteString(strings.Join(labels, ", "))
@@ -555,6 +600,7 @@ func renderPlatformRBACDocPage(data map[string]interface{}) string {
 		b.WriteString(strings.Join(valStrs, ", "))
 		b.WriteString("]\n")
 		b.WriteString("```\n\n")
+		renderChartLegend(&b, owners)
 
 		// RBAC graph: ServiceAccount -> Role bindings across the platform
 		b.WriteString("## RBAC Binding Graph\n\n")
@@ -612,20 +658,20 @@ func renderPlatformSecretsDocPage(data map[string]interface{}) string {
 		sort.Strings(owners)
 
 		// Compact bar chart: secrets per component
-		chartHeight := len(owners)*40 + 100
-		if chartHeight < 300 {
-			chartHeight = 300
+		chartWidth := len(owners)*100 + 200
+		if chartWidth < 500 {
+			chartWidth = 500
 		}
 		b.WriteString("## Secret Distribution\n\n")
 		b.WriteString("```mermaid\n")
-		b.WriteString(fmt.Sprintf("%%%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 700, 'height': %d}}}%%%%\n", chartHeight))
-		b.WriteString("xychart-beta horizontal\n")
+		b.WriteString(fmt.Sprintf("%%%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': %d, 'height': 400, 'plotReservedSpacePercent': 60}}}%%%%\n", chartWidth))
+		b.WriteString("xychart-beta\n")
 		b.WriteString("    title \"Secrets per Component\"\n")
 		b.WriteString("    x-axis [")
 		labels := make([]string, 0, len(owners))
 		totalVals := make([]int, 0, len(owners))
 		for _, owner := range owners {
-			labels = append(labels, fmt.Sprintf("\"%s\"", owner))
+			labels = append(labels, fmt.Sprintf("\"%s\"", abbreviateComponent(owner)))
 			totalVals = append(totalVals, len(ownerSecrets[owner]))
 		}
 		b.WriteString(strings.Join(labels, ", "))
@@ -645,6 +691,7 @@ func renderPlatformSecretsDocPage(data map[string]interface{}) string {
 		b.WriteString(strings.Join(valStrs, ", "))
 		b.WriteString("]\n")
 		b.WriteString("```\n\n")
+		renderChartLegend(&b, owners)
 
 		// Summary table
 		b.WriteString("## Secrets by Component\n\n")

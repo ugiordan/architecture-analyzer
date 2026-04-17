@@ -7,13 +7,29 @@
 Each bar shows the widest role (by resource type count). Scope: 🔴 wide (>30), 🟠 medium (10-30), 🟢 narrow (<10).
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 700, 'height': 380}}}%%
-xychart-beta horizontal
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 900, 'height': 400, 'plotReservedSpacePercent': 60}}}%%
+xychart-beta
     title "Widest Role Scope (resource types)"
-    x-axis ["data-science-pipelines-operator", "kserve", "model-registry-operator", "odh-dashboard", "odh-model-controller", "opendatahub-operator", "trustyai-service-operator"]
+    x-axis ["DSPO", "KSR", "MR-OP", "ODH-DB", "ODH-MC", "ODH-OP", "TRUST"]
     y-axis "Resource types" 0 --> 60
     bar [55, 45, 27, 40, 41, 2, 44]
 ```
+
+
+<details markdown>
+<summary>Component abbreviations</summary>
+
+| Code | Component |
+|------|-----------|
+| DSPO | data-science-pipelines-operator |
+| KSR | kserve |
+| MR-OP | model-registry-operator |
+| ODH-DB | odh-dashboard |
+| ODH-MC | odh-model-controller |
+| ODH-OP | opendatahub-operator |
+| TRUST | trustyai-service-operator |
+
+</details>
 
 ## RBAC Binding Graph
 

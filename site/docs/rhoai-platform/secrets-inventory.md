@@ -5,13 +5,30 @@
 ## Secret Distribution
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 700, 'height': 420}}}%%
-xychart-beta horizontal
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 1000, 'height': 400, 'plotReservedSpacePercent': 60}}}%%
+xychart-beta
     title "Secrets per Component"
-    x-axis ["data-science-pipelines-operator", "kserve", "kube-auth-proxy", "kuberay", "model-registry-operator", "odh-dashboard", "odh-model-controller", "opendatahub-operator"]
+    x-axis ["DSPO", "KSR", "KAUTH", "KRAY", "MR-OP", "ODH-DB", "ODH-MC", "ODH-OP"]
     y-axis "Secrets" 0 --> 12
     bar [4, 3, 2, 1, 2, 2, 1, 10]
 ```
+
+
+<details markdown>
+<summary>Component abbreviations</summary>
+
+| Code | Component |
+|------|-----------|
+| DSPO | data-science-pipelines-operator |
+| KSR | kserve |
+| KAUTH | kube-auth-proxy |
+| KRAY | kuberay |
+| MR-OP | model-registry-operator |
+| ODH-DB | odh-dashboard |
+| ODH-MC | odh-model-controller |
+| ODH-OP | opendatahub-operator |
+
+</details>
 
 ## Secrets by Component
 
