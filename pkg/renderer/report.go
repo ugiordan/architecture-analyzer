@@ -79,11 +79,11 @@ func renderCRDTable(b *strings.Builder, data map[string]interface{}) {
 	for _, crd := range crds {
 		rules := getStringSlice(crd, "validation_rules")
 		ruleCount := len(rules)
-		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %d | %d | `%s` |\n",
-			getStr(crd, "group", ""), getStr(crd, "version", ""),
-			getStr(crd, "kind", ""), getStr(crd, "scope", ""),
+		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %d | %d | %s |\n",
+			escapeMdCell(getStr(crd, "group", "")), escapeMdCell(getStr(crd, "version", "")),
+			escapeMdCell(getStr(crd, "kind", "")), escapeMdCell(getStr(crd, "scope", "")),
 			getInt(crd, "fields_count"), ruleCount,
-			getStr(crd, "source", "")))
+			sourceLink(data, getStr(crd, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -97,10 +97,10 @@ func renderWebhookTable(b *strings.Builder, data map[string]interface{}) {
 	b.WriteString("| Name | Type | Path | Failure Policy | Service | Source |\n")
 	b.WriteString("|------|------|------|----------------|---------|--------|\n")
 	for _, wh := range webhooks {
-		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | `%s` |\n",
+		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | %s |\n",
 			getStr(wh, "name", ""), getStr(wh, "type", ""),
 			getStr(wh, "path", ""), getStr(wh, "failure_policy", ""),
-			getStr(wh, "service_ref", ""), getStr(wh, "source", "")))
+			getStr(wh, "service_ref", ""), sourceLink(data, getStr(wh, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -114,9 +114,9 @@ func renderHTTPEndpointTable(b *strings.Builder, data map[string]interface{}) {
 	b.WriteString("| Method | Path | Source |\n")
 	b.WriteString("|--------|------|--------|\n")
 	for _, ep := range endpoints {
-		b.WriteString(fmt.Sprintf("| %s | %s | `%s` |\n",
+		b.WriteString(fmt.Sprintf("| %s | %s | %s |\n",
 			getStr(ep, "method", ""), getStr(ep, "path", ""),
-			getStr(ep, "source", "")))
+			sourceLink(data, getStr(ep, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -178,12 +178,12 @@ func renderServiceTable(b *strings.Builder, data map[string]interface{}) {
 		ports := getSlice(svc, "ports")
 		var portParts []string
 		for _, p := range ports {
-			portParts = append(portParts, fmt.Sprintf("%v/%s",
-				p["port"], getStr(p, "protocol", "TCP")))
+			portParts = append(portParts, fmt.Sprintf("%d/%s",
+				getInt(p, "port"), getStr(p, "protocol", "TCP")))
 		}
-		b.WriteString(fmt.Sprintf("| %s | %s | %s | `%s` |\n",
-			getStr(svc, "name", ""), getStr(svc, "type", "ClusterIP"),
-			strings.Join(portParts, ", "), getStr(svc, "source", "")))
+		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n",
+			escapeMdCell(getStr(svc, "name", "")), escapeMdCell(getStr(svc, "type", "ClusterIP")),
+			strings.Join(portParts, ", "), sourceLink(data, getStr(svc, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -204,10 +204,10 @@ func renderIngressTable(b *strings.Builder, data map[string]interface{}) {
 		if tls {
 			tlsStr = "yes"
 		}
-		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | `%s` |\n",
+		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | %s |\n",
 			getStr(res, "kind", ""), getStr(res, "name", ""),
 			strings.Join(hosts, ", "), strings.Join(paths, ", "),
-			tlsStr, getStr(res, "source", "")))
+			tlsStr, sourceLink(data, getStr(res, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -222,9 +222,9 @@ func renderNetworkPolicyTable(b *strings.Builder, data map[string]interface{}) {
 	b.WriteString("|------|-------------|--------|\n")
 	for _, np := range netpols {
 		policyTypes := getStringSlice(np, "policy_types")
-		b.WriteString(fmt.Sprintf("| %s | %s | `%s` |\n",
+		b.WriteString(fmt.Sprintf("| %s | %s | %s |\n",
 			getStr(np, "name", ""), strings.Join(policyTypes, ", "),
-			getStr(np, "source", "")))
+			sourceLink(data, getStr(np, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -246,9 +246,9 @@ func renderRBACSection(b *strings.Builder, data map[string]interface{}) {
 			for _, rule := range rules {
 				resources := getStringSlice(rule, "resources")
 				verbs := getStringSlice(rule, "verbs")
-				b.WriteString(fmt.Sprintf("| %s | %s | %s | `%s` |\n",
+				b.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n",
 					roleName, strings.Join(resources, ", "),
-					strings.Join(verbs, ", "), getStr(role, "source", "")))
+					strings.Join(verbs, ", "), sourceLink(data, getStr(role, "source", ""))))
 			}
 		}
 		b.WriteString("\n")
@@ -257,7 +257,34 @@ func renderRBACSection(b *strings.Builder, data map[string]interface{}) {
 	markers := getSlice(rbac, "kubebuilder_markers")
 	if len(markers) > 0 {
 		b.WriteString("### Kubebuilder RBAC Markers\n\n")
-		b.WriteString(fmt.Sprintf("%d markers found in source code.\n\n", len(markers)))
+		b.WriteString(fmt.Sprintf("Kubebuilder `+kubebuilder:rbac` markers declare the RBAC requirements of controller reconcilers. "+
+			"These are the source of truth for generated ClusterRole manifests. %d markers found.\n\n", len(markers)))
+		b.WriteString("| File | Line | Groups | Resources | Verbs |\n")
+		b.WriteString("|------|------|--------|-----------|-------|\n")
+		for _, m := range markers {
+			file := getStr(m, "file", "")
+			line := getInt(m, "line")
+			parsed := getMap(m, "parsed")
+			groups := ""
+			resources := ""
+			verbs := ""
+			if parsed != nil {
+				groups = strings.Join(getStringSlice(parsed, "groups"), ", ")
+				resources = strings.Join(getStringSlice(parsed, "resources"), ", ")
+				verbs = strings.Join(getStringSlice(parsed, "verbs"), ", ")
+			}
+			marker := getStr(m, "marker", "")
+			fileLine := fmt.Sprintf("%s:%d", file, line)
+			link := sourceLink(data, fileLine)
+			if parsed == nil && marker != "" {
+				// Fallback: show raw marker text
+				b.WriteString(fmt.Sprintf("| %s | %d | %s | | |\n", link, line, escapeMdCell(marker)))
+			} else {
+				b.WriteString(fmt.Sprintf("| %s | %d | %s | %s | %s |\n",
+					link, line, escapeMdCell(groups), escapeMdCell(resources), escapeMdCell(verbs)))
+			}
+		}
+		b.WriteString("\n")
 	}
 }
 
@@ -307,8 +334,8 @@ func renderSecurityContextSection(b *strings.Builder, data map[string]interface{
 					privileged = fmt.Sprintf("%v", v)
 				}
 			}
-			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | `%s` |\n",
-				depName, cName, runAsNonRoot, readOnlyFS, privileged, source))
+			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | %s |\n",
+				depName, cName, runAsNonRoot, readOnlyFS, privileged, sourceLink(data, source)))
 		}
 	}
 	b.WriteString("\n")
@@ -324,9 +351,9 @@ func renderConfigMapTable(b *strings.Builder, data map[string]interface{}) {
 	b.WriteString("|------|-----------|--------|\n")
 	for _, cm := range configmaps {
 		keys := getStringSlice(cm, "data_keys")
-		b.WriteString(fmt.Sprintf("| %s | %s | `%s` |\n",
+		b.WriteString(fmt.Sprintf("| %s | %s | %s |\n",
 			getStr(cm, "name", ""), strings.Join(keys, ", "),
-			getStr(cm, "source", "")))
+			sourceLink(data, getStr(cm, "source", ""))))
 	}
 	b.WriteString("\n")
 }
@@ -399,8 +426,8 @@ func renderControllerWatchTable(b *strings.Builder, data map[string]interface{})
 			return getStr(items[i], "gvk", "") < getStr(items[j], "gvk", "")
 		})
 		for _, w := range items {
-			b.WriteString(fmt.Sprintf("| %s | %s | `%s` |\n",
-				t, getStr(w, "gvk", ""), getStr(w, "source", "")))
+			b.WriteString(fmt.Sprintf("| %s | %s | %s |\n",
+				t, getStr(w, "gvk", ""), sourceLink(data, getStr(w, "source", ""))))
 		}
 	}
 	b.WriteString("\n")

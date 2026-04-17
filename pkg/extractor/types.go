@@ -21,6 +21,7 @@ func DefaultModulePrefixes() []string {
 type ComponentArchitecture struct {
 	Component       string             `json:"component"`
 	Repo            string             `json:"repo"`
+	CommitSHA       string             `json:"commit_sha,omitempty"`
 	ExtractedAt     string             `json:"extracted_at"`
 	AnalyzerVersion string             `json:"analyzer_version"`
 	CRDs            []CRD              `json:"crds"`

@@ -172,6 +172,10 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 			if idx := strings.LastIndex(gvk, "/"); idx >= 0 {
 				kind = gvk[idx+1:]
 			}
+			if kind == "" {
+				log.Printf("WARN: malformed GVK '%s' in component %s, skipping", gvk, compName)
+				continue
+			}
 			if owner, ok := crdOwners[kind]; ok && owner != compName {
 				edgeType := "watches-crd:" + kind
 				key := compName + "|" + owner + "|" + edgeType
@@ -262,7 +266,7 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 				}
 				normalizedComp := strings.ReplaceAll(compName, "-", "")
 				normalizedBase := strings.ReplaceAll(base, "-", "")
-				if normalizedBase == normalizedComp || strings.Contains(normalizedBase, normalizedComp) {
+				if normalizedBase == normalizedComp {
 					compImagePatterns[compName] = append(compImagePatterns[compName], base)
 				}
 			}

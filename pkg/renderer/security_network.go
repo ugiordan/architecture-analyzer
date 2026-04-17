@@ -129,13 +129,8 @@ func (r *SecurityNetworkRenderer) Render(data map[string]interface{}) string {
 	b.WriteString(fmt.Sprintf("  Kubebuilder markers: %d\n", markerCount))
 
 	for _, cr := range getSlice(rbac, "cluster_roles") {
-		name := getStr(cr, "name", "")
-		rules := getSlice(cr, "rules")
-		totalResources := 0
-		for _, rule := range rules {
-			totalResources += len(getStringSlice(rule, "resources"))
-		}
-		b.WriteString(fmt.Sprintf("    CR: %s (%d resource types)\n", name, totalResources))
+		rs := computeRoleSummary(cr, "ClusterRole")
+		b.WriteString(fmt.Sprintf("    CR: %s (%d resource types)\n", rs.Name, rs.ResourceCount))
 	}
 
 	// Secrets Inventory

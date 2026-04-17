@@ -3,6 +3,8 @@
 package renderer
 
 import (
+	"fmt"
+	"sort"
 	"strings"
 	"unicode"
 )
@@ -15,21 +17,9 @@ type Renderer interface {
 	Filename() string
 }
 
-// allRenderers returns every available per-component renderer.
-func allRenderers() []Renderer {
-	return []Renderer{
-		&RBACRenderer{},
-		&ComponentRenderer{},
-		&SecurityNetworkRenderer{},
-		&DependencyRenderer{},
-		&C4Renderer{},
-		&DataflowRenderer{},
-		&ReportRenderer{},
-	}
-}
-
-// rendererByName maps short names to renderers for selective execution.
-var rendererByName = map[string]Renderer{
+// rendererRegistry is the single source of truth for all renderers.
+// Add new renderers here only.
+var rendererRegistry = map[string]Renderer{
 	"rbac":             &RBACRenderer{},
 	"component":        &ComponentRenderer{},
 	"security_network": &SecurityNetworkRenderer{},
@@ -37,6 +27,20 @@ var rendererByName = map[string]Renderer{
 	"c4":               &C4Renderer{},
 	"dataflow":         &DataflowRenderer{},
 	"report":           &ReportRenderer{},
+}
+
+// allRenderers returns every available per-component renderer in stable order.
+func allRenderers() []Renderer {
+	names := make([]string, 0, len(rendererRegistry))
+	for name := range rendererRegistry {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+	out := make([]Renderer, 0, len(names))
+	for _, name := range names {
+		out = append(out, rendererRegistry[name])
+	}
+	return out
 }
 
 // RenderAll runs the selected renderers (by short name) against data and
@@ -49,7 +53,7 @@ func RenderAll(data map[string]interface{}, formats []string) map[string]string 
 		renderers = allRenderers()
 	} else {
 		for _, name := range formats {
-			if r, ok := rendererByName[name]; ok {
+			if r, ok := rendererRegistry[name]; ok {
 				renderers = append(renderers, r)
 			}
 		}
@@ -90,7 +94,66 @@ func escapeLabel(text string) string {
 	text = strings.ReplaceAll(text, `"`, "'")
 	text = strings.ReplaceAll(text, "<", "&lt;")
 	text = strings.ReplaceAll(text, ">", "&gt;")
+	text = strings.ReplaceAll(text, "\n", " ")
+	text = strings.ReplaceAll(text, "\r", " ")
+	text = strings.ReplaceAll(text, "|", "/")
 	return text
+}
+
+// escapeMdCell escapes characters that break markdown table cells.
+func escapeMdCell(text string) string {
+	text = strings.ReplaceAll(text, "|", "\\|")
+	text = strings.ReplaceAll(text, "\n", " ")
+	return text
+}
+
+
+// RoleSummary holds computed permission breadth for a single RBAC role.
+type RoleSummary struct {
+	Name          string
+	Kind          string // "ClusterRole" or "Role"
+	ResourceCount int
+	HasWildcard   bool
+}
+
+// computeRoleSummary extracts permission breadth from a role data map.
+func computeRoleSummary(role map[string]interface{}, kind string) RoleSummary {
+	name := getStr(role, "name", "")
+	rules := getSlice(role, "rules")
+	resourceCount := 0
+	hasWildcard := false
+	for _, rule := range rules {
+		resourceCount += len(getStringSlice(rule, "resources"))
+		for _, v := range getStringSlice(rule, "verbs") {
+			if v == "*" {
+				hasWildcard = true
+			}
+		}
+	}
+	return RoleSummary{Name: name, Kind: kind, ResourceCount: resourceCount, HasWildcard: hasWildcard}
+}
+
+// sourceLink generates a GitHub permalink for a source file reference.
+// If commit_sha and repo are available, returns a clickable markdown link.
+// Otherwise returns the source path in backticks.
+func sourceLink(data map[string]interface{}, source string) string {
+	sha := getStr(data, "commit_sha", "")
+	repo := getStr(data, "repo", "")
+	if sha == "" || repo == "" || source == "" {
+		return fmt.Sprintf("`%s`", source)
+	}
+	// Split source into file:line if present
+	file := source
+	anchor := ""
+	if idx := strings.LastIndex(source, ":"); idx > 0 {
+		possibleLine := source[idx+1:]
+		if _, err := fmt.Sscanf(possibleLine, "%d", new(int)); err == nil {
+			file = source[:idx]
+			anchor = fmt.Sprintf("#L%s", possibleLine)
+		}
+	}
+	url := fmt.Sprintf("https://github.com/%s/blob/%s/%s%s", repo, sha, file, anchor)
+	return fmt.Sprintf("[`%s`](%s)", source, url)
 }
 
 // helper to extract a string from a map with a default.

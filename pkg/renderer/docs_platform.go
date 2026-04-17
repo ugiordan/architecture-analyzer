@@ -126,7 +126,7 @@ func renderPlatformDepGraphMermaid(data map[string]interface{}) string {
 		from := getStr(dep, "from", "")
 		to := getStr(dep, "to", "")
 		depType := getStr(dep, "type", "")
-		if from == to { // skip self-references
+		if from == "" || to == "" || from == to {
 			continue
 		}
 		pair := edgePair{from, to}
@@ -154,6 +154,7 @@ func renderPlatformDepGraphMermaid(data map[string]interface{}) string {
 	}
 
 	b.WriteString("```mermaid\n")
+	b.WriteString("%%{init: {'theme': 'base', 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 50}}}%%\n")
 	b.WriteString("graph LR\n")
 	b.WriteString("    classDef internal fill:#3498db,stroke:#2980b9,color:#fff\n")
 	b.WriteString("    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff\n\n")
@@ -246,7 +247,10 @@ func renderPlatformArchDocPage(data map[string]interface{}) string {
 		// Group by owner
 		ownerCRDs := make(map[string][]string)
 		for kind, owner := range crdOwnership {
-			ownerStr, _ := owner.(string)
+			ownerStr, ok := owner.(string)
+			if !ok || ownerStr == "" {
+				continue
+			}
 			ownerCRDs[ownerStr] = append(ownerCRDs[ownerStr], kind)
 		}
 
@@ -293,7 +297,7 @@ func renderPlatformArchDocPage(data map[string]interface{}) string {
 		}
 		maxKey, maxCount := "", 0
 		for k, v := range couplingCounts {
-			if v > maxCount {
+			if v > maxCount || (v == maxCount && k < maxKey) {
 				maxKey, maxCount = k, v
 			}
 		}
@@ -316,16 +320,10 @@ func renderPlatformNetworkDocPage(data map[string]interface{}) string {
 	b.WriteString("# Network Topology\n\n")
 	b.WriteString(fmt.Sprintf("%d Kubernetes services across the platform.\n\n", len(services)))
 
-	// Service map diagram grouped by component, with cross-component links
-	if len(services) > 0 {
-		b.WriteString("## Service Map\n\n")
-		b.WriteString("Services grouped by owning component. Dashed arrows show cross-component references (component A deploys or references a service defined by component B).\n\n")
-		b.WriteString("```mermaid\n")
-		b.WriteString("graph LR\n")
-		b.WriteString("    classDef webhook fill:#e74c3c,stroke:#c0392b,color:#fff\n")
-		b.WriteString("    classDef metrics fill:#f39c12,stroke:#e67e22,color:#fff\n")
-		b.WriteString("    classDef data fill:#2ecc71,stroke:#27ae60,color:#fff\n\n")
+	// Kiali-style network topology graph
+	renderPlatformNetworkTopologyGraph(&b, data)
 
+	if len(services) > 0 {
 		// Group services by owner
 		ownerServices := make(map[string][]map[string]interface{})
 		for _, svc := range services {
@@ -339,85 +337,128 @@ func renderPlatformNetworkDocPage(data map[string]interface{}) string {
 		}
 		sort.Strings(owners)
 
-		// Build service name -> (owner, svcID) map for cross-linking
+		// Detect cross-component service references (same service name in multiple components)
 		type svcRef struct {
-			owner string
-			svcID string
+			owner   string
+			service string
 		}
-		svcNameMap := make(map[string][]svcRef)
-
-		svcCounter := 0
+		svcNameRefs := make(map[string][]svcRef)
 		for _, owner := range owners {
-			ownerID := sanitizeID(owner)
-			b.WriteString(fmt.Sprintf("    subgraph %s_sub[\"%s\"]\n", ownerID, escapeLabel(owner)))
 			for _, svc := range ownerServices[owner] {
-				svcCounter++
 				name := getStr(svc, "name", "")
-				ports := getSlice(svc, "ports")
-				var portParts []string
-				for _, p := range ports {
-					portParts = append(portParts, fmt.Sprintf("%v", p["port"]))
-				}
-				svcID := fmt.Sprintf("svc_%d", svcCounter)
-				portStr := strings.Join(portParts, ",")
-
-				// Classify by port pattern
-				cls := "data"
-				for _, p := range ports {
-					port := getInt(p, "port")
-					if port == 443 {
-						cls = "webhook"
-					} else if port == 8443 {
-						cls = "metrics"
-					}
-				}
-
-				b.WriteString(fmt.Sprintf("        %s[\"%s\\n%s\"]:::%s\n",
-					svcID, escapeLabel(name), portStr, cls))
-
-				svcNameMap[name] = append(svcNameMap[name], svcRef{owner, svcID})
+				svcNameRefs[name] = append(svcNameRefs[name], svcRef{owner, name})
 			}
-			b.WriteString("    end\n")
 		}
 
-		// Cross-component links: when the same service name appears in multiple components
-		b.WriteString("\n    %% Cross-component service references\n")
-		for name, refs := range svcNameMap {
+		// Filter to real cross-component refs
+		type crossRef struct {
+			from    string
+			to      string
+			service string
+		}
+		var crossRefs []crossRef
+		for name, refs := range svcNameRefs {
 			if len(refs) < 2 {
 				continue
 			}
-			// Skip generic names that don't represent real cross-component refs
-			if name == "webhook-service" || name == "kube-rbac-proxy" || name == "service" {
+			lower := strings.ToLower(name)
+			isGeneric := lower == "service" ||
+				strings.Contains(lower, "webhook") ||
+				strings.Contains(lower, "proxy") ||
+				strings.Contains(lower, "metrics") ||
+				strings.Contains(lower, "health") ||
+				lower == "grpc" || lower == "api"
+			if isGeneric {
 				continue
 			}
-			// Link secondary references to the primary (first alphabetically by owner)
 			sort.Slice(refs, func(i, j int) bool { return refs[i].owner < refs[j].owner })
-			primaryRef := refs[0]
+			primary := refs[0]
 			for _, ref := range refs[1:] {
-				b.WriteString(fmt.Sprintf("    %s -.->|\"refs %s\"| %s\n",
-					ref.svcID, escapeLabel(name), primaryRef.svcID))
+				crossRefs = append(crossRefs, crossRef{ref.owner, primary.owner, name})
 			}
 		}
 
-		b.WriteString("```\n\n")
+		// Cross-component service graph (only if there are cross-refs)
+		if len(crossRefs) > 0 {
+			b.WriteString("## Cross-Component Service References\n\n")
+			b.WriteString("Services referenced across component boundaries. When component A defines a service that component B also references, it indicates a deployment dependency.\n\n")
+			b.WriteString("```mermaid\n")
+			b.WriteString("graph LR\n")
+			b.WriteString("    classDef comp fill:#3498db,stroke:#2980b9,color:#fff\n\n")
 
-		// Services table
+			// Emit only the connected components
+			connectedComps := make(map[string]bool)
+			for _, cr := range crossRefs {
+				connectedComps[cr.from] = true
+				connectedComps[cr.to] = true
+			}
+			sortedComps := make([]string, 0, len(connectedComps))
+			for c := range connectedComps {
+				sortedComps = append(sortedComps, c)
+			}
+			sort.Strings(sortedComps)
+			for _, comp := range sortedComps {
+				b.WriteString(fmt.Sprintf("    %s[\"%s\"]:::comp\n", sanitizeID(comp), escapeLabel(comp)))
+			}
+			b.WriteString("\n")
+			for _, cr := range crossRefs {
+				b.WriteString(fmt.Sprintf("    %s -.->|\"%s\"| %s\n",
+					sanitizeID(cr.from), escapeLabel(cr.service), sanitizeID(cr.to)))
+			}
+			b.WriteString("```\n\n")
+		}
+
+		// Services summary table
 		b.WriteString("## Services by Component\n\n")
-		b.WriteString("| Owner | Service | Ports |\n")
-		b.WriteString("|-------|---------|-------|\n")
+		b.WriteString(fmt.Sprintf("| Component | Services | Webhook (443) | Metrics (8443) | Data |\n"))
+		b.WriteString("|-----------|----------|---------------|----------------|------|\n")
 		for _, owner := range owners {
-			for _, svc := range ownerServices[owner] {
+			svcs := ownerServices[owner]
+			webhookCount, metricsCount, dataCount := 0, 0, 0
+			for _, svc := range svcs {
+				ports := getSlice(svc, "ports")
+				classified := false
+				for _, p := range ports {
+					port := getInt(p, "port")
+					if port == 443 {
+						webhookCount++
+						classified = true
+					} else if port == 8443 {
+						metricsCount++
+						classified = true
+					}
+				}
+				if !classified {
+					dataCount++
+				}
+			}
+			b.WriteString(fmt.Sprintf("| %s | %d | %d | %d | %d |\n",
+				owner, len(svcs), webhookCount, metricsCount, dataCount))
+		}
+		b.WriteString("\n")
+
+		// Full service detail: grouped by component, no Owner column duplication
+		b.WriteString("## Service Detail\n\n")
+		b.WriteString("Per-component service breakdown with exact port numbers and protocols.\n\n")
+		for _, owner := range owners {
+			svcs := ownerServices[owner]
+			b.WriteString(fmt.Sprintf("### %s (%d services)\n\n", owner, len(svcs)))
+			b.WriteString("| Service | Type | Ports |\n")
+			b.WriteString("|---------|------|-------|\n")
+			for _, svc := range svcs {
 				ports := getSlice(svc, "ports")
 				var portParts []string
 				for _, p := range ports {
-					portParts = append(portParts, fmt.Sprintf("%v/%s",
-						p["port"], getStr(p, "protocol", "TCP")))
+					portParts = append(portParts, fmt.Sprintf("%d/%s",
+						getInt(p, "port"), getStr(p, "protocol", "TCP")))
 				}
 				b.WriteString(fmt.Sprintf("| %s | %s | %s |\n",
-					owner, getStr(svc, "name", ""), strings.Join(portParts, ", ")))
+					getStr(svc, "name", ""),
+					getStr(svc, "type", "ClusterIP"),
+					strings.Join(portParts, ", ")))
 			}
+			b.WriteString("\n")
 		}
-		b.WriteString("\n")
 
 		// Port patterns
 		b.WriteString("## Port Patterns\n\n")
@@ -425,7 +466,7 @@ func renderPlatformNetworkDocPage(data map[string]interface{}) string {
 		for _, svc := range services {
 			ports := getSlice(svc, "ports")
 			for _, p := range ports {
-				port := fmt.Sprintf("%v/TCP", p["port"])
+				port := fmt.Sprintf("%d/TCP", getInt(p, "port"))
 				name := getStr(svc, "name", "")
 				portGroups[port] = append(portGroups[port], name)
 			}
@@ -456,20 +497,10 @@ func renderPlatformRBACDocPage(data map[string]interface{}) string {
 
 	if len(rbacRoles) > 0 {
 		// Permission scope summary: one bar per component showing role count and max breadth
-		type roleInfo struct {
-			name      string
-			resources int
-		}
-		ownerRoles := make(map[string][]roleInfo)
+		ownerRoles := make(map[string][]RoleSummary)
 		for _, role := range rbacRoles {
 			owner := getStr(role, "owner", "")
-			name := getStr(role, "name", "")
-			rules := getSlice(role, "rules")
-			totalResources := 0
-			for _, rule := range rules {
-				totalResources += len(getStringSlice(rule, "resources"))
-			}
-			ownerRoles[owner] = append(ownerRoles[owner], roleInfo{name, totalResources})
+			ownerRoles[owner] = append(ownerRoles[owner], computeRoleSummary(role, "ClusterRole"))
 		}
 
 		owners := make([]string, 0, len(ownerRoles))
@@ -479,31 +510,31 @@ func renderPlatformRBACDocPage(data map[string]interface{}) string {
 		sort.Strings(owners)
 
 		b.WriteString("## Permission Scope by Component\n\n")
-		b.WriteString("Each bar shows the widest role (by resource type count). Color indicates scope: ")
-		b.WriteString(":red_circle: wide (>30 resources), :orange_circle: medium (10-30), :green_circle: narrow (<10).\n\n")
+		b.WriteString("Each bar shows the widest role (by resource type count). Scope: ")
+		b.WriteString("\U0001F534 wide (>30), \U0001F7E0 medium (10-30), \U0001F7E2 narrow (<10).\n\n")
+		// Compute chart height based on number of components (40px per bar + padding)
+		chartHeight := len(owners)*40 + 100
+		if chartHeight < 300 {
+			chartHeight = 300
+		}
 		b.WriteString("```mermaid\n")
-		b.WriteString("%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%\n")
-		b.WriteString("xychart-beta\n")
+		b.WriteString(fmt.Sprintf("%%%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 700, 'height': %d}}}%%%%\n", chartHeight))
+		b.WriteString("xychart-beta horizontal\n")
 		b.WriteString("    title \"Widest Role Scope (resource types)\"\n")
 		b.WriteString("    x-axis [")
 
-		// Build x-axis labels and data
+		// Build x-axis labels using full names (horizontal layout has room)
 		labels := make([]string, 0, len(owners))
 		values := make([]int, 0, len(owners))
 		for _, owner := range owners {
 			roles := ownerRoles[owner]
 			maxRes := 0
 			for _, r := range roles {
-				if r.resources > maxRes {
-					maxRes = r.resources
+				if r.ResourceCount > maxRes {
+					maxRes = r.ResourceCount
 				}
 			}
-			// Shorten label for readability
-			shortName := owner
-			if len(shortName) > 20 {
-				shortName = shortName[:18] + ".."
-			}
-			labels = append(labels, fmt.Sprintf("\"%s\"", shortName))
+			labels = append(labels, fmt.Sprintf("\"%s\"", owner))
 			values = append(values, maxRes)
 		}
 		b.WriteString(strings.Join(labels, ", "))
@@ -525,41 +556,33 @@ func renderPlatformRBACDocPage(data map[string]interface{}) string {
 		b.WriteString("]\n")
 		b.WriteString("```\n\n")
 
-		// Summary table: component, role count, widest role name, resource count
+		// RBAC graph: ServiceAccount -> Role bindings across the platform
+		b.WriteString("## RBAC Binding Graph\n\n")
+		b.WriteString("Subject-to-role bindings across all platform components. Edge direction shows who has access to what.\n\n")
+		rbacRoles := getSlice(data, "rbac_cluster_roles")
+		componentData := getSlice(data, "component_data")
+		renderPlatformRBACGraph(&b, rbacRoles, componentData)
+
+		// Roles by component, no duplicate detail table
 		b.WriteString("## Roles by Component\n\n")
 		b.WriteString("| Component | Roles | Widest Role | Resources | Scope |\n")
 		b.WriteString("|-----------|-------|-------------|-----------|-------|\n")
 		for _, owner := range owners {
 			roles := ownerRoles[owner]
 			sort.Slice(roles, func(i, j int) bool {
-				return roles[i].resources > roles[j].resources
+				return roles[i].ResourceCount > roles[j].ResourceCount
 			})
 			widest := roles[0]
 			scope := "narrow"
-			if widest.resources > 30 {
+			if widest.ResourceCount > 30 {
 				scope = "**wide**"
-			} else if widest.resources > 10 {
+			} else if widest.ResourceCount > 10 {
 				scope = "medium"
 			}
 			b.WriteString(fmt.Sprintf("| %s | %d | %s | %d | %s |\n",
-				owner, len(roles), widest.name, widest.resources, scope))
+				owner, len(roles), widest.Name, widest.ResourceCount, scope))
 		}
 		b.WriteString("\n")
-
-		// Detailed expandable section for full role list
-		b.WriteString("<details>\n<summary>Full role details</summary>\n\n")
-		b.WriteString("| Owner | Role | Resource Types |\n")
-		b.WriteString("|-------|------|----------------|\n")
-		for _, owner := range owners {
-			roles := ownerRoles[owner]
-			sort.Slice(roles, func(i, j int) bool {
-				return roles[i].resources > roles[j].resources
-			})
-			for _, r := range roles {
-				b.WriteString(fmt.Sprintf("| %s | %s | %d |\n", owner, r.name, r.resources))
-			}
-		}
-		b.WriteString("\n</details>\n\n")
 	}
 
 	return b.String()
@@ -588,21 +611,21 @@ func renderPlatformSecretsDocPage(data map[string]interface{}) string {
 		}
 		sort.Strings(owners)
 
-		// Compact bar chart: secrets per component, stacked by type
+		// Compact bar chart: secrets per component
+		chartHeight := len(owners)*40 + 100
+		if chartHeight < 300 {
+			chartHeight = 300
+		}
 		b.WriteString("## Secret Distribution\n\n")
 		b.WriteString("```mermaid\n")
-		b.WriteString("%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%\n")
-		b.WriteString("xychart-beta\n")
+		b.WriteString(fmt.Sprintf("%%%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '12px'}, 'xyChart': {'width': 700, 'height': %d}}}%%%%\n", chartHeight))
+		b.WriteString("xychart-beta horizontal\n")
 		b.WriteString("    title \"Secrets per Component\"\n")
 		b.WriteString("    x-axis [")
 		labels := make([]string, 0, len(owners))
 		totalVals := make([]int, 0, len(owners))
 		for _, owner := range owners {
-			shortName := owner
-			if len(shortName) > 20 {
-				shortName = shortName[:18] + ".."
-			}
-			labels = append(labels, fmt.Sprintf("\"%s\"", shortName))
+			labels = append(labels, fmt.Sprintf("\"%s\"", owner))
 			totalVals = append(totalVals, len(ownerSecrets[owner]))
 		}
 		b.WriteString(strings.Join(labels, ", "))
@@ -643,17 +666,20 @@ func renderPlatformSecretsDocPage(data map[string]interface{}) string {
 		}
 		b.WriteString("\n")
 
-		// Detailed secret list in expandable section
-		b.WriteString("<details>\n<summary>Full secret inventory</summary>\n\n")
-		b.WriteString("| Owner | Secret | Type |\n")
-		b.WriteString("|-------|--------|------|\n")
+		// Per-component secret detail (grouped, not duplicating summary columns)
+		b.WriteString("## Secret Detail\n\n")
+		b.WriteString("Per-component secret breakdown by name and type.\n\n")
 		for _, owner := range owners {
-			for _, s := range ownerSecrets[owner] {
-				b.WriteString(fmt.Sprintf("| %s | %s | %s |\n",
-					owner, getStr(s, "name", ""), getStr(s, "type", "Opaque")))
+			secrets := ownerSecrets[owner]
+			b.WriteString(fmt.Sprintf("### %s (%d secrets)\n\n", owner, len(secrets)))
+			b.WriteString("| Secret | Type |\n")
+			b.WriteString("|--------|------|\n")
+			for _, s := range secrets {
+				b.WriteString(fmt.Sprintf("| %s | %s |\n",
+					getStr(s, "name", ""), getStr(s, "type", "Opaque")))
 			}
+			b.WriteString("\n")
 		}
-		b.WriteString("\n</details>\n\n")
 
 		// Patterns
 		b.WriteString("## Patterns\n\n")
@@ -679,4 +705,266 @@ func renderPlatformSecretsDocPage(data map[string]interface{}) string {
 	}
 
 	return b.String()
+}
+
+// renderPlatformRBACGraph generates a Mermaid graph showing ServiceAccount -> Role bindings.
+func renderPlatformRBACGraph(b *strings.Builder, rbacRoles []map[string]interface{}, componentData []map[string]interface{}) {
+	type binding struct {
+		subject  string
+		subjKind string
+		role     string
+		owner    string
+	}
+	var bindings []binding
+	for _, comp := range componentData {
+		owner := getStr(comp, "component", "")
+		rbac := getMap(comp, "rbac")
+		if rbac == nil {
+			continue
+		}
+		for _, bd := range getSlice(rbac, "cluster_role_bindings") {
+			roleRef := getStr(bd, "role_ref", "")
+			for _, subj := range getSlice(bd, "subjects") {
+				bindings = append(bindings, binding{
+					subject:  getStr(subj, "name", ""),
+					subjKind: getStr(subj, "kind", ""),
+					role:     roleRef,
+					owner:    owner,
+				})
+			}
+		}
+	}
+
+	if len(bindings) == 0 {
+		b.WriteString("No RBAC bindings found across components.\n\n")
+		return
+	}
+
+	if len(bindings) > 50 {
+		b.WriteString(fmt.Sprintf("*%d bindings total. Showing the first 50.*\n\n", len(bindings)))
+		bindings = bindings[:50]
+	}
+
+	b.WriteString("```mermaid\n")
+	b.WriteString("graph LR\n")
+	b.WriteString("    classDef role fill:#e74c3c,stroke:#c0392b,color:#fff\n")
+	b.WriteString("    classDef subject fill:#3498db,stroke:#2980b9,color:#fff\n\n")
+
+	emittedNodes := make(map[string]bool)
+	for _, bind := range bindings {
+		subjID := sanitizeID("sa_" + bind.subject)
+		roleID := sanitizeID("role_" + bind.role)
+		if !emittedNodes[subjID] {
+			emittedNodes[subjID] = true
+			b.WriteString(fmt.Sprintf("    %s[\"%s\\n%s\"]:::subject\n",
+				subjID, escapeLabel(bind.subject), bind.subjKind))
+		}
+		if !emittedNodes[roleID] {
+			emittedNodes[roleID] = true
+			b.WriteString(fmt.Sprintf("    %s[\"%s\"]:::role\n",
+				roleID, escapeLabel(bind.role)))
+		}
+		b.WriteString(fmt.Sprintf("    %s -->|%s| %s\n", subjID, escapeLabel(bind.owner), roleID))
+	}
+
+	b.WriteString("```\n\n")
+}
+
+// renderPlatformNetworkTopologyGraph generates a Kiali-style network topology
+// showing components, their services, external dependencies, and traffic flows.
+func renderPlatformNetworkTopologyGraph(b *strings.Builder, data map[string]interface{}) {
+	componentData := getSlice(data, "component_data")
+	if len(componentData) == 0 {
+		return
+	}
+
+	b.WriteString("## Network Topology Graph\n\n")
+	b.WriteString("Service mesh view of the platform. Components are grouped with their services. ")
+	b.WriteString("Arrows show inter-component dependencies (CRD watches, Go module imports, sidecar injection) and external service connections.\n\n")
+
+	b.WriteString("```mermaid\n")
+	b.WriteString("%%{init: {'theme': 'base', 'flowchart': {'nodeSpacing': 20, 'rankSpacing': 40, 'curve': 'basis'}}}%%\n")
+	b.WriteString("graph TB\n")
+	b.WriteString("    classDef comp fill:#3498db,stroke:#2980b9,color:#fff\n")
+	b.WriteString("    classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff,font-size:10px\n")
+	b.WriteString("    classDef ext fill:#e74c3c,stroke:#c0392b,color:#fff\n")
+	b.WriteString("    classDef netpol fill:#f39c12,stroke:#d68910,color:#fff,font-size:10px\n")
+	b.WriteString("    classDef webhook fill:#9b59b6,stroke:#8e44ad,color:#fff,font-size:10px\n\n")
+
+	// Collect per-component data
+	type compInfo struct {
+		name       string
+		services   []map[string]interface{}
+		extConns   []map[string]interface{}
+		webhooks   []map[string]interface{}
+		netPols    []map[string]interface{}
+		hasIngress bool
+	}
+
+	var components []compInfo
+	for _, cd := range componentData {
+		name := getStr(cd, "component", "")
+		if name == "" {
+			continue
+		}
+		ci := compInfo{
+			name:     name,
+			services: getSlice(cd, "services"),
+			extConns: getSlice(cd, "external_connections"),
+			webhooks: getSlice(cd, "webhooks"),
+			netPols:  getSlice(cd, "network_policies"),
+		}
+		ci.hasIngress = len(getSlice(cd, "ingress_routing")) > 0
+		components = append(components, ci)
+	}
+
+	// Sort by name for stable output
+	sort.Slice(components, func(i, j int) bool {
+		return components[i].name < components[j].name
+	})
+
+	// Render each component as a subgraph with its services
+	for _, comp := range components {
+		compID := sanitizeID(comp.name)
+
+		// Dedup services by name
+		type svcKey struct{ name, svcType string }
+		seen := make(map[svcKey]bool)
+		var uniqueSvcs []map[string]interface{}
+		for _, svc := range comp.services {
+			key := svcKey{getStr(svc, "name", ""), getStr(svc, "type", "")}
+			source := getStr(svc, "source", "")
+			isTest := strings.Contains(source, "/test/") || strings.Contains(source, "/e2e/") || strings.Contains(source, "/testdata/")
+			if !seen[key] && !isTest {
+				seen[key] = true
+				uniqueSvcs = append(uniqueSvcs, svc)
+			}
+		}
+
+		if len(uniqueSvcs) > 0 || len(comp.extConns) > 0 {
+			b.WriteString(fmt.Sprintf("    subgraph %s_sub[\"%s\"]\n", compID, escapeLabel(comp.name)))
+			b.WriteString(fmt.Sprintf("        %s([\"%s\"]):::%s\n", compID, escapeLabel(comp.name), "comp"))
+
+			// Services (limit to 5 per component to keep graph readable)
+			displaySvcs := uniqueSvcs
+			if len(displaySvcs) > 5 {
+				displaySvcs = displaySvcs[:5]
+			}
+			for i, svc := range displaySvcs {
+				svcName := getStr(svc, "name", "")
+				ports := getSlice(svc, "ports")
+				var portStr string
+				if len(ports) > 0 {
+					portParts := make([]string, 0)
+					for _, p := range ports {
+						portParts = append(portParts, fmt.Sprintf("%d", getInt(p, "port")))
+					}
+					portStr = strings.Join(portParts, ",")
+				}
+				svcID := fmt.Sprintf("%s_svc_%d", compID, i)
+				label := escapeLabel(svcName)
+				if portStr != "" {
+					label += "\\n:" + portStr
+				}
+				b.WriteString(fmt.Sprintf("        %s[\"%s\"]:::svc\n", svcID, label))
+				b.WriteString(fmt.Sprintf("        %s --- %s\n", compID, svcID))
+			}
+			if len(uniqueSvcs) > 5 {
+				moreID := fmt.Sprintf("%s_svc_more", compID)
+				b.WriteString(fmt.Sprintf("        %s[\"+%d more\"]:::svc\n", moreID, len(uniqueSvcs)-5))
+			}
+
+			// Network policy indicator
+			if len(comp.netPols) > 0 {
+				npID := fmt.Sprintf("%s_np", compID)
+				b.WriteString(fmt.Sprintf("        %s{{\"%d NetworkPolicies\"}}:::netpol\n", npID, len(comp.netPols)))
+				b.WriteString(fmt.Sprintf("        %s -.- %s\n", npID, compID))
+			}
+
+			b.WriteString("    end\n")
+		} else {
+			// Component with no services
+			b.WriteString(fmt.Sprintf("    %s([\"%s\"]):::%s\n", compID, escapeLabel(comp.name), "comp"))
+		}
+	}
+
+	b.WriteString("\n")
+
+	// External services (deduplicated)
+	extSeen := make(map[string]bool)
+	for _, comp := range components {
+		for _, ec := range comp.extConns {
+			service := getStr(ec, "service", "")
+			ecType := getStr(ec, "type", "")
+			key := ecType + "/" + service
+			if !extSeen[key] && service != "" {
+				extSeen[key] = true
+				extID := sanitizeID("ext_" + service)
+				b.WriteString(fmt.Sprintf("    %s[[\"%s\\n%s\"]]:::ext\n", extID, escapeLabel(service), ecType))
+			}
+		}
+	}
+	b.WriteString("\n")
+
+	// Inter-component dependency edges
+	depGraph := getSlice(data, "dependency_graph")
+	type edgePair struct{ from, to string }
+	edgeLabels := make(map[edgePair][]string)
+	edgeOrder := make([]edgePair, 0)
+	for _, dep := range depGraph {
+		from := getStr(dep, "from", "")
+		to := getStr(dep, "to", "")
+		depType := getStr(dep, "type", "")
+		if from == "" || to == "" || from == to {
+			continue
+		}
+		pair := edgePair{from, to}
+		if _, exists := edgeLabels[pair]; !exists {
+			edgeOrder = append(edgeOrder, pair)
+		}
+		edgeLabels[pair] = append(edgeLabels[pair], depType)
+	}
+
+	for _, pair := range edgeOrder {
+		fromID := sanitizeID(pair.from)
+		toID := sanitizeID(pair.to)
+		labels := edgeLabels[pair]
+
+		// Classify edge type
+		hasWatch := false
+		hasSidecar := false
+		for _, l := range labels {
+			if strings.HasPrefix(l, "watches-crd") {
+				hasWatch = true
+			}
+			if l == "uses-image" {
+				hasSidecar = true
+			}
+		}
+
+		if hasWatch {
+			b.WriteString(fmt.Sprintf("    %s ==>|watches| %s\n", fromID, toID))
+		} else if hasSidecar {
+			b.WriteString(fmt.Sprintf("    %s -->|sidecar| %s\n", fromID, toID))
+		} else {
+			b.WriteString(fmt.Sprintf("    %s -.->|module| %s\n", fromID, toID))
+		}
+	}
+
+	// External connection edges
+	for _, comp := range components {
+		compID := sanitizeID(comp.name)
+		extConnSeen := make(map[string]bool)
+		for _, ec := range comp.extConns {
+			service := getStr(ec, "service", "")
+			if service == "" || extConnSeen[service] {
+				continue
+			}
+			extConnSeen[service] = true
+			extID := sanitizeID("ext_" + service)
+			b.WriteString(fmt.Sprintf("    %s -.-> %s\n", compID, extID))
+		}
+	}
+
+	b.WriteString("```\n\n")
 }

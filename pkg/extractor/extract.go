@@ -44,6 +44,7 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 	arch := &ComponentArchitecture{
 		Component:       componentName,
 		Repo:            fmt.Sprintf("%s/%s", org, componentName),
+		CommitSHA:       detectHEAD(absPath),
 		ExtractedAt:     time.Now().UTC().Format(time.RFC3339),
 		AnalyzerVersion: AnalyzerVersion,
 		CRDs:            extractCRDs(absPath),
@@ -125,6 +126,58 @@ func detectOrg(repoPath string) string {
 	}
 
 	return "opendatahub-io"
+}
+
+// detectHEAD reads the current commit SHA from .git/HEAD.
+// Returns empty string if the repo has no git directory or HEAD cannot be resolved.
+func detectHEAD(repoPath string) string {
+	headPath := filepath.Join(repoPath, ".git", "HEAD")
+	data, err := os.ReadFile(headPath)
+	if err != nil {
+		return ""
+	}
+	content := strings.TrimSpace(string(data))
+
+	// Detached HEAD: raw SHA
+	if len(content) == 40 && !strings.Contains(content, " ") {
+		return content
+	}
+
+	// Symbolic ref: "ref: refs/heads/main"
+	if strings.HasPrefix(content, "ref: ") {
+		refPath := strings.TrimPrefix(content, "ref: ")
+		shaPath := filepath.Join(repoPath, ".git", refPath)
+		shaData, err := os.ReadFile(shaPath)
+		if err != nil {
+			// Try packed-refs
+			return readPackedRef(repoPath, refPath)
+		}
+		return strings.TrimSpace(string(shaData))
+	}
+
+	return ""
+}
+
+// readPackedRef looks up a ref in .git/packed-refs (used when refs are packed).
+func readPackedRef(repoPath, refPath string) string {
+	packedPath := filepath.Join(repoPath, ".git", "packed-refs")
+	f, err := os.Open(packedPath)
+	if err != nil {
+		return ""
+	}
+	defer f.Close()
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, "#") {
+			continue
+		}
+		parts := strings.Fields(line)
+		if len(parts) == 2 && parts[1] == refPath {
+			return parts[0]
+		}
+	}
+	return ""
 }
 
 // orgFromGitURL extracts the GitHub organization from a git remote URL.

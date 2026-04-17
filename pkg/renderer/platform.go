@@ -108,18 +108,13 @@ func renderRBACOverview(data map[string]interface{}) string {
 	for _, role := range roles {
 		counter++
 		owner := getStr(role, "owner", "")
-		name := getStr(role, "name", "")
-		rules := getSlice(role, "rules")
-		totalResources := 0
-		for _, rule := range rules {
-			totalResources += len(getStringSlice(rule, "resources"))
-		}
+		rs := computeRoleSummary(role, "ClusterRole")
 		ownerID := sanitizeID(owner)
 		roleID := fmt.Sprintf("role_%d", counter)
 		b.WriteString(fmt.Sprintf("    %s[\"%s\"]\n", ownerID, escapeLabel(owner)))
 		b.WriteString(fmt.Sprintf("    class %s component\n", ownerID))
 		b.WriteString(fmt.Sprintf("    %s --> %s[\"%s\\n(%d resources)\"]\n",
-			ownerID, roleID, escapeLabel(name), totalResources))
+			ownerID, roleID, escapeLabel(rs.Name), rs.ResourceCount))
 		b.WriteString(fmt.Sprintf("    class %s role\n", roleID))
 	}
 

@@ -1,0 +1,57 @@
+/* Make mermaid diagrams scrollable and zoomable */
+.mermaid,
+pre.mermaid {
+  overflow: auto;
+  max-width: 100%;
+  max-height: 500px;
+  cursor: grab;
+  position: relative;
+}
+
+.mermaid svg,
+pre.mermaid svg {
+  max-height: 480px;
+  width: auto;
+}
+
+/* Zoom toggle button for mermaid diagrams */
+.diagram-zoom {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 10;
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.diagram-zoom:hover {
+  opacity: 1;
+}
+
+/* Fullscreen mode for diagrams */
+.mermaid.fullscreen,
+pre.mermaid.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: var(--md-default-bg-color);
+  overflow: auto;
+  padding: 2rem;
+  cursor: default;
+}
+
+.mermaid.fullscreen svg,
+pre.mermaid.fullscreen svg {
+  max-width: none;
+  width: auto;
+  height: auto;
+}

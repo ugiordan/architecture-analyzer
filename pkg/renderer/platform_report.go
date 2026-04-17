@@ -110,14 +110,10 @@ func renderPlatformReport(data map[string]interface{}) string {
 		b.WriteString("| Owner | Role | Resource Count |\n")
 		b.WriteString("|-------|------|----------------|\n")
 		for _, role := range rbacRoles {
-			rules := getSlice(role, "rules")
-			totalResources := 0
-			for _, rule := range rules {
-				totalResources += len(getStringSlice(rule, "resources"))
-			}
+			rs := computeRoleSummary(role, "ClusterRole")
 			b.WriteString(fmt.Sprintf("| %s | %s | %d |\n",
-				getStr(role, "owner", ""), getStr(role, "name", ""),
-				totalResources))
+				getStr(role, "owner", ""), rs.Name,
+				rs.ResourceCount))
 		}
 		b.WriteString("\n")
 	}
