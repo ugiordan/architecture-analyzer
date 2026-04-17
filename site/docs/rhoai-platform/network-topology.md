@@ -11,6 +11,7 @@ Interactive service mesh view of the platform. Drag nodes to rearrange, hover to
   <button data-action="zoom-in" title="Zoom in">+</button>
   <button data-action="zoom-out" title="Zoom out">&minus;</button>
   <button data-action="relayout" title="Re-run layout">Relayout</button>
+  <button data-action="fullscreen" title="Toggle fullscreen">Fullscreen</button>
 </div>
 <div class="cytoscape-topology">
   <script type="application/json">
@@ -19,12 +20,13 @@ Interactive service mesh view of the platform. Drag nodes to rearrange, hover to
 </div>
 <div class="topology-legend">
   <span><span class="swatch" style="background:#3498db"></span> Component</span>
-  <span><span class="swatch" style="background:#2ecc71"></span> Service</span>
-  <span><span class="swatch" style="background:#e74c3c"></span> External</span>
+  <span><span class="swatch" style="background:#27ae60"></span> Has Ingress</span>
+  <span><span class="swatch" style="background:#3498db;border:2px solid #f39c12"></span> Has NetworkPolicy</span>
+  <span><span class="swatch" style="background:#e74c3c;border-radius:2px;transform:rotate(45deg)"></span> External</span>
   <span><span class="line-swatch" style="background:#e74c3c"></span> CRD Watch</span>
   <span><span class="line-swatch" style="background:#9b59b6"></span> Sidecar</span>
   <span><span class="line-swatch" style="background:#95a5a6;border-top:2px dashed #95a5a6;height:0"></span> Module</span>
-  <span><span class="line-swatch" style="background:#e67e22;border-top:2px dotted #e67e22;height:0"></span> External Conn</span>
+  <span><span class="line-swatch" style="background:#e67e22;border-top:2px dotted #e67e22;height:0"></span> External</span>
 </div>
 
 ## Cross-Component Service References
@@ -40,9 +42,9 @@ graph LR
     odh_dashboard["odh-dashboard"]:::comp
     opendatahub_operator["opendatahub-operator"]:::comp
 
+    opendatahub_operator -.->|"odh-dashboard"| odh_dashboard
     opendatahub_operator -.->|"kserve-controller-manager-service"| kserve
     opendatahub_operator -.->|"kuberay-operator"| kuberay
-    opendatahub_operator -.->|"odh-dashboard"| odh_dashboard
 ```
 
 ## Services by Component
