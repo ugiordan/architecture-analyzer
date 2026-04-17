@@ -14,24 +14,50 @@ pre.mermaid svg {
   width: auto;
 }
 
-/* Zoom toggle button for mermaid diagrams */
-.diagram-zoom {
+/* Diagram toolbar: zoom in/out, reset, fullscreen */
+.diagram-toolbar {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 6px;
+  right: 6px;
   z-index: 10;
+  display: flex;
+  gap: 2px;
   background: var(--md-default-bg-color);
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 4px;
-  padding: 2px 6px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  opacity: 0.6;
+  border-radius: 6px;
+  padding: 3px;
+  opacity: 0;
   transition: opacity 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
-.diagram-zoom:hover {
+.mermaid:hover .diagram-toolbar,
+pre.mermaid:hover .diagram-toolbar,
+.diagram-toolbar:hover {
   opacity: 1;
+}
+
+.diagram-toolbar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.diagram-toolbar button:hover {
+  background: var(--md-accent-fg-color--transparent, rgba(0, 0, 0, 0.06));
+  color: var(--md-default-fg-color);
 }
 
 /* Fullscreen mode for diagrams */
@@ -42,6 +68,7 @@ pre.mermaid.fullscreen {
   left: 0;
   width: 100vw;
   height: 100vh;
+  max-height: 100vh;
   z-index: 9999;
   background: var(--md-default-bg-color);
   overflow: auto;
@@ -49,9 +76,19 @@ pre.mermaid.fullscreen {
   cursor: default;
 }
 
+.mermaid.fullscreen .diagram-toolbar,
+pre.mermaid.fullscreen .diagram-toolbar {
+  opacity: 1;
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10000;
+}
+
 .mermaid.fullscreen svg,
 pre.mermaid.fullscreen svg {
   max-width: none;
+  max-height: none;
   width: auto;
   height: auto;
 }
