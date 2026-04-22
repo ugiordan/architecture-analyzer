@@ -1,6 +1,7 @@
 # Platform scan configuration
 # Each platform produces its own aggregated architecture analysis and docs section.
 # Repos are listed under their GitHub org. The workflow combines org + repo name.
+# Only Go-based repos are included (the analyzer extracts from Go source).
 
 platforms:
   odh:
@@ -15,16 +16,15 @@ platforms:
         - trustyai-service-operator
         - training-operator
         - trainer
-        - feast
         - llama-stack-k8s-operator
         - mlflow-operator
         - spark-operator
+        - codeflare-operator
         - kubeflow
         # Core services
         - odh-dashboard
         - data-science-pipelines
         - model-registry
-        - trustyai-explainability
         - models-as-a-service
         - notebooks
         # Inference
@@ -34,17 +34,18 @@ platforms:
         - kube-auth-proxy
         - distributed-workloads
         - kueue
-        - odh-ide-extensions
         # AI Safety / Guardrails
         - fms-guardrails-orchestrator
-        - guardrails-detectors
         # LLM Infrastructure
         - llm-d-inference-scheduler
         - llm-d-kv-cache
         # Evaluation
-        - lm-evaluation-harness
+        - eval-hub
         # Batch
         - argo-workflows
+        - batch-gateway
+        # Other
+        - workload-variant-autoscaler
       # External upstream dependencies
       kserve:
         - kserve
@@ -66,7 +67,6 @@ platforms:
         - trustyai-service-operator
         - training-operator
         - trainer
-        - feast
         - llama-stack-k8s-operator
         - mlflow-operator
         - spark-operator
@@ -75,17 +75,12 @@ platforms:
         - odh-dashboard
         - data-science-pipelines
         - model-registry
-        - trustyai-explainability
+        - models-as-a-service
         - notebooks
         # Inference
         - kserve
         - modelmesh-serving
         - odh-model-controller
-        - vllm
-        - vllm-cpu
-        - vllm-gaudi
-        - openvino_model_server
-        - MLServer
         # Infrastructure
         - kube-auth-proxy
         - kube-rbac-proxy
@@ -95,22 +90,13 @@ platforms:
         - kueue
         # AI Safety / Guardrails
         - fms-guardrails-orchestrator
-        - guardrails-detectors
-        - guardrails-regex-detector
-        - NeMo-Guardrails
         # LLM Infrastructure
         - llm-d-inference-scheduler
         - llm-d-kv-cache
-        - vllm-orchestrator-gateway
         # Evaluation
-        - lm-evaluation-harness
         - eval-hub
         # Batch
         - argo-workflows
         - batch-gateway
-        # Agentic / LLaMA Stack
-        - llama-stack-distribution
-        - llama-stack-provider-ragas
-        - llama-stack-provider-trustyai-garak
         # Other
         - workload-variant-autoscaler
