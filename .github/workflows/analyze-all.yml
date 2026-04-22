@@ -9,6 +9,12 @@ on:
         description: 'Platform to analyze (odh, rhoai, or all)'
         required: false
         default: 'all'
+      version:
+        description: 'Version label for snapshot (e.g. v2.15.0). Defaults to date stamp if empty.'
+        required: false
+        default: ''
+
+concurrency: snapshots
 
 permissions:
   contents: read
@@ -129,6 +135,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Determine version label
+        id: version
+        run: |
+          ver="${{ inputs.version }}"
+          if [ -z "$ver" ]; then
+            ver="$(date -u +%Y-%m-%d)"
+          fi
+          echo "label=${ver}" >> "$GITHUB_OUTPUT"
+          # Check if this is a date-stamped version (for retention pruning)
+          if echo "$ver" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+            echo "is_dated=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_dated=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build analyzer
         run: go build -o rhoai-analyzer ./cmd/rhoai-analyzer/
 
@@ -150,20 +171,22 @@ jobs:
 
       - name: Aggregate and generate docs
         run: |
+          VERSION="${{ steps.version.outputs.label }}"
+
           if [ -d odh-results ] && [ "$(ls -A odh-results)" ]; then
             echo "=== Aggregating ODH ==="
-            ./rhoai-analyzer aggregate odh-results --output-dir platform-output/odh
+            ./rhoai-analyzer aggregate -output-dir platform-output/odh -version "$VERSION" -platform odh odh-results
             echo "=== Generating ODH docs ==="
-            ./rhoai-analyzer docs platform-output/odh/platform-architecture.json \
-              --output-dir site/docs/odh-platform --prefix odh-platform
+            ./rhoai-analyzer docs -output-dir site/docs/odh-platform -prefix odh-platform \
+              "platform-output/odh/${VERSION}/platform-architecture.json"
           fi
 
           if [ -d rhoai-results ] && [ "$(ls -A rhoai-results)" ]; then
             echo "=== Aggregating RHOAI ==="
-            ./rhoai-analyzer aggregate rhoai-results --output-dir platform-output/rhoai
+            ./rhoai-analyzer aggregate -output-dir platform-output/rhoai -version "$VERSION" -platform rhoai rhoai-results
             echo "=== Generating RHOAI docs ==="
-            ./rhoai-analyzer docs platform-output/rhoai/platform-architecture.json \
-              --output-dir site/docs/rhoai-platform --prefix rhoai-platform
+            ./rhoai-analyzer docs -output-dir site/docs/rhoai-platform -prefix rhoai-platform \
+              "platform-output/rhoai/${VERSION}/platform-architecture.json"
           fi
 
       - name: Upload platform artifacts
@@ -179,3 +202,69 @@ jobs:
       - name: Deploy to GitHub Pages
         working-directory: site
         run: mkdocs gh-deploy --force
+
+      - name: Publish snapshot to snapshots branch
+        run: |
+          VERSION="${{ steps.version.outputs.label }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create or switch to snapshots branch using a worktree
+          SNAP_DIR="/tmp/snapshots-worktree"
+          rm -rf "$SNAP_DIR"
+          if git ls-remote --heads origin snapshots | grep -q snapshots; then
+            git fetch origin snapshots
+            git worktree add "$SNAP_DIR" origin/snapshots
+          else
+            git worktree add --orphan "$SNAP_DIR" snapshots
+            (cd "$SNAP_DIR" && git rm -rf . 2>/dev/null || true)
+          fi
+
+          # Copy versioned output
+          mkdir -p "$SNAP_DIR/output/${VERSION}"
+          cp -r platform-output/* "$SNAP_DIR/output/${VERSION}/"
+
+          # Commit and tag
+          (
+            cd "$SNAP_DIR"
+            git add "output/${VERSION}/"
+            git commit -m "snapshot: ${VERSION}" || echo "No changes to commit"
+            git tag -f "arch/${VERSION}"
+          )
+
+          # Push branch and tag
+          (cd "$SNAP_DIR" && git push origin HEAD:snapshots && git push origin "arch/${VERSION}" --force)
+          git worktree remove "$SNAP_DIR" --force
+
+      - name: Prune old date-stamped snapshots
+        if: steps.version.outputs.is_dated == 'true'
+        run: |
+          KEEP=10
+          git fetch origin snapshots
+          SNAP_DIR="/tmp/snapshots-prune"
+          rm -rf "$SNAP_DIR"
+          git worktree add "$SNAP_DIR" origin/snapshots
+
+          cd "$SNAP_DIR"
+
+          # List date-stamped snapshot dirs, sorted oldest first
+          DATED_DIRS=$(ls -d output/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] 2>/dev/null | sort)
+          COUNT=$(echo "$DATED_DIRS" | grep -c . || true)
+
+          if [ "$COUNT" -gt "$KEEP" ]; then
+            TO_DELETE=$((COUNT - KEEP))
+            echo "Pruning $TO_DELETE old date-stamped snapshots (keeping $KEEP)..."
+            echo "$DATED_DIRS" | head -n "$TO_DELETE" | while read -r dir; do
+              DATE_LABEL=$(basename "$dir")
+              echo "  Removing: $dir (tag arch/${DATE_LABEL})"
+              git rm -rf "$dir"
+              git push origin --delete "arch/${DATE_LABEL}" 2>/dev/null || true
+            done
+            git commit -m "prune: remove old date-stamped snapshots (kept $KEEP)"
+            git push origin HEAD:snapshots
+          else
+            echo "Only $COUNT date-stamped snapshots, nothing to prune (keep $KEEP)"
+          fi
+
+          cd /tmp
+          git worktree remove "$SNAP_DIR" --force

@@ -8,7 +8,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
+	"time"
 
 	"github.com/ugiordan/rhoai-architecture-analyzer/pkg/aggregator"
 	"github.com/ugiordan/rhoai-architecture-analyzer/pkg/annotator"
@@ -33,6 +35,48 @@ func init() {
 	domains.Register(security.New())
 	domains.Register(testingdomain.New())
 	domains.Register(upgrade.New())
+}
+
+// versionLabelRe validates version labels for snapshot output directories.
+var versionLabelRe = regexp.MustCompile(`^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$`)
+
+// validateVersionLabel checks that a version label is safe for use in file paths and git tags.
+func validateVersionLabel(label string) error {
+	if !versionLabelRe.MatchString(label) {
+		return fmt.Errorf("invalid version label %q: must match %s", label, versionLabelRe.String())
+	}
+	return nil
+}
+
+// applyVersion adjusts outputDir to include a version subdirectory when version is non-empty.
+// e.g. applyVersion("output", "v2.15.0") returns "output/v2.15.0".
+func applyVersion(outputDir, ver string) string {
+	if ver == "" {
+		return outputDir
+	}
+	return filepath.Join(outputDir, ver)
+}
+
+// snapshotMetadata holds version and provenance information written alongside output.
+type snapshotMetadata struct {
+	Version         string            `json:"version"`
+	Timestamp       string            `json:"timestamp"`
+	AnalyzerVersion string            `json:"analyzer_version"`
+	ReposAnalyzed   map[string]string `json:"repos_analyzed"`
+	Platform        string            `json:"platform,omitempty"`
+}
+
+// writeSnapshotMetadata writes snapshot-metadata.json to the given directory.
+func writeSnapshotMetadata(dir, ver string, repos map[string]string, platform string) error {
+	meta := snapshotMetadata{
+		Version:         ver,
+		Timestamp:       time.Now().UTC().Format(time.RFC3339),
+		AnalyzerVersion: version,
+		ReposAnalyzed:   repos,
+		Platform:        platform,
+	}
+	path := filepath.Join(dir, "snapshot-metadata.json")
+	return writeJSON(path, meta)
 }
 
 func main() {
@@ -119,10 +163,17 @@ func cmdExtract(args []string) error {
 	fs := flag.NewFlagSet("extract", flag.ExitOnError)
 	output := fs.String("output", "component-architecture.json", "Output JSON file")
 	org := fs.String("org", "", "GitHub organization (auto-detected from go.mod if empty)")
+	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
 	fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: rhoai-analyzer extract <repo-path> [--output file.json] [--org org]")
+		return fmt.Errorf("usage: rhoai-analyzer extract <repo-path> [--output file.json] [--org org] [--version label]")
+	}
+
+	if *ver != "" {
+		if err := validateVersionLabel(*ver); err != nil {
+			return err
+		}
 	}
 
 	opts := &extractor.ExtractOptions{Org: *org}
@@ -130,7 +181,15 @@ func cmdExtract(args []string) error {
 	if err != nil {
 		return err
 	}
-	return writeJSON(*output, arch)
+
+	outPath := *output
+	if *ver != "" {
+		// Place output in a versioned subdirectory
+		dir := filepath.Dir(outPath)
+		base := filepath.Base(outPath)
+		outPath = filepath.Join(dir, *ver, base)
+	}
+	return writeJSON(outPath, arch)
 }
 
 // cmdRender renders diagrams from architecture JSON.
@@ -169,23 +228,32 @@ func cmdAnalyze(args []string) error {
 	fs := flag.NewFlagSet("analyze", flag.ExitOnError)
 	outputDir := fs.String("output-dir", "output", "Output directory")
 	org := fs.String("org", "", "GitHub organization (auto-detected from go.mod if empty)")
+	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
 	fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: rhoai-analyzer analyze <repo-path> [--output-dir dir] [--org org]")
+		return fmt.Errorf("usage: rhoai-analyzer analyze <repo-path> [--output-dir dir] [--org org] [--version label]")
 	}
 
+	if *ver != "" {
+		if err := validateVersionLabel(*ver); err != nil {
+			return err
+		}
+	}
+
+	repoPath := fs.Arg(0)
 	opts := &extractor.ExtractOptions{Org: *org}
-	arch, err := extractor.ExtractAll(fs.Arg(0), opts)
+	arch, err := extractor.ExtractAll(repoPath, opts)
 	if err != nil {
 		return err
 	}
 
-	if err := os.MkdirAll(*outputDir, 0o755); err != nil {
+	outDir := applyVersion(*outputDir, *ver)
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("creating output dir: %w", err)
 	}
 
-	jsonPath := filepath.Join(*outputDir, "component-architecture.json")
+	jsonPath := filepath.Join(outDir, "component-architecture.json")
 	if err := writeJSON(jsonPath, arch); err != nil {
 		return err
 	}
@@ -196,12 +264,21 @@ func cmdAnalyze(args []string) error {
 		return err
 	}
 
-	diagramsDir := filepath.Join(*outputDir, "diagrams")
+	diagramsDir := filepath.Join(outDir, "diagrams")
 	diagrams := renderer.RenderAll(data, nil)
 	if err := writeDiagrams(diagramsDir, diagrams); err != nil {
 		return err
 	}
 	fmt.Printf("Rendered %d diagram(s) to: %s\n", len(diagrams), diagramsDir)
+
+	if *ver != "" {
+		repos := map[string]string{arch.Repo: arch.CommitSHA}
+		if err := writeSnapshotMetadata(outDir, *ver, repos, ""); err != nil {
+			return fmt.Errorf("writing snapshot metadata: %w", err)
+		}
+		fmt.Printf("Snapshot metadata written to: %s/snapshot-metadata.json\n", outDir)
+	}
+
 	return nil
 }
 
@@ -209,10 +286,18 @@ func cmdAnalyze(args []string) error {
 func cmdAggregate(args []string) error {
 	fs := flag.NewFlagSet("aggregate", flag.ExitOnError)
 	outputDir := fs.String("output-dir", "platform-output", "Output directory")
+	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
+	platform := fs.String("platform", "", "Platform name for snapshot metadata (e.g. rhoai, odh)")
 	fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: rhoai-analyzer aggregate <results-dir> [--output-dir dir]")
+		return fmt.Errorf("usage: rhoai-analyzer aggregate <results-dir> [--output-dir dir] [--version label] [--platform name]")
+	}
+
+	if *ver != "" {
+		if err := validateVersionLabel(*ver); err != nil {
+			return err
+		}
 	}
 
 	platformData, err := aggregator.Aggregate(fs.Arg(0))
@@ -220,22 +305,32 @@ func cmdAggregate(args []string) error {
 		return err
 	}
 
-	if err := os.MkdirAll(*outputDir, 0o755); err != nil {
+	outDir := applyVersion(*outputDir, *ver)
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("creating output dir: %w", err)
 	}
 
-	jsonPath := filepath.Join(*outputDir, "platform-architecture.json")
+	jsonPath := filepath.Join(outDir, "platform-architecture.json")
 	if err := writeJSON(jsonPath, platformData); err != nil {
 		return err
 	}
 	fmt.Printf("Aggregated platform architecture to: %s\n", jsonPath)
 
-	diagramsDir := filepath.Join(*outputDir, "diagrams")
+	diagramsDir := filepath.Join(outDir, "diagrams")
 	diagrams := renderer.RenderPlatformAll(platformData)
 	if err := writeDiagrams(diagramsDir, diagrams); err != nil {
 		return err
 	}
 	fmt.Printf("Rendered %d platform diagram(s) to: %s\n", len(diagrams), diagramsDir)
+
+	if *ver != "" {
+		repos := collectRepoSHAs(fs.Arg(0))
+		if err := writeSnapshotMetadata(outDir, *ver, repos, *platform); err != nil {
+			return fmt.Errorf("writing snapshot metadata: %w", err)
+		}
+		fmt.Printf("Snapshot metadata written to: %s/snapshot-metadata.json\n", outDir)
+	}
+
 	return nil
 }
 
@@ -244,10 +339,17 @@ func cmdDocs(args []string) error {
 	fs := flag.NewFlagSet("docs", flag.ExitOnError)
 	outputDir := fs.String("output-dir", "docs", "Output directory for generated docs")
 	prefix := fs.String("prefix", "", "Path prefix for nav snippet (e.g. 'rhoai-platform')")
+	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
 	fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: rhoai-analyzer docs <json-file> [--output-dir dir] [--prefix path]")
+		return fmt.Errorf("usage: rhoai-analyzer docs <json-file> [--output-dir dir] [--prefix path] [--version label]")
+	}
+
+	if *ver != "" {
+		if err := validateVersionLabel(*ver); err != nil {
+			return err
+		}
 	}
 
 	data, err := loadJSON(fs.Arg(0))
@@ -257,17 +359,42 @@ func cmdDocs(args []string) error {
 
 	pages := renderer.RenderDocs(data)
 
+	// Look for snapshot metadata next to the input JSON file
+	var banner string
+	metaPath := filepath.Join(filepath.Dir(fs.Arg(0)), "snapshot-metadata.json")
+	if metaData, err := loadJSON(metaPath); err == nil {
+		snapVer, _ := metaData["version"].(string)
+		snapTS, _ := metaData["timestamp"].(string)
+		if snapTS != "" {
+			// Truncate to date only for display
+			if len(snapTS) >= 10 {
+				snapTS = snapTS[:10]
+			}
+		}
+		if snapVer != "" {
+			banner = fmt.Sprintf("> **Architecture snapshot: %s** (%s)\n\n", snapVer, snapTS)
+		}
+	}
+
+	outDir := applyVersion(*outputDir, *ver)
 	for _, page := range pages {
-		outPath := filepath.Join(*outputDir, page.Path)
+		content := page.Content
+		if banner != "" && strings.HasSuffix(page.Path, "index.md") {
+			// Inject version banner after the first heading
+			if idx := strings.Index(content, "\n"); idx > 0 {
+				content = content[:idx+1] + "\n" + banner + content[idx+1:]
+			}
+		}
+		outPath := filepath.Join(outDir, page.Path)
 		if err := os.MkdirAll(filepath.Dir(outPath), 0o755); err != nil {
 			return fmt.Errorf("creating directory for %s: %w", outPath, err)
 		}
-		if err := os.WriteFile(outPath, []byte(page.Content), 0o644); err != nil {
+		if err := os.WriteFile(outPath, []byte(content), 0o644); err != nil {
 			return fmt.Errorf("writing %s: %w", outPath, err)
 		}
 	}
 
-	fmt.Printf("Generated %d documentation pages to: %s\n", len(pages), *outputDir)
+	fmt.Printf("Generated %d documentation pages to: %s\n", len(pages), outDir)
 
 	// Print nav snippet
 	navSnippet := renderer.NavSnippet(pages, *prefix)
@@ -551,14 +678,22 @@ func cmdFullAnalysis(args []string) error {
 	outputDir := fs.String("output-dir", "output", "Output directory")
 	org := fs.String("org", "", "GitHub organization (auto-detected from go.mod if empty)")
 	domainList := fs.String("domains", "", "Comma-separated domains (default: all)")
+	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
 	fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: rhoai-analyzer full-analysis <repo-path> [--output-dir dir] [--org org] [--domains sec,test]")
+		return fmt.Errorf("usage: rhoai-analyzer full-analysis <repo-path> [--output-dir dir] [--org org] [--domains sec,test] [--version label]")
+	}
+
+	if *ver != "" {
+		if err := validateVersionLabel(*ver); err != nil {
+			return err
+		}
 	}
 
 	repoPath := fs.Arg(0)
-	if err := os.MkdirAll(*outputDir, 0o755); err != nil {
+	outDir := applyVersion(*outputDir, *ver)
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("creating output dir: %w", err)
 	}
 
@@ -571,7 +706,7 @@ func cmdFullAnalysis(args []string) error {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Warning: architecture extraction failed: %v\n", err)
 	} else {
-		jsonPath := filepath.Join(*outputDir, "component-architecture.json")
+		jsonPath := filepath.Join(outDir, "component-architecture.json")
 		if err := writeJSON(jsonPath, archResult); err != nil {
 			return err
 		}
@@ -594,7 +729,7 @@ func cmdFullAnalysis(args []string) error {
 		if loadErr != nil {
 			fmt.Fprintf(os.Stderr, "Warning: failed to load architecture JSON: %v\n", loadErr)
 		} else if data2 != nil {
-			diagramsDir := filepath.Join(*outputDir, "diagrams")
+			diagramsDir := filepath.Join(outDir, "diagrams")
 			diagrams := renderer.RenderAll(data2, nil)
 			if wErr := writeDiagrams(diagramsDir, diagrams); wErr != nil {
 				fmt.Fprintf(os.Stderr, "Warning: failed to write diagrams: %v\n", wErr)
@@ -649,14 +784,14 @@ func cmdFullAnalysis(args []string) error {
 
 		printFindings(cpg, findings)
 
-		findingsPath := filepath.Join(*outputDir, "security-findings.json")
+		findingsPath := filepath.Join(outDir, "security-findings.json")
 		if wErr := outputJSON(findingsPath, findings); wErr != nil {
 			fmt.Fprintf(os.Stderr, "Warning: failed to write findings: %v\n", wErr)
 		} else {
 			fmt.Printf("Findings written to: %s\n", findingsPath)
 		}
 
-		graphPath := filepath.Join(*outputDir, "code-graph.json")
+		graphPath := filepath.Join(outDir, "code-graph.json")
 		graphData := map[string]interface{}{
 			"nodes": cpg.Nodes(),
 			"edges": cpg.Edges(),
@@ -674,7 +809,7 @@ func cmdFullAnalysis(args []string) error {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Warning: schema extraction failed: %v\n", err)
 	} else if len(schemas) > 0 {
-		schemaDir := filepath.Join(*outputDir, "schemas")
+		schemaDir := filepath.Join(outDir, "schemas")
 		if mkErr := os.MkdirAll(schemaDir, 0o755); mkErr != nil {
 			fmt.Fprintf(os.Stderr, "Warning: failed to create schema dir: %v\n", mkErr)
 		} else {
@@ -690,7 +825,41 @@ func cmdFullAnalysis(args []string) error {
 		fmt.Println("No CRD schemas found")
 	}
 
+	if *ver != "" && archResult != nil {
+		repos := map[string]string{archResult.Repo: archResult.CommitSHA}
+		if err := writeSnapshotMetadata(outDir, *ver, repos, ""); err != nil {
+			return fmt.Errorf("writing snapshot metadata: %w", err)
+		}
+		fmt.Printf("Snapshot metadata written to: %s/snapshot-metadata.json\n", outDir)
+	}
+
 	return nil
+}
+
+// collectRepoSHAs scans a results directory for component-architecture.json files
+// and extracts repo -> commit_sha pairs for snapshot metadata.
+func collectRepoSHAs(resultsDir string) map[string]string {
+	repos := make(map[string]string)
+	entries, err := os.ReadDir(resultsDir)
+	if err != nil {
+		return repos
+	}
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			continue
+		}
+		jsonPath := filepath.Join(resultsDir, entry.Name(), "component-architecture.json")
+		data, err := loadJSON(jsonPath)
+		if err != nil {
+			continue
+		}
+		repo, _ := data["repo"].(string)
+		sha, _ := data["commit_sha"].(string)
+		if repo != "" {
+			repos[repo] = sha
+		}
+	}
+	return repos
 }
 
 // buildCPG constructs a Code Property Graph from a repo directory.
