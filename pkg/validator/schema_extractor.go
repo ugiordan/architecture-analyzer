@@ -115,12 +115,24 @@ func ExtractSchemasFromDir(dir string) ([]SchemaInfo, error) {
 	}
 
 	// Fallback: recursive scan of the whole directory, skipping already-searched paths.
+	// Capped at 500 YAML files to avoid spending 30+ minutes on large repos
+	// (e.g. kserve, kuberay, opendatahub-operator) that have thousands of
+	// test fixtures, Helm charts, and vendored manifests.
 	if len(results) == 0 {
+		yamlCount := 0
+		const maxYAMLFiles = 500
 		err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
 				return nil
 			}
 			if info.IsDir() {
+				base := filepath.Base(path)
+				// Skip directories that never contain CRD definitions.
+				switch base {
+				case ".git", "vendor", "node_modules", "testdata", "test", "tests",
+					"_output", "hack", "docs", "examples", "samples", ".github":
+					return filepath.SkipDir
+				}
 				return nil
 			}
 			ext := filepath.Ext(path)
@@ -136,6 +148,10 @@ func ExtractSchemasFromDir(dir string) ([]SchemaInfo, error) {
 				if relErr == nil && !strings.HasPrefix(rel, "..") {
 					return nil
 				}
+			}
+			yamlCount++
+			if yamlCount > maxYAMLFiles {
+				return filepath.SkipAll
 			}
 			schemas, extractErr := ExtractSchemasFromCRD(path)
 			if extractErr != nil {
