@@ -6,7 +6,10 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
+	"sync"
+	"sync/atomic"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 	"github.com/ugiordan/architecture-analyzer/pkg/parser"
@@ -26,18 +29,27 @@ func NewBuilder() *Builder {
 	}
 }
 
+// fileEntry holds a discovered source file path and its matched parser index.
+type fileEntry struct {
+	path     string
+	relPath  string
+	parserID int
+}
+
 // BuildFromDir walks a directory tree, parses supported source files,
 // and returns a code property graph with resolved call edges.
 func (b *Builder) BuildFromDir(dir string) (*graph.CPG, error) {
 	cpg := graph.NewCPG()
 
-	extMap := make(map[string]parser.Parser)
-	for _, p := range b.parsers {
+	extMap := make(map[string]int)
+	for i, p := range b.parsers {
 		for _, ext := range p.Extensions() {
-			extMap[ext] = p
+			extMap[ext] = i
 		}
 	}
 
+	// Phase 1: collect file paths (fast, single-threaded walk)
+	var files []fileEntry
 	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			log.Printf("WARN: walk error at %s: %v", path, err)
@@ -52,14 +64,8 @@ func (b *Builder) BuildFromDir(dir string) (*graph.CPG, error) {
 		}
 
 		ext := filepath.Ext(path)
-		p, ok := extMap[ext]
+		pid, ok := extMap[ext]
 		if !ok {
-			return nil
-		}
-
-		content, err := os.ReadFile(path)
-		if err != nil {
-			log.Printf("WARN: failed to read %s: %v", path, err)
 			return nil
 		}
 
@@ -68,18 +74,74 @@ func (b *Builder) BuildFromDir(dir string) (*graph.CPG, error) {
 			relPath = path
 		}
 
-		result, err := p.ParseFile(relPath, content)
-		if err != nil {
-			log.Printf("WARN: failed to parse %s: %v", relPath, err)
-			return nil
-		}
-
-		b.mergeResult(cpg, result)
+		files = append(files, fileEntry{path: path, relPath: relPath, parserID: pid})
 		return nil
 	})
-
 	if err != nil {
 		return nil, fmt.Errorf("walking directory: %w", err)
+	}
+
+	// Phase 2: parse files in parallel (tree-sitter requires one parser per goroutine)
+	workers := runtime.NumCPU()
+	if workers > 8 {
+		workers = 8
+	}
+	if workers < 1 {
+		workers = 1
+	}
+
+	type parseJob struct {
+		entry  fileEntry
+		result *parser.ParseResult
+	}
+
+	results := make([]parseJob, len(files))
+	var wg sync.WaitGroup
+	ch := make(chan int, len(files))
+
+	for i := range files {
+		ch <- i
+	}
+	close(ch)
+
+	// Shared ID counter across all worker parsers to avoid node ID collisions
+	var sharedSeq atomic.Int64
+
+	for w := 0; w < workers; w++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			// Each goroutine gets its own parser instance with a shared ID counter
+			localParsers := make([]parser.Parser, len(b.parsers))
+			for i := range b.parsers {
+				localParsers[i] = parser.NewGoParserWithSeq(&sharedSeq)
+			}
+
+			for idx := range ch {
+				entry := files[idx]
+				content, err := os.ReadFile(entry.path)
+				if err != nil {
+					log.Printf("WARN: failed to read %s: %v", entry.path, err)
+					continue
+				}
+
+				result, err := localParsers[entry.parserID].ParseFile(entry.relPath, content)
+				if err != nil {
+					log.Printf("WARN: failed to parse %s: %v", entry.relPath, err)
+					continue
+				}
+
+				results[idx] = parseJob{entry: entry, result: result}
+			}
+		}()
+	}
+	wg.Wait()
+
+	// Phase 3: merge results (single-threaded, fast)
+	for _, r := range results {
+		if r.result != nil {
+			b.mergeResult(cpg, r.result)
+		}
 	}
 
 	b.resolveCallEdges(cpg)

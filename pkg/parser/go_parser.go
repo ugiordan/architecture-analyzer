@@ -20,16 +20,26 @@ const maxFileSize = 10 * 1024 * 1024
 // The idSeq counter is safe for concurrent use via atomic operations. The underlying
 // tree-sitter parser is NOT safe for concurrent use even with external locks: each
 // goroutine MUST use its own GoParser instance (call NewGoParser per goroutine).
+// When running multiple GoParser instances in parallel, pass a shared counter via
+// NewGoParserWithSeq to avoid node ID collisions.
 type GoParser struct {
 	parser *sitter.Parser
-	idSeq  atomic.Int64
+	idSeq  *atomic.Int64
 }
 
 // NewGoParser creates a parser for Go source files backed by tree-sitter.
 func NewGoParser() *GoParser {
 	p := sitter.NewParser()
 	p.SetLanguage(golang.GetLanguage())
-	return &GoParser{parser: p}
+	return &GoParser{parser: p, idSeq: &atomic.Int64{}}
+}
+
+// NewGoParserWithSeq creates a parser that shares an ID counter with other instances.
+// Use this when running multiple parsers in parallel to avoid node ID collisions.
+func NewGoParserWithSeq(seq *atomic.Int64) *GoParser {
+	p := sitter.NewParser()
+	p.SetLanguage(golang.GetLanguage())
+	return &GoParser{parser: p, idSeq: seq}
 }
 
 func (gp *GoParser) Language() string    { return "go" }
