@@ -13,13 +13,16 @@ type Analyzer struct {
 func New() *Analyzer {
 	return &Analyzer{
 		annotators: map[string]domains.Annotator{
-			"go": &GoAnnotator{},
+			"go":         &GoAnnotator{},
+			"python":     &PythonAnnotator{},
+			"typescript": &TypeScriptAnnotator{},
+			"rust":       &RustAnnotator{},
 		},
 	}
 }
 
 func (a *Analyzer) Name() string                { return "security" }
-func (a *Analyzer) SupportedLanguages() []string { return []string{"go"} }
+func (a *Analyzer) SupportedLanguages() []string { return []string{"go", "python", "typescript", "rust"} }
 func (a *Analyzer) Dependencies() []string       { return nil }
 
 func (a *Analyzer) Annotate(g *graph.CPG, lang string, archData *domains.ArchitectureData) error {

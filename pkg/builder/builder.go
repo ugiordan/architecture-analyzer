@@ -25,6 +25,9 @@ func NewBuilder() *Builder {
 	return &Builder{
 		parsers: []parser.Parser{
 			parser.NewGoParser(),
+			parser.NewPythonParser(),
+			parser.NewTypeScriptParser(),
+			parser.NewRustParser(),
 		},
 	}
 }
@@ -114,7 +117,16 @@ func (b *Builder) BuildFromDir(dir string) (*graph.CPG, error) {
 			// Each goroutine gets its own parser instance with a shared ID counter
 			localParsers := make([]parser.Parser, len(b.parsers))
 			for i := range b.parsers {
-				localParsers[i] = parser.NewGoParserWithSeq(&sharedSeq)
+				switch b.parsers[i].Language() {
+				case "go":
+					localParsers[i] = parser.NewGoParserWithSeq(&sharedSeq)
+				case "python":
+					localParsers[i] = parser.NewPythonParserWithSeq(&sharedSeq)
+				case "typescript":
+					localParsers[i] = parser.NewTypeScriptParserWithSeq(&sharedSeq)
+				case "rust":
+					localParsers[i] = parser.NewRustParserWithSeq(&sharedSeq)
+				}
 			}
 
 			for idx := range ch {
