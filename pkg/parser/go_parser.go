@@ -124,6 +124,7 @@ func (gp *GoParser) extractFunction(node *sitter.Node, src []byte, file string, 
 		}
 		if len(paramTypes) > 0 {
 			fn.Properties["param_types"] = strings.Join(paramTypes, ",")
+			fn.ParamTypes = paramTypes
 		}
 	}
 
@@ -209,6 +210,7 @@ func (gp *GoParser) extractCallSite(node *sitter.Node, src []byte, file string, 
 				if firstArg != nil {
 					route := strings.Trim(firstArg.Content(src), "\"")
 					handler.Properties["route"] = route
+					handler.Route = route
 				}
 			}
 			result.HTTPHandlers = append(result.HTTPHandlers, handler)
@@ -225,6 +227,7 @@ func (gp *GoParser) extractCallSite(node *sitter.Node, src []byte, file string, 
 			Line:       line,
 			Language:   "go",
 			Properties: map[string]string{"operation": "write"},
+			Operation:  "write",
 		}
 		gp.extractTableName(node, src, dbOp)
 		result.DBOperations = append(result.DBOperations, dbOp)
@@ -237,6 +240,7 @@ func (gp *GoParser) extractCallSite(node *sitter.Node, src []byte, file string, 
 			Line:       line,
 			Language:   "go",
 			Properties: map[string]string{"operation": "read"},
+			Operation:  "read",
 		}
 		gp.extractTableName(node, src, dbOp)
 		result.DBOperations = append(result.DBOperations, dbOp)
@@ -270,6 +274,7 @@ func (gp *GoParser) extractTableName(node *sitter.Node, src []byte, dbOp *graph.
 				tableName := strings.Trim(arg.Content(src), "\"")
 				if tableName != "" && !strings.Contains(tableName, " ") {
 					dbOp.Properties["table"] = tableName
+					dbOp.Table = tableName
 					break
 				}
 			}
@@ -291,7 +296,9 @@ func (gp *GoParser) findTableInNode(node *sitter.Node, src []byte, dbOp *graph.N
 				if len(fields) > 0 {
 					tableName := strings.Trim(fields[0], "\"'`()")
 					if tableName != "" && tableName != "%s" {
-						dbOp.Properties["table"] = strings.ToLower(tableName)
+						table := strings.ToLower(tableName)
+						dbOp.Properties["table"] = table
+						dbOp.Table = table
 						return
 					}
 				}
@@ -426,14 +433,16 @@ func (gp *GoParser) extractStructLiteral(node *sitter.Node, src []byte, file str
 	}
 
 	sl := &graph.Node{
-		ID:       gp.nextID("struct"),
-		Kind:     graph.NodeStructLiteral,
-		Name:     typeName,
-		File:     file,
-		Line:     int(node.StartPoint().Row) + 1,
-		EndLine:  int(node.EndPoint().Row) + 1,
-		Language: "go",
+		ID:         gp.nextID("struct"),
+		Kind:       graph.NodeStructLiteral,
+		Name:       typeName,
+		File:       file,
+		Line:       int(node.StartPoint().Row) + 1,
+		EndLine:    int(node.EndPoint().Row) + 1,
+		Language:   "go",
 		Properties: properties,
+		StructType: typeName,
+		FieldNames: fieldNames,
 	}
 	result.StructLiterals = append(result.StructLiterals, sl)
 }

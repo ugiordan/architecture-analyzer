@@ -61,13 +61,13 @@ func TestGoParserDetectsDBOperations(t *testing.T) {
 	if len(result.DBOperations) < 2 {
 		t.Errorf("expected at least 2 DB operations, got %d", len(result.DBOperations))
 		for _, op := range result.DBOperations {
-			t.Logf("  db op: %s (kind=%s)", op.Name, op.Properties["operation"])
+			t.Logf("  db op: %s (operation=%s)", op.Name, op.Operation)
 		}
 	}
 
 	hasRead, hasWrite := false, false
 	for _, op := range result.DBOperations {
-		switch op.Properties["operation"] {
+		switch op.Operation {
 		case "read":
 			hasRead = true
 		case "write":
@@ -116,15 +116,25 @@ func TestGoParserExtractsParamTypes(t *testing.T) {
 		t.Fatal("expected to find Handle function")
 	}
 
-	paramTypes := handleFn.Properties["param_types"]
-	if paramTypes == "" {
-		t.Fatal("expected param_types property on Handle function")
+	// Test typed field
+	if len(handleFn.ParamTypes) == 0 {
+		t.Fatal("expected ParamTypes field on Handle function")
 	}
-	if !strings.Contains(paramTypes, "context.Context") {
-		t.Errorf("expected param_types to contain context.Context, got %q", paramTypes)
+	foundContext := false
+	foundRequest := false
+	for _, pt := range handleFn.ParamTypes {
+		if strings.Contains(pt, "context.Context") {
+			foundContext = true
+		}
+		if strings.Contains(pt, "admission.Request") {
+			foundRequest = true
+		}
 	}
-	if !strings.Contains(paramTypes, "admission.Request") {
-		t.Errorf("expected param_types to contain admission.Request, got %q", paramTypes)
+	if !foundContext {
+		t.Errorf("expected ParamTypes to contain context.Context, got %v", handleFn.ParamTypes)
+	}
+	if !foundRequest {
+		t.Errorf("expected ParamTypes to contain admission.Request, got %v", handleFn.ParamTypes)
 	}
 }
 
@@ -146,7 +156,7 @@ func TestGoParserExtractsStructLiterals(t *testing.T) {
 
 	var certLiteral *graph.Node
 	for _, sl := range result.StructLiterals {
-		if strings.Contains(sl.Properties["type"], "Certificate") {
+		if strings.Contains(sl.StructType, "Certificate") {
 			certLiteral = sl
 			break
 		}
@@ -155,13 +165,17 @@ func TestGoParserExtractsStructLiterals(t *testing.T) {
 		t.Fatal("expected to find x509.Certificate struct literal")
 	}
 
-	fields := certLiteral.Properties["fields"]
-	if fields == "" {
-		t.Fatal("expected fields property on struct literal")
+	// Test typed field
+	if len(certLiteral.FieldNames) == 0 {
+		t.Fatal("expected FieldNames field on struct literal")
+	}
+	fieldMap := make(map[string]bool)
+	for _, f := range certLiteral.FieldNames {
+		fieldMap[f] = true
 	}
 	for _, expected := range []string{"SerialNumber", "IsCA", "KeyUsage", "DNSNames"} {
-		if !strings.Contains(fields, expected) {
-			t.Errorf("expected fields to contain %q, got %q", expected, fields)
+		if !fieldMap[expected] {
+			t.Errorf("expected FieldNames to contain %q, got %v", expected, certLiteral.FieldNames)
 		}
 	}
 }
