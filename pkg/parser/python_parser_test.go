@@ -82,13 +82,13 @@ func TestPythonParserFlaskApp(t *testing.T) {
 		if len(result.HTTPHandlers) < 3 {
 			t.Errorf("expected at least 3 HTTP handlers, got %d", len(result.HTTPHandlers))
 			for _, h := range result.HTTPHandlers {
-				t.Logf("  handler: %s route=%s", h.Name, h.Properties["route"])
+				t.Logf("  handler: %s route=%s", h.Name, h.Route)
 			}
 		}
 
 		hasUsersRoute := false
 		for _, h := range result.HTTPHandlers {
-			if h.Properties["route"] == "/users" {
+			if h.Route == "/users" {
 				hasUsersRoute = true
 				break
 			}
@@ -124,13 +124,13 @@ func TestPythonParserFlaskApp(t *testing.T) {
 		if len(result.DBOperations) < 2 {
 			t.Errorf("expected at least 2 DB operations, got %d", len(result.DBOperations))
 			for _, op := range result.DBOperations {
-				t.Logf("  db op: %s (op=%s)", op.Name, op.Properties["operation"])
+				t.Logf("  db op: %s (op=%s)", op.Name, op.Operation)
 			}
 		}
 
 		hasRead, hasWrite := false, false
 		for _, op := range result.DBOperations {
-			switch op.Properties["operation"] {
+			switch op.Operation {
 			case "read":
 				hasRead = true
 			case "write":
@@ -199,7 +199,7 @@ func TestPythonParserFastAPIApp(t *testing.T) {
 		if len(result.HTTPHandlers) < 2 {
 			t.Errorf("expected at least 2 HTTP handlers, got %d", len(result.HTTPHandlers))
 			for _, h := range result.HTTPHandlers {
-				t.Logf("  handler: %s route=%s", h.Name, h.Properties["route"])
+				t.Logf("  handler: %s route=%s", h.Name, h.Route)
 			}
 		}
 	})

@@ -242,8 +242,11 @@ func (pp *PythonParser) maybeExtractHTTPHandler(decorator string, fn *graph.Node
 	}
 	if route != "" {
 		handler.Properties["route"] = route
+		handler.Route = route
 	}
-	handler.Properties["method"] = strings.ToUpper(method)
+	httpMethod := strings.ToUpper(method)
+	handler.Properties["method"] = httpMethod
+	handler.HTTPMethod = httpMethod
 	result.HTTPHandlers = append(result.HTTPHandlers, handler)
 }
 
@@ -295,6 +298,7 @@ func (pp *PythonParser) extractCallSite(node *sitter.Node, src []byte, file stri
 			Line:       line,
 			Language:   "python",
 			Properties: map[string]string{"operation": op},
+			Operation:  op,
 		}
 		result.DBOperations = append(result.DBOperations, dbOp)
 	}
@@ -322,6 +326,7 @@ func (pp *PythonParser) extractCallSite(node *sitter.Node, src []byte, file stri
 					Line:       line,
 					Language:   "python",
 					Properties: map[string]string{"operation": op},
+					Operation:  op,
 				}
 				result.DBOperations = append(result.DBOperations, dbOp)
 			}
