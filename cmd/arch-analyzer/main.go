@@ -651,8 +651,9 @@ func cmdGraph(args []string) error {
 	switch *format {
 	case "json":
 		output := map[string]interface{}{
-			"nodes": cpg.Nodes(),
-			"edges": cpg.Edges(),
+			"schema_version": 2,
+			"nodes":          cpg.Nodes(),
+			"edges":          cpg.Edges(),
 		}
 		content, err = json.MarshalIndent(output, "", "  ")
 		if err != nil {
@@ -793,8 +794,9 @@ func cmdFullAnalysis(args []string) error {
 
 		graphPath := filepath.Join(outDir, "code-graph.json")
 		graphData := map[string]interface{}{
-			"nodes": cpg.Nodes(),
-			"edges": cpg.Edges(),
+			"schema_version": 2,
+			"nodes":          cpg.Nodes(),
+			"edges":          cpg.Edges(),
 		}
 		if wErr := writeJSON(graphPath, graphData); wErr != nil {
 			fmt.Fprintf(os.Stderr, "Warning: failed to write code graph: %v\n", wErr)
