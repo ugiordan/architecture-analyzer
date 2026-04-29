@@ -8,6 +8,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/rust"
 
+	"github.com/ugiordan/architecture-analyzer/pkg/dataflow"
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 )
 
@@ -204,10 +205,21 @@ func (rp *RustParser) extractFunction(node *sitter.Node, src []byte, file, implT
 		}
 	}
 
+	// Extract parameter names from the parameters node
+	params := node.ChildByFieldName("parameters")
+	if params != nil {
+		fn.ParamNames = extractRustParamNames(params, src)
+	}
+
 	// Compute cyclomatic complexity from function body.
 	body := node.ChildByFieldName("body")
 	if body != nil {
 		fn.Complexity = computeRustComplexity(body)
+	}
+
+	// Extract intraprocedural data flow from function body
+	if body != nil {
+		rp.analyzeFunctionBody(body, src, file, fn, result)
 	}
 
 	// Check preceding siblings for attribute_items (HTTP routes, #[test], etc.)
@@ -513,4 +525,661 @@ func (rp *RustParser) extractStructExpression(node *sitter.Node, src []byte, fil
 		FieldNames: fieldNames,
 	}
 	result.StructLiterals = append(result.StructLiterals, sl)
+}
+
+// ---------------------------------------------------------------------------
+// Intraprocedural data flow analysis
+// ---------------------------------------------------------------------------
+
+// extractRustParamNames extracts parameter names from a Rust parameters node.
+// It excludes self/&self/&mut self parameters (similar to Python's self exclusion).
+func extractRustParamNames(params *sitter.Node, src []byte) []string {
+	var names []string
+	for i := 0; i < int(params.ChildCount()); i++ {
+		param := params.Child(i)
+		if param == nil {
+			continue
+		}
+		switch param.Type() {
+		case "parameter":
+			// Regular parameter: identifier child is the name
+			for j := 0; j < int(param.ChildCount()); j++ {
+				child := param.Child(j)
+				if child != nil && child.Type() == "identifier" {
+					names = append(names, child.Content(src))
+					break
+				}
+			}
+		case "self_parameter":
+			// Skip self/&self/&mut self
+			continue
+		}
+	}
+	return names
+}
+
+// analyzeFunctionBody creates variable/parameter nodes and data flow edges
+// for a single Rust function body. One SymbolTable + FlowBuilder per function.
+func (rp *RustParser) analyzeFunctionBody(body *sitter.Node, src []byte, file string, fn *graph.Node, result *ParseResult) {
+	st := dataflow.NewSymbolTable()
+	fb := dataflow.NewFlowBuilder()
+
+	// Create parameter nodes and register them in the symbol table
+	for _, pName := range fn.ParamNames {
+		paramID := NodeID(graph.NodeParameter, pName, file, fn.Line, 0)
+		paramNode := &graph.Node{
+			ID:       paramID,
+			Kind:     graph.NodeParameter,
+			Name:     pName,
+			File:     file,
+			Line:     fn.Line,
+			Language: "rust",
+		}
+		fb.AddParameter(paramNode)
+		fb.AddDeclares(fn.ID, paramID)
+		st.Define(pName, paramID)
+	}
+
+	// Walk body statements sequentially
+	childCount := int(body.ChildCount())
+	for i := 0; i < childCount; i++ {
+		child := body.Child(i)
+		if child == nil {
+			continue
+		}
+
+		// Check for implicit return: last non-brace expression in block
+		isLastExpr := false
+		if i == childCount-1 || (i == childCount-2 && body.Child(childCount-1) != nil && body.Child(childCount-1).Type() == "}") {
+			if child.Type() == "identifier" || child.Type() == "field_expression" ||
+				child.Type() == "call_expression" || child.Type() == "macro_invocation" {
+				isLastExpr = true
+			}
+		}
+
+		if isLastExpr {
+			rp.analyzeImplicitReturn(child, src, file, fn, st, fb)
+		} else {
+			rp.analyzeStatementDF(child, src, file, fn, st, fb)
+		}
+
+		if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+			fn.Annotations["dataflow:truncated"] = true
+			break
+		}
+	}
+
+	// Merge results into ParseResult
+	nodes, edges := fb.Result()
+	for _, n := range nodes {
+		switch n.Kind {
+		case graph.NodeVariable:
+			result.Variables = append(result.Variables, n)
+		case graph.NodeParameter:
+			result.Parameters = append(result.Parameters, n)
+		}
+	}
+	result.Edges = append(result.Edges, edges...)
+}
+
+// analyzeStatementDF dispatches to handlers based on tree-sitter node type.
+func (rp *RustParser) analyzeStatementDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	switch node.Type() {
+	case "let_declaration":
+		rp.analyzeLetDeclDF(node, src, file, fn, st, fb)
+	case "assignment_expression":
+		rp.analyzeAssignmentDF(node, src, file, fn, st, fb)
+	case "expression_statement":
+		// Check for return_expression, assignment_expression, or standalone call
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			switch child.Type() {
+			case "return_expression":
+				rp.analyzeReturnDF(child, src, file, fn, st, fb)
+			case "assignment_expression":
+				rp.analyzeAssignmentDF(child, src, file, fn, st, fb)
+			case "call_expression":
+				rp.analyzeCallArgsDF(child, src, file, st, fb)
+			case "macro_invocation":
+				rp.analyzeMacroArgsDF(child, src, file, st, fb)
+			}
+		}
+	case "return_expression":
+		rp.analyzeReturnDF(node, src, file, fn, st, fb)
+	default:
+		// Recurse into block-level structures (if, for, match, loop, etc.)
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			rp.analyzeStatementDF(child, src, file, fn, st, fb)
+			if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+				return
+			}
+		}
+	}
+}
+
+// analyzeLetDeclDF handles `let x = expr` and `let x: Type = expr`.
+func (rp *RustParser) analyzeLetDeclDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	// In Rust tree-sitter, let_declaration has children: let, identifier (pattern), optional type, =, value
+	// The pattern is typically an identifier
+	var nameNode *sitter.Node
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil && child.Type() == "identifier" {
+			nameNode = child
+			break
+		}
+	}
+	if nameNode == nil {
+		return
+	}
+
+	name := nameNode.Content(src)
+	line := int(nameNode.StartPoint().Row) + 1
+	col := int(nameNode.StartPoint().Column)
+	varID := NodeID(graph.NodeVariable, name, file, line, col)
+	varNode := &graph.Node{
+		ID:       varID,
+		Kind:     graph.NodeVariable,
+		Name:     name,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "rust",
+	}
+	fb.AddVariable(varNode)
+	st.Define(name, varID)
+
+	// Find the value expression (after the = sign)
+	valueNode := rp.findLetValue(node)
+	if valueNode != nil {
+		sourceID := rp.resolveRHSSourceDF(valueNode, src, file, fn, st, fb)
+		if sourceID != "" {
+			fb.AddAssign(sourceID, varID)
+		}
+		rp.emitReadsDF(valueNode, src, varID, st, fb)
+	}
+}
+
+// findLetValue finds the value expression in a let_declaration.
+// It looks for the expression after the '=' token.
+func (rp *RustParser) findLetValue(node *sitter.Node) *sitter.Node {
+	foundEq := false
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		if child.Type() == "=" {
+			foundEq = true
+			continue
+		}
+		if foundEq && child.Type() != ";" {
+			return child
+		}
+	}
+	return nil
+}
+
+// analyzeAssignmentDF handles `x = expr`.
+func (rp *RustParser) analyzeAssignmentDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	if left == nil || right == nil {
+		return
+	}
+
+	var targetName string
+	if left.Type() == "identifier" {
+		targetName = left.Content(src)
+	}
+	if targetName == "" {
+		return
+	}
+
+	targetID, ok := st.Resolve(targetName)
+	if !ok {
+		return
+	}
+
+	sourceID := rp.resolveRHSSourceDF(right, src, file, fn, st, fb)
+	if sourceID != "" {
+		fb.AddAssign(sourceID, targetID)
+	}
+	rp.emitReadsDF(right, src, targetID, st, fb)
+}
+
+// analyzeReturnDF handles explicit `return expr`.
+func (rp *RustParser) analyzeReturnDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		switch child.Type() {
+		case "identifier":
+			name := child.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddReturn(varID, fn.ID)
+			}
+		case "field_expression":
+			rootID := rp.resolveFieldExprDF(child, src, file, fn, st, fb)
+			if rootID != "" {
+				fb.AddReturn(rootID, fn.ID)
+			}
+		default:
+			rp.walkReturnExprDF(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// analyzeImplicitReturn handles implicit returns (last expression in block body).
+func (rp *RustParser) analyzeImplicitReturn(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	switch node.Type() {
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddReturn(varID, fn.ID)
+		}
+	case "field_expression":
+		rootID := rp.resolveFieldExprDF(node, src, file, fn, st, fb)
+		if rootID != "" {
+			fb.AddReturn(rootID, fn.ID)
+		}
+	case "call_expression":
+		// Implicit return of a call result
+		fnNode := node.ChildByFieldName("function")
+		if fnNode != nil {
+			callText := fnNode.Content(src)
+			line := int(node.StartPoint().Row) + 1
+			col := int(node.StartPoint().Column)
+			callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+			rp.analyzeCallArgsDF(node, src, file, st, fb)
+			fb.AddReturn(callID, fn.ID)
+		}
+	default:
+		rp.walkReturnExprDF(node, src, file, fn, st, fb)
+	}
+}
+
+// walkReturnExprDF recursively finds identifiers in return expressions.
+func (rp *RustParser) walkReturnExprDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddReturn(varID, fn.ID)
+		}
+		return
+	}
+	if node.Type() == "field_expression" {
+		rootID := rp.resolveFieldExprDF(node, src, file, fn, st, fb)
+		if rootID != "" {
+			fb.AddReturn(rootID, fn.ID)
+		}
+		return
+	}
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			rp.walkReturnExprDF(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// resolveRHSSourceDF resolves the primary data source from an RHS expression.
+func (rp *RustParser) resolveRHSSourceDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil {
+		return ""
+	}
+
+	switch node.Type() {
+	case "call_expression":
+		fnNode := node.ChildByFieldName("function")
+		if fnNode == nil {
+			return ""
+		}
+		callText := fnNode.Content(src)
+		line := int(node.StartPoint().Row) + 1
+		col := int(node.StartPoint().Column)
+		callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+		rp.analyzeCallArgsDF(node, src, file, st, fb)
+		// For method calls like user.email.clone(), resolve the field chain
+		// to emit field_access edges from the receiver object
+		if fnNode.Type() == "field_expression" {
+			rp.resolveFieldExprDF(fnNode, src, file, fn, st, fb)
+		}
+		return callID
+
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			return varID
+		}
+		return ""
+
+	case "field_expression":
+		return rp.resolveFieldExprDF(node, src, file, fn, st, fb)
+
+	case "index_expression":
+		// e.g., payload["name"]: resolve the object
+		if node.ChildCount() > 0 {
+			obj := node.Child(0)
+			if obj != nil && obj.Type() == "identifier" {
+				name := obj.Content(src)
+				if varID, ok := st.Resolve(name); ok {
+					return varID
+				}
+			}
+		}
+		return ""
+
+	case "reference_expression":
+		// e.g., &body: resolve the inner expression
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child != nil && child.Type() != "&" {
+				return rp.resolveRHSSourceDF(child, src, file, fn, st, fb)
+			}
+		}
+		return ""
+
+	case "try_expression":
+		// e.g., expr? : resolve the inner expression
+		if node.ChildCount() > 0 {
+			return rp.resolveRHSSourceDF(node.Child(0), src, file, fn, st, fb)
+		}
+		return ""
+
+	case "macro_invocation":
+		// e.g., format!(...): return the macro call site ID
+		macroName := ""
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			if child.Type() == "identifier" || child.Type() == "scoped_identifier" {
+				macroName = child.Content(src)
+				break
+			}
+		}
+		if macroName == "" {
+			return ""
+		}
+		displayName := macroName + "!"
+		line := int(node.StartPoint().Row) + 1
+		col := int(node.StartPoint().Column)
+		callID := NodeID(graph.NodeCallSite, displayName, file, line, col)
+		// Process macro arguments for passes_to edges
+		rp.analyzeMacroArgsDF(node, src, file, st, fb)
+		return callID
+
+	case "binary_expression":
+		left := node.ChildByFieldName("left")
+		right := node.ChildByFieldName("right")
+		if leftID := rp.resolveRHSSourceDF(left, src, file, fn, st, fb); leftID != "" {
+			return leftID
+		}
+		return rp.resolveRHSSourceDF(right, src, file, fn, st, fb)
+
+	default:
+		return ""
+	}
+}
+
+// resolveFieldExprDF handles field_expression chains like user.email or request.to_string.
+// Creates a single synthetic field variable with the full text and emits one field_access
+// edge from the root identifier to the synthetic variable.
+func (rp *RustParser) resolveFieldExprDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil || node.Type() != "field_expression" {
+		return ""
+	}
+
+	fullText := node.Content(src)
+
+	// Walk to the leftmost identifier to find the root
+	var rootID string
+	current := node
+	for {
+		// In Rust field_expression, the first child is the value (object)
+		if current.ChildCount() == 0 {
+			break
+		}
+		obj := current.Child(0)
+		if obj == nil {
+			break
+		}
+		if obj.Type() == "identifier" {
+			rootName := obj.Content(src)
+			if id, ok := st.Resolve(rootName); ok {
+				rootID = id
+			}
+			break
+		} else if obj.Type() == "field_expression" {
+			current = obj
+		} else if obj.Type() == "call_expression" {
+			// e.g., payload["name"].as_str().unwrap - walk into call's function
+			fnChild := obj.ChildByFieldName("function")
+			if fnChild != nil && fnChild.Type() == "field_expression" {
+				current = fnChild
+			} else {
+				break
+			}
+		} else if obj.Type() == "index_expression" {
+			// e.g., payload["name"]: resolve the indexed object
+			if obj.ChildCount() > 0 {
+				first := obj.Child(0)
+				if first != nil && first.Type() == "identifier" {
+					rootName := first.Content(src)
+					if id, ok := st.Resolve(rootName); ok {
+						rootID = id
+					}
+				}
+			}
+			break
+		} else {
+			break
+		}
+	}
+
+	if rootID == "" {
+		return ""
+	}
+
+	// Create ONE synthetic field variable with the full text
+	line := int(node.StartPoint().Row) + 1
+	col := int(node.StartPoint().Column)
+	fieldVarID := NodeID(graph.NodeVariable, fullText, file, line, col)
+	fieldVarNode := &graph.Node{
+		ID:       fieldVarID,
+		Kind:     graph.NodeVariable,
+		Name:     fullText,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "rust",
+	}
+	fb.AddVariable(fieldVarNode)
+	fb.AddFieldAccess(rootID, fieldVarID)
+
+	return fieldVarID
+}
+
+// analyzeCallArgsDF processes arguments to a call expression, creating
+// passes_to edges and mutates edges for &x reference_expression patterns.
+func (rp *RustParser) analyzeCallArgsDF(callNode *sitter.Node, src []byte, file string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	fnNode := callNode.ChildByFieldName("function")
+	if fnNode == nil {
+		return
+	}
+	callText := fnNode.Content(src)
+	line := int(callNode.StartPoint().Row) + 1
+	col := int(callNode.StartPoint().Column)
+	callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+
+	args := callNode.ChildByFieldName("arguments")
+	if args == nil {
+		return
+	}
+
+	for i := 0; i < int(args.ChildCount()); i++ {
+		arg := args.Child(i)
+		if arg == nil {
+			continue
+		}
+
+		switch arg.Type() {
+		case "identifier":
+			name := arg.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddPassesTo(varID, callID)
+			}
+
+		case "reference_expression":
+			// &x: passes_to + mutates
+			for j := 0; j < int(arg.ChildCount()); j++ {
+				child := arg.Child(j)
+				if child == nil || child.Type() == "&" {
+					continue
+				}
+				if child.Type() == "identifier" {
+					name := child.Content(src)
+					if varID, ok := st.Resolve(name); ok {
+						fb.AddPassesTo(varID, callID)
+						fb.AddMutates(callID, varID)
+					}
+				}
+			}
+
+		case "field_expression":
+			// e.g., user.name: passes_to from root identifier
+			rp.passFieldToCall(arg, src, callID, st, fb)
+		}
+	}
+}
+
+// analyzeMacroArgsDF processes arguments inside a macro_invocation's token_tree.
+// Finds identifiers and emits passes_to edges.
+func (rp *RustParser) analyzeMacroArgsDF(node *sitter.Node, src []byte, file string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	macroName := ""
+	var tokenTree *sitter.Node
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		if child.Type() == "identifier" || child.Type() == "scoped_identifier" {
+			macroName = child.Content(src)
+		}
+		if child.Type() == "token_tree" {
+			tokenTree = child
+		}
+	}
+	if macroName == "" || tokenTree == nil {
+		return
+	}
+
+	displayName := macroName + "!"
+	line := int(node.StartPoint().Row) + 1
+	col := int(node.StartPoint().Column)
+	callID := NodeID(graph.NodeCallSite, displayName, file, line, col)
+
+	// Walk token_tree for identifiers
+	rp.walkTokenTreeForArgs(tokenTree, src, callID, st, fb)
+}
+
+// walkTokenTreeForArgs walks a token_tree looking for identifier arguments
+// and emits passes_to edges.
+func (rp *RustParser) walkTokenTreeForArgs(node *sitter.Node, src []byte, callID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		switch child.Type() {
+		case "identifier":
+			name := child.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddPassesTo(varID, callID)
+			}
+		case "reference_expression":
+			// &x in macro args
+			for j := 0; j < int(child.ChildCount()); j++ {
+				gc := child.Child(j)
+				if gc != nil && gc.Type() == "identifier" {
+					name := gc.Content(src)
+					if varID, ok := st.Resolve(name); ok {
+						fb.AddPassesTo(varID, callID)
+						fb.AddMutates(callID, varID)
+					}
+				}
+			}
+		case "token_tree":
+			rp.walkTokenTreeForArgs(child, src, callID, st, fb)
+		}
+	}
+}
+
+// passFieldToCall finds the root identifier of a field expression
+// and emits a passes_to edge.
+func (rp *RustParser) passFieldToCall(node *sitter.Node, src []byte, callID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	switch node.Type() {
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddPassesTo(varID, callID)
+		}
+	case "field_expression":
+		if node.ChildCount() > 0 {
+			rp.passFieldToCall(node.Child(0), src, callID, st, fb)
+		}
+	}
+}
+
+// emitReadsDF walks a compound expression (binary_expression, etc.) to find all
+// identifier references and emits reads edges.
+func (rp *RustParser) emitReadsDF(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+
+	if node.Type() != "binary_expression" {
+		return
+	}
+
+	rp.walkForReadsDF(node, src, targetID, st, fb)
+}
+
+// walkForReadsDF recursively finds identifiers in an expression tree and emits reads edges.
+func (rp *RustParser) walkForReadsDF(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddRead(varID, targetID)
+		}
+		return
+	}
+
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			rp.walkForReadsDF(child, src, targetID, st, fb)
+		}
+	}
 }

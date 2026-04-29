@@ -9,6 +9,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/python"
 
+	"github.com/ugiordan/architecture-analyzer/pkg/dataflow"
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 )
 
@@ -274,6 +275,11 @@ func (pp *PythonParser) extractFunction(node *sitter.Node, src []byte, file, cla
 		pp.maybeExtractHTTPHandler(dec, fn, file, result)
 	}
 
+	// Extract intraprocedural data flow from function body
+	if body != nil {
+		pp.analyzeFunctionBody(body, src, file, fn, result)
+	}
+
 	// Walk function body for call sites, etc.
 	if body != nil {
 		for i := 0; i < int(body.ChildCount()); i++ {
@@ -471,4 +477,404 @@ func (pp *PythonParser) maybeExtractStructLiteral(name string, node *sitter.Node
 		Properties: make(map[string]string),
 	}
 	result.StructLiterals = append(result.StructLiterals, sl)
+}
+
+// ---------------------------------------------------------------------------
+// Intraprocedural data flow analysis
+// ---------------------------------------------------------------------------
+
+// analyzeFunctionBody creates variable/parameter nodes and data flow edges
+// for a single Python function body. One SymbolTable + FlowBuilder per function.
+func (pp *PythonParser) analyzeFunctionBody(body *sitter.Node, src []byte, file string, fn *graph.Node, result *ParseResult) {
+	st := dataflow.NewSymbolTable()
+	fb := dataflow.NewFlowBuilder()
+
+	// Create parameter nodes and register them in the symbol table.
+	// ParamNames already excludes self/cls (handled in extractFunction).
+	for _, pName := range fn.ParamNames {
+		paramID := NodeID(graph.NodeParameter, pName, file, fn.Line, 0)
+		paramNode := &graph.Node{
+			ID:       paramID,
+			Kind:     graph.NodeParameter,
+			Name:     pName,
+			File:     file,
+			Line:     fn.Line,
+			Language: "python",
+		}
+		fb.AddParameter(paramNode)
+		fb.AddDeclares(fn.ID, paramID)
+		st.Define(pName, paramID)
+	}
+
+	// Walk body statements sequentially
+	for i := 0; i < int(body.ChildCount()); i++ {
+		child := body.Child(i)
+		if child == nil {
+			continue
+		}
+		pp.analyzeStatementDF(child, src, file, fn, st, fb)
+		if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+			fn.Annotations["dataflow:truncated"] = true
+			break
+		}
+	}
+
+	// Merge results into ParseResult
+	nodes, edges := fb.Result()
+	for _, n := range nodes {
+		switch n.Kind {
+		case graph.NodeVariable:
+			result.Variables = append(result.Variables, n)
+		case graph.NodeParameter:
+			result.Parameters = append(result.Parameters, n)
+		}
+	}
+	result.Edges = append(result.Edges, edges...)
+}
+
+// analyzeStatementDF dispatches to handlers based on tree-sitter node type.
+func (pp *PythonParser) analyzeStatementDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	switch node.Type() {
+	case "assignment":
+		pp.analyzeAssignmentDF(node, src, file, fn, st, fb)
+	case "expression_statement":
+		// Assignments in Python are wrapped in expression_statement
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			switch child.Type() {
+			case "assignment":
+				pp.analyzeAssignmentDF(child, src, file, fn, st, fb)
+			case "call":
+				pp.analyzeCallArgsDF(child, src, file, st, fb)
+			}
+		}
+	case "return_statement":
+		pp.analyzeReturnDF(node, src, file, fn, st, fb)
+	default:
+		// Recurse into block-level structures (if, for, while, etc.)
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			pp.analyzeStatementDF(child, src, file, fn, st, fb)
+			if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+				return
+			}
+		}
+	}
+}
+
+// analyzeAssignmentDF handles `x = expr` assignments.
+func (pp *PythonParser) analyzeAssignmentDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	if left == nil {
+		return
+	}
+
+	// Get LHS variable name
+	var targetName string
+	if left.Type() == "identifier" {
+		targetName = left.Content(src)
+	} else if left.Type() == "pattern_list" {
+		// Tuple unpacking: take the first identifier
+		for i := 0; i < int(left.ChildCount()); i++ {
+			child := left.Child(i)
+			if child != nil && child.Type() == "identifier" {
+				targetName = child.Content(src)
+				break
+			}
+		}
+	}
+
+	if targetName == "" {
+		return
+	}
+
+	// Python assignments always create/rebind, so create a new variable node
+	line := int(left.StartPoint().Row) + 1
+	col := int(left.StartPoint().Column)
+	varID := NodeID(graph.NodeVariable, targetName, file, line, col)
+	varNode := &graph.Node{
+		ID:       varID,
+		Kind:     graph.NodeVariable,
+		Name:     targetName,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "python",
+	}
+	fb.AddVariable(varNode)
+	st.Define(targetName, varID)
+
+	// Resolve RHS source and create assigns edge
+	if right != nil {
+		sourceID := pp.resolveRHSSourceDF(right, src, file, fn, st, fb)
+		if sourceID != "" {
+			fb.AddAssign(sourceID, varID)
+		}
+		// Emit reads edges for binary expressions
+		pp.emitReadsDF(right, src, varID, st, fb)
+	}
+}
+
+// resolveRHSSourceDF resolves the primary data source from an RHS expression.
+func (pp *PythonParser) resolveRHSSourceDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil {
+		return ""
+	}
+
+	switch node.Type() {
+	case "call":
+		// Return the call site ID (must match what extractCallSite generates)
+		fnNode := node.ChildByFieldName("function")
+		if fnNode == nil {
+			return ""
+		}
+		callText := fnNode.Content(src)
+		line := int(node.StartPoint().Row) + 1
+		col := int(node.StartPoint().Column)
+		callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+		// Also process call arguments
+		pp.analyzeCallArgsDF(node, src, file, st, fb)
+		return callID
+
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			return varID
+		}
+		return ""
+
+	case "attribute":
+		return pp.resolveFieldAccessDF(node, src, file, fn, st, fb)
+
+	case "subscript":
+		// e.g., payload["name"]: resolve the object (whole collection taint)
+		obj := node.ChildByFieldName("value")
+		if obj != nil && obj.Type() == "identifier" {
+			name := obj.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				return varID
+			}
+		}
+		return ""
+
+	case "binary_operator":
+		// For binary ops like "str" + name, resolve first meaningful operand
+		left := node.ChildByFieldName("left")
+		right := node.ChildByFieldName("right")
+		if leftID := pp.resolveRHSSourceDF(left, src, file, fn, st, fb); leftID != "" {
+			return leftID
+		}
+		return pp.resolveRHSSourceDF(right, src, file, fn, st, fb)
+
+	default:
+		return ""
+	}
+}
+
+// resolveFieldAccessDF handles attribute access chains like user.email or self.db.execute.
+// Creates a single synthetic field variable with the full text and emits one field_access
+// edge from the root identifier to the synthetic variable.
+// The synthetic variable is NOT registered in the symbol table (per spec).
+func (pp *PythonParser) resolveFieldAccessDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil || node.Type() != "attribute" {
+		return ""
+	}
+
+	fullText := node.Content(src)
+
+	// Walk to the leftmost identifier to find the root
+	var rootID string
+	current := node
+	for {
+		obj := current.ChildByFieldName("object")
+		if obj == nil {
+			break
+		}
+		if obj.Type() == "identifier" {
+			rootName := obj.Content(src)
+			// Skip "self" as root: resolve from the next level
+			if rootName == "self" || rootName == "cls" {
+				break
+			}
+			if id, ok := st.Resolve(rootName); ok {
+				rootID = id
+			}
+			break
+		} else if obj.Type() == "attribute" {
+			current = obj
+		} else {
+			break
+		}
+	}
+
+	if rootID == "" {
+		return ""
+	}
+
+	// Create ONE synthetic field variable with the full text
+	line := int(node.StartPoint().Row) + 1
+	col := int(node.StartPoint().Column)
+	fieldVarID := NodeID(graph.NodeVariable, fullText, file, line, col)
+	fieldVarNode := &graph.Node{
+		ID:       fieldVarID,
+		Kind:     graph.NodeVariable,
+		Name:     fullText,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "python",
+	}
+	fb.AddVariable(fieldVarNode)
+	fb.AddFieldAccess(rootID, fieldVarID)
+
+	return fieldVarID
+}
+
+// analyzeCallArgsDF processes arguments to a call expression, creating passes_to edges.
+func (pp *PythonParser) analyzeCallArgsDF(callNode *sitter.Node, src []byte, file string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	fnNode := callNode.ChildByFieldName("function")
+	if fnNode == nil {
+		return
+	}
+	callText := fnNode.Content(src)
+	line := int(callNode.StartPoint().Row) + 1
+	col := int(callNode.StartPoint().Column)
+	callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+
+	args := callNode.ChildByFieldName("arguments")
+	if args == nil {
+		return
+	}
+
+	for i := 0; i < int(args.ChildCount()); i++ {
+		arg := args.Child(i)
+		if arg == nil {
+			continue
+		}
+
+		switch arg.Type() {
+		case "identifier":
+			name := arg.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddPassesTo(varID, callID)
+			}
+		case "attribute":
+			// e.g., user.name: passes_to from root identifier
+			pp.passAttributeToCall(arg, src, callID, st, fb)
+		}
+	}
+}
+
+// passAttributeToCall finds the root identifier of an attribute expression
+// and emits a passes_to edge.
+func (pp *PythonParser) passAttributeToCall(node *sitter.Node, src []byte, callID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	switch node.Type() {
+	case "identifier":
+		name := node.Content(src)
+		if name == "self" || name == "cls" {
+			return
+		}
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddPassesTo(varID, callID)
+		}
+	case "attribute":
+		obj := node.ChildByFieldName("object")
+		if obj != nil {
+			pp.passAttributeToCall(obj, src, callID, st, fb)
+		}
+	}
+}
+
+// analyzeReturnDF handles `return expr`.
+func (pp *PythonParser) analyzeReturnDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		switch child.Type() {
+		case "identifier":
+			name := child.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddReturn(varID, fn.ID)
+			}
+		case "attribute":
+			rootID := pp.resolveFieldAccessDF(child, src, file, fn, st, fb)
+			if rootID != "" {
+				fb.AddReturn(rootID, fn.ID)
+			}
+		default:
+			// Walk into compound expressions to find identifiers
+			pp.walkReturnExprDF(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// walkReturnExprDF recursively finds identifiers in return expressions.
+func (pp *PythonParser) walkReturnExprDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddReturn(varID, fn.ID)
+		}
+		return
+	}
+	if node.Type() == "attribute" {
+		rootID := pp.resolveFieldAccessDF(node, src, file, fn, st, fb)
+		if rootID != "" {
+			fb.AddReturn(rootID, fn.ID)
+		}
+		return
+	}
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			pp.walkReturnExprDF(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// emitReadsDF walks a compound expression (binary_operator) to find all
+// identifier references and emits reads edges.
+func (pp *PythonParser) emitReadsDF(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() != "binary_operator" {
+		return
+	}
+	pp.walkForReadsDF(node, src, targetID, st, fb)
+}
+
+// walkForReadsDF recursively finds identifiers in an expression tree and emits reads edges.
+func (pp *PythonParser) walkForReadsDF(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddRead(varID, targetID)
+		}
+		return
+	}
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			pp.walkForReadsDF(child, src, targetID, st, fb)
+		}
+	}
 }

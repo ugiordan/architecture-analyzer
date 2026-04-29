@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
+	"github.com/ugiordan/architecture-analyzer/pkg/parser"
 )
 
 func TestBuildFromDirectory(t *testing.T) {
@@ -120,4 +121,69 @@ func filterCallEdges(edges []*graph.Edge) []*graph.Edge {
 		}
 	}
 	return result
+}
+
+func TestMergeResultIncludesVariablesAndParameters(t *testing.T) {
+	cpg := graph.NewCPG()
+	b := NewBuilder()
+
+	result := &parser.ParseResult{
+		Variables: []*graph.Node{
+			{ID: "var_test1", Kind: graph.NodeVariable, Name: "x", File: "test.go", Line: 5},
+			{ID: "var_test2", Kind: graph.NodeVariable, Name: "y", File: "test.go", Line: 6},
+		},
+		Parameters: []*graph.Node{
+			{ID: "param_test1", Kind: graph.NodeParameter, Name: "r", File: "test.go", Line: 3},
+		},
+	}
+
+	if err := b.mergeResult(cpg, result); err != nil {
+		t.Fatalf("mergeResult failed: %v", err)
+	}
+
+	vars := cpg.NodesByKind(graph.NodeVariable)
+	if len(vars) != 2 {
+		t.Errorf("got %d variables, want 2", len(vars))
+	}
+
+	params := cpg.NodesByKind(graph.NodeParameter)
+	if len(params) != 1 {
+		t.Errorf("got %d parameters, want 1", len(params))
+	}
+}
+
+func TestBuildFromDirectoryIncludesDataFlow(t *testing.T) {
+	b := NewBuilder()
+	cpg, err := b.BuildFromDir("../../testdata")
+	if err != nil {
+		t.Fatalf("BuildFromDir failed: %v", err)
+	}
+
+	// Verify NodeVariable and NodeParameter nodes appear in CPG
+	vars := cpg.NodesByKind(graph.NodeVariable)
+	if len(vars) == 0 {
+		t.Error("expected NodeVariable nodes in CPG, got 0")
+	}
+
+	params := cpg.NodesByKind(graph.NodeParameter)
+	if len(params) == 0 {
+		t.Error("expected NodeParameter nodes in CPG, got 0")
+	}
+
+	// Verify EdgeDataFlow edges with data flow labels appear
+	dataFlowLabels := make(map[string]bool)
+	for _, e := range cpg.Edges() {
+		if e.Kind == graph.EdgeDataFlow {
+			dataFlowLabels[e.Label] = true
+		}
+	}
+
+	for _, label := range []string{"declares", "assigns"} {
+		if !dataFlowLabels[label] {
+			t.Errorf("expected EdgeDataFlow with label %q in CPG", label)
+		}
+	}
+
+	t.Logf("CPG contains %d variables, %d parameters", len(vars), len(params))
+	t.Logf("Data flow labels found: %v", dataFlowLabels)
 }

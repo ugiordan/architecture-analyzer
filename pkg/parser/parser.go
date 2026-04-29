@@ -12,6 +12,8 @@ type ParseResult struct {
 	HTTPHandlers   []*graph.Node
 	DBOperations   []*graph.Node
 	StructLiterals []*graph.Node
+	Variables      []*graph.Node
+	Parameters     []*graph.Node
 }
 
 // Parser extracts code property graph nodes and edges from source files.

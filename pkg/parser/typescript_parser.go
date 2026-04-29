@@ -8,6 +8,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/typescript/tsx"
 
+	"github.com/ugiordan/architecture-analyzer/pkg/dataflow"
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 )
 
@@ -203,16 +204,22 @@ func (tp *TypeScriptParser) extractFunction(node *sitter.Node, src []byte, file 
 		Annotations: make(map[string]bool),
 		Properties:  make(map[string]string),
 	}
-	// Extract parameter types for request handler detection
+	// Extract parameter types and names for request handler detection and data flow
 	params := node.ChildByFieldName("parameters")
 	if params != nil {
 		fn.ParamTypes = extractParamTypes(params, src)
+		fn.ParamNames = extractTSParamNames(params, src)
 	}
 	body := node.ChildByFieldName("body")
 	if body != nil {
 		fn.Complexity = computeTypeScriptComplexity(body)
 	}
 	result.Functions = append(result.Functions, fn)
+
+	// Extract intraprocedural data flow from function body
+	if body != nil {
+		tp.analyzeFunctionBody(body, src, file, fn, result)
+	}
 }
 
 // extractMethod handles method_definition nodes inside classes.
@@ -236,16 +243,22 @@ func (tp *TypeScriptParser) extractMethod(node *sitter.Node, src []byte, file, c
 		Annotations: make(map[string]bool),
 		Properties:  make(map[string]string),
 	}
-	// Extract parameter types for request handler detection
+	// Extract parameter types and names for request handler detection and data flow
 	params := node.ChildByFieldName("parameters")
 	if params != nil {
 		fn.ParamTypes = extractParamTypes(params, src)
+		fn.ParamNames = extractTSParamNames(params, src)
 	}
 	body := node.ChildByFieldName("body")
 	if body != nil {
 		fn.Complexity = computeTypeScriptComplexity(body)
 	}
 	result.Functions = append(result.Functions, fn)
+
+	// Extract intraprocedural data flow from function body
+	if body != nil {
+		tp.analyzeFunctionBody(body, src, file, fn, result)
+	}
 }
 
 // extractClass handles class_declaration nodes, walking the body with the class name set.
@@ -297,12 +310,13 @@ func (tp *TypeScriptParser) extractArrowFunctions(node *sitter.Node, src []byte,
 				Annotations: make(map[string]bool),
 				Properties:  make(map[string]string),
 			}
-			// Find the arrow_function node to extract params
+			// Find the arrow_function node to extract params and data flow
 			arrowNode := findArrowFunction(valueNode)
 			if arrowNode != nil {
 				params := arrowNode.ChildByFieldName("parameters")
 				if params != nil {
 					fn.ParamTypes = extractParamTypes(params, src)
+					fn.ParamNames = extractTSParamNames(params, src)
 				}
 				arrowBody := arrowNode.ChildByFieldName("body")
 				if arrowBody != nil {
@@ -310,6 +324,14 @@ func (tp *TypeScriptParser) extractArrowFunctions(node *sitter.Node, src []byte,
 				}
 			}
 			result.Functions = append(result.Functions, fn)
+
+			// Extract intraprocedural data flow from arrow function body
+			if arrowNode != nil {
+				arrowBody := arrowNode.ChildByFieldName("body")
+				if arrowBody != nil {
+					tp.analyzeFunctionBody(arrowBody, src, file, fn, result)
+				}
+			}
 		}
 	}
 }
@@ -581,4 +603,448 @@ func findArrowFunction(node *sitter.Node) *sitter.Node {
 		}
 	}
 	return nil
+}
+
+// extractTSParamNames extracts parameter names from a formal_parameters node.
+func extractTSParamNames(params *sitter.Node, src []byte) []string {
+	var names []string
+	for i := 0; i < int(params.ChildCount()); i++ {
+		param := params.Child(i)
+		if param == nil {
+			continue
+		}
+		switch param.Type() {
+		case "required_parameter", "optional_parameter":
+			nameNode := param.ChildByFieldName("pattern")
+			if nameNode != nil {
+				names = append(names, nameNode.Content(src))
+			}
+		}
+	}
+	return names
+}
+
+// ---------------------------------------------------------------------------
+// Intraprocedural data flow analysis
+// ---------------------------------------------------------------------------
+
+// analyzeFunctionBody creates variable/parameter nodes and data flow edges
+// for a single TypeScript function body. One SymbolTable + FlowBuilder per function.
+func (tp *TypeScriptParser) analyzeFunctionBody(body *sitter.Node, src []byte, file string, fn *graph.Node, result *ParseResult) {
+	st := dataflow.NewSymbolTable()
+	fb := dataflow.NewFlowBuilder()
+
+	// Create parameter nodes and register them in the symbol table
+	for _, pName := range fn.ParamNames {
+		paramID := NodeID(graph.NodeParameter, pName, file, fn.Line, 0)
+		paramNode := &graph.Node{
+			ID:       paramID,
+			Kind:     graph.NodeParameter,
+			Name:     pName,
+			File:     file,
+			Line:     fn.Line,
+			Language: "typescript",
+		}
+		fb.AddParameter(paramNode)
+		fb.AddDeclares(fn.ID, paramID)
+		st.Define(pName, paramID)
+	}
+
+	// Walk body statements sequentially
+	for i := 0; i < int(body.ChildCount()); i++ {
+		child := body.Child(i)
+		if child == nil {
+			continue
+		}
+		tp.analyzeStatementDF(child, src, file, fn, st, fb)
+		if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+			fn.Annotations["dataflow:truncated"] = true
+			break
+		}
+	}
+
+	// Merge results into ParseResult
+	nodes, edges := fb.Result()
+	for _, n := range nodes {
+		switch n.Kind {
+		case graph.NodeVariable:
+			result.Variables = append(result.Variables, n)
+		case graph.NodeParameter:
+			result.Parameters = append(result.Parameters, n)
+		}
+	}
+	result.Edges = append(result.Edges, edges...)
+}
+
+// analyzeStatementDF dispatches to handlers based on tree-sitter node type.
+func (tp *TypeScriptParser) analyzeStatementDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	switch node.Type() {
+	case "lexical_declaration":
+		tp.analyzeLexicalDeclDF(node, src, file, fn, st, fb)
+	case "variable_declaration":
+		tp.analyzeLexicalDeclDF(node, src, file, fn, st, fb)
+	case "expression_statement":
+		// Check for assignment_expression or standalone call_expression
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			switch child.Type() {
+			case "assignment_expression":
+				tp.analyzeAssignmentDF(child, src, file, fn, st, fb)
+			case "call_expression":
+				tp.analyzeCallArgsDF(child, src, file, st, fb)
+			}
+		}
+	case "return_statement":
+		tp.analyzeReturnDF(node, src, file, fn, st, fb)
+	default:
+		// Recurse into block-level structures (if, for, while, etc.)
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			tp.analyzeStatementDF(child, src, file, fn, st, fb)
+			if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+				return
+			}
+		}
+	}
+}
+
+// analyzeLexicalDeclDF handles `const x = expr` / `let x = expr` / `var x = expr`.
+// These are lexical_declaration or variable_declaration containing variable_declarator children.
+func (tp *TypeScriptParser) analyzeLexicalDeclDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil || child.Type() != "variable_declarator" {
+			continue
+		}
+
+		nameNode := child.ChildByFieldName("name")
+		if nameNode == nil {
+			continue
+		}
+		name := nameNode.Content(src)
+
+		line := int(nameNode.StartPoint().Row) + 1
+		col := int(nameNode.StartPoint().Column)
+		varID := NodeID(graph.NodeVariable, name, file, line, col)
+		varNode := &graph.Node{
+			ID:       varID,
+			Kind:     graph.NodeVariable,
+			Name:     name,
+			File:     file,
+			Line:     line,
+			Column:   col,
+			Language: "typescript",
+		}
+		fb.AddVariable(varNode)
+		st.Define(name, varID)
+
+		// Resolve RHS source and create assigns edge
+		valueNode := child.ChildByFieldName("value")
+		if valueNode != nil {
+			sourceID := tp.resolveRHSSourceDF(valueNode, src, file, fn, st, fb)
+			if sourceID != "" {
+				fb.AddAssign(sourceID, varID)
+			}
+			// Emit reads edges for binary expressions
+			tp.emitReadsDF(valueNode, src, varID, st, fb)
+		}
+	}
+}
+
+// analyzeAssignmentDF handles `x = expr` assignment expressions.
+func (tp *TypeScriptParser) analyzeAssignmentDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	if left == nil || right == nil {
+		return
+	}
+
+	var targetName string
+	if left.Type() == "identifier" {
+		targetName = left.Content(src)
+	}
+	if targetName == "" {
+		return
+	}
+
+	targetID, ok := st.Resolve(targetName)
+	if !ok {
+		return
+	}
+
+	sourceID := tp.resolveRHSSourceDF(right, src, file, fn, st, fb)
+	if sourceID != "" {
+		fb.AddAssign(sourceID, targetID)
+	}
+	tp.emitReadsDF(right, src, targetID, st, fb)
+}
+
+// resolveRHSSourceDF resolves the primary data source from an RHS expression.
+func (tp *TypeScriptParser) resolveRHSSourceDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil {
+		return ""
+	}
+
+	switch node.Type() {
+	case "call_expression":
+		fnNode := node.ChildByFieldName("function")
+		if fnNode == nil {
+			return ""
+		}
+		callText := fnNode.Content(src)
+		line := int(node.StartPoint().Row) + 1
+		col := int(node.StartPoint().Column)
+		callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+		// Also process call arguments
+		tp.analyzeCallArgsDF(node, src, file, st, fb)
+		return callID
+
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			return varID
+		}
+		return ""
+
+	case "member_expression":
+		return tp.resolveMemberExprDF(node, src, file, fn, st, fb)
+
+	case "subscript_expression":
+		// e.g., payload["name"]: resolve the object
+		obj := node.ChildByFieldName("object")
+		if obj != nil && obj.Type() == "identifier" {
+			name := obj.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				return varID
+			}
+		}
+		return ""
+
+	case "binary_expression":
+		// For binary expressions like "str" + name, resolve first meaningful operand
+		left := node.ChildByFieldName("left")
+		right := node.ChildByFieldName("right")
+		if leftID := tp.resolveRHSSourceDF(left, src, file, fn, st, fb); leftID != "" {
+			return leftID
+		}
+		return tp.resolveRHSSourceDF(right, src, file, fn, st, fb)
+
+	case "template_string":
+		// Template literals: walk children for template_substitution
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child != nil && child.Type() == "template_substitution" {
+				for j := 0; j < int(child.ChildCount()); j++ {
+					inner := child.Child(j)
+					if inner != nil {
+						if id := tp.resolveRHSSourceDF(inner, src, file, fn, st, fb); id != "" {
+							return id
+						}
+					}
+				}
+			}
+		}
+		return ""
+
+	default:
+		return ""
+	}
+}
+
+// resolveMemberExprDF handles member_expression chains like user.email or req.body.
+// Creates a single synthetic field variable with the full text and emits one field_access
+// edge from the root identifier to the synthetic variable.
+func (tp *TypeScriptParser) resolveMemberExprDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil || node.Type() != "member_expression" {
+		return ""
+	}
+
+	fullText := node.Content(src)
+
+	// Walk to the leftmost identifier to find the root
+	var rootID string
+	current := node
+	for {
+		obj := current.ChildByFieldName("object")
+		if obj == nil {
+			break
+		}
+		if obj.Type() == "identifier" {
+			rootName := obj.Content(src)
+			if id, ok := st.Resolve(rootName); ok {
+				rootID = id
+			}
+			break
+		} else if obj.Type() == "member_expression" {
+			current = obj
+		} else {
+			break
+		}
+	}
+
+	if rootID == "" {
+		return ""
+	}
+
+	// Create ONE synthetic field variable with the full text
+	line := int(node.StartPoint().Row) + 1
+	col := int(node.StartPoint().Column)
+	fieldVarID := NodeID(graph.NodeVariable, fullText, file, line, col)
+	fieldVarNode := &graph.Node{
+		ID:       fieldVarID,
+		Kind:     graph.NodeVariable,
+		Name:     fullText,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "typescript",
+	}
+	fb.AddVariable(fieldVarNode)
+	fb.AddFieldAccess(rootID, fieldVarID)
+
+	return fieldVarID
+}
+
+// analyzeCallArgsDF processes arguments to a call expression, creating passes_to edges.
+func (tp *TypeScriptParser) analyzeCallArgsDF(callNode *sitter.Node, src []byte, file string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	fnNode := callNode.ChildByFieldName("function")
+	if fnNode == nil {
+		return
+	}
+	callText := fnNode.Content(src)
+	line := int(callNode.StartPoint().Row) + 1
+	col := int(callNode.StartPoint().Column)
+	callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+
+	args := callNode.ChildByFieldName("arguments")
+	if args == nil {
+		return
+	}
+
+	for i := 0; i < int(args.ChildCount()); i++ {
+		arg := args.Child(i)
+		if arg == nil {
+			continue
+		}
+
+		switch arg.Type() {
+		case "identifier":
+			name := arg.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddPassesTo(varID, callID)
+			}
+		case "member_expression":
+			// e.g., user.name: passes_to from root identifier
+			tp.passMemberToCall(arg, src, callID, st, fb)
+		}
+	}
+}
+
+// passMemberToCall finds the root identifier of a member expression
+// and emits a passes_to edge.
+func (tp *TypeScriptParser) passMemberToCall(node *sitter.Node, src []byte, callID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	switch node.Type() {
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddPassesTo(varID, callID)
+		}
+	case "member_expression":
+		obj := node.ChildByFieldName("object")
+		if obj != nil {
+			tp.passMemberToCall(obj, src, callID, st, fb)
+		}
+	}
+}
+
+// analyzeReturnDF handles `return expr`.
+func (tp *TypeScriptParser) analyzeReturnDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		switch child.Type() {
+		case "identifier":
+			name := child.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddReturn(varID, fn.ID)
+			}
+		case "member_expression":
+			rootID := tp.resolveMemberExprDF(child, src, file, fn, st, fb)
+			if rootID != "" {
+				fb.AddReturn(rootID, fn.ID)
+			}
+		default:
+			tp.walkReturnExprDF(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// walkReturnExprDF recursively finds identifiers in return expressions.
+func (tp *TypeScriptParser) walkReturnExprDF(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddReturn(varID, fn.ID)
+		}
+		return
+	}
+	if node.Type() == "member_expression" {
+		rootID := tp.resolveMemberExprDF(node, src, file, fn, st, fb)
+		if rootID != "" {
+			fb.AddReturn(rootID, fn.ID)
+		}
+		return
+	}
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			tp.walkReturnExprDF(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// emitReadsDF walks a compound expression (binary_expression) to find all
+// identifier references and emits reads edges.
+func (tp *TypeScriptParser) emitReadsDF(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() != "binary_expression" {
+		return
+	}
+	tp.walkForReadsDF(node, src, targetID, st, fb)
+}
+
+// walkForReadsDF recursively finds identifiers in an expression tree and emits reads edges.
+func (tp *TypeScriptParser) walkForReadsDF(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddRead(varID, targetID)
+		}
+		return
+	}
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			tp.walkForReadsDF(child, src, targetID, st, fb)
+		}
+	}
 }

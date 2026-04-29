@@ -8,6 +8,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 	"github.com/smacker/go-tree-sitter/golang"
 
+	"github.com/ugiordan/architecture-analyzer/pkg/dataflow"
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 )
 
@@ -161,8 +162,9 @@ func (gp *GoParser) extractFunction(node *sitter.Node, src []byte, file string, 
 			fn.Properties["handler_type"] = "http"
 		}
 
-		// Extract individual parameter types
+		// Extract individual parameter names and types
 		var paramTypes []string
+		var paramNames []string
 		for i := 0; i < int(params.ChildCount()); i++ {
 			child := params.Child(i)
 			if child != nil && child.Type() == "parameter_declaration" {
@@ -170,11 +172,21 @@ func (gp *GoParser) extractFunction(node *sitter.Node, src []byte, file string, 
 				if typeNode != nil {
 					paramTypes = append(paramTypes, typeNode.Content(src))
 				}
+				// Extract parameter names (identifiers before the type)
+				for j := 0; j < int(child.ChildCount()); j++ {
+					nameChild := child.Child(j)
+					if nameChild != nil && nameChild.Type() == "identifier" {
+						paramNames = append(paramNames, nameChild.Content(src))
+					}
+				}
 			}
 		}
 		if len(paramTypes) > 0 {
 			fn.Properties["param_types"] = strings.Join(paramTypes, ",")
 			fn.ParamTypes = paramTypes
+		}
+		if len(paramNames) > 0 {
+			fn.ParamNames = paramNames
 		}
 	}
 
@@ -194,6 +206,11 @@ func (gp *GoParser) extractFunction(node *sitter.Node, src []byte, file string, 
 
 	// Extract switch/case statements from function body
 	gp.extractSwitchCases(node, src, fn)
+
+	// Extract intraprocedural data flow from function body
+	if body != nil {
+		gp.analyzeFunctionBody(body, src, file, fn, result)
+	}
 
 	result.Functions = append(result.Functions, fn)
 }
@@ -560,6 +577,643 @@ func (gp *GoParser) findSwitchStatements(node *sitter.Node, src []byte, exprs *[
 		child := node.Child(i)
 		if child != nil {
 			gp.findSwitchStatements(child, src, exprs, vals)
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Intraprocedural data flow analysis
+// ---------------------------------------------------------------------------
+
+// analyzeFunctionBody creates variable/parameter nodes and data flow edges
+// for a single function body. One SymbolTable + FlowBuilder per function.
+func (gp *GoParser) analyzeFunctionBody(body *sitter.Node, src []byte, file string, fn *graph.Node, result *ParseResult) {
+	st := dataflow.NewSymbolTable()
+	fb := dataflow.NewFlowBuilder()
+
+	// Create parameter nodes and register them in the symbol table
+	for _, pName := range fn.ParamNames {
+		if pName == "_" {
+			continue
+		}
+		paramID := NodeID(graph.NodeParameter, pName, file, fn.Line, 0)
+		paramNode := &graph.Node{
+			ID:       paramID,
+			Kind:     graph.NodeParameter,
+			Name:     pName,
+			File:     file,
+			Line:     fn.Line,
+			Language: "go",
+		}
+		fb.AddParameter(paramNode)
+		fb.AddDeclares(fn.ID, paramID)
+		st.Define(pName, paramID)
+	}
+
+	// Walk body statements sequentially
+	for i := 0; i < int(body.ChildCount()); i++ {
+		child := body.Child(i)
+		if child == nil {
+			continue
+		}
+		gp.analyzeStatement(child, src, file, fn, st, fb)
+		if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+			fn.Annotations["dataflow:truncated"] = true
+			break
+		}
+	}
+
+	// Merge results into ParseResult
+	nodes, edges := fb.Result()
+	for _, n := range nodes {
+		switch n.Kind {
+		case graph.NodeVariable:
+			result.Variables = append(result.Variables, n)
+		case graph.NodeParameter:
+			result.Parameters = append(result.Parameters, n)
+		}
+	}
+	result.Edges = append(result.Edges, edges...)
+}
+
+// analyzeStatement dispatches to handlers based on tree-sitter node type.
+func (gp *GoParser) analyzeStatement(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	switch node.Type() {
+	case "short_var_declaration":
+		gp.analyzeShortVarDecl(node, src, file, fn, st, fb)
+	case "var_declaration":
+		gp.analyzeVarDecl(node, src, file, fn, st, fb)
+	case "assignment_statement":
+		gp.analyzeAssignment(node, src, file, fn, st, fb)
+	case "expression_statement":
+		// Check for standalone call expressions (e.g., json.Unmarshal(body, &review))
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child != nil && child.Type() == "call_expression" {
+				gp.analyzeCallArgs(child, src, file, st, fb)
+			}
+		}
+	case "return_statement":
+		gp.analyzeReturn(node, src, file, fn, st, fb)
+	default:
+		// Recurse into block-level structures (if, for, etc.)
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child == nil {
+				continue
+			}
+			gp.analyzeStatement(child, src, file, fn, st, fb)
+			if fb.VariableCount() >= dataflow.MaxVariablesPerFunction {
+				return
+			}
+		}
+	}
+}
+
+// analyzeShortVarDecl handles `x := expr` and `a, b := expr1, expr2`.
+func (gp *GoParser) analyzeShortVarDecl(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	if left == nil {
+		return
+	}
+
+	// Collect LHS names
+	var lhsNames []*sitter.Node
+	if left.Type() == "expression_list" {
+		for i := 0; i < int(left.ChildCount()); i++ {
+			child := left.Child(i)
+			if child != nil && child.Type() == "identifier" {
+				lhsNames = append(lhsNames, child)
+			}
+		}
+	} else if left.Type() == "identifier" {
+		lhsNames = append(lhsNames, left)
+	}
+
+	// Collect RHS expressions
+	var rhsExprs []*sitter.Node
+	if right != nil {
+		if right.Type() == "expression_list" {
+			for i := 0; i < int(right.ChildCount()); i++ {
+				child := right.Child(i)
+				if child != nil && child.Type() != "," {
+					rhsExprs = append(rhsExprs, child)
+				}
+			}
+		} else {
+			rhsExprs = append(rhsExprs, right)
+		}
+	}
+
+	for idx, nameNode := range lhsNames {
+		name := nameNode.Content(src)
+		if name == "_" {
+			continue
+		}
+
+		line := int(nameNode.StartPoint().Row) + 1
+		col := int(nameNode.StartPoint().Column)
+		varID := NodeID(graph.NodeVariable, name, file, line, col)
+		varNode := &graph.Node{
+			ID:       varID,
+			Kind:     graph.NodeVariable,
+			Name:     name,
+			File:     file,
+			Line:     line,
+			Column:   col,
+			Language: "go",
+		}
+		fb.AddVariable(varNode)
+		st.Define(name, varID)
+
+		// Resolve RHS source and create assigns edge
+		if idx < len(rhsExprs) {
+			rhsNode := rhsExprs[idx]
+			sourceID := gp.resolveRHSSource(rhsNode, src, file, fn, st, fb)
+			if sourceID != "" {
+				fb.AddAssign(sourceID, varID)
+			}
+			// Emit reads edges for compound expressions
+			gp.emitReads(rhsNode, src, file, varID, st, fb)
+		}
+	}
+}
+
+// analyzeVarDecl handles `var x Type = expr`.
+func (gp *GoParser) analyzeVarDecl(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	// var_declaration contains var_spec children
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil || child.Type() != "var_spec" {
+			continue
+		}
+		gp.analyzeVarSpec(child, src, file, fn, st, fb)
+	}
+}
+
+// analyzeVarSpec handles a single var_spec inside a var_declaration.
+func (gp *GoParser) analyzeVarSpec(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	nameNode := node.ChildByFieldName("name")
+	if nameNode == nil {
+		// Try iterating children for identifiers
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child != nil && child.Type() == "identifier" {
+				nameNode = child
+				break
+			}
+		}
+	}
+	if nameNode == nil {
+		return
+	}
+
+	name := nameNode.Content(src)
+	if name == "_" {
+		return
+	}
+
+	line := int(nameNode.StartPoint().Row) + 1
+	col := int(nameNode.StartPoint().Column)
+	varID := NodeID(graph.NodeVariable, name, file, line, col)
+	varNode := &graph.Node{
+		ID:       varID,
+		Kind:     graph.NodeVariable,
+		Name:     name,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "go",
+	}
+	fb.AddVariable(varNode)
+	st.Define(name, varID)
+
+	// Check for value expression
+	valueNode := node.ChildByFieldName("value")
+	if valueNode != nil {
+		sourceID := gp.resolveRHSSource(valueNode, src, file, fn, st, fb)
+		if sourceID != "" {
+			fb.AddAssign(sourceID, varID)
+		}
+	}
+}
+
+// analyzeAssignment handles `x = expr`.
+func (gp *GoParser) analyzeAssignment(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	left := node.ChildByFieldName("left")
+	right := node.ChildByFieldName("right")
+	if left == nil || right == nil {
+		return
+	}
+
+	// Get the target variable
+	var targetName string
+	if left.Type() == "identifier" {
+		targetName = left.Content(src)
+	} else if left.Type() == "expression_list" {
+		for i := 0; i < int(left.ChildCount()); i++ {
+			child := left.Child(i)
+			if child != nil && child.Type() == "identifier" {
+				targetName = child.Content(src)
+				break
+			}
+		}
+	}
+
+	if targetName == "" || targetName == "_" {
+		return
+	}
+
+	targetID, ok := st.Resolve(targetName)
+	if !ok {
+		return
+	}
+
+	sourceID := gp.resolveRHSSource(right, src, file, fn, st, fb)
+	if sourceID != "" {
+		fb.AddAssign(sourceID, targetID)
+	}
+	gp.emitReads(right, src, file, targetID, st, fb)
+}
+
+// analyzeReturn handles `return expr`.
+func (gp *GoParser) analyzeReturn(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child == nil {
+			continue
+		}
+		switch child.Type() {
+		case "identifier":
+			name := child.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddReturn(varID, fn.ID)
+			}
+		case "selector_expression":
+			// e.g., return r.URL.Path
+			rootID := gp.resolveSelectorChain(child, src, file, fn, st, fb)
+			if rootID != "" {
+				fb.AddReturn(rootID, fn.ID)
+			}
+		default:
+			// Walk into compound expressions to find identifiers
+			gp.walkReturnExpr(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// walkReturnExpr recursively finds identifiers in return expressions.
+func (gp *GoParser) walkReturnExpr(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddReturn(varID, fn.ID)
+		}
+		return
+	}
+	if node.Type() == "selector_expression" {
+		rootID := gp.resolveSelectorChain(node, src, file, fn, st, fb)
+		if rootID != "" {
+			fb.AddReturn(rootID, fn.ID)
+		}
+		return
+	}
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			gp.walkReturnExpr(child, src, file, fn, st, fb)
+		}
+	}
+}
+
+// resolveRHSSource resolves the primary data source from an RHS expression.
+// Returns a node ID that the LHS variable gets its value from.
+func (gp *GoParser) resolveRHSSource(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil {
+		return ""
+	}
+
+	switch node.Type() {
+	case "call_expression":
+		// Return the call site ID (must match what extractCallSite generates)
+		fnNode := node.ChildByFieldName("function")
+		if fnNode == nil {
+			return ""
+		}
+		callText := fnNode.Content(src)
+		line := int(node.StartPoint().Row) + 1
+		col := int(node.StartPoint().Column)
+		callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+		// Also process call arguments
+		gp.analyzeCallArgs(node, src, file, st, fb)
+		return callID
+
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			return varID
+		}
+		return ""
+
+	case "selector_expression":
+		return gp.resolveSelectorChain(node, src, file, fn, st, fb)
+
+	case "index_expression":
+		// e.g., review["name"]: resolve the object (whole collection taint)
+		obj := node.ChildByFieldName("operand")
+		if obj == nil {
+			// Try first child
+			if node.ChildCount() > 0 {
+				obj = node.Child(0)
+			}
+		}
+		if obj != nil && obj.Type() == "identifier" {
+			name := obj.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				return varID
+			}
+		}
+		return ""
+
+	case "expression_list":
+		// Use first element
+		for i := 0; i < int(node.ChildCount()); i++ {
+			child := node.Child(i)
+			if child != nil && child.Type() != "," {
+				return gp.resolveRHSSource(child, src, file, fn, st, fb)
+			}
+		}
+		return ""
+
+	case "binary_expression":
+		// For binary expressions like "str" + name.(string), resolve first meaningful operand
+		left := node.ChildByFieldName("left")
+		right := node.ChildByFieldName("right")
+		// Try left first, then right
+		if leftID := gp.resolveRHSSource(left, src, file, fn, st, fb); leftID != "" {
+			return leftID
+		}
+		return gp.resolveRHSSource(right, src, file, fn, st, fb)
+
+	case "type_assertion_expression":
+		// e.g., name.(string): resolve the operand
+		operand := node.ChildByFieldName("operand")
+		if operand != nil {
+			return gp.resolveRHSSource(operand, src, file, fn, st, fb)
+		}
+		return ""
+
+	case "unary_expression":
+		// e.g., &http.Request{}: resolve the operand
+		operand := node.ChildByFieldName("operand")
+		if operand != nil {
+			return gp.resolveRHSSource(operand, src, file, fn, st, fb)
+		}
+		return ""
+
+	default:
+		return ""
+	}
+}
+
+// resolveSelectorChain handles selector_expression chains like r.URL.Path.
+// Creates a single synthetic field variable with the full text (e.g., "r.URL.Path")
+// and emits one field_access edge from the root identifier to the synthetic variable.
+// The synthetic variable is NOT registered in the symbol table (per spec).
+func (gp *GoParser) resolveSelectorChain(node *sitter.Node, src []byte, file string, fn *graph.Node, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) string {
+	if node == nil || node.Type() != "selector_expression" {
+		return ""
+	}
+
+	// Get the full text of the selector expression (e.g., "r.URL.Path")
+	fullText := node.Content(src)
+
+	// Walk to the leftmost identifier to find the root
+	var rootID string
+	current := node
+	for {
+		operand := current.ChildByFieldName("operand")
+		if operand == nil {
+			break
+		}
+
+		if operand.Type() == "identifier" {
+			// Found the root identifier
+			rootName := operand.Content(src)
+			if id, ok := st.Resolve(rootName); ok {
+				rootID = id
+			}
+			break
+		} else if operand.Type() == "selector_expression" {
+			// Continue walking left
+			current = operand
+		} else {
+			// Unexpected operand type, stop
+			break
+		}
+	}
+
+	if rootID == "" {
+		return ""
+	}
+
+	// Create ONE synthetic field variable with the full text
+	line := int(node.StartPoint().Row) + 1
+	col := int(node.StartPoint().Column)
+	fieldVarID := NodeID(graph.NodeVariable, fullText, file, line, col)
+	fieldVarNode := &graph.Node{
+		ID:       fieldVarID,
+		Kind:     graph.NodeVariable,
+		Name:     fullText,
+		File:     file,
+		Line:     line,
+		Column:   col,
+		Language: "go",
+	}
+	fb.AddVariable(fieldVarNode)
+	// Emit ONE field_access edge from root to synthetic variable
+	fb.AddFieldAccess(rootID, fieldVarID)
+	// Do NOT register in symbol table (per spec)
+
+	return fieldVarID
+}
+
+// analyzeCallArgs processes arguments to a call expression, creating
+// passes_to edges and mutates edges for &x patterns.
+func (gp *GoParser) analyzeCallArgs(callNode *sitter.Node, src []byte, file string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	fnNode := callNode.ChildByFieldName("function")
+	if fnNode == nil {
+		return
+	}
+	callText := fnNode.Content(src)
+	line := int(callNode.StartPoint().Row) + 1
+	col := int(callNode.StartPoint().Column)
+	callID := NodeID(graph.NodeCallSite, callText, file, line, col)
+
+	args := callNode.ChildByFieldName("arguments")
+	if args == nil {
+		return
+	}
+
+	for i := 0; i < int(args.ChildCount()); i++ {
+		arg := args.Child(i)
+		if arg == nil {
+			continue
+		}
+
+		switch arg.Type() {
+		case "identifier":
+			name := arg.Content(src)
+			if varID, ok := st.Resolve(name); ok {
+				fb.AddPassesTo(varID, callID)
+			}
+
+		case "unary_expression":
+			// Check for & operator (address-of)
+			operand := arg.ChildByFieldName("operand")
+			operator := arg.ChildByFieldName("operator")
+			isAddressOf := false
+			if operator != nil && operator.Content(src) == "&" {
+				isAddressOf = true
+			} else {
+				// Check for "&" as a direct child
+				for j := 0; j < int(arg.ChildCount()); j++ {
+					child := arg.Child(j)
+					if child != nil && child.Type() == "&" {
+						isAddressOf = true
+						break
+					}
+				}
+			}
+
+			if isAddressOf && operand != nil {
+				// Handle &identifier
+				if operand.Type() == "identifier" {
+					name := operand.Content(src)
+					if varID, ok := st.Resolve(name); ok {
+						fb.AddPassesTo(varID, callID)
+						fb.AddMutates(callID, varID)
+					}
+				} else if operand.Type() == "selector_expression" {
+					// Handle &x.Field or &x[0]: resolve root identifier and apply both edges to it
+					rootID := gp.findRootIdentifier(operand, src, st)
+					if rootID != "" {
+						fb.AddPassesTo(rootID, callID)
+						fb.AddMutates(callID, rootID)
+					}
+				} else if operand.Type() == "index_expression" {
+					// Handle &x[0]: resolve the array/slice variable
+					indexOperand := operand.ChildByFieldName("operand")
+					if indexOperand != nil && indexOperand.Type() == "identifier" {
+						name := indexOperand.Content(src)
+						if varID, ok := st.Resolve(name); ok {
+							fb.AddPassesTo(varID, callID)
+							fb.AddMutates(callID, varID)
+						}
+					}
+				}
+			}
+
+		case "selector_expression":
+			// e.g., r.Body: passes_to from root identifier
+			gp.passSelectorToCall(arg, src, callID, st, fb)
+		}
+	}
+}
+
+// passSelectorToCall finds the root identifier of a selector expression
+// and emits a passes_to edge.
+func (gp *GoParser) passSelectorToCall(node *sitter.Node, src []byte, callID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+	switch node.Type() {
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddPassesTo(varID, callID)
+		}
+	case "selector_expression":
+		operand := node.ChildByFieldName("operand")
+		if operand != nil {
+			gp.passSelectorToCall(operand, src, callID, st, fb)
+		}
+	}
+}
+
+// findRootIdentifier walks a selector expression to find the leftmost identifier
+// and resolves it in the symbol table. Used for &x.Field patterns.
+func (gp *GoParser) findRootIdentifier(node *sitter.Node, src []byte, st *dataflow.SymbolTable) string {
+	if node == nil {
+		return ""
+	}
+
+	switch node.Type() {
+	case "identifier":
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			return varID
+		}
+		return ""
+
+	case "selector_expression":
+		operand := node.ChildByFieldName("operand")
+		if operand != nil {
+			return gp.findRootIdentifier(operand, src, st)
+		}
+		return ""
+
+	default:
+		return ""
+	}
+}
+
+// emitReads walks a compound expression (binary_expression, etc.) to find all
+// identifier references and emits reads edges.
+func (gp *GoParser) emitReads(node *sitter.Node, src []byte, file string, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+
+	if node.Type() != "binary_expression" {
+		return
+	}
+
+	// Walk all children to find identifier reads
+	gp.walkForReads(node, src, targetID, st, fb)
+}
+
+// walkForReads recursively finds identifiers in an expression tree and emits reads edges.
+func (gp *GoParser) walkForReads(node *sitter.Node, src []byte, targetID string, st *dataflow.SymbolTable, fb *dataflow.FlowBuilder) {
+	if node == nil {
+		return
+	}
+
+	if node.Type() == "identifier" {
+		name := node.Content(src)
+		if varID, ok := st.Resolve(name); ok {
+			fb.AddRead(varID, targetID)
+		}
+		return
+	}
+
+	// Recurse into type_assertion_expression operands
+	if node.Type() == "type_assertion_expression" {
+		operand := node.ChildByFieldName("operand")
+		if operand != nil {
+			gp.walkForReads(operand, src, targetID, st, fb)
+		}
+		return
+	}
+
+	for i := 0; i < int(node.ChildCount()); i++ {
+		child := node.Child(i)
+		if child != nil {
+			gp.walkForReads(child, src, targetID, st, fb)
 		}
 	}
 }
