@@ -132,6 +132,12 @@ func (g *CPG) EnsureAnnotations(nodeID string) {
 	}
 }
 
+// SARIFFindings returns all ExternalFinding nodes in the graph, providing
+// a flat accessor for SARIF-ingested findings without traversing edges.
+func (g *CPG) SARIFFindings() []*Node {
+	return g.NodesByKind(NodeExternalFinding)
+}
+
 func (g *CPG) Edges() []*Edge {
 	g.mu.RLock()
 	defer g.mu.RUnlock()

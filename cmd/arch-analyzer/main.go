@@ -1210,13 +1210,15 @@ func ingestSARIFFiles(cpg *graph.CPG, paths string) ([]query.Finding, error) {
 			continue
 		}
 		findings = append(findings, query.Finding{
-			RuleID:   n.RuleID,
-			Severity: n.Severity,
-			Message:  n.Message,
-			File:     n.File,
-			Line:     n.Line,
-			NodeID:   n.ID,
-			Domain:   "external/" + n.ToolName,
+			RuleID:      n.RuleID,
+			Severity:    n.Severity,
+			Message:     n.Message,
+			File:        n.File,
+			Line:        n.Line,
+			NodeID:      n.ID,
+			Domain:      "external/" + n.ToolName,
+			ToolName:    n.ToolName,
+			ToolVersion: n.ToolVersion,
 		})
 	}
 
@@ -1260,8 +1262,31 @@ func printFindings(cpg *graph.CPG, findings []query.Finding) {
 		return
 	}
 	fmt.Printf("\n%d security finding(s):\n", len(findings))
+	externalByTool := make(map[string]int)
 	for _, f := range findings {
-		fmt.Printf("  [%s] %s: %s (%s:%d)\n", f.Severity, f.RuleID, f.Message, f.File, f.Line)
+		prefix := ""
+		if strings.HasPrefix(f.Domain, "external/") {
+			prefix = fmt.Sprintf("[ext/%s] ", f.ToolName)
+			externalByTool[f.ToolName]++
+		} else if f.Domain != "" && f.Domain != "legacy" {
+			prefix = fmt.Sprintf("[%s] ", f.Domain)
+		}
+		fmt.Printf("  %s[%s] %s: %s (%s:%d)\n", prefix, f.Severity, f.RuleID, f.Message, f.File, f.Line)
+	}
+	if len(externalByTool) > 0 {
+		fmt.Printf("\nExternal findings summary:\n")
+		total := 0
+		for tool, count := range externalByTool {
+			fmt.Printf("  %s: %d finding(s)\n", tool, count)
+			total += count
+		}
+		fmt.Printf("  Total external: %d of %d findings\n", total, len(findings))
+
+		// Cross-reference: internal findings corroborated by external scanners
+		correlated := sarif.CrossReference(cpg, findings)
+		if output := sarif.FormatCorrelations(correlated); output != "" {
+			fmt.Print(output)
+		}
 	}
 }
 
@@ -1293,11 +1318,20 @@ func outputSARIF(path string, findings []query.Finding) error {
 
 	var runs []map[string]interface{}
 	for domain, domainFindings := range grouped {
+		toolName := "arch-analyzer/" + domain
+		toolVersion := version
+		// For external findings, preserve the original tool identity
+		if strings.HasPrefix(domain, "external/") && len(domainFindings) > 0 {
+			toolName = domainFindings[0].ToolName
+			if domainFindings[0].ToolVersion != "" {
+				toolVersion = domainFindings[0].ToolVersion
+			}
+		}
 		runs = append(runs, map[string]interface{}{
 			"tool": map[string]interface{}{
 				"driver": map[string]interface{}{
-					"name":    "arch-analyzer/" + domain,
-					"version": version,
+					"name":    toolName,
+					"version": toolVersion,
 				},
 			},
 			"results": sarifResults(domainFindings),
@@ -1319,12 +1353,16 @@ func outputSARIF(path string, findings []query.Finding) error {
 
 func domainGroupedJSON(findings []query.Finding) map[string]interface{} {
 	grouped := make(map[string][]query.Finding)
+	externalByTool := make(map[string]int)
 	for _, f := range findings {
 		domain := f.Domain
 		if domain == "" {
 			domain = "legacy"
 		}
 		grouped[domain] = append(grouped[domain], f)
+		if strings.HasPrefix(f.Domain, "external/") {
+			externalByTool[f.ToolName]++
+		}
 	}
 
 	domainResults := make(map[string]interface{})
@@ -1335,10 +1373,14 @@ func domainGroupedJSON(findings []query.Finding) map[string]interface{} {
 		}
 	}
 
-	return map[string]interface{}{
+	result := map[string]interface{}{
 		"domains":        domainResults,
 		"total_findings": len(findings),
 	}
+	if len(externalByTool) > 0 {
+		result["external_tools"] = externalByTool
+	}
+	return result
 }
 
 func sarifResults(findings []query.Finding) []map[string]interface{} {

@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
-	"github.com/ugiordan/architecture-analyzer/pkg/parser"
 	"github.com/ugiordan/architecture-analyzer/pkg/sarif"
 )
 
@@ -53,7 +52,7 @@ func makeResult(ruleID, level, msg, file string, line int) sarif.Result {
 }
 
 func TestIngestExactMatch(t *testing.T) {
-	fnID := parser.NodeID(graph.NodeFunction, "handleRequest", "pkg/handler/serve.go", 40, 0)
+	fnID := graph.NodeID(graph.NodeFunction, "handleRequest", "pkg/handler/serve.go", 40, 0)
 	fn := &graph.Node{
 		ID: fnID, Kind: graph.NodeFunction, Name: "handleRequest",
 		File: "pkg/handler/serve.go", Line: 40, EndLine: 60,
@@ -83,8 +82,8 @@ func TestIngestExactMatch(t *testing.T) {
 	if result.EdgesCreated != 1 {
 		t.Errorf("EdgesCreated = %d, want 1", result.EdgesCreated)
 	}
-	if len(result.ToolNames) != 1 || result.ToolNames[0] != "semgrep" {
-		t.Errorf("ToolNames = %v, want [semgrep]", result.ToolNames)
+	if len(result.Tools) != 1 || result.Tools[0].Name != "semgrep" {
+		t.Errorf("Tools = %v, want [{semgrep 1.56.0}]", result.Tools)
 	}
 
 	// Verify the ExternalFinding node was added
@@ -99,8 +98,8 @@ func TestIngestExactMatch(t *testing.T) {
 	if ef.ToolName != "semgrep" {
 		t.Errorf("ToolName = %q", ef.ToolName)
 	}
-	if ef.Severity != "error" {
-		t.Errorf("Severity = %q", ef.Severity)
+	if ef.Severity != "high" {
+		t.Errorf("Severity = %q, want high (normalized from error)", ef.Severity)
 	}
 
 	// Verify REPORTED_BY edge: function -> finding
@@ -117,10 +116,22 @@ func TestIngestExactMatch(t *testing.T) {
 	if !found {
 		t.Error("missing REPORTED_BY edge from function to finding")
 	}
+
+	// Verify sarif: annotation on the matched node
+	matchedNode := cpg.GetNode(fnID)
+	if matchedNode.Annotations == nil || !matchedNode.Annotations["sarif:semgrep:xss-rule"] {
+		t.Errorf("expected sarif:semgrep:xss-rule annotation on matched node, got %v", matchedNode.Annotations)
+	}
+
+	// Verify SARIFFindings accessor
+	sarifFindings := cpg.SARIFFindings()
+	if len(sarifFindings) != 1 {
+		t.Errorf("SARIFFindings() = %d, want 1", len(sarifFindings))
+	}
 }
 
 func TestIngestRangeProximity(t *testing.T) {
-	fnID := parser.NodeID(graph.NodeFunction, "processData", "pkg/data.go", 10, 0)
+	fnID := graph.NodeID(graph.NodeFunction, "processData", "pkg/data.go", 10, 0)
 	fn := &graph.Node{
 		ID: fnID, Kind: graph.NodeFunction, Name: "processData",
 		File: "pkg/data.go", Line: 10, EndLine: 50,
@@ -146,6 +157,12 @@ func TestIngestRangeProximity(t *testing.T) {
 				t.Errorf("edge confidence = %q, want INFERRED for range proximity", e.Confidence)
 			}
 		}
+	}
+
+	// Verify sarif: annotation on the matched function node
+	matchedNode := cpg.GetNode(fnID)
+	if matchedNode.Annotations == nil || !matchedNode.Annotations["sarif:codeql:sql-injection"] {
+		t.Errorf("expected sarif:codeql:sql-injection annotation on matched node, got %v", matchedNode.Annotations)
 	}
 }
 
@@ -199,8 +216,8 @@ func TestIngestIdempotent(t *testing.T) {
 	if result2.NodesCreated != 0 {
 		t.Errorf("second: NodesCreated = %d, want 0 (idempotent)", result2.NodesCreated)
 	}
-	if result2.FindingsTotal != 1 {
-		t.Errorf("second: FindingsTotal = %d, want 1", result2.FindingsTotal)
+	if result2.FindingsTotal != 0 {
+		t.Errorf("second: FindingsTotal = %d, want 0 (duplicates not counted)", result2.FindingsTotal)
 	}
 }
 
@@ -324,8 +341,8 @@ func TestIngestMultipleRuns(t *testing.T) {
 		t.Errorf("ExternalFinding nodes = %d, want 2", len(findings))
 	}
 	// Verify both tools are tracked
-	if len(result.ToolNames) != 2 {
-		t.Errorf("ToolNames = %v, want 2 entries", result.ToolNames)
+	if len(result.Tools) != 2 {
+		t.Errorf("Tools = %v, want 2 entries", result.Tools)
 	}
 	summary := result.ToolSummary()
 	if summary != "tool1 v1.0, tool2 v2.0" {
@@ -349,8 +366,8 @@ func TestIngestEmptyReport(t *testing.T) {
 	if result.NodesCreated != 0 {
 		t.Errorf("NodesCreated = %d, want 0", result.NodesCreated)
 	}
-	if len(result.ToolNames) != 0 {
-		t.Errorf("ToolNames = %v, want empty", result.ToolNames)
+	if len(result.Tools) != 0 {
+		t.Errorf("Tools = %v, want empty", result.Tools)
 	}
 }
 
@@ -365,8 +382,8 @@ func TestIngestRunWithEmptyResults(t *testing.T) {
 	if result.FindingsTotal != 0 {
 		t.Errorf("FindingsTotal = %d, want 0", result.FindingsTotal)
 	}
-	if len(result.ToolNames) != 1 || result.ToolNames[0] != "semgrep" {
-		t.Errorf("ToolNames = %v, want [semgrep] even with empty results", result.ToolNames)
+	if len(result.Tools) != 1 || result.Tools[0].Name != "semgrep" {
+		t.Errorf("Tools = %v, want [{semgrep 1.0}] even with empty results", result.Tools)
 	}
 }
 
@@ -406,8 +423,8 @@ func TestIngestMultipleLocationsPerResult(t *testing.T) {
 func TestIngestNestedFunctionRanges(t *testing.T) {
 	// Outer function spans lines 1-100, inner function spans lines 40-60
 	// Finding at line 50 should link to the inner (tighter) function
-	outerID := parser.NodeID(graph.NodeFunction, "outer", "nested.go", 1, 0)
-	innerID := parser.NodeID(graph.NodeFunction, "inner", "nested.go", 40, 0)
+	outerID := graph.NodeID(graph.NodeFunction, "outer", "nested.go", 1, 0)
+	innerID := graph.NodeID(graph.NodeFunction, "inner", "nested.go", 40, 0)
 	outer := &graph.Node{ID: outerID, Kind: graph.NodeFunction, Name: "outer", File: "nested.go", Line: 1, EndLine: 100}
 	inner := &graph.Node{ID: innerID, Kind: graph.NodeFunction, Name: "inner", File: "nested.go", Line: 40, EndLine: 60}
 	cpg := makeCPGWithNodes(t, outer, inner)
@@ -449,9 +466,78 @@ func TestIngestNestedFunctionRanges(t *testing.T) {
 	}
 }
 
+func TestIngestNestedWithIntermediateNonEnclosing(t *testing.T) {
+	// Regression test: functions [A(1-100), B(10-20), C(40-60)], finding at line 50.
+	// B does not contain line 50 but sits between A and C in StartLine order.
+	// The backward walk must not break early when hitting B.
+	outerID := graph.NodeID(graph.NodeFunction, "outer", "mixed.go", 1, 0)
+	middleID := graph.NodeID(graph.NodeFunction, "middle", "mixed.go", 10, 0)
+	innerID := graph.NodeID(graph.NodeFunction, "inner", "mixed.go", 40, 0)
+	outer := &graph.Node{ID: outerID, Kind: graph.NodeFunction, Name: "outer", File: "mixed.go", Line: 1, EndLine: 100}
+	middle := &graph.Node{ID: middleID, Kind: graph.NodeFunction, Name: "middle", File: "mixed.go", Line: 10, EndLine: 20}
+	inner := &graph.Node{ID: innerID, Kind: graph.NodeFunction, Name: "inner", File: "mixed.go", Line: 40, EndLine: 60}
+	cpg := makeCPGWithNodes(t, outer, middle, inner)
+
+	report := makeReport("scanner", "1.0",
+		makeResult("R1", "warning", "issue", "mixed.go", 50),
+	)
+
+	result, err := sarif.Ingest(cpg, report, "")
+	if err != nil {
+		t.Fatalf("Ingest error: %v", err)
+	}
+	if result.FindingsLinked != 1 {
+		t.Fatalf("FindingsLinked = %d, want 1", result.FindingsLinked)
+	}
+
+	// Should link to inner (tightest span), not outer
+	innerEdges := cpg.OutEdges(innerID)
+	foundInner := false
+	for _, e := range innerEdges {
+		if e.Kind == graph.EdgeReportedBy {
+			foundInner = true
+		}
+	}
+	if !foundInner {
+		t.Error("expected REPORTED_BY edge from inner function (tightest range)")
+	}
+}
+
+func TestIngestOuterOnlyWithIntermediateGap(t *testing.T) {
+	// Without the inner function, outer should still be found despite middle not enclosing.
+	outerID := graph.NodeID(graph.NodeFunction, "outer", "gap.go", 1, 0)
+	middleID := graph.NodeID(graph.NodeFunction, "middle", "gap.go", 10, 0)
+	outer := &graph.Node{ID: outerID, Kind: graph.NodeFunction, Name: "outer", File: "gap.go", Line: 1, EndLine: 100}
+	middle := &graph.Node{ID: middleID, Kind: graph.NodeFunction, Name: "middle", File: "gap.go", Line: 10, EndLine: 20}
+	cpg := makeCPGWithNodes(t, outer, middle)
+
+	report := makeReport("scanner", "1.0",
+		makeResult("R1", "warning", "issue", "gap.go", 50),
+	)
+
+	result, err := sarif.Ingest(cpg, report, "")
+	if err != nil {
+		t.Fatalf("Ingest error: %v", err)
+	}
+	if result.FindingsLinked != 1 {
+		t.Fatalf("FindingsLinked = %d, want 1 (outer function contains line 50)", result.FindingsLinked)
+	}
+
+	outerEdges := cpg.OutEdges(outerID)
+	found := false
+	for _, e := range outerEdges {
+		if e.Kind == graph.EdgeReportedBy {
+			found = true
+		}
+	}
+	if !found {
+		t.Error("expected REPORTED_BY edge from outer function")
+	}
+}
+
 func TestIngestFindingOutsideFunctionRange(t *testing.T) {
 	// Function spans lines 10-50, finding at line 60 (outside range)
-	fnID := parser.NodeID(graph.NodeFunction, "handler", "out.go", 10, 0)
+	fnID := graph.NodeID(graph.NodeFunction, "handler", "out.go", 10, 0)
 	fn := &graph.Node{ID: fnID, Kind: graph.NodeFunction, Name: "handler", File: "out.go", Line: 10, EndLine: 50}
 	cpg := makeCPGWithNodes(t, fn)
 
@@ -474,8 +560,8 @@ func TestIngestFindingOutsideFunctionRange(t *testing.T) {
 func TestIngestDeterministicMatching(t *testing.T) {
 	// Two nodes at the same file+line (e.g., function and parameter)
 	// Should deterministically pick the same one every time (sorted by ID)
-	id1 := parser.NodeID(graph.NodeFunction, "handler", "det.go", 10, 0)
-	id2 := parser.NodeID(graph.NodeParameter, "req", "det.go", 10, 5)
+	id1 := graph.NodeID(graph.NodeFunction, "handler", "det.go", 10, 0)
+	id2 := graph.NodeID(graph.NodeParameter, "req", "det.go", 10, 5)
 	n1 := &graph.Node{ID: id1, Kind: graph.NodeFunction, Name: "handler", File: "det.go", Line: 10}
 	n2 := &graph.Node{ID: id2, Kind: graph.NodeParameter, Name: "req", File: "det.go", Line: 10}
 	cpg := makeCPGWithNodes(t, n1, n2)
@@ -566,8 +652,8 @@ func TestIngestEmptyLevel(t *testing.T) {
 		t.Errorf("NodesCreated = %d, want 1 (empty level is valid)", result.NodesCreated)
 	}
 	findings := cpg.NodesByKind(graph.NodeExternalFinding)
-	if findings[0].Severity != "" {
-		t.Errorf("Severity = %q, want empty", findings[0].Severity)
+	if findings[0].Severity != "informational" {
+		t.Errorf("Severity = %q, want informational (normalized from empty)", findings[0].Severity)
 	}
 }
 
@@ -618,9 +704,11 @@ func TestNormalizePathEdgeCases(t *testing.T) {
 		{"deeply nested", "a/b/c/d/e/f.go", "", "a/b/c/d/e/f.go"},
 		{"trailing slash", "pkg/foo/", "", "pkg/foo"},
 		{"dot only", ".", "", "."},
-		{"multiple parent refs", "a/b/../../c.go", "", "c.go"},
+		{"multiple parent refs resolving within repo", "a/b/../../c.go", "", "c.go"},
+		{"traversal escaping repo", "../../etc/passwd", "", "passwd"},
+		{"traversal with prefix", "pkg/../../etc/shadow", "", "shadow"},
 		{"encoded special chars", "pkg/%E4%B8%AD%E6%96%87.go", "", "pkg/\u4e2d\u6587.go"},
-		{"absolute path no repo root", "/absolute/path/file.go", "", "/absolute/path/file.go"},
+		{"absolute path no repo root", "/absolute/path/file.go", "", "file.go"},
 		{"absolute path with repo root", "/repo/root/pkg/file.go", "/repo/root", "pkg/file.go"},
 		{"file URI with spaces", "file:///home/user/my%20project/file.go", "/home/user/my project", "file.go"},
 	}
@@ -631,5 +719,65 @@ func TestNormalizePathEdgeCases(t *testing.T) {
 				t.Errorf("NormalizePath(%q, %q) = %q, want %q", tt.uri, tt.repoRoot, got, tt.want)
 			}
 		})
+	}
+}
+
+func TestIngestTruncatesOnRuneBoundary(t *testing.T) {
+	cpg := graph.NewCPG()
+
+	// Message with multi-byte runes: each CJK character is 3 bytes.
+	// A byte-level truncation at 4096 could split a rune; rune-level truncation should not.
+	longMsg := ""
+	for i := 0; i < 5000; i++ {
+		longMsg += "\u4e2d" // CJK character (3 bytes each)
+	}
+	report := makeReport("scanner", "1.0", sarif.Result{
+		RuleID:  "R1",
+		Level:   "warning",
+		Message: sarif.Message{Text: longMsg},
+		Locations: []sarif.Location{{
+			PhysicalLocation: sarif.PhysicalLocation{
+				ArtifactLocation: sarif.ArtifactLocation{URI: "a.go"},
+				Region:           sarif.Region{StartLine: 1, StartColumn: 1},
+			},
+		}},
+	})
+
+	result, err := sarif.Ingest(cpg, report, "")
+	if err != nil {
+		t.Fatalf("Ingest error: %v", err)
+	}
+	if result.NodesCreated != 1 {
+		t.Fatalf("NodesCreated = %d, want 1", result.NodesCreated)
+	}
+
+	findings := cpg.NodesByKind(graph.NodeExternalFinding)
+	msg := findings[0].Message
+	runes := []rune(msg)
+	if len(runes) != 4096 {
+		t.Errorf("message rune count = %d, want 4096 (truncated at rune boundary)", len(runes))
+	}
+}
+
+func TestIngestAnnotationSanitization(t *testing.T) {
+	// Tool names with special characters should be sanitized in annotation keys
+	fnID := graph.NodeID(graph.NodeFunction, "handler", "a.go", 10, 0)
+	fn := &graph.Node{ID: fnID, Kind: graph.NodeFunction, Name: "handler", File: "a.go", Line: 10}
+	cpg := makeCPGWithNodes(t, fn)
+
+	report := makeReport("my.tool/v2", "1.0",
+		makeResult("go.lang.security.audit.xss", "error", "XSS", "a.go", 10),
+	)
+
+	_, err := sarif.Ingest(cpg, report, "")
+	if err != nil {
+		t.Fatalf("Ingest error: %v", err)
+	}
+
+	node := cpg.GetNode(fnID)
+	// Dots and slashes should be replaced with underscores
+	expectedKey := "sarif:my_tool_v2:go_lang_security_audit_xss"
+	if node.Annotations == nil || !node.Annotations[expectedKey] {
+		t.Errorf("expected annotation %q, got %v", expectedKey, node.Annotations)
 	}
 }

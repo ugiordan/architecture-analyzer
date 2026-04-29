@@ -13,6 +13,8 @@ type Finding struct {
 	Path            []string `json:"path,omitempty"`
 	Domain          string   `json:"domain,omitempty"`
 	ArchitectureRef string   `json:"architecture_ref,omitempty"`
+	ToolName        string   `json:"tool_name,omitempty"`
+	ToolVersion     string   `json:"tool_version,omitempty"`
 }
 
 // Rule is a named query that can detect patterns in the annotated graph.

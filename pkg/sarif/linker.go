@@ -5,12 +5,50 @@ import (
 	"net/url"
 	"path"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
-	"github.com/ugiordan/architecture-analyzer/pkg/parser"
 )
+
+var sarifAnnotationSanitizer = regexp.MustCompile(`[^a-zA-Z0-9_-]`)
+
+// sanitizeAnnotationKey replaces characters outside [a-zA-Z0-9_-] with underscores.
+func sanitizeAnnotationKey(s string) string {
+	return sarifAnnotationSanitizer.ReplaceAllString(s, "_")
+}
+
+// DefaultMaxResults is the maximum number of SARIF results to ingest.
+// Prevents memory exhaustion from crafted SARIF files within the 100MB size budget.
+const DefaultMaxResults = 100_000
+
+// maxFieldLen defines truncation limits for untrusted SARIF string fields.
+var maxFieldLen = struct {
+	Message     int
+	RuleID      int
+	ToolName    int
+	ToolVersion int
+}{
+	Message:     4096,
+	RuleID:      256,
+	ToolName:    128,
+	ToolVersion: 64,
+}
+
+func truncate(s string, max int) string {
+	runes := []rune(s)
+	if len(runes) <= max {
+		return s
+	}
+	return string(runes[:max])
+}
+
+// ToolInfo pairs a tool name with its version.
+type ToolInfo struct {
+	Name    string
+	Version string
+}
 
 // IngestResult holds statistics from a SARIF ingestion.
 type IngestResult struct {
@@ -19,17 +57,16 @@ type IngestResult struct {
 	FindingsUnlinked int
 	NodesCreated     int
 	EdgesCreated     int
-	ToolNames        []string
-	ToolVersions     []string
+	Tools            []ToolInfo
 }
 
 // ToolSummary returns a human-readable summary of tools, e.g. "semgrep v1.56.0, codeql v2.16.0".
 func (r *IngestResult) ToolSummary() string {
 	var parts []string
-	for i, name := range r.ToolNames {
-		s := name
-		if i < len(r.ToolVersions) && r.ToolVersions[i] != "" {
-			s += " v" + r.ToolVersions[i]
+	for _, t := range r.Tools {
+		s := t.Name
+		if t.Version != "" {
+			s += " v" + t.Version
 		}
 		parts = append(parts, s)
 	}
@@ -66,65 +103,95 @@ func Ingest(cpg *graph.CPG, report *Report, repoRoot string) (*IngestResult, err
 			funcIndex[n.File] = append(funcIndex[n.File], funcRange{Node: n, EndLine: n.EndLine})
 		}
 	}
-
-	ruleMap := make(map[string]map[string]Rule)
-	for _, run := range report.Runs {
-		toolName := run.Tool.Driver.Name
-		if ruleMap[toolName] == nil {
-			ruleMap[toolName] = make(map[string]Rule)
-		}
-		for _, rule := range run.Tool.Driver.Rules {
-			ruleMap[toolName][rule.ID] = rule
-		}
+	// PERF-002: Sort per-file function ranges by StartLine for binary search
+	for file, funcs := range funcIndex {
+		sort.Slice(funcs, func(i, j int) bool { return funcs[i].Node.Line < funcs[j].Node.Line })
+		funcIndex[file] = funcs
 	}
 
+	totalResults := 0
+
 	for _, run := range report.Runs {
-		toolName := run.Tool.Driver.Name
-		toolVersion := run.Tool.Driver.Version
-		result.ToolNames = append(result.ToolNames, toolName)
-		result.ToolVersions = append(result.ToolVersions, toolVersion)
+		toolName := truncate(run.Tool.Driver.Name, maxFieldLen.ToolName)
+		toolVersion := truncate(run.Tool.Driver.Version, maxFieldLen.ToolVersion)
+		result.Tools = append(result.Tools, ToolInfo{Name: toolName, Version: toolVersion})
+
+		// CORR-003: Build rule map per-run to avoid cross-run metadata contamination
+		rules := make(map[string]Rule)
+		for _, rule := range run.Tool.Driver.Rules {
+			rules[rule.ID] = rule
+		}
+
+		// PERF-003: Cache annotation keys and edge labels per (toolName, ruleID) pair
+		annotationCache := make(map[string]string)
+		labelCache := make(map[string]string)
 
 		for _, r := range run.Results {
 			if len(r.Locations) == 0 {
 				continue
 			}
 
-			for _, loc := range r.Locations {
-				result.FindingsTotal++
+			// SEC-002: Enforce maximum result count at result level.
+			// Check before iterating locations so multi-location results
+			// are either fully ingested or fully rejected.
+			if totalResults+len(r.Locations) > DefaultMaxResults {
+				return result, fmt.Errorf("SARIF result count exceeds limit of %d", DefaultMaxResults)
+			}
 
+			for _, loc := range r.Locations {
 				file := NormalizePath(loc.PhysicalLocation.ArtifactLocation.URI, repoRoot)
 				line := loc.PhysicalLocation.Region.StartLine
 				col := loc.PhysicalLocation.Region.StartColumn
 
 				var cwes []string
-				if rules, ok := ruleMap[toolName]; ok {
-					if rule, ok := rules[r.RuleID]; ok {
-						cwes = ExtractCWEs(rule.Properties.Tags)
-					}
+				if rule, ok := rules[r.RuleID]; ok {
+					cwes = ExtractCWEs(rule.Properties.Tags)
 				}
 
-				idInput := fmt.Sprintf("%s/%s", toolName, r.RuleID)
-				nodeID := parser.NodeID(graph.NodeExternalFinding, idInput, file, line, col)
+				// SEC-003: Truncate untrusted string fields
+				ruleID := truncate(r.RuleID, maxFieldLen.RuleID)
+				message := truncate(r.Message.Text, maxFieldLen.Message)
+
+				idInput := toolName + "/" + ruleID
+				nodeID := graph.NodeID(graph.NodeExternalFinding, idInput, file, line, col)
 
 				efNode := &graph.Node{
 					ID:          nodeID,
 					Kind:        graph.NodeExternalFinding,
-					Name:        r.RuleID,
+					Name:        ruleID,
 					File:        file,
 					Line:        line,
 					Column:      col,
-					RuleID:      r.RuleID,
-					Severity:    r.Level,
-					Message:     r.Message.Text,
+					RuleID:      ruleID,
+					Severity:    NormalizedSeverity(r.Level),
+					Message:     message,
 					ToolName:    toolName,
 					ToolVersion: toolVersion,
 					CWEs:        cwes,
 				}
 
 				if err := cpg.AddNode(efNode); err != nil {
+					// Duplicate node (idempotent re-ingestion), skip without counting
 					continue
 				}
+				result.FindingsTotal++
 				result.NodesCreated++
+				totalResults++
+
+				// PERF-003: Use cached annotation key and edge label
+				cacheKey := ruleID
+				annotationKey, ok := annotationCache[cacheKey]
+				if !ok {
+					annotationKey = fmt.Sprintf("sarif:%s:%s",
+						sanitizeAnnotationKey(toolName),
+						sanitizeAnnotationKey(ruleID))
+					annotationCache[cacheKey] = annotationKey
+				}
+				edgeLabel, ok := labelCache[cacheKey]
+				if !ok {
+					edgeLabel = toolName + ":" + ruleID
+					labelCache[cacheKey] = edgeLabel
+				}
 
 				k := fileLineKey{File: file, Line: line}
 				if targets, ok := exactIndex[k]; ok && len(targets) > 0 {
@@ -132,9 +199,10 @@ func Ingest(cpg *graph.CPG, report *Report, repoRoot string) (*IngestResult, err
 						From:       targets[0].ID,
 						To:         nodeID,
 						Kind:       graph.EdgeReportedBy,
-						Label:      fmt.Sprintf("%s:%s", toolName, r.RuleID),
+						Label:      edgeLabel,
 						Confidence: graph.ConfidenceCertain,
 					})
+					cpg.SetAnnotation(targets[0].ID, annotationKey, true)
 					result.EdgesCreated++
 					result.FindingsLinked++
 					continue
@@ -142,9 +210,16 @@ func Ingest(cpg *graph.CPG, report *Report, repoRoot string) (*IngestResult, err
 
 				linked := false
 				if funcs, ok := funcIndex[file]; ok {
+					// PERF-002: Binary search for the rightmost function with StartLine <= line
+					idx := sort.Search(len(funcs), func(i int) bool {
+						return funcs[i].Node.Line > line
+					})
+					// idx is the first function with StartLine > line
+					// Walk backward to find enclosing functions and pick the tightest span
 					var bestFunc *graph.Node
 					bestSpan := int(^uint(0) >> 1)
-					for _, fr := range funcs {
+					for i := idx - 1; i >= 0; i-- {
+						fr := funcs[i]
 						if fr.Node.Line <= line && line <= fr.EndLine {
 							span := fr.EndLine - fr.Node.Line
 							if span < bestSpan {
@@ -158,9 +233,10 @@ func Ingest(cpg *graph.CPG, report *Report, repoRoot string) (*IngestResult, err
 							From:       bestFunc.ID,
 							To:         nodeID,
 							Kind:       graph.EdgeReportedBy,
-							Label:      fmt.Sprintf("%s:%s", toolName, r.RuleID),
+							Label:      edgeLabel,
 							Confidence: graph.ConfidenceInferred,
 						})
+						cpg.SetAnnotation(bestFunc.ID, annotationKey, true)
 						result.EdgesCreated++
 						result.FindingsLinked++
 						linked = true
@@ -197,6 +273,17 @@ func NormalizePath(uri string, repoRoot string) string {
 	decoded = strings.TrimPrefix(decoded, "./")
 	decoded = filepath.ToSlash(decoded)
 	decoded = path.Clean(decoded)
+
+	// Reject paths that escape the repository root via parent directory traversal.
+	if !filepath.IsAbs(decoded) && strings.HasPrefix(decoded, "..") {
+		return filepath.Base(decoded)
+	}
+
+	// SEC-001: Strip absolute paths to base name when no repoRoot is set,
+	// preventing arbitrary filesystem paths from persisting in CPG nodes.
+	if filepath.IsAbs(decoded) && repoRoot == "" {
+		return filepath.Base(decoded)
+	}
 
 	return decoded
 }
