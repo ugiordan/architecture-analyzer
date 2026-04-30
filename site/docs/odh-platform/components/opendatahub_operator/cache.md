@@ -20,6 +20,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 | appsv1.Deployment | namespace | namespace-scoped |
 | corev1.ConfigMap | namespace | namespace-scoped |
 | corev1.Secret | namespace | namespace-scoped |
+| extv1.CustomResourceDefinition | label | label selector |
 | networkingv1.NetworkPolicy | namespace | namespace-scoped |
 | rbacv1.ClusterRole | label | label selector |
 | rbacv1.ClusterRoleBinding | label | label selector |
