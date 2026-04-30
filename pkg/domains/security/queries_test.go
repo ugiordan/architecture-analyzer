@@ -1,6 +1,7 @@
 package security
 
 import (
+	"encoding/json"
 	"strings"
 	"testing"
 
@@ -196,11 +197,11 @@ func TestQueryWeakSerialEntropy(t *testing.T) {
 
 func TestSecurityQueriesReturnsAllRules(t *testing.T) {
 	rules := securityQueries()
-	if len(rules) != 9 {
-		t.Fatalf("expected 9 rules, got %d", len(rules))
+	if len(rules) != 12 {
+		t.Fatalf("expected 12 rules, got %d", len(rules))
 	}
 
-	expectedRuleIDs := []string{"CGA-003", "CGA-004", "CGA-005", "CGA-006", "CGA-007", "CGA-008", "CGA-009", "CGA-010", "CGA-011"}
+	expectedRuleIDs := []string{"CGA-003", "CGA-004", "CGA-005", "CGA-006", "CGA-007", "CGA-008", "CGA-009", "CGA-010", "CGA-011", "CGA-012", "CGA-013", "CGA-014"}
 	for i, rule := range rules {
 		if rule.ID != expectedRuleIDs[i] {
 			t.Errorf("rule %d: expected ID %s, got %s", i, expectedRuleIDs[i], rule.ID)
@@ -430,6 +431,470 @@ func TestQueryUntrustedEndpoint(t *testing.T) {
 	}
 }
 
+// Cross-domain query tests (CGA-012, CGA-013, CGA-014)
+
+func TestQueryUnprotectedIngress_NoArchData(t *testing.T) {
+	g := graph.NewCPG()
+	ep := &graph.Node{
+		ID: "ep1", Kind: graph.NodeHTTPEndpoint, Name: "publicAPI",
+		File: "api.go", Line: 10, TrustLevel: graph.TrustUntrusted,
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ep); err != nil { t.Fatal(err) }
+
+	findings := queryUnprotectedIngress(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings without arch data, got %d", len(findings))
+	}
+}
+
+func TestQueryUnprotectedIngress_NoNetworkPolicy(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	ep := &graph.Node{
+		ID: "ep1", Kind: graph.NodeHTTPEndpoint, Name: "publicAPI",
+		File: "api.go", Line: 10, TrustLevel: graph.TrustUntrusted,
+		HTTPMethod: "POST", Route: "/api/v1/predict",
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ep); err != nil { t.Fatal(err) }
+
+	findings := queryUnprotectedIngress(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding, got %d", len(findings))
+	}
+	if findings[0].RuleID != "CGA-012" {
+		t.Errorf("expected CGA-012, got %s", findings[0].RuleID)
+	}
+	if !strings.Contains(findings[0].ArchitectureRef, "none defined") {
+		t.Errorf("expected 'none defined' in ArchitectureRef, got %q", findings[0].ArchitectureRef)
+	}
+}
+
+func TestQueryUnprotectedIngress_WithNetworkPolicy(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		NetworkPolicies: []arch.NetworkPolicy{
+			{
+				Name:         "allow-ingress",
+				PolicyTypes:  []string{"Ingress"},
+				IngressRules: []json.RawMessage{[]byte(`{"from": []}`)},
+			},
+		},
+	}
+
+	ep := &graph.Node{
+		ID: "ep1", Kind: graph.NodeHTTPEndpoint, Name: "publicAPI",
+		File: "api.go", Line: 10, TrustLevel: graph.TrustUntrusted,
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ep); err != nil { t.Fatal(err) }
+
+	findings := queryUnprotectedIngress(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings with ingress policy, got %d", len(findings))
+	}
+}
+
+func TestQueryUnprotectedIngress_SkipsTrustedEndpoints(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	ep := &graph.Node{
+		ID: "ep1", Kind: graph.NodeHTTPEndpoint, Name: "healthz",
+		File: "api.go", Line: 10, TrustLevel: graph.TrustTrusted,
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ep); err != nil { t.Fatal(err) }
+
+	findings := queryUnprotectedIngress(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings for trusted endpoint, got %d", len(findings))
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_NoArchData(t *testing.T) {
+	g := graph.NewCPG()
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings without arch data, got %d", len(findings))
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_WildcardVerbs(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		RBAC: arch.RBAC{
+			ClusterRoles: []arch.ClusterRole{
+				{
+					Name: "controller-role",
+					Rules: []arch.RBACRule{
+						{Resources: []string{"secrets"}, Verbs: []string{"*"}},
+					},
+				},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding, got %d", len(findings))
+	}
+	if findings[0].RuleID != "CGA-013" {
+		t.Errorf("expected CGA-013, got %s", findings[0].RuleID)
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_ScopedVerbs(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		RBAC: arch.RBAC{
+			ClusterRoles: []arch.ClusterRole{
+				{
+					Name: "controller-role",
+					Rules: []arch.RBACRule{
+						{Resources: []string{"secrets"}, Verbs: []string{"get", "list", "watch"}},
+					},
+				},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings with scoped verbs, got %d", len(findings))
+	}
+}
+
+func TestQueryUncontrolledEgress_NoArchData(t *testing.T) {
+	g := graph.NewCPG()
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "callAPI",
+		File: "client.go", Line: 10,
+		Annotations: map[string]bool{AnnotCallsExternal: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryUncontrolledEgress(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings without arch data, got %d", len(findings))
+	}
+}
+
+func TestQueryUncontrolledEgress_NoEgressPolicy(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "callAPI",
+		File: "client.go", Line: 10,
+		Annotations: map[string]bool{AnnotCallsExternal: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryUncontrolledEgress(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding, got %d", len(findings))
+	}
+	if findings[0].RuleID != "CGA-014" {
+		t.Errorf("expected CGA-014, got %s", findings[0].RuleID)
+	}
+}
+
+func TestQueryUncontrolledEgress_WithEgressPolicy(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		NetworkPolicies: []arch.NetworkPolicy{
+			{
+				Name:        "restrict-egress",
+				PolicyTypes: []string{"Egress"},
+				EgressRules: []json.RawMessage{[]byte(`{"to": []}`)},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "callAPI",
+		File: "client.go", Line: 10,
+		Annotations: map[string]bool{AnnotCallsExternal: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryUncontrolledEgress(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings with egress policy, got %d", len(findings))
+	}
+}
+
+func TestQueryUncontrolledEgress_ExternalCallNodes(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	ec := &graph.Node{
+		ID: "ec1", Kind: graph.NodeExternalCall, Name: "sql.Open",
+		File: "db.go", Line: 15,
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ec); err != nil { t.Fatal(err) }
+
+	findings := queryUncontrolledEgress(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding for ExternalCall node, got %d", len(findings))
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_WildcardResource(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		RBAC: arch.RBAC{
+			ClusterRoles: []arch.ClusterRole{
+				{
+					Name: "admin-role",
+					Rules: []arch.RBACRule{
+						{APIGroups: []string{""}, Resources: []string{"*"}, Verbs: []string{"*"}},
+					},
+				},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding for wildcard resource, got %d", len(findings))
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_NonCoreAPIGroup(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		RBAC: arch.RBAC{
+			ClusterRoles: []arch.ClusterRole{
+				{
+					Name: "custom-role",
+					Rules: []arch.RBACRule{
+						{APIGroups: []string{"apps"}, Resources: []string{"secrets"}, Verbs: []string{"*"}},
+					},
+				},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings for non-core API group, got %d", len(findings))
+	}
+}
+
+func TestQueryUnprotectedIngress_EmptyPolicyTypes(t *testing.T) {
+	g := graph.NewCPG()
+	// Per K8s spec, empty PolicyTypes with ingress rules defaults to Ingress.
+	g.ArchData = &arch.Data{
+		NetworkPolicies: []arch.NetworkPolicy{
+			{
+				Name:         "legacy-policy",
+				PolicyTypes:  []string{},
+				IngressRules: []json.RawMessage{[]byte(`{"from": []}`)},
+			},
+		},
+	}
+
+	ep := &graph.Node{
+		ID: "ep1", Kind: graph.NodeHTTPEndpoint, Name: "publicAPI",
+		File: "api.go", Line: 10, TrustLevel: graph.TrustUntrusted,
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ep); err != nil { t.Fatal(err) }
+
+	findings := queryUnprotectedIngress(g)
+	if len(findings) != 0 {
+		t.Errorf("expected 0 findings when empty PolicyTypes has ingress rules (K8s default), got %d", len(findings))
+	}
+}
+
+func TestQueryUncontrolledEgress_DedupAnnotationAndExternalCall(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	// Function with calls_external annotation
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "callAPI",
+		File: "client.go", Line: 10,
+		Annotations: map[string]bool{AnnotCallsExternal: true},
+	}
+	// ExternalCall node with same file+name (should be deduped)
+	ec := &graph.Node{
+		ID: "ec1", Kind: graph.NodeExternalCall, Name: "callAPI",
+		File: "client.go", Line: 12,
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+	if err := g.AddNode(ec); err != nil { t.Fatal(err) }
+
+	findings := queryUncontrolledEgress(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding (deduped), got %d", len(findings))
+	}
+	if findings[0].NodeID != "fn1" {
+		t.Errorf("expected finding from function annotation, got node %s", findings[0].NodeID)
+	}
+}
+
+func TestQueryUncontrolledEgress_DifferentExternalCalls(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	ec1 := &graph.Node{
+		ID: "ec1", Kind: graph.NodeExternalCall, Name: "sql.Open",
+		File: "db.go", Line: 15, Annotations: make(map[string]bool),
+	}
+	ec2 := &graph.Node{
+		ID: "ec2", Kind: graph.NodeExternalCall, Name: "http.Get",
+		File: "api.go", Line: 20, Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ec1); err != nil { t.Fatal(err) }
+	if err := g.AddNode(ec2); err != nil { t.Fatal(err) }
+
+	findings := queryUncontrolledEgress(g)
+	if len(findings) != 2 {
+		t.Fatalf("expected 2 findings for different external calls, got %d", len(findings))
+	}
+}
+
+func TestQueryUnprotectedIngress_MultipleUntrustedEndpoints(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{NetworkPolicies: []arch.NetworkPolicy{}}
+
+	ep1 := &graph.Node{
+		ID: "ep1", Kind: graph.NodeHTTPEndpoint, Name: "predict",
+		File: "api.go", Line: 10, TrustLevel: graph.TrustUntrusted,
+		HTTPMethod: "POST", Route: "/api/v1/predict",
+		Annotations: make(map[string]bool),
+	}
+	ep2 := &graph.Node{
+		ID: "ep2", Kind: graph.NodeHTTPEndpoint, Name: "upload",
+		File: "api.go", Line: 20, TrustLevel: graph.TrustUntrusted,
+		HTTPMethod: "POST", Route: "/api/v1/upload",
+		Annotations: make(map[string]bool),
+	}
+	if err := g.AddNode(ep1); err != nil { t.Fatal(err) }
+	if err := g.AddNode(ep2); err != nil { t.Fatal(err) }
+
+	findings := queryUnprotectedIngress(g)
+	if len(findings) != 2 {
+		t.Fatalf("expected 2 findings for 2 untrusted endpoints, got %d", len(findings))
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_EmptyAPIGroups(t *testing.T) {
+	// Empty APIGroups list implies core group per K8s convention
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		RBAC: arch.RBAC{
+			ClusterRoles: []arch.ClusterRole{
+				{
+					Name: "legacy-role",
+					Rules: []arch.RBACRule{
+						{Resources: []string{"secrets"}, Verbs: []string{"*"}},
+					},
+				},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding for empty APIGroups (implies core), got %d", len(findings))
+	}
+}
+
+func TestQueryOverprivilegedSecretAccess_WildcardAPIGroup(t *testing.T) {
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		RBAC: arch.RBAC{
+			ClusterRoles: []arch.ClusterRole{
+				{
+					Name: "super-admin",
+					Rules: []arch.RBACRule{
+						{APIGroups: []string{"*"}, Resources: []string{"secrets"}, Verbs: []string{"*"}},
+					},
+				},
+			},
+		},
+	}
+
+	fn := &graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "readSecret",
+		File: "secret.go", Line: 10,
+		Annotations: map[string]bool{AnnotAccessesSecret: true},
+	}
+	if err := g.AddNode(fn); err != nil { t.Fatal(err) }
+
+	findings := queryOverprivilegedSecretAccess(g)
+	if len(findings) != 1 {
+		t.Fatalf("expected 1 finding for wildcard APIGroup, got %d", len(findings))
+	}
+}
+
+func TestHasEgressNetworkPolicy_EmptyPolicyTypes(t *testing.T) {
+	// Unlike ingress, empty PolicyTypes does NOT default to Egress
+	g := graph.NewCPG()
+	g.ArchData = &arch.Data{
+		NetworkPolicies: []arch.NetworkPolicy{
+			{
+				Name:        "legacy",
+				PolicyTypes: []string{},
+				EgressRules: []json.RawMessage{[]byte(`{"to": []}`)},
+			},
+		},
+	}
+	if hasEgressNetworkPolicy(g) {
+		t.Error("empty PolicyTypes should NOT match egress (K8s defaults to Ingress only)")
+	}
+}
+
 func TestAllAnnotationsHaveSecurityPrefix(t *testing.T) {
 	annotations := []string{
 		AnnotCreatesRBAC, AnnotHandlesAdmission, AnnotGeneratesCert,
@@ -439,6 +904,7 @@ func TestAllAnnotationsHaveSecurityPrefix(t *testing.T) {
 		AnnotSubprocessCall, AnnotFileAccess, AnnotTemplateRender,
 		AnnotRendersHTML, AnnotEvalUsage, AnnotRedirect,
 		AnnotUnsafeBlock, AnnotFFICall, AnnotCommandExecution,
+		AnnotCallsExternal,
 	}
 	for _, ann := range annotations {
 		if !strings.HasPrefix(ann, SecurityAnnotationPrefix) {

@@ -33,4 +33,7 @@ const (
 	AnnotUnsafeBlock      = "sec:unsafe_block"
 	AnnotFFICall          = "sec:ffi_call"
 	AnnotCommandExecution = "sec:command_execution"
+
+	// Cross-domain annotations
+	AnnotCallsExternal = "sec:calls_external"
 )

@@ -3,6 +3,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -119,6 +120,8 @@ func main() {
 		err = cmdDomains()
 	case "docs":
 		err = cmdDocs(args)
+	case "discover":
+		err = cmdDiscover(args)
 	case "full-analysis":
 		err = cmdFullAnalysis(args)
 	case "version":
@@ -168,6 +171,11 @@ Code graph commands:
   ingest <sarif-file>                  Ingest external scanner SARIF findings
                                        [--graph code-graph.json] [--output file]
   domains                              List registered analysis domains
+
+Platform commands:
+  discover <operator-repo-path>        Discover platform components from kustomize manifests
+                                       [--output file] [--format json|text|map]
+                                       [--org org] [--platform name]
 
 Combined:
   full-analysis <repo-path>            Run architecture extraction + code graph scan
@@ -921,6 +929,76 @@ func formatDiffText(d *diff.GraphDiff) string {
 	}
 
 	return b.String()
+}
+
+// cmdDiscover discovers platform components from an operator repo's kustomize manifests.
+func cmdDiscover(args []string) error {
+	fs := flag.NewFlagSet("discover", flag.ExitOnError)
+	output := fs.String("output", "", "Output file (default: stdout)")
+	format := fs.String("format", "text", "Output format: text, json, map")
+	org := fs.String("org", "", "GitHub organization for repo URLs")
+	platform := fs.String("platform", "", "Platform name (e.g. rhoai, odh)")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: arch-analyzer discover <operator-repo-path> [--output file] [--format text|json|map] [--org org] [--platform name]")
+	}
+
+	repoPath := fs.Arg(0)
+	discovery, err := extractor.DiscoverPlatformComponents(repoPath)
+	if err != nil {
+		return err
+	}
+
+	orgName := *org
+	if orgName == "" {
+		// Auto-detect from the repo
+		orgName = detectOrgFromRepo(repoPath)
+	}
+
+	switch *format {
+	case "text":
+		fmt.Print(discovery.FormatSummary())
+		return nil
+	case "json":
+		return outputJSON(*output, discovery)
+	case "map":
+		cm := extractor.BuildComponentMap(discovery, orgName)
+		if *platform != "" {
+			cm.Platform = *platform
+		}
+		return outputJSON(*output, cm)
+	default:
+		return fmt.Errorf("unknown format: %s", *format)
+	}
+}
+
+// detectOrgFromRepo tries to detect the GitHub org from a repo path.
+func detectOrgFromRepo(repoPath string) string {
+	absPath, err := filepath.Abs(repoPath)
+	if err != nil {
+		return ""
+	}
+	opts := &extractor.ExtractOptions{}
+	// Use the same detection logic as extract
+	_ = opts
+	// Simple: check go.mod
+	goModPath := filepath.Join(absPath, "go.mod")
+	if f, err := os.Open(goModPath); err == nil {
+		defer f.Close()
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			line := strings.TrimSpace(scanner.Text())
+			if strings.HasPrefix(line, "module ") {
+				module := strings.TrimPrefix(line, "module ")
+				parts := strings.Split(strings.TrimSpace(module), "/")
+				if len(parts) >= 2 && parts[0] == "github.com" {
+					return parts[1]
+				}
+			}
+		}
+	}
+	return ""
 }
 
 // cmdFullAnalysis runs architecture extraction + code graph scan.

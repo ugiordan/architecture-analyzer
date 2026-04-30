@@ -41,6 +41,7 @@ type ComponentArchitecture struct {
 	ExternalConnections []ExternalConnection `json:"external_connections,omitempty"`
 	FeatureGates        []FeatureGate        `json:"feature_gates,omitempty"`
 	CacheConfig         *CacheConfig       `json:"cache_config,omitempty"`
+	KustomizeComponents []KustomizeComponent `json:"kustomize_components,omitempty"`
 }
 
 // CRD represents a single version of a CustomResourceDefinition.

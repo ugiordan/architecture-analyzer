@@ -1,6 +1,8 @@
 // Package arch provides typed representations of architecture extraction data.
 package arch
 
+import "encoding/json"
+
 // Data holds parsed architecture information from the extractor JSON.
 type Data struct {
 	Component string      `json:"component"`
@@ -10,6 +12,12 @@ type Data struct {
 	Secrets   []Secret    `json:"secrets_referenced"`
 	Cache        CacheConfig  `json:"cache_config"`
 	FeatureGates []FeatureGate `json:"feature_gates"`
+
+	// Cross-domain fields: deployment context for security posture queries.
+	NetworkPolicies     []NetworkPolicy      `json:"network_policies"`
+	HTTPEndpoints       []HTTPEndpoint       `json:"http_endpoints"`
+	ExternalConnections []ExternalConnection `json:"external_connections"`
+	Deployments         []Deployment         `json:"deployments"`
 }
 
 // CRD represents a CustomResourceDefinition from the architecture extraction.
@@ -103,4 +111,41 @@ type CacheFilteredType struct {
 	Type       string `json:"type"`
 	FilterKind string `json:"filter_kind"`
 	Filter     string `json:"filter"`
+}
+
+// NetworkPolicy represents a Kubernetes NetworkPolicy from the architecture extraction.
+// IngressRules and EgressRules are raw JSON arrays; queries only need len() > 0.
+// PodSelector maps to the extractor's pod_selector field for per-pod policy matching.
+type NetworkPolicy struct {
+	Name         string                 `json:"name"`
+	Source       string                 `json:"source"`
+	PodSelector  map[string]interface{} `json:"pod_selector"`
+	PolicyTypes  []string               `json:"policy_types"`
+	IngressRules []json.RawMessage      `json:"ingress_rules"`
+	EgressRules  []json.RawMessage      `json:"egress_rules"`
+}
+
+// HTTPEndpoint represents an HTTP route registration found by the extractor.
+type HTTPEndpoint struct {
+	Method  string `json:"method"`
+	Path    string `json:"path"`
+	Handler string `json:"handler,omitempty"`
+	Source  string `json:"source"`
+}
+
+// ExternalConnection represents a reference to an external service found in source code.
+type ExternalConnection struct {
+	Type     string `json:"type"`
+	Service  string `json:"service"`
+	Target   string `json:"target"`
+	Source   string `json:"source"`
+	Function string `json:"function,omitempty"`
+}
+
+// Deployment represents a Deployment or StatefulSet from the architecture extraction.
+type Deployment struct {
+	Name           string `json:"name"`
+	Kind           string `json:"kind"`
+	Source         string `json:"source"`
+	ServiceAccount string `json:"service_account"`
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ugiordan/architecture-analyzer/pkg/arch"
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 	"github.com/ugiordan/architecture-analyzer/pkg/query"
 )
@@ -19,6 +20,10 @@ func securityQueries() []query.Rule {
 		{ID: "CGA-009", Name: "weak-serial-entropy", Domain: "security", Severity: "medium", Run: queryWeakSerialEntropy},
 		{ID: "CGA-010", Name: "complexity-hotspot", Domain: "security", Severity: "medium", Run: queryComplexityHotspot},
 		{ID: "CGA-011", Name: "untrusted-endpoint", Domain: "security", Severity: "informational", Run: queryUntrustedEndpoint},
+		// Cross-domain queries: combine CPG code analysis with architecture deployment data.
+		{ID: "CGA-012", Name: "unprotected-ingress", Domain: "security", Severity: "high", Run: queryUnprotectedIngress},
+		{ID: "CGA-013", Name: "overprivileged-secret-access", Domain: "security", Severity: "medium", Run: queryOverprivilegedSecretAccess},
+		{ID: "CGA-014", Name: "uncontrolled-egress", Domain: "security", Severity: "medium", Run: queryUncontrolledEgress},
 	}
 }
 
@@ -287,6 +292,217 @@ func queryUntrustedEndpoint(g *graph.CPG) []query.Finding {
 			File:     ep.File,
 			Line:     ep.Line,
 			NodeID:   ep.ID,
+		})
+	}
+	return findings
+}
+
+// hasIngressNetworkPolicy checks whether the architecture data contains at least
+// one NetworkPolicy with Ingress policy type and at least one ingress rule.
+// An empty PodSelector ({}) means the policy applies to all pods in the namespace.
+// A non-empty PolicyTypes list is required; policies with empty PolicyTypes are
+// treated as Ingress-only per Kubernetes spec, but we require explicit declaration.
+func hasIngressNetworkPolicy(g *graph.CPG) bool {
+	if g.ArchData == nil {
+		return false
+	}
+	for _, np := range g.ArchData.NetworkPolicies {
+		if len(np.PolicyTypes) == 0 {
+			// Per K8s spec, empty PolicyTypes defaults to Ingress-only.
+			if len(np.IngressRules) > 0 {
+				return true
+			}
+			continue
+		}
+		for _, pt := range np.PolicyTypes {
+			if pt == "Ingress" && len(np.IngressRules) > 0 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// hasEgressNetworkPolicy checks whether the architecture data contains at least
+// one NetworkPolicy with Egress policy type and at least one egress rule.
+func hasEgressNetworkPolicy(g *graph.CPG) bool {
+	if g.ArchData == nil {
+		return false
+	}
+	for _, np := range g.ArchData.NetworkPolicies {
+		for _, pt := range np.PolicyTypes {
+			if pt == "Egress" && len(np.EgressRules) > 0 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// networkPoliciesRef returns an ArchitectureRef string for network policies.
+func networkPoliciesRef(g *graph.CPG) string {
+	if g.ArchData == nil || len(g.ArchData.NetworkPolicies) == 0 {
+		return "network_policies: none defined"
+	}
+	var refs []string
+	for _, np := range g.ArchData.NetworkPolicies {
+		refs = append(refs, fmt.Sprintf("%s (types: %s, source: %s)",
+			np.Name, strings.Join(np.PolicyTypes, "/"), np.Source))
+	}
+	return fmt.Sprintf("network_policies: %s", strings.Join(refs, "; "))
+}
+
+// queryUnprotectedIngress finds HTTP endpoints that handle user input but have
+// no NetworkPolicy restricting ingress traffic. Requires --with-arch data.
+func queryUnprotectedIngress(g *graph.CPG) []query.Finding {
+	if g.ArchData == nil {
+		return nil
+	}
+	if hasIngressNetworkPolicy(g) {
+		return nil
+	}
+
+	var findings []query.Finding
+	for _, ep := range g.NodesByKind(graph.NodeHTTPEndpoint) {
+		if ep.TrustLevel != graph.TrustUntrusted {
+			continue
+		}
+		findings = append(findings, query.Finding{
+			RuleID:          "CGA-012",
+			Domain:          "security",
+			Severity:        "high",
+			Message:         fmt.Sprintf("Untrusted endpoint %s (%s %s) has no NetworkPolicy restricting ingress", ep.Name, ep.HTTPMethod, ep.Route),
+			File:            ep.File,
+			Line:            ep.Line,
+			NodeID:          ep.ID,
+			ArchitectureRef: networkPoliciesRef(g),
+		})
+	}
+	return findings
+}
+
+// rbacHasWildcardSecretVerbs checks whether any RBAC ClusterRole grants wildcard
+// verbs on secrets resources. Only matches rules whose APIGroups include the core
+// group ("" or "*"), since secrets are a core API resource.
+func rbacHasWildcardSecretVerbs(g *graph.CPG) bool {
+	if g.ArchData == nil {
+		return false
+	}
+	for _, cr := range g.ArchData.RBAC.ClusterRoles {
+		for _, rule := range cr.Rules {
+			if !ruleMatchesCoreGroup(rule) {
+				continue
+			}
+			hasSecrets := false
+			for _, r := range rule.Resources {
+				if r == "secrets" || r == "*" {
+					hasSecrets = true
+					break
+				}
+			}
+			if !hasSecrets {
+				continue
+			}
+			for _, v := range rule.Verbs {
+				if v == "*" {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// ruleMatchesCoreGroup returns true if the RBAC rule applies to the core API group
+// (empty string) or uses a wildcard ("*"). Secrets are a core API resource.
+func ruleMatchesCoreGroup(rule arch.RBACRule) bool {
+	if len(rule.APIGroups) == 0 {
+		return true // empty APIGroups list implies core group
+	}
+	for _, g := range rule.APIGroups {
+		if g == "" || g == "*" {
+			return true
+		}
+	}
+	return false
+}
+
+// queryOverprivilegedSecretAccess finds functions that access secrets while RBAC
+// grants wildcard verbs on secrets. Requires --with-arch data.
+func queryOverprivilegedSecretAccess(g *graph.CPG) []query.Finding {
+	if g.ArchData == nil {
+		return nil
+	}
+	if !rbacHasWildcardSecretVerbs(g) {
+		return nil
+	}
+
+	var findings []query.Finding
+	for _, fn := range g.NodesByKind(graph.NodeFunction) {
+		if !fn.Annotations[AnnotAccessesSecret] {
+			continue
+		}
+		findings = append(findings, query.Finding{
+			RuleID:          "CGA-013",
+			Domain:          "security",
+			Severity:        "medium",
+			Message:         fmt.Sprintf("Function %s accesses secrets and RBAC grants wildcard verbs on secrets resource", fn.Name),
+			File:            fn.File,
+			Line:            fn.Line,
+			NodeID:          fn.ID,
+			ArchitectureRef: clusterRolesRef(g),
+		})
+	}
+	return findings
+}
+
+// queryUncontrolledEgress finds functions that make external connections while
+// no NetworkPolicy restricts egress traffic. Requires --with-arch data.
+func queryUncontrolledEgress(g *graph.CPG) []query.Finding {
+	if g.ArchData == nil {
+		return nil
+	}
+	if hasEgressNetworkPolicy(g) {
+		return nil
+	}
+
+	var findings []query.Finding
+	reported := make(map[string]bool)
+
+	// Check CPG nodes annotated as calling external services.
+	for _, fn := range g.NodesByKind(graph.NodeFunction) {
+		if !fn.Annotations[AnnotCallsExternal] {
+			continue
+		}
+		key := fn.File + ":" + fn.Name
+		reported[key] = true
+		findings = append(findings, query.Finding{
+			RuleID:          "CGA-014",
+			Domain:          "security",
+			Severity:        "medium",
+			Message:         fmt.Sprintf("Function %s makes external connections with no NetworkPolicy restricting egress", fn.Name),
+			File:            fn.File,
+			Line:            fn.Line,
+			NodeID:          fn.ID,
+			ArchitectureRef: networkPoliciesRef(g),
+		})
+	}
+	// Also check ExternalCall nodes from the CPG builder.
+	// Skip if the parent function was already reported via annotation.
+	for _, ec := range g.NodesByKind(graph.NodeExternalCall) {
+		key := ec.File + ":" + ec.Name
+		if reported[key] {
+			continue
+		}
+		findings = append(findings, query.Finding{
+			RuleID:          "CGA-014",
+			Domain:          "security",
+			Severity:        "medium",
+			Message:         fmt.Sprintf("External call to %s with no NetworkPolicy restricting egress", ec.Name),
+			File:            ec.File,
+			Line:            ec.Line,
+			NodeID:          ec.ID,
+			ArchitectureRef: networkPoliciesRef(g),
 		})
 	}
 	return findings

@@ -132,6 +132,11 @@ func SortOutput(arch *ComponentArchitecture) {
 		return arch.FeatureGates[i].Name < arch.FeatureGates[j].Name
 	})
 
+	// KustomizeComponents: already sorted by extractKustomizeComponents, but ensure consistency
+	sort.Slice(arch.KustomizeComponents, func(i, j int) bool {
+		return arch.KustomizeComponents[i].Name < arch.KustomizeComponents[j].Name
+	})
+
 	// CacheConfig: sort filtered types and implicit informers
 	if arch.CacheConfig != nil {
 		sort.Slice(arch.CacheConfig.FilteredTypes, func(i, j int) bool {

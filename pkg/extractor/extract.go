@@ -68,6 +68,9 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 	// Cache analysis runs after watches and deployments are extracted
 	arch.CacheConfig = extractCacheConfig(absPath, arch.ControllerWatch, arch.Deployments)
 
+	// Kustomize component discovery (for operator repos with *_support.go files)
+	arch.KustomizeComponents = extractKustomizeComponents(absPath)
+
 	// Normalize output ordering for deterministic JSON
 	SortOutput(arch)
 
