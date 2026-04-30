@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/aggregator"
+	"github.com/ugiordan/architecture-analyzer/pkg/config"
 	"github.com/ugiordan/architecture-analyzer/pkg/diff"
 	"github.com/ugiordan/architecture-analyzer/pkg/annotator"
 	"github.com/ugiordan/architecture-analyzer/pkg/dataflow"
@@ -104,6 +105,8 @@ func main() {
 		err = cmdAnalyze(args)
 	case "aggregate":
 		err = cmdAggregate(args)
+	case "aggregate-cpg":
+		err = cmdAggregateCPG(args)
 	case "extract-schema":
 		err = cmdExtractSchema(args)
 	case "validate":
@@ -122,6 +125,14 @@ func main() {
 		err = cmdDocs(args)
 	case "discover":
 		err = cmdDiscover(args)
+	case "build-config":
+		err = cmdBuildConfig(args)
+	case "konflux":
+		err = cmdKonflux(args)
+	case "version-compat":
+		err = cmdVersionCompat(args)
+	case "platforms":
+		err = cmdPlatforms(args)
 	case "full-analysis":
 		err = cmdFullAnalysis(args)
 	case "version":
@@ -176,6 +187,13 @@ Platform commands:
   discover <operator-repo-path>        Discover platform components from kustomize manifests
                                        [--output file] [--format json|text|map]
                                        [--org org] [--platform name]
+  build-config <dir>                   Extract build metadata (OCP versions, arches, OLM)
+  konflux <snapshot-file-or-dir>       Parse Konflux snapshot image mappings
+  platforms <scan-config.yaml>         List platforms defined in scan config
+                                       [--platform name] [--output file]
+  aggregate-cpg <results-dir>          Merge code graphs into platform-wide CPG
+  version-compat <arch.json>           Check API version compatibility against target OCP/k8s
+                                       [--target-version ver]
 
 Combined:
   full-analysis <repo-path>            Run architecture extraction + code graph scan
@@ -1145,6 +1163,196 @@ func cmdFullAnalysis(args []string) error {
 	}
 
 	return nil
+}
+
+// cmdBuildConfig extracts build metadata from a RHOAI-Build-Config style directory.
+func cmdBuildConfig(args []string) error {
+	fs := flag.NewFlagSet("build-config", flag.ExitOnError)
+	output := fs.String("output", "", "Output file (default: stdout)")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: arch-analyzer build-config <dir> [--output file]")
+	}
+
+	bc, err := extractor.ParseBuildConfig(fs.Arg(0))
+	if err != nil {
+		return err
+	}
+
+	return outputJSON(*output, bc)
+}
+
+// cmdKonflux parses Konflux snapshot files.
+func cmdKonflux(args []string) error {
+	fs := flag.NewFlagSet("konflux", flag.ExitOnError)
+	output := fs.String("output", "", "Output file (default: stdout)")
+	format := fs.String("format", "json", "Output format: json, text")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: arch-analyzer konflux <snapshot-file-or-dir> [--output file] [--format json|text]")
+	}
+
+	path := fs.Arg(0)
+	info, err := os.Stat(path)
+	if err != nil {
+		return fmt.Errorf("path not found: %w", err)
+	}
+
+	if info.IsDir() {
+		idx, err := extractor.ParseKonfluxDir(path)
+		if err != nil {
+			return err
+		}
+		switch *format {
+		case "text":
+			fmt.Printf("Parsed %d snapshot(s), %d unique images\n", idx.Snapshots, len(idx.Components()))
+			for _, c := range idx.Components() {
+				fmt.Printf("  %-30s %s\n", c.Name, c.ContainerImage)
+				if c.Repository != "" {
+					fmt.Printf("  %-30s -> %s@%s\n", "", c.Repository, c.Revision)
+				}
+			}
+			return nil
+		default:
+			return outputJSON(*output, idx)
+		}
+	}
+
+	snap, err := extractor.ParseKonfluxSnapshot(path)
+	if err != nil {
+		return err
+	}
+	switch *format {
+	case "text":
+		fmt.Printf("Application: %s (%d components)\n", snap.Application, len(snap.Components))
+		for _, c := range snap.Components {
+			fmt.Printf("  %-30s %s\n", c.Name, c.ContainerImage)
+			if c.Repository != "" {
+				fmt.Printf("  %-30s -> %s@%s\n", "", c.Repository, c.Revision)
+			}
+		}
+		return nil
+	default:
+		return outputJSON(*output, snap)
+	}
+}
+
+// cmdAggregateCPG merges code graphs from multiple components.
+func cmdAggregateCPG(args []string) error {
+	fs := flag.NewFlagSet("aggregate-cpg", flag.ExitOnError)
+	output := fs.String("output", "", "Output file (default: stdout)")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: arch-analyzer aggregate-cpg <results-dir> [--output file]")
+	}
+
+	platform, err := aggregator.AggregateCPGs(fs.Arg(0))
+	if err != nil {
+		return err
+	}
+
+	fmt.Fprintf(os.Stderr, "Merged CPG: %d components, %d nodes, %d edges, %d cross-component links\n",
+		platform.ComponentCount, platform.TotalNodes, platform.TotalEdges, platform.CrossEdges)
+
+	return outputJSON(*output, platform)
+}
+
+// cmdVersionCompat checks API version compatibility against a target OCP/Kubernetes version.
+func cmdVersionCompat(args []string) error {
+	fs := flag.NewFlagSet("version-compat", flag.ExitOnError)
+	targetVersion := fs.String("target-version", "4.14", "Target OCP or Kubernetes version (e.g. 4.14, 1.27)")
+	output := fs.String("output", "", "Output file (default: stdout)")
+	format := fs.String("format", "text", "Output format: text, json")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: arch-analyzer version-compat <arch.json> [--target-version ver] [--output file] [--format text|json]")
+	}
+
+	data, err := loadJSON(fs.Arg(0))
+	if err != nil {
+		return err
+	}
+
+	result, err := validator.CheckVersionCompat(data, *targetVersion)
+	if err != nil {
+		return err
+	}
+
+	switch *format {
+	case "text":
+		fmt.Printf("Version Compatibility Check: target %s (Kubernetes %s)\n\n", result.TargetVersion, result.KubeVersion)
+		if len(result.Issues) == 0 {
+			fmt.Println("No compatibility issues found.")
+		} else {
+			for _, issue := range result.Issues {
+				icon := "WARNING"
+				if issue.Severity == "error" {
+					icon = "ERROR"
+				}
+				fmt.Printf("  [%s] %s\n", icon, issue.Message)
+				fmt.Printf("          Source: %s\n", issue.Source)
+				if issue.Replacement != "" {
+					fmt.Printf("          Replace with: %s\n", issue.Replacement)
+				}
+			}
+		}
+		if result.Compatible {
+			fmt.Println("\nResult: COMPATIBLE")
+		} else {
+			fmt.Println("\nResult: INCOMPATIBLE")
+		}
+		return nil
+	default:
+		return outputJSON(*output, result)
+	}
+}
+
+// cmdPlatforms lists or queries platform definitions from scan-config.yaml.
+func cmdPlatforms(args []string) error {
+	fs := flag.NewFlagSet("platforms", flag.ExitOnError)
+	platform := fs.String("platform", "", "Show repos for a specific platform")
+	output := fs.String("output", "", "Output file (default: stdout)")
+	fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		return fmt.Errorf("usage: arch-analyzer platforms <scan-config.yaml> [--platform name] [--output file]")
+	}
+
+	configPath := fs.Arg(0)
+
+	if *platform == "" {
+		names, err := config.ListPlatforms(configPath)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("Platforms defined in %s:\n", configPath)
+		for _, name := range names {
+			fmt.Printf("  - %s\n", name)
+		}
+		return nil
+	}
+
+	specs, platCfg, err := config.LoadPlatformConfig(configPath, *platform)
+	if err != nil {
+		return err
+	}
+
+	result := map[string]interface{}{
+		"platform":    *platform,
+		"name":        platCfg.Name,
+		"description": platCfg.Description,
+		"repo_count":  len(specs),
+		"repos":       specs,
+	}
+	if platCfg.OCPVersions != nil {
+		result["ocp_versions"] = platCfg.OCPVersions
+	}
+
+	return outputJSON(*output, result)
 }
 
 // collectRepoSHAs scans a results directory for component-architecture.json files
