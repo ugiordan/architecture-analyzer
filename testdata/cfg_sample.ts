@@ -55,3 +55,37 @@ function linearFunction(): number {
 
 function emptyFunction(): void {
 }
+
+function elseIfNoElse(x: number): number {
+    let result = 0;
+    if (x > 10) {
+        result = 1;
+    } else if (x > 5) {
+        result = 2;
+    }
+    return result;
+}
+
+function loopWithBreak(items: string[]): string {
+    for (const item of items) {
+        if (item === "stop") {
+            break;
+        }
+    }
+    return "done";
+}
+
+function loopWithContinue(items: string[]): number {
+    let count = 0;
+    for (const item of items) {
+        if (item === "") {
+            continue;
+        }
+        count++;
+    }
+    return count;
+}
+
+function singleReturn(): number {
+    return 42;
+}

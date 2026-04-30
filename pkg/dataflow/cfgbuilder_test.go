@@ -13,8 +13,8 @@ func TestCFGBuilderNewBlock(t *testing.T) {
 	if entry.Kind != graph.NodeBasicBlock {
 		t.Errorf("Kind = %s, want BasicBlock", entry.Kind)
 	}
-	if entry.Name != "entry" {
-		t.Errorf("Name = %q, want entry", entry.Name)
+	if entry.Name != "entry-0" {
+		t.Errorf("Name = %q, want entry-0", entry.Name)
 	}
 	if entry.File != "main.go" {
 		t.Errorf("File = %q, want main.go", entry.File)

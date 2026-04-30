@@ -1211,7 +1211,7 @@ func (rp *RustParser) buildCFG(body *sitter.Node, src []byte, file string, fn *g
 		}
 	}
 
-	lastBlock := rp.buildCFGStatementsRust(body, src, file, fn, entryBlock, exitBlock, cb, posMap)
+	lastBlock := rp.buildCFGStatementsRust(body, src, file, fn, entryBlock, exitBlock, cb, posMap, nil)
 	if lastBlock != nil {
 		cb.AddEdge(lastBlock.ID, exitBlock.ID, "exit")
 	}
@@ -1221,7 +1221,7 @@ func (rp *RustParser) buildCFG(body *sitter.Node, src []byte, file string, fn *g
 	result.Edges = append(result.Edges, edges...)
 }
 
-func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string) *graph.Node {
+func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string, lc *loopContext) *graph.Node {
 	if container == nil {
 		return currentBlock
 	}
@@ -1241,7 +1241,7 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 
 		switch child.Type() {
 		case "if_expression":
-			currentBlock = rp.buildCFGIfRust(child, src, file, fn, currentBlock, exitBlock, cb, posMap)
+			currentBlock = rp.buildCFGIfRust(child, src, file, fn, currentBlock, exitBlock, cb, posMap, lc)
 			if currentBlock == nil {
 				return nil
 			}
@@ -1253,7 +1253,7 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 			}
 
 		case "match_expression":
-			currentBlock = rp.buildCFGMatchRust(child, src, file, fn, currentBlock, exitBlock, cb, posMap)
+			currentBlock = rp.buildCFGMatchRust(child, src, file, fn, currentBlock, exitBlock, cb, posMap, lc)
 			if currentBlock == nil {
 				return nil
 			}
@@ -1265,6 +1265,24 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 			cb.AddEdge(currentBlock.ID, exitBlock.ID, "exit")
 			return nil
 
+		case "break_expression":
+			for _, id := range collectNodeIDs(child, posMap) {
+				cb.AddMember(currentBlock, id)
+			}
+			if lc != nil {
+				cb.AddEdge(currentBlock.ID, lc.afterBlock.ID, "fallthrough")
+			}
+			return nil
+
+		case "continue_expression":
+			for _, id := range collectNodeIDs(child, posMap) {
+				cb.AddMember(currentBlock, id)
+			}
+			if lc != nil {
+				cb.AddEdge(currentBlock.ID, lc.headerBlock.ID, "loop_back")
+			}
+			return nil
+
 		case "expression_statement":
 			// Check for inner control flow expressions
 			for j := 0; j < int(child.ChildCount()); j++ {
@@ -1274,7 +1292,7 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 				}
 				switch inner.Type() {
 				case "if_expression":
-					currentBlock = rp.buildCFGIfRust(inner, src, file, fn, currentBlock, exitBlock, cb, posMap)
+					currentBlock = rp.buildCFGIfRust(inner, src, file, fn, currentBlock, exitBlock, cb, posMap, lc)
 					if currentBlock == nil {
 						return nil
 					}
@@ -1284,7 +1302,7 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 						return nil
 					}
 				case "match_expression":
-					currentBlock = rp.buildCFGMatchRust(inner, src, file, fn, currentBlock, exitBlock, cb, posMap)
+					currentBlock = rp.buildCFGMatchRust(inner, src, file, fn, currentBlock, exitBlock, cb, posMap, lc)
 					if currentBlock == nil {
 						return nil
 					}
@@ -1293,6 +1311,22 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 						cb.AddMember(currentBlock, id)
 					}
 					cb.AddEdge(currentBlock.ID, exitBlock.ID, "exit")
+					return nil
+				case "break_expression":
+					for _, id := range collectNodeIDs(inner, posMap) {
+						cb.AddMember(currentBlock, id)
+					}
+					if lc != nil {
+						cb.AddEdge(currentBlock.ID, lc.afterBlock.ID, "fallthrough")
+					}
+					return nil
+				case "continue_expression":
+					for _, id := range collectNodeIDs(inner, posMap) {
+						cb.AddMember(currentBlock, id)
+					}
+					if lc != nil {
+						cb.AddEdge(currentBlock.ID, lc.headerBlock.ID, "loop_back")
+					}
 					return nil
 				default:
 					for _, id := range collectNodeIDs(inner, posMap) {
@@ -1310,7 +1344,7 @@ func (rp *RustParser) buildCFGStatementsRust(container *sitter.Node, src []byte,
 	return currentBlock
 }
 
-func (rp *RustParser) buildCFGIfRust(node *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string) *graph.Node {
+func (rp *RustParser) buildCFGIfRust(node *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string, lc *loopContext) *graph.Node {
 	cond := node.ChildByFieldName("condition")
 	if cond != nil {
 		for _, id := range collectNodeIDs(cond, posMap) {
@@ -1324,15 +1358,15 @@ func (rp *RustParser) buildCFGIfRust(node *sitter.Node, src []byte, file string,
 	if consequence != nil {
 		thenLine = int(consequence.StartPoint().Row) + 1
 	}
-	thenBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), thenLine)
+	thenBlock := cb.NewBlock("if-then", thenLine)
 	cb.AddEdge(condBlock.ID, thenBlock.ID, "true_branch")
-	thenEnd := rp.buildCFGStatementsRust(consequence, src, file, fn, thenBlock, exitBlock, cb, posMap)
+	thenEnd := rp.buildCFGStatementsRust(consequence, src, file, fn, thenBlock, exitBlock, cb, posMap, lc)
 
 	alternative := node.ChildByFieldName("alternative")
 	var elseEnd *graph.Node
 	if alternative != nil {
 		elseLine := int(alternative.StartPoint().Row) + 1
-		elseBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), elseLine)
+		elseBlock := cb.NewBlock("else", elseLine)
 		cb.AddEdge(condBlock.ID, elseBlock.ID, "false_branch")
 
 		// Check for else if
@@ -1340,19 +1374,19 @@ func (rp *RustParser) buildCFGIfRust(node *sitter.Node, src []byte, file string,
 		for j := 0; j < int(alternative.ChildCount()); j++ {
 			c := alternative.Child(j)
 			if c != nil && c.Type() == "if_expression" {
-				elseEnd = rp.buildCFGIfRust(c, src, file, fn, elseBlock, exitBlock, cb, posMap)
+				elseEnd = rp.buildCFGIfRust(c, src, file, fn, elseBlock, exitBlock, cb, posMap, lc)
 				hasElseIf = true
 				break
 			}
 		}
 		if !hasElseIf {
-			elseEnd = rp.buildCFGStatementsRust(alternative, src, file, fn, elseBlock, exitBlock, cb, posMap)
+			elseEnd = rp.buildCFGStatementsRust(alternative, src, file, fn, elseBlock, exitBlock, cb, posMap, lc)
 		}
 	}
 
 	if thenEnd != nil || elseEnd != nil || alternative == nil {
 		mergeLine := int(node.EndPoint().Row) + 1
-		mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), mergeLine)
+		mergeBlock := cb.NewBlock("merge", mergeLine)
 		if thenEnd != nil {
 			cb.AddEdge(thenEnd.ID, mergeBlock.ID, "fallthrough")
 		}
@@ -1368,20 +1402,25 @@ func (rp *RustParser) buildCFGIfRust(node *sitter.Node, src []byte, file string,
 
 func (rp *RustParser) buildCFGForRust(node *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string) *graph.Node {
 	headerLine := int(node.StartPoint().Row) + 1
-	headerBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), headerLine)
+	headerBlock := cb.NewBlock("loop-header", headerLine)
 	cb.AddEdge(currentBlock.ID, headerBlock.ID, "fallthrough")
+
+	afterLine := int(node.EndPoint().Row) + 1
+	afterBlock := cb.NewBlock("loop-after", afterLine)
+
+	lc := &loopContext{headerBlock: headerBlock, afterBlock: afterBlock}
 
 	body := node.ChildByFieldName("body")
 	bodyLine := headerLine + 1
 	if body != nil {
 		bodyLine = int(body.StartPoint().Row) + 1
 	}
-	bodyBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), bodyLine)
+	bodyBlock := cb.NewBlock("loop-body", bodyLine)
 	cb.AddEdge(headerBlock.ID, bodyBlock.ID, "true_branch")
 
 	var bodyEnd *graph.Node
 	if body != nil {
-		bodyEnd = rp.buildCFGStatementsRust(body, src, file, fn, bodyBlock, exitBlock, cb, posMap)
+		bodyEnd = rp.buildCFGStatementsRust(body, src, file, fn, bodyBlock, exitBlock, cb, posMap, lc)
 	} else {
 		bodyEnd = bodyBlock
 	}
@@ -1390,13 +1429,11 @@ func (rp *RustParser) buildCFGForRust(node *sitter.Node, src []byte, file string
 		cb.AddEdge(bodyEnd.ID, headerBlock.ID, "loop_back")
 	}
 
-	afterLine := int(node.EndPoint().Row) + 1
-	afterBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), afterLine)
 	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
 	return afterBlock
 }
 
-func (rp *RustParser) buildCFGMatchRust(node *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string) *graph.Node {
+func (rp *RustParser) buildCFGMatchRust(node *sitter.Node, src []byte, file string, fn *graph.Node, currentBlock *graph.Node, exitBlock *graph.Node, cb *dataflow.CFGBuilder, posMap map[posKey][]string, lc *loopContext) *graph.Node {
 	condBlock := currentBlock
 	body := node.ChildByFieldName("body")
 	if body == nil {
@@ -1404,7 +1441,7 @@ func (rp *RustParser) buildCFGMatchRust(node *sitter.Node, src []byte, file stri
 	}
 
 	mergeLine := int(node.EndPoint().Row) + 1
-	mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), mergeLine)
+	mergeBlock := cb.NewBlock("match-merge", mergeLine)
 
 	hasWildcard := false
 
@@ -1421,7 +1458,7 @@ func (rp *RustParser) buildCFGMatchRust(node *sitter.Node, src []byte, file stri
 		}
 
 		armLine := int(child.StartPoint().Row) + 1
-		armBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), armLine)
+		armBlock := cb.NewBlock("match-arm", armLine)
 
 		label := "true_branch"
 		if hasWildcard && pattern != nil && pattern.Content(src) == "_" {

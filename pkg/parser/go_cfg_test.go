@@ -33,7 +33,7 @@ func filterCFEdgesByLabel(edges []*graph.Edge, label string) []*graph.Edge {
 
 func findBlockByName(blocks []*graph.Node, parentID, name string) *graph.Node {
 	for _, b := range blocks {
-		if b.Kind == graph.NodeBasicBlock && b.ParentID == parentID && b.Name == name {
+		if b.Kind == graph.NodeBasicBlock && b.ParentID == parentID && strings.HasPrefix(b.Name, name) {
 			return b
 		}
 	}

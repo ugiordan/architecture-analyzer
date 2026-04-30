@@ -917,8 +917,8 @@ func (pp *PythonParser) buildCFG(body *sitter.Node, src []byte, file string, fn 
 		cb.AddMember(entry, paramID)
 	}
 
-	// Process function body statements
-	lastBlock := pp.buildCFGStatementsPy(body, src, file, fn, entry, exit, posMap, cb)
+	// Process function body statements (no loop context at top level)
+	lastBlock := pp.buildCFGStatementsPy(body, src, file, fn, entry, exit, posMap, cb, nil)
 
 	// Connect last block to exit (if it didn't terminate early)
 	if lastBlock != nil {
@@ -930,7 +930,8 @@ func (pp *PythonParser) buildCFG(body *sitter.Node, src []byte, file string, fn 
 
 // buildCFGStatementsPy walks container children and builds CFG for Python statements.
 // Returns the last open block (nil if all paths terminated).
-func (pp *PythonParser) buildCFGStatementsPy(container *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+// lc is non-nil when inside a loop body (enables break/continue edges).
+func (pp *PythonParser) buildCFGStatementsPy(container *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	if container == nil {
 		return current
 	}
@@ -946,44 +947,57 @@ func (pp *PythonParser) buildCFGStatementsPy(container *sitter.Node, src []byte,
 			continue
 		}
 
-		// If current is nil, control flow has terminated, skip remaining statements
 		if current == nil {
 			return nil
 		}
 
 		switch child.Type() {
 		case "if_statement":
-			current = pp.buildCFGIfPy(child, src, file, fn, current, exit, posMap, cb)
+			current = pp.buildCFGIfPy(child, src, file, fn, current, exit, posMap, cb, lc)
 
 		case "for_statement", "while_statement":
 			current = pp.buildCFGForPy(child, src, file, fn, current, exit, posMap, cb)
 
 		case "return_statement":
-			// Collect node IDs from return statement and add to current block
 			nodeIDs := collectNodeIDs(child, posMap)
 			for _, id := range nodeIDs {
 				cb.AddMember(current, id)
 			}
-			// Connect to exit and terminate this path
 			cb.AddEdge(current.ID, exit.ID, "exit")
 			return nil
 
 		case "raise_statement":
-			// Collect node IDs from raise statement and add to current block
 			nodeIDs := collectNodeIDs(child, posMap)
 			for _, id := range nodeIDs {
 				cb.AddMember(current, id)
 			}
-			// raise terminates control flow
 			cb.AddEdge(current.ID, exit.ID, "exit")
 			return nil
 
+		case "break_statement":
+			nodeIDs := collectNodeIDs(child, posMap)
+			for _, id := range nodeIDs {
+				cb.AddMember(current, id)
+			}
+			if lc != nil {
+				cb.AddEdge(current.ID, lc.afterBlock.ID, "fallthrough")
+			}
+			return nil
+
+		case "continue_statement":
+			nodeIDs := collectNodeIDs(child, posMap)
+			for _, id := range nodeIDs {
+				cb.AddMember(current, id)
+			}
+			if lc != nil {
+				cb.AddEdge(current.ID, lc.headerBlock.ID, "loop_back")
+			}
+			return nil
+
 		case "pass_statement":
-			// pass is a no-op, no node IDs to collect
 			continue
 
 		default:
-			// Sequential statement: add node IDs to current block
 			nodeIDs := collectNodeIDs(child, posMap)
 			for _, id := range nodeIDs {
 				cb.AddMember(current, id)
@@ -997,13 +1011,11 @@ func (pp *PythonParser) buildCFGStatementsPy(container *sitter.Node, src []byte,
 // buildCFGIfPy handles if_statement nodes in Python.
 // Creates condition block, then-block, elif/else-blocks (if present), and merge block.
 // Returns merge block or nil if all branches terminate.
-func (pp *PythonParser) buildCFGIfPy(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+func (pp *PythonParser) buildCFGIfPy(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	if current == nil {
-		// Control flow already terminated
 		return nil
 	}
 
-	// Condition evaluation happens in current block
 	condition := node.ChildByFieldName("condition")
 	if condition != nil {
 		nodeIDs := collectNodeIDs(condition, posMap)
@@ -1012,18 +1024,20 @@ func (pp *PythonParser) buildCFGIfPy(node *sitter.Node, src []byte, file string,
 		}
 	}
 
-	// Create then-block
 	line := int(node.StartPoint().Row) + 1
-	thenBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	thenBlock := cb.NewBlock("if-then", line)
 	cb.AddEdge(current.ID, thenBlock.ID, "true_branch")
 
-	// Process then-branch (consequence)
 	consequence := node.ChildByFieldName("consequence")
-	thenEnd := pp.buildCFGStatementsPy(consequence, src, file, fn, thenBlock, exit, posMap, cb)
+	thenEnd := pp.buildCFGStatementsPy(consequence, src, file, fn, thenBlock, exit, posMap, cb, lc)
 
-	// Check for elif/else branches by walking children
-	var elseEnd *graph.Node
-	var hasElseBranch bool
+	// Track all elif/else branch endpoints for merge
+	var branchEnds []*graph.Node
+	if thenEnd != nil {
+		branchEnds = append(branchEnds, thenEnd)
+	}
+
+	hasElse := false
 
 	for i := 0; i < int(node.ChildCount()); i++ {
 		child := node.Child(i)
@@ -1032,17 +1046,9 @@ func (pp *PythonParser) buildCFGIfPy(node *sitter.Node, src []byte, file string,
 		}
 
 		if child.Type() == "elif_clause" {
-			// Create a block for the elif condition
-			elifBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
-			if !hasElseBranch {
-				// First elif: connect from current block
-				cb.AddEdge(current.ID, elifBlock.ID, "false_branch")
-			} else {
-				// Subsequent elif: this shouldn't happen in well-formed Python, but handle it
-				cb.AddEdge(current.ID, elifBlock.ID, "false_branch")
-			}
+			elifBlock := cb.NewBlock("elif", int(child.StartPoint().Row)+1)
+			cb.AddEdge(current.ID, elifBlock.ID, "false_branch")
 
-			// Process elif condition
 			elifCondition := child.ChildByFieldName("condition")
 			if elifCondition != nil {
 				nodeIDs := collectNodeIDs(elifCondition, posMap)
@@ -1051,55 +1057,64 @@ func (pp *PythonParser) buildCFGIfPy(node *sitter.Node, src []byte, file string,
 				}
 			}
 
-			// Create elif body block
-			elifBodyBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
+			elifBodyBlock := cb.NewBlock("elif-body", int(child.StartPoint().Row)+1)
 			cb.AddEdge(elifBlock.ID, elifBodyBlock.ID, "true_branch")
 
-			// Process elif body
 			elifConsequence := child.ChildByFieldName("consequence")
-			elifEnd := pp.buildCFGStatementsPy(elifConsequence, src, file, fn, elifBodyBlock, exit, posMap, cb)
-
-			// Update elseEnd to track the last elif branch
-			if elseEnd == nil || elifEnd != nil {
-				elseEnd = elifEnd
+			elifEnd := pp.buildCFGStatementsPy(elifConsequence, src, file, fn, elifBodyBlock, exit, posMap, cb, lc)
+			if elifEnd != nil {
+				branchEnds = append(branchEnds, elifEnd)
 			}
 
-			// The false branch of this elif becomes the "current" for the next clause
+			// Chain: this elif's false_branch becomes next clause's source
 			current = elifBlock
-			hasElseBranch = true
 
 		} else if child.Type() == "else_clause" {
-			// Create else block
-			elseBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
+			elseBlock := cb.NewBlock("else", int(child.StartPoint().Row)+1)
 			cb.AddEdge(current.ID, elseBlock.ID, "false_branch")
 
-			// Process else body
 			elseBody := child.ChildByFieldName("body")
-			elseEnd = pp.buildCFGStatementsPy(elseBody, src, file, fn, elseBlock, exit, posMap, cb)
-			hasElseBranch = true
+			elseEnd := pp.buildCFGStatementsPy(elseBody, src, file, fn, elseBlock, exit, posMap, cb, lc)
+			if elseEnd != nil {
+				branchEnds = append(branchEnds, elseEnd)
+			}
+			hasElse = true
 		}
 	}
 
-	// If no else branch exists, the false_branch of the last condition goes to merge
-	if !hasElseBranch {
-		elseEnd = current
+	// CORR-001 fix: if no else clause, the last condition's false_branch must
+	// connect to merge. Track current as a "pass-through" branch endpoint.
+	if !hasElse {
+		branchEnds = append(branchEnds, nil) // sentinel: need false_branch edge
 	}
 
-	// Create merge block if at least one branch continues
-	if thenEnd == nil && elseEnd == nil {
-		// Both branches terminated
+	// All branches terminated and no implicit fall-through needed
+	if len(branchEnds) == 0 || (len(branchEnds) == 1 && branchEnds[0] == nil && thenEnd == nil) {
 		return nil
 	}
 
-	mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
-
-	if thenEnd != nil {
-		cb.AddEdge(thenEnd.ID, mergeBlock.ID, "fallthrough")
+	// Lazy merge: only create if at least one branch continues
+	hasLiveBranch := false
+	for _, b := range branchEnds {
+		if b != nil {
+			hasLiveBranch = true
+			break
+		}
 	}
-	if elseEnd != nil && elseEnd != current {
-		cb.AddEdge(elseEnd.ID, mergeBlock.ID, "fallthrough")
-	} else if !hasElseBranch {
-		// No else branch: connect current to merge via false_branch
+	if !hasLiveBranch && hasElse {
+		return nil
+	}
+
+	mergeBlock := cb.NewBlock("merge", line)
+
+	for _, b := range branchEnds {
+		if b != nil {
+			cb.AddEdge(b.ID, mergeBlock.ID, "fallthrough")
+		}
+	}
+
+	if !hasElse {
+		// Connect last condition's false_branch to merge
 		cb.AddEdge(current.ID, mergeBlock.ID, "false_branch")
 	}
 
@@ -1110,17 +1125,14 @@ func (pp *PythonParser) buildCFGIfPy(node *sitter.Node, src []byte, file string,
 // Creates header-block, body-block, loop_back, and loop_exit edges.
 func (pp *PythonParser) buildCFGForPy(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
 	if current == nil {
-		// Control flow already terminated
 		return nil
 	}
 
 	line := int(node.StartPoint().Row) + 1
 
-	// Create header block (loop condition evaluation)
-	headerBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	headerBlock := cb.NewBlock("loop-header", line)
 	cb.AddEdge(current.ID, headerBlock.ID, "fallthrough")
 
-	// For while_statement, add condition to header block
 	if node.Type() == "while_statement" {
 		condition := node.ChildByFieldName("condition")
 		if condition != nil {
@@ -1131,7 +1143,6 @@ func (pp *PythonParser) buildCFGForPy(node *sitter.Node, src []byte, file string
 		}
 	}
 
-	// For for_statement, add loop variable to header block
 	if node.Type() == "for_statement" {
 		left := node.ChildByFieldName("left")
 		right := node.ChildByFieldName("right")
@@ -1149,22 +1160,21 @@ func (pp *PythonParser) buildCFGForPy(node *sitter.Node, src []byte, file string
 		}
 	}
 
-	// Create body block
-	bodyBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	bodyBlock := cb.NewBlock("loop-body", line)
 	cb.AddEdge(headerBlock.ID, bodyBlock.ID, "true_branch")
 
-	// Process loop body
-	body := node.ChildByFieldName("body")
-	bodyEnd := pp.buildCFGStatementsPy(body, src, file, fn, bodyBlock, exit, posMap, cb)
+	afterBlock := cb.NewBlock("loop-after", line)
+	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
 
-	// Loop back from body end to header
+	// Pass loop context so break/continue in the body create correct edges
+	lc := &loopContext{headerBlock: headerBlock, afterBlock: afterBlock}
+
+	body := node.ChildByFieldName("body")
+	bodyEnd := pp.buildCFGStatementsPy(body, src, file, fn, bodyBlock, exit, posMap, cb, lc)
+
 	if bodyEnd != nil {
 		cb.AddEdge(bodyEnd.ID, headerBlock.ID, "loop_back")
 	}
-
-	// Create after-loop block (loop exit)
-	afterBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
-	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
 
 	return afterBlock
 }

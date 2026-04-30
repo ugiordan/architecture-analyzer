@@ -49,3 +49,37 @@ fn linear_function() -> i32 {
 
 fn empty_function() {
 }
+
+fn else_if_no_else(x: i32) -> i32 {
+    let mut result = 0;
+    if x > 10 {
+        result = 1;
+    } else if x > 5 {
+        result = 2;
+    }
+    result
+}
+
+fn loop_with_break(items: Vec<String>) -> &'static str {
+    for item in items {
+        if item == "stop" {
+            break;
+        }
+    }
+    "done"
+}
+
+fn loop_with_continue(items: Vec<String>) -> i32 {
+    let mut count = 0;
+    for item in items {
+        if item.is_empty() {
+            continue;
+        }
+        count += 1;
+    }
+    count
+}
+
+fn single_return() -> i32 {
+    42
+}

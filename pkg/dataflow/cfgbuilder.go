@@ -1,10 +1,27 @@
 package dataflow
 
-import "github.com/ugiordan/architecture-analyzer/pkg/graph"
+import (
+	"fmt"
+
+	"github.com/ugiordan/architecture-analyzer/pkg/graph"
+)
 
 // MaxBlocksPerFunction is the limit on NodeBasicBlock nodes per function.
 // When exceeded, CFG construction stops for that function.
 const MaxBlocksPerFunction = 200
+
+// MaxASTDepth is the maximum recursion depth for AST walking functions
+// (collectNodeIDs, containsPanic). Prevents stack overflow on deeply nested input.
+const MaxASTDepth = 1000
+
+// Valid EdgeControlFlow labels used by CFG construction:
+//   - "entry"        function -> entry block
+//   - "exit"         block -> exit block (return, panic, raise, throw, or function end)
+//   - "true_branch"  condition true, or switch/match case
+//   - "false_branch" condition false, or switch/match default/no-else
+//   - "fallthrough"  sequential flow, or branch merging
+//   - "loop_back"    loop body end -> loop header
+//   - "loop_exit"    loop header -> after-loop block
 
 // CFGBuilder accumulates basic blocks and control flow edges during
 // CFG construction. One instance per function body analysis.
@@ -24,12 +41,14 @@ func NewCFGBuilder(funcID, file string) *CFGBuilder {
 }
 
 // NewBlock creates a NodeBasicBlock node. The block ID includes the funcID
-// to ensure uniqueness across functions in the same file.
+// and a sequence number to ensure uniqueness across functions and blocks.
 func (cb *CFGBuilder) NewBlock(name string, line int) *graph.Node {
+	seq := len(cb.blocks)
+	blockName := fmt.Sprintf("%s-%d", name, seq)
 	block := &graph.Node{
-		ID:       graph.NodeID(graph.NodeBasicBlock, cb.funcID+"/"+name, cb.file, line, 0),
+		ID:       graph.NodeID(graph.NodeBasicBlock, cb.funcID+"/"+blockName, cb.file, line, 0),
 		Kind:     graph.NodeBasicBlock,
-		Name:     name,
+		Name:     blockName,
 		File:     cb.file,
 		Line:     line,
 		ParentID: cb.funcID,

@@ -80,3 +80,41 @@ func LinearFunction() int {
 	y := x + 2
 	return y
 }
+
+// Edge case: if-else if without else
+func ElseIfNoElse(x int) int {
+	result := 0
+	if x > 10 {
+		result = 1
+	} else if x > 5 {
+		result = 2
+	}
+	return result
+}
+
+// Edge case: loop with break
+func LoopWithBreak(items []string) string {
+	for _, item := range items {
+		if item == "stop" {
+			break
+		}
+	}
+	return "done"
+}
+
+// Edge case: loop with continue
+func LoopWithContinue(items []string) int {
+	count := 0
+	for _, item := range items {
+		if item == "" {
+			continue
+		}
+		count++
+	}
+	return count
+}
+
+// Edge case: single return function
+func SingleReturn() int {
+	return 42
+}

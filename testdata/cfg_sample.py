@@ -33,3 +33,28 @@ def empty_function():
 
 def process(data):
     return data
+
+def elif_no_else(x):
+    result = 0
+    if x > 10:
+        result = 1
+    elif x > 5:
+        result = 2
+    return result
+
+def loop_with_break(items):
+    for item in items:
+        if item == "stop":
+            break
+    return "done"
+
+def loop_with_continue(items):
+    count = 0
+    for item in items:
+        if item == "":
+            continue
+        count = count + 1
+    return count
+
+def single_return():
+    return 42

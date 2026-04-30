@@ -1246,9 +1246,14 @@ func buildPositionMap(nodes []*graph.Node) map[posKey][]string {
 }
 
 // collectNodeIDs walks an AST node recursively and collects all B1 node IDs
-// at positions within it, using the position map.
+// at positions within it, using the position map. Depth-limited to prevent
+// stack overflow on deeply nested input (see dataflow.MaxASTDepth).
 func collectNodeIDs(node *sitter.Node, posMap map[posKey][]string) []string {
-	if node == nil {
+	return collectNodeIDsDepth(node, posMap, 0)
+}
+
+func collectNodeIDsDepth(node *sitter.Node, posMap map[posKey][]string, depth int) []string {
+	if node == nil || depth > dataflow.MaxASTDepth {
 		return nil
 	}
 
@@ -1263,7 +1268,7 @@ func collectNodeIDs(node *sitter.Node, posMap map[posKey][]string) []string {
 	for i := 0; i < int(node.ChildCount()); i++ {
 		child := node.Child(i)
 		if child != nil {
-			ids = append(ids, collectNodeIDs(child, posMap)...)
+			ids = append(ids, collectNodeIDsDepth(child, posMap, depth+1)...)
 		}
 	}
 
@@ -1292,8 +1297,8 @@ func (gp *GoParser) buildCFG(body *sitter.Node, src []byte, file string, fn *gra
 		cb.AddMember(entry, paramID)
 	}
 
-	// Process function body statements
-	lastBlock := gp.buildCFGStatements(body, src, file, fn, entry, exit, posMap, cb)
+	// Process function body statements (no loop context at top level)
+	lastBlock := gp.buildCFGStatements(body, src, file, fn, entry, exit, posMap, cb, nil)
 
 	// Connect last block to exit (if it didn't terminate early)
 	if lastBlock != nil {
@@ -1303,9 +1308,16 @@ func (gp *GoParser) buildCFG(body *sitter.Node, src []byte, file string, fn *gra
 	return cb.Result()
 }
 
+// loopContext holds loop header and after-loop blocks for break/continue handling.
+type loopContext struct {
+	headerBlock *graph.Node // target for continue
+	afterBlock  *graph.Node // target for break
+}
+
 // buildCFGStatements walks container children and builds CFG.
 // Returns the last open block (nil if all paths terminated).
-func (gp *GoParser) buildCFGStatements(container *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+// lc is non-nil when inside a loop body (enables break/continue edges).
+func (gp *GoParser) buildCFGStatements(container *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	if container == nil {
 		return current
 	}
@@ -1321,9 +1333,13 @@ func (gp *GoParser) buildCFGStatements(container *sitter.Node, src []byte, file 
 			continue
 		}
 
+		if current == nil {
+			return nil
+		}
+
 		switch child.Type() {
 		case "if_statement":
-			current = gp.buildCFGIf(child, src, file, fn, current, exit, posMap, cb)
+			current = gp.buildCFGIf(child, src, file, fn, current, exit, posMap, cb, lc)
 			if current == nil {
 				return nil
 			}
@@ -1335,41 +1351,54 @@ func (gp *GoParser) buildCFGStatements(container *sitter.Node, src []byte, file 
 			}
 
 		case "expression_switch_statement":
-			current = gp.buildCFGSwitch(child, src, file, fn, current, exit, posMap, cb)
+			current = gp.buildCFGSwitch(child, src, file, fn, current, exit, posMap, cb, lc)
 			if current == nil {
 				return nil
 			}
 
 		case "return_statement":
-			// Collect node IDs from return statement and add to current block
 			nodeIDs := collectNodeIDs(child, posMap)
 			for _, id := range nodeIDs {
 				cb.AddMember(current, id)
 			}
-			// Connect to exit and terminate this path
 			cb.AddEdge(current.ID, exit.ID, "exit")
 			return nil
 
+		case "break_statement":
+			nodeIDs := collectNodeIDs(child, posMap)
+			for _, id := range nodeIDs {
+				cb.AddMember(current, id)
+			}
+			if lc != nil {
+				cb.AddEdge(current.ID, lc.afterBlock.ID, "fallthrough")
+			}
+			return nil
+
+		case "continue_statement":
+			nodeIDs := collectNodeIDs(child, posMap)
+			for _, id := range nodeIDs {
+				cb.AddMember(current, id)
+			}
+			if lc != nil {
+				cb.AddEdge(current.ID, lc.headerBlock.ID, "loop_back")
+			}
+			return nil
+
 		case "expression_statement":
-			// Check for panic() calls
 			if gp.containsPanic(child, src) {
-				// Collect node IDs and add to current block
 				nodeIDs := collectNodeIDs(child, posMap)
 				for _, id := range nodeIDs {
 					cb.AddMember(current, id)
 				}
-				// panic terminates control flow
 				cb.AddEdge(current.ID, exit.ID, "exit")
 				return nil
 			}
-			// Regular statement: add node IDs to current block
 			nodeIDs := collectNodeIDs(child, posMap)
 			for _, id := range nodeIDs {
 				cb.AddMember(current, id)
 			}
 
 		default:
-			// Sequential statement: add node IDs to current block
 			nodeIDs := collectNodeIDs(child, posMap)
 			for _, id := range nodeIDs {
 				cb.AddMember(current, id)
@@ -1381,8 +1410,13 @@ func (gp *GoParser) buildCFGStatements(container *sitter.Node, src []byte, file 
 }
 
 // containsPanic checks if an expression_statement contains a panic() call.
+// Depth-limited to prevent stack overflow on deeply nested input.
 func (gp *GoParser) containsPanic(node *sitter.Node, src []byte) bool {
-	if node == nil {
+	return gp.containsPanicDepth(node, src, 0)
+}
+
+func (gp *GoParser) containsPanicDepth(node *sitter.Node, src []byte, depth int) bool {
+	if node == nil || depth > dataflow.MaxASTDepth {
 		return false
 	}
 
@@ -1395,7 +1429,7 @@ func (gp *GoParser) containsPanic(node *sitter.Node, src []byte) bool {
 
 	for i := 0; i < int(node.ChildCount()); i++ {
 		child := node.Child(i)
-		if child != nil && gp.containsPanic(child, src) {
+		if child != nil && gp.containsPanicDepth(child, src, depth+1) {
 			return true
 		}
 	}
@@ -1406,8 +1440,7 @@ func (gp *GoParser) containsPanic(node *sitter.Node, src []byte) bool {
 // buildCFGIf handles if_statement nodes.
 // Creates condition block, then-block, else-block (if present), and merge block.
 // Returns merge block or nil if all branches terminate.
-func (gp *GoParser) buildCFGIf(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
-	// Condition evaluation happens in current block
+func (gp *GoParser) buildCFGIf(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	condition := node.ChildByFieldName("condition")
 	if condition != nil {
 		nodeIDs := collectNodeIDs(condition, posMap)
@@ -1416,45 +1449,36 @@ func (gp *GoParser) buildCFGIf(node *sitter.Node, src []byte, file string, fn *g
 		}
 	}
 
-	// Create then-block
 	line := int(node.StartPoint().Row) + 1
-	thenBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	thenBlock := cb.NewBlock("if-then", line)
 	cb.AddEdge(current.ID, thenBlock.ID, "true_branch")
 
-	// Process then-branch
 	consequence := node.ChildByFieldName("consequence")
-	thenEnd := gp.buildCFGStatements(consequence, src, file, fn, thenBlock, exit, posMap, cb)
+	thenEnd := gp.buildCFGStatements(consequence, src, file, fn, thenBlock, exit, posMap, cb, lc)
 
-	// Check for else-branch
 	alternative := node.ChildByFieldName("alternative")
 	var elseEnd *graph.Node
 
 	if alternative != nil {
-		// Check if alternative is an else-if (another if_statement)
 		if alternative.Type() == "if_statement" {
-			// else if: recurse into buildCFGIf from current block (false_branch)
-			// Create a block for the else-if condition
-			elseIfBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(alternative.StartPoint().Row)+1)
+			elseIfBlock := cb.NewBlock("else-if", int(alternative.StartPoint().Row)+1)
 			cb.AddEdge(current.ID, elseIfBlock.ID, "false_branch")
-			elseEnd = gp.buildCFGIf(alternative, src, file, fn, elseIfBlock, exit, posMap, cb)
+			elseEnd = gp.buildCFGIf(alternative, src, file, fn, elseIfBlock, exit, posMap, cb, lc)
 		} else {
-			// Regular else block
-			elseBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(alternative.StartPoint().Row)+1)
+			elseBlock := cb.NewBlock("else", int(alternative.StartPoint().Row)+1)
 			cb.AddEdge(current.ID, elseBlock.ID, "false_branch")
-			elseEnd = gp.buildCFGStatements(alternative, src, file, fn, elseBlock, exit, posMap, cb)
+			elseEnd = gp.buildCFGStatements(alternative, src, file, fn, elseBlock, exit, posMap, cb, lc)
 		}
 	} else {
-		// No else: false_branch goes to merge block
 		elseEnd = current
 	}
 
-	// Create merge block if at least one branch continues
+	// Lazy merge: only create if at least one branch continues
 	if thenEnd == nil && elseEnd == nil {
-		// Both branches terminated
 		return nil
 	}
 
-	mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	mergeBlock := cb.NewBlock("merge", line)
 
 	if thenEnd != nil {
 		cb.AddEdge(thenEnd.ID, mergeBlock.ID, "fallthrough")
@@ -1462,7 +1486,6 @@ func (gp *GoParser) buildCFGIf(node *sitter.Node, src []byte, file string, fn *g
 	if elseEnd != nil && elseEnd != current {
 		cb.AddEdge(elseEnd.ID, mergeBlock.ID, "fallthrough")
 	} else if alternative == nil {
-		// No else branch: connect current to merge via false_branch
 		cb.AddEdge(current.ID, mergeBlock.ID, "false_branch")
 	}
 
@@ -1471,21 +1494,24 @@ func (gp *GoParser) buildCFGIf(node *sitter.Node, src []byte, file string, fn *g
 
 // buildCFGFor handles for_statement nodes.
 // Creates header-block, body-block, loop_back, and loop_exit edges.
+// Passes loop context to body so break/continue create correct edges.
 func (gp *GoParser) buildCFGFor(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
 	line := int(node.StartPoint().Row) + 1
 
-	// Create header block (loop condition evaluation)
-	headerBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	headerBlock := cb.NewBlock("loop-header", line)
 	cb.AddEdge(current.ID, headerBlock.ID, "fallthrough")
 
-	// Create body block
-	bodyBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	bodyBlock := cb.NewBlock("loop-body", line)
 	cb.AddEdge(headerBlock.ID, bodyBlock.ID, "true_branch")
 
-	// Process loop body
+	afterBlock := cb.NewBlock("loop-after", line)
+	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
+
+	// Pass loop context so break/continue in the body create correct edges
+	lc := &loopContext{headerBlock: headerBlock, afterBlock: afterBlock}
+
 	body := node.ChildByFieldName("body")
 	if body == nil {
-		// Try to find block as last child
 		for i := int(node.ChildCount()) - 1; i >= 0; i-- {
 			child := node.Child(i)
 			if child != nil && child.Type() == "block" {
@@ -1495,26 +1521,20 @@ func (gp *GoParser) buildCFGFor(node *sitter.Node, src []byte, file string, fn *
 		}
 	}
 
-	bodyEnd := gp.buildCFGStatements(body, src, file, fn, bodyBlock, exit, posMap, cb)
+	bodyEnd := gp.buildCFGStatements(body, src, file, fn, bodyBlock, exit, posMap, cb, lc)
 
-	// Loop back from body end to header
 	if bodyEnd != nil {
 		cb.AddEdge(bodyEnd.ID, headerBlock.ID, "loop_back")
 	}
-
-	// Create after-loop block (loop exit)
-	afterBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
-	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
 
 	return afterBlock
 }
 
 // buildCFGSwitch handles expression_switch_statement nodes.
 // Creates one case block per case, connects with true_branch/false_branch, merges.
-func (gp *GoParser) buildCFGSwitch(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+func (gp *GoParser) buildCFGSwitch(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	line := int(node.StartPoint().Row) + 1
 
-	// Switch value evaluation happens in current block
 	value := node.ChildByFieldName("value")
 	if value != nil {
 		nodeIDs := collectNodeIDs(value, posMap)
@@ -1523,10 +1543,8 @@ func (gp *GoParser) buildCFGSwitch(node *sitter.Node, src []byte, file string, f
 		}
 	}
 
-	// Create merge block
-	mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	mergeBlock := cb.NewBlock("switch-merge", line)
 
-	// Process each case
 	hasDefault := false
 	var caseEnds []*graph.Node
 
@@ -1540,10 +1558,10 @@ func (gp *GoParser) buildCFGSwitch(node *sitter.Node, src []byte, file string, f
 		var label string
 
 		if child.Type() == "expression_case" {
-			caseBlock = cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
+			caseBlock = cb.NewBlock("case", int(child.StartPoint().Row)+1)
 			label = "true_branch"
 		} else if child.Type() == "default_case" {
-			caseBlock = cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
+			caseBlock = cb.NewBlock("default", int(child.StartPoint().Row)+1)
 			label = "false_branch"
 			hasDefault = true
 		} else {
@@ -1552,19 +1570,16 @@ func (gp *GoParser) buildCFGSwitch(node *sitter.Node, src []byte, file string, f
 
 		cb.AddEdge(current.ID, caseBlock.ID, label)
 
-		// Process case body
-		caseEnd := gp.buildCFGStatements(child, src, file, fn, caseBlock, exit, posMap, cb)
+		caseEnd := gp.buildCFGStatements(child, src, file, fn, caseBlock, exit, posMap, cb, lc)
 		caseEnds = append(caseEnds, caseEnd)
 	}
 
-	// Connect case ends to merge block
 	for _, caseEnd := range caseEnds {
 		if caseEnd != nil {
 			cb.AddEdge(caseEnd.ID, mergeBlock.ID, "fallthrough")
 		}
 	}
 
-	// If no default case, connect current to merge (implicit default)
 	if !hasDefault {
 		cb.AddEdge(current.ID, mergeBlock.ID, "false_branch")
 	}

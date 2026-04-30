@@ -1086,7 +1086,7 @@ func (tp *TypeScriptParser) buildCFG(body *sitter.Node, src []byte, file string,
 	}
 
 	// Process function body statements
-	lastBlock := tp.buildCFGStatementsTS(body, src, file, fn, entry, exit, posMap, cb)
+	lastBlock := tp.buildCFGStatementsTS(body, src, file, fn, entry, exit, posMap, cb, nil)
 
 	// Connect last block to exit (if it didn't terminate early)
 	if lastBlock != nil {
@@ -1101,7 +1101,7 @@ func (tp *TypeScriptParser) buildCFG(body *sitter.Node, src []byte, file string,
 
 // buildCFGStatementsTS walks container children and builds CFG for TypeScript statements.
 // Returns the last open block (nil if all paths terminated).
-func (tp *TypeScriptParser) buildCFGStatementsTS(container *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+func (tp *TypeScriptParser) buildCFGStatementsTS(container *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	if container == nil {
 		return current
 	}
@@ -1124,13 +1124,33 @@ func (tp *TypeScriptParser) buildCFGStatementsTS(container *sitter.Node, src []b
 
 		switch child.Type() {
 		case "if_statement":
-			current = tp.buildCFGIfTS(child, src, file, fn, current, exit, posMap, cb)
+			current = tp.buildCFGIfTS(child, src, file, fn, current, exit, posMap, cb, lc)
 
 		case "for_statement", "for_in_statement", "while_statement":
 			current = tp.buildCFGForTS(child, src, file, fn, current, exit, posMap, cb)
 
 		case "switch_statement":
-			current = tp.buildCFGSwitchTS(child, src, file, fn, current, exit, posMap, cb)
+			current = tp.buildCFGSwitchTS(child, src, file, fn, current, exit, posMap, cb, lc)
+
+		case "break_statement":
+			nodeIDs := collectNodeIDs(child, posMap)
+			for _, id := range nodeIDs {
+				cb.AddMember(current, id)
+			}
+			if lc != nil {
+				cb.AddEdge(current.ID, lc.afterBlock.ID, "fallthrough")
+			}
+			return nil
+
+		case "continue_statement":
+			nodeIDs := collectNodeIDs(child, posMap)
+			for _, id := range nodeIDs {
+				cb.AddMember(current, id)
+			}
+			if lc != nil {
+				cb.AddEdge(current.ID, lc.headerBlock.ID, "loop_back")
+			}
+			return nil
 
 		case "return_statement":
 			// Collect node IDs from return statement and add to current block
@@ -1167,7 +1187,7 @@ func (tp *TypeScriptParser) buildCFGStatementsTS(container *sitter.Node, src []b
 // buildCFGIfTS handles if_statement nodes in TypeScript.
 // Creates condition block, then-block, else-block (if present), and merge block.
 // Returns merge block or nil if all branches terminate.
-func (tp *TypeScriptParser) buildCFGIfTS(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+func (tp *TypeScriptParser) buildCFGIfTS(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	if current == nil {
 		return nil
 	}
@@ -1183,12 +1203,12 @@ func (tp *TypeScriptParser) buildCFGIfTS(node *sitter.Node, src []byte, file str
 
 	// Create then-block
 	line := int(node.StartPoint().Row) + 1
-	thenBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	thenBlock := cb.NewBlock("if-then", line)
 	cb.AddEdge(current.ID, thenBlock.ID, "true_branch")
 
 	// Process then-branch (consequence)
 	consequence := node.ChildByFieldName("consequence")
-	thenEnd := tp.buildCFGStatementsTS(consequence, src, file, fn, thenBlock, exit, posMap, cb)
+	thenEnd := tp.buildCFGStatementsTS(consequence, src, file, fn, thenBlock, exit, posMap, cb, lc)
 
 	// Check for else-branch
 	alternative := node.ChildByFieldName("alternative")
@@ -1209,20 +1229,20 @@ func (tp *TypeScriptParser) buildCFGIfTS(node *sitter.Node, src []byte, file str
 
 			if elseIfNode != nil {
 				// else if: create block and recurse
-				elseIfBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(elseIfNode.StartPoint().Row)+1)
+				elseIfBlock := cb.NewBlock("else-if", int(elseIfNode.StartPoint().Row)+1)
 				cb.AddEdge(current.ID, elseIfBlock.ID, "false_branch")
-				elseEnd = tp.buildCFGIfTS(elseIfNode, src, file, fn, elseIfBlock, exit, posMap, cb)
+				elseEnd = tp.buildCFGIfTS(elseIfNode, src, file, fn, elseIfBlock, exit, posMap, cb, lc)
 			} else {
 				// Regular else clause
-				elseBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(alternative.StartPoint().Row)+1)
+				elseBlock := cb.NewBlock("else", int(alternative.StartPoint().Row)+1)
 				cb.AddEdge(current.ID, elseBlock.ID, "false_branch")
-				elseEnd = tp.buildCFGStatementsTS(alternative, src, file, fn, elseBlock, exit, posMap, cb)
+				elseEnd = tp.buildCFGStatementsTS(alternative, src, file, fn, elseBlock, exit, posMap, cb, lc)
 			}
 		} else {
 			// Unexpected alternative structure, treat as regular block
-			elseBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(alternative.StartPoint().Row)+1)
+			elseBlock := cb.NewBlock("else", int(alternative.StartPoint().Row)+1)
 			cb.AddEdge(current.ID, elseBlock.ID, "false_branch")
-			elseEnd = tp.buildCFGStatementsTS(alternative, src, file, fn, elseBlock, exit, posMap, cb)
+			elseEnd = tp.buildCFGStatementsTS(alternative, src, file, fn, elseBlock, exit, posMap, cb, lc)
 		}
 	} else {
 		// No else branch, false_branch goes to merge
@@ -1235,7 +1255,7 @@ func (tp *TypeScriptParser) buildCFGIfTS(node *sitter.Node, src []byte, file str
 		return nil
 	}
 
-	mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	mergeBlock := cb.NewBlock("merge", line)
 
 	if thenEnd != nil {
 		cb.AddEdge(thenEnd.ID, mergeBlock.ID, "fallthrough")
@@ -1262,7 +1282,7 @@ func (tp *TypeScriptParser) buildCFGForTS(node *sitter.Node, src []byte, file st
 	line := int(node.StartPoint().Row) + 1
 
 	// Create header block (condition evaluation)
-	headerBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	headerBlock := cb.NewBlock("loop-header", line)
 
 	// For for_in_statement, condition is the iterator expression
 	// For for_statement, condition is in the initializer/condition/update
@@ -1288,21 +1308,24 @@ func (tp *TypeScriptParser) buildCFGForTS(node *sitter.Node, src []byte, file st
 	cb.AddEdge(current.ID, headerBlock.ID, "fallthrough")
 
 	// Create body block
-	bodyBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	bodyBlock := cb.NewBlock("loop-body", line)
 	cb.AddEdge(headerBlock.ID, bodyBlock.ID, "true_branch")
+
+	// Create after-loop block before processing body (needed for break/continue)
+	afterBlock := cb.NewBlock("loop-after", line)
+	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
+
+	// Pass loop context so break/continue in the body create correct edges
+	lc := &loopContext{headerBlock: headerBlock, afterBlock: afterBlock}
 
 	// Process loop body
 	body := node.ChildByFieldName("body")
-	bodyEnd := tp.buildCFGStatementsTS(body, src, file, fn, bodyBlock, exit, posMap, cb)
+	bodyEnd := tp.buildCFGStatementsTS(body, src, file, fn, bodyBlock, exit, posMap, cb, lc)
 
 	// Loop back from body end to header
 	if bodyEnd != nil {
 		cb.AddEdge(bodyEnd.ID, headerBlock.ID, "loop_back")
 	}
-
-	// Create after-loop block (loop exit)
-	afterBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
-	cb.AddEdge(headerBlock.ID, afterBlock.ID, "loop_exit")
 
 	return afterBlock
 }
@@ -1310,7 +1333,7 @@ func (tp *TypeScriptParser) buildCFGForTS(node *sitter.Node, src []byte, file st
 // buildCFGSwitchTS handles switch_statement nodes in TypeScript.
 // Creates one case block per case, connects with true_branch/false_branch, handles breaks.
 // Returns merge block.
-func (tp *TypeScriptParser) buildCFGSwitchTS(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder) *graph.Node {
+func (tp *TypeScriptParser) buildCFGSwitchTS(node *sitter.Node, src []byte, file string, fn *graph.Node, current, exit *graph.Node, posMap map[posKey][]string, cb *dataflow.CFGBuilder, lc *loopContext) *graph.Node {
 	if current == nil {
 		return nil
 	}
@@ -1341,7 +1364,7 @@ func (tp *TypeScriptParser) buildCFGSwitchTS(node *sitter.Node, src []byte, file
 	}
 
 	// Create merge block
-	mergeBlock := cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), line)
+	mergeBlock := cb.NewBlock("switch-merge", line)
 
 	// Process each case
 	hasDefault := false
@@ -1357,10 +1380,10 @@ func (tp *TypeScriptParser) buildCFGSwitchTS(node *sitter.Node, src []byte, file
 		var label string
 
 		if child.Type() == "switch_case" {
-			caseBlock = cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
+			caseBlock = cb.NewBlock("case", int(child.StartPoint().Row)+1)
 			label = "true_branch"
 		} else if child.Type() == "switch_default" {
-			caseBlock = cb.NewBlock(fmt.Sprintf("bb%d", cb.BlockCount()-2), int(child.StartPoint().Row)+1)
+			caseBlock = cb.NewBlock("default", int(child.StartPoint().Row)+1)
 			label = "false_branch"
 			hasDefault = true
 		} else {
