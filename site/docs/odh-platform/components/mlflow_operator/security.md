@@ -19,12 +19,12 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | manager | ? | true | ? | [`config/manager/manager.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/f753d470caec527a7f134dec1863ddfa8fd975e5/config/manager/manager.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/overlays/odh/manager_patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/f753d470caec527a7f134dec1863ddfa8fd975e5/config/overlays/odh/manager_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/overlays/openshift/manager_patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/f753d470caec527a7f134dec1863ddfa8fd975e5/config/overlays/openshift/manager_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/overlays/rhoai/manager_patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/f753d470caec527a7f134dec1863ddfa8fd975e5/config/overlays/rhoai/manager_patch.yaml) |
-| mlflow-operator-controller-manager | manager | ? | ? | ? | [`config/overlays/kind/manager-patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/f753d470caec527a7f134dec1863ddfa8fd975e5/config/overlays/kind/manager-patch.yaml) |
-| postgres-deployment | postgres | ? | ? | ? | [`config/postgres/base/deployment.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/f753d470caec527a7f134dec1863ddfa8fd975e5/config/postgres/base/deployment.yaml) |
+| controller-manager | manager | ? | true | ? | [`config/manager/manager.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/manager/manager.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/overlays/odh/manager_patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/overlays/odh/manager_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/overlays/openshift/manager_patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/overlays/openshift/manager_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/overlays/rhoai/manager_patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/overlays/rhoai/manager_patch.yaml) |
+| mlflow-operator-controller-manager | manager | ? | ? | ? | [`config/overlays/kind/manager-patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/overlays/kind/manager-patch.yaml) |
+| postgres-deployment | postgres | ? | ? | ? | [`config/postgres/base/deployment.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/postgres/base/deployment.yaml) |
 
 ## Build Security
 

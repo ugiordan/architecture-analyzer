@@ -21,9 +21,9 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | manager | ? | ? | ? | [`config/manager/manager.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/04945463394a52fa43a7ee089aa627f162c003fb/config/manager/manager.yaml) |
-| mariadb | mariadb | ? | ? | ? | [`.github/resources/mariadb/deployment.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/04945463394a52fa43a7ee089aa627f162c003fb/.github/resources/mariadb/deployment.yaml) |
-| minio | minio | ? | ? | ? | [`.github/resources/minio/deployment.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/04945463394a52fa43a7ee089aa627f162c003fb/.github/resources/minio/deployment.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/manager/manager.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/72aa6b5ea346af4d8c9b519dcf226485db7294f0/config/manager/manager.yaml) |
+| mariadb | mariadb | ? | ? | ? | [`.github/resources/mariadb/deployment.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/72aa6b5ea346af4d8c9b519dcf226485db7294f0/.github/resources/mariadb/deployment.yaml) |
+| minio | minio | ? | ? | ? | [`.github/resources/minio/deployment.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/72aa6b5ea346af4d8c9b519dcf226485db7294f0/.github/resources/minio/deployment.yaml) |
 
 ## Build Security
 

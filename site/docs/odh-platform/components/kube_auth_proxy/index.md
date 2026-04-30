@@ -1,11 +1,11 @@
 # kube-auth-proxy
 
-> **Architecture snapshot: 2026-04-29** (2026-04-29)
+> **Architecture snapshot: 2026-04-30** (2026-04-30)
 
 
 **Repository:** opendatahub-io/kube-auth-proxy  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-29T11:06:19Z
+**Extracted:** 2026-04-30T14:42:56Z
 
 ## Summary
 

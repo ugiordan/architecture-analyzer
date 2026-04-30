@@ -18,10 +18,10 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| kubeflow-trainer-controller-manager | manager | true | ? | ? | [`manifests/base/manager/manager.yaml`](https://github.com/kubeflow/trainer/blob/841b1745e453f0cb9af4197761a23bcdc3a23b61/manifests/base/manager/manager.yaml) |
-| kubeflow-trainer-controller-manager | manager | ? | ? | ? | [`manifests/base/manager/manager_config_patch.yaml`](https://github.com/kubeflow/trainer/blob/841b1745e453f0cb9af4197761a23bcdc3a23b61/manifests/base/manager/manager_config_patch.yaml) |
-| kubeflow-trainer-controller-manager | manager | ? | ? | ? | [`manifests/rhoai/manager_config_patch.yaml`](https://github.com/kubeflow/trainer/blob/841b1745e453f0cb9af4197761a23bcdc3a23b61/manifests/rhoai/manager_config_patch.yaml) |
-| kubeflow-trainer-controller-manager | manager | ? | ? | ? | [`manifests/rhoai/manager_metrics_patch.yaml`](https://github.com/kubeflow/trainer/blob/841b1745e453f0cb9af4197761a23bcdc3a23b61/manifests/rhoai/manager_metrics_patch.yaml) |
+| kubeflow-trainer-controller-manager | manager | true | ? | ? | [`manifests/base/manager/manager.yaml`](https://github.com/kubeflow/trainer/blob/690a4093f9e48f2193ef56ee5d938e09e39ef06b/manifests/base/manager/manager.yaml) |
+| kubeflow-trainer-controller-manager | manager | ? | ? | ? | [`manifests/base/manager/manager_config_patch.yaml`](https://github.com/kubeflow/trainer/blob/690a4093f9e48f2193ef56ee5d938e09e39ef06b/manifests/base/manager/manager_config_patch.yaml) |
+| kubeflow-trainer-controller-manager | manager | ? | ? | ? | [`manifests/rhoai/manager_config_patch.yaml`](https://github.com/kubeflow/trainer/blob/690a4093f9e48f2193ef56ee5d938e09e39ef06b/manifests/rhoai/manager_config_patch.yaml) |
+| kubeflow-trainer-controller-manager | manager | ? | ? | ? | [`manifests/rhoai/manager_metrics_patch.yaml`](https://github.com/kubeflow/trainer/blob/690a4093f9e48f2193ef56ee5d938e09e39ef06b/manifests/rhoai/manager_metrics_patch.yaml) |
 
 ## Build Security
 

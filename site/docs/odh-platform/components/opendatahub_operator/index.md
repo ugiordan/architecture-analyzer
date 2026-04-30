@@ -1,11 +1,11 @@
 # opendatahub-operator
 
-> **Architecture snapshot: 2026-04-29** (2026-04-29)
+> **Architecture snapshot: 2026-04-30** (2026-04-30)
 
 
 **Repository:** opendatahub-io/opendatahub-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-29T11:05:37Z
+**Extracted:** 2026-04-30T14:43:03Z
 
 ## Summary
 
@@ -186,12 +186,12 @@ No CRDs defined.
 | Component | Interaction |
 |-----------|-------------|
 | models-as-a-service | Go module dependency: github.com/opendatahub-io/models-as-a-service/maas-controller |
-| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2/pkg/clusterhealth |
+| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth |
 | opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2/pkg/failureclassifier |
-| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2/pkg/clusterhealth |
-| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2/pkg/clusterhealth |
+| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth |
+| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth |
 | opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2/pkg/failureclassifier |
-| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2/pkg/clusterhealth |
+| opendatahub-operator | Go module dependency: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth |
 
 ### Key External Dependencies
 

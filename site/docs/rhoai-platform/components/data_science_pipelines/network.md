@@ -22,20 +22,20 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP | [`manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/5c7196d225dc2857335e7b6abb1125fc53c78ee0/manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml) |
-| squid | ClusterIP | 3128/TCP | [`.github/resources/squid/manifests/service.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/5c7196d225dc2857335e7b6abb1125fc53c78ee0/.github/resources/squid/manifests/service.yaml) |
+| kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP | [`manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/2a6d734e149b007861022227fccd43dacb843029/manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml) |
+| squid | ClusterIP | 3128/TCP | [`.github/resources/squid/manifests/service.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/2a6d734e149b007861022227fccd43dacb843029/.github/resources/squid/manifests/service.yaml) |
 
 ### Ingress / Routing
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Route | ml-pipeline-ui |  |  | yes | [`manifests/kustomize/env/openshift/base/route.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/5c7196d225dc2857335e7b6abb1125fc53c78ee0/manifests/kustomize/env/openshift/base/route.yaml) |
+| Route | ml-pipeline-ui |  |  | yes | [`manifests/kustomize/env/openshift/base/route.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/2a6d734e149b007861022227fccd43dacb843029/manifests/kustomize/env/openshift/base/route.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| seaweedfs | Ingress | [`manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/5c7196d225dc2857335e7b6abb1125fc53c78ee0/manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml) |
+| seaweedfs | Ingress | [`manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/2a6d734e149b007861022227fccd43dacb843029/manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml) |
 
 ## Network Policy Graph
 

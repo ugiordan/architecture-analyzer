@@ -6,7 +6,7 @@ Kubernetes resources this controller monitors for changes. Each watch triggers r
 
 | Type | GVK | Source |
 |------|-----|--------|
-| For | /v1/Pod | [`examples/kv_events/pod_reconciler/pod_reconciler.go:180`](https://github.com/llm-d/llm-d-kv-cache/blob/ba3a65b3c2a1ef22caa32583f390dcf1970115b2/examples/kv_events/pod_reconciler/pod_reconciler.go#L180) |
+| For | /v1/Pod | [`examples/kv_events/pod_reconciler/pod_reconciler.go:180`](https://github.com/llm-d/llm-d-kv-cache/blob/4f857211d6dc4623ce306ef446540baedb25b638/examples/kv_events/pod_reconciler/pod_reconciler.go#L180) |
 
 ## Reconciliation Flow
 
@@ -26,9 +26,9 @@ sequenceDiagram
 
 | Method | Path | Source |
 |--------|------|--------|
-| * | /metrics | [`examples/kv_events/online/main.go:243`](https://github.com/llm-d/llm-d-kv-cache/blob/ba3a65b3c2a1ef22caa32583f390dcf1970115b2/examples/kv_events/online/main.go#L243) |
-| * | /score_chat_completions | [`examples/kv_events/online/main.go:273`](https://github.com/llm-d/llm-d-kv-cache/blob/ba3a65b3c2a1ef22caa32583f390dcf1970115b2/examples/kv_events/online/main.go#L273) |
-| * | /score_completions | [`examples/kv_events/online/main.go:247`](https://github.com/llm-d/llm-d-kv-cache/blob/ba3a65b3c2a1ef22caa32583f390dcf1970115b2/examples/kv_events/online/main.go#L247) |
+| * | /metrics | [`examples/kv_events/online/main.go:244`](https://github.com/llm-d/llm-d-kv-cache/blob/4f857211d6dc4623ce306ef446540baedb25b638/examples/kv_events/online/main.go#L244) |
+| * | /score_chat_completions | [`examples/kv_events/online/main.go:274`](https://github.com/llm-d/llm-d-kv-cache/blob/4f857211d6dc4623ce306ef446540baedb25b638/examples/kv_events/online/main.go#L274) |
+| * | /score_completions | [`examples/kv_events/online/main.go:248`](https://github.com/llm-d/llm-d-kv-cache/blob/4f857211d6dc4623ce306ef446540baedb25b638/examples/kv_events/online/main.go#L248) |
 
 ## Configuration
 

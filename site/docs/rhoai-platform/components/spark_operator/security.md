@@ -18,9 +18,9 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_webhook_patch.yaml`](https://github.com/kubeflow/spark-operator/blob/5366d3d2fe80d4a3e972ea010e3556631d52f017/config/default/manager_webhook_patch.yaml) |
-| spark-operator-controller | controller | true | true | false | [`config/manager/manager.yaml`](https://github.com/kubeflow/spark-operator/blob/5366d3d2fe80d4a3e972ea010e3556631d52f017/config/manager/manager.yaml) |
-| spark-operator-webhook | webhook | true | true | false | [`config/webhook/deployment.yaml`](https://github.com/kubeflow/spark-operator/blob/5366d3d2fe80d4a3e972ea010e3556631d52f017/config/webhook/deployment.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_webhook_patch.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/default/manager_webhook_patch.yaml) |
+| spark-operator-controller | controller | true | true | false | [`config/manager/manager.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/manager/manager.yaml) |
+| spark-operator-webhook | webhook | true | true | false | [`config/webhook/deployment.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/webhook/deployment.yaml) |
 
 ## Build Security
 

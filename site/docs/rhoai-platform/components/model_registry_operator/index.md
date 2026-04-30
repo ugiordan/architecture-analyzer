@@ -1,11 +1,11 @@
 # model-registry-operator
 
-> **Architecture snapshot: 2026-04-29** (2026-04-29)
+> **Architecture snapshot: 2026-04-30** (2026-04-30)
 
 
 **Repository:** opendatahub-io/model-registry-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-29T11:05:39Z
+**Extracted:** 2026-04-30T14:42:18Z
 
 ## Summary
 
@@ -95,8 +95,8 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Source |
 |-------|---------|------|-------|--------|------------------|--------|
-| modelregistry.opendatahub.io | v1alpha1 | ModelRegistry | Namespaced | 120 | 2 | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/af675d40d340ce50d395d34a72a9669ea68493b3/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
-| modelregistry.opendatahub.io | v1beta1 | ModelRegistry | Namespaced | 113 | 6 | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/af675d40d340ce50d395d34a72a9669ea68493b3/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
+| modelregistry.opendatahub.io | v1alpha1 | ModelRegistry | Namespaced | 120 | 2 | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/22d8b46629b60f5a4b3d09ecc81e22aae32d6327/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
+| modelregistry.opendatahub.io | v1beta1 | ModelRegistry | Namespaced | 113 | 6 | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/22d8b46629b60f5a4b3d09ecc81e22aae32d6327/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
 
 ## Dependencies
 
