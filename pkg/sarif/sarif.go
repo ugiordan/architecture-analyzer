@@ -78,27 +78,20 @@ func Parse(r io.Reader) (*Report, error) {
 	return ParseWithLimit(r, DefaultMaxSARIFSize)
 }
 
-// countingReader wraps a reader and tracks bytes read for size enforcement.
-type countingReader struct {
-	r     io.Reader
-	n     int64
-	limit int64
-}
-
-func (cr *countingReader) Read(p []byte) (int, error) {
-	n, err := cr.r.Read(p)
-	cr.n += int64(n)
-	if cr.n > cr.limit {
-		return n, fmt.Errorf("SARIF input exceeds size limit of %d bytes", cr.limit)
-	}
-	return n, err
-}
-
 func ParseWithLimit(r io.Reader, maxBytes int64) (*Report, error) {
-	cr := &countingReader{r: r, limit: maxBytes}
+	// Read into a size-limited buffer first, then unmarshal. This ensures
+	// the size limit is enforced before any JSON parsing/allocation.
+	lr := io.LimitReader(r, maxBytes+1)
+	data, err := io.ReadAll(lr)
+	if err != nil {
+		return nil, fmt.Errorf("reading SARIF: %w", err)
+	}
+	if int64(len(data)) > maxBytes {
+		return nil, fmt.Errorf("SARIF input exceeds size limit of %d bytes", maxBytes)
+	}
 
 	var report Report
-	if err := json.NewDecoder(cr).Decode(&report); err != nil {
+	if err := json.Unmarshal(data, &report); err != nil {
 		return nil, fmt.Errorf("parsing SARIF JSON: %w", err)
 	}
 
