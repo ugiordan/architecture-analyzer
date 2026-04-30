@@ -5,7 +5,7 @@
 
 **Repository:** opendatahub-io/model-registry-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T15:05:27Z
+**Extracted:** 2026-04-30T15:12:05Z
 
 ## Summary
 
