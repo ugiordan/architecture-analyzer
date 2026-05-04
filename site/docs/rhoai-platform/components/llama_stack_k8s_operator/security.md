@@ -12,10 +12,10 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | kube-rbac-proxy | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/config/default/manager_auth_proxy_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/config/default/manager_auth_proxy_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_config_patch.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/config/default/manager_config_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/manager/manager.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/config/manager/manager.yaml) |
+| controller-manager | kube-rbac-proxy | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/config/default/manager_auth_proxy_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/config/default/manager_auth_proxy_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_config_patch.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/config/default/manager_config_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/manager/manager.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/config/manager/manager.yaml) |
 
 ## Build Security
 

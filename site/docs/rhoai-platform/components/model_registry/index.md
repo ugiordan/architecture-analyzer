@@ -1,11 +1,11 @@
 # model-registry
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** kubeflow/model-registry  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:44Z
+**Extracted:** 2026-05-04T08:27:03Z
 
 ## Summary
 

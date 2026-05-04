@@ -21,9 +21,9 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| mariadb | ClusterIP | 3306/TCP | [`.github/resources/mariadb/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/72aa6b5ea346af4d8c9b519dcf226485db7294f0/.github/resources/mariadb/service.yaml) |
-| minio | ClusterIP | 9000/TCP, 9001/TCP | [`.github/resources/minio/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/72aa6b5ea346af4d8c9b519dcf226485db7294f0/.github/resources/minio/service.yaml) |
-| pypi-server | ClusterIP | 8080/TCP | [`.github/resources/pypiserver/base/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/72aa6b5ea346af4d8c9b519dcf226485db7294f0/.github/resources/pypiserver/base/service.yaml) |
+| mariadb | ClusterIP | 3306/TCP | [`.github/resources/mariadb/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a628323e2ffd7827e8abe2b3292dbd034f95edcc/.github/resources/mariadb/service.yaml) |
+| minio | ClusterIP | 9000/TCP, 9001/TCP | [`.github/resources/minio/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a628323e2ffd7827e8abe2b3292dbd034f95edcc/.github/resources/minio/service.yaml) |
+| pypi-server | ClusterIP | 8080/TCP | [`.github/resources/pypiserver/base/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a628323e2ffd7827e8abe2b3292dbd034f95edcc/.github/resources/pypiserver/base/service.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources found. All pod-to-pod traffic is allowed by default.

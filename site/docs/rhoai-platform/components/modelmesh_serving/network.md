@@ -19,17 +19,17 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| modelmesh-controller | ClusterIP | 8080/TCP | [`config/overlays/odh/manager/service.yaml`](https://github.com/kserve/modelmesh-serving/blob/794cbf39ff585034ae3ed8b73953e65b2524a738/config/overlays/odh/manager/service.yaml) |
-| modelmesh-webhook-server-service | ClusterIP | 9443/TCP | [`config/webhook/service.yaml`](https://github.com/kserve/modelmesh-serving/blob/794cbf39ff585034ae3ed8b73953e65b2524a738/config/webhook/service.yaml) |
+| modelmesh-controller | ClusterIP | 8080/TCP | [`config/overlays/odh/manager/service.yaml`](https://github.com/kserve/modelmesh-serving/blob/056bc2e855779c02536db9ef786b26cc73c63f20/config/overlays/odh/manager/service.yaml) |
+| modelmesh-webhook-server-service | ClusterIP | 9443/TCP | [`config/webhook/service.yaml`](https://github.com/kserve/modelmesh-serving/blob/056bc2e855779c02536db9ef786b26cc73c63f20/config/webhook/service.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| etcd | Ingress | [`config/overlays/odh/rbac/networkpolicy_etcd.yaml`](https://github.com/kserve/modelmesh-serving/blob/794cbf39ff585034ae3ed8b73953e65b2524a738/config/overlays/odh/rbac/networkpolicy_etcd.yaml) |
-| modelmesh-controller | Ingress | [`config/rbac/common/networkpolicy-controller.yaml`](https://github.com/kserve/modelmesh-serving/blob/794cbf39ff585034ae3ed8b73953e65b2524a738/config/rbac/common/networkpolicy-controller.yaml) |
-| modelmesh-runtimes | Ingress | [`config/rbac/common/networkpolicy-runtimes.yaml`](https://github.com/kserve/modelmesh-serving/blob/794cbf39ff585034ae3ed8b73953e65b2524a738/config/rbac/common/networkpolicy-runtimes.yaml) |
-| modelmesh-webhook | Ingress | [`config/rbac/common/networkpolicy-webhook.yaml`](https://github.com/kserve/modelmesh-serving/blob/794cbf39ff585034ae3ed8b73953e65b2524a738/config/rbac/common/networkpolicy-webhook.yaml) |
+| etcd | Ingress | [`config/overlays/odh/rbac/networkpolicy_etcd.yaml`](https://github.com/kserve/modelmesh-serving/blob/056bc2e855779c02536db9ef786b26cc73c63f20/config/overlays/odh/rbac/networkpolicy_etcd.yaml) |
+| modelmesh-controller | Ingress | [`config/rbac/common/networkpolicy-controller.yaml`](https://github.com/kserve/modelmesh-serving/blob/056bc2e855779c02536db9ef786b26cc73c63f20/config/rbac/common/networkpolicy-controller.yaml) |
+| modelmesh-runtimes | Ingress | [`config/rbac/common/networkpolicy-runtimes.yaml`](https://github.com/kserve/modelmesh-serving/blob/056bc2e855779c02536db9ef786b26cc73c63f20/config/rbac/common/networkpolicy-runtimes.yaml) |
+| modelmesh-webhook | Ingress | [`config/rbac/common/networkpolicy-webhook.yaml`](https://github.com/kserve/modelmesh-serving/blob/056bc2e855779c02536db9ef786b26cc73c63f20/config/rbac/common/networkpolicy-webhook.yaml) |
 
 ## Network Policy Graph
 

@@ -18,9 +18,9 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| kuberay-operator | kuberay-operator | ? | ? | ? | [`ray-operator/config/overlays/test-overrides/deployment-override.yaml`](https://github.com/ray-project/kuberay/blob/c8eb1020e2fc4b05c79ede7416ff745177f258dd/ray-operator/config/overlays/test-overrides/deployment-override.yaml) |
-| kuberay-operator | kuberay-operator | ? | ? | ? | [`ray-operator/config/default-with-webhooks/manager_webhook_patch.yaml`](https://github.com/ray-project/kuberay/blob/c8eb1020e2fc4b05c79ede7416ff745177f258dd/ray-operator/config/default-with-webhooks/manager_webhook_patch.yaml) |
-| kuberay-operator | kuberay-operator | ? | true | ? | [`ray-operator/config/manager/manager.yaml`](https://github.com/ray-project/kuberay/blob/c8eb1020e2fc4b05c79ede7416ff745177f258dd/ray-operator/config/manager/manager.yaml) |
+| kuberay-operator | kuberay-operator | ? | ? | ? | [`ray-operator/config/overlays/test-overrides/deployment-override.yaml`](https://github.com/ray-project/kuberay/blob/6f4e6803379e0aa1c88ac02b047f140d5abd28d3/ray-operator/config/overlays/test-overrides/deployment-override.yaml) |
+| kuberay-operator | kuberay-operator | ? | ? | ? | [`ray-operator/config/default-with-webhooks/manager_webhook_patch.yaml`](https://github.com/ray-project/kuberay/blob/6f4e6803379e0aa1c88ac02b047f140d5abd28d3/ray-operator/config/default-with-webhooks/manager_webhook_patch.yaml) |
+| kuberay-operator | kuberay-operator | ? | true | ? | [`ray-operator/config/manager/manager.yaml`](https://github.com/ray-project/kuberay/blob/6f4e6803379e0aa1c88ac02b047f140d5abd28d3/ray-operator/config/manager/manager.yaml) |
 
 ## Build Security
 
@@ -38,7 +38,7 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | `historyserver/Dockerfile.historyserver` | ubuntu:22.04 | 2 |  |  |  |  | No USER directive found (defaults to root) |
 | `historyserver/cmd/collector/Dockerfile` |  | 0 |  |  |  |  | No USER directive found (defaults to root) |
 | `historyserver/cmd/historyserver/Dockerfile` |  | 0 |  |  |  |  | No USER directive found (defaults to root) |
-| `proto/Dockerfile` | golang:1.25-bookworm | 1 | 65532:65532 |  |  |  |  |
+| `proto/Dockerfile` | golang:1.26-bookworm | 1 | 65532:65532 |  |  |  |  |
 | `ray-operator/Dockerfile` | gcr.io/distroless/base-debian12:nonroot | 3 | 65532:65532 |  |  |  | Unpinned base image: scratch |
 | `ray-operator/Dockerfile.buildx` | gcr.io/distroless/base-debian12:nonroot | 1 | 65532:65532 |  | multi-arch |  |  |
 | `ray-operator/Dockerfile.submitter.buildx` | scratch | 1 | 65532:65532 |  | multi-arch |  | Unpinned base image: scratch |

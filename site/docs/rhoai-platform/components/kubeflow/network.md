@@ -19,9 +19,9 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| service | ClusterIP | 443/TCP | [`components/notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/1e5cd256fe1eff78d8d6ab508e984952a8b5d9b6/components/notebook-controller/config/manager/service.yaml) |
-| service | ClusterIP | 8080/TCP | [`components/odh-notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/1e5cd256fe1eff78d8d6ab508e984952a8b5d9b6/components/odh-notebook-controller/config/manager/service.yaml) |
-| webhook-service | ClusterIP | 443/TCP | [`components/odh-notebook-controller/config/webhook/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/1e5cd256fe1eff78d8d6ab508e984952a8b5d9b6/components/odh-notebook-controller/config/webhook/service.yaml) |
+| service | ClusterIP | 443/TCP | [`components/notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/78a036aef9ffb4ad7c801878eef558ebf6b3545c/components/notebook-controller/config/manager/service.yaml) |
+| service | ClusterIP | 8080/TCP | [`components/odh-notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/78a036aef9ffb4ad7c801878eef558ebf6b3545c/components/odh-notebook-controller/config/manager/service.yaml) |
+| webhook-service | ClusterIP | 443/TCP | [`components/odh-notebook-controller/config/webhook/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/78a036aef9ffb4ad7c801878eef558ebf6b3545c/components/odh-notebook-controller/config/webhook/service.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources found. All pod-to-pod traffic is allowed by default.

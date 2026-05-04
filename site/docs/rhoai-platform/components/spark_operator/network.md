@@ -17,14 +17,14 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| spark-operator-webhook-svc | ClusterIP | 443/TCP | [`config/webhook/service.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/webhook/service.yaml) |
+| spark-operator-webhook-svc | ClusterIP | 443/TCP | [`config/webhook/service.yaml`](https://github.com/kubeflow/spark-operator/blob/16adb437ef96672ef47603845e2078e899f3edbe/config/webhook/service.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| spark-operator-allow-internal | Ingress | [`config/overlays/odh/networkpolicy.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/overlays/odh/networkpolicy.yaml) |
-| spark-operator-allow-internal | Ingress | [`config/overlays/rhoai/networkpolicy.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/overlays/rhoai/networkpolicy.yaml) |
+| spark-operator-allow-internal | Ingress | [`config/overlays/odh/networkpolicy.yaml`](https://github.com/kubeflow/spark-operator/blob/16adb437ef96672ef47603845e2078e899f3edbe/config/overlays/odh/networkpolicy.yaml) |
+| spark-operator-allow-internal | Ingress | [`config/overlays/rhoai/networkpolicy.yaml`](https://github.com/kubeflow/spark-operator/blob/16adb437ef96672ef47603845e2078e899f3edbe/config/overlays/rhoai/networkpolicy.yaml) |
 
 ## Network Policy Graph
 

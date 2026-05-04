@@ -1,11 +1,11 @@
 # codeflare-operator
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** project-codeflare/codeflare-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:25:11Z
+**Extracted:** 2026-05-04T08:27:04Z
 
 ## Summary
 

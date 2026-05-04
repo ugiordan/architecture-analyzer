@@ -12,7 +12,7 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | manager | true | ? | ? | [`config/manager/manager.yaml`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/52fa0632c89259e4b8a3246ddf94bbbb5796a718/config/manager/manager.yaml) |
+| controller-manager | manager | true | ? | ? | [`config/manager/manager.yaml`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/3a6125510a4276c5dd7b956ed50e57f1b3b129d3/config/manager/manager.yaml) |
 
 ## Build Security
 

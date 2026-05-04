@@ -1,11 +1,11 @@
 # training-operator
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** kubeflow/training-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:25:29Z
+**Extracted:** 2026-05-04T08:27:34Z
 
 ## Summary
 

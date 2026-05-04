@@ -1,11 +1,11 @@
 # trainer
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** kubeflow/trainer  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:47Z
+**Extracted:** 2026-05-04T08:27:28Z
 
 ## Summary
 
@@ -55,9 +55,9 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Source |
 |-------|---------|------|-------|--------|------------------|--------|
-| trainer.kubeflow.org | v1alpha1 | ClusterTrainingRuntime | Cluster | 1246 | 9 | [`manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml`](https://github.com/kubeflow/trainer/blob/e061cc924f66edfe015d483856d91584ff5d8f1a/manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml) |
-| trainer.kubeflow.org | v1alpha1 | TrainJob | Namespaced | 562 | 5 | [`manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml`](https://github.com/kubeflow/trainer/blob/e061cc924f66edfe015d483856d91584ff5d8f1a/manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml) |
-| trainer.kubeflow.org | v1alpha1 | TrainingRuntime | Namespaced | 1246 | 9 | [`manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml`](https://github.com/kubeflow/trainer/blob/e061cc924f66edfe015d483856d91584ff5d8f1a/manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml) |
+| trainer.kubeflow.org | v1alpha1 | ClusterTrainingRuntime | Cluster | 1246 | 9 | [`manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml`](https://github.com/kubeflow/trainer/blob/44d5bb90ead7443e8cea9a124799e4571d6f8838/manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml) |
+| trainer.kubeflow.org | v1alpha1 | TrainJob | Namespaced | 562 | 5 | [`manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml`](https://github.com/kubeflow/trainer/blob/44d5bb90ead7443e8cea9a124799e4571d6f8838/manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml) |
+| trainer.kubeflow.org | v1alpha1 | TrainingRuntime | Namespaced | 1246 | 9 | [`manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml`](https://github.com/kubeflow/trainer/blob/44d5bb90ead7443e8cea9a124799e4571d6f8838/manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml) |
 
 ## Dependencies
 

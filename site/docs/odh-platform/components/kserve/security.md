@@ -20,17 +20,17 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| kserve-controller-manager | kube-rbac-proxy | true | true | false | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/default/manager_auth_proxy_patch.yaml) |
-| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/default/manager_auth_proxy_patch.yaml) |
-| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_image_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/default/manager_image_patch.yaml) |
-| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_prometheus_metrics_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/default/manager_prometheus_metrics_patch.yaml) |
-| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_resources_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/default/manager_resources_patch.yaml) |
-| kserve-controller-manager | manager | true | true | false | [`config/manager/manager.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/manager/manager.yaml) |
-| kserve-controller-manager | manager | ? | ? | ? | [`config/overlays/test/manager_image_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/overlays/test/manager_image_patch.yaml) |
-| kserve-controller-manager | manager | ? | ? | ? | [`config/overlays/version-template/manager_image_patch.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/overlays/version-template/manager_image_patch.yaml) |
-| kserve-localmodel-controller-manager | manager | true | true | false | [`config/localmodels/manager.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/localmodels/manager.yaml) |
-| llmisvc-controller-manager | manager | true | true | false | [`config/llmisvc/manager.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/config/llmisvc/manager.yaml) |
-| spark-pmml-iris | kfserving-container | ? | ? | ? | [`docs/samples/v1beta1/spark/deployment.yaml`](https://github.com/kserve/kserve/blob/646c4cc736a44bdbfb0eb0f278d405c93c2bf4c4/docs/samples/v1beta1/spark/deployment.yaml) |
+| kserve-controller-manager | kube-rbac-proxy | true | true | false | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/default/manager_auth_proxy_patch.yaml) |
+| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/default/manager_auth_proxy_patch.yaml) |
+| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_image_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/default/manager_image_patch.yaml) |
+| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_prometheus_metrics_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/default/manager_prometheus_metrics_patch.yaml) |
+| kserve-controller-manager | manager | ? | ? | ? | [`config/default/manager_resources_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/default/manager_resources_patch.yaml) |
+| kserve-controller-manager | manager | true | true | false | [`config/manager/manager.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/manager/manager.yaml) |
+| kserve-controller-manager | manager | ? | ? | ? | [`config/overlays/test/manager_image_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/overlays/test/manager_image_patch.yaml) |
+| kserve-controller-manager | manager | ? | ? | ? | [`config/overlays/version-template/manager_image_patch.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/overlays/version-template/manager_image_patch.yaml) |
+| kserve-localmodel-controller-manager | manager | true | true | false | [`config/localmodels/manager.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/localmodels/manager.yaml) |
+| llmisvc-controller-manager | manager | true | true | false | [`config/llmisvc/manager.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/config/llmisvc/manager.yaml) |
+| spark-pmml-iris | kfserving-container | ? | ? | ? | [`docs/samples/v1beta1/spark/deployment.yaml`](https://github.com/kserve/kserve/blob/d5aea2c6d8f2f2c8dcf22897e23e5d929cf654dd/docs/samples/v1beta1/spark/deployment.yaml) |
 
 ## Build Security
 

@@ -18,14 +18,14 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| minio-service | ClusterIP | 9000/TCP | [`config/seaweedfs/components/tls/service-tls-patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/46d31981c7867fd944d4ab8a9e0d8434648d379e/config/seaweedfs/components/tls/service-tls-patch.yaml) |
-| postgres-service | ClusterIP | 5432/TCP | [`config/postgres/base/service.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/46d31981c7867fd944d4ab8a9e0d8434648d379e/config/postgres/base/service.yaml) |
+| minio-service | ClusterIP | 9000/TCP | [`config/seaweedfs/components/tls/service-tls-patch.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/81842d0a300f01311565ebc064bea6e0e53a6ced/config/seaweedfs/components/tls/service-tls-patch.yaml) |
+| postgres-service | ClusterIP | 5432/TCP | [`config/postgres/base/service.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/81842d0a300f01311565ebc064bea6e0e53a6ced/config/postgres/base/service.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| seaweedfs | Ingress | [`config/seaweedfs/base/seaweedfs-networkpolicy.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/46d31981c7867fd944d4ab8a9e0d8434648d379e/config/seaweedfs/base/seaweedfs-networkpolicy.yaml) |
+| seaweedfs | Ingress | [`config/seaweedfs/base/seaweedfs-networkpolicy.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/81842d0a300f01311565ebc064bea6e0e53a6ced/config/seaweedfs/base/seaweedfs-networkpolicy.yaml) |
 
 ## Network Policy Graph
 

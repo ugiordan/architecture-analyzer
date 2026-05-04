@@ -19,6 +19,7 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | `images/dataset/alpaca/Dockerfile` | registry.access.redhat.com/ubi9:latest | 2 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/python-311:latest; Unpinned base image: registry.access.redhat.com/ubi9:latest; No USER directive found (defaults to root) |
 | `images/model/bloom560m/Dockerfile` | registry.access.redhat.com/ubi9:9.4 | 2 |  |  |  |  | No USER directive found (defaults to root) |
 | `images/runtime/examples/ray-data-docling/Dockerfile` | quay.io/modh/ray:2.52.1-py312-cpu | 1 | 1001 |  |  |  |  |
+| `images/runtime/examples/ray-data-rag/Dockerfile` | quay.io/modh/ray:2.54.1-py312-cu128 | 1 | 1001 |  |  |  |  |
 | `images/runtime/examples/ray-torch-cuda/Dockerfile` | quay.io/modh/ray:2.35.0-py311-cu121 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `images/runtime/examples/ray-torch-rocm/Dockerfile` | quay.io/modh/ray:2.35.0-py311-rocm62 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `images/runtime/ray/cuda/2.52.1-py311-cu121/Dockerfile` | registry.access.redhat.com/ubi9/python-${PYTHON_VERSION}:${IMAGE_TAG} | 1 | 1001 |  |  |  |  |

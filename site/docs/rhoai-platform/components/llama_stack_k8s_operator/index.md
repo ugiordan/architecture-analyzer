@@ -1,11 +1,11 @@
 # llama-stack-k8s-operator
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** llamastack/llama-stack-k8s-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:31Z
+**Extracted:** 2026-05-04T08:27:08Z
 
 ## Summary
 
@@ -68,7 +68,7 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Source |
 |-------|---------|------|-------|--------|------------------|--------|
-| llamastack.io | v1alpha1 | LlamaStackDistribution | Namespaced | 371 | 1 | [`config/crd/bases/llamastack.io_llamastackdistributions.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/config/crd/bases/llamastack.io_llamastackdistributions.yaml) |
+| llamastack.io | v1alpha1 | LlamaStackDistribution | Namespaced | 371 | 1 | [`config/crd/bases/llamastack.io_llamastackdistributions.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/config/crd/bases/llamastack.io_llamastackdistributions.yaml) |
 
 ## Dependencies
 

@@ -1,11 +1,11 @@
 # workload-variant-autoscaler
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** llm-d/workload-variant-autoscaler  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:59Z
+**Extracted:** 2026-05-04T08:27:34Z
 
 ## Summary
 
@@ -46,7 +46,7 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Source |
 |-------|---------|------|-------|--------|------------------|--------|
-| llmd.ai | v1alpha1 | VariantAutoscaling | Namespaced | 26 | 1 | [`config/crd/bases/llmd.ai_variantautoscalings.yaml`](https://github.com/llm-d/workload-variant-autoscaler/blob/735a0461e794c9f4e635bb6ab004e84b04a18c45/config/crd/bases/llmd.ai_variantautoscalings.yaml) |
+| llmd.ai | v1alpha1 | VariantAutoscaling | Namespaced | 26 | 1 | [`config/crd/bases/llmd.ai_variantautoscalings.yaml`](https://github.com/llm-d/workload-variant-autoscaler/blob/770b5b8edc2ce8b18c8df84f7784dda4793f522e/config/crd/bases/llmd.ai_variantautoscalings.yaml) |
 
 ## Dependencies
 

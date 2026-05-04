@@ -18,17 +18,17 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | manager | ? | ? | ? | [`config/alpha-enabled/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/alpha-enabled/manager_config_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/components/manager/manager.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/components/manager/manager.yaml) |
-| controller-manager | kube-rbac-proxy | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/default/manager_auth_proxy_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/default/manager_config_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_metrics_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/default/manager_metrics_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_visibility_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/default/manager_visibility_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/default/manager_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/default/manager_webhook_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/dev/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/dev/manager_config_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/rhoai/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/rhoai/manager_config_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/rhoai/manager_metrics_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/rhoai/manager_metrics_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`config/rhoai/manager_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e4afc39d2dcacc94adb71be812ae892b5e49caf1/config/rhoai/manager_webhook_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/alpha-enabled/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/alpha-enabled/manager_config_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/components/manager/manager.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/components/manager/manager.yaml) |
+| controller-manager | kube-rbac-proxy | ? | ? | ? | [`config/default/manager_auth_proxy_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/default/manager_auth_proxy_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/default/manager_config_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_metrics_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/default/manager_metrics_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_visibility_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/default/manager_visibility_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/default/manager_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/default/manager_webhook_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/dev/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/dev/manager_config_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/rhoai/manager_config_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/rhoai/manager_config_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/rhoai/manager_metrics_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/rhoai/manager_metrics_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`config/rhoai/manager_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/e8b3ff9daa256c43f854fc8bbfea4a51d66f7b8b/config/rhoai/manager_webhook_patch.yaml) |
 
 ## Build Security
 
@@ -37,7 +37,7 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
 | `Dockerfile` | ${BASE_IMAGE} | 2 | 65532:65532 |  | multi-arch |  | Unpinned base image: ${BUILDER_IMAGE}; Unpinned base image: ${BASE_IMAGE} |
-| `Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:7d4e47500f28ac3a2bff06c25eff9127ff21048538ae03ce240d57cf756acd00 | 2 | 65532:65532 |  |  |  |  |
+| `Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:8d0a8fb39ec907e8ca62cdd24b62a63ca49a30fe465798a360741fde58437a23 | 2 | 65532:65532 |  |  |  |  |
 | `Dockerfile.rhoai` | registry.access.redhat.com/ubi9/ubi:latest | 3 | 65532:65532 |  |  |  | Unpinned base image: ${GOLANG_IMAGE}; Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest; Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest |
 | `cmd/experimental/kueue-viz/backend/Dockerfile` | ${BASE_IMAGE} | 2 | 65532:65532 |  |  |  | Unpinned base image: ${BUILDER_IMAGE}; Unpinned base image: ${BASE_IMAGE} |
 | `cmd/experimental/kueue-viz/frontend/Dockerfile` | node:23 | 2 |  |  |  |  | No USER directive found (defaults to root) |

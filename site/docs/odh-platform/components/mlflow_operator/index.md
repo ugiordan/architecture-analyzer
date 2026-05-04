@@ -1,11 +1,11 @@
 # mlflow-operator
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** opendatahub-io/mlflow-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:28Z
+**Extracted:** 2026-05-04T08:28:11Z
 
 ## Summary
 
@@ -82,8 +82,8 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Source |
 |-------|---------|------|-------|--------|------------------|--------|
-| mlflow.kubeflow.org | v1 | MLflowConfig | Namespaced | 6 | 4 | [`config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml) |
-| mlflow.opendatahub.io | v1 | MLflow | Cluster | 296 | 16 | [`config/crd/bases/mlflow.opendatahub.io_mlflows.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/9a0ea2c59dc32a19ad60a648ea61d1b33659cc17/config/crd/bases/mlflow.opendatahub.io_mlflows.yaml) |
+| mlflow.kubeflow.org | v1 | MLflowConfig | Namespaced | 6 | 4 | [`config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/c47bea907957a9eeb35ee4ed3b0403e855d096cc/config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml) |
+| mlflow.opendatahub.io | v1 | MLflow | Cluster | 296 | 16 | [`config/crd/bases/mlflow.opendatahub.io_mlflows.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/c47bea907957a9eeb35ee4ed3b0403e855d096cc/config/crd/bases/mlflow.opendatahub.io_mlflows.yaml) |
 
 ## Dependencies
 

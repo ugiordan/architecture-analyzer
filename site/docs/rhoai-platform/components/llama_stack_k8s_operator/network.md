@@ -17,13 +17,13 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| service | ClusterIP | 0/TCP | [`controllers/manifests/base/service.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/controllers/manifests/base/service.yaml) |
+| service | ClusterIP | 0/TCP | [`controllers/manifests/base/service.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/controllers/manifests/base/service.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| network-policy | Ingress | [`controllers/manifests/base/networkpolicy.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/498ad3f2ac59e93ea7c1ebee43e4c9b27727ddea/controllers/manifests/base/networkpolicy.yaml) |
+| network-policy | Ingress | [`controllers/manifests/base/networkpolicy.yaml`](https://github.com/llamastack/llama-stack-k8s-operator/blob/7fb27ebdebc380a75f221b46ec036d2a4c762d27/controllers/manifests/base/networkpolicy.yaml) |
 
 ## Network Policy Graph
 

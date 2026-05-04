@@ -1,11 +1,11 @@
 # models-as-a-service
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** red-hat-data-services/models-as-a-service  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:25Z
+**Extracted:** 2026-05-04T08:27:29Z
 
 ## Summary
 

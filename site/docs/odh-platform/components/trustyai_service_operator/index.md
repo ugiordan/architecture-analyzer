@@ -1,11 +1,11 @@
 # trustyai-service-operator
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** trustyai-explainability/trustyai-service-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:44Z
+**Extracted:** 2026-05-04T08:27:01Z
 
 ## Summary
 
@@ -16,7 +16,7 @@
 | Services | 0 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
-| Controller Watches | 13 |
+| Controller Watches | 15 |
 
 ## Component Architecture
 
@@ -43,10 +43,12 @@ graph LR
     class owned_3 owned
     controller -->|"Owns"| owned_4["Service"]
     class owned_4 owned
-    watch_5["InferenceService"] -->|"Watches"| controller
-    class watch_5 external
-    watch_6["Namespace"] -->|"Watches"| controller
+    controller -->|"Owns"| owned_5["ServiceMonitor"]
+    class owned_5 owned
+    watch_6["InferenceService"] -->|"Watches"| controller
     class watch_6 external
+    watch_7["Namespace"] -->|"Watches"| controller
+    class watch_7 external
 ```
 
 ### CRDs
@@ -59,7 +61,7 @@ No CRDs defined.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.2 |
+| github.com/go-logr/logr | v1.4.3 |
 | github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring | v0.64.1 |
 | github.com/prometheus/client_golang | v1.18.0 |
 | k8s.io/api | v0.29.2 |

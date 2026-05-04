@@ -19,9 +19,9 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| training-operator | training-operator | ? | ? | ? | [`manifests/base/deployment.yaml`](https://github.com/kubeflow/training-operator/blob/53ac7bf22ce5e0bfa9e51f08eab04c4190718887/manifests/base/deployment.yaml) |
-| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_config_patch.yaml`](https://github.com/kubeflow/training-operator/blob/53ac7bf22ce5e0bfa9e51f08eab04c4190718887/manifests/rhoai/manager_config_patch.yaml) |
-| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_metrics_patch.yaml`](https://github.com/kubeflow/training-operator/blob/53ac7bf22ce5e0bfa9e51f08eab04c4190718887/manifests/rhoai/manager_metrics_patch.yaml) |
+| training-operator | training-operator | ? | ? | ? | [`manifests/base/deployment.yaml`](https://github.com/kubeflow/training-operator/blob/bd331e7d9885e086f6cada2f7f89f3fd567d28c4/manifests/base/deployment.yaml) |
+| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_config_patch.yaml`](https://github.com/kubeflow/training-operator/blob/bd331e7d9885e086f6cada2f7f89f3fd567d28c4/manifests/rhoai/manager_config_patch.yaml) |
+| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_metrics_patch.yaml`](https://github.com/kubeflow/training-operator/blob/bd331e7d9885e086f6cada2f7f89f3fd567d28c4/manifests/rhoai/manager_metrics_patch.yaml) |
 
 ## Build Security
 
@@ -31,7 +31,7 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 |------|------------|--------|------|-------|---------------|------|--------|
 | `build/images/kubectl-delivery/Dockerfile` | alpine:3.17 | 2 |  |  |  |  | No USER directive found (defaults to root) |
 | `build/images/training-operator/Dockerfile` | gcr.io/distroless/static:latest | 2 |  |  |  |  | Unpinned base image: gcr.io/distroless/static:latest; No USER directive found (defaults to root) |
-| `build/images/training-operator/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:7d4e47500f28ac3a2bff06c25eff9127ff21048538ae03ce240d57cf756acd00 | 2 | ${USER}:${USER} |  |  |  |  |
+| `build/images/training-operator/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:8d0a8fb39ec907e8ca62cdd24b62a63ca49a30fe465798a360741fde58437a23 | 2 | ${USER}:${USER} |  |  |  |  |
 | `build/images/training-operator/Dockerfile.multiarch` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 1 | 65532:65532 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
 | `build/images/training-operator/Dockerfile.rhoai` | registry.access.redhat.com/ubi9/ubi:latest | 2 | 65532:65532 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest |
 | `examples/jax/cpu-demo/Dockerfile` | python:3.12 | 1 |  |  |  |  | No USER directive found (defaults to root) |

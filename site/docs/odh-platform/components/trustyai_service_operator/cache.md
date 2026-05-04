@@ -27,5 +27,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 - Type Namespace is watched but has no cache filter (cluster-wide informer)
 - Type NemoGuardrails is watched but has no cache filter (cluster-wide informer)
 - Type Service is watched but has no cache filter (cluster-wide informer)
+- Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)
 - Type TrustyAIService is watched but has no cache filter (cluster-wide informer)
+- Type Workload is watched but has no cache filter (cluster-wide informer)
 

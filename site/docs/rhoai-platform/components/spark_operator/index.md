@@ -1,11 +1,11 @@
 # spark-operator
 
-> **Architecture snapshot: 2026-04-30** (2026-04-30)
+> **Architecture snapshot: 2026-05-04** (2026-05-04)
 
 
 **Repository:** kubeflow/spark-operator  
 **Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-04-30T16:24:22Z
+**Extracted:** 2026-05-04T08:27:04Z
 
 ## Summary
 
@@ -54,9 +54,9 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Source |
 |-------|---------|------|-------|--------|------------------|--------|
-| sparkoperator.k8s.io | v1alpha1 | SparkConnect | Namespaced | 95 | 0 | [`config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml) |
-| sparkoperator.k8s.io | v1beta2 | ScheduledSparkApplication | Namespaced | 1676 | 0 | [`config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml) |
-| sparkoperator.k8s.io | v1beta2 | SparkApplication | Namespaced | 1679 | 0 | [`config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/0d80119298bfc55a43df4674964e0d938319159a/config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml) |
+| sparkoperator.k8s.io | v1alpha1 | SparkConnect | Namespaced | 95 | 0 | [`config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml`](https://github.com/kubeflow/spark-operator/blob/16adb437ef96672ef47603845e2078e899f3edbe/config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml) |
+| sparkoperator.k8s.io | v1beta2 | ScheduledSparkApplication | Namespaced | 1676 | 0 | [`config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/16adb437ef96672ef47603845e2078e899f3edbe/config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml) |
+| sparkoperator.k8s.io | v1beta2 | SparkApplication | Namespaced | 1679 | 0 | [`config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/16adb437ef96672ef47603845e2078e899f3edbe/config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml) |
 
 ## Dependencies
 
