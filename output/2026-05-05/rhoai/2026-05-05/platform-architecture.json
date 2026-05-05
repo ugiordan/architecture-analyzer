@@ -1,5 +1,5 @@
 {
-  "aggregated_at": "2026-05-05T13:57:30Z",
+  "aggregated_at": "2026-05-05T15:24:55Z",
   "component_count": 31,
   "component_data": [
     {
@@ -5106,7 +5106,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:41Z",
+      "extracted_at": "2026-05-05T15:10:46Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -7203,7 +7203,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:13Z",
+      "extracted_at": "2026-05-05T15:10:48Z",
       "helm": {
         "chart_name": "batch-gateway",
         "chart_version": "0.1.0"
@@ -7403,8 +7403,8 @@
       "cache_config": {
         "cache_scope": "cluster-wide",
         "issues": [
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)",
           "Type Ingress is watched but has no cache filter (cluster-wide informer)",
           "Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)",
@@ -7812,7 +7812,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:37Z",
+      "extracted_at": "2026-05-05T15:10:42Z",
       "helm": {},
       "ingress_routing": [
         {
@@ -8889,6 +8889,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "mutating"
         },
@@ -8897,6 +8898,7 @@
           "name": "mappwrapper.kb.io",
           "path": "/mutate-workload-codeflare-dev-v1beta2-appwrapper",
           "port": 9443,
+          "side_effects": "None",
           "source": "pkg/controllers/appwrapper_webhook.go",
           "type": "mutating"
         },
@@ -8923,6 +8925,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "mutating"
         },
@@ -8949,6 +8952,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "validating"
         },
@@ -8957,6 +8961,7 @@
           "name": "vappwrapper.kb.io",
           "path": "/validate-workload-codeflare-dev-v1beta2-appwrapper",
           "port": 9443,
+          "side_effects": "None",
           "source": "pkg/controllers/appwrapper_webhook.go",
           "type": "validating"
         },
@@ -8983,6 +8988,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "validating"
         }
@@ -10866,7 +10872,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:10Z",
+      "extracted_at": "2026-05-05T15:10:08Z",
       "helm": {},
       "ingress_routing": [
         {
@@ -13690,76 +13696,571 @@
       ],
       "summary": "data-science-pipelines-operator is a Kubernetes component. managing 4 CRD(s): DataSciencePipelinesApplication, Pipeline, PipelineVersion, ScheduledWorkflow. deploying 3 workload(s) (mariadb, minio, data-science-pipelines-operator-controller-manager) with 3 container(s). watching 11 resource type(s). exposing 11 service(s). with 2 webhook(s) (1 validating, 1 mutating). protected by 2 network policy/policies. connecting to external services: minio, mysql. defining 2 API spec type(s) across 31 struct(s) with 124 total fields. with 123 operator config constants (15 image references). following 9 reconciliation steps across 1 controller(s). exposing 9 Prometheus metrics. reporting 10 status condition types. with 2 ingress route(s).",
       "template_files": [
-        "config/internal/apiserver/default/deployment.yaml.tmpl",
-        "config/internal/apiserver/default/kfp_launcher_config.yaml.tmpl",
-        "config/internal/apiserver/default/kube-rbac-proxy-config.yaml.tmpl",
-        "config/internal/apiserver/default/monitor.yaml.tmpl",
-        "config/internal/apiserver/default/role_ds-pipeline-user-access.yaml.tmpl",
-        "config/internal/apiserver/default/role_ds-pipeline.yaml.tmpl",
-        "config/internal/apiserver/default/role_pipeline-runner.yaml.tmpl",
-        "config/internal/apiserver/default/rolebinding_ds-pipeline.yaml.tmpl",
-        "config/internal/apiserver/default/rolebinding_pipeline-runner.yaml.tmpl",
-        "config/internal/apiserver/default/sa_ds-pipeline.yaml.tmpl",
-        "config/internal/apiserver/default/sa_pipeline-runner.yaml.tmpl",
-        "config/internal/apiserver/default/server-config.yaml.tmpl",
-        "config/internal/apiserver/default/service.ml-pipeline.yaml.tmpl",
-        "config/internal/apiserver/default/service.yaml.tmpl",
-        "config/internal/apiserver/route/route.yaml.tmpl",
-        "config/internal/apiserver/sample-pipeline/sample-config.yaml.tmpl",
-        "config/internal/apiserver/sample-pipeline/sample-pipeline.yaml.tmpl",
-        "config/internal/common/default/mlmd-envoy-dashboard-access-policy.yaml.tmpl",
-        "config/internal/common/default/policy.yaml.tmpl",
-        "config/internal/common/no-owner/clusterrolebinding.yaml.tmpl",
-        "config/internal/devtools/database.secret.yaml.tmpl",
-        "config/internal/devtools/storage.secret.yaml.tmpl",
-        "config/internal/mariadb/default/deployment.yaml.tmpl",
-        "config/internal/mariadb/default/mariadb-sa.yaml.tmpl",
-        "config/internal/mariadb/default/networkpolicy.yaml.tmpl",
-        "config/internal/mariadb/default/pvc.yaml.tmpl",
-        "config/internal/mariadb/default/service.yaml.tmpl",
-        "config/internal/mariadb/default/tls-config.yaml.tmpl",
-        "config/internal/mariadb/generated-secret/secret.yaml.tmpl",
-        "config/internal/minio/default/deployment.yaml.tmpl",
-        "config/internal/minio/default/minio-sa.yaml.tmpl",
-        "config/internal/minio/default/pvc.yaml.tmpl",
-        "config/internal/minio/default/service.minioservice.yaml.tmpl",
-        "config/internal/minio/default/service.yaml.tmpl",
-        "config/internal/minio/generated-secret/secret.yaml.tmpl",
-        "config/internal/minio/route.yaml.tmpl",
-        "config/internal/ml-metadata/grpc-service/metadata-grpc.ml-pipeline.service.yaml.tmpl",
-        "config/internal/ml-metadata/grpc-service/metadata-grpc.service.yaml.tmpl",
-        "config/internal/ml-metadata/kube-rbac-proxy-config.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-envoy.configmap.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-envoy.deployment.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-envoy.service.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-envoy.serviceaccount.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-grpc-tls-config-secret.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-grpc.configmap.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-grpc.deployment.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-grpc.networkpolicy.yaml.tmpl",
-        "config/internal/ml-metadata/metadata-grpc.serviceaccount.yaml.tmpl",
-        "config/internal/ml-metadata/route/metadata-envoy.route.yaml.tmpl",
-        "config/internal/persistence-agent/deployment.yaml.tmpl",
-        "config/internal/persistence-agent/role.yaml.tmpl",
-        "config/internal/persistence-agent/rolebinding.yaml.tmpl",
-        "config/internal/persistence-agent/sa.yaml.tmpl",
-        "config/internal/scheduled-workflow/deployment.yaml.tmpl",
-        "config/internal/scheduled-workflow/role.yaml.tmpl",
-        "config/internal/scheduled-workflow/rolebinding.yaml.tmpl",
-        "config/internal/scheduled-workflow/sa.yaml.tmpl",
-        "config/internal/webhook/deployment.yaml.tmpl",
-        "config/internal/webhook/mutating_webhook.yaml.tmpl",
-        "config/internal/webhook/role_webhook.yaml.tmpl",
-        "config/internal/webhook/rolebinding_webhook.yaml.tmpl",
-        "config/internal/webhook/sa_webhook.yaml.tmpl",
-        "config/internal/webhook/service.yaml.tmpl",
-        "config/internal/webhook/validating_webhook.yaml.tmpl",
-        "config/internal/workflow-controller/configmap.yaml.tmpl",
-        "config/internal/workflow-controller/deployment.yaml.tmpl",
-        "config/internal/workflow-controller/role.yaml.tmpl",
-        "config/internal/workflow-controller/rolebinding.yaml.tmpl",
-        "config/internal/workflow-controller/sa.yaml.tmpl",
-        "config/internal/workflow-controller/service.yaml.tmpl"
+        {
+          "conditionals": [
+            ".APIServer.ManagedPipelines",
+            ".APIServer.ManagedPipelines.Pipelines",
+            "$i",
+            ".IncludeOwnerReference",
+            ".CustomCABundle",
+            ".CustomSSLCertDir",
+            ".ObjectStorageConnection.BasePath",
+            ".MLMD",
+            ".MLMD.Deploy",
+            ".MLMD.GRPC.Port",
+            ".PodToPodTLS",
+            ".FIPSEnabled",
+            ".CompiledPipelineSpecPatch",
+            ".ProxyConfig",
+            ".ProxyConfig.HTTPProxy",
+            ".ProxyConfig.HTTPSProxy",
+            "and .ProxyConfig.NoProxy (or .ProxyConfig.HTTPProxy .ProxyConfig.HTTPSProxy)",
+            "eq .APIServer.PipelineStore \"kubernetes\"",
+            ".APIServer.Resources.Requests",
+            ".APIServer.Resources.Requests.CPU",
+            ".APIServer.Resources.Requests.Memory",
+            ".APIServer.Resources.Limits",
+            ".APIServer.Resources.Limits.CPU",
+            ".APIServer.Resources.Limits.Memory",
+            ".APIServer.EnableRoute"
+          ],
+          "path": "config/internal/apiserver/default/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "conditionals": [
+            ".APIServer.CustomKfpLauncherConfigMap",
+            ".ObjectStorageConnection.BasePath",
+            ".ObjectStorageConnection.Secure",
+            ".ObjectStorageConnection.CredentialsSecret"
+          ],
+          "path": "config/internal/apiserver/default/kfp_launcher_config.yaml.tmpl"
+        },
+        {
+          "path": "config/internal/apiserver/default/kube-rbac-proxy-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/monitor.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceMonitor"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/role_ds-pipeline-user-access.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/role_ds-pipeline.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/role_pipeline-runner.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/rolebinding_ds-pipeline.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/rolebinding_pipeline-runner.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/sa_ds-pipeline.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/sa_pipeline-runner.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "conditionals": [
+            ".APIServerWorkspaceJSON"
+          ],
+          "path": "config/internal/apiserver/default/server-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/default/service.ml-pipeline.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "conditionals": [
+            ".APIServer.EnableRoute"
+          ],
+          "path": "config/internal/apiserver/default/service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/route/route.yaml.tmpl",
+          "resource_kinds": [
+            "Route"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/sample-pipeline/sample-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "config/internal/apiserver/sample-pipeline/sample-pipeline.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "config/internal/common/default/mlmd-envoy-dashboard-access-policy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "config/internal/common/default/policy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "config/internal/common/no-owner/clusterrolebinding.yaml.tmpl",
+          "resource_kinds": [
+            "ClusterRoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/devtools/database.secret.yaml.tmpl",
+          "resource_kinds": [
+            "Secret"
+          ]
+        },
+        {
+          "path": "config/internal/devtools/storage.secret.yaml.tmpl",
+          "resource_kinds": [
+            "Secret"
+          ]
+        },
+        {
+          "conditionals": [
+            ".MariaDB.Resources.Requests",
+            ".MariaDB.Resources.Requests.CPU",
+            ".MariaDB.Resources.Requests.Memory",
+            ".MariaDB.Resources.Limits",
+            ".MariaDB.Resources.Limits.CPU",
+            ".MariaDB.Resources.Limits.Memory",
+            ".PodToPodTLS"
+          ],
+          "path": "config/internal/mariadb/default/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/mariadb/default/mariadb-sa.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/mariadb/default/networkpolicy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "conditionals": [
+            ".MariaDB.StorageClassName"
+          ],
+          "path": "config/internal/mariadb/default/pvc.yaml.tmpl",
+          "resource_kinds": [
+            "PersistentVolumeClaim"
+          ]
+        },
+        {
+          "conditionals": [
+            ".PodToPodTLS"
+          ],
+          "path": "config/internal/mariadb/default/service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "config/internal/mariadb/default/tls-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "config/internal/mariadb/generated-secret/secret.yaml.tmpl",
+          "resource_kinds": [
+            "Secret"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Minio.Resources.Requests",
+            ".Minio.Resources.Requests.CPU",
+            ".Minio.Resources.Requests.Memory",
+            ".Minio.Resources.Limits",
+            ".Minio.Resources.Limits.CPU",
+            ".Minio.Resources.Limits.Memory"
+          ],
+          "path": "config/internal/minio/default/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/minio/default/minio-sa.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Minio.StorageClassName"
+          ],
+          "path": "config/internal/minio/default/pvc.yaml.tmpl",
+          "resource_kinds": [
+            "PersistentVolumeClaim"
+          ]
+        },
+        {
+          "path": "config/internal/minio/default/service.minioservice.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "config/internal/minio/default/service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "config/internal/minio/generated-secret/secret.yaml.tmpl"
+        },
+        {
+          "path": "config/internal/minio/route.yaml.tmpl",
+          "resource_kinds": [
+            "Route"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/grpc-service/metadata-grpc.ml-pipeline.service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "conditionals": [
+            ".PodToPodTLS"
+          ],
+          "path": "config/internal/ml-metadata/grpc-service/metadata-grpc.service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "conditionals": [
+            ".MLMD.Envoy.DeployRoute"
+          ],
+          "path": "config/internal/ml-metadata/kube-rbac-proxy-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".PodToPodTLS"
+          ],
+          "path": "config/internal/ml-metadata/metadata-envoy.configmap.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".ProxyConfig",
+            ".ProxyConfig.HTTPProxy",
+            ".ProxyConfig.HTTPSProxy",
+            "and .ProxyConfig.NoProxy (or .ProxyConfig.HTTPProxy .ProxyConfig.HTTPSProxy)",
+            ".MLMD.Envoy.Resources.Requests",
+            ".MLMD.Envoy.Resources.Requests.CPU",
+            ".MLMD.Envoy.Resources.Requests.Memory",
+            ".MLMD.Envoy.Resources.Limits",
+            ".MLMD.Envoy.Resources.Limits.CPU",
+            ".MLMD.Envoy.Resources.Limits.Memory",
+            ".PodToPodTLS",
+            ".MLMD.Envoy.DeployRoute",
+            "and .CustomCABundle .PodToPodTLS"
+          ],
+          "path": "config/internal/ml-metadata/metadata-envoy.deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/metadata-envoy.service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/metadata-envoy.serviceaccount.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/metadata-grpc-tls-config-secret.yaml.tmpl",
+          "resource_kinds": [
+            "Secret"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/metadata-grpc.configmap.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".PodToPodTLS",
+            ".CustomCABundle",
+            ".ProxyConfig",
+            ".ProxyConfig.HTTPProxy",
+            ".ProxyConfig.HTTPSProxy",
+            "and .ProxyConfig.NoProxy (or .ProxyConfig.HTTPProxy .ProxyConfig.HTTPSProxy)",
+            ".MLMD.GRPC.Resources.Requests",
+            ".MLMD.GRPC.Resources.Requests.CPU",
+            ".MLMD.GRPC.Resources.Requests.Memory",
+            ".MLMD.GRPC.Resources.Limits",
+            ".MLMD.GRPC.Resources.Limits.CPU",
+            ".MLMD.GRPC.Resources.Limits.Memory"
+          ],
+          "path": "config/internal/ml-metadata/metadata-grpc.deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/metadata-grpc.networkpolicy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/metadata-grpc.serviceaccount.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/ml-metadata/route/metadata-envoy.route.yaml.tmpl",
+          "resource_kinds": [
+            "Route"
+          ]
+        },
+        {
+          "conditionals": [
+            ".PodToPodTLS",
+            ".ProxyConfig",
+            ".ProxyConfig.HTTPProxy",
+            ".ProxyConfig.HTTPSProxy",
+            "and .ProxyConfig.NoProxy (or .ProxyConfig.HTTPProxy .ProxyConfig.HTTPSProxy)",
+            "and .CustomCABundle .PodToPodTLS",
+            ".PersistenceAgent.Resources.Requests",
+            ".PersistenceAgent.Resources.Requests.CPU",
+            ".PersistenceAgent.Resources.Requests.Memory",
+            ".PersistenceAgent.Resources.Limits",
+            ".PersistenceAgent.Resources.Limits.CPU",
+            ".PersistenceAgent.Resources.Limits.Memory"
+          ],
+          "path": "config/internal/persistence-agent/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/persistence-agent/role.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "config/internal/persistence-agent/rolebinding.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/persistence-agent/sa.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "conditionals": [
+            ".ProxyConfig",
+            ".ProxyConfig.HTTPProxy",
+            ".ProxyConfig.HTTPSProxy",
+            "and .ProxyConfig.NoProxy (or .ProxyConfig.HTTPProxy .ProxyConfig.HTTPSProxy)",
+            ".PodToPodTLS",
+            ".ScheduledWorkflow.Resources.Requests",
+            ".ScheduledWorkflow.Resources.Requests.CPU",
+            ".ScheduledWorkflow.Resources.Requests.Memory",
+            ".ScheduledWorkflow.Resources.Limits",
+            ".ScheduledWorkflow.Resources.Limits.CPU",
+            ".ScheduledWorkflow.Resources.Limits.Memory",
+            "and .CustomCABundle .PodToPodTLS"
+          ],
+          "path": "config/internal/scheduled-workflow/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/scheduled-workflow/role.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "config/internal/scheduled-workflow/rolebinding.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/scheduled-workflow/sa.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/webhook/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "conditionals": [
+            ".WebhookAnnotations"
+          ],
+          "path": "config/internal/webhook/mutating_webhook.yaml.tmpl",
+          "resource_kinds": [
+            "MutatingWebhookConfiguration"
+          ]
+        },
+        {
+          "path": "config/internal/webhook/role_webhook.yaml.tmpl",
+          "resource_kinds": [
+            "ClusterRole"
+          ]
+        },
+        {
+          "path": "config/internal/webhook/rolebinding_webhook.yaml.tmpl",
+          "resource_kinds": [
+            "ClusterRoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/webhook/sa_webhook.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/webhook/service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "conditionals": [
+            ".WebhookAnnotations"
+          ],
+          "path": "config/internal/webhook/validating_webhook.yaml.tmpl",
+          "resource_kinds": [
+            "ValidatingWebhookConfiguration"
+          ]
+        },
+        {
+          "path": "config/internal/workflow-controller/configmap.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".WorkflowController.CustomConfig",
+            ".FIPSEnabled",
+            ".ProxyConfig",
+            ".ProxyConfig.HTTPProxy",
+            ".ProxyConfig.HTTPSProxy",
+            "and .ProxyConfig.NoProxy (or .ProxyConfig.HTTPProxy .ProxyConfig.HTTPSProxy)",
+            ".WorkflowController.Resources.Requests",
+            ".WorkflowController.Resources.Requests.CPU",
+            ".WorkflowController.Resources.Requests.Memory",
+            ".WorkflowController.Resources.Limits",
+            ".WorkflowController.Resources.Limits.CPU",
+            ".WorkflowController.Resources.Limits.Memory"
+          ],
+          "path": "config/internal/workflow-controller/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "config/internal/workflow-controller/role.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "config/internal/workflow-controller/rolebinding.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "config/internal/workflow-controller/sa.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "path": "config/internal/workflow-controller/service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        }
       ],
       "webhooks": [
         {
@@ -13785,6 +14286,7 @@
             }
           ],
           "service_ref": "template-value/template-value",
+          "side_effects": "None",
           "source": "config/internal/webhook/mutating_webhook.yaml.tmpl",
           "type": "mutating"
         },
@@ -13811,6 +14313,7 @@
             }
           ],
           "service_ref": "template-value/template-value",
+          "side_effects": "None",
           "source": "config/internal/webhook/validating_webhook.yaml.tmpl",
           "type": "validating"
         }
@@ -15339,7 +15842,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:27Z",
+      "extracted_at": "2026-05-05T15:09:41Z",
       "helm": {
         "chart_name": "kubeflow-pipelines",
         "chart_version": "1.0.0"
@@ -16270,6 +16773,9 @@
             "source": "manifests/kustomize/base/installs/multi-user/cache/cluster-role.yaml"
           },
           {
+            "aggregation_rule": {
+              "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-pipelines-edit": "true"
+            },
             "name": "kubeflow-pipelines-edit",
             "source": "manifests/kustomize/base/installs/multi-user/view-edit-cluster-roles.yaml"
           },
@@ -16321,6 +16827,9 @@
             "source": "manifests/kustomize/base/installs/multi-user/metadata-writer/cluster-role.yaml"
           },
           {
+            "aggregation_rule": {
+              "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-pipelines-view": "true"
+            },
             "name": "kubeflow-pipelines-view",
             "source": "manifests/kustomize/base/installs/multi-user/view-edit-cluster-roles.yaml"
           },
@@ -17954,7 +18463,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:57Z",
+      "extracted_at": "2026-05-05T15:09:04Z",
       "helm": {},
       "rbac": {},
       "repo": "opendatahub-io/distributed-workloads",
@@ -18254,7 +18763,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:41Z",
+      "extracted_at": "2026-05-05T15:10:46Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -18462,7 +18971,7 @@
           "user": "orchestr8"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:20Z",
+      "extracted_at": "2026-05-05T15:10:29Z",
       "helm": {},
       "rbac": {},
       "repo": "red-hat-data-services/fms-guardrails-orchestrator",
@@ -20924,8 +21433,8 @@
           }
         ],
         "issues": [
-          "No DefaultTransform: managedFields cached for all objects (wasted memory)",
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
+          "No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
           "Type ClusterServingRuntime is watched but has no cache filter (cluster-wide informer)",
           "Type Gateway is watched but has no cache filter (cluster-wide informer)",
           "Type HTTPRoute is watched but has no cache filter (cluster-wide informer)",
@@ -21526,14 +22035,6 @@
             "has(self.hpa) || has(self.keda)",
             "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
             "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
-            "has(self.wva)",
-            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-            "has(self.hpa) || has(self.keda)",
-            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
             "(self.size() \u003e 0 ? self[0].matches.size() : 0) + (self.size() \u003e 1 ? self[1].matches.size() : 0) + (self.size() \u003e 2 ? self[2].matches.size() : 0) + (self.size() \u003e 3 ? self[3].matches.size() : 0) + (self.size() \u003e 4 ? self[4].matches.size() : 0) + (self.size() \u003e 5 ? self[5].matches.size() : 0) + (self.size() \u003e 6 ? self[6].matches.size() : 0) + (self.size() \u003e 7 ? self[7].matches.size() : 0) + (self.size() \u003e 8 ? self[8].matches.size() : 0) + (self.size() \u003e 9 ? self[9].matches.size() : 0) + (self.size() \u003e 10 ? self[10].matches.size() : 0) + (self.size() \u003e 11 ? self[11].matches.size() : 0) + (self.size() \u003e 12 ? self[12].matches.size() : 0) + (self.size() \u003e 13 ? self[13].matches.size() : 0) + (self.size() \u003e 14 ? self[14].matches.size() : 0) + (self.size() \u003e 15 ? self[15].matches.size() : 0) \u003c= 128",
             "(has(self.backendRefs) \u0026\u0026 size(self.backendRefs) \u003e 0) ? (!has(self.filters) || self.filters.all(f, !has(f.requestRedirect))): true",
             "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
@@ -21564,20 +22065,20 @@
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "self.numerator \u003c= self.denominator",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "self.protocol == 'GRPC' ? has(self.grpc) : true",
             "has(self.grpc) ? self.protocol == 'GRPC' : true",
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.numerator \u003c= self.denominator",
             "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
             "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
             "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -21595,12 +22096,11 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.numerator \u003c= self.denominator",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -21610,9 +22110,10 @@
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "self.numerator \u003c= self.denominator",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
             "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
             "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
@@ -21624,8 +22125,16 @@
             "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/.') : true",
             "self.type in ['Exact','PathPrefix'] || self.type == 'RegularExpression'",
             "(self.type in ['Exact','PathPrefix']) ? self.value.matches(r\"\"\"^(?:[-A-Za-z0-9/._~!$\u0026'()*+,;=:@]|[%][0-9a-fA-F]{2})+$\"\"\") : true",
+            "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
             "self.kind != 'Service' || has(self.port)",
-            "self.all(p1, self.exists_one(p2, p1.number==p2.number))"
+            "has(self.wva)",
+            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+            "has(self.hpa) || has(self.keda)",
+            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0"
           ],
           "version": "v1alpha2",
           "versions": [
@@ -21649,6 +22158,23 @@
           "source": "config/crd/full/llmisvc/serving.kserve.io_llminferenceserviceconfigs.yaml",
           "validation_rules": [
             "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+            "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+            "has(self.wva)",
+            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+            "has(self.hpa) || has(self.keda)",
+            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+            "has(self.wva)",
+            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+            "has(self.hpa) || has(self.keda)",
+            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
             "(self.size() \u003e 0 ? self[0].matches.size() : 0) + (self.size() \u003e 1 ? self[1].matches.size() : 0) + (self.size() \u003e 2 ? self[2].matches.size() : 0) + (self.size() \u003e 3 ? self[3].matches.size() : 0) + (self.size() \u003e 4 ? self[4].matches.size() : 0) + (self.size() \u003e 5 ? self[5].matches.size() : 0) + (self.size() \u003e 6 ? self[6].matches.size() : 0) + (self.size() \u003e 7 ? self[7].matches.size() : 0) + (self.size() \u003e 8 ? self[8].matches.size() : 0) + (self.size() \u003e 9 ? self[9].matches.size() : 0) + (self.size() \u003e 10 ? self[10].matches.size() : 0) + (self.size() \u003e 11 ? self[11].matches.size() : 0) + (self.size() \u003e 12 ? self[12].matches.size() : 0) + (self.size() \u003e 13 ? self[13].matches.size() : 0) + (self.size() \u003e 14 ? self[14].matches.size() : 0) + (self.size() \u003e 15 ? self[15].matches.size() : 0) \u003c= 128",
             "(has(self.backendRefs) \u0026\u0026 size(self.backendRefs) \u003e 0) ? (!has(self.filters) || self.filters.all(f, !has(f.requestRedirect))): true",
             "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
@@ -21675,24 +22201,24 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "self.protocol == 'GRPC' ? has(self.grpc) : true",
             "has(self.grpc) ? self.protocol == 'GRPC' : true",
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
             "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
             "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -21710,39 +22236,22 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "self.protocol == 'GRPC' ? has(self.grpc) : true",
             "has(self.grpc) ? self.protocol == 'GRPC' : true",
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "self.kind != 'Service' || has(self.port)",
-            "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
-            "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
-            "has(self.wva)",
-            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-            "has(self.hpa) || has(self.keda)",
-            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
-            "has(self.wva)",
-            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-            "has(self.hpa) || has(self.keda)",
-            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0"
+            "self.all(p1, self.exists_one(p2, p1.number==p2.number))"
           ],
           "version": "v1alpha2",
           "versions": [
@@ -22414,7 +22923,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:18Z",
+      "extracted_at": "2026-05-05T15:10:58Z",
       "helm": {
         "chart_name": "kserve-crd",
         "chart_version": "v0.17.0"
@@ -24848,6 +25357,7 @@
             }
           ],
           "service_ref": "$(kserveNamespace)/$(webhookServiceName)",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "validating"
         },
@@ -25506,7 +26016,7 @@
           "type": "database"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:31Z",
+      "extracted_at": "2026-05-05T15:09:03Z",
       "helm": {
         "chart_name": "kubernetes",
         "chart_version": "7.14.1"
@@ -25821,7 +26331,7 @@
           "user": "65534"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:47Z",
+      "extracted_at": "2026-05-05T15:09:53Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -26497,7 +27007,7 @@
           "user": "1001:0"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:06Z",
+      "extracted_at": "2026-05-05T15:09:04Z",
       "helm": {},
       "prometheus_metrics": [
         {
@@ -26619,6 +27129,7 @@
           "name": "notebooks-validation.opendatahub.io",
           "path": "/validate-notebook-v1",
           "port": 9443,
+          "side_effects": "None",
           "source": "components/odh-notebook-controller/controllers/notebook_validating_webhook.go",
           "type": "validating"
         },
@@ -26627,6 +27138,7 @@
           "name": "notebooks.opendatahub.io",
           "path": "/mutate-notebook-v1",
           "port": 9443,
+          "side_effects": "None",
           "source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go",
           "type": "mutating"
         }
@@ -27359,7 +27871,7 @@
           "type": "grpc"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:06Z",
+      "extracted_at": "2026-05-05T15:09:52Z",
       "feature_gates": [
         {
           "default": true,
@@ -27830,6 +28342,7 @@
             }
           ],
           "service_ref": "$(namespace)/kuberay-webhook-service",
+          "side_effects": "None",
           "source": "ray-operator/config/openshift/webhook.yaml",
           "type": "mutating"
         },
@@ -27838,6 +28351,7 @@
           "name": "mraycluster.kb.io",
           "path": "/mutate-ray-io-v1-raycluster",
           "port": 9443,
+          "side_effects": "None",
           "source": "ray-operator/pkg/webhooks/v1/raycluster_mutating_webhook.go",
           "type": "mutating"
         },
@@ -27846,6 +28360,7 @@
           "name": "vraycluster.kb.io",
           "path": "/validate-ray-io-v1-raycluster",
           "port": 9443,
+          "side_effects": "None",
           "source": "ray-operator/pkg/webhooks/v1/raycluster_validating_webhook.go",
           "type": "validating"
         }
@@ -30565,8 +31080,8 @@
           }
         ],
         "issues": [
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type AdmissionCheck is watched but has no cache filter (cluster-wide informer)",
           "Type ClusterQueue is watched but has no cache filter (cluster-wide informer)",
           "Type LeaderWorkerSet is watched but has no cache filter (cluster-wide informer)",
@@ -31461,7 +31976,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:45Z",
+      "extracted_at": "2026-05-05T15:09:55Z",
       "helm": {
         "chart_name": "kueue",
         "chart_version": "0.1.0"
@@ -32093,6 +32608,7 @@
           "name": "vcohort.kb.io",
           "path": "/validate-kueue-x-k8s-io-v1alpha1-cohort",
           "port": 9443,
+          "side_effects": "None",
           "source": "pkg/webhooks/cohort_webhook.go",
           "type": "validating"
         },
@@ -33053,7 +33569,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:34Z",
+      "extracted_at": "2026-05-05T15:09:11Z",
       "helm": {},
       "horizontal_pod_autoscalers": [
         {
@@ -35667,7 +36183,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:06Z",
+      "extracted_at": "2026-05-05T15:09:47Z",
       "helm": {},
       "horizontal_pod_autoscalers": [
         {
@@ -36137,6 +36653,7 @@
             }
           ],
           "service_ref": "llm-d-istio-system/istiod-llm-d-gateway",
+          "side_effects": "None",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
           "type": "mutating"
         },
@@ -36162,6 +36679,7 @@
             }
           ],
           "service_ref": "llm-d-istio-system/istiod-llm-d-gateway",
+          "side_effects": "None",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
           "type": "mutating"
         },
@@ -36187,6 +36705,7 @@
             }
           ],
           "service_ref": "llm-d-istio-system/istiod-llm-d-gateway",
+          "side_effects": "None",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
           "type": "mutating"
         },
@@ -36212,6 +36731,7 @@
             }
           ],
           "service_ref": "llm-d-istio-system/istiod-llm-d-gateway",
+          "side_effects": "None",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
           "type": "mutating"
         },
@@ -36241,6 +36761,7 @@
             }
           ],
           "service_ref": "llm-d-istio-system/istiod-llm-d-gateway",
+          "side_effects": "None",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
           "type": "validating"
         }
@@ -36547,7 +37068,7 @@
           "type": "database"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:47Z",
+      "extracted_at": "2026-05-05T15:10:13Z",
       "helm": {
         "chart_name": "pvc-evictor",
         "chart_version": "0.1.0",
@@ -37050,8 +37571,8 @@
           }
         ],
         "issues": [
-          "No DefaultTransform: managedFields cached for all objects (wasted memory)",
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
+          "No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
           "Type ConsoleLink is watched but has no cache filter (cluster-wide informer)",
           "Type HTTPRoute is watched but has no cache filter (cluster-wide informer)",
           "Type MLflow is watched but has no cache filter (cluster-wide informer)",
@@ -37449,7 +37970,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:14Z",
+      "extracted_at": "2026-05-05T15:09:46Z",
       "helm": {
         "chart_name": "mlflow",
         "chart_version": "0.1.0",
@@ -39693,8 +40214,9 @@
           }
         ],
         "issues": [
-          "No DefaultTransform: managedFields cached for all objects (wasted memory)",
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
+          "Cache bypass (DisableFor) configured for corev1.Secret. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)",
+          "No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
           "Type ModelRegistry is watched but has no cache filter (cluster-wide informer)"
         ],
         "manager_file": "cmd/main.go",
@@ -39816,10 +40338,10 @@
           "validation_rules": [
             "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
             "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
-            "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
             "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
             "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-            "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
+            "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
+            "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
           ],
           "version": "v1beta1",
           "versions": [
@@ -40056,7 +40578,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:07Z",
+      "extracted_at": "2026-05-05T15:09:25Z",
       "helm": {},
       "ingress_routing": [
         {
@@ -41298,40 +41820,263 @@
       ],
       "summary": "model-registry-operator is a Kubernetes component. managing 1 CRD(s): ModelRegistry. deploying 1 workload(s) (model-registry-operator-controller-manager) with 1 container(s). watching 11 resource type(s). exposing 6 service(s). with 2 webhook(s) (1 validating, 1 mutating). protected by 4 network policy/policies. defining 6 API spec type(s) across 27 struct(s) with 152 total fields. with 39 operator config constants (12 image references). reporting 9 status condition types. with 1 platform-conditional resource paths. with 1 ingress route(s).",
       "template_files": [
-        "internal/controller/config/templates/catalog/catalog-admin-role.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-admin-rolebinding.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-configmap.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-default-configmap.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-deployment.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-config.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-https-route.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-network-policy.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-role-binding.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-mcp-configmap.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-postgres-deployment.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-postgres-network-policy.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-postgres-pvc.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-postgres-secret.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-postgres-service.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-role.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-rolebinding.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-service.yaml.tmpl",
-        "internal/controller/config/templates/catalog/catalog-serviceaccount.yaml.tmpl",
-        "internal/controller/config/templates/deployment.yaml.tmpl",
-        "internal/controller/config/templates/group.yaml.tmpl",
-        "internal/controller/config/templates/http-route.yaml.tmpl",
-        "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-config.yaml.tmpl",
-        "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-https-route.yaml.tmpl",
-        "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-network-policy.yaml.tmpl",
-        "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-role-binding.yaml.tmpl",
-        "internal/controller/config/templates/postgres-deployment.yaml.tmpl",
-        "internal/controller/config/templates/postgres-network-policy.yaml.tmpl",
-        "internal/controller/config/templates/postgres-pvc.yaml.tmpl",
-        "internal/controller/config/templates/postgres-service.yaml.tmpl",
-        "internal/controller/config/templates/role-binding.yaml.tmpl",
-        "internal/controller/config/templates/role.yaml.tmpl",
-        "internal/controller/config/templates/service.yaml.tmpl",
-        "internal/controller/config/templates/serviceaccount.yaml.tmpl"
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-admin-role.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-admin-rolebinding.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-configmap.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-default-configmap.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy",
+            ".Requests",
+            ".Limits"
+          ],
+          "path": "internal/controller/config/templates/catalog/catalog-deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy"
+          ],
+          "path": "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-https-route.yaml.tmpl",
+          "resource_kinds": [
+            "Route"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy"
+          ],
+          "path": "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-network-policy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-kube-rbac-proxy-role-binding.yaml.tmpl",
+          "resource_kinds": [
+            "ClusterRoleBinding"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-mcp-configmap.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-postgres-deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-postgres-network-policy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-postgres-pvc.yaml.tmpl",
+          "resource_kinds": [
+            "PersistentVolumeClaim"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-postgres-secret.yaml.tmpl",
+          "resource_kinds": [
+            "Secret"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-postgres-service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-role.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-rolebinding.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy"
+          ],
+          "path": "internal/controller/config/templates/catalog/catalog-service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/catalog/catalog-serviceaccount.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.Postgres",
+            "not $pgHost",
+            ".Spec.Postgres.SSLMode",
+            ".Spec.Postgres.PasswordSecret",
+            ".Spec.Postgres.SSLCertificateSecret",
+            ".Spec.Postgres.SSLKeySecret",
+            ".Spec.Postgres.SSLRootCertificateConfigMap",
+            ".Spec.Postgres.SSLRootCertificateSecret",
+            ".Spec.MySQL",
+            "not $mysqlHost",
+            ".Spec.MySQL.PasswordSecret",
+            ".Spec.MySQL.SSLCertificateSecret",
+            ".Spec.MySQL.SSLKeySecret",
+            ".Spec.MySQL.SSLRootCertificateConfigMap",
+            ".Spec.MySQL.SSLRootCertificateSecret",
+            "or .Spec.MySQL.SSLRootCertificatesConfigMapName .Spec.MySQL.SSLRootCertificatesSecretName",
+            ".Spec.MySQL.SSLCipher",
+            ".Spec.MySQL.VerifyServerCert",
+            ".Spec.Postgres.SSLPasswordSecret",
+            "or .Spec.Postgres.SSLRootCertificateConfigMap .Spec.Postgres.SSLRootCertificateSecret",
+            "or .Spec.MySQL.SSLRootCertificateConfigMap .Spec.MySQL.SSLRootCertificateSecret",
+            ".Requests",
+            ".Limits",
+            ".Spec.KubeRBACProxy",
+            ".Spec.MySQL.SSLRootCertificatesConfigMapName",
+            ".Spec.MySQL.SSLRootCertificatesSecretName"
+          ],
+          "path": "internal/controller/config/templates/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/group.yaml.tmpl",
+          "resource_kinds": [
+            "Group"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/http-route.yaml.tmpl",
+          "resource_kinds": [
+            "Route"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-config.yaml.tmpl",
+          "resource_kinds": [
+            "ConfigMap"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy"
+          ],
+          "path": "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-https-route.yaml.tmpl",
+          "resource_kinds": [
+            "Route"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy"
+          ],
+          "path": "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-network-policy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/kube-rbac-proxy/kube-rbac-proxy-role-binding.yaml.tmpl",
+          "resource_kinds": [
+            "ClusterRoleBinding"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/postgres-deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/postgres-network-policy.yaml.tmpl",
+          "resource_kinds": [
+            "NetworkPolicy"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/postgres-pvc.yaml.tmpl",
+          "resource_kinds": [
+            "PersistentVolumeClaim"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/postgres-service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/role-binding.yaml.tmpl",
+          "resource_kinds": [
+            "RoleBinding"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/role.yaml.tmpl",
+          "resource_kinds": [
+            "Role"
+          ]
+        },
+        {
+          "conditionals": [
+            ".Spec.KubeRBACProxy",
+            "not .OriginalSpec.KubeRBACProxy.TLSCertificateSecret",
+            "eq .Spec.KubeRBACProxy.ServiceRoute \"enabled\""
+          ],
+          "path": "internal/controller/config/templates/service.yaml.tmpl",
+          "resource_kinds": [
+            "Service"
+          ]
+        },
+        {
+          "path": "internal/controller/config/templates/serviceaccount.yaml.tmpl",
+          "resource_kinds": [
+            "ServiceAccount"
+          ]
+        }
       ],
       "webhooks": [
         {
@@ -41395,8 +42140,8 @@
       "cache_config": {
         "cache_scope": "cluster-wide",
         "issues": [
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type InferenceService is watched but has no cache filter (cluster-wide informer)"
         ],
         "manager_file": "cmd/controller/main.go",
@@ -42143,7 +42888,7 @@
           "user": "1000"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:04Z",
+      "extracted_at": "2026-05-05T15:11:08Z",
       "helm": {},
       "rbac": {
         "cluster_role_bindings": [
@@ -42863,8 +43608,8 @@
       "cache_config": {
         "cache_scope": "namespace-scoped",
         "issues": [
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type ClusterServingRuntime is watched but has no cache filter (cluster-wide informer)",
           "Type ConfigMap is watched but has no cache filter (cluster-wide informer)",
           "Type Deployment is watched but has no cache filter (cluster-wide informer)",
@@ -43504,7 +44249,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:14Z",
+      "extracted_at": "2026-05-05T15:09:04Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -44504,7 +45249,15 @@
       ],
       "summary": "modelmesh-serving is a Kubernetes component. managing 4 CRD(s): ClusterServingRuntime, InferenceService, Predictor, ServingRuntime. deploying 3 workload(s) (controller-manager, modelmesh-controller, etcd) with 4 container(s). watching 10 resource type(s). exposing 3 service(s). with 1 webhook(s) (1 validating). protected by 4 network policy/policies. connecting to external services: azure-blob. defining 2 API spec type(s) across 12 struct(s) with 43 total fields. with 93 operator config constants.",
       "template_files": [
-        "config/internal/base/deployment.yaml.tmpl"
+        {
+          "conditionals": [
+            ".Metrics"
+          ],
+          "path": "config/internal/base/deployment.yaml.tmpl",
+          "resource_kinds": [
+            "Deployment"
+          ]
+        }
       ],
       "webhooks": [
         {
@@ -45153,7 +45906,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:08Z",
+      "extracted_at": "2026-05-05T15:09:52Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -47508,7 +48261,7 @@
           "user": "root"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:26Z",
+      "extracted_at": "2026-05-05T15:09:09Z",
       "helm": {},
       "rbac": {},
       "repo": "red-hat-data-services/notebooks",
@@ -49538,7 +50291,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:14Z",
+      "extracted_at": "2026-05-05T15:09:05Z",
       "helm": {},
       "ingress_routing": [
         {
@@ -50818,8 +51571,8 @@
           }
         ],
         "issues": [
-          "No DefaultTransform: managedFields cached for all objects (wasted memory)",
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
+          "No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
           "Type Account is watched but has no cache filter (cluster-wide informer)",
           "Type AuthPolicy is watched but has no cache filter (cluster-wide informer)",
           "Type Authorino is watched but has no cache filter (cluster-wide informer)",
@@ -51569,7 +52322,7 @@
           "user": "root"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:36Z",
+      "extracted_at": "2026-05-05T15:10:00Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -53526,6 +54279,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "mutating"
         },
@@ -53551,6 +54305,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "mutating"
         },
@@ -53576,6 +54331,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "mutating"
         },
@@ -53601,6 +54357,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "validating"
         },
@@ -53627,6 +54384,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "validating"
         },
@@ -53653,6 +54411,7 @@
             }
           ],
           "service_ref": "system/webhook-service",
+          "side_effects": "None",
           "source": "config/webhook/manifests.yaml",
           "type": "validating"
         }
@@ -53960,8 +54719,8 @@
       "cache_config": {
         "cache_scope": "cluster-wide",
         "issues": [
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type ClusterRole is watched but has no cache filter (cluster-wide informer)",
           "Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)",
           "Type ConfigMap is watched but has no cache filter (cluster-wide informer)",
@@ -54557,7 +55316,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-05-05T13:56:01Z",
+      "extracted_at": "2026-05-05T15:10:47Z",
       "helm": {},
       "operator_config": [
         {
@@ -57657,7 +58416,7 @@
           "user": "${spark_uid}"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:32Z",
+      "extracted_at": "2026-05-05T15:09:14Z",
       "feature_gates": [
         {
           "default": false,
@@ -59623,7 +60382,7 @@
           }
         ],
         "issues": [
-          "Implicit informer for corev1.Secret via client.Get at pkg/runtime/framework/plugins/mpi/mpi.go:256 (cluster-wide, OOM risk)"
+          "Implicit informer for corev1.Secret via client.Get at pkg/runtime/framework/plugins/mpi/mpi.go:256 (cluster-wide, OOM risk). This bypasses cache filters and creates a full cluster-wide watch"
         ],
         "manager_file": "cmd/trainer-controller-manager/main.go"
       },
@@ -60089,7 +60848,7 @@
           "stages": 1
         }
       ],
-      "extracted_at": "2026-05-05T13:55:46Z",
+      "extracted_at": "2026-05-05T15:10:15Z",
       "helm": {
         "chart_name": "kubeflow-trainer",
         "chart_version": "2.1.0"
@@ -60132,6 +60891,9 @@
         ],
         "cluster_roles": [
           {
+            "aggregation_rule": {
+              "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-trainer-admin": "true"
+            },
             "name": "kubeflow-trainer-admin",
             "source": "manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml"
           },
@@ -62070,7 +62832,7 @@
           "stages": 1
         }
       ],
-      "extracted_at": "2026-05-05T13:55:05Z",
+      "extracted_at": "2026-05-05T15:09:06Z",
       "helm": {},
       "operator_config": [
         {
@@ -62212,6 +62974,9 @@
         ],
         "cluster_roles": [
           {
+            "aggregation_rule": {
+              "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-training-admin": "true"
+            },
             "name": "kubeflow-training-admin",
             "source": "manifests/overlays/kubeflow/kubeflow-training-roles.yaml"
           },
@@ -65087,7 +65852,7 @@
         "gomemlimit": "630MiB",
         "gomemlimit_ratio": 90,
         "issues": [
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type ConfigMap is watched but has no cache filter (cluster-wide informer)",
           "Type Deployment is watched but has no cache filter (cluster-wide informer)",
           "Type EvalHub is watched but has no cache filter (cluster-wide informer)",
@@ -65472,7 +66237,7 @@
           "user": "orchestr8"
         }
       ],
-      "extracted_at": "2026-05-05T13:54:59Z",
+      "extracted_at": "2026-05-05T15:10:22Z",
       "helm": {},
       "operator_config": [
         {
@@ -68888,8 +69653,8 @@
           }
         ],
         "issues": [
-          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)",
-          "No cache configuration: all informers are cluster-wide (OOM risk)",
+          "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+          "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
           "Type ConfigMap is watched but has no cache filter (cluster-wide informer)",
           "Type InferencePool is watched but has no cache filter (cluster-wide informer)",
           "Type VariantAutoscaling is watched but has no cache filter (cluster-wide informer)"
@@ -69240,7 +70005,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-05-05T13:55:40Z",
+      "extracted_at": "2026-05-05T15:09:55Z",
       "helm": {
         "chart_name": "workload-variant-autoscaler",
         "chart_version": "0.5.1"
@@ -70259,14 +71024,6 @@
         "has(self.hpa) || has(self.keda)",
         "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
         "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
-        "has(self.wva)",
-        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-        "has(self.hpa) || has(self.keda)",
-        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "(self.size() \u003e 0 ? self[0].matches.size() : 0) + (self.size() \u003e 1 ? self[1].matches.size() : 0) + (self.size() \u003e 2 ? self[2].matches.size() : 0) + (self.size() \u003e 3 ? self[3].matches.size() : 0) + (self.size() \u003e 4 ? self[4].matches.size() : 0) + (self.size() \u003e 5 ? self[5].matches.size() : 0) + (self.size() \u003e 6 ? self[6].matches.size() : 0) + (self.size() \u003e 7 ? self[7].matches.size() : 0) + (self.size() \u003e 8 ? self[8].matches.size() : 0) + (self.size() \u003e 9 ? self[9].matches.size() : 0) + (self.size() \u003e 10 ? self[10].matches.size() : 0) + (self.size() \u003e 11 ? self[11].matches.size() : 0) + (self.size() \u003e 12 ? self[12].matches.size() : 0) + (self.size() \u003e 13 ? self[13].matches.size() : 0) + (self.size() \u003e 14 ? self[14].matches.size() : 0) + (self.size() \u003e 15 ? self[15].matches.size() : 0) \u003c= 128",
         "(has(self.backendRefs) \u0026\u0026 size(self.backendRefs) \u003e 0) ? (!has(self.filters) || self.filters.all(f, !has(f.requestRedirect))): true",
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
@@ -70297,20 +71054,20 @@
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "self.protocol == 'GRPC' ? has(self.grpc) : true",
         "has(self.grpc) ? self.protocol == 'GRPC' : true",
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
         "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
         "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
         "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -70328,12 +71085,11 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -70343,9 +71099,10 @@
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
         "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
         "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
@@ -70357,8 +71114,16 @@
         "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/.') : true",
         "self.type in ['Exact','PathPrefix'] || self.type == 'RegularExpression'",
         "(self.type in ['Exact','PathPrefix']) ? self.value.matches(r\"\"\"^(?:[-A-Za-z0-9/._~!$\u0026'()*+,;=:@]|[%][0-9a-fA-F]{2})+$\"\"\") : true",
+        "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
         "self.kind != 'Service' || has(self.port)",
-        "self.all(p1, self.exists_one(p2, p1.number==p2.number))"
+        "has(self.wva)",
+        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+        "has(self.hpa) || has(self.keda)",
+        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0"
       ],
       "version": "v1alpha2",
       "versions": [
@@ -70383,6 +71148,23 @@
       "source": "config/crd/full/llmisvc/serving.kserve.io_llminferenceserviceconfigs.yaml",
       "validation_rules": [
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+        "has(self.wva)",
+        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+        "has(self.hpa) || has(self.keda)",
+        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+        "has(self.wva)",
+        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+        "has(self.hpa) || has(self.keda)",
+        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "(self.size() \u003e 0 ? self[0].matches.size() : 0) + (self.size() \u003e 1 ? self[1].matches.size() : 0) + (self.size() \u003e 2 ? self[2].matches.size() : 0) + (self.size() \u003e 3 ? self[3].matches.size() : 0) + (self.size() \u003e 4 ? self[4].matches.size() : 0) + (self.size() \u003e 5 ? self[5].matches.size() : 0) + (self.size() \u003e 6 ? self[6].matches.size() : 0) + (self.size() \u003e 7 ? self[7].matches.size() : 0) + (self.size() \u003e 8 ? self[8].matches.size() : 0) + (self.size() \u003e 9 ? self[9].matches.size() : 0) + (self.size() \u003e 10 ? self[10].matches.size() : 0) + (self.size() \u003e 11 ? self[11].matches.size() : 0) + (self.size() \u003e 12 ? self[12].matches.size() : 0) + (self.size() \u003e 13 ? self[13].matches.size() : 0) + (self.size() \u003e 14 ? self[14].matches.size() : 0) + (self.size() \u003e 15 ? self[15].matches.size() : 0) \u003c= 128",
         "(has(self.backendRefs) \u0026\u0026 size(self.backendRefs) \u003e 0) ? (!has(self.filters) || self.filters.all(f, !has(f.requestRedirect))): true",
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
@@ -70409,24 +71191,24 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "self.protocol == 'GRPC' ? has(self.grpc) : true",
         "has(self.grpc) ? self.protocol == 'GRPC' : true",
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
         "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
         "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -70444,39 +71226,22 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "self.protocol == 'GRPC' ? has(self.grpc) : true",
         "has(self.grpc) ? self.protocol == 'GRPC' : true",
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "self.kind != 'Service' || has(self.port)",
-        "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
-        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
-        "has(self.wva)",
-        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-        "has(self.hpa) || has(self.keda)",
-        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
-        "has(self.wva)",
-        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-        "has(self.hpa) || has(self.keda)",
-        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0"
+        "self.all(p1, self.exists_one(p2, p1.number==p2.number))"
       ],
       "version": "v1alpha2",
       "versions": [
@@ -70593,10 +71358,10 @@
       "validation_rules": [
         "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
         "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
-        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
         "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
         "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
+        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
+        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
       ],
       "version": "v1beta1",
       "versions": [
@@ -73178,6 +73943,9 @@
       "source": "manifests/kustomize/base/installs/multi-user/cache/cluster-role.yaml"
     },
     {
+      "aggregation_rule": {
+        "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-pipelines-edit": "true"
+      },
       "name": "kubeflow-pipelines-edit",
       "owner": "data-science-pipelines",
       "source": "manifests/kustomize/base/installs/multi-user/view-edit-cluster-roles.yaml"
@@ -73231,6 +73999,9 @@
       "source": "manifests/kustomize/base/installs/multi-user/metadata-writer/cluster-role.yaml"
     },
     {
+      "aggregation_rule": {
+        "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-pipelines-view": "true"
+      },
       "name": "kubeflow-pipelines-view",
       "owner": "data-science-pipelines",
       "source": "manifests/kustomize/base/installs/multi-user/view-edit-cluster-roles.yaml"
@@ -77053,6 +77824,9 @@
       "source": "config/rbac/sparkapplication_viewer_role.yaml"
     },
     {
+      "aggregation_rule": {
+        "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-trainer-admin": "true"
+      },
       "name": "kubeflow-trainer-admin",
       "owner": "trainer",
       "source": "manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml"
@@ -77518,6 +78292,9 @@
       "source": "manifests/rhoai/kubeflow-training-roles.yaml"
     },
     {
+      "aggregation_rule": {
+        "rbac.authorization.kubeflow.org/aggregate-to-kubeflow-training-admin": "true"
+      },
       "name": "kubeflow-training-admin",
       "owner": "training-operator",
       "source": "manifests/overlays/kubeflow/kubeflow-training-roles.yaml"

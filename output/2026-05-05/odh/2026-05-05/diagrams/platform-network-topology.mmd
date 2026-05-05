@@ -136,95 +136,75 @@ graph LR
     class mlflow_operator component
     mlflow_operator --> svc_33["postgres-service\nClusterIP: 5432/TCP"]
     class svc_33 service
-    model_registry_operator["model-registry-operator"]
-    class model_registry_operator component
-    model_registry_operator --> svc_34["model-registry-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
-    class svc_34 service
-    model_registry_operator["model-registry-operator"]
-    class model_registry_operator component
-    model_registry_operator --> svc_35["model-registry-operator-webhook-service\nClusterIP: 443/TCP"]
-    class svc_35 service
-    model_registry_operator["model-registry-operator"]
-    class model_registry_operator component
-    model_registry_operator --> svc_36["template-value\nClusterIP: 0/TCP, 0/TCP"]
-    class svc_36 service
-    model_registry_operator["model-registry-operator"]
-    class model_registry_operator component
-    model_registry_operator --> svc_37["template-value-postgres\nClusterIP: 5432/TCP"]
-    class svc_37 service
     model_registry["model-registry"]
     class model_registry component
-    model_registry --> svc_38["model-catalog\nClusterIP: 8080/TCP"]
+    model_registry --> svc_34["model-catalog\nClusterIP: 8080/TCP"]
+    class svc_34 service
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_35["etcd\nClusterIP: 2379/TCP"]
+    class svc_35 service
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_36["modelmesh-controller\nClusterIP: 8080/TCP"]
+    class svc_36 service
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_37["modelmesh-webhook-server-service\nClusterIP: 9443/TCP"]
+    class svc_37 service
+    models_as_a_service["models-as-a-service"]
+    class models_as_a_service component
+    models_as_a_service --> svc_38["maas-api\nClusterIP: 8080/TCP, 9090/TCP"]
     class svc_38 service
-    modelmesh_serving["modelmesh-serving"]
-    class modelmesh_serving component
-    modelmesh_serving --> svc_39["etcd\nClusterIP: 2379/TCP"]
+    models_as_a_service["models-as-a-service"]
+    class models_as_a_service component
+    models_as_a_service --> svc_39["payload-processing\nClusterIP: 9004/TCP"]
     class svc_39 service
-    modelmesh_serving["modelmesh-serving"]
-    class modelmesh_serving component
-    modelmesh_serving --> svc_40["modelmesh-controller\nClusterIP: 8080/TCP"]
-    class svc_40 service
-    modelmesh_serving["modelmesh-serving"]
-    class modelmesh_serving component
-    modelmesh_serving --> svc_41["modelmesh-webhook-server-service\nClusterIP: 9443/TCP"]
-    class svc_41 service
-    models_as_a_service["models-as-a-service"]
-    class models_as_a_service component
-    models_as_a_service --> svc_42["maas-api\nClusterIP: 8080/TCP, 9090/TCP"]
-    class svc_42 service
-    models_as_a_service["models-as-a-service"]
-    class models_as_a_service component
-    models_as_a_service --> svc_43["payload-processing\nClusterIP: 9004/TCP"]
-    class svc_43 service
     notebooks["notebooks"]
     class notebooks component
-    notebooks --> svc_44["notebook\nClusterIP: 8888/TCP"]
+    notebooks --> svc_40["notebook\nClusterIP: 8888/TCP"]
+    class svc_40 service
+    odh_dashboard["odh-dashboard"]
+    class odh_dashboard component
+    odh_dashboard --> svc_41["odh-dashboard\nClusterIP: 8443/TCP"]
+    class svc_41 service
+    odh_dashboard["odh-dashboard"]
+    class odh_dashboard component
+    odh_dashboard --> svc_42["workspaces-backend\nClusterIP: 4000/TCP"]
+    class svc_42 service
+    odh_dashboard["odh-dashboard"]
+    class odh_dashboard component
+    odh_dashboard --> svc_43["workspaces-controller-metrics-service\nClusterIP: 8080/TCP"]
+    class svc_43 service
+    odh_dashboard["odh-dashboard"]
+    class odh_dashboard component
+    odh_dashboard --> svc_44["workspaces-frontend\nClusterIP: 8080/TCP"]
     class svc_44 service
     odh_dashboard["odh-dashboard"]
     class odh_dashboard component
-    odh_dashboard --> svc_45["odh-dashboard\nClusterIP: 8443/TCP"]
+    odh_dashboard --> svc_45["workspaces-webhook-service\nClusterIP: 443/TCP"]
     class svc_45 service
-    odh_dashboard["odh-dashboard"]
-    class odh_dashboard component
-    odh_dashboard --> svc_46["workspaces-backend\nClusterIP: 4000/TCP"]
+    odh_model_controller["odh-model-controller"]
+    class odh_model_controller component
+    odh_model_controller --> svc_46["model-serving-api\nClusterIP: 443/TCP, 8080/TCP"]
     class svc_46 service
-    odh_dashboard["odh-dashboard"]
-    class odh_dashboard component
-    odh_dashboard --> svc_47["workspaces-controller-metrics-service\nClusterIP: 8080/TCP"]
+    odh_model_controller["odh-model-controller"]
+    class odh_model_controller component
+    odh_model_controller --> svc_47["odh-model-controller-webhook-service\nClusterIP: 443/TCP"]
     class svc_47 service
-    odh_dashboard["odh-dashboard"]
-    class odh_dashboard component
-    odh_dashboard --> svc_48["workspaces-frontend\nClusterIP: 8080/TCP"]
-    class svc_48 service
-    odh_dashboard["odh-dashboard"]
-    class odh_dashboard component
-    odh_dashboard --> svc_49["workspaces-webhook-service\nClusterIP: 443/TCP"]
-    class svc_49 service
-    odh_model_controller["odh-model-controller"]
-    class odh_model_controller component
-    odh_model_controller --> svc_50["model-serving-api\nClusterIP: 443/TCP, 8080/TCP"]
-    class svc_50 service
-    odh_model_controller["odh-model-controller"]
-    class odh_model_controller component
-    odh_model_controller --> svc_51["odh-model-controller-webhook-service\nClusterIP: 443/TCP"]
-    class svc_51 service
     opendatahub_operator["opendatahub-operator"]
     class opendatahub_operator component
-    opendatahub_operator --> svc_52["webhook-service\nClusterIP: 443/TCP"]
-    class svc_52 service
+    opendatahub_operator --> svc_48["webhook-service\nClusterIP: 443/TCP"]
+    class svc_48 service
     spark_operator["spark-operator"]
     class spark_operator component
-    spark_operator --> svc_53["spark-operator-webhook-svc\nClusterIP: 443/TCP"]
-    class svc_53 service
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator --> svc_54["training-operator\nClusterIP: 8080/TCP, 443/TCP"]
-    class svc_54 service
+    spark_operator --> svc_49["spark-operator-webhook-svc\nClusterIP: 443/TCP"]
+    class svc_49 service
     trustyai_service_operator["trustyai-service-operator"]
     class trustyai_service_operator component
-    trustyai_service_operator --> svc_55["trustyai-service-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
-    class svc_55 service
+    trustyai_service_operator --> svc_50["trustyai-service-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    class svc_50 service
     trustyai_service_operator["trustyai-service-operator"]
     class trustyai_service_operator component
-    trustyai_service_operator --> svc_56["trustyai-service-operator-metrics-service\nClusterIP: 8080/TCP"]
-    class svc_56 service
+    trustyai_service_operator --> svc_51["trustyai-service-operator-metrics-service\nClusterIP: 8080/TCP"]
+    class svc_51 service

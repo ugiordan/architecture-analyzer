@@ -8,11 +8,11 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 31 |
-| CRDs | 42 |
-| Services | 56 |
-| Secrets | 38 |
-| Cluster Roles | 107 |
+| Components | 29 |
+| CRDs | 35 |
+| Services | 51 |
+| Secrets | 34 |
+| Cluster Roles | 95 |
 | Cross-Component Dependencies | 15 |
 
 ## Component Registry
@@ -38,7 +38,6 @@
 | llm-d-kv-cache |
 | mlflow-operator |
 | model-registry |
-| model-registry-operator |
 | modelmesh-serving |
 | models-as-a-service |
 | notebooks |
@@ -47,7 +46,6 @@
 | opendatahub-operator |
 | spark-operator |
 | trainer |
-| training-operator |
 | trustyai-service-operator |
 | workload-variant-autoscaler |
 
@@ -78,7 +76,6 @@
 | llama-stack-k8s-operator | LlamaStackDistribution |
 | mlflow-operator | MLflow |
 | mlflow-operator | MLflowConfig |
-| model-registry-operator | ModelRegistry |
 | modelmesh-serving | Predictor |
 | odh-model-controller | Account |
 | spark-operator | ScheduledSparkApplication |
@@ -87,12 +84,6 @@
 | trainer | ClusterTrainingRuntime |
 | trainer | TrainJob |
 | trainer | TrainingRuntime |
-| training-operator | JAXJob |
-| training-operator | MPIJob |
-| training-operator | PaddleJob |
-| training-operator | PyTorchJob |
-| training-operator | TFJob |
-| training-operator | XGBoostJob |
 | workload-variant-autoscaler | VariantAutoscaling |
 
 ## Cross-Component Dependencies
@@ -138,8 +129,6 @@
 | istiod-tls | llm-d-inference-scheduler | Opaque |
 | controller-manager-metrics-tls | mlflow-operator | Opaque |
 | postgres-secret | mlflow-operator | Opaque |
-| controller-manager-metrics-service | model-registry-operator | Opaque |
-| webhook-server-cert | model-registry-operator | Opaque |
 | minio-secret | model-registry | Opaque |
 | model-catalog-hf-api-key | model-registry | Opaque |
 | model-catalog-postgres | model-registry | Opaque |
@@ -153,8 +142,6 @@
 | redhat-ods-operator-controller-webhook-cert | opendatahub-operator | kubernetes.io/tls |
 | webhook-server-cert | spark-operator | Opaque |
 | kubeflow-trainer-webhook-cert | trainer | Opaque |
-| kubeflow-training-operator-webhook-cert | training-operator | Opaque |
-| training-operator-webhook-cert | training-operator | Opaque |
 | epp-metrics-token | workload-variant-autoscaler | Opaque |
 | prometheus-client-cert | workload-variant-autoscaler | Opaque |
 
@@ -200,12 +187,6 @@
 | mlflow-operator | mlflow-edit | 13 |
 | mlflow-operator | mlflow-integration | 5 |
 | mlflow-operator | mlflow-view | 8 |
-| model-registry-operator | manager-role | 27 |
-| model-registry-operator | metrics-reader | 0 |
-| model-registry-operator | modelregistry-admin-role | 2 |
-| model-registry-operator | modelregistry-editor-role | 2 |
-| model-registry-operator | modelregistry-viewer-role | 2 |
-| model-registry-operator | proxy-role | 2 |
 | model-registry | metrics-auth-role | 2 |
 | model-registry | metrics-reader | 0 |
 | model-registry | model-registry-create-sars | 1 |
@@ -256,12 +237,6 @@
 | trainer | training-admin | 6 |
 | trainer | training-edit | 6 |
 | trainer | training-view | 6 |
-| training-operator | kubeflow-training-admin | 0 |
-| training-operator | kubeflow-training-edit | 15 |
-| training-operator | kubeflow-training-view | 13 |
-| training-operator | training-edit | 12 |
-| training-operator | training-operator | 31 |
-| training-operator | training-view | 12 |
 | workload-variant-autoscaler | VariantAutoscalings-viewer-role | 2 |
 | workload-variant-autoscaler | epp-metrics-reader-role | 0 |
 | workload-variant-autoscaler | manager-role | 20 |
@@ -307,10 +282,6 @@
 | mlflow-operator | minio-service | ClusterIP | 9000/TCP |
 | mlflow-operator | mlflow-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | mlflow-operator | postgres-service | ClusterIP | 5432/TCP |
-| model-registry-operator | model-registry-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
-| model-registry-operator | model-registry-operator-webhook-service | ClusterIP | 443/TCP |
-| model-registry-operator | template-value | ClusterIP | template-value/TCP, template-value/TCP |
-| model-registry-operator | template-value-postgres | ClusterIP | 5432/TCP |
 | model-registry | model-catalog | ClusterIP | 8080/TCP |
 | modelmesh-serving | etcd | ClusterIP | 2379/TCP |
 | modelmesh-serving | modelmesh-controller | ClusterIP | 8080/TCP |
@@ -327,7 +298,6 @@
 | odh-model-controller | odh-model-controller-webhook-service | ClusterIP | 443/TCP |
 | opendatahub-operator | webhook-service | ClusterIP | 443/TCP |
 | spark-operator | spark-operator-webhook-svc | ClusterIP | 443/TCP |
-| training-operator | training-operator | ClusterIP | 8080/TCP, 443/TCP |
 | trustyai-service-operator | trustyai-service-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | trustyai-service-operator | trustyai-service-operator-metrics-service | ClusterIP | 8080/TCP |
 

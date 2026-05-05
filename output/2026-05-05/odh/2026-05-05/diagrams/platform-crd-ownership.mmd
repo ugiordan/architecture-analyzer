@@ -48,115 +48,87 @@ graph TD
     class kserve component
     kserve -->|"defines"| crd_11{{"InferenceService"}}
     class crd_11 crd
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator -->|"defines"| crd_12{{"JAXJob"}}
+    kserve["kserve"]
+    class kserve component
+    kserve -->|"defines"| crd_12{{"LLMInferenceService"}}
     class crd_12 crd
     kserve["kserve"]
     class kserve component
-    kserve -->|"defines"| crd_13{{"LLMInferenceService"}}
+    kserve -->|"defines"| crd_13{{"LLMInferenceServiceConfig"}}
     class crd_13 crd
-    kserve["kserve"]
-    class kserve component
-    kserve -->|"defines"| crd_14{{"LLMInferenceServiceConfig"}}
-    class crd_14 crd
     llama_stack_k8s_operator["llama-stack-k8s-operator"]
     class llama_stack_k8s_operator component
-    llama_stack_k8s_operator -->|"defines"| crd_15{{"LlamaStackDistribution"}}
+    llama_stack_k8s_operator -->|"defines"| crd_14{{"LlamaStackDistribution"}}
+    class crd_14 crd
+    kserve["kserve"]
+    class kserve component
+    kserve -->|"defines"| crd_15{{"LocalModelCache"}}
     class crd_15 crd
     kserve["kserve"]
     class kserve component
-    kserve -->|"defines"| crd_16{{"LocalModelCache"}}
+    kserve -->|"defines"| crd_16{{"LocalModelNamespaceCache"}}
     class crd_16 crd
     kserve["kserve"]
     class kserve component
-    kserve -->|"defines"| crd_17{{"LocalModelNamespaceCache"}}
+    kserve -->|"defines"| crd_17{{"LocalModelNode"}}
     class crd_17 crd
     kserve["kserve"]
     class kserve component
-    kserve -->|"defines"| crd_18{{"LocalModelNode"}}
+    kserve -->|"defines"| crd_18{{"LocalModelNodeGroup"}}
     class crd_18 crd
-    kserve["kserve"]
-    class kserve component
-    kserve -->|"defines"| crd_19{{"LocalModelNodeGroup"}}
+    mlflow_operator["mlflow-operator"]
+    class mlflow_operator component
+    mlflow_operator -->|"defines"| crd_19{{"MLflow"}}
     class crd_19 crd
     mlflow_operator["mlflow-operator"]
     class mlflow_operator component
-    mlflow_operator -->|"defines"| crd_20{{"MLflow"}}
+    mlflow_operator -->|"defines"| crd_20{{"MLflowConfig"}}
     class crd_20 crd
-    mlflow_operator["mlflow-operator"]
-    class mlflow_operator component
-    mlflow_operator -->|"defines"| crd_21{{"MLflowConfig"}}
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator -->|"defines"| crd_21{{"Pipeline"}}
     class crd_21 crd
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator -->|"defines"| crd_22{{"MPIJob"}}
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator -->|"defines"| crd_22{{"PipelineVersion"}}
     class crd_22 crd
-    model_registry_operator["model-registry-operator"]
-    class model_registry_operator component
-    model_registry_operator -->|"defines"| crd_23{{"ModelRegistry"}}
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving -->|"defines"| crd_23{{"Predictor"}}
     class crd_23 crd
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator -->|"defines"| crd_24{{"PaddleJob"}}
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator -->|"defines"| crd_24{{"ScheduledSparkApplication"}}
     class crd_24 crd
     data_science_pipelines_operator["data-science-pipelines-operator"]
     class data_science_pipelines_operator component
-    data_science_pipelines_operator -->|"defines"| crd_25{{"Pipeline"}}
+    data_science_pipelines_operator -->|"defines"| crd_25{{"ScheduledWorkflow"}}
     class crd_25 crd
-    data_science_pipelines_operator["data-science-pipelines-operator"]
-    class data_science_pipelines_operator component
-    data_science_pipelines_operator -->|"defines"| crd_26{{"PipelineVersion"}}
+    kserve["kserve"]
+    class kserve component
+    kserve -->|"defines"| crd_26{{"ServingRuntime"}}
     class crd_26 crd
-    modelmesh_serving["modelmesh-serving"]
-    class modelmesh_serving component
-    modelmesh_serving -->|"defines"| crd_27{{"Predictor"}}
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator -->|"defines"| crd_27{{"SparkApplication"}}
     class crd_27 crd
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator -->|"defines"| crd_28{{"PyTorchJob"}}
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator -->|"defines"| crd_28{{"SparkConnect"}}
     class crd_28 crd
-    spark_operator["spark-operator"]
-    class spark_operator component
-    spark_operator -->|"defines"| crd_29{{"ScheduledSparkApplication"}}
+    trainer["trainer"]
+    class trainer component
+    trainer -->|"defines"| crd_29{{"TrainJob"}}
     class crd_29 crd
-    data_science_pipelines_operator["data-science-pipelines-operator"]
-    class data_science_pipelines_operator component
-    data_science_pipelines_operator -->|"defines"| crd_30{{"ScheduledWorkflow"}}
+    kserve["kserve"]
+    class kserve component
+    kserve -->|"defines"| crd_30{{"TrainedModel"}}
     class crd_30 crd
-    kserve["kserve"]
-    class kserve component
-    kserve -->|"defines"| crd_31{{"ServingRuntime"}}
+    trainer["trainer"]
+    class trainer component
+    trainer -->|"defines"| crd_31{{"TrainingRuntime"}}
     class crd_31 crd
-    spark_operator["spark-operator"]
-    class spark_operator component
-    spark_operator -->|"defines"| crd_32{{"SparkApplication"}}
-    class crd_32 crd
-    spark_operator["spark-operator"]
-    class spark_operator component
-    spark_operator -->|"defines"| crd_33{{"SparkConnect"}}
-    class crd_33 crd
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator -->|"defines"| crd_34{{"TFJob"}}
-    class crd_34 crd
-    trainer["trainer"]
-    class trainer component
-    trainer -->|"defines"| crd_35{{"TrainJob"}}
-    class crd_35 crd
-    kserve["kserve"]
-    class kserve component
-    kserve -->|"defines"| crd_36{{"TrainedModel"}}
-    class crd_36 crd
-    trainer["trainer"]
-    class trainer component
-    trainer -->|"defines"| crd_37{{"TrainingRuntime"}}
-    class crd_37 crd
     workload_variant_autoscaler["workload-variant-autoscaler"]
     class workload_variant_autoscaler component
-    workload_variant_autoscaler -->|"defines"| crd_38{{"VariantAutoscaling"}}
-    class crd_38 crd
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator -->|"defines"| crd_39{{"XGBoostJob"}}
-    class crd_39 crd
+    workload_variant_autoscaler -->|"defines"| crd_32{{"VariantAutoscaling"}}
+    class crd_32 crd
