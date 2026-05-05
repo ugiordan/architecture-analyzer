@@ -14797,6 +14797,61 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#operator-config-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operator Config extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconcile-sequences-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconcile Sequences extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-metrics-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus Metrics extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-conditions-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Conditions extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-detection-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform Detection extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15419,6 +15474,61 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#operator-config-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operator Config extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconcile-sequences-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconcile Sequences extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-metrics-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus Metrics extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-conditions-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status Conditions extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-detection-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform Detection extractor
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15495,7 +15605,7 @@
 
 
 <h1 id="extractors">Extractors<a class="headerlink" href="#extractors" title="Permanent link">¶</a></h1>
-<p>The analyzer includes 17 extractors that parse Kubernetes manifests, Go source code, Dockerfiles, and Helm charts.</p>
+<p>The analyzer includes 22 extractors that parse Kubernetes manifests, Go source code, Dockerfiles, and Helm charts.</p>
 <h2 id="extractor-reference">Extractor reference<a class="headerlink" href="#extractor-reference" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -15609,6 +15719,36 @@
 <td>Go source (<code>ctrl.NewManager</code>, <code>cache.Options</code>)</td>
 <td>Cache scope, filtered types, disabled types, implicit informers, GOMEMLIMIT</td>
 </tr>
+<tr>
+<td>18</td>
+<td>Operator Config</td>
+<td>Go source (const/var blocks in controllers, pkg/config)</td>
+<td>Classified constants: images, ports, timeouts, env vars, resources, name patterns</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Reconcile Sequences</td>
+<td>Go source (<code>Reconcile()</code> methods)</td>
+<td>Ordered sub-resource reconciliation steps with conditional guards</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Prometheus Metrics</td>
+<td>Go source (<code>prometheus.New*</code>, <code>promauto.New*</code>)</td>
+<td>Metric name, type (gauge/counter/histogram/summary), help, labels, namespace</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Status Conditions</td>
+<td>Go source (const blocks in controllers, API types)</td>
+<td>Condition type constants, associated reason constants, source location</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Platform Detection</td>
+<td>Go source (controllers, reconcilers, config packages)</td>
+<td>Capability structs (IsOpenShift, HasRoute), API discovery checks, conditional resource creation</td>
+</tr>
 </tbody>
 </table>
 <h2 id="yaml-extractors">YAML extractors<a class="headerlink" href="#yaml-extractors" title="Permanent link">¶</a></h2>
@@ -15649,7 +15789,7 @@
 <h3 id="secrets-extractor">Secrets extractor<a class="headerlink" href="#secrets-extractor" title="Permanent link">¶</a></h3>
 <p>Scans deployments and services for secret references. Extracts secret names and types but never extracts secret values.</p>
 <h2 id="go-source-extractors">Go source extractors<a class="headerlink" href="#go-source-extractors" title="Permanent link">¶</a></h2>
-<p>Extractors 6, 13, 15, 16, and 17 parse Go source code.</p>
+<p>Extractors 6, 13, 15-22 parse Go source code.</p>
 <h3 id="controller-watches-extractor">Controller Watches extractor<a class="headerlink" href="#controller-watches-extractor" title="Permanent link">¶</a></h3>
 <p>Parses controller <code>SetupWithManager</code> functions to extract:</p>
 <ul>
@@ -15696,6 +15836,49 @@
 <p>This data feeds into the CPG upgrade domain query <strong>CGA-U03</strong> (ungated-feature), which detects functions that check unregistered gates or feature-related functions that lack gate checks entirely.</p>
 <h3 id="cache-config-extractor">Cache Config extractor<a class="headerlink" href="#cache-config-extractor" title="Permanent link">¶</a></h3>
 <p>Analyzes controller-runtime cache configuration. See <a href="../../architecture/cache-analysis/">Cache Analysis</a> for details.</p>
+<h3 id="operator-config-extractor">Operator Config extractor<a class="headerlink" href="#operator-config-extractor" title="Permanent link">¶</a></h3>
+<p>Scans Go const/var blocks in controller, config, and root-level source files. Classifies each constant by category using a precedence-based heuristic:</p>
+<ul>
+<li><strong>image</strong>: Container image references (registry paths, <code>:tag</code> suffixes)</li>
+<li><strong>port</strong>: Port numbers (numeric values 1-65535 with port-related names)</li>
+<li><strong>timeout</strong>: Duration values (<code>time.Second</code>, <code>time.Minute</code>, etc.)</li>
+<li><strong>env_var</strong>: Environment variable names (UPPER_SNAKE_CASE)</li>
+<li><strong>resource</strong>: Kubernetes resource quantities (<code>100m</code>, <code>256Mi</code>, etc.)</li>
+<li><strong>name_pattern</strong>: Kubernetes object names (lowercase with hyphens)</li>
+<li><strong>general</strong>: Everything else</li>
+</ul>
+<p>Deduplicates against status condition constants to avoid overlap. Skips iota-only blocks, test files, and vendor directories.</p>
+<h3 id="reconcile-sequences-extractor">Reconcile Sequences extractor<a class="headerlink" href="#reconcile-sequences-extractor" title="Permanent link">¶</a></h3>
+<p>Parses <code>Reconcile()</code> and <code>reconcile*()</code> methods using go/ast to extract the ordered sequence of sub-resource reconciliation steps. For each step, captures:</p>
+<ul>
+<li>Method name and derived component (e.g., <code>ReconcileDatabase</code> -&gt; <code>Database</code>)</li>
+<li>Conditional guards (if-blocks wrapping the call)</li>
+<li>Source location</li>
+</ul>
+<p>This reveals the reconciliation order and which steps are conditional on configuration.</p>
+<h3 id="prometheus-metrics-extractor">Prometheus Metrics extractor<a class="headerlink" href="#prometheus-metrics-extractor" title="Permanent link">¶</a></h3>
+<p>Regex-based extraction of Prometheus metric registrations. Matches <code>prometheus.New{Gauge,Counter,Histogram,Summary}(Vec)?</code> and <code>promauto.New*</code> patterns. For each metric:</p>
+<ul>
+<li>Composes the full metric name from Namespace + Subsystem + Name fields</li>
+<li>Extracts help text</li>
+<li>Captures labels from <code>[]string{...}</code> literals for Vec types</li>
+<li>Reports metric type and source location</li>
+</ul>
+<h3 id="status-conditions-extractor">Status Conditions extractor<a class="headerlink" href="#status-conditions-extractor" title="Permanent link">¶</a></h3>
+<p>Parses Go const blocks using go/ast to extract status condition type and reason constants. Detects conditions by:</p>
+<ul>
+<li>Explicit type annotations (<code>ConditionType</code>, <code>StatusConditionType</code>)</li>
+<li>Name suffixes (<code>Available</code>, <code>Ready</code>, <code>Degraded</code>, <code>Progressing</code>, <code>Reconciled</code>)</li>
+<li>Name prefixes (<code>Condition*</code>, <code>Reason*</code>)</li>
+</ul>
+<p>Associates reason constants with their preceding condition type within the same const block. Returns Go constant names for dedup with the operator config extractor.</p>
+<h3 id="platform-detection-extractor">Platform Detection extractor<a class="headerlink" href="#platform-detection-extractor" title="Permanent link">¶</a></h3>
+<p>Three-pass detection of platform-specific behavior:</p>
+<ol>
+<li><strong>Capability structs</strong>: Finds struct types with boolean fields matching platform patterns (<code>IsOpenShift</code>, <code>HasRoute</code>, <code>HasIstio</code>, etc.) with a blocklist for common non-platform booleans (<code>IsDeleted</code>, <code>IsReady</code>, <code>HasError</code>)</li>
+<li><strong>API discovery calls</strong>: Matches <code>discovery.ServerResourcesForGroupVersion</code>, <code>RESTMapper().ResourcesFor</code>, and similar runtime capability checks</li>
+<li><strong>Conditional resource creation</strong>: Scans reconciler functions for if-blocks guarded by capability checks, extracting the resource kind and action from the body</li>
+</ol>
 <h2 id="file-extractors">File extractors<a class="headerlink" href="#file-extractors" title="Permanent link">¶</a></h2>
 <h3 id="dockerfiles-extractor">Dockerfiles extractor<a class="headerlink" href="#dockerfiles-extractor" title="Permanent link">¶</a></h3>
 <p>Parses Dockerfile/Containerfile syntax:</p>
@@ -15744,7 +15927,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 16, 2026 12:41:26 UTC">April 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 5, 2026 13:53:47 UTC">May 5, 2026</span>
   </span>
 
     
