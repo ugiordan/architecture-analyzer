@@ -5,16 +5,21 @@ The aggregator merges multiple single-component analyses into a cross-repo platf
 ## Usage
 
 ```bash
-# Step 1: Analyze individual repos
-arch-analyzer analyze /path/to/repo-a --output-dir results/repo-a
-arch-analyzer analyze /path/to/repo-b --output-dir results/repo-b
-arch-analyzer analyze /path/to/repo-c --output-dir results/repo-c
+# Step 1: Analyze individual repos (using the batch script)
+# Output is org-namespaced: results/<org>/<repo>/
+scripts/analyze-repo.sh myorg/repo-a results/
+scripts/analyze-repo.sh myorg/repo-b results/
+scripts/analyze-repo.sh otherorg/repo-c results/
+
+# Or manually:
+arch-analyzer analyze /path/to/repo-a --output-dir results/myorg/repo-a
+arch-analyzer analyze /path/to/repo-b --output-dir results/myorg/repo-b
 
 # Step 2: Aggregate
 arch-analyzer aggregate results/ --output-dir platform-output/
 ```
 
-The aggregator discovers all `component-architecture.json` files in the results directory and merges them.
+The aggregator recursively discovers all `component-architecture.json` files in the results directory and merges them. Both flat (`results/<repo>/`) and org-namespaced (`results/<org>/<repo>/`) layouts are supported.
 
 ## What aggregation reveals
 
@@ -86,11 +91,12 @@ For automated platform analysis:
 
 ```bash
 # Analyze all repos from scan-config.yaml
+# Results are org-namespaced automatically: results/<org>/<repo>/
 for repo in $(yq '.repos[].name' scan-config.yaml); do
-  ./scripts/analyze-repo.sh "$repo" results/"$repo"/
+  ./scripts/analyze-repo.sh "$repo" results/
 done
 
-# Aggregate
+# Aggregate (recursively discovers all component JSONs)
 arch-analyzer aggregate results/ --output-dir platform-output/
 ```
 

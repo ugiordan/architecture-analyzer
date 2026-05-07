@@ -1484,27 +1484,27 @@ func cmdPlatforms(args []string) error {
 
 // collectRepoSHAs scans a results directory for component-architecture.json files
 // and extracts repo -> commit_sha pairs for snapshot metadata.
+// Supports both flat (results/<repo>/) and org-namespaced (results/<org>/<repo>/) layouts.
 func collectRepoSHAs(resultsDir string) (map[string]string, error) {
 	repos := make(map[string]string)
-	entries, err := os.ReadDir(resultsDir)
-	if err != nil {
-		return repos, fmt.Errorf("reading results directory %s: %w", resultsDir, err)
-	}
-	for _, entry := range entries {
-		if !entry.IsDir() {
-			continue
+	err := filepath.Walk(resultsDir, func(path string, fi os.FileInfo, walkErr error) error {
+		if walkErr != nil || fi.IsDir() || fi.Name() != "component-architecture.json" {
+			return nil
 		}
-		jsonPath := filepath.Join(resultsDir, entry.Name(), "component-architecture.json")
-		data, err := loadJSON(jsonPath)
-		if err != nil {
-			fmt.Printf("WARN: failed to load %s: %v\n", jsonPath, err)
-			continue
+		data, loadErr := loadJSON(path)
+		if loadErr != nil {
+			fmt.Printf("WARN: failed to load %s: %v\n", path, loadErr)
+			return nil
 		}
 		repo, _ := data["repo"].(string)
 		sha, _ := data["commit_sha"].(string)
 		if repo != "" {
 			repos[repo] = sha
 		}
+		return nil
+	})
+	if err != nil {
+		return repos, fmt.Errorf("scanning results directory %s: %w", resultsDir, err)
 	}
 	return repos, nil
 }

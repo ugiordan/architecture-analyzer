@@ -15,8 +15,9 @@ if [[ ! "$REPO" =~ ^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$ ]]; then
     exit 1
 fi
 
+ORG="${REPO%%/*}"
 SHORT="${REPO##*/}"
-OUTDIR="${RESULTS_BASE}/${SHORT}"
+OUTDIR="${RESULTS_BASE}/${ORG}/${SHORT}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ANALYZER_DIR="$(dirname "${SCRIPT_DIR}")"
 ANALYZER_BIN="${ANALYZER_DIR}/arch-analyzer"

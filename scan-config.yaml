@@ -1,7 +1,8 @@
 # Platform scan configuration
 # Each platform produces its own aggregated architecture analysis and docs section.
 # Repos are listed under their GitHub org. The workflow combines org + repo name.
-# Only Go-based repos are included (the analyzer extracts from Go source).
+# Go repos get full extraction (22 extractors + CPG). Non-Go repos get partial
+# extraction (Dockerfiles, K8s manifests, Helm charts) and multi-language CPG.
 
 platforms:
   odh:
@@ -9,7 +10,7 @@ platforms:
     description: "Upstream ML platform on Kubernetes"
     orgs:
       opendatahub-io:
-        # Operators
+        # Operators (Go)
         - opendatahub-operator
         - data-science-pipelines-operator
         - model-registry-operator
@@ -21,31 +22,40 @@ platforms:
         - spark-operator
         - codeflare-operator
         - kubeflow
-        # Core services
+        # Core services (Go)
         - odh-dashboard
         - data-science-pipelines
         - model-registry
         - models-as-a-service
         - notebooks
-        # Inference
+        # Inference (Go)
         - modelmesh-serving
         - odh-model-controller
-        # Infrastructure
+        # Infrastructure (Go)
         - kube-auth-proxy
         - distributed-workloads
         - kueue
-        # AI Safety / Guardrails
+        # AI Safety / Guardrails (Go)
         - fms-guardrails-orchestrator
-        # LLM Infrastructure
+        # LLM Infrastructure (Go)
         - llm-d-inference-scheduler
         - llm-d-kv-cache
-        # Evaluation
+        # Evaluation (Go)
         - eval-hub
-        # Batch
+        # Batch (Go)
         - argo-workflows
         - batch-gateway
-        # Other
+        # Other (Go)
         - workload-variant-autoscaler
+        # Non-Go components (partial extraction: Dockerfiles, manifests, CPG)
+        - guardrails-detectors        # Python
+        - kserve-autogluon-server     # Python
+        - llama-stack                 # Python
+        - llama-stack-provider-trustyai-garak  # Python
+        - lm-evaluation-harness       # Python
+        - mlflow                      # Python
+        - modelmesh                   # Java
+        - vllm                        # Python/C++
       # External upstream dependencies
       kserve:
         - kserve
@@ -62,7 +72,7 @@ platforms:
       max: "4.17"
     orgs:
       red-hat-data-services:
-        # Operators (downstream of opendatahub-io)
+        # Operators (Go, downstream of opendatahub-io)
         - opendatahub-operator
         - data-science-pipelines-operator
         - model-registry-operator
@@ -73,32 +83,36 @@ platforms:
         - mlflow-operator
         - spark-operator
         - codeflare-operator
-        # Core services
+        # Core services (Go)
         - odh-dashboard
         - data-science-pipelines
         - model-registry
         - models-as-a-service
         - notebooks
-        # Inference
+        # Inference (Go)
         - kserve
         - modelmesh-serving
         - odh-model-controller
-        # Infrastructure
+        # Infrastructure (Go)
         - kube-auth-proxy
         - kube-rbac-proxy
         - kuberay
         - kubeflow
         - distributed-workloads
         - kueue
-        # AI Safety / Guardrails
+        # AI Safety / Guardrails (Go)
         - fms-guardrails-orchestrator
-        # LLM Infrastructure
+        # LLM Infrastructure (Go)
         - llm-d-inference-scheduler
         - llm-d-kv-cache
-        # Evaluation
+        # Evaluation (Go)
         - eval-hub
-        # Batch
+        # Batch (Go)
         - argo-workflows
         - batch-gateway
-        # Other
+        # Other (Go)
         - workload-variant-autoscaler
+        # Non-Go components (partial extraction: Dockerfiles, manifests, CPG)
+        - codeflare-sdk               # Python
+        - fms-hf-tuning               # Python
+        - vllm-cpu                    # Python/C++
