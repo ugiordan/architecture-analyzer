@@ -2,7 +2,7 @@
 
 ## component-architecture.json
 
-The core output format. Contains all data extracted by the 17 extractors.
+The core output format. Contains all data extracted by the 22 extractors.
 
 ### Top-level structure
 
@@ -28,7 +28,12 @@ The core output format. Contains all data extracted by the 17 extractors.
   "ingress_routing": [],
   "external_connections": [],
   "feature_gates": [],
-  "cache_config": {}
+  "cache_config": {},
+  "operator_config": [],
+  "reconcile_sequences": [],
+  "prometheus_metrics": [],
+  "status_conditions": [],
+  "platform_detection": {}
 }
 ```
 
@@ -189,6 +194,183 @@ The core output format. Contains all data extracted by the 17 extractors.
       "recommendation": "Add cache.DefaultTransform to strip managedFields"
     }
   ]
+}
+```
+
+#### Operator Config
+
+```json
+[
+  {
+    "name": "DefaultDeploymentServiceAccount",
+    "value": "ds-pipeline",
+    "category": "name_pattern",
+    "source": "controllers/dsp_params.go"
+  },
+  {
+    "name": "APIServerImage",
+    "value": "quay.io/opendatahub/ds-pipelines-api-server",
+    "category": "image",
+    "source": "controllers/config/defaults.go"
+  }
+]
+```
+
+#### Reconcile Sequences
+
+```json
+[
+  {
+    "controller": "DSPAReconciler",
+    "steps": [
+      {
+        "method": "ReconcileDatabase",
+        "component": "Database",
+        "conditional": "p.DatabaseHealthy()",
+        "source": "controllers/dspa_controller.go:85"
+      },
+      {
+        "method": "ReconcileStorage",
+        "component": "Storage",
+        "source": "controllers/dspa_controller.go:92"
+      }
+    ],
+    "source": "controllers/dspa_controller.go"
+  }
+]
+```
+
+#### Prometheus Metrics
+
+```json
+[
+  {
+    "name": "dspo_reconciliation_duration_seconds",
+    "type": "histogram",
+    "help": "Time taken to reconcile a DSPA resource",
+    "labels": ["dspa_name", "dspa_namespace"],
+    "namespace": "dspo",
+    "source": "controllers/metrics.go"
+  }
+]
+```
+
+#### Status Conditions
+
+```json
+[
+  {
+    "type": "DatabaseAvailable",
+    "reasons": ["DatabaseCreated", "DatabaseFailed", "ExternalDBInUse"],
+    "source": "controllers/status.go"
+  }
+]
+```
+
+#### Platform Detection
+
+```json
+{
+  "capabilities": [
+    {
+      "name": "IsOpenShift",
+      "check": "whether the cluster is OpenShift",
+      "source": "pkg/config/platform.go"
+    }
+  ],
+  "conditionals": [
+    {
+      "condition": "p.IsOpenShift",
+      "resource_kind": "Route",
+      "action": "create",
+      "source": "controllers/reconciler.go"
+    }
+  ]
+}
+```
+
+## code-graph.json
+
+The code property graph output. Contains all nodes, edges, basic blocks, and optionally taint findings.
+
+### Top-level structure
+
+```json
+{
+  "schema_version": 2,
+  "nodes": [],
+  "edges": [],
+  "taint_findings": []
+}
+```
+
+### Node
+
+```json
+{
+  "id": "pkg/handler/auth.go::HandleLogin",
+  "kind": "Function",
+  "name": "HandleLogin",
+  "file": "pkg/handler/auth.go",
+  "line": 42,
+  "end_line": 85,
+  "language": "go",
+  "type_name": "",
+  "complexity": 8,
+  "param_names": ["w", "r"],
+  "param_types": ["http.ResponseWriter", "*http.Request"],
+  "return_type": "",
+  "trust_level": "untrusted",
+  "is_test": false,
+  "annotations": {
+    "handles_user_input": true,
+    "sec:handles_request": true
+  }
+}
+```
+
+Node kinds: `File`, `Function`, `Parameter`, `Call`, `StructLiteral`, `Variable`, `BasicBlock`.
+
+Trust levels: `untrusted` (public HTTP, no auth), `semi_trusted` (webhook, auth middleware), `trusted` (controller Reconcile, init).
+
+### Edge
+
+```json
+{
+  "source": "pkg/handler/auth.go::HandleLogin",
+  "target": "pkg/db/users.go::FindUser",
+  "kind": "EdgeCalls",
+  "label": "",
+  "confidence": "CERTAIN"
+}
+```
+
+Edge kinds and labels:
+
+- `EdgeCalls`: function-to-function call (confidence: CERTAIN, INFERRED, UNCERTAIN)
+- `EdgeContains`: file-to-function, function-to-literal containment
+- `EdgeAliases`: type alias relationship
+- `EdgeDataFlow`: intraprocedural data flow (labels: `assigns`, `reads`, `passes_to`, `field_access`, `returns`)
+- `EdgeControlFlow`: CFG edges (labels: `true_branch`, `false_branch`, `fallthrough`, `loop_back`, `loop_exit`, `exception`, `entry`, `exit`)
+
+### Taint Finding
+
+```json
+{
+  "rule": "taint-to-sink",
+  "source": {
+    "id": "pkg/handler/auth.go::HandleLogin::r",
+    "file": "pkg/handler/auth.go",
+    "line": 42
+  },
+  "sink": {
+    "id": "pkg/db/users.go::FindUser::db.Query",
+    "file": "pkg/db/users.go",
+    "line": 67
+  },
+  "path": ["HandleLogin::r", "HandleLogin::username", "FindUser::query", "FindUser::db.Query"],
+  "sanitized": false,
+  "cross_function": true
 }
 ```
 

@@ -6,12 +6,12 @@ A static analysis tool that extracts architecture data from Kubernetes/OpenShift
 
 ## Features
 
-- **17 extractors** covering CRDs, RBAC, deployments, services, network policies, controller watches, dependencies, secrets, Helm charts, Dockerfiles, webhooks, configmaps, HTTP endpoints, ingress, external connections, feature gates, and cache architecture
+- **22 architecture extractors** covering CRDs, RBAC, deployments, services, network policies, controller watches, dependencies, secrets, Helm charts, Dockerfiles, webhooks, configmaps, HTTP endpoints, ingress, external connections, feature gates, cache architecture, operator config constants, reconciliation sequences, Prometheus metrics, status conditions, and platform detection
+- **Code property graph** with multi-language parsing (Go, Python, TypeScript, Rust), typed node model, edge confidence classification, intraprocedural data flow, control flow graphs, and two-phase taint propagation
+- **20 security queries** across 3 domains (security, testing, upgrade) detecting webhook gaps, RBAC bugs, secret leaks, taint paths, complexity hotspots, and more
+- **SARIF ingestion** mapping external scanner findings (Semgrep, gosec, etc.) to CPG nodes for unified analysis
+- **Structural diff engine** comparing code graphs across versions to detect regressions
 - **7 renderers** producing Mermaid diagrams, Structurizr C4 DSL, ASCII security views, and structured markdown reports
-- **Cache architecture analysis** detecting OOM risks by cross-referencing controller-runtime cache config against watches and deployment memory limits
-- **External connection detection** scanning Go source for database, object storage, gRPC, and messaging service references with automatic credential redaction
-- **Feature gate inventory** extracting registered gates with default state, pre-release stage, and source location for upgrade safety analysis
-- **Code property graph** with security queries (taint analysis, SQL injection, hardcoded secrets, missing auth)
 - **CRD contract validation** detecting breaking schema changes across repos
 - **Platform aggregation** merging multiple component analyses into a cross-repo view
 
@@ -21,68 +21,48 @@ A static analysis tool that extracts architecture data from Kubernetes/OpenShift
 graph LR
     subgraph Inputs
         REPO[Git Repository]
+        SARIF[SARIF Files]
     end
 
-    subgraph "Extractors (17)"
-        E1[CRDs]
-        E2[RBAC]
-        E3[Services]
-        E4[Deployments]
-        E5[Network Policies]
-        E6[Controller Watches]
-        E7[Dependencies]
-        E8[Secrets]
-        E9[Helm]
-        E10[Dockerfiles]
-        E11[Webhooks]
-        E12[ConfigMaps]
-        E13[HTTP Endpoints]
-        E14[Ingress]
-        E15[External Connections]
-        E16[Feature Gates]
-        E17[Cache Config]
+    subgraph "Architecture Extractors (22)"
+        E1[CRDs & RBAC]
+        E2[Services & Deployments]
+        E3[Network Policies & Ingress]
+        E4[Controller Watches & Dependencies]
+        E5[Cache Config & Operator Config]
+        E6[Reconcile Sequences & Status Conditions]
+        E7[Prometheus Metrics & Platform Detection]
+        E8[Secrets, Helm, Dockerfiles, Webhooks, ConfigMaps, HTTP Endpoints, External Connections, Feature Gates]
     end
 
-    subgraph Data
+    subgraph "Code Property Graph"
+        PARSE[Multi-Language Parsers<br/>Go, Python, TS, Rust]
+        CPG[Typed Node Model<br/>Edge Confidence]
+        DF[Data Flow Analysis]
+        CFG[Control Flow Graphs]
+        TAINT[Taint Propagation Engine]
+        DOMAINS[Domain Queries<br/>Security, Testing, Upgrade]
+    end
+
+    subgraph Outputs
         JSON[component-architecture.json]
+        GRAPH[code-graph.json]
+        FINDINGS[security-findings.json/sarif]
+        DIAGRAMS[Diagrams & Reports]
     end
 
-    subgraph "Renderers (7)"
-        R1[Mermaid RBAC]
-        R2[Mermaid Component]
-        R3[ASCII Security]
-        R4[Mermaid Dependencies]
-        R5[C4 DSL]
-        R6[Mermaid Dataflow]
-        R7[Markdown Report]
-    end
-
-    subgraph "Code Graph"
-        CPG[Code Property Graph]
-        SEC[Security Queries]
-    end
-
-    subgraph Aggregator
-        AGG[Platform Aggregator]
-    end
-
-    REPO --> E1 & E2 & E3 & E4 & E5 & E6 & E7 & E8 & E9 & E10 & E11 & E12 & E13 & E14 & E15 & E16 & E17
-    E1 & E2 & E3 & E4 & E5 & E6 & E7 & E8 & E9 & E10 & E11 & E12 & E13 & E14 & E15 & E16 & E17 --> JSON
-    JSON --> R1 & R2 & R3 & R4 & R5 & R6 & R7
-    JSON --> AGG
-    REPO --> CPG --> SEC
+    REPO --> E1 & E2 & E3 & E4 & E5 & E6 & E7 & E8 --> JSON --> DIAGRAMS
+    REPO --> PARSE --> CPG --> DF --> CFG --> TAINT --> DOMAINS --> FINDINGS
+    SARIF --> CPG
+    CPG --> GRAPH
 
     classDef extractor fill:#3498db,stroke:#2980b9,color:#fff
-    classDef renderer fill:#2ecc71,stroke:#27ae60,color:#fff
-    classDef data fill:#e74c3c,stroke:#c0392b,color:#fff
-    classDef agg fill:#f39c12,stroke:#e67e22,color:#fff
     classDef cpg fill:#9b59b6,stroke:#8e44ad,color:#fff
+    classDef output fill:#2ecc71,stroke:#27ae60,color:#fff
 
-    class E1,E2,E3,E4,E5,E6,E7,E8,E9,E10,E11,E12,E13,E14,E15,E16,E17 extractor
-    class R1,R2,R3,R4,R5,R6,R7 renderer
-    class JSON data
-    class AGG agg
-    class CPG,SEC cpg
+    class E1,E2,E3,E4,E5,E6,E7,E8 extractor
+    class PARSE,CPG,DF,CFG,TAINT,DOMAINS cpg
+    class JSON,GRAPH,FINDINGS,DIAGRAMS output
 ```
 
 ## Requirements
@@ -121,24 +101,47 @@ Produces:
 ./arch-analyzer extract /path/to/repo --output component-architecture.json
 ```
 
-### Render diagrams from existing JSON
-
-```bash
-./arch-analyzer render component-architecture.json --output-dir diagrams/
-./arch-analyzer render component-architecture.json --formats rbac,component
-```
-
 ### Code graph security scan
 
 ```bash
 ./arch-analyzer scan /path/to/repo --format json --output findings.json
 ./arch-analyzer scan /path/to/repo --format sarif --output findings.sarif
+
+# With specific domains
+./arch-analyzer scan /path/to/repo --domains security,testing,upgrade
+
+# Import SARIF from external scanners alongside the scan
+./arch-analyzer scan /path/to/repo --import-sarif gosec.sarif,semgrep.sarif
+
+# With architecture context for richer queries
+./arch-analyzer scan /path/to/repo --with-arch
+```
+
+### Export code property graph
+
+```bash
+./arch-analyzer graph /path/to/repo --output code-graph.json
+./arch-analyzer graph /path/to/repo --format dot --output code-graph.dot
+```
+
+### Structural diff between code graphs
+
+```bash
+./arch-analyzer diff base.json head.json --format text
+./arch-analyzer diff base.json head.json --format json --output diff.json
+```
+
+### Ingest external SARIF findings
+
+```bash
+./arch-analyzer ingest gosec.sarif --graph code-graph.json --output enriched-graph.json
 ```
 
 ### Full analysis (architecture + code graph + schemas)
 
 ```bash
 ./arch-analyzer full-analysis /path/to/repo --output-dir output/
+./arch-analyzer full-analysis /path/to/repo --import-sarif gosec.sarif --domains security
 ```
 
 ### CRD contract validation
@@ -157,6 +160,13 @@ Produces:
 ./arch-analyzer analyze /path/to/repo-a --output-dir results/repo-a
 ./arch-analyzer analyze /path/to/repo-b --output-dir results/repo-b
 ./arch-analyzer aggregate results/ --output-dir platform-output/
+```
+
+### Platform discovery
+
+```bash
+./arch-analyzer discover /path/to/operator-repo --format json
+./arch-analyzer build-config /path/to/operator-repo
 ```
 
 ## Extractors
@@ -180,6 +190,11 @@ Produces:
 | External Connections | Go source (`sql.Open`, `redis.NewClient`, `grpc.Dial`, `sarama.New*`) | Database, object storage, gRPC, messaging references with credential redaction |
 | Feature Gates | Go source (`DefaultMutableFeatureGate.Add`, `featuregate.Feature` consts) | Gate name, default state, pre-release stage, source location |
 | Cache Config | Go source (`ctrl.NewManager`, `cache.Options`) | Cache scope, filtered types, disabled types, implicit informers, GOMEMLIMIT |
+| Operator Config | Go source (const/var blocks in controllers, pkg/config) | Classified constants: images, ports, timeouts, env vars, resources, name patterns |
+| Reconcile Sequences | Go source (`Reconcile()` methods) | Ordered sub-resource reconciliation steps with conditional guards |
+| Prometheus Metrics | Go source (`prometheus.New*`, `promauto.New*`) | Metric name, type (gauge/counter/histogram/summary), help, labels, namespace |
+| Status Conditions | Go source (const blocks in controllers, API types) | Condition type constants, associated reason constants, source location |
+| Platform Detection | Go source (controllers, reconcilers, config packages) | Capability structs (IsOpenShift, HasRoute), API discovery checks, conditional resource creation |
 
 ### Cache Architecture Analysis
 
@@ -193,6 +208,101 @@ The cache analyzer cross-references controller-runtime cache configuration again
 - **GOMEMLIMIT exceeding 90%** of container memory limit
 
 This catches real bugs like [opendatahub-io/data-science-pipelines-operator#992](https://github.com/opendatahub-io/data-science-pipelines-operator/issues/992) and [opendatahub-io/model-registry-operator#457](https://github.com/opendatahub-io/model-registry-operator/issues/457).
+
+## Code Property Graph
+
+The CPG pipeline builds a multi-language code graph from source using tree-sitter (no compilation required) and runs layered analysis on top of it.
+
+### Multi-Language Parsing
+
+Four language parsers extract AST-level nodes (functions, call sites, struct literals, HTTP endpoints, DB operations) and edges (calls, contains):
+
+| Language | Parser | CFG | Data Flow | Taint |
+|----------|--------|-----|-----------|-------|
+| Go | tree-sitter-go | Yes | Yes | Yes |
+| Python | tree-sitter-python | Yes | Yes | Yes |
+| TypeScript | tree-sitter-typescript | Yes | Yes | Yes |
+| Rust | tree-sitter-rust | Yes | Yes | Yes |
+
+### Typed Node Model
+
+Nodes carry typed fields instead of string maps, covering function signatures (params, return types), call targets, HTTP routes, DB operations, struct types, cyclomatic complexity, and entrypoint trust level.
+
+### Edge Confidence
+
+Call edges are classified by resolution confidence:
+
+| Confidence | Meaning | Example |
+|------------|---------|---------|
+| `CERTAIN` | Exact match, same package | Direct function call `doWork()` |
+| `INFERRED` | Cross-package short-name match | `utils.Validate()` matched heuristically |
+| `UNCERTAIN` | Multiple candidates, interface dispatch | `handler.Process()` with multiple implementations |
+
+Security queries never filter out UNCERTAIN edges; they use confidence to prioritize review order.
+
+### Intraprocedural Data Flow
+
+Per-function analysis tracks variable assignments, reads, argument passing, field access, and return values. Produces `assigns`, `reads`, `passes_to`, `field_access`, and `returns` edges within function bodies.
+
+### Control Flow Graphs
+
+Basic block construction within each function with branching edges (`true_branch`, `false_branch`, `fallthrough`, `loop_back`, `loop_exit`, `exception`, `entry`, `exit`). Enables path-sensitive analysis: distinguishing "validation guards the dangerous operation" from "validation on independent path."
+
+### Taint Propagation
+
+Two-phase taint engine:
+
+1. **Intraprocedural** (Phase A): per-function taint propagation along data flow edges, filtered by CFG block reachability. Produces function summaries.
+2. **Interprocedural** (Phase B): walks the call graph using Phase A summaries to trace taint across function boundaries and storage links.
+
+Sources: user input handlers, deserialization calls. Sinks: SQL execution, subprocess calls, command execution, template rendering, HTML output, file access, eval usage. Bounded by configurable depth (20), path (100), and visit (10K) limits with truncation diagnostics.
+
+### SARIF Ingestion
+
+Ingest SARIF 2.1.0 output from external static analyzers (Semgrep, gosec, Trivy, etc.) and map findings to CPG nodes. Enriches external findings with architecture context: "Semgrep found SQL injection at handler.go:42" becomes "that function is an untrusted webhook handler with RBAC for secrets."
+
+Validation: schema validation, path normalization, annotation sanitization, 50K result size limit.
+
+### Structural Diff
+
+Compare two code-graph.json files to detect regressions: new functions, removed functions, changed complexity, new call edges, trust level changes. Useful for PR review automation.
+
+## Security Queries
+
+### Security Domain (12 rules)
+
+| Rule | ID | Severity | Description |
+|------|----|----------|-------------|
+| Webhook Missing Update | CGA-003 | High | Webhooks intercepting CREATE but not UPDATE |
+| RBAC Precedence Bug | CGA-004 | High | Conflicting RBAC rules across bindings |
+| Cert as CA | CGA-005 | High | Certificate used as CA without proper validation |
+| Cross-Namespace Secret | CGA-006 | High | Secret access crossing namespace boundaries |
+| Unfiltered Cache | CGA-007 | Medium | Watched types without cache filters (OOM risk) |
+| Plaintext Secrets | CGA-008 | Medium | Hardcoded secrets or credentials in source |
+| Weak Serial Entropy | CGA-009 | Medium | Weak randomness in security-sensitive contexts |
+| Complexity Hotspot | CGA-010 | Medium | High-complexity functions with security annotations |
+| Untrusted Endpoint | CGA-011 | Info | HTTP endpoints without recognized auth middleware |
+| Unprotected Ingress | CGA-012 | High | Ingress routes without TLS or auth |
+| Overprivileged Secret Access | CGA-013 | Medium | Broad secret access beyond what's needed |
+| Uncontrolled Egress | CGA-014 | Medium | Outbound connections without network policy |
+
+### Testing Domain (4 rules)
+
+| Rule | ID | Severity | Description |
+|------|----|----------|-------------|
+| Untested Security Function | CGA-T01 | Medium | Security-annotated functions without test coverage |
+| Fake-Only Integration | CGA-T02 | Low | Integration tests using only fakes/mocks |
+| Missing Error Paths | CGA-T03 | Medium | Error return paths without test coverage |
+| Consolidation Opportunity | CGA-T04 | Low | Duplicate test patterns that could be consolidated |
+
+### Upgrade Domain (4 rules)
+
+| Rule | ID | Severity | Description |
+|------|----|----------|-------------|
+| Unconverted CRD | CGA-U01 | Medium | CRDs still using v1beta1 |
+| Pre-Release API Usage | CGA-U02 | Low | Usage of alpha/beta Kubernetes APIs |
+| Ungated Feature | CGA-U03 | Medium | Features without feature gate protection |
+| Unchecked Version Access | CGA-U04 | Low | Version-dependent code without version checks |
 
 ## Renderers
 
@@ -211,33 +321,40 @@ This catches real bugs like [opendatahub-io/data-science-pipelines-operator#992]
 ```
 architecture-analyzer/
   cmd/arch-analyzer/
-    main.go              # CLI entry point with 11 subcommands
+    main.go                # CLI entry point with subcommands
   pkg/
-    extractor/           # 17 architecture extractors
-    renderer/            # 7 diagram/report renderers
-    aggregator/          # Platform-wide aggregation
-    validator/           # CRD contract validation
-    parser/              # Go source parser (tree-sitter)
-    builder/             # Code property graph builder
-    graph/               # CPG data structure
-    linker/              # Storage linker (DB ops to schemas)
-    annotator/           # Security annotation engine
-    query/               # Security query engine
-    domains/             # Domain framework (security, testing, upgrade)
-    arch/                # Architecture data structures
-    config/              # Configuration types
+    extractor/             # 22 architecture extractors
+    renderer/              # 7 diagram/report renderers
+    aggregator/            # Platform-wide aggregation
+    validator/             # CRD contract validation
+    parser/                # Multi-language parsers (Go, Python, TypeScript, Rust)
+                           # with CFG construction per language
+    builder/               # Code property graph builder (call resolution, edge confidence)
+    graph/                 # CPG data structures (typed nodes, edges, basic blocks)
+    dataflow/              # Taint propagation engine (intraprocedural + interprocedural)
+    diff/                  # Structural diff engine for code graph comparison
+    sarif/                 # SARIF 2.1.0 ingestion and node mapping
+    linker/                # Storage linker (DB operations to schemas)
+    annotator/             # Security annotation engine
+    query/                 # Security query engine (base queries + taint-to-sink)
+    domains/               # Domain framework with registered query rules
+      security/            # 12 security queries
+      testing/             # 4 testing queries
+      upgrade/             # 4 upgrade queries
+    arch/                  # Architecture data structures
+    config/                # Configuration types
   contracts/
-    schemas/             # CRD baseline schemas for validation
+    schemas/               # CRD baseline schemas for validation
   scripts/
-    analyze-repo.sh      # Clone + analyze + cleanup
+    analyze-repo.sh        # Clone + analyze + cleanup
   site/
-    docs/                # MkDocs Material documentation
-    mkdocs.yml           # Docs site configuration
+    docs/                  # MkDocs Material documentation
+    mkdocs.yml             # Docs site configuration
   .github/workflows/
-    analyze-all.yml      # Scheduled analysis workflow
-    extract-schemas.yml  # CRD schema extraction workflow
-    validate-contracts.yml  # CRD contract validation on PRs
-    docs.yml             # Deploy docs to GitHub Pages
+    analyze-all.yml        # Scheduled analysis workflow
+    extract-schemas.yml    # CRD schema extraction workflow
+    validate-contracts.yml # CRD contract validation on PRs
+    docs.yml               # Deploy docs to GitHub Pages
 ```
 
 ## Running Tests

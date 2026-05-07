@@ -2,7 +2,7 @@
 
 ## CRD Ownership Map
 
-The platform defines 45 CRDs. Each CRD is owned by the component that declares it.
+The platform defines 35 CRDs. Each CRD is owned by the component that declares it.
 
 | Owner | CRDs | Count |
 |-------|------|-------|
@@ -12,12 +12,10 @@ The platform defines 45 CRDs. Each CRD is owned by the component that declares i
 | **kserve** | ClusterServingRuntime, ClusterStorageContainer, InferenceGraph, InferenceService, LLMInferenceService, LLMInferenceServiceConfig, LocalModelCache, LocalModelNamespaceCache, LocalModelNode, LocalModelNodeGroup, ServingRuntime, TrainedModel | 12 |
 | **llama-stack-k8s-operator** | LlamaStackDistribution | 1 |
 | **mlflow-operator** | MLflow, MLflowConfig | 2 |
-| **model-registry-operator** | ModelRegistry | 1 |
 | **modelmesh-serving** | ClusterServingRuntime, InferenceService, Predictor, ServingRuntime | 4 |
 | **odh-model-controller** | Account | 1 |
 | **spark-operator** | ScheduledSparkApplication, SparkApplication, SparkConnect | 3 |
 | **trainer** | ClusterTrainingRuntime, TrainJob, TrainingRuntime | 3 |
-| **training-operator** | JAXJob, MPIJob, PaddleJob, PyTorchJob, TFJob, XGBoostJob | 6 |
 | **workload-variant-autoscaler** | VariantAutoscaling | 1 |
 
 ## Cross-Component Dependencies
@@ -41,13 +39,6 @@ Relationships detected through Go module imports and CRD watch patterns.
 | odh-model-controller | kserve | watches-crd:InferenceService |
 | opendatahub-operator | models-as-a-service | go-module |
 | opendatahub-operator | opendatahub-operator | go-module |
-| kserve | kube-rbac-proxy | uses-image |
-| kube-auth-proxy | kube-rbac-proxy | uses-image |
-| kubeflow | kube-rbac-proxy | uses-image |
-| kueue | kube-rbac-proxy | uses-image |
-| llama-stack-k8s-operator | kube-rbac-proxy | uses-image |
-| modelmesh-serving | kube-rbac-proxy | uses-image |
-| odh-dashboard | kube-rbac-proxy | uses-image |
 
 **Tightest coupling:** `odh-model-controller -> kserve` (5 dependency edges).
 

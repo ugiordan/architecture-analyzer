@@ -54,7 +54,7 @@ type DomainAnalyzer interface {
 | `Name()` | Unique domain identifier |
 | `Description()` | Human-readable description |
 | `Dependencies()` | Other domains that must run first |
-| `Languages()` | Supported languages (currently Go) |
+| `Languages()` | Supported languages (Go, Python, TypeScript, Rust) |
 | `Annotators()` | Map of language to annotator implementation |
 | `Queries()` | List of query functions to run |
 
@@ -102,9 +102,9 @@ Domains use this for cross-cutting queries (e.g., checking code references again
 1. Create `pkg/domains/mydomain/` directory
 2. Implement `DomainAnalyzer` interface in `analyzer.go`
 3. Define annotation types in `annotations.go`
-4. Implement annotator in `go_annotator.go`
+4. Implement language-specific annotators (e.g., `go_annotator.go`, `python_annotator.go`)
 5. Implement queries in `queries.go`
-6. Register in `main.go`
+6. Register in `pkg/domains/registry.go`
 7. Add tests in `*_test.go` files
 
 ### Example: Minimal domain
@@ -119,7 +119,7 @@ func NewAnalyzer() *Analyzer { return &Analyzer{} }
 func (a *Analyzer) Name() string        { return "mydomain" }
 func (a *Analyzer) Description() string { return "My custom analysis" }
 func (a *Analyzer) Dependencies() []string { return nil }
-func (a *Analyzer) Languages() []string { return []string{"go"} }
+func (a *Analyzer) Languages() []string { return []string{"go", "python"} }
 
 func (a *Analyzer) Annotators() map[string]annotator.Annotator {
     return map[string]annotator.Annotator{
