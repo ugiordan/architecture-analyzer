@@ -14843,7 +14843,7 @@
   <a href="#core-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core pipeline
+        Core Pipeline
       
     </span>
   </a>
@@ -14854,12 +14854,12 @@
   <a href="#design-decisions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design decisions
+        Design Decisions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Design decisions">
+    <nav class="md-nav" aria-label="Design Decisions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14885,10 +14885,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-tree-sitter-for-go-parsing" class="md-nav__link">
+  <a href="#why-tree-sitter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why tree-sitter for Go parsing?
+        Why tree-sitter?
       
     </span>
   </a>
@@ -14915,7 +14915,7 @@
   <a href="#package-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Package structure
+        Package Structure
       
     </span>
   </a>
@@ -14926,7 +14926,7 @@
   <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data flow
+        Data Flow
       
     </span>
   </a>
@@ -15184,7 +15184,7 @@
   <a href="#core-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core pipeline
+        Core Pipeline
       
     </span>
   </a>
@@ -15195,12 +15195,12 @@
   <a href="#design-decisions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design decisions
+        Design Decisions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Design decisions">
+    <nav class="md-nav" aria-label="Design Decisions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -15226,10 +15226,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#why-tree-sitter-for-go-parsing" class="md-nav__link">
+  <a href="#why-tree-sitter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why tree-sitter for Go parsing?
+        Why tree-sitter?
       
     </span>
   </a>
@@ -15256,7 +15256,7 @@
   <a href="#package-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Package structure
+        Package Structure
       
     </span>
   </a>
@@ -15267,7 +15267,7 @@
   <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data flow
+        Data Flow
       
     </span>
   </a>
@@ -15295,19 +15295,24 @@
 
 
 <h1 id="design-overview">Design Overview<a class="headerlink" href="#design-overview" title="Permanent link">¶</a></h1>
-<p>The Architecture Analyzer is a deterministic static analysis tool. No LLM involvement, no non-determinism, no API calls. It reads a repository and produces structured architecture data.</p>
-<h2 id="core-pipeline">Core pipeline<a class="headerlink" href="#core-pipeline" title="Permanent link">¶</a></h2>
+<p>The Architecture Analyzer is a deterministic static analysis tool. No LLM involvement, no non-determinism, no API calls. It reads a repository and produces structured architecture data plus a code property graph with security analysis.</p>
+<h2 id="core-pipeline">Core Pipeline<a class="headerlink" href="#core-pipeline" title="Permanent link">¶</a></h2>
 <pre class="mermaid"><code>flowchart TB
     REPO["Git Repository"] --&gt; EXTRACT["Extractors (22)"]
     EXTRACT --&gt; JSON["component-architecture.json"]
     JSON --&gt; RENDER["Renderers (7)"]
     JSON --&gt; AGG["Aggregator"]
 
-    REPO --&gt; PARSE["Tree-sitter Parser"]
-    PARSE --&gt; CPG["Code Property Graph"]
-    CPG --&gt; ANNOTATE["Domain Annotators"]
-    ANNOTATE --&gt; QUERY["Security Queries"]
+    REPO --&gt; PARSE["Multi-Language Parsers\n(Go, Python, TS, Rust)"]
+    PARSE --&gt; CPG["Code Property Graph\n(typed nodes, edge confidence)"]
+    CPG --&gt; DF["Data Flow + CFG"]
+    DF --&gt; ANNOTATE["Domain Annotators"]
+    ANNOTATE --&gt; TAINT["Taint Propagation"]
+    TAINT --&gt; QUERY["Domain Queries (20)"]
     QUERY --&gt; FINDINGS["Findings (JSON/SARIF)"]
+
+    SARIF["External SARIF"] --&gt; CPG
+    CPG --&gt; DIFF["Structural Diff"]
 
     JSON --&gt; SCHEMA["Schema Extractor"]
     SCHEMA --&gt; VALIDATE["Contract Validator"]
@@ -15319,9 +15324,9 @@
 
     class EXTRACT extract
     class RENDER render
-    class CPG,ANNOTATE,QUERY cpg
+    class PARSE,CPG,DF,ANNOTATE,TAINT,QUERY cpg
     class JSON,FINDINGS data</code></pre>
-<h2 id="design-decisions">Design decisions<a class="headerlink" href="#design-decisions" title="Permanent link">¶</a></h2>
+<h2 id="design-decisions">Design Decisions<a class="headerlink" href="#design-decisions" title="Permanent link">¶</a></h2>
 <h3 id="why-static-analysis">Why static analysis?<a class="headerlink" href="#why-static-analysis" title="Permanent link">¶</a></h3>
 <ul>
 <li><strong>Deterministic</strong>: Same input always produces same output. No model variability.</li>
@@ -15337,52 +15342,62 @@
 <li><strong>Custom processing</strong>: Use the JSON with any tool (jq, Python, etc.)</li>
 <li><strong>CI artifacts</strong>: Store JSON as build artifacts, render on demand</li>
 </ul>
-<h3 id="why-tree-sitter-for-go-parsing">Why tree-sitter for Go parsing?<a class="headerlink" href="#why-tree-sitter-for-go-parsing" title="Permanent link">¶</a></h3>
+<h3 id="why-tree-sitter">Why tree-sitter?<a class="headerlink" href="#why-tree-sitter" title="Permanent link">¶</a></h3>
 <ul>
-<li><strong>No Go toolchain dependency</strong>: Tree-sitter parses syntax without needing <code>go build</code> to succeed</li>
+<li><strong>No toolchain dependency</strong>: Tree-sitter parses syntax without needing compilation to succeed</li>
+<li><strong>Multi-language</strong>: Same approach works for Go, Python, TypeScript, and Rust with language-specific grammars</li>
 <li><strong>Fast incremental parsing</strong>: Can parse individual files without resolving the full module graph</li>
-<li><strong>Cross-language potential</strong>: Same approach extends to Python, TypeScript, etc.</li>
 <li><strong>Partial-file resilience</strong>: Parses what it can even if the file has errors</li>
 </ul>
 <h3 id="why-a-code-property-graph">Why a code property graph?<a class="headerlink" href="#why-a-code-property-graph" title="Permanent link">¶</a></h3>
 <p>The CPG provides:</p>
 <ul>
-<li><strong>Cross-function analysis</strong>: Trace data flow across function boundaries</li>
+<li><strong>Cross-function analysis</strong>: Trace data flow across function boundaries via taint propagation</li>
 <li><strong>Annotation layers</strong>: Multiple domains (security, testing, upgrade) annotate the same graph</li>
 <li><strong>Composable queries</strong>: Each query traverses the same graph independently</li>
 <li><strong>Architecture integration</strong>: CPG nodes link to architecture data for cross-cutting analysis</li>
+<li><strong>Edge confidence</strong>: Call resolution classified as CERTAIN, INFERRED, or UNCERTAIN so queries can prioritize</li>
+<li><strong>Path sensitivity</strong>: Control flow graphs distinguish validation-guarded paths from unguarded ones</li>
 </ul>
-<h2 id="package-structure">Package structure<a class="headerlink" href="#package-structure" title="Permanent link">¶</a></h2>
+<h2 id="package-structure">Package Structure<a class="headerlink" href="#package-structure" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pkg/
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  extractor/      # 22 architecture extractors
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  renderer/       # 7 diagram/report renderers
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  aggregator/     # Platform-wide aggregation
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  validator/      # CRD contract validation
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  parser/         # Tree-sitter Go parser
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  builder/        # CPG builder
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  graph/          # CPG data structure (thread-safe)
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  annotator/      # Annotation engine
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  query/          # Query engine + taint analysis
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  domains/        # Pluggable domain framework
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    security/     # Security domain
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    testing/      # Testing domain
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    upgrade/      # Upgrade domain
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  arch/           # Architecture data types and parsing
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>  linker/         # Storage linker
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  config/         # Configuration types
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  parser/         # Multi-language parsers (Go, Python, TypeScript, Rust)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                  # with CFG (basic block) construction per language
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  builder/        # CPG builder (cross-file resolution, edge confidence)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  graph/          # CPG data structure (typed nodes, thread-safe)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  dataflow/       # Taint propagation engine (intraprocedural + interprocedural)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  diff/           # Structural diff engine for code graph comparison
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  sarif/          # SARIF 2.1.0 ingestion and node mapping
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  annotator/      # Annotation engine
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  query/          # Query engine + base taint-to-sink queries
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  domains/        # Pluggable domain framework
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    security/     # Security domain (12 queries, multi-language annotators)
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    testing/      # Testing domain (4 queries)
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    upgrade/      # Upgrade domain (4 queries)
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  linker/         # Storage linker (DB operations to schemas)
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  arch/           # Architecture data types and parsing
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  config/         # Configuration types
 </code></pre></div>
-<h2 id="data-flow">Data flow<a class="headerlink" href="#data-flow" title="Permanent link">¶</a></h2>
+<h2 id="data-flow">Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">¶</a></h2>
 <ol>
 <li><strong>Input</strong>: Path to a git repository (local checkout)</li>
 <li><strong>YAML extraction</strong>: Walk filesystem for Kubernetes manifests, parse into typed structs</li>
-<li><strong>Go extraction</strong>: Parse controller files for watches, endpoints, cache config, operator constants, reconcile sequences, Prometheus metrics, status conditions, and platform detection</li>
+<li><strong>Go source extraction</strong>: Parse controller files for watches, endpoints, cache config, operator constants, reconcile sequences, Prometheus metrics, status conditions, and platform detection</li>
 <li><strong>File extraction</strong>: Parse Dockerfiles, Helm charts, go.mod</li>
 <li><strong>Assembly</strong>: All extracted data merged into <code>ComponentArchitecture</code> struct</li>
-<li><strong>Serialization</strong>: JSON output</li>
+<li><strong>Serialization</strong>: JSON output (<code>component-architecture.json</code>)</li>
 <li><strong>Rendering</strong>: Each renderer reads JSON, produces its format</li>
-<li><strong>CPG</strong> (optional): Tree-sitter parses all Go files, builds graph, runs domain queries</li>
+<li><strong>CPG</strong> (optional): Tree-sitter parses source files across 4 languages, builds typed node graph with data flow edges, control flow graphs, and edge confidence</li>
+<li><strong>SARIF ingestion</strong> (optional): External scanner findings mapped to CPG nodes</li>
+<li><strong>Taint analysis</strong>: Two-phase propagation (intraprocedural summaries, then interprocedural call graph walk)</li>
+<li><strong>Domain queries</strong>: 20 rules across security, testing, and upgrade domains produce findings</li>
 <li><strong>Aggregation</strong> (optional): Multiple component JSONs merged into platform view</li>
 <li><strong>Validation</strong> (optional): CRD schemas compared against baseline contracts</li>
+<li><strong>Diff</strong> (optional): Structural comparison of two code graphs for regression detection</li>
 </ol>
 
 
@@ -15406,7 +15421,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 5, 2026 13:53:47 UTC">May 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 7, 2026 09:11:42 UTC">May 7, 2026</span>
   </span>
 
     

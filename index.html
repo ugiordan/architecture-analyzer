@@ -15276,8 +15276,9 @@
     end
 
     subgraph "Code Graph"
-        CPG[Code Property Graph]
-        SEC[Security Queries]
+        CPG["Multi-Language CPG\n(Go, Python, TS, Rust)"]
+        TAINT[Taint Propagation]
+        SEC["20 Domain Queries"]
     end
 
     subgraph Aggregator
@@ -15288,7 +15289,7 @@
     E1 &amp; E2 &amp; E3 &amp; E4 &amp; E5 &amp; E6 &amp; E7 &amp; E8 &amp; E9 &amp; E10 &amp; E11 &amp; E12 &amp; E13 &amp; E14 &amp; E15 &amp; E16 &amp; E17 &amp; E18 &amp; E19 &amp; E20 &amp; E21 &amp; E22 --&gt; JSON
     JSON --&gt; R1 &amp; R2 &amp; R3 &amp; R4 &amp; R5 &amp; R6 &amp; R7
     JSON --&gt; AGG
-    REPO --&gt; CPG --&gt; SEC
+    REPO --&gt; CPG --&gt; TAINT --&gt; SEC
 
     classDef extractor fill:#3498db,stroke:#2980b9,color:#fff
     classDef renderer fill:#2ecc71,stroke:#27ae60,color:#fff
@@ -15300,7 +15301,7 @@
     class R1,R2,R3,R4,R5,R6,R7 renderer
     class JSON data
     class AGG agg
-    class CPG,SEC cpg</code></pre>
+    class CPG,TAINT,SEC cpg</code></pre>
 <h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">¶</a></h2>
 <div class="grid cards">
 <ul>
@@ -15313,7 +15314,7 @@
 <li>
 <p><strong>Code Property Graph</strong></p>
 <hr>
-<p>Tree-sitter-based Go parser builds a CPG with security queries: taint analysis, SQL injection, hardcoded secrets, missing auth.</p>
+<p>Multi-language CPG (Go, Python, TypeScript, Rust) via tree-sitter. Typed nodes with edge confidence, intraprocedural data flow, control flow graphs, two-phase taint propagation, SARIF ingestion, and structural diff. 20 security queries across 3 domains (security, testing, upgrade).</p>
 <p><a href="architecture/cpg/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"></path></svg></span> CPG architecture</a></p>
 </li>
 <li>
@@ -15381,9 +15382,19 @@
 <td>Machine-readable extracted data</td>
 </tr>
 <tr>
+<td>Code Graph</td>
+<td><code>code-graph.json</code></td>
+<td>CPG nodes, edges, basic blocks, taint findings</td>
+</tr>
+<tr>
+<td>Security JSON</td>
+<td><code>security-findings.json</code></td>
+<td>Domain query findings with file:line references</td>
+</tr>
+<tr>
 <td>SARIF</td>
 <td><code>findings.sarif</code></td>
-<td>Security findings in SARIF format</td>
+<td>Security findings in SARIF 2.1.0 format</td>
 </tr>
 </tbody>
 </table>
@@ -15415,7 +15426,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 5, 2026 13:53:47 UTC">May 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 7, 2026 09:11:42 UTC">May 7, 2026</span>
   </span>
 
     
