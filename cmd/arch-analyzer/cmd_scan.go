@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ugiordan/architecture-analyzer/pkg/annotator"
 	"github.com/ugiordan/architecture-analyzer/pkg/arch"
 	"github.com/ugiordan/architecture-analyzer/pkg/builder"
 	"github.com/ugiordan/architecture-analyzer/pkg/dataflow"
@@ -398,8 +397,8 @@ func buildCPG(repoPath string) (*graph.CPG, error) {
 	sl := linker.NewStorageLinker()
 	linked := sl.Link(cpg)
 
-	sa := annotator.NewSecurityAnnotator()
-	sa.Annotate(cpg)
+	// Legacy SecurityAnnotator removed: its annotations (has_auth, mutates_state,
+	// sec:calls_external, etc.) are now set by the domain GoAnnotator.
 
 	fmt.Printf("Graph: %d nodes, %d edges, %d storage links\n",
 		len(cpg.Nodes()), len(cpg.Edges()), linked)

@@ -32,6 +32,10 @@ func (a *GoAnnotator) Annotate(g *graph.CPG, archData *domains.ArchitectureData)
 	}
 	// Third pass: classify trust levels
 	a.classifyTrust(g)
+	// Cross-language annotations (auth, storage, external calls).
+	// These were previously in a separate legacy SecurityAnnotator.
+	a.annotateAuthAndStorage(g)
+	a.annotateExternalCalls(g)
 	return nil
 }
 
@@ -256,4 +260,87 @@ func containsSubjectString(s string) bool {
 		}
 	}
 	return false
+}
+
+// annotateAuthAndStorage detects auth decorators and DB storage operations.
+// Runs on ALL languages (decorator/DB patterns are cross-language).
+func (a *GoAnnotator) annotateAuthAndStorage(g *graph.CPG) {
+	for _, fn := range g.NodesByKind(graph.NodeFunction) {
+		for _, dec := range fn.Decorators {
+			lower := strings.ToLower(dec)
+			if strings.Contains(lower, "auth") || strings.Contains(lower, "login_required") ||
+				strings.Contains(lower, "require_admin") || strings.Contains(lower, "authenticated") {
+				g.SetAnnotation(fn.ID, "has_auth", true)
+			}
+			if strings.Contains(lower, "rate_limit") || strings.Contains(lower, "limiter") {
+				g.SetAnnotation(fn.ID, "has_rate_limit", true)
+			}
+		}
+		for _, edge := range g.OutEdges(fn.ID) {
+			target := g.GetNode(edge.To)
+			if target == nil {
+				continue
+			}
+			if target.Kind == graph.NodeDBOperation {
+				if target.Operation == "write" {
+					g.SetAnnotation(fn.ID, "writes_storage", true)
+					g.SetAnnotation(fn.ID, "mutates_state", true)
+				} else if target.Operation == "read" {
+					g.SetAnnotation(fn.ID, "reads_storage", true)
+				}
+			}
+			if target.Kind == graph.NodeCallSite {
+				for _, inner := range g.OutEdges(target.ID) {
+					it := g.GetNode(inner.To)
+					if it != nil && it.Kind == graph.NodeDBOperation {
+						if it.Operation == "write" {
+							g.SetAnnotation(fn.ID, "writes_storage", true)
+							g.SetAnnotation(fn.ID, "mutates_state", true)
+						} else if it.Operation == "read" {
+							g.SetAnnotation(fn.ID, "reads_storage", true)
+						}
+					}
+				}
+			}
+		}
+	}
+	for _, op := range g.NodesByKind(graph.NodeDBOperation) {
+		if op.Operation == "write" {
+			g.SetAnnotation(op.ID, "writes_storage", true)
+		} else if op.Operation == "read" {
+			g.SetAnnotation(op.ID, "reads_storage", true)
+		}
+	}
+}
+
+// annotateExternalCalls detects HTTP client calls and namespace-crossing operations.
+func (a *GoAnnotator) annotateExternalCalls(g *graph.CPG) {
+	for _, cs := range g.NodesByKind(graph.NodeCallSite) {
+		name := strings.ToLower(cs.Name)
+		isExternal := strings.HasPrefix(name, "http.") && (strings.Contains(name, "post") ||
+			strings.Contains(name, "get") || strings.Contains(name, "do"))
+		if strings.Contains(name, "client.do") || strings.Contains(name, "client.post") ||
+			strings.Contains(name, "client.get") {
+			isExternal = true
+		}
+		if isExternal {
+			g.SetAnnotation(cs.ID, AnnotCallsExternal, true)
+			for _, edge := range g.InEdges(cs.ID) {
+				src := g.GetNode(edge.From)
+				if src != nil && src.Kind == graph.NodeFunction {
+					g.SetAnnotation(src.ID, AnnotCallsExternal, true)
+				}
+			}
+		}
+		if strings.Contains(name, "namespace") && (strings.Contains(name, "get") ||
+			strings.Contains(name, "list") || strings.Contains(name, "client.")) {
+			g.SetAnnotation(cs.ID, AnnotCrossesNamespace, true)
+			for _, edge := range g.InEdges(cs.ID) {
+				src := g.GetNode(edge.From)
+				if src != nil && src.Kind == graph.NodeFunction {
+					g.SetAnnotation(src.ID, AnnotCrossesNamespace, true)
+				}
+			}
+		}
+	}
 }
