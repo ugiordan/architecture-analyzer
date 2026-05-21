@@ -73,7 +73,7 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 		ConfigMaps:      extractConfigMaps(absPath),
 		HTTPEndpoints:   extractHTTPEndpoints(absPath),
 		IngressRouting:      extractIngress(absPath),
-		ExternalConnections: extractExternalConnections(absPath),
+		ExternalConnections: extractAllExternalConnections(absPath),
 		FeatureGates:        extractFeatureGates(absPath),
 		RuntimeDependencies: extractRuntimeDependencies(absPath),
 	}

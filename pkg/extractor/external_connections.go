@@ -302,3 +302,12 @@ func redactTarget(target string) string {
 	// Redact user:pass@ patterns
 	return credentialInTargetRE.ReplaceAllString(target, "***@")
 }
+
+// extractAllExternalConnections combines Go and Python external connection extraction.
+func extractAllExternalConnections(repoPath string) []ExternalConnection {
+	conns := extractExternalConnections(repoPath)
+	if pyConns := extractPythonExternalConnections(repoPath); len(pyConns) > 0 {
+		conns = append(conns, pyConns...)
+	}
+	return conns
+}
