@@ -16,6 +16,7 @@ import (
 	"github.com/ugiordan/architecture-analyzer/pkg/config"
 	"github.com/ugiordan/architecture-analyzer/pkg/arch"
 	"github.com/ugiordan/architecture-analyzer/pkg/domains"
+	"github.com/ugiordan/architecture-analyzer/pkg/domains/architecture"
 	"github.com/ugiordan/architecture-analyzer/pkg/domains/security"
 	testingdomain "github.com/ugiordan/architecture-analyzer/pkg/domains/testing"
 	"github.com/ugiordan/architecture-analyzer/pkg/domains/upgrade"
@@ -32,6 +33,7 @@ func init() {
 	domains.Register(security.New())
 	domains.Register(testingdomain.New())
 	domains.Register(upgrade.New())
+	domains.Register(architecture.New())
 }
 
 // versionLabelRe validates version labels for snapshot output directories.
