@@ -89,6 +89,24 @@ check_symlinks() {
 # Check symlinks after clone
 check_symlinks
 
+# Skip analysis if repo hasn't changed since last scan and analyzer version is the same.
+# Uses .last-scan-shas.json (committed to repo) to track previous scan state.
+# Set FORCE_RESCAN=1 to bypass this check.
+CLONE_SHA=$(git -C "${CLONE_DIR}" rev-parse HEAD 2>/dev/null || echo "")
+SHAS_FILE="${ANALYZER_DIR}/.last-scan-shas.json"
+if [ -n "${CLONE_SHA}" ] && [ -f "${SHAS_FILE}" ] && [ "${FORCE_RESCAN:-}" != "1" ]; then
+    PREV_SHA=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get(sys.argv[2],{}).get('commit_sha',''))" "${SHAS_FILE}" "${REPO}" 2>/dev/null || echo "")
+    PREV_VER=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get(sys.argv[2],{}).get('analyzer_version',''))" "${SHAS_FILE}" "${REPO}" 2>/dev/null || echo "")
+    ANALYZER_VER=$("${ANALYZER_BIN}" version 2>/dev/null | awk '{print $2}' || echo "")
+    if [ "${CLONE_SHA}" = "${PREV_SHA}" ] && [ -n "${PREV_VER}" ] && [ "${ANALYZER_VER}" = "${PREV_VER}" ]; then
+        echo "[*] Skipping ${SHORT}: HEAD ${CLONE_SHA:0:8} unchanged, analyzer ${ANALYZER_VER} unchanged"
+        chmod -R u+w "${CLONE_DIR}" 2>/dev/null || true
+        rm -rf "${CLONE_DIR}"
+        exit 0
+    fi
+    echo "[*] Change detected for ${SHORT}: HEAD ${PREV_SHA:0:8} -> ${CLONE_SHA:0:8}, analyzer ${PREV_VER} -> ${ANALYZER_VER}"
+fi
+
 # Download Go dependencies for go/packages analysis (isolated cache)
 if [ -f "${CLONE_DIR}/go.mod" ]; then
     echo "[*] Downloading Go modules for ${SHORT}..."

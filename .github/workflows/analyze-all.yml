@@ -13,6 +13,11 @@ on:
         description: 'Version label for snapshot (e.g. v2.15.0). Defaults to date stamp if empty.'
         required: false
         default: ''
+      force_rescan:
+        description: 'Force rescan all repos even if unchanged'
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: snapshots
@@ -100,6 +105,7 @@ jobs:
           sparse-checkout: |
             scripts
             scan-config.yaml
+            .last-scan-shas.json
       - name: Download analyzer
         uses: actions/download-artifact@v8
         with:
@@ -108,6 +114,7 @@ jobs:
         id: analyze
         env:
           REPO: ${{ matrix.repo }}
+          FORCE_RESCAN: ${{ inputs.force_rescan == true && '1' || '0' }}
         run: |
           chmod +x arch-analyzer
           mkdir -p results
@@ -146,6 +153,7 @@ jobs:
           sparse-checkout: |
             scripts
             scan-config.yaml
+            .last-scan-shas.json
       - name: Download analyzer
         uses: actions/download-artifact@v8
         with:
@@ -154,6 +162,7 @@ jobs:
         id: analyze
         env:
           REPO: ${{ matrix.repo }}
+          FORCE_RESCAN: ${{ inputs.force_rescan == true && '1' || '0' }}
         run: |
           chmod +x arch-analyzer
           mkdir -p results
@@ -250,6 +259,15 @@ jobs:
               "platform-output/rhoai/${VERSION}/platform-architecture.json"
           fi
 
+      - name: Update scan SHAs for skip-on-no-change
+        run: |
+          python3 scripts/update-scan-shas.py \
+            ${odh_dir:+odh-results} ${rhoai_dir:+rhoai-results} \
+            -o .last-scan-shas.json
+        env:
+          odh_dir: ${{ needs.analyze-odh.result != 'skipped' && 'yes' || '' }}
+          rhoai_dir: ${{ needs.analyze-rhoai.result != 'skipped' && 'yes' || '' }}
+
       - name: Upload platform artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -264,7 +282,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/
+          git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/ .last-scan-shas.json
           if git diff --cached --quiet; then
             echo "No platform doc changes to commit"
           else
