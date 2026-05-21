@@ -4,20 +4,41 @@ package arch
 import "encoding/json"
 
 // Data holds parsed architecture information from the extractor JSON.
+// Fields are added as domain queries need them. Not all extractor fields
+// are represented: renderers and SBOM/report generators read the raw JSON
+// directly for fields like dockerfiles, dependencies, prometheus_metrics.
 type Data struct {
-	Component string      `json:"component"`
+	// Identity and metadata
+	Component      string `json:"component"`
+	Repo           string `json:"repo,omitempty"`
+	CommitSHA      string `json:"commit_sha,omitempty"`
+	AnalyzerVersion string `json:"analyzer_version,omitempty"`
+
+	// API surface
 	CRDs      []CRD       `json:"crds,omitempty"`
-	RBAC      RBAC        `json:"rbac"`
 	Webhooks  []Webhook   `json:"webhooks,omitempty"`
+
+	// Security
+	RBAC      RBAC        `json:"rbac"`
 	Secrets   []Secret    `json:"secrets_referenced,omitempty"`
+
+	// Operations
 	Cache        CacheConfig  `json:"cache_config"`
 	FeatureGates []FeatureGate `json:"feature_gates,omitempty"`
+	Services     []Service    `json:"services,omitempty"`
 
 	// Cross-domain fields: deployment context for security posture queries.
 	NetworkPolicies     []NetworkPolicy      `json:"network_policies,omitempty"`
 	HTTPEndpoints       []HTTPEndpoint       `json:"http_endpoints,omitempty"`
 	ExternalConnections []ExternalConnection `json:"external_connections,omitempty"`
 	Deployments         []Deployment         `json:"deployments,omitempty"`
+
+	// Controller behavior
+	ControllerWatches   []ControllerWatch    `json:"controller_watches,omitempty"`
+	ReconcileSequences  []ReconcileSequence  `json:"reconcile_sequences,omitempty"`
+
+	// Dependencies
+	IngressRouting      []IngressResource    `json:"ingress_routing,omitempty"`
 }
 
 // CRD represents a CustomResourceDefinition from the architecture extraction.
@@ -167,4 +188,31 @@ type Deployment struct {
 	Kind           string `json:"kind"`
 	Source         string `json:"source"`
 	ServiceAccount string `json:"service_account,omitempty"`
+}
+
+// Service represents a Kubernetes Service.
+type Service struct {
+	Name   string `json:"name"`
+	Type   string `json:"type,omitempty"`
+	Source string `json:"source,omitempty"`
+}
+
+// ControllerWatch represents a controller For/Owns/Watches registration.
+type ControllerWatch struct {
+	Type       string `json:"type"`
+	GVK        string `json:"gvk"`
+	Controller string `json:"controller,omitempty"`
+	Source     string `json:"source,omitempty"`
+}
+
+// ReconcileSequence represents an ordered reconciliation step sequence.
+type ReconcileSequence struct {
+	Controller string `json:"controller"`
+	Source     string `json:"source,omitempty"`
+}
+
+// IngressResource represents an ingress/gateway routing resource.
+type IngressResource struct {
+	Name string `json:"name"`
+	Kind string `json:"kind,omitempty"`
 }
