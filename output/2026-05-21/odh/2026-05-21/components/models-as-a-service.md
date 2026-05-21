@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | opendatahub-io/models-as-a-service |
-| Commit | 7cebe7381bf421d1ac24f5990309da5b03e50c5b |
-| Extracted | 2026-05-21T04:15:17Z |
+| Commit | 90ea64a6372edceb1c58d30b02fbee6d01777048 |
+| Extracted | 2026-05-21T12:51:36Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -19,31 +19,31 @@
 
 | Method | Path | Description | Source |
 |--------|------|-------------|--------|
-| OPTIONS | /*path |  | [`maas-api/cmd/main.go:112`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L112) |
-| DELETE | /:id |  | [`maas-api/cmd/main.go:221`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L221) |
-| GET | /:id |  | [`maas-api/cmd/main.go:220`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L220) |
-| * | /api-keys |  | [`maas-api/cmd/main.go:216`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L216) |
-| POST | /api-keys/cleanup |  | [`maas-api/cmd/main.go:226`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L226) |
-| POST | /api-keys/validate |  | [`maas-api/cmd/main.go:225`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L225) |
-| POST | /bulk-revoke |  | [`maas-api/cmd/main.go:219`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L219) |
-| GET | /health |  | [`maas-api/cmd/main.go:179`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L179) |
-| * | /internal/v1 |  | [`maas-api/cmd/main.go:224`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L224) |
-| * | /metrics |  | [`maas-api/internal/metrics/server.go:19`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/internal/metrics/server.go#L19) |
-| GET | /model/:model-id/subscriptions |  | [`maas-api/cmd/main.go:213`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L213) |
-| GET | /models |  | [`maas-api/cmd/main.go:209`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L209) |
-| POST | /search |  | [`maas-api/cmd/main.go:218`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L218) |
-| GET | /subscriptions |  | [`maas-api/cmd/main.go:212`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L212) |
-| POST | /subscriptions/select |  | [`maas-api/cmd/main.go:227`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L227) |
-| * | /v1 |  | [`maas-api/cmd/main.go:185`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/cmd/main.go#L185) |
+| OPTIONS | /*path |  | [`maas-api/cmd/main.go:112`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L112) |
+| DELETE | /:id |  | [`maas-api/cmd/main.go:221`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L221) |
+| GET | /:id |  | [`maas-api/cmd/main.go:220`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L220) |
+| * | /api-keys |  | [`maas-api/cmd/main.go:216`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L216) |
+| POST | /api-keys/cleanup |  | [`maas-api/cmd/main.go:226`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L226) |
+| POST | /api-keys/validate |  | [`maas-api/cmd/main.go:225`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L225) |
+| POST | /bulk-revoke |  | [`maas-api/cmd/main.go:219`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L219) |
+| GET | /health |  | [`maas-api/cmd/main.go:179`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L179) |
+| * | /internal/v1 |  | [`maas-api/cmd/main.go:224`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L224) |
+| * | /metrics |  | [`maas-api/internal/metrics/server.go:19`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/internal/metrics/server.go#L19) |
+| GET | /model/:model-id/subscriptions |  | [`maas-api/cmd/main.go:213`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L213) |
+| GET | /models |  | [`maas-api/cmd/main.go:209`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L209) |
+| POST | /search |  | [`maas-api/cmd/main.go:218`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L218) |
+| GET | /subscriptions |  | [`maas-api/cmd/main.go:212`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L212) |
+| POST | /subscriptions/select |  | [`maas-api/cmd/main.go:227`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L227) |
+| * | /v1 |  | [`maas-api/cmd/main.go:185`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/cmd/main.go#L185) |
 
 
 ## Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| maas-api | ClusterIP | 8080/TCP (http), 9090/TCP (metrics) | [`deployment/base/maas-api/core/service.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/deployment/base/maas-api/core/service.yaml) |
-| maas-api | ClusterIP | 0/TCP, 8443/TCP (https) | [`deployment/base/maas-api/overlays/tls/service-patch.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/deployment/base/maas-api/overlays/tls/service-patch.yaml) |
-| payload-processing | ClusterIP | 9004/TCP | [`deployment/base/payload-processing/manager/service.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/deployment/base/payload-processing/manager/service.yaml) |
+| maas-api | ClusterIP | 8080/TCP (http), 9090/TCP (metrics) | [`deployment/base/maas-api/core/service.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/deployment/base/maas-api/core/service.yaml) |
+| maas-api | ClusterIP | 0/TCP, 8443/TCP (https) | [`deployment/base/maas-api/overlays/tls/service-patch.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/deployment/base/maas-api/overlays/tls/service-patch.yaml) |
+| payload-processing | ClusterIP | 9004/TCP | [`deployment/base/payload-processing/manager/service.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/deployment/base/payload-processing/manager/service.yaml) |
 
 
 ## Ingress Routing
@@ -186,7 +186,7 @@
 
 | Name | Type | Evidence |
 |------|------|----------|
-| PostgreSQL | database | uri:postgres:// |
+| PostgreSQL | database | uri:postgresql:// |
 | kubernetes | service | dns:kubernetes.default.svc |
 
 
@@ -194,20 +194,20 @@
 
 | GVK | Watch Type | Source |
 |-----|-----------|--------|
-| apps/v1/Deployment | For | [`maas-controller/pkg/controller/maas/self_deployment_controller.go:292`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/self_deployment_controller.go#L292) |
-| maas/v1alpha1/ExternalModel | For | [`maas-controller/pkg/reconciler/externalmodel/reconciler.go:316`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/reconciler/externalmodel/reconciler.go#L316) |
-| maas/v1alpha1/MaaSAuthPolicy | For | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1232`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1232) |
-| maas/v1alpha1/MaaSModelRef | For | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:392`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L392) |
-| maas/v1alpha1/MaaSSubscription | For | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:983`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maassubscription_controller.go#L983) |
-| maas/v1alpha1/Tenant | For | [`maas-controller/pkg/controller/maas/tenant_controller.go:199`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/tenant_controller.go#L199) |
-| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:996`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maassubscription_controller.go#L996) |
-| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:398`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L398) |
-| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1238`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1238) |
-| maas/v1alpha1/MaaSAuthPolicy | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:414`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L414) |
-| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:1000`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maassubscription_controller.go#L1000) |
-| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1242`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1242) |
-| maas/v1alpha1/MaaSSubscription | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:410`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L410) |
-| serving/v1alpha1/LLMInferenceService | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:403`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L403) |
+| apps/v1/Deployment | For | [`maas-controller/pkg/controller/maas/self_deployment_controller.go:292`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/self_deployment_controller.go#L292) |
+| maas/v1alpha1/ExternalModel | For | [`maas-controller/pkg/reconciler/externalmodel/reconciler.go:317`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/reconciler/externalmodel/reconciler.go#L317) |
+| maas/v1alpha1/MaaSAuthPolicy | For | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1232`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1232) |
+| maas/v1alpha1/MaaSModelRef | For | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:392`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L392) |
+| maas/v1alpha1/MaaSSubscription | For | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:983`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maassubscription_controller.go#L983) |
+| maas/v1alpha1/Tenant | For | [`maas-controller/pkg/controller/maas/tenant_controller.go:199`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/tenant_controller.go#L199) |
+| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:996`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maassubscription_controller.go#L996) |
+| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:398`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L398) |
+| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1238`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1238) |
+| maas/v1alpha1/MaaSAuthPolicy | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:414`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L414) |
+| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:1000`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maassubscription_controller.go#L1000) |
+| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1242`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1242) |
+| maas/v1alpha1/MaaSSubscription | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:410`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L410) |
+| serving/v1alpha1/LLMInferenceService | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:403`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L403) |
 
 
 ## Dockerfiles
@@ -218,6 +218,14 @@
 | maas-api/Dockerfile.konflux | registry.access.redhat.com/ubi9/ubi-minimal@sha256:80f3902b6dcb47005a90e14140eef9080ccc1bb22df70ee16b27d5891524edb2 | 0 |  |
 | maas-controller/Dockerfile | registry.access.redhat.com/ubi9/ubi-minimal:latest | 0 |  |
 | maas-controller/Dockerfile.konflux | registry.access.redhat.com/ubi9/ubi-minimal@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183 | 0 |  |
+
+
+## Cache Architecture
+
+**Filtered Types:**
+- 
+- 
+- 
 
 
 ## Component References
@@ -232,11 +240,11 @@
 
 | Name | Type | Help | Source |
 |------|------|------|--------|
-| maas_api_http_request_duration_seconds | histogram | HTTP request latency in seconds. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/internal/metrics/prometheus.go) |
-| maas_api_http_requests_in_flight | gauge | Number of HTTP requests currently being served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/internal/metrics/prometheus.go) |
-| maas_api_http_requests_total | counter | Total number of HTTP requests served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/internal/metrics/prometheus.go) |
-| sar_cache_hits_total | counter | Total number of SAR admin check cache hits. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/internal/auth/cached_admin_checker.go) |
-| sar_cache_misses_total | counter | Total number of SAR admin check cache misses. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/opendatahub-io/models-as-a-service/blob/7cebe7381bf421d1ac24f5990309da5b03e50c5b/maas-api/internal/auth/cached_admin_checker.go) |
+| maas_api_http_request_duration_seconds | histogram | HTTP request latency in seconds. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/internal/metrics/prometheus.go) |
+| maas_api_http_requests_in_flight | gauge | Number of HTTP requests currently being served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/internal/metrics/prometheus.go) |
+| maas_api_http_requests_total | counter | Total number of HTTP requests served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/internal/metrics/prometheus.go) |
+| sar_cache_hits_total | counter | Total number of SAR admin check cache hits. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/internal/auth/cached_admin_checker.go) |
+| sar_cache_misses_total | counter | Total number of SAR admin check cache misses. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/opendatahub-io/models-as-a-service/blob/90ea64a6372edceb1c58d30b02fbee6d01777048/maas-api/internal/auth/cached_admin_checker.go) |
 
 
 ## Label Contracts

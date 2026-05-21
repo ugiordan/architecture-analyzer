@@ -10,10 +10,10 @@
 |--------|-------|
 | Components | 56 |
 | CRDs | 56 |
-| Services | 81 |
-| Secrets | 45 |
+| Services | 48 |
+| Secrets | 24 |
 | Cluster Roles | 61 |
-| Cross-Component Dependencies | 24 |
+| Cross-Component Dependencies | 13 |
 
 ## Component Registry
 
@@ -124,59 +124,32 @@
 
 | From | To | Type |
 |------|----|------|
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferencePool |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferenceObjective |
-| kserve | gateway-api-inference-extension | watches-crd:InferencePool |
-| kserve | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| kserve | gateway-api-inference-extension | watches-crd:InferenceObjective |
 | kubeflow | data-science-pipelines-operator | go-module |
 | llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferencePool |
 | llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
 | llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceObjective |
 | mlflow-operator | mlflow-operator | go-module |
 | model-registry | kserve | watches-crd:InferenceService |
-| modelmesh-serving | kserve | watches-crd:InferenceGraph |
 | modelmesh-serving | kserve | watches-crd:ServingRuntime |
-| modelmesh-serving | kserve | watches-crd:TrainedModel |
-| modelmesh-serving | kserve | watches-crd:InferenceService |
 | models-as-a-service | kserve | go-module |
 | models-as-a-service | ai-gateway-payload-processing | watches-crd:ExternalModel |
 | odh-cli | opendatahub-operator | go-module |
 | workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferenceObjective |
-| kserve | modelmesh-serving | webhook-ref |
-| modelmesh-serving | workload-variant-autoscaler | webhook-ref |
-| spark-operator | workload-variant-autoscaler | webhook-ref |
+| modelmesh-serving | kueue | webhook-ref |
+| spark-operator | kueue | webhook-ref |
 
 ## Secrets Referenced
 
 | Secret | Owner | Type |
 |--------|-------|------|
-| ds-pipeline-db-test | data-science-pipelines-operator | Opaque |
-| mariadb-certs | data-science-pipelines-operator | Opaque |
-| minio | data-science-pipelines-operator | Opaque |
-| minio-certs | data-science-pipelines-operator | Opaque |
 | kfp-api-webhook-cert | data-science-pipelines | Opaque |
 | mlpipeline-minio-artifact | data-science-pipelines | Opaque |
-| kubeflow-trainer-webhook-cert | distributed-workloads | Opaque |
-| kueue-webhook-server-cert | distributed-workloads | Opaque |
-| webhook-server-cert | distributed-workloads | Opaque |
-| epp-metrics-token | kserve | Opaque |
-| hf-token | kserve | Opaque |
-| kedaorg-certs | kserve | Opaque |
 | kserve-webhook-server-cert | kserve | Opaque |
 | llmisvc-webhook-server-cert | kserve | Opaque |
 | localmodel-webhook-server-cert | kserve | Opaque |
-| opentelemetry-operator-controller-manager-service-cert | kserve | Opaque |
-| opentelemetry-operator-metrics | kserve | Opaque |
-| prometheus-client-cert | kserve | Opaque |
-| webhook-server-cert | kserve | Opaque |
 | odh-notebook-controller-webhook-cert | kubeflow | kubernetes.io/tls |
 | webhook-server-cert | kubeflow | Opaque |
 | webhook-server-cert | kuberay | Opaque |
-| training-operator-v2-webhook-cert | kueue | Opaque |
-| training-operator-webhook-cert | kueue | Opaque |
 | webhook-server-cert | kueue | Opaque |
 | ogx-k8s-operator-webhook-cert | llama-stack-k8s-operator | Opaque |
 | cacerts | llm-d-inference-scheduler | Opaque |
@@ -187,17 +160,12 @@
 | minio-secret | model-registry | Opaque |
 | model-catalog-hf-api-key | model-registry | Opaque |
 | model-catalog-postgres | model-registry | Opaque |
-| kserve-webhook-server-cert | modelmesh-serving | Opaque |
 | modelmesh-webhook-server-cert | modelmesh-serving | Opaque |
 | maas-api-serving-cert | models-as-a-service | kubernetes.io/tls |
 | webhook-server-cert | spark-operator | Opaque |
 | kubeflow-trainer-webhook-cert | trainer | Opaque |
-| webhook-server-cert | trainer | Opaque |
 | epp-metrics-token | workload-variant-autoscaler | Opaque |
-| hf-token | workload-variant-autoscaler | Opaque |
-| kedaorg-certs | workload-variant-autoscaler | Opaque |
 | prometheus-client-cert | workload-variant-autoscaler | Opaque |
-| webhook-server-cert | workload-variant-autoscaler | Opaque |
 
 ## RBAC Surface
 
@@ -271,46 +239,26 @@
 |-------|---------|------|-------|
 | gateway-api-inference-extension | uvicorn-server | python-source | 8000/TCP |
 | NeMo-Guardrails | env-port-default | python-source | 1235/TCP |
-| ai-gateway-payload-processing | uvicorn-server | python-source | 8000/TCP |
-| argo-workflows | the-service | LoadBalancer | 8666/TCP |
 | data-science-pipelines-operator | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |
 | data-science-pipelines-operator | ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP |
-| data-science-pipelines-operator | mariadb | ClusterIP | 3306/TCP |
 | data-science-pipelines-operator | mariadb-template-value | ClusterIP | 3306/TCP |
-| data-science-pipelines-operator | minio | ClusterIP | 9000/TCP, 9001/TCP |
 | data-science-pipelines-operator | minio-service | ClusterIP | 9000/TCP |
 | data-science-pipelines-operator | minio-template-value | ClusterIP | 9000/TCP, 80/TCP |
 | data-science-pipelines-operator | ml-pipeline | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP |
-| data-science-pipelines-operator | pypi-server | ClusterIP | 8080/TCP |
 | data-science-pipelines-operator | template-value | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP |
-| data-science-pipelines-operator | the-service | LoadBalancer | 8666/TCP |
 | data-science-pipelines | kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP |
-| data-science-pipelines | squid | ClusterIP | 3128/TCP |
-| distributed-workloads | kuberay-operator | ClusterIP | 8080/TCP |
-| distributed-workloads | training-operator | ClusterIP | 8080/TCP |
-| distributed-workloads | visibility-server | ClusterIP | 443/TCP |
-| distributed-workloads | webhook-service | ClusterIP | 443/TCP |
 | feast | uvicorn-server | python-source | 6566/TCP |
 | kserve | cli-port-default | python-source | 80/TCP |
-| kserve | keda-admission-webhooks | ClusterIP | 443/TCP, 8080/TCP |
-| kserve | keda-metrics-apiserver | ClusterIP | 443/TCP, 8080/TCP |
-| kserve | keda-operator | ClusterIP | 9666/TCP, 8080/TCP |
 | kserve | kserve-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | kserve | kserve-controller-manager-service | ClusterIP | 8443/TCP |
 | kserve | kserve-webhook-server-service | ClusterIP | 443/TCP |
 | kserve | llmisvc-controller-manager-service | ClusterIP | 8443/TCP |
 | kserve | llmisvc-webhook-server-service | ClusterIP | 443/TCP |
 | kserve | localmodel-webhook-server-service | ClusterIP | 443/TCP |
-| kserve | uvicorn-server | python-source | 8000/TCP |
-| kserve | webhook-service | ClusterIP | 443/TCP |
 | kubeflow | service | ClusterIP | 443/TCP |
 | kubeflow | webhook-service | ClusterIP | 443/TCP |
 | kuberay | kuberay-operator | ClusterIP | 8080/TCP |
-| kuberay | the-service | LoadBalancer | 8666/TCP |
 | kuberay | webhook-service | ClusterIP | 443/TCP |
-| kueue | kuberay-operator | ClusterIP | 8080/TCP |
-| kueue | the-service | LoadBalancer | 8666/TCP |
-| kueue | training-operator | ClusterIP | 8080/TCP, 443/TCP |
 | kueue | visibility-server | ClusterIP | 443/TCP |
 | kueue | webhook-service | ClusterIP | 443/TCP |
 | llama-stack-k8s-operator | ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
@@ -319,35 +267,22 @@
 | llm-d-inference-scheduler | inference-gateway-istio-nodeport | NodePort | 15021/TCP, 80/TCP |
 | llm-d-inference-scheduler | istiod-llm-d-gateway | ClusterIP | 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP |
 | llm-d-inference-scheduler | service | ClusterIP | 8080/TCP |
-| llm-d-inference-scheduler | uvicorn-server | python-source | 8000/TCP |
 | llm-d-routing-sidecar | service | ClusterIP | 8080/TCP |
 | mlflow-operator | minio-service | ClusterIP | 9000/TCP |
 | mlflow-operator | mlflow-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | mlflow-operator | postgres-service | ClusterIP | 5432/TCP |
 | model-registry | model-catalog | ClusterIP | 8080/TCP |
-| modelmesh-serving | cli-port-default | python-source | 80/TCP |
 | modelmesh-serving | etcd | ClusterIP | 2379/TCP |
-| modelmesh-serving | kserve-controller-manager-service | ClusterIP | 8443/TCP |
-| modelmesh-serving | kserve-webhook-server-service | ClusterIP | 443/TCP |
 | modelmesh-serving | modelmesh-controller | ClusterIP | 8080/TCP |
 | modelmesh-serving | modelmesh-webhook-server-service | ClusterIP | 9443/TCP |
-| modelmesh-serving | models-server | python-source | 8080/TCP |
 | models-as-a-service | maas-api | ClusterIP | 8080/TCP, 9090/TCP |
 | models-as-a-service | payload-processing | ClusterIP | 9004/TCP |
 | notebooks-downstream | notebook | ClusterIP | 8888/TCP |
 | notebooks | notebook | ClusterIP | 8888/TCP |
-| odh-cli | the-service | LoadBalancer | 8666/TCP |
 | spark-operator | spark-operator-webhook-svc | ClusterIP | 443/TCP |
-| spark-operator | the-service | LoadBalancer | 8666/TCP |
 | text-generation-inference | inference-server | ClusterIP | 8033/TCP |
-| trainer | webhook-service | ClusterIP | 443/TCP |
 | vllm-cpu | cli-port-default | python-source | 8000/TCP |
 | vllm-cpu | disagg_proxy_p2p_nccl_xpyd-server | python-source | 10001/TCP |
 | vllm-cpu | moriio_toy_proxy_server-server | python-source | 10001/TCP |
 | vllm-gaudi | cli-port-default | python-source | 8000/TCP |
-| workload-variant-autoscaler | keda-admission-webhooks | ClusterIP | 443/TCP, 8080/TCP |
-| workload-variant-autoscaler | keda-metrics-apiserver | ClusterIP | 443/TCP, 8080/TCP |
-| workload-variant-autoscaler | keda-operator | ClusterIP | 9666/TCP, 8080/TCP |
-| workload-variant-autoscaler | uvicorn-server | python-source | 8000/TCP |
-| workload-variant-autoscaler | webhook-service | ClusterIP | 443/TCP |
 

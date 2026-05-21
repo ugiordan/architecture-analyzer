@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/models-as-a-service |
 | Commit | 0f82ac85ed6a982aa92ff641c93748b71db3428a |
-| Extracted | 2026-05-21T04:15:38Z |
+| Extracted | 2026-05-21T12:52:13Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -186,7 +186,7 @@
 
 | Name | Type | Evidence |
 |------|------|----------|
-| PostgreSQL | database | uri:postgres:// |
+| PostgreSQL | database | uri:postgresql:// |
 | kubernetes | service | dns:kubernetes.default.svc |
 
 
@@ -218,6 +218,14 @@
 | maas-api/Dockerfile.konflux | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 0 |  |
 | maas-controller/Dockerfile | registry.access.redhat.com/ubi9/ubi-minimal:latest | 0 |  |
 | maas-controller/Dockerfile.konflux | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 0 |  |
+
+
+## Cache Architecture
+
+**Filtered Types:**
+- 
+- 
+- 
 
 
 ## Component References

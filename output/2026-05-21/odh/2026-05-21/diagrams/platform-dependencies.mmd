@@ -74,9 +74,6 @@ graph LR
     kuberay["kuberay"]
     class kuberay component
 
-    kserve_autogluon_server -->|"watches InferencePool"| gateway_api_inference_extension
-    kserve_autogluon_server -->|"watches InferenceModelRewrite"| gateway_api_inference_extension
-    kserve_autogluon_server -->|"watches InferenceObjective"| gateway_api_inference_extension
     kserve_autogluon_server -->|"watches InferenceGraph"| kserve
     kserve_autogluon_server -->|"watches LocalModelCache"| kserve
     kserve_autogluon_server -->|"watches LocalModelNamespaceCache"| kserve
@@ -90,15 +87,9 @@ graph LR
     llm_d_inference_scheduler -->|"watches InferenceObjective"| gateway_api_inference_extension
     mlflow_operator -.->|"go-module"| mlflow_operator
     model_registry -->|"watches InferenceService"| kserve
-    modelmesh_serving -->|"watches InferenceGraph"| kserve
     modelmesh_serving -->|"watches ServingRuntime"| kserve
-    modelmesh_serving -->|"watches TrainedModel"| kserve
-    modelmesh_serving -->|"watches InferenceService"| kserve
     models_as_a_service -.->|"go-module"| kserve
     workload_variant_autoscaler -->|"watches InferencePool"| gateway_api_inference_extension
-    workload_variant_autoscaler -->|"watches InferenceObjective"| gateway_api_inference_extension
-    kserve -.->|"webhook-ref"| modelmesh_serving
     kserve -.->|"webhook-ref"| kserve_autogluon_server
-    kserve_autogluon_server -.->|"webhook-ref"| modelmesh_serving
     modelmesh_serving -.->|"webhook-ref"| kuberay
     spark_operator -.->|"webhook-ref"| kuberay

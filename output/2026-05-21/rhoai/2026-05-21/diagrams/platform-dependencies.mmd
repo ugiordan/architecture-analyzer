@@ -118,27 +118,16 @@ graph LR
     workload_variant_autoscaler["workload-variant-autoscaler"]
     class workload_variant_autoscaler component
 
-    ai_gateway_payload_processing -->|"watches InferencePool"| gateway_api_inference_extension
-    ai_gateway_payload_processing -->|"watches InferenceModelRewrite"| gateway_api_inference_extension
-    ai_gateway_payload_processing -->|"watches InferenceObjective"| gateway_api_inference_extension
-    kserve -->|"watches InferencePool"| gateway_api_inference_extension
-    kserve -->|"watches InferenceModelRewrite"| gateway_api_inference_extension
-    kserve -->|"watches InferenceObjective"| gateway_api_inference_extension
     kubeflow -.->|"go-module"| data_science_pipelines_operator
     llm_d_inference_scheduler -->|"watches InferencePool"| gateway_api_inference_extension
     llm_d_inference_scheduler -->|"watches InferenceModelRewrite"| gateway_api_inference_extension
     llm_d_inference_scheduler -->|"watches InferenceObjective"| gateway_api_inference_extension
     mlflow_operator -.->|"go-module"| mlflow_operator
     model_registry -->|"watches InferenceService"| kserve
-    modelmesh_serving -->|"watches InferenceGraph"| kserve
     modelmesh_serving -->|"watches ServingRuntime"| kserve
-    modelmesh_serving -->|"watches TrainedModel"| kserve
-    modelmesh_serving -->|"watches InferenceService"| kserve
     models_as_a_service -.->|"go-module"| kserve
     models_as_a_service -->|"watches ExternalModel"| ai_gateway_payload_processing
     odh_cli -.->|"go-module"| opendatahub_operator
     workload_variant_autoscaler -->|"watches InferencePool"| gateway_api_inference_extension
-    workload_variant_autoscaler -->|"watches InferenceObjective"| gateway_api_inference_extension
-    kserve -.->|"webhook-ref"| modelmesh_serving
-    modelmesh_serving -.->|"webhook-ref"| workload_variant_autoscaler
-    spark_operator -.->|"webhook-ref"| workload_variant_autoscaler
+    modelmesh_serving -.->|"webhook-ref"| kueue
+    spark_operator -.->|"webhook-ref"| kueue

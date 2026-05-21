@@ -3,7 +3,7 @@
 
 ## Summary
 
-60 interactions across 25 components.
+51 interactions across 25 components.
 
 ## All Interactions
 
@@ -19,11 +19,7 @@
 | eval-hub | mlflow | component-ref:config | file: internal/eval_hub/config/mlflow_config.go |
 | eval-hub | mlflow | component-ref:import | go import: github.com/eval-hub/eval-hub/internal/eval_hub/mlflow |
 | kserve | kserve-autogluon-server | webhook-ref | webhook service reference |
-| kserve | modelmesh-serving | webhook-ref | webhook service reference |
 | kserve | vllm | component-ref:import | python import: .vllm.utils |
-| kserve-autogluon-server | gateway-api-inference-extension | watches-crd:InferenceModelRewrite | controller watch |
-| kserve-autogluon-server | gateway-api-inference-extension | watches-crd:InferenceObjective | controller watch |
-| kserve-autogluon-server | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
 | kserve-autogluon-server | kserve | component-ref:client | file: python/kserve/kserve/api/kserve_client.py |
 | kserve-autogluon-server | kserve | component-ref:import | python import: kserve |
 | kserve-autogluon-server | kserve | component-ref:provider | directory: config/components/kserve |
@@ -34,7 +30,6 @@
 | kserve-autogluon-server | kserve | watches-crd:LocalModelNamespaceCache | controller watch |
 | kserve-autogluon-server | kserve | watches-crd:LocalModelNode | controller watch |
 | kserve-autogluon-server | kserve | watches-crd:TrainedModel | controller watch |
-| kserve-autogluon-server | modelmesh-serving | webhook-ref | webhook service reference |
 | kserve-autogluon-server | vllm | component-ref:import | python import: .vllm.utils |
 | kube-auth-proxy | kube-rbac-proxy | component-ref:import | go import: github.com/brancz/kube-rbac-proxy/test/kubetest |
 | kubeflow | data-science-pipelines-operator | go-module | import dependency |
@@ -57,17 +52,13 @@
 | model-registry | kserve | watches-crd:InferenceService | controller watch |
 | model-registry | kubeflow | component-ref:import | go import: github.com/kubeflow/hub/catalog/internal/catalog |
 | modelmesh-serving | kserve | component-ref:import | go import: github.com/kserve/kserve/pkg/constants |
-| modelmesh-serving | kserve | watches-crd:InferenceGraph | controller watch |
-| modelmesh-serving | kserve | watches-crd:InferenceService | controller watch |
 | modelmesh-serving | kserve | watches-crd:ServingRuntime | controller watch |
-| modelmesh-serving | kserve | watches-crd:TrainedModel | controller watch |
 | modelmesh-serving | kuberay | webhook-ref | webhook service reference |
 | models-as-a-service | kserve | component-ref:import | go import: github.com/kserve/kserve/pkg/client/listers/serving/v1alpha1 |
 | models-as-a-service | kserve | component-ref:provider | directory: deployment/components/odh/kserve |
 | models-as-a-service | kserve | go-module | import dependency |
 | spark-operator | kuberay | webhook-ref | webhook service reference |
 | trainer | kubeflow | component-ref:import | go import: github.com/kubeflow/trainer/v2/pkg/apis/trainer/v1alpha1 |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferenceObjective | controller watch |
 | workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
 
 ## Per-Component View
@@ -91,16 +82,16 @@
 
 ### gateway-api-inference-extension
 
-**Used by:** kserve-autogluon-server (watches-crd:InferenceModelRewrite), kserve-autogluon-server (watches-crd:InferenceObjective), kserve-autogluon-server (watches-crd:InferencePool), llm-d-inference-scheduler (watches-crd:InferenceModelRewrite), llm-d-inference-scheduler (watches-crd:InferenceObjective), llm-d-inference-scheduler (watches-crd:InferencePool), workload-variant-autoscaler (watches-crd:InferenceObjective), workload-variant-autoscaler (watches-crd:InferencePool)  
+**Used by:** llm-d-inference-scheduler (watches-crd:InferenceModelRewrite), llm-d-inference-scheduler (watches-crd:InferenceObjective), llm-d-inference-scheduler (watches-crd:InferencePool), workload-variant-autoscaler (watches-crd:InferencePool)  
 
 ### kserve
 
-**Depends on:** kserve-autogluon-server (webhook-ref), modelmesh-serving (webhook-ref), vllm (component-ref:import)  
-**Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), kserve-autogluon-server (component-ref:client), kserve-autogluon-server (component-ref:import), kserve-autogluon-server (component-ref:provider), kserve-autogluon-server (watches-crd:InferenceGraph), kserve-autogluon-server (watches-crd:InferenceService), kserve-autogluon-server (watches-crd:LLMInferenceService), kserve-autogluon-server (watches-crd:LocalModelCache), kserve-autogluon-server (watches-crd:LocalModelNamespaceCache), kserve-autogluon-server (watches-crd:LocalModelNode), kserve-autogluon-server (watches-crd:TrainedModel), model-registry (component-ref:import), model-registry (watches-crd:InferenceService), modelmesh-serving (component-ref:import), modelmesh-serving (watches-crd:InferenceGraph), modelmesh-serving (watches-crd:InferenceService), modelmesh-serving (watches-crd:ServingRuntime), modelmesh-serving (watches-crd:TrainedModel), models-as-a-service (component-ref:import), models-as-a-service (component-ref:provider), models-as-a-service (go-module)  
+**Depends on:** kserve-autogluon-server (webhook-ref), vllm (component-ref:import)  
+**Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), kserve-autogluon-server (component-ref:client), kserve-autogluon-server (component-ref:import), kserve-autogluon-server (component-ref:provider), kserve-autogluon-server (watches-crd:InferenceGraph), kserve-autogluon-server (watches-crd:InferenceService), kserve-autogluon-server (watches-crd:LLMInferenceService), kserve-autogluon-server (watches-crd:LocalModelCache), kserve-autogluon-server (watches-crd:LocalModelNamespaceCache), kserve-autogluon-server (watches-crd:LocalModelNode), kserve-autogluon-server (watches-crd:TrainedModel), model-registry (component-ref:import), model-registry (watches-crd:InferenceService), modelmesh-serving (component-ref:import), modelmesh-serving (watches-crd:ServingRuntime), models-as-a-service (component-ref:import), models-as-a-service (component-ref:provider), models-as-a-service (go-module)  
 
 ### kserve-autogluon-server
 
-**Depends on:** gateway-api-inference-extension (watches-crd:InferenceModelRewrite), gateway-api-inference-extension (watches-crd:InferenceObjective), gateway-api-inference-extension (watches-crd:InferencePool), kserve (component-ref:client), kserve (component-ref:import), kserve (component-ref:provider), kserve (watches-crd:InferenceGraph), kserve (watches-crd:InferenceService), kserve (watches-crd:LLMInferenceService), kserve (watches-crd:LocalModelCache), kserve (watches-crd:LocalModelNamespaceCache), kserve (watches-crd:LocalModelNode), kserve (watches-crd:TrainedModel), modelmesh-serving (webhook-ref), vllm (component-ref:import)  
+**Depends on:** kserve (component-ref:client), kserve (component-ref:import), kserve (component-ref:provider), kserve (watches-crd:InferenceGraph), kserve (watches-crd:InferenceService), kserve (watches-crd:LLMInferenceService), kserve (watches-crd:LocalModelCache), kserve (watches-crd:LocalModelNamespaceCache), kserve (watches-crd:LocalModelNode), kserve (watches-crd:TrainedModel), vllm (component-ref:import)  
 **Used by:** kserve (webhook-ref)  
 
 ### kube-auth-proxy
@@ -160,8 +151,7 @@
 
 ### modelmesh-serving
 
-**Depends on:** kserve (component-ref:import), kserve (watches-crd:InferenceGraph), kserve (watches-crd:InferenceService), kserve (watches-crd:ServingRuntime), kserve (watches-crd:TrainedModel), kuberay (webhook-ref)  
-**Used by:** kserve (webhook-ref), kserve-autogluon-server (webhook-ref)  
+**Depends on:** kserve (component-ref:import), kserve (watches-crd:ServingRuntime), kuberay (webhook-ref)  
 
 ### models-as-a-service
 
@@ -182,5 +172,5 @@
 
 ### workload-variant-autoscaler
 
-**Depends on:** gateway-api-inference-extension (watches-crd:InferenceObjective), gateway-api-inference-extension (watches-crd:InferencePool)  
+**Depends on:** gateway-api-inference-extension (watches-crd:InferencePool)  
 

@@ -3,16 +3,13 @@
 
 ## Summary
 
-73 interactions across 39 components.
+62 interactions across 39 components.
 
 ## All Interactions
 
 | From | To | Type | Evidence |
 |------|-----|------|----------|
 | MLServer | mlflow | component-ref:import | python import: mlflow |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferenceModelRewrite | controller watch |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferenceObjective | controller watch |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
 | caikit-nlp | trainer | component-ref:utils | file: caikit_nlp/toolkit/trainer_utils.py |
 | codeflare-sdk | kueue | component-ref:import | python import: .common.kueue |
 | data-science-pipelines | argo-workflows | component-ref:import | go import: github.com/argoproj/argo-workflows/v3/pkg/apis/workflow |
@@ -25,10 +22,6 @@
 | eval-hub | mlflow | component-ref:config | file: internal/eval_hub/config/mlflow_config.go |
 | eval-hub | mlflow | component-ref:import | go import: github.com/eval-hub/eval-hub/internal/eval_hub/mlflow |
 | fms-hf-tuning | trainer | component-ref:import | python import: transformers.trainer |
-| kserve | gateway-api-inference-extension | watches-crd:InferenceModelRewrite | controller watch |
-| kserve | gateway-api-inference-extension | watches-crd:InferenceObjective | controller watch |
-| kserve | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
-| kserve | modelmesh-serving | webhook-ref | webhook service reference |
 | kserve | vllm | component-ref:import | python import: .vllm.utils |
 | kube-auth-proxy | kube-rbac-proxy | component-ref:import | go import: github.com/brancz/kube-rbac-proxy/test/kubetest |
 | kubeflow | data-science-pipelines-operator | go-module | import dependency |
@@ -50,11 +43,8 @@
 | model-registry | kubeflow | component-ref:import | go import: github.com/kubeflow/hub/catalog/internal/catalog |
 | modelmesh-runtime-adapter | kserve | component-ref:import | go import: github.com/kserve/modelmesh-runtime-adapter/internal/proto/mmesh |
 | modelmesh-serving | kserve | component-ref:import | go import: github.com/kserve/kserve/pkg/constants |
-| modelmesh-serving | kserve | watches-crd:InferenceGraph | controller watch |
-| modelmesh-serving | kserve | watches-crd:InferenceService | controller watch |
 | modelmesh-serving | kserve | watches-crd:ServingRuntime | controller watch |
-| modelmesh-serving | kserve | watches-crd:TrainedModel | controller watch |
-| modelmesh-serving | workload-variant-autoscaler | webhook-ref | webhook service reference |
+| modelmesh-serving | kueue | webhook-ref | webhook service reference |
 | models-as-a-service | ai-gateway-payload-processing | watches-crd:ExternalModel | controller watch |
 | models-as-a-service | kserve | component-ref:import | go import: github.com/kserve/kserve/pkg/client/listers/serving/v1alpha1 |
 | models-as-a-service | kserve | component-ref:provider | directory: deployment/components/odh/kserve |
@@ -75,12 +65,11 @@
 | odh-cli | training-operator | component-ref:import | go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/trainingoperator |
 | odh-cli | training-operator | component-ref:provider | directory: pkg/lint/checks/components/trainingoperator |
 | rest-proxy | kserve | component-ref:import | go import: github.com/kserve/rest-proxy/gen |
-| spark-operator | workload-variant-autoscaler | webhook-ref | webhook service reference |
+| spark-operator | kueue | webhook-ref | webhook service reference |
 | trainer | kubeflow | component-ref:import | go import: github.com/kubeflow/trainer/v2/pkg/apis/trainer/v1alpha1 |
 | trustyai-explainability | kserve | component-ref:provider | directory: explainability-connectors/src/main/java/org/kie/trustyai/connectors/kserve |
 | vllm-cpu | vllm | component-ref:import | python import: vllm.v1.worker.workspace |
 | vllm-gaudi | vllm | component-ref:import | python import: vllm |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferenceObjective | controller watch |
 | workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
 
 ## Per-Component View
@@ -91,7 +80,6 @@
 
 ### ai-gateway-payload-processing
 
-**Depends on:** gateway-api-inference-extension (watches-crd:InferenceModelRewrite), gateway-api-inference-extension (watches-crd:InferenceObjective), gateway-api-inference-extension (watches-crd:InferencePool)  
 **Used by:** models-as-a-service (watches-crd:ExternalModel)  
 
 ### argo-workflows
@@ -125,12 +113,12 @@
 
 ### gateway-api-inference-extension
 
-**Used by:** ai-gateway-payload-processing (watches-crd:InferenceModelRewrite), ai-gateway-payload-processing (watches-crd:InferenceObjective), ai-gateway-payload-processing (watches-crd:InferencePool), kserve (watches-crd:InferenceModelRewrite), kserve (watches-crd:InferenceObjective), kserve (watches-crd:InferencePool), llm-d-inference-scheduler (watches-crd:InferenceModelRewrite), llm-d-inference-scheduler (watches-crd:InferenceObjective), llm-d-inference-scheduler (watches-crd:InferencePool), workload-variant-autoscaler (watches-crd:InferenceObjective), workload-variant-autoscaler (watches-crd:InferencePool)  
+**Used by:** llm-d-inference-scheduler (watches-crd:InferenceModelRewrite), llm-d-inference-scheduler (watches-crd:InferenceObjective), llm-d-inference-scheduler (watches-crd:InferencePool), workload-variant-autoscaler (watches-crd:InferencePool)  
 
 ### kserve
 
-**Depends on:** gateway-api-inference-extension (watches-crd:InferenceModelRewrite), gateway-api-inference-extension (watches-crd:InferenceObjective), gateway-api-inference-extension (watches-crd:InferencePool), modelmesh-serving (webhook-ref), vllm (component-ref:import)  
-**Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), model-registry (component-ref:import), model-registry (watches-crd:InferenceService), modelmesh-runtime-adapter (component-ref:import), modelmesh-serving (component-ref:import), modelmesh-serving (watches-crd:InferenceGraph), modelmesh-serving (watches-crd:InferenceService), modelmesh-serving (watches-crd:ServingRuntime), modelmesh-serving (watches-crd:TrainedModel), models-as-a-service (component-ref:import), models-as-a-service (component-ref:provider), models-as-a-service (go-module), odh-cli (component-ref:import), odh-cli (component-ref:provider), rest-proxy (component-ref:import), trustyai-explainability (component-ref:provider)  
+**Depends on:** vllm (component-ref:import)  
+**Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), model-registry (component-ref:import), model-registry (watches-crd:InferenceService), modelmesh-runtime-adapter (component-ref:import), modelmesh-serving (component-ref:import), modelmesh-serving (watches-crd:ServingRuntime), models-as-a-service (component-ref:import), models-as-a-service (component-ref:provider), models-as-a-service (go-module), odh-cli (component-ref:import), odh-cli (component-ref:provider), rest-proxy (component-ref:import), trustyai-explainability (component-ref:provider)  
 
 ### kube-auth-proxy
 
@@ -151,7 +139,7 @@
 
 ### kueue
 
-**Used by:** codeflare-sdk (component-ref:import), odh-cli (component-ref:import), odh-cli (component-ref:provider)  
+**Used by:** codeflare-sdk (component-ref:import), modelmesh-serving (webhook-ref), odh-cli (component-ref:import), odh-cli (component-ref:provider), spark-operator (webhook-ref)  
 
 ### llama-stack
 
@@ -195,8 +183,7 @@
 
 ### modelmesh-serving
 
-**Depends on:** kserve (component-ref:import), kserve (watches-crd:InferenceGraph), kserve (watches-crd:InferenceService), kserve (watches-crd:ServingRuntime), kserve (watches-crd:TrainedModel), workload-variant-autoscaler (webhook-ref)  
-**Used by:** kserve (webhook-ref)  
+**Depends on:** kserve (component-ref:import), kserve (watches-crd:ServingRuntime), kueue (webhook-ref)  
 
 ### models-as-a-service
 
@@ -220,7 +207,7 @@
 
 ### spark-operator
 
-**Depends on:** workload-variant-autoscaler (webhook-ref)  
+**Depends on:** kueue (webhook-ref)  
 
 ### trainer
 
@@ -249,6 +236,5 @@
 
 ### workload-variant-autoscaler
 
-**Depends on:** gateway-api-inference-extension (watches-crd:InferenceObjective), gateway-api-inference-extension (watches-crd:InferencePool)  
-**Used by:** modelmesh-serving (webhook-ref), spark-operator (webhook-ref)  
+**Depends on:** gateway-api-inference-extension (watches-crd:InferencePool)  
 
