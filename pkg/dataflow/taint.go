@@ -227,8 +227,17 @@ func (te *TaintEngine) traceFlowTargets(
 	visited := make(map[string]int)
 	totalVisits := 0
 
-	var dfs func(nodeID string, path []string)
-	dfs = func(nodeID string, path []string) {
+	// Shared path stack: grows on descent, truncates on backtrack.
+	// Only copied when persisting a result into targets.
+	stack := make([]string, 0, 32)
+	snapPath := func() []string {
+		cp := make([]string, len(stack))
+		copy(cp, stack)
+		return cp
+	}
+
+	var dfs func(nodeID string)
+	dfs = func(nodeID string) {
 		if totalVisits >= te.maxVisits {
 			return
 		}
@@ -243,50 +252,42 @@ func (te *TaintEngine) traceFlowTargets(
 		// Check for sink (use resolved node to avoid redundant GetNode)
 		sinkAnn := te.matchSinkNode(node)
 		if sinkAnn != "" {
-			pathCopy := make([]string, len(path))
-			copy(pathCopy, path)
 			targets = append(targets, FlowTarget{
 				Kind:     FlowKindSink,
 				TargetID: nodeID,
-				Path:     pathCopy,
+				Path:     snapPath(),
 			})
 			return
 		}
 
 		// Check for storage-linked nodes (DB write operations)
 		if len(cpg.EdgesByKindFrom(graph.EdgeStorageLink, nodeID)) > 0 {
-			pathCopy := make([]string, len(path))
-			copy(pathCopy, path)
 			targets = append(targets, FlowTarget{
 				Kind:     FlowKindStorage,
 				TargetID: nodeID,
-				Path:     pathCopy,
+				Path:     snapPath(),
 			})
 		}
 
 		// Check for call site (call_arg target)
 		if node.Kind == graph.NodeCallSite {
-			argIdx := te.resolveCallSiteArgIndex(cpg, nodeID, startID, path)
+			argIdx := te.resolveCallSiteArgIndex(cpg, nodeID, startID, stack)
 
-			pathCopy := make([]string, len(path))
-			copy(pathCopy, path)
 			targets = append(targets, FlowTarget{
 				Kind:     FlowKindCallArg,
 				TargetID: nodeID,
 				ArgIndex: argIdx,
-				Path:     pathCopy,
+				Path:     snapPath(),
 			})
 		}
 
 		// Check for return to function
 		for _, e := range cpg.EdgesByKindFrom(graph.EdgeDataFlow, nodeID) {
 			if e.Label == "returns" && e.To == funcID {
-				pathCopy := make([]string, len(path))
-				copy(pathCopy, path)
 				targets = append(targets, FlowTarget{
 					Kind:     FlowKindReturn,
 					TargetID: funcID,
-					Path:     pathCopy,
+					Path:     snapPath(),
 				})
 			}
 		}
@@ -303,15 +304,14 @@ func (te *TaintEngine) traceFlowTargets(
 			if visited[e.To] >= maxNodeRevisits {
 				continue
 			}
-			// Explicit path copy to avoid slice aliasing across sibling DFS branches
-			newPath := make([]string, len(path)+1)
-			copy(newPath, path)
-			newPath[len(path)] = e.To
-			dfs(e.To, newPath)
+			stack = append(stack, e.To)
+			dfs(e.To)
+			stack = stack[:len(stack)-1]
 		}
 	}
 
-	dfs(startID, []string{startID})
+	stack = append(stack, startID)
+	dfs(startID)
 	return targets
 }
 
@@ -826,8 +826,17 @@ func (te *TaintEngine) dfsPropagate(
 	totalVisits := 0
 	pathCount := 0
 
-	var dfs func(nodeID string, path []string)
-	dfs = func(nodeID string, path []string) {
+	// Shared path stack: grows on descent, truncates on backtrack.
+	// Only copied when persisting a taint edge result.
+	stack := make([]string, 0, 32)
+	snapPath := func() []string {
+		cp := make([]string, len(stack))
+		copy(cp, stack)
+		return cp
+	}
+
+	var dfs func(nodeID string)
+	dfs = func(nodeID string) {
 		if totalVisits >= te.maxVisits || pathCount >= te.maxPaths {
 			return
 		}
@@ -839,15 +848,13 @@ func (te *TaintEngine) dfsPropagate(
 		sinkAnn := te.matchSink(cpg, nodeID)
 		if sinkAnn != "" {
 			pathCount++
-			pathCopy := make([]string, len(path))
-			copy(pathCopy, path)
 			result = append(result, &graph.Edge{
 				From:       src.nodeID,
 				To:         nodeID,
 				Kind:       graph.EdgeTaint,
 				Label:      fmt.Sprintf("%s->%s", src.annotation, sinkAnn),
 				Confidence: graph.ConfidenceCertain,
-				Path:       pathCopy,
+				Path:       snapPath(),
 			})
 			return
 		}
@@ -868,15 +875,14 @@ func (te *TaintEngine) dfsPropagate(
 				continue
 			}
 
-			// Explicit path copy to avoid slice aliasing across sibling DFS branches
-			newPath := make([]string, len(path)+1)
-			copy(newPath, path)
-			newPath[len(path)] = targetID
-			dfs(targetID, newPath)
+			stack = append(stack, targetID)
+			dfs(targetID)
+			stack = stack[:len(stack)-1]
 		}
 	}
 
-	dfs(src.nodeID, []string{src.nodeID})
+	stack = append(stack, src.nodeID)
+	dfs(src.nodeID)
 	return result
 }
 

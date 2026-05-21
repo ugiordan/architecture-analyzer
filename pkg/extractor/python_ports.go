@@ -260,7 +260,7 @@ func findPythonFiles(repoPath string) []string {
 		}
 		if info.IsDir() {
 			base := filepath.Base(path)
-			if pythonSkipDirs[base] {
+			if pythonSkipDirs[base] || strings.HasPrefix(base, ".") {
 				return filepath.SkipDir
 			}
 			return nil

@@ -29,6 +29,11 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 		opts = &ExtractOptions{}
 	}
 
+	// Build file index once for all extractors to share.
+	activeFileIndex = NewFileIndex(absPath)
+	activeFileIndex.build()
+	defer func() { activeFileIndex = nil }()
+
 	componentName := filepath.Base(absPath)
 
 	org := opts.Org

@@ -59,7 +59,22 @@ func findYAMLFiles(repoPath string, patterns []string) []string {
 
 // findFiles locates files matching any of the given glob patterns relative to
 // repoPath. Patterns containing "**" are expanded via recursive walk.
+//
+// When called during ExtractAll, a shared FileIndex is used to avoid redundant
+// filesystem walks across 30+ extractors.
 func findFiles(repoPath string, patterns []string) []string {
+	if activeFileIndex != nil {
+		absRoot, _ := filepath.Abs(repoPath)
+		if absRoot == activeFileIndex.absRoot {
+			return activeFileIndex.FindByPatterns(patterns)
+		}
+	}
+	return findFilesSlow(repoPath, patterns)
+}
+
+// findFilesSlow is the original walk-based implementation, used as fallback
+// when no FileIndex is active or for a different root path.
+func findFilesSlow(repoPath string, patterns []string) []string {
 	seen := make(map[string]bool)
 	var result []string
 

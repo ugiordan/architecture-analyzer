@@ -325,7 +325,7 @@ func walkFiles(root string, fn func(path string, info os.FileInfo)) {
 	for _, e := range entries {
 		path := root + "/" + e.Name()
 		if e.IsDir() {
-			if pyK8sSkipDirs[e.Name()] {
+			if pyK8sSkipDirs[e.Name()] || strings.HasPrefix(e.Name(), ".") {
 				continue
 			}
 			walkFiles(path, fn)
