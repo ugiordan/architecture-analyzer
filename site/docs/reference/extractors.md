@@ -1,6 +1,6 @@
 # Extractors
 
-The analyzer includes 25 extractors that parse Kubernetes manifests, Go source code, Dockerfiles, and Helm charts.
+The analyzer includes 26 extractors that parse Kubernetes manifests, Go and Python source code, Dockerfiles, and Helm charts.
 
 ## Extractor reference
 
@@ -20,7 +20,8 @@ The analyzer includes 25 extractors that parse Kubernetes manifests, Go source c
 | 12 | ConfigMaps | `**/configmap*.yaml` | ConfigMap names, data keys |
 | 13 | HTTP Endpoints | Go source (`http.HandleFunc`, `mux.Route`, `gin.Engine`) | Method, path, handler, middleware |
 | 14 | Ingress | `**/ingress*`, `**/virtualservice*`, `**/httproute*` | Gateway API, Istio, K8s Ingress resources |
-| 15 | External Connections | Go source (`sql.Open`, `redis.NewClient`, `grpc.Dial`, `sarama.New*`) | Database, object storage, gRPC, messaging references with credential redaction |
+| 15 | External Connections (Go) | Go source (`sql.Open`, `redis.NewClient`, `grpc.Dial`, `sarama.New*`) | Database, object storage, gRPC, messaging references with credential redaction |
+| 26 | External Connections (Python) | Python source (`psycopg2`, `sqlalchemy`, `boto3`, `requests`, `httpx`, `grpc`, `openai`, `chromadb`, etc.) | Database, object storage, gRPC, messaging, HTTP clients, LLM/ML SDK references |
 | 16 | Feature Gates | Go source (`DefaultMutableFeatureGate.Add`, `featuregate.Feature` consts) | Gate name, default state, pre-release stage, source location |
 | 17 | Cache Config | Go source (`ctrl.NewManager`, `cache.Options`) | Cache scope, filtered types, disabled types, implicit informers, GOMEMLIMIT |
 | 18 | Operator Config | Go source (const/var blocks in controllers, pkg/config) | Classified constants: images, ports, timeouts, env vars, resources, name patterns |

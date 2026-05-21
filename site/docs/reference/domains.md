@@ -9,6 +9,7 @@ The domain analysis framework provides pluggable analysis capabilities on top of
 | `security` | Go, Python, TypeScript, Rust | None | 12 rules (CGA-003 to CGA-014) |
 | `testing` | Go | security | 4 rules (CGA-T01 to CGA-T04) |
 | `upgrade` | Go | None | 4 rules (CGA-U01 to CGA-U04) |
+| `architecture` | Python | None | 4 rules (CGA-A01 to CGA-A04) |
 
 Additionally, the base query engine provides 2 core queries (CGA-001, CGA-002) that run independently of domains.
 
@@ -104,6 +105,37 @@ Marks nodes with upgrade-relevant metadata:
 | CGA-U02 | pre-release-api-usage | Low | Usage of alpha/beta Kubernetes APIs |
 | CGA-U03 | ungated-feature | Medium | Features without feature gate protection |
 | CGA-U04 | unchecked-version-access | Low | Version-dependent code without version checks |
+
+## Architecture Domain
+
+### Annotator
+
+Python annotator marks CPG nodes with structural metadata:
+
+- **Abstract bases**: Classes inheriting from `ABC` or with `Base`/`Abstract` name prefix
+- **Implementations**: Classes with non-empty `BaseClasses` (inheritance chain)
+- **Factory methods**: Functions containing 2+ class instantiations via data flow edges
+- **SDK clients**: Call sites matching known SDK patterns (openai, boto3, chromadb, elasticsearch, etc.)
+
+### Queries
+
+| Query ID | Name | Severity | Description |
+|----------|------|----------|-------------|
+| CGA-A01 | abstraction-layers | Info | Surfaces class hierarchies with abstract bases and their implementations |
+| CGA-A02 | external-api-surface | Info | Functions using external SDK clients (openai, boto3, chromadb, etc.) |
+| CGA-A03 | factory-dispatch | Info | Factory functions dispatching to multiple implementation types |
+| CGA-A04 | unimplemented-interface | Low | Abstract bases with no implementations found in analyzed sources |
+
+### Example output (feast)
+
+```
+CGA-A01: Abstraction layer: OfflineStore has 16 implementations: BigQueryOfflineStore, ...
+CGA-A01: Abstraction layer: ComputeEngine has 6 implementations: Lambda, K8s, Local, Ray, ...
+CGA-A02: Function _get_client calls external SDK: Elasticsearch
+CGA-A02: Function _connect calls external SDK: MilvusClient
+CGA-A03: Factory function get_online_store dispatches to: RedisOnlineStore, DynamoDBOnlineStore
+CGA-A04: Abstract base StreamProcessor has no implementations found in analyzed sources
+```
 
 ## Using Domains
 

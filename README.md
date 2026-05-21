@@ -6,10 +6,10 @@ A static analysis tool that extracts architecture data from Kubernetes/OpenShift
 
 ## Features
 
-- **25 architecture extractors** covering CRDs, RBAC, deployments, services, network policies, controller watches, dependencies, secrets, Helm charts, Dockerfiles, webhooks, configmaps, HTTP endpoints, ingress, external connections, feature gates, cache architecture, operator config constants, reconciliation sequences, Prometheus metrics, status conditions, platform detection, Go CRD extraction, webhook behavioral analysis, and programmatic resource operations
+- **26 architecture extractors** covering CRDs, RBAC, deployments, services, network policies, controller watches, dependencies, secrets, Helm charts, Dockerfiles, webhooks, configmaps, HTTP endpoints, ingress, external connections (Go + Python), feature gates, cache architecture, operator config constants, reconciliation sequences, Prometheus metrics, status conditions, platform detection, Go CRD extraction, webhook behavioral analysis, and programmatic resource operations
 - **Go AST extraction** via `go/packages` for operators that `.gitignore` generated manifests. Extracts CRDs from Go types with kubebuilder markers, analyzes webhook method bodies for field-level mutations and validations, and detects programmatic `client.Create/Update/Patch/Delete` calls in reconcile methods. Security-hardened for untrusted repo analysis (CGO_ENABLED=0, module isolation, boundedFileSystem).
-- **Code property graph** with multi-language parsing (Go, Python, TypeScript, Rust), typed node model, edge confidence classification, intraprocedural data flow, control flow graphs, and two-phase taint propagation
-- **20 security queries** across 3 domains (security, testing, upgrade) detecting webhook gaps, RBAC bugs, secret leaks, taint paths, complexity hotspots, and more
+- **Code property graph** with multi-language parsing (Go, Python, TypeScript, Rust), typed node model, edge confidence classification, intraprocedural data flow, control flow graphs, Python class hierarchy extraction (NodeClass with BaseClasses and EdgeContains), and two-phase taint propagation
+- **24 security queries** across 4 domains (security, testing, upgrade, architecture) detecting webhook gaps, RBAC bugs, secret leaks, taint paths, complexity hotspots, class hierarchies, factory patterns, external API surfaces, and more
 - **SARIF ingestion** mapping external scanner findings (Semgrep, gosec, etc.) to CPG nodes for unified analysis
 - **Structural diff engine** comparing code graphs across versions to detect regressions
 - **7 renderers** producing Mermaid diagrams, Structurizr C4 DSL, ASCII security views, and structured markdown reports
@@ -27,7 +27,7 @@ graph LR
         SARIF[SARIF Files]
     end
 
-    subgraph "Architecture Extractors (25)"
+    subgraph "Architecture Extractors (26)"
         E1[CRDs & RBAC]
         E2[Services & Deployments]
         E3[Network Policies & Ingress]
@@ -44,7 +44,7 @@ graph LR
         DF[Data Flow Analysis]
         CFG[Control Flow Graphs]
         TAINT[Taint Propagation Engine]
-        DOMAINS[Domain Queries<br/>Security, Testing, Upgrade]
+        DOMAINS[Domain Queries<br/>Security, Testing, Upgrade, Architecture]
     end
 
     subgraph Outputs
@@ -214,7 +214,8 @@ Includes Go modules, Python deps, Dockerfile base images, deployment container i
 | ConfigMaps | `**/configmap*.yaml` | ConfigMap names, data keys |
 | HTTP Endpoints | Go source (`http.HandleFunc`, `mux.Route`, `gin.Engine`) | Method, path, handler, middleware |
 | Ingress | `**/ingress*`, `**/virtualservice*`, `**/httproute*` | Gateway API, Istio, K8s Ingress resources |
-| External Connections | Go source (`sql.Open`, `redis.NewClient`, `grpc.Dial`, `sarama.New*`) | Database, object storage, gRPC, messaging references with credential redaction |
+| External Connections (Go) | Go source (`sql.Open`, `redis.NewClient`, `grpc.Dial`, `sarama.New*`) | Database, object storage, gRPC, messaging references with credential redaction |
+| External Connections (Python) | Python source (`psycopg2`, `sqlalchemy`, `boto3`, `requests`, `httpx`, `grpc`, `openai`, `chromadb`, etc.) | Database, object storage, gRPC, messaging, HTTP clients, LLM/ML SDK references |
 | Feature Gates | Go source (`DefaultMutableFeatureGate.Add`, `featuregate.Feature` consts) | Gate name, default state, pre-release stage, source location |
 | Cache Config | Go source (`ctrl.NewManager`, `cache.Options`) | Cache scope, filtered types, disabled types, implicit informers, GOMEMLIMIT |
 | Operator Config | Go source (const/var blocks in controllers, pkg/config) | Classified constants: images, ports, timeouts, env vars, resources, name patterns |
@@ -256,7 +257,7 @@ Four language parsers extract AST-level nodes (functions, call sites, struct lit
 
 ### Typed Node Model
 
-Nodes carry typed fields instead of string maps, covering function signatures (params, return types), call targets, HTTP routes, DB operations, struct types, cyclomatic complexity, and entrypoint trust level.
+Nodes carry typed fields instead of string maps, covering function signatures (params, return types), call targets, HTTP routes, DB operations, struct types, class definitions (with base classes for inheritance tracking), cyclomatic complexity, and entrypoint trust level.
 
 ### Edge Confidence
 
@@ -334,6 +335,15 @@ Compare two code-graph.json files to detect regressions: new functions, removed 
 | Ungated Feature | CGA-U03 | Medium | Features without feature gate protection |
 | Unchecked Version Access | CGA-U04 | Low | Version-dependent code without version checks |
 
+### Architecture Domain (4 rules)
+
+| Rule | ID | Severity | Description |
+|------|----|----------|-------------|
+| Abstraction Layers | CGA-A01 | Info | Surfaces class hierarchies with abstract bases and implementations |
+| External API Surface | CGA-A02 | Info | Functions using external SDK clients (openai, boto3, chromadb, etc.) |
+| Factory Dispatch | CGA-A03 | Info | Factory functions dispatching to multiple implementation types |
+| Unimplemented Interface | CGA-A04 | Low | Abstract bases with no implementations found in analyzed sources |
+
 ## Renderers
 
 | Renderer | Output | Description |
@@ -353,7 +363,7 @@ architecture-analyzer/
   cmd/arch-analyzer/
     main.go                # CLI entry point with subcommands
   pkg/
-    extractor/             # 25 architecture extractors
+    extractor/             # 26 architecture extractors
     renderer/              # 7 diagram/report renderers
     aggregator/            # Platform-wide aggregation
     validator/             # CRD contract validation
@@ -371,6 +381,7 @@ architecture-analyzer/
       security/            # 12 security queries
       testing/             # 4 testing queries
       upgrade/             # 4 upgrade queries
+      architecture/        # 4 architecture queries
     arch/                  # Architecture data structures
     config/                # Configuration types
   contracts/
