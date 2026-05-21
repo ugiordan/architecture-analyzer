@@ -209,8 +209,26 @@ func (b *Builder) mergeResult(cpg *graph.CPG, result *parser.ParseResult) error 
 			return fmt.Errorf("merging basic block node: %w", err)
 		}
 	}
+	for _, n := range result.Classes {
+		if err := cpg.AddNode(n); err != nil {
+			return fmt.Errorf("merging class node: %w", err)
+		}
+	}
 	for _, e := range result.Edges {
 		cpg.AddEdge(e)
+	}
+
+	// Create EdgeContains from Class nodes to their methods
+	for _, cls := range result.Classes {
+		for _, fn := range result.Functions {
+			if fn.TypeName == cls.Name && fn.File == cls.File {
+				cpg.AddEdge(&graph.Edge{
+					From: cls.ID,
+					To:   fn.ID,
+					Kind: graph.EdgeContains,
+				})
+			}
+		}
 	}
 	return nil
 }

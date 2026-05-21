@@ -154,13 +154,42 @@ func (pp *PythonParser) walk(node *sitter.Node, src []byte, file, className stri
 	}
 }
 
-// extractClass processes a class_definition node, walking its body with the class name set.
+// extractClass processes a class_definition node: emits a Class node with base
+// classes, then walks the body with the class name set so methods get TypeName.
 func (pp *PythonParser) extractClass(node *sitter.Node, src []byte, file string, result *ParseResult) {
 	nameNode := node.ChildByFieldName("name")
 	if nameNode == nil {
 		return
 	}
 	clsName := nameNode.Content(src)
+	line := int(node.StartPoint().Row) + 1
+
+	var baseClasses []string
+	if args := node.ChildByFieldName("superclasses"); args != nil {
+		for i := 0; i < int(args.ChildCount()); i++ {
+			child := args.Child(i)
+			if child == nil {
+				continue
+			}
+			switch child.Type() {
+			case "identifier", "attribute":
+				baseClasses = append(baseClasses, child.Content(src))
+			case "keyword_argument":
+				// metaclass=ABCMeta — skip
+			}
+		}
+	}
+
+	classNode := &graph.Node{
+		ID:          graph.NodeID(graph.NodeClass, clsName, file, line, 0),
+		Kind:        graph.NodeClass,
+		Name:        clsName,
+		File:        file,
+		Line:        line,
+		Language:    "python",
+		BaseClasses: baseClasses,
+	}
+	result.Classes = append(result.Classes, classNode)
 
 	body := node.ChildByFieldName("body")
 	if body == nil {

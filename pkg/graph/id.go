@@ -19,6 +19,7 @@ var kindPrefix = map[NodeKind]string{
 	NodeStructLiteral:   "struct",
 	NodeExternalFinding: "extf",
 	NodeBasicBlock:      "bb",
+	NodeClass:           "cls",
 }
 
 // NodeID produces a deterministic, stable node ID from the node's identity fields.

@@ -15,6 +15,7 @@ type ParseResult struct {
 	Variables      []*graph.Node
 	Parameters     []*graph.Node
 	BasicBlocks    []*graph.Node
+	Classes        []*graph.Node
 }
 
 // Parser extracts code property graph nodes and edges from source files.

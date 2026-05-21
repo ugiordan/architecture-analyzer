@@ -16,6 +16,7 @@ const (
 	NodeStructLiteral   NodeKind = "StructLiteral"
 	NodeExternalFinding NodeKind = "ExternalFinding"
 	NodeBasicBlock      NodeKind = "BasicBlock"
+	NodeClass           NodeKind = "Class"
 )
 
 // TrustLevel classifies HTTP handlers and entrypoints by trust level.
@@ -67,6 +68,9 @@ type Node struct {
 	// Struct literal fields
 	StructType string   `json:"struct_type,omitempty"`
 	FieldNames []string `json:"field_names,omitempty"`
+
+	// Class fields (Python class hierarchy)
+	BaseClasses []string `json:"base_classes,omitempty"`
 
 	// Entrypoint classification (populated in A2)
 	TrustLevel TrustLevel `json:"trust_level,omitempty"`

@@ -11,6 +11,7 @@ const (
 	EdgeAnnotatedWith EdgeKind = "ANNOTATED_WITH"
 	EdgeReportedBy    EdgeKind = "REPORTED_BY"
 	EdgeTaint         EdgeKind = "TAINT"
+	EdgeContains      EdgeKind = "CONTAINS"
 )
 
 // EdgeConfidence expresses how reliable a call resolution is.
