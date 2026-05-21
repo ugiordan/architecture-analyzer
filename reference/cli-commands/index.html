@@ -624,6 +624,8 @@
       
         
       
+        
+      
     
     
     
@@ -766,6 +768,34 @@
     
   
     Platform Aggregation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/sbom-and-reporting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SBOM &amp; Reporting
   
 
     
@@ -1099,6 +1129,45 @@
     <span class="md-ellipsis">
       
         arch-analyzer domains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sbom-reporting-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM &amp; Reporting Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SBOM &amp; Reporting Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arch-analyzer-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        arch-analyzer sbom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arch-analyzer-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        arch-analyzer report
       
     </span>
   </a>
@@ -25672,6 +25741,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sbom-reporting-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM &amp; Reporting Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SBOM &amp; Reporting Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arch-analyzer-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        arch-analyzer sbom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arch-analyzer-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        arch-analyzer report
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contract-validation-commands" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -26108,10 +26216,153 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>arch-analyzer<span class="w"> </span>domains
 </code></pre></div>
 <p>Output includes domain name, supported languages, dependencies, and query count.</p>
+<h2 id="sbom-reporting-commands">SBOM &amp; Reporting Commands<a class="headerlink" href="#sbom-reporting-commands" title="Permanent link">¶</a></h2>
+<h3 id="arch-analyzer-sbom">arch-analyzer sbom<a class="headerlink" href="#arch-analyzer-sbom" title="Permanent link">¶</a></h3>
+<p>Generate a CycloneDX 1.5 Software Bill of Materials from extracted architecture data.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>arch-analyzer<span class="w"> </span>sbom<span class="w"> </span>&lt;component-architecture.json&gt;<span class="w"> </span><span class="o">[</span>--output<span class="w"> </span>&lt;file&gt;<span class="o">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output</code></td>
+<td>Output file path (default: stdout)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Components included</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Go modules</td>
+<td><code>library</code></td>
+<td>Module path, version, PURL (<code>pkg:golang/...</code>)</td>
+</tr>
+<tr>
+<td>Python deps</td>
+<td><code>library</code></td>
+<td>Package name, version, PURL (<code>pkg:pypi/...</code>)</td>
+</tr>
+<tr>
+<td>Dockerfile base images</td>
+<td><code>container</code></td>
+<td>Image name, tag, digest (SHA-256), stages, user, architectures, FIPS flag, issues</td>
+</tr>
+<tr>
+<td>Deployment containers</td>
+<td><code>container</code></td>
+<td>Image, security context (runAsNonRoot, readOnlyFS, privileged, drop ALL), resource limits/requests, health probes</td>
+</tr>
+<tr>
+<td>Operator image constants</td>
+<td><code>container</code></td>
+<td>Go const name, default image value, source file</td>
+</tr>
+</tbody>
+</table>
+<p>Each component carries <code>arch-analyzer:*</code> properties for traceability (source file, ecosystem, deployment name, Dockerfile issues).</p>
+<div class="admonition example">
+<p class="admonition-title">Generate SBOM for a component</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>arch-analyzer<span class="w"> </span>sbom<span class="w"> </span>component-architecture.json<span class="w"> </span>--output<span class="w"> </span>sbom.json
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Check component count</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>cat<span class="w"> </span>sbom.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.components | length'</span>
+</code></pre></div>
+</div>
+<h3 id="arch-analyzer-report">arch-analyzer report<a class="headerlink" href="#arch-analyzer-report" title="Permanent link">¶</a></h3>
+<p>Generate a comprehensive image and container analysis report in markdown.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>arch-analyzer<span class="w"> </span>report<span class="w"> </span><span class="o">[</span>--output<span class="w"> </span>&lt;file&gt;<span class="o">]</span><span class="w"> </span>&lt;json-file&gt;...
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output</code></td>
+<td>Output markdown file (default: stdout)</td>
+</tr>
+</tbody>
+</table>
+<p>Accepts one or more <code>component-architecture.json</code> files. When given multiple inputs, produces a cross-component analysis.</p>
+<p><strong>Report sections</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU / CUDA Dependencies</td>
+<td>Components requiring NVIDIA CUDA, Intel Gaudi, AMD ROCm, with version detection</td>
+</tr>
+<tr>
+<td>Base Image Registry Distribution</td>
+<td>Which registries are used (Red Hat, Docker Hub, Google, Quay, etc.)</td>
+</tr>
+<tr>
+<td>Multi-Architecture Support</td>
+<td>Dockerfiles declaring multi-arch builds</td>
+</tr>
+<tr>
+<td>Dockerfile Security Issues</td>
+<td>Unpinned images, missing USER, no health checks, etc.</td>
+</tr>
+<tr>
+<td>Container Security Contexts</td>
+<td>RunAsNonRoot, ReadOnlyRootFilesystem, Privileged, Capabilities</td>
+</tr>
+<tr>
+<td>Resource Limits</td>
+<td>CPU/memory requests and limits per container</td>
+</tr>
+<tr>
+<td>Health Probes</td>
+<td>Liveness and readiness probe coverage</td>
+</tr>
+<tr>
+<td>Sidecar Containers</td>
+<td>Deployments with kube-rbac-proxy, oauth-proxy, etc.</td>
+</tr>
+<tr>
+<td>Deployment Issues</td>
+<td>Missing PodDisruptionBudget, HPA, resource limits</td>
+</tr>
+<tr>
+<td>Operator Image Constants</td>
+<td>Go constants defining default images</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Cross-component report</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># All components</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>arch-analyzer<span class="w"> </span>report<span class="w"> </span>--output<span class="w"> </span>platform-report.md<span class="w"> </span>results/*/component-architecture.json
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Single component</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>arch-analyzer<span class="w"> </span>report<span class="w"> </span>component-architecture.json
+</code></pre></div>
+</div>
 <h2 id="contract-validation-commands">Contract Validation Commands<a class="headerlink" href="#contract-validation-commands" title="Permanent link">¶</a></h2>
 <h3 id="arch-analyzer-extract-schema">arch-analyzer extract-schema<a class="headerlink" href="#arch-analyzer-extract-schema" title="Permanent link">¶</a></h3>
 <p>Extract CRD JSON schemas for contract validation.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>arch-analyzer<span class="w"> </span>extract-schema<span class="w"> </span>&lt;repo-path&gt;<span class="w"> </span>--output-dir<span class="w"> </span>&lt;dir&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>arch-analyzer<span class="w"> </span>extract-schema<span class="w"> </span>&lt;repo-path&gt;<span class="w"> </span>--output-dir<span class="w"> </span>&lt;dir&gt;
 </code></pre></div>
 <table>
 <thead>
@@ -26129,7 +26380,7 @@
 </table>
 <h3 id="arch-analyzer-validate">arch-analyzer validate<a class="headerlink" href="#arch-analyzer-validate" title="Permanent link">¶</a></h3>
 <p>Validate CRD changes against baseline contracts.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>arch-analyzer<span class="w"> </span>validate<span class="w"> </span>&lt;repo-path&gt;<span class="w"> </span>--contracts-dir<span class="w"> </span>&lt;dir&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>arch-analyzer<span class="w"> </span>validate<span class="w"> </span>&lt;repo-path&gt;<span class="w"> </span>--contracts-dir<span class="w"> </span>&lt;dir&gt;
 </code></pre></div>
 <table>
 <thead>
@@ -26149,7 +26400,7 @@
 <h2 id="platform-commands">Platform Commands<a class="headerlink" href="#platform-commands" title="Permanent link">¶</a></h2>
 <h3 id="arch-analyzer-aggregate">arch-analyzer aggregate<a class="headerlink" href="#arch-analyzer-aggregate" title="Permanent link">¶</a></h3>
 <p>Merge multiple component analyses into platform view.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>arch-analyzer<span class="w"> </span>aggregate<span class="w"> </span>&lt;results-dir&gt;<span class="w"> </span>--output-dir<span class="w"> </span>&lt;dir&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>arch-analyzer<span class="w"> </span>aggregate<span class="w"> </span>&lt;results-dir&gt;<span class="w"> </span>--output-dir<span class="w"> </span>&lt;dir&gt;
 </code></pre></div>
 <table>
 <thead>
@@ -26168,11 +26419,11 @@
 <p>Discovers all <code>component-architecture.json</code> files in the results directory recursively.</p>
 <h3 id="arch-analyzer-aggregate-cpg">arch-analyzer aggregate-cpg<a class="headerlink" href="#arch-analyzer-aggregate-cpg" title="Permanent link">¶</a></h3>
 <p>Merge code graphs into a platform-wide CPG.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>arch-analyzer<span class="w"> </span>aggregate-cpg<span class="w"> </span>&lt;results-dir&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>arch-analyzer<span class="w"> </span>aggregate-cpg<span class="w"> </span>&lt;results-dir&gt;
 </code></pre></div>
 <h3 id="arch-analyzer-discover">arch-analyzer discover<a class="headerlink" href="#arch-analyzer-discover" title="Permanent link">¶</a></h3>
 <p>Discover platform components from kustomize manifests.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>arch-analyzer<span class="w"> </span>discover<span class="w"> </span>&lt;operator-repo-path&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>arch-analyzer<span class="w"> </span>discover<span class="w"> </span>&lt;operator-repo-path&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
 </code></pre></div>
 <table>
 <thead>
@@ -26202,15 +26453,15 @@
 </table>
 <h3 id="arch-analyzer-build-config">arch-analyzer build-config<a class="headerlink" href="#arch-analyzer-build-config" title="Permanent link">¶</a></h3>
 <p>Extract build metadata (OCP versions, architectures, OLM).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>arch-analyzer<span class="w"> </span>build-config<span class="w"> </span>&lt;dir&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>arch-analyzer<span class="w"> </span>build-config<span class="w"> </span>&lt;dir&gt;
 </code></pre></div>
 <h3 id="arch-analyzer-konflux">arch-analyzer konflux<a class="headerlink" href="#arch-analyzer-konflux" title="Permanent link">¶</a></h3>
 <p>Parse Konflux snapshot image mappings.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>arch-analyzer<span class="w"> </span>konflux<span class="w"> </span>&lt;snapshot-file-or-dir&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>arch-analyzer<span class="w"> </span>konflux<span class="w"> </span>&lt;snapshot-file-or-dir&gt;
 </code></pre></div>
 <h3 id="arch-analyzer-platforms">arch-analyzer platforms<a class="headerlink" href="#arch-analyzer-platforms" title="Permanent link">¶</a></h3>
 <p>List platforms defined in scan config.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>arch-analyzer<span class="w"> </span>platforms<span class="w"> </span>&lt;scan-config.yaml&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>arch-analyzer<span class="w"> </span>platforms<span class="w"> </span>&lt;scan-config.yaml&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
 </code></pre></div>
 <table>
 <thead>
@@ -26232,7 +26483,7 @@
 </table>
 <h3 id="arch-analyzer-version-compat">arch-analyzer version-compat<a class="headerlink" href="#arch-analyzer-version-compat" title="Permanent link">¶</a></h3>
 <p>Check API version compatibility against target OCP/k8s version.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>arch-analyzer<span class="w"> </span>version-compat<span class="w"> </span>&lt;arch.json&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>arch-analyzer<span class="w"> </span>version-compat<span class="w"> </span>&lt;arch.json&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
 </code></pre></div>
 <table>
 <thead>
@@ -26251,7 +26502,7 @@
 <h2 id="combined-commands">Combined Commands<a class="headerlink" href="#combined-commands" title="Permanent link">¶</a></h2>
 <h3 id="arch-analyzer-full-analysis">arch-analyzer full-analysis<a class="headerlink" href="#arch-analyzer-full-analysis" title="Permanent link">¶</a></h3>
 <p>Run architecture extraction + code graph scan.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>arch-analyzer<span class="w"> </span>full-analysis<span class="w"> </span>&lt;repo-path&gt;<span class="w"> </span>--output-dir<span class="w"> </span>&lt;dir&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>arch-analyzer<span class="w"> </span>full-analysis<span class="w"> </span>&lt;repo-path&gt;<span class="w"> </span>--output-dir<span class="w"> </span>&lt;dir&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
 </code></pre></div>
 <table>
 <thead>
@@ -26277,7 +26528,7 @@
 </table>
 <h3 id="arch-analyzer-version">arch-analyzer version<a class="headerlink" href="#arch-analyzer-version" title="Permanent link">¶</a></h3>
 <p>Print version information.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>arch-analyzer<span class="w"> </span>version
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>arch-analyzer<span class="w"> </span>version
 </code></pre></div>
 
 
@@ -26301,7 +26552,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 7, 2026 09:11:42 UTC">May 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 20, 2026 07:46:08 UTC">May 20, 2026</span>
   </span>
 
     
