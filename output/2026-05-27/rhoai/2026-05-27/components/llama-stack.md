@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/llama-stack |
 | Commit | 5d65c017b088eab0f40c88fc92e7b4aac9834a27 |
-| Extracted | 2026-05-27T04:24:20Z |
+| Extracted | 2026-05-27T16:03:30Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

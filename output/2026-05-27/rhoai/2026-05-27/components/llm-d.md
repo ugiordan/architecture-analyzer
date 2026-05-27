@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | llm-d/llm-d |
-| Commit | 935e0ee1df16823e1e89e657637a9bccd75aad25 |
-| Extracted | 2026-05-27T04:25:52Z |
+| Commit | 1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83 |
+| Extracted | 2026-05-27T16:04:31Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -36,11 +36,11 @@
 
 | Name | Data Keys | Source |
 |------|-----------|--------|
-| llm-d-inference-gateway | deployment, service | [`guides/recipes/gateway/istio/configmap.yaml`](https://github.com/llm-d/llm-d/blob/935e0ee1df16823e1e89e657637a9bccd75aad25/guides/recipes/gateway/istio/configmap.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/cks/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/935e0ee1df16823e1e89e657637a9bccd75aad25/guides/workload-autoscaling/wva-config/platform/cks/configmap-patch.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/generic/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/935e0ee1df16823e1e89e657637a9bccd75aad25/guides/workload-autoscaling/wva-config/platform/generic/configmap-patch.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/gke/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/935e0ee1df16823e1e89e657637a9bccd75aad25/guides/workload-autoscaling/wva-config/platform/gke/configmap-patch.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_CA_CERT_PATH, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/ocp/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/935e0ee1df16823e1e89e657637a9bccd75aad25/guides/workload-autoscaling/wva-config/platform/ocp/configmap-patch.yaml) |
+| llm-d-inference-gateway | deployment, service | [`guides/recipes/gateway/istio/configmap.yaml`](https://github.com/llm-d/llm-d/blob/1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83/guides/recipes/gateway/istio/configmap.yaml) |
+| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/cks/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83/guides/workload-autoscaling/wva-config/platform/cks/configmap-patch.yaml) |
+| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/generic/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83/guides/workload-autoscaling/wva-config/platform/generic/configmap-patch.yaml) |
+| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/gke/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83/guides/workload-autoscaling/wva-config/platform/gke/configmap-patch.yaml) |
+| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_CA_CERT_PATH, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/ocp/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83/guides/workload-autoscaling/wva-config/platform/ocp/configmap-patch.yaml) |
 
 
 ## Dockerfiles
@@ -66,5 +66,5 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| get |  | [`scripts/lint-dockerfile-envvars.py:157`](https://github.com/llm-d/llm-d/blob/935e0ee1df16823e1e89e657637a9bccd75aad25/scripts/lint-dockerfile-envvars.py#L157) |
+| get |  | [`scripts/lint-dockerfile-envvars.py:157`](https://github.com/llm-d/llm-d/blob/1c72dc608d642e8ab7901d9fe33b2b6bc0f71b83/scripts/lint-dockerfile-envvars.py#L157) |
 

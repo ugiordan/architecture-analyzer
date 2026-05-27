@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | kserve/modelmesh-runtime-adapter |
 | Commit | 4056288112efd5f14ac64afd6c30102a3b087449 |
-| Extracted | 2026-05-27T04:25:32Z |
+| Extracted | 2026-05-27T16:04:39Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

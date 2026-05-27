@@ -11,7 +11,7 @@
 | Repository | kserve/modelmesh-serving |
 | Aliases | ModelMesh |
 | Commit | 741aa49b572d3b87ea159c4c92348af1a2f58d68 |
-| Extracted | 2026-05-27T04:21:32Z |
+| Extracted | 2026-05-27T16:00:25Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

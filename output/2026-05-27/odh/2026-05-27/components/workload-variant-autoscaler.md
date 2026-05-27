@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | llm-d/workload-variant-autoscaler |
 | Commit | 0641ee03e8430cce5821797137b1b53bf70b98a2 |
-| Extracted | 2026-05-27T04:25:07Z |
+| Extracted | 2026-05-27T16:04:09Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

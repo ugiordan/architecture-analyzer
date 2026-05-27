@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | kubeflow/model-registry |
-| Commit | 137383c05f44d8412e55c38730460423d4d18140 |
-| Extracted | 2026-05-27T04:20:29Z |
+| Commit | 05fb1c7f028221a6ba05d4e08de5cefd0035c42d |
+| Extracted | 2026-05-27T16:00:01Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -19,7 +19,7 @@
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| model-catalog | ClusterIP | 8080/TCP (http-api) | [`manifests/kustomize/options/catalog/base/service.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/catalog/base/service.yaml) |
+| model-catalog | ClusterIP | 8080/TCP (http-api) | [`manifests/kustomize/options/catalog/base/service.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/catalog/base/service.yaml) |
 
 
 ## Deployments
@@ -37,12 +37,12 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| metrics-auth-role | 2 resources | [`manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml) |
-| metrics-reader | 0 resources | [`manifests/kustomize/options/controller/rbac/metrics_reader_role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/controller/rbac/metrics_reader_role.yaml) |
-| model-registry-create-sars | 1 resources | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
-| model-registry-manager-role | 3 resources | [`manifests/kustomize/options/controller/rbac/role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/controller/rbac/role.yaml) |
-| model-registry-retrieve-clusterrolebindings | 1 resources | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
-| model-registry-ui-services-reader | 1 resources | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
+| metrics-auth-role | 2 resources | [`manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml) |
+| metrics-reader | 0 resources | [`manifests/kustomize/options/controller/rbac/metrics_reader_role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/controller/rbac/metrics_reader_role.yaml) |
+| model-registry-create-sars | 1 resources | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
+| model-registry-manager-role | 3 resources | [`manifests/kustomize/options/controller/rbac/role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/controller/rbac/role.yaml) |
+| model-registry-retrieve-clusterrolebindings | 1 resources | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
+| model-registry-ui-services-reader | 1 resources | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
 
 ### Cluster Role Bindings
 
@@ -58,7 +58,7 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| leader-election-role | 3 resources | [`manifests/kustomize/options/controller/rbac/leader_election_role.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/controller/rbac/leader_election_role.yaml) |
+| leader-election-role | 3 resources | [`manifests/kustomize/options/controller/rbac/leader_election_role.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/controller/rbac/leader_election_role.yaml) |
 
 ### Role Bindings
 
@@ -184,16 +184,16 @@
 
 | GVK | Watch Type | Source |
 |-----|-----------|--------|
-| serving/v1beta1/InferenceService | For | [`cmd/controller/internal/controllers/inferenceservice_controller.go:44`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/cmd/controller/internal/controllers/inferenceservice_controller.go#L44) |
-| serving/v1beta1/InferenceService | For | [`pkg/inferenceservice-controller/controller.go:239`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/pkg/inferenceservice-controller/controller.go#L239) |
+| serving/v1beta1/InferenceService | For | [`cmd/controller/internal/controllers/inferenceservice_controller.go:44`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/cmd/controller/internal/controllers/inferenceservice_controller.go#L44) |
+| serving/v1beta1/InferenceService | For | [`pkg/inferenceservice-controller/controller.go:239`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/pkg/inferenceservice-controller/controller.go#L239) |
 
 
 ## ConfigMaps
 
 | Name | Data Keys | Source |
 |------|-----------|--------|
-| auth-proxy-config | nginx.conf | [`manifests/kustomize/options/ui/overlays/standalone/auth-proxy-configmap.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/options/ui/overlays/standalone/auth-proxy-configmap.yaml) |
-| model-registry-configmap | MODEL_REGISTRY_DATA_STORE_TYPE, MODEL_REGISTRY_REST_SERVICE_HOST, MODEL_REGISTRY_REST_SERVICE_PORT | [`manifests/kustomize/base/model-registry-configmap.yaml`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/manifests/kustomize/base/model-registry-configmap.yaml) |
+| auth-proxy-config | nginx.conf | [`manifests/kustomize/options/ui/overlays/standalone/auth-proxy-configmap.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/options/ui/overlays/standalone/auth-proxy-configmap.yaml) |
+| model-registry-configmap | MODEL_REGISTRY_DATA_STORE_TYPE, MODEL_REGISTRY_REST_SERVICE_HOST, MODEL_REGISTRY_REST_SERVICE_PORT | [`manifests/kustomize/base/model-registry-configmap.yaml`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/manifests/kustomize/base/model-registry-configmap.yaml) |
 
 
 ## Dockerfiles
@@ -252,57 +252,57 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| create |  | [`clients/python/src/mr_openapi/rest.py:53`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/mr_openapi/rest.py#L53) |
-| create |  | [`clients/python/src/model_registry/core.py:464`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L464) |
-| create |  | [`clients/python/src/model_registry/core.py:517`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L517) |
-| create |  | [`jobs/async-upload/job/config.py:518`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/jobs/async-upload/job/config.py#L518) |
-| create |  | [`clients/python/src/model_registry/core.py:307`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L307) |
-| create |  | [`clients/python/src/model_registry/core.py:204`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L204) |
-| create |  | [`clients/python/src/model_registry/core.py:121`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L121) |
-| create |  | [`clients/python/src/model_registry/types/artifacts.py:167`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/types/artifacts.py#L167) |
-| create |  | [`jobs/async-upload/job/config.py:524`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/jobs/async-upload/job/config.py#L524) |
-| get |  | [`catalog/clients/python/src/model_catalog/_client.py:503`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/model_catalog/_client.py#L503) |
-| get |  | [`clients/python/src/model_registry/core.py:775`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L775) |
-| get |  | [`clients/python/src/model_registry/_client.py:988`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L988) |
-| get |  | [`clients/python/src/model_registry/core.py:117`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L117) |
-| get |  | [`catalog/clients/python/src/catalog_openapi/api/mcp_catalog_service_api.py:44`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/catalog_openapi/api/mcp_catalog_service_api.py#L44) |
-| get |  | [`clients/python/src/model_registry/_client.py:219`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L219) |
-| get |  | [`clients/python/src/model_registry/core.py:489`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L489) |
-| get |  | [`clients/python/src/model_registry/_client.py:808`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L808) |
-| get |  | [`clients/python/src/model_registry/_client.py:806`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L806) |
-| get |  | [`clients/python/src/model_registry/core.py:534`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L534) |
-| get |  | [`clients/python/src/model_registry/core.py:600`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L600) |
-| get |  | [`clients/python/src/model_registry/core.py:740`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L740) |
-| get |  | [`clients/python/src/model_registry/_client.py:857`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L857) |
-| get |  | [`clients/python/src/model_registry/_client.py:850`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L850) |
-| get |  | [`clients/python/src/model_registry/_client.py:898`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L898) |
-| get |  | [`clients/python/src/model_registry/_client.py:930`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L930) |
-| get |  | [`clients/python/src/model_registry/_client.py:931`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L931) |
-| get |  | [`clients/python/src/model_registry/_client.py:908`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L908) |
-| get |  | [`catalog/clients/python/src/catalog_openapi/configuration.py:584`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/catalog_openapi/configuration.py#L584) |
-| get |  | [`catalog/clients/python/src/catalog_openapi/configuration.py:553`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/catalog_openapi/configuration.py#L553) |
-| get |  | [`clients/python/src/model_registry/_experiments.py:73`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_experiments.py#L73) |
-| get |  | [`catalog/clients/python/src/model_catalog/_client.py:629`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/model_catalog/_client.py#L629) |
-| get |  | [`catalog/clients/python/src/model_catalog/_client.py:526`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/model_catalog/_client.py#L526) |
-| get |  | [`clients/python/src/model_registry/core.py:343`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L343) |
-| get |  | [`jobs/async-upload/job/mr_client.py:39`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/jobs/async-upload/job/mr_client.py#L39) |
-| get |  | [`clients/python/src/model_registry/_client.py:615`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L615) |
-| get |  | [`clients/python/src/model_registry/core.py:422`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L422) |
-| get |  | [`clients/python/src/model_registry/_client.py:303`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L303) |
-| get |  | [`clients/python/src/model_registry/core.py:410`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L410) |
-| get |  | [`clients/python/src/model_registry/_client.py:233`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L233) |
-| get |  | [`clients/python/src/model_registry/_client.py:649`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L649) |
-| get |  | [`jobs/async-upload/job/download.py:54`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/jobs/async-upload/job/download.py#L54) |
-| get |  | [`clients/python/src/model_registry/_client.py:592`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L592) |
-| get |  | [`jobs/async-upload/job/mr_client.py:79`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/jobs/async-upload/job/mr_client.py#L79) |
-| get |  | [`clients/python/src/model_registry/_client.py:226`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L226) |
-| get |  | [`clients/python/src/model_registry/core.py:241`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/core.py#L241) |
-| get |  | [`clients/python/src/model_registry/_client.py:151`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/_client.py#L151) |
-| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:226`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/signing/trust_manager.py#L226) |
-| get |  | [`catalog/clients/python/src/catalog_openapi/api_client.py:340`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/catalog_openapi/api_client.py#L340) |
-| get |  | [`catalog/clients/python/src/model_catalog/_client.py:682`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/catalog/clients/python/src/model_catalog/_client.py#L682) |
-| get |  | [`clients/python/src/model_registry/signing/model_signer.py:117`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/signing/model_signer.py#L117) |
-| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:340`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/signing/trust_manager.py#L340) |
-| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:121`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/signing/trust_manager.py#L121) |
-| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:54`](https://github.com/kubeflow/model-registry/blob/137383c05f44d8412e55c38730460423d4d18140/clients/python/src/model_registry/signing/trust_manager.py#L54) |
+| create |  | [`clients/python/src/mr_openapi/rest.py:53`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/mr_openapi/rest.py#L53) |
+| create |  | [`clients/python/src/model_registry/core.py:464`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L464) |
+| create |  | [`clients/python/src/model_registry/core.py:517`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L517) |
+| create |  | [`jobs/async-upload/job/config.py:518`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/jobs/async-upload/job/config.py#L518) |
+| create |  | [`clients/python/src/model_registry/core.py:307`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L307) |
+| create |  | [`clients/python/src/model_registry/core.py:204`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L204) |
+| create |  | [`clients/python/src/model_registry/core.py:121`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L121) |
+| create |  | [`clients/python/src/model_registry/types/artifacts.py:167`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/types/artifacts.py#L167) |
+| create |  | [`jobs/async-upload/job/config.py:524`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/jobs/async-upload/job/config.py#L524) |
+| get |  | [`catalog/clients/python/src/model_catalog/_client.py:503`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/model_catalog/_client.py#L503) |
+| get |  | [`clients/python/src/model_registry/core.py:775`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L775) |
+| get |  | [`clients/python/src/model_registry/_client.py:988`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L988) |
+| get |  | [`clients/python/src/model_registry/core.py:117`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L117) |
+| get |  | [`catalog/clients/python/src/catalog_openapi/api/mcp_catalog_service_api.py:44`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/catalog_openapi/api/mcp_catalog_service_api.py#L44) |
+| get |  | [`clients/python/src/model_registry/_client.py:219`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L219) |
+| get |  | [`clients/python/src/model_registry/core.py:489`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L489) |
+| get |  | [`clients/python/src/model_registry/_client.py:808`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L808) |
+| get |  | [`clients/python/src/model_registry/_client.py:806`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L806) |
+| get |  | [`clients/python/src/model_registry/core.py:534`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L534) |
+| get |  | [`clients/python/src/model_registry/core.py:600`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L600) |
+| get |  | [`clients/python/src/model_registry/core.py:740`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L740) |
+| get |  | [`clients/python/src/model_registry/_client.py:857`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L857) |
+| get |  | [`clients/python/src/model_registry/_client.py:850`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L850) |
+| get |  | [`clients/python/src/model_registry/_client.py:898`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L898) |
+| get |  | [`clients/python/src/model_registry/_client.py:930`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L930) |
+| get |  | [`clients/python/src/model_registry/_client.py:931`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L931) |
+| get |  | [`clients/python/src/model_registry/_client.py:908`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L908) |
+| get |  | [`catalog/clients/python/src/catalog_openapi/configuration.py:584`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/catalog_openapi/configuration.py#L584) |
+| get |  | [`catalog/clients/python/src/catalog_openapi/configuration.py:553`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/catalog_openapi/configuration.py#L553) |
+| get |  | [`clients/python/src/model_registry/_experiments.py:73`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_experiments.py#L73) |
+| get |  | [`catalog/clients/python/src/model_catalog/_client.py:629`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/model_catalog/_client.py#L629) |
+| get |  | [`catalog/clients/python/src/model_catalog/_client.py:526`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/model_catalog/_client.py#L526) |
+| get |  | [`clients/python/src/model_registry/core.py:343`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L343) |
+| get |  | [`jobs/async-upload/job/mr_client.py:39`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/jobs/async-upload/job/mr_client.py#L39) |
+| get |  | [`clients/python/src/model_registry/_client.py:615`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L615) |
+| get |  | [`clients/python/src/model_registry/core.py:422`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L422) |
+| get |  | [`clients/python/src/model_registry/_client.py:303`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L303) |
+| get |  | [`clients/python/src/model_registry/core.py:410`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L410) |
+| get |  | [`clients/python/src/model_registry/_client.py:233`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L233) |
+| get |  | [`clients/python/src/model_registry/_client.py:649`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L649) |
+| get |  | [`jobs/async-upload/job/download.py:54`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/jobs/async-upload/job/download.py#L54) |
+| get |  | [`clients/python/src/model_registry/_client.py:592`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L592) |
+| get |  | [`jobs/async-upload/job/mr_client.py:79`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/jobs/async-upload/job/mr_client.py#L79) |
+| get |  | [`clients/python/src/model_registry/_client.py:226`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L226) |
+| get |  | [`clients/python/src/model_registry/core.py:241`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/core.py#L241) |
+| get |  | [`clients/python/src/model_registry/_client.py:151`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/_client.py#L151) |
+| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:226`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/signing/trust_manager.py#L226) |
+| get |  | [`catalog/clients/python/src/catalog_openapi/api_client.py:340`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/catalog_openapi/api_client.py#L340) |
+| get |  | [`catalog/clients/python/src/model_catalog/_client.py:682`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/catalog/clients/python/src/model_catalog/_client.py#L682) |
+| get |  | [`clients/python/src/model_registry/signing/model_signer.py:117`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/signing/model_signer.py#L117) |
+| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:340`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/signing/trust_manager.py#L340) |
+| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:121`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/signing/trust_manager.py#L121) |
+| get |  | [`clients/python/src/model_registry/signing/trust_manager.py:54`](https://github.com/kubeflow/model-registry/blob/05fb1c7f028221a6ba05d4e08de5cefd0035c42d/clients/python/src/model_registry/signing/trust_manager.py#L54) |
 

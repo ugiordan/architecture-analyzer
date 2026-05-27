@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/distributed-workloads |
 | Commit | 96867f495b7845d53a07209e3aff77112ec83a70 |
-| Extracted | 2026-05-27T04:22:39Z |
+| Extracted | 2026-05-27T16:01:31Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

@@ -11,7 +11,7 @@
 | Repository | kubeflow/data-science-pipelines |
 | Aliases | DSP, dsp |
 | Commit | 8d14d410d500472cba60d64666cdf4994196b12a |
-| Extracted | 2026-05-27T04:22:59Z |
+| Extracted | 2026-05-27T16:01:46Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

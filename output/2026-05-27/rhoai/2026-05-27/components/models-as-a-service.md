@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | red-hat-data-services/models-as-a-service |
-| Commit | 6683706c84f5f1c846d444edabca9ccbc624374e |
-| Extracted | 2026-05-27T04:20:04Z |
+| Commit | e54924bf1d92c7c2029a5c9f177a1463babc51cd |
+| Extracted | 2026-05-27T15:58:51Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -19,31 +19,31 @@
 
 | Method | Path | Description | Source |
 |--------|------|-------------|--------|
-| OPTIONS | /*path |  | [`maas-api/cmd/main.go:112`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L112) |
-| DELETE | /:id |  | [`maas-api/cmd/main.go:221`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L221) |
-| GET | /:id |  | [`maas-api/cmd/main.go:220`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L220) |
-| * | /api-keys |  | [`maas-api/cmd/main.go:216`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L216) |
-| POST | /api-keys/cleanup |  | [`maas-api/cmd/main.go:226`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L226) |
-| POST | /api-keys/validate |  | [`maas-api/cmd/main.go:225`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L225) |
-| POST | /bulk-revoke |  | [`maas-api/cmd/main.go:219`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L219) |
-| GET | /health |  | [`maas-api/cmd/main.go:179`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L179) |
-| * | /internal/v1 |  | [`maas-api/cmd/main.go:224`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L224) |
-| * | /metrics |  | [`maas-api/internal/metrics/server.go:19`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/internal/metrics/server.go#L19) |
-| GET | /model/:model-id/subscriptions |  | [`maas-api/cmd/main.go:213`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L213) |
-| GET | /models |  | [`maas-api/cmd/main.go:209`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L209) |
-| POST | /search |  | [`maas-api/cmd/main.go:218`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L218) |
-| GET | /subscriptions |  | [`maas-api/cmd/main.go:212`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L212) |
-| POST | /subscriptions/select |  | [`maas-api/cmd/main.go:227`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L227) |
-| * | /v1 |  | [`maas-api/cmd/main.go:185`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/cmd/main.go#L185) |
+| OPTIONS | /*path |  | [`maas-api/cmd/main.go:112`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L112) |
+| DELETE | /:id |  | [`maas-api/cmd/main.go:221`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L221) |
+| GET | /:id |  | [`maas-api/cmd/main.go:220`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L220) |
+| * | /api-keys |  | [`maas-api/cmd/main.go:216`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L216) |
+| POST | /api-keys/cleanup |  | [`maas-api/cmd/main.go:226`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L226) |
+| POST | /api-keys/validate |  | [`maas-api/cmd/main.go:225`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L225) |
+| POST | /bulk-revoke |  | [`maas-api/cmd/main.go:219`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L219) |
+| GET | /health |  | [`maas-api/cmd/main.go:179`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L179) |
+| * | /internal/v1 |  | [`maas-api/cmd/main.go:224`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L224) |
+| * | /metrics |  | [`maas-api/internal/metrics/server.go:19`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/internal/metrics/server.go#L19) |
+| GET | /model/:model-id/subscriptions |  | [`maas-api/cmd/main.go:213`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L213) |
+| GET | /models |  | [`maas-api/cmd/main.go:209`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L209) |
+| POST | /search |  | [`maas-api/cmd/main.go:218`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L218) |
+| GET | /subscriptions |  | [`maas-api/cmd/main.go:212`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L212) |
+| POST | /subscriptions/select |  | [`maas-api/cmd/main.go:227`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L227) |
+| * | /v1 |  | [`maas-api/cmd/main.go:185`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/cmd/main.go#L185) |
 
 
 ## Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| maas-api | ClusterIP | 8080/TCP (http), 9090/TCP (metrics) | [`deployment/base/maas-api/core/service.yaml`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/deployment/base/maas-api/core/service.yaml) |
-| maas-api | ClusterIP | 0/TCP, 8443/TCP (https) | [`deployment/base/maas-api/overlays/tls/service-patch.yaml`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/deployment/base/maas-api/overlays/tls/service-patch.yaml) |
-| payload-processing | ClusterIP | 9004/TCP | [`deployment/base/payload-processing/manager/service.yaml`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/deployment/base/payload-processing/manager/service.yaml) |
+| maas-api | ClusterIP | 8080/TCP (http), 9090/TCP (metrics) | [`deployment/base/maas-api/core/service.yaml`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/deployment/base/maas-api/core/service.yaml) |
+| maas-api | ClusterIP | 0/TCP, 8443/TCP (https) | [`deployment/base/maas-api/overlays/tls/service-patch.yaml`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/deployment/base/maas-api/overlays/tls/service-patch.yaml) |
+| payload-processing | ClusterIP | 9004/TCP | [`deployment/base/payload-processing/manager/service.yaml`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/deployment/base/payload-processing/manager/service.yaml) |
 
 
 ## Ingress Routing
@@ -194,20 +194,20 @@
 
 | GVK | Watch Type | Source |
 |-----|-----------|--------|
-| apps/v1/Deployment | For | [`maas-controller/pkg/controller/maas/self_deployment_controller.go:292`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/self_deployment_controller.go#L292) |
-| maas/v1alpha1/ExternalModel | For | [`maas-controller/pkg/reconciler/externalmodel/reconciler.go:317`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/reconciler/externalmodel/reconciler.go#L317) |
-| maas/v1alpha1/MaaSAuthPolicy | For | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1232`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1232) |
-| maas/v1alpha1/MaaSModelRef | For | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:392`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L392) |
-| maas/v1alpha1/MaaSSubscription | For | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:983`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maassubscription_controller.go#L983) |
-| maas/v1alpha1/Tenant | For | [`maas-controller/pkg/controller/maas/tenant_controller.go:199`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/tenant_controller.go#L199) |
-| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:996`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maassubscription_controller.go#L996) |
-| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:398`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L398) |
-| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1238`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1238) |
-| maas/v1alpha1/MaaSAuthPolicy | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:414`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L414) |
-| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:1000`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maassubscription_controller.go#L1000) |
-| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1242`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1242) |
-| maas/v1alpha1/MaaSSubscription | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:410`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L410) |
-| serving/v1alpha1/LLMInferenceService | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:403`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L403) |
+| apps/v1/Deployment | For | [`maas-controller/pkg/controller/maas/self_deployment_controller.go:292`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/self_deployment_controller.go#L292) |
+| maas/v1alpha1/ExternalModel | For | [`maas-controller/pkg/reconciler/externalmodel/reconciler.go:317`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/reconciler/externalmodel/reconciler.go#L317) |
+| maas/v1alpha1/MaaSAuthPolicy | For | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1232`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1232) |
+| maas/v1alpha1/MaaSModelRef | For | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:392`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L392) |
+| maas/v1alpha1/MaaSSubscription | For | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:983`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maassubscription_controller.go#L983) |
+| maas/v1alpha1/Tenant | For | [`maas-controller/pkg/controller/maas/tenant_controller.go:199`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/tenant_controller.go#L199) |
+| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:996`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maassubscription_controller.go#L996) |
+| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:398`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L398) |
+| apis/v1/HTTPRoute | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1238`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1238) |
+| maas/v1alpha1/MaaSAuthPolicy | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:414`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L414) |
+| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maassubscription_controller.go:1000`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maassubscription_controller.go#L1000) |
+| maas/v1alpha1/MaaSModelRef | Watches | [`maas-controller/pkg/controller/maas/maasauthpolicy_controller.go:1242`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasauthpolicy_controller.go#L1242) |
+| maas/v1alpha1/MaaSSubscription | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:410`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L410) |
+| serving/v1alpha1/LLMInferenceService | Watches | [`maas-controller/pkg/controller/maas/maasmodelref_controller.go:403`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-controller/pkg/controller/maas/maasmodelref_controller.go#L403) |
 
 
 ## Dockerfiles
@@ -240,11 +240,11 @@
 
 | Name | Type | Help | Source |
 |------|------|------|--------|
-| maas_api_http_request_duration_seconds | histogram | HTTP request latency in seconds. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/internal/metrics/prometheus.go) |
-| maas_api_http_requests_in_flight | gauge | Number of HTTP requests currently being served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/internal/metrics/prometheus.go) |
-| maas_api_http_requests_total | counter | Total number of HTTP requests served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/internal/metrics/prometheus.go) |
-| sar_cache_hits_total | counter | Total number of SAR admin check cache hits. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/internal/auth/cached_admin_checker.go) |
-| sar_cache_misses_total | counter | Total number of SAR admin check cache misses. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/6683706c84f5f1c846d444edabca9ccbc624374e/maas-api/internal/auth/cached_admin_checker.go) |
+| maas_api_http_request_duration_seconds | histogram | HTTP request latency in seconds. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/internal/metrics/prometheus.go) |
+| maas_api_http_requests_in_flight | gauge | Number of HTTP requests currently being served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/internal/metrics/prometheus.go) |
+| maas_api_http_requests_total | counter | Total number of HTTP requests served. | [`maas-api/internal/metrics/prometheus.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/internal/metrics/prometheus.go) |
+| sar_cache_hits_total | counter | Total number of SAR admin check cache hits. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/internal/auth/cached_admin_checker.go) |
+| sar_cache_misses_total | counter | Total number of SAR admin check cache misses. | [`maas-api/internal/auth/cached_admin_checker.go`](https://github.com/red-hat-data-services/models-as-a-service/blob/e54924bf1d92c7c2029a5c9f177a1463babc51cd/maas-api/internal/auth/cached_admin_checker.go) |
 
 
 ## Label Contracts

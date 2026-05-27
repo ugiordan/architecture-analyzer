@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-05-27T04:31:52Z  
-**Components**: 56  
+**Generated**: 2026-05-27T16:11:29Z  
+**Components**: 57  
 
 ## How to Find Information
 
@@ -45,6 +45,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 |-----------|---------|------|----------|------|------|
 | MLServer |  | 0 | 0 | 92 | [mlserver.md](components/mlserver.md) |
 | NeMo-Guardrails |  | 0 | 1 | 197 | [nemo-guardrails.md](components/nemo-guardrails.md) |
+| agents-operator |  | 0 | 1 | 15 | [agents-operator.md](components/agents-operator.md) |
 | ai-gateway-payload-processing |  | 2 | 0 | 13 | [ai-gateway-payload-processing.md](components/ai-gateway-payload-processing.md) |
 | ai4rag |  | 0 | 0 | 9 | [ai4rag.md](components/ai4rag.md) |
 | argo-workflows |  | 0 | 0 | 105 | [argo-workflows.md](components/argo-workflows.md) |

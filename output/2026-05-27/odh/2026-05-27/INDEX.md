@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-05-27T04:31:51Z  
-**Components**: 34  
+**Generated**: 2026-05-27T16:11:29Z  
+**Components**: 35  
 
 ## How to Find Information
 
@@ -43,6 +43,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 
 | Component | Aliases | CRDs | Services | Deps | File |
 |-----------|---------|------|----------|------|------|
+| agents-operator |  | 0 | 1 | 15 | [agents-operator.md](components/agents-operator.md) |
 | ai4rag |  | 0 | 0 | 9 | [ai4rag.md](components/ai4rag.md) |
 | argo-workflows |  | 0 | 0 | 105 | [argo-workflows.md](components/argo-workflows.md) |
 | batch-gateway |  | 0 | 0 | 29 | [batch-gateway.md](components/batch-gateway.md) |
@@ -60,7 +61,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | kubeflow |  | 0 | 3 | 34 | [kubeflow.md](components/kubeflow.md) |
 | kuberay |  | 0 | 2 | 123 | [kuberay.md](components/kuberay.md) |
 | kueue |  | 2 | 2 | 43 | [kueue.md](components/kueue.md) |
-| llama-stack |  | 0 | 1 | 123 | [llama-stack.md](components/llama-stack.md) |
+| llama-stack |  | 0 | 1 | 122 | [llama-stack.md](components/llama-stack.md) |
 | llama-stack-k8s-operator |  | 2 | 2 | 16 | [llama-stack-k8s-operator.md](components/llama-stack-k8s-operator.md) |
 | llama-stack-provider-trustyai-garak |  | 0 | 0 | 205 | [llama-stack-provider-trustyai-garak.md](components/llama-stack-provider-trustyai-garak.md) |
 | llm-d |  | 0 | 0 | 0 | [llm-d.md](components/llm-d.md) |

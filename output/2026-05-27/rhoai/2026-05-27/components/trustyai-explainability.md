@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/trustyai-explainability |
 | Commit | ee0b2b22cb42f0f60431192315488f3b195137d9 |
-| Extracted | 2026-05-27T04:25:00Z |
+| Extracted | 2026-05-27T16:03:57Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

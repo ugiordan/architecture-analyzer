@@ -8,10 +8,10 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 56 |
+| Components | 57 |
 | CRDs | 56 |
-| Services | 48 |
-| Secrets | 24 |
+| Services | 49 |
+| Secrets | 25 |
 | Cluster Roles | 61 |
 | Cross-Component Dependencies | 13 |
 
@@ -21,6 +21,7 @@
 |-----------|
 | MLServer |
 | NeMo-Guardrails |
+| agents-operator |
 | ai-gateway-payload-processing |
 | ai4rag |
 | argo-workflows |
@@ -142,6 +143,7 @@
 
 | Secret | Owner | Type |
 |--------|-------|------|
+| webhook-server-cert | agents-operator | Opaque |
 | kfp-api-webhook-cert | data-science-pipelines | Opaque |
 | mlpipeline-minio-artifact | data-science-pipelines | Opaque |
 | kserve-webhook-server-cert | kserve | Opaque |
@@ -239,6 +241,7 @@
 |-------|---------|------|-------|
 | gateway-api-inference-extension | uvicorn-server | python-source | 8000/TCP |
 | NeMo-Guardrails | env-port-default | python-source | 1235/TCP |
+| agents-operator | webhook-service | ClusterIP | 443/TCP |
 | data-science-pipelines-operator | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |
 | data-science-pipelines-operator | ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP |
 | data-science-pipelines-operator | mariadb-template-value | ClusterIP | 3306/TCP |

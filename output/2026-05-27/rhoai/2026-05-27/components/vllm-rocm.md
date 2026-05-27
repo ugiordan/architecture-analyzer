@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/vllm-rocm |
 | Commit | 3244ce3588176c8b9c0c6e3f4c3b59910fd70d6c |
-| Extracted | 2026-05-27T04:25:30Z |
+| Extracted | 2026-05-27T16:04:13Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

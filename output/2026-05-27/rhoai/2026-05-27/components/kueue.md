@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/kueue |
 | Commit | f82ffedba8225f26dc78f9ddaf596623fc2959f1 |
-| Extracted | 2026-05-27T04:24:34Z |
+| Extracted | 2026-05-27T16:03:31Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -29,38 +29,38 @@
 |------|------|-----------|------------|----------|------------------|----------|
 | AppWrapper-webhook | mutating |  |  |  |  |  |
 | AppWrapper-webhook | validating |  |  |  |  |  |
-| ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
+| ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
 | JobSetWebhook-webhook | mutating |  |  |  |  |  |
-| JobWebhook-webhook | mutating |  |  |  |  |  |
 | JobWebhook-webhook | validating |  |  |  |  |  |
-| MpiJobWebhook-webhook | validating |  |  |  |  |  |
+| JobWebhook-webhook | mutating |  |  |  |  |  |
 | MpiJobWebhook-webhook | mutating |  |  |  |  |  |
+| MpiJobWebhook-webhook | validating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
-| RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayClusterWebhook-webhook | validating |  |  |  |  |  |
-| RayJobWebhook-webhook | validating |  |  |  |  |  |
+| RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | mutating |  |  |  |  |  |
+| RayJobWebhook-webhook | validating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
-| Webhook-webhook | validating |  |  |  |  |  |
-| WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | mutating |  |  |  |  |  |
+| WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | mdeployment.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/f82ffedba8225f26dc78f9ddaf596623fc2959f1/config/rhoai/mutating_webhook_patch.yaml) |
 | mjob.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/f82ffedba8225f26dc78f9ddaf596623fc2959f1/config/rhoai/mutating_webhook_patch.yaml) |
 | mpod.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/f82ffedba8225f26dc78f9ddaf596623fc2959f1/config/rhoai/mutating_webhook_patch.yaml) |
@@ -95,13 +95,6 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| spec.template.annotations | set | suspend &amp;&amp; deployment.Spec.Template.Annotations == nil |
-| spec.template.labels | set | suspend &amp;&amp; deployment.Spec.Template.Labels == nil |
-
-### Webhook-webhook Behavior
-
-| Field | Operation | Condition |
-|-------|-----------|----------|
 | spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
 | spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
 
@@ -111,6 +104,13 @@
 |-------|-----------|----------|
 | labels | set | priorityClass != "" &amp;&amp; podTemplateSpec.Labels == nil |
 | annotations | set | podTemplateSpec.Annotations == nil |
+
+### Webhook-webhook Behavior
+
+| Field | Operation | Condition |
+|-------|-----------|----------|
+| spec.template.annotations | set | suspend &amp;&amp; deployment.Spec.Template.Annotations == nil |
+| spec.template.labels | set | suspend &amp;&amp; deployment.Spec.Template.Labels == nil |
 
 
 ## HTTP Endpoints

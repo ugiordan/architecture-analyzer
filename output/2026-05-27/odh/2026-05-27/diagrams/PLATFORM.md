@@ -8,10 +8,10 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 34 |
+| Components | 35 |
 | CRDs | 80 |
-| Services | 49 |
-| Secrets | 27 |
+| Services | 50 |
+| Secrets | 28 |
 | Cluster Roles | 63 |
 | Cross-Component Dependencies | 19 |
 
@@ -19,6 +19,7 @@
 
 | Component |
 |-----------|
+| agents-operator |
 | ai4rag |
 | argo-workflows |
 | batch-gateway |
@@ -127,6 +128,7 @@
 | kserve-webhook-server-cert | kserve | Opaque |
 | llmisvc-webhook-server-cert | kserve | Opaque |
 | localmodel-webhook-server-cert | kserve | Opaque |
+| webhook-server-cert | agents-operator | Opaque |
 | kfp-api-webhook-cert | data-science-pipelines | Opaque |
 | mlpipeline-minio-artifact | data-science-pipelines | Opaque |
 | kserve-webhook-server-cert | kserve-autogluon-server | Opaque |
@@ -232,6 +234,7 @@
 | kserve | llmisvc-webhook-server-service | ClusterIP | 443/TCP |
 | kserve | localmodel-webhook-server-service | ClusterIP | 443/TCP |
 | gateway-api-inference-extension | uvicorn-server | python-source | 8000/TCP |
+| agents-operator | webhook-service | ClusterIP | 443/TCP |
 | data-science-pipelines-operator | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |
 | data-science-pipelines-operator | ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP |
 | data-science-pipelines-operator | mariadb-template-value | ClusterIP | 3306/TCP |
