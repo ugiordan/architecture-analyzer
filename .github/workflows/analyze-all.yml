@@ -279,6 +279,8 @@ jobs:
         run: python3 scripts/generate-nav.py site/docs site/mkdocs.yml
 
       - name: Commit generated platform docs
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -287,13 +289,26 @@ jobs:
           if git diff --cached --quiet; then
             echo "No platform doc changes to commit"
           else
-            BRANCH="chore/update-generated-platform-docs-$(date +%Y%m%d)"
-            git checkout -b "$BRANCH"
+            BRANCH="chore/update-generated-platform-docs"
+            # Reuse existing branch or create new one
+            if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
+              git fetch origin "$BRANCH"
+              git checkout -B "$BRANCH" origin/"$BRANCH"
+              git merge --no-edit origin/main || git checkout --theirs . && git add .
+              # Re-stage the generated changes
+              git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/ .last-scan-shas.json
+              git reset -- .github/
+            else
+              git checkout -b "$BRANCH"
+            fi
             git commit -m "chore: update generated platform docs [skip ci]"
-            git push origin "$BRANCH"
-            gh pr create --title "chore: update generated platform docs" \
-              --body "Auto-generated platform documentation update." \
-              --base main --head "$BRANCH" || true
+            git push origin "$BRANCH" --force
+            # Create PR only if one doesn't already exist
+            if ! gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
+              gh pr create --title "chore: update generated platform docs" \
+                --body "Auto-generated platform documentation update. This PR is force-pushed on each CI run." \
+                --base main --head "$BRANCH" || true
+            fi
           fi
 
       - name: Install MkDocs dependencies
