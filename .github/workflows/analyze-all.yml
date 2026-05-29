@@ -290,20 +290,9 @@ jobs:
             echo "No platform doc changes to commit"
           else
             BRANCH="chore/update-generated-platform-docs"
-            # Reuse existing branch or create new one
-            if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
-              git fetch origin "$BRANCH"
-              git checkout -B "$BRANCH" origin/"$BRANCH"
-              git merge --no-edit origin/main || git checkout --theirs . && git add .
-              # Re-stage the generated changes
-              git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/ .last-scan-shas.json
-              git reset -- .github/
-            else
-              git checkout -b "$BRANCH"
-            fi
+            git checkout -b "$BRANCH"
             git commit -m "chore: update generated platform docs [skip ci]"
             git push origin "$BRANCH" --force
-            # Create PR only if one doesn't already exist
             if ! gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
               gh pr create --title "chore: update generated platform docs" \
                 --body "Auto-generated platform documentation update. This PR is force-pushed on each CI run." \
