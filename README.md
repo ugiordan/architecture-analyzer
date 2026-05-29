@@ -4,6 +4,12 @@ A static analysis tool that extracts architecture data from Kubernetes/OpenShift
 
 **[Documentation](https://ugiordan.github.io/architecture-analyzer)** | **[GitHub](https://github.com/ugiordan/architecture-analyzer)**
 
+## Demo
+
+<p align="center">
+  <img src="site/docs/images/demo.gif" alt="Architecture Analyzer Demo" width="800">
+</p>
+
 ## Features
 
 - **26 architecture extractors** covering CRDs, RBAC, deployments, services, network policies, controller watches, dependencies, secrets, Helm charts, Dockerfiles, webhooks, configmaps, HTTP endpoints, ingress, external connections (Go + Python), feature gates, cache architecture, operator config constants, reconciliation sequences, Prometheus metrics, status conditions, platform detection, Go CRD extraction, webhook behavioral analysis, and programmatic resource operations

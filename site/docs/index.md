@@ -9,13 +9,19 @@ hide:
   <h1 style="margin: 0; font-size: 2.4em;">Architecture Analyzer</h1>
   <p style="font-size: 1.3em; color: #666; margin-top: 8px;">
     Static analysis for Kubernetes/OpenShift architecture.<br>
-    25 extractors. 7 renderers. Code property graph with security queries.
+    26 extractors. 4 domains. Code property graph with security queries.
   </p>
   <p style="margin-top: 20px;">
     <a href="getting-started/installation/" class="md-button md-button--primary">Get Started</a>
     <a href="https://github.com/ugiordan/architecture-analyzer" class="md-button">GitHub</a>
   </p>
 </div>
+
+## Demo
+
+<p align="center">
+  <img src="images/demo.gif" alt="Architecture Analyzer Demo" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+</p>
 
 ## What Is This?
 
