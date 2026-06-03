@@ -1,0 +1,206 @@
+graph LR
+    %% Platform network topology
+
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
+    classDef service fill:#2ecc71,stroke:#27ae60,color:#fff
+
+    gateway_api_inference_extension["gateway-api-inference-extension"]
+    class gateway_api_inference_extension component
+    gateway_api_inference_extension --> svc_1["uvicorn-server\npython-source: 8000/TCP"]
+    class svc_1 service
+    NeMo_Guardrails["NeMo-Guardrails"]
+    class NeMo_Guardrails component
+    NeMo_Guardrails --> svc_2["env-port-default\npython-source: 1235/TCP"]
+    class svc_2 service
+    agents_operator["agents-operator"]
+    class agents_operator component
+    agents_operator --> svc_3["webhook-service\nClusterIP: 443/TCP"]
+    class svc_3 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_4["data-science-pipelines-operator-service\nClusterIP: 8080/TCP"]
+    class svc_4 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_5["ds-pipeline-workflow-controller-metrics-template-value\nClusterIP: 9090/TCP"]
+    class svc_5 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_6["mariadb-template-value\nClusterIP: 3306/TCP"]
+    class svc_6 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_7["minio-service\nClusterIP: 9000/TCP"]
+    class svc_7 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_8["minio-template-value\nClusterIP: 9000/TCP, 80/TCP"]
+    class svc_8 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_9["ml-pipeline\nClusterIP: 8443/TCP, 8888/TCP, 8887/TCP"]
+    class svc_9 service
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator --> svc_10["template-value\nClusterIP: 8443/TCP, 8888/TCP, 8887/TCP"]
+    class svc_10 service
+    data_science_pipelines["data-science-pipelines"]
+    class data_science_pipelines component
+    data_science_pipelines --> svc_11["kubeflow-pipelines-profile-controller\nClusterIP: 80/TCP"]
+    class svc_11 service
+    feast["feast"]
+    class feast component
+    feast --> svc_12["uvicorn-server\npython-source: 6566/TCP"]
+    class svc_12 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_13["cli-port-default\npython-source: 80/TCP"]
+    class svc_13 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_14["kserve-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    class svc_14 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_15["kserve-controller-manager-service\nClusterIP: 8443/TCP"]
+    class svc_15 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_16["kserve-webhook-server-service\nClusterIP: 443/TCP"]
+    class svc_16 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_17["llmisvc-controller-manager-service\nClusterIP: 8443/TCP"]
+    class svc_17 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_18["llmisvc-webhook-server-service\nClusterIP: 443/TCP"]
+    class svc_18 service
+    kserve["kserve"]
+    class kserve component
+    kserve --> svc_19["localmodel-webhook-server-service\nClusterIP: 443/TCP"]
+    class svc_19 service
+    kubeflow["kubeflow"]
+    class kubeflow component
+    kubeflow --> svc_20["service\nClusterIP: 443/TCP"]
+    class svc_20 service
+    kubeflow["kubeflow"]
+    class kubeflow component
+    kubeflow --> svc_21["webhook-service\nClusterIP: 443/TCP"]
+    class svc_21 service
+    kuberay["kuberay"]
+    class kuberay component
+    kuberay --> svc_22["kuberay-operator\nClusterIP: 8080/TCP"]
+    class svc_22 service
+    kuberay["kuberay"]
+    class kuberay component
+    kuberay --> svc_23["webhook-service\nClusterIP: 443/TCP"]
+    class svc_23 service
+    kueue["kueue"]
+    class kueue component
+    kueue --> svc_24["visibility-server\nClusterIP: 443/TCP"]
+    class svc_24 service
+    kueue["kueue"]
+    class kueue component
+    kueue --> svc_25["webhook-service\nClusterIP: 443/TCP"]
+    class svc_25 service
+    llama_stack_k8s_operator["llama-stack-k8s-operator"]
+    class llama_stack_k8s_operator component
+    llama_stack_k8s_operator --> svc_26["ogx-k8s-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    class svc_26 service
+    llama_stack_k8s_operator["llama-stack-k8s-operator"]
+    class llama_stack_k8s_operator component
+    llama_stack_k8s_operator --> svc_27["ogx-k8s-operator-webhook-service\nClusterIP: 443/TCP"]
+    class svc_27 service
+    llm_d_inference_scheduler["llm-d-inference-scheduler"]
+    class llm_d_inference_scheduler component
+    llm_d_inference_scheduler --> svc_28["${EPP_NAME}\nClusterIP: 9002/TCP, 5557/TCP, 9090/TCP"]
+    class svc_28 service
+    llm_d_inference_scheduler["llm-d-inference-scheduler"]
+    class llm_d_inference_scheduler component
+    llm_d_inference_scheduler --> svc_29["inference-gateway-istio-nodeport\nNodePort: 15021/TCP, 80/TCP"]
+    class svc_29 service
+    llm_d_inference_scheduler["llm-d-inference-scheduler"]
+    class llm_d_inference_scheduler component
+    llm_d_inference_scheduler --> svc_30["istiod-llm-d-gateway\nClusterIP: 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP"]
+    class svc_30 service
+    llm_d_inference_scheduler["llm-d-inference-scheduler"]
+    class llm_d_inference_scheduler component
+    llm_d_inference_scheduler --> svc_31["service\nClusterIP: 8080/TCP"]
+    class svc_31 service
+    llm_d_routing_sidecar["llm-d-routing-sidecar"]
+    class llm_d_routing_sidecar component
+    llm_d_routing_sidecar --> svc_32["service\nClusterIP: 8080/TCP"]
+    class svc_32 service
+    mlflow_operator["mlflow-operator"]
+    class mlflow_operator component
+    mlflow_operator --> svc_33["minio-service\nClusterIP: 9000/TCP"]
+    class svc_33 service
+    mlflow_operator["mlflow-operator"]
+    class mlflow_operator component
+    mlflow_operator --> svc_34["mlflow-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    class svc_34 service
+    mlflow_operator["mlflow-operator"]
+    class mlflow_operator component
+    mlflow_operator --> svc_35["postgres-service\nClusterIP: 5432/TCP"]
+    class svc_35 service
+    model_registry["model-registry"]
+    class model_registry component
+    model_registry --> svc_36["model-catalog\nClusterIP: 8080/TCP"]
+    class svc_36 service
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_37["etcd\nClusterIP: 2379/TCP"]
+    class svc_37 service
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_38["modelmesh-controller\nClusterIP: 8080/TCP"]
+    class svc_38 service
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_39["modelmesh-webhook-server-service\nClusterIP: 9443/TCP"]
+    class svc_39 service
+    models_as_a_service["models-as-a-service"]
+    class models_as_a_service component
+    models_as_a_service --> svc_40["maas-api\nClusterIP: 8080/TCP, 9090/TCP"]
+    class svc_40 service
+    models_as_a_service["models-as-a-service"]
+    class models_as_a_service component
+    models_as_a_service --> svc_41["payload-processing\nClusterIP: 9004/TCP"]
+    class svc_41 service
+    notebooks_downstream["notebooks-downstream"]
+    class notebooks_downstream component
+    notebooks_downstream --> svc_42["notebook\nClusterIP: 8888/TCP"]
+    class svc_42 service
+    notebooks["notebooks"]
+    class notebooks component
+    notebooks --> svc_43["notebook\nClusterIP: 8888/TCP"]
+    class svc_43 service
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator --> svc_44["spark-operator-webhook-svc\nClusterIP: 443/TCP"]
+    class svc_44 service
+    text_generation_inference["text-generation-inference"]
+    class text_generation_inference component
+    text_generation_inference --> svc_45["inference-server\nClusterIP: 8033/TCP"]
+    class svc_45 service
+    vllm_cpu["vllm-cpu"]
+    class vllm_cpu component
+    vllm_cpu --> svc_46["cli-port-default\npython-source: 8000/TCP"]
+    class svc_46 service
+    vllm_cpu["vllm-cpu"]
+    class vllm_cpu component
+    vllm_cpu --> svc_47["disagg_proxy_p2p_nccl_xpyd-server\npython-source: 10001/TCP"]
+    class svc_47 service
+    vllm_cpu["vllm-cpu"]
+    class vllm_cpu component
+    vllm_cpu --> svc_48["moriio_toy_proxy_server-server\npython-source: 10001/TCP"]
+    class svc_48 service
+    vllm_gaudi["vllm-gaudi"]
+    class vllm_gaudi component
+    vllm_gaudi --> svc_49["cli-port-default\npython-source: 8000/TCP"]
+    class svc_49 service
+    workload_variant_autoscaler["workload-variant-autoscaler"]
+    class workload_variant_autoscaler component
+    workload_variant_autoscaler --> svc_50["controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    class svc_50 service
