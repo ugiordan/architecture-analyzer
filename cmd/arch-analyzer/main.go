@@ -111,6 +111,8 @@ func main() {
 		err = cmdGraph(args)
 	case "diff":
 		err = cmdDiff(args)
+	case "flow":
+		err = cmdFlow(args)
 	case "ingest":
 		err = cmdIngest(args)
 	case "domains":
@@ -166,6 +168,7 @@ Architecture commands:
   analyze <repo-path>                  Extract + render in one step
   aggregate <results-dir>              Aggregate multiple component JSONs into platform view
   docs <json-file>                     Generate browsable documentation site from architecture JSON
+  flow <json-file>                     Generate interactive flow diagram (flowlens HTML)
 
 Contract validation commands:
   extract-schema <repo-path>           Extract CRD JSON schemas from a repository
