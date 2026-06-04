@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/models-as-a-service |
 | Commit | 81628d897c3bcce0aaeb097c6c1875d7872f9605 |
-| Extracted | 2026-06-04T04:43:38Z |
+| Extracted | 2026-06-04T07:59:33Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

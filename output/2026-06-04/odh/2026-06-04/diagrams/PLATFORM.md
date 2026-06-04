@@ -8,12 +8,12 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 35 |
-| CRDs | 81 |
-| Services | 54 |
+| Components | 34 |
+| CRDs | 77 |
+| Services | 53 |
 | Secrets | 27 |
 | Cluster Roles | 56 |
-| Cross-Component Dependencies | 20 |
+| Cross-Component Dependencies | 17 |
 
 ## Component Registry
 
@@ -28,7 +28,6 @@
 | distributed-workloads |
 | eval-hub |
 | fms-guardrails-orchestrator |
-| gateway-api-inference-extension |
 | guardrails-detectors |
 | kserve |
 | kserve-autogluon-server |
@@ -66,26 +65,24 @@
 | data-science-pipelines-operator | Pipeline |
 | data-science-pipelines-operator | PipelineVersion |
 | data-science-pipelines-operator | ScheduledWorkflow |
-| gateway-api-inference-extension | InferenceModelRewrite |
-| gateway-api-inference-extension | InferenceObjective |
-| gateway-api-inference-extension | InferencePool |
-| gateway-api-inference-extension | InferencePoolImport |
-| kserve | ClusterServingRuntime |
-| kserve | ClusterStorageContainer |
-| kserve | InferenceGraph |
-| kserve | InferenceService |
-| kserve | LLMInferenceService |
-| kserve | LLMInferenceServiceConfig |
-| kserve | LocalModelCache |
-| kserve | LocalModelNamespaceCache |
-| kserve | LocalModelNode |
-| kserve | LocalModelNodeGroup |
-| kserve | ServingRuntime |
-| kserve | TrainedModel |
+| kserve-autogluon-server | ClusterServingRuntime |
+| kserve-autogluon-server | ClusterStorageContainer |
+| kserve-autogluon-server | InferenceGraph |
+| kserve-autogluon-server | InferenceService |
+| kserve-autogluon-server | LLMInferenceService |
+| kserve-autogluon-server | LLMInferenceServiceConfig |
+| kserve-autogluon-server | LocalModelCache |
+| kserve-autogluon-server | LocalModelNamespaceCache |
+| kserve-autogluon-server | LocalModelNode |
+| kserve-autogluon-server | LocalModelNodeGroup |
+| kserve-autogluon-server | ServingRuntime |
+| kserve-autogluon-server | TrainedModel |
 | kueue | ClusterQueue |
 | kueue | LocalQueue |
 | llama-stack-k8s-operator | LlamaStackDistribution |
 | llama-stack-k8s-operator | OGXServer |
+| llm-d-inference-scheduler | InferenceModelRewrite |
+| llm-d-inference-scheduler | InferenceObjective |
 | mlflow-operator | MLflow |
 | mlflow-operator | MLflowConfig |
 | modelmesh-serving | Predictor |
@@ -101,41 +98,39 @@
 | From | To | Type |
 |------|----|------|
 | data-science-pipelines-operator | mlflow-operator | go-module |
-| kserve-autogluon-server | kserve | watches-crd:InferenceGraph |
-| kserve-autogluon-server | kserve | watches-crd:LocalModelCache |
-| kserve-autogluon-server | kserve | watches-crd:LocalModelNamespaceCache |
-| kserve-autogluon-server | kserve | watches-crd:LocalModelNode |
-| kserve-autogluon-server | kserve | watches-crd:TrainedModel |
-| kserve-autogluon-server | kserve | watches-crd:LLMInferenceService |
-| kserve-autogluon-server | kserve | watches-crd:InferenceService |
+| kserve | odh-platform-utilities | go-module |
+| kserve | kserve-autogluon-server | watches-crd:InferenceGraph |
+| kserve | kserve-autogluon-server | watches-crd:LocalModelCache |
+| kserve | kserve-autogluon-server | watches-crd:LocalModelNamespaceCache |
+| kserve | kserve-autogluon-server | watches-crd:LocalModelNode |
+| kserve | kserve-autogluon-server | watches-crd:TrainedModel |
+| kserve | kserve-autogluon-server | watches-crd:LLMInferenceService |
+| kserve | kserve-autogluon-server | watches-crd:InferenceService |
 | kubeflow | data-science-pipelines-operator | go-module |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferencePool |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceObjective |
 | mlflow-operator | mlflow-operator | go-module |
-| model-registry | kserve | watches-crd:InferenceService |
-| modelmesh-serving | kserve | watches-crd:ServingRuntime |
+| model-registry | kserve-autogluon-server | watches-crd:InferenceService |
+| modelmesh-serving | kserve-autogluon-server | watches-crd:ServingRuntime |
 | models-as-a-service | kserve | go-module |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool |
-| kserve | kserve-autogluon-server | webhook-ref |
-| modelmesh-serving | kuberay | webhook-ref |
-| spark-operator | kuberay | webhook-ref |
+| kserve-autogluon-server | kserve | webhook-ref |
+| modelmesh-serving | kueue | webhook-ref |
+| spark-operator | kueue | webhook-ref |
 
 ## Secrets Referenced
 
 | Secret | Owner | Type |
 |--------|-------|------|
-| kserve-webhook-server-cert | kserve | Opaque |
-| llmisvc-webhook-server-cert | kserve | Opaque |
-| localmodel-webhook-server-cert | kserve | Opaque |
 | webhook-server-cert | agents-operator | Opaque |
 | kfp-api-webhook-cert | data-science-pipelines | Opaque |
 | mlpipeline-minio-artifact | data-science-pipelines | Opaque |
 | kserve-webhook-server-cert | kserve-autogluon-server | Opaque |
 | llmisvc-webhook-server-cert | kserve-autogluon-server | Opaque |
 | localmodel-webhook-server-cert | kserve-autogluon-server | Opaque |
+| kserve-webhook-server-cert | kserve | Opaque |
+| llmisvc-webhook-server-cert | kserve | Opaque |
+| localmodel-webhook-server-cert | kserve | Opaque |
 | odh-notebook-controller-webhook-cert | kubeflow | kubernetes.io/tls |
 | webhook-server-cert | kubeflow | Opaque |
+| webhook-server-cert | kuberay | Opaque |
 | webhook-server-cert | kueue | Opaque |
 | ogx-k8s-operator-webhook-cert | llama-stack-k8s-operator | Opaque |
 | cacerts | llm-d-inference-scheduler | Opaque |
@@ -151,14 +146,11 @@
 | webhook-server-cert | spark-operator | Opaque |
 | kubeflow-trainer-webhook-cert | trainer | Opaque |
 | epp-metrics-token | workload-variant-autoscaler | Opaque |
-| webhook-server-cert | kuberay | Opaque |
 
 ## RBAC Surface
 
 | Owner | Role | Resource Count |
 |-------|------|----------------|
-| kserve | kserve-manager-role | 42 |
-| kserve | kserve-proxy-role | 2 |
 | argo-workflows | argo-aggregate-to-admin | 14 |
 | argo-workflows | argo-aggregate-to-edit | 12 |
 | argo-workflows | argo-aggregate-to-view | 12 |
@@ -183,6 +175,8 @@
 | data-science-pipelines | ml-pipeline-viewer-controller-role | 4 |
 | kserve-autogluon-server | kserve-manager-role | 42 |
 | kserve-autogluon-server | kserve-proxy-role | 2 |
+| kserve | kserve-manager-role | 45 |
+| kserve | kserve-proxy-role | 2 |
 | llama-stack-k8s-operator | manager-role | 18 |
 | llama-stack-k8s-operator | metrics-reader | 0 |
 | llama-stack-k8s-operator | ogxserver-editor-role | 2 |
@@ -218,14 +212,6 @@
 
 | Owner | Service | Type | Ports |
 |-------|---------|------|-------|
-| kserve | cli-port-default | python-source | 80/TCP |
-| kserve | kserve-controller-manager-metrics-service | ClusterIP | 8443/TCP |
-| kserve | kserve-controller-manager-service | ClusterIP | 8443/TCP |
-| kserve | kserve-webhook-server-service | ClusterIP | 443/TCP |
-| kserve | llmisvc-controller-manager-service | ClusterIP | 8443/TCP |
-| kserve | llmisvc-webhook-server-service | ClusterIP | 443/TCP |
-| kserve | localmodel-webhook-server-service | ClusterIP | 443/TCP |
-| gateway-api-inference-extension | uvicorn-server | python-source | 8000/TCP |
 | agents-operator | webhook-service | ClusterIP | 443/TCP |
 | data-science-pipelines-operator | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |
 | data-science-pipelines-operator | ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP |
@@ -242,8 +228,17 @@
 | kserve-autogluon-server | llmisvc-controller-manager-service | ClusterIP | 8443/TCP |
 | kserve-autogluon-server | llmisvc-webhook-server-service | ClusterIP | 443/TCP |
 | kserve-autogluon-server | localmodel-webhook-server-service | ClusterIP | 443/TCP |
+| kserve | cli-port-default | python-source | 80/TCP |
+| kserve | kserve-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| kserve | kserve-controller-manager-service | ClusterIP | 8443/TCP |
+| kserve | kserve-webhook-server-service | ClusterIP | 443/TCP |
+| kserve | llmisvc-controller-manager-service | ClusterIP | 8443/TCP |
+| kserve | llmisvc-webhook-server-service | ClusterIP | 443/TCP |
+| kserve | localmodel-webhook-server-service | ClusterIP | 443/TCP |
 | kubeflow | service | ClusterIP | 443/TCP |
 | kubeflow | webhook-service | ClusterIP | 443/TCP |
+| kuberay | kuberay-operator | ClusterIP | 8080/TCP |
+| kuberay | webhook-service | ClusterIP | 443/TCP |
 | kueue | visibility-server | ClusterIP | 443/TCP |
 | kueue | webhook-service | ClusterIP | 443/TCP |
 | llama-stack-k8s-operator | ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
@@ -270,6 +265,4 @@
 | notebooks | notebook | ClusterIP | 8888/TCP |
 | spark-operator | spark-operator-webhook-svc | ClusterIP | 443/TCP |
 | workload-variant-autoscaler | controller-manager-metrics-service | ClusterIP | 8443/TCP |
-| kuberay | kuberay-operator | ClusterIP | 8080/TCP |
-| kuberay | webhook-service | ClusterIP | 443/TCP |
 

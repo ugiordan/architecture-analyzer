@@ -7,8 +7,6 @@ graph LR
 
     ai4rag["ai4rag"]
     class ai4rag component
-    gateway_api_inference_extension["gateway-api-inference-extension"]
-    class gateway_api_inference_extension component
     llm_d["llm-d"]
     class llm_d component
     MLServer["MLServer"]
@@ -121,15 +119,11 @@ graph LR
     class workload_variant_autoscaler component
 
     kubeflow -.->|"go-module"| data_science_pipelines_operator
-    llm_d_inference_scheduler -->|"watches InferencePool"| gateway_api_inference_extension
-    llm_d_inference_scheduler -->|"watches InferenceModelRewrite"| gateway_api_inference_extension
-    llm_d_inference_scheduler -->|"watches InferenceObjective"| gateway_api_inference_extension
     mlflow_operator -.->|"go-module"| mlflow_operator
     model_registry -->|"watches InferenceService"| kserve
     modelmesh_serving -->|"watches ServingRuntime"| kserve
     models_as_a_service -.->|"go-module"| kserve
     models_as_a_service -->|"watches ExternalModel"| ai_gateway_payload_processing
     odh_cli -.->|"go-module"| opendatahub_operator
-    workload_variant_autoscaler -->|"watches InferencePool"| gateway_api_inference_extension
     modelmesh_serving -.->|"webhook-ref"| kueue
     spark_operator -.->|"webhook-ref"| kueue

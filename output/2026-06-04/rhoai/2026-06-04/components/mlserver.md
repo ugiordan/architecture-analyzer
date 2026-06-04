@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/MLServer |
 | Commit | 8a1a92adb254a5935b9e5e35cd0446c953fd754b |
-| Extracted | 2026-06-04T04:48:54Z |
+| Extracted | 2026-06-04T08:04:33Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

@@ -8,12 +8,12 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 57 |
-| CRDs | 57 |
-| Services | 53 |
+| Components | 56 |
+| CRDs | 53 |
+| Services | 52 |
 | Secrets | 24 |
 | Cluster Roles | 54 |
-| Cross-Component Dependencies | 13 |
+| Cross-Component Dependencies | 9 |
 
 ## Component Registry
 
@@ -36,7 +36,6 @@
 | feast |
 | fms-guardrails-orchestrator |
 | fms-hf-tuning |
-| gateway-api-inference-extension |
 | guardrails-regex-detector |
 | kserve |
 | kube-auth-proxy |
@@ -90,10 +89,6 @@
 | data-science-pipelines-operator | Pipeline |
 | data-science-pipelines-operator | PipelineVersion |
 | data-science-pipelines-operator | ScheduledWorkflow |
-| gateway-api-inference-extension | InferenceModelRewrite |
-| gateway-api-inference-extension | InferenceObjective |
-| gateway-api-inference-extension | InferencePool |
-| gateway-api-inference-extension | InferencePoolImport |
 | kserve | ClusterServingRuntime |
 | kserve | ClusterStorageContainer |
 | kserve | InferenceGraph |
@@ -110,6 +105,8 @@
 | kueue | LocalQueue |
 | llama-stack-k8s-operator | LlamaStackDistribution |
 | llama-stack-k8s-operator | OGXServer |
+| llm-d-inference-scheduler | InferenceModelRewrite |
+| llm-d-inference-scheduler | InferenceObjective |
 | mlflow-operator | MLflow |
 | mlflow-operator | MLflowConfig |
 | modelmesh-serving | Predictor |
@@ -125,16 +122,12 @@
 | From | To | Type |
 |------|----|------|
 | kubeflow | data-science-pipelines-operator | go-module |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferencePool |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceObjective |
 | mlflow-operator | mlflow-operator | go-module |
 | model-registry | kserve | watches-crd:InferenceService |
 | modelmesh-serving | kserve | watches-crd:ServingRuntime |
 | models-as-a-service | kserve | go-module |
 | models-as-a-service | ai-gateway-payload-processing | watches-crd:ExternalModel |
 | odh-cli | opendatahub-operator | go-module |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool |
 | modelmesh-serving | kueue | webhook-ref |
 | spark-operator | kueue | webhook-ref |
 
@@ -230,7 +223,6 @@
 
 | Owner | Service | Type | Ports |
 |-------|---------|------|-------|
-| gateway-api-inference-extension | uvicorn-server | python-source | 8000/TCP |
 | NeMo-Guardrails | env-port-default | python-source | 1235/TCP |
 | agents-operator | webhook-service | ClusterIP | 443/TCP |
 | data-science-pipelines-operator | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/mlflow-operator |
 | Commit | 00a212e9865caff41978e51c5a1223552e87a201 |
-| Extracted | 2026-06-04T04:45:18Z |
+| Extracted | 2026-06-04T08:01:13Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

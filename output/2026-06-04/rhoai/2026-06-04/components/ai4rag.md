@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | IBM/ai4rag |
 | Commit | 6d5d1b39b9365ecd85fecb4b7ab2c4fcff967708 |
-| Extracted | 2026-06-04T04:49:37Z |
+| Extracted | 2026-06-04T08:05:22Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

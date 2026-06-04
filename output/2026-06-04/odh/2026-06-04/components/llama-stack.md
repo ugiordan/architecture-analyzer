@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/llama-stack |
 | Commit | 091ff4d9eba1c69c5330d3768b69922425a0fda9 |
-| Extracted | 2026-06-04T04:47:30Z |
+| Extracted | 2026-06-04T08:03:29Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

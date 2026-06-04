@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-04T04:53:50Z  
-**Components**: 57  
+**Generated**: 2026-06-04T08:08:57Z  
+**Components**: 56  
 
 ## How to Find Information
 
@@ -60,7 +60,6 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | feast |  | 0 | 1 | 122 | [feast.md](components/feast.md) |
 | fms-guardrails-orchestrator |  | 0 | 0 | 0 | [fms-guardrails-orchestrator.md](components/fms-guardrails-orchestrator.md) |
 | fms-hf-tuning |  | 0 | 0 | 15 | [fms-hf-tuning.md](components/fms-hf-tuning.md) |
-| gateway-api-inference-extension |  | 4 | 1 | 55 | [gateway-api-inference-extension.md](components/gateway-api-inference-extension.md) |
 | guardrails-regex-detector |  | 0 | 0 | 0 | [guardrails-regex-detector.md](components/guardrails-regex-detector.md) |
 | kserve | KServe | 26 | 7 | 84 | [kserve.md](components/kserve.md) |
 | kube-auth-proxy |  | 0 | 0 | 56 | [kube-auth-proxy.md](components/kube-auth-proxy.md) |

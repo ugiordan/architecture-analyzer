@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-04T04:53:50Z  
-**Components**: 35  
+**Generated**: 2026-06-04T08:08:57Z  
+**Components**: 34  
 
 ## How to Find Information
 
@@ -52,14 +52,13 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | distributed-workloads |  | 0 | 0 | 18 | [distributed-workloads.md](components/distributed-workloads.md) |
 | eval-hub |  | 0 | 0 | 47 | [eval-hub.md](components/eval-hub.md) |
 | fms-guardrails-orchestrator |  | 0 | 0 | 0 | [fms-guardrails-orchestrator.md](components/fms-guardrails-orchestrator.md) |
-| gateway-api-inference-extension |  | 4 | 1 | 55 | [gateway-api-inference-extension.md](components/gateway-api-inference-extension.md) |
 | guardrails-detectors |  | 0 | 0 | 1 | [guardrails-detectors.md](components/guardrails-detectors.md) |
-| kserve | KServe | 26 | 7 | 82 | [kserve.md](components/kserve.md) |
+| kserve | KServe | 26 | 7 | 94 | [kserve.md](components/kserve.md) |
 | kserve-autogluon-server |  | 26 | 7 | 83 | [kserve-autogluon-server.md](components/kserve-autogluon-server.md) |
 | kube-auth-proxy |  | 0 | 0 | 56 | [kube-auth-proxy.md](components/kube-auth-proxy.md) |
 | kube-rbac-proxy |  | 0 | 0 | 14 | [kube-rbac-proxy.md](components/kube-rbac-proxy.md) |
 | kubeflow |  | 0 | 3 | 34 | [kubeflow.md](components/kubeflow.md) |
-| kuberay |  | 0 | 2 | 122 | [kuberay.md](components/kuberay.md) |
+| kuberay |  | 0 | 2 | 91 | [kuberay.md](components/kuberay.md) |
 | kueue |  | 2 | 2 | 43 | [kueue.md](components/kueue.md) |
 | llama-stack |  | 0 | 1 | 121 | [llama-stack.md](components/llama-stack.md) |
 | llama-stack-k8s-operator |  | 2 | 2 | 16 | [llama-stack-k8s-operator.md](components/llama-stack-k8s-operator.md) |

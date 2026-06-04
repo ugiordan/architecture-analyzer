@@ -7,12 +7,6 @@ graph LR
 
     ai4rag["ai4rag"]
     class ai4rag component
-    kube_rbac_proxy["kube-rbac-proxy"]
-    class kube_rbac_proxy component
-    kserve["kserve"]
-    class kserve component
-    gateway_api_inference_extension["gateway-api-inference-extension"]
-    class gateway_api_inference_extension component
     llm_d["llm-d"]
     class llm_d component
     agents_operator["agents-operator"]
@@ -35,10 +29,16 @@ graph LR
     class guardrails_detectors component
     kserve_autogluon_server["kserve-autogluon-server"]
     class kserve_autogluon_server component
+    kserve["kserve"]
+    class kserve component
     kube_auth_proxy["kube-auth-proxy"]
     class kube_auth_proxy component
+    kube_rbac_proxy["kube-rbac-proxy"]
+    class kube_rbac_proxy component
     kubeflow["kubeflow"]
     class kubeflow component
+    kuberay["kuberay"]
+    class kuberay component
     kueue["kueue"]
     class kueue component
     llama_stack_k8s_operator["llama-stack-k8s-operator"]
@@ -73,26 +73,21 @@ graph LR
     class trainer component
     workload_variant_autoscaler["workload-variant-autoscaler"]
     class workload_variant_autoscaler component
-    kuberay["kuberay"]
-    class kuberay component
 
     data_science_pipelines_operator -.->|"go-module"| mlflow_operator
-    kserve_autogluon_server -->|"watches InferenceGraph"| kserve
-    kserve_autogluon_server -->|"watches LocalModelCache"| kserve
-    kserve_autogluon_server -->|"watches LocalModelNamespaceCache"| kserve
-    kserve_autogluon_server -->|"watches LocalModelNode"| kserve
-    kserve_autogluon_server -->|"watches TrainedModel"| kserve
-    kserve_autogluon_server -->|"watches LLMInferenceService"| kserve
-    kserve_autogluon_server -->|"watches InferenceService"| kserve
+    kserve -.->|"go-module"| odh_platform_utilities
+    kserve -->|"watches InferenceGraph"| kserve_autogluon_server
+    kserve -->|"watches LocalModelCache"| kserve_autogluon_server
+    kserve -->|"watches LocalModelNamespaceCache"| kserve_autogluon_server
+    kserve -->|"watches LocalModelNode"| kserve_autogluon_server
+    kserve -->|"watches TrainedModel"| kserve_autogluon_server
+    kserve -->|"watches LLMInferenceService"| kserve_autogluon_server
+    kserve -->|"watches InferenceService"| kserve_autogluon_server
     kubeflow -.->|"go-module"| data_science_pipelines_operator
-    llm_d_inference_scheduler -->|"watches InferencePool"| gateway_api_inference_extension
-    llm_d_inference_scheduler -->|"watches InferenceModelRewrite"| gateway_api_inference_extension
-    llm_d_inference_scheduler -->|"watches InferenceObjective"| gateway_api_inference_extension
     mlflow_operator -.->|"go-module"| mlflow_operator
-    model_registry -->|"watches InferenceService"| kserve
-    modelmesh_serving -->|"watches ServingRuntime"| kserve
+    model_registry -->|"watches InferenceService"| kserve_autogluon_server
+    modelmesh_serving -->|"watches ServingRuntime"| kserve_autogluon_server
     models_as_a_service -.->|"go-module"| kserve
-    workload_variant_autoscaler -->|"watches InferencePool"| gateway_api_inference_extension
-    kserve -.->|"webhook-ref"| kserve_autogluon_server
-    modelmesh_serving -.->|"webhook-ref"| kuberay
-    spark_operator -.->|"webhook-ref"| kuberay
+    kserve_autogluon_server -.->|"webhook-ref"| kserve
+    modelmesh_serving -.->|"webhook-ref"| kueue
+    spark_operator -.->|"webhook-ref"| kueue

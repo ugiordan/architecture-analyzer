@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/openvino_model_server |
 | Commit | 7f59c399eb88d29920f5f0461eafbc1ec5658411 |
-| Extracted | 2026-06-04T04:49:14Z |
+| Extracted | 2026-06-04T08:04:49Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

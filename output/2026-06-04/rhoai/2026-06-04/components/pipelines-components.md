@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/pipelines-components |
 | Commit | c70a91d2f06299cfe59fee08d09e2b1e6e56028b |
-| Extracted | 2026-06-04T04:49:18Z |
+| Extracted | 2026-06-04T08:04:56Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

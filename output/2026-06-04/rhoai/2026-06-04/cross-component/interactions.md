@@ -3,7 +3,7 @@
 
 ## Summary
 
-65 interactions across 40 components.
+61 interactions across 38 components.
 
 ## All Interactions
 
@@ -29,9 +29,6 @@
 | llama-stack | model-registry | component-ref:import | python import: llama_stack.providers.utils.inference.model_registry |
 | llama-stack | vllm | component-ref:import | python import: vllm |
 | llama-stack | vllm | component-ref:provider | directory: llama_stack/providers/inline/inference/vllm |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceModelRewrite | controller watch |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceObjective | controller watch |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
 | llm-d-inference-scheduler | llm-d-kv-cache | component-ref:import | go import: github.com/llm-d/llm-d-kv-cache/pkg/kvcache |
 | llm-d-kv-cache | vllm | component-ref:adapter | file: pkg/kvevents/engineadapter/vllm_adapter.go |
 | llm-d-kv-cache | vllm | component-ref:import | python import: vllm |
@@ -73,7 +70,6 @@
 | trustyai-explainability | kserve | component-ref:provider | directory: explainability-connectors/src/main/java/org/kie/trustyai/connectors/kserve |
 | vllm-cpu | vllm | component-ref:import | python import: vllm.v1.worker.workspace |
 | vllm-gaudi | vllm | component-ref:import | python import: vllm |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool | controller watch |
 
 ## Per-Component View
 
@@ -115,10 +111,6 @@
 
 **Depends on:** trainer (component-ref:import)  
 
-### gateway-api-inference-extension
-
-**Used by:** llm-d-inference-scheduler (watches-crd:InferenceModelRewrite), llm-d-inference-scheduler (watches-crd:InferenceObjective), llm-d-inference-scheduler (watches-crd:InferencePool), workload-variant-autoscaler (watches-crd:InferencePool)  
-
 ### kserve
 
 **Depends on:** vllm (component-ref:import)  
@@ -152,7 +144,7 @@
 
 ### llm-d-inference-scheduler
 
-**Depends on:** gateway-api-inference-extension (watches-crd:InferenceModelRewrite), gateway-api-inference-extension (watches-crd:InferenceObjective), gateway-api-inference-extension (watches-crd:InferencePool), llm-d-kv-cache (component-ref:import)  
+**Depends on:** llm-d-kv-cache (component-ref:import)  
 
 ### llm-d-kv-cache
 
@@ -241,8 +233,4 @@
 ### vllm-gaudi
 
 **Depends on:** vllm (component-ref:import)  
-
-### workload-variant-autoscaler
-
-**Depends on:** gateway-api-inference-extension (watches-crd:InferencePool)  
 
