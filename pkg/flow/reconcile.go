@@ -2,6 +2,7 @@ package flow
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/renderer"
@@ -92,7 +93,7 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 			if n.Type != renderer.FlowNodeDeployment {
 				continue
 			}
-			if controllerLower != "" && strings.Contains(strings.ToLower(n.Label), controllerLower) {
+			if len(controllerLower) >= 3 && strings.Contains(strings.ToLower(n.Label), controllerLower) {
 				return n.ID, true
 			}
 		}
@@ -118,8 +119,15 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 		g.Edges = append(g.Edges, e)
 	}
 
-	// Process each controller's For watches.
-	for ctrl, forWatches := range forByCtrl {
+	// Process controllers in sorted order for deterministic output.
+	ctrlNames := make([]string, 0, len(forByCtrl))
+	for ctrl := range forByCtrl {
+		ctrlNames = append(ctrlNames, ctrl)
+	}
+	sort.Strings(ctrlNames)
+
+	for _, ctrl := range ctrlNames {
+		forWatches := forByCtrl[ctrl]
 		for _, fw := range forWatches {
 			gvk := renderer.GetStr(fw, "gvk", "")
 			kind := kindFromGVK(gvk)
