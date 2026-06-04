@@ -11,6 +11,7 @@ import (
 // kindFromGVK extracts the Kind (last segment) from a slash-separated GVK
 // string like "serving/v1beta1/InferenceService".
 func kindFromGVK(gvk string) string {
+	gvk = strings.TrimRight(gvk, "/")
 	if idx := strings.LastIndex(gvk, "/"); idx >= 0 && idx+1 < len(gvk) {
 		return gvk[idx+1:]
 	}

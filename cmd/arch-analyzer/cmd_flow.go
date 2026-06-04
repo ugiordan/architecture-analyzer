@@ -12,11 +12,13 @@ import (
 )
 
 func cmdFlow(args []string) error {
-	fs := flag.NewFlagSet("flow", flag.ExitOnError)
+	fs := flag.NewFlagSet("flow", flag.ContinueOnError)
 	output := fs.String("o", "flow.html", "Output file path")
 	diagramOnly := fs.Bool("diagram", false, "Output flowlens diagram JSON only, no HTML")
 	title := fs.String("title", "", "Override diagram title")
-	fs.Parse(args)
+	if err := fs.Parse(args); err != nil {
+		return err
+	}
 
 	if fs.NArg() < 1 {
 		return fmt.Errorf("usage: arch-analyzer flow <component-architecture.json> [-o flow.html] [-diagram] [-title title]")
