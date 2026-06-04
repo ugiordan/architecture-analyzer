@@ -8,8 +8,8 @@ import "sort"
 func ApplyLayout(d *Diagram) {
 	if len(d.Nodes) == 0 {
 		d.Canvas = DiagramCanvas{
-			Width:  maxInt(1400, 0),
-			Height: maxInt(900, 0),
+			Width:  max(1400, 0),
+			Height: max(900, 0),
 		}
 		return
 	}
@@ -43,9 +43,9 @@ func ApplyLayout(d *Diagram) {
 	}
 
 	// Compute canvas dimensions.
-	canvasWidth := maxInt(layerCount*240+160, 1400)
-	verticalSpacing := maxInt(80, 900/(maxNodesInLayer+1))
-	canvasHeight := maxInt(maxNodesInLayer*verticalSpacing+100, 900)
+	canvasWidth := max(layerCount*240+160, 1400)
+	verticalSpacing := max(80, 900/(maxNodesInLayer+1))
+	canvasHeight := max(maxNodesInLayer*verticalSpacing+100, 900)
 
 	// Position each node within its layer.
 	for i, layerIdx := range layerIndices {
@@ -64,11 +64,4 @@ func ApplyLayout(d *Diagram) {
 	}
 
 	d.Canvas = DiagramCanvas{Width: canvasWidth, Height: canvasHeight}
-}
-
-func maxInt(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }

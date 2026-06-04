@@ -51,10 +51,10 @@ type FlowGraph struct {
 	Paths     []FlowPath `json:"paths"`
 }
 
-// flowNodeID returns a safe HTML element ID suffix for a node label.
+// FlowNodeID returns a safe HTML element ID suffix for a node label.
 // Letters, digits, hyphens, and underscores are preserved; everything else
 // (dots, slashes, colons, spaces) becomes a hyphen.
-func flowNodeID(s string) string {
+func FlowNodeID(s string) string {
 	var b strings.Builder
 	for _, ch := range s {
 		if unicode.IsLetter(ch) || unicode.IsDigit(ch) || ch == '-' || ch == '_' {
@@ -147,7 +147,7 @@ func BuildFlowGraph(data map[string]interface{}) FlowGraph {
 	for _, item := range getSlice(data, "ingress_routing") {
 		name := getStr(item, "name", "ingress")
 		name = uniqueName(name, "ingress")
-		id := "ingress-" + flowNodeID(name)
+		id := "ingress-" + FlowNodeID(name)
 		addNode(FlowNode{ID: id, Label: name, Type: FlowNodeIngress, Layer: 1,
 			Meta: map[string]string{"kind": getStr(item, "kind", "")}})
 		ingressRefs = append(ingressRefs, nodeRef{id, item})
@@ -195,7 +195,7 @@ func BuildFlowGraph(data map[string]interface{}) FlowGraph {
 		for _, item := range webhooks {
 			name := getStr(item, "name", "webhook")
 			name = uniqueName(name, "webhook")
-			id := "wh-" + flowNodeID(name)
+			id := "wh-" + FlowNodeID(name)
 			addNode(FlowNode{ID: id, Label: name, Type: FlowNodeWebhook, Layer: 2,
 				Meta: map[string]string{"type": getStr(item, "type", "")}})
 			webhookRefs = append(webhookRefs, nodeRef{id, item})
@@ -216,7 +216,7 @@ func BuildFlowGraph(data map[string]interface{}) FlowGraph {
 		if len(portParts) > 0 {
 			meta["ports"] = strings.Join(portParts, ", ")
 		}
-		id := "svc-" + flowNodeID(name)
+		id := "svc-" + FlowNodeID(name)
 		addNode(FlowNode{ID: id, Label: name, Type: FlowNodeService, Layer: 3, Meta: meta})
 		serviceRefs = append(serviceRefs, nodeRef{id, item})
 	}
@@ -225,7 +225,7 @@ func BuildFlowGraph(data map[string]interface{}) FlowGraph {
 	for _, item := range getSlice(data, "deployments") {
 		name := getStr(item, "name", "deployment")
 		name = uniqueName(name, "deployment")
-		id := "dep-" + flowNodeID(name)
+		id := "dep-" + FlowNodeID(name)
 		addNode(FlowNode{ID: id, Label: name, Type: FlowNodeDeployment, Layer: 4})
 	}
 
@@ -248,7 +248,7 @@ func BuildFlowGraph(data map[string]interface{}) FlowGraph {
 		if count > 1 {
 			label = fmt.Sprintf("%s (%d)", connType, count)
 		}
-		id := "ext-" + flowNodeID(connType)
+		id := "ext-" + FlowNodeID(connType)
 		addNode(FlowNode{ID: id, Label: label, Type: FlowNodeExternal, Layer: 5,
 			Meta: map[string]string{"type": connType, "count": fmt.Sprintf("%d", count)}})
 		externalRefs = append(externalRefs, nodeRef{id, extFirstItem[connType]})
@@ -314,7 +314,7 @@ func BuildFlowGraph(data map[string]interface{}) FlowGraph {
 	for _, ref := range serviceRefs {
 		target := getStr(ref.item, "target_deployment", "")
 		if target != "" {
-			depID := "dep-" + flowNodeID(target)
+			depID := "dep-" + FlowNodeID(target)
 			if seen[depID] {
 				addEdge(ref.id, depID, "target", "")
 			}

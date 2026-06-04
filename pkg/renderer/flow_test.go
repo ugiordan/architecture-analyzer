@@ -5,46 +5,46 @@ import (
 	"testing"
 )
 
-// ---- flowNodeID tests ----
+// ---- FlowNodeID tests ----
 
 func TestFlowNodeID_BareAlphanumeric(t *testing.T) {
-	if id := flowNodeID("my-service"); id != "my-service" {
+	if id := FlowNodeID("my-service"); id != "my-service" {
 		t.Errorf("expected 'my-service', got %q", id)
 	}
 }
 
 func TestFlowNodeID_DotsBecomeDashes(t *testing.T) {
-	if id := flowNodeID("serving.kserve.io"); id != "serving-kserve-io" {
+	if id := FlowNodeID("serving.kserve.io"); id != "serving-kserve-io" {
 		t.Errorf("expected 'serving-kserve-io', got %q", id)
 	}
 }
 
 func TestFlowNodeID_SlashesBecomeDashes(t *testing.T) {
-	if id := flowNodeID("ns/my-svc"); id != "ns-my-svc" {
+	if id := FlowNodeID("ns/my-svc"); id != "ns-my-svc" {
 		t.Errorf("expected 'ns-my-svc', got %q", id)
 	}
 }
 
 func TestFlowNodeID_ColonsBecomeDashes(t *testing.T) {
-	if id := flowNodeID("kube:system"); id != "kube-system" {
+	if id := FlowNodeID("kube:system"); id != "kube-system" {
 		t.Errorf("expected 'kube-system', got %q", id)
 	}
 }
 
 func TestFlowNodeID_SpacesBecomeDashes(t *testing.T) {
-	if id := flowNodeID("my service"); id != "my-service" {
+	if id := FlowNodeID("my service"); id != "my-service" {
 		t.Errorf("expected 'my-service', got %q", id)
 	}
 }
 
 func TestFlowNodeID_EmptyString(t *testing.T) {
-	if id := flowNodeID(""); id != "node" {
+	if id := FlowNodeID(""); id != "node" {
 		t.Errorf("expected 'node', got %q", id)
 	}
 }
 
 func TestFlowNodeID_Underscores(t *testing.T) {
-	if id := flowNodeID("my_service"); id != "my_service" {
+	if id := FlowNodeID("my_service"); id != "my_service" {
 		t.Errorf("expected 'my_service', got %q", id)
 	}
 }

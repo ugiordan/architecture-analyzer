@@ -3,29 +3,9 @@ package flow
 import (
 	"fmt"
 	"strings"
-	"unicode"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/renderer"
 )
-
-// reconcileNodeID produces a safe HTML element ID from a label.
-// Letters, digits, hyphens, and underscores are kept; everything else
-// becomes a hyphen.
-func reconcileNodeID(s string) string {
-	var b strings.Builder
-	for _, ch := range s {
-		if unicode.IsLetter(ch) || unicode.IsDigit(ch) || ch == '-' || ch == '_' {
-			b.WriteRune(ch)
-		} else {
-			b.WriteByte('-')
-		}
-	}
-	result := b.String()
-	if result == "" {
-		return "node"
-	}
-	return result
-}
 
 // kindFromGVK extracts the Kind (last segment) from a slash-separated GVK
 // string like "serving/v1beta1/InferenceService".
@@ -90,26 +70,36 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 
 	// Resolve the deployment target for controllers.
 	// If only one deployment exists, all controllers map to it.
-	// Otherwise try to find a matching deployment node in the graph.
+	// For multiple deployments, try to match by controller name.
+	// Otherwise, create a per-controller fallback node.
 	resolveDeploymentID := func(controller string) (string, bool) {
 		// Single deployment shortcut.
 		if len(deployments) == 1 {
 			name := renderer.GetStr(deployments[0], "name", "")
 			if name != "" {
-				id := "dep-" + reconcileNodeID(name)
+				id := "dep-" + renderer.FlowNodeID(name)
 				return id, existingNodes[id]
 			}
 		}
 
-		// Try to find a deployment node that already exists in the graph.
+		// Try name matching: controller "FooReconciler" might match deployment "foo-controller".
+		controllerLower := strings.ToLower(controller)
+		controllerLower = strings.TrimSuffix(controllerLower, "reconciler")
+		controllerLower = strings.TrimSuffix(controllerLower, "controller")
+		controllerLower = strings.TrimSpace(controllerLower)
+
 		for _, n := range g.Nodes {
-			if n.Type == renderer.FlowNodeDeployment {
+			if n.Type != renderer.FlowNodeDeployment {
+				continue
+			}
+			if controllerLower != "" && strings.Contains(strings.ToLower(n.Label), controllerLower) {
 				return n.ID, true
 			}
 		}
 
-		// Fallback: create a generic controller node.
-		return "ctrl-" + reconcileNodeID(controller), false
+		// Fallback: create a per-controller node.
+		fallbackID := "ctrl-" + renderer.FlowNodeID(controller)
+		return fallbackID, existingNodes[fallbackID]
 	}
 
 	addNode := func(n renderer.FlowNode) {
@@ -143,7 +133,7 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 			}
 
 			// CRD node.
-			crdID := "crd-" + reconcileNodeID(kind)
+			crdID := "crd-" + renderer.FlowNodeID(kind)
 			addNode(renderer.FlowNode{
 				ID:    crdID,
 				Label: kind,
@@ -165,7 +155,7 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 			}
 
 			// Edge: CRD -> controller deployment (reconcile).
-			reconcileEdgeID := fmt.Sprintf("reconcile-%s-%s", reconcileNodeID(kind), depID)
+			reconcileEdgeID := fmt.Sprintf("reconcile-%s-%s", renderer.FlowNodeID(kind), depID)
 			addEdge(renderer.FlowEdge{
 				ID:    reconcileEdgeID,
 				From:  crdID,
@@ -185,7 +175,7 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 					continue
 				}
 
-				ownedID := "owned-" + reconcileNodeID(ownKind)
+				ownedID := "owned-" + renderer.FlowNodeID(ownKind)
 				addNode(renderer.FlowNode{
 					ID:    ownedID,
 					Label: ownKind,
@@ -193,7 +183,7 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 					Layer: 6,
 				})
 
-				manageEdgeID := fmt.Sprintf("reconcile-%s-%s", depID, ownedID)
+				manageEdgeID := fmt.Sprintf("reconcile-%s-%s-%s", depID, renderer.FlowNodeID(ctrl), ownedID)
 				addEdge(renderer.FlowEdge{
 					ID:    manageEdgeID,
 					From:  depID,
@@ -204,12 +194,22 @@ func AddReconcileFlows(g *renderer.FlowGraph, data map[string]interface{}) {
 				pathEdges = append(pathEdges, manageEdgeID)
 			}
 
-			// Build reconciliation path.
-			g.Paths = append(g.Paths, renderer.FlowPath{
-				Name:  kind + " Reconciliation",
-				Edges: pathEdges,
-				Color: "#0066cc",
-			})
+			// Build reconciliation path (skip if one with this name already exists).
+			pathName := kind + " Reconciliation"
+			alreadyExists := false
+			for _, p := range g.Paths {
+				if p.Name == pathName {
+					alreadyExists = true
+					break
+				}
+			}
+			if !alreadyExists {
+				g.Paths = append(g.Paths, renderer.FlowPath{
+					Name:  pathName,
+					Edges: pathEdges,
+					Color: "#0066cc",
+				})
+			}
 		}
 	}
 }

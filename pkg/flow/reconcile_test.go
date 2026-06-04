@@ -21,7 +21,7 @@ func graphWithDeployment(depName string) renderer.FlowGraph {
 	return renderer.FlowGraph{
 		Component: "test",
 		Nodes: []renderer.FlowNode{
-			{ID: "dep-" + reconcileNodeID(depName), Label: depName, Type: renderer.FlowNodeDeployment, Layer: 4},
+			{ID: "dep-" + renderer.FlowNodeID(depName), Label: depName, Type: renderer.FlowNodeDeployment, Layer: 4},
 		},
 		Edges: []renderer.FlowEdge{},
 		Paths: []renderer.FlowPath{},
@@ -274,8 +274,8 @@ func TestAddReconcileFlows_OwnsEntries(t *testing.T) {
 		t.Fatal("expected owned-Deployment node")
 	}
 
-	// Manages edges.
-	cmEdge := findEdge(g, "reconcile-dep-dspa-operator-owned-ConfigMap")
+	// Manages edges (edge ID includes controller name for uniqueness).
+	cmEdge := findEdge(g, "reconcile-dep-dspa-operator-DSPAReconciler-owned-ConfigMap")
 	if cmEdge == nil {
 		t.Fatal("expected manages edge to owned-ConfigMap")
 	}
@@ -462,9 +462,173 @@ func TestKindFromGVK(t *testing.T) {
 	}
 }
 
-// ---------- reconcileNodeID ----------
+// ---------- per-controller fallback nodes ----------
 
-func TestReconcileNodeID(t *testing.T) {
+func TestAddReconcileFlows_PerControllerFallback(t *testing.T) {
+	g := emptyGraph() // no deployment nodes
+	data := map[string]interface{}{
+		"controller_watches": []interface{}{
+			map[string]interface{}{
+				"type":       "For",
+				"gvk":        "api/v1/Alpha",
+				"controller": "AlphaReconciler",
+				"source":     "ctrl/alpha.go:1",
+			},
+			map[string]interface{}{
+				"type":       "For",
+				"gvk":        "api/v1/Beta",
+				"controller": "BetaReconciler",
+				"source":     "ctrl/beta.go:1",
+			},
+		},
+		"crds": []interface{}{
+			map[string]interface{}{"kind": "Alpha", "group": "example.io", "version": "v1"},
+			map[string]interface{}{"kind": "Beta", "group": "example.io", "version": "v1"},
+		},
+		"deployments": []interface{}{},
+	}
+
+	AddReconcileFlows(&g, data)
+
+	// Each controller should get its own fallback node.
+	alphaCtrl := findNode(g, "ctrl-AlphaReconciler")
+	betaCtrl := findNode(g, "ctrl-BetaReconciler")
+	if alphaCtrl == nil {
+		t.Fatal("expected per-controller fallback node ctrl-AlphaReconciler")
+	}
+	if betaCtrl == nil {
+		t.Fatal("expected per-controller fallback node ctrl-BetaReconciler")
+	}
+
+	// They should be distinct nodes.
+	if alphaCtrl.ID == betaCtrl.ID {
+		t.Errorf("fallback nodes should be distinct, both got %q", alphaCtrl.ID)
+	}
+
+	// Each CRD should point to its own controller's fallback.
+	alphaEdge := findEdge(g, "reconcile-Alpha-ctrl-AlphaReconciler")
+	betaEdge := findEdge(g, "reconcile-Beta-ctrl-BetaReconciler")
+	if alphaEdge == nil {
+		t.Fatal("expected reconcile edge for Alpha to its controller")
+	}
+	if betaEdge == nil {
+		t.Fatal("expected reconcile edge for Beta to its controller")
+	}
+	if alphaEdge.To != "ctrl-AlphaReconciler" {
+		t.Errorf("Alpha edge.To = %q, want ctrl-AlphaReconciler", alphaEdge.To)
+	}
+	if betaEdge.To != "ctrl-BetaReconciler" {
+		t.Errorf("Beta edge.To = %q, want ctrl-BetaReconciler", betaEdge.To)
+	}
+}
+
+// ---------- multi-deployment controller name matching ----------
+
+func TestAddReconcileFlows_MultiDeploymentNameMatch(t *testing.T) {
+	g := renderer.FlowGraph{
+		Component: "test",
+		Nodes: []renderer.FlowNode{
+			{ID: "dep-alpha-controller", Label: "alpha-controller", Type: renderer.FlowNodeDeployment, Layer: 4},
+			{ID: "dep-beta-controller", Label: "beta-controller", Type: renderer.FlowNodeDeployment, Layer: 4},
+		},
+		Edges: []renderer.FlowEdge{},
+		Paths: []renderer.FlowPath{},
+	}
+	data := map[string]interface{}{
+		"controller_watches": []interface{}{
+			map[string]interface{}{
+				"type":       "For",
+				"gvk":        "api/v1/Alpha",
+				"controller": "AlphaReconciler",
+				"source":     "ctrl/alpha.go:1",
+			},
+			map[string]interface{}{
+				"type":       "For",
+				"gvk":        "api/v1/Beta",
+				"controller": "BetaReconciler",
+				"source":     "ctrl/beta.go:1",
+			},
+		},
+		"crds": []interface{}{
+			map[string]interface{}{"kind": "Alpha", "group": "example.io", "version": "v1"},
+			map[string]interface{}{"kind": "Beta", "group": "example.io", "version": "v1"},
+		},
+		"deployments": []interface{}{
+			map[string]interface{}{"name": "alpha-controller"},
+			map[string]interface{}{"name": "beta-controller"},
+		},
+	}
+
+	AddReconcileFlows(&g, data)
+
+	// AlphaReconciler should match alpha-controller deployment.
+	alphaEdge := findEdge(g, "reconcile-Alpha-dep-alpha-controller")
+	if alphaEdge == nil {
+		t.Fatal("expected reconcile edge for Alpha to alpha-controller deployment")
+	}
+	if alphaEdge.To != "dep-alpha-controller" {
+		t.Errorf("Alpha edge.To = %q, want dep-alpha-controller", alphaEdge.To)
+	}
+
+	// BetaReconciler should match beta-controller deployment.
+	betaEdge := findEdge(g, "reconcile-Beta-dep-beta-controller")
+	if betaEdge == nil {
+		t.Fatal("expected reconcile edge for Beta to beta-controller deployment")
+	}
+	if betaEdge.To != "dep-beta-controller" {
+		t.Errorf("Beta edge.To = %q, want dep-beta-controller", betaEdge.To)
+	}
+}
+
+// ---------- owned-resource edge ID includes controller ----------
+
+func TestAddReconcileFlows_OwnedEdgeIDIncludesController(t *testing.T) {
+	g := graphWithDeployment("operator")
+	data := map[string]interface{}{
+		"controller_watches": []interface{}{
+			map[string]interface{}{
+				"type": "For", "gvk": "api/v1/Alpha",
+				"controller": "AlphaReconciler", "source": "a.go:1",
+			},
+			map[string]interface{}{
+				"type": "Owns", "gvk": "apps/v1/Deployment",
+				"controller": "AlphaReconciler", "source": "a.go:2",
+			},
+			map[string]interface{}{
+				"type": "For", "gvk": "api/v1/Beta",
+				"controller": "BetaReconciler", "source": "b.go:1",
+			},
+			map[string]interface{}{
+				"type": "Owns", "gvk": "apps/v1/Deployment",
+				"controller": "BetaReconciler", "source": "b.go:2",
+			},
+		},
+		"crds": []interface{}{
+			map[string]interface{}{"kind": "Alpha", "group": "example.io", "version": "v1"},
+			map[string]interface{}{"kind": "Beta", "group": "example.io", "version": "v1"},
+		},
+		"deployments": []interface{}{
+			map[string]interface{}{"name": "operator"},
+		},
+	}
+
+	AddReconcileFlows(&g, data)
+
+	// Both controllers own Deployment, but edge IDs should be distinct.
+	alphaManage := findEdge(g, "reconcile-dep-operator-AlphaReconciler-owned-Deployment")
+	betaManage := findEdge(g, "reconcile-dep-operator-BetaReconciler-owned-Deployment")
+
+	if alphaManage == nil {
+		t.Error("expected manages edge with AlphaReconciler in ID")
+	}
+	if betaManage == nil {
+		t.Error("expected manages edge with BetaReconciler in ID")
+	}
+}
+
+// ---------- FlowNodeID (via renderer) ----------
+
+func TestFlowNodeID_ViaRenderer(t *testing.T) {
 	cases := []struct {
 		input string
 		want  string
@@ -476,9 +640,9 @@ func TestReconcileNodeID(t *testing.T) {
 		{"a b c", "a-b-c"},
 	}
 	for _, tc := range cases {
-		got := reconcileNodeID(tc.input)
+		got := renderer.FlowNodeID(tc.input)
 		if got != tc.want {
-			t.Errorf("reconcileNodeID(%q) = %q, want %q", tc.input, got, tc.want)
+			t.Errorf("renderer.FlowNodeID(%q) = %q, want %q", tc.input, got, tc.want)
 		}
 	}
 }
@@ -508,6 +672,7 @@ func TestAddReconcileFlows_NoDuplicateNodes(t *testing.T) {
 	AddReconcileFlows(&g, data)
 	nodeCountAfterFirst := len(g.Nodes)
 	edgeCountAfterFirst := len(g.Edges)
+	pathCountAfterFirst := len(g.Paths)
 
 	AddReconcileFlows(&g, data)
 
@@ -516,5 +681,8 @@ func TestAddReconcileFlows_NoDuplicateNodes(t *testing.T) {
 	}
 	if len(g.Edges) != edgeCountAfterFirst {
 		t.Errorf("second call added edges: %d -> %d", edgeCountAfterFirst, len(g.Edges))
+	}
+	if len(g.Paths) != pathCountAfterFirst {
+		t.Errorf("second call added paths: %d -> %d", pathCountAfterFirst, len(g.Paths))
 	}
 }

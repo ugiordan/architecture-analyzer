@@ -380,6 +380,77 @@ func TestConvertDiagram_MissingEdgeSkipped(t *testing.T) {
 	}
 }
 
+// ---------- step numbering with skipped edges ----------
+
+func TestConvertDiagram_StepNumberingNoGaps(t *testing.T) {
+	g := renderer.FlowGraph{
+		Component: "test",
+		Nodes: []renderer.FlowNode{
+			{ID: "a", Label: "A", Type: renderer.FlowNodeIngress, Layer: 0},
+			{ID: "b", Label: "B", Type: renderer.FlowNodeService, Layer: 3},
+			{ID: "c", Label: "C", Type: renderer.FlowNodeDeployment, Layer: 4},
+		},
+		Edges: []renderer.FlowEdge{
+			{ID: "e1", From: "a", To: "b", Type: "route"},
+			// e2 is intentionally missing from the edge list
+			{ID: "e3", From: "b", To: "c", Type: "target"},
+		},
+		Paths: []renderer.FlowPath{
+			{Name: "Test", Edges: []string{"e1", "missing-edge", "e3"}, Color: "#000"},
+		},
+	}
+	d := ConvertDiagram(g, nil)
+	flow := d.Flows["test"]
+	if len(flow.Steps) != 2 {
+		t.Fatalf("steps = %d, want 2 (one skipped)", len(flow.Steps))
+	}
+	if flow.Steps[0].Num != 1 {
+		t.Errorf("step[0].num = %d, want 1", flow.Steps[0].Num)
+	}
+	if flow.Steps[1].Num != 2 {
+		t.Errorf("step[1].num = %d, want 2 (no gap after skipped edge)", flow.Steps[1].Num)
+	}
+}
+
+// ---------- slug collision deduplication ----------
+
+func TestConvertDiagram_SlugCollision(t *testing.T) {
+	g := renderer.FlowGraph{
+		Component: "test",
+		Nodes: []renderer.FlowNode{
+			{ID: "a", Label: "A", Type: renderer.FlowNodeIngress, Layer: 0},
+			{ID: "b", Label: "B", Type: renderer.FlowNodeService, Layer: 3},
+		},
+		Edges: []renderer.FlowEdge{
+			{ID: "e1", From: "a", To: "b", Type: "route"},
+		},
+		Paths: []renderer.FlowPath{
+			{Name: "My Flow", Edges: []string{"e1"}, Color: "#000"},
+			{Name: "My  Flow", Edges: []string{"e1"}, Color: "#111"}, // slugifies to same "my-flow"
+			{Name: "My Flow!", Edges: []string{"e1"}, Color: "#222"}, // also "my-flow"
+		},
+	}
+	d := ConvertDiagram(g, nil)
+
+	if len(d.Flows) != 3 {
+		t.Fatalf("expected 3 flows (deduped slugs), got %d", len(d.Flows))
+	}
+	if _, ok := d.Flows["my-flow"]; !ok {
+		t.Error("expected flow with slug 'my-flow'")
+	}
+	if _, ok := d.Flows["my-flow-2"]; !ok {
+		t.Error("expected flow with slug 'my-flow-2'")
+	}
+	if _, ok := d.Flows["my-flow-3"]; !ok {
+		t.Error("expected flow with slug 'my-flow-3'")
+	}
+
+	// FlowOrder should reflect all three.
+	if len(d.FlowOrder) != 3 {
+		t.Errorf("flowOrder length = %d, want 3", len(d.FlowOrder))
+	}
+}
+
 // ---------- slugify ----------
 
 func TestSlugify(t *testing.T) {

@@ -45,7 +45,13 @@ func cmdFlow(args []string) error {
 		if err != nil {
 			return fmt.Errorf("marshaling diagram: %w", err)
 		}
-		if *output != "flow.html" {
+		outputSet := false
+		fs.Visit(func(f *flag.Flag) {
+			if f.Name == "o" {
+				outputSet = true
+			}
+		})
+		if outputSet {
 			if err := os.MkdirAll(filepath.Dir(*output), 0o755); err != nil {
 				return err
 			}

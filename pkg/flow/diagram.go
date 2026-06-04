@@ -3,6 +3,7 @@
 package flow
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/renderer"
@@ -150,26 +151,36 @@ func ConvertDiagram(g renderer.FlowGraph, data map[string]interface{}) Diagram {
 
 	// Convert FlowPaths to DiagramFlows.
 	for _, p := range g.Paths {
-		flowID := slugify(p.Name)
+		slug := slugify(p.Name)
+		// Deduplicate slugs: if the slug already exists, append a numeric suffix.
+		base := slug
+		for counter := 2; ; counter++ {
+			if _, exists := d.Flows[slug]; !exists {
+				break
+			}
+			slug = fmt.Sprintf("%s-%d", base, counter)
+		}
 		flow := DiagramFlow{
 			Label: p.Name,
 			Steps: make([]ArrowStep, 0, len(p.Edges)),
 		}
-		for i, eid := range p.Edges {
+		stepNum := 0
+		for _, eid := range p.Edges {
 			e, ok := edgeByID[eid]
 			if !ok {
 				continue
 			}
+			stepNum++
 			flow.Steps = append(flow.Steps, ArrowStep{
 				Mode:  "arrow",
 				From:  e.From,
 				To:    e.To,
-				Num:   i + 1,
+				Num:   stepNum,
 				Label: e.Label,
 			})
 		}
-		d.Flows[flowID] = flow
-		d.FlowOrder = append(d.FlowOrder, flowID)
+		d.Flows[slug] = flow
+		d.FlowOrder = append(d.FlowOrder, slug)
 	}
 
 	// Set default flow to the first one if any exist.
