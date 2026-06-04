@@ -103,7 +103,8 @@ var nodeTypeMap = map[renderer.FlowNodeType]nodeMapping{
 
 // ConvertDiagram transforms a renderer.FlowGraph into a flowlens Diagram.
 // The optional data map (raw component-architecture.json) is used to extract
-// the repository field. Positions are set to zero; call ApplyLayout afterward.
+// the repository field. ApplyLayout is called automatically to assign
+// positions based on each node's layer.
 func ConvertDiagram(g renderer.FlowGraph, data map[string]interface{}) Diagram {
 	d := Diagram{
 		Meta: DiagramMeta{
@@ -217,6 +218,8 @@ func ConvertDiagram(g renderer.FlowGraph, data map[string]interface{}) Diagram {
 	} else {
 		d.Mode = "live"
 	}
+
+	ApplyLayout(&d)
 
 	return d
 }
