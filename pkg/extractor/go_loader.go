@@ -47,6 +47,14 @@ func loadGoPackages(repoPath string) *GoPackageSet {
 		return nil
 	}
 
+	// Create a temp directory for Go module/build caches outside the target repo.
+	gopath, err := os.MkdirTemp("", "gopath-loader-*")
+	if err != nil {
+		log.Printf("[go_loader] failed to create temp gopath: %v", err)
+		return nil
+	}
+	defer cleanGopath(gopath)
+
 	// Run go mod download with security-hardened env and 2min timeout.
 	// Note: go mod download needs -mod=mod (not readonly) to actually fetch.
 	dlCtx, dlCancel := context.WithTimeout(context.Background(), 2*time.Minute)
@@ -54,7 +62,7 @@ func loadGoPackages(repoPath string) *GoPackageSet {
 
 	dlCmd := exec.CommandContext(dlCtx, "go", "mod", "download")
 	dlCmd.Dir = absRepo
-	dlCmd.Env = loaderEnv(absRepo, false)
+	dlCmd.Env = loaderEnv(absRepo, gopath, false)
 	if out, err := dlCmd.CombinedOutput(); err != nil {
 		outStr := string(out)
 		if strings.Contains(outStr, "SECURITY ERROR") || strings.Contains(outStr, "checksum mismatch") {
@@ -87,7 +95,7 @@ func loadGoPackages(repoPath string) *GoPackageSet {
 		Dir:     absRepo,
 		Fset:    fset,
 		Context: loadCtx,
-		Env:     loaderEnv(absRepo, true),
+		Env:     loaderEnv(absRepo, gopath, true),
 	}
 
 	pkgs, err := packages.Load(cfg, "./...")
@@ -133,10 +141,28 @@ func loadGoPackages(repoPath string) *GoPackageSet {
 	}
 }
 
+// cleanGopath removes a gopath directory, handling read-only files
+// that Go's module cache creates.
+func cleanGopath(dir string) {
+	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return nil
+		}
+		if info.IsDir() {
+			os.Chmod(path, 0o755)
+		} else {
+			os.Chmod(path, 0o644)
+		}
+		return nil
+	})
+	os.RemoveAll(dir)
+}
+
 // loaderEnv builds a sanitized environment for go commands.
-func loaderEnv(absRepoPath string, readonly bool) []string {
+// gopath is an external directory for module/build caches, kept outside the
+// target repo so we don't pollute the source tree with read-only artifacts.
+func loaderEnv(absRepoPath, gopath string, readonly bool) []string {
 	env := os.Environ()
-	gopath := filepath.Join(absRepoPath, ".gopath-loader")
 	overrides := map[string]string{
 		"CGO_ENABLED":  "0",
 		"GONOSUMCHECK": "",
