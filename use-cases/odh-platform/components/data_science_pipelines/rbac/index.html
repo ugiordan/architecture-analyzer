@@ -26188,7 +26188,7 @@
 <h1 id="data-science-pipelines-rbac">data-science-pipelines: RBAC<a class="headerlink" href="#data-science-pipelines-rbac" title="Permanent link">¶</a></h1>
 <p>ServiceAccount bindings, roles, and resource permissions.</p>
 <h2 id="rbac-overview">RBAC Overview<a class="headerlink" href="#rbac-overview" title="Permanent link">¶</a></h2>
-<p>This component defines a large RBAC surface (341 diagram lines). The graph below groups roles by permission scope.</p>
+<p>This component defines a large RBAC surface (349 diagram lines). The graph below groups roles by permission scope.</p>
 <pre class="mermaid"><code>graph LR
     classDef wide fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef medium fill:#f39c12,stroke:#d68910,color:#fff
@@ -26198,7 +26198,7 @@
     subgraph wide["Wide Scope (&gt;30 resources)"]
     aggregate_to_kubeflow_pipelines_edit["aggregate-to-kubeflow-pipelines-edit\n13 resources\n!! wildcard"]:::wide
     application_manager_role["application-manager-role\n2 resources\n!! wildcard"]:::wide
-    pipeline_runner["pipeline-runner\n16 resources\n!! wildcard"]:::wide
+    pipeline_runner["pipeline-runner\n17 resources\n!! wildcard"]:::wide
     proxy_agent_runner["proxy-agent-runner\n1 resources\n!! wildcard"]:::wide
     end
     subgraph med["Medium Scope (10-30)"]
@@ -26212,7 +26212,7 @@
     kubeflow_pipelines_edit["kubeflow-pipelines-edit"]:::narrow
     kubeflow_pipelines_metadata_writer_role["kubeflow-pipelines-metadata-writer-role\n3 resources"]:::narrow
     kubeflow_pipelines_view["kubeflow-pipelines-view"]:::narrow
-    ml_pipeline["ml-pipeline\n8 resources"]:::narrow
+    ml_pipeline["ml-pipeline\n9 resources"]:::narrow
     ml_pipeline_persistenceagent_role["ml-pipeline-persistenceagent-role\n5 resources"]:::narrow
     ml_pipeline_scheduledworkflow_role["ml-pipeline-scheduledworkflow-role\n5 resources"]:::narrow
     ml_pipeline_ui["ml-pipeline-ui\n5 resources"]:::narrow
@@ -26222,7 +26222,7 @@
     kubeflow_pipelines_cache_role["kubeflow-pipelines-cache-role\n3 resources"]:::narrow
     kubeflow_pipelines_metadata_writer_role["kubeflow-pipelines-metadata-writer-role\n3 resources"]:::narrow
     kubeflow_pipelines_public["kubeflow-pipelines-public\n1 resources"]:::narrow
-    ml_pipeline["ml-pipeline\n8 resources"]:::narrow
+    ml_pipeline["ml-pipeline\n10 resources"]:::narrow
     ml_pipeline_persistenceagent_role["ml-pipeline-persistenceagent-role\n5 resources"]:::narrow
     ml_pipeline_scheduledworkflow_role["ml-pipeline-scheduledworkflow-role\n5 resources"]:::narrow
     ml_pipeline_ui["ml-pipeline-ui\n7 resources"]:::narrow
@@ -26662,6 +26662,13 @@
 <td>create</td>
 </tr>
 <tr>
+<td>ml-pipeline</td>
+<td>ClusterRole</td>
+<td></td>
+<td>configmaps</td>
+<td>get</td>
+</tr>
+<tr>
 <td>ml-pipeline-persistenceagent-role</td>
 <td>ClusterRole</td>
 <td></td>
@@ -26879,6 +26886,20 @@
 <td>create</td>
 </tr>
 <tr>
+<td>ml-pipeline</td>
+<td>Role</td>
+<td></td>
+<td>experiments</td>
+<td>get, list, create, update</td>
+</tr>
+<tr>
+<td>ml-pipeline</td>
+<td>Role</td>
+<td></td>
+<td>configmaps</td>
+<td>get</td>
+</tr>
+<tr>
 <td>ml-pipeline-persistenceagent-role</td>
 <td>Role</td>
 <td></td>
@@ -27061,6 +27082,13 @@
 <td>create, patch</td>
 </tr>
 <tr>
+<td>pipeline-runner</td>
+<td>Role</td>
+<td></td>
+<td>experiments</td>
+<td>get, list, create, update</td>
+</tr>
+<tr>
 <td>proxy-agent-runner</td>
 <td>Role</td>
 <td></td>
@@ -27091,7 +27119,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 8, 2026 04:51:33 UTC">June 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 9, 2026 04:12:40 UTC">June 9, 2026</span>
   </span>
 
     
