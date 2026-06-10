@@ -1,0 +1,167 @@
+{
+  "component": "trustyai-explainability",
+  "repo": "red-hat-data-services/trustyai-explainability",
+  "commit_sha": "ee0b2b22cb42f0f60431192315488f3b195137d9",
+  "extracted_at": "2026-06-10T10:51:26Z",
+  "analyzer_version": "0.2.0",
+  "schema_version": "2",
+  "rbac": {},
+  "dependencies": {},
+  "dockerfiles": [
+    {
+      "path": "Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi8/openjdk-17-runtime:latest",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi8/openjdk-17:latest"
+      ],
+      "stages": 2,
+      "user": "root",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17:latest",
+        "Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17-runtime:latest",
+        "Container runs as root user"
+      ]
+    },
+    {
+      "path": "Dockerfile.konflux",
+      "base_image": "registry.access.redhat.com/ubi9/openjdk-17-runtime@sha256:07e1fcaaeb8d4210dccd781a47e123df5d3c917d868a4ff325739118403bbc7c",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/ubi-minimal@sha256:e1c4703364c5cb58f5462575dc90345bcd934ddc45e6c32f9c162f2b5617681c"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "explainability-service/src/main/docker/Dockerfile.jvm",
+      "base_image": "registry.access.redhat.com/ubi8/openjdk-17:latest",
+      "stages": 1,
+      "user": "185",
+      "exposed_ports": [
+        8080
+      ],
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17:latest"
+      ]
+    },
+    {
+      "path": "explainability-service/src/main/docker/Dockerfile.legacy-jar",
+      "base_image": "registry.access.redhat.com/ubi8/openjdk-17:latest",
+      "stages": 1,
+      "user": "185",
+      "exposed_ports": [
+        8080
+      ],
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17:latest"
+      ]
+    },
+    {
+      "path": "explainability-service/src/main/docker/Dockerfile.native",
+      "base_image": "registry.access.redhat.com/ubi8/ubi-minimal:8.6",
+      "stages": 1,
+      "user": "1001",
+      "exposed_ports": [
+        8080
+      ]
+    },
+    {
+      "path": "explainability-service/src/main/docker/Dockerfile.native-micro",
+      "base_image": "quay.io/quarkus/quarkus-micro-image:2.0",
+      "stages": 1,
+      "user": "1001",
+      "exposed_ports": [
+        8080
+      ]
+    }
+  ],
+  "helm": {},
+  "ingress_routing": [
+    {
+      "kind": "Route",
+      "name": "trustyai",
+      "backend": "trustyai-service",
+      "tls": true,
+      "source": "explainability-service/manifests/base/route.yaml"
+    }
+  ],
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "explainability-service/demo/logger/generator.py:28"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "explainability-service/demo/logger/partial.py:50"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "explainability-service/demo/logger/partial.py:54"
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "explainability-service/manifests/base/trustyai-deployment.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "deployment",
+      "source": "explainability-service/manifests/base/trustyai-deployment.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "deployment-template",
+      "source": "explainability-service/manifests/base/trustyai-deployment.yaml"
+    }
+  ],
+  "component_refs": [
+    {
+      "target": "kserve",
+      "type": "provider",
+      "source": "explainability-connectors/src/main/java/org/kie/trustyai/connectors/kserve",
+      "evidence": "directory: explainability-connectors/src/main/java/org/kie/trustyai/connectors/kserve"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "rich",
+    "external_connections": "moderate",
+    "ingress_routing": "sparse",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "moderate",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "trustyai-explainability is a Kubernetes component. Dockerfile EXPOSE ports: 8080. connecting to external services: requests. with 1 ingress route(s). integrates with Prometheus via labels/annotations. references components: kserve (provider)."
+}

@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/model-registry-operator |
 | Aliases | Model Registry operator |
 | Commit | 9a1c709c1bdb3195a1cb40b64290e8b2a2c6d7e9 |
-| Extracted | 2026-06-10T10:34:21Z |
+| Extracted | 2026-06-10T10:48:56Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -20,7 +20,7 @@
 
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
-| ModelRegistry | modelregistry.opendatahub.io | v1beta1 | Namespaced | 113 | !(has(self.oauthProxy) &amp;&amp; has(self.kubeRBACProxy)), has(self.generateDeployment) &amp;&amp; self.generateDeployment ? true : (size(self.host) &gt; 0 \|\| size(self.hostAddress) &gt; 0), has(self.database) &amp;&amp; size(self.database) &gt; 0 ? has(self.username) &amp;&amp; size(self.username) &gt; 0 : true, !(has(self.generateDeployment) &amp;&amp; self.generateDeployment) \|\| ((!has(self.host) \|\| size(self.host) == 0) &amp;&amp; (!has(self.hostAddress) \|\| size(self.hostAddress) == 0)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.tlsCertificateSecret) == has(self.tlsKeySecret) | YAML | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/9a1c709c1bdb3195a1cb40b64290e8b2a2c6d7e9/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
+| ModelRegistry | modelregistry.opendatahub.io | v1beta1 | Namespaced | 113 | !(has(self.oauthProxy) &amp;&amp; has(self.kubeRBACProxy)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.generateDeployment) &amp;&amp; self.generateDeployment ? true : (size(self.host) &gt; 0 \|\| size(self.hostAddress) &gt; 0), has(self.database) &amp;&amp; size(self.database) &gt; 0 ? has(self.username) &amp;&amp; size(self.username) &gt; 0 : true, !(has(self.generateDeployment) &amp;&amp; self.generateDeployment) \|\| ((!has(self.host) \|\| size(self.host) == 0) &amp;&amp; (!has(self.hostAddress) \|\| size(self.hostAddress) == 0)) | YAML | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/9a1c709c1bdb3195a1cb40b64290e8b2a2c6d7e9/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
 
 
 ## Webhooks

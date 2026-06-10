@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/odh-dashboard |
 | Aliases | ODH Dashboard |
 | Commit | 9d2558c016808fc9bacd9cf33211d0b166d2767b |
-| Extracted | 2026-06-10T10:33:13Z |
+| Extracted | 2026-06-10T10:45:05Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/kueue |
 | Commit | 2a545fb94cd077c4c10c5400649d9d913d4c5c0f |
-| Extracted | 2026-06-10T10:39:22Z |
+| Extracted | 2026-06-10T10:51:47Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -29,36 +29,36 @@
 |------|------|-----------|------------|----------|------------------|----------|
 | AppWrapper-webhook | validating |  |  |  |  |  |
 | AppWrapper-webhook | mutating |  |  |  |  |  |
-| ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | mutating |  |  |  |  |  |
+| ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
-| JobSetWebhook-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
-| JobWebhook-webhook | validating |  |  |  |  |  |
+| JobSetWebhook-webhook | mutating |  |  |  |  |  |
 | JobWebhook-webhook | mutating |  |  |  |  |  |
-| MpiJobWebhook-webhook | validating |  |  |  |  |  |
+| JobWebhook-webhook | validating |  |  |  |  |  |
 | MpiJobWebhook-webhook | mutating |  |  |  |  |  |
+| MpiJobWebhook-webhook | validating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
 | RayClusterWebhook-webhook | validating |  |  |  |  |  |
 | RayClusterWebhook-webhook | mutating |  |  |  |  |  |
-| RayJobWebhook-webhook | validating |  |  |  |  |  |
 | RayJobWebhook-webhook | mutating |  |  |  |  |  |
-| ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
+| RayJobWebhook-webhook | validating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | validating |  |  |  |  |  |
+| ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
-| Webhook-webhook | validating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
 | WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | mutating |  |  |  |  |  |
 | mdeployment.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/2a545fb94cd077c4c10c5400649d9d913d4c5c0f/config/rhoai/mutating_webhook_patch.yaml) |

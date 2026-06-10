@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/odh-model-controller |
 | Aliases | ODH Model Controller, omc |
 | Commit | d7ae770280167a9d24e213b7ab0d2307fecb2015 |
-| Extracted | 2026-06-10T10:37:08Z |
+| Extracted | 2026-06-10T10:48:02Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

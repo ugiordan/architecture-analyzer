@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/rhods-operator |
 | Aliases | opendatahub-operator, RHODS operator |
 | Commit | 45861c7be7460b35798f50a796371e9e147816d6 |
-| Extracted | 2026-06-10T10:36:41Z |
+| Extracted | 2026-06-10T10:49:04Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

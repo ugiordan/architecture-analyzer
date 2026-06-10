@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/rhds-llama-stack-distribution |
 | Commit | 53fb2c2f9dbd960835ae7583bd4ab48694ac19b9 |
-| Extracted | 2026-06-10T10:39:23Z |
+| Extracted | 2026-06-10T10:51:37Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

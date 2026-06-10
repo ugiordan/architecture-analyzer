@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | llm-d/llm-d-kv-cache |
 | Commit | 4f857211d6dc4623ce306ef446540baedb25b638 |
-| Extracted | 2026-06-10T10:38:20Z |
+| Extracted | 2026-06-10T10:50:53Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

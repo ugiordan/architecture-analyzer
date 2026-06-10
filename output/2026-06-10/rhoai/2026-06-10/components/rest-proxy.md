@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | kserve/rest-proxy |
 | Commit | fef0ff4381c8da9fb6ea6a3bb61a04e3857b3e67 |
-| Extracted | 2026-06-10T10:39:44Z |
+| Extracted | 2026-06-10T10:52:14Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
