@@ -333,6 +333,23 @@ jobs:
             exit 0
           fi
 
+          # Copy per-component raw data (component-architecture.json + security-findings.json)
+          for platform_dir in odh-results rhoai-results; do
+            [ -d "$platform_dir" ] || continue
+            platform=$(echo "$platform_dir" | sed 's/-results//')
+            find "$platform_dir" -name "component-architecture.json" -o -name "security-findings.json" | while read -r f; do
+              # Extract org/repo from path: platform-results/org/repo/file.json
+              rel="${f#${platform_dir}/}"
+              repo_path=$(dirname "$rel")
+              repo_name=$(basename "$repo_path")
+              dest="$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/raw/${repo_name}"
+              mkdir -p "$dest"
+              cp "$f" "$dest/"
+            done
+            count=$(find "$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/raw" -name "*.json" 2>/dev/null | wc -l | tr -d ' ')
+            echo "Copied ${count} raw files for ${platform}"
+          done
+
           # Commit and tag
           (
             cd "$SNAP_DIR"
