@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-10T10:09:31Z  
-**Components**: 35  
+**Generated**: 2026-06-10T10:43:04Z  
+**Components**: 42  
 
 ## How to Find Information
 
@@ -47,6 +47,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | ai4rag |  | 0 | 0 | 9 | [ai4rag.md](components/ai4rag.md) |
 | argo-workflows |  | 0 | 0 | 105 | [argo-workflows.md](components/argo-workflows.md) |
 | batch-gateway |  | 0 | 0 | 29 | [batch-gateway.md](components/batch-gateway.md) |
+| codeflare-operator | CodeFlare operator | 1 | 1 | 23 | [codeflare-operator.md](components/codeflare-operator.md) |
 | data-science-pipelines | DSP, dsp | 3 | 1 | 192 | [data-science-pipelines.md](components/data-science-pipelines.md) |
 | data-science-pipelines-operator | DSPO, dspo | 4 | 8 | 25 | [data-science-pipelines-operator.md](components/data-science-pipelines-operator.md) |
 | distributed-workloads |  | 0 | 0 | 18 | [distributed-workloads.md](components/distributed-workloads.md) |
@@ -70,12 +71,18 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | mlflow |  | 0 | 1 | 765 | [mlflow.md](components/mlflow.md) |
 | mlflow-operator |  | 2 | 3 | 21 | [mlflow-operator.md](components/mlflow-operator.md) |
 | model-registry |  | 0 | 1 | 80 | [model-registry.md](components/model-registry.md) |
+| model-registry-operator | Model Registry operator | 1 | 4 | 18 | [model-registry-operator.md](components/model-registry-operator.md) |
 | modelmesh |  | 0 | 1 | 0 | [modelmesh.md](components/modelmesh.md) |
 | modelmesh-serving | ModelMesh | 4 | 3 | 29 | [modelmesh-serving.md](components/modelmesh-serving.md) |
 | models-as-a-service |  | 0 | 4 | 38 | [models-as-a-service.md](components/models-as-a-service.md) |
 | notebooks |  | 0 | 8 | 14 | [notebooks.md](components/notebooks.md) |
+| odh-dashboard | ODH Dashboard | 0 | 13 | 175 | [odh-dashboard.md](components/odh-dashboard.md) |
+| odh-model-controller | ODH Model Controller, omc | 1 | 2 | 45 | [odh-model-controller.md](components/odh-model-controller.md) |
 | ogx-k8s-operator |  | 2 | 2 | 21 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
+| opendatahub-operator | ODH operator, odh-operator | 1 | 3 | 70 | [opendatahub-operator.md](components/opendatahub-operator.md) |
 | spark-operator |  | 3 | 1 | 26 | [spark-operator.md](components/spark-operator.md) |
 | trainer |  | 3 | 0 | 22 | [trainer.md](components/trainer.md) |
+| training-operator | Training operator, Kubeflow Training operator | 6 | 1 | 22 | [training-operator.md](components/training-operator.md) |
+| trustyai-service-operator | TrustyAI operator | 4 | 2 | 19 | [trustyai-service-operator.md](components/trustyai-service-operator.md) |
 | workload-variant-autoscaler |  | 0 | 1 | 23 | [workload-variant-autoscaler.md](components/workload-variant-autoscaler.md) |
 

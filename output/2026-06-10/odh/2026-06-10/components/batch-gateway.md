@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | llm-d-incubation/batch-gateway |
 | Commit | 35f956260ca00c3d314b17b562ad5e2bca7ed56a |
-| Extracted | 2026-06-10T10:04:48Z |
+| Extracted | 2026-06-10T10:37:57Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

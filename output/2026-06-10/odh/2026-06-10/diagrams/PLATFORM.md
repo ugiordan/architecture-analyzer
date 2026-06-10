@@ -8,12 +8,12 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 35 |
-| CRDs | 77 |
-| Services | 55 |
-| Secrets | 28 |
-| Cluster Roles | 56 |
-| Cross-Component Dependencies | 18 |
+| Components | 42 |
+| CRDs | 91 |
+| Services | 78 |
+| Secrets | 48 |
+| Cluster Roles | 110 |
+| Cross-Component Dependencies | 34 |
 
 ## Component Registry
 
@@ -23,6 +23,7 @@
 | ai4rag |
 | argo-workflows |
 | batch-gateway |
+| codeflare-operator |
 | data-science-pipelines |
 | data-science-pipelines-operator |
 | distributed-workloads |
@@ -46,19 +47,26 @@
 | mlflow |
 | mlflow-operator |
 | model-registry |
+| model-registry-operator |
 | modelmesh |
 | modelmesh-serving |
 | models-as-a-service |
 | notebooks |
+| odh-dashboard |
+| odh-model-controller |
 | ogx-k8s-operator |
+| opendatahub-operator |
 | spark-operator |
 | trainer |
+| training-operator |
+| trustyai-service-operator |
 | workload-variant-autoscaler |
 
 ## CRD Ownership Map
 
 | Owner | Kind |
 |-------|------|
+| codeflare-operator | AppWrapper |
 | data-science-pipelines | CompositeController |
 | data-science-pipelines | ControllerRevision |
 | data-science-pipelines | DecoratorController |
@@ -84,20 +92,33 @@
 | llm-d-inference-scheduler | InferenceObjective |
 | mlflow-operator | MLflow |
 | mlflow-operator | MLflowConfig |
+| model-registry-operator | ModelRegistry |
 | modelmesh-serving | Predictor |
+| odh-model-controller | Account |
 | ogx-k8s-operator | LlamaStackDistribution |
 | ogx-k8s-operator | OGXServer |
+| opendatahub-operator | FeatureTracker |
 | spark-operator | ScheduledSparkApplication |
 | spark-operator | SparkApplication |
 | spark-operator | SparkConnect |
 | trainer | ClusterTrainingRuntime |
 | trainer | TrainJob |
 | trainer | TrainingRuntime |
+| training-operator | JAXJob |
+| training-operator | MPIJob |
+| training-operator | PaddleJob |
+| training-operator | PyTorchJob |
+| training-operator | TFJob |
+| training-operator | XGBoostJob |
+| trustyai-service-operator | EvalHub |
+| trustyai-service-operator | LMEvalJob |
+| trustyai-service-operator | TrustyAIService |
 
 ## Cross-Component Dependencies
 
 | From | To | Type |
 |------|----|------|
+| codeflare-operator | opendatahub-operator | go-module |
 | data-science-pipelines-operator | mlflow-operator | go-module |
 | kserve | odh-platform-utilities | go-module |
 | kserve | kserve-autogluon-server | watches-crd:InferenceGraph |
@@ -109,19 +130,35 @@
 | kserve | kserve-autogluon-server | watches-crd:InferenceService |
 | kubeflow | data-science-pipelines-operator | go-module |
 | mlflow-operator | mlflow-operator | go-module |
+| model-registry-operator | operator-chaos | go-module |
 | model-registry | kserve-autogluon-server | watches-crd:InferenceService |
 | modelmesh-serving | kserve-autogluon-server | watches-crd:ServingRuntime |
 | models-as-a-service | kserve | go-module |
+| odh-dashboard | mlflow-go | go-module |
+| odh-dashboard | odh-platform-utilities | go-module |
+| odh-dashboard | ogx-k8s-operator | go-module |
+| odh-model-controller | kserve | go-module |
+| odh-model-controller | kserve-autogluon-server | watches-crd:InferenceGraph |
+| odh-model-controller | kserve-autogluon-server | watches-crd:ServingRuntime |
+| odh-model-controller | kserve-autogluon-server | watches-crd:LLMInferenceService |
+| odh-model-controller | kserve-autogluon-server | watches-crd:InferenceService |
 | ogx-k8s-operator | odh-platform-utilities | go-module |
+| opendatahub-operator | models-as-a-service | go-module |
+| opendatahub-operator | opendatahub-operator | go-module |
+| codeflare-operator | opendatahub-operator | webhook-ref |
 | kserve-autogluon-server | kserve | webhook-ref |
-| modelmesh-serving | kueue | webhook-ref |
-| spark-operator | kueue | webhook-ref |
+| model-registry-operator | opendatahub-operator | webhook-ref |
+| modelmesh-serving | opendatahub-operator | webhook-ref |
+| odh-model-controller | opendatahub-operator | webhook-ref |
+| spark-operator | opendatahub-operator | webhook-ref |
+| trustyai-service-operator | opendatahub-operator | webhook-ref |
 
 ## Secrets Referenced
 
 | Secret | Owner | Type |
 |--------|-------|------|
 | webhook-server-cert | agents-operator | Opaque |
+| webhook-server-cert | codeflare-operator | Opaque |
 | kfp-api-webhook-cert | data-science-pipelines | Opaque |
 | mlpipeline-minio-artifact | data-science-pipelines | Opaque |
 | kserve-webhook-server-cert | kserve-autogluon-server | Opaque |
@@ -139,15 +176,34 @@
 | istiod-tls | llm-d-inference-scheduler | Opaque |
 | controller-manager-metrics-tls | mlflow-operator | Opaque |
 | postgres-secret | mlflow-operator | Opaque |
+| controller-manager-metrics-service | model-registry-operator | Opaque |
+| webhook-server-cert | model-registry-operator | Opaque |
 | minio-secret | model-registry | Opaque |
 | model-catalog-hf-api-key | model-registry | Opaque |
 | model-catalog-postgres | model-registry | Opaque |
 | modelmesh-webhook-server-cert | modelmesh-serving | Opaque |
 | maas-api-serving-cert | models-as-a-service | kubernetes.io/tls |
 | maas-controller-webhook-cert | models-as-a-service | kubernetes.io/tls |
+| <TLS_SECRET_NAME> | odh-dashboard | kubernetes.io/tls |
+| automl-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| autorag-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| dashboard-operator-webhook-tls | odh-dashboard | Opaque |
+| dashboard-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| eval-hub-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| gen-ai-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| maas-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| mlflow-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| model-registry-proxy-tls | odh-dashboard | kubernetes.io/tls |
+| webhook-server-cert | odh-dashboard | Opaque |
+| model-serving-api-tls | odh-model-controller | kubernetes.io/tls |
+| odh-model-controller-webhook-cert | odh-model-controller | kubernetes.io/tls |
 | ogx-k8s-operator-webhook-cert | ogx-k8s-operator | Opaque |
+| opendatahub-operator-controller-webhook-cert | opendatahub-operator | kubernetes.io/tls |
+| redhat-ods-operator-controller-webhook-cert | opendatahub-operator | kubernetes.io/tls |
 | webhook-server-cert | spark-operator | Opaque |
 | kubeflow-trainer-webhook-cert | trainer | Opaque |
+| kubeflow-training-operator-webhook-cert | training-operator | Opaque |
+| training-operator-webhook-cert | training-operator | Opaque |
 | epp-metrics-token | workload-variant-autoscaler | Opaque |
 
 ## RBAC Surface
@@ -159,6 +215,9 @@
 | argo-workflows | argo-aggregate-to-view | 12 |
 | argo-workflows | argo-cluster-role | 21 |
 | argo-workflows | argo-server-cluster-role | 14 |
+| codeflare-operator | appwrapper-editor-role | 2 |
+| codeflare-operator | manager-role | 34 |
+| codeflare-operator | viewer-role | 2 |
 | data-science-pipelines-operator | aggregate-dspa-admin-edit | 4 |
 | data-science-pipelines-operator | aggregate-dspa-admin-view | 4 |
 | data-science-pipelines-operator | manager-argo-role | 22 |
@@ -186,17 +245,62 @@
 | mlflow-operator | mlflow-edit | 13 |
 | mlflow-operator | mlflow-integration | 5 |
 | mlflow-operator | mlflow-view | 8 |
+| model-registry-operator | manager-role | 29 |
+| model-registry-operator | metrics-reader | 0 |
+| model-registry-operator | modelregistry-admin-role | 2 |
+| model-registry-operator | modelregistry-editor-role | 2 |
+| model-registry-operator | modelregistry-viewer-role | 2 |
+| model-registry-operator | proxy-role | 2 |
 | model-registry | metrics-auth-role | 2 |
 | model-registry | metrics-reader | 0 |
 | model-registry | model-registry-create-sars | 1 |
 | model-registry | model-registry-manager-role | 3 |
 | model-registry | model-registry-retrieve-clusterrolebindings | 1 |
 | model-registry | model-registry-ui-services-reader | 1 |
+| odh-dashboard | odh-dashboard | 40 |
+| odh-dashboard | odh-dashboard-automl | 1 |
+| odh-dashboard | odh-dashboard-autorag | 1 |
+| odh-dashboard | odh-dashboard-eval-hub | 1 |
+| odh-dashboard | odh-dashboard-gen-ai | 3 |
+| odh-dashboard | odh-dashboard-maas | 2 |
+| odh-dashboard | odh-dashboard-mlflow | 2 |
+| odh-dashboard | odh-dashboard-model-registry | 1 |
+| odh-dashboard | odh-dashboard-modules | 3 |
+| odh-model-controller | account-editor-role | 2 |
+| odh-model-controller | account-viewer-role | 3 |
+| odh-model-controller | kserve-prometheus-k8s | 3 |
+| odh-model-controller | metrics-auth-role | 2 |
+| odh-model-controller | metrics-reader | 0 |
+| odh-model-controller | odh-model-controller-role | 45 |
+| odh-model-controller | proxy-role | 2 |
 | ogx-k8s-operator | manager-role | 18 |
 | ogx-k8s-operator | metrics-reader | 0 |
 | ogx-k8s-operator | ogxserver-editor-role | 2 |
 | ogx-k8s-operator | ogxserver-viewer-role | 2 |
 | ogx-k8s-operator | proxy-role | 2 |
+| opendatahub-operator | auth-editor-role | 2 |
+| opendatahub-operator | auth-viewer-role | 2 |
+| opendatahub-operator | dashboard-editor-role | 2 |
+| opendatahub-operator | dashboard-viewer-role | 2 |
+| opendatahub-operator | datasciencepipelines-editor-role | 2 |
+| opendatahub-operator | datasciencepipelines-viewer-role | 2 |
+| opendatahub-operator | kserve-editor-role | 2 |
+| opendatahub-operator | kserve-viewer-role | 2 |
+| opendatahub-operator | kueue-editor-role | 2 |
+| opendatahub-operator | kueue-viewer-role | 2 |
+| opendatahub-operator | metrics-reader | 0 |
+| opendatahub-operator | modelregistry-editor-role | 2 |
+| opendatahub-operator | modelregistry-viewer-role | 2 |
+| opendatahub-operator | monitoring-editor-role | 2 |
+| opendatahub-operator | monitoring-viewer-role | 2 |
+| opendatahub-operator | ray-editor-role | 2 |
+| opendatahub-operator | ray-viewer-role | 2 |
+| opendatahub-operator | trainingoperator-editor-role | 2 |
+| opendatahub-operator | trainingoperator-viewer-role | 2 |
+| opendatahub-operator | trustyai-editor-role | 2 |
+| opendatahub-operator | trustyai-viewer-role | 2 |
+| opendatahub-operator | workbenches-editor-role | 2 |
+| opendatahub-operator | workbenches-viewer-role | 2 |
 | spark-operator | spark-operator-controller | 16 |
 | spark-operator | spark-operator-scheduledsparkapplication-editor-role | 2 |
 | spark-operator | spark-operator-scheduledsparkapplication-viewer-role | 2 |
@@ -210,12 +314,19 @@
 | trainer | training-admin | 6 |
 | trainer | training-edit | 6 |
 | trainer | training-view | 6 |
+| training-operator | kubeflow-training-admin | 0 |
+| training-operator | kubeflow-training-edit | 15 |
+| training-operator | kubeflow-training-view | 13 |
+| training-operator | training-edit | 12 |
+| training-operator | training-operator | 31 |
+| training-operator | training-view | 12 |
 
 ## Network Topology
 
 | Owner | Service | Type | Ports |
 |-------|---------|------|-------|
 | agents-operator | webhook-service | ClusterIP | 443/TCP |
+| codeflare-operator | webhook-service | ClusterIP | 443/TCP |
 | data-science-pipelines-operator | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |
 | data-science-pipelines-operator | ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP |
 | data-science-pipelines-operator | mariadb-template-value | ClusterIP | 3306/TCP |
@@ -257,6 +368,9 @@
 | mlflow-operator | mlflow-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | mlflow-operator | postgres-service | ClusterIP | 5432/TCP |
 | mlflow | env-port-default | python-source | 9137/TCP |
+| model-registry-operator | model-registry-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| model-registry-operator | model-registry-operator-webhook-service | ClusterIP | 443/TCP |
+| model-registry-operator | template-value-postgres | ClusterIP | 5432/TCP |
 | model-registry | model-catalog | ClusterIP | 8080/TCP |
 | modelmesh-serving | etcd | ClusterIP | 2379/TCP |
 | modelmesh-serving | modelmesh-controller | ClusterIP | 8080/TCP |
@@ -266,8 +380,27 @@
 | models-as-a-service | maas-controller-webhook-service | ClusterIP | 443/TCP |
 | models-as-a-service | payload-processing | ClusterIP | 9004/TCP |
 | notebooks | notebook | ClusterIP | 8888/TCP |
+| odh-dashboard | <MODULE_SERVICE_NAME> | ClusterIP | <MODULE_PORT>/TCP |
+| odh-dashboard | odh-dashboard | ClusterIP | 8443/TCP |
+| odh-dashboard | odh-dashboard-automl-ui | ClusterIP | 8643/TCP |
+| odh-dashboard | odh-dashboard-autorag-ui | ClusterIP | 8743/TCP |
+| odh-dashboard | odh-dashboard-eval-hub-ui | ClusterIP | 8543/TCP |
+| odh-dashboard | odh-dashboard-gen-ai-ui | ClusterIP | 8143/TCP |
+| odh-dashboard | odh-dashboard-maas-ui | ClusterIP | 8243/TCP |
+| odh-dashboard | odh-dashboard-mlflow-ui | ClusterIP | 8343/TCP |
+| odh-dashboard | odh-dashboard-model-registry-ui | ClusterIP | 8043/TCP |
+| odh-dashboard | workspaces-backend | ClusterIP | 4000/TCP |
+| odh-dashboard | workspaces-controller-metrics-service | ClusterIP | 8080/TCP |
+| odh-dashboard | workspaces-frontend | ClusterIP | 8080/TCP |
+| odh-dashboard | workspaces-webhook-service | ClusterIP | 443/TCP |
+| odh-model-controller | model-serving-api | ClusterIP | 443/TCP, 8080/TCP |
+| odh-model-controller | odh-model-controller-webhook-service | ClusterIP | 443/TCP |
 | ogx-k8s-operator | ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | ogx-k8s-operator | ogx-k8s-operator-webhook-service | ClusterIP | 443/TCP |
+| opendatahub-operator | webhook-service | ClusterIP | 443/TCP |
 | spark-operator | spark-operator-webhook-svc | ClusterIP | 443/TCP |
+| training-operator | training-operator | ClusterIP | 8080/TCP, 443/TCP |
+| trustyai-service-operator | trustyai-service-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| trustyai-service-operator | trustyai-service-operator-metrics-service | ClusterIP | 8080/TCP |
 | workload-variant-autoscaler | controller-manager-metrics-service | ClusterIP | 8443/TCP |
 

@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-10T10:09:32Z  
-**Components**: 56  
+**Generated**: 2026-06-10T10:43:05Z  
+**Components**: 63  
 
 ## How to Find Information
 
@@ -52,6 +52,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | batch-gateway |  | 0 | 0 | 29 | [batch-gateway.md](components/batch-gateway.md) |
 | caikit-nlp |  | 0 | 0 | 17 | [caikit-nlp.md](components/caikit-nlp.md) |
 | caikit-tgis-serving |  | 0 | 0 | 3 | [caikit-tgis-serving.md](components/caikit-tgis-serving.md) |
+| codeflare-operator | CodeFlare operator | 1 | 1 | 23 | [codeflare-operator.md](components/codeflare-operator.md) |
 | codeflare-sdk |  | 0 | 0 | 13 | [codeflare-sdk.md](components/codeflare-sdk.md) |
 | data-science-pipelines | DSP, dsp | 3 | 1 | 191 | [data-science-pipelines.md](components/data-science-pipelines.md) |
 | data-science-pipelines-operator | DSPO, dspo | 4 | 8 | 23 | [data-science-pipelines-operator.md](components/data-science-pipelines-operator.md) |
@@ -77,22 +78,28 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | mlflow-operator |  | 2 | 3 | 21 | [mlflow-operator.md](components/mlflow-operator.md) |
 | model-metadata-collection |  | 0 | 0 | 4 | [model-metadata-collection.md](components/model-metadata-collection.md) |
 | model-registry |  | 0 | 1 | 80 | [model-registry.md](components/model-registry.md) |
+| model-registry-operator | Model Registry operator | 1 | 4 | 18 | [model-registry-operator.md](components/model-registry-operator.md) |
 | modelmesh-runtime-adapter |  | 0 | 0 | 60 | [modelmesh-runtime-adapter.md](components/modelmesh-runtime-adapter.md) |
 | modelmesh-serving | ModelMesh | 4 | 3 | 29 | [modelmesh-serving.md](components/modelmesh-serving.md) |
 | models-as-a-service |  | 0 | 3 | 38 | [models-as-a-service.md](components/models-as-a-service.md) |
 | notebooks |  | 0 | 8 | 14 | [notebooks.md](components/notebooks.md) |
 | notebooks-downstream |  | 0 | 13 | 19 | [notebooks-downstream.md](components/notebooks-downstream.md) |
 | odh-cli |  | 0 | 0 | 50 | [odh-cli.md](components/odh-cli.md) |
+| odh-dashboard | ODH Dashboard | 0 | 13 | 175 | [odh-dashboard.md](components/odh-dashboard.md) |
 | odh-deployer |  | 0 | 0 | 0 | [odh-deployer.md](components/odh-deployer.md) |
+| odh-model-controller | ODH Model Controller, omc | 1 | 2 | 45 | [odh-model-controller.md](components/odh-model-controller.md) |
 | ogx-k8s-operator |  | 2 | 2 | 21 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | openvino_model_server |  | 0 | 0 | 42 | [openvino_model_server.md](components/openvino_model_server.md) |
 | pipelines-components |  | 0 | 0 | 66 | [pipelines-components.md](components/pipelines-components.md) |
 | rest-proxy |  | 0 | 0 | 6 | [rest-proxy.md](components/rest-proxy.md) |
 | rhds-llama-stack-distribution |  | 0 | 0 | 0 | [rhds-llama-stack-distribution.md](components/rhds-llama-stack-distribution.md) |
+| rhods-operator | opendatahub-operator, RHODS operator | 1 | 3 | 70 | [rhods-operator.md](components/rhods-operator.md) |
 | spark-operator |  | 3 | 1 | 28 | [spark-operator.md](components/spark-operator.md) |
 | text-generation-inference |  | 0 | 1 | 2 | [text-generation-inference.md](components/text-generation-inference.md) |
 | trainer |  | 3 | 0 | 22 | [trainer.md](components/trainer.md) |
+| training-operator | Training operator, Kubeflow Training operator | 6 | 1 | 22 | [training-operator.md](components/training-operator.md) |
 | trustyai-explainability |  | 0 | 0 | 3 | [trustyai-explainability.md](components/trustyai-explainability.md) |
+| trustyai-service-operator | TrustyAI operator | 4 | 2 | 19 | [trustyai-service-operator.md](components/trustyai-service-operator.md) |
 | vllm-cpu |  | 0 | 5 | 485 | [vllm-cpu.md](components/vllm-cpu.md) |
 | vllm-gaudi |  | 0 | 1 | 16 | [vllm-gaudi.md](components/vllm-gaudi.md) |
 | vllm-orchestrator-gateway |  | 0 | 0 | 0 | [vllm-orchestrator-gateway.md](components/vllm-orchestrator-gateway.md) |

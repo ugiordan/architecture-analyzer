@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/caikit-tgis-serving |
 | Commit | 27e5ef01c74822e835e3ae7d55c69d747be718fd |
-| Extracted | 2026-06-10T10:05:01Z |
+| Extracted | 2026-06-10T10:38:51Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

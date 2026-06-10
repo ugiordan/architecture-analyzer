@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/agents-operator |
 | Commit | 0ed740a85dd65da6b16f3562babc9abfc3621aae |
-| Extracted | 2026-06-10T10:01:40Z |
+| Extracted | 2026-06-10T10:32:42Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

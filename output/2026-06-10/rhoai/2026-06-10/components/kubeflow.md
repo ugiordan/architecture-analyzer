@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/kubeflow |
 | Commit | 66633e76809dd5b5d13eec8a5afb0ca4c37a0d19 |
-| Extracted | 2026-06-10T10:00:07Z |
+| Extracted | 2026-06-10T10:32:37Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/kube-auth-proxy |
 | Commit | 1ad41e6bbfbb259e69e16b10c8743acd24318a35 |
-| Extracted | 2026-06-10T10:03:32Z |
+| Extracted | 2026-06-10T10:36:48Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

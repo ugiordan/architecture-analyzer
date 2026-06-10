@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/kueue |
 | Commit | 2a545fb94cd077c4c10c5400649d9d913d4c5c0f |
-| Extracted | 2026-06-10T10:04:33Z |
+| Extracted | 2026-06-10T10:39:22Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -33,32 +33,32 @@
 | ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
-| JobWebhook-webhook | mutating |  |  |  |  |  |
 | JobWebhook-webhook | validating |  |  |  |  |  |
-| MpiJobWebhook-webhook | mutating |  |  |  |  |  |
+| JobWebhook-webhook | mutating |  |  |  |  |  |
 | MpiJobWebhook-webhook | validating |  |  |  |  |  |
+| MpiJobWebhook-webhook | mutating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
 | RayClusterWebhook-webhook | validating |  |  |  |  |  |
 | RayClusterWebhook-webhook | mutating |  |  |  |  |  |
-| RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | validating |  |  |  |  |  |
+| RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
-| Webhook-webhook | validating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
 | WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | mutating |  |  |  |  |  |
 | mdeployment.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/2a545fb94cd077c4c10c5400649d9d913d4c5c0f/config/rhoai/mutating_webhook_patch.yaml) |
@@ -95,6 +95,13 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
+| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
+| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
+
+### Webhook-webhook Behavior
+
+| Field | Operation | Condition |
+|-------|-----------|----------|
 | spec.template.annotations | set | suspend &amp;&amp; deployment.Spec.Template.Annotations == nil |
 | spec.template.labels | set | suspend &amp;&amp; deployment.Spec.Template.Labels == nil |
 
@@ -104,13 +111,6 @@
 |-------|-----------|----------|
 | labels | set | priorityClass != "" &amp;&amp; podTemplateSpec.Labels == nil |
 | annotations | set | podTemplateSpec.Annotations == nil |
-
-### Webhook-webhook Behavior
-
-| Field | Operation | Condition |
-|-------|-----------|----------|
-| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
-| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
 
 
 ## HTTP Endpoints
