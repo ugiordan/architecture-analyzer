@@ -133,7 +133,8 @@ if [ -f "${SCAN_CONFIG}" ] && command -v yq &>/dev/null; then
         .platforms[].repo_overrides.\"${SHORT}\".aliases // [] | join(\",\")
     " "${SCAN_CONFIG}" 2>/dev/null | grep -v '^$' | head -1 || true)
     if [ -n "${ALIASES}" ]; then
-        ALIASES_ARGS="-aliases ${ALIASES}"
+        ALIASES_ARGS="-aliases"
+        ALIASES_VAL="${ALIASES}"
     fi
 fi
 
@@ -144,7 +145,15 @@ if [ -n "${VERSION_LABEL}" ]; then
     VERSION_ARGS="-version ${VERSION_LABEL}"
 fi
 ANALYSIS_TIMEOUT="${ANALYSIS_TIMEOUT:-2400}"
-timeout "${ANALYSIS_TIMEOUT}" "${ANALYZER_BIN}" full-analysis -output-dir "${OUTDIR}" ${VERSION_ARGS} ${ALIASES_ARGS} "${CLONE_DIR}" || {
+FULL_ARGS=(-output-dir "${OUTDIR}")
+if [ -n "${VERSION_ARGS}" ]; then
+    FULL_ARGS+=(${VERSION_ARGS})
+fi
+if [ -n "${ALIASES_ARGS}" ]; then
+    FULL_ARGS+=("${ALIASES_ARGS}" "${ALIASES_VAL}")
+fi
+FULL_ARGS+=("${CLONE_DIR}")
+timeout "${ANALYSIS_TIMEOUT}" "${ANALYZER_BIN}" full-analysis "${FULL_ARGS[@]}" || {
     rc=$?
     if [ "$rc" -eq 124 ]; then
         echo "::warning::Analysis timed out for ${REPO} after ${ANALYSIS_TIMEOUT}s, partial results may be available"
