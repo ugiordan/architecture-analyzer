@@ -1,5 +1,21 @@
 # CI Integration
 
+## Pre-built binaries
+
+Download pre-built binaries from [GitHub Releases](https://github.com/ugiordan/architecture-analyzer/releases):
+
+```bash
+# Linux (amd64)
+curl -L https://github.com/ugiordan/architecture-analyzer/releases/latest/download/arch-analyzer-linux-amd64 -o arch-analyzer
+chmod +x arch-analyzer
+
+# macOS (Apple Silicon)
+curl -L https://github.com/ugiordan/architecture-analyzer/releases/latest/download/arch-analyzer-darwin-arm64 -o arch-analyzer
+chmod +x arch-analyzer
+```
+
+## Workflows
+
 The analyzer provides three GitHub Actions workflows for automated analysis.
 
 ## Workflows overview
