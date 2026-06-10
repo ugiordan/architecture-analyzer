@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/vllm-orchestrator-gateway |
 | Commit | 211cc6f2b3787bb5615c50a9f8e1ebbd37bfe75e |
-| Extracted | 2026-06-10T04:20:17Z |
+| Extracted | 2026-06-10T10:05:29Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

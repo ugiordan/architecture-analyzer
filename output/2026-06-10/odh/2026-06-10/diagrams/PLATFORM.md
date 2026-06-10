@@ -8,9 +8,9 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 34 |
+| Components | 35 |
 | CRDs | 77 |
-| Services | 54 |
+| Services | 55 |
 | Secrets | 28 |
 | Cluster Roles | 56 |
 | Cross-Component Dependencies | 18 |
@@ -27,6 +27,7 @@
 | data-science-pipelines-operator |
 | distributed-workloads |
 | eval-hub |
+| feast |
 | fms-guardrails-orchestrator |
 | guardrails-detectors |
 | kserve |
@@ -37,7 +38,6 @@
 | kuberay |
 | kueue |
 | llama-stack |
-| llama-stack-k8s-operator |
 | llama-stack-provider-trustyai-garak |
 | llm-d |
 | llm-d-inference-scheduler |
@@ -50,6 +50,7 @@
 | modelmesh-serving |
 | models-as-a-service |
 | notebooks |
+| ogx-k8s-operator |
 | spark-operator |
 | trainer |
 | workload-variant-autoscaler |
@@ -79,13 +80,13 @@
 | kserve-autogluon-server | TrainedModel |
 | kueue | ClusterQueue |
 | kueue | LocalQueue |
-| llama-stack-k8s-operator | LlamaStackDistribution |
-| llama-stack-k8s-operator | OGXServer |
 | llm-d-inference-scheduler | InferenceModelRewrite |
 | llm-d-inference-scheduler | InferenceObjective |
 | mlflow-operator | MLflow |
 | mlflow-operator | MLflowConfig |
 | modelmesh-serving | Predictor |
+| ogx-k8s-operator | LlamaStackDistribution |
+| ogx-k8s-operator | OGXServer |
 | spark-operator | ScheduledSparkApplication |
 | spark-operator | SparkApplication |
 | spark-operator | SparkConnect |
@@ -107,11 +108,11 @@
 | kserve | kserve-autogluon-server | watches-crd:LLMInferenceService |
 | kserve | kserve-autogluon-server | watches-crd:InferenceService |
 | kubeflow | data-science-pipelines-operator | go-module |
-| llama-stack-k8s-operator | odh-platform-utilities | go-module |
 | mlflow-operator | mlflow-operator | go-module |
 | model-registry | kserve-autogluon-server | watches-crd:InferenceService |
 | modelmesh-serving | kserve-autogluon-server | watches-crd:ServingRuntime |
 | models-as-a-service | kserve | go-module |
+| ogx-k8s-operator | odh-platform-utilities | go-module |
 | kserve-autogluon-server | kserve | webhook-ref |
 | modelmesh-serving | kueue | webhook-ref |
 | spark-operator | kueue | webhook-ref |
@@ -133,7 +134,6 @@
 | webhook-server-cert | kubeflow | Opaque |
 | webhook-server-cert | kuberay | Opaque |
 | webhook-server-cert | kueue | Opaque |
-| ogx-k8s-operator-webhook-cert | llama-stack-k8s-operator | Opaque |
 | cacerts | llm-d-inference-scheduler | Opaque |
 | istio-kubeconfig | llm-d-inference-scheduler | Opaque |
 | istiod-tls | llm-d-inference-scheduler | Opaque |
@@ -145,6 +145,7 @@
 | modelmesh-webhook-server-cert | modelmesh-serving | Opaque |
 | maas-api-serving-cert | models-as-a-service | kubernetes.io/tls |
 | maas-controller-webhook-cert | models-as-a-service | kubernetes.io/tls |
+| ogx-k8s-operator-webhook-cert | ogx-k8s-operator | Opaque |
 | webhook-server-cert | spark-operator | Opaque |
 | kubeflow-trainer-webhook-cert | trainer | Opaque |
 | epp-metrics-token | workload-variant-autoscaler | Opaque |
@@ -179,11 +180,6 @@
 | kserve-autogluon-server | kserve-proxy-role | 2 |
 | kserve | kserve-manager-role | 45 |
 | kserve | kserve-proxy-role | 2 |
-| llama-stack-k8s-operator | manager-role | 18 |
-| llama-stack-k8s-operator | metrics-reader | 0 |
-| llama-stack-k8s-operator | ogxserver-editor-role | 2 |
-| llama-stack-k8s-operator | ogxserver-viewer-role | 2 |
-| llama-stack-k8s-operator | proxy-role | 2 |
 | mlflow-operator | manager-role | 10 |
 | mlflow-operator | metrics-auth-role | 2 |
 | mlflow-operator | metrics-reader | 0 |
@@ -196,6 +192,11 @@
 | model-registry | model-registry-manager-role | 3 |
 | model-registry | model-registry-retrieve-clusterrolebindings | 1 |
 | model-registry | model-registry-ui-services-reader | 1 |
+| ogx-k8s-operator | manager-role | 18 |
+| ogx-k8s-operator | metrics-reader | 0 |
+| ogx-k8s-operator | ogxserver-editor-role | 2 |
+| ogx-k8s-operator | ogxserver-viewer-role | 2 |
+| ogx-k8s-operator | proxy-role | 2 |
 | spark-operator | spark-operator-controller | 16 |
 | spark-operator | spark-operator-scheduledsparkapplication-editor-role | 2 |
 | spark-operator | spark-operator-scheduledsparkapplication-viewer-role | 2 |
@@ -223,6 +224,7 @@
 | data-science-pipelines-operator | ml-pipeline | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP |
 | data-science-pipelines-operator | template-value | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP |
 | data-science-pipelines | kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP |
+| feast | uvicorn-server | python-source | 6566/TCP |
 | kserve-autogluon-server | cli-port-default | python-source | 80/TCP |
 | kserve-autogluon-server | kserve-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | kserve-autogluon-server | kserve-controller-manager-service | ClusterIP | 8443/TCP |
@@ -243,8 +245,6 @@
 | kuberay | webhook-service | ClusterIP | 443/TCP |
 | kueue | visibility-server | ClusterIP | 443/TCP |
 | kueue | webhook-service | ClusterIP | 443/TCP |
-| llama-stack-k8s-operator | ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
-| llama-stack-k8s-operator | ogx-k8s-operator-webhook-service | ClusterIP | 443/TCP |
 | llama-stack | cli-port-default | python-source | 8081/TCP |
 | llm-d-inference-scheduler | ${EPP_NAME} | ClusterIP | 9002/TCP, 5557/TCP, 9090/TCP |
 | llm-d-inference-scheduler | e2e-epp | ClusterIP | 9002/TCP, 5557/TCP |
@@ -266,6 +266,8 @@
 | models-as-a-service | maas-controller-webhook-service | ClusterIP | 443/TCP |
 | models-as-a-service | payload-processing | ClusterIP | 9004/TCP |
 | notebooks | notebook | ClusterIP | 8888/TCP |
+| ogx-k8s-operator | ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| ogx-k8s-operator | ogx-k8s-operator-webhook-service | ClusterIP | 443/TCP |
 | spark-operator | spark-operator-webhook-svc | ClusterIP | 443/TCP |
 | workload-variant-autoscaler | controller-manager-metrics-service | ClusterIP | 8443/TCP |
 

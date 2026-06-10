@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/kueue |
 | Commit | 97024bd289d2cc5c9369b40d9f3483ab1483143d |
-| Extracted | 2026-06-10T04:19:13Z |
+| Extracted | 2026-06-10T10:04:43Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -31,33 +31,33 @@
 | AppWrapper-webhook | validating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
-| JobSetWebhook-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
-| JobWebhook-webhook | mutating |  |  |  |  |  |
+| JobSetWebhook-webhook | mutating |  |  |  |  |  |
 | JobWebhook-webhook | validating |  |  |  |  |  |
-| MpiJobWebhook-webhook | mutating |  |  |  |  |  |
+| JobWebhook-webhook | mutating |  |  |  |  |  |
 | MpiJobWebhook-webhook | validating |  |  |  |  |  |
+| MpiJobWebhook-webhook | mutating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
 | RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayClusterWebhook-webhook | validating |  |  |  |  |  |
-| RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | validating |  |  |  |  |  |
-| ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
+| RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | validating |  |  |  |  |  |
+| ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | mutating |  |  |  |  |  |
@@ -102,15 +102,15 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
-| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
+| spec.template.annotations | set | suspend &amp;&amp; deployment.Spec.Template.Annotations == nil |
+| spec.template.labels | set | suspend &amp;&amp; deployment.Spec.Template.Labels == nil |
 
 ### Webhook-webhook Behavior
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| spec.template.annotations | set | suspend &amp;&amp; deployment.Spec.Template.Annotations == nil |
-| spec.template.labels | set | suspend &amp;&amp; deployment.Spec.Template.Labels == nil |
+| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
+| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
 
 
 ## HTTP Endpoints

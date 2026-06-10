@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-10T04:24:57Z  
-**Components**: 34  
+**Generated**: 2026-06-10T10:09:31Z  
+**Components**: 35  
 
 ## How to Find Information
 
@@ -50,7 +50,8 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | data-science-pipelines | DSP, dsp | 3 | 1 | 192 | [data-science-pipelines.md](components/data-science-pipelines.md) |
 | data-science-pipelines-operator | DSPO, dspo | 4 | 8 | 25 | [data-science-pipelines-operator.md](components/data-science-pipelines-operator.md) |
 | distributed-workloads |  | 0 | 0 | 18 | [distributed-workloads.md](components/distributed-workloads.md) |
-| eval-hub |  | 0 | 0 | 47 | [eval-hub.md](components/eval-hub.md) |
+| eval-hub |  | 0 | 0 | 46 | [eval-hub.md](components/eval-hub.md) |
+| feast |  | 0 | 1 | 142 | [feast.md](components/feast.md) |
 | fms-guardrails-orchestrator |  | 0 | 0 | 0 | [fms-guardrails-orchestrator.md](components/fms-guardrails-orchestrator.md) |
 | guardrails-detectors |  | 0 | 0 | 1 | [guardrails-detectors.md](components/guardrails-detectors.md) |
 | kserve | KServe | 26 | 7 | 95 | [kserve.md](components/kserve.md) |
@@ -61,7 +62,6 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | kuberay |  | 0 | 2 | 91 | [kuberay.md](components/kuberay.md) |
 | kueue |  | 2 | 2 | 43 | [kueue.md](components/kueue.md) |
 | llama-stack |  | 0 | 1 | 123 | [llama-stack.md](components/llama-stack.md) |
-| llama-stack-k8s-operator |  | 2 | 2 | 21 | [llama-stack-k8s-operator.md](components/llama-stack-k8s-operator.md) |
 | llama-stack-provider-trustyai-garak |  | 0 | 0 | 205 | [llama-stack-provider-trustyai-garak.md](components/llama-stack-provider-trustyai-garak.md) |
 | llm-d |  | 0 | 0 | 0 | [llm-d.md](components/llm-d.md) |
 | llm-d-inference-scheduler |  | 2 | 7 | 50 | [llm-d-inference-scheduler.md](components/llm-d-inference-scheduler.md) |
@@ -74,6 +74,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | modelmesh-serving | ModelMesh | 4 | 3 | 29 | [modelmesh-serving.md](components/modelmesh-serving.md) |
 | models-as-a-service |  | 0 | 4 | 38 | [models-as-a-service.md](components/models-as-a-service.md) |
 | notebooks |  | 0 | 8 | 14 | [notebooks.md](components/notebooks.md) |
+| ogx-k8s-operator |  | 2 | 2 | 21 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | spark-operator |  | 3 | 1 | 26 | [spark-operator.md](components/spark-operator.md) |
 | trainer |  | 3 | 0 | 22 | [trainer.md](components/trainer.md) |
 | workload-variant-autoscaler |  | 0 | 1 | 23 | [workload-variant-autoscaler.md](components/workload-variant-autoscaler.md) |

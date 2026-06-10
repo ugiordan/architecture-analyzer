@@ -40,7 +40,6 @@
 | kuberay | vllm | component-ref:import | python import: vllm |
 | llama-stack | model-registry | component-ref:import | python import: ogx.providers.utils.inference.model_registry |
 | llama-stack | vllm | component-ref:provider | directory: src/ogx/providers/remote/inference/vllm |
-| llama-stack-k8s-operator | odh-platform-utilities | go-module | import dependency |
 | llama-stack-provider-trustyai-garak | eval-hub | component-ref:import | python import: evalhub.adapter |
 | llama-stack-provider-trustyai-garak | llama-stack | component-ref:import | python import: llama_stack.apis.datatypes |
 | llm-d-inference-scheduler | llm-d-kv-cache | component-ref:import | go import: github.com/llm-d/llm-d-kv-cache/pkg/kvcache |
@@ -59,6 +58,7 @@
 | models-as-a-service | kserve | component-ref:import | go import: github.com/kserve/kserve/pkg/client/listers/serving/v1alpha1 |
 | models-as-a-service | kserve | component-ref:provider | directory: deployment/components/odh/kserve |
 | models-as-a-service | kserve | go-module | import dependency |
+| ogx-k8s-operator | odh-platform-utilities | go-module | import dependency |
 | spark-operator | kueue | webhook-ref | webhook service reference |
 | trainer | kubeflow | component-ref:import | go import: github.com/kubeflow/trainer/v2/pkg/apis/trainer/v1alpha1 |
 
@@ -118,10 +118,6 @@
 **Depends on:** model-registry (component-ref:import), vllm (component-ref:provider)  
 **Used by:** llama-stack-provider-trustyai-garak (component-ref:import)  
 
-### llama-stack-k8s-operator
-
-**Depends on:** odh-platform-utilities (go-module)  
-
 ### llama-stack-provider-trustyai-garak
 
 **Depends on:** eval-hub (component-ref:import), llama-stack (component-ref:import)  
@@ -164,7 +160,11 @@
 
 ### odh-platform-utilities
 
-**Used by:** kserve (go-module), llama-stack-k8s-operator (go-module)  
+**Used by:** kserve (go-module), ogx-k8s-operator (go-module)  
+
+### ogx-k8s-operator
+
+**Depends on:** odh-platform-utilities (go-module)  
 
 ### spark-operator
 

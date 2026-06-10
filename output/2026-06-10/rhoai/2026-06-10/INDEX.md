@@ -2,7 +2,7 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-10T04:24:57Z  
+**Generated**: 2026-06-10T10:09:32Z  
 **Components**: 56  
 
 ## How to Find Information
@@ -56,7 +56,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | data-science-pipelines | DSP, dsp | 3 | 1 | 191 | [data-science-pipelines.md](components/data-science-pipelines.md) |
 | data-science-pipelines-operator | DSPO, dspo | 4 | 8 | 23 | [data-science-pipelines-operator.md](components/data-science-pipelines-operator.md) |
 | distributed-workloads |  | 0 | 0 | 18 | [distributed-workloads.md](components/distributed-workloads.md) |
-| eval-hub |  | 0 | 0 | 47 | [eval-hub.md](components/eval-hub.md) |
+| eval-hub |  | 0 | 0 | 46 | [eval-hub.md](components/eval-hub.md) |
 | feast |  | 0 | 1 | 122 | [feast.md](components/feast.md) |
 | fms-guardrails-orchestrator |  | 0 | 0 | 0 | [fms-guardrails-orchestrator.md](components/fms-guardrails-orchestrator.md) |
 | fms-hf-tuning |  | 0 | 0 | 15 | [fms-hf-tuning.md](components/fms-hf-tuning.md) |
@@ -68,7 +68,6 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | kuberay |  | 0 | 2 | 91 | [kuberay.md](components/kuberay.md) |
 | kueue |  | 2 | 2 | 43 | [kueue.md](components/kueue.md) |
 | llama-stack |  | 0 | 0 | 126 | [llama-stack.md](components/llama-stack.md) |
-| llama-stack-k8s-operator |  | 2 | 2 | 21 | [llama-stack-k8s-operator.md](components/llama-stack-k8s-operator.md) |
 | llm-d |  | 0 | 0 | 0 | [llm-d.md](components/llm-d.md) |
 | llm-d-inference-scheduler |  | 2 | 7 | 50 | [llm-d-inference-scheduler.md](components/llm-d-inference-scheduler.md) |
 | llm-d-kv-cache |  | 0 | 0 | 35 | [llm-d-kv-cache.md](components/llm-d-kv-cache.md) |
@@ -85,6 +84,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | notebooks-downstream |  | 0 | 13 | 19 | [notebooks-downstream.md](components/notebooks-downstream.md) |
 | odh-cli |  | 0 | 0 | 50 | [odh-cli.md](components/odh-cli.md) |
 | odh-deployer |  | 0 | 0 | 0 | [odh-deployer.md](components/odh-deployer.md) |
+| ogx-k8s-operator |  | 2 | 2 | 21 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | openvino_model_server |  | 0 | 0 | 42 | [openvino_model_server.md](components/openvino_model_server.md) |
 | pipelines-components |  | 0 | 0 | 66 | [pipelines-components.md](components/pipelines-components.md) |
 | rest-proxy |  | 0 | 0 | 6 | [rest-proxy.md](components/rest-proxy.md) |

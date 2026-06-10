@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | opendatahub-io/model-metadata-collection |
-| Commit | dd44e60caee301cccec092537c29873e3a6058ec |
-| Extracted | 2026-06-10T04:20:14Z |
+| Commit | de1e54701ba76dc4f14953f1f5c105a016b20d55 |
+| Extracted | 2026-06-10T10:05:42Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 

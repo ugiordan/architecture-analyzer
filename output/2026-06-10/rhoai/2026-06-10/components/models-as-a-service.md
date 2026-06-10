@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/models-as-a-service |
 | Commit | bbd2219771cf7a79091ef9ad8154590484652e60 |
-| Extracted | 2026-06-10T04:15:06Z |
+| Extracted | 2026-06-10T10:00:17Z |
 | Analyzer Version | 0.2.0 |
 | Data Coverage | full |
 
@@ -186,7 +186,7 @@
 
 | Name | Type | Evidence |
 |------|------|----------|
-| PostgreSQL | database | uri:postgresql:// |
+| PostgreSQL | database | uri:postgres:// |
 | kubernetes | service | dns:kubernetes.default.svc |
 
 

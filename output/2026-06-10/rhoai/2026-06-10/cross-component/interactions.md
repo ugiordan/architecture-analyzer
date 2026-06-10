@@ -29,7 +29,6 @@
 | llama-stack | model-registry | component-ref:import | python import: llama_stack.providers.utils.inference.model_registry |
 | llama-stack | vllm | component-ref:import | python import: vllm |
 | llama-stack | vllm | component-ref:provider | directory: llama_stack/providers/inline/inference/vllm |
-| llama-stack-k8s-operator | odh-platform-utilities | go-module | import dependency |
 | llm-d-inference-scheduler | llm-d-kv-cache | component-ref:import | go import: github.com/llm-d/llm-d-kv-cache/pkg/kvcache |
 | llm-d-kv-cache | vllm | component-ref:adapter | file: pkg/kvevents/engineadapter/vllm_adapter.go |
 | llm-d-kv-cache | vllm | component-ref:import | python import: vllm |
@@ -62,6 +61,7 @@
 | odh-cli | opendatahub-operator | go-module | import dependency |
 | odh-cli | training-operator | component-ref:import | go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/trainingoperator |
 | odh-cli | training-operator | component-ref:provider | directory: pkg/lint/checks/components/trainingoperator |
+| ogx-k8s-operator | odh-platform-utilities | go-module | import dependency |
 | pipelines-components | eval-hub | component-ref:import | python import: components.evaluation.evalhub.kserve |
 | pipelines-components | eval-hub | component-ref:provider | directory: components/evaluation/evalhub |
 | pipelines-components | kserve | component-ref:provider | directory: components/evaluation/evalhub/kserve |
@@ -143,10 +143,6 @@
 **Depends on:** model-registry (component-ref:import), vllm (component-ref:import), vllm (component-ref:provider)  
 **Used by:** odh-cli (component-ref:import), odh-cli (component-ref:provider)  
 
-### llama-stack-k8s-operator
-
-**Depends on:** odh-platform-utilities (go-module)  
-
 ### llm-d-inference-scheduler
 
 **Depends on:** llm-d-kv-cache (component-ref:import)  
@@ -200,7 +196,11 @@
 
 ### odh-platform-utilities
 
-**Used by:** llama-stack-k8s-operator (go-module)  
+**Used by:** ogx-k8s-operator (go-module)  
+
+### ogx-k8s-operator
+
+**Depends on:** odh-platform-utilities (go-module)  
 
 ### opendatahub-operator
 

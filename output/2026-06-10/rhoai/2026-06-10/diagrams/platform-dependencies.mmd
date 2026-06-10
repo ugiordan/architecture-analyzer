@@ -55,8 +55,6 @@ graph LR
     class kuberay component
     kueue["kueue"]
     class kueue component
-    llama_stack_k8s_operator["llama-stack-k8s-operator"]
-    class llama_stack_k8s_operator component
     llama_stack["llama-stack"]
     class llama_stack component
     llm_d_inference_scheduler["llm-d-inference-scheduler"]
@@ -89,6 +87,8 @@ graph LR
     class odh_cli component
     odh_deployer["odh-deployer"]
     class odh_deployer component
+    ogx_k8s_operator["ogx-k8s-operator"]
+    class ogx_k8s_operator component
     openvino_model_server["openvino_model_server"]
     class openvino_model_server component
     pipelines_components["pipelines-components"]
@@ -119,12 +119,12 @@ graph LR
     class workload_variant_autoscaler component
 
     kubeflow -.->|"go-module"| data_science_pipelines_operator
-    llama_stack_k8s_operator -.->|"go-module"| odh_platform_utilities
     mlflow_operator -.->|"go-module"| mlflow_operator
     model_registry -->|"watches InferenceService"| kserve
     modelmesh_serving -->|"watches ServingRuntime"| kserve
     models_as_a_service -.->|"go-module"| kserve
     models_as_a_service -->|"watches ExternalModel"| ai_gateway_payload_processing
     odh_cli -.->|"go-module"| opendatahub_operator
+    ogx_k8s_operator -.->|"go-module"| odh_platform_utilities
     modelmesh_serving -.->|"webhook-ref"| kueue
     spark_operator -.->|"webhook-ref"| kueue
