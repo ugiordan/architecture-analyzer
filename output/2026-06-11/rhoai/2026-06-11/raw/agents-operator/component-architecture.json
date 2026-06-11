@@ -1,0 +1,1333 @@
+{
+  "component": "agents-operator",
+  "repo": "red-hat-data-services/agents-operator",
+  "commit_sha": "8aec7ccbf29ae1fd5f6c853ccf3b92c764eba0f3",
+  "extracted_at": "2026-06-11T04:27:06Z",
+  "analyzer_version": "0.2.0",
+  "schema_version": "2",
+  "rbac": {},
+  "services": [
+    {
+      "name": "webhook-service",
+      "source": "kagenti-operator/config/webhook/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "port": 443,
+          "targetPort": 9443,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "control-plane": "controller-manager"
+      },
+      "target_deployment": "controller-manager"
+    }
+  ],
+  "deployments": [
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "kagenti-operator/config/default/manager_webhook_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "",
+          "ports": [
+            {
+              "name": "webhook-server",
+              "containerPort": 9443,
+              "protocol": "TCP"
+            }
+          ],
+          "volume_mounts": [
+            {
+              "mountPath": "/tmp/k8s-webhook-server/serving-certs",
+              "name": "cert",
+              "secret": "webhook-server-cert"
+            }
+          ],
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "kagenti-operator/config/manager/manager.yaml",
+      "replicas": 1,
+      "service_account": "controller-manager",
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "controller:latest",
+          "security_context": {
+            "allowPrivilegeEscalation": false,
+            "capabilities": {
+              "add": [],
+              "drop": [
+                "ALL"
+              ]
+            }
+          },
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "128Mi"
+            },
+            "requests": {
+              "cpu": "10m",
+              "memory": "64Mi"
+            }
+          },
+          "liveness_probe": {
+            "type": "httpGet",
+            "path": "/healthz",
+            "port": 8081
+          },
+          "readiness_probe": {
+            "type": "httpGet",
+            "path": "/readyz",
+            "port": 8081
+          }
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    }
+  ],
+  "controller_watches": [
+    {
+      "type": "For",
+      "gvk": "/v1/ConfigMap",
+      "controller": "DefaultsConfigReconciler",
+      "source": "kagenti-operator/internal/webhook/injector/defaults_config_reconciler.go:251"
+    },
+    {
+      "type": "For",
+      "gvk": "/v1/Namespace",
+      "controller": "AuthbridgeConfigReconciler",
+      "source": "kagenti-operator/internal/controller/authbridgeconfig_controller.go:186"
+    },
+    {
+      "type": "For",
+      "gvk": "api/v1alpha1/AgentCard",
+      "controller": "AgentCardNetworkPolicyReconciler",
+      "source": "kagenti-operator/internal/controller/agentcard_networkpolicy_controller.go:371"
+    },
+    {
+      "type": "For",
+      "gvk": "api/v1alpha1/AgentCard",
+      "controller": "AgentCardReconciler",
+      "source": "kagenti-operator/internal/controller/agentcard_controller.go:1522"
+    },
+    {
+      "type": "For",
+      "gvk": "api/v1alpha1/AgentRuntime",
+      "controller": "AgentRuntimeReconciler",
+      "source": "kagenti-operator/internal/controller/agentruntime_controller.go:1258"
+    },
+    {
+      "type": "For",
+      "gvk": "apps/v1/Deployment",
+      "controller": "ClientRegistrationReconciler",
+      "source": "kagenti-operator/internal/controller/clientregistration_controller.go:495"
+    },
+    {
+      "type": "For",
+      "gvk": "apps/v1/Deployment",
+      "controller": "AgentCardSyncReconciler",
+      "source": "kagenti-operator/internal/controller/agentcardsync_controller.go:410"
+    },
+    {
+      "type": "For",
+      "gvk": "apps/v1/Deployment",
+      "controller": "MLflowReconciler",
+      "source": "kagenti-operator/internal/controller/mlflow_controller.go:346"
+    },
+    {
+      "type": "For",
+      "gvk": "apps/v1/StatefulSet",
+      "controller": "AgentCardSyncReconciler",
+      "source": "kagenti-operator/internal/controller/agentcardsync_controller.go:418"
+    },
+    {
+      "type": "For",
+      "gvk": "github.com/kagenti/operator/internal/mlflow/DataScienceCluster",
+      "controller": "MLflowOperandReconciler",
+      "source": "kagenti-operator/internal/controller/mlflow_operand_controller.go:416"
+    },
+    {
+      "type": "For",
+      "gvk": "github.com/kagenti/operator/internal/tekton/TektonConfig",
+      "controller": "TektonConfigReconciler",
+      "source": "kagenti-operator/internal/controller/tektonconfig_controller.go:91"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/ConfigMap",
+      "controller": "AuthbridgeConfigReconciler",
+      "source": "kagenti-operator/internal/controller/authbridgeconfig_controller.go:201"
+    },
+    {
+      "type": "Owns",
+      "gvk": "networking.k8s.io/v1/NetworkPolicy",
+      "controller": "AgentCardNetworkPolicyReconciler",
+      "source": "kagenti-operator/internal/controller/agentcard_networkpolicy_controller.go:372"
+    },
+    {
+      "type": "Owns",
+      "gvk": "rbac.authorization.k8s.io/v1/Role",
+      "controller": "MLflowReconciler",
+      "source": "kagenti-operator/internal/controller/mlflow_controller.go:347"
+    },
+    {
+      "type": "Owns",
+      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
+      "controller": "MLflowReconciler",
+      "source": "kagenti-operator/internal/controller/mlflow_controller.go:348"
+    },
+    {
+      "type": "Watches",
+      "gvk": "/v1/Secret",
+      "controller": "SharedTrustReconciler",
+      "source": "kagenti-operator/internal/controller/sharedtrust_controller.go:390"
+    },
+    {
+      "type": "Watches",
+      "gvk": "apps/v1/Deployment",
+      "controller": "MLflowOperandReconciler",
+      "source": "kagenti-operator/internal/controller/mlflow_operand_controller.go:419"
+    },
+    {
+      "type": "Watches",
+      "gvk": "certmanager/v1/Certificate",
+      "controller": "SharedTrustReconciler",
+      "source": "kagenti-operator/internal/controller/sharedtrust_controller.go:389"
+    }
+  ],
+  "dependencies": {
+    "go_version": "1.25.0",
+    "go_modules": [
+      {
+        "module": "github.com/cert-manager/cert-manager",
+        "version": "v1.20.2",
+        "category": "cert-management",
+        "purpose": "Certificate management"
+      },
+      {
+        "module": "github.com/charmbracelet/bubbles",
+        "version": "v1.0.0"
+      },
+      {
+        "module": "github.com/charmbracelet/bubbletea",
+        "version": "v1.3.10"
+      },
+      {
+        "module": "github.com/charmbracelet/lipgloss",
+        "version": "v1.1.0"
+      },
+      {
+        "module": "github.com/charmbracelet/x/ansi",
+        "version": "v0.11.7"
+      },
+      {
+        "module": "github.com/envoyproxy/go-control-plane/envoy",
+        "version": "v1.37.0"
+      },
+      {
+        "module": "github.com/envoyproxy/go-control-plane/envoy",
+        "version": "v1.37.0"
+      },
+      {
+        "module": "github.com/fsnotify/fsnotify",
+        "version": "v1.10.1"
+      },
+      {
+        "module": "github.com/fsnotify/fsnotify",
+        "version": "v1.10.1"
+      },
+      {
+        "module": "github.com/go-logr/logr",
+        "version": "v1.4.3"
+      },
+      {
+        "module": "github.com/gobwas/glob",
+        "version": "v0.2.3"
+      },
+      {
+        "module": "github.com/kagenti/kagenti-extensions/authbridge/authlib",
+        "version": "v0.0.0-00010101000000-000000000000"
+      },
+      {
+        "module": "github.com/kagenti/kagenti-extensions/authbridge/authlib",
+        "version": "v0.0.0-00010101000000-000000000000"
+      },
+      {
+        "module": "github.com/kagenti/kagenti-extensions/authbridge/authlib",
+        "version": "v0.0.0-00010101000000-000000000000"
+      },
+      {
+        "module": "github.com/kagenti/kagenti-extensions/authbridge/authlib",
+        "version": "v0.0.0-00010101000000-000000000000"
+      },
+      {
+        "module": "github.com/lestrrat-go/jwx/v2",
+        "version": "v2.1.6"
+      },
+      {
+        "module": "github.com/onsi/ginkgo/v2",
+        "version": "v2.29.0",
+        "category": "testing",
+        "purpose": "BDD testing framework"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.41.0",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/prometheus/client_golang",
+        "version": "v1.23.2",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/prometheus/client_model",
+        "version": "v0.6.2",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/spiffe/go-spiffe/v2",
+        "version": "v2.6.0"
+      },
+      {
+        "module": "github.com/spiffe/go-spiffe/v2",
+        "version": "v2.6.0"
+      },
+      {
+        "module": "google.golang.org/genproto/googleapis/rpc",
+        "version": "v0.0.0-20260226221140-a57be14db171"
+      },
+      {
+        "module": "google.golang.org/grpc",
+        "version": "v1.81.1",
+        "category": "serialization",
+        "purpose": "gRPC framework"
+      },
+      {
+        "module": "google.golang.org/grpc",
+        "version": "v1.81.1",
+        "category": "serialization",
+        "purpose": "gRPC framework"
+      },
+      {
+        "module": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "category": "serialization",
+        "purpose": "YAML parser"
+      },
+      {
+        "module": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "category": "serialization",
+        "purpose": "YAML parser"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.36.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apiextensions-apiserver",
+        "version": "v0.36.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.36.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.36.1",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/utils",
+        "version": "v0.0.0-20260210185600-b8788abfbbc2",
+        "category": "k8s-api",
+        "purpose": "Kubernetes utility library"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.24.1",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/yaml",
+        "version": "v1.6.0",
+        "category": "serialization",
+        "purpose": "Kubernetes YAML parser"
+      }
+    ]
+  },
+  "secrets_referenced": [
+    {
+      "name": "webhook-server-cert",
+      "type": "Opaque",
+      "referenced_by": [
+        "deployment/controller-manager"
+      ],
+      "provisioned_by": "volume-mounted"
+    }
+  ],
+  "dockerfiles": [
+    {
+      "path": "authbridge/cmd/authbridge-envoy/Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi9/ubi-micro@sha256:2173487b3b72b1a7b11edc908e9bbf1726f9df46a4f78fd6d19a2bab0a701f38",
+      "build_stage_images": [
+        "golang:1.25-alpine@sha256:a2ea69f8f07fe886989c61e9da297f932ddf50b42dad2f44d2664710c94dca37",
+        "docker.io/envoyproxy/envoy:v1.37.1"
+      ],
+      "stages": 3,
+      "user": "1337",
+      "exposed_ports": [
+        15123,
+        15124,
+        9901,
+        9090
+      ]
+    },
+    {
+      "path": "authbridge/cmd/authbridge-lite/Dockerfile",
+      "base_image": "alpine:3.20@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d",
+      "build_stage_images": [
+        "golang:1.25-alpine@sha256:a2ea69f8f07fe886989c61e9da297f932ddf50b42dad2f44d2664710c94dca37"
+      ],
+      "stages": 2,
+      "user": "1001",
+      "exposed_ports": [
+        8080,
+        8081,
+        9091,
+        9093,
+        9094
+      ]
+    },
+    {
+      "path": "authbridge/cmd/authbridge-proxy/Dockerfile",
+      "base_image": "alpine:3.20@sha256:beefdbd8a1da6d2915566fde36db9db0b524eb737fc57cd1367effd16dc0d06d",
+      "build_stage_images": [
+        "golang:1.25-alpine@sha256:a2ea69f8f07fe886989c61e9da297f932ddf50b42dad2f44d2664710c94dca37"
+      ],
+      "stages": 2,
+      "user": "1001",
+      "exposed_ports": [
+        8080,
+        8081,
+        9091,
+        9093,
+        9094
+      ]
+    },
+    {
+      "path": "authbridge/demos/echo/agent/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/demos/echo/upstream/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "exposed_ports": [
+        8080
+      ],
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/demos/finance-sparc/finance-agent/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/demos/finance-sparc/finance-mcp/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "exposed_ports": [
+        8888
+      ],
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/demos/ibac/agent/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/demos/ibac/email-server/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "exposed_ports": [
+        8888
+      ],
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/demos/ibac/evil-server/Dockerfile",
+      "base_image": "gcr.io/distroless/static-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.24-alpine"
+      ],
+      "stages": 2,
+      "exposed_ports": [
+        9999
+      ],
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "authbridge/proxy-init/Dockerfile.init",
+      "base_image": "docker.io/library/alpine:3.23",
+      "stages": 1,
+      "user": "root",
+      "issues": [
+        "Container runs as root user"
+      ]
+    },
+    {
+      "path": "authbridge/sparc-service/Dockerfile",
+      "base_image": "python:3.12-slim",
+      "stages": 1,
+      "user": "sparc",
+      "exposed_ports": [
+        8090
+      ]
+    },
+    {
+      "path": "kagenti-operator/Dockerfile",
+      "base_image": "gcr.io/distroless/static:nonroot",
+      "build_stage_images": [
+        "docker.io/golang:1.26"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    },
+    {
+      "path": "kagenti-operator/Dockerfile.konflux",
+      "base_image": "registry.redhat.io/ubi9/ubi-minimal@sha256:ae09ecc3d754bc1726cbda3e2599cc7839e09fe1cc547ce173cf669b645be3cc",
+      "build_stage_images": [
+        "registry.redhat.io/ubi9/go-toolset@sha256:d36470d5258da00f618b7aca9bdaab8e05134aa938bd6c42d9bd17d50ed45e76"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    },
+    {
+      "path": "kagenti-operator/cmd/agentcard-signer/Dockerfile",
+      "base_image": "gcr.io/distroless/static:nonroot",
+      "build_stage_images": [
+        "docker.io/golang:1.26"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    },
+    {
+      "path": "kagenti-operator/cmd/test-tls-agent/Dockerfile",
+      "base_image": "gcr.io/distroless/static:nonroot",
+      "build_stage_images": [
+        "docker.io/golang:1.26"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    }
+  ],
+  "helm": {
+    "chart_name": "kagenti-operator-chart",
+    "chart_version": "0.2.0-alpha.24",
+    "values_defaults": {
+      "networkPolicy.enable": false,
+      "rbac.enable": true
+    }
+  },
+  "webhooks": [
+    {
+      "name": "inject.kagenti.io",
+      "type": "mutating",
+      "port": 9443,
+      "sources": [
+        {
+          "type": "yaml_manifest",
+          "file": "kagenti-operator/config/default/webhook_namespace_selector_patch.yaml"
+        }
+      ]
+    },
+    {
+      "name": "vagentcard.kb.io",
+      "type": "validating",
+      "path": "/validate-agent-kagenti-dev-v1alpha1-agentcard",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "kagenti-operator/internal/webhook/v1alpha1/agentcard_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "kagenti-operator/internal/webhook/v1alpha1/agentcard_webhook.go"
+        }
+      ]
+    }
+  ],
+  "configmaps": [
+    {
+      "name": "authbridge-config",
+      "data_keys": [
+        "ISSUER",
+        "KEYCLOAK_REALM",
+        "KEYCLOAK_URL"
+      ],
+      "source": "authbridge/demos/github-issue/k8s/configmaps.yaml"
+    },
+    {
+      "name": "authbridge-config",
+      "data_keys": [
+        "CLIENT_AUTH_TYPE",
+        "EXPECTED_AUDIENCE",
+        "ISSUER",
+        "JWKS_URL",
+        "KEYCLOAK_NAMESPACE",
+        "KEYCLOAK_REALM",
+        "KEYCLOAK_URL",
+        "SPIFFE_IDP_ALIAS",
+        "SPIRE_ENABLED",
+        "TOKEN_URL"
+      ],
+      "source": "authbridge/demos/weather-agent/k8s/configmaps-advanced.yaml"
+    },
+    {
+      "name": "authproxy-routes",
+      "data_keys": [
+        "routes.yaml"
+      ],
+      "source": "authbridge/demos/github-issue/k8s/configmaps.yaml"
+    },
+    {
+      "name": "authproxy-routes",
+      "data_keys": [
+        "routes.yaml"
+      ],
+      "source": "authbridge/demos/weather-agent/k8s/configmaps-advanced.yaml"
+    }
+  ],
+  "http_endpoints": [
+    {
+      "method": "*",
+      "path": "/",
+      "source": "authbridge/demos/ibac/agent/main.go:799"
+    },
+    {
+      "method": "*",
+      "path": "/",
+      "source": "authbridge/demos/finance-sparc/finance-agent/main.go:464"
+    },
+    {
+      "method": "*",
+      "path": "/",
+      "source": "authbridge/authlib/observe/statserver.go:64"
+    },
+    {
+      "method": "*",
+      "path": "/",
+      "source": "authbridge/demos/ibac/evil-server/main.go:17"
+    },
+    {
+      "method": "*",
+      "path": "/",
+      "source": "authbridge/demos/echo/agent/main.go:383"
+    },
+    {
+      "method": "*",
+      "path": "/.well-known/agent-card.json",
+      "source": "kagenti-operator/cmd/test-tls-agent/main.go:52"
+    },
+    {
+      "method": "*",
+      "path": "/.well-known/agent-card.json",
+      "source": "authbridge/demos/ibac/agent/main.go:800"
+    },
+    {
+      "method": "*",
+      "path": "/.well-known/agent-card.json",
+      "source": "authbridge/demos/echo/agent/main.go:384"
+    },
+    {
+      "method": "*",
+      "path": "/.well-known/agent-card.json",
+      "source": "authbridge/demos/finance-sparc/finance-agent/main.go:465"
+    },
+    {
+      "method": "*",
+      "path": "/config",
+      "source": "authbridge/authlib/observe/statserver.go:58"
+    },
+    {
+      "method": "*",
+      "path": "/echo",
+      "source": "authbridge/demos/echo/upstream/main.go:33"
+    },
+    {
+      "method": "*",
+      "path": "/healthz",
+      "source": "authbridge/cmd/authbridge-envoy/main.go:256"
+    },
+    {
+      "method": "*",
+      "path": "/healthz",
+      "source": "authbridge/cmd/authbridge-lite/main.go:282"
+    },
+    {
+      "method": "*",
+      "path": "/healthz",
+      "source": "kagenti-operator/cmd/test-tls-agent/main.go:56"
+    },
+    {
+      "method": "*",
+      "path": "/healthz",
+      "source": "authbridge/cmd/authbridge-proxy/main.go:295"
+    },
+    {
+      "method": "*",
+      "path": "/mcp",
+      "source": "authbridge/demos/finance-sparc/finance-mcp/main.go:213"
+    },
+    {
+      "method": "*",
+      "path": "/mcp",
+      "source": "authbridge/demos/ibac/email-server/main.go:161"
+    },
+    {
+      "method": "*",
+      "path": "/readyz",
+      "source": "authbridge/cmd/authbridge-proxy/main.go:298"
+    },
+    {
+      "method": "*",
+      "path": "/readyz",
+      "source": "authbridge/cmd/authbridge-lite/main.go:285"
+    },
+    {
+      "method": "*",
+      "path": "/readyz",
+      "source": "authbridge/cmd/authbridge-envoy/main.go:259"
+    },
+    {
+      "method": "*",
+      "path": "/reload/status",
+      "source": "authbridge/authlib/observe/statserver.go:61"
+    },
+    {
+      "method": "*",
+      "path": "/stats",
+      "source": "authbridge/authlib/observe/statserver.go:59"
+    },
+    {
+      "method": "*",
+      "path": "GET /healthz",
+      "source": "authbridge/authlib/sessionapi/server.go:127"
+    },
+    {
+      "method": "*",
+      "path": "GET /v1/events",
+      "source": "authbridge/authlib/sessionapi/server.go:124"
+    },
+    {
+      "method": "*",
+      "path": "GET /v1/pipeline",
+      "source": "authbridge/authlib/sessionapi/server.go:125"
+    },
+    {
+      "method": "*",
+      "path": "GET /v1/plugins",
+      "source": "authbridge/authlib/sessionapi/server.go:126"
+    },
+    {
+      "method": "*",
+      "path": "GET /v1/sessions",
+      "source": "authbridge/authlib/sessionapi/server.go:122"
+    },
+    {
+      "method": "*",
+      "path": "GET /v1/sessions/{id}",
+      "source": "authbridge/authlib/sessionapi/server.go:123"
+    }
+  ],
+  "cache_config": {
+    "manager_file": "kagenti-operator/cmd/main.go",
+    "cache_scope": "namespace-scoped",
+    "filtered_types": [
+      {
+        "type": "corev1.ConfigMap",
+        "filter_kind": "namespace",
+        "filter": "namespace-scoped"
+      }
+    ],
+    "memory_limit": "128Mi",
+    "issues": [
+      "No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint",
+      "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+      "Type AgentCard is watched but has no cache filter (cluster-wide informer)",
+      "Type AgentRuntime is watched but has no cache filter (cluster-wide informer)",
+      "Type Certificate is watched but has no cache filter (cluster-wide informer)",
+      "Type DataScienceCluster is watched but has no cache filter (cluster-wide informer)",
+      "Type Deployment is watched but has no cache filter (cluster-wide informer)",
+      "Type Namespace is watched but has no cache filter (cluster-wide informer)",
+      "Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)",
+      "Type Role is watched but has no cache filter (cluster-wide informer)",
+      "Type RoleBinding is watched but has no cache filter (cluster-wide informer)",
+      "Type Secret is watched but has no cache filter (cluster-wide informer)",
+      "Type StatefulSet is watched but has no cache filter (cluster-wide informer)",
+      "Type TektonConfig is watched but has no cache filter (cluster-wide informer)"
+    ]
+  },
+  "prometheus_metrics": [
+    {
+      "name": "a2a_signature_verification_duration_seconds",
+      "type": "histogram",
+      "help": "Duration of A2A signature verifications",
+      "labels": [
+        "provider"
+      ],
+      "source": "kagenti-operator/internal/signature/metrics.go"
+    },
+    {
+      "name": "a2a_signature_verification_errors_total",
+      "type": "counter",
+      "help": "Total A2A signature verification errors",
+      "labels": [
+        "provider",
+        "error_type"
+      ],
+      "source": "kagenti-operator/internal/signature/metrics.go"
+    },
+    {
+      "name": "a2a_signature_verification_total",
+      "type": "counter",
+      "help": "Total A2A signature verifications",
+      "labels": [
+        "provider",
+        "result",
+        "audit_mode"
+      ],
+      "source": "kagenti-operator/internal/signature/metrics.go"
+    },
+    {
+      "name": "kagenti_x5c_binding_trust_domain_mismatch_total",
+      "type": "counter",
+      "help": "Count of cert SAN SPIFFE ID trust domain mismatches",
+      "source": "kagenti-operator/internal/signature/x5c.go"
+    },
+    {
+      "name": "kagenti_x5c_chain_validation_total",
+      "type": "counter",
+      "help": "Total x5c chain validation attempts",
+      "labels": [
+        "valid",
+        "reason"
+      ],
+      "source": "kagenti-operator/internal/signature/x5c.go"
+    },
+    {
+      "name": "kagenti_x5c_trust_bundle_age_seconds",
+      "type": "gauge",
+      "help": "Age of the cached trust bundle in seconds",
+      "source": "kagenti-operator/internal/signature/x5c.go"
+    },
+    {
+      "name": "kagenti_x5c_trust_bundle_load_errors_total",
+      "type": "counter",
+      "help": "Trust bundle load/parse failures",
+      "labels": [
+        "reason"
+      ],
+      "source": "kagenti-operator/internal/signature/x5c.go"
+    }
+  ],
+  "runtime_dependencies": [
+    {
+      "name": "OpenTelemetry Collector",
+      "type": "observability",
+      "source": "scripts/kind-with-registry.yaml",
+      "evidence": "env:OTEL_TRACES_EXPORTER",
+      "required": false
+    },
+    {
+      "name": "Keycloak",
+      "type": "service",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:54",
+      "evidence": "env:KEYCLOAK_URL",
+      "required": true
+    },
+    {
+      "name": "echo-agent",
+      "type": "service",
+      "source": "authbridge/demos/echo/agent/main.go:209",
+      "evidence": "dns:echo-agent.team1.svc.cluster.local",
+      "required": true
+    },
+    {
+      "name": "echo-upstream",
+      "type": "service",
+      "source": "authbridge/demos/echo/agent/main.go:77",
+      "evidence": "dns:echo-upstream.team1.svc.cluster.local",
+      "required": true
+    },
+    {
+      "name": "email-agent",
+      "type": "service",
+      "source": "authbridge/demos/ibac/agent/main.go:642",
+      "evidence": "dns:email-agent.team1.svc.cluster.local",
+      "required": true
+    },
+    {
+      "name": "finance-agent",
+      "type": "service",
+      "source": "authbridge/demos/finance-sparc/finance-agent/main.go:368",
+      "evidence": "dns:finance-agent.team1.svc.cluster.local",
+      "required": true
+    },
+    {
+      "name": "mlflow",
+      "type": "service",
+      "source": "kagenti-operator/internal/bootstrap/otel.go:376",
+      "evidence": "dns:mlflow.ns.svc",
+      "required": true
+    }
+  ],
+  "template_files": [
+    {
+      "path": "kagenti-operator/internal/webhook/injector/envoy.yaml.tmpl",
+      "conditionals": [
+        ".MTLSStrict",
+        ".MTLSEnabled",
+        ".MTLSPermissive",
+        ".SpireEnabled"
+      ]
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "configmap",
+      "source": "kagenti-operator/config/authbridge/authbridge-runtime-config.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "configmap",
+      "source": "kagenti-operator/config/authbridge/envoy-config.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "configmap",
+      "source": "kagenti-operator/config/authbridge/spiffe-helper-config.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "issuer",
+      "source": "kagenti-operator/config/certmanager/certificate.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "certificate",
+      "source": "kagenti-operator/config/certmanager/certificate.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "service",
+      "source": "kagenti-operator/config/default/metrics_service.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "mutatingwebhookconfiguration",
+      "source": "kagenti-operator/config/default/webhookcainjection_patch.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "validatingwebhookconfiguration",
+      "source": "kagenti-operator/config/default/webhookcainjection_patch.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "certificate",
+      "source": "kagenti-operator/config/istio-trust/certificates.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterissuer",
+      "source": "kagenti-operator/config/istio-trust/cluster-issuers.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "namespace",
+      "source": "kagenti-operator/config/manager/manager.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "deployment",
+      "source": "kagenti-operator/config/manager/manager.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "networkpolicy",
+      "source": "kagenti-operator/config/network-policy/allow-metrics-traffic.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "networkpolicy",
+      "source": "kagenti-operator/config/network-policy/allow-webhook-traffic.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "servicemonitor",
+      "source": "kagenti-operator/config/prometheus/monitor.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "role",
+      "source": "kagenti-operator/config/rbac/leader_election_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "rolebinding",
+      "source": "kagenti-operator/config/rbac/leader_election_role_binding.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrolebinding",
+      "source": "kagenti-operator/config/rbac/mlflow_binding.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrolebinding",
+      "source": "kagenti-operator/config/rbac/role_binding.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "serviceaccount",
+      "source": "kagenti-operator/config/rbac/service_account.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "securitycontextconstraints",
+      "source": "kagenti-operator/config/security/kagenti-authbridge-scc.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "kagenti-operator/config/security/kagenti-authbridge-scc.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrolebinding",
+      "source": "kagenti-operator/config/security/kagenti-authbridge-scc.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/bootstrap/otel.go:231"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/bootstrap/otel.go:261"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/bootstrap/otel.go:323"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/bootstrap/otel.go:362"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/controller/agentcardsync_controller.go:43"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/controller/authbridgeconfig_controller.go:109"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/controller/authbridgeconfig_controller.go:81"
+    },
+    {
+      "label": "sidecar.istio.io/inject",
+      "integration": "Istio",
+      "type": "label",
+      "context": "source-code",
+      "source": "kagenti-operator/internal/webhook/injector/pod_mutator.go:59"
+    }
+  ],
+  "python_k8s_calls": [
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "client",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:120"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "client_scope",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:133"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "realm",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:107"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "user",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:172"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "client",
+      "source": "authbridge/demos/weather-agent/setup_keycloak_weather_advanced.py:139"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "client_id",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:116"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "client_optional_client_scopes",
+      "source": "authbridge/keycloak_sync.py:340"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "client_scopes",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:127"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "mappers_from_client_scope",
+      "source": "authbridge/keycloak_sync.py:261"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "realm_role",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:406"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "realms",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:102"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "user_id",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:411"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "users",
+      "source": "authbridge/demos/echo/scripts/setup_keycloak.py:163"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "moderate",
+    "crds": "none",
+    "deployments": "sparse",
+    "dockerfiles": "rich",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "rich",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "rich",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "rich",
+    "secrets": "sparse",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "sparse"
+  },
+  "summary": "agents-operator is a Kubernetes component. deploying 2 workload(s) (controller-manager, controller-manager) with 2 container(s). watching 13 resource type(s). exposing 1 service(s) on ports: 443. Dockerfile EXPOSE ports: 8080, 8081, 8090, 8888, 9090, 9091, 9093, 9094, 9901, 9999, 15123, 15124. with 2 webhook(s) (1 validating, 1 mutating). runtime dependencies: Keycloak, OpenTelemetry Collector, echo-agent, echo-upstream, email-agent, finance-agent, mlflow. exposing 7 Prometheus metrics. Python k8s client with 13 API call(s). integrates with Istio, management relationship via labels/annotations."
+}

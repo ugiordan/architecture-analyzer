@@ -1,0 +1,2923 @@
+{
+  "component": "feast",
+  "repo": "feast-dev/feast",
+  "commit_sha": "01efa505d378a21ad3653d86aaea207c291fc434",
+  "extracted_at": "2026-06-11T04:31:18Z",
+  "analyzer_version": "0.2.0",
+  "schema_version": "2",
+  "rbac": {},
+  "services": [
+    {
+      "name": "uvicorn-server",
+      "source": "infra/scripts/feature_server_docker_smoke.py:41",
+      "type": "python-source",
+      "ports": [
+        {
+          "port": 6566,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "infra/feast-operator/config/default/manager_config_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "",
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "infra/feast-operator/config/manager/manager.yaml",
+      "replicas": 1,
+      "service_account": "controller-manager",
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "controller:latest",
+          "security_context": {
+            "allowPrivilegeEscalation": false,
+            "capabilities": {
+              "add": [],
+              "drop": [
+                "ALL"
+              ]
+            }
+          },
+          "resources": {
+            "limits": {
+              "cpu": "1000m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "10m",
+              "memory": "64Mi"
+            }
+          },
+          "env_vars": {
+            "GOMEMLIMIT": "230MiB"
+          },
+          "liveness_probe": {
+            "type": "httpGet",
+            "path": "/healthz",
+            "port": 8081
+          },
+          "readiness_probe": {
+            "type": "httpGet",
+            "path": "/readyz",
+            "port": 8081
+          }
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    }
+  ],
+  "controller_watches": [
+    {
+      "type": "For",
+      "gvk": "api/v1/FeatureStore",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:361"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/ConfigMap",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:362"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/PersistentVolumeClaim",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:365"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:364"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/ServiceAccount",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:366"
+    },
+    {
+      "type": "Owns",
+      "gvk": "apps/v1/Deployment",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:363"
+    },
+    {
+      "type": "Owns",
+      "gvk": "autoscaling/v2/HorizontalPodAutoscaler",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:370"
+    },
+    {
+      "type": "Owns",
+      "gvk": "batch/v1/CronJob",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:369"
+    },
+    {
+      "type": "Owns",
+      "gvk": "policy/v1/PodDisruptionBudget",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:371"
+    },
+    {
+      "type": "Owns",
+      "gvk": "rbac.authorization.k8s.io/v1/Role",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:368"
+    },
+    {
+      "type": "Owns",
+      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:367"
+    },
+    {
+      "type": "Owns",
+      "gvk": "route/v1/Route",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:375"
+    },
+    {
+      "type": "Watches",
+      "gvk": "api/v1/FeatureStore",
+      "controller": "FeatureStoreReconciler",
+      "source": "infra/feast-operator/internal/controller/featurestore_controller.go:372"
+    }
+  ],
+  "dependencies": {
+    "go_version": "1.25.0",
+    "go_modules": [
+      {
+        "module": "cloud.google.com/go/storage",
+        "version": "v1.58.0",
+        "category": "cloud-provider",
+        "purpose": "Google Cloud SDK"
+      },
+      {
+        "module": "github.com/apache/arrow/go/v17",
+        "version": "v17.0.0"
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2",
+        "version": "v1.36.4",
+        "category": "cloud-provider",
+        "purpose": "AWS SDK"
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/config",
+        "version": "v1.29.14",
+        "category": "cloud-provider",
+        "purpose": "AWS SDK"
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/dynamodb",
+        "version": "v1.43.3",
+        "category": "cloud-provider",
+        "purpose": "AWS SDK"
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go-v2/service/s3",
+        "version": "v1.79.3",
+        "category": "cloud-provider",
+        "purpose": "AWS SDK"
+      },
+      {
+        "module": "github.com/cabify/gotoprom",
+        "version": "v1.1.0"
+      },
+      {
+        "module": "github.com/ghodss/yaml",
+        "version": "v1.0.0",
+        "category": "serialization",
+        "purpose": "JSON/YAML converter"
+      },
+      {
+        "module": "github.com/go-sql-driver/mysql",
+        "version": "v1.8.1",
+        "category": "storage",
+        "purpose": "MySQL database driver"
+      },
+      {
+        "module": "github.com/golang/protobuf",
+        "version": "v1.5.4"
+      },
+      {
+        "module": "github.com/google/uuid",
+        "version": "v1.6.0"
+      },
+      {
+        "module": "github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus",
+        "version": "v1.1.0"
+      },
+      {
+        "module": "github.com/jackc/pgx/v5",
+        "version": "v5.8.0",
+        "category": "storage",
+        "purpose": "PostgreSQL database driver"
+      },
+      {
+        "module": "github.com/mattn/go-sqlite3",
+        "version": "v1.14.23"
+      },
+      {
+        "module": "github.com/onsi/ginkgo/v2",
+        "version": "v2.22.2",
+        "category": "testing",
+        "purpose": "BDD testing framework"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.36.2",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/openshift/api",
+        "version": "v0.0.0-20240912201240-0a8800162826",
+        "category": "openshift",
+        "purpose": "OpenShift API types"
+      },
+      {
+        "module": "github.com/pkg/errors",
+        "version": "v0.9.1"
+      },
+      {
+        "module": "github.com/prometheus-operator/prometheus-operator/pkg/client",
+        "version": "v0.83.0"
+      },
+      {
+        "module": "github.com/prometheus/client_golang",
+        "version": "v1.23.2",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/prometheus/client_golang",
+        "version": "v1.22.0",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/prometheus/client_model",
+        "version": "v0.6.1",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/redis/go-redis/v9",
+        "version": "v9.20.0",
+        "category": "storage",
+        "purpose": "Redis client"
+      },
+      {
+        "module": "github.com/roberson-io/mmh3",
+        "version": "v0.0.0-20190729202758-fdfce3ba6225"
+      },
+      {
+        "module": "github.com/rs/zerolog",
+        "version": "v1.33.0"
+      },
+      {
+        "module": "github.com/spaolacci/murmur3",
+        "version": "v1.1.0"
+      },
+      {
+        "module": "github.com/stretchr/testify",
+        "version": "v1.11.1",
+        "category": "testing",
+        "purpose": "Test assertions library"
+      },
+      {
+        "module": "go.opentelemetry.io/otel",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.opentelemetry.io/otel/exporters/otlp/otlptrace",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.opentelemetry.io/otel/sdk",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.opentelemetry.io/otel/trace",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "golang.org/x/sync",
+        "version": "v0.20.0"
+      },
+      {
+        "module": "google.golang.org/genproto/googleapis/rpc",
+        "version": "v0.0.0-20260526163538-3dc84a4a5aaa"
+      },
+      {
+        "module": "google.golang.org/grpc",
+        "version": "v1.81.1",
+        "category": "serialization",
+        "purpose": "gRPC framework"
+      },
+      {
+        "module": "google.golang.org/protobuf",
+        "version": "v1.36.11",
+        "category": "serialization",
+        "purpose": "Protocol Buffers"
+      },
+      {
+        "module": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "category": "serialization",
+        "purpose": "YAML parser"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.33.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.33.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.33.1",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/utils",
+        "version": "v0.0.0-20250502105355-0f33e8f1c979",
+        "category": "k8s-api",
+        "purpose": "Kubernetes utility library"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.21.0",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      }
+    ],
+    "python_packages": [
+      {
+        "name": "bigtree",
+        "version": "\u003e=0.19.2",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "click",
+        "version": "\u003e=7.0.0,\u003c9.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "colorama",
+        "version": "\u003e=0.3.9,\u003c1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "dask",
+        "version": "\u003e=2024.2.1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "dill",
+        "version": "~=0.3.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "fastapi",
+        "version": "\u003e=0.68.0",
+        "category": "web-framework",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jinja2",
+        "version": "\u003e=2,\u003c4",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jsonschema",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "mmh3",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "numpy",
+        "version": "\u003e=2.0.0,\u003c3",
+        "category": "numerical",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pandas",
+        "version": "\u003e=1.4.3,\u003c3",
+        "category": "data",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "prometheus-client",
+        "version": "\u003e=0.20.0,\u003c0.25.0",
+        "category": "observability",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "protobuf",
+        "version": "\u003e=4.24.0",
+        "category": "serialization",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "psutil",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pyarrow",
+        "version": "\u003e=21.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pydantic",
+        "version": "\u003e=2.10.6",
+        "category": "serialization",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pygments",
+        "version": "\u003e=2.12.0,\u003c3",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pyjwt",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pyyaml",
+        "version": "\u003e=5.4.0,\u003c7",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "requests",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "sqlalchemy",
+        "version": "\u003e1",
+        "category": "database",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "starlette",
+        "version": "\u003e=1.0.1",
+        "category": "web-framework",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "tabulate",
+        "version": "\u003e=0.8.0,\u003c1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "tenacity",
+        "version": "\u003e=7,\u003c9",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "toml",
+        "version": "\u003e=0.10.0,\u003c1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "tqdm",
+        "version": "\u003e=4,\u003c5",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "typeguard",
+        "version": "\u003e=4.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "uvicorn",
+        "version": "\u003e=0.30.6,\u003c=0.34.0",
+        "category": "web-server",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "uvicorn-worker",
+        "source": "pyproject.toml",
+        "required": true
+      }
+    ]
+  },
+  "dockerfiles": [
+    {
+      "path": "go/infra/docker/feature-server/Dockerfile",
+      "base_image": "golang:1.25",
+      "stages": 1,
+      "exposed_ports": [
+        8080
+      ],
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "infra/feast-operator/Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi9/ubi-minimal:9.5",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset:1.25"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    },
+    {
+      "path": "java/infra/docker/feature-server/Dockerfile",
+      "base_image": "amazoncorretto:11",
+      "build_stage_images": [
+        "maven:3-jdk-11"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "java/infra/docker/feature-server/Dockerfile.dev",
+      "base_image": "openjdk:11-jre",
+      "stages": 1,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/compute_engines/aws_lambda/Dockerfile",
+      "base_image": "public.ecr.aws/lambda/python:3.9",
+      "stages": 1,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/compute_engines/kubernetes/Dockerfile",
+      "base_image": "debian:11-slim",
+      "stages": 1,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi9/python-312-minimal:latest",
+      "stages": 1,
+      "user": "1001",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi9/python-312-minimal:latest"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/Dockerfile.dev",
+      "base_image": "registry.access.redhat.com/ubi9/python-312-minimal:latest",
+      "stages": 1,
+      "user": "1001",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi9/python-312-minimal:latest"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/offline/Dockerfile.binary",
+      "base_image": "yarn-builder:latest",
+      "stages": 1,
+      "issues": [
+        "Unpinned base image: yarn-builder:latest",
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/offline/Dockerfile.binary.release",
+      "base_image": "registry.access.redhat.com/ubi9/python-312-minimal:1",
+      "stages": 1,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/offline/Dockerfile.builder.yarn",
+      "base_image": "registry.access.redhat.com/ubi9/python-312-minimal:1",
+      "stages": 1,
+      "user": "1001"
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/offline/Dockerfile.builder.yum",
+      "base_image": "registry.access.redhat.com/ubi9/python-312-minimal:1",
+      "stages": 1,
+      "user": "1001"
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/offline/Dockerfile.sdist",
+      "base_image": "yarn-builder:latest",
+      "stages": 1,
+      "user": "1001",
+      "issues": [
+        "Unpinned base image: yarn-builder:latest"
+      ]
+    },
+    {
+      "path": "sdk/python/feast/infra/feature_servers/multicloud/offline/Dockerfile.sdist.release",
+      "base_image": "registry.access.redhat.com/ubi9/python-312-minimal:1",
+      "stages": 1,
+      "user": "1001"
+    },
+    {
+      "path": "sdk/python/feast/infra/transformation_servers/Dockerfile",
+      "base_image": "python:3.11-slim",
+      "stages": 1,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "ui/docker/Dockerfile",
+      "base_image": "node:17.9.0-slim",
+      "stages": 1,
+      "exposed_ports": [
+        3000
+      ],
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    }
+  ],
+  "helm": {
+    "chart_name": "feast",
+    "chart_version": "0.63.0",
+    "values_defaults": {
+      "serviceAccount.name": ""
+    }
+  },
+  "http_endpoints": [
+    {
+      "method": "*",
+      "path": "/get-online-features",
+      "source": "go/internal/feast/server/http_server.go:388"
+    },
+    {
+      "method": "*",
+      "path": "/get-online-features",
+      "source": "go/internal/feast/server/http_server.go:402"
+    },
+    {
+      "method": "*",
+      "path": "/health",
+      "source": "go/internal/feast/server/http_server.go:389"
+    },
+    {
+      "method": "*",
+      "path": "/health",
+      "source": "go/internal/feast/server/http_server.go:403"
+    },
+    {
+      "method": "*",
+      "path": "/metrics",
+      "source": "go/main.go:204"
+    },
+    {
+      "method": "*",
+      "path": "/metrics",
+      "source": "go/main.go:264"
+    }
+  ],
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "elasticsearch",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/elasticsearch_online_store/elasticsearch.py:67",
+      "function": "_get_client"
+    },
+    {
+      "type": "api",
+      "service": "milvus",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/milvus_online_store/milvus.py:156",
+      "function": "_connect"
+    },
+    {
+      "type": "api",
+      "service": "milvus",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/milvus_online_store/milvus.py:163",
+      "function": "_connect"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:1296",
+      "function": "_mlflow_log_apply_diffs"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:1650"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:1652"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:1853"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:2472"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:2475"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:326",
+      "function": "_log_entity_df_metadata"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:334",
+      "function": "_log_entity_df_artifact"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/feature_store.py:3394"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow.py:123",
+      "function": "__getattr__"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/__init__.py:24"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/__init__.py:25"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/client.py:102"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/client.py:109"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/client.py:39",
+      "function": "FeastMlflowClient"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/client.py:42",
+      "function": "FeastMlflowClient"
+    },
+    {
+      "type": "api",
+      "service": "mlflow",
+      "target": "",
+      "source": "sdk/python/feast/mlflow_integration/logger.py:128"
+    },
+    {
+      "type": "api",
+      "service": "qdrant",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/qdrant_online_store/qdrant.py:84",
+      "function": "_get_client"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "sdk/python/feast/permissions/client/http_auth_requests_wrapper.py:154"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "sdk/python/feast/permissions/client/oidc_authentication_client_manager.py:101",
+      "function": "_fetch_token_from_idp"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "sdk/python/feast/permissions/oidc_service.py:31",
+      "function": "_fetch_discovery_data"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "mongodb://localhost:27017",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/mongodb_offline_store/mongodb.py:105",
+      "function": "MongoDBOfflineStoreConfig"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/mongodb_offline_store/mongodb.py:199"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/mongodb_offline_store/mongodb.py:407",
+      "function": "_get_client_and_ensure_indexes"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "mongodb://host",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/ray_offline_store/ray_source.py:103"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "mongodb://localhost:27017",
+      "source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:50",
+      "function": "MongoDBOnlineStoreConfig"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:574",
+      "function": "_get_client"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:600",
+      "function": "_get_client_async"
+    },
+    {
+      "type": "database",
+      "service": "mysql",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/mysql_online_store/mysql.py:51",
+      "function": "_get_conn"
+    },
+    {
+      "type": "database",
+      "service": "postgres",
+      "target": "",
+      "source": "sdk/python/feast/infra/utils/postgres/connection_utils.py:17",
+      "function": "_get_conn"
+    },
+    {
+      "type": "database",
+      "service": "postgres",
+      "target": "",
+      "source": "sdk/python/feast/templates/postgres/bootstrap.py:51",
+      "function": "bootstrap"
+    },
+    {
+      "type": "database",
+      "service": "postgres",
+      "target": "postgresql://{postgres_user}",
+      "source": "sdk/python/feast/templates/postgres/bootstrap.py:53",
+      "function": "bootstrap"
+    },
+    {
+      "type": "database",
+      "service": "redis",
+      "target": "",
+      "source": "go/internal/feast/onlinestore/redisonlinestore.go:118",
+      "function": "NewRedisOnlineStore"
+    },
+    {
+      "type": "database",
+      "service": "redis",
+      "target": "",
+      "source": "go/internal/feast/onlinestore/redisonlinestore.go:129",
+      "function": "NewRedisOnlineStore"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "sdk/python/feast/infra/ray_initializer.py:261",
+      "function": "_connection_factory"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "sdk/python/feast/infra/ray_initializer.py:546",
+      "function": "_factory"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "sdk/python/feast/infra/registry/sql.py:297"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "sdk/python/feast/infra/registry/sql.py:301"
+    },
+    {
+      "type": "database",
+      "service": "sqlite",
+      "target": "",
+      "source": "go/internal/feast/onlinestore/sqliteonlinestore.go:148",
+      "function": "initializeConnection"
+    },
+    {
+      "type": "database",
+      "service": "sqlite",
+      "target": "",
+      "source": "sdk/python/feast/infra/online_stores/sqlite.py:702"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "go/internal/feast/transformation/transformation_service.go:35",
+      "function": "NewGrpcTransformationService"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1123",
+      "function": "to_remote_storage"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1480",
+      "function": "_list_azure_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1485",
+      "function": "_list_azure_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "sdk/python/feast/infra/registry/contrib/azure/azure_registry_store.py:45",
+      "function": "__init__"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "sdk/python/feast/infra/registry/contrib/azure/azure_registry_store.py:58",
+      "function": "__init__"
+    },
+    {
+      "type": "object-storage",
+      "service": "gcs",
+      "target": "",
+      "source": "go/internal/feast/registry/gcs.go:47",
+      "function": "NewGCSRegistryStore"
+    },
+    {
+      "type": "object-storage",
+      "service": "gcs",
+      "target": "gs://{b.bucket.name}/{b.name}",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:1318",
+      "function": "to_remote_storage"
+    },
+    {
+      "type": "object-storage",
+      "service": "gcs",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1439",
+      "function": "_list_gcs_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "gcs",
+      "target": "gs://{bucket}/{blob.name}",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1446",
+      "function": "_list_gcs_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "gcs",
+      "target": "",
+      "source": "sdk/python/feast/infra/registry/gcs.py:24",
+      "function": "__init__"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "",
+      "source": "go/internal/feast/registry/s3.go:43",
+      "function": "NewS3RegistryStore"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://bucket/cheques/",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/ray_offline_store/ray_source.py:56",
+      "function": "RaySource"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "",
+      "source": "sdk/python/feast/infra/offline_stores/ibis.py:481",
+      "function": "list_s3_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://{bucket}/{content[",
+      "source": "sdk/python/feast/infra/offline_stores/ibis.py:488",
+      "function": "list_s3_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:56",
+      "function": "get_s3_resource"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://foo/bar/test.file",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:63",
+      "function": "get_bucket_and_key"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:719",
+      "function": "list_s3_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://{bucket}/{content[",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:725",
+      "function": "list_s3_files"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://my-bucket/warehouse",
+      "source": "sdk/python/feast/table_format.py:123",
+      "function": "IcebergFormat"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://my-bucket/checkpoints/my_table",
+      "source": "sdk/python/feast/table_format.py:232",
+      "function": "DeltaFormat"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://bucket/checkpoints",
+      "source": "sdk/python/feast/table_format.py:456",
+      "function": "create_table_format"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "s3://bucket/checkpoints",
+      "source": "sdk/python/feast/table_format.py:534",
+      "function": "table_format_from_json"
+    }
+  ],
+  "cache_config": {
+    "manager_file": "infra/feast-operator/cmd/main.go",
+    "cache_scope": "cluster-wide",
+    "filtered_types": [
+      {
+        "type": "appsv1.Deployment",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "autoscalingv2.HorizontalPodAutoscaler",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "batchv1.CronJob",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "corev1.ConfigMap",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "corev1.PersistentVolumeClaim",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "corev1.Service",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "corev1.ServiceAccount",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "policyv1.PodDisruptionBudget",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "rbacv1.Role",
+        "filter_kind": "label",
+        "filter": "label selector"
+      },
+      {
+        "type": "rbacv1.RoleBinding",
+        "filter_kind": "label",
+        "filter": "label selector"
+      }
+    ],
+    "default_transform": true,
+    "default_transform_func": "cache",
+    "disabled_types": [
+      "appsv1.Deployment",
+      "autoscalingv2.HorizontalPodAutoscaler",
+      "batchv1.CronJob",
+      "corev1.ConfigMap",
+      "corev1.PersistentVolumeClaim",
+      "corev1.Secret",
+      "corev1.Service",
+      "corev1.ServiceAccount",
+      "policyv1.PodDisruptionBudget",
+      "rbacv1.Role",
+      "rbacv1.RoleBinding"
+    ],
+    "gomemlimit": "230MiB",
+    "memory_limit": "256Mi",
+    "gomemlimit_ratio": 89.8,
+    "issues": [
+      "Cache bypass (DisableFor) configured for corev1.ConfigMap. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)",
+      "Cache bypass (DisableFor) configured for corev1.Secret. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)",
+      "Type FeatureStore is watched but has no cache filter (cluster-wide informer)",
+      "Type Route is watched but has no cache filter (cluster-wide informer)"
+    ]
+  },
+  "prometheus_metrics": [
+    {
+      "name": "cpu_temperature_celsius",
+      "type": "gauge",
+      "help": "Current temperature of the CPU.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/doc.go"
+    },
+    {
+      "name": "feast_operator_feature_store_info",
+      "type": "gauge",
+      "help": "Information about a deployed FeatureStore. ",
+      "labels": [
+        "labelNamespace",
+        "labelName",
+        "online_store_type",
+        "offline_store_type",
+        "registry_type"
+      ],
+      "source": "infra/feast-operator/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "grpc_client_handled_total",
+      "type": "counter",
+      "help": "Total number of RPCs completed by the client, regardless of success or failure.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method",
+        "grpc_code"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_metrics.go"
+    },
+    {
+      "name": "grpc_client_handling_seconds",
+      "type": "histogram",
+      "help": "Histogram of response latency (seconds) of the gRPC until it is finished by the application.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_options.go"
+    },
+    {
+      "name": "grpc_client_msg_received_total",
+      "type": "counter",
+      "help": "Total number of RPC stream messages received by the client.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_metrics.go"
+    },
+    {
+      "name": "grpc_client_msg_recv_handling_seconds",
+      "type": "histogram",
+      "help": "Histogram of response latency (seconds) of the gRPC single message receive.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_options.go"
+    },
+    {
+      "name": "grpc_client_msg_send_handling_seconds",
+      "type": "histogram",
+      "help": "Histogram of response latency (seconds) of the gRPC single message send.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_options.go"
+    },
+    {
+      "name": "grpc_client_msg_sent_total",
+      "type": "counter",
+      "help": "Total number of gRPC stream messages sent by the client.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_metrics.go"
+    },
+    {
+      "name": "grpc_client_started_total",
+      "type": "counter",
+      "help": "Total number of RPCs started on the client.",
+      "labels": [
+        "grpc_type",
+        "grpc_service",
+        "grpc_method"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/client_metrics.go"
+    },
+    {
+      "name": "grpc_server_handled_total",
+      "type": "counter",
+      "help": "Total number of RPCs completed on the server, regardless of success or failure.",
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/server_metrics.go"
+    },
+    {
+      "name": "grpc_server_handling_seconds",
+      "type": "histogram",
+      "help": "Histogram of response latency (seconds) of gRPC that had been application-level handled by the server.",
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/server_metrics.go"
+    },
+    {
+      "name": "grpc_server_msg_received_total",
+      "type": "counter",
+      "help": "Total number of RPC stream messages received on the server.",
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/server_metrics.go"
+    },
+    {
+      "name": "grpc_server_msg_sent_total",
+      "type": "counter",
+      "help": "Total number of gRPC stream messages sent by the server.",
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/server_metrics.go"
+    },
+    {
+      "name": "grpc_server_started_total",
+      "type": "counter",
+      "help": "Total number of RPCs started on the server.",
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus@v1.1.0/server_metrics.go"
+    },
+    {
+      "name": "hd_errors_total",
+      "type": "counter",
+      "help": "Number of hard-disk errors.",
+      "labels": [
+        "device"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/doc.go"
+    },
+    {
+      "name": "hello_requests_total",
+      "type": "counter",
+      "help": "Total number of hello-world requests by HTTP code.",
+      "labels": [
+        "code"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promauto/auto.go"
+    },
+    {
+      "name": "http_request_duration_seconds",
+      "type": "histogram",
+      "help": "A histogram of the HTTP request durations in seconds.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/createdtimestamps/main.go"
+    },
+    {
+      "name": "http_request_duration_seconds",
+      "type": "histogram",
+      "help": "A histogram of the HTTP request durations in seconds.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/exemplars/main.go"
+    },
+    {
+      "name": "promhttp_metric_handler_errors_total",
+      "type": "counter",
+      "help": "Total number of internal errors encountered by the promhttp metric handler.",
+      "labels": [
+        "cause"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promhttp/http.go"
+    },
+    {
+      "name": "promhttp_metric_handler_requests_in_flight",
+      "type": "gauge",
+      "help": "Current number of scrapes being served.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promhttp/http.go"
+    },
+    {
+      "name": "promhttp_metric_handler_requests_total",
+      "type": "counter",
+      "help": "Total number of scrapes by HTTP status code.",
+      "labels": [
+        "code"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promhttp/http.go"
+    },
+    {
+      "name": "random_numbers",
+      "type": "histogram",
+      "help": "A histogram of normally distributed random numbers.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promauto/auto.go"
+    },
+    {
+      "name": "rpc_durations_histogram_seconds",
+      "type": "histogram",
+      "help": "RPC latency distributions.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/random/main.go"
+    },
+    {
+      "name": "rpc_durations_seconds",
+      "type": "summary",
+      "help": "RPC latency distributions.",
+      "labels": [
+        "service"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/random/main.go"
+    }
+  ],
+  "runtime_dependencies": [
+    {
+      "name": "MongoDB",
+      "type": "database",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/mongodb_offline_store/mongodb.py:105",
+      "evidence": "uri:mongodb://",
+      "required": true
+    },
+    {
+      "name": "PostgreSQL",
+      "type": "database",
+      "source": "sdk/python/feast/repo_config.py:207",
+      "evidence": "uri:postgresql://",
+      "required": true
+    },
+    {
+      "name": "S3",
+      "type": "object-storage",
+      "source": "sdk/python/feast/infra/registry/s3.py:32",
+      "evidence": "env:FEAST_S3_ENDPOINT_URL",
+      "required": true
+    },
+    {
+      "name": "OpenTelemetry Collector",
+      "type": "observability",
+      "source": "go/main.go:322",
+      "evidence": "env:ENABLE_OTEL_TRACING",
+      "required": true
+    },
+    {
+      "name": "MLflow",
+      "type": "service",
+      "source": "sdk/python/feast/mlflow_integration/config.py:29",
+      "evidence": "env:MLFLOW_TRACKING_URI",
+      "required": true
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "service",
+      "source": "infra/feast-operator/bundle/manifests/feast-operator-controller-manager-metrics-service_v1_service.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/bundle/manifests/feast-operator-featurestore-editor-role_rbac.authorization.k8s.io_v1_clusterrole.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/bundle/manifests/feast-operator-featurestore-viewer-role_rbac.authorization.k8s.io_v1_clusterrole.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/bundle/manifests/feast-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "service",
+      "source": "infra/feast-operator/config/default/metrics_service.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "namespace",
+      "source": "infra/feast-operator/config/manager/manager.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "deployment",
+      "source": "infra/feast-operator/config/manager/manager.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "servicemonitor",
+      "source": "infra/feast-operator/config/prometheus/monitor.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/config/rbac/featurestore_editor_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/config/rbac/featurestore_viewer_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "role",
+      "source": "infra/feast-operator/config/rbac/leader_election_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "rolebinding",
+      "source": "infra/feast-operator/config/rbac/leader_election_role_binding.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/config/rbac/metrics_auth_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrolebinding",
+      "source": "infra/feast-operator/config/rbac/metrics_auth_role_binding.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/config/rbac/metrics_reader_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrolebinding",
+      "source": "infra/feast-operator/config/rbac/role_binding.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "serviceaccount",
+      "source": "infra/feast-operator/config/rbac/service_account.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "namespace",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "serviceaccount",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "role",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "rolebinding",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrolebinding",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "service",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "deployment",
+      "source": "infra/feast-operator/dist/install.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "infra/feast-operator/internal/controller/services/services_types.go:154"
+    }
+  ],
+  "python_k8s_calls": [
+    {
+      "api": "BatchV1Api",
+      "operation": "delete",
+      "resource": "job",
+      "source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:214"
+    },
+    {
+      "api": "BatchV1Api",
+      "operation": "get",
+      "resource": "job",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:226"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "all",
+      "source": "sdk/python/feast/infra/registry/sql.py:307"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "collection",
+      "source": "sdk/python/feast/infra/online_stores/couchbase_online_store/couchbase.py:261"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "config_map",
+      "source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:293"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "data_source",
+      "source": "sdk/python/feast/cli/dbt_import.py:242"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "dataset",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:1393"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "default_context",
+      "source": "sdk/python/feast/permissions/auth/oidc_token_parser.py:109"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "dir",
+      "source": "sdk/python/feast/infra/registry/contrib/hdfs/hdfs_registry_store.py:65"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "disposition",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:125"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "engine",
+      "source": "sdk/python/feast/infra/ray_initializer.py:261"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "entity",
+      "source": "sdk/python/feast/cli/dbt_import.py:230"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "experiment",
+      "source": "sdk/python/feast/mlflow_integration/logger.py:138"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "feature_view",
+      "source": "sdk/python/feast/cli/dbt_import.py:249"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "filesystem_and_path",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/ray_offline_store/ray.py:2217"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "from_dict",
+      "source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:386"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "function",
+      "source": "sdk/python/feast/infra/compute_engines/aws_lambda/lambda_engine.py:108"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "index",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/mongodb_offline_store/mongodb.py:397"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "instance",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/couchbase_offline_store/couchbase.py:365"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "model",
+      "source": "sdk/python/feast/image_utils.py:90"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "payload_index",
+      "source": "sdk/python/feast/infra/online_stores/qdrant_online_store/qdrant.py:220"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "run",
+      "source": "sdk/python/feast/mlflow_integration/logger.py:168"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "scope",
+      "source": "sdk/python/feast/infra/online_stores/couchbase_online_store/couchbase.py:252"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "search_index",
+      "source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:555"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "table",
+      "source": "sdk/python/feast/infra/online_stores/dynamodb.py:336"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "table_with_default_cf",
+      "source": "sdk/python/feast/infra/online_stores/hbase_online_store/hbase.py:204"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "token_review",
+      "source": "sdk/python/feast/permissions/auth/kubernetes_token_parser.py:217"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "api",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:710"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "blob",
+      "source": "sdk/python/feast/infra/registry/contrib/azure/azure_registry_store.py:90"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "config_map",
+      "source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:221"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "data_source",
+      "source": "sdk/python/feast/diff/registry_diff.py:363"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "entity",
+      "source": "sdk/python/feast/diff/registry_diff.py:339"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "entity_values",
+      "source": "sdk/python/feast/infra/online_stores/redis.py:226"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "feature_service",
+      "source": "sdk/python/feast/diff/registry_diff.py:344"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "feature_view",
+      "source": "sdk/python/feast/diff/registry_diff.py:356"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "file",
+      "source": "sdk/python/feast/infra/registry/contrib/hdfs/hdfs_registry_store.py:53"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "function",
+      "source": "sdk/python/feast/infra/compute_engines/aws_lambda/lambda_engine.py:143"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "label_view",
+      "source": "sdk/python/feast/infra/registry/registry.py:1655"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "multi",
+      "source": "sdk/python/feast/infra/online_stores/datastore.py:330"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "permission",
+      "source": "sdk/python/feast/diff/registry_diff.py:372"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "project",
+      "source": "sdk/python/feast/cli/projects.py:85"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "s3_directory",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena.py:272"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "saved_dataset",
+      "source": "sdk/python/feast/infra/registry/registry.py:1636"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "table",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:355"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "validation_reference",
+      "source": "sdk/python/feast/feature_store.py:1593"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all",
+      "source": "sdk/python/feast/infra/online_stores/hazelcast_online_store/hazelcast_online_store.py:229"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all_rows",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/couchbase_offline_store/couchbase.py:326"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "any_feature_view",
+      "source": "sdk/python/feast/cli/feature_views.py:105"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "apis",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:677"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "athena_data_client",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena.py:100"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "athena_query_result",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena.py:548"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "authorization_url",
+      "source": "sdk/python/feast/permissions/auth/oidc_token_parser.py:56"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "baseline",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:362"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "blob_client",
+      "source": "sdk/python/feast/infra/registry/contrib/azure/azure_registry_store.py:49"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "bucket",
+      "source": "sdk/python/feast/infra/registry/gcs.py:36"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "client",
+      "source": "sdk/python/feast/infra/utils/clickhouse/connection_utils.py:17"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "col_from_feature",
+      "source": "sdk/python/feast/infra/online_stores/hbase_online_store/hbase.py:108"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "column_info",
+      "source": "sdk/python/feast/infra/compute_engines/local/feature_builder.py:38"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "container_client",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1489"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "current",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/ray_offline_store/ray.py:444"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "data_source",
+      "source": "sdk/python/feast/cli/cli.py:172"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "dataset",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:1385"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "default_yaml_file_path",
+      "source": "sdk/python/feast/cli/cli.py:118"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "embedding_dim",
+      "source": "sdk/python/feast/doc_embedder.py:231"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "entity",
+      "source": "sdk/python/feast/cli/cli.py:169"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "entity_df",
+      "source": "sdk/python/feast/mlflow_integration/client.py:300"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "event_loop",
+      "source": "sdk/python/feast/infra/online_stores/online_store.py:428"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "execution_context",
+      "source": "sdk/python/feast/infra/compute_engines/local/compute.py:78"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "expected_join_keys",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:323"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "experiment_by_name",
+      "source": "sdk/python/feast/mlflow_integration/logger.py:135"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature",
+      "source": "sdk/python/feast/utils.py:642"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_from_col",
+      "source": "sdk/python/feast/infra/online_stores/hbase_online_store/hbase.py:166"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_metrics",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:282"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_server_endpoint",
+      "source": "sdk/python/feast/cli/cli.py:228"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_service",
+      "source": "examples/operator-rbac/client/feature_repo/test.py:69"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_service_metrics",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:338"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_transformation",
+      "source": "sdk/python/feast/batch_feature_view.py:141"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_view",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:93"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_view_by_name",
+      "source": "sdk/python/feast/offline_server.py:219"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_view_by_version",
+      "source": "sdk/python/feast/feature_store.py:1092"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_view_metrics",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:311"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "feature_view_query_context",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:332"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "field_mapping",
+      "source": "sdk/python/feast/infra/compute_engines/feature_builder.py:155"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "file_info",
+      "source": "sdk/python/feast/infra/offline_stores/file_source.py:170"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "flight_info",
+      "source": "sdk/python/feast/infra/offline_stores/remote.py:552"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "function",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:619"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "help_record",
+      "source": "sdk/python/feast/cli/cli.py:76"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "historical_features",
+      "source": "examples/operator-rbac/client/feature_repo/test.py:32"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "image_features",
+      "source": "sdk/python/feast/embedder.py:237"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "infra",
+      "source": "sdk/python/feast/feature_store.py:1227"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "input_values",
+      "source": "sdk/python/feast/infra/compute_engines/local/local_node.py:14"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "item",
+      "source": "sdk/python/feast/infra/online_stores/dynamodb.py:961"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "jwks_url",
+      "source": "sdk/python/feast/permissions/auth/oidc_token_parser.py:118"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "kuberay_config",
+      "source": "sdk/python/feast/infra/ray_initializer.py:790"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "label_view",
+      "source": "sdk/python/feast/cli/label_views.py:28"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "log_timestamp_column",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:397"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "map",
+      "source": "sdk/python/feast/infra/online_stores/hazelcast_online_store/hazelcast_online_store.py:160"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "middleware",
+      "source": "sdk/python/feast/permissions/server/arrow.py:72"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "model_version",
+      "source": "sdk/python/feast/mlflow_integration/client.py:183"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "model_version_by_alias",
+      "source": "sdk/python/feast/mlflow_integration/client.py:185"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "models",
+      "source": "sdk/python/feast/cli/dbt_import.py:170"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "monitoring_max_timestamp",
+      "source": "sdk/python/feast/monitoring/monitoring_service.py:1007"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "multi",
+      "source": "sdk/python/feast/infra/online_stores/datastore.py:283"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "object_relationships",
+      "source": "sdk/python/feast/infra/registry/base_registry.py:1095"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "objects_from_registry",
+      "source": "sdk/python/feast/diff/registry_diff.py:228"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "objects_from_repo_contents",
+      "source": "sdk/python/feast/diff/registry_diff.py:231"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "on_demand_feature_view",
+      "source": "sdk/python/feast/cli/cli.py:176"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "online_features",
+      "source": "docs/tutorials/azure/notebooks/src/score.py:51"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "online_features_async",
+      "source": "sdk/python/feast/feature_server.py:440"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "paginator",
+      "source": "sdk/python/feast/infra/offline_stores/redshift_source.py:214"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "params",
+      "source": "sdk/python/feast/cli/cli.py:75"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "permission",
+      "source": "sdk/python/feast/cli/permissions.py:157"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "prefixed_table_name",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/ray_repo_configuration.py:58"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "project",
+      "source": "sdk/python/feast/api/registry/rest/metrics.py:441"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "project_metadata",
+      "source": "sdk/python/feast/api/registry/rest/metrics.py:450"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pyarrow_schema_from_batch_source",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:440"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "query_execution",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:798"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "query_results",
+      "source": "sdk/python/feast/infra/utils/aws_utils.py:856"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "redshift_data_client",
+      "source": "sdk/python/feast/infra/offline_stores/redshift.py:137"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "redshift_statement_result",
+      "source": "sdk/python/feast/infra/offline_stores/redshift.py:1210"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "refresh_url",
+      "source": "sdk/python/feast/permissions/auth/oidc_token_parser.py:57"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "registry_lineage",
+      "source": "sdk/python/feast/registry_server.py:1154"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "registry_proto",
+      "source": "sdk/python/feast/infra/registry/contrib/azure/azure_registry_store.py:103"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "request_data_schema",
+      "source": "sdk/python/feast/feature_store.py:1806"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "requested_odfvs",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:362"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "roles",
+      "source": "sdk/python/feast/cli/cli_utils.py:194"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "run",
+      "source": "sdk/python/feast/mlflow_integration/client.py:133"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "running_loop",
+      "source": "sdk/python/feast/feature_store.py:3496"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "s3_resource",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena.py:101"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "saved_dataset",
+      "source": "sdk/python/feast/cli/cli.py:173"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "schema",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:393"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "sentence_embedding_dimension",
+      "source": "sdk/python/feast/embedder.py:170"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "session",
+      "source": "sdk/python/feast/infra/online_stores/dynamodb.py:161"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "signing_key_from_jwt",
+      "source": "sdk/python/feast/permissions/auth/oidc_token_parser.py:122"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "single_input_value",
+      "source": "sdk/python/feast/infra/compute_engines/local/local_node.py:11"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "single_table",
+      "source": "sdk/python/feast/infra/compute_engines/local/nodes.py:137"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "source_key_from_type",
+      "source": "sdk/python/feast/infra/offline_stores/hybrid_offline_store.py:78"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "statement_result",
+      "source": "sdk/python/feast/infra/offline_stores/redshift.py:629"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "stream_feature_view",
+      "source": "sdk/python/feast/cli/cli.py:175"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:1421"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table_column_names_and_types",
+      "source": "sdk/python/feast/inference.py:79"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table_column_names_and_types_from_data_source",
+      "source": "sdk/python/feast/feature_store.py:3289"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table_metadata",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena_source.py:213"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table_query_string",
+      "source": "sdk/python/feast/infra/compute_engines/snowflake/snowflake_engine.py:248"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table_query_string_with_alias",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/postgres_offline_store/postgres.py:370"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "temp_entity_table_name",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:1395"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "temp_s3_path",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena.py:396"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "temp_table_dml_header",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/athena_offline_store/athena.py:404"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "template",
+      "source": "sdk/python/feast/api/registry/rest/codegen_utils.py:12"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "timeseries",
+      "source": "sdk/python/feast/api/registry/rest/monitoring.py:388"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "token_url",
+      "source": "sdk/python/feast/permissions/auth/oidc_token_parser.py:55"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tracking_uri",
+      "source": "sdk/python/feast/mlflow_integration/client.py:50"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "training_entity_df",
+      "source": "sdk/python/feast/mlflow_integration/__init__.py:27"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "transformed_features_df",
+      "source": "sdk/python/feast/embedded_go/online_features_service.py:264"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "transport_config",
+      "source": "sdk/python/feast/openlineage/client.py:108"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "ttl_duration",
+      "source": "sdk/python/feast/feature_view.py:524"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "uri_for_file_path",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/ray_offline_store/ray.py:1472"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "user_roles",
+      "source": "sdk/python/feast/permissions/auth/kubernetes_token_parser.py:92"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "validation_reference",
+      "source": "sdk/python/feast/cli/cli.py:174"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "version",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/mongodb_offline_store/__init__.py:6"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "waiter",
+      "source": "sdk/python/feast/infra/compute_engines/aws_lambda/lambda_engine.py:132"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "all_feature_views",
+      "source": "sdk/python/feast/cli/cli_utils.py:166"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "artifacts",
+      "source": "sdk/python/feast/mlflow_integration/model_resolver.py:135"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "batch_feature_views",
+      "source": "sdk/python/feast/cli/cli_utils.py:172"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "blobs",
+      "source": "sdk/python/feast/infra/offline_stores/bigquery.py:1315"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "cluster_role_binding",
+      "source": "sdk/python/feast/permissions/auth/kubernetes_token_parser.py:177"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "collection_names",
+      "source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:514"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "collections",
+      "source": "sdk/python/feast/infra/online_stores/milvus_online_store/milvus.py:790"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "column_families",
+      "source": "sdk/python/feast/infra/online_stores/bigtable.py:262"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "data_sources",
+      "source": "sdk/python/feast/cli/cli_utils.py:103"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "entities",
+      "source": "sdk/python/feast/cli/cli_utils.py:145"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "feature_services",
+      "source": "sdk/python/feast/cli/cli_utils.py:124"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "feature_view_versions",
+      "source": "sdk/python/feast/cli/feature_views.py:205"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "feature_views",
+      "source": "examples/operator-rbac/client/feature_repo/test.py:103"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "feature_views_by_name",
+      "source": "sdk/python/feast/offline_server.py:290"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "features",
+      "source": "infra/scripts/feature_store_client_configs_gen.py:172"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "label_views",
+      "source": "sdk/python/feast/cli/label_views.py:52"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "objects_v2",
+      "source": "sdk/python/feast/infra/compute_engines/spark/utils.py:93"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "on_demand_feature_views",
+      "source": "sdk/python/feast/cli/cli_utils.py:168"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "permissions",
+      "source": "sdk/python/feast/cli/cli_utils.py:215"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "pod",
+      "source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:238"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "project_metadata",
+      "source": "sdk/python/feast/infra/registry/base_registry.py:1164"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "projects",
+      "source": "sdk/python/feast/cli/projects.py:103"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "role_binding",
+      "source": "sdk/python/feast/permissions/auth/kubernetes_token_parser.py:134"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "role_binding_for_all_namespaces",
+      "source": "sdk/python/feast/permissions/auth/kubernetes_token_parser.py:164"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "s3_files",
+      "source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark.py:1114"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "saved_datasets",
+      "source": "sdk/python/feast/cli/cli_utils.py:61"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "search_indexes",
+      "source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:474"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "stream_feature_views",
+      "source": "sdk/python/feast/cli/cli_utils.py:174"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "tags_of_resource",
+      "source": "sdk/python/feast/infra/online_stores/dynamodb.py:256"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "tools",
+      "source": "examples/agent_feature_store/agent.py:79"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "val",
+      "source": "sdk/python/feast/proto_json.py:107"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "validation_references",
+      "source": "sdk/python/feast/cli/cli_utils.py:82"
+    },
+    {
+      "api": "kubernetes",
+      "operation": "import",
+      "resource": "",
+      "source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:8"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "sparse",
+    "dockerfiles": "rich",
+    "external_connections": "rich",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "rich",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "rich",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "moderate",
+    "secrets": "none",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "feast is a Kubernetes component. deploying 2 workload(s) (controller-manager, controller-manager) with 2 container(s). watching 12 resource type(s). exposing 1 service(s) on ports: 6566. Dockerfile EXPOSE ports: 3000, 8080. connecting to external services: azure-blob, elasticsearch, gcs, grpc, milvus, mlflow, mongodb, mysql, postgres, qdrant, redis, requests, s3, sqlalchemy, sqlite. runtime dependencies: MLflow, MongoDB, OpenTelemetry Collector, PostgreSQL, S3. 29 Python package dependencies (29 required), categories: 1 data, 1 database, 1 numerical, 1 observability, 1 web-server, 2 serialization, 2 web-framework. exposing 24 Prometheus metrics. Python k8s client with 193 API call(s). integrates with management relationship via labels/annotations.",
+  "go_ast_mode": "syntax-only",
+  "go_ast_warning": "majority of packages had type-checking errors, using syntax-only mode"
+}
