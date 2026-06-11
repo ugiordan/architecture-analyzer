@@ -12,46 +12,49 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - goos: linux
-            goarch: amd64
-            suffix: linux-amd64
-          - goos: linux
-            goarch: arm64
-            suffix: linux-arm64
-          - goos: darwin
-            goarch: amd64
-            suffix: darwin-amd64
-          - goos: darwin
-            goarch: arm64
-            suffix: darwin-arm64
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-go@v6
         with:
           go-version: '1.26'
           cache-dependency-path: go.sum
-      - name: Build
-        env:
-          GOOS: ${{ matrix.goos }}
-          GOARCH: ${{ matrix.goarch }}
-          CGO_ENABLED: '0'
+      - name: Build linux-amd64
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          go build -ldflags "-s -w -X main.version=${VERSION}" \
-            -o arch-analyzer-${{ matrix.suffix }} ./cmd/arch-analyzer/
-      - name: Upload binary
-        uses: actions/upload-artifact@v7
+          GOARCH=amd64 go build -ldflags "-s -w -X main.version=${VERSION}" \
+            -o arch-analyzer-linux-amd64 ./cmd/arch-analyzer/
+      - uses: actions/upload-artifact@v7
         with:
-          name: arch-analyzer-${{ matrix.suffix }}
-          path: arch-analyzer-${{ matrix.suffix }}
+          name: arch-analyzer-linux-amd64
+          path: arch-analyzer-linux-amd64
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26'
+          cache-dependency-path: go.sum
+      - name: Build darwin-arm64
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          GOARCH=arm64 go build -ldflags "-s -w -X main.version=${VERSION}" \
+            -o arch-analyzer-darwin-arm64 ./cmd/arch-analyzer/
+      - name: Build darwin-amd64
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          GOARCH=amd64 go build -ldflags "-s -w -X main.version=${VERSION}" \
+            -o arch-analyzer-darwin-amd64 ./cmd/arch-analyzer/
+      - uses: actions/upload-artifact@v7
+        with:
+          name: arch-analyzer-darwin
+          path: arch-analyzer-darwin-*
 
   release:
-    needs: build
+    needs: [build-linux, build-macos]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v8
