@@ -50,6 +50,8 @@ jobs:
 
   release:
     needs: [build-linux, build-macos-arm64]
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/download-artifact@v8
         with:
           path: binaries/
