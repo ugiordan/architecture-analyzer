@@ -23,7 +23,7 @@ jobs:
       - name: Build linux-amd64
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          GOARCH=amd64 go build -ldflags "-s -w -X main.version=${VERSION}" \
+          go build -ldflags "-s -w -X main.version=${VERSION}" \
             -o arch-analyzer-linux-amd64 ./cmd/arch-analyzer/
       - uses: actions/upload-artifact@v7
         with:
@@ -67,9 +67,18 @@ jobs:
           path: arch-analyzer-darwin-amd64
 
   release:
+    if: always()
     needs: [build-linux, build-macos-arm64, build-macos-amd64]
     runs-on: ubuntu-latest
     steps:
+      - name: Check at least one build succeeded
+        run: |
+          if [ "${{ needs.build-linux.result }}" != "success" ] && \
+             [ "${{ needs.build-macos-arm64.result }}" != "success" ] && \
+             [ "${{ needs.build-macos-amd64.result }}" != "success" ]; then
+            echo "All builds failed"
+            exit 1
+          fi
       - uses: actions/download-artifact@v8
         with:
           path: binaries/
