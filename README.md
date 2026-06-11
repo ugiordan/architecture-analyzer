@@ -74,11 +74,21 @@ graph LR
     class JSON,GRAPH,FINDINGS,DIAGRAMS output
 ```
 
-## Requirements
-
-- Go 1.25+
-
 ## Installation
+
+Download the latest binary from [GitHub Releases](https://github.com/ugiordan/architecture-analyzer/releases):
+
+```bash
+# Linux
+curl -L https://github.com/ugiordan/architecture-analyzer/releases/latest/download/arch-analyzer-linux-amd64 -o arch-analyzer
+chmod +x arch-analyzer
+
+# macOS (Apple Silicon)
+curl -L https://github.com/ugiordan/architecture-analyzer/releases/latest/download/arch-analyzer-darwin-arm64 -o arch-analyzer
+chmod +x arch-analyzer
+```
+
+Or build from source (requires Go 1.25+):
 
 ```bash
 git clone https://github.com/ugiordan/architecture-analyzer.git

@@ -1,19 +1,28 @@
 # Installation
 
-## Requirements
+## Download pre-built binary (recommended)
 
-- Go 1.25+
-- git
+Download the latest release from [GitHub Releases](https://github.com/ugiordan/architecture-analyzer/releases):
+
+```bash
+# Linux (amd64)
+curl -L https://github.com/ugiordan/architecture-analyzer/releases/latest/download/arch-analyzer-linux-amd64 -o arch-analyzer
+chmod +x arch-analyzer
+
+# macOS (Apple Silicon)
+curl -L https://github.com/ugiordan/architecture-analyzer/releases/latest/download/arch-analyzer-darwin-arm64 -o arch-analyzer
+chmod +x arch-analyzer
+```
 
 ## Build from source
+
+Requires Go 1.25+ and git.
 
 ```bash
 git clone https://github.com/ugiordan/architecture-analyzer.git
 cd architecture-analyzer
 go build -o arch-analyzer ./cmd/arch-analyzer/
 ```
-
-The binary `arch-analyzer` is now ready to use.
 
 ## Verify installation
 
@@ -24,7 +33,7 @@ The binary `arch-analyzer` is now ready to use.
 Expected output:
 
 ```
-architecture-analyzer v0.2.0
+arch-analyzer 0.1.0
 ```
 
 ## Optional: Add to PATH
