@@ -48,37 +48,8 @@ jobs:
           name: arch-analyzer-darwin-arm64
           path: arch-analyzer-darwin-arm64
 
-  build-macos-amd64:
-    runs-on: macos-13
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-go@v6
-        with:
-          go-version: '1.26'
-          cache-dependency-path: go.sum
-      - name: Build darwin-amd64
-        run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          go build -ldflags "-s -w -X main.version=${VERSION}" \
-            -o arch-analyzer-darwin-amd64 ./cmd/arch-analyzer/
-      - uses: actions/upload-artifact@v7
-        with:
-          name: arch-analyzer-darwin-amd64
-          path: arch-analyzer-darwin-amd64
-
   release:
-    if: always()
-    needs: [build-linux, build-macos-arm64, build-macos-amd64]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check at least one build succeeded
-        run: |
-          if [ "${{ needs.build-linux.result }}" != "success" ] && \
-             [ "${{ needs.build-macos-arm64.result }}" != "success" ] && \
-             [ "${{ needs.build-macos-amd64.result }}" != "success" ]; then
-            echo "All builds failed"
-            exit 1
-          fi
+    needs: [build-linux, build-macos-arm64]
       - uses: actions/download-artifact@v8
         with:
           path: binaries/
