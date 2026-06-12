@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -212,10 +213,12 @@ func cmdExtract(args []string) error {
 	org := fs.String("org", "", "GitHub organization (auto-detected from go.mod if empty)")
 	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
 	aliases := fs.String("aliases", "", "Comma-separated component aliases (e.g. rhods-operator,RHODS)")
+	withDeps := fs.Bool("with-deps", false, "Also extract dependencies detected via component_refs")
+	scanConfig := fs.String("scan-config", "", "Path to scan-config.yaml for resolving dependency repos")
 	fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: arch-analyzer extract <repo-path> [--output file.json] [--org org] [--version label] [--aliases list]")
+		return fmt.Errorf("usage: arch-analyzer extract <repo-path> [--output file.json] [--org org] [--version label] [--aliases list] [--with-deps --scan-config config.yaml]")
 	}
 
 	if *ver != "" {
@@ -232,12 +235,111 @@ func cmdExtract(args []string) error {
 
 	outPath := *output
 	if *ver != "" {
-		// Place output in a versioned subdirectory
 		dir := filepath.Dir(outPath)
 		base := filepath.Base(outPath)
 		outPath = filepath.Join(dir, *ver, base)
 	}
-	return writeJSON(outPath, arch)
+	if err := writeJSON(outPath, arch); err != nil {
+		return err
+	}
+
+	if *withDeps && len(arch.ComponentRefs) > 0 {
+		return extractDeps(arch, outPath, *org, *scanConfig)
+	}
+	return nil
+}
+
+// extractDeps clones and extracts dependencies found in component_refs.
+func extractDeps(primary *extractor.ComponentArchitecture, primaryOutput, org, scanConfigPath string) error {
+	repoMap, err := buildRepoMap(scanConfigPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: could not load scan-config for dep resolution: %v\n", err)
+		return nil
+	}
+
+	outDir := filepath.Dir(primaryOutput)
+	scanned := map[string]bool{primary.Component: true}
+
+	for _, ref := range primary.ComponentRefs {
+		target := ref.Target
+		if scanned[target] {
+			continue
+		}
+		scanned[target] = true
+
+		repoURL, ok := repoMap[target]
+		if !ok {
+			fmt.Fprintf(os.Stderr, "  Dep %s: no repo mapping found, skipping\n", target)
+			continue
+		}
+
+		tmpDir, err := os.MkdirTemp("", "arch-dep-"+target+"-")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "  Dep %s: failed to create temp dir: %v\n", target, err)
+			continue
+		}
+		defer os.RemoveAll(tmpDir)
+
+		fmt.Fprintf(os.Stderr, "  Dep %s: cloning %s\n", target, repoURL)
+		cloneCmd := exec.Command("git", "clone", "--depth", "1", repoURL, tmpDir)
+		cloneCmd.Stderr = os.Stderr
+		if err := cloneCmd.Run(); err != nil {
+			fmt.Fprintf(os.Stderr, "  Dep %s: clone failed: %v\n", target, err)
+			continue
+		}
+
+		depOpts := &extractor.ExtractOptions{Org: org}
+		depArch, err := extractor.ExtractAll(tmpDir, depOpts)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "  Dep %s: extraction failed: %v\n", target, err)
+			continue
+		}
+
+		depOutput := filepath.Join(outDir, target+"-architecture.json")
+		if err := writeJSON(depOutput, depArch); err != nil {
+			fmt.Fprintf(os.Stderr, "  Dep %s: write failed: %v\n", target, err)
+			continue
+		}
+		fmt.Fprintf(os.Stderr, "  Dep %s: extracted to %s\n", target, depOutput)
+	}
+	return nil
+}
+
+// buildRepoMap reads scan-config.yaml and builds a component-name → clone-URL map.
+func buildRepoMap(scanConfigPath string) (map[string]string, error) {
+	if scanConfigPath == "" {
+		// Try default location
+		scanConfigPath = "scan-config.yaml"
+	}
+	data, err := os.ReadFile(scanConfigPath)
+	if err != nil {
+		return nil, err
+	}
+
+	// Simple YAML parsing: extract org/repo pairs from the nested structure.
+	// Uses line-by-line parsing to avoid a YAML dependency.
+	repoMap := make(map[string]string)
+	var currentOrg string
+	for _, line := range strings.Split(string(data), "\n") {
+		trimmed := strings.TrimSpace(line)
+		// Detect org keys (lines ending with ":" that are indented under "orgs:")
+		if strings.HasSuffix(trimmed, ":") && !strings.Contains(trimmed, " ") && !strings.HasPrefix(trimmed, "#") && !strings.HasPrefix(trimmed, "-") {
+			candidate := strings.TrimSuffix(trimmed, ":")
+			if strings.Contains(candidate, "-") || strings.Contains(candidate, ".") {
+				currentOrg = candidate
+			}
+		}
+		// Detect repo entries (lines starting with "- ")
+		if strings.HasPrefix(trimmed, "- ") && currentOrg != "" {
+			repo := strings.TrimPrefix(trimmed, "- ")
+			repo = strings.TrimSpace(repo)
+			if repo != "" && !strings.HasPrefix(repo, "#") && !strings.Contains(repo, ":") {
+				url := fmt.Sprintf("https://github.com/%s/%s.git", currentOrg, repo)
+				repoMap[repo] = url
+			}
+		}
+	}
+	return repoMap, nil
 }
 
 // cmdRender renders diagrams from architecture JSON.
