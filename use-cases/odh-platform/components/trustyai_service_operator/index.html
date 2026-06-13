@@ -27101,11 +27101,11 @@
 
 <h1 id="trustyai-service-operator">trustyai-service-operator<a class="headerlink" href="#trustyai-service-operator" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-06-12</strong> (2026-06-12)</p>
+<p><strong>Architecture snapshot: 2026-06-13</strong> (2026-06-13)</p>
 </blockquote>
 <p><strong>Repository:</strong> trustyai-explainability/trustyai-service-operator<br>
 <strong>Analyzer:</strong> arch-analyzer 0.1.0<br>
-<strong>Extracted:</strong> 2026-06-12T04:41:24Z</p>
+<strong>Extracted:</strong> 2026-06-13T04:21:41Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -27117,7 +27117,7 @@
 <tbody>
 <tr>
 <td>CRDs</td>
-<td>4</td>
+<td>5</td>
 </tr>
 <tr>
 <td>Deployments</td>
@@ -27125,11 +27125,11 @@
 </tr>
 <tr>
 <td>Services</td>
-<td>2</td>
+<td>3</td>
 </tr>
 <tr>
 <td>Secrets</td>
-<td>0</td>
+<td>1</td>
 </tr>
 <tr>
 <td>Cluster Roles</td>
@@ -27157,6 +27157,9 @@
         class dep_1 controller
     end
 
+    crd_EvalHub{{"EvalHub\ntrustyai.opendatahub.io/v1"}}
+    class crd_EvalHub crd
+    crd_EvalHub --&gt;|"For (reconciles)"| controller
     crd_TrustyAIService{{"TrustyAIService\ntrustyai.opendatahub.io/v1"}}
     class crd_TrustyAIService crd
     crd_TrustyAIService --&gt;|"For (reconciles)"| controller
@@ -27199,12 +27202,22 @@
 <tr>
 <td>trustyai.opendatahub.io</td>
 <td>v1</td>
+<td>EvalHub</td>
+<td>Namespaced</td>
+<td>19</td>
+<td>0</td>
+<td>Go AST</td>
+<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/56eca3531f33568fa7d82b30e945ac3600370bf5//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1/evalhub_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1/evalhub_types.go</code></a></td>
+</tr>
+<tr>
+<td>trustyai.opendatahub.io</td>
+<td>v1</td>
 <td>TrustyAIService</td>
 <td>Namespaced</td>
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/bd46e6161ae64ecb217693b050adc9d09cc37e54//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1/trustyaiservice_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1/trustyaiservice_types.go</code></a></td>
+<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/56eca3531f33568fa7d82b30e945ac3600370bf5//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1/trustyaiservice_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1/trustyaiservice_types.go</code></a></td>
 </tr>
 <tr>
 <td>trustyai.opendatahub.io</td>
@@ -27214,7 +27227,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/bd46e6161ae64ecb217693b050adc9d09cc37e54//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1alpha1/evalhub_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1alpha1/evalhub_types.go</code></a></td>
+<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/56eca3531f33568fa7d82b30e945ac3600370bf5//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1alpha1/evalhub_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1alpha1/evalhub_types.go</code></a></td>
 </tr>
 <tr>
 <td>trustyai.opendatahub.io</td>
@@ -27224,7 +27237,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/bd46e6161ae64ecb217693b050adc9d09cc37e54//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/lmes/v1alpha1/lmevaljob_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/lmes/v1alpha1/lmevaljob_types.go</code></a></td>
+<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/56eca3531f33568fa7d82b30e945ac3600370bf5//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/lmes/v1alpha1/lmevaljob_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/lmes/v1alpha1/lmevaljob_types.go</code></a></td>
 </tr>
 <tr>
 <td>trustyai.opendatahub.io</td>
@@ -27234,7 +27247,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/bd46e6161ae64ecb217693b050adc9d09cc37e54//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1alpha1/trustyaiservice_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1alpha1/trustyaiservice_types.go</code></a></td>
+<td><a href="https://github.com/trustyai-explainability/trustyai-service-operator/blob/56eca3531f33568fa7d82b30e945ac3600370bf5//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1alpha1/trustyaiservice_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1alpha1/trustyaiservice_types.go</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -27258,27 +27271,27 @@
 </tr>
 <tr>
 <td>github.com/prometheus/client_golang</td>
-<td>v1.18.0</td>
+<td>v1.23.2</td>
 </tr>
 <tr>
 <td>k8s.io/api</td>
-<td>v0.29.2</td>
+<td>v0.34.5</td>
 </tr>
 <tr>
 <td>k8s.io/apiextensions-apiserver</td>
-<td>v0.29.0</td>
+<td>v0.34.5</td>
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
-<td>v0.29.2</td>
+<td>v0.34.5</td>
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
-<td>v0.29.2</td>
+<td>v0.34.5</td>
 </tr>
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
-<td>v0.17.0</td>
+<td>v0.22.5</td>
 </tr>
 </tbody>
 </table>
@@ -27304,7 +27317,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 12, 2026 04:49:51 UTC">June 12, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 13, 2026 04:30:13 UTC">June 13, 2026</span>
   </span>
 
     
