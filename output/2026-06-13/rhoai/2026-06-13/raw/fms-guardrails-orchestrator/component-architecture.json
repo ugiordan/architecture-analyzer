@@ -1,0 +1,98 @@
+{
+  "component": "fms-guardrails-orchestrator",
+  "repo": "red-hat-data-services/fms-guardrails-orchestrator",
+  "commit_sha": "7f859373c017de00de7dc2b6eb98c9674e2fd472",
+  "extracted_at": "2026-06-13T04:23:02Z",
+  "analyzer_version": "0.1.0",
+  "schema_version": "2",
+  "rbac": {},
+  "dependencies": {},
+  "dockerfiles": [
+    {
+      "path": "Dockerfile.amd64",
+      "base_image": "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+      "build_stage_images": [
+        "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+        "rust-builder"
+      ],
+      "stages": 3,
+      "user": "orchestr8",
+      "issues": [
+        "Unpinned base image: rust-builder"
+      ]
+    },
+    {
+      "path": "Dockerfile.konflux",
+      "base_image": "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+      "build_stage_images": [
+        "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+        "rust-builder"
+      ],
+      "stages": 3,
+      "user": "orchestr8",
+      "issues": [
+        "Unpinned base image: rust-builder"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": ""
+      }
+    },
+    {
+      "path": "Dockerfile.ppc64le",
+      "base_image": "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+      "build_stage_images": [
+        "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+        "rust-builder"
+      ],
+      "stages": 3,
+      "user": "orchestr8",
+      "issues": [
+        "Unpinned base image: rust-builder"
+      ]
+    },
+    {
+      "path": "Dockerfile.s390x",
+      "base_image": "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+      "build_stage_images": [
+        "${UBI_MINIMAL_BASE_IMAGE}:${UBI_BASE_IMAGE_TAG}",
+        "rust-builder"
+      ],
+      "stages": 3,
+      "user": "orchestr8",
+      "issues": [
+        "Unpinned base image: rust-builder"
+      ]
+    }
+  ],
+  "helm": {},
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "moderate",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "fms-guardrails-orchestrator is a Kubernetes component."
+}
