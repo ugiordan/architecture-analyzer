@@ -1,0 +1,194 @@
+graph TD
+    %% CRD ownership map
+
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
+    classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
+
+    odh_model_controller["odh-model-controller"]
+    class odh_model_controller component
+    odh_model_controller -->|"defines"| crd_1{{"Account"}}
+    class crd_1 crd
+    codeflare_operator["codeflare-operator"]
+    class codeflare_operator component
+    codeflare_operator -->|"defines"| crd_2{{"AppWrapper"}}
+    class crd_2 crd
+    kueue["kueue"]
+    class kueue component
+    kueue -->|"defines"| crd_3{{"ClusterQueue"}}
+    class crd_3 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_4{{"ClusterServingRuntime"}}
+    class crd_4 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_5{{"ClusterStorageContainer"}}
+    class crd_5 crd
+    trainer["trainer"]
+    class trainer component
+    trainer -->|"defines"| crd_6{{"ClusterTrainingRuntime"}}
+    class crd_6 crd
+    data_science_pipelines["data-science-pipelines"]
+    class data_science_pipelines component
+    data_science_pipelines -->|"defines"| crd_7{{"CompositeController"}}
+    class crd_7 crd
+    data_science_pipelines["data-science-pipelines"]
+    class data_science_pipelines component
+    data_science_pipelines -->|"defines"| crd_8{{"ControllerRevision"}}
+    class crd_8 crd
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator -->|"defines"| crd_9{{"DataSciencePipelinesApplication"}}
+    class crd_9 crd
+    data_science_pipelines["data-science-pipelines"]
+    class data_science_pipelines component
+    data_science_pipelines -->|"defines"| crd_10{{"DecoratorController"}}
+    class crd_10 crd
+    trustyai_service_operator["trustyai-service-operator"]
+    class trustyai_service_operator component
+    trustyai_service_operator -->|"defines"| crd_11{{"EvalHub"}}
+    class crd_11 crd
+    opendatahub_operator["opendatahub-operator"]
+    class opendatahub_operator component
+    opendatahub_operator -->|"defines"| crd_12{{"FeatureTracker"}}
+    class crd_12 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_13{{"InferenceGraph"}}
+    class crd_13 crd
+    llm_d_inference_scheduler["llm-d-inference-scheduler"]
+    class llm_d_inference_scheduler component
+    llm_d_inference_scheduler -->|"defines"| crd_14{{"InferenceModelRewrite"}}
+    class crd_14 crd
+    llm_d_inference_scheduler["llm-d-inference-scheduler"]
+    class llm_d_inference_scheduler component
+    llm_d_inference_scheduler -->|"defines"| crd_15{{"InferenceObjective"}}
+    class crd_15 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_16{{"InferenceService"}}
+    class crd_16 crd
+    training_operator["training-operator"]
+    class training_operator component
+    training_operator -->|"defines"| crd_17{{"JAXJob"}}
+    class crd_17 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_18{{"LLMInferenceService"}}
+    class crd_18 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_19{{"LLMInferenceServiceConfig"}}
+    class crd_19 crd
+    trustyai_service_operator["trustyai-service-operator"]
+    class trustyai_service_operator component
+    trustyai_service_operator -->|"defines"| crd_20{{"LMEvalJob"}}
+    class crd_20 crd
+    ogx_k8s_operator["ogx-k8s-operator"]
+    class ogx_k8s_operator component
+    ogx_k8s_operator -->|"defines"| crd_21{{"LlamaStackDistribution"}}
+    class crd_21 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_22{{"LocalModelCache"}}
+    class crd_22 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_23{{"LocalModelNamespaceCache"}}
+    class crd_23 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_24{{"LocalModelNode"}}
+    class crd_24 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_25{{"LocalModelNodeGroup"}}
+    class crd_25 crd
+    kueue["kueue"]
+    class kueue component
+    kueue -->|"defines"| crd_26{{"LocalQueue"}}
+    class crd_26 crd
+    mlflow_operator["mlflow-operator"]
+    class mlflow_operator component
+    mlflow_operator -->|"defines"| crd_27{{"MLflow"}}
+    class crd_27 crd
+    mlflow_operator["mlflow-operator"]
+    class mlflow_operator component
+    mlflow_operator -->|"defines"| crd_28{{"MLflowConfig"}}
+    class crd_28 crd
+    training_operator["training-operator"]
+    class training_operator component
+    training_operator -->|"defines"| crd_29{{"MPIJob"}}
+    class crd_29 crd
+    model_registry_operator["model-registry-operator"]
+    class model_registry_operator component
+    model_registry_operator -->|"defines"| crd_30{{"ModelRegistry"}}
+    class crd_30 crd
+    ogx_k8s_operator["ogx-k8s-operator"]
+    class ogx_k8s_operator component
+    ogx_k8s_operator -->|"defines"| crd_31{{"OGXServer"}}
+    class crd_31 crd
+    training_operator["training-operator"]
+    class training_operator component
+    training_operator -->|"defines"| crd_32{{"PaddleJob"}}
+    class crd_32 crd
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator -->|"defines"| crd_33{{"Pipeline"}}
+    class crd_33 crd
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator -->|"defines"| crd_34{{"PipelineVersion"}}
+    class crd_34 crd
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving -->|"defines"| crd_35{{"Predictor"}}
+    class crd_35 crd
+    training_operator["training-operator"]
+    class training_operator component
+    training_operator -->|"defines"| crd_36{{"PyTorchJob"}}
+    class crd_36 crd
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator -->|"defines"| crd_37{{"ScheduledSparkApplication"}}
+    class crd_37 crd
+    data_science_pipelines_operator["data-science-pipelines-operator"]
+    class data_science_pipelines_operator component
+    data_science_pipelines_operator -->|"defines"| crd_38{{"ScheduledWorkflow"}}
+    class crd_38 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_39{{"ServingRuntime"}}
+    class crd_39 crd
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator -->|"defines"| crd_40{{"SparkApplication"}}
+    class crd_40 crd
+    spark_operator["spark-operator"]
+    class spark_operator component
+    spark_operator -->|"defines"| crd_41{{"SparkConnect"}}
+    class crd_41 crd
+    training_operator["training-operator"]
+    class training_operator component
+    training_operator -->|"defines"| crd_42{{"TFJob"}}
+    class crd_42 crd
+    trainer["trainer"]
+    class trainer component
+    trainer -->|"defines"| crd_43{{"TrainJob"}}
+    class crd_43 crd
+    kserve_autogluon_server["kserve-autogluon-server"]
+    class kserve_autogluon_server component
+    kserve_autogluon_server -->|"defines"| crd_44{{"TrainedModel"}}
+    class crd_44 crd
+    trainer["trainer"]
+    class trainer component
+    trainer -->|"defines"| crd_45{{"TrainingRuntime"}}
+    class crd_45 crd
+    trustyai_service_operator["trustyai-service-operator"]
+    class trustyai_service_operator component
+    trustyai_service_operator -->|"defines"| crd_46{{"TrustyAIService"}}
+    class crd_46 crd
+    training_operator["training-operator"]
+    class training_operator component
+    training_operator -->|"defines"| crd_47{{"XGBoostJob"}}
+    class crd_47 crd

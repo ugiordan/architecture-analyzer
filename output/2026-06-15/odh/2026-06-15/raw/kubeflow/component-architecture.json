@@ -1,0 +1,918 @@
+{
+  "component": "kubeflow",
+  "repo": "opendatahub-io/kubeflow",
+  "commit_sha": "6b8377fa07c008f6dc0535686cba99029642cd3a",
+  "extracted_at": "2026-06-15T05:01:46Z",
+  "analyzer_version": "0.1.0",
+  "schema_version": "2",
+  "rbac": {},
+  "services": [
+    {
+      "name": "service",
+      "source": "components/notebook-controller/config/manager/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "port": 443,
+          "targetPort": 0,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "notebook-controller",
+        "kustomize.component": "notebook-controller"
+      }
+    },
+    {
+      "name": "service",
+      "source": "components/odh-notebook-controller/config/manager/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "name": "metrics",
+          "port": 8080,
+          "targetPort": "metrics",
+          "protocol": "TCP"
+        }
+      ]
+    },
+    {
+      "name": "webhook-service",
+      "source": "components/odh-notebook-controller/config/webhook/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "name": "webhook",
+          "port": 443,
+          "targetPort": "webhook",
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "components/notebook-controller/config/default/manager_auth_proxy_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "kube-rbac-proxy",
+          "image": "quay.io/brancz/kube-rbac-proxy:v0.4.0",
+          "ports": [
+            {
+              "name": "https",
+              "containerPort": 8443,
+              "protocol": "TCP"
+            }
+          ],
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        },
+        {
+          "name": "manager",
+          "image": "",
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "components/notebook-controller/config/default/manager_image_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "IMAGE_URL",
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "components/notebook-controller/config/default/manager_prometheus_metrics_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "",
+          "ports": [
+            {
+              "name": "metrics",
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ],
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "controller-manager",
+      "kind": "Deployment",
+      "source": "components/notebook-controller/config/default/manager_webhook_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "",
+          "ports": [
+            {
+              "name": "webhook-server",
+              "containerPort": 443,
+              "protocol": "TCP"
+            }
+          ],
+          "volume_mounts": [
+            {
+              "mountPath": "/tmp/k8s-webhook-server/serving-certs",
+              "name": "cert",
+              "secret": "webhook-server-cert"
+            }
+          ],
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "deployment",
+      "kind": "Deployment",
+      "source": "components/notebook-controller/config/manager/manager.yaml",
+      "replicas": 1,
+      "service_account": "service-account",
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "ghcr.io/kubeflow/kubeflow/notebook-controller",
+          "env_from_configmaps": [
+            "config",
+            "notebook-controller-culler-config"
+          ],
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "liveness_probe": {
+            "type": "httpGet",
+            "path": "/healthz",
+            "port": 8081
+          },
+          "readiness_probe": {
+            "type": "httpGet",
+            "path": "/readyz",
+            "port": 8081
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "deployment",
+      "kind": "Deployment",
+      "source": "components/notebook-controller/config/overlays/openshift/manager_openshift_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "odh-kf-notebook-controller-image_PLACEHOLDER",
+          "env_from_configmaps": [
+            "config",
+            "notebook-controller-culler-config"
+          ],
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "4Gi"
+            },
+            "requests": {
+              "cpu": "500m",
+              "memory": "256Mi"
+            }
+          },
+          "issues": [
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "manager",
+      "kind": "Deployment",
+      "source": "components/odh-notebook-controller/config/manager/manager.yaml",
+      "replicas": 1,
+      "service_account": "manager",
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "manager",
+          "image": "odh-notebook-controller-image_PLACEHOLDER",
+          "ports": [
+            {
+              "name": "metrics",
+              "containerPort": 8080,
+              "protocol": "TCP"
+            },
+            {
+              "name": "health",
+              "containerPort": 8081,
+              "protocol": "TCP"
+            }
+          ],
+          "security_context": {
+            "allowPrivilegeEscalation": false
+          },
+          "env_from_configmaps": [
+            "notebook-controller-setting-config"
+          ],
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "4Gi"
+            },
+            "requests": {
+              "cpu": "500m",
+              "memory": "256Mi"
+            }
+          },
+          "env_vars": {
+            "GOMEMLIMIT": "3600MiB"
+          },
+          "liveness_probe": {
+            "type": "httpGet",
+            "path": "/healthz",
+            "port": "health"
+          },
+          "readiness_probe": {
+            "type": "httpGet",
+            "path": "/readyz",
+            "port": "health"
+          }
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    }
+  ],
+  "controller_watches": [
+    {
+      "type": "For",
+      "gvk": "api/v1/Notebook",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:737"
+    },
+    {
+      "type": "For",
+      "gvk": "api/v1beta1/Notebook",
+      "controller": "CullingReconciler",
+      "source": "components/notebook-controller/controllers/culling_controller.go:580"
+    },
+    {
+      "type": "For",
+      "gvk": "api/v1beta1/Notebook",
+      "controller": "NotebookReconciler",
+      "source": "components/notebook-controller/controllers/notebook_controller.go:801"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/ConfigMap",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:741"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Secret",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:740"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:739"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "NotebookReconciler",
+      "source": "components/notebook-controller/controllers/notebook_controller.go:803"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/ServiceAccount",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:738"
+    },
+    {
+      "type": "Owns",
+      "gvk": "apps/v1/StatefulSet",
+      "controller": "NotebookReconciler",
+      "source": "components/notebook-controller/controllers/notebook_controller.go:802"
+    },
+    {
+      "type": "Owns",
+      "gvk": "networking.k8s.io/v1/NetworkPolicy",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:742"
+    },
+    {
+      "type": "Owns",
+      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:743"
+    },
+    {
+      "type": "Watches",
+      "gvk": "/v1/ConfigMap",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:818"
+    },
+    {
+      "type": "Watches",
+      "gvk": "apis/v1/HTTPRoute",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:747"
+    },
+    {
+      "type": "Watches",
+      "gvk": "apis/v1beta1/ReferenceGrant",
+      "controller": "OpenshiftNotebookReconciler",
+      "source": "components/odh-notebook-controller/controllers/notebook_controller.go:777"
+    }
+  ],
+  "dependencies": {
+    "go_version": "1.26.3",
+    "go_modules": [
+      {
+        "module": "github.com/go-logr/logr",
+        "version": "v1.4.3"
+      },
+      {
+        "module": "github.com/go-logr/logr",
+        "version": "v1.4.3"
+      },
+      {
+        "module": "github.com/google/go-cmp",
+        "version": "v0.7.0"
+      },
+      {
+        "module": "github.com/kubeflow/kubeflow/components/common",
+        "version": "v0.0.0-20220218084159-4ad0158e955e",
+        "category": "ml-platform",
+        "purpose": "Kubeflow ML platform"
+      },
+      {
+        "module": "github.com/kubeflow/kubeflow/components/notebook-controller",
+        "version": "v0.0.0-20220728153354-fc09bd1eefb8",
+        "category": "ml-platform",
+        "purpose": "Kubeflow ML platform"
+      },
+      {
+        "module": "github.com/onsi/ginkgo",
+        "version": "v1.16.5",
+        "category": "testing",
+        "purpose": "BDD testing framework"
+      },
+      {
+        "module": "github.com/onsi/ginkgo",
+        "version": "v1.16.5",
+        "category": "testing",
+        "purpose": "BDD testing framework"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.41.0",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.41.0",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/opendatahub-io/data-science-pipelines-operator",
+        "version": "v1.1.1-0.20250318214030-560cbc1d827a"
+      },
+      {
+        "module": "github.com/openshift/api",
+        "version": "v0.0.0-20231118005202-0f638a8a4705",
+        "category": "openshift",
+        "purpose": "OpenShift API types"
+      },
+      {
+        "module": "github.com/pkg/errors",
+        "version": "v0.9.1"
+      },
+      {
+        "module": "github.com/prometheus/client_golang",
+        "version": "v1.23.2",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/stretchr/testify",
+        "version": "v1.11.1",
+        "category": "testing",
+        "purpose": "Test assertions library"
+      },
+      {
+        "module": "go.opentelemetry.io/otel",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.opentelemetry.io/otel/sdk",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.opentelemetry.io/otel/trace",
+        "version": "v1.44.0",
+        "category": "observability",
+        "purpose": "OpenTelemetry tracing/metrics"
+      },
+      {
+        "module": "go.uber.org/zap",
+        "version": "v1.28.0"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.33.7",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.33.7",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apiextensions-apiserver",
+        "version": "v0.33.7",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.33.7",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.33.7",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.33.7",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.33.7",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/utils",
+        "version": "v0.0.0-20260507154919-ff6756f316d2",
+        "category": "k8s-api",
+        "purpose": "Kubernetes utility library"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.21.0",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.21.0",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/gateway-api",
+        "version": "v1.2.1",
+        "category": "networking",
+        "purpose": "Kubernetes Gateway API"
+      }
+    ],
+    "internal_odh": [
+      {
+        "component": "data-science-pipelines-operator",
+        "interaction": "Go module dependency: github.com/opendatahub-io/data-science-pipelines-operator"
+      }
+    ]
+  },
+  "secrets_referenced": [
+    {
+      "name": "odh-notebook-controller-webhook-cert",
+      "type": "kubernetes.io/tls",
+      "referenced_by": [
+        "service/webhook-service"
+      ],
+      "provisioned_by": "OpenShift serving cert"
+    },
+    {
+      "name": "webhook-server-cert",
+      "type": "Opaque",
+      "referenced_by": [
+        "deployment/controller-manager"
+      ],
+      "provisioned_by": "volume-mounted"
+    }
+  ],
+  "dockerfiles": [
+    {
+      "path": "components/notebook-controller/Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi9/ubi-minimal:latest",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset:${GOLANG_VERSION}"
+      ],
+      "stages": 2,
+      "user": "1001:0",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "GOLANG_VERSION": "1.26",
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    },
+    {
+      "path": "components/notebook-controller/Dockerfile.ci",
+      "base_image": "gcr.io/distroless/base:debug",
+      "build_stage_images": [
+        "golang:${GOLANG_VERSION}"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ],
+      "build_args": {
+        "GOLANG_VERSION": "1.15"
+      }
+    },
+    {
+      "path": "components/odh-notebook-controller/Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi9/ubi-minimal:latest",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset:${GOLANG_VERSION}"
+      ],
+      "stages": 2,
+      "user": "1001:0",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "GOLANG_VERSION": "1.26",
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      }
+    }
+  ],
+  "helm": {},
+  "webhooks": [
+    {
+      "name": "notebooks-validation.opendatahub.io",
+      "type": "validating",
+      "path": "/validate-notebook-v1",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "components/odh-notebook-controller/controllers/notebook_validating_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "components/odh-notebook-controller/controllers/notebook_validating_webhook.go"
+        }
+      ]
+    },
+    {
+      "name": "notebooks.opendatahub.io",
+      "type": "mutating",
+      "path": "/mutate-notebook-v1",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go"
+        }
+      ]
+    }
+  ],
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "components/notebook-controller/third_party/concatenate_license.py:39",
+      "function": "fetch_license_text"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "components/odh-notebook-controller/third_party/concatenate_license.py:40",
+      "function": "fetch_license_text"
+    }
+  ],
+  "cache_config": {
+    "manager_file": "components/odh-notebook-controller/main.go",
+    "cache_scope": "cluster-wide",
+    "transform_types": [
+      {
+        "type": "corev1.ConfigMap",
+        "function": "stripConfigMapData"
+      },
+      {
+        "type": "corev1.Secret",
+        "function": "stripSecretData"
+      }
+    ],
+    "default_transform": true,
+    "default_transform_func": "cache",
+    "disabled_types": [
+      "corev1.ConfigMap",
+      "corev1.Secret"
+    ],
+    "memory_limit": "4Gi",
+    "issues": [
+      "Cache bypass (DisableFor) configured for corev1.ConfigMap. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)",
+      "Cache bypass (DisableFor) configured for corev1.Secret. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)",
+      "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+      "Type HTTPRoute is watched but has no cache filter (cluster-wide informer)",
+      "Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)",
+      "Type Notebook is watched but has no cache filter (cluster-wide informer)",
+      "Type ReferenceGrant is watched but has no cache filter (cluster-wide informer)",
+      "Type RoleBinding is watched but has no cache filter (cluster-wide informer)",
+      "Type Service is watched but has no cache filter (cluster-wide informer)",
+      "Type ServiceAccount is watched but has no cache filter (cluster-wide informer)",
+      "Type StatefulSet is watched but has no cache filter (cluster-wide informer)"
+    ]
+  },
+  "prometheus_metrics": [
+    {
+      "name": "last_notebook_culling_timestamp_seconds",
+      "type": "gauge",
+      "help": "Timestamp of the last notebook culling in seconds",
+      "labels": [
+        "namespace",
+        "name"
+      ],
+      "source": "components/notebook-controller/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "notebook_create_failed_total",
+      "type": "counter",
+      "help": "Total failure times of creating notebooks",
+      "labels": [
+        "namespace"
+      ],
+      "source": "components/notebook-controller/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "notebook_create_total",
+      "type": "counter",
+      "help": "Total times of creating notebooks",
+      "labels": [
+        "namespace"
+      ],
+      "source": "components/notebook-controller/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "notebook_culling_total",
+      "type": "counter",
+      "help": "Total times of culling notebooks",
+      "labels": [
+        "namespace",
+        "name"
+      ],
+      "source": "components/notebook-controller/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "notebook_running",
+      "type": "gauge",
+      "help": "Current running notebooks in the cluster",
+      "labels": [
+        "namespace"
+      ],
+      "source": "components/notebook-controller/pkg/metrics/metrics.go"
+    }
+  ],
+  "runtime_dependencies": [
+    {
+      "name": "MLflow",
+      "type": "service",
+      "source": "components/odh-notebook-controller/config/manager/manager.yaml",
+      "evidence": "env:MLFLOW_ENABLED",
+      "required": true
+    },
+    {
+      "name": "image-registry",
+      "type": "service",
+      "source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:880",
+      "evidence": "dns:image-registry.openshift-image-registry.svc",
+      "required": true
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:45"
+    },
+    {
+      "label": "prometheus.io/port",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "components/notebook-controller/config/rbac/auth_proxy_service.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "deployment-template",
+      "source": "components/notebook-controller/config/default/manager_prometheus_metrics_patch.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "components/notebook-controller/config/rbac/auth_proxy_service.yaml"
+    },
+    {
+      "label": "sidecar.istio.io/inject",
+      "integration": "Istio",
+      "type": "annotation",
+      "context": "deployment-template",
+      "source": "conformance/1.5/katib-conformance.yaml"
+    },
+    {
+      "label": "sidecar.istio.io/inject",
+      "integration": "Istio",
+      "type": "annotation",
+      "context": "deployment-template",
+      "source": "conformance/1.5/training-operator-conformance.yaml"
+    },
+    {
+      "label": "sidecar.istio.io/inject",
+      "integration": "Istio",
+      "type": "annotation",
+      "context": "deployment-template",
+      "source": "conformance/1.7/katib-conformance.yaml"
+    },
+    {
+      "label": "sidecar.istio.io/inject",
+      "integration": "Istio",
+      "type": "annotation",
+      "context": "deployment-template",
+      "source": "conformance/1.7/training-operator-conformance.yaml"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "rich",
+    "dockerfiles": "moderate",
+    "external_connections": "sparse",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "rich",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "moderate",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "sparse",
+    "secrets": "sparse",
+    "services": "moderate",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "sparse"
+  },
+  "summary": "kubeflow is a Kubernetes component. deploying 7 workload(s) (controller-manager, controller-manager, controller-manager, controller-manager, deployment, deployment, manager) with 8 container(s). watching 11 resource type(s). exposing 3 service(s) on ports: 443, 8080. with 2 webhook(s) (1 validating, 1 mutating). connecting to external services: requests. runtime dependencies: MLflow, image-registry. exposing 5 Prometheus metrics. integrates with Istio, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization."
+}
