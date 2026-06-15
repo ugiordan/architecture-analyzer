@@ -1,6 +1,7 @@
 package extractor
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -13,21 +14,28 @@ import (
 var dockerfilePatterns = []string{
 	"Dockerfile",
 	"Dockerfile.*",
+	"*.Dockerfile",
 	"Containerfile",
 	"Containerfile.*",
+	"*.Containerfile",
 	"**/Dockerfile",
 	"**/Dockerfile.*",
+	"**/*.Dockerfile",
 	"**/Containerfile",
 	"**/Containerfile.*",
+	"**/*.Containerfile",
 }
 
 var (
-	fromRE       = regexp.MustCompile(`^FROM\s+(?:--platform=(\S+)\s+)?(\S+)(?:\s+[Aa][Ss]\s+\S+)?`)
+	fromRE       = regexp.MustCompile(`(?i)^FROM\s+(?:--platform=(\S+)\s+)?(\S+)(?:\s+AS\s+(\S+))?`)
 	userRE       = regexp.MustCompile(`^USER\s+(\S+)`)
 	exposeRE     = regexp.MustCompile(`^EXPOSE\s+(.*)`)
 	argRE        = regexp.MustCompile(`^ARG\s+(\w+)(?:=(.*))?`)
 	envRE        = regexp.MustCompile(`^ENV\s+(\w+)(?:=|\s+)(.*)`)
 	targetArchRE = regexp.MustCompile(`TARGETARCH|TARGETOS|TARGETPLATFORM`)
+	copyRE       = regexp.MustCompile(`(?i)^COPY\s+((?:--\w+(?:=\S+)?\s+)*)(.+)`)
+	addRE        = regexp.MustCompile(`(?i)^ADD\s+((?:--\w+(?:=\S+)?\s+)*)(.+)`)
+	copyFromRE   = regexp.MustCompile(`--from=(\S+)`)
 )
 
 // FIPS-related environment variables and build args.
@@ -60,6 +68,14 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 		fipsEnabled := false
 		buildArgs := make(map[string]string)
 		content := string(data)
+		type stagedCopy struct {
+			CopyInstruction
+			stage int
+		}
+		stageAlias := make(map[string]int)
+		stageParent := make(map[int]int)
+		stageIndex := -1
+		var stagedCopies []stagedCopy
 
 		for _, line := range lines {
 			stripped := strings.TrimSpace(line)
@@ -71,7 +87,10 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 			if match := fromRE.FindStringSubmatch(stripped); match != nil {
 				platform := match[1]
 				image := match[2]
+				alias := match[3]
 				fromImages = append(fromImages, image)
+
+				recordStage(&stageIndex, stageAlias, stageParent, image, alias)
 
 				if platform != "" {
 					// --platform=linux/amd64 or $TARGETPLATFORM
@@ -129,6 +148,18 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 					}
 				}
 			}
+
+			// COPY instruction
+			if match := copyRE.FindStringSubmatch(stripped); match != nil {
+				ci := parseCopyAdd(match[1], match[2], stageAlias)
+				stagedCopies = append(stagedCopies, stagedCopy{CopyInstruction: ci, stage: stageIndex})
+			}
+
+			// ADD instruction
+			if match := addRE.FindStringSubmatch(stripped); match != nil {
+				ci := parseCopyAdd(match[1], match[2], stageAlias)
+				stagedCopies = append(stagedCopies, stagedCopy{CopyInstruction: ci, stage: stageIndex})
+			}
 		}
 
 		// Check for TARGETARCH usage (multi-arch build)
@@ -150,6 +181,31 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 					fipsEnabled = true
 				}
 			}
+		}
+
+		// Build per-stage host sources map
+		stageHostSources := make(map[int][]string)
+		for _, sc := range stagedCopies {
+			if sc.FromStage == "" && !sc.IsURL {
+				stageHostSources[sc.stage] = append(stageHostSources[sc.stage], sc.Sources...)
+			}
+		}
+
+		// Keep only final-stage copies, trace original sources for --from references
+		var finalCopies []CopyInstruction
+		for _, sc := range stagedCopies {
+			if sc.stage != stageIndex {
+				continue
+			}
+			ci := sc.CopyInstruction
+			if ci.FromStage != "" {
+				// External stage refs (e.g., --from=external-image:tag) are not resolved
+				// to host sources; OriginalSources remains nil for those cases.
+				if targetIdx, ok := stageAlias[ci.FromStage]; ok {
+					ci.OriginalSources = collectStageHostSources(targetIdx, stageHostSources, stageParent)
+				}
+			}
+			finalCopies = append(finalCopies, ci)
 		}
 
 		stages := len(fromImages)
@@ -194,6 +250,7 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 			Architectures:    architectures,
 			FIPSEnabled:      fipsEnabled,
 			BuildArgs:        buildArgs,
+			CopyInstructions: finalCopies,
 		})
 	}
 
@@ -238,4 +295,77 @@ func isSecurityRelevantArg(name string) bool {
 		}
 	}
 	return false
+}
+
+func parseCopyAdd(flags, args string, stageAlias map[string]int) CopyInstruction {
+	var ci CopyInstruction
+
+	if m := copyFromRE.FindStringSubmatch(flags); m != nil {
+		ci.FromStage = m[1]
+	}
+
+	parts := splitCopyArgs(args)
+	if len(parts) >= 2 {
+		ci.Sources = parts[:len(parts)-1]
+		ci.Destination = parts[len(parts)-1]
+	} else if len(parts) == 1 {
+		ci.Sources = parts
+	}
+
+	for _, s := range ci.Sources {
+		if strings.HasPrefix(s, "http://") || strings.HasPrefix(s, "https://") {
+			ci.IsURL = true
+			break
+		}
+	}
+
+	return ci
+}
+
+func splitCopyArgs(args string) []string {
+	args = strings.TrimSpace(args)
+	if strings.HasPrefix(args, "[") {
+		var parts []string
+		if err := json.Unmarshal([]byte(args), &parts); err != nil {
+			return nil
+		}
+		return parts
+	}
+	return strings.Fields(args)
+}
+
+// recordStage updates stage tracking maps when a FROM instruction is encountered.
+// It increments the stage index, registers numeric and named aliases, and records
+// parent-child relationships for multi-stage builds.
+func recordStage(stageIndex *int, stageAlias map[string]int, stageParent map[int]int, image, alias string) {
+	*stageIndex++
+	idx := *stageIndex
+	stageAlias[strconv.Itoa(idx)] = idx
+	if alias != "" {
+		stageAlias[alias] = idx
+	}
+	if parentIdx, ok := stageAlias[image]; ok {
+		stageParent[idx] = parentIdx
+	}
+}
+
+func collectStageHostSources(idx int, hostSources map[int][]string, parents map[int]int) []string {
+	seen := make(map[string]bool)
+	visited := make(map[int]bool)
+	var result []string
+	for cur := idx; !visited[cur]; {
+		visited[cur] = true
+		for _, s := range hostSources[cur] {
+			if !seen[s] {
+				seen[s] = true
+				result = append(result, s)
+			}
+		}
+		parent, ok := parents[cur]
+		if !ok {
+			break
+		}
+		cur = parent
+	}
+	return result
 }
