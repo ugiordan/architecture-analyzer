@@ -295,6 +295,15 @@ type SecretRef struct {
 	ProvisionedBy  string   `json:"provisioned_by,omitempty"`
 }
 
+// CopyInstruction represents a COPY or ADD instruction that lands in the final runtime image.
+type CopyInstruction struct {
+	Sources         []string `json:"sources"`
+	Destination     string   `json:"destination"`
+	FromStage       string   `json:"from_stage,omitempty"`
+	OriginalSources []string `json:"original_sources,omitempty"`
+	IsURL           bool     `json:"is_url,omitempty"`
+}
+
 // DockerfileInfo holds metadata extracted from a Dockerfile.
 type DockerfileInfo struct {
 	Path             string            `json:"path"`
@@ -307,6 +316,7 @@ type DockerfileInfo struct {
 	Architectures    []string          `json:"architectures,omitempty"`
 	FIPSEnabled      bool              `json:"fips_enabled,omitempty"`
 	BuildArgs        map[string]string `json:"build_args,omitempty"`
+	CopyInstructions []CopyInstruction `json:"copy_instructions,omitempty"`
 }
 
 // HelmData holds Helm chart metadata and security-relevant value defaults.

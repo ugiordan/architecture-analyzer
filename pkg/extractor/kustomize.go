@@ -13,19 +13,20 @@ import (
 // KustomizeComponent represents a component discovered from kustomize overlay
 // support files (e.g. *_support.go) in an operator repository.
 type KustomizeComponent struct {
-	Name           string            `json:"name"`
-	SupportFile    string            `json:"support_file"`
-	OverlayPaths   []string          `json:"overlay_paths,omitempty"`
-	ImageParams    []ImageParam      `json:"image_params,omitempty"`
-	ManagedCRDs    []string          `json:"managed_crds,omitempty"`
-	FeatureFlags   []string          `json:"feature_flags,omitempty"`
+	Name         string       `json:"name"`
+	SupportFile  string       `json:"support_file"`
+	OverlayPaths []string     `json:"overlay_paths,omitempty"`
+	ContextDirs  []string     `json:"context_dirs,omitempty"`
+	ImageParams  []ImageParam `json:"image_params,omitempty"`
+	ManagedCRDs  []string     `json:"managed_crds,omitempty"`
+	FeatureFlags []string     `json:"feature_flags,omitempty"`
 }
 
 // ImageParam maps a params.env placeholder to a RELATED_IMAGE environment
 // variable. The chain is: env var name -> params.env key -> container image.
 type ImageParam struct {
-	EnvVar      string `json:"env_var"`
-	ParamsKey   string `json:"params_key"`
+	EnvVar       string `json:"env_var"`
+	ParamsKey    string `json:"params_key"`
 	DefaultImage string `json:"default_image,omitempty"`
 }
 
@@ -47,9 +48,28 @@ var (
 	componentNameRe   = regexp.MustCompile(`func\s+\([^)]+\)\s+GetComponentName\(\)\s+string\s*\{`)
 	componentReturnRe = regexp.MustCompile(`return\s+"([^"]+)"`)
 	imageParamRe      = regexp.MustCompile(`"([^"]+)":\s*"(RELATED_IMAGE[^"]*)"`)
-	overlayPathRe     = regexp.MustCompile(`"([^"]*(?:overlay|kustomize|manifests)[^"]*)"`)
+	commentLineRe     = regexp.MustCompile(`(?m)//.*$`)
+	blockCommentRe    = regexp.MustCompile(`(?s)/\*.*?\*/`)
 	managedResourceRe = regexp.MustCompile(`GroupVersionKind\{[^}]*Kind:\s*"([^"]+)"`)
 	featureFlagRe     = regexp.MustCompile(`features?\.(\w+)`)
+
+	// Overlay/source path extraction: multi-strategy regexes.
+	// Strategy 1: literal SourcePath: "value" in ManifestInfo structs
+	sourcePathLiteralRe = regexp.MustCompile(`SourcePath:\s*"([^"]+)"`)
+	// Strategy 2: map values from *SourcePath* maps (e.g. overlaysSourcePaths = map[...]string{...})
+	sourcePathMapRe = regexp.MustCompile(`(?is)\w*(?:source|overlay|manifest)s?(?:source)?paths?\s*=\s*map\[[^\]]*\]string\s*\{([^}]+)\}`)
+	mapStringValueRe = regexp.MustCompile(`"([^"]+)"`)
+	// Strategy 3: constants with SourcePath/ManifestSourcePath in name
+	sourcePathConstRe = regexp.MustCompile(`(?i)\w*(?:manifest|source)s?(?:source)?path\w*\s*=\s*"([^"]+)"`)
+
+	// Context dir extraction
+	contextDirLiteralRe = regexp.MustCompile(`ContextDir:\s*"([^"]+)"`)
+	contextDirVarRe     = regexp.MustCompile(`ContextDir:\s*[Cc]omponent[Nn]ame`)
+	// Matches path.Join context dir definitions like:
+	//   notebookControllerContextDir = path.Join(ComponentName, notebookControllerPath)
+	contextDirJoinRe = regexp.MustCompile(`(\w*[Cc]ontext[Dd]ir\w*)\s*=\s*path\.Join\(\s*\w+,\s*(\w+)\s*\)`)
+	// Used to resolve variable names to their string literal values
+	constStringRe = regexp.MustCompile(`(\w+)\s*=\s*"([^"]+)"`)
 )
 
 // extractKustomizeComponents scans for *_support.go files in the repo and
@@ -90,6 +110,9 @@ func findSupportFiles(repoPath string) []string {
 		}
 		name := info.Name()
 		if strings.HasSuffix(name, "_support.go") || strings.HasSuffix(name, "_component.go") {
+			if !isComponentPath(path) {
+				return nil
+			}
 			files = append(files, path)
 		}
 		return nil
@@ -98,6 +121,8 @@ func findSupportFiles(repoPath string) []string {
 }
 
 // parseComponentSupportFile extracts component metadata from a single support file.
+// It also scans all sibling Go files in the same directory (excluding tests) to
+// capture source paths and context dirs defined outside the support file.
 func parseComponentSupportFile(repoPath, filePath string) KustomizeComponent {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
@@ -118,11 +143,17 @@ func parseComponentSupportFile(repoPath, filePath string) KustomizeComponent {
 		comp.Name = strings.TrimSuffix(strings.TrimSuffix(base, "_support.go"), "_component.go")
 	}
 
-	// Extract image parameter mappings
-	comp.ImageParams = extractImageParams(content)
+	// Read all sibling Go files for broader extraction
+	allContent := readComponentDirContent(filePath)
 
-	// Extract overlay paths
-	comp.OverlayPaths = extractOverlayPaths(content)
+	// Extract image parameter mappings from all Go files in the component directory
+	comp.ImageParams = extractImageParams(allContent)
+
+	// Extract overlay/source paths from all Go files in the component directory
+	comp.OverlayPaths = extractOverlayPaths(allContent)
+
+	// Extract context dirs
+	comp.ContextDirs = extractContextDirs(allContent, comp.Name)
 
 	// Extract managed CRDs/resources
 	comp.ManagedCRDs = extractManagedResources(content)
@@ -176,25 +207,168 @@ func extractImageParams(content string) []ImageParam {
 	return params
 }
 
-// extractOverlayPaths finds kustomize overlay directory references.
+// extractOverlayPaths finds kustomize overlay/source path references using
+// three complementary strategies. Comments are stripped before matching to
+// avoid false positives.
+//
+// Strategy 1: Literal SourcePath field assignments in ManifestInfo structs:
+//   return types.ManifestInfo{SourcePath: "overlays/odh"}
+//
+// Strategy 2: Map values from *SourcePath* variables (e.g., overlaysSourcePaths):
+//   overlaysSourcePaths = map[Platform]string{
+//       cluster.SelfManagedRhoai: "/rhoai",
+//       cluster.OpenDataHub:      "/odh",
+//   }
+//
+// Strategy 3: Constants with SourcePath/ManifestSourcePath in the name:
+//   kserveManifestSourcePath = "overlays/odh"
+//   kserveManifestSourcePathXKS = "overlays/odh-xks"
 func extractOverlayPaths(content string) []string {
-	matches := overlayPathRe.FindAllStringSubmatch(content, -1)
-	if len(matches) == 0 {
+	content = blockCommentRe.ReplaceAllString(content, "")
+	content = commentLineRe.ReplaceAllString(content, "")
+
+	seen := make(map[string]bool)
+	collect := func(val string) {
+		if seen[val] || !isValidOverlayPath(val) {
+			return
+		}
+		seen[val] = true
+	}
+
+	// Strategy 1: literal SourcePath: "value"
+	for _, m := range sourcePathLiteralRe.FindAllStringSubmatch(content, -1) {
+		collect(m[1])
+	}
+
+	// Strategy 2: map values from *SourcePath* maps
+	for _, mapMatch := range sourcePathMapRe.FindAllStringSubmatch(content, -1) {
+		mapBody := mapMatch[1]
+		for _, valMatch := range mapStringValueRe.FindAllStringSubmatch(mapBody, -1) {
+			collect(valMatch[1])
+		}
+	}
+
+	// Strategy 3: constants with SourcePath in name
+	for _, m := range sourcePathConstRe.FindAllStringSubmatch(content, -1) {
+		collect(m[1])
+	}
+
+	if len(seen) == 0 {
 		return nil
 	}
 
-	seen := make(map[string]bool)
-	var paths []string
-	for _, m := range matches {
-		p := m[1]
-		if seen[p] {
-			continue
-		}
-		seen[p] = true
+	paths := make([]string, 0, len(seen))
+	for p := range seen {
 		paths = append(paths, p)
 	}
 	sort.Strings(paths)
 	return paths
+}
+
+// isValidOverlayPath returns false for Go import paths and other non-path strings.
+func isValidOverlayPath(s string) bool {
+	if strings.Contains(s, ".io/") || strings.Contains(s, ".com/") || strings.Contains(s, ".org/") {
+		return false
+	}
+	// Some operators use sentinel values in platform maps to mark unsupported
+	// platforms (e.g. cluster.ManagedRhoai: "/not-supported"). These are not
+	// real filesystem paths and must be excluded.
+	trimmed := strings.TrimLeft(s, "/")
+	if trimmed == "not-supported" {
+		return false
+	}
+	return true
+}
+
+// isComponentPath checks that a file path is under a /components/ directory,
+// filtering out framework utilities like actions, services, conditions.
+func isComponentPath(path string) bool {
+	return strings.Contains(path, string(filepath.Separator)+"components"+string(filepath.Separator))
+}
+
+// readComponentDirContent reads and concatenates all non-test Go files in the
+// same directory as filePath. This captures source paths and context dirs
+// defined in sibling files (e.g. kserve.go alongside kserve_support.go).
+func readComponentDirContent(filePath string) string {
+	dir := filepath.Dir(filePath)
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		data, _ := os.ReadFile(filePath)
+		return string(data)
+	}
+
+	var b strings.Builder
+	for _, e := range entries {
+		if e.IsDir() {
+			continue
+		}
+		name := e.Name()
+		if !strings.HasSuffix(name, ".go") || strings.HasSuffix(name, "_test.go") {
+			continue
+		}
+		data, err := os.ReadFile(filepath.Join(dir, name))
+		if err != nil {
+			continue
+		}
+		b.Write(data)
+		b.WriteByte('\n')
+	}
+	return b.String()
+}
+
+// buildConstMap extracts variable-to-string-literal assignments from Go source,
+// returning a map like {"notebookControllerPath": "odh-notebook-controller"}.
+func buildConstMap(content string) map[string]string {
+	m := make(map[string]string)
+	for _, match := range constStringRe.FindAllStringSubmatch(content, -1) {
+		m[match[1]] = match[2]
+	}
+	return m
+}
+
+// extractContextDirs finds kustomize context directory references from
+// ContextDir field assignments in ManifestInfo struct literals.
+// Handles three patterns:
+//   - ContextDir: "literal"
+//   - ContextDir: ComponentName → uses the extracted component name
+//   - varContextDir = path.Join(ComponentName, subPathVar) → resolves subPathVar
+func extractContextDirs(content string, componentName string) []string {
+	content = blockCommentRe.ReplaceAllString(content, "")
+	content = commentLineRe.ReplaceAllString(content, "")
+
+	seen := make(map[string]bool)
+
+	// Literal ContextDir: "value"
+	for _, m := range contextDirLiteralRe.FindAllStringSubmatch(content, -1) {
+		seen[m[1]] = true
+	}
+
+	// ContextDir: ComponentName or componentName → use extracted name
+	if contextDirVarRe.MatchString(content) && componentName != "" {
+		seen[componentName] = true
+	}
+
+	// path.Join(ComponentName, subPathVar) pattern (e.g., workbenches)
+	if componentName != "" {
+		constValues := buildConstMap(content)
+		for _, m := range contextDirJoinRe.FindAllStringSubmatch(content, -1) {
+			subPathVar := m[2]
+			if resolved, ok := constValues[subPathVar]; ok {
+				seen[componentName+"/"+resolved] = true
+			}
+		}
+	}
+
+	if len(seen) == 0 {
+		return nil
+	}
+
+	dirs := make([]string, 0, len(seen))
+	for d := range seen {
+		dirs = append(dirs, d)
+	}
+	sort.Strings(dirs)
+	return dirs
 }
 
 // extractManagedResources finds GVK references indicating managed resources.

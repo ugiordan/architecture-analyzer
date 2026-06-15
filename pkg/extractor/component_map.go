@@ -39,6 +39,7 @@ type ComponentMapEntry struct {
 	ImageCount  int           `json:"image_count"`
 	CRDCount    int           `json:"crd_count"`
 	HasOverlays bool          `json:"has_overlays"`
+	ContextDirs []string      `json:"context_dirs,omitempty"`
 	Features    []string      `json:"features,omitempty"`
 }
 
@@ -79,6 +80,7 @@ func BuildComponentMap(discovery *PlatformDiscovery, org string) *ComponentMap {
 			ImageCount:  len(comp.ImageParams),
 			CRDCount:    len(comp.ManagedCRDs),
 			HasOverlays: len(comp.OverlayPaths) > 0,
+			ContextDirs: comp.ContextDirs,
 			Features:    comp.FeatureFlags,
 		}
 		if org != "" {
