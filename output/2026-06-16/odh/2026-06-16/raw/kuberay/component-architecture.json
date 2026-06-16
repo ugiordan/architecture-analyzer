@@ -1,0 +1,2492 @@
+{
+  "component": "kuberay",
+  "repo": "ray-project/kuberay",
+  "commit_sha": "4e7483e22e686bbe23b01521fdae40e3d94fe33d",
+  "extracted_at": "2026-06-16T05:11:50Z",
+  "analyzer_version": "0.1.0",
+  "schema_version": "2",
+  "rbac": {
+    "kubebuilder_markers": [
+      {
+        "file": "ray-operator/controllers/ray/raycronjob_controller.go",
+        "line": 48,
+        "marker": "+kubebuilder:rbac:groups=ray.io,resources=raycronjobs,verbs=get;list;watch;create;update;patch;delete",
+        "parsed": {
+          "groups": [
+            "ray.io"
+          ],
+          "resources": [
+            "raycronjobs"
+          ],
+          "verbs": [
+            "get",
+            "list",
+            "watch",
+            "create",
+            "update",
+            "patch",
+            "delete"
+          ]
+        }
+      },
+      {
+        "file": "ray-operator/controllers/ray/raycronjob_controller.go",
+        "line": 49,
+        "marker": "+kubebuilder:rbac:groups=ray.io,resources=raycronjobs/status,verbs=get;update;patch",
+        "parsed": {
+          "groups": [
+            "ray.io"
+          ],
+          "resources": [
+            "raycronjobs/status"
+          ],
+          "verbs": [
+            "get",
+            "update",
+            "patch"
+          ]
+        }
+      },
+      {
+        "file": "ray-operator/controllers/ray/raycronjob_controller.go",
+        "line": 50,
+        "marker": "+kubebuilder:rbac:groups=ray.io,resources=raycronjobs/finalizers,verbs=update",
+        "parsed": {
+          "groups": [
+            "ray.io"
+          ],
+          "resources": [
+            "raycronjobs/finalizers"
+          ],
+          "verbs": [
+            "update"
+          ]
+        }
+      },
+      {
+        "file": "ray-operator/controllers/ray/raycronjob_controller.go",
+        "line": 51,
+        "marker": "+kubebuilder:rbac:groups=ray.io,resources=rayjobs,verbs=create",
+        "parsed": {
+          "groups": [
+            "ray.io"
+          ],
+          "resources": [
+            "rayjobs"
+          ],
+          "verbs": [
+            "create"
+          ]
+        }
+      },
+      {
+        "file": "ray-operator/controllers/ray/raycronjob_controller.go",
+        "line": 52,
+        "marker": "+kubebuilder:rbac:groups=core,resources=events,verbs=create;patch",
+        "parsed": {
+          "groups": [
+            "core"
+          ],
+          "resources": [
+            "events"
+          ],
+          "verbs": [
+            "create",
+            "patch"
+          ]
+        }
+      }
+    ]
+  },
+  "services": [
+    {
+      "name": "kuberay-operator",
+      "source": "ray-operator/config/manager/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "name": "monitoring-port",
+          "port": 8080,
+          "targetPort": 8080,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/component": "kuberay-operator",
+        "app.kubernetes.io/name": "kuberay"
+      },
+      "target_deployment": "kuberay-operator"
+    },
+    {
+      "name": "webhook-service",
+      "source": "ray-operator/config/webhook/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "port": 443,
+          "targetPort": 9443,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app.kubernetes.io/component": "kuberay-operator"
+      },
+      "target_deployment": "kuberay-operator"
+    }
+  ],
+  "deployments": [
+    {
+      "name": "kuberay-operator",
+      "kind": "Deployment",
+      "source": "ray-operator/config/overlays/test-overrides/deployment-override.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "kuberay-operator",
+          "image": "",
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "kuberay-operator",
+      "kind": "Deployment",
+      "source": "ray-operator/config/default-with-webhooks/manager_webhook_patch.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "kuberay-operator",
+          "image": "",
+          "ports": [
+            {
+              "name": "webhook-server",
+              "containerPort": 9443,
+              "protocol": "TCP"
+            }
+          ],
+          "volume_mounts": [
+            {
+              "mountPath": "/tmp/k8s-webhook-server/serving-certs",
+              "name": "cert",
+              "secret": "webhook-server-cert"
+            }
+          ],
+          "resources": {
+            "limits": {},
+            "requests": {}
+          },
+          "issues": [
+            "no resource limits configured",
+            "no resource requests configured",
+            "no liveness probe configured",
+            "no readiness probe configured",
+            "no security context configured"
+          ]
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    },
+    {
+      "name": "kuberay-operator",
+      "kind": "Deployment",
+      "source": "ray-operator/config/manager/manager.yaml",
+      "replicas": 1,
+      "service_account": "kuberay-operator",
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "kuberay-operator",
+          "image": "kuberay/operator",
+          "ports": [
+            {
+              "name": "http",
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ],
+          "security_context": {
+            "allowPrivilegeEscalation": false,
+            "capabilities": {
+              "add": [],
+              "drop": [
+                "ALL"
+              ]
+            },
+            "readOnlyRootFilesystem": true,
+            "seccompProfile": {
+              "type": "RuntimeDefault"
+            }
+          },
+          "resources": {
+            "limits": {
+              "cpu": "100m",
+              "memory": "512Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "512Mi"
+            }
+          },
+          "liveness_probe": {
+            "type": "httpGet",
+            "path": "/metrics",
+            "port": "http"
+          },
+          "readiness_probe": {
+            "type": "httpGet",
+            "path": "/metrics",
+            "port": "http"
+          }
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    }
+  ],
+  "controller_watches": [
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayCluster",
+      "controller": "AuthenticationController",
+      "source": "ray-operator/controllers/ray/authentication_controller.go:1174"
+    },
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayCluster",
+      "controller": "NetworkPolicyController",
+      "source": "ray-operator/controllers/ray/networkpolicy_controller.go:427"
+    },
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayCluster",
+      "controller": "RayClusterReconciler",
+      "source": "ray-operator/controllers/ray/raycluster_controller.go:1621"
+    },
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayCluster",
+      "controller": "RayClusterMTLSController",
+      "source": "ray-operator/controllers/ray/raycluster_mtls_controller.go:834"
+    },
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayCronJob",
+      "controller": "RayCronJobReconciler",
+      "source": "ray-operator/controllers/ray/raycronjob_controller.go:182"
+    },
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayJob",
+      "controller": "RayJobReconciler",
+      "source": "ray-operator/controllers/ray/rayjob_controller.go:888"
+    },
+    {
+      "type": "For",
+      "gvk": "ray/v1/RayService",
+      "controller": "RayServiceReconciler",
+      "source": "ray-operator/controllers/ray/rayservice_controller.go:578"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Pod",
+      "controller": "RayClusterReconciler",
+      "source": "ray-operator/controllers/ray/raycluster_controller.go:1626"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Secret",
+      "controller": "RayClusterReconciler",
+      "source": "ray-operator/controllers/ray/raycluster_controller.go:1628"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "RayJobReconciler",
+      "source": "ray-operator/controllers/ray/rayjob_controller.go:890"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "RayClusterReconciler",
+      "source": "ray-operator/controllers/ray/raycluster_controller.go:1627"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "AuthenticationController",
+      "source": "ray-operator/controllers/ray/authentication_controller.go:1177"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/Service",
+      "controller": "RayServiceReconciler",
+      "source": "ray-operator/controllers/ray/rayservice_controller.go:584"
+    },
+    {
+      "type": "Owns",
+      "gvk": "/v1/ServiceAccount",
+      "controller": "AuthenticationController",
+      "source": "ray-operator/controllers/ray/authentication_controller.go:1176"
+    },
+    {
+      "type": "Owns",
+      "gvk": "batch/v1/Job",
+      "controller": "RayJobReconciler",
+      "source": "ray-operator/controllers/ray/rayjob_controller.go:891"
+    },
+    {
+      "type": "Owns",
+      "gvk": "networking.k8s.io/v1/NetworkPolicy",
+      "controller": "NetworkPolicyController",
+      "source": "ray-operator/controllers/ray/networkpolicy_controller.go:428"
+    },
+    {
+      "type": "Owns",
+      "gvk": "ray/v1/RayCluster",
+      "controller": "RayJobReconciler",
+      "source": "ray-operator/controllers/ray/rayjob_controller.go:889"
+    },
+    {
+      "type": "Owns",
+      "gvk": "ray/v1/RayCluster",
+      "controller": "RayServiceReconciler",
+      "source": "ray-operator/controllers/ray/rayservice_controller.go:583"
+    },
+    {
+      "type": "Owns",
+      "gvk": "ray/v1/RayJob",
+      "controller": "RayCronJobReconciler",
+      "source": "ray-operator/controllers/ray/raycronjob_controller.go:183"
+    },
+    {
+      "type": "Owns",
+      "gvk": "route/v1/Route",
+      "controller": "AuthenticationController",
+      "source": "ray-operator/controllers/ray/authentication_controller.go:1179"
+    }
+  ],
+  "dependencies": {
+    "go_version": "1.25.0",
+    "go_modules": [
+      {
+        "module": "cloud.google.com/go/storage",
+        "version": "v1.59.2",
+        "category": "cloud-provider",
+        "purpose": "Google Cloud SDK"
+      },
+      {
+        "module": "github.com/Azure/azure-sdk-for-go/sdk/azcore",
+        "version": "v1.20.0",
+        "category": "cloud-provider",
+        "purpose": "Azure SDK"
+      },
+      {
+        "module": "github.com/Azure/azure-sdk-for-go/sdk/azidentity",
+        "version": "v1.13.1",
+        "category": "cloud-provider",
+        "purpose": "Azure SDK"
+      },
+      {
+        "module": "github.com/Azure/azure-sdk-for-go/sdk/storage/azblob",
+        "version": "v1.6.4",
+        "category": "cloud-provider",
+        "purpose": "Azure SDK"
+      },
+      {
+        "module": "github.com/Masterminds/semver/v3",
+        "version": "v3.4.0"
+      },
+      {
+        "module": "github.com/alibabacloud-go/tea",
+        "version": "v1.3.11"
+      },
+      {
+        "module": "github.com/aliyun/aliyun-oss-go-sdk",
+        "version": "v3.0.2+incompatible"
+      },
+      {
+        "module": "github.com/aliyun/credentials-go",
+        "version": "v1.4.7"
+      },
+      {
+        "module": "github.com/aws/aws-sdk-go",
+        "version": "v1.55.8",
+        "category": "cloud-provider",
+        "purpose": "AWS SDK"
+      },
+      {
+        "module": "github.com/bmatcuk/doublestar/v4",
+        "version": "v4.10.0"
+      },
+      {
+        "module": "github.com/cert-manager/cert-manager",
+        "version": "v1.18.2",
+        "category": "cert-management",
+        "purpose": "Certificate management"
+      },
+      {
+        "module": "github.com/coder/websocket",
+        "version": "v1.8.14"
+      },
+      {
+        "module": "github.com/dustinkirkland/golang-petname",
+        "version": "v0.0.0-20240428194347-eebcea082ee0"
+      },
+      {
+        "module": "github.com/elazarl/go-bindata-assetfs",
+        "version": "v1.0.1"
+      },
+      {
+        "module": "github.com/emicklei/go-restful/v3",
+        "version": "v3.13.0"
+      },
+      {
+        "module": "github.com/fsnotify/fsnotify",
+        "version": "v1.9.0"
+      },
+      {
+        "module": "github.com/fsouza/fake-gcs-server",
+        "version": "v1.53.1"
+      },
+      {
+        "module": "github.com/go-logr/logr",
+        "version": "v1.4.3"
+      },
+      {
+        "module": "github.com/go-logr/logr",
+        "version": "v1.4.3"
+      },
+      {
+        "module": "github.com/go-logr/zapr",
+        "version": "v1.3.0"
+      },
+      {
+        "module": "github.com/go-logr/zerologr",
+        "version": "v1.2.3"
+      },
+      {
+        "module": "github.com/golang/mock",
+        "version": "v1.7.0-rc.1"
+      },
+      {
+        "module": "github.com/google/go-cmp",
+        "version": "v0.7.0"
+      },
+      {
+        "module": "github.com/google/shlex",
+        "version": "v0.0.0-20191202100458-e7afc7fbc510"
+      },
+      {
+        "module": "github.com/grpc-ecosystem/go-grpc-middleware",
+        "version": "v1.4.0"
+      },
+      {
+        "module": "github.com/grpc-ecosystem/go-grpc-prometheus",
+        "version": "v1.2.0"
+      },
+      {
+        "module": "github.com/grpc-ecosystem/grpc-gateway/v2",
+        "version": "v2.26.3"
+      },
+      {
+        "module": "github.com/hashicorp/golang-lru/v2",
+        "version": "v2.0.7"
+      },
+      {
+        "module": "github.com/jarcoal/httpmock",
+        "version": "v1.4.1"
+      },
+      {
+        "module": "github.com/kr/pretty",
+        "version": "v0.3.1"
+      },
+      {
+        "module": "github.com/novln/docker-parser",
+        "version": "v1.0.0"
+      },
+      {
+        "module": "github.com/onsi/ginkgo/v2",
+        "version": "v2.27.3",
+        "category": "testing",
+        "purpose": "BDD testing framework"
+      },
+      {
+        "module": "github.com/onsi/ginkgo/v2",
+        "version": "v2.27.3",
+        "category": "testing",
+        "purpose": "BDD testing framework"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.38.3",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.38.2",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.38.3",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/openshift/api",
+        "version": "v0.0.0-20251214014457-bfa868a22401",
+        "category": "openshift",
+        "purpose": "OpenShift API types"
+      },
+      {
+        "module": "github.com/orcaman/concurrent-map/v2",
+        "version": "v2.0.1"
+      },
+      {
+        "module": "github.com/pkg/errors",
+        "version": "v0.9.1"
+      },
+      {
+        "module": "github.com/prometheus/client_golang",
+        "version": "v1.23.2",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/prometheus/client_golang",
+        "version": "v1.23.2",
+        "category": "observability",
+        "purpose": "Prometheus metrics"
+      },
+      {
+        "module": "github.com/ray-project/kuberay/ray-operator",
+        "version": "v0.0.0"
+      },
+      {
+        "module": "github.com/ray-project/kuberay/ray-operator",
+        "version": "v1.5.1"
+      },
+      {
+        "module": "github.com/robfig/cron/v3",
+        "version": "v3.0.1"
+      },
+      {
+        "module": "github.com/rs/cors",
+        "version": "v1.11.1"
+      },
+      {
+        "module": "github.com/rs/zerolog",
+        "version": "v1.34.0"
+      },
+      {
+        "module": "github.com/sirupsen/logrus",
+        "version": "v1.9.3"
+      },
+      {
+        "module": "github.com/smallnest/chanx",
+        "version": "v1.2.0"
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.9.1"
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10"
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10"
+      },
+      {
+        "module": "github.com/stretchr/testify",
+        "version": "v1.11.1",
+        "category": "testing",
+        "purpose": "Test assertions library"
+      },
+      {
+        "module": "github.com/stretchr/testify",
+        "version": "v1.11.1",
+        "category": "testing",
+        "purpose": "Test assertions library"
+      },
+      {
+        "module": "github.com/stretchr/testify",
+        "version": "v1.11.1",
+        "category": "testing",
+        "purpose": "Test assertions library"
+      },
+      {
+        "module": "github.com/virtual-kubelet/virtual-kubelet",
+        "version": "v1.12.0"
+      },
+      {
+        "module": "go.uber.org/mock",
+        "version": "v0.6.0"
+      },
+      {
+        "module": "go.uber.org/zap",
+        "version": "v1.27.1"
+      },
+      {
+        "module": "golang.org/x/sync",
+        "version": "v0.19.0"
+      },
+      {
+        "module": "google.golang.org/api",
+        "version": "v0.264.0",
+        "category": "cloud-provider",
+        "purpose": "Google API client"
+      },
+      {
+        "module": "google.golang.org/genproto/googleapis/api",
+        "version": "v0.0.0-20250707201910-8d1bb00bc6a7"
+      },
+      {
+        "module": "google.golang.org/genproto/googleapis/rpc",
+        "version": "v0.0.0-20250826171959-ef028d996bc1"
+      },
+      {
+        "module": "google.golang.org/grpc",
+        "version": "v1.75.1",
+        "category": "serialization",
+        "purpose": "gRPC framework"
+      },
+      {
+        "module": "google.golang.org/protobuf",
+        "version": "v1.36.11",
+        "category": "serialization",
+        "purpose": "Protocol Buffers"
+      },
+      {
+        "module": "gopkg.in/natefinch/lumberjack.v2",
+        "version": "v2.2.1"
+      },
+      {
+        "module": "gopkg.in/yaml.v2",
+        "version": "v2.4.0",
+        "category": "serialization",
+        "purpose": "YAML parser"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.35.0",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apiserver",
+        "version": "v0.34.3",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/cli-runtime",
+        "version": "v0.34.1"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.35.0",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.35.0",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.35.0",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.35.0",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "k8s.io/code-generator",
+        "version": "v0.35.0"
+      },
+      {
+        "module": "k8s.io/component-base",
+        "version": "v0.34.3",
+        "category": "k8s-api",
+        "purpose": "Kubernetes component base library"
+      },
+      {
+        "module": "k8s.io/klog/v2",
+        "version": "v2.130.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes logging library"
+      },
+      {
+        "module": "k8s.io/klog/v2",
+        "version": "v2.130.1",
+        "category": "k8s-api",
+        "purpose": "Kubernetes logging library"
+      },
+      {
+        "module": "k8s.io/kubectl",
+        "version": "v0.34.1",
+        "category": "k8s-client",
+        "purpose": "Kubernetes CLI library"
+      },
+      {
+        "module": "k8s.io/utils",
+        "version": "v0.0.0-20251002143259-bc988d571ff4",
+        "category": "k8s-api",
+        "purpose": "Kubernetes utility library"
+      },
+      {
+        "module": "k8s.io/utils",
+        "version": "v0.0.0-20251002143259-bc988d571ff4",
+        "category": "k8s-api",
+        "purpose": "Kubernetes utility library"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.22.4",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.22.4",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.22.4",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/gateway-api",
+        "version": "v1.4.1",
+        "category": "networking",
+        "purpose": "Kubernetes Gateway API"
+      },
+      {
+        "module": "sigs.k8s.io/scheduler-plugins",
+        "version": "v0.33.5"
+      },
+      {
+        "module": "sigs.k8s.io/structured-merge-diff/v6",
+        "version": "v6.3.1"
+      },
+      {
+        "module": "sigs.k8s.io/yaml",
+        "version": "v1.6.0",
+        "category": "serialization",
+        "purpose": "Kubernetes YAML parser"
+      },
+      {
+        "module": "sigs.k8s.io/yaml",
+        "version": "v1.6.0",
+        "category": "serialization",
+        "purpose": "Kubernetes YAML parser"
+      },
+      {
+        "module": "volcano.sh/apis",
+        "version": "v1.13.0"
+      }
+    ],
+    "replace_directives": [
+      {
+        "original": "google.golang.org/genproto",
+        "replacement": "google.golang.org/genproto",
+        "version": "v0.0.0-20250707201910-8d1bb00bc6a7"
+      }
+    ],
+    "issues": [
+      "k8s.io modules span multiple minor versions: v0.35 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/code-generator); v0.34 (k8s.io/cli-runtime, k8s.io/kubectl, k8s.io/apiserver)"
+    ]
+  },
+  "secrets_referenced": [
+    {
+      "name": "webhook-server-cert",
+      "type": "Opaque",
+      "referenced_by": [
+        "deployment/kuberay-operator"
+      ],
+      "provisioned_by": "volume-mounted"
+    }
+  ],
+  "dockerfiles": [
+    {
+      "path": "apiserver/Dockerfile",
+      "base_image": "scratch",
+      "build_stage_images": [
+        "golang:1.25-bookworm"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: scratch"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/workspace/apiserver/kuberay-apiserver"
+          ],
+          "destination": "apiserver/",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "ray-operator/go.mod",
+            "ray-operator/go.sum",
+            "proto/",
+            "ray-operator/",
+            "apiserver/",
+            "apiserversdk/"
+          ]
+        },
+        {
+          "sources": [
+            "proto/"
+          ],
+          "destination": "proto/"
+        }
+      ]
+    },
+    {
+      "path": "apiserver/Dockerfile.buildx",
+      "base_image": "scratch",
+      "stages": 1,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: scratch"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "./apiserver/kuberay-apiserver-${TARGETARCH}"
+          ],
+          "destination": "apiserver/kuberay-apiserver"
+        },
+        {
+          "sources": [
+            "proto/"
+          ],
+          "destination": "proto/"
+        }
+      ]
+    },
+    {
+      "path": "benchmark/perf-tests/images/ray-pytorch/Dockerfile",
+      "base_image": "rayproject/ray:2.46.0",
+      "stages": 1,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "dashboard/Dockerfile",
+      "base_image": "base",
+      "build_stage_images": [
+        "node:24-alpine",
+        "base",
+        "base"
+      ],
+      "stages": 4,
+      "user": "nextjs",
+      "exposed_ports": [
+        3000
+      ],
+      "issues": [
+        "Unpinned base image: base",
+        "Unpinned base image: base",
+        "Unpinned base image: base"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/app/public"
+          ],
+          "destination": "./public",
+          "from_stage": "builder",
+          "original_sources": [
+            "."
+          ]
+        },
+        {
+          "sources": [
+            "/app/.next/standalone"
+          ],
+          "destination": "./",
+          "from_stage": "builder",
+          "original_sources": [
+            "."
+          ]
+        },
+        {
+          "sources": [
+            "/app/.next/static"
+          ],
+          "destination": "./.next/static",
+          "from_stage": "builder",
+          "original_sources": [
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "path": "experimental/Dockerfile",
+      "base_image": "scratch",
+      "build_stage_images": [
+        "golang:1.25-bookworm"
+      ],
+      "stages": 2,
+      "issues": [
+        "Unpinned base image: scratch",
+        "No USER directive found (defaults to root)"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/workspace/experimental/security_proxy"
+          ],
+          "destination": "/usr/local/bin/security_proxy",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "ray-operator/go.mod",
+            "ray-operator/go.sum",
+            "experimental/"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "experimental/Dockerfile.buildx",
+      "base_image": "scratch",
+      "stages": 1,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: scratch"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "./experimental/security_proxy-${TARGETARCH}"
+          ],
+          "destination": "/usr/local/bin/security_proxy"
+        }
+      ]
+    },
+    {
+      "path": "historyserver/Dockerfile.collector",
+      "base_image": "ubuntu:22.04",
+      "build_stage_images": [
+        "golang:1.25.1"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/historyserver/output/bin/collector"
+          ],
+          "destination": "/usr/local/bin/collector",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "cmd/collector/main.go",
+            "pkg/collector/",
+            "pkg/storage/",
+            "pkg/utils/",
+            "pkg/eventserver/",
+            "Makefile"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "historyserver/Dockerfile.historyserver",
+      "base_image": "ubuntu:22.04",
+      "build_stage_images": [
+        "golang:1.25.1"
+      ],
+      "stages": 2,
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/historyserver/output/bin/historyserver"
+          ],
+          "destination": "/usr/local/bin/historyserver",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "cmd/historyserver/main.go",
+            "pkg/collector/",
+            "pkg/historyserver/",
+            "pkg/storage/",
+            "pkg/utils/",
+            "pkg/eventserver/",
+            "Makefile"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "historyserver/cmd/collector/Dockerfile",
+      "base_image": "",
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "historyserver/cmd/historyserver/Dockerfile",
+      "base_image": "",
+      "issues": [
+        "No USER directive found (defaults to root)"
+      ]
+    },
+    {
+      "path": "proto/Dockerfile",
+      "base_image": "golang:1.25-bookworm",
+      "stages": 1,
+      "user": "65532:65532"
+    },
+    {
+      "path": "ray-operator/Dockerfile",
+      "base_image": "gcr.io/distroless/base-debian12:nonroot",
+      "build_stage_images": [
+        "golang:1.25-bookworm",
+        "scratch"
+      ],
+      "stages": 3,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: scratch"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/workspace/manager"
+          ],
+          "destination": ".",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "main.go",
+            "apis/",
+            "controllers/",
+            "pkg/features",
+            "pkg/utils",
+            "pkg/webhooks",
+            "rayjob-submitter/"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "ray-operator/Dockerfile.buildx",
+      "base_image": "gcr.io/distroless/base-debian12:nonroot",
+      "stages": 1,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "./manager-${TARGETARCH}"
+          ],
+          "destination": "./manager"
+        }
+      ]
+    },
+    {
+      "path": "ray-operator/Dockerfile.konflux",
+      "base_image": "registry.access.redhat.com/ubi9/ubi-minimal@sha256:7c5495d5fad59aaee12abc3cbbd2b283818ee1e814b00dbc7f25bf2d14fa4f0c",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset@sha256:84286c7555df503df0bd3acb86fe2ad50af82a07f35707918bb0fad312fdc193"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "/workspace/manager"
+          ],
+          "destination": ".",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "main.go",
+            "apis/",
+            "controllers/",
+            "pkg/features",
+            "pkg/utils",
+            "pkg/webhooks"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "ray-operator/Dockerfile.rhoai",
+      "base_image": "registry.access.redhat.com/ubi9/ubi:latest",
+      "build_stage_images": [
+        "registry.redhat.io/ubi9/go-toolset@sha256:570ebf7fd7809394f10deaa27bc5b80e31891c17f10e95fe6b587e4eea7be790"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/workspace/manager"
+          ],
+          "destination": ".",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "main.go",
+            "apis/",
+            "controllers/",
+            "pkg/features",
+            "pkg/utils",
+            "pkg/webhooks"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "ray-operator/Dockerfile.submitter.buildx",
+      "base_image": "scratch",
+      "stages": 1,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: scratch"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "./submitter-${TARGETARCH}"
+          ],
+          "destination": "./submitter"
+        }
+      ]
+    }
+  ],
+  "helm": {
+    "chart_name": "kuberay-apiserver",
+    "chart_version": "1.6.1",
+    "values_defaults": {
+      "securityContext.allowPrivilegeEscalation": false,
+      "securityContext.capabilities.drop": [
+        "ALL"
+      ],
+      "securityContext.readOnlyRootFilesystem": true,
+      "securityContext.runAsNonRoot": true,
+      "securityContext.seccompProfile.type": "RuntimeDefault",
+      "serviceAccount.create": true,
+      "serviceAccount.name": "kuberay-operator"
+    }
+  },
+  "webhooks": [
+    {
+      "name": "mraycluster.kb.io",
+      "type": "mutating",
+      "service_ref": "$(namespace)/kuberay-webhook-service",
+      "path": "/mutate-ray-io-v1-raycluster",
+      "port": 9443,
+      "failure_policy": "Fail",
+      "side_effects": "None",
+      "rules": [
+        {
+          "apiGroups": [
+            "ray.io"
+          ],
+          "apiVersions": [
+            "v1"
+          ],
+          "resources": [
+            "rayclusters"
+          ],
+          "operations": [
+            "CREATE",
+            "UPDATE"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "type": "yaml_manifest",
+          "file": "ray-operator/config/openshift/webhook.yaml"
+        }
+      ]
+    },
+    {
+      "name": "mraycluster.kb.io",
+      "type": "mutating",
+      "path": "/mutate-ray-io-v1-raycluster",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "ray-operator/pkg/webhooks/v1/raycluster_mutating_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "ray-operator/pkg/webhooks/v1/raycluster_mutating_webhook.go"
+        }
+      ]
+    },
+    {
+      "name": "vraycluster.kb.io",
+      "type": "validating",
+      "path": "/validate-ray-io-v1-raycluster",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "ray-operator/pkg/webhooks/v1/raycluster_validating_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "ray-operator/pkg/webhooks/v1/raycluster_validating_webhook.go"
+        }
+      ]
+    },
+    {
+      "name": "vrayjob.kb.io",
+      "type": "validating",
+      "path": "/validate-ray-io-v1-rayjob",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "ray-operator/pkg/webhooks/v1/rayjob_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "ray-operator/pkg/webhooks/v1/rayjob_webhook.go"
+        }
+      ]
+    },
+    {
+      "name": "vrayservice.kb.io",
+      "type": "validating",
+      "path": "/validate-ray-io-v1-rayservice",
+      "port": 9443,
+      "failure_policy": "fail",
+      "side_effects": "None",
+      "sources": [
+        {
+          "type": "kubebuilder_marker",
+          "file": "ray-operator/pkg/webhooks/v1/rayservice_webhook.go"
+        },
+        {
+          "type": "go_handler",
+          "file": "ray-operator/pkg/webhooks/v1/rayservice_webhook.go"
+        }
+      ]
+    }
+  ],
+  "http_endpoints": [
+    {
+      "method": "*",
+      "path": "/",
+      "source": "experimental/cmd/main.go:111"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "historyserver/pkg/historyserver/router.go:102"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "historyserver/pkg/historyserver/router.go:64"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "source": "historyserver/pkg/historyserver/router.go:55"
+    },
+    {
+      "method": "GET",
+      "path": "/actors",
+      "source": "historyserver/pkg/historyserver/router.go:277"
+    },
+    {
+      "method": "GET",
+      "path": "/actors/{single_actor:*}",
+      "source": "historyserver/pkg/historyserver/router.go:285"
+    },
+    {
+      "method": "*",
+      "path": "/api/v1/namespaces/{namespace}/services/{service}/proxy",
+      "source": "apiserversdk/proxy.go:64"
+    },
+    {
+      "method": "*",
+      "path": "/api/v1/namespaces/{namespace}/services/{service}/proxy/",
+      "source": "apiserversdk/proxy.go:65"
+    },
+    {
+      "method": "*",
+      "path": "/apis/ray.io/v1/",
+      "source": "apiserversdk/proxy.go:46"
+    },
+    {
+      "method": "GET",
+      "path": "/cluster_status",
+      "source": "historyserver/pkg/historyserver/router.go:111"
+    },
+    {
+      "method": "POST",
+      "path": "/events",
+      "source": "historyserver/pkg/collector/eventserver/eventserver.go:90"
+    },
+    {
+      "method": "GET",
+      "path": "/grafana_health",
+      "source": "historyserver/pkg/historyserver/router.go:114"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/",
+      "source": "historyserver/pkg/historyserver/router.go:121"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{job_id}",
+      "source": "historyserver/pkg/historyserver/router.go:125"
+    },
+    {
+      "method": "*",
+      "path": "/livez",
+      "source": "historyserver/pkg/historyserver/router.go:262"
+    },
+    {
+      "method": "GET",
+      "path": "/prometheus_health",
+      "source": "historyserver/pkg/historyserver/router.go:117"
+    },
+    {
+      "method": "*",
+      "path": "/readz",
+      "source": "historyserver/pkg/historyserver/router.go:256"
+    },
+    {
+      "method": "GET",
+      "path": "/v0/cluster_metadata",
+      "source": "historyserver/pkg/historyserver/router.go:130"
+    },
+    {
+      "method": "GET",
+      "path": "/v0/logs",
+      "source": "historyserver/pkg/historyserver/router.go:134"
+    },
+    {
+      "method": "GET",
+      "path": "/v0/logs/{media_type}",
+      "source": "historyserver/pkg/historyserver/router.go:140"
+    },
+    {
+      "method": "GET",
+      "path": "/v0/tasks",
+      "source": "historyserver/pkg/historyserver/router.go:163"
+    },
+    {
+      "method": "GET",
+      "path": "/v0/tasks/summarize",
+      "source": "historyserver/pkg/historyserver/router.go:174"
+    },
+    {
+      "method": "GET",
+      "path": "/v0/tasks/timeline",
+      "source": "historyserver/pkg/historyserver/router.go:182"
+    },
+    {
+      "method": "GET",
+      "path": "/{namespace}/{name}/{session}",
+      "source": "historyserver/pkg/historyserver/router.go:297"
+    },
+    {
+      "method": "GET",
+      "path": "/{node_id}",
+      "source": "historyserver/pkg/historyserver/router.go:91"
+    },
+    {
+      "method": "GET",
+      "path": "/{subpath:*}",
+      "source": "historyserver/pkg/historyserver/router.go:191"
+    },
+    {
+      "method": "*",
+      "path": "GET /api/v1/namespaces/{namespace}/events",
+      "source": "apiserversdk/proxy.go:47"
+    },
+    {
+      "method": "*",
+      "path": "POST /apis/ray.io/v1/namespaces/{namespace}/rayclusters",
+      "source": "apiserversdk/proxy.go:53"
+    },
+    {
+      "method": "*",
+      "path": "POST /apis/ray.io/v1/namespaces/{namespace}/rayjobs",
+      "source": "apiserversdk/proxy.go:55"
+    },
+    {
+      "method": "*",
+      "path": "POST /apis/ray.io/v1/namespaces/{namespace}/rayservices",
+      "source": "apiserversdk/proxy.go:57"
+    },
+    {
+      "method": "*",
+      "path": "PUT /apis/ray.io/v1/namespaces/{namespace}/rayclusters/{name}",
+      "source": "apiserversdk/proxy.go:54"
+    },
+    {
+      "method": "*",
+      "path": "PUT /apis/ray.io/v1/namespaces/{namespace}/rayjobs/{name}",
+      "source": "apiserversdk/proxy.go:56"
+    },
+    {
+      "method": "*",
+      "path": "PUT /apis/ray.io/v1/namespaces/{namespace}/rayservices/{name}",
+      "source": "apiserversdk/proxy.go:58"
+    },
+    {
+      "method": "*",
+      "path": "gateway.networking.k8s.io",
+      "source": "ray-operator/controllers/ray/authentication_controller.go:473"
+    }
+  ],
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:108",
+      "function": "create_compute_template"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:124",
+      "function": "delete_compute_template"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:139",
+      "function": "list_clusters"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:156",
+      "function": "list_clusters_namespace"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:174",
+      "function": "get_cluster"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:190",
+      "function": "create_cluster"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:271",
+      "function": "delete_cluster"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:288",
+      "function": "submit_job"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:305",
+      "function": "get_job_info"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:321",
+      "function": "list_job_info"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:341",
+      "function": "get_job_log"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:357",
+      "function": "stop_ray_job"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:373",
+      "function": "delete_ray_job"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:57",
+      "function": "list_compute_templates"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:74",
+      "function": "list_compute_templates_namespace"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:92",
+      "function": "get_compute_template"
+    },
+    {
+      "type": "api",
+      "service": "urllib",
+      "target": "",
+      "source": "scripts/openapi2jsonschema.py:134"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "remoteURL",
+      "source": "experimental/cmd/main.go:61",
+      "function": "main"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "proto/go_client/cluster.pb.gw.go:379",
+      "function": "RegisterClusterServiceHandlerFromEndpoint"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "proto/go_client/config.pb.gw.go:619",
+      "function": "RegisterComputeTemplateServiceHandlerFromEndpoint"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "proto/go_client/config.pb.gw.go:759",
+      "function": "RegisterImageTemplateServiceHandlerFromEndpoint"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "proto/go_client/job.pb.gw.go:379",
+      "function": "RegisterRayJobServiceHandlerFromEndpoint"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "proto/go_client/job_submission.pb.gw.go:553",
+      "function": "RegisterRayJobSubmissionServiceHandlerFromEndpoint"
+    },
+    {
+      "type": "grpc",
+      "service": "grpc",
+      "target": "endpoint",
+      "source": "proto/go_client/serve.pb.gw.go:457",
+      "function": "RegisterRayServeServiceHandlerFromEndpoint"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "historyserver/pkg/storage/azureblob/azureblob.go:319",
+      "function": "createAzureBlobClient"
+    },
+    {
+      "type": "object-storage",
+      "service": "azure-blob",
+      "target": "",
+      "source": "historyserver/pkg/storage/azureblob/azureblob.go:327",
+      "function": "createAzureBlobClient"
+    },
+    {
+      "type": "object-storage",
+      "service": "gcs",
+      "target": "",
+      "source": "historyserver/pkg/storage/gcs/gcs_handler.go:271",
+      "function": "New"
+    }
+  ],
+  "feature_gates": [
+    {
+      "name": "AsyncJobInfoQuery",
+      "default": false,
+      "pre_release": "Alpha",
+      "source": "ray-operator/pkg/features/features.go:69"
+    },
+    {
+      "name": "RayClusterStatusConditions",
+      "default": true,
+      "pre_release": "Beta",
+      "source": "ray-operator/pkg/features/features.go:64"
+    },
+    {
+      "name": "RayCronJob",
+      "default": false,
+      "pre_release": "Alpha",
+      "source": "ray-operator/pkg/features/features.go:68"
+    },
+    {
+      "name": "RayJobDeletionPolicy",
+      "default": true,
+      "pre_release": "Beta",
+      "source": "ray-operator/pkg/features/features.go:65"
+    },
+    {
+      "name": "RayMultiHostIndexing",
+      "default": true,
+      "pre_release": "Beta",
+      "source": "ray-operator/pkg/features/features.go:66"
+    },
+    {
+      "name": "RayServiceIncrementalUpgrade",
+      "default": false,
+      "pre_release": "Alpha",
+      "source": "ray-operator/pkg/features/features.go:67"
+    }
+  ],
+  "cache_config": {
+    "manager_file": "ray-operator/main.go",
+    "cache_scope": "namespace-scoped",
+    "filtered_types": [
+      {
+        "type": "batchv1.Job",
+        "filter_kind": "label",
+        "filter": "label selector"
+      }
+    ],
+    "memory_limit": "512Mi",
+    "issues": [
+      "No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint",
+      "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
+      "Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)",
+      "Type Pod is watched but has no cache filter (cluster-wide informer)",
+      "Type RayCluster is watched but has no cache filter (cluster-wide informer)",
+      "Type RayCronJob is watched but has no cache filter (cluster-wide informer)",
+      "Type RayJob is watched but has no cache filter (cluster-wide informer)",
+      "Type RayService is watched but has no cache filter (cluster-wide informer)",
+      "Type Route is watched but has no cache filter (cluster-wide informer)",
+      "Type Secret is watched but has no cache filter (cluster-wide informer)",
+      "Type Service is watched but has no cache filter (cluster-wide informer)",
+      "Type ServiceAccount is watched but has no cache filter (cluster-wide informer)"
+    ]
+  },
+  "prometheus_metrics": [
+    {
+      "name": "certwatcher_read_certificate_errors_total",
+      "type": "counter",
+      "help": "Total number of certificate read errors",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/certwatcher/metrics/metrics.go"
+    },
+    {
+      "name": "certwatcher_read_certificate_total",
+      "type": "counter",
+      "help": "Total number of certificate reads",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/certwatcher/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_active_workers",
+      "type": "gauge",
+      "help": "Number of currently used workers per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_conversion_webhook_panics_total",
+      "type": "counter",
+      "help": "Total number of conversion webhook panics",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/webhook/conversion/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_max_concurrent_reconciles",
+      "type": "gauge",
+      "help": "Maximum number of concurrent reconciles per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_errors_total",
+      "type": "counter",
+      "help": "Total number of reconciliation errors per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_panics_total",
+      "type": "counter",
+      "help": "Total number of reconciliation panics per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_time_seconds",
+      "type": "histogram",
+      "help": "Length of time per reconciliation per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_total",
+      "type": "counter",
+      "help": "Total number of reconciliations per controller",
+      "labels": [
+        "controller",
+        "result"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_terminal_reconcile_errors_total",
+      "type": "counter",
+      "help": "Total number of terminal reconciliation errors per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_latency_seconds",
+      "type": "histogram",
+      "help": "Histogram of the latency of processing admission requests",
+      "labels": [
+        "webhook"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/webhook/internal/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_panics_total",
+      "type": "counter",
+      "help": "Total number of webhook panics",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/webhook/admission/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_requests_in_flight",
+      "type": "gauge",
+      "help": "Current number of admission requests being served.",
+      "labels": [
+        "webhook"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/webhook/internal/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_requests_total",
+      "type": "counter",
+      "help": "Total number of admission requests by HTTP status code.",
+      "labels": [
+        "webhook",
+        "code"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/webhook/internal/metrics/metrics.go"
+    },
+    {
+      "name": "cpu_temperature_celsius",
+      "type": "gauge",
+      "help": "Current temperature of the CPU.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/doc.go"
+    },
+    {
+      "name": "demo_server_say_hello_method_handle_count",
+      "type": "counter",
+      "help": "Total number of RPCs handled on the server.",
+      "labels": [
+        "name"
+      ],
+      "source": ".gomod-cache/github.com/grpc-ecosystem/go-grpc-prometheus@v1.2.0/examples/grpc-server-with-prometheus/server/server.go"
+    },
+    {
+      "name": "hd_errors_total",
+      "type": "counter",
+      "help": "Number of hard-disk errors.",
+      "labels": [
+        "device"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/doc.go"
+    },
+    {
+      "name": "hello_requests_total",
+      "type": "counter",
+      "help": "Total number of hello-world requests by HTTP code.",
+      "labels": [
+        "code"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promauto/auto.go"
+    },
+    {
+      "name": "http_request_duration_seconds",
+      "type": "histogram",
+      "help": "A histogram of the HTTP request durations in seconds.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/exemplars/main.go"
+    },
+    {
+      "name": "http_request_duration_seconds",
+      "type": "histogram",
+      "help": "A histogram of the HTTP request durations in seconds.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/createdtimestamps/main.go"
+    },
+    {
+      "name": "kuberay_cluster_provisioned_duration_seconds",
+      "type": "gauge",
+      "help": "The time, in seconds, when a RayCluster's `RayClusterProvisioned` status transitions from false (or unset) to true",
+      "labels": [
+        "name",
+        "namespace",
+        "uid"
+      ],
+      "source": "ray-operator/controllers/ray/metrics/ray_cluster_metrics.go"
+    },
+    {
+      "name": "kuberay_job_execution_duration_seconds",
+      "type": "gauge",
+      "help": "Duration from when the RayJob CR’s JobDeploymentStatus transitions from Initializing to either the Retrying state or a terminal state, such as Complete or Failed. The Retrying state indicates that the CR previously failed and that spec.backoffLimit is enabled.",
+      "labels": [
+        "name",
+        "namespace",
+        "uid",
+        "job_deployment_status",
+        "retry_count"
+      ],
+      "source": "ray-operator/controllers/ray/metrics/ray_job_metrics.go"
+    },
+    {
+      "name": "leader_election_master_status",
+      "type": "gauge",
+      "help": "Gauge of if the reporting system is master of the relevant lease, 0 indicates backup, 1 indicates master. 'name' is the string used to identify the lease. Please make sure to group by name.",
+      "labels": [
+        "name"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/metrics/leaderelection.go"
+    },
+    {
+      "name": "leader_election_slowpath_total",
+      "type": "counter",
+      "help": "Total number of slow path exercised in renewing leader leases. 'name' is the string used to identify the lease. Please make sure to group by name.",
+      "labels": [
+        "name"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/metrics/leaderelection.go"
+    },
+    {
+      "name": "promhttp_metric_handler_errors_total",
+      "type": "counter",
+      "help": "Total number of internal errors encountered by the promhttp metric handler.",
+      "labels": [
+        "cause"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promhttp/http.go"
+    },
+    {
+      "name": "promhttp_metric_handler_requests_in_flight",
+      "type": "gauge",
+      "help": "Current number of scrapes being served.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promhttp/http.go"
+    },
+    {
+      "name": "promhttp_metric_handler_requests_total",
+      "type": "counter",
+      "help": "Total number of scrapes by HTTP status code.",
+      "labels": [
+        "code"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promhttp/http.go"
+    },
+    {
+      "name": "random_numbers",
+      "type": "histogram",
+      "help": "A histogram of normally distributed random numbers.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/prometheus/promauto/auto.go"
+    },
+    {
+      "name": "rest_client_requests_total",
+      "type": "counter",
+      "help": "Number of HTTP requests, partitioned by status code, method, and host.",
+      "labels": [
+        "code",
+        "method",
+        "host"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.22.4/pkg/metrics/client_go_adapter.go"
+    },
+    {
+      "name": "rpc_durations_histogram_seconds",
+      "type": "histogram",
+      "help": "RPC latency distributions.",
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/random/main.go"
+    },
+    {
+      "name": "rpc_durations_seconds",
+      "type": "summary",
+      "help": "RPC latency distributions.",
+      "labels": [
+        "service"
+      ],
+      "source": ".gomod-cache/github.com/prometheus/client_golang@v1.23.2/examples/random/main.go"
+    }
+  ],
+  "runtime_dependencies": [
+    {
+      "name": "Redis",
+      "type": "cache",
+      "source": "ray-operator/controllers/ray/raycluster_controller.go:1551",
+      "evidence": "uri:redis://",
+      "required": true
+    },
+    {
+      "name": "MinIO/S3",
+      "type": "object-storage",
+      "source": "historyserver/config/minio.yaml",
+      "evidence": "env:MINIO_ROOT_USER",
+      "required": true
+    },
+    {
+      "name": "S3",
+      "type": "object-storage",
+      "source": "historyserver/config/historyserver.yaml",
+      "evidence": "env:S3_BUCKET",
+      "required": true
+    },
+    {
+      "name": "kuberay-apiserver-service",
+      "type": "service",
+      "source": "dashboard/demo/test-sdk.py:4",
+      "evidence": "dns:kuberay-apiserver-service.default.svc.cluster.local",
+      "required": true
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "apiserver/pkg/util/cluster.go:759"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "apiserver/pkg/util/config.go:19"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "issuer",
+      "source": "ray-operator/config/certmanager/certificate.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "certificate",
+      "source": "ray-operator/config/certmanager/certificate.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "validatingwebhookconfiguration",
+      "source": "ray-operator/config/default-with-webhooks/webhookcainjection_patch.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "service",
+      "source": "ray-operator/config/webhook/service.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "ray-operator/controllers/ray/authentication_controller.go:657"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "role",
+      "source": "scripts/tmp/leader_election_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/ray_raycronjob_editor_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/ray_raycronjob_viewer_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/ray_rayjob_editor_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/ray_rayjob_viewer_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/ray_rayservice_editor_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/ray_rayservice_viewer_role.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
+      "source": "scripts/tmp/role.yaml"
+    },
+    {
+      "label": "prometheus.io/port",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "apiserver/deploy/base/insecure/apiserver.yaml"
+    },
+    {
+      "label": "prometheus.io/port",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "apiserver/deploy/base/secure/apiserver.yaml"
+    },
+    {
+      "label": "prometheus.io/port",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "ray-operator/config/manager/service.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "apiserver/deploy/base/insecure/apiserver.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "apiserver/deploy/base/secure/apiserver.yaml"
+    },
+    {
+      "label": "prometheus.io/scrape",
+      "integration": "Prometheus",
+      "type": "annotation",
+      "context": "service",
+      "source": "ray-operator/config/manager/service.yaml"
+    }
+  ],
+  "python_k8s_calls": [
+    {
+      "api": "CRD",
+      "operation": "kind_ref",
+      "resource": "RayCluster",
+      "source": "clients/python-client/examples/use-raw-config_map_with-api.py:41"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "compute_template",
+      "source": "dashboard/demo/test-sdk.py:7"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "config_map",
+      "source": "clients/python-client/examples/use-raw-config_map_with-api.py:111"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "ray_cluster",
+      "source": "clients/python-client/examples/complete-example.py:42"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "config_map",
+      "source": "clients/python-client/examples/use-raw-config_map_with-api.py:191"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "ray_cluster",
+      "source": "clients/python-client/examples/complete-example.py:115"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "checkpoint",
+      "source": "ray-operator/config/samples/pytorch-resnet-image-classifier/fine-tune-pytorch-resnet-image-classifier.py:113"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "cluster",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:206"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "cluster_status",
+      "source": "clients/python-apiserver-client/src/python_apiserver_client/kuberay_apis.py:228"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "context",
+      "source": "ray-operator/config/samples/pytorch-mnist/ray_train_pytorch_mnist.py:100"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "custom_object_status",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:142"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "dataset_shard",
+      "source": "ray-operator/config/samples/pytorch-text-classifier/fine-tune-pytorch-text-classifier.py:94"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "device",
+      "source": "ray-operator/config/samples/pytorch-resnet-image-classifier/fine-tune-pytorch-resnet-image-classifier.py:106"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "job_status",
+      "source": "clients/python-client/python_client/kuberay_job_api.py:142"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "node_ip_address",
+      "source": "clients/python-client/examples/use-raw-config_map_with-api.py:35"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pull",
+      "source": "scripts/changelog-generator.py:12"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "ray_cluster",
+      "source": "clients/python-client/examples/use-director.py:61"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "ray_cluster_status",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:188"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "repo",
+      "source": "scripts/changelog-generator.py:9"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "blobs",
+      "source": "ray-operator/config/samples/ray-data-image-resize/ray_data_image_resize.py:20"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "compute_templates_namespace",
+      "source": "dashboard/demo/test-sdk.py:12"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "pod",
+      "source": "clients/python-client/examples/use-raw-config_map_with-api.py:149"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "ray_clusters",
+      "source": "clients/python-client/examples/complete-example.py:97"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "patch",
+      "resource": "ray_cluster",
+      "source": "clients/python-client/examples/complete-example.py:80"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "create",
+      "resource": "custom_object",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:231"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "delete",
+      "resource": "custom_object",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:260"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "get",
+      "resource": "custom_object",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:104"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "list",
+      "resource": "custom_object",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:71"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "patch",
+      "resource": "custom_object",
+      "source": "clients/python-client/python_client/kuberay_cluster_api.py:297"
+    },
+    {
+      "api": "kubernetes",
+      "operation": "import",
+      "resource": "",
+      "source": "clients/python-client/examples/use-raw-config_map_with-api.py:7"
+    }
+  ],
+  "component_refs": [
+    {
+      "target": "vllm",
+      "type": "import",
+      "source": "ray-operator/config/samples/vllm/serve_tpu.py",
+      "evidence": "python import: vllm"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "moderate",
+    "dockerfiles": "rich",
+    "external_connections": "rich",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "rich",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "rich",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "moderate",
+    "secrets": "sparse",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "moderate"
+  },
+  "summary": "kuberay is a Kubernetes component. deploying 3 workload(s) (kuberay-operator, kuberay-operator, kuberay-operator) with 3 container(s). watching 11 resource type(s). exposing 2 service(s) on ports: 443, 8080. Dockerfile EXPOSE ports: 3000. with 5 webhook(s) (3 validating, 2 mutating). connecting to external services: azure-blob, gcs, grpc, requests, urllib. runtime dependencies: MinIO/S3, Redis, S3, kuberay-apiserver-service. exposing 31 Prometheus metrics. Python k8s client with 28 API call(s) and 1 CRD kind reference(s). integrates with Prometheus, management relationship via labels/annotations. references components: vllm (import).",
+  "go_ast_mode": "full"
+}
