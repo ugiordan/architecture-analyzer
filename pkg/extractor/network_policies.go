@@ -260,3 +260,13 @@ func extractDirectionalRules(v interface{}, directionKey string) []map[string]in
 	}
 	return result
 }
+
+
+// extractAllNetworkPolicies combines YAML-extracted and Go-extracted NetworkPolicies.
+func extractAllNetworkPolicies(repoPath string) []NetworkPolicy {
+	policies := extractNetworkPolicies(repoPath)
+	if goNPs := extractGoNetworkPolicies(repoPath); len(goNPs) > 0 {
+		policies = append(policies, goNPs...)
+	}
+	return policies
+}
