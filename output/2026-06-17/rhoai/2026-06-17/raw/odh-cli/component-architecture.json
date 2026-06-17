@@ -1,0 +1,805 @@
+{
+  "component": "odh-cli",
+  "repo": "opendatahub-io/odh-cli",
+  "commit_sha": "7838cb8a6f028719249cd9df8ab0b4505b6c49df",
+  "extracted_at": "2026-06-17T04:53:51Z",
+  "analyzer_version": "0.1.0",
+  "schema_version": "2",
+  "rbac": {},
+  "dependencies": {
+    "go_version": "1.26",
+    "go_modules": [
+      {
+        "module": "github.com/blang/semver/v4",
+        "version": "v4.0.0"
+      },
+      {
+        "module": "github.com/fatih/color",
+        "version": "v1.18.0"
+      },
+      {
+        "module": "github.com/go-viper/mapstructure/v2",
+        "version": "v2.5.0"
+      },
+      {
+        "module": "github.com/invopop/jsonschema",
+        "version": "v0.14.0"
+      },
+      {
+        "module": "github.com/itchyny/gojq",
+        "version": "v0.12.18"
+      },
+      {
+        "module": "github.com/olekukonko/tablewriter",
+        "version": "v1.1.3"
+      },
+      {
+        "module": "github.com/onsi/gomega",
+        "version": "v1.39.1",
+        "category": "testing",
+        "purpose": "Test matcher library"
+      },
+      {
+        "module": "github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth",
+        "version": "v0.1.1-0.20260504121932-5bc4a11a6a87"
+      },
+      {
+        "module": "github.com/operator-framework/api",
+        "version": "v0.39.0",
+        "category": "operator-tooling",
+        "purpose": "Operator Framework (OLM, SDK)"
+      },
+      {
+        "module": "github.com/operator-framework/operator-lifecycle-manager",
+        "version": "v0.40.0",
+        "category": "operator-tooling",
+        "purpose": "Operator Framework (OLM, SDK)"
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.10.2"
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.10"
+      },
+      {
+        "module": "github.com/stretchr/testify",
+        "version": "v1.11.1",
+        "category": "testing",
+        "purpose": "Test assertions library"
+      },
+      {
+        "module": "golang.org/x/sync",
+        "version": "v0.19.0"
+      },
+      {
+        "module": "golang.org/x/term",
+        "version": "v0.40.0"
+      },
+      {
+        "module": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "category": "serialization",
+        "purpose": "YAML parser"
+      },
+      {
+        "module": "k8s.io/api",
+        "version": "v0.35.2",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apiextensions-apiserver",
+        "version": "v0.35.2",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/apimachinery",
+        "version": "v0.35.2",
+        "category": "k8s-api",
+        "purpose": "Kubernetes API types"
+      },
+      {
+        "module": "k8s.io/cli-runtime",
+        "version": "v0.35.2"
+      },
+      {
+        "module": "k8s.io/client-go",
+        "version": "v0.35.2",
+        "category": "k8s-client",
+        "purpose": "Kubernetes API client"
+      },
+      {
+        "module": "sigs.k8s.io/controller-runtime",
+        "version": "v0.23.3",
+        "category": "controller-framework",
+        "purpose": "Kubernetes controller framework"
+      },
+      {
+        "module": "sigs.k8s.io/yaml",
+        "version": "v1.6.0",
+        "category": "serialization",
+        "purpose": "Kubernetes YAML parser"
+      }
+    ],
+    "python_packages": [
+      {
+        "name": "calver",
+        "version": "==2025.10.20",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "certifi",
+        "version": "==2026.1.4",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "==3.4.4",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "cython",
+        "version": "==3.2.4",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "durationpy",
+        "version": "==0.10",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "flit-core",
+        "version": "==3.12.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "hatch-vcs",
+        "version": "==0.5.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "hatchling",
+        "version": "==1.28.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "idna",
+        "version": "==3.11",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "kubernetes",
+        "version": "==35.0.0",
+        "category": "k8s-client",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "oauthlib",
+        "version": "==3.3.1",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "packaging",
+        "version": "==26.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "pathspec",
+        "version": "==1.0.4",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "pluggy",
+        "version": "==1.6.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "python-dateutil",
+        "version": "==2.9.0.post0",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "pyyaml",
+        "version": "==6.0.3",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "requests",
+        "version": "==2.32.5",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "requests-oauthlib",
+        "version": "==2.0.0",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "setuptools",
+        "version": "==81.0.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "setuptools-scm",
+        "version": "==7.1.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "six",
+        "version": "==1.17.0",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "trove-classifiers",
+        "version": "==2026.1.14.14",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "typing-extensions",
+        "version": "==4.15.0",
+        "source": "requirements-build.txt",
+        "required": true
+      },
+      {
+        "name": "urllib3",
+        "version": "==2.6.3",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "websocket-client",
+        "version": "==1.9.0",
+        "source": "requirements.txt",
+        "required": true
+      },
+      {
+        "name": "wheel",
+        "version": "==0.46.3",
+        "source": "requirements-build.txt",
+        "required": true
+      }
+    ],
+    "internal_odh": [
+      {
+        "component": "opendatahub-operator",
+        "interaction": "Go module dependency: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth"
+      }
+    ]
+  },
+  "dockerfiles": [
+    {
+      "path": "Dockerfile",
+      "base_image": "registry.access.redhat.com/ubi9/ubi:latest",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset:1.26"
+      ],
+      "stages": 2,
+      "user": "root",
+      "issues": [
+        "Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest",
+        "Container runs as root user"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "/workspace/bin/kubectl-odh"
+          ],
+          "destination": "/opt/rhai-cli/bin/rhai-cli",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "."
+          ]
+        },
+        {
+          "sources": [
+            "/opt/rhai-upgrade-helpers"
+          ],
+          "destination": "/opt/rhai-upgrade-helpers",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "path": "Dockerfile.konflux",
+      "base_image": "registry.redhat.io/openshift4/ose-cli-rhel9:v4.21.0",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset:1.26@sha256:ebcc3560ec892af7c081bcfbef9959fe54c4b1603dc1f6c6e1494992f6c71f89",
+        "registry.access.redhat.com/ubi9/go-toolset:1.26@sha256:ebcc3560ec892af7c081bcfbef9959fe54c4b1603dc1f6c6e1494992f6c71f89"
+      ],
+      "stages": 3,
+      "user": "root",
+      "issues": [
+        "Container runs as root user"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "./rhoai-upgrade-helpers"
+          ],
+          "destination": "/opt/rhai-upgrade-helpers"
+        },
+        {
+          "sources": [
+            "./requirements.txt"
+          ],
+          "destination": "./requirements.txt"
+        },
+        {
+          "sources": [
+            "/workspace/yq"
+          ],
+          "destination": "/usr/bin/yq",
+          "from_stage": "yq-builder",
+          "original_sources": [
+            "./yq"
+          ]
+        },
+        {
+          "sources": [
+            "/workspace/bin/kubectl-odh"
+          ],
+          "destination": "/opt/rhai-cli/bin/rhai-cli",
+          "from_stage": "builder",
+          "original_sources": [
+            "go.mod",
+            "go.sum",
+            "."
+          ]
+        }
+      ]
+    }
+  ],
+  "helm": {
+    "chart_name": "rhai-on-openshift-chart",
+    "chart_version": "3.4.0"
+  },
+  "prometheus_metrics": [
+    {
+      "name": "catalog_source_count",
+      "type": "gauge",
+      "help": "Number of catalog sources",
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "catalog_source_snapshots_total",
+      "type": "counter",
+      "help": "The number of times the catalog operator has requested a snapshot of data from a catalog source",
+      "labels": [
+        "NamespaceLabel",
+        "NameLabel"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "catalogsource_ready",
+      "type": "gauge",
+      "help": "State of a CatalogSource. 1 indicates that the CatalogSource is in a READY state. 0 indicates CatalogSource is in a Non READY state.",
+      "labels": [
+        "NamespaceLabel",
+        "NameLabel"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "certwatcher_read_certificate_errors_total",
+      "type": "counter",
+      "help": "Total number of certificate read errors",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/certwatcher/metrics/metrics.go"
+    },
+    {
+      "name": "certwatcher_read_certificate_total",
+      "type": "counter",
+      "help": "Total number of certificate reads",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/certwatcher/metrics/metrics.go"
+    },
+    {
+      "name": "controller_reconcile_",
+      "type": "counter",
+      "labels": [
+        "NamespaceLabel",
+        "NameLabel"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/experimental_register.go"
+    },
+    {
+      "name": "controller_runtime_active_workers",
+      "type": "gauge",
+      "help": "Number of currently used workers per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_conversion_webhook_panics_total",
+      "type": "counter",
+      "help": "Total number of conversion webhook panics",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/webhook/conversion/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_max_concurrent_reconciles",
+      "type": "gauge",
+      "help": "Maximum number of concurrent reconciles per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_errors_total",
+      "type": "counter",
+      "help": "Total number of reconciliation errors per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_panics_total",
+      "type": "counter",
+      "help": "Total number of reconciliation panics per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_time_seconds",
+      "type": "histogram",
+      "help": "Length of time per reconciliation per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_timeouts_total",
+      "type": "counter",
+      "help": "Total number of reconciliation timeouts per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_reconcile_total",
+      "type": "counter",
+      "help": "Total number of reconciliations per controller",
+      "labels": [
+        "controller",
+        "result"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_terminal_reconcile_errors_total",
+      "type": "counter",
+      "help": "Total number of terminal reconciliation errors per controller",
+      "labels": [
+        "controller"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/internal/controller/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_latency_seconds",
+      "type": "histogram",
+      "help": "Histogram of the latency of processing admission requests",
+      "labels": [
+        "webhook"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/webhook/internal/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_panics_total",
+      "type": "counter",
+      "help": "Total number of webhook panics",
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/webhook/admission/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_requests_in_flight",
+      "type": "gauge",
+      "help": "Current number of admission requests being served.",
+      "labels": [
+        "webhook"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/webhook/internal/metrics/metrics.go"
+    },
+    {
+      "name": "controller_runtime_webhook_requests_total",
+      "type": "counter",
+      "help": "Total number of admission requests by HTTP status code.",
+      "labels": [
+        "webhook",
+        "code"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/webhook/internal/metrics/metrics.go"
+    },
+    {
+      "name": "csv_abnormal",
+      "type": "gauge",
+      "help": "CSV is not installed",
+      "labels": [
+        "NamespaceLabel",
+        "NameLabel",
+        "VersionLabel",
+        "PhaseLabel",
+        "ReasonLabel"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "csv_count",
+      "type": "gauge",
+      "help": "Number of CSVs successfully registered",
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "csv_succeeded",
+      "type": "gauge",
+      "help": "Successful CSV install",
+      "labels": [
+        "NamespaceLabel",
+        "NameLabel",
+        "VersionLabel"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "csv_upgrade_count",
+      "type": "counter",
+      "help": "Monotonic count of CSV upgrades",
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "install_plan_count",
+      "type": "gauge",
+      "help": "Number of install plans",
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "installplan_warnings_total",
+      "type": "counter",
+      "help": "monotonic count of resources that generated warnings when applied as part of an InstallPlan (for example, due to deprecation)",
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "leader_election_master_status",
+      "type": "gauge",
+      "help": "Gauge of if the reporting system is master of the relevant lease, 0 indicates backup, 1 indicates master. 'name' is the string used to identify the lease. Please make sure to group by name.",
+      "labels": [
+        "name"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/metrics/leaderelection.go"
+    },
+    {
+      "name": "leader_election_slowpath_total",
+      "type": "counter",
+      "help": "Total number of slow path exercised in renewing leader leases. 'name' is the string used to identify the lease. Please make sure to group by name.",
+      "labels": [
+        "name"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/metrics/leaderelection.go"
+    },
+    {
+      "name": "olm_resolution_duration_seconds",
+      "type": "summary",
+      "help": "The duration of a dependency resolution attempt",
+      "labels": [
+        "Outcome"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "rest_client_requests_total",
+      "type": "counter",
+      "help": "Number of HTTP requests, partitioned by status code, method, and host.",
+      "labels": [
+        "code",
+        "method",
+        "host"
+      ],
+      "source": ".gomod-cache/sigs.k8s.io/controller-runtime@v0.23.3/pkg/metrics/client_go_adapter.go"
+    },
+    {
+      "name": "subscription_count",
+      "type": "gauge",
+      "help": "Number of subscriptions",
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    },
+    {
+      "name": "subscription_sync_total",
+      "type": "counter",
+      "help": "Monotonic count of subscription syncs",
+      "labels": [
+        "NameLabel",
+        "InstalledLabel",
+        "ChannelLabel",
+        "PackageLabel",
+        "ApprovalLabel"
+      ],
+      "source": ".gomod-cache/github.com/operator-framework/operator-lifecycle-manager@v0.40.0/pkg/metrics/metrics.go"
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "pkg/deps/install.go:48"
+    },
+    {
+      "label": "kueue.x-k8s.io/queue-name",
+      "integration": "Kueue",
+      "type": "label",
+      "context": "source-code",
+      "source": "pkg/constants/constants.go:34"
+    },
+    {
+      "label": "serving.kserve.io/inferenceservice",
+      "integration": "KServe",
+      "type": "label",
+      "context": "source-code",
+      "source": "pkg/migrate/actions/trustyai/deadlock/run_task.go:18"
+    }
+  ],
+  "component_refs": [
+    {
+      "target": "data-science-pipelines",
+      "type": "import",
+      "source": "pkg/lint/command.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/datasciencepipelines"
+    },
+    {
+      "target": "data-science-pipelines",
+      "type": "provider",
+      "source": "pkg/lint/checks/components/datasciencepipelines",
+      "evidence": "directory: pkg/lint/checks/components/datasciencepipelines"
+    },
+    {
+      "target": "kserve",
+      "type": "import",
+      "source": "pkg/lint/command.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/kserve"
+    },
+    {
+      "target": "kserve",
+      "type": "provider",
+      "source": "pkg/lint/checks/components/kserve",
+      "evidence": "directory: pkg/lint/checks/components/kserve"
+    },
+    {
+      "target": "kueue",
+      "type": "import",
+      "source": "pkg/lint/checks/components/kueue/kueue.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/kueue/discovery"
+    },
+    {
+      "target": "kueue",
+      "type": "provider",
+      "source": "pkg/lint/checks/components/kueue",
+      "evidence": "directory: pkg/lint/checks/components/kueue"
+    },
+    {
+      "target": "llama-stack",
+      "type": "import",
+      "source": "pkg/lint/command.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/llamastack"
+    },
+    {
+      "target": "llama-stack",
+      "type": "provider",
+      "source": "pkg/lint/checks/components/llamastack",
+      "evidence": "directory: pkg/lint/checks/components/llamastack"
+    },
+    {
+      "target": "modelmesh",
+      "type": "import",
+      "source": "pkg/lint/command.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/modelmesh"
+    },
+    {
+      "target": "modelmesh",
+      "type": "provider",
+      "source": "pkg/lint/checks/components/modelmesh",
+      "evidence": "directory: pkg/lint/checks/components/modelmesh"
+    },
+    {
+      "target": "notebooks",
+      "type": "import",
+      "source": "pkg/backup/command.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/backup/dependencies/notebooks"
+    },
+    {
+      "target": "opendatahub-operator",
+      "type": "import",
+      "source": "pkg/events/filter.go",
+      "evidence": "go import: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth"
+    },
+    {
+      "target": "training-operator",
+      "type": "import",
+      "source": "pkg/lint/command.go",
+      "evidence": "go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/trainingoperator"
+    },
+    {
+      "target": "training-operator",
+      "type": "provider",
+      "source": "pkg/lint/checks/components/trainingoperator",
+      "evidence": "directory: pkg/lint/checks/components/trainingoperator"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "rich",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "moderate",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "rich",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "odh-cli is a Kubernetes component. 26 Python package dependencies (26 required), categories: 1 k8s-client. exposing 31 Prometheus metrics. integrates with KServe, Kueue, management relationship via labels/annotations. references components: data-science-pipelines (import, provider), kserve (import, provider), kueue (import, provider), llama-stack (import, provider), modelmesh (import, provider), notebooks (import), opendatahub-operator (import), training-operator (import, provider).",
+  "go_ast_mode": "full"
+}
