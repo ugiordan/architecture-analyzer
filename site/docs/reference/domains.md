@@ -10,6 +10,7 @@ The domain analysis framework provides pluggable analysis capabilities on top of
 | `testing` | Go | security | 4 rules (CGA-T01 to CGA-T04) |
 | `upgrade` | Go | None | 4 rules (CGA-U01 to CGA-U04) |
 | `architecture` | Python | None | 4 rules (CGA-A01 to CGA-A04) |
+| `netpolicy` | Go, Python | None | 2 rules (CGA-N01 to CGA-N02) |
 
 Additionally, the base query engine provides 2 core queries (CGA-001, CGA-002) that run independently of domains.
 
@@ -135,6 +136,33 @@ CGA-A02: Function _get_client calls external SDK: Elasticsearch
 CGA-A02: Function _connect calls external SDK: MilvusClient
 CGA-A03: Factory function get_online_store dispatches to: RedisOnlineStore, DynamoDBOnlineStore
 CGA-A04: Abstract base StreamProcessor has no implementations found in analyzed sources
+```
+
+## Network Policy Domain
+
+### How it works
+
+The netpolicy domain traces NetworkPolicy trust chains by combining YAML-extracted and programmatically-created (Go source) NetworkPolicies. It identifies:
+
+- **Bare namespaceSelectors**: NetworkPolicies that allow ingress from matching namespaces without podSelector or port restrictions
+- **Tenant namespace reach**: namespaceSelector labels applied to namespaces running tenant workloads (notebooks, pipelines, model serving) that can reach control plane services
+
+### Queries
+
+| Query ID | Name | Severity | Description |
+|----------|------|----------|-------------|
+| CGA-N01 | netpol-bare-namespace-selector | High | NetworkPolicy allows ingress via namespaceSelector without podSelector or port restrictions |
+| CGA-N02 | netpol-tenant-reach | High | Tenant workload namespaces can reach control plane services |
+
+### Example output (opendatahub-operator)
+
+```
+CGA-N01: NetworkPolicy "applications-namespace" allows ingress from namespaces matching
+  labels.ODH.OwnedNamespace=labels.True without podSelector or port restrictions.
+  (internal/controller/dscinitialization/utils.go:160)
+
+CGA-N02: NetworkPolicy "security-dashboard" allows ingress from tenant namespace.
+  Restriction: ports. Tenant workloads can reach control plane services.
 ```
 
 ## Using Domains

@@ -15,7 +15,7 @@ A static analysis tool that extracts architecture data from Kubernetes/OpenShift
 - **26 architecture extractors** covering CRDs, RBAC, deployments, services, network policies, controller watches, dependencies, secrets, Helm charts, Dockerfiles, webhooks, configmaps, HTTP endpoints, ingress, external connections (Go + Python), feature gates, cache architecture, operator config constants, reconciliation sequences, Prometheus metrics, status conditions, platform detection, Go CRD extraction, webhook behavioral analysis, and programmatic resource operations
 - **Go AST extraction** via `go/packages` for operators that `.gitignore` generated manifests. Extracts CRDs from Go types with kubebuilder markers, analyzes webhook method bodies for field-level mutations and validations, and detects programmatic `client.Create/Update/Patch/Delete` calls in reconcile methods. Security-hardened for untrusted repo analysis (CGO_ENABLED=0, module isolation, boundedFileSystem).
 - **Code property graph** with multi-language parsing (Go, Python, TypeScript, Rust), typed node model, edge confidence classification, intraprocedural data flow, control flow graphs, Python class hierarchy extraction (NodeClass with BaseClasses and EdgeContains), and two-phase taint propagation
-- **24 security queries** across 4 domains (security, testing, upgrade, architecture) detecting webhook gaps, RBAC bugs, secret leaks, taint paths, complexity hotspots, class hierarchies, factory patterns, external API surfaces, and more
+- **26 security queries** across 5 domains (security, testing, upgrade, architecture, netpolicy) detecting webhook gaps, RBAC bugs, secret leaks, taint paths, complexity hotspots, class hierarchies, factory patterns, external API surfaces, and more
 - **SARIF ingestion** mapping external scanner findings (Semgrep, gosec, etc.) to CPG nodes for unified analysis
 - **Structural diff engine** comparing code graphs across versions to detect regressions
 - **7 renderers** producing Mermaid diagrams, Structurizr C4 DSL, ASCII security views, and structured markdown reports
@@ -50,7 +50,7 @@ graph LR
         DF[Data Flow Analysis]
         CFG[Control Flow Graphs]
         TAINT[Taint Propagation Engine]
-        DOMAINS[Domain Queries<br/>Security, Testing, Upgrade, Architecture]
+        DOMAINS[Domain Queries<br/>Security, Testing, Upgrade,<br/>Architecture, NetPolicy]
     end
 
     subgraph Outputs
@@ -360,6 +360,13 @@ Compare two code-graph.json files to detect regressions: new functions, removed 
 | Factory Dispatch | CGA-A03 | Info | Factory functions dispatching to multiple implementation types |
 | Unimplemented Interface | CGA-A04 | Low | Abstract bases with no implementations found in analyzed sources |
 
+### Network Policy Domain (2 rules)
+
+| Rule | ID | Severity | Description |
+|------|----|----------|-------------|
+| Bare Namespace Selector | CGA-N01 | High | NetworkPolicy allows ingress via namespaceSelector without podSelector or port restrictions |
+| Tenant Namespace Reach | CGA-N02 | High | Tenant workload namespaces (notebooks, pipelines) can reach control plane services |
+
 ## Renderers
 
 | Renderer | Output | Description |
@@ -398,6 +405,7 @@ architecture-analyzer/
       testing/             # 4 testing queries
       upgrade/             # 4 upgrade queries
       architecture/        # 4 architecture queries
+      netpolicy/           # 2 network policy queries
     arch/                  # Architecture data structures
     config/                # Configuration types
   contracts/
