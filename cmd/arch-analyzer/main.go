@@ -28,7 +28,7 @@ import (
 	"github.com/ugiordan/architecture-analyzer/pkg/validator"
 )
 
-var version = "0.2.0"
+var version = "dev"
 
 func init() {
 	extractor.AnalyzerVersion = version
