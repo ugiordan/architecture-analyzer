@@ -2,7 +2,6 @@ package extractor
 
 import (
 	"os"
-	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -134,26 +133,7 @@ func extractRBAC(repoPath string) *RBACData {
 
 // findGoFiles finds all .go files under the repo path, skipping non-source directories.
 func findGoFiles(repoPath string) []string {
-	var files []string
-	_ = filepath.WalkDir(repoPath, func(path string, d os.DirEntry, err error) error {
-		if err != nil {
-			return nil
-		}
-		if d.Type()&os.ModeSymlink != 0 {
-			if d.IsDir() {
-				return filepath.SkipDir
-			}
-			return nil
-		}
-		if d.IsDir() && isExcludedDir(d.Name(), nil) {
-			return filepath.SkipDir
-		}
-		if !d.IsDir() && strings.HasSuffix(path, ".go") {
-			files = append(files, path)
-		}
-		return nil
-	})
-	return files
+	return findFiles(repoPath, []string{"**/*.go"})
 }
 
 // parseKubebuilderMarker parses key=value pairs from a kubebuilder RBAC marker.

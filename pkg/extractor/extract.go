@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
+
+	"golang.org/x/sync/errgroup"
 )
 
 // AnalyzerVersion is the version of the analyzer, set by the CLI entry point.
@@ -46,10 +49,11 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 		modulePrefixes = DefaultModulePrefixes()
 	}
 
-	// Load Go packages for AST-based extraction (requires go.mod).
-	// Returns nil for non-Go repos, "full" when type info is available,
-	// "syntax-only" when >50% of packages have type-checking errors.
-	goPackages := loadGoPackages(repoPath)
+	active, err := resolveExtractorGroups(opts.Extractors)
+	if err != nil {
+		return nil, err
+	}
+	run := func(group string) bool { return shouldRun(active, group) }
 
 	arch := &ComponentArchitecture{
 		Component:       componentName,
@@ -59,23 +63,40 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 		ExtractedAt:     time.Now().UTC().Format(time.RFC3339),
 		AnalyzerVersion: AnalyzerVersion,
 		SchemaVersion:   "2",
-		CRDs:            extractCRDs(absPath),
-		RBAC:            extractRBAC(absPath),
-		Services:        extractServices(absPath),
-		Deployments:     extractDeployments(absPath),
-		NetworkPolicies: extractAllNetworkPolicies(absPath),
-		ControllerWatch: extractControllerWatches(absPath),
-		Dependencies:    extractDependencies(absPath, modulePrefixes),
-		Secrets:         extractSecrets(absPath),
-		Dockerfiles:     extractDockerfiles(absPath),
-		Helm:            extractHelm(absPath),
-		Webhooks:        extractWebhooks(absPath),
-		ConfigMaps:      extractConfigMaps(absPath),
-		HTTPEndpoints:   extractHTTPEndpoints(absPath),
-		IngressRouting:      extractIngress(absPath),
-		ExternalConnections: extractAllExternalConnections(absPath),
-		FeatureGates:        extractFeatureGates(absPath),
-		RuntimeDependencies: extractRuntimeDependencies(absPath),
+	}
+
+	ctx := &extractContext{
+		absPath:        absPath,
+		componentName:  componentName,
+		modulePrefixes: modulePrefixes,
+		opts:           opts,
+	}
+
+	// ── Phase 1: parallel extraction (one goroutine per group) ───────
+	// Each group writes to distinct arch fields — no cross-group data races.
+	g := new(errgroup.Group)
+	g.SetLimit(runtime.NumCPU())
+
+	// Load Go packages for AST-based extraction (requires go.mod).
+	// Returns nil for non-Go repos, "full" when type info is available,
+	// "syntax-only" when >50% of packages have type-checking errors.
+	var goPackages *GoPackageSet
+	if needsGoPackages(active) {
+		g.Go(func() error { goPackages = loadGoPackages(repoPath); return nil })
+	}
+	for _, grp := range allGroups {
+		if run(grp.name) {
+			g.Go(func() error { grp.extract(ctx, arch); return nil })
+		}
+	}
+	_ = g.Wait()
+
+	// ── Phase 2: serial enrichment (depends on arch) ─────────────────
+	if run(GroupOperator) {
+		arch.OperatorConfig = extractOperatorConfig(absPath, ctx.statusConditionConstNames)
+	}
+	if run(GroupKustomize) {
+		mergeKustomizeResources(arch, ctx.kustomizeResults)
 	}
 
 	// Go AST enrichment: set mode/warning and merge AST-extracted data
@@ -85,54 +106,55 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 		arch.GoASTMode = goPackages.Mode
 		arch.GoASTWarning = goPackages.Warning
 	}
-	if goPackages != nil && goPackages.Mode == "full" {
+	if run(GroupCRDs) && goPackages != nil && goPackages.Mode == "full" {
 		goCRDs := extractCRDsFromGo(goPackages)
 		arch.CRDs = mergeCRDs(arch.CRDs, goCRDs)
 	}
 
 	// Python source port detection: scan .py files for listening ports
-	if pythonPorts := extractPythonPorts(absPath); len(pythonPorts) > 0 {
-		arch.Services = append(arch.Services, pythonPorts...)
-	}
-
-	// Cache analysis runs after watches and deployments are extracted
-	arch.CacheConfig = extractCacheConfig(absPath, arch.ControllerWatch, arch.Deployments)
-
-	// Kustomize build: render overlays and merge rendered resources into extraction.
-	// Rendered resources replace or supplement raw-scanned ones, giving us fully
-	// resolved manifests with patches and substitutions applied.
-	kustomizeResults := kustomizeBuildOverlays(absPath, opts.OverlayPreference)
-	mergeKustomizeResources(arch, kustomizeResults)
-
-	// Extract webhook server port from Go source (controller-runtime webhook.Options).
-	// Runs AFTER kustomize merge so rendered webhooks also get the port.
-	// If not explicitly configured, controller-runtime defaults to 9443.
-	webhookPort := extractWebhookServerPort(absPath)
-	if webhookPort == 0 && len(arch.Webhooks) > 0 {
-		webhookPort = 9443 // controller-runtime default
-	}
-	if webhookPort > 0 {
-		for i := range arch.Webhooks {
-			if arch.Webhooks[i].Port == 0 {
-				arch.Webhooks[i].Port = webhookPort
-			}
+	if run(GroupPython) || run(GroupK8sCore) {
+		if pythonPorts := extractPythonPorts(absPath); len(pythonPorts) > 0 {
+			arch.Services = append(arch.Services, pythonPorts...)
 		}
 	}
 
-	// Go source enrichment: handler mapping, data_read, enable_condition.
-	// Runs after kustomize merge and port assignment.
-	enrichWebhooks(arch.Webhooks, absPath)
+	// Cache analysis runs after watches and deployments are extracted
+	if run(GroupControllers) {
+		arch.CacheConfig = extractCacheConfig(absPath, arch.ControllerWatch, arch.Deployments)
+	}
 
-	// Go AST webhook behavior: extract field-level mutations and validations
-	// from Default/Validate* methods on kubebuilder webhook types.
-	if goPackages != nil && goPackages.Mode == "full" {
-		behaviors := extractWebhookBehavior(goPackages)
-		mergeWebhookBehavior(arch, behaviors)
+	// ── Phase 3: webhook enrichment ──────────────────────────────────
+	if run(GroupWebhooks) {
+		// Extract webhook server port from Go source (controller-runtime webhook.Options).
+		// Runs AFTER kustomize merge so rendered webhooks also get the port.
+		// If not explicitly configured, controller-runtime defaults to 9443.
+		webhookPort := extractWebhookServerPort(absPath)
+		if webhookPort == 0 && len(arch.Webhooks) > 0 {
+			webhookPort = 9443 // controller-runtime default
+		}
+		if webhookPort > 0 {
+			for i := range arch.Webhooks {
+				if arch.Webhooks[i].Port == 0 {
+					arch.Webhooks[i].Port = webhookPort
+				}
+			}
+		}
+
+		// Go source enrichment: handler mapping, data_read, enable_condition.
+		// Runs after kustomize merge and port assignment.
+		enrichWebhooks(arch.Webhooks, absPath)
+
+		// Go AST webhook behavior: extract field-level mutations and validations
+		// from Default/Validate* methods on kubebuilder webhook types.
+		if goPackages != nil && goPackages.Mode == "full" {
+			behaviors := extractWebhookBehavior(goPackages)
+			mergeWebhookBehavior(arch, behaviors)
+		}
 	}
 
 	// Go AST resource operations: extract programmatic Create/Update/Patch/Delete
 	// calls from Reconcile methods with resolved type information.
-	if goPackages != nil && goPackages.Mode == "full" {
+	if run(GroupControllers) && goPackages != nil && goPackages.Mode == "full" {
 		resourceOps := extractResourceOps(goPackages)
 		if len(resourceOps) > 0 {
 			arch.ControllerWatch = append(arch.ControllerWatch, ControllerWatch{
@@ -144,80 +166,31 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 		}
 	}
 
-	// Kustomize component discovery (for operator repos with *_support.go files)
-	arch.KustomizeComponents = extractKustomizeComponents(absPath)
-
-	// Serving runtime discovery (KServe/ModelMesh)
-	arch.ServingRuntimes = extractServingRuntimes(absPath)
-
-	// Serving runtime image-to-CRD mapping: scan all YAML and Go source for
-	// ServingRuntime/ClusterServingRuntime/InferenceService container images
-	arch.ServingRuntimeRefs = extractServingRuntimeRefs(absPath)
-
-	// Resource defaults from configmaps (inference config, deployment defaults)
-	arch.ResourceDefaults = extractResourceDefaults(absPath)
-
-	// Availability: PDB and HPA extraction
-	arch.PodDisruptionBudgets = extractPDBs(absPath)
-	arch.HorizontalPodAutoscalers = extractHPAs(absPath)
-
-	// API types: parse *_types.go files for CR struct definitions
-	arch.APITypes = extractAPITypes(absPath)
-
-	// Status conditions: extract condition type/reason constants.
-	// Also returns Go constant names for dedup with operator config.
-	var statusConditionConstNames map[string]bool
-	arch.StatusConditions, statusConditionConstNames = extractStatusConditions(absPath)
-
-	// Operator config: extract const/var blocks (dedup with status conditions)
-	arch.OperatorConfig = extractOperatorConfig(absPath, statusConditionConstNames)
-
-	// Reconcile sequences: extract ordered sub-resource reconciliation steps
-	arch.ReconcileSequences = extractReconcileSequences(absPath)
-
-	// Prometheus metrics: extract metric registrations
-	arch.PrometheusMetrics = extractPrometheusMetrics(absPath)
-
-	// Platform detection: extract capability checks and conditional resource creation
-	arch.PlatformDetection = extractPlatformDetection(absPath)
-
-	// Template file enumeration: list .tmpl files for operators that use
-	// Go templates to define runtime-rendered Kubernetes resources.
-	arch.TemplateFiles = findTemplateFiles(absPath)
-
-	// Label/annotation contracts: detect well-known labels that imply
-	// cross-component integration (Kueue, KServe, Istio, etc.)
-	arch.LabelContracts = extractLabelContracts(absPath)
-
-	// Python k8s API calls: detect kubernetes client usage in Python source
-	// (e.g., codeflare-sdk creating LocalQueue objects via CustomObjectsApi)
-	arch.PythonK8sCalls = extractPythonK8sCalls(absPath)
-
-	// Kustomize overlay cross-references: parse all kustomization.yaml files
-	// to extract resources, patches, generators, and image transforms
-	arch.KustomizeOverlayRefs = extractKustomizeOverlayRefs(absPath)
-
-	// Component cross-references: detect provider/adapter directories referencing
-	// other known components (e.g., llama-stack's providers/remote/inference/vllm/)
-	arch.ComponentRefs = extractComponentRefs(absPath, componentName, opts.KnownComponents)
-
+	// ── Phase 4: final passes ────────────────────────────────────────
 	// Cross-reference pass: link services to deployments, detect runtime deps
 	buildCrossReferences(arch)
-
 	// ConfigMap volume mount correlation: explicit ConfigMap → container links
 	arch.ConfigMapVolumes = extractConfigMapVolumes(arch)
-
 	// Availability assessment: flag deployments missing PDB/HPA
-	assessAvailability(arch)
-
+	if run(GroupAvailability) {
+		assessAvailability(arch)
+	}
 	// Data coverage: assess richness of each section for LLM context
 	arch.DataCoverage = computeDataCoverage(arch)
-
 	// Generate natural-language summary
 	arch.Summary = generateSummary(arch)
-
 	// Normalize output ordering for deterministic JSON
 	SortOutput(arch)
+
+	if len(opts.Extractors) > 0 {
+		var ran []string
+		for _, name := range ExtractorGroupNames() {
+			if active[name] {
+				ran = append(ran, name)
+			}
+		}
+		arch.ExtractorsRun = ran
+	}
 
 	return arch, nil
 }

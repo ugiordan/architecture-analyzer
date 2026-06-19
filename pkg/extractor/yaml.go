@@ -57,6 +57,24 @@ func findYAMLFiles(repoPath string, patterns []string) []string {
 	return findFiles(repoPath, patterns)
 }
 
+// findGoFilesInDirs returns non-test .go files under the given directory prefixes.
+// Each dir is converted to a "dir/**/*.go" glob pattern for FileIndex lookup.
+func findGoFilesInDirs(repoPath string, dirs []string) []string {
+	var patterns []string
+	for _, dir := range dirs {
+		dir = strings.TrimSuffix(dir, "/")
+		patterns = append(patterns, dir+"/**/*.go")
+	}
+	all := findFiles(repoPath, patterns)
+	var result []string
+	for _, f := range all {
+		if !strings.HasSuffix(f, "_test.go") {
+			result = append(result, f)
+		}
+	}
+	return result
+}
+
 // findFiles locates files matching any of the given glob patterns relative to
 // repoPath. Patterns containing "**" are expanded via recursive walk.
 //

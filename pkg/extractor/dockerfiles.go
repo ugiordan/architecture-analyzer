@@ -36,6 +36,15 @@ var (
 	copyRE       = regexp.MustCompile(`(?i)^COPY\s+((?:--\w+(?:=\S+)?\s+)*)(.+)`)
 	addRE        = regexp.MustCompile(`(?i)^ADD\s+((?:--\w+(?:=\S+)?\s+)*)(.+)`)
 	copyFromRE   = regexp.MustCompile(`--from=(\S+)`)
+
+	runRE             = regexp.MustCompile(`(?i)^RUN\s+(.+)`)
+	goBuildRE         = regexp.MustCompile(`go\s+build\b`)
+	goBuildOutputRE   = regexp.MustCompile(`-o\s+(\S+)`)
+	goBuildEntryRE    = regexp.MustCompile(`\s((?:\./)?(?:[\w./-]+\.go|[\w./-]+/\.\.\.|\.(?:/[\w./-]+)+/?))$`)
+	npmBuildRE        = regexp.MustCompile(`(?:npm\s+run|yarn\s+run|yarn|pnpm(?:\s+run)?)\s+(build\S*)`)
+	pipInstallRE      = regexp.MustCompile(`pip3?\s+install\b`)
+	pipRequirementsRE = regexp.MustCompile(`-r\s+(\S+)`)
+	makeTargetRE      = regexp.MustCompile(`\bmake\s+([a-zA-Z0-9._-]+)`)
 )
 
 // FIPS-related environment variables and build args.
@@ -76,6 +85,7 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 		stageParent := make(map[int]int)
 		stageIndex := -1
 		var stagedCopies []stagedCopy
+		stageBuildCmds := make(map[int][]BuildCommand)
 
 		for _, line := range lines {
 			stripped := strings.TrimSpace(line)
@@ -151,14 +161,19 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 
 			// COPY instruction
 			if match := copyRE.FindStringSubmatch(stripped); match != nil {
-				ci := parseCopyAdd(match[1], match[2], stageAlias)
+				ci := parseCopyAdd(match[1], match[2])
 				stagedCopies = append(stagedCopies, stagedCopy{CopyInstruction: ci, stage: stageIndex})
 			}
 
 			// ADD instruction
 			if match := addRE.FindStringSubmatch(stripped); match != nil {
-				ci := parseCopyAdd(match[1], match[2], stageAlias)
+				ci := parseCopyAdd(match[1], match[2])
 				stagedCopies = append(stagedCopies, stagedCopy{CopyInstruction: ci, stage: stageIndex})
+			}
+
+			// RUN instruction — extract build tool invocations
+			if match := runRE.FindStringSubmatch(stripped); match != nil {
+				stageBuildCmds[stageIndex] = append(stageBuildCmds[stageIndex], parseRunCommand(match[1])...)
 			}
 		}
 
@@ -239,6 +254,35 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 			buildArgs = nil
 		}
 
+		// Collect build commands from all stages that contribute to the final image
+		var buildCmds []BuildCommand
+		referencedStages := make(map[int]bool)
+		referencedStages[stageIndex] = true
+		worklist := []int{stageIndex}
+		for len(worklist) > 0 {
+			cur := worklist[len(worklist)-1]
+			worklist = worklist[:len(worklist)-1]
+			// Follow parent lineage
+			if parent, ok := stageParent[cur]; ok && !referencedStages[parent] {
+				referencedStages[parent] = true
+				worklist = append(worklist, parent)
+			}
+			// Follow transitive COPY --from references from this stage
+			for _, sc := range stagedCopies {
+				if sc.stage == cur && sc.FromStage != "" {
+					if idx, ok := stageAlias[sc.FromStage]; ok && !referencedStages[idx] {
+						referencedStages[idx] = true
+						worklist = append(worklist, idx)
+					}
+				}
+			}
+		}
+		for si := 0; si <= stageIndex; si++ {
+			if referencedStages[si] {
+				buildCmds = append(buildCmds, stageBuildCmds[si]...)
+			}
+		}
+
 		dockerfiles = append(dockerfiles, DockerfileInfo{
 			Path:             relativePath(repoPath, fpath),
 			BaseImage:        baseImage,
@@ -251,6 +295,7 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 			FIPSEnabled:      fipsEnabled,
 			BuildArgs:        buildArgs,
 			CopyInstructions: finalCopies,
+			BuildCommands:    buildCmds,
 		})
 	}
 
@@ -297,7 +342,7 @@ func isSecurityRelevantArg(name string) bool {
 	return false
 }
 
-func parseCopyAdd(flags, args string, stageAlias map[string]int) CopyInstruction {
+func parseCopyAdd(flags, args string) CopyInstruction {
 	var ci CopyInstruction
 
 	if m := copyFromRE.FindStringSubmatch(flags); m != nil {
@@ -347,6 +392,73 @@ func recordStage(stageIndex *int, stageAlias map[string]int, stageParent map[int
 	if parentIdx, ok := stageAlias[image]; ok {
 		stageParent[idx] = parentIdx
 	}
+}
+
+// parseRunCommand extracts build tool invocations from a RUN instruction body.
+// A single RUN line may contain chained commands (&&); each segment is checked
+// independently so multiple tools in one RUN are all captured.
+func parseRunCommand(body string) []BuildCommand {
+	var cmds []BuildCommand
+	for _, segment := range strings.Split(body, "&&") {
+		cmd := strings.TrimSpace(segment)
+		if bc := parseGoBuild(cmd); bc != nil {
+			cmds = append(cmds, *bc)
+		} else if bc := parseNpmBuild(cmd); bc != nil {
+			cmds = append(cmds, *bc)
+		} else if bc := parsePipInstall(cmd); bc != nil {
+			cmds = append(cmds, *bc)
+		} else if bc := parseMakeBuild(cmd); bc != nil {
+			cmds = append(cmds, *bc)
+		}
+	}
+	return cmds
+}
+
+func parseGoBuild(cmd string) *BuildCommand {
+	if !goBuildRE.MatchString(cmd) {
+		return nil
+	}
+	bc := &BuildCommand{Tool: "go", Command: "build"}
+	if m := goBuildOutputRE.FindStringSubmatch(cmd); m != nil {
+		bc.Output = m[1]
+	}
+	if m := goBuildEntryRE.FindStringSubmatch(cmd); m != nil {
+		bc.EntryPoint = m[1]
+	}
+	return bc
+}
+
+func parseNpmBuild(cmd string) *BuildCommand {
+	m := npmBuildRE.FindStringSubmatch(cmd)
+	if m == nil {
+		return nil
+	}
+	tool := "npm"
+	if strings.Contains(cmd, "yarn") {
+		tool = "yarn"
+	} else if strings.Contains(cmd, "pnpm") {
+		tool = "pnpm"
+	}
+	return &BuildCommand{Tool: tool, Command: m[1]}
+}
+
+func parsePipInstall(cmd string) *BuildCommand {
+	if !pipInstallRE.MatchString(cmd) {
+		return nil
+	}
+	bc := &BuildCommand{Tool: "pip", Command: "install"}
+	if m := pipRequirementsRE.FindStringSubmatch(cmd); m != nil {
+		bc.EntryPoint = m[1]
+	}
+	return bc
+}
+
+func parseMakeBuild(cmd string) *BuildCommand {
+	m := makeTargetRE.FindStringSubmatch(cmd)
+	if m == nil {
+		return nil
+	}
+	return &BuildCommand{Tool: "make", Command: m[1]}
 }
 
 func collectStageHostSources(idx int, hostSources map[int][]string, parents map[int]int) []string {

@@ -176,8 +176,34 @@ COPY ${DIR}/ /app/
 	ci := result[0].CopyInstructions[0]
 
 	if ci.Sources[0] != "${DIR}/" {
-		t.Errorf("expected literal ${DIR}/, got %q", ci.Sources[0])
+		t.Errorf("expected ${DIR}/, got %q", ci.Sources[0])
 	}
+}
+
+func TestExtractCopyAddVarsInOriginalSources(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+ARG BFF_SOURCE_CODE=packages/gen-ai/bff
+COPY ${BFF_SOURCE_CODE}/go.mod ${BFF_SOURCE_CODE}/go.sum ./
+COPY ${BFF_SOURCE_CODE}/cmd/ ./cmd/
+
+FROM scratch
+COPY --from=builder /app /app
+`
+
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	ci := result[0].CopyInstructions[0]
+
+	if ci.FromStage != "builder" {
+		t.Fatalf("from_stage: got %q, want %q", ci.FromStage, "builder")
+	}
+	assertStringSlice(t, "original_sources", ci.OriginalSources, []string{
+		"${BFF_SOURCE_CODE}/go.mod", "${BFF_SOURCE_CODE}/go.sum", "${BFF_SOURCE_CODE}/cmd/",
+	})
 }
 
 func TestExtractCopyAddOriginalSources(t *testing.T) {
@@ -293,6 +319,281 @@ ADD config/manifests/ /manifests/
 	}
 	if !found {
 		t.Errorf("expected FromStage=builder in copy instructions, got %+v", df.CopyInstructions)
+	}
+}
+
+func TestBuildCommandGoBuild(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+COPY go.mod go.sum ./
+COPY cmd/ ./cmd/
+COPY internal/ ./internal/
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o manager cmd/main.go
+
+FROM scratch
+COPY --from=builder /workspace/manager .
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.Tool != "go" {
+		t.Errorf("tool: got %q, want go", bc.Tool)
+	}
+	if bc.Command != "build" {
+		t.Errorf("command: got %q, want build", bc.Command)
+	}
+	if bc.EntryPoint != "cmd/main.go" {
+		t.Errorf("entry_point: got %q, want cmd/main.go", bc.EntryPoint)
+	}
+	if bc.Output != "manager" {
+		t.Errorf("output: got %q, want manager", bc.Output)
+	}
+}
+
+func TestBuildCommandNpm(t *testing.T) {
+	dockerfile := `FROM node:20 AS builder
+COPY package*.json ./
+RUN npm ci
+RUN npm run build:prod
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.Tool != "npm" {
+		t.Errorf("tool: got %q, want npm", bc.Tool)
+	}
+	if bc.Command != "build:prod" {
+		t.Errorf("command: got %q, want build:prod", bc.Command)
+	}
+}
+
+func TestBuildCommandPipInstall(t *testing.T) {
+	dockerfile := `FROM python:3.11 AS builder
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+FROM python:3.11-slim
+COPY --from=builder /usr/local/lib/python3.11 /usr/local/lib/python3.11
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.Tool != "pip" {
+		t.Errorf("tool: got %q, want pip", bc.Tool)
+	}
+	if bc.EntryPoint != "requirements.txt" {
+		t.Errorf("entry_point: got %q, want requirements.txt", bc.EntryPoint)
+	}
+}
+
+func TestBuildCommandMake(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+COPY . .
+RUN make build
+
+FROM scratch
+COPY --from=builder /app/bin /app
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.Tool != "make" {
+		t.Errorf("tool: got %q, want make", bc.Tool)
+	}
+	if bc.Command != "build" {
+		t.Errorf("command: got %q, want build", bc.Command)
+	}
+}
+
+func TestBuildCommandMakeHyphenatedTarget(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+COPY . .
+RUN make build-image
+
+FROM scratch
+COPY --from=builder /app/bin /app
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.Tool != "make" {
+		t.Errorf("tool: got %q, want make", bc.Tool)
+	}
+	if bc.Command != "build-image" {
+		t.Errorf("command: got %q, want build-image", bc.Command)
+	}
+}
+
+func TestBuildCommandChainedRun(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+COPY . .
+RUN go mod download && go build -o app ./cmd/server/...
+
+FROM scratch
+COPY --from=builder /go/app .
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.Tool != "go" {
+		t.Errorf("tool: got %q, want go", bc.Tool)
+	}
+	if bc.EntryPoint != "./cmd/server/..." {
+		t.Errorf("entry_point: got %q, want ./cmd/server/...", bc.EntryPoint)
+	}
+	if bc.Output != "app" {
+		t.Errorf("output: got %q, want app", bc.Output)
+	}
+}
+
+func TestBuildCommandChainedRunMultipleTools(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+COPY . .
+RUN go build -o app ./cmd/server && make generate
+
+FROM scratch
+COPY --from=builder /go/app .
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 2 {
+		t.Fatalf("expected 2 build commands, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	if result[0].BuildCommands[0].Tool != "go" {
+		t.Errorf("first tool: got %q, want go", result[0].BuildCommands[0].Tool)
+	}
+	if result[0].BuildCommands[1].Tool != "make" {
+		t.Errorf("second tool: got %q, want make", result[0].BuildCommands[1].Tool)
+	}
+	if result[0].BuildCommands[1].Command != "generate" {
+		t.Errorf("second command: got %q, want generate", result[0].BuildCommands[1].Command)
+	}
+}
+
+func TestBuildCommandGoPackagePath(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+COPY . .
+RUN go build -o cloudmanager ./cmd/cloudmanager/
+
+FROM scratch
+COPY --from=builder /go/cloudmanager .
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command, got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	bc := result[0].BuildCommands[0]
+	if bc.EntryPoint != "./cmd/cloudmanager/" {
+		t.Errorf("entry_point: got %q, want ./cmd/cloudmanager/", bc.EntryPoint)
+	}
+	if bc.Output != "cloudmanager" {
+		t.Errorf("output: got %q, want cloudmanager", bc.Output)
+	}
+}
+
+func TestBuildCommandNotFromUnreferencedStage(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+RUN go build -o app main.go
+
+FROM node:20 AS frontend
+RUN npm run build:prod
+
+FROM scratch
+COPY --from=builder /app .
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	// Only builder stage is referenced, not frontend
+	if len(result[0].BuildCommands) != 1 {
+		t.Fatalf("expected 1 build command (only from referenced stage), got %d: %+v", len(result[0].BuildCommands), result[0].BuildCommands)
+	}
+	if result[0].BuildCommands[0].Tool != "go" {
+		t.Errorf("expected go build from builder stage, got %q", result[0].BuildCommands[0].Tool)
+	}
+}
+
+func TestBuildCommandTransitiveCopyFrom(t *testing.T) {
+	// final → intermediate → builder: build commands from all three must appear
+	dockerfile := `FROM golang:1.22 AS builder
+RUN go build -o app main.go
+
+FROM alpine AS intermediate
+COPY --from=builder /app /app
+RUN chmod +x /app
+
+FROM scratch
+COPY --from=intermediate /app /app
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	cmds := result[0].BuildCommands
+	tools := make(map[string]bool)
+	for _, c := range cmds {
+		tools[c.Tool] = true
+	}
+	if !tools["go"] {
+		t.Errorf("expected go build command from builder stage, got %+v", cmds)
 	}
 }
 

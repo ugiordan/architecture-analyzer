@@ -2,7 +2,6 @@ package extractor
 
 import (
 	"os"
-	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -32,28 +31,19 @@ func extractPrometheusMetrics(repoPath string) []PrometheusMetric {
 	var metrics []PrometheusMetric
 	seen := make(map[string]bool)
 
-	filepath.Walk(repoPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return nil
-		}
-		if info.IsDir() && strings.Contains(path, "/vendor") {
-			return filepath.SkipDir
-		}
-		if info.IsDir() {
-			return nil
-		}
-		if !strings.HasSuffix(path, ".go") || strings.HasSuffix(path, "_test.go") {
-			return nil
+	for _, path := range findFiles(repoPath, []string{"**/*.go"}) {
+		if strings.HasSuffix(path, "_test.go") {
+			continue
 		}
 
 		data, err := os.ReadFile(path)
 		if err != nil || len(data) > 500*1024 {
-			return nil
+			continue
 		}
 		content := string(data)
 
 		if !strings.Contains(content, "prometheus.") && !strings.Contains(content, "promauto.") {
-			return nil
+			continue
 		}
 
 		relPath := relativePath(repoPath, path)
@@ -65,8 +55,7 @@ func extractPrometheusMetrics(repoPath string) []PrometheusMetric {
 				metrics = append(metrics, m)
 			}
 		}
-		return nil
-	})
+	}
 
 	if metrics == nil {
 		metrics = []PrometheusMetric{}

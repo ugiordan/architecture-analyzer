@@ -32,27 +32,17 @@ type KustomizeOverlayRef struct {
 func extractKustomizeOverlayRefs(repoPath string) []KustomizeOverlayRef {
 	var refs []KustomizeOverlayRef
 
-	// Walk config/ directory for kustomization files
-	configDir := filepath.Join(repoPath, "config")
-	if _, err := os.Stat(configDir); err != nil {
-		return nil
-	}
-
-	_ = filepath.Walk(configDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
-			return nil
-		}
-		name := info.Name()
-		if name != "kustomization.yaml" && name != "kustomization.yml" && name != "Kustomization" {
-			return nil
-		}
-
+	kustomFiles := findFiles(repoPath, []string{
+		"config/**/kustomization.yaml",
+		"config/**/kustomization.yml",
+		"config/**/Kustomization",
+	})
+	for _, path := range kustomFiles {
 		ref := parseKustomizationFile(repoPath, path)
 		if ref != nil {
 			refs = append(refs, *ref)
 		}
-		return nil
-	})
+	}
 
 	return refs
 }
