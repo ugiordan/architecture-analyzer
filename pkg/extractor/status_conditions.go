@@ -4,8 +4,6 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -32,28 +30,7 @@ var conditionReasonTypes = []string{"ConditionReason", "StatusReason", "conditio
 // extractStatusConditions scans Go source for status condition type and reason constants.
 // It also returns a set of Go constant names (not values) for dedup with operator config.
 func extractStatusConditions(repoPath string) ([]StatusCondition, map[string]bool) {
-	var goFiles []string
-	for _, dir := range statusConditionSearchPaths {
-		fullDir := filepath.Join(repoPath, dir)
-		if info, err := os.Stat(fullDir); err != nil || !info.IsDir() {
-			continue
-		}
-		filepath.Walk(fullDir, func(path string, info os.FileInfo, err error) error {
-			if err != nil {
-				return nil
-			}
-			if info.IsDir() && strings.Contains(path, "/vendor") {
-				return filepath.SkipDir
-			}
-			if info.IsDir() {
-				return nil
-			}
-			if strings.HasSuffix(path, ".go") && !strings.HasSuffix(path, "_test.go") {
-				goFiles = append(goFiles, path)
-			}
-			return nil
-		})
-	}
+	goFiles := findGoFilesInDirs(repoPath, statusConditionSearchPaths)
 
 	var conditions []StatusCondition
 	seen := make(map[string]bool)

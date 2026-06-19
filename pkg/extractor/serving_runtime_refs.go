@@ -3,9 +3,7 @@ package extractor
 import (
 	"bufio"
 	"fmt"
-	"io/fs"
 	"os"
-	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
@@ -53,22 +51,7 @@ func extractServingRuntimeRefs(repoPath string) []ServingRuntimeRef {
 func extractServingRuntimeRefsFromYAML(repoPath string) []ServingRuntimeRef {
 	var refs []ServingRuntimeRef
 
-	_ = filepath.WalkDir(repoPath, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return nil
-		}
-		if d.IsDir() {
-			if isExcludedDir(d.Name(), nil) {
-				return fs.SkipDir
-			}
-			return nil
-		}
-
-		ext := strings.ToLower(filepath.Ext(path))
-		if ext != ".yaml" && ext != ".yml" {
-			return nil
-		}
-
+	for _, path := range findFiles(repoPath, []string{"**/*.yaml", "**/*.yml"}) {
 		for _, doc := range parseYAMLSafe(path) {
 			kind, _ := doc["kind"].(string)
 			if !servingRuntimeRefKinds[kind] {
@@ -95,8 +78,7 @@ func extractServingRuntimeRefsFromYAML(repoPath string) []ServingRuntimeRef {
 				})
 			}
 		}
-		return nil
-	})
+	}
 
 	return refs
 }
@@ -171,73 +153,69 @@ var goImageLiteralRE = regexp.MustCompile(
 // capturing programmatic CR creation patterns.
 func extractServingRuntimeRefsFromGo(repoPath string) []ServingRuntimeRef {
 	var refs []ServingRuntimeRef
-
-	_ = filepath.WalkDir(repoPath, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return nil
+	for _, path := range findFiles(repoPath, []string{"**/*.go"}) {
+		if strings.HasSuffix(path, "_test.go") {
+			continue
 		}
-		if d.IsDir() {
-			if isExcludedDir(d.Name(), nil) {
-				return fs.SkipDir
-			}
-			return nil
-		}
-		if !strings.HasSuffix(path, ".go") {
-			return nil
-		}
+		refs = append(refs, scanGoFileForServingRefs(repoPath, path)...)
+	}
+	return refs
+}
 
-		f, ferr := os.Open(path)
-		if ferr != nil {
-			return nil
-		}
-		defer f.Close()
-
-		rel := relativePath(repoPath, path)
-		scanner := bufio.NewScanner(f)
-		scanner.Buffer(make([]byte, 0, 256*1024), 256*1024)
-		lineNum := 0
-
-		// Track the most recent kind reference within a window of lines
-		var lastKind string
-		var lastKindLine int
-		const kindWindowLines = 20
-
-		for scanner.Scan() {
-			lineNum++
-			line := scanner.Text()
-
-			// Check for Kind references
-			if matches := goServingKindRE.FindStringSubmatch(line); len(matches) > 0 {
-				kind := matches[1]
-				if kind == "" {
-					kind = matches[2]
-				}
-				lastKind = kind
-				lastKindLine = lineNum
-			}
-
-			// Check for image literals near a kind reference
-			if lastKind != "" && lineNum-lastKindLine <= kindWindowLines {
-				if imgMatches := goImageLiteralRE.FindAllStringSubmatch(line, -1); len(imgMatches) > 0 {
-					for _, m := range imgMatches {
-						img := m[1]
-						// Skip obviously non-image strings (e.g., module paths)
-						if strings.Contains(img, "github.com") || strings.Contains(img, "golang.org") {
-							continue
-						}
-						refs = append(refs, ServingRuntimeRef{
-							Name:           "go-source",
-							Kind:           lastKind,
-							ContainerImage: img,
-							Source:         fmt.Sprintf("%s:%d", rel, lineNum),
-						})
-					}
-				}
-			}
-		}
+// scanGoFileForServingRefs scans a single Go file for serving runtime kind +
+// image literal pairs within a sliding window of lines.
+func scanGoFileForServingRefs(repoPath, path string) []ServingRuntimeRef {
+	f, err := os.Open(path)
+	if err != nil {
 		return nil
-	})
+	}
+	defer f.Close()
 
+	var refs []ServingRuntimeRef
+	rel := relativePath(repoPath, path)
+	scanner := bufio.NewScanner(f)
+	scanner.Buffer(make([]byte, 0, 256*1024), 256*1024)
+	lineNum := 0
+
+	// Track the most recent kind reference within a window of lines
+	var lastKind string
+	var lastKindLine int
+	const kindWindowLines = 20
+
+	for scanner.Scan() {
+		lineNum++
+		line := scanner.Text()
+
+		// Check for Kind references
+		if matches := goServingKindRE.FindStringSubmatch(line); len(matches) > 0 {
+			kind := matches[1]
+			if kind == "" {
+				kind = matches[2]
+			}
+			lastKind = kind
+			lastKindLine = lineNum
+		}
+
+		// Check for image literals near a kind reference
+		if lastKind != "" && lineNum-lastKindLine <= kindWindowLines {
+			if imgMatches := goImageLiteralRE.FindAllStringSubmatch(line, -1); len(imgMatches) > 0 {
+				for _, m := range imgMatches {
+					img := m[1]
+					// Skip obviously non-image strings (e.g., module paths)
+					if strings.Contains(img, "github.com") || strings.Contains(img, "golang.org") {
+						continue
+					}
+					refs = append(refs, ServingRuntimeRef{
+						Name:           "go-source",
+						Kind:           lastKind,
+						ContainerImage: img,
+						Source:         fmt.Sprintf("%s:%d", rel, lineNum),
+					})
+				}
+			}
+		}
+	}
+	_ = scanner.Err()
 	return refs
 }
 

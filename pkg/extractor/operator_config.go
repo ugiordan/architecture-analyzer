@@ -6,8 +6,6 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
-	"os"
-	"path/filepath"
 	"regexp"
 	"strings"
 	"unicode"
@@ -34,31 +32,12 @@ var upperSnakeCaseRE = regexp.MustCompile(`^[A-Z][A-Z0-9_]{2,}$`)
 // configuration. statusConditionNames is the dedup set from the status conditions
 // extractor; constants matching those names are skipped.
 func extractOperatorConfig(repoPath string, statusConditionNames map[string]bool) []OperatorConstant {
-	var goFiles []string
-
-	// Scan configured directories
-	for _, dir := range operatorConfigSearchPaths {
-		fullDir := filepath.Join(repoPath, dir)
-		if info, err := os.Stat(fullDir); err != nil || !info.IsDir() {
-			continue
-		}
-		filepath.Walk(fullDir, func(path string, info os.FileInfo, err error) error {
-			if err != nil || info.IsDir() {
-				return nil
-			}
-			if strings.HasSuffix(path, ".go") && !strings.HasSuffix(path, "_test.go") &&
-				!strings.Contains(path, "/vendor/") {
-				goFiles = append(goFiles, path)
-			}
-			return nil
-		})
-	}
+	goFiles := findGoFilesInDirs(repoPath, operatorConfigSearchPaths)
 
 	// Also scan root-level .go files
-	entries, _ := os.ReadDir(repoPath)
-	for _, e := range entries {
-		if !e.IsDir() && strings.HasSuffix(e.Name(), ".go") && !strings.HasSuffix(e.Name(), "_test.go") {
-			goFiles = append(goFiles, filepath.Join(repoPath, e.Name()))
+	for _, f := range findFiles(repoPath, []string{"*.go"}) {
+		if !strings.HasSuffix(f, "_test.go") {
+			goFiles = append(goFiles, f)
 		}
 	}
 

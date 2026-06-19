@@ -6,8 +6,6 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
-	"os"
-	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -36,28 +34,7 @@ var reconcileMethodRE = regexp.MustCompile(
 // extractReconcileSequences scans Go source for Reconcile() method bodies
 // and extracts the ordered sequence of sub-resource reconciliation calls.
 func extractReconcileSequences(repoPath string) []ReconcileSequence {
-	var goFiles []string
-	for _, dir := range reconcileSearchPaths {
-		fullDir := filepath.Join(repoPath, dir)
-		if info, err := os.Stat(fullDir); err != nil || !info.IsDir() {
-			continue
-		}
-		filepath.Walk(fullDir, func(path string, info os.FileInfo, err error) error {
-			if err != nil {
-				return nil
-			}
-			if info.IsDir() && strings.Contains(path, "/vendor") {
-				return filepath.SkipDir
-			}
-			if info.IsDir() {
-				return nil
-			}
-			if strings.HasSuffix(path, ".go") && !strings.HasSuffix(path, "_test.go") {
-				goFiles = append(goFiles, path)
-			}
-			return nil
-		})
-	}
+	goFiles := findGoFilesInDirs(repoPath, reconcileSearchPaths)
 
 	var sequences []ReconcileSequence
 	for _, fpath := range goFiles {

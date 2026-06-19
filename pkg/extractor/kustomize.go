@@ -97,26 +97,13 @@ func extractKustomizeComponents(repoPath string) []KustomizeComponent {
 // findSupportFiles searches the repo for Go files matching the pattern
 // *_support.go or *_component.go, which typically define component metadata.
 func findSupportFiles(repoPath string) []string {
+	candidates := findFiles(repoPath, []string{"**/*_support.go", "**/*_component.go"})
 	var files []string
-	_ = filepath.Walk(repoPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return nil
-		}
-		if info.IsDir() {
-			if isExcludedDir(filepath.Base(path), nil) {
-				return filepath.SkipDir
-			}
-			return nil
-		}
-		name := info.Name()
-		if strings.HasSuffix(name, "_support.go") || strings.HasSuffix(name, "_component.go") {
-			if !isComponentPath(path) {
-				return nil
-			}
+	for _, path := range candidates {
+		if isComponentPath(path) {
 			files = append(files, path)
 		}
-		return nil
-	})
+	}
 	return files
 }
 
@@ -479,26 +466,16 @@ func findParamsEnv(repoPath string) []string {
 	}
 
 	// Also search more broadly
-	_ = filepath.Walk(repoPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return nil
-		}
-		if info.IsDir() {
-			if isExcludedDir(filepath.Base(path), nil) {
-				return filepath.SkipDir
-			}
-			return nil
-		}
-		if info.Name() == "params.env" {
-			for _, existing := range found {
-				if existing == path {
-					return nil
-				}
-			}
+	foundSet := make(map[string]bool, len(found))
+	for _, f := range found {
+		foundSet[f] = true
+	}
+	for _, path := range findFiles(repoPath, []string{"**/params.env"}) {
+		if !foundSet[path] {
+			foundSet[path] = true
 			found = append(found, path)
 		}
-		return nil
-	})
+	}
 
 	return found
 }

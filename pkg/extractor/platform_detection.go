@@ -5,7 +5,6 @@ import (
 	"go/parser"
 	"go/token"
 	"os"
-	"path/filepath"
 	"regexp"
 	"strings"
 	"unicode"
@@ -43,23 +42,7 @@ var resourceKindFromMethodRE = regexp.MustCompile(
 // extractPlatformDetection scans Go source for platform capability checks
 // and conditional resource creation patterns.
 func extractPlatformDetection(repoPath string) *PlatformDetection {
-	var goFiles []string
-	for _, dir := range platformSearchPaths {
-		fullDir := filepath.Join(repoPath, dir)
-		if info, err := os.Stat(fullDir); err != nil || !info.IsDir() {
-			continue
-		}
-		filepath.Walk(fullDir, func(path string, info os.FileInfo, err error) error {
-			if err != nil || info.IsDir() {
-				return nil
-			}
-			if strings.HasSuffix(path, ".go") && !strings.HasSuffix(path, "_test.go") &&
-				!strings.Contains(path, "/vendor/") {
-				goFiles = append(goFiles, path)
-			}
-			return nil
-		})
-	}
+	goFiles := findGoFilesInDirs(repoPath, platformSearchPaths)
 
 	pd := &PlatformDetection{}
 	capabilityNames := make(map[string]bool)

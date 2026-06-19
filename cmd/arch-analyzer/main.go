@@ -14,8 +14,8 @@ import (
 	"time"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/aggregator"
-	"github.com/ugiordan/architecture-analyzer/pkg/config"
 	"github.com/ugiordan/architecture-analyzer/pkg/arch"
+	"github.com/ugiordan/architecture-analyzer/pkg/config"
 	"github.com/ugiordan/architecture-analyzer/pkg/domains"
 	"github.com/ugiordan/architecture-analyzer/pkg/domains/architecture"
 	"github.com/ugiordan/architecture-analyzer/pkg/domains/netpolicy"
@@ -217,10 +217,11 @@ func cmdExtract(args []string) error {
 	aliases := fs.String("aliases", "", "Comma-separated component aliases (e.g. rhods-operator,RHODS)")
 	withDeps := fs.Bool("with-deps", false, "Also extract dependencies detected via component_refs")
 	scanConfig := fs.String("scan-config", "", "Path to scan-config.yaml for resolving dependency repos")
-	fs.Parse(args)
+	extractors := fs.String("extractors", "", "Comma-separated extractor groups to run (default: all). Available: "+strings.Join(extractor.ExtractorGroupNames(), ", "))
+	fs.Parse(reorderArgs(fs, args))
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: arch-analyzer extract <repo-path> [--output file.json] [--org org] [--version label] [--aliases list] [--with-deps --scan-config config.yaml]")
+		return fmt.Errorf("usage: arch-analyzer extract <repo-path> [--output file.json] [--org org] [--version label] [--aliases list] [--with-deps] [--scan-config config.yaml] [--extractors groups]")
 	}
 
 	if *ver != "" {
@@ -229,7 +230,7 @@ func cmdExtract(args []string) error {
 		}
 	}
 
-	opts := &extractor.ExtractOptions{Org: *org, Aliases: parseAliases(*aliases)}
+	opts := &extractor.ExtractOptions{Org: *org, Aliases: parseAliases(*aliases), Extractors: parseAliases(*extractors)}
 	arch, err := extractor.ExtractAll(fs.Arg(0), opts)
 	if err != nil {
 		return err
@@ -621,7 +622,7 @@ func aggregateVersionCompat(resultsDir, outDir, scanConfigPath, platformName str
 	fmt.Printf("\n=== Version Compatibility Check (target OCP %s) ===\n", targetVersion)
 
 	type componentCompat struct {
-		Component string                        `json:"component"`
+		Component string                         `json:"component"`
 		Result    *validator.VersionCompatResult `json:"result"`
 	}
 
@@ -880,10 +881,11 @@ func cmdFullAnalysis(args []string) error {
 	ver := fs.String("version", "", "Version label for snapshot output (e.g. v2.15.0)")
 	importSARIF := fs.String("import-sarif", "", "Comma-separated SARIF files to ingest after building graph")
 	aliases := fs.String("aliases", "", "Comma-separated component aliases (e.g. rhods-operator,RHODS)")
-	fs.Parse(args)
+	extractorsList := fs.String("extractors", "", "Comma-separated extractor groups to run (default: all). Available: "+strings.Join(extractor.ExtractorGroupNames(), ", "))
+	fs.Parse(reorderArgs(fs, args))
 
 	if fs.NArg() < 1 {
-		return fmt.Errorf("usage: arch-analyzer full-analysis <repo-path> [--output-dir dir] [--org org] [--domains sec,test] [--version label] [--aliases list]")
+		return fmt.Errorf("usage: arch-analyzer full-analysis <repo-path> [--output-dir dir] [--org org] [--domains sec,test] [--extractors groups] [--version label] [--aliases list]")
 	}
 
 	if *ver != "" {
@@ -900,7 +902,7 @@ func cmdFullAnalysis(args []string) error {
 
 	// Architecture extraction
 	fmt.Println("=== Architecture Extraction ===")
-	extractOpts := &extractor.ExtractOptions{Org: *org, Aliases: parseAliases(*aliases)}
+	extractOpts := &extractor.ExtractOptions{Org: *org, Aliases: parseAliases(*aliases), Extractors: parseAliases(*extractorsList)}
 	archResult, err := extractor.ExtractAll(repoPath, extractOpts)
 	var archData *domains.ArchitectureData
 	var parsedArch *arch.Data
@@ -1043,3 +1045,33 @@ func cmdFullAnalysis(args []string) error {
 	return nil
 }
 
+// reorderArgs moves positional arguments after flags so that flag.FlagSet.Parse
+// works regardless of argument order. Without this, flags placed after the first
+// positional argument are silently ignored by Go's flag package.
+func reorderArgs(fs *flag.FlagSet, args []string) []string {
+	boolFlags := map[string]bool{}
+	fs.VisitAll(func(f *flag.Flag) {
+		if bf, ok := f.Value.(interface{ IsBoolFlag() bool }); ok && bf.IsBoolFlag() {
+			boolFlags[f.Name] = true
+		}
+	})
+
+	var flags, positional []string
+	for i := 0; i < len(args); i++ {
+		arg := args[i]
+		if !strings.HasPrefix(arg, "-") {
+			positional = append(positional, arg)
+			continue
+		}
+		name := strings.TrimLeft(arg, "-")
+		if eq := strings.Index(name, "="); eq >= 0 {
+			name = name[:eq]
+		}
+		flags = append(flags, arg)
+		if !boolFlags[name] && !strings.Contains(arg, "=") && i+1 < len(args) {
+			i++
+			flags = append(flags, args[i])
+		}
+	}
+	return append(flags, positional...)
+}

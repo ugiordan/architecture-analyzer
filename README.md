@@ -118,6 +118,9 @@ Produces:
 
 ```bash
 ./arch-analyzer extract /path/to/repo --output component-architecture.json
+
+# Run only specific extractor groups (faster for targeted analysis)
+./arch-analyzer extract /path/to/repo --extractors dockerfiles,kustomize --output component-architecture.json
 ```
 
 ### Generate SBOM (CycloneDX 1.5)
@@ -225,7 +228,7 @@ Includes Go modules, Python deps, Dockerfile base images, deployment container i
 | Dependencies | `go.mod` | Go version, toolchain, modules (direct only), internal ODH deps, replace directives |
 | Secrets | Deployments, services | Secret names, types, references (never values) |
 | Helm | `Chart.yaml`, `values.yaml` | Chart metadata, security-relevant defaults |
-| Dockerfiles | `Dockerfile*`, `Containerfile*` | Base image, stages, USER, EXPOSE, FIPS indicators |
+| Dockerfiles | `Dockerfile*`, `Containerfile*`, `*.Dockerfile`, `*.Containerfile` | Base image, build stages, USER, EXPOSE, FIPS indicators, COPY/ADD instructions with multi-stage source tracing, build tool invocations (go build, npm/yarn/pnpm, pip, make) |
 | Webhooks | `**/webhook*.yaml`, `**/mutating*`, `**/validating*` | Webhook rules, failure policy, side effects |
 | ConfigMaps | `**/configmap*.yaml` | ConfigMap names, data keys |
 | HTTP Endpoints | Go source (`http.HandleFunc`, `mux.Route`, `gin.Engine`) | Method, path, handler, middleware |

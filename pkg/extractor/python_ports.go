@@ -254,39 +254,27 @@ func inferAppRunName(source string) string {
 // __pycache__, test directories, and other non-source directories.
 func findPythonFiles(repoPath string) []string {
 	var result []string
-	err := filepath.Walk(repoPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return nil // skip errors
-		}
-		if info.IsDir() {
-			base := filepath.Base(path)
-			if pythonSkipDirs[base] || strings.HasPrefix(base, ".") {
-				return filepath.SkipDir
-			}
-			return nil
-		}
-		if !strings.HasSuffix(info.Name(), ".py") {
-			return nil
-		}
-		// Skip test files
-		name := info.Name()
+	for _, path := range findFiles(repoPath, []string{"**/*.py"}) {
+		name := filepath.Base(path)
 		if strings.HasPrefix(name, "test_") || strings.HasSuffix(name, "_test.py") {
-			return nil
+			continue
 		}
-		// Skip files inside test directories
 		rel, _ := filepath.Rel(repoPath, path)
 		if strings.Contains(rel, "/tests/") || strings.Contains(rel, "/test/") {
-			return nil
+			continue
 		}
-		// Skip symlinks
-		if info.Mode()&os.ModeSymlink != 0 {
-			return nil
+		// pythonSkipDirs not covered by DefaultExcludedDirs
+		skip := false
+		for _, seg := range strings.Split(rel, string(filepath.Separator)) {
+			if seg == "venv" || seg == "env" || seg == "__pycache__" {
+				skip = true
+				break
+			}
+		}
+		if skip {
+			continue
 		}
 		result = append(result, path)
-		return nil
-	})
-	if err != nil {
-		log.Printf("warning: walking Python files in %s: %v", repoPath, err)
 	}
 	return result
 }

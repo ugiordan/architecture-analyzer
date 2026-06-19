@@ -15,6 +15,8 @@ type ExtractOptions struct {
 	Aliases []string
 	// KnownComponents lists all component names from scan-config for cross-reference detection.
 	KnownComponents []string
+	// Extractors lists extractor groups to run (empty = all).
+	Extractors []string
 }
 
 // DefaultModulePrefixes returns the standard internal module prefixes for the analyzed platform.
@@ -74,6 +76,7 @@ type ComponentArchitecture struct {
 	Summary                 string                    `json:"summary,omitempty"`
 	GoASTMode               string                    `json:"go_ast_mode,omitempty"`
 	GoASTWarning            string                    `json:"go_ast_warning,omitempty"`
+	ExtractorsRun           []string                  `json:"extractors_run,omitempty"`
 }
 
 // CRD represents a CustomResourceDefinition with all its versions.
@@ -304,6 +307,14 @@ type CopyInstruction struct {
 	IsURL           bool     `json:"is_url,omitempty"`
 }
 
+// BuildCommand represents a build tool invocation extracted from a RUN instruction.
+type BuildCommand struct {
+	Tool       string `json:"tool"`
+	Command    string `json:"command"`
+	EntryPoint string `json:"entry_point,omitempty"`
+	Output     string `json:"output,omitempty"`
+}
+
 // DockerfileInfo holds metadata extracted from a Dockerfile.
 type DockerfileInfo struct {
 	Path             string            `json:"path"`
@@ -317,6 +328,7 @@ type DockerfileInfo struct {
 	FIPSEnabled      bool              `json:"fips_enabled,omitempty"`
 	BuildArgs        map[string]string `json:"build_args,omitempty"`
 	CopyInstructions []CopyInstruction `json:"copy_instructions,omitempty"`
+	BuildCommands    []BuildCommand    `json:"build_commands,omitempty"`
 }
 
 // HelmData holds Helm chart metadata and security-relevant value defaults.
