@@ -124,6 +124,9 @@ var pySDKPatterns = []struct {
 	{regexp.MustCompile(`(?:anthropic\.)?Anthropic\(`), "anthropic"},
 	{regexp.MustCompile(`(?:anthropic\.)?AsyncAnthropic\(`), "anthropic"},
 	{regexp.MustCompile(`LlamaStackClient\(`), "llama-stack"},
+	{regexp.MustCompile(`from\s+llama_stack_client\s+import`), "llama-stack"},
+	{regexp.MustCompile(`OgxClient\(`), "ogx"},
+	{regexp.MustCompile(`from\s+ogx_client\s+import`), "ogx"},
 	{regexp.MustCompile(`(?:cohere\.)?Client\(\s*api_key`), "cohere"},
 
 	// Vector databases
