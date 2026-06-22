@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/data-science-pipelines-operator |
 | Aliases | DSPO, dspo |
 | Commit | a817389fada72967b3cdf506cd91359109b1fe41 |
-| Extracted | 2026-06-22T05:04:15Z |
+| Extracted | 2026-06-22T11:22:41Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

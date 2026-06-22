@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/guardrails-detectors |
 | Commit | 845f9bdc80c63730aac793385a0e2f1b21e800bd |
-| Extracted | 2026-06-22T05:05:29Z |
+| Extracted | 2026-06-22T11:25:28Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -2,7 +2,7 @@
   "component": "ai4rag",
   "repo": "IBM/ai4rag",
   "commit_sha": "f4588ddb83580c1eaeebe5dce62daa3c88796b4b",
-  "extracted_at": "2026-06-22T05:07:45Z",
+  "extracted_at": "2026-06-22T11:28:26Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "rbac": {},
@@ -73,6 +73,62 @@
     ]
   },
   "helm": {},
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/core/experiment/experiment.py:11"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/rag/embedding/ogx.py:9"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/rag/foundation_models/ogx.py:8"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/rag/vector_store/get_vector_store.py:5"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/rag/vector_store/ogx.py:5"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/search_space/prepare/ogx_utils.py:7"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "ai4rag/search_space/prepare/prepare_search_space.py:7"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "dev_utils/run_experiment.py:27"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "dev_utils/run_experiment.py:9"
+    }
+  ],
   "python_k8s_calls": [
     {
       "api": "CoreV1Api",
@@ -131,7 +187,7 @@
     "crds": "none",
     "deployments": "none",
     "dockerfiles": "none",
-    "external_connections": "none",
+    "external_connections": "rich",
     "ingress_routing": "none",
     "kustomize_overlay_refs": "none",
     "label_contracts": "none",
@@ -149,5 +205,5 @@
     "status_conditions": "none",
     "webhooks": "none"
   },
-  "summary": "ai4rag is a Kubernetes component. 10 Python package dependencies (10 required), categories: 1 data, 1 serialization. Python k8s client with 8 API call(s)."
+  "summary": "ai4rag is a Kubernetes component. connecting to external services: ogx. 10 Python package dependencies (10 required), categories: 1 data, 1 serialization. Python k8s client with 8 API call(s)."
 }

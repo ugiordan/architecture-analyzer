@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-06-22T05:11:22Z  
-**Components**: 63  
+**Generated**: 2026-06-22T11:33:02Z  
+**Components**: 64  
 
 ## How to Find Information
 
@@ -47,7 +47,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | NeMo-Guardrails |  | 0 | 0 | 197 | [nemo-guardrails.md](components/nemo-guardrails.md) |
 | agents-operator |  | 0 | 2 | 48 | [agents-operator.md](components/agents-operator.md) |
 | ai-gateway-payload-processing |  | 2 | 0 | 15 | [ai-gateway-payload-processing.md](components/ai-gateway-payload-processing.md) |
-| ai4rag |  | 0 | 0 | 10 | [ai4rag.md](components/ai4rag.md) |
+| ai4rag |  | 0 | 0 | 19 | [ai4rag.md](components/ai4rag.md) |
 | argo-workflows |  | 0 | 0 | 105 | [argo-workflows.md](components/argo-workflows.md) |
 | batch-gateway |  | 0 | 0 | 29 | [batch-gateway.md](components/batch-gateway.md) |
 | caikit-nlp |  | 0 | 0 | 17 | [caikit-nlp.md](components/caikit-nlp.md) |
@@ -68,7 +68,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | kubeflow |  | 0 | 3 | 35 | [kubeflow.md](components/kubeflow.md) |
 | kuberay |  | 0 | 2 | 91 | [kuberay.md](components/kuberay.md) |
 | kueue |  | 2 | 2 | 43 | [kueue.md](components/kueue.md) |
-| llama-stack |  | 0 | 0 | 126 | [llama-stack.md](components/llama-stack.md) |
+| llama-stack |  | 0 | 0 | 131 | [llama-stack.md](components/llama-stack.md) |
 | llm-d |  | 0 | 0 | 1 | [llm-d.md](components/llm-d.md) |
 | llm-d-inference-scheduler |  | 2 | 7 | 50 | [llm-d-inference-scheduler.md](components/llm-d-inference-scheduler.md) |
 | llm-d-kv-cache |  | 0 | 0 | 35 | [llm-d-kv-cache.md](components/llm-d-kv-cache.md) |
@@ -90,7 +90,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | odh-model-controller | ODH Model Controller, omc | 1 | 2 | 46 | [odh-model-controller.md](components/odh-model-controller.md) |
 | ogx-k8s-operator |  | 2 | 2 | 21 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | openvino_model_server |  | 0 | 0 | 42 | [openvino_model_server.md](components/openvino_model_server.md) |
-| pipelines-components |  | 0 | 0 | 65 | [pipelines-components.md](components/pipelines-components.md) |
+| pipelines-components |  | 0 | 0 | 77 | [pipelines-components.md](components/pipelines-components.md) |
 | rest-proxy |  | 0 | 0 | 6 | [rest-proxy.md](components/rest-proxy.md) |
 | rhds-llama-stack-distribution |  | 0 | 0 | 0 | [rhds-llama-stack-distribution.md](components/rhds-llama-stack-distribution.md) |
 | rhods-operator | opendatahub-operator, RHODS operator | 1 | 3 | 71 | [rhods-operator.md](components/rhods-operator.md) |
@@ -100,6 +100,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | training-operator | Training operator, Kubeflow Training operator | 6 | 1 | 22 | [training-operator.md](components/training-operator.md) |
 | trustyai-explainability |  | 0 | 0 | 3 | [trustyai-explainability.md](components/trustyai-explainability.md) |
 | trustyai-service-operator | TrustyAI operator | 5 | 3 | 19 | [trustyai-service-operator.md](components/trustyai-service-operator.md) |
+| vllm |  | 0 | 0 | 0 | [vllm.md](components/vllm.md) |
 | vllm-cpu |  | 0 | 1 | 199 | [vllm-cpu.md](components/vllm-cpu.md) |
 | vllm-gaudi |  | 0 | 0 | 16 | [vllm-gaudi.md](components/vllm-gaudi.md) |
 | vllm-orchestrator-gateway |  | 0 | 0 | 0 | [vllm-orchestrator-gateway.md](components/vllm-orchestrator-gateway.md) |

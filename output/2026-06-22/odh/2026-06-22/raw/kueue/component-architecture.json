@@ -2,7 +2,7 @@
   "component": "kueue",
   "repo": "opendatahub-io/kueue",
   "commit_sha": "97024bd289d2cc5c9369b40d9f3483ab1483143d",
-  "extracted_at": "2026-06-22T05:05:31Z",
+  "extracted_at": "2026-06-22T11:25:28Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -1181,18 +1181,6 @@
     },
     {
       "name": "ClusterQueueWebhook-webhook",
-      "type": "validating",
-      "path": "/validate-kueue-x-k8s-io-v1beta1-clusterqueue",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "ClusterQueueWebhook"
-    },
-    {
-      "name": "ClusterQueueWebhook-webhook",
       "type": "mutating",
       "path": "/mutate-kueue-x-k8s-io-v1beta1-clusterqueue",
       "sources": [
@@ -1204,9 +1192,21 @@
       "target_type": "ClusterQueueWebhook"
     },
     {
+      "name": "ClusterQueueWebhook-webhook",
+      "type": "validating",
+      "path": "/validate-kueue-x-k8s-io-v1beta1-clusterqueue",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "ClusterQueueWebhook"
+    },
+    {
       "name": "JobControl-webhook",
-      "type": "mutating",
-      "path": "/mutate-kubeflow-org-v1-tfjob",
+      "type": "validating",
+      "path": "/validate-kubeflow-org-v1-xgboostjob",
       "sources": [
         {
           "type": "go_ast",
@@ -1219,6 +1219,30 @@
       "name": "JobControl-webhook",
       "type": "mutating",
       "path": "/mutate-kubeflow-org-v1-pytorchjob",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "JobControl"
+    },
+    {
+      "name": "JobControl-webhook",
+      "type": "mutating",
+      "path": "/mutate-kubeflow-org-v1-xgboostjob",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "JobControl"
+    },
+    {
+      "name": "JobControl-webhook",
+      "type": "validating",
+      "path": "/validate-kubeflow-org-v1-tfjob",
       "sources": [
         {
           "type": "go_ast",
@@ -1254,19 +1278,7 @@
     {
       "name": "JobControl-webhook",
       "type": "mutating",
-      "path": "/mutate-kubeflow-org-v1-xgboostjob",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "JobControl"
-    },
-    {
-      "name": "JobControl-webhook",
-      "type": "validating",
-      "path": "/validate-kubeflow-org-v1-xgboostjob",
+      "path": "/mutate-kubeflow-org-v1-tfjob",
       "sources": [
         {
           "type": "go_ast",
@@ -1279,18 +1291,6 @@
       "name": "JobControl-webhook",
       "type": "mutating",
       "path": "/mutate-kubeflow-org-v1-paddlejob",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "JobControl"
-    },
-    {
-      "name": "JobControl-webhook",
-      "type": "validating",
-      "path": "/validate-kubeflow-org-v1-tfjob",
       "sources": [
         {
           "type": "go_ast",
@@ -1360,8 +1360,8 @@
     },
     {
       "name": "MpiJobWebhook-webhook",
-      "type": "validating",
-      "path": "/validate-kubeflow-org-v2beta1-mpijob",
+      "type": "mutating",
+      "path": "/mutate-kubeflow-org-v2beta1-mpijob",
       "sources": [
         {
           "type": "go_ast",
@@ -1372,8 +1372,8 @@
     },
     {
       "name": "MpiJobWebhook-webhook",
-      "type": "mutating",
-      "path": "/mutate-kubeflow-org-v2beta1-mpijob",
+      "type": "validating",
+      "path": "/validate-kubeflow-org-v2beta1-mpijob",
       "sources": [
         {
           "type": "go_ast",
@@ -1514,18 +1514,6 @@
     },
     {
       "name": "ResourceFlavorWebhook-webhook",
-      "type": "mutating",
-      "path": "/mutate-kueue-x-k8s-io-v1beta1-resourceflavor",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "ResourceFlavorWebhook"
-    },
-    {
-      "name": "ResourceFlavorWebhook-webhook",
       "type": "validating",
       "path": "/validate-kueue-x-k8s-io-v1beta1-resourceflavor",
       "sources": [
@@ -1537,16 +1525,16 @@
       "target_type": "ResourceFlavorWebhook"
     },
     {
-      "name": "Webhook-webhook",
-      "type": "validating",
-      "path": "/validate-leaderworkerset-x-k8s-io-v1-leaderworkerset",
+      "name": "ResourceFlavorWebhook-webhook",
+      "type": "mutating",
+      "path": "/mutate-kueue-x-k8s-io-v1beta1-resourceflavor",
       "sources": [
         {
           "type": "go_ast",
           "file": ""
         }
       ],
-      "target_type": "Webhook"
+      "target_type": "ResourceFlavorWebhook"
     },
     {
       "name": "Webhook-webhook",
@@ -1578,6 +1566,18 @@
             "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/statefulset/statefulset_webhook.go",
             "line": 85
           }
+        }
+      ],
+      "target_type": "Webhook"
+    },
+    {
+      "name": "Webhook-webhook",
+      "type": "validating",
+      "path": "/validate-apps-v1-statefulset",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
         }
       ],
       "target_type": "Webhook"
@@ -1619,7 +1619,7 @@
     {
       "name": "Webhook-webhook",
       "type": "validating",
-      "path": "/validate-apps-v1-statefulset",
+      "path": "/validate-apps-v1-deployment",
       "sources": [
         {
           "type": "go_ast",
@@ -1631,7 +1631,7 @@
     {
       "name": "Webhook-webhook",
       "type": "validating",
-      "path": "/validate-apps-v1-deployment",
+      "path": "/validate-leaderworkerset-x-k8s-io-v1-leaderworkerset",
       "sources": [
         {
           "type": "go_ast",

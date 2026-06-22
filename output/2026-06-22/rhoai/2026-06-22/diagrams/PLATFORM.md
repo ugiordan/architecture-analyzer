@@ -8,7 +8,7 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 63 |
+| Components | 64 |
 | CRDs | 69 |
 | Services | 74 |
 | Secrets | 47 |
@@ -76,6 +76,7 @@
 | training-operator |
 | trustyai-explainability |
 | trustyai-service-operator |
+| vllm |
 | vllm-cpu |
 | vllm-gaudi |
 | vllm-orchestrator-gateway |

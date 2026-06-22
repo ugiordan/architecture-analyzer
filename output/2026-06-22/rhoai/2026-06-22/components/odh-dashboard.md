@@ -11,7 +11,7 @@
 | Repository | red-hat-data-services/odh-dashboard |
 | Aliases | ODH Dashboard |
 | Commit | 159a6b8f61e7663946e2ade9aeba4d61bc651cc6 |
-| Extracted | 2026-06-22T05:03:02Z |
+| Extracted | 2026-06-22T11:24:22Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -46,8 +46,8 @@
 | PUT | /api/v1/update-subscription/{name} |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/maas/bff/openapi.yaml) |
 | GET | /api/v1/user |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/maas/bff/openapi.yaml) |
 | GET | /api/v1/view-policy/{name} |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/maas/bff/openapi.yaml) |
-| GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /healthcheck |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/maas/bff/openapi.yaml) |
+| GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /namespaces |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | POST | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/159a6b8f61e7663946e2ade9aeba4d61bc651cc6/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/codeflare-sdk |
 | Commit | 13658b82a7fd1bb1ba656d7e3d9a27a608cd49e4 |
-| Extracted | 2026-06-22T05:07:58Z |
+| Extracted | 2026-06-22T11:28:45Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

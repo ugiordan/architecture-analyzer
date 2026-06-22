@@ -11,7 +11,7 @@
 | Repository | trustyai-explainability/trustyai-service-operator |
 | Aliases | TrustyAI operator |
 | Commit | b4eaaabfffdb342235ad600156ae667bf0cb758e |
-| Extracted | 2026-06-22T05:03:10Z |
+| Extracted | 2026-06-22T11:23:26Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/agents-operator |
 | Commit | 6f9fd95688df89298061aa2e1ac6b6f7576b5f7b |
-| Extracted | 2026-06-22T05:02:30Z |
+| Extracted | 2026-06-22T11:21:33Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

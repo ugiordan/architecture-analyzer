@@ -1,5 +1,5 @@
 {
-  "aggregated_at": "2026-06-22T05:11:21Z",
+  "aggregated_at": "2026-06-22T11:33:01Z",
   "aliases": {
     "CodeFlare operator": "codeflare-operator",
     "DSP": "data-science-pipelines",
@@ -32,7 +32,7 @@
         "crds": "none",
         "deployments": "none",
         "dockerfiles": "none",
-        "external_connections": "none",
+        "external_connections": "rich",
         "ingress_routing": "none",
         "kustomize_overlay_refs": "none",
         "label_contracts": "none",
@@ -116,7 +116,63 @@
           }
         ]
       },
-      "extracted_at": "2026-06-22T05:07:45Z",
+      "external_connections": [
+        {
+          "service": "ogx",
+          "source": "ai4rag/core/experiment/experiment.py:11",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "ai4rag/rag/embedding/ogx.py:9",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "ai4rag/rag/foundation_models/ogx.py:8",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "ai4rag/rag/vector_store/get_vector_store.py:5",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "ai4rag/rag/vector_store/ogx.py:5",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "ai4rag/search_space/prepare/ogx_utils.py:7",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "ai4rag/search_space/prepare/prepare_search_space.py:7",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "dev_utils/run_experiment.py:27",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "dev_utils/run_experiment.py:9",
+          "target": "",
+          "type": "api"
+        }
+      ],
+      "extracted_at": "2026-06-22T11:28:26Z",
       "helm": {},
       "python_k8s_calls": [
         {
@@ -171,7 +227,7 @@
       "rbac": {},
       "repo": "IBM/ai4rag",
       "schema_version": "2",
-      "summary": "ai4rag is a Kubernetes component. 10 Python package dependencies (10 required), categories: 1 data, 1 serialization. Python k8s client with 8 API call(s)."
+      "summary": "ai4rag is a Kubernetes component. connecting to external services: ogx. 10 Python package dependencies (10 required), categories: 1 data, 1 serialization. Python k8s client with 8 API call(s)."
     },
     {
       "analyzer_version": "dev",
@@ -572,7 +628,7 @@
           "stages": 1
         }
       ],
-      "extracted_at": "2026-06-22T05:07:20Z",
+      "extracted_at": "2026-06-22T11:28:08Z",
       "helm": {},
       "horizontal_pod_autoscalers": [
         {
@@ -1809,7 +1865,7 @@
           "type": "api"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:30Z",
+      "extracted_at": "2026-06-22T11:21:33Z",
       "helm": {
         "chart_name": "kagenti-operator-chart",
         "chart_version": "0.2.0-alpha.24",
@@ -10926,7 +10982,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:40Z",
+      "extracted_at": "2026-06-22T11:26:12Z",
       "go_ast_mode": "full",
       "helm": {},
       "http_endpoints": [
@@ -11363,37 +11419,12 @@
         {
           "method": "*",
           "path": "DELETE",
-          "source": "pkg/apiclient/workflow/workflow.pb.gw.go:1841"
-        },
-        {
-          "method": "*",
-          "path": "DELETE",
-          "source": "pkg/apiclient/eventsource/eventsource.pb.gw.go:748"
-        },
-        {
-          "method": "*",
-          "path": "DELETE",
           "source": "pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:1043"
         },
         {
           "method": "*",
           "path": "DELETE",
           "source": "pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:619"
-        },
-        {
-          "method": "*",
-          "path": "DELETE",
-          "source": "pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:833"
-        },
-        {
-          "method": "*",
-          "path": "DELETE",
-          "source": "pkg/apiclient/sensor/sensor.pb.gw.go:639"
-        },
-        {
-          "method": "*",
-          "path": "DELETE",
-          "source": "pkg/apiclient/sensor/sensor.pb.gw.go:826"
         },
         {
           "method": "*",
@@ -11408,12 +11439,37 @@
         {
           "method": "*",
           "path": "DELETE",
+          "source": "pkg/apiclient/sensor/sensor.pb.gw.go:639"
+        },
+        {
+          "method": "*",
+          "path": "DELETE",
+          "source": "pkg/apiclient/workflow/workflow.pb.gw.go:1841"
+        },
+        {
+          "method": "*",
+          "path": "DELETE",
           "source": "pkg/apiclient/eventsource/eventsource.pb.gw.go:584"
         },
         {
           "method": "*",
           "path": "DELETE",
+          "source": "pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:833"
+        },
+        {
+          "method": "*",
+          "path": "DELETE",
           "source": "pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go:480"
+        },
+        {
+          "method": "*",
+          "path": "DELETE",
+          "source": "pkg/apiclient/sensor/sensor.pb.gw.go:826"
+        },
+        {
+          "method": "*",
+          "path": "DELETE",
+          "source": "pkg/apiclient/eventsource/eventsource.pb.gw.go:748"
         },
         {
           "method": "*",
@@ -19213,7 +19269,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:18Z",
+      "extracted_at": "2026-06-22T11:25:56Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "batch-gateway",
@@ -21609,7 +21665,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:34Z",
+      "extracted_at": "2026-06-22T11:21:28Z",
       "go_ast_mode": "full",
       "helm": {},
       "ingress_routing": [
@@ -25060,7 +25116,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:40Z",
+      "extracted_at": "2026-06-22T11:21:39Z",
       "go_ast_mode": "full",
       "helm": {},
       "ingress_routing": [
@@ -31606,7 +31662,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:45Z",
+      "extracted_at": "2026-06-22T11:21:38Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "kubeflow-pipelines",
@@ -46127,7 +46183,7 @@
     },
     {
       "analyzer_version": "dev",
-      "commit_sha": "2241bf3ad381185ceffffb7e1a0b99853ea03a20",
+      "commit_sha": "36f900392edb786b36597c340d88c46e24b5fc3a",
       "component": "distributed-workloads",
       "data_coverage": {
         "api_types": "none",
@@ -47194,7 +47250,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-06-22T05:05:10Z",
+      "extracted_at": "2026-06-22T11:25:17Z",
       "go_ast_mode": "full",
       "helm": {},
       "python_k8s_calls": [
@@ -47687,7 +47743,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:06Z",
+      "extracted_at": "2026-06-22T11:25:44Z",
       "go_ast_mode": "full",
       "helm": {},
       "http_endpoints": [
@@ -51405,7 +51461,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:05:01Z",
+      "extracted_at": "2026-06-22T11:25:04Z",
       "go_ast_mode": "syntax-only",
       "go_ast_warning": "majority of packages had type-checking errors, using syntax-only mode",
       "helm": {
@@ -54721,7 +54777,7 @@
           "user": "orchestr8"
         }
       ],
-      "extracted_at": "2026-06-22T05:05:25Z",
+      "extracted_at": "2026-06-22T11:25:18Z",
       "helm": {},
       "rbac": {},
       "repo": "opendatahub-io/fms-guardrails-orchestrator",
@@ -54887,7 +54943,7 @@
           "stages": 3
         }
       ],
-      "extracted_at": "2026-06-22T05:05:29Z",
+      "extracted_at": "2026-06-22T11:25:28Z",
       "helm": {},
       "label_contracts": [
         {
@@ -58612,8 +58668,6 @@
           "validation_rules": [
             "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
             "!(has(self.worker) \u0026\u0026 has(self.scaling))",
-            "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
-            "!(has(self.worker) \u0026\u0026 has(self.scaling))",
             "has(self.wva)",
             "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
             "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
@@ -58622,6 +58676,8 @@
             "has(self.hpa) || has(self.keda)",
             "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
             "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+            "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+            "!(has(self.worker) \u0026\u0026 has(self.scaling))",
             "has(self.wva)",
             "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
             "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
@@ -58667,6 +58723,15 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+            "self.protocol == 'GRPC' ? has(self.grpc) : true",
+            "has(self.grpc) ? self.protocol == 'GRPC' : true",
+            "self.protocol == 'HTTP' ? has(self.http) : true",
+            "has(self.http) ? self.protocol == 'HTTP' : true",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -58674,17 +58739,8 @@
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "self.protocol == 'GRPC' ? has(self.grpc) : true",
-            "has(self.grpc) ? self.protocol == 'GRPC' : true",
-            "self.protocol == 'HTTP' ? has(self.http) : true",
-            "has(self.http) ? self.protocol == 'HTTP' : true",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
             "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
             "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -58707,15 +58763,15 @@
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.numerator \u003c= self.denominator",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-            "self.numerator \u003c= self.denominator",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -58746,14 +58802,6 @@
           "validation_rules": [
             "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
             "!(has(self.worker) \u0026\u0026 has(self.scaling))",
-            "has(self.wva)",
-            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-            "has(self.hpa) || has(self.keda)",
-            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
             "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
             "!(has(self.worker) \u0026\u0026 has(self.scaling))",
             "has(self.wva)",
@@ -58764,12 +58812,15 @@
             "has(self.hpa) || has(self.keda)",
             "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
             "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+            "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
+            "self.kind != 'Service' || has(self.port)",
             "(self.size() \u003e 0 ? self[0].matches.size() : 0) + (self.size() \u003e 1 ? self[1].matches.size() : 0) + (self.size() \u003e 2 ? self[2].matches.size() : 0) + (self.size() \u003e 3 ? self[3].matches.size() : 0) + (self.size() \u003e 4 ? self[4].matches.size() : 0) + (self.size() \u003e 5 ? self[5].matches.size() : 0) + (self.size() \u003e 6 ? self[6].matches.size() : 0) + (self.size() \u003e 7 ? self[7].matches.size() : 0) + (self.size() \u003e 8 ? self[8].matches.size() : 0) + (self.size() \u003e 9 ? self[9].matches.size() : 0) + (self.size() \u003e 10 ? self[10].matches.size() : 0) + (self.size() \u003e 11 ? self[11].matches.size() : 0) + (self.size() \u003e 12 ? self[12].matches.size() : 0) + (self.size() \u003e 13 ? self[13].matches.size() : 0) + (self.size() \u003e 14 ? self[14].matches.size() : 0) + (self.size() \u003e 15 ? self[15].matches.size() : 0) \u003c= 128",
             "(has(self.backendRefs) \u0026\u0026 size(self.backendRefs) \u003e 0) ? (!has(self.filters) || self.filters.all(f, !has(f.requestRedirect))): true",
             "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
+            "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
             "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
@@ -58789,6 +58840,17 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+            "self.protocol == 'GRPC' ? has(self.grpc) : true",
+            "has(self.grpc) ? self.protocol == 'GRPC' : true",
+            "self.protocol == 'HTTP' ? has(self.http) : true",
+            "has(self.http) ? self.protocol == 'HTTP' : true",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
@@ -58796,17 +58858,6 @@
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "self.protocol == 'GRPC' ? has(self.grpc) : true",
-            "has(self.grpc) ? self.protocol == 'GRPC' : true",
-            "self.protocol == 'HTTP' ? has(self.http) : true",
-            "has(self.http) ? self.protocol == 'HTTP' : true",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
             "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
             "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -58824,10 +58875,6 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
@@ -58838,9 +58885,18 @@
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
-            "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
-            "self.kind != 'Service' || has(self.port)"
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+            "has(self.wva)",
+            "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+            "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+            "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+            "has(self.hpa) || has(self.keda)",
+            "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+            "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0"
           ],
           "version": "v1alpha2",
           "versions": [
@@ -62145,7 +62201,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:47Z",
+      "extracted_at": "2026-06-22T11:21:43Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "kserve-crd",
@@ -64532,14 +64588,14 @@
           "type": "annotation"
         },
         {
-          "context": "statefulset-template",
+          "context": "deployment-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.6.0-rc0/kfserving_kubeflow.yaml",
           "type": "annotation"
         },
         {
-          "context": "deployment-template",
+          "context": "statefulset-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.6.0-rc0/kfserving_kubeflow.yaml",
@@ -64560,14 +64616,14 @@
           "type": "annotation"
         },
         {
-          "context": "deployment-template",
+          "context": "statefulset-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.7.0-rc0/kserve_kubeflow.yaml",
           "type": "annotation"
         },
         {
-          "context": "statefulset-template",
+          "context": "deployment-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.7.0-rc0/kserve_kubeflow.yaml",
@@ -80843,7 +80899,6 @@
             "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
-            "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
             "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
@@ -80865,10 +80920,6 @@
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "self.protocol == 'GRPC' ? has(self.grpc) : true",
             "has(self.grpc) ? self.protocol == 'GRPC' : true",
             "self.protocol == 'HTTP' ? has(self.http) : true",
@@ -80877,6 +80928,10 @@
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -80898,8 +80953,11 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "self.protocol == 'GRPC' ? has(self.grpc) : true",
+            "has(self.grpc) ? self.protocol == 'GRPC' : true",
+            "self.protocol == 'HTTP' ? has(self.http) : true",
+            "has(self.http) ? self.protocol == 'HTTP' : true",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "!(has(self.percent) \u0026\u0026 has(self.fraction))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.numerator \u003c= self.denominator",
@@ -80907,15 +80965,12 @@
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "self.protocol == 'GRPC' ? has(self.grpc) : true",
-            "has(self.grpc) ? self.protocol == 'GRPC' : true",
-            "self.protocol == 'HTTP' ? has(self.http) : true",
-            "has(self.http) ? self.protocol == 'HTTP' : true",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
             "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
             "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
             "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
@@ -80927,6 +80982,7 @@
             "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/.') : true",
             "self.type in ['Exact','PathPrefix'] || self.type == 'RegularExpression'",
             "(self.type in ['Exact','PathPrefix']) ? self.value.matches(r\"\"\"^(?:[-A-Za-z0-9/._~!$\u0026'()*+,;=:@]|[%][0-9a-fA-F]{2})+$\"\"\") : true",
+            "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
             "self.kind != 'Service' || has(self.port)",
             "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
             "has(self.wva)",
@@ -80975,37 +81031,6 @@
             "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
             "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
-            "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
-            "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
-            "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
-            "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
-            "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
-            "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
-            "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
-            "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
-            "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
-            "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
-            "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
-            "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
-            "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
-            "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
-            "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
-            "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
-            "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "self.numerator \u003c= self.denominator",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-            "self.protocol == 'GRPC' ? has(self.grpc) : true",
-            "has(self.grpc) ? self.protocol == 'GRPC' : true",
-            "self.protocol == 'HTTP' ? has(self.http) : true",
-            "has(self.http) ? self.protocol == 'HTTP' : true",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
             "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
@@ -81026,8 +81051,46 @@
             "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
             "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
             "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
             "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "self.protocol == 'GRPC' ? has(self.grpc) : true",
+            "has(self.grpc) ? self.protocol == 'GRPC' : true",
+            "self.protocol == 'HTTP' ? has(self.http) : true",
+            "has(self.http) ? self.protocol == 'HTTP' : true",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+            "self.numerator \u003c= self.denominator",
+            "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
+            "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
+            "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
+            "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
+            "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
+            "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
+            "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
+            "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
+            "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
+            "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
+            "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
+            "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
+            "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
+            "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
+            "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
+            "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
+            "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+            "self.numerator \u003c= self.denominator",
+            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
             "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
             "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
             "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -81037,13 +81100,6 @@
             "self.protocol == 'HTTP' ? has(self.http) : true",
             "has(self.http) ? self.protocol == 'HTTP' : true",
             "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-            "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-            "self.numerator \u003c= self.denominator",
-            "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-            "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-            "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-            "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
             "self.kind != 'Service' || has(self.port)",
             "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
             "has(self.wva)",
@@ -84633,7 +84689,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:07:36Z",
+      "extracted_at": "2026-06-22T11:27:43Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "kserve-crd",
@@ -87608,14 +87664,14 @@
           "type": "annotation"
         },
         {
-          "context": "deployment-template",
+          "context": "statefulset-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.7.0-rc0/kserve_kubeflow.yaml",
           "type": "annotation"
         },
         {
-          "context": "statefulset-template",
+          "context": "deployment-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.7.0-rc0/kserve_kubeflow.yaml",
@@ -87643,14 +87699,14 @@
           "type": "annotation"
         },
         {
-          "context": "statefulset-template",
+          "context": "deployment-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.9.0-rc0/kserve_kubeflow.yaml",
           "type": "annotation"
         },
         {
-          "context": "deployment-template",
+          "context": "statefulset-template",
           "integration": "Istio",
           "label": "sidecar.istio.io/inject",
           "source": "install/v0.9.0-rc0/kserve_kubeflow.yaml",
@@ -101636,7 +101692,7 @@
           "type": "database"
         }
       ],
-      "extracted_at": "2026-06-22T05:04:59Z",
+      "extracted_at": "2026-06-22T11:25:04Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "kubernetes",
@@ -102570,7 +102626,7 @@
           "user": "65534"
         }
       ],
-      "extracted_at": "2026-06-22T05:07:11Z",
+      "extracted_at": "2026-06-22T11:27:35Z",
       "go_ast_mode": "full",
       "helm": {},
       "http_endpoints": [
@@ -103417,7 +103473,7 @@
           "type": "api"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:25Z",
+      "extracted_at": "2026-06-22T11:21:24Z",
       "helm": {},
       "label_contracts": [
         {
@@ -104935,7 +104991,7 @@
         ],
         "go_version": "1.24.0",
         "issues": [
-          "k8s.io modules span multiple minor versions: v0.33 (k8s.io/cli-runtime, k8s.io/kubectl); v0.34 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/apiserver, k8s.io/client-go, k8s.io/code-generator)"
+          "k8s.io modules span multiple minor versions: v0.34 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/apiserver, k8s.io/client-go, k8s.io/code-generator); v0.33 (k8s.io/cli-runtime, k8s.io/kubectl)"
         ],
         "replace_directives": [
           {
@@ -105518,7 +105574,7 @@
           "type": "grpc"
         }
       ],
-      "extracted_at": "2026-06-22T05:07:28Z",
+      "extracted_at": "2026-06-22T11:27:56Z",
       "feature_gates": [
         {
           "default": true,
@@ -113888,7 +113944,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-06-22T05:05:31Z",
+      "extracted_at": "2026-06-22T11:25:28Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "kueue",
@@ -118919,18 +118975,6 @@
         },
         {
           "name": "ClusterQueueWebhook-webhook",
-          "path": "/validate-kueue-x-k8s-io-v1beta1-clusterqueue",
-          "sources": [
-            {
-              "file": "",
-              "type": "go_ast"
-            }
-          ],
-          "target_type": "ClusterQueueWebhook",
-          "type": "validating"
-        },
-        {
-          "name": "ClusterQueueWebhook-webhook",
           "path": "/mutate-kueue-x-k8s-io-v1beta1-clusterqueue",
           "sources": [
             {
@@ -118942,8 +118986,20 @@
           "type": "mutating"
         },
         {
+          "name": "ClusterQueueWebhook-webhook",
+          "path": "/validate-kueue-x-k8s-io-v1beta1-clusterqueue",
+          "sources": [
+            {
+              "file": "",
+              "type": "go_ast"
+            }
+          ],
+          "target_type": "ClusterQueueWebhook",
+          "type": "validating"
+        },
+        {
           "name": "JobControl-webhook",
-          "path": "/mutate-kubeflow-org-v1-tfjob",
+          "path": "/validate-kubeflow-org-v1-xgboostjob",
           "sources": [
             {
               "file": "",
@@ -118951,7 +119007,7 @@
             }
           ],
           "target_type": "JobControl",
-          "type": "mutating"
+          "type": "validating"
         },
         {
           "name": "JobControl-webhook",
@@ -118964,6 +119020,30 @@
           ],
           "target_type": "JobControl",
           "type": "mutating"
+        },
+        {
+          "name": "JobControl-webhook",
+          "path": "/mutate-kubeflow-org-v1-xgboostjob",
+          "sources": [
+            {
+              "file": "",
+              "type": "go_ast"
+            }
+          ],
+          "target_type": "JobControl",
+          "type": "mutating"
+        },
+        {
+          "name": "JobControl-webhook",
+          "path": "/validate-kubeflow-org-v1-tfjob",
+          "sources": [
+            {
+              "file": "",
+              "type": "go_ast"
+            }
+          ],
+          "target_type": "JobControl",
+          "type": "validating"
         },
         {
           "name": "JobControl-webhook",
@@ -118991,7 +119071,7 @@
         },
         {
           "name": "JobControl-webhook",
-          "path": "/mutate-kubeflow-org-v1-xgboostjob",
+          "path": "/mutate-kubeflow-org-v1-tfjob",
           "sources": [
             {
               "file": "",
@@ -119000,18 +119080,6 @@
           ],
           "target_type": "JobControl",
           "type": "mutating"
-        },
-        {
-          "name": "JobControl-webhook",
-          "path": "/validate-kubeflow-org-v1-xgboostjob",
-          "sources": [
-            {
-              "file": "",
-              "type": "go_ast"
-            }
-          ],
-          "target_type": "JobControl",
-          "type": "validating"
         },
         {
           "name": "JobControl-webhook",
@@ -119024,18 +119092,6 @@
           ],
           "target_type": "JobControl",
           "type": "mutating"
-        },
-        {
-          "name": "JobControl-webhook",
-          "path": "/validate-kubeflow-org-v1-tfjob",
-          "sources": [
-            {
-              "file": "",
-              "type": "go_ast"
-            }
-          ],
-          "target_type": "JobControl",
-          "type": "validating"
         },
         {
           "name": "JobSetWebhook-webhook",
@@ -119098,18 +119154,6 @@
         },
         {
           "name": "MpiJobWebhook-webhook",
-          "path": "/validate-kubeflow-org-v2beta1-mpijob",
-          "sources": [
-            {
-              "file": "",
-              "type": "go_ast"
-            }
-          ],
-          "target_type": "MpiJobWebhook",
-          "type": "validating"
-        },
-        {
-          "name": "MpiJobWebhook-webhook",
           "path": "/mutate-kubeflow-org-v2beta1-mpijob",
           "sources": [
             {
@@ -119119,6 +119163,18 @@
           ],
           "target_type": "MpiJobWebhook",
           "type": "mutating"
+        },
+        {
+          "name": "MpiJobWebhook-webhook",
+          "path": "/validate-kubeflow-org-v2beta1-mpijob",
+          "sources": [
+            {
+              "file": "",
+              "type": "go_ast"
+            }
+          ],
+          "target_type": "MpiJobWebhook",
+          "type": "validating"
         },
         {
           "name": "Pod-webhook",
@@ -119252,18 +119308,6 @@
         },
         {
           "name": "ResourceFlavorWebhook-webhook",
-          "path": "/mutate-kueue-x-k8s-io-v1beta1-resourceflavor",
-          "sources": [
-            {
-              "file": "",
-              "type": "go_ast"
-            }
-          ],
-          "target_type": "ResourceFlavorWebhook",
-          "type": "mutating"
-        },
-        {
-          "name": "ResourceFlavorWebhook-webhook",
           "path": "/validate-kueue-x-k8s-io-v1beta1-resourceflavor",
           "sources": [
             {
@@ -119275,16 +119319,16 @@
           "type": "validating"
         },
         {
-          "name": "Webhook-webhook",
-          "path": "/validate-leaderworkerset-x-k8s-io-v1-leaderworkerset",
+          "name": "ResourceFlavorWebhook-webhook",
+          "path": "/mutate-kueue-x-k8s-io-v1beta1-resourceflavor",
           "sources": [
             {
               "file": "",
               "type": "go_ast"
             }
           ],
-          "target_type": "Webhook",
-          "type": "validating"
+          "target_type": "ResourceFlavorWebhook",
+          "type": "mutating"
         },
         {
           "mutations": [
@@ -119319,6 +119363,18 @@
           ],
           "target_type": "Webhook",
           "type": "mutating"
+        },
+        {
+          "name": "Webhook-webhook",
+          "path": "/validate-apps-v1-statefulset",
+          "sources": [
+            {
+              "file": "",
+              "type": "go_ast"
+            }
+          ],
+          "target_type": "Webhook",
+          "type": "validating"
         },
         {
           "mutations": [
@@ -119356,7 +119412,7 @@
         },
         {
           "name": "Webhook-webhook",
-          "path": "/validate-apps-v1-statefulset",
+          "path": "/validate-apps-v1-deployment",
           "sources": [
             {
               "file": "",
@@ -119368,7 +119424,7 @@
         },
         {
           "name": "Webhook-webhook",
-          "path": "/validate-apps-v1-deployment",
+          "path": "/validate-leaderworkerset-x-k8s-io-v1-leaderworkerset",
           "sources": [
             {
               "file": "",
@@ -120805,7 +120861,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:36Z",
+      "extracted_at": "2026-06-22T11:26:30Z",
       "helm": {},
       "python_k8s_calls": [
         {
@@ -120885,7 +120941,7 @@
     },
     {
       "analyzer_version": "dev",
-      "commit_sha": "45fa6b93966f8df33e7c8358cd363339b5e51f81",
+      "commit_sha": "24eae1c620c941b0f13cab42fc7f1a8ba882eef9",
       "component": "llama-stack",
       "component_refs": [
         {
@@ -121321,6 +121377,26 @@
           "type": "api"
         },
         {
+          "function": "ogx_client",
+          "service": "ogx",
+          "source": "client-sdks/openapi/templates/python/lib/cli/ogx_client.py:79",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "service": "ogx",
+          "source": "src/ogx/core/library_client.py:41",
+          "target": "",
+          "type": "api"
+        },
+        {
+          "function": "patch_httpx_for_test_id",
+          "service": "ogx",
+          "source": "src/ogx/testing/api_recorder.py:320",
+          "target": "",
+          "type": "api"
+        },
+        {
           "function": "create_client",
           "service": "openai",
           "source": "benchmarking/rag/lib/client.py:27",
@@ -121701,7 +121777,7 @@
         {
           "function": "_extract_provider_metadata",
           "service": "urllib",
-          "source": "src/ogx/testing/api_recorder.py:1107",
+          "source": "src/ogx/testing/api_recorder.py:1120",
           "target": "",
           "type": "api"
         },
@@ -121755,7 +121831,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:19Z",
+      "extracted_at": "2026-06-22T11:26:18Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -122883,7 +122959,7 @@
           "api": "CoreV1Api",
           "operation": "get",
           "resource": "type_hints",
-          "source": "src/ogx/core/library_client.py:740"
+          "source": "src/ogx/core/library_client.py:954"
         },
         {
           "api": "CoreV1Api",
@@ -123069,11 +123145,11 @@
           "type": "python-source"
         }
       ],
-      "summary": "llama-stack is a Kubernetes component. exposing 1 service(s) on ports: 8081. connecting to external services: aiohttp, anthropic, chromadb, cohere, elasticsearch, httpx, milvus, mongodb, openai, qdrant, redis, requests, s3, sqlalchemy, sqlite, urllib. runtime dependencies: OpenTelemetry Collector, Redis, kubernetes. 12 Python package dependencies (12 required), categories: 1 llm-sdk, 1 serialization, 1 tokenizer. Python k8s client with 134 API call(s). references components: model-registry (import), vllm (provider)."
+      "summary": "llama-stack is a Kubernetes component. exposing 1 service(s) on ports: 8081. connecting to external services: aiohttp, anthropic, chromadb, cohere, elasticsearch, httpx, milvus, mongodb, ogx, openai, qdrant, redis, requests, s3, sqlalchemy, sqlite, urllib. runtime dependencies: OpenTelemetry Collector, Redis, kubernetes. 12 Python package dependencies (12 required), categories: 1 llm-sdk, 1 serialization, 1 tokenizer. Python k8s client with 134 API call(s). references components: model-registry (import), vllm (provider)."
     },
     {
       "analyzer_version": "dev",
-      "commit_sha": "aec384902be17ad4e3e310ac0533fb19f46122b2",
+      "commit_sha": "bb5f430ed95e7e9f6a8da2bca09ce7ce5b88fe81",
       "component": "llm-d-inference-scheduler",
       "configmap_volumes": [
         {
@@ -124210,7 +124286,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:01Z",
+      "extracted_at": "2026-06-22T11:25:43Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "llm-d-router-gateway",
@@ -124352,14 +124428,14 @@
           "type": "label"
         },
         {
-          "context": "deployment-template",
+          "context": "deployment",
           "integration": "management relationship",
           "label": "app.kubernetes.io/managed-by",
           "source": "deploy/components/istio-control-plane/deployment.yaml",
           "type": "label"
         },
         {
-          "context": "deployment",
+          "context": "deployment-template",
           "integration": "management relationship",
           "label": "app.kubernetes.io/managed-by",
           "source": "deploy/components/istio-control-plane/deployment.yaml",
@@ -124377,13 +124453,6 @@
           "integration": "management relationship",
           "label": "app.kubernetes.io/managed-by",
           "source": "deploy/components/istio-control-plane/policies.yaml",
-          "type": "label"
-        },
-        {
-          "context": "clusterrole",
-          "integration": "management relationship",
-          "label": "app.kubernetes.io/managed-by",
-          "source": "deploy/components/istio-control-plane/rbac.yaml",
           "type": "label"
         },
         {
@@ -124408,6 +124477,13 @@
           "type": "label"
         },
         {
+          "context": "clusterrole",
+          "integration": "management relationship",
+          "label": "app.kubernetes.io/managed-by",
+          "source": "deploy/components/istio-control-plane/rbac.yaml",
+          "type": "label"
+        },
+        {
           "context": "serviceaccount",
           "integration": "management relationship",
           "label": "app.kubernetes.io/managed-by",
@@ -124422,14 +124498,14 @@
           "type": "label"
         },
         {
-          "context": "validatingwebhookconfiguration",
+          "context": "mutatingwebhookconfiguration",
           "integration": "management relationship",
           "label": "app.kubernetes.io/managed-by",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
           "type": "label"
         },
         {
-          "context": "mutatingwebhookconfiguration",
+          "context": "validatingwebhookconfiguration",
           "integration": "management relationship",
           "label": "app.kubernetes.io/managed-by",
           "source": "deploy/components/istio-control-plane/webhooks.yaml",
@@ -124450,14 +124526,14 @@
           "type": "label"
         },
         {
-          "context": "deployment",
+          "context": "deployment-template",
           "integration": "Istio",
           "label": "istio.io/rev",
           "source": "deploy/components/istio-control-plane/deployment.yaml",
           "type": "label"
         },
         {
-          "context": "deployment-template",
+          "context": "deployment",
           "integration": "Istio",
           "label": "istio.io/rev",
           "source": "deploy/components/istio-control-plane/deployment.yaml",
@@ -130687,7 +130763,7 @@
           "type": "database"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:05Z",
+      "extracted_at": "2026-06-22T11:25:46Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "pvc-evictor",
@@ -131610,7 +131686,7 @@
           "type": "api"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:04Z",
+      "extracted_at": "2026-06-22T11:25:35Z",
       "helm": {},
       "python_k8s_calls": [
         {
@@ -132976,7 +133052,7 @@
           "type": "api"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:36Z",
+      "extracted_at": "2026-06-22T11:21:30Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "mlflow",
@@ -139677,7 +139753,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:51Z",
+      "extracted_at": "2026-06-22T11:27:23Z",
       "helm": {
         "chart_name": "mlflow",
         "chart_version": "0.1.0",
@@ -143847,10 +143923,10 @@
           "validation_rules": [
             "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
             "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
+            "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
             "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
             "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-            "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
-            "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
+            "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
           ],
           "version": "v1beta1",
           "versions": [
@@ -144130,7 +144206,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:35Z",
+      "extracted_at": "2026-06-22T11:21:31Z",
       "go_ast_mode": "full",
       "helm": {},
       "ingress_routing": [
@@ -147609,7 +147685,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:38Z",
+      "extracted_at": "2026-06-22T11:21:57Z",
       "go_ast_mode": "full",
       "helm": {},
       "label_contracts": [
@@ -153975,7 +154051,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:45Z",
+      "extracted_at": "2026-06-22T11:21:37Z",
       "go_ast_mode": "full",
       "helm": {},
       "http_endpoints": [
@@ -156779,7 +156855,7 @@
           "user": "${USER}"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:30Z",
+      "extracted_at": "2026-06-22T11:22:11Z",
       "helm": {},
       "kustomize_overlay_refs": [
         {
@@ -157783,7 +157859,7 @@
           "user": "1001"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:27Z",
+      "extracted_at": "2026-06-22T11:21:22Z",
       "helm": {},
       "http_endpoints": [
         {
@@ -160695,7 +160771,7 @@
     },
     {
       "analyzer_version": "dev",
-      "commit_sha": "6bb306b1fa74696d419fb59573e9d23b98721604",
+      "commit_sha": "14c1914e44feb7cd90ca30aa8097cecef89cccaf",
       "component": "notebooks",
       "data_coverage": {
         "api_types": "none",
@@ -162223,7 +162299,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:33Z",
+      "extracted_at": "2026-06-22T11:21:57Z",
       "helm": {},
       "python_k8s_calls": [
         {
@@ -162574,7 +162650,7 @@
         "manager_file": "packages/notebooks/upstream/workspaces/controller/cmd/main.go",
         "memory_limit": "128Mi"
       },
-      "commit_sha": "d85e73cdb01fd887c85272f84a24c0749954a2c3",
+      "commit_sha": "c9552a362893ba17efc6219ac7676bf07a43c67a",
       "component": "odh-dashboard",
       "component_refs": [
         {
@@ -163856,7 +163932,7 @@
           }
         ],
         "issues": [
-          "k8s.io modules span multiple minor versions: v0.31 (k8s.io/api, k8s.io/apimachinery, k8s.io/apiserver, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.35 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go); v0.34 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.36 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go)"
+          "k8s.io modules span multiple minor versions: v0.35 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go); v0.34 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.36 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.31 (k8s.io/api, k8s.io/apimachinery, k8s.io/apiserver, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go)"
         ],
         "replace_directives": [
           {
@@ -167161,7 +167237,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:33Z",
+      "extracted_at": "2026-06-22T11:21:26Z",
       "helm": {
         "chart_name": "dashboard",
         "chart_version": "0.1.0",
@@ -167306,12 +167382,12 @@
         {
           "method": "GET",
           "path": "/healthcheck",
-          "source": "packages/notebooks/upstream/workspaces/backend/openapi/swagger.json"
+          "source": "packages/maas/bff/openapi.yaml"
         },
         {
           "method": "GET",
           "path": "/healthcheck",
-          "source": "packages/maas/bff/openapi.yaml"
+          "source": "packages/notebooks/upstream/workspaces/backend/openapi/swagger.json"
         },
         {
           "method": "GET",
@@ -179093,7 +179169,7 @@
           "user": "root"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:44Z",
+      "extracted_at": "2026-06-22T11:21:57Z",
       "go_ast_mode": "full",
       "helm": {},
       "http_endpoints": [
@@ -183567,29 +183643,6 @@
             "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'file_processors') || !has(self.providers.fileProcessors)",
             "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
             "!has(self.id) || self.id.size() \u003e 0",
-            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-            "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.baseUrl) || self.baseUrl.size() \u003e 0",
-            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-            "!has(self.id) || self.id.size() \u003e 0",
-            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-            "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.region) || self.region.size() \u003e 0",
-            "!has(self.endpointUrl) || self.endpointUrl.size() \u003e 0",
-            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-            "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.url) || self.url.size() \u003e 0",
-            "!has(self.http) || self.http.size() \u003e 0",
-            "!has(self.https) || self.https.size() \u003e 0",
-            "!has(self.cacert) || self.cacert.size() \u003e 0",
-            "!has(self.endpoint) || self.endpoint.size() \u003e 0",
-            "!has(self.projectId) || self.projectId.size() \u003e 0",
-            "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.url) || self.url.size() \u003e 0",
-            "!has(self.http) || self.http.size() \u003e 0",
-            "!has(self.https) || self.https.size() \u003e 0",
-            "!has(self.cacert) || self.cacert.size() \u003e 0",
             "!has(self.apiVersion) || self.apiVersion.size() \u003e 0",
             "!has(self.apiType) || self.apiType.size() \u003e 0",
             "!has(self.id) || self.id.size() \u003e 0",
@@ -183621,19 +183674,31 @@
             "!has(self.http) || self.http.size() \u003e 0",
             "!has(self.https) || self.https.size() \u003e 0",
             "!has(self.cacert) || self.cacert.size() \u003e 0",
+            "!has(self.id) || self.id.size() \u003e 0",
+            "!has(self.url) || self.url.size() \u003e 0",
+            "!has(self.http) || self.http.size() \u003e 0",
+            "!has(self.https) || self.https.size() \u003e 0",
+            "!has(self.cacert) || self.cacert.size() \u003e 0",
+            "!has(self.endpoint) || self.endpoint.size() \u003e 0",
+            "!has(self.projectId) || self.projectId.size() \u003e 0",
+            "!has(self.id) || self.id.size() \u003e 0",
+            "!has(self.url) || self.url.size() \u003e 0",
+            "!has(self.http) || self.http.size() \u003e 0",
+            "!has(self.https) || self.https.size() \u003e 0",
+            "!has(self.cacert) || self.cacert.size() \u003e 0",
             "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
             "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.defaultProviderId) || self.defaultProviderId.size() \u003e 0",
             "!has(self.summarizationPrompt) || self.summarizationPrompt.size() \u003e 0",
             "!has(self.summaryPrefix) || self.summaryPrefix.size() \u003e 0",
             "!has(self.summarizationModel) || self.summarizationModel.size() \u003e 0",
             "!has(self.tokenizerEncoding) || self.tokenizerEncoding.size() \u003e 0",
+            "!has(self.defaultProviderId) || self.defaultProviderId.size() \u003e 0",
+            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+            "!has(self.id) || self.id.size() \u003e 0",
             "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
             "!has(self.id) || self.id.size() \u003e 0",
             "!has(self.id) || self.id.size() \u003e 0",
             "!has(self.defaultProviderId) || self.defaultProviderId.size() \u003e 0",
-            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-            "!has(self.id) || self.id.size() \u003e 0",
             "!has(self.id) || self.id.size() \u003e 0",
             "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
             "!has(self.id) || self.id.size() \u003e 0",
@@ -183661,22 +183726,33 @@
             "!has(self.id) || self.id.size() \u003e 0",
             "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
             "!has(self.id) || self.id.size() \u003e 0",
-            "!has(self.provider) || self.provider.size() \u003e 0",
-            "!has(self.modelType) || self.modelType.size() \u003e 0",
-            "!has(self.quantization) || self.quantization.size() \u003e 0",
+            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+            "!has(self.id) || self.id.size() \u003e 0",
+            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+            "!has(self.id) || self.id.size() \u003e 0",
+            "!has(self.baseUrl) || self.baseUrl.size() \u003e 0",
+            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+            "!has(self.id) || self.id.size() \u003e 0",
+            "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+            "!has(self.id) || self.id.size() \u003e 0",
+            "!has(self.region) || self.region.size() \u003e 0",
+            "!has(self.endpointUrl) || self.endpointUrl.size() \u003e 0",
             "self.type != 'redis' || has(self.endpoint)",
             "!has(self.endpoint) || self.type == 'redis'",
             "!has(self.password) || self.type == 'redis'",
             "self.type != 'postgres' || has(self.connectionString)",
             "!has(self.connectionString) || self.type == 'postgres'",
+            "!(has(self.name) \u0026\u0026 has(self.image))",
+            "has(self.name) || has(self.image)",
+            "!has(self.provider) || self.provider.size() \u003e 0",
+            "!has(self.modelType) || self.modelType.size() \u003e 0",
+            "!has(self.quantization) || self.quantization.size() \u003e 0",
             "!has(self.mountPath) || self.mountPath.size() \u003e 0",
             "!has(self.size) || quantity(self.size).isGreaterThan(quantity('0'))",
             "!has(self.minReplicas) || self.maxReplicas \u003e= self.minReplicas",
             "!has(self.serviceAccountName) || self.serviceAccountName.size() \u003e 0",
             "has(self.minAvailable) || has(self.maxUnavailable)",
             "!(has(self.minAvailable) \u0026\u0026 has(self.maxUnavailable))",
-            "!(has(self.name) \u0026\u0026 has(self.image))",
-            "has(self.name) || has(self.image)",
             "!has(self.hostname) || self.hostname.size() \u003e 0"
           ],
           "version": "v1beta1",
@@ -184136,7 +184212,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-06-22T05:04:46Z",
+      "extracted_at": "2026-06-22T11:24:45Z",
       "go_ast_mode": "full",
       "helm": {},
       "horizontal_pod_autoscalers": [
@@ -191910,7 +191986,7 @@
         "manager_file": "cmd/main.go",
         "memory_limit": "4Gi"
       },
-      "commit_sha": "ca923034cfda058309c4583b4619453ba6f84b41",
+      "commit_sha": "22c6108963d816257d6abb545308ed54a3888375",
       "component": "opendatahub-operator",
       "component_refs": [
         {
@@ -195065,7 +195141,7 @@
           "type": "object-storage"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:36Z",
+      "extracted_at": "2026-06-22T11:21:30Z",
       "go_ast_mode": "full",
       "helm": {},
       "kustomize_components": [
@@ -204166,7 +204242,7 @@
         },
         {
           "name": "Injector-webhook",
-          "path": "/mutate-prometheus-monitors",
+          "path": "/mutate-hardware-profile",
           "sources": [
             {
               "file": "",
@@ -204178,7 +204254,7 @@
         },
         {
           "name": "Injector-webhook",
-          "path": "/mutate-hardware-profile",
+          "path": "/mutate-prometheus-monitors",
           "sources": [
             {
               "file": "",
@@ -204214,7 +204290,7 @@
         },
         {
           "name": "Validator-webhook",
-          "path": "/validate-dscinitialization-v1",
+          "path": "/validate-datasciencecluster-v2",
           "sources": [
             {
               "file": "",
@@ -204238,7 +204314,7 @@
         },
         {
           "name": "Validator-webhook",
-          "path": "/validate-datasciencecluster-v2",
+          "path": "/validate-dscinitialization-v2",
           "sources": [
             {
               "file": "",
@@ -204250,7 +204326,7 @@
         },
         {
           "name": "Validator-webhook",
-          "path": "/validate-dscinitialization-v2",
+          "path": "/validate-dscinitialization-v1",
           "sources": [
             {
               "file": "",
@@ -206652,7 +206728,7 @@
           "user": "${spark_uid}"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:33Z",
+      "extracted_at": "2026-06-22T11:21:35Z",
       "feature_gates": [
         {
           "default": false,
@@ -211226,15 +211302,15 @@
           "scope": "Cluster",
           "source": "manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml",
           "validation_rules": [
-            "!(has(self.numNodes) \u0026\u0026 (has(self.torch) \u0026\u0026 has(self.torch.elasticPolicy)))",
-            "!(has(self.torch) \u0026\u0026 has(self.mpi))",
-            "self \u003e 0 || self in ['auto', 'cpu', 'gpu']",
             "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
             "self == oldSelf",
             "self == oldSelf",
             "self == oldSelf",
             "self == oldSelf",
-            "self == oldSelf"
+            "self == oldSelf",
+            "!(has(self.numNodes) \u0026\u0026 (has(self.torch) \u0026\u0026 has(self.torch.elasticPolicy)))",
+            "!(has(self.torch) \u0026\u0026 has(self.mpi))",
+            "self \u003e 0 || self in ['auto', 'cpu', 'gpu']"
           ],
           "version": "v1alpha1",
           "versions": [
@@ -211884,7 +211960,7 @@
           "stages": 1
         }
       ],
-      "extracted_at": "2026-06-22T05:02:34Z",
+      "extracted_at": "2026-06-22T11:21:30Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "kubeflow-trainer",
@@ -215367,7 +215443,7 @@
           "stages": 1
         }
       ],
-      "extracted_at": "2026-06-22T05:02:39Z",
+      "extracted_at": "2026-06-22T11:21:32Z",
       "go_ast_mode": "full",
       "helm": {},
       "label_contracts": [
@@ -222255,7 +222331,7 @@
           "user": "orchestr8"
         }
       ],
-      "extracted_at": "2026-06-22T05:02:43Z",
+      "extracted_at": "2026-06-22T11:21:53Z",
       "go_ast_mode": "full",
       "helm": {},
       "kustomize_overlay_refs": [
@@ -227517,7 +227593,7 @@
           "user": "65532:65532"
         }
       ],
-      "extracted_at": "2026-06-22T05:06:29Z",
+      "extracted_at": "2026-06-22T11:26:23Z",
       "go_ast_mode": "full",
       "helm": {
         "chart_name": "workload-variant-autoscaler",
@@ -230260,8 +230336,6 @@
       "validation_rules": [
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.worker) \u0026\u0026 has(self.scaling))",
-        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
-        "!(has(self.worker) \u0026\u0026 has(self.scaling))",
         "has(self.wva)",
         "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
         "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
@@ -230270,6 +230344,8 @@
         "has(self.hpa) || has(self.keda)",
         "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
         "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+        "!(has(self.worker) \u0026\u0026 has(self.scaling))",
         "has(self.wva)",
         "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
         "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
@@ -230315,6 +230391,15 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "self.protocol == 'GRPC' ? has(self.grpc) : true",
+        "has(self.grpc) ? self.protocol == 'GRPC' : true",
+        "self.protocol == 'HTTP' ? has(self.http) : true",
+        "has(self.http) ? self.protocol == 'HTTP' : true",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -230322,17 +230407,8 @@
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "self.protocol == 'GRPC' ? has(self.grpc) : true",
-        "has(self.grpc) ? self.protocol == 'GRPC' : true",
-        "self.protocol == 'HTTP' ? has(self.http) : true",
-        "has(self.http) ? self.protocol == 'HTTP' : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
         "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
         "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -230355,15 +230431,15 @@
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "self.numerator \u003c= self.denominator",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -230395,14 +230471,6 @@
       "validation_rules": [
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.worker) \u0026\u0026 has(self.scaling))",
-        "has(self.wva)",
-        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
-        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
-        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
-        "has(self.hpa) || has(self.keda)",
-        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
-        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.worker) \u0026\u0026 has(self.scaling))",
         "has(self.wva)",
@@ -230413,12 +230481,15 @@
         "has(self.hpa) || has(self.keda)",
         "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
         "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+        "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
+        "self.kind != 'Service' || has(self.port)",
         "(self.size() \u003e 0 ? self[0].matches.size() : 0) + (self.size() \u003e 1 ? self[1].matches.size() : 0) + (self.size() \u003e 2 ? self[2].matches.size() : 0) + (self.size() \u003e 3 ? self[3].matches.size() : 0) + (self.size() \u003e 4 ? self[4].matches.size() : 0) + (self.size() \u003e 5 ? self[5].matches.size() : 0) + (self.size() \u003e 6 ? self[6].matches.size() : 0) + (self.size() \u003e 7 ? self[7].matches.size() : 0) + (self.size() \u003e 8 ? self[8].matches.size() : 0) + (self.size() \u003e 9 ? self[9].matches.size() : 0) + (self.size() \u003e 10 ? self[10].matches.size() : 0) + (self.size() \u003e 11 ? self[11].matches.size() : 0) + (self.size() \u003e 12 ? self[12].matches.size() : 0) + (self.size() \u003e 13 ? self[13].matches.size() : 0) + (self.size() \u003e 14 ? self[14].matches.size() : 0) + (self.size() \u003e 15 ? self[15].matches.size() : 0) \u003c= 128",
         "(has(self.backendRefs) \u0026\u0026 size(self.backendRefs) \u003e 0) ? (!has(self.filters) || self.filters.all(f, !has(f.requestRedirect))): true",
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
+        "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
         "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
@@ -230438,6 +230509,17 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "self.protocol == 'GRPC' ? has(self.grpc) : true",
+        "has(self.grpc) ? self.protocol == 'GRPC' : true",
+        "self.protocol == 'HTTP' ? has(self.http) : true",
+        "has(self.http) ? self.protocol == 'HTTP' : true",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
@@ -230445,17 +230527,6 @@
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "self.protocol == 'GRPC' ? has(self.grpc) : true",
-        "has(self.grpc) ? self.protocol == 'GRPC' : true",
-        "self.protocol == 'HTTP' ? has(self.http) : true",
-        "has(self.http) ? self.protocol == 'HTTP' : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
         "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
         "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
@@ -230473,10 +230544,6 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
@@ -230487,9 +230554,18 @@
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
-        "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
-        "self.kind != 'Service' || has(self.port)"
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "has(self.wva)",
+        "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || has(self.minReplicas)",
+        "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
+        "!(has(self.hpa) \u0026\u0026 has(self.keda))",
+        "has(self.hpa) || has(self.keda)",
+        "!has(self.advanced) || (size(self.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.advanced.scalingModifiers.metricType) == 0)",
+        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0"
       ],
       "version": "v1alpha2",
       "versions": [
@@ -230962,7 +231038,6 @@
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
-        "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
         "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
@@ -230984,10 +231059,6 @@
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "self.protocol == 'GRPC' ? has(self.grpc) : true",
         "has(self.grpc) ? self.protocol == 'GRPC' : true",
         "self.protocol == 'HTTP' ? has(self.http) : true",
@@ -230996,6 +231067,10 @@
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -231017,8 +231092,11 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "self.protocol == 'GRPC' ? has(self.grpc) : true",
+        "has(self.grpc) ? self.protocol == 'GRPC' : true",
+        "self.protocol == 'HTTP' ? has(self.http) : true",
+        "has(self.http) ? self.protocol == 'HTTP' : true",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(has(self.percent) \u0026\u0026 has(self.fraction))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.numerator \u003c= self.denominator",
@@ -231026,15 +231104,12 @@
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "self.protocol == 'GRPC' ? has(self.grpc) : true",
-        "has(self.grpc) ? self.protocol == 'GRPC' : true",
-        "self.protocol == 'HTTP' ? has(self.http) : true",
-        "has(self.http) ? self.protocol == 'HTTP' : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
         "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
         "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
@@ -231046,6 +231121,7 @@
         "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/.') : true",
         "self.type in ['Exact','PathPrefix'] || self.type == 'RegularExpression'",
         "(self.type in ['Exact','PathPrefix']) ? self.value.matches(r\"\"\"^(?:[-A-Za-z0-9/._~!$\u0026'()*+,;=:@]|[%][0-9a-fA-F]{2})+$\"\"\") : true",
+        "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
         "self.kind != 'Service' || has(self.port)",
         "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
         "has(self.wva)",
@@ -231095,37 +231171,6 @@
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
-        "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
-        "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
-        "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
-        "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
-        "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
-        "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
-        "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
-        "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
-        "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
-        "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
-        "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
-        "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
-        "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
-        "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
-        "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
-        "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
-        "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "self.protocol == 'GRPC' ? has(self.grpc) : true",
-        "has(self.grpc) ? self.protocol == 'GRPC' : true",
-        "self.protocol == 'HTTP' ? has(self.http) : true",
-        "has(self.http) ? self.protocol == 'HTTP' : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
         "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
@@ -231146,8 +231191,46 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "self.protocol == 'GRPC' ? has(self.grpc) : true",
+        "has(self.grpc) ? self.protocol == 'GRPC' : true",
+        "self.protocol == 'HTTP' ? has(self.http) : true",
+        "has(self.http) ? self.protocol == 'HTTP' : true",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
+        "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
+        "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
+        "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
+        "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
+        "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
+        "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
+        "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
+        "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
+        "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
+        "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
+        "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
+        "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
+        "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
+        "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
+        "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
+        "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
+        "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "self.numerator \u003c= self.denominator",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -231157,13 +231240,6 @@
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "self.kind != 'Service' || has(self.port)",
         "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
         "has(self.wva)",
@@ -231343,10 +231419,10 @@
       "validation_rules": [
         "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
         "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
+        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
         "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
         "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
-        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
+        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
       ],
       "version": "v1beta1",
       "versions": [
@@ -231484,29 +231560,6 @@
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'file_processors') || !has(self.providers.fileProcessors)",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.baseUrl) || self.baseUrl.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.region) || self.region.size() \u003e 0",
-        "!has(self.endpointUrl) || self.endpointUrl.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.url) || self.url.size() \u003e 0",
-        "!has(self.http) || self.http.size() \u003e 0",
-        "!has(self.https) || self.https.size() \u003e 0",
-        "!has(self.cacert) || self.cacert.size() \u003e 0",
-        "!has(self.endpoint) || self.endpoint.size() \u003e 0",
-        "!has(self.projectId) || self.projectId.size() \u003e 0",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.url) || self.url.size() \u003e 0",
-        "!has(self.http) || self.http.size() \u003e 0",
-        "!has(self.https) || self.https.size() \u003e 0",
-        "!has(self.cacert) || self.cacert.size() \u003e 0",
         "!has(self.apiVersion) || self.apiVersion.size() \u003e 0",
         "!has(self.apiType) || self.apiType.size() \u003e 0",
         "!has(self.id) || self.id.size() \u003e 0",
@@ -231538,19 +231591,31 @@
         "!has(self.http) || self.http.size() \u003e 0",
         "!has(self.https) || self.https.size() \u003e 0",
         "!has(self.cacert) || self.cacert.size() \u003e 0",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "!has(self.url) || self.url.size() \u003e 0",
+        "!has(self.http) || self.http.size() \u003e 0",
+        "!has(self.https) || self.https.size() \u003e 0",
+        "!has(self.cacert) || self.cacert.size() \u003e 0",
+        "!has(self.endpoint) || self.endpoint.size() \u003e 0",
+        "!has(self.projectId) || self.projectId.size() \u003e 0",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "!has(self.url) || self.url.size() \u003e 0",
+        "!has(self.http) || self.http.size() \u003e 0",
+        "!has(self.https) || self.https.size() \u003e 0",
+        "!has(self.cacert) || self.cacert.size() \u003e 0",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.defaultProviderId) || self.defaultProviderId.size() \u003e 0",
         "!has(self.summarizationPrompt) || self.summarizationPrompt.size() \u003e 0",
         "!has(self.summaryPrefix) || self.summaryPrefix.size() \u003e 0",
         "!has(self.summarizationModel) || self.summarizationModel.size() \u003e 0",
         "!has(self.tokenizerEncoding) || self.tokenizerEncoding.size() \u003e 0",
+        "!has(self.defaultProviderId) || self.defaultProviderId.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.defaultProviderId) || self.defaultProviderId.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.id) || self.id.size() \u003e 0",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
@@ -231578,22 +231643,33 @@
         "!has(self.id) || self.id.size() \u003e 0",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.provider) || self.provider.size() \u003e 0",
-        "!has(self.modelType) || self.modelType.size() \u003e 0",
-        "!has(self.quantization) || self.quantization.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "!has(self.baseUrl) || self.baseUrl.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "!has(self.region) || self.region.size() \u003e 0",
+        "!has(self.endpointUrl) || self.endpointUrl.size() \u003e 0",
         "self.type != 'redis' || has(self.endpoint)",
         "!has(self.endpoint) || self.type == 'redis'",
         "!has(self.password) || self.type == 'redis'",
         "self.type != 'postgres' || has(self.connectionString)",
         "!has(self.connectionString) || self.type == 'postgres'",
+        "!(has(self.name) \u0026\u0026 has(self.image))",
+        "has(self.name) || has(self.image)",
+        "!has(self.provider) || self.provider.size() \u003e 0",
+        "!has(self.modelType) || self.modelType.size() \u003e 0",
+        "!has(self.quantization) || self.quantization.size() \u003e 0",
         "!has(self.mountPath) || self.mountPath.size() \u003e 0",
         "!has(self.size) || quantity(self.size).isGreaterThan(quantity('0'))",
         "!has(self.minReplicas) || self.maxReplicas \u003e= self.minReplicas",
         "!has(self.serviceAccountName) || self.serviceAccountName.size() \u003e 0",
         "has(self.minAvailable) || has(self.maxUnavailable)",
         "!(has(self.minAvailable) \u0026\u0026 has(self.maxUnavailable))",
-        "!(has(self.name) \u0026\u0026 has(self.image))",
-        "has(self.name) || has(self.image)",
         "!has(self.hostname) || self.hostname.size() \u003e 0"
       ],
       "version": "v1beta1",
@@ -231678,15 +231754,15 @@
       "scope": "Cluster",
       "source": "manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml",
       "validation_rules": [
-        "!(has(self.numNodes) \u0026\u0026 (has(self.torch) \u0026\u0026 has(self.torch.elasticPolicy)))",
-        "!(has(self.torch) \u0026\u0026 has(self.mpi))",
-        "self \u003e 0 || self in ['auto', 'cpu', 'gpu']",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
-        "self == oldSelf"
+        "self == oldSelf",
+        "!(has(self.numNodes) \u0026\u0026 (has(self.torch) \u0026\u0026 has(self.torch.elasticPolicy)))",
+        "!(has(self.torch) \u0026\u0026 has(self.mpi))",
+        "self \u003e 0 || self in ['auto', 'cpu', 'gpu']"
       ],
       "version": "v1alpha1",
       "versions": [

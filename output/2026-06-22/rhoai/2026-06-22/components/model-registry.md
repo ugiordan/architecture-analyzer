@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | kubeflow/model-registry |
 | Commit | 62733189ea906eeb88e955052c9b5da10405115a |
-| Extracted | 2026-06-22T05:02:44Z |
+| Extracted | 2026-06-22T11:23:48Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

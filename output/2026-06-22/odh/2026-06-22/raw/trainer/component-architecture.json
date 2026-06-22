@@ -2,7 +2,7 @@
   "component": "trainer",
   "repo": "kubeflow/trainer",
   "commit_sha": "fc9f4315b4ba88cfa03fabf29a730532411bab4c",
-  "extracted_at": "2026-06-22T05:02:34Z",
+  "extracted_at": "2026-06-22T11:21:30Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -20,15 +20,15 @@
       ],
       "fields_count": 1246,
       "validation_rules": [
-        "!(has(self.numNodes) \u0026\u0026 (has(self.torch) \u0026\u0026 has(self.torch.elasticPolicy)))",
-        "!(has(self.torch) \u0026\u0026 has(self.mpi))",
-        "self \u003e 0 || self in ['auto', 'cpu', 'gpu']",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
-        "self == oldSelf"
+        "self == oldSelf",
+        "!(has(self.numNodes) \u0026\u0026 (has(self.torch) \u0026\u0026 has(self.torch.elasticPolicy)))",
+        "!(has(self.torch) \u0026\u0026 has(self.mpi))",
+        "self \u003e 0 || self in ['auto', 'cpu', 'gpu']"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml"
     },

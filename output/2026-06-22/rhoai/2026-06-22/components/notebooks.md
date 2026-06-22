@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | red-hat-data-services/notebooks |
-| Commit | cf3b6ef8129808129aa953102b4b11dfa3b091f2 |
-| Extracted | 2026-06-22T05:04:31Z |
+| Commit | 64b92f303600a5e17783e0f04d234ffe7e43d7e3 |
+| Extracted | 2026-06-22T11:23:22Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -19,14 +19,14 @@
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| notebook | ClusterIP | 8888/TCP | [`jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml) |
 
 
 ## Deployments
@@ -103,36 +103,36 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| kind_ref |  | [`ci/cached-builds/konflux_generate_component_build_pipelines.py:86`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ci/cached-builds/konflux_generate_component_build_pipelines.py#L86) |
-| create |  | [`manifests/tools/generate_envs.py:30`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/manifests/tools/generate_envs.py#L30) |
-| create |  | [`ntb/strings.py:148`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ntb/strings.py#L148) |
-| create |  | [`scripts/cve/create_cve_trackers.py:425`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/create_cve_trackers.py#L425) |
-| create |  | [`scripts/cve/create_cve_trackers.py:458`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/create_cve_trackers.py#L458) |
-| create |  | [`ci/check-image-availability.py:351`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ci/check-image-availability.py#L351) |
-| delete |  | [`tests/containers/conftest.py:317`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/conftest.py#L317) |
-| delete |  | [`scripts/cve/jira_auth.py:165`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/jira_auth.py#L165) |
-| get |  | [`tests/containers/kubernetes_utils.py:233`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/kubernetes_utils.py#L233) |
-| get |  | [`tests/containers/docker_utils.py:158`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/docker_utils.py#L158) |
-| get |  | [`ci/cached-builds/has_tests.py:41`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ci/cached-builds/has_tests.py#L41) |
-| get |  | [`ci/cached-builds/konflux_generate_component_build_pipelines.py:804`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ci/cached-builds/konflux_generate_component_build_pipelines.py#L804) |
-| get |  | [`base-images/copr/src/copr_rebuild/copr_client.py:280`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/base-images/copr/src/copr_rebuild/copr_client.py#L280) |
-| get |  | [`tests/containers/kubernetes_utils.py:51`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/kubernetes_utils.py#L51) |
-| get |  | [`scripts/cve/create_cve_trackers.py:173`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/create_cve_trackers.py#L173) |
-| get |  | [`prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py:136`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py#L136) |
-| get |  | [`tests/containers/conftest.py:114`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/conftest.py#L114) |
-| get |  | [`prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py:781`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py#L781) |
-| get |  | [`ci/check-image-availability.py:36`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ci/check-image-availability.py#L36) |
-| get |  | [`ntb/strings.py:152`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ntb/strings.py#L152) |
-| get |  | [`prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py:302`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py#L302) |
-| get |  | [`base-images/copr/src/copr_rebuild/rebuild.py:49`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/base-images/copr/src/copr_rebuild/rebuild.py#L49) |
-| get |  | [`scripts/cve/jira_auth.py:139`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/jira_auth.py#L139) |
-| get |  | [`tests/containers/conftest.py:290`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/conftest.py#L290) |
-| get |  | [`tests/containers/conftest.py:281`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/conftest.py#L281) |
-| get |  | [`tests/containers/docker_utils.py:84`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/docker_utils.py#L84) |
-| list |  | [`ci/cached-builds/gen_gha_matrix_jobs.py:152`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/ci/cached-builds/gen_gha_matrix_jobs.py#L152) |
-| list |  | [`scripts/cve/cve_due_dates.py:342`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/cve_due_dates.py#L342) |
-| list |  | [`scripts/cve/create_cve_trackers.py:596`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/create_cve_trackers.py#L596) |
-| list |  | [`scripts/cve/cve_due_dates.py:316`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/scripts/cve/cve_due_dates.py#L316) |
-| list |  | [`tests/containers/kubernetes_utils.py:220`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/kubernetes_utils.py#L220) |
-| import |  | [`tests/containers/kubernetes_utils.py:12`](https://github.com/red-hat-data-services/notebooks/blob/cf3b6ef8129808129aa953102b4b11dfa3b091f2/tests/containers/kubernetes_utils.py#L12) |
+| kind_ref |  | [`ci/cached-builds/konflux_generate_component_build_pipelines.py:86`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ci/cached-builds/konflux_generate_component_build_pipelines.py#L86) |
+| create |  | [`manifests/tools/generate_envs.py:30`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/manifests/tools/generate_envs.py#L30) |
+| create |  | [`ntb/strings.py:148`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ntb/strings.py#L148) |
+| create |  | [`scripts/cve/create_cve_trackers.py:425`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/create_cve_trackers.py#L425) |
+| create |  | [`scripts/cve/create_cve_trackers.py:458`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/create_cve_trackers.py#L458) |
+| create |  | [`ci/check-image-availability.py:351`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ci/check-image-availability.py#L351) |
+| delete |  | [`tests/containers/conftest.py:317`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/conftest.py#L317) |
+| delete |  | [`scripts/cve/jira_auth.py:165`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/jira_auth.py#L165) |
+| get |  | [`tests/containers/kubernetes_utils.py:233`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/kubernetes_utils.py#L233) |
+| get |  | [`tests/containers/docker_utils.py:158`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/docker_utils.py#L158) |
+| get |  | [`ci/cached-builds/has_tests.py:41`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ci/cached-builds/has_tests.py#L41) |
+| get |  | [`ci/cached-builds/konflux_generate_component_build_pipelines.py:804`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ci/cached-builds/konflux_generate_component_build_pipelines.py#L804) |
+| get |  | [`base-images/copr/src/copr_rebuild/copr_client.py:280`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/base-images/copr/src/copr_rebuild/copr_client.py#L280) |
+| get |  | [`tests/containers/kubernetes_utils.py:51`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/kubernetes_utils.py#L51) |
+| get |  | [`scripts/cve/create_cve_trackers.py:173`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/create_cve_trackers.py#L173) |
+| get |  | [`prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py:136`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py#L136) |
+| get |  | [`tests/containers/conftest.py:114`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/conftest.py#L114) |
+| get |  | [`prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py:781`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py#L781) |
+| get |  | [`ci/check-image-availability.py:36`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ci/check-image-availability.py#L36) |
+| get |  | [`ntb/strings.py:152`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ntb/strings.py#L152) |
+| get |  | [`prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py:302`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/prefetch-input/elyra-v4.3.1/elyra/kfp/bootstrapper.py#L302) |
+| get |  | [`base-images/copr/src/copr_rebuild/rebuild.py:49`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/base-images/copr/src/copr_rebuild/rebuild.py#L49) |
+| get |  | [`scripts/cve/jira_auth.py:139`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/jira_auth.py#L139) |
+| get |  | [`tests/containers/conftest.py:290`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/conftest.py#L290) |
+| get |  | [`tests/containers/conftest.py:281`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/conftest.py#L281) |
+| get |  | [`tests/containers/docker_utils.py:84`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/docker_utils.py#L84) |
+| list |  | [`ci/cached-builds/gen_gha_matrix_jobs.py:152`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/ci/cached-builds/gen_gha_matrix_jobs.py#L152) |
+| list |  | [`scripts/cve/cve_due_dates.py:342`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/cve_due_dates.py#L342) |
+| list |  | [`scripts/cve/create_cve_trackers.py:596`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/create_cve_trackers.py#L596) |
+| list |  | [`scripts/cve/cve_due_dates.py:316`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/scripts/cve/cve_due_dates.py#L316) |
+| list |  | [`tests/containers/kubernetes_utils.py:220`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/kubernetes_utils.py#L220) |
+| import |  | [`tests/containers/kubernetes_utils.py:12`](https://github.com/red-hat-data-services/notebooks/blob/64b92f303600a5e17783e0f04d234ffe7e43d7e3/tests/containers/kubernetes_utils.py#L12) |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/text-generation-inference |
 | Commit | fded01861025fff09ba5f9a49cda710fcfd3ca93 |
-| Extracted | 2026-06-22T05:08:24Z |
+| Extracted | 2026-06-22T11:29:34Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

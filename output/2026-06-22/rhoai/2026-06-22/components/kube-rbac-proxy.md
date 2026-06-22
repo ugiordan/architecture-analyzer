@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | brancz/kube-rbac-proxy |
 | Commit | 8c023307909f0948887682073750b5a1ab4d0467 |
-| Extracted | 2026-06-22T05:05:37Z |
+| Extracted | 2026-06-22T11:26:21Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -2,7 +2,7 @@
   "component": "llm-d-inference-scheduler",
   "repo": "llm-d/llm-d-inference-scheduler",
   "commit_sha": "1f40050f38ff3f03a317abf875a6eb167fe2dac7",
-  "extracted_at": "2026-06-22T05:06:50Z",
+  "extracted_at": "2026-06-22T11:27:49Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -6821,14 +6821,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "deployment",
+      "context": "deployment-template",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "deployment-template",
+      "context": "deployment",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
@@ -6849,14 +6849,7 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "clusterrole",
-      "source": "deploy/components/istio-control-plane/rbac.yaml"
-    },
-    {
-      "label": "app.kubernetes.io/managed-by",
-      "integration": "management relationship",
-      "type": "label",
-      "context": "clusterrolebinding",
+      "context": "role",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -6870,7 +6863,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "role",
+      "context": "clusterrolebinding",
+      "source": "deploy/components/istio-control-plane/rbac.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -6891,14 +6891,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "validatingwebhookconfiguration",
+      "context": "mutatingwebhookconfiguration",
       "source": "deploy/components/istio-control-plane/webhooks.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "mutatingwebhookconfiguration",
+      "context": "validatingwebhookconfiguration",
       "source": "deploy/components/istio-control-plane/webhooks.yaml"
     },
     {
@@ -6919,14 +6919,14 @@
       "label": "istio.io/rev",
       "integration": "Istio",
       "type": "label",
-      "context": "deployment",
+      "context": "deployment-template",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
       "label": "istio.io/rev",
       "integration": "Istio",
       "type": "label",
-      "context": "deployment-template",
+      "context": "deployment",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {

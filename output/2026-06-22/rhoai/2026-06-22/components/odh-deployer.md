@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/odh-deployer |
 | Commit | f315a7aad26bf15bfa83855846efb8c6fab98a91 |
-| Extracted | 2026-06-22T05:07:53Z |
+| Extracted | 2026-06-22T11:28:38Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

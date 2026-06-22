@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | kubeflow/spark-operator |
 | Commit | fca4d2102de729efef272c41c68f50c0d68cc63a |
-| Extracted | 2026-06-22T05:04:25Z |
+| Extracted | 2026-06-22T11:23:54Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

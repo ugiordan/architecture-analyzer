@@ -9,8 +9,8 @@
 | Field | Value |
 |-------|-------|
 | Repository | red-hat-data-services/MLServer |
-| Commit | d96f838fb020dd567671849e48ae645e61dfed8c |
-| Extracted | 2026-06-22T05:08:15Z |
+| Commit | 15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de |
+| Extracted | 2026-06-22T11:29:14Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -23,16 +23,16 @@
 |---------|---------|----------|----------|
 | aiofiles | ==25.1.0 \ |  | true |
 | aiohappyeyeballs | ==2.6.2 \ |  | true |
-| aiohttp | ==3.14.0 \ | web-framework | true |
+| aiohttp | ==3.14.1 \ | web-framework | true |
 | aiokafka | ==0.14.0 \ |  | true |
 | aiosignal | ==1.4.0 \ |  | true |
 | annotated-types | ==0.7.0 \ |  | true |
-| anyio | ==4.13.0 \ |  | true |
+| anyio | ==4.14.0 \ |  | true |
 | asgiref | ==3.11.1 \ |  | true |
 | async-timeout | ==5.0.1 \ |  | true |
 | attrs | ==26.1.0 \ |  | true |
 | brotli | ==1.2.0 \ |  | true |
-| certifi | ==2026.5.20 \ |  | true |
+| certifi | ==2026.6.17 \ |  | true |
 | click | ==8.4.1 \ |  | true |
 | fastapi | ==0.115.14 \ | web-framework | true |
 | flatbuffers | ==25.12.19 \ |  | true |
@@ -40,8 +40,8 @@
 | gevent | ==26.5.0 \ |  | true |
 | geventhttpclient | ==2.3.9 \ |  | true |
 | googleapis-common-protos | ==1.75.0 \ |  | true |
-| greenlet | ==3.5.1 \ |  | true |
-| grpcio | ==1.81.0 \ | grpc | true |
+| greenlet | ==3.5.2 \ |  | true |
+| grpcio | ==1.81.1 \ | grpc | true |
 | h11 | ==0.16.0 \ |  | true |
 | idna | ==3.18 \ |  | true |
 | joblib | ==1.5.3 \ |  | true |
@@ -54,9 +54,9 @@
 | mlserver-xgboost | ==1.7.1+rhaiv.8 \ |  | true |
 | mpmath | ==1.3.0 \ |  | true |
 | multidict | ==6.7.1 \ |  | true |
-| narwhals | ==2.22.0 \ |  | true |
+| narwhals | ==2.22.1 \ |  | true |
 | numpy | ==2.4.6 \ | numerical | true |
-| onnx | ==1.21.0 \ |  | true |
+| onnx | ==1.22.0 \ |  | true |
 | onnxruntime | ==1.24.4 \ |  | true |
 | opentelemetry-api | ==1.42.1 \ | observability | true |
 | opentelemetry-exporter-otlp-proto-common | ==1.42.1 \ | observability | true |
@@ -73,7 +73,7 @@
 | packaging | ==26.2 \ |  | true |
 | pandas | ==3.0.3 \ | data | true |
 | prometheus-client | ==0.25.0 \ | observability | true |
-| propcache | ==0.4.1 \ |  | true |
+| propcache | ==0.5.2 \ |  | true |
 | protobuf | ==6.33.6 \ | serialization | true |
 | py-grpc-prometheus | ==0.8.0 \ | observability | true |
 | pydantic | ==2.13.4 \ | serialization | true |
@@ -85,7 +85,7 @@
 | python-rapidjson | ==1.23 \ |  | true |
 | scikit-learn | ==1.9.0 \ |  | true |
 | scipy | ==1.17.1 \ | numerical | true |
-| setuptools | ==80.10.2 \ |  | true |
+| setuptools | ==82.0.1 \ |  | true |
 | six | ==1.17.0 \ |  | true |
 | starlette | ==0.46.2 \ | web-framework | true |
 | starlette-exporter | ==0.23.0 \ |  | true |
@@ -98,7 +98,7 @@
 | uvicorn | ==0.49.0 \ | web-server | true |
 | uvloop | ==0.22.1 \ |  | true |
 | wrapt | ==2.2.1 \ |  | true |
-| xgboost | ==3.2.0 \ |  | true |
+| xgboost | ==3.3.0 \ |  | true |
 | yarl | ==1.24.2 \ |  | true |
 | zope-event | ==6.2 \ |  | true |
 | zope-interface | ==8.5 \ |  | true |
@@ -137,30 +137,30 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| create |  | [`mlserver/batching/adaptive.py:56`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/batching/adaptive.py#L56) |
-| create |  | [`tests/utils.py:42`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/tests/utils.py#L42) |
-| create |  | [`mlserver/batch_processing.py:486`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/batch_processing.py#L486) |
-| create |  | [`tests/kafka/utils.py:52`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/tests/kafka/utils.py#L52) |
-| delete |  | [`mlserver/server.py:170`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/server.py#L170) |
-| get |  | [`runtimes/alibi-explain/mlserver_alibi_explain/runtime.py:95`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/runtimes/alibi-explain/mlserver_alibi_explain/runtime.py#L95) |
-| get |  | [`mlserver/utils.py:111`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/utils.py#L111) |
-| get |  | [`docs/conf.py:131`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/docs/conf.py#L131) |
-| get |  | [`runtimes/mlflow/mlserver_mlflow/runtime.py:160`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/runtimes/mlflow/mlserver_mlflow/runtime.py#L160) |
-| get |  | [`runtimes/onnx/mlserver_onnx/onnx.py:101`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/runtimes/onnx/mlserver_onnx/onnx.py#L101) |
-| get |  | [`mlserver/parallel/dispatcher.py:107`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/parallel/dispatcher.py#L107) |
-| get |  | [`mlserver/grpc/interceptors.py:78`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/grpc/interceptors.py#L78) |
-| get |  | [`mlserver/handlers/dataplane.py:84`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/handlers/dataplane.py#L84) |
-| get |  | [`mlserver/handlers/dataplane.py:69`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/handlers/dataplane.py#L69) |
-| get |  | [`mlserver/logging.py:91`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/logging.py#L91) |
-| get |  | [`hack/generate-pinned-requirements.py:655`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/hack/generate-pinned-requirements.py#L655) |
-| get |  | [`runtimes/onnx/mlserver_onnx/onnx.py:106`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/runtimes/onnx/mlserver_onnx/onnx.py#L106) |
-| get |  | [`mlserver/batch_processing.py:136`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/batch_processing.py#L136) |
-| get |  | [`mlserver/batching/adaptive.py:55`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/batching/adaptive.py#L55) |
-| get |  | [`mlserver/parallel/utils.py:24`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/parallel/utils.py#L24) |
-| get |  | [`tests/tracing/conftest.py:36`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/tests/tracing/conftest.py#L36) |
-| get |  | [`docs/examples/mlflow/src/train.py:85`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/docs/examples/mlflow/src/train.py#L85) |
-| get |  | [`mlserver/metrics/prometheus.py:31`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/mlserver/metrics/prometheus.py#L31) |
-| list |  | [`runtimes/huggingface/mlserver_huggingface/codecs/utils.py:133`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/runtimes/huggingface/mlserver_huggingface/codecs/utils.py#L133) |
-| list |  | [`tests/utils.py:217`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/tests/utils.py#L217) |
-| list |  | [`tests/kafka/utils.py:36`](https://github.com/red-hat-data-services/MLServer/blob/d96f838fb020dd567671849e48ae645e61dfed8c/tests/kafka/utils.py#L36) |
+| create |  | [`mlserver/batching/adaptive.py:56`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/batching/adaptive.py#L56) |
+| create |  | [`tests/utils.py:42`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/tests/utils.py#L42) |
+| create |  | [`mlserver/batch_processing.py:486`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/batch_processing.py#L486) |
+| create |  | [`tests/kafka/utils.py:52`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/tests/kafka/utils.py#L52) |
+| delete |  | [`mlserver/server.py:170`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/server.py#L170) |
+| get |  | [`runtimes/alibi-explain/mlserver_alibi_explain/runtime.py:95`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/runtimes/alibi-explain/mlserver_alibi_explain/runtime.py#L95) |
+| get |  | [`mlserver/utils.py:111`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/utils.py#L111) |
+| get |  | [`docs/conf.py:131`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/docs/conf.py#L131) |
+| get |  | [`runtimes/mlflow/mlserver_mlflow/runtime.py:160`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/runtimes/mlflow/mlserver_mlflow/runtime.py#L160) |
+| get |  | [`runtimes/onnx/mlserver_onnx/onnx.py:101`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/runtimes/onnx/mlserver_onnx/onnx.py#L101) |
+| get |  | [`mlserver/parallel/dispatcher.py:107`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/parallel/dispatcher.py#L107) |
+| get |  | [`mlserver/grpc/interceptors.py:78`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/grpc/interceptors.py#L78) |
+| get |  | [`mlserver/handlers/dataplane.py:84`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/handlers/dataplane.py#L84) |
+| get |  | [`mlserver/handlers/dataplane.py:69`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/handlers/dataplane.py#L69) |
+| get |  | [`mlserver/logging.py:91`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/logging.py#L91) |
+| get |  | [`hack/generate-pinned-requirements.py:655`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/hack/generate-pinned-requirements.py#L655) |
+| get |  | [`runtimes/onnx/mlserver_onnx/onnx.py:106`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/runtimes/onnx/mlserver_onnx/onnx.py#L106) |
+| get |  | [`mlserver/batch_processing.py:136`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/batch_processing.py#L136) |
+| get |  | [`mlserver/batching/adaptive.py:55`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/batching/adaptive.py#L55) |
+| get |  | [`mlserver/parallel/utils.py:24`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/parallel/utils.py#L24) |
+| get |  | [`tests/tracing/conftest.py:36`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/tests/tracing/conftest.py#L36) |
+| get |  | [`docs/examples/mlflow/src/train.py:85`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/docs/examples/mlflow/src/train.py#L85) |
+| get |  | [`mlserver/metrics/prometheus.py:31`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/mlserver/metrics/prometheus.py#L31) |
+| list |  | [`runtimes/huggingface/mlserver_huggingface/codecs/utils.py:133`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/runtimes/huggingface/mlserver_huggingface/codecs/utils.py#L133) |
+| list |  | [`tests/utils.py:217`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/tests/utils.py#L217) |
+| list |  | [`tests/kafka/utils.py:36`](https://github.com/red-hat-data-services/MLServer/blob/15d0a4c4d6ad4c0e666c4c6f3b4ffd25b51094de/tests/kafka/utils.py#L36) |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/vllm-gaudi |
 | Commit | 913c8137213a04b27d908d59479f1394ce8e5e9f |
-| Extracted | 2026-06-22T05:08:39Z |
+| Extracted | 2026-06-22T11:30:10Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/llama-stack |
 | Commit | 5d65c017b088eab0f40c88fc92e7b4aac9834a27 |
-| Extracted | 2026-06-22T05:07:34Z |
+| Extracted | 2026-06-22T11:28:27Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -115,6 +115,11 @@
 | httpx | api |  |
 | httpx | api |  |
 | httpx | api |  |
+| llama-stack | api |  |
+| llama-stack | api |  |
+| llama-stack | api |  |
+| llama-stack | api |  |
+| llama-stack | api |  |
 | llama-stack | api |  |
 | llama-stack | api |  |
 | milvus | api |  |

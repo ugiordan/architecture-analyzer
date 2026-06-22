@@ -11,7 +11,7 @@
 | Repository | kubeflow/training-operator |
 | Aliases | Training operator, Kubeflow Training operator |
 | Commit | 59b148579eafdac4f96031f11a22c0ff0d6d894b |
-| Extracted | 2026-06-22T05:03:58Z |
+| Extracted | 2026-06-22T11:24:43Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

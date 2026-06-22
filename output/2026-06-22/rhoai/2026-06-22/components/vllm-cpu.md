@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/vllm-cpu |
 | Commit | 50b998a4d48c06112ec511c220bce18efc9f1c94 |
-| Extracted | 2026-06-22T05:08:41Z |
+| Extracted | 2026-06-22T11:30:11Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

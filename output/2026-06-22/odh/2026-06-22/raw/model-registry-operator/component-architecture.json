@@ -5,7 +5,7 @@
   ],
   "repo": "opendatahub-io/model-registry-operator",
   "commit_sha": "6b56ffdf84327624c607e19dcc66ce5ceedb4fef",
-  "extracted_at": "2026-06-22T05:02:35Z",
+  "extracted_at": "2026-06-22T11:21:31Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -30,10 +30,10 @@
       "validation_rules": [
         "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
         "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
+        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
         "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
         "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
-        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
+        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
       ],
       "source": "config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml"
     }

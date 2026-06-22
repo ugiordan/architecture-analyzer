@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | argoproj/argo-workflows |
 | Commit | 5363dfa59facb7def469aa80a745c5f86eb93163 |
-| Extracted | 2026-06-22T05:06:40Z |
+| Extracted | 2026-06-22T11:26:12Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -105,17 +105,17 @@
 | * | /oauth2/callback |  | [`server/apiserver/argoserver.go:396`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/server/apiserver/argoserver.go#L396) |
 | * | /oauth2/redirect |  | [`server/apiserver/argoserver.go:395`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/server/apiserver/argoserver.go#L395) |
 | POST | /template.execute |  | [`pkg/plugins/executor/swagger.yml`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/plugins/executor/swagger.yml) |
-| * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1841`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflow/workflow.pb.gw.go#L1841) |
-| * | DELETE |  | [`pkg/apiclient/eventsource/eventsource.pb.gw.go:748`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/eventsource/eventsource.pb.gw.go#L748) |
 | * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:1043`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L1043) |
 | * | DELETE |  | [`pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:619`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go#L619) |
-| * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:833`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L833) |
-| * | DELETE |  | [`pkg/apiclient/sensor/sensor.pb.gw.go:639`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/sensor/sensor.pb.gw.go#L639) |
-| * | DELETE |  | [`pkg/apiclient/sensor/sensor.pb.gw.go:826`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/sensor/sensor.pb.gw.go#L826) |
 | * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1456`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflow/workflow.pb.gw.go#L1456) |
 | * | DELETE |  | [`pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:452`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go#L452) |
+| * | DELETE |  | [`pkg/apiclient/sensor/sensor.pb.gw.go:639`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/sensor/sensor.pb.gw.go#L639) |
+| * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1841`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflow/workflow.pb.gw.go#L1841) |
 | * | DELETE |  | [`pkg/apiclient/eventsource/eventsource.pb.gw.go:584`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/eventsource/eventsource.pb.gw.go#L584) |
+| * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:833`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L833) |
 | * | DELETE |  | [`pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go:480`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go#L480) |
+| * | DELETE |  | [`pkg/apiclient/sensor/sensor.pb.gw.go:826`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/sensor/sensor.pb.gw.go#L826) |
+| * | DELETE |  | [`pkg/apiclient/eventsource/eventsource.pb.gw.go:748`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/eventsource/eventsource.pb.gw.go#L748) |
 | * | DELETE |  | [`pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go:793`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go#L793) |
 | * | DELETE |  | [`pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go:626`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go#L626) |
 | * | DELETE |  | [`pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go:676`](https://github.com/argoproj/argo-workflows/blob/5363dfa59facb7def469aa80a745c5f86eb93163/pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go#L676) |

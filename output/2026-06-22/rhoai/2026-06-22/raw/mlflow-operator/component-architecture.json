@@ -2,7 +2,7 @@
   "component": "mlflow-operator",
   "repo": "opendatahub-io/mlflow-operator",
   "commit_sha": "38d24847f545c25c512f62d5294094f7636984fe",
-  "extracted_at": "2026-06-22T05:04:39Z",
+  "extracted_at": "2026-06-22T11:23:40Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -21,9 +21,9 @@
       "fields_count": 6,
       "validation_rules": [
         "self.metadata.name == 'mlflow'",
-        "self == 'mlflow-artifact-connection'",
         "self == '' || !self.startsWith('/')",
-        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')"
+        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')",
+        "self == 'mlflow-artifact-connection'"
       ],
       "source": "config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml"
     },

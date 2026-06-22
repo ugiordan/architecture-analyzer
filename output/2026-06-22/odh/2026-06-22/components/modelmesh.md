@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/modelmesh |
 | Commit | 663e9404150dc48010c5e9263bdbdfd24a561f65 |
-| Extracted | 2026-06-22T05:02:30Z |
+| Extracted | 2026-06-22T11:22:11Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

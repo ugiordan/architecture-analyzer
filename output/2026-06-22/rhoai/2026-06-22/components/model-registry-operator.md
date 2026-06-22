@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/model-registry-operator |
 | Aliases | Model Registry operator |
 | Commit | de0ac1b0c8f1b9d85c67cee4d9a45da984b41960 |
-| Extracted | 2026-06-22T05:04:12Z |
+| Extracted | 2026-06-22T11:24:10Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

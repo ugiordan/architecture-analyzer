@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | llm-d/llm-d-routing-sidecar |
 | Commit | cc502d185a124d82170df5675b7ec9a533acfd4f |
-| Extracted | 2026-06-22T05:06:48Z |
+| Extracted | 2026-06-22T11:27:51Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

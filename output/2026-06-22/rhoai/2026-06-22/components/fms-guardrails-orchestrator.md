@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/fms-guardrails-orchestrator |
 | Commit | 270e5f2e0d971f511fa7473e150c21d9e2748bfb |
-| Extracted | 2026-06-22T05:06:19Z |
+| Extracted | 2026-06-22T11:27:37Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
