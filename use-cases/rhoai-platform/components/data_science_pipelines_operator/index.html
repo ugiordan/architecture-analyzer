@@ -25919,6 +25919,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#internal-platform-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Platform Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#key-external-dependencies" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -26066,11 +26077,11 @@
 
 <h1 id="data-science-pipelines-operator">data-science-pipelines-operator<a class="headerlink" href="#data-science-pipelines-operator" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-06-22</strong> (2026-06-22)</p>
+<p><strong>Architecture snapshot: 2026-06-23</strong> (2026-06-23)</p>
 </blockquote>
 <p><strong>Repository:</strong> opendatahub-io/data-science-pipelines-operator<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-06-22T11:22:41Z</p>
+<strong>Extracted:</strong> 2026-06-23T04:04:32Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -26150,7 +26161,11 @@
     controller --&gt;|"Owns"| owned_10["Service"]
     class owned_10 owned
     controller --&gt;|"Owns"| owned_11["ServiceAccount"]
-    class owned_11 owned</code></pre>
+    class owned_11 owned
+    controller -.-&gt;|"depends on"| odh_12["mlflow-operator"]
+    class odh_12 dep
+    controller -.-&gt;|"depends on"| odh_13["operator-chaos"]
+    class odh_13 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -26171,10 +26186,10 @@
 <td>v1</td>
 <td>DataSciencePipelinesApplication</td>
 <td>Namespaced</td>
-<td>205</td>
+<td>208</td>
 <td>2</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a817389fada72967b3cdf506cd91359109b1fe41/config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml"><code>config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/ab30578b3e674c26ff759edd1ddcc0e8734dfeee/config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml"><code>config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml</code></a></td>
 </tr>
 <tr>
 <td>kubeflow.org</td>
@@ -26184,7 +26199,7 @@
 <td>5</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a817389fada72967b3cdf506cd91359109b1fe41/config/crd/bases/scheduledworkflows.yaml"><code>config/crd/bases/scheduledworkflows.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/ab30578b3e674c26ff759edd1ddcc0e8734dfeee/config/crd/bases/scheduledworkflows.yaml"><code>config/crd/bases/scheduledworkflows.yaml</code></a></td>
 </tr>
 <tr>
 <td>pipelines.kubeflow.org</td>
@@ -26194,7 +26209,7 @@
 <td>7</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a817389fada72967b3cdf506cd91359109b1fe41/config/crd/bases/pipelines.kubeflow.org_pipelines.yaml"><code>config/crd/bases/pipelines.kubeflow.org_pipelines.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/ab30578b3e674c26ff759edd1ddcc0e8734dfeee/config/crd/bases/pipelines.kubeflow.org_pipelines.yaml"><code>config/crd/bases/pipelines.kubeflow.org_pipelines.yaml</code></a></td>
 </tr>
 <tr>
 <td>pipelines.kubeflow.org</td>
@@ -26204,11 +26219,30 @@
 <td>18</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/a817389fada72967b3cdf506cd91359109b1fe41/config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml"><code>config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/data-science-pipelines-operator/blob/ab30578b3e674c26ff759edd1ddcc0e8734dfeee/config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml"><code>config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
+<h3 id="internal-platform-dependencies">Internal Platform Dependencies<a class="headerlink" href="#internal-platform-dependencies" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Interaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mlflow-operator</td>
+<td>Go module dependency: github.com/opendatahub-io/mlflow-operator/api</td>
+</tr>
+<tr>
+<td>operator-chaos</td>
+<td>Go module dependency: github.com/opendatahub-io/operator-chaos</td>
+</tr>
+</tbody>
+</table>
 <h3 id="key-external-dependencies">Key External Dependencies<a class="headerlink" href="#key-external-dependencies" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -26266,7 +26300,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 22, 2026 11:33:05 UTC">June 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 23, 2026 04:11:49 UTC">June 23, 2026</span>
   </span>
 
     
