@@ -9811,6 +9811,8 @@
       
         
       
+        
+      
     
     
     
@@ -9934,6 +9936,34 @@
     
   
     Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../odh-platform/components/spark_operator/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
   
 
     
@@ -23091,6 +23121,8 @@
       
         
       
+        
+      
     
     
     
@@ -23214,6 +23246,34 @@
     
   
     Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
   
 
     
@@ -25919,6 +25979,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#internal-platform-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Platform Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#key-external-dependencies" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -26066,11 +26137,11 @@
 
 <h1 id="spark-operator">spark-operator<a class="headerlink" href="#spark-operator" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-06-30</strong> (2026-06-30)</p>
+<p><strong>Architecture snapshot: 2026-07-01</strong> (2026-07-01)</p>
 </blockquote>
 <p><strong>Repository:</strong> kubeflow/spark-operator<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-06-30T04:08:26Z</p>
+<strong>Extracted:</strong> 2026-07-01T04:24:56Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -26086,7 +26157,7 @@
 </tr>
 <tr>
 <td>Deployments</td>
-<td>3</td>
+<td>4</td>
 </tr>
 <tr>
 <td>Services</td>
@@ -26102,7 +26173,7 @@
 </tr>
 <tr>
 <td>Controller Watches</td>
-<td>2</td>
+<td>3</td>
 </tr>
 </tbody>
 </table>
@@ -26122,8 +26193,10 @@
         class dep_1 controller
         dep_2["spark-operator-controller"]
         class dep_2 controller
-        dep_3["spark-operator-webhook"]
+        dep_3["spark-operator-module-controller-manager"]
         class dep_3 controller
+        dep_4["spark-operator-webhook"]
+        class dep_4 controller
     end
 
     crd_SparkConnect{{"SparkConnect\nsparkoperator.k8s.io/v1alpha1"}}
@@ -26132,7 +26205,9 @@
     crd_ScheduledSparkApplication{{"ScheduledSparkApplication\nsparkoperator.k8s.io/v1beta2"}}
     class crd_ScheduledSparkApplication crd
     crd_SparkApplication{{"SparkApplication\nsparkoperator.k8s.io/v1beta2"}}
-    class crd_SparkApplication crd</code></pre>
+    class crd_SparkApplication crd
+    controller -.-&gt;|"depends on"| odh_5["odh-platform-utilities"]
+    class odh_5 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -26156,7 +26231,7 @@
 <td>95</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kubeflow/spark-operator/blob/aa4053a1b4b37422d9b4276bca07f753df80e108/config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml"><code>config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml</code></a></td>
+<td><a href="https://github.com/kubeflow/spark-operator/blob/5905ff30287be2bf04199e0fd609981a495b77be/config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml"><code>config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml</code></a></td>
 </tr>
 <tr>
 <td>sparkoperator.k8s.io</td>
@@ -26166,7 +26241,7 @@
 <td>1676</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kubeflow/spark-operator/blob/aa4053a1b4b37422d9b4276bca07f753df80e108/config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml"><code>config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml</code></a></td>
+<td><a href="https://github.com/kubeflow/spark-operator/blob/5905ff30287be2bf04199e0fd609981a495b77be/config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml"><code>config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml</code></a></td>
 </tr>
 <tr>
 <td>sparkoperator.k8s.io</td>
@@ -26176,11 +26251,26 @@
 <td>1679</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kubeflow/spark-operator/blob/aa4053a1b4b37422d9b4276bca07f753df80e108/config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml"><code>config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml</code></a></td>
+<td><a href="https://github.com/kubeflow/spark-operator/blob/5905ff30287be2bf04199e0fd609981a495b77be/config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml"><code>config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
+<h3 id="internal-platform-dependencies">Internal Platform Dependencies<a class="headerlink" href="#internal-platform-dependencies" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Interaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>odh-platform-utilities</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-platform-utilities</td>
+</tr>
+</tbody>
+</table>
 <h3 id="key-external-dependencies">Key External Dependencies<a class="headerlink" href="#key-external-dependencies" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -26207,8 +26297,16 @@
 <td>v0.32.5</td>
 </tr>
 <tr>
+<td>k8s.io/apiextensions-apiserver</td>
+<td>v0.35.2</td>
+</tr>
+<tr>
 <td>k8s.io/apimachinery</td>
 <td>v0.32.5</td>
+</tr>
+<tr>
+<td>k8s.io/apimachinery</td>
+<td>v0.35.4</td>
 </tr>
 <tr>
 <td>k8s.io/apiserver</td>
@@ -26219,8 +26317,16 @@
 <td>v0.32.5</td>
 </tr>
 <tr>
+<td>k8s.io/client-go</td>
+<td>v0.35.2</td>
+</tr>
+<tr>
 <td>sigs.k8s.io/controller-runtime</td>
 <td>v0.20.4</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.23.3</td>
 </tr>
 </tbody>
 </table>
@@ -26246,7 +26352,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 30, 2026 04:15:58 UTC">June 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 1, 2026 04:33:04 UTC">July 1, 2026</span>
   </span>
 
     
