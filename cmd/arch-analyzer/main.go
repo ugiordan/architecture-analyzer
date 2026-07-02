@@ -110,6 +110,8 @@ func main() {
 		err = cmdValidate(args)
 	case "scan":
 		err = cmdScan(args)
+	case "context-bundle":
+		err = cmdContextBundle(args)
 	case "graph":
 		err = cmdGraph(args)
 	case "diff":
@@ -180,6 +182,9 @@ Contract validation commands:
 Code graph commands:
   scan <repo-path>                     Build code graph and run security queries
                                        [--domains d1,d2] [--with-arch] [--import-sarif files]
+  context-bundle <repo-path>           Generate SrcLang context bundle for LLM consumption
+                                       [--layer security] [--output context.srclg]
+                                       [--with-scan] [--domains d1,d2]
   graph <repo-path>                    Export code property graph (JSON or DOT)
   diff <base.json> <head.json>       Structural diff between two code-graph.json files
                                      [--format json|text] [--kind f1,f2] [--output file]
