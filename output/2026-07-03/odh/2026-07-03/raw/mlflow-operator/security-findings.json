@@ -1,0 +1,1028 @@
+[
+  {
+    "rule_id": "CGA-A02",
+    "severity": "informational",
+    "message": "Function main calls external SDK: os.environ.get(\"MLFLOW_BACKEND_STORE_URI\", \"\").strip, os.environ.get(\"MLFLOW_REGISTRY_STORE_URI\", \"\").strip",
+    "file": "internal/controller/assets/mlflow_db_migrate.py",
+    "line": 93,
+    "node_id": "fn_1bc38fd6ee235c1b",
+    "domain": "architecture"
+  },
+  {
+    "rule_id": "CGA-A02",
+    "severity": "informational",
+    "message": "Function create_mlflow_client calls external SDK: mlflow.set_tracking_uri, MlflowClient",
+    "file": "mlflow-tests/src/mlflow_tests/utils/client.py",
+    "line": 44,
+    "node_id": "fn_eff8c7cffe5dee4a",
+    "domain": "architecture"
+  },
+  {
+    "rule_id": "CGA-A02",
+    "severity": "informational",
+    "message": "Function extract_supported_mlflow_version calls external SDK: SUPPORTED_MLFLOW_VERSION_RE.search",
+    "file": "scripts/print_supported_mlflow_version.py",
+    "line": 16,
+    "node_id": "fn_e39bee7917011995",
+    "domain": "architecture"
+  },
+  {
+    "rule_id": "CGA-A02",
+    "severity": "informational",
+    "message": "Function main calls external SDK: extract_supported_mlflow_version, normalize_mlflow_version",
+    "file": "scripts/print_supported_mlflow_version.py",
+    "line": 31,
+    "node_id": "fn_90e0c18c64a8d1e0",
+    "domain": "architecture"
+  },
+  {
+    "rule_id": "CGA-A03",
+    "severity": "informational",
+    "message": "Factory function verify_rbac_permissions dispatches to: AuthorizationV1Api,V1SubjectAccessReview,V1SubjectAccessReviewSpec,V1ResourceAttributes",
+    "file": "mlflow-tests/src/mlflow_tests/manager/rbac.py",
+    "line": 205,
+    "node_id": "fn_8b53611a66f80a14",
+    "domain": "architecture"
+  },
+  {
+    "rule_id": "CGA-A03",
+    "severity": "informational",
+    "message": "Factory function __init__ dispatches to: K8RoleManager,ServiceAccountManager",
+    "file": "mlflow-tests/src/mlflow_tests/manager/user.py",
+    "line": 21,
+    "node_id": "fn_dab82232163bfc26",
+    "domain": "architecture"
+  },
+  {
+    "rule_id": "CGA-007",
+    "severity": "medium",
+    "message": "ByObject{} at cmd/main.go:301 has no Field or Label selector (unfiltered cache may cause OOM)",
+    "file": "cmd/main.go",
+    "line": 301,
+    "node_id": "struct_5e2516cb83bfa901",
+    "domain": "security",
+    "architecture_ref": "cache_issues: No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint; No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior; Type ConsoleLink is watched but has no cache filter (cluster-wide informer); Type CronJob is watched but has no cache filter (cluster-wide informer); Type HTTPRoute is watched but has no cache filter (cluster-wide informer); Type MLflow is watched but has no cache filter (cluster-wide informer); Type MLflowOperator is watched but has no cache filter (cluster-wide informer); Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)"
+  },
+  {
+    "rule_id": "CGA-007",
+    "severity": "medium",
+    "message": "ByObject{} at internal/controller/mlflow_controller.go:721 has no Field or Label selector (unfiltered cache may cause OOM)",
+    "file": "internal/controller/mlflow_controller.go",
+    "line": 721,
+    "node_id": "struct_f42c595c2639b369",
+    "domain": "security",
+    "architecture_ref": "cache_issues: No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint; No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior; Type ConsoleLink is watched but has no cache filter (cluster-wide informer); Type CronJob is watched but has no cache filter (cluster-wide informer); Type HTTPRoute is watched but has no cache filter (cluster-wide informer); Type MLflow is watched but has no cache filter (cluster-wide informer); Type MLflowOperator is watched but has no cache filter (cluster-wide informer); Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function main has high cyclomatic complexity (28), increasing review difficulty",
+    "file": "cmd/main.go",
+    "line": 167,
+    "node_id": "fn_dc12cf1969072124",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function jobFailureDetails has high cyclomatic complexity (12), increasing review difficulty",
+    "file": "internal/controller/migration.go",
+    "line": 392,
+    "node_id": "fn_dc3e913fa8b86e25",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus has high cyclomatic complexity (14), increasing review difficulty",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 20,
+    "node_id": "fn_50072b3b99853c1a",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function TestMLflowOperatorReconcileBlocksReadyUntilRequiredProjectedFieldsExist has high cyclomatic complexity (11), increasing review difficulty",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 89,
+    "node_id": "fn_0660cfcf21dc6621",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function TestEnsureMLflowOperatorReadyBlocksWhenModuleMissing has high cyclomatic complexity (11), increasing review difficulty",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 117,
+    "node_id": "fn_f87fce2c66aceb58",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function TestEnsureMLflowOperatorReadyPreservesAvailabilityWhenModuleDeletionBlocked has high cyclomatic complexity (11), increasing review difficulty",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 219,
+    "node_id": "fn_8d125bef3be35e15",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 20,
+    "node_id": "fn_50072b3b99853c1a",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestMLflowOperatorReconcileBlocksReadyUntilRequiredProjectedFieldsExist makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 89,
+    "node_id": "fn_0660cfcf21dc6621",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestMLflowOperatorReconcileAllowsOptionalGatewayDomainToBeEmpty makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 147,
+    "node_id": "fn_b88c6c62b32055a7",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestMLflowOperatorDeletionBlockedWhenMLflowInstancesExist makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 194,
+    "node_id": "fn_de92a69159ba66a1",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestMLflowOperatorDeletionRemovesFinalizerWhenSafe makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 250,
+    "node_id": "fn_66ac0d70a83eccb5",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestEnsureMLflowOperatorReadyBlocksWhenModuleMissing makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 117,
+    "node_id": "fn_f87fce2c66aceb58",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestEnsureMLflowOperatorReadyPreservesAvailabilityWhenModuleDeletionBlocked makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 219,
+    "node_id": "fn_8d125bef3be35e15",
+    "domain": "security",
+    "architecture_ref": "network_policies: seaweedfs (types: Ingress, source: config/seaweedfs/base/seaweedfs-networkpolicy.yaml)"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: modulev1alpha1.AddToScheme at cmd/main.go:90 (v1alpha1/v1beta1 may change between versions)",
+    "file": "cmd/main.go",
+    "line": 90,
+    "node_id": "call_d9355d2912028260",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026modulev1alpha1.MLflowOperator{}).\n\t\tWatches(\n\t\t\t\u0026mlflowv1.MLflow{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(context.Context, client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{\n\t\t\t\t\tNamespacedName: types.NamespacedName{Name: modulev1alpha1.MLflowOperatorInstanceName},\n\t\t\t\t}}\n\t\t\t}),\n\t\t).\n\t\tComplete at internal/controller/mlflowoperator_controller.go:121 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/mlflowoperator_controller.go",
+    "line": 121,
+    "node_id": "call_32d2a8d2c203011a",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026modulev1alpha1.MLflowOperator{}).\n\t\tWatches at internal/controller/mlflowoperator_controller.go:121 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/mlflowoperator_controller.go",
+    "line": 121,
+    "node_id": "call_9f24175c81b871c8",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-T02",
+    "severity": "low",
+    "message": "Function Reconcile is tested with fake client but never with envtest",
+    "file": "internal/controller/mlflow_controller.go",
+    "line": 99,
+    "node_id": "fn_899479007c6bb941",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T02",
+    "severity": "low",
+    "message": "Function Reconcile is tested with fake client but never with envtest",
+    "file": "internal/controller/mlflowoperator_controller.go",
+    "line": 60,
+    "node_id": "fn_2b2ca9c55e6fbb1c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowSpecResourceClaimsJSONRoundTrip has no error path assertions",
+    "file": "api/v1/mlflow_types_test.go",
+    "line": 26,
+    "node_id": "fn_66986fa37ca1a879",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestInferPodNamespaceFromEnv has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 12,
+    "node_id": "fn_750b42890dd3ccb8",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestInferPodNamespaceFallsBackOutsideCluster has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 19,
+    "node_id": "fn_6d925decd62e56d2",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestValidateStartupConfig has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 26,
+    "node_id": "fn_d5deb4172e10426f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveManagerNamespace has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 77,
+    "node_id": "fn_27bfac1ca782a5a5",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestWaitForRequiredCRDReturnsImmediatelyWhenAvailable has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 127,
+    "node_id": "fn_cb1ed3291aff41ad",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestWaitForRequiredCRDRetriesUntilAvailable has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 141,
+    "node_id": "fn_98e9925fbde80ada",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestWaitForRequiredCRDTimesOutWhenUnavailable has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 162,
+    "node_id": "fn_bbd0559935ec2d61",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestWaitForRequiredCRDRejectsNonPositiveTimeout has no error path assertions",
+    "file": "cmd/main_test.go",
+    "line": 174,
+    "node_id": "fn_4df364413b0fdbc7",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestLoadConfigPrefersModularInputs has no error path assertions",
+    "file": "internal/config/config_test.go",
+    "line": 11,
+    "node_id": "fn_4c0bb7ca6c8f817c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestLoadConfigFallsBackToLegacyInputs has no error path assertions",
+    "file": "internal/config/config_test.go",
+    "line": 34,
+    "node_id": "fn_9e6c1c3a46ffac6e",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_CABundle has no error path assertions",
+    "file": "internal/controller/helm_cabundle_test.go",
+    "line": 28,
+    "node_id": "fn_4dabe7c1778844b2",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_CABundle has no error path assertions",
+    "file": "internal/controller/helm_cabundle_test.go",
+    "line": 129,
+    "node_id": "fn_81509306022cdae3",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_CABundle_ODHOnly has no error path assertions",
+    "file": "internal/controller/helm_cabundle_test.go",
+    "line": 270,
+    "node_id": "fn_83f9600045d6ce85",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_NoCABundle has no error path assertions",
+    "file": "internal/controller/helm_cabundle_test.go",
+    "line": 326,
+    "node_id": "fn_240ad73be8a6936b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestBuildCORSAllowedOrigins has no error path assertions",
+    "file": "internal/controller/helm_cors_test.go",
+    "line": 31,
+    "node_id": "fn_d65395a877ee6b53",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_CORSAllowedOrigins has no error path assertions",
+    "file": "internal/controller/helm_cors_test.go",
+    "line": 177,
+    "node_id": "fn_ef6a365e32c20e89",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_CORSEnvVar has no error path assertions",
+    "file": "internal/controller/helm_cors_test.go",
+    "line": 204,
+    "node_id": "fn_f503352f919dec68",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_ResourceClaims has no error path assertions",
+    "file": "internal/controller/helm_dra_test.go",
+    "line": 30,
+    "node_id": "fn_eb5afff750dfc57d",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_ResourceClaims has no error path assertions",
+    "file": "internal/controller/helm_dra_test.go",
+    "line": 59,
+    "node_id": "fn_062d3ac276cedcb5",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_ResourceClaimName has no error path assertions",
+    "file": "internal/controller/helm_dra_test.go",
+    "line": 120,
+    "node_id": "fn_16250376e6a51f32",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_StaticPrefix has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 31,
+    "node_id": "fn_c93be25b42cefb7d",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Env has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 65,
+    "node_id": "fn_77f75fec415b7b18",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_OpenShiftInjectsUvicornSSLCiphersEnv has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 163,
+    "node_id": "fn_8fc5f000db029673",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_NonOpenShiftDoesNotInjectUvicornSSLCiphersEnv has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 231,
+    "node_id": "fn_69e23a01e7020551",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_EnvFrom has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 270,
+    "node_id": "fn_382bb0be62b512a6",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_EnvVars has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 343,
+    "node_id": "fn_88c29c05547190ff",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_WorkspaceLabelSelectorEnvVar has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 489,
+    "node_id": "fn_d9e47887ab12d58f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_WorkspaceLabelSelectorNilOmitsEnvVar has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 572,
+    "node_id": "fn_e1a89e072aeaf46e",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_WorkspaceLabelSelectorEmptyOmitsEnvVar has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 626,
+    "node_id": "fn_fee86f4773970829",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_WorkspaceLabelSelectorInvalidOperatorReturnsError has no error path assertions",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 682,
+    "node_id": "fn_01f273371cee4f5f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_GarbageCollection has no error path assertions",
+    "file": "internal/controller/helm_gc_test.go",
+    "line": 31,
+    "node_id": "fn_9784aa8315abb1a3",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_GarbageCollection has no error path assertions",
+    "file": "internal/controller/helm_gc_test.go",
+    "line": 143,
+    "node_id": "fn_e21e4de19c5ce571",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Image has no error path assertions",
+    "file": "internal/controller/helm_image_test.go",
+    "line": 29,
+    "node_id": "fn_84f1ab99c5c66bbb",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Metrics has no error path assertions",
+    "file": "internal/controller/helm_metrics_test.go",
+    "line": 29,
+    "node_id": "fn_82fa905e964230f9",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_ServiceMonitorWithTLSConfig has no error path assertions",
+    "file": "internal/controller/helm_metrics_test.go",
+    "line": 142,
+    "node_id": "fn_9c160f4173db6fa9",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_ServiceMonitorInsecureSkipVerify has no error path assertions",
+    "file": "internal/controller/helm_metrics_test.go",
+    "line": 228,
+    "node_id": "fn_bb0b2b20d5e951c8",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_MLflowConfig has no error path assertions",
+    "file": "internal/controller/helm_mlflowconfig_test.go",
+    "line": 29,
+    "node_id": "fn_fbd2ef839a67c21f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_NetworkPolicy has no error path assertions",
+    "file": "internal/controller/helm_networkpolicy_test.go",
+    "line": 32,
+    "node_id": "fn_767a16ae7f5ee29c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_PodAnnotations has no error path assertions",
+    "file": "internal/controller/helm_pod_metadata_test.go",
+    "line": 29,
+    "node_id": "fn_cddc5fb2329d20c3",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart_PodAnnotations has no error path assertions",
+    "file": "internal/controller/helm_pod_metadata_test.go",
+    "line": 114,
+    "node_id": "fn_38328bb042e42493",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_PodLabels has no error path assertions",
+    "file": "internal/controller/helm_pod_metadata_test.go",
+    "line": 142,
+    "node_id": "fn_6cea58ab7a853289",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRenderChart has no error path assertions",
+    "file": "internal/controller/helm_renderchart_test.go",
+    "line": 29,
+    "node_id": "fn_f7b62c98fe926654",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Storage has no error path assertions",
+    "file": "internal/controller/helm_storage_test.go",
+    "line": 30,
+    "node_id": "fn_ae81556811c4aaf3",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Resources has no error path assertions",
+    "file": "internal/controller/helm_workload_test.go",
+    "line": 30,
+    "node_id": "fn_eda5961aecb9163c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Replicas has no error path assertions",
+    "file": "internal/controller/helm_workload_test.go",
+    "line": 117,
+    "node_id": "fn_7b8550bd04920f31",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_Namespace has no error path assertions",
+    "file": "internal/controller/helm_workload_test.go",
+    "line": 162,
+    "node_id": "fn_cc83a997938435b4",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMlflowToHelmValues_ResourceSuffix has no error path assertions",
+    "file": "internal/controller/helm_workload_test.go",
+    "line": 182,
+    "node_id": "fn_28cd45a3319633bc",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationRequested has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 48,
+    "node_id": "fn_8fda6aa9057522f5",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationConditionWasForceTriggered has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 177,
+    "node_id": "fn_081593bbed713ebe",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestBuildMigrationJobFromDeployment has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 223,
+    "node_id": "fn_13f137c4ff52cca6",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestSupportedVersionEarlierThanStatusVersion has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 343,
+    "node_id": "fn_881231074d02e766",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestIsJobFailedRequiresTerminalFailureCondition has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 384,
+    "node_id": "fn_5d7e09e9da049339",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestNamespaceRoleIncludesJobsAndPods has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 404,
+    "node_id": "fn_63474b57bdc52ba2",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationScriptSupportsDriverQualifiedSQLAlchemyURIs has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 419,
+    "node_id": "fn_c5a95e7bb1c5d03a",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationScriptIncludesRHOAIBackendGapFixHook has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 427,
+    "node_id": "fn_fd8fa0f0c83e7fcf",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationScriptValidatesSupportedVersion has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 438,
+    "node_id": "fn_fe0c144478944c1c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationScriptDefinesSpecificExitCodes has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 449,
+    "node_id": "fn_ebef33709bc3f5e5",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMigrationFailureMessageForExitCode has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 466,
+    "node_id": "fn_07eed0d4c45f0b66",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestClassifyMigrationFailure has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 530,
+    "node_id": "fn_52de8780d3ca43e4",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestJobFailureDetailsReturnsPodListError has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 575,
+    "node_id": "fn_4d48a03d88a0dcb1",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestJobFailureDetailsPrefersMappedExitCodeOverTerminationMessage has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 608,
+    "node_id": "fn_5de084d9321a1d55",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestJobFailedConditionUsesFailedTransitionTime has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 663,
+    "node_id": "fn_90acebb5f02e7788",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestDeploymentHasActiveReplicas has no error path assertions",
+    "file": "internal/controller/migration_test.go",
+    "line": 686,
+    "node_id": "fn_fa0fa42d95440e8c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestIsSharedRBACObject has no error path assertions",
+    "file": "internal/controller/mlflow_controller_helpers_test.go",
+    "line": 28,
+    "node_id": "fn_d9dac725ff933ec4",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestSharedRBACObjectToMLflowRequests has no error path assertions",
+    "file": "internal/controller/mlflow_controller_helpers_test.go",
+    "line": 89,
+    "node_id": "fn_4b7aecb9eb6d2df0",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorToMLflowRequestsEnqueuesAllMLflows has no error path assertions",
+    "file": "internal/controller/mlflow_watch_requests_test.go",
+    "line": 15,
+    "node_id": "fn_6a70f306f0c64406",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorToMLflowRequestsIgnoresUnexpectedModuleName has no error path assertions",
+    "file": "internal/controller/mlflow_watch_requests_test.go",
+    "line": 50,
+    "node_id": "fn_7875e4d64ce47f03",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus has no error path assertions",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 20,
+    "node_id": "fn_50072b3b99853c1a",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorReconcileBlocksReadyUntilRequiredProjectedFieldsExist has no error path assertions",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 89,
+    "node_id": "fn_0660cfcf21dc6621",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorReconcileAllowsOptionalGatewayDomainToBeEmpty has no error path assertions",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 147,
+    "node_id": "fn_b88c6c62b32055a7",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorDeletionBlockedWhenMLflowInstancesExist has no error path assertions",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 194,
+    "node_id": "fn_de92a69159ba66a1",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMLflowOperatorDeletionRemovesFinalizerWhenSafe has no error path assertions",
+    "file": "internal/controller/mlflowoperator_controller_test.go",
+    "line": 250,
+    "node_id": "fn_66ac0d70a83eccb5",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveOperatorConfigFromBaseKeepsLegacyPathWhenToggleDisabled has no error path assertions",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 18,
+    "node_id": "fn_742a690147252fbc",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveOperatorConfigFromBaseOverlaysModuleSpecWhenToggleEnabled has no error path assertions",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 59,
+    "node_id": "fn_95fa4dc409d8d523",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestGatewayDomainToURL has no error path assertions",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 103,
+    "node_id": "fn_9f099df8a88d280b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestEnsureMLflowOperatorReadyBlocksWhenModuleMissing has no error path assertions",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 117,
+    "node_id": "fn_f87fce2c66aceb58",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestEnsureMLflowOperatorReadyPassesWhenModuleReady has no error path assertions",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 171,
+    "node_id": "fn_0513a9348b549602",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestEnsureMLflowOperatorReadyPreservesAvailabilityWhenModuleDeletionBlocked has no error path assertions",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 219,
+    "node_id": "fn_8d125bef3be35e15",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestBuildStatusURL has no error path assertions",
+    "file": "internal/controller/status_urls_test.go",
+    "line": 12,
+    "node_id": "fn_1adcb20f5644a990",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestBuildStatusAddress has no error path assertions",
+    "file": "internal/controller/status_urls_test.go",
+    "line": 81,
+    "node_id": "fn_f4e0a76ce4328ca7",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestSetObservedURLs has no error path assertions",
+    "file": "internal/controller/status_urls_test.go",
+    "line": 128,
+    "node_id": "fn_0d0bb044f3003dd7",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestControllers has no error path assertions",
+    "file": "internal/controller/suite_test.go",
+    "line": 61,
+    "node_id": "fn_bf562cc828b7415c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File internal/controller/helm_env_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "internal/controller/helm_env_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File internal/controller/migration_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "internal/controller/migration_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File internal/controller/operator_config_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "internal/controller/operator_config_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File cmd/main_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "cmd/main_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  }
+]
