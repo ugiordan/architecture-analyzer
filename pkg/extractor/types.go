@@ -77,6 +77,20 @@ type ComponentArchitecture struct {
 	GoASTMode               string                    `json:"go_ast_mode,omitempty"`
 	GoASTWarning            string                    `json:"go_ast_warning,omitempty"`
 	ExtractorsRun           []string                  `json:"extractors_run,omitempty"`
+	SecurityAnnotations     []SecurityAnnotation       `json:"security_annotations,omitempty"`
+}
+
+type SecurityAnnotation struct {
+	Type        string   `json:"type"`
+	Severity    string   `json:"severity"`
+	Resource    string   `json:"resource,omitempty"`
+	Verbs       []string `json:"verbs,omitempty"`
+	Source      string   `json:"source"`
+	Field       string   `json:"field,omitempty"`
+	Container   string   `json:"container,omitempty"`
+	EnvVar      string   `json:"env_var,omitempty"`
+	CRDKind     string   `json:"crd_kind,omitempty"`
+	Description string   `json:"description"`
 }
 
 // CRD represents a CustomResourceDefinition with all its versions.
@@ -185,6 +199,8 @@ type Deployment struct {
 type Container struct {
 	Name              string                   `json:"name"`
 	Image             string                   `json:"image"`
+	Command           []string                 `json:"command,omitempty"`
+	Args              []string                 `json:"args,omitempty"`
 	Ports             []ContainerPort          `json:"ports,omitempty"`
 	SecurityContext   map[string]interface{}   `json:"security_context,omitempty"`
 	EnvFromSecrets    []string                 `json:"env_from_secrets,omitempty"`
@@ -192,10 +208,19 @@ type Container struct {
 	VolumeMounts      []map[string]interface{} `json:"volume_mounts,omitempty"`
 	Resources         map[string]interface{}   `json:"resources,omitempty"`
 	EnvVars           map[string]string        `json:"env_vars,omitempty"`
+	EnvVarRefs        []EnvVarRef              `json:"env_var_refs,omitempty"`
 	LivenessProbe     *ProbeInfo               `json:"liveness_probe,omitempty"`
 	ReadinessProbe    *ProbeInfo               `json:"readiness_probe,omitempty"`
 	StartupProbe      *ProbeInfo               `json:"startup_probe,omitempty"`
 	Issues            []string                 `json:"issues,omitempty"`
+}
+
+type EnvVarRef struct {
+	Name      string `json:"name"`
+	SecretKey string `json:"secret_key,omitempty"`
+	SecretName string `json:"secret_name,omitempty"`
+	ConfigMapKey string `json:"configmap_key,omitempty"`
+	ConfigMapName string `json:"configmap_name,omitempty"`
 }
 
 // ProbeInfo holds liveness/readiness/startup probe metadata.

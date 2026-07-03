@@ -136,6 +136,8 @@ func parseYAMLContainer(c map[string]interface{}, volumes []map[string]interface
 	container := Container{
 		Name:              cName,
 		Image:             cImage,
+		Command:           toStringSlice(c["command"]),
+		Args:              toStringSlice(c["args"]),
 		Ports:             ports,
 		SecurityContext:   extractSecurityContext(c["securityContext"]),
 		EnvFromSecrets:    cSecrets,
@@ -146,6 +148,7 @@ func parseYAMLContainer(c map[string]interface{}, volumes []map[string]interface
 			"limits":   limits,
 		},
 		EnvVars:        extractSecurityEnvVars(c),
+		EnvVarRefs:     extractEnvVarRefs(c),
 		LivenessProbe:  extractProbe(c["livenessProbe"]),
 		ReadinessProbe: extractProbe(c["readinessProbe"]),
 		StartupProbe:   extractProbe(c["startupProbe"]),
@@ -401,3 +404,32 @@ func extractProbe(v interface{}) *ProbeInfo {
 	}
 	return info
 }
+
+func extractEnvVarRefs(container map[string]interface{}) []EnvVarRef {
+	envVars := toSliceOfMaps(container["env"])
+	var refs []EnvVarRef
+	for _, envVar := range envVars {
+		name, _ := envVar["name"].(string)
+		if name == "" {
+			continue
+		}
+		valueFrom, ok := envVar["valueFrom"].(map[string]interface{})
+		if !ok {
+			continue
+		}
+		ref := EnvVarRef{Name: name}
+		if secretKeyRef, ok := valueFrom["secretKeyRef"].(map[string]interface{}); ok {
+			ref.SecretName, _ = secretKeyRef["name"].(string)
+			ref.SecretKey, _ = secretKeyRef["key"].(string)
+		}
+		if configMapKeyRef, ok := valueFrom["configMapKeyRef"].(map[string]interface{}); ok {
+			ref.ConfigMapName, _ = configMapKeyRef["name"].(string)
+			ref.ConfigMapKey, _ = configMapKeyRef["key"].(string)
+		}
+		if ref.SecretName != "" || ref.ConfigMapName != "" {
+			refs = append(refs, ref)
+		}
+	}
+	return refs
+}
+
