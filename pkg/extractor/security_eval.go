@@ -105,7 +105,7 @@ func evalSecretExposureInArgs(arch *ComponentArchitecture) []SecurityAnnotation 
 							Source:      dep.Source,
 							Container:   c.Name,
 							EnvVar:      envName,
-							Description: fmt.Sprintf("Container %q in %s uses $(%.s) in args/command, which references secret %q. Kubelet expands this into /proc/1/cmdline, exposing the secret value to any process that can read procfs.", c.Name, dep.Name, envName, secretName),
+							Description: fmt.Sprintf("Container %q in %s uses $(%s) in args/command, which references secret %q. Kubelet expands this into /proc/1/cmdline, exposing the secret value to any process that can read procfs.", c.Name, dep.Name, envName, secretName),
 						})
 					}
 				}
