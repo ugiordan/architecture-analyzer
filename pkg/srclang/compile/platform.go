@@ -11,6 +11,7 @@ import (
 
 type platformFile struct {
 	Platform       string               `json:"platform"`
+	Version        string               `json:"version"`
 	ComponentCount int                  `json:"component_count"`
 	Components     []string             `json:"components"`
 	DependencyGraph []platformEdgeRaw   `json:"dependency_graph"`
@@ -46,7 +47,22 @@ func extractPlatform(path string, component string) (*srclang.Platform, error) {
 
 	platform := &srclang.Platform{
 		Name:       pf.Platform,
+		Version:    pf.Version,
 		Components: pf.ComponentCount,
+	}
+
+	seen := make(map[string]bool)
+	for _, comp := range pf.ComponentData {
+		for _, dep := range comp.Deployments {
+			ns := dep.Namespace
+			if ns == "" || seen[ns] {
+				continue
+			}
+			seen[ns] = true
+			platform.Topology = append(platform.Topology, srclang.Namespace{
+				Name: ns,
+			})
+		}
 	}
 
 	for _, edge := range pf.DependencyGraph {

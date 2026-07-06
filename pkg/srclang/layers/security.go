@@ -44,12 +44,12 @@ func NewSecuritySelector(repoPath string) *SecuritySelector {
 	}
 }
 
-func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, securityAnnotations []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
+func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, extractionAnnotations []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
 	layer := &srclang.Layer{Name: "security"}
 	var warnings []srclang.Warning
 
 	layer.Findings = s.convertFindings(findings)
-	layer.Findings = append(layer.Findings, convertSecurityAnnotations(securityAnnotations)...)
+	layer.Findings = append(layer.Findings, convertSecurityAnnotations(extractionAnnotations)...)
 	s.addSecurityFunctions(cpg, layer, &warnings)
 	if arch != nil {
 		s.addRBAC(arch, layer)
