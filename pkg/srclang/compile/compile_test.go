@@ -181,6 +181,116 @@ func TestCompile_ProducerIncludesVersion(t *testing.T) {
 	}
 }
 
+func TestCompile_WithSecurityAnnotations(t *testing.T) {
+	cpg := graph.NewCPG()
+	arch := &extractor.ComponentArchitecture{
+		Component:       "test-operator",
+		AnalyzerVersion: "0.2.0",
+	}
+	annotations := []extractor.SecurityAnnotation{
+		{
+			Type:        "RBAC_CLUSTER_SCOPE_SENSITIVE",
+			Severity:    "high",
+			Source:      "config/rbac/role.yaml",
+			Description: "ClusterRole grants cluster-wide secrets CRUD",
+		},
+	}
+
+	opts := Options{
+		RepoPath:            t.TempDir(),
+		Layer:               "security",
+		CPG:                 cpg,
+		Arch:                arch,
+		SecurityAnnotations: annotations,
+	}
+
+	doc, err := Compile(opts)
+	if err != nil {
+		t.Fatalf("Compile() error: %v", err)
+	}
+
+	if len(doc.Body.Layer.Findings) != 1 {
+		t.Fatalf("expected 1 finding, got %d", len(doc.Body.Layer.Findings))
+	}
+	f := doc.Body.Layer.Findings[0]
+	if f.Domain != "extraction" {
+		t.Errorf("finding domain = %q, want %q", f.Domain, "extraction")
+	}
+	if f.Rule != "RBAC_CLUSTER_SCOPE_SENSITIVE" {
+		t.Errorf("finding rule = %q, want %q", f.Rule, "RBAC_CLUSTER_SCOPE_SENSITIVE")
+	}
+}
+
+func TestCompile_WithPlatformFile(t *testing.T) {
+	cpg := graph.NewCPG()
+	arch := &extractor.ComponentArchitecture{
+		Component:       "kserve",
+		AnalyzerVersion: "0.2.0",
+	}
+
+	platformJSON := `{
+		"platform": "RHOAI",
+		"component_count": 38,
+		"components": ["kserve", "odh-model-controller"],
+		"dependency_graph": [
+			{"from": "odh-model-controller", "to": "kserve", "type": "go-module"}
+		],
+		"component_data": []
+	}`
+	path := writeTempJSON(t, platformJSON)
+
+	opts := Options{
+		RepoPath:     t.TempDir(),
+		Layer:        "security",
+		CPG:          cpg,
+		Arch:         arch,
+		PlatformFile: path,
+	}
+
+	doc, err := Compile(opts)
+	if err != nil {
+		t.Fatalf("Compile() error: %v", err)
+	}
+
+	if doc.Head.Platform == nil {
+		t.Fatal("expected Platform to be set")
+	}
+	if doc.Head.Platform.Name != "RHOAI" {
+		t.Errorf("platform name = %q, want %q", doc.Head.Platform.Name, "RHOAI")
+	}
+	if len(doc.Head.Platform.Inbound) != 1 {
+		t.Fatalf("expected 1 inbound edge, got %d", len(doc.Head.Platform.Inbound))
+	}
+}
+
+func TestCompile_WithPlatformFile_InvalidFile(t *testing.T) {
+	cpg := graph.NewCPG()
+	arch := &extractor.ComponentArchitecture{
+		Component:       "test-operator",
+		AnalyzerVersion: "0.2.0",
+	}
+
+	opts := Options{
+		RepoPath:     t.TempDir(),
+		Layer:        "security",
+		CPG:          cpg,
+		Arch:         arch,
+		PlatformFile: "/nonexistent/platform.json",
+	}
+
+	doc, err := Compile(opts)
+	if err != nil {
+		t.Fatalf("expected no error (graceful degradation), got: %v", err)
+	}
+
+	if doc.Head.Platform != nil {
+		t.Error("expected Platform to be nil on failure")
+	}
+	if len(doc.Head.Diagnostics) == 0 {
+		t.Error("expected diagnostic warning for failed platform extraction")
+	}
+}
+
 func TestCompile_ExtractedTimestamp(t *testing.T) {
 	cpg := graph.NewCPG()
 	arch := &extractor.ComponentArchitecture{

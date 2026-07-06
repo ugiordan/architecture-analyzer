@@ -13,7 +13,28 @@ type Head struct {
 	Extracted   string
 	Layer       string
 	Languages   []Language
+	Platform    *Platform
 	Diagnostics []Warning
+}
+
+type Platform struct {
+	Name       string
+	Version    string
+	Components int
+	Topology   []Namespace
+	Inbound    []PlatformEdge
+	Outbound   []PlatformEdge
+}
+
+type Namespace struct {
+	Name string
+	Zone string
+}
+
+type PlatformEdge struct {
+	Peer   string
+	Type   string
+	Target string
 }
 
 type Repository struct {

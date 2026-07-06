@@ -14,6 +14,7 @@ func cmdContextBundle(args []string) error {
 	fs := flag.NewFlagSet("context-bundle", flag.ExitOnError)
 	layer := fs.String("layer", "security", "Domain layer (security)")
 	output := fs.String("output", "context.srclg", "Output .srclg file")
+	platformFile := fs.String("platform", "", "Path to platform-architecture.json for platform context")
 	withScan := fs.Bool("with-scan", true, "Run CPG scan for findings and taint analysis")
 	domainList := fs.String("domains", "", "Comma-separated domain list for scan (default: all)")
 	fs.Parse(reorderArgs(fs, args))
@@ -36,10 +37,12 @@ func cmdContextBundle(args []string) error {
 	}
 
 	opts := compile.Options{
-		RepoPath: repoPath,
-		Layer:    *layer,
-		Arch:     arch,
-		CPG:      cpg,
+		RepoPath:            repoPath,
+		Layer:               *layer,
+		Arch:                arch,
+		CPG:                 cpg,
+		SecurityAnnotations: arch.SecurityAnnotations,
+		PlatformFile:        *platformFile,
 	}
 
 	// Optionally run security scan for findings and taint analysis

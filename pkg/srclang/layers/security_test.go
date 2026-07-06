@@ -36,7 +36,7 @@ func TestSecuritySelector_SelectsWebhookHandlers(t *testing.T) {
 	}
 
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	if layer.Name != "security" {
 		t.Errorf("layer name = %q, want %q", layer.Name, "security")
@@ -83,7 +83,7 @@ func TestSecuritySelector_IncludesFindings(t *testing.T) {
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, findings)
+	layer, _ := sel.Select(cpg, arch, findings, nil)
 
 	if len(layer.Findings) != 1 {
 		t.Fatalf("expected 1 finding, got %d", len(layer.Findings))
@@ -104,7 +104,7 @@ func TestSecuritySelector_IncludesNetworkPolicies(t *testing.T) {
 
 	dir := t.TempDir()
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	if len(layer.Resources) == 0 {
 		t.Error("expected NetworkPolicy resource in output")
@@ -124,7 +124,7 @@ func TestSecuritySelector_IncludesRBAC(t *testing.T) {
 
 	dir := t.TempDir()
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	foundRBAC := false
 	for _, r := range layer.Resources {
@@ -158,7 +158,7 @@ func TestSecuritySelector_TaintAnnotations(t *testing.T) {
 
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	for _, f := range layer.Files {
 		for _, fn := range f.Functions {
@@ -203,7 +203,7 @@ func TestSecuritySelector_CallRelationships(t *testing.T) {
 	dir := t.TempDir()
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	if len(layer.Relationships) == 0 {
 		t.Fatal("expected at least one relationship")
@@ -237,7 +237,7 @@ func TestSecuritySelector_HTTPEndpoints(t *testing.T) {
 	dir := t.TempDir()
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	found := false
 	for _, f := range layer.Files {
@@ -264,7 +264,7 @@ func TestSecuritySelector_FindingsSorting(t *testing.T) {
 	dir := t.TempDir()
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, findings)
+	layer, _ := sel.Select(cpg, arch, findings, nil)
 
 	if len(layer.Findings) != 4 {
 		t.Fatalf("expected 4 findings, got %d", len(layer.Findings))
@@ -290,7 +290,7 @@ func TestSecuritySelector_FiltersNonSecurityFindings(t *testing.T) {
 	dir := t.TempDir()
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, findings)
+	layer, _ := sel.Select(cpg, arch, findings, nil)
 
 	if len(layer.Findings) != 2 {
 		t.Errorf("expected 2 findings (security + netpolicy), got %d", len(layer.Findings))
@@ -303,7 +303,7 @@ func TestSecuritySelector_EmptyInputs(t *testing.T) {
 	dir := t.TempDir()
 
 	sel := NewSecuritySelector(dir)
-	layer, warnings := sel.Select(cpg, arch, nil)
+	layer, warnings := sel.Select(cpg, arch, nil, nil)
 
 	if layer.Name != "security" {
 		t.Errorf("layer name = %q, want %q", layer.Name, "security")
@@ -335,7 +335,7 @@ func TestSecuritySelector_DBOperations(t *testing.T) {
 	dir := t.TempDir()
 	arch := &extractor.ComponentArchitecture{Component: "test"}
 	sel := NewSecuritySelector(dir)
-	layer, _ := sel.Select(cpg, arch, nil)
+	layer, _ := sel.Select(cpg, arch, nil, nil)
 
 	found := false
 	for _, f := range layer.Files {
@@ -347,6 +347,81 @@ func TestSecuritySelector_DBOperations(t *testing.T) {
 	}
 	if !found {
 		t.Error("expected DBOperation node to be selected")
+	}
+}
+
+func TestSecuritySelector_IncludesExtractionAnnotations(t *testing.T) {
+	cpg := graph.NewCPG()
+	arch := &extractor.ComponentArchitecture{Component: "test"}
+	annotations := []extractor.SecurityAnnotation{
+		{
+			Type:        "RBAC_CLUSTER_SCOPE_SENSITIVE",
+			Severity:    "high",
+			Source:      "config/rbac/role.yaml",
+			Description: "ClusterRole grants cluster-wide secrets CRUD",
+		},
+		{
+			Type:        "SECRET_IN_CONTAINER_ARGS",
+			Severity:    "medium",
+			Source:      "manifests/deployment.yaml",
+			Description: "Container uses $(SECRET_KEY) in args",
+		},
+	}
+
+	dir := t.TempDir()
+	sel := NewSecuritySelector(dir)
+	layer, _ := sel.Select(cpg, arch, nil, annotations)
+
+	if len(layer.Findings) != 2 {
+		t.Fatalf("expected 2 extraction findings, got %d", len(layer.Findings))
+	}
+
+	// Sorted by severity: high before medium
+	if layer.Findings[0].Domain != "extraction" {
+		t.Errorf("finding[0] domain = %q, want %q", layer.Findings[0].Domain, "extraction")
+	}
+	if layer.Findings[0].Rule != "RBAC_CLUSTER_SCOPE_SENSITIVE" {
+		t.Errorf("finding[0] rule = %q, want %q", layer.Findings[0].Rule, "RBAC_CLUSTER_SCOPE_SENSITIVE")
+	}
+	if layer.Findings[0].Severity != "high" {
+		t.Errorf("finding[0] severity = %q, want %q", layer.Findings[0].Severity, "high")
+	}
+	if layer.Findings[1].Rule != "SECRET_IN_CONTAINER_ARGS" {
+		t.Errorf("finding[1] rule = %q, want %q", layer.Findings[1].Rule, "SECRET_IN_CONTAINER_ARGS")
+	}
+	if layer.Findings[1].Severity != "medium" {
+		t.Errorf("finding[1] severity = %q, want %q", layer.Findings[1].Severity, "medium")
+	}
+}
+
+func TestSecuritySelector_MergesCPGAndExtractionFindings(t *testing.T) {
+	cpg := graph.NewCPG()
+	arch := &extractor.ComponentArchitecture{Component: "test"}
+
+	cpgFindings := []query.Finding{
+		{RuleID: "CGA-N01", Severity: "high", Domain: "netpolicy", Message: "Bare namespaceSelector", File: "utils.go", Line: 160},
+	}
+	annotations := []extractor.SecurityAnnotation{
+		{Type: "CRD_CONFUSED_DEPUTY", Severity: "high", Source: "config/crd/test.yaml", Description: "CRD has user-settable image field"},
+	}
+
+	dir := t.TempDir()
+	sel := NewSecuritySelector(dir)
+	layer, _ := sel.Select(cpg, arch, cpgFindings, annotations)
+
+	if len(layer.Findings) != 2 {
+		t.Fatalf("expected 2 merged findings (1 CPG + 1 extraction), got %d", len(layer.Findings))
+	}
+
+	domains := map[string]bool{}
+	for _, f := range layer.Findings {
+		domains[f.Domain] = true
+	}
+	if !domains["netpolicy"] {
+		t.Error("expected netpolicy domain finding")
+	}
+	if !domains["extraction"] {
+		t.Error("expected extraction domain finding")
 	}
 }
 

@@ -54,6 +54,9 @@ func writeHead(b *xmlBuilder, h *Head) {
 		}
 		b.close("languages")
 	}
+	if h.Platform != nil {
+		writePlatform(b, h.Platform)
+	}
 	if len(h.Diagnostics) > 0 {
 		b.open("diagnostics")
 		for _, d := range h.Diagnostics {
@@ -66,6 +69,51 @@ func writeHead(b *xmlBuilder, h *Head) {
 		b.close("diagnostics")
 	}
 	b.close("head")
+}
+
+func writePlatform(b *xmlBuilder, p *Platform) {
+	attrs := fmt.Sprintf(`name="%s"`, escAttr(p.Name))
+	if p.Version != "" {
+		attrs += fmt.Sprintf(` version="%s"`, escAttr(p.Version))
+	}
+	if p.Components > 0 {
+		attrs += fmt.Sprintf(` components="%d"`, p.Components)
+	}
+	b.openf("<platform %s>", attrs)
+	if len(p.Topology) > 0 {
+		b.open("topology")
+		for _, ns := range p.Topology {
+			a := fmt.Sprintf(`name="%s"`, escAttr(ns.Name))
+			if ns.Zone != "" {
+				a += fmt.Sprintf(` zone="%s"`, escAttr(ns.Zone))
+			}
+			b.linef("<namespace %s/>", a)
+		}
+		b.close("topology")
+	}
+	if len(p.Inbound) > 0 {
+		b.open("inbound")
+		for _, e := range p.Inbound {
+			a := fmt.Sprintf(`from="%s" type="%s"`, escAttr(e.Peer), escAttr(e.Type))
+			if e.Target != "" {
+				a += fmt.Sprintf(` target="%s"`, escAttr(e.Target))
+			}
+			b.linef("<edge %s/>", a)
+		}
+		b.close("inbound")
+	}
+	if len(p.Outbound) > 0 {
+		b.open("outbound")
+		for _, e := range p.Outbound {
+			a := fmt.Sprintf(`to="%s" type="%s"`, escAttr(e.Peer), escAttr(e.Type))
+			if e.Target != "" {
+				a += fmt.Sprintf(` target="%s"`, escAttr(e.Target))
+			}
+			b.linef("<edge %s/>", a)
+		}
+		b.close("outbound")
+	}
+	b.close("platform")
 }
 
 func writeBody(b *xmlBuilder, body *Body) {
@@ -318,7 +366,11 @@ func writeFinding(b *xmlBuilder, f *Finding) {
 	b.openf(`<finding id="%s" domain="%s" severity="%s" rule="%s">`,
 		escAttr(f.ID), escAttr(f.Domain), escAttr(f.Severity), escAttr(f.Rule))
 	if f.SourceFile != "" {
-		b.linef(`<source file="%s" line="%d"/>`, escAttr(f.SourceFile), f.SourceLine)
+		if f.SourceLine > 0 {
+			b.linef(`<source file="%s" line="%d"/>`, escAttr(f.SourceFile), f.SourceLine)
+		} else {
+			b.linef(`<source file="%s"/>`, escAttr(f.SourceFile))
+		}
 	}
 	if f.Title != "" {
 		b.element("title", f.Title)

@@ -44,11 +44,12 @@ func NewSecuritySelector(repoPath string) *SecuritySelector {
 	}
 }
 
-func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding) (*srclang.Layer, []srclang.Warning) {
+func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, securityAnnotations []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
 	layer := &srclang.Layer{Name: "security"}
 	var warnings []srclang.Warning
 
 	layer.Findings = s.convertFindings(findings)
+	layer.Findings = append(layer.Findings, convertSecurityAnnotations(securityAnnotations)...)
 	s.addSecurityFunctions(cpg, layer, &warnings)
 	if arch != nil {
 		s.addRBAC(arch, layer)
@@ -224,14 +225,14 @@ func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer
 
 func (s *SecuritySelector) convertFindings(findings []query.Finding) []srclang.Finding {
 	var result []srclang.Finding
-	counter := 0
+	counters := make(map[string]int)
 	for _, f := range findings {
 		if f.Domain != "security" && f.Domain != "netpolicy" {
 			continue
 		}
-		counter++
+		counters[f.RuleID]++
 		result = append(result, srclang.Finding{
-			ID:          fmt.Sprintf("%s-%03d", f.RuleID, counter),
+			ID:          fmt.Sprintf("%s-%03d", f.RuleID, counters[f.RuleID]),
 			Domain:      f.Domain,
 			Severity:    f.Severity,
 			Rule:        f.RuleID,
@@ -239,6 +240,24 @@ func (s *SecuritySelector) convertFindings(findings []query.Finding) []srclang.F
 			SourceLine:  f.Line,
 			Title:       f.Message,
 			Description: f.Message,
+		})
+	}
+	return result
+}
+
+func convertSecurityAnnotations(annotations []extractor.SecurityAnnotation) []srclang.Finding {
+	var result []srclang.Finding
+	counters := make(map[string]int)
+	for _, a := range annotations {
+		counters[a.Type]++
+		result = append(result, srclang.Finding{
+			ID:          fmt.Sprintf("%s-%03d", a.Type, counters[a.Type]),
+			Domain:      "extraction",
+			Severity:    a.Severity,
+			Rule:        a.Type,
+			SourceFile:  a.Source,
+			Title:       a.Description,
+			Description: a.Description,
 		})
 	}
 	return result

@@ -13,11 +13,13 @@ import (
 )
 
 type Options struct {
-	RepoPath string
-	Layer    string
-	CPG      *graph.CPG
-	Arch     *extractor.ComponentArchitecture
-	Findings []query.Finding
+	RepoPath            string
+	Layer               string
+	CPG                 *graph.CPG
+	Arch                *extractor.ComponentArchitecture
+	Findings            []query.Finding
+	SecurityAnnotations []extractor.SecurityAnnotation
+	PlatformFile        string
 }
 
 func Compile(opts Options) (*srclang.Document, error) {
@@ -31,7 +33,7 @@ func Compile(opts Options) (*srclang.Document, error) {
 	switch opts.Layer {
 	case "security":
 		sel := layers.NewSecuritySelector(opts.RepoPath)
-		layer, warnings = sel.Select(opts.CPG, opts.Arch, opts.Findings)
+		layer, warnings = sel.Select(opts.CPG, opts.Arch, opts.Findings, opts.SecurityAnnotations)
 	default:
 		return nil, fmt.Errorf("unsupported layer %q (v0.0.1 supports: security)", opts.Layer)
 	}
@@ -57,6 +59,17 @@ func Compile(opts Options) (*srclang.Document, error) {
 		doc.Head.Languages = detectLanguages(opts.Arch)
 	} else if opts.RepoPath != "" {
 		doc.Head.Component = filepath.Base(opts.RepoPath)
+	}
+
+	if opts.PlatformFile != "" {
+		p, err := extractPlatform(opts.PlatformFile, doc.Head.Component)
+		if err != nil {
+			warnings = append(warnings, srclang.Warning{
+				Message: fmt.Sprintf("platform extraction failed: %v", err),
+			})
+		} else {
+			doc.Head.Platform = p
+		}
 	}
 
 	if len(warnings) > 0 {

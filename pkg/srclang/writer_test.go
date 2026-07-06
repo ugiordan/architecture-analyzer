@@ -257,4 +257,102 @@ func TestWriteDocument_AttributeEscaping(t *testing.T) {
 	}
 }
 
+func TestWriteDocument_Platform(t *testing.T) {
+	doc := &Document{
+		Version: "0.0.1",
+		Head: Head{
+			Component: "kserve",
+			Layer:     "security",
+			Platform: &Platform{
+				Name:       "RHOAI",
+				Version:    "rhoai.next",
+				Components: 69,
+				Topology: []Namespace{
+					{Name: "redhat-ods-applications", Zone: "control-plane"},
+					{Name: "rhods-notebooks", Zone: "tenant"},
+				},
+				Inbound: []PlatformEdge{
+					{Peer: "odh-model-controller", Type: "watches-crd", Target: "InferenceService"},
+				},
+				Outbound: []PlatformEdge{
+					{Peer: "knative-serving", Type: "go-module", Target: "knative.dev/serving"},
+				},
+			},
+		},
+		Body: Body{Layer: Layer{Name: "security"}},
+	}
+
+	var buf bytes.Buffer
+	if err := WriteDocument(&buf, doc); err != nil {
+		t.Fatalf("WriteDocument() error: %v", err)
+	}
+	out := buf.String()
+
+	checks := []string{
+		`<platform name="RHOAI" version="rhoai.next" components="69">`,
+		`<namespace name="redhat-ods-applications" zone="control-plane"/>`,
+		`<namespace name="rhods-notebooks" zone="tenant"/>`,
+		`<edge from="odh-model-controller" type="watches-crd" target="InferenceService"/>`,
+		`<edge to="knative-serving" type="go-module" target="knative.dev/serving"/>`,
+		`<inbound>`,
+		`<outbound>`,
+		`<topology>`,
+		`</platform>`,
+	}
+	for _, c := range checks {
+		if !strings.Contains(out, c) {
+			t.Errorf("output missing %q", c)
+		}
+	}
+}
+
+func TestWriteDocument_PlatformEmpty(t *testing.T) {
+	doc := &Document{
+		Version: "0.0.1",
+		Head: Head{
+			Component: "test",
+			Layer:     "security",
+			Platform: &Platform{
+				Name:       "TestPlatform",
+				Components: 5,
+			},
+		},
+		Body: Body{Layer: Layer{Name: "security"}},
+	}
+
+	var buf bytes.Buffer
+	if err := WriteDocument(&buf, doc); err != nil {
+		t.Fatalf("WriteDocument() error: %v", err)
+	}
+	out := buf.String()
+
+	if !strings.Contains(out, `<platform name="TestPlatform" components="5">`) {
+		t.Error("missing platform element")
+	}
+	if strings.Contains(out, "<topology>") {
+		t.Error("empty topology should not produce <topology> element")
+	}
+	if strings.Contains(out, "<inbound>") {
+		t.Error("empty inbound should not produce <inbound> element")
+	}
+}
+
+func TestWriteDocument_NilPlatform(t *testing.T) {
+	doc := &Document{
+		Version: "0.0.1",
+		Head:    Head{Component: "test", Layer: "security"},
+		Body:    Body{Layer: Layer{Name: "security"}},
+	}
+
+	var buf bytes.Buffer
+	if err := WriteDocument(&buf, doc); err != nil {
+		t.Fatalf("WriteDocument() error: %v", err)
+	}
+	out := buf.String()
+
+	if strings.Contains(out, "<platform") {
+		t.Error("nil platform should not produce <platform> element")
+	}
+}
+
 func boolPtr(b bool) *bool { return &b }
