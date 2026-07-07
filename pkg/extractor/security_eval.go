@@ -82,7 +82,9 @@ func evalRBACScope(arch *ComponentArchitecture) []SecurityAnnotation {
 func evalSecretExposureInArgs(arch *ComponentArchitecture) []SecurityAnnotation {
 	var annotations []SecurityAnnotation
 	for _, dep := range arch.Deployments {
-		allContainers := append(dep.Containers, dep.InitContainers...)
+		allContainers := make([]Container, 0, len(dep.Containers)+len(dep.InitContainers))
+		allContainers = append(allContainers, dep.Containers...)
+		allContainers = append(allContainers, dep.InitContainers...)
 		for _, c := range allContainers {
 			secretEnvNames := make(map[string]string)
 			for _, ref := range c.EnvVarRefs {
@@ -93,7 +95,9 @@ func evalSecretExposureInArgs(arch *ComponentArchitecture) []SecurityAnnotation 
 			if len(secretEnvNames) == 0 {
 				continue
 			}
-			allStrings := append(c.Args, c.Command...)
+			allStrings := make([]string, 0, len(c.Args)+len(c.Command))
+			allStrings = append(allStrings, c.Args...)
+			allStrings = append(allStrings, c.Command...)
 			for _, arg := range allStrings {
 				matches := envVarRefRE.FindAllStringSubmatch(arg, -1)
 				for _, match := range matches {

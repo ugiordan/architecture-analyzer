@@ -6,6 +6,9 @@ import (
 	"strings"
 )
 
+const maxBodyFileSize = 10 * 1024 * 1024 // 10MB
+const maxCacheEntries = 200
+
 type BodyExtractor struct {
 	cache map[string][]string
 }
@@ -42,6 +45,14 @@ func (be *BodyExtractor) loadFile(path string) ([]string, error) {
 		return cached, nil
 	}
 
+	info, err := os.Stat(path)
+	if err != nil {
+		return nil, fmt.Errorf("stat %s: %w", path, err)
+	}
+	if info.Size() > maxBodyFileSize {
+		return nil, fmt.Errorf("file too large: %s (%d bytes)", path, info.Size())
+	}
+
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("reading %s: %w", path, err)
@@ -53,6 +64,14 @@ func (be *BodyExtractor) loadFile(path string) ([]string, error) {
 		return nil, nil
 	}
 	lines := strings.Split(content, "\n")
+
+	// Evict oldest entry if cache is full
+	if len(be.cache) >= maxCacheEntries {
+		for k := range be.cache {
+			delete(be.cache, k)
+			break
+		}
+	}
 	be.cache[path] = lines
 	return lines, nil
 }

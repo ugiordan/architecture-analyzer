@@ -44,6 +44,22 @@ func NewSecuritySelector(repoPath string) *SecuritySelector {
 	}
 }
 
+func (s *SecuritySelector) safeJoin(file string) (string, bool) {
+	fullPath := filepath.Join(s.repoPath, file)
+	absPath, err := filepath.Abs(fullPath)
+	if err != nil {
+		return "", false
+	}
+	absRepo, err := filepath.Abs(s.repoPath)
+	if err != nil {
+		return "", false
+	}
+	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
+		return "", false
+	}
+	return fullPath, true
+}
+
 func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, extractionAnnotations []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
 	layer := &srclang.Layer{Name: "security"}
 	var warnings []srclang.Warning
@@ -95,16 +111,23 @@ func (s *SecuritySelector) addSecurityFunctions(cpg *graph.CPG, layer *srclang.L
 		}
 
 		if node.EndLine > 0 && node.Line > 0 {
-			fullPath := filepath.Join(s.repoPath, file)
-			code, err := s.body.Extract(fullPath, node.Line, node.EndLine)
-			if err != nil {
+			fullPath, ok := s.safeJoin(file)
+			if !ok {
 				*warnings = append(*warnings, srclang.Warning{
 					File:    file,
-					Message: fmt.Sprintf("body extraction failed for %s: %v", node.Name, err),
+					Message: fmt.Sprintf("path traversal attempt for %s", node.Name),
 				})
 			} else {
-				fn.Code = code
-				fn.BodyLines = node.EndLine - node.Line + 1
+				code, err := s.body.Extract(fullPath, node.Line, node.EndLine)
+				if err != nil {
+					*warnings = append(*warnings, srclang.Warning{
+						File:    file,
+						Message: fmt.Sprintf("body extraction failed for %s: %v", node.Name, err),
+					})
+				} else {
+					fn.Code = code
+					fn.BodyLines = node.EndLine - node.Line + 1
+				}
 			}
 		}
 
@@ -201,16 +224,23 @@ func (s *SecuritySelector) addFindingReferencedFunctions(cpg *graph.CPG, layer *
 			fn.Complexity = node.Complexity
 		}
 		if node.EndLine > 0 && node.Line > 0 {
-			fullPath := filepath.Join(s.repoPath, node.File)
-			code, err := s.body.Extract(fullPath, node.Line, node.EndLine)
-			if err != nil {
+			fullPath, ok := s.safeJoin(node.File)
+			if !ok {
 				*warnings = append(*warnings, srclang.Warning{
 					File:    node.File,
-					Message: fmt.Sprintf("body extraction failed for %s: %v", node.Name, err),
+					Message: fmt.Sprintf("path traversal attempt for %s", node.Name),
 				})
 			} else {
-				fn.Code = code
-				fn.BodyLines = node.EndLine - node.Line + 1
+				code, err := s.body.Extract(fullPath, node.Line, node.EndLine)
+				if err != nil {
+					*warnings = append(*warnings, srclang.Warning{
+						File:    node.File,
+						Message: fmt.Sprintf("body extraction failed for %s: %v", node.Name, err),
+					})
+				} else {
+					fn.Code = code
+					fn.BodyLines = node.EndLine - node.Line + 1
+				}
 			}
 		}
 		fn.Params = extractParams(node)
@@ -333,6 +363,9 @@ func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer
 		}
 	}
 
+	if len(bothSelected) > maxRelationships {
+		bothSelected = bothSelected[:maxRelationships]
+	}
 	layer.Relationships = append(layer.Relationships, bothSelected...)
 	remaining := maxRelationships - len(bothSelected)
 	if remaining > 0 && len(oneSelected) > 0 {

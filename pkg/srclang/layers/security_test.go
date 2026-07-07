@@ -425,6 +425,82 @@ func TestSecuritySelector_MergesCPGAndExtractionFindings(t *testing.T) {
 	}
 }
 
+func TestSecuritySelector_FindingReferencedFunctions(t *testing.T) {
+	cpg := graph.NewCPG()
+	// A function with NO security annotations but whose line range contains a finding
+	cpg.AddNode(&graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "ReconcileResources",
+		File: "controller.go", Line: 10, EndLine: 50,
+		Language: "go",
+	})
+	// A function that IS security-relevant (should still be included)
+	cpg.AddNode(&graph.Node{
+		ID: "fn2", Kind: graph.NodeFunction, Name: "HandleWebhook",
+		File: "webhook.go", Line: 5, EndLine: 20,
+		Language: "go",
+		Annotations: map[string]bool{"webhook_handler": true},
+	})
+
+	findings := []query.Finding{
+		{RuleID: "CGA-007", Severity: "medium", Message: "unfiltered cache",
+			File: "controller.go", Line: 25, Domain: "security"},
+	}
+
+	dir := t.TempDir()
+	writeTestFile(t, dir, "controller.go", 60)
+	writeTestFile(t, dir, "webhook.go", 30)
+
+	sel := NewSecuritySelector(dir)
+	layer, _ := sel.Select(cpg, nil, findings, nil)
+
+	// Should have both: webhook handler (by annotation) AND ReconcileResources (by finding reference)
+	funcNames := make(map[string]bool)
+	for _, f := range layer.Files {
+		for _, fn := range f.Functions {
+			funcNames[fn.Name] = true
+		}
+	}
+	if !funcNames["HandleWebhook"] {
+		t.Error("expected HandleWebhook (security-annotated)")
+	}
+	if !funcNames["ReconcileResources"] {
+		t.Error("expected ReconcileResources (finding-referenced, line 25 is within 10-50)")
+	}
+}
+
+func TestSecuritySelector_FindingReferencedFunctions_NoDuplicates(t *testing.T) {
+	cpg := graph.NewCPG()
+	cpg.AddNode(&graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "AuthCheck",
+		File: "auth.go", Line: 10, EndLine: 30,
+		Language: "go",
+		Annotations: map[string]bool{"auth_check": true},
+	})
+
+	findings := []query.Finding{
+		{RuleID: "CGA-001", Severity: "high", Message: "auth bypass",
+			File: "auth.go", Line: 15, Domain: "security"},
+	}
+
+	dir := t.TempDir()
+	writeTestFile(t, dir, "auth.go", 40)
+
+	sel := NewSecuritySelector(dir)
+	layer, _ := sel.Select(cpg, nil, findings, nil)
+
+	count := 0
+	for _, f := range layer.Files {
+		for _, fn := range f.Functions {
+			if fn.Name == "AuthCheck" {
+				count++
+			}
+		}
+	}
+	if count != 1 {
+		t.Errorf("AuthCheck should appear exactly once (already selected by annotation), got %d", count)
+	}
+}
+
 func writeTestFile(t *testing.T, dir, name string, lines int) {
 	t.Helper()
 	var sb []byte

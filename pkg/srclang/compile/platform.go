@@ -9,6 +9,8 @@ import (
 	"github.com/ugiordan/architecture-analyzer/pkg/srclang"
 )
 
+const maxPlatformFileSize = 100 * 1024 * 1024 // 100MB
+
 type platformFile struct {
 	Platform       string               `json:"platform"`
 	Version        string               `json:"version"`
@@ -35,6 +37,14 @@ type platformDeployment struct {
 }
 
 func extractPlatform(path string, component string) (*srclang.Platform, error) {
+	info, err := os.Stat(path)
+	if err != nil {
+		return nil, fmt.Errorf("stat platform file: %w", err)
+	}
+	if info.Size() > maxPlatformFileSize {
+		return nil, fmt.Errorf("platform file too large: %d bytes (max %d)", info.Size(), maxPlatformFileSize)
+	}
+
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("reading platform file: %w", err)
