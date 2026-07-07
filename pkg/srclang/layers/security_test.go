@@ -160,9 +160,12 @@ func TestSecuritySelector_TaintAnnotations(t *testing.T) {
 	sel := NewSecuritySelector(dir)
 	layer, _ := sel.Select(cpg, arch, nil, nil)
 
+	foundHandler := false
+	foundSQL := false
 	for _, f := range layer.Files {
 		for _, fn := range f.Functions {
 			if fn.Name == "HandleRequest" {
+				foundHandler = true
 				if fn.TaintRole != "source" {
 					t.Errorf("HandleRequest TaintRole = %q, want %q", fn.TaintRole, "source")
 				}
@@ -171,11 +174,18 @@ func TestSecuritySelector_TaintAnnotations(t *testing.T) {
 				}
 			}
 			if fn.Name == "ExecuteSQL" {
+				foundSQL = true
 				if fn.TaintRole != "sink" {
 					t.Errorf("ExecuteSQL TaintRole = %q, want %q", fn.TaintRole, "sink")
 				}
 			}
 		}
+	}
+	if !foundHandler {
+		t.Error("HandleRequest not found in security layer")
+	}
+	if !foundSQL {
+		t.Error("ExecuteSQL not found in security layer")
 	}
 }
 

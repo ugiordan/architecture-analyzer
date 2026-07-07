@@ -175,6 +175,47 @@ func TestSplitEdgeType(t *testing.T) {
 	}
 }
 
+func TestExtractPlatform_TopologyFromComponentData(t *testing.T) {
+	platformJSON := `{
+		"platform": "RHOAI",
+		"component_count": 3,
+		"components": ["kserve", "odh-model-controller", "notebooks"],
+		"dependency_graph": [],
+		"component_data": [
+			{"component": "kserve", "deployments": [
+				{"name": "kserve-controller", "namespace": "redhat-ods-applications"},
+				{"name": "kserve-webhook", "namespace": "redhat-ods-applications"}
+			]},
+			{"component": "notebooks", "deployments": [
+				{"name": "notebook-controller", "namespace": "rhods-notebooks"}
+			]},
+			{"component": "odh-model-controller", "deployments": [
+				{"name": "omc", "namespace": "redhat-ods-applications"}
+			]}
+		]
+	}`
+	path := writeTempJSON(t, platformJSON)
+
+	p, err := extractPlatform(path, "kserve")
+	if err != nil {
+		t.Fatalf("extractPlatform() error: %v", err)
+	}
+
+	if len(p.Topology) != 2 {
+		t.Fatalf("expected 2 namespaces (deduped), got %d", len(p.Topology))
+	}
+	nsNames := make(map[string]bool)
+	for _, ns := range p.Topology {
+		nsNames[ns.Name] = true
+	}
+	if !nsNames["redhat-ods-applications"] {
+		t.Error("missing namespace redhat-ods-applications")
+	}
+	if !nsNames["rhods-notebooks"] {
+		t.Error("missing namespace rhods-notebooks")
+	}
+}
+
 func writeTempJSON(t *testing.T, content string) string {
 	t.Helper()
 	path := filepath.Join(t.TempDir(), "platform-architecture.json")

@@ -298,12 +298,7 @@ func evalMissingMutualExclusion(arch *ComponentArchitecture, repoPath string) []
 						if ok {
 							pType, _ := ps["type"].(string)
 							if pType == "object" || pType == "" {
-								nullable, _ := ps["nullable"].(bool)
-								xNullable, _ := ps["x-kubernetes-preserve-unknown-fields"].(bool)
-								_, hasPointerMarker := ps["x-kubernetes-int-or-string"]
-								if nullable || xNullable || hasPointerMarker || isOptionalPointer(ps) {
-									foundAuthFields = append(foundAuthFields, authName)
-								}
+								foundAuthFields = append(foundAuthFields, authName)
 							}
 						}
 					}
@@ -338,11 +333,6 @@ func evalMissingMutualExclusion(arch *ComponentArchitecture, repoPath string) []
 		}
 	}
 	return annotations
-}
-
-func isOptionalPointer(schema map[string]interface{}) bool {
-	_, hasDefault := schema["default"]
-	return !hasDefault
 }
 
 func containsAny(s string, substrs []string) bool {
