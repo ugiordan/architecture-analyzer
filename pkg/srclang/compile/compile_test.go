@@ -129,6 +129,39 @@ func TestCompile_DetectsPythonLanguage(t *testing.T) {
 	}
 }
 
+func TestCompile_GoExternalConnectionsNotPython(t *testing.T) {
+	cpg := graph.NewCPG()
+	arch := &extractor.ComponentArchitecture{
+		Component:       "go-operator",
+		GoASTMode:       "full",
+		AnalyzerVersion: "0.2.0",
+		ExternalConnections: []extractor.ExternalConnection{
+			{Type: "database", Service: "postgres"},
+		},
+	}
+
+	opts := Options{
+		RepoPath: t.TempDir(),
+		Layer:    "security",
+		CPG:      cpg,
+		Arch:     arch,
+	}
+
+	doc, err := Compile(opts)
+	if err != nil {
+		t.Fatalf("Compile() error: %v", err)
+	}
+
+	for _, lang := range doc.Head.Languages {
+		if lang.Name == "python" {
+			t.Error("Go-only repo with external connections should not report python")
+		}
+	}
+	if len(doc.Head.Languages) != 1 || doc.Head.Languages[0].Name != "go" {
+		t.Errorf("expected [go], got %v", doc.Head.Languages)
+	}
+}
+
 func TestCompile_IncludesRepositoryInfo(t *testing.T) {
 	cpg := graph.NewCPG()
 	arch := &extractor.ComponentArchitecture{

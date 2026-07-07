@@ -84,7 +84,11 @@ func detectLanguages(arch *extractor.ComponentArchitecture) []srclang.Language {
 	if arch.GoASTMode != "" {
 		langs = append(langs, srclang.Language{Name: "go"})
 	}
-	if len(arch.PythonK8sCalls) > 0 || len(arch.ExternalConnections) > 0 {
+	hasPython := len(arch.PythonK8sCalls) > 0
+	if !hasPython && arch.Dependencies != nil {
+		hasPython = len(arch.Dependencies.PythonPackages) > 0
+	}
+	if hasPython {
 		langs = append(langs, srclang.Language{Name: "python"})
 	}
 	return langs
