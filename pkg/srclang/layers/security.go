@@ -404,7 +404,7 @@ func convertSecurityAnnotations(annotations []extractor.SecurityAnnotation) []sr
 	for _, a := range annotations {
 		counters[a.Type]++
 		result = append(result, srclang.Finding{
-			ID:          fmt.Sprintf("%s-%03d", a.Type, counters[a.Type]),
+			ID:          fmt.Sprintf("ext-%s-%03d", a.Type, counters[a.Type]),
 			Domain:      "extraction",
 			Severity:    a.Severity,
 			Rule:        a.Type,

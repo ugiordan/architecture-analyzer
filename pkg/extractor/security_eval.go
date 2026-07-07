@@ -7,6 +7,22 @@ import (
 	"strings"
 )
 
+func safeRepoJoin(repoPath, file string) (string, bool) {
+	fullPath := filepath.Join(repoPath, file)
+	absPath, err := filepath.Abs(fullPath)
+	if err != nil {
+		return "", false
+	}
+	absRepo, err := filepath.Abs(repoPath)
+	if err != nil {
+		return "", false
+	}
+	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
+		return "", false
+	}
+	return fullPath, true
+}
+
 var sensitiveRBACResources = map[string]bool{
 	"secrets":                    true,
 	"configmaps":                true,
@@ -157,7 +173,10 @@ func findImageFieldsInCRD(crd CRD, repoPath string) []string {
 	if crd.Source == "" {
 		return nil
 	}
-	fullPath := filepath.Join(repoPath, crd.Source)
+	fullPath, ok := safeRepoJoin(repoPath, crd.Source)
+	if !ok {
+		return nil
+	}
 	docs := parseYAMLSafe(fullPath)
 	if len(docs) == 0 {
 		return nil
@@ -244,7 +263,10 @@ func evalMissingMutualExclusion(arch *ComponentArchitecture, repoPath string) []
 		if crd.Source == "" {
 			continue
 		}
-		fullPath := filepath.Join(repoPath, crd.Source)
+		fullPath, ok := safeRepoJoin(repoPath, crd.Source)
+		if !ok {
+			continue
+		}
 		docs := parseYAMLSafe(fullPath)
 		for _, doc := range docs {
 			kind, _ := doc["kind"].(string)

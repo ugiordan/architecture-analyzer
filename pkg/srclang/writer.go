@@ -14,7 +14,7 @@ const (
 func WriteDocument(w io.Writer, doc *Document) error {
 	b := &xmlBuilder{w: w}
 	b.line(xmlHeader)
-	b.openf(`<srclang version="%s" xmlns="%s">`, doc.Version, namespace)
+	b.openf(`<srclang version="%s" xmlns="%s">`, escAttr(doc.Version), namespace)
 	writeHead(b, &doc.Head)
 	writeBody(b, &doc.Body)
 	b.close("srclang")

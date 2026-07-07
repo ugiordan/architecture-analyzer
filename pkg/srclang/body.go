@@ -59,13 +59,12 @@ func (be *BodyExtractor) loadFile(path string) ([]string, error) {
 	}
 
 	content := strings.TrimRight(string(data), "\n")
-	if content == "" {
-		be.cache[path] = nil
-		return nil, nil
-	}
-	lines := strings.Split(content, "\n")
 
-	// Evict oldest entry if cache is full
+	var lines []string
+	if content != "" {
+		lines = strings.Split(content, "\n")
+	}
+
 	if len(be.cache) >= maxCacheEntries {
 		for k := range be.cache {
 			delete(be.cache, k)

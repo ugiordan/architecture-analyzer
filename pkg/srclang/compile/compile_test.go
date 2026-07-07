@@ -1,6 +1,7 @@
 package compile
 
 import (
+	"strings"
 	"testing"
 	"time"
 
@@ -62,6 +63,9 @@ func TestCompile_UnsupportedLayer(t *testing.T) {
 	_, err := Compile(opts)
 	if err == nil {
 		t.Error("expected error for unsupported layer")
+	}
+	if err != nil && !strings.Contains(err.Error(), "unsupported layer") {
+		t.Errorf("expected unsupported layer error, got: %v", err)
 	}
 }
 
