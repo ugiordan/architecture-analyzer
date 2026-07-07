@@ -1,6 +1,7 @@
 package layers
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/extractor"
@@ -142,8 +143,8 @@ func TestArchitectureSelector_IncludesExternalConnections(t *testing.T) {
 	if len(layer.Relationships) == 0 {
 		t.Fatal("expected external connection relationship")
 	}
-	if layer.Relationships[0].Kind != "external" {
-		t.Errorf("kind = %q, want %q", layer.Relationships[0].Kind, "external")
+	if layer.Relationships[0].Kind != "external-database" {
+		t.Errorf("kind = %q, want %q", layer.Relationships[0].Kind, "external-database")
 	}
 }
 
@@ -289,5 +290,32 @@ func TestArchitectureSelector_CompileIntegration(t *testing.T) {
 	}
 	if len(layer.Files) == 0 {
 		t.Error("expected reconcile function in files")
+	}
+}
+
+func TestArchitectureSelector_PathTraversalRejected(t *testing.T) {
+	cpg := graph.NewCPG()
+	cpg.AddNode(&graph.Node{
+		ID: "fn1", Kind: graph.NodeFunction, Name: "Reconcile",
+		File: "../../../etc/passwd", Line: 1, EndLine: 5,
+		Language: "go",
+	})
+	sel := NewArchitectureSelector(t.TempDir())
+	layer, warnings := sel.Select(cpg, nil, nil, nil)
+	if len(layer.Files) > 0 {
+		for _, f := range layer.Files {
+			if len(f.Functions) > 0 && f.Functions[0].Code != "" {
+				t.Error("path traversal should not extract code")
+			}
+		}
+	}
+	foundWarning := false
+	for _, w := range warnings {
+		if strings.Contains(w.Message, "path traversal") {
+			foundWarning = true
+		}
+	}
+	if !foundWarning {
+		t.Error("expected path traversal warning")
 	}
 }

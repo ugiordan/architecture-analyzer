@@ -24,6 +24,22 @@ func NewArchitectureSelector(repoPath string) *ArchitectureSelector {
 	}
 }
 
+func (s *ArchitectureSelector) safeJoin(file string) (string, bool) {
+	fullPath := filepath.Join(s.repoPath, file)
+	absPath, err := filepath.Abs(fullPath)
+	if err != nil {
+		return "", false
+	}
+	absRepo, err := filepath.Abs(s.repoPath)
+	if err != nil {
+		return "", false
+	}
+	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
+		return "", false
+	}
+	return fullPath, true
+}
+
 func (s *ArchitectureSelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, _ []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
 	layer := &srclang.Layer{Name: "architecture"}
 	var warnings []srclang.Warning
@@ -41,6 +57,14 @@ func (s *ArchitectureSelector) Select(cpg *graph.CPG, arch *extractor.ComponentA
 	s.addArchitectureFindings(findings, layer)
 	s.addReconcileFunctions(cpg, layer, &warnings)
 
+	sort.Slice(layer.Relationships, func(i, j int) bool {
+		if layer.Relationships[i].Kind != layer.Relationships[j].Kind {
+			return layer.Relationships[i].Kind < layer.Relationships[j].Kind
+		}
+		return layer.Relationships[i].From.Function < layer.Relationships[j].From.Function
+	})
+
+	sortFindings(layer)
 	return layer, warnings
 }
 
@@ -138,7 +162,7 @@ func (s *ArchitectureSelector) addDeployments(arch *extractor.ComponentArchitect
 func (s *ArchitectureSelector) addExternalConnections(arch *extractor.ComponentArchitecture, layer *srclang.Layer) {
 	for _, ec := range arch.ExternalConnections {
 		layer.Relationships = append(layer.Relationships, srclang.Relationship{
-			Kind: "external",
+			Kind: "external-" + ec.Type,
 			From: srclang.Endpoint{
 				Function: ec.Function,
 				File:     ec.Source,
@@ -234,15 +258,20 @@ func (s *ArchitectureSelector) addReconcileFunctions(cpg *graph.CPG, layer *srcl
 
 		fn := srclang.Function{
 			Name:       node.Name,
-			Kind:       "method",
+			Kind:       functionKind(node),
 			SourceLine: node.Line,
 		}
 		if node.Complexity > 0 {
 			fn.Complexity = node.Complexity
 		}
 		if node.EndLine > 0 {
-			fullPath, ok := safeJoinPath(s.repoPath, node.File)
-			if ok {
+			fullPath, ok := s.safeJoin(node.File)
+			if !ok {
+				*warnings = append(*warnings, srclang.Warning{
+					File:    node.File,
+					Message: fmt.Sprintf("path traversal attempt for %s", node.Name),
+				})
+			} else {
 				code, err := s.body.Extract(fullPath, node.Line, node.EndLine)
 				if err != nil {
 					*warnings = append(*warnings, srclang.Warning{
@@ -274,18 +303,3 @@ func (s *ArchitectureSelector) addReconcileFunctions(cpg *graph.CPG, layer *srcl
 	})
 }
 
-func safeJoinPath(repoPath, file string) (string, bool) {
-	fullPath := filepath.Join(repoPath, file)
-	absPath, err := filepath.Abs(fullPath)
-	if err != nil {
-		return "", false
-	}
-	absRepo, err := filepath.Abs(repoPath)
-	if err != nil {
-		return "", false
-	}
-	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
-		return "", false
-	}
-	return fullPath, true
-}
