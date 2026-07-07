@@ -51,6 +51,7 @@ func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchi
 	layer.Findings = s.convertFindings(findings)
 	layer.Findings = append(layer.Findings, convertSecurityAnnotations(extractionAnnotations)...)
 	s.addSecurityFunctions(cpg, layer, &warnings)
+	s.addFindingReferencedFunctions(cpg, layer, &warnings)
 	if arch != nil {
 		s.addRBAC(arch, layer)
 		s.addNetworkPolicies(arch, layer)
@@ -134,6 +135,105 @@ func (s *SecuritySelector) addSecurityFunctions(cpg *graph.CPG, layer *srclang.L
 	})
 }
 
+func (s *SecuritySelector) addFindingReferencedFunctions(cpg *graph.CPG, layer *srclang.Layer, warnings *[]srclang.Warning) {
+	existingFuncs := make(map[string]bool)
+	for _, f := range layer.Files {
+		for _, fn := range f.Functions {
+			existingFuncs[f.Path+":"+fmt.Sprintf("%d", fn.SourceLine)] = true
+		}
+	}
+
+	findingLocations := make(map[string]int)
+	for _, f := range layer.Findings {
+		if f.SourceFile != "" && f.SourceLine > 0 {
+			key := f.SourceFile + ":" + fmt.Sprintf("%d", f.SourceLine)
+			findingLocations[key] = f.SourceLine
+		}
+	}
+
+	fileMap := make(map[string]*srclang.File)
+	for _, sf := range layer.Files {
+		fileMap[sf.Path] = &sf
+	}
+
+	for _, node := range cpg.Nodes() {
+		if node.Kind != graph.NodeFunction && node.Kind != graph.NodeHTTPEndpoint {
+			continue
+		}
+		if node.File == "" || node.Line == 0 {
+			continue
+		}
+		locKey := node.File + ":" + fmt.Sprintf("%d", node.Line)
+		if existingFuncs[locKey] {
+			continue
+		}
+		if _, referenced := findingLocations[locKey]; !referenced {
+			if node.EndLine > 0 {
+				for fl := node.Line; fl <= node.EndLine; fl++ {
+					ck := node.File + ":" + fmt.Sprintf("%d", fl)
+					if _, ok := findingLocations[ck]; ok {
+						referenced = true
+						break
+					}
+				}
+			}
+			if !referenced {
+				continue
+			}
+		}
+
+		sf, ok := fileMap[node.File]
+		if !ok {
+			newFile := &srclang.File{
+				Path:     node.File,
+				Language: node.Language,
+			}
+			fileMap[node.File] = newFile
+			sf = newFile
+		}
+
+		fn := srclang.Function{
+			Name:       node.Name,
+			Kind:       functionKind(node),
+			SourceLine: node.Line,
+		}
+		if node.Complexity > 0 {
+			fn.Complexity = node.Complexity
+		}
+		if node.EndLine > 0 && node.Line > 0 {
+			fullPath := filepath.Join(s.repoPath, node.File)
+			code, err := s.body.Extract(fullPath, node.Line, node.EndLine)
+			if err != nil {
+				*warnings = append(*warnings, srclang.Warning{
+					File:    node.File,
+					Message: fmt.Sprintf("body extraction failed for %s: %v", node.Name, err),
+				})
+			} else {
+				fn.Code = code
+				fn.BodyLines = node.EndLine - node.Line + 1
+			}
+		}
+		fn.Params = extractParams(node)
+		fn.Returns = extractReturns(node)
+		if node.TypeName != "" {
+			fn.ReceiverType = node.TypeName
+		}
+		sf.Functions = append(sf.Functions, fn)
+		existingFuncs[locKey] = true
+	}
+
+	layer.Files = nil
+	for _, sf := range fileMap {
+		sort.Slice(sf.Functions, func(i, j int) bool {
+			return sf.Functions[i].SourceLine < sf.Functions[j].SourceLine
+		})
+		layer.Files = append(layer.Files, *sf)
+	}
+	sort.Slice(layer.Files, func(i, j int) bool {
+		return layer.Files[i].Path < layer.Files[j].Path
+	})
+}
+
 func (s *SecuritySelector) addRBAC(arch *extractor.ComponentArchitecture, layer *srclang.Layer) {
 	if arch.RBAC == nil {
 		return
@@ -171,6 +271,8 @@ func (s *SecuritySelector) addNetworkPolicies(arch *extractor.ComponentArchitect
 	}
 }
 
+const maxRelationships = 500
+
 func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer) {
 	selectedFuncs := make(map[string]bool)
 	for _, f := range layer.Files {
@@ -179,6 +281,9 @@ func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer
 			selectedFuncs[key] = true
 		}
 	}
+
+	var bothSelected []srclang.Relationship
+	var oneSelected []srclang.Relationship
 
 	for _, edge := range cpg.Edges() {
 		if edge.Kind != graph.EdgeCalls {
@@ -191,7 +296,10 @@ func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer
 		}
 		fromKey := fromNode.File + ":" + fromNode.Name + ":" + fmt.Sprintf("%d", fromNode.Line)
 		toKey := toNode.File + ":" + toNode.Name + ":" + fmt.Sprintf("%d", toNode.Line)
-		if !selectedFuncs[fromKey] && !selectedFuncs[toKey] {
+
+		fromSelected := selectedFuncs[fromKey]
+		toSelected := selectedFuncs[toKey]
+		if !fromSelected && !toSelected {
 			continue
 		}
 
@@ -209,17 +317,29 @@ func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer
 			},
 		}
 
-		if !selectedFuncs[fromKey] || !selectedFuncs[toKey] {
+		if !fromSelected {
 			resolved := false
-			if !selectedFuncs[fromKey] {
-				rel.From.Resolved = &resolved
-			}
-			if !selectedFuncs[toKey] {
-				rel.To.Resolved = &resolved
-			}
+			rel.From.Resolved = &resolved
+		}
+		if !toSelected {
+			resolved := false
+			rel.To.Resolved = &resolved
 		}
 
-		layer.Relationships = append(layer.Relationships, rel)
+		if fromSelected && toSelected {
+			bothSelected = append(bothSelected, rel)
+		} else {
+			oneSelected = append(oneSelected, rel)
+		}
+	}
+
+	layer.Relationships = append(layer.Relationships, bothSelected...)
+	remaining := maxRelationships - len(bothSelected)
+	if remaining > 0 && len(oneSelected) > 0 {
+		if len(oneSelected) > remaining {
+			oneSelected = oneSelected[:remaining]
+		}
+		layer.Relationships = append(layer.Relationships, oneSelected...)
 	}
 }
 
