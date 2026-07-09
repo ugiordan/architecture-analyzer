@@ -98,15 +98,7 @@ func scanYAMLForLabels(repoPath string) []LabelContract {
 	for _, fpath := range files {
 		relPath := relativePath(repoPath, fpath)
 
-		// Handle .tmpl files separately
-		var docs []map[string]interface{}
-		if strings.HasSuffix(fpath, ".tmpl") {
-			docs = parseTemplateYAML(fpath)
-		} else {
-			docs = parseYAMLSafe(fpath)
-		}
-
-		for _, doc := range docs {
+		for _, doc := range parseYAMLOrTemplate(fpath) {
 			kind, _ := doc["kind"].(string)
 			if kind == "" {
 				continue

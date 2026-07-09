@@ -17,6 +17,12 @@ var deploymentSearchPatterns = []string{
 	"**/statefulset.yml",
 	"charts/**/templates/deployment*.yaml",
 	"charts/**/templates/deployment*.yml",
+	"**/deployment*.yaml.tmpl",
+	"**/deployment*.yml.tmpl",
+	"**/manager*.yaml.tmpl",
+	"**/manager*.yml.tmpl",
+	"**/statefulset*.yaml.tmpl",
+	"**/statefulset*.yml.tmpl",
 }
 
 // extractDeployments scans YAML files for Deployment and StatefulSet definitions.
@@ -25,7 +31,7 @@ func extractDeployments(repoPath string) []Deployment {
 	var deployments []Deployment
 
 	for _, fpath := range files {
-		for _, doc := range parseYAMLSafe(fpath) {
+		for _, doc := range parseYAMLOrTemplate(fpath) {
 			kind, _ := doc["kind"].(string)
 			if kind != "Deployment" && kind != "StatefulSet" {
 				continue

@@ -379,6 +379,16 @@ func parseTemplateYAML(path string) []map[string]interface{} {
 	return parseYAMLFromBytes([]byte(cleaned))
 }
 
+// parseYAMLOrTemplate dispatches to parseTemplateYAML for .tmpl files and
+// parseYAMLSafe for regular YAML files. Use this in extractors whose search
+// patterns include both .yaml and .yaml.tmpl variants.
+func parseYAMLOrTemplate(path string) []map[string]interface{} {
+	if strings.HasSuffix(path, ".tmpl") {
+		return parseTemplateYAML(path)
+	}
+	return parseYAMLSafe(path)
+}
+
 // stripGoTemplateDirectives replaces Go template directives with either
 // empty strings (control flow) or "template-value" (expressions).
 func stripGoTemplateDirectives(content string) string {

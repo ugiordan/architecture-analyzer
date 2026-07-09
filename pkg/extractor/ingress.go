@@ -9,6 +9,8 @@ var ingressYAMLPatterns = []string{
 	"**/gateway*.yml",
 	"**/httproute*.yaml",
 	"**/httproute*.yml",
+	"**/*httproute*.yaml",
+	"**/*httproute*.yml",
 	"**/virtualservice*.yaml",
 	"**/virtualservice*.yml",
 	"**/destinationrule*.yaml",
@@ -17,11 +19,21 @@ var ingressYAMLPatterns = []string{
 	"**/ingress*.yml",
 	"**/route*.yaml",
 	"**/route*.yml",
+	"**/*route*.yaml",
+	"**/*route*.yml",
 	"**/serviceentry*.yaml",
 	"**/serviceentry*.yml",
 	"config/**/ingress*.yaml",
 	"charts/**/templates/*ingress*.yaml",
 	"charts/**/templates/*route*.yaml",
+	"**/*route*.yaml.tmpl",
+	"**/*route*.yml.tmpl",
+	"**/*ingress*.yaml.tmpl",
+	"**/*ingress*.yml.tmpl",
+	"**/*gateway*.yaml.tmpl",
+	"**/*gateway*.yml.tmpl",
+	"**/*httproute*.yaml.tmpl",
+	"**/*httproute*.yml.tmpl",
 }
 
 // supportedIngressKinds lists Kubernetes resource kinds we extract as ingress/routing.
@@ -41,7 +53,7 @@ func extractIngress(repoPath string) []IngressResource {
 	var resources []IngressResource
 
 	for _, fpath := range files {
-		for _, doc := range parseYAMLSafe(fpath) {
+		for _, doc := range parseYAMLOrTemplate(fpath) {
 			kind, _ := doc["kind"].(string)
 			if !supportedIngressKinds[kind] {
 				continue

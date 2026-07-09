@@ -52,6 +52,7 @@ func EvaluateSecurityAnnotations(arch *ComponentArchitecture, repoPath string) [
 	var annotations []SecurityAnnotation
 	annotations = append(annotations, evalRBACScope(arch)...)
 	annotations = append(annotations, evalSecretExposureInArgs(arch)...)
+	annotations = append(annotations, evalRouteNoTLS(arch)...)
 	annotations = append(annotations, evalCRDConfusedDeputy(arch, repoPath)...)
 	annotations = append(annotations, evalMissingMutualExclusion(arch, repoPath)...)
 	return annotations
@@ -131,6 +132,29 @@ func evalSecretExposureInArgs(arch *ComponentArchitecture) []SecurityAnnotation 
 				}
 			}
 		}
+	}
+	return annotations
+}
+
+func evalRouteNoTLS(arch *ComponentArchitecture) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	for _, res := range arch.IngressRouting {
+		if res.Kind != "Route" {
+			continue
+		}
+		if res.TLS {
+			continue
+		}
+		if len(res.RBACVerbs) > 0 {
+			continue
+		}
+		annotations = append(annotations, SecurityAnnotation{
+			Type:        "ROUTE_NO_TLS",
+			Severity:    "medium",
+			Source:      res.Source,
+			Resource:    res.Name,
+			Description: fmt.Sprintf("Route %q has no TLS configuration. Traffic between the router and backend service is unencrypted.", res.Name),
+		})
 	}
 	return annotations
 }

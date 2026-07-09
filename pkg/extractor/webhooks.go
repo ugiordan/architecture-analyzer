@@ -101,13 +101,7 @@ func extractWebhooks(repoPath string) []WebhookConfig {
 	// Extract from YAML manifests (including Go template files)
 	files := findYAMLFiles(repoPath, webhookYAMLPatterns)
 	for _, fpath := range files {
-		var docs []map[string]interface{}
-		if strings.HasSuffix(fpath, ".tmpl") {
-			docs = parseTemplateYAML(fpath)
-		} else {
-			docs = parseYAMLSafe(fpath)
-		}
-		for _, doc := range docs {
+		for _, doc := range parseYAMLOrTemplate(fpath) {
 			kind, _ := doc["kind"].(string)
 			if kind != "ValidatingWebhookConfiguration" && kind != "MutatingWebhookConfiguration" {
 				continue
