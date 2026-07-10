@@ -17,6 +17,7 @@ func cmdContextBundle(args []string) error {
 	platformFile := fs.String("platform", "", "Path to platform-architecture.json for platform context")
 	withScan := fs.Bool("with-scan", true, "Run CPG scan for findings and taint analysis")
 	domainList := fs.String("domains", "", "Comma-separated domain list for scan (default: all)")
+	importSARIF := fs.String("sarif", "", "Comma-separated SARIF files to include as findings (e.g., kube-chainsaw.sarif,tekton-guard.sarif)")
 	fs.Parse(reorderArgs(fs, args))
 
 	if fs.NArg() < 1 {
@@ -53,6 +54,15 @@ func cmdContextBundle(args []string) error {
 			return fmt.Errorf("security scan failed: %w", scanErr)
 		}
 		opts.Findings = findings
+	}
+
+	// Ingest external SARIF findings (kube-chainsaw, tekton-guard, helm-guard, etc.)
+	if *importSARIF != "" {
+		externalFindings, sarifErr := ingestSARIFFiles(cpg, *importSARIF)
+		if sarifErr != nil {
+			fmt.Fprintf(os.Stderr, "Warning: SARIF ingestion: %v\n", sarifErr)
+		}
+		opts.Findings = append(opts.Findings, externalFindings...)
 	}
 
 	doc, err := compile.Compile(opts)

@@ -1,6 +1,7 @@
 package layers
 
 import (
+	"encoding/json"
 	"fmt"
 	"path/filepath"
 	"sort"
@@ -268,22 +269,106 @@ func (s *SecuritySelector) addRBAC(arch *extractor.ComponentArchitecture, layer 
 	if arch.RBAC == nil {
 		return
 	}
+	bindingsByRole := s.buildBindingIndex(arch.RBAC)
+
 	for _, cr := range arch.RBAC.ClusterRoles {
-		layer.Resources = append(layer.Resources, srclang.Resource{
+		res := srclang.Resource{
 			Kind:       "ClusterRole",
 			Name:       cr.Name,
 			SourceFile: cr.Source,
+			APIGroup:   "rbac.authorization.k8s.io",
+			Scope:      "cluster",
 			Summary:    fmt.Sprintf("%d rules", len(cr.Rules)),
-		})
+		}
+		res.Children = append(res.Children, rbacRuleChildren(cr.Rules)...)
+		if cr.AggregationRule != nil {
+			res.Children = append(res.Children, rbacAggregationChild(cr.AggregationRule))
+		}
+		res.Children = append(res.Children, rbacBindingChildren(bindingsByRole["ClusterRole/"+cr.Name])...)
+		layer.Resources = append(layer.Resources, res)
 	}
 	for _, r := range arch.RBAC.Roles {
-		layer.Resources = append(layer.Resources, srclang.Resource{
+		res := srclang.Resource{
 			Kind:       "Role",
 			Name:       r.Name,
 			SourceFile: r.Source,
+			APIGroup:   "rbac.authorization.k8s.io",
+			Scope:      "namespaced",
 			Summary:    fmt.Sprintf("%d rules", len(r.Rules)),
+		}
+		res.Children = append(res.Children, rbacRuleChildren(r.Rules)...)
+		res.Children = append(res.Children, rbacBindingChildren(bindingsByRole["Role/"+r.Name])...)
+		layer.Resources = append(layer.Resources, res)
+	}
+}
+
+func (s *SecuritySelector) buildBindingIndex(rbac *extractor.RBACData) map[string][]extractor.RBACBinding {
+	index := make(map[string][]extractor.RBACBinding)
+	for _, b := range rbac.ClusterRoleBindings {
+		key := "ClusterRole/" + b.RoleRef
+		index[key] = append(index[key], b)
+	}
+	for _, b := range rbac.RoleBindings {
+		key := "Role/" + b.RoleRef
+		index[key] = append(index[key], b)
+		key2 := "ClusterRole/" + b.RoleRef
+		index[key2] = append(index[key2], b)
+	}
+	return index
+}
+
+func rbacRuleChildren(rules []extractor.RBACRule) []srclang.ResourceChild {
+	var children []srclang.ResourceChild
+	for _, r := range rules {
+		attrs := fmt.Sprintf(`apiGroups="%s" resources="%s" verbs="%s"`,
+			xmlEscAttr(strings.Join(r.APIGroups, ",")),
+			xmlEscAttr(strings.Join(r.Resources, ",")),
+			xmlEscAttr(strings.Join(r.Verbs, ",")),
+		)
+		if len(r.ResourceNames) > 0 {
+			attrs += fmt.Sprintf(` resourceNames="%s"`, xmlEscAttr(strings.Join(r.ResourceNames, ",")))
+		}
+		children = append(children, srclang.ResourceChild{
+			XMLContent: fmt.Sprintf("<rule %s/>", attrs),
 		})
 	}
+	return children
+}
+
+func rbacAggregationChild(labels map[string]string) srclang.ResourceChild {
+	var parts []string
+	for k, v := range labels {
+		parts = append(parts, fmt.Sprintf("%s=%s", k, v))
+	}
+	sort.Strings(parts)
+	return srclang.ResourceChild{
+		XMLContent: fmt.Sprintf(`<aggregation-rule labels="%s"/>`, xmlEscAttr(strings.Join(parts, ","))),
+	}
+}
+
+func rbacBindingChildren(bindings []extractor.RBACBinding) []srclang.ResourceChild {
+	var children []srclang.ResourceChild
+	for _, b := range bindings {
+		for _, subj := range b.Subjects {
+			subjStr := subj.Kind + ":" + subj.Name
+			if subj.Namespace != "" {
+				subjStr = subj.Kind + ":" + subj.Namespace + "/" + subj.Name
+			}
+			children = append(children, srclang.ResourceChild{
+				XMLContent: fmt.Sprintf(`<binding name="%s" subject="%s" source="%s"/>`,
+					xmlEscAttr(b.Name), xmlEscAttr(subjStr), xmlEscAttr(b.Source)),
+			})
+		}
+	}
+	return children
+}
+
+func xmlEscAttr(s string) string {
+	s = strings.ReplaceAll(s, "&", "&amp;")
+	s = strings.ReplaceAll(s, "<", "&lt;")
+	s = strings.ReplaceAll(s, ">", "&gt;")
+	s = strings.ReplaceAll(s, "\"", "&quot;")
+	return s
 }
 
 func (s *SecuritySelector) addNetworkPolicies(arch *extractor.ComponentArchitecture, layer *srclang.Layer) {
@@ -292,13 +377,150 @@ func (s *SecuritySelector) addNetworkPolicies(arch *extractor.ComponentArchitect
 		if strings.HasSuffix(np.Source, ".go") {
 			origin = "programmatic"
 		}
-		layer.Resources = append(layer.Resources, srclang.Resource{
+		res := srclang.Resource{
 			Kind:       "NetworkPolicy",
 			Name:       np.Name,
 			SourceFile: np.Source,
 			Origin:     origin,
-		})
+		}
+		if len(np.PolicyTypes) > 0 {
+			res.Children = append(res.Children, srclang.ResourceChild{
+				XMLContent: fmt.Sprintf(`<policy-types>%s</policy-types>`, xmlEscAttr(strings.Join(np.PolicyTypes, ","))),
+			})
+		}
+		if np.PodSelector != nil {
+			res.Children = append(res.Children, netpolSelectorChild("pod-selector", np.PodSelector))
+		}
+		for _, rule := range np.IngressRules {
+			res.Children = append(res.Children, netpolRuleChild("ingress-rule", rule))
+		}
+		for _, rule := range np.EgressRules {
+			res.Children = append(res.Children, netpolRuleChild("egress-rule", rule))
+		}
+		for _, issue := range np.Issues {
+			res.Children = append(res.Children, srclang.ResourceChild{
+				XMLContent: fmt.Sprintf(`<issue>%s</issue>`, xmlEscAttr(issue)),
+			})
+		}
+		layer.Resources = append(layer.Resources, res)
 	}
+}
+
+func netpolSelectorChild(tag string, selector map[string]interface{}) srclang.ResourceChild {
+	labels, _ := flattenLabels(selector)
+	return srclang.ResourceChild{
+		XMLContent: fmt.Sprintf(`<%s labels="%s"/>`, tag, xmlEscAttr(labels)),
+	}
+}
+
+func netpolRuleChild(tag string, rule map[string]interface{}) srclang.ResourceChild {
+	var attrs []string
+	if from, ok := rule["from"]; ok {
+		attrs = append(attrs, fmt.Sprintf(`from="%s"`, xmlEscAttr(flattenNetpolPeers(from))))
+	}
+	if to, ok := rule["to"]; ok {
+		attrs = append(attrs, fmt.Sprintf(`to="%s"`, xmlEscAttr(flattenNetpolPeers(to))))
+	}
+	if ports, ok := rule["ports"]; ok {
+		attrs = append(attrs, fmt.Sprintf(`ports="%s"`, xmlEscAttr(flattenPorts(ports))))
+	}
+	return srclang.ResourceChild{
+		XMLContent: fmt.Sprintf(`<%s %s/>`, tag, strings.Join(attrs, " ")),
+	}
+}
+
+func flattenLabels(selector map[string]interface{}) (string, bool) {
+	ml, ok := selector["matchLabels"]
+	if !ok {
+		return "{}", false
+	}
+	labels, ok := ml.(map[string]interface{})
+	if !ok {
+		return "{}", false
+	}
+	var parts []string
+	for k, v := range labels {
+		parts = append(parts, fmt.Sprintf("%s=%v", k, v))
+	}
+	sort.Strings(parts)
+	return strings.Join(parts, ","), true
+}
+
+func flattenNetpolPeers(v interface{}) string {
+	peers, ok := v.([]interface{})
+	if !ok {
+		return fmt.Sprintf("%v", v)
+	}
+	var parts []string
+	for _, p := range peers {
+		pm, ok := p.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		if ns, ok := pm["namespaceSelector"]; ok {
+			nsMap, _ := ns.(map[string]interface{})
+			labels, _ := flattenLabels(nsMap)
+			if labels == "{}" {
+				parts = append(parts, "namespace:*")
+			} else {
+				parts = append(parts, "namespace:"+labels)
+			}
+		}
+		if pod, ok := pm["podSelector"]; ok {
+			podMap, _ := pod.(map[string]interface{})
+			labels, _ := flattenLabels(podMap)
+			if labels == "{}" {
+				parts = append(parts, "pod:*")
+			} else {
+				parts = append(parts, "pod:"+labels)
+			}
+		}
+		if cidr, ok := pm["ipBlock"]; ok {
+			cb, _ := cidr.(map[string]interface{})
+			if c, ok := cb["cidr"]; ok {
+				parts = append(parts, fmt.Sprintf("cidr:%v", c))
+			}
+		}
+	}
+	if len(parts) == 0 {
+		return "any"
+	}
+	return strings.Join(parts, ";")
+}
+
+func flattenPorts(v interface{}) string {
+	var items []interface{}
+	switch vt := v.(type) {
+	case []interface{}:
+		items = vt
+	default:
+		b, err := json.Marshal(v)
+		if err != nil {
+			return fmt.Sprintf("%v", v)
+		}
+		if err := json.Unmarshal(b, &items); err != nil {
+			return string(b)
+		}
+	}
+	var parts []string
+	for _, p := range items {
+		pm, ok := p.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		port := fmt.Sprintf("%v", pm["port"])
+		if f, ok := pm["port"].(float64); ok {
+			port = fmt.Sprintf("%d", int(f))
+		}
+		if proto, ok := pm["protocol"]; ok {
+			port += "/" + fmt.Sprintf("%v", proto)
+		}
+		parts = append(parts, port)
+	}
+	if len(parts) == 0 {
+		return fmt.Sprintf("%v", v)
+	}
+	return strings.Join(parts, ",")
 }
 
 const maxRelationships = 500
@@ -380,7 +602,7 @@ func (s *SecuritySelector) convertFindings(findings []query.Finding) []srclang.F
 	var result []srclang.Finding
 	counters := make(map[string]int)
 	for _, f := range findings {
-		if f.Domain != "security" && f.Domain != "netpolicy" {
+		if f.Domain != "security" && f.Domain != "netpolicy" && !strings.HasPrefix(f.Domain, "external/") {
 			continue
 		}
 		counters[f.RuleID]++
