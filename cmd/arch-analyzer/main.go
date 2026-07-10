@@ -24,6 +24,7 @@ import (
 	"github.com/ugiordan/architecture-analyzer/pkg/domains/upgrade"
 	"github.com/ugiordan/architecture-analyzer/pkg/extractor"
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
+	"github.com/ugiordan/architecture-analyzer/pkg/query"
 	"github.com/ugiordan/architecture-analyzer/pkg/renderer"
 	"github.com/ugiordan/architecture-analyzer/pkg/validator"
 )
@@ -995,6 +996,10 @@ func cmdFullAnalysis(args []string) error {
 			findings = append(findings, externalFindings...)
 		}
 
+		if archResult != nil {
+			findings = append(findings, securityAnnotationsToFindings(archResult.SecurityAnnotations)...)
+		}
+
 		printFindings(cpg, findings)
 
 		findingsPath := filepath.Join(outDir, "security-findings.json")
@@ -1079,4 +1084,33 @@ func reorderArgs(fs *flag.FlagSet, args []string) []string {
 		}
 	}
 	return append(flags, positional...)
+}
+
+var secAnnotationRulePrefix = map[string]string{
+	"RBAC_CLUSTER_SCOPE_SENSITIVE": "SEC-RBAC",
+	"ROUTE_NO_TLS":                "SEC-ROUTE",
+	"SECRET_IN_CONTAINER_ARGS":    "SEC-SECRET",
+	"CRD_CONFUSED_DEPUTY":         "SEC-CRD",
+	"MISSING_AUTH_REQUIREMENT":     "SEC-AUTH",
+}
+
+func securityAnnotationsToFindings(annotations []extractor.SecurityAnnotation) []query.Finding {
+	counters := make(map[string]int)
+	var findings []query.Finding
+	for _, a := range annotations {
+		prefix := secAnnotationRulePrefix[a.Type]
+		if prefix == "" {
+			prefix = "SEC-EVAL"
+		}
+		counters[prefix]++
+		findings = append(findings, query.Finding{
+			RuleID:          fmt.Sprintf("%s-%03d", prefix, counters[prefix]),
+			Severity:        a.Severity,
+			Message:         a.Description,
+			File:            a.Source,
+			Domain:          "security",
+			ArchitectureRef: "security_annotations:" + a.Type,
+		})
+	}
+	return findings
 }
