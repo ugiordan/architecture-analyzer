@@ -1,0 +1,78 @@
+[
+  {
+    "rule_id": "CGA-011",
+    "severity": "informational",
+    "message": "Untrusted HTTP endpoint mux.HandleFunc ( GET /health) receives unvalidated external input",
+    "file": "internal/proxy/proxy.go",
+    "line": 239,
+    "node_id": "http_d64a3ca271ba6fbf",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-011",
+    "severity": "informational",
+    "message": "Untrusted HTTP endpoint mux.HandleFunc ( POST \"+ChatCompletionsPath) receives unvalidated external input",
+    "file": "internal/proxy/proxy.go",
+    "line": 242,
+    "node_id": "http_877e9b61d0f91dce",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-011",
+    "severity": "informational",
+    "message": "Untrusted HTTP endpoint mux.HandleFunc ( POST \"+CompletionsPath) receives unvalidated external input",
+    "file": "internal/proxy/proxy.go",
+    "line": 243,
+    "node_id": "http_28f37e9be89ed400",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-012",
+    "severity": "high",
+    "message": "Untrusted endpoint mux.HandleFunc ( GET /health) has no NetworkPolicy restricting ingress",
+    "file": "internal/proxy/proxy.go",
+    "line": 239,
+    "node_id": "http_d64a3ca271ba6fbf",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-012",
+    "severity": "high",
+    "message": "Untrusted endpoint mux.HandleFunc ( POST \"+ChatCompletionsPath) has no NetworkPolicy restricting ingress",
+    "file": "internal/proxy/proxy.go",
+    "line": 242,
+    "node_id": "http_877e9b61d0f91dce",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-012",
+    "severity": "high",
+    "message": "Untrusted endpoint mux.HandleFunc ( POST \"+CompletionsPath) has no NetworkPolicy restricting ingress",
+    "file": "internal/proxy/proxy.go",
+    "line": 243,
+    "node_id": "http_28f37e9be89ed400",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestProxy has no error path assertions",
+    "file": "internal/proxy/proxy_suite_test.go",
+    "line": 25,
+    "node_id": "fn_5b34b18cc8477f45",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "SEC-ROUTE-001",
+    "severity": "medium",
+    "message": "Route \"route\" has no TLS configuration. Traffic between the router and backend service is unencrypted.",
+    "file": "deploy/openshift/patch-route.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:ROUTE_NO_TLS"
+  }
+]
