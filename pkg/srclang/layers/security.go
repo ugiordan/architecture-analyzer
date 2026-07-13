@@ -403,7 +403,89 @@ func (s *SecuritySelector) addNetworkPolicies(arch *extractor.ComponentArchitect
 			})
 		}
 		layer.Resources = append(layer.Resources, res)
+
+		layer.Findings = append(layer.Findings, netpolRiskFindings(np)...)
 	}
+}
+
+func netpolRiskFindings(np extractor.NetworkPolicy) []srclang.Finding {
+	var findings []srclang.Finding
+	counters := make(map[string]int)
+
+	emit := func(rule, severity, title string) {
+		counters[rule]++
+		findings = append(findings, srclang.Finding{
+			ID:          fmt.Sprintf("ext-%s-%03d", rule, counters[rule]),
+			Domain:      "extraction",
+			Severity:    severity,
+			Rule:        rule,
+			SourceFile:  np.Source,
+			Title:       title,
+			Description: title,
+		})
+	}
+
+	for _, rule := range np.EgressRules {
+		peers := extractPeers(rule, "to")
+		for _, peer := range peers {
+			if ipBlock, ok := peer["ipBlock"].(map[string]interface{}); ok {
+				cidrStr := fmt.Sprintf("%v", ipBlock["cidr"])
+				if cidrStr == "0.0.0.0/0" || cidrStr == "::/0" {
+					ports := flattenPorts(rule["ports"])
+					emit("NETPOL_UNRESTRICTED_EGRESS", "medium",
+						fmt.Sprintf("NetworkPolicy %q allows egress to %s on ports %s", np.Name, cidrStr, ports))
+				}
+			}
+		}
+	}
+
+	for _, rule := range np.IngressRules {
+		peers := extractPeers(rule, "from")
+		for _, peer := range peers {
+			if ns, ok := peer["namespaceSelector"]; ok {
+				nsMap, _ := ns.(map[string]interface{})
+				if nsMap != nil {
+					_, hasLabels := nsMap["matchLabels"]
+					_, hasExpressions := nsMap["matchExpressions"]
+					if !hasLabels && !hasExpressions {
+						emit("NETPOL_CROSS_NAMESPACE_INGRESS", "medium",
+							fmt.Sprintf("NetworkPolicy %q allows ingress from any namespace (empty namespaceSelector)", np.Name))
+					}
+				}
+			}
+		}
+	}
+
+	hasEgress := false
+	for _, pt := range np.PolicyTypes {
+		if strings.EqualFold(pt, "Egress") {
+			hasEgress = true
+		}
+	}
+	if len(np.PolicyTypes) > 0 && !hasEgress {
+		emit("NETPOL_MISSING_EGRESS_POLICY", "low",
+			fmt.Sprintf("NetworkPolicy %q does not include Egress in policyTypes (all egress allowed by default)", np.Name))
+	}
+
+	return findings
+}
+
+func extractPeers(rule map[string]interface{}, key string) []map[string]interface{} {
+	v, ok := rule[key]
+	if !ok {
+		return nil
+	}
+	peers, ok := v.([]interface{})
+	if !ok {
+		return nil
+	}
+	var result []map[string]interface{}
+	for _, p := range peers {
+		if pm, ok := p.(map[string]interface{}); ok {
+			result = append(result, pm)
+		}
+	}
+	return result
 }
 
 func netpolSelectorChild(tag string, selector map[string]interface{}) srclang.ResourceChild {
