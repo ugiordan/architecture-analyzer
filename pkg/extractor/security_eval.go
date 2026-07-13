@@ -2,6 +2,7 @@ package extractor
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -55,6 +56,12 @@ func EvaluateSecurityAnnotations(arch *ComponentArchitecture, repoPath string) [
 	annotations = append(annotations, evalRouteNoTLS(arch)...)
 	annotations = append(annotations, evalCRDConfusedDeputy(arch, repoPath)...)
 	annotations = append(annotations, evalMissingMutualExclusion(arch, repoPath)...)
+	annotations = append(annotations, evalHardcodedSecretValues(arch)...)
+	annotations = append(annotations, evalPermissivePasswordEnv(arch)...)
+	annotations = append(annotations, evalAuthBypassArgs(arch)...)
+	annotations = append(annotations, evalDebugEndpoints(arch, repoPath)...)
+	annotations = append(annotations, evalKustomizeSecurityDeletion(arch, repoPath)...)
+	annotations = append(annotations, evalSecretInURL(arch, repoPath)...)
 	return annotations
 }
 
@@ -366,4 +373,256 @@ func containsAny(s string, substrs []string) bool {
 		}
 	}
 	return false
+}
+
+var knownPlaceholderSecrets = []string{
+	"secret", "changeme", "password", "password123", "admin",
+	"default", "placeholder", "fixme", "todo", "replace_me",
+}
+
+func evalHardcodedSecretValues(arch *ComponentArchitecture) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	secretEnvPatterns := []string{
+		"secret", "password", "token", "key", "credential",
+	}
+	for _, dep := range arch.Deployments {
+		for _, c := range append(dep.Containers, dep.InitContainers...) {
+			for name, value := range c.EnvVars {
+				nameLower := strings.ToLower(name)
+				isSecretEnv := false
+				for _, p := range secretEnvPatterns {
+					if strings.Contains(nameLower, p) {
+						isSecretEnv = true
+						break
+					}
+				}
+				if !isSecretEnv {
+					continue
+				}
+				valueLower := strings.ToLower(strings.TrimSpace(value))
+				for _, placeholder := range knownPlaceholderSecrets {
+					if valueLower == placeholder {
+						annotations = append(annotations, SecurityAnnotation{
+							Type:        "HARDCODED_SECRET_VALUE",
+							Severity:    "high",
+							Source:      dep.Source,
+							Container:   c.Name,
+							EnvVar:      name,
+							Description: fmt.Sprintf("Container %q in %s has env var %s=%q which is a known placeholder secret value", c.Name, dep.Name, name, value),
+						})
+						break
+					}
+				}
+			}
+		}
+	}
+	return annotations
+}
+
+var passwordPermissiveRE = regexp.MustCompile(`(?i)(ALLOW_EMPTY_PASSWORD|NO_PASSWORD|SKIP_PASSWORD|DISABLE_AUTH)`)
+
+func evalPermissivePasswordEnv(arch *ComponentArchitecture) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	for _, dep := range arch.Deployments {
+		for _, c := range append(dep.Containers, dep.InitContainers...) {
+			for name, value := range c.EnvVars {
+				if !passwordPermissiveRE.MatchString(name) {
+					continue
+				}
+				valueLower := strings.ToLower(strings.TrimSpace(value))
+				if valueLower == "true" || valueLower == "1" || valueLower == "yes" {
+					annotations = append(annotations, SecurityAnnotation{
+						Type:        "PERMISSIVE_PASSWORD_ENV",
+						Severity:    "medium",
+						Source:      dep.Source,
+						Container:   c.Name,
+						EnvVar:      name,
+						Description: fmt.Sprintf("Container %q in %s sets %s=%s, disabling password authentication", c.Name, dep.Name, name, value),
+					})
+				}
+			}
+		}
+	}
+	return annotations
+}
+
+var authBypassPatterns = []string{
+	"--skip-auth-regex",
+	"--ignore-paths",
+	"--insecure-skip-tls-verify",
+	"--skip-auth-preflight",
+}
+
+func evalAuthBypassArgs(arch *ComponentArchitecture) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	for _, dep := range arch.Deployments {
+		for _, c := range append(dep.Containers, dep.InitContainers...) {
+			allArgs := append(c.Command, c.Args...)
+			for _, arg := range allArgs {
+				argLower := strings.ToLower(arg)
+				for _, pattern := range authBypassPatterns {
+					if strings.HasPrefix(argLower, pattern) {
+						annotations = append(annotations, SecurityAnnotation{
+							Type:        "AUTH_BYPASS_ARG",
+							Severity:    "medium",
+							Source:      dep.Source,
+							Container:   c.Name,
+							Description: fmt.Sprintf("Container %q in %s uses %s which bypasses authentication or TLS verification", c.Name, dep.Name, arg),
+						})
+					}
+				}
+			}
+		}
+	}
+	return annotations
+}
+
+var pprofImportRE = regexp.MustCompile(`"net/http/pprof"`)
+var pprofRegisterRE = regexp.MustCompile(`pprof\.(Register|Handler)`)
+
+func evalDebugEndpoints(arch *ComponentArchitecture, repoPath string) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	if arch.GoASTMode == "" {
+		return nil
+	}
+	goFiles := findGoFiles(repoPath)
+	for _, f := range goFiles {
+		if strings.Contains(f, "vendor/") || strings.Contains(f, "test") {
+			continue
+		}
+		fullPath, ok := safeRepoJoin(repoPath, f)
+		if !ok {
+			continue
+		}
+		content := readFileSafe(fullPath)
+		if content == "" {
+			continue
+		}
+		if pprofImportRE.MatchString(content) || pprofRegisterRE.MatchString(content) {
+			annotations = append(annotations, SecurityAnnotation{
+				Type:        "DEBUG_ENDPOINT_PPROF",
+				Severity:    "medium",
+				Source:      f,
+				Description: fmt.Sprintf("File %s imports or registers pprof debug endpoint. Pprof exposes heap dumps, goroutine stacks, and CPU profiles which may leak sensitive data.", f),
+			})
+		}
+	}
+	return annotations
+}
+
+func evalKustomizeSecurityDeletion(arch *ComponentArchitecture, repoPath string) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	kustomizeFiles := findFilesByName(repoPath, "kustomization.yaml", "kustomization.yml")
+	securityResourceKinds := []string{"networkpolicy", "role", "clusterrole", "securitycontextconstraints"}
+	for _, f := range kustomizeFiles {
+		fullPath, ok := safeRepoJoin(repoPath, f)
+		if !ok {
+			continue
+		}
+		docs := parseYAMLSafe(fullPath)
+		for _, doc := range docs {
+			patches := toSliceOfMaps(doc["patches"])
+			for _, patch := range patches {
+				target, ok := patch["target"].(map[string]interface{})
+				if !ok {
+					continue
+				}
+				kind, _ := target["kind"].(string)
+				kindLower := strings.ToLower(kind)
+				isSecurity := false
+				for _, sk := range securityResourceKinds {
+					if kindLower == sk {
+						isSecurity = true
+						break
+					}
+				}
+				if !isSecurity {
+					continue
+				}
+				patchStr, _ := patch["patch"].(string)
+				if strings.Contains(patchStr, "$patch: delete") || strings.Contains(patchStr, "op: remove") {
+					annotations = append(annotations, SecurityAnnotation{
+						Type:        "KUSTOMIZE_SECURITY_DELETION",
+						Severity:    "high",
+						Source:      f,
+						Resource:    kind,
+						Description: fmt.Sprintf("Kustomize overlay in %s deletes %s resource, removing security controls", f, kind),
+					})
+				}
+			}
+		}
+	}
+	return annotations
+}
+
+var secretInURLRE = regexp.MustCompile(`(?i)(api[_-]?key|token|secret|password|credential)[=/]`)
+
+func evalSecretInURL(arch *ComponentArchitecture, repoPath string) []SecurityAnnotation {
+	var annotations []SecurityAnnotation
+	for _, dep := range arch.Deployments {
+		for _, c := range append(dep.Containers, dep.InitContainers...) {
+			allArgs := append(c.Command, c.Args...)
+			for _, arg := range allArgs {
+				if !strings.Contains(arg, "http") {
+					continue
+				}
+				if secretInURLRE.MatchString(arg) {
+					annotations = append(annotations, SecurityAnnotation{
+						Type:        "SECRET_IN_URL",
+						Severity:    "medium",
+						Source:      dep.Source,
+						Container:   c.Name,
+						Description: fmt.Sprintf("Container %q in %s passes a secret/key/token in URL: %s", c.Name, dep.Name, truncate(arg, 120)),
+					})
+				}
+			}
+		}
+	}
+	return annotations
+}
+
+func truncate(s string, maxLen int) string {
+	if len(s) <= maxLen {
+		return s
+	}
+	return s[:maxLen] + "..."
+}
+
+func findFilesByName(repoPath string, names ...string) []string {
+	nameSet := make(map[string]bool)
+	for _, n := range names {
+		nameSet[n] = true
+	}
+	var files []string
+	filepath.Walk(repoPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return nil
+		}
+		if info.IsDir() {
+			base := filepath.Base(path)
+			if base == "vendor" || base == ".git" || base == "node_modules" {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+		if nameSet[filepath.Base(path)] {
+			rel, err := filepath.Rel(repoPath, path)
+			if err == nil {
+				files = append(files, rel)
+			}
+		}
+		return nil
+	})
+	return files
+}
+
+func readFileSafe(path string) string {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return ""
+	}
+	if len(data) > 512*1024 {
+		return ""
+	}
+	return string(data)
 }
