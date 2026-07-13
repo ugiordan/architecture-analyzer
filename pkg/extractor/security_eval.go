@@ -62,6 +62,7 @@ func EvaluateSecurityAnnotations(arch *ComponentArchitecture, repoPath string) [
 	annotations = append(annotations, evalDebugEndpoints(arch, repoPath)...)
 	annotations = append(annotations, evalKustomizeSecurityDeletion(arch, repoPath)...)
 	annotations = append(annotations, evalSecretInURL(arch, repoPath)...)
+	annotations = append(annotations, evalGitHubActionsWorkflows(repoPath)...)
 	return annotations
 }
 
