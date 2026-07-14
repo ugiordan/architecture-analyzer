@@ -137,6 +137,8 @@ func main() {
 		err = cmdPlatforms(args)
 	case "full-analysis":
 		err = cmdFullAnalysis(args)
+	case "quick-index":
+		err = cmdQuickIndex(args)
 	case "sbom":
 		err = cmdSBOM(args)
 	case "report":
@@ -186,6 +188,8 @@ Code graph commands:
   context-bundle <repo-path>           Generate SrcLang context bundle for LLM consumption
                                        [--layer security] [--output context.srclg]
                                        [--with-scan] [--domains d1,d2]
+  quick-index <repo-path>               Fast function/call index (tree-sitter only, no taint/domains)
+                                       [--output file]
   graph <repo-path>                    Export code property graph (JSON or DOT)
   diff <base.json> <head.json>       Structural diff between two code-graph.json files
                                      [--format json|text] [--kind f1,f2] [--output file]
