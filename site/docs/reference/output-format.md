@@ -33,7 +33,10 @@ The core output format. Contains all data extracted by the 22 extractors.
   "reconcile_sequences": [],
   "prometheus_metrics": [],
   "status_conditions": [],
-  "platform_detection": {}
+  "platform_detection": {},
+  "ingress_routing": [],
+  "template_files": [],
+  "security_annotations": []
 }
 ```
 
@@ -289,6 +292,208 @@ The core output format. Contains all data extracted by the 22 extractors.
 }
 ```
 
+#### Ingress Routing
+
+```json
+[
+  {
+    "kind": "Route",
+    "name": "my-route",
+    "hosts": ["app.example.com"],
+    "paths": ["/api"],
+    "backend": "my-service",
+    "tls": false,
+    "source": "internal/controller/config/templates/http-route.yaml.tmpl"
+  },
+  {
+    "kind": "Ingress",
+    "name": "my-ingress",
+    "hosts": ["app.example.com"],
+    "tls": true,
+    "source": "config/networking/ingress.yaml"
+  }
+]
+```
+
+Supported kinds: `Gateway`, `HTTPRoute`, `Ingress`, `VirtualService`, `DestinationRule`, `ServiceEntry`, `Route` (OpenShift). Extracted from YAML manifests and `.yaml.tmpl` template files. RBAC-inferred entries include `rbac_verbs` and `note` fields.
+
+#### Template Files
+
+```json
+[
+  {
+    "path": "internal/controller/config/templates/deployment.yaml.tmpl",
+    "resource_kinds": ["Deployment"],
+    "conditionals": [".Spec.Postgres", ".Spec.MySQL"]
+  }
+]
+```
+
+Go template files (`.yaml.tmpl`) found in the repository. Each entry includes the Kubernetes resource kinds defined in the template and any `{{if}}` conditional guards.
+
+#### Security Annotations
+
+```json
+[
+  {
+    "type": "RBAC_CLUSTER_SCOPE_SENSITIVE",
+    "severity": "high",
+    "resource": "secrets",
+    "verbs": ["create", "update", "patch", "delete"],
+    "source": "config/rbac/role.yaml",
+    "description": "ClusterRole \"manager-role\" grants cluster-wide create/update/patch/delete secrets"
+  },
+  {
+    "type": "ROUTE_NO_TLS",
+    "severity": "medium",
+    "resource": "http-route",
+    "source": "internal/controller/config/templates/http-route.yaml.tmpl",
+    "description": "Route \"http-route\" has no TLS configuration."
+  }
+]
+```
+
+Security evaluation results from `security_eval.go`. These are also surfaced as `SEC-*` findings in `security-findings.json` when running `full-analysis`.
+
+| Type | Rule prefix | What it detects |
+|------|-------------|-----------------|
+| `RBAC_CLUSTER_SCOPE_SENSITIVE` | `SEC-RBAC` | ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec |
+| `SECRET_IN_CONTAINER_ARGS` | `SEC-SECRET` | Container args/command referencing secrets via `$(VAR)` |
+| `CRD_CONFUSED_DEPUTY` | `SEC-CRD` | CRDs with user-settable image fields deployed with operator ServiceAccount |
+| `MISSING_AUTH_REQUIREMENT` | `SEC-AUTH` | Optional auth components with mutual exclusion but no "at least one" rule |
+| `ROUTE_NO_TLS` | `SEC-ROUTE` | OpenShift Routes with no `spec.tls` block |
+| `GHA_UNPINNED_ACTION` | `SEC-GHA` | GitHub Actions using tag references instead of SHA pins |
+| `GHA_MISSING_PERMISSIONS` | `SEC-GHA` | Workflows without explicit permissions blocks |
+
+## component-report.md
+
+Generated as part of the `analyze` and `full-analysis` diagram output (in the `diagrams/` directory). A human-readable markdown summary of all extracted architecture data.
+
+Sections: APIs Exposed (CRDs, webhooks, HTTP endpoints), Dependencies (Go modules, internal ODH deps), Network Architecture (services, network policies, ingress), RBAC Surface (cluster roles, role bindings), Deployments (containers, security context, resources, probes), and Operational (metrics, status conditions, feature gates).
+
+## build-config.json
+
+Build metadata extracted from Dockerfiles, OLM bundle, and CI configuration.
+
+```json
+{
+  "ocp_versions": {"min": "4.14", "max": "4.17"},
+  "architectures": ["amd64", "arm64"],
+  "go_version": "1.22",
+  "base_images": ["registry.access.redhat.com/ubi9/go-toolset:1.22"],
+  "fips_enabled": false,
+  "olm": {"default_channel": "stable", "channels": ["stable", "alpha"]}
+}
+```
+
+## quick-index.json
+
+Lightweight function and call graph index from tree-sitter parsing. Produced by `quick-index` command.
+
+```json
+{
+  "schema_version": 1,
+  "repo_path": "/path/to/repo",
+  "indexed_at": "2026-07-14T12:00:00Z",
+  "stats": {
+    "functions": 282,
+    "call_sites": 4660,
+    "call_edges": 1737,
+    "http_endpoints": 0,
+    "db_operations": 0,
+    "classes": 0,
+    "parse_time_ms": 70
+  },
+  "functions": [
+    {
+      "name": "Reconcile",
+      "file": "controllers/reconciler.go",
+      "line": 45,
+      "end_line": 120,
+      "language": "go",
+      "kind": "method",
+      "receiver": "MyReconciler",
+      "params": ["ctx context.Context", "req ctrl.Request"],
+      "return_type": "ctrl.Result, error",
+      "complexity": 12
+    }
+  ],
+  "calls": [
+    {
+      "caller": "r.Reconcile",
+      "caller_file": "controllers/reconciler.go",
+      "callee": "Create",
+      "callee_file": "pkg/client/client.go",
+      "line": 67,
+      "confidence": "certain"
+    }
+  ],
+  "http_endpoints": [
+    {
+      "name": "handlePredict",
+      "route": "/v1/models/{model}:predict",
+      "method": "POST",
+      "file": "pkg/handler/predict.go",
+      "line": 30
+    }
+  ]
+}
+```
+
+## SrcLang context bundle (.srclg)
+
+Structured XML format for LLM agent consumption. Produced by `context-bundle` command. Contains a domain-specialized view of the repository with semantic annotations.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<srclang version="0.0.1" xmlns="https://srclang.dev/ns/core/0">
+  <head>
+    <producer>arch-analyzer 0.2.2</producer>
+    <repository uri="https://github.com/org/my-operator">
+      <commit sha="abc1234"/>
+    </repository>
+    <component>my-operator</component>
+    <extracted>2026-07-14T10:00:00Z</extracted>
+    <layer name="security"/>
+    <languages>
+      <language name="go"/>
+    </languages>
+    <platform name="RHOAI" components="38">
+      <inbound>
+        <edge from="other-component" type="go-module"/>
+      </inbound>
+      <outbound>
+        <edge to="kserve" type="code-ref"/>
+      </outbound>
+    </platform>
+  </head>
+  <body>
+    <layer name="security">
+      <finding id="SEC-RBAC-001" domain="extraction" severity="high" rule="RBAC_CLUSTER_SCOPE_SENSITIVE">
+        <source file="config/rbac/role.yaml"/>
+        <title>ClusterRole grants cluster-wide secrets CRUD</title>
+        <description>...</description>
+      </finding>
+      <file path="pkg/webhook/handler.go" language="go">
+        <function name="Handle" kind="method" trust="untrusted" taint-role="source">
+          <source line="42"/>
+          <code><![CDATA[func (h *Handler) Handle(...) { ... }]]></code>
+        </function>
+      </file>
+      <resource kind="ClusterRole" name="manager-role">
+        <source file="config/rbac/role.yaml"/>
+      </resource>
+      <relationship kind="calls">
+        <from function="Handle" file="pkg/webhook/handler.go" line="42"/>
+        <to function="Create" file="pkg/client/client.go" resolved="false"/>
+      </relationship>
+    </layer>
+  </body>
+</srclang>
+```
+
+Available layers: `security` (security-relevant functions, taint paths, RBAC, network policies, findings) and `architecture` (CRDs, controller watches, reconcile sequences, external connections, API surface).
+
 ## code-graph.json
 
 The code property graph output. Contains all nodes, edges, basic blocks, and optionally taint findings.
@@ -374,24 +579,37 @@ Edge kinds and labels:
 }
 ```
 
-## Security findings (JSON)
+## security-findings.json
+
+Array of findings from CPG domain queries and security evaluation annotations. Produced by `full-analysis` and `scan` commands.
 
 ```json
-{
-  "domain": "security",
-  "findings": [
-    {
-      "id": "CGA-004-001",
-      "query": "CGA-004",
-      "title": "Hardcoded API key",
-      "severity": "high",
-      "file": "pkg/config/defaults.go",
-      "line": 23,
-      "evidence": "String literal matches API key pattern: 'sk-...'",
-      "recommendation": "Use environment variable or secret mount"
-    }
-  ]
-}
+[
+  {
+    "rule_id": "CGA-S01",
+    "severity": "high",
+    "message": "Webhook handler accepts untrusted input without validation",
+    "file": "pkg/webhook/handler.go",
+    "line": 42,
+    "domain": "security",
+    "architecture_ref": ""
+  },
+  {
+    "rule_id": "SEC-RBAC-001",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create/update/patch/delete secrets",
+    "file": "config/rbac/role.yaml",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  }
+]
+```
+
+Finding sources:
+
+- **CGA-* rules**: CPG domain query results (security, testing, upgrade, architecture, netpolicy domains)
+- **SEC-* rules**: Security evaluation annotations converted to finding format (see [Security Annotations](#security-annotations))
+- **External SARIF**: Findings ingested via `--import-sarif` flag (tool name and version preserved)
 ```
 
 ## Security findings (SARIF)

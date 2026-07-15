@@ -58,6 +58,41 @@ Auto-detects whether the input is a single component or aggregated platform JSON
 
 ## Code Graph Commands
 
+### arch-analyzer quick-index
+
+Fast tree-sitter code indexing. Parses source files in parallel and resolves call edges without running taint analysis or domain queries. Produces a lightweight JSON suitable for function lookup and caller/callee verification.
+
+```bash
+arch-analyzer quick-index <repo-path> [flags]
+```
+
+| Flag | Description |
+|------|-------------|
+| `--output` | Output file path (default: `quick-index.json`, use `-` for stdout) |
+
+**Output**: `quick-index.json` with functions, resolved call edges, HTTP endpoints, DB operations, and classes.
+
+Performance: 70ms for a 282-function repo, 526ms for a 4725-function repo. No git dependency, parallel tree-sitter across 8 workers.
+
+### arch-analyzer context-bundle
+
+Generate a SrcLang context bundle (`.srclg`) for LLM agent consumption. Produces a structured XML document with domain-specialized content: security-relevant functions with full source code, findings, relationships, RBAC surface, and platform context.
+
+```bash
+arch-analyzer context-bundle <repo-path> [flags]
+```
+
+| Flag | Description |
+|------|-------------|
+| `--layer` | Domain layer: `security` or `architecture` (default: `security`) |
+| `--output` | Output file path (default: `context.srclg`) |
+| `--platform` | Path to `platform-architecture.json` for platform context in `<head>` |
+| `--with-scan` | Run CPG scan for findings and taint analysis (default: `true`) |
+| `--domains` | Comma-separated domain list for scan |
+| `--sarif` | Comma-separated SARIF files to include as findings |
+
+**Output**: `.srclg` XML document. See [SrcLang output format](output-format.md#srclang-context-bundle-srclg) for details.
+
 ### arch-analyzer scan
 
 Build code property graph and run security queries.
