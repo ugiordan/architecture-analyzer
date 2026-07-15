@@ -169,23 +169,111 @@ Supported kinds: `Gateway`, `HTTPRoute`, `Ingress`, `VirtualService`, `Destinati
 
 ---
 
-### Diagram outputs (diagrams/)
+### Diagram and report outputs (diagrams/)
 
 **Produced by:** `analyze`, `full-analysis` (in `diagrams/` subdirectory)
 
 Seven files generated from `component-architecture.json`:
 
-| File | Format | What it provides |
-|------|--------|-----------------|
-| `component-report.md` | Markdown | Human-readable architecture summary: CRDs, webhooks, HTTP endpoints, dependencies, services, network policies, ingress/routing, RBAC surface, deployments with security contexts, template files |
-| `component.mmd` | Mermaid | Component architecture diagram showing CRDs, controllers, watches, and external connections |
-| `dependencies.mmd` | Mermaid | Go module dependency graph |
-| `rbac.mmd` | Mermaid | RBAC permission structure: roles, bindings, and resource access |
-| `dataflow.mmd` | Mermaid | Data flow between controllers, CRDs, external systems, and storage |
-| `c4-context.dsl` | Structurizr DSL | C4 context diagram showing system boundaries and external actors |
-| `security-network.txt` | ASCII | Network policy summary: ingress/egress rules, namespace selectors, port restrictions |
+#### component-report.md
 
-`component-report.md` is the most useful for review agents and humans. It contains linked source references (clickable GitHub URLs) for every extracted resource.
+Human-readable architecture summary with clickable GitHub source links. This is the most useful output for review agents and humans who need a quick overview of a component's architecture.
+
+Sections:
+
+- **APIs Exposed**
+    - CRDs: group, version, kind, scope, field count, CEL validation rule count, discovery method (YAML, Go AST, or both), source file
+    - Webhooks: name, type (validating/mutating/conversion), path, failure policy, service reference, kustomize overlays, enable conditions, Go AST-extracted mutation/validation behavior (fields, operations, conditions)
+    - HTTP Endpoints: method, path, source file
+- **Dependencies**
+    - Internal platform dependencies: which ODH/RHOAI components this operator depends on, with interaction type (Go module, CRD watch, code reference)
+    - Key external dependencies: filtered to notable modules (controller-runtime, client-go, k8s.io/api, etc.) with versions
+- **Network Architecture**
+    - Services: name, type (ClusterIP/NodePort/LoadBalancer), ports with protocol, source file
+    - Ingress/Routing: kind (Route/Ingress/Gateway/HTTPRoute), name, hosts, paths, TLS status, source file
+    - Network Policies: name, policy types (Ingress/Egress), source file
+- **Security**
+    - Cluster Roles: name, resources, verbs, source file (one row per RBAC rule)
+    - Kubebuilder RBAC Markers: file, line, API groups, resources, verbs (from `+kubebuilder:rbac` annotations in Go source)
+    - Secrets Referenced: name, type (Opaque/TLS/etc.), referenced-by list
+    - Container Security Contexts: deployment, container, runAsNonRoot, readOnlyRootFilesystem, privileged, source file
+- **Configuration**
+    - ConfigMaps: name, data keys, source file
+    - Helm: chart name and version (if Helm-based)
+- **Build**
+    - Dockerfiles: path, base image, stage count, USER directive, exposed ports, architectures, FIPS enabled, issues (unpinned base, missing USER, etc.)
+- **Controller Watches**
+    - Watch registrations: type (For/Owns/Watches), GVK, source file
+    - Programmatic resource operations: verb (create/update/delete), kind, API group, conditional guard (extracted from Go AST)
+- **Cache Architecture** (when cache config is detected)
+    - Manager configuration: manager file, cache scope, DefaultTransform, GOMEMLIMIT, container memory limit
+    - Filtered types: type, filter kind, filter expression
+    - Cache-bypassed types (DisableFor)
+    - Transform-stripped types
+    - Implicit informers with OOM risk assessment
+    - Issues and recommendations
+
+#### component.mmd
+
+Mermaid graph diagram showing the component architecture: CRDs as red nodes, controllers as blue nodes, owned resources as green nodes, external dependencies. Shows For/Owns/Watches relationships between controllers and resources.
+
+```mermaid
+graph LR
+    crd_ModelRegistry{{"ModelRegistry\nmodelregistry.opendatahub.io/v1beta1"}}
+    crd_ModelRegistry -->|"For (reconciles)"| controller
+    controller -->|"Owns"| owned_Deployment["Deployment"]
+```
+
+#### rbac.mmd
+
+Mermaid graph showing the RBAC permission hierarchy: ServiceAccounts bound to Roles/ClusterRoles via RoleBindings/ClusterRoleBindings, with resource access arrows showing which API resources each role can access.
+
+```mermaid
+graph TD
+    sa["ServiceAccount: controller-manager"] -->|bound via manager-rolebinding| cr["CR: manager-role"]
+    cr -->|create, delete, get, list, watch| res["core: secrets"]
+```
+
+#### dependencies.mmd
+
+Mermaid graph showing Go module dependencies, highlighting platform-internal modules and key external libraries.
+
+#### dataflow.mmd
+
+Mermaid graph showing data flow between controllers, CRDs, external systems (databases, object storage, messaging), and storage backends.
+
+#### c4-context.dsl
+
+Structurizr DSL file for C4 context diagrams. Defines system boundaries, containers (one per deployment), external systems (Kubernetes API, databases), and person actors (Platform Admin, Data Scientist).
+
+```
+workspace {
+    model {
+        admin = person "Platform Admin" "Manages the OpenShift AI platform"
+        my_system = softwareSystem "my-operator" {
+            container_manager = container "controller-manager" "..." "port 9443/TCP"
+        }
+        kubernetes_api = softwareSystem "Kubernetes API" "Cluster API server"
+    }
+}
+```
+
+#### security-network.txt
+
+ASCII art diagram showing the security and network architecture in layers: network topology (services with ports and TLS), network policies (ingress/egress rules with namespace selectors), RBAC surface (cluster roles with resource permissions), and deployment security (container security contexts, probes, resource limits).
+
+```
+================================================================================
+  NETWORK TOPOLOGY
+================================================================================
+--- Services -------------------------------------------------------------------
+  [ClusterIP] my-service
+    Port: 8443 -> 9443/TCP [https] (TLS)
+--- Network Policies -----------------------------------------------------------
+  [Policy] default-network-policy
+    Ingress: from namespace-selector app=my-operator
+    Ports: 8443/TCP
+```
 
 ---
 
