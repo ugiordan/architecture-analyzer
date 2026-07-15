@@ -1,17 +1,38 @@
 # Output Format
 
-## component-architecture.json
+The architecture analyzer produces several output files depending on the command used. This page documents every output file, how it is generated, and what it provides.
 
-The core output format. Contains all data extracted by the 22 extractors.
+## Output by command
 
-### Top-level structure
+| Command | Output files |
+|---------|-------------|
+| `analyze` | `component-architecture.json`, `diagrams/*` (7 files) |
+| `full-analysis` | All `analyze` outputs + `security-findings.json`, `code-graph.json`, `build-config.json`, `schemas/*.json`, `snapshot-metadata.json` |
+| `scan` | `security-findings.json` (or SARIF) |
+| `context-bundle` | `.srclg` (SrcLang XML) |
+| `quick-index` | `quick-index.json` |
+| `aggregate` | `platform-architecture.json`, `diagrams/*` (5 files) |
+| `extract-schema` | `schemas/*.json` |
+| `sbom` | CycloneDX 1.5 JSON |
+| `report` | Image/container analysis markdown |
+
+---
+
+## Architecture extraction outputs
+
+### component-architecture.json
+
+**Produced by:** `analyze`, `extract`, `full-analysis`
+
+The core output. Contains all data extracted by the 22 extractor groups from a single repository. This is the source of truth for everything else: diagrams, reports, security annotations, and SrcLang context bundles are all derived from this data.
 
 ```json
 {
   "component": "my-operator",
   "repo": "github.com/org/my-operator",
-  "extracted_at": "2026-04-14T10:30:00Z",
-  "analyzer_version": "0.2.0",
+  "commit_sha": "abc123def456",
+  "extracted_at": "2026-07-14T10:30:00Z",
+  "analyzer_version": "0.2.2",
   "crds": [],
   "rbac": {},
   "services": [],
@@ -34,15 +55,14 @@ The core output format. Contains all data extracted by the 22 extractors.
   "prometheus_metrics": [],
   "status_conditions": [],
   "platform_detection": {},
-  "ingress_routing": [],
   "template_files": [],
   "security_annotations": []
 }
 ```
 
-### Key types
+#### Key types
 
-#### CRD
+**CRD**: Custom Resource Definitions with field counts, validation rules, and source paths.
 
 ```json
 {
@@ -51,12 +71,12 @@ The core output format. Contains all data extracted by the 22 extractors.
   "kind": "DataScienceCluster",
   "scope": "Cluster",
   "field_count": 42,
-  "cel_rules": 3,
-  "source_file": "config/crd/bases/datasciencecluster.yaml"
+  "validation_rules": ["has(self.kubeRBACProxy) || has(self.oauthProxy)"],
+  "source": "config/crd/bases/datasciencecluster.yaml"
 }
 ```
 
-#### RBAC
+**RBAC**: ClusterRoles, Roles, RoleBindings, and kubebuilder RBAC markers.
 
 ```json
 {
@@ -67,311 +87,165 @@ The core output format. Contains all data extracted by the 22 extractors.
         {
           "api_groups": [""],
           "resources": ["secrets"],
-          "verbs": ["get", "list", "watch"]
+          "verbs": ["get", "list", "watch", "create", "update", "delete"]
         }
       ],
       "source": "config/rbac/role.yaml"
     }
-  ],
-  "role_bindings": [],
-  "kubebuilder_markers": []
+  ]
 }
 ```
 
-#### Controller Watches
+**Deployments**: Container images, args, commands, env var references, security contexts, probes, resource limits. Extracted from YAML manifests and `.yaml.tmpl` template files.
 
 ```json
 {
-  "controllers": [
+  "name": "controller-manager",
+  "kind": "Deployment",
+  "source": "config/manager/manager.yaml",
+  "containers": [
     {
-      "name": "DSCController",
-      "file": "controllers/dsc_controller.go",
-      "for": {
-        "group": "datasciencecluster.opendatahub.io",
-        "version": "v1",
-        "kind": "DataScienceCluster"
-      },
-      "owns": [
-        { "group": "apps", "version": "v1", "kind": "Deployment" }
-      ],
-      "watches": [
-        { "group": "", "version": "v1", "kind": "ConfigMap" }
+      "name": "manager",
+      "image": "quay.io/org/controller:latest",
+      "args": ["--leader-elect", "--database-dsn=$(DB_PASSWORD)"],
+      "env_var_refs": [
+        {"name": "DB_PASSWORD", "secret_name": "db-creds", "secret_key": "password"}
       ]
     }
   ]
 }
 ```
 
-#### Dependencies
+**Ingress Routing**: Gateway API, OpenShift Routes, Istio VirtualServices, and Kubernetes Ingress resources. Extracted from YAML and `.yaml.tmpl` files.
 
 ```json
 {
-  "go_version": "1.25",
-  "toolchain": "go1.25.0",
-  "go_modules": [
-    { "module": "sigs.k8s.io/controller-runtime", "version": "v0.23.3" }
-  ],
-  "replace_directives": [
-    {
-      "original": "github.com/org/old-module",
-      "replacement": "github.com/org/new-module",
-      "version": "v1.2.0"
-    }
-  ],
-  "internal_odh": [
-    {
-      "component": "opendatahub-operator",
-      "interaction": "Go module dependency: github.com/opendatahub-io/opendatahub-operator/v2"
-    }
-  ]
+  "kind": "Route",
+  "name": "http-route",
+  "hosts": [],
+  "paths": [],
+  "backend": "my-service",
+  "tls": false,
+  "source": "internal/controller/config/templates/http-route.yaml.tmpl"
 }
 ```
 
-#### External Connections
+Supported kinds: `Gateway`, `HTTPRoute`, `Ingress`, `VirtualService`, `DestinationRule`, `ServiceEntry`, `Route`.
 
-```json
-[
-  {
-    "type": "database",
-    "service": "postgres",
-    "target": "postgres://***@db.example.com:5432/mydb",
-    "source": "pkg/storage/db.go:42",
-    "function": "NewStore"
-  },
-  {
-    "type": "messaging",
-    "service": "kafka",
-    "target": "",
-    "source": "pkg/events/producer.go:18",
-    "function": "InitProducer"
-  }
-]
-```
-
-#### Feature Gates
-
-```json
-[
-  {
-    "name": "PipelineReuse",
-    "default": true,
-    "pre_release": "Beta",
-    "source": "pkg/features/gates.go:15"
-  },
-  {
-    "name": "ExperimentalAPI",
-    "default": false,
-    "pre_release": "Alpha",
-    "source": "pkg/features/gates.go:16"
-  },
-  {
-    "name": "DebugMode",
-    "default": true,
-    "source": "cmd/main.go:42",
-    "runtime_set": true
-  }
-]
-```
-
-#### Cache Config
+**Template Files**: Go template files (`.yaml.tmpl`) with Kubernetes resource kinds and conditional guards.
 
 ```json
 {
-  "scope": "cluster",
-  "filtered_types": ["ConfigMap", "Secret"],
-  "disabled_types": [],
-  "implicit_informers": [
-    {
-      "type": "Namespace",
-      "source": "controllers/dsc_controller.go:145",
-      "reason": "client.Get call for unwatched type"
-    }
-  ],
-  "gomemlimit": "512MiB",
-  "container_memory_limit": "1Gi",
-  "default_transform": false,
-  "findings": [
-    {
-      "severity": "warning",
-      "message": "Missing DefaultTransform - managedFields consuming extra memory",
-      "recommendation": "Add cache.DefaultTransform to strip managedFields"
-    }
-  ]
+  "path": "internal/controller/config/templates/deployment.yaml.tmpl",
+  "resource_kinds": ["Deployment"],
+  "conditionals": [".Spec.Postgres", ".Spec.MySQL"]
 }
 ```
 
-#### Operator Config
-
-```json
-[
-  {
-    "name": "DefaultDeploymentServiceAccount",
-    "value": "ds-pipeline",
-    "category": "name_pattern",
-    "source": "controllers/dsp_params.go"
-  },
-  {
-    "name": "APIServerImage",
-    "value": "quay.io/opendatahub/ds-pipelines-api-server",
-    "category": "image",
-    "source": "controllers/config/defaults.go"
-  }
-]
-```
-
-#### Reconcile Sequences
-
-```json
-[
-  {
-    "controller": "DSPAReconciler",
-    "steps": [
-      {
-        "method": "ReconcileDatabase",
-        "component": "Database",
-        "conditional": "p.DatabaseHealthy()",
-        "source": "controllers/dspa_controller.go:85"
-      },
-      {
-        "method": "ReconcileStorage",
-        "component": "Storage",
-        "source": "controllers/dspa_controller.go:92"
-      }
-    ],
-    "source": "controllers/dspa_controller.go"
-  }
-]
-```
-
-#### Prometheus Metrics
-
-```json
-[
-  {
-    "name": "dspo_reconciliation_duration_seconds",
-    "type": "histogram",
-    "help": "Time taken to reconcile a DSPA resource",
-    "labels": ["dspa_name", "dspa_namespace"],
-    "namespace": "dspo",
-    "source": "controllers/metrics.go"
-  }
-]
-```
-
-#### Status Conditions
-
-```json
-[
-  {
-    "type": "DatabaseAvailable",
-    "reasons": ["DatabaseCreated", "DatabaseFailed", "ExternalDBInUse"],
-    "source": "controllers/status.go"
-  }
-]
-```
-
-#### Platform Detection
+**Security Annotations**: Security evaluation results from static analysis of the extracted data. These are also surfaced as `SEC-*` findings in `security-findings.json`.
 
 ```json
 {
-  "capabilities": [
-    {
-      "name": "IsOpenShift",
-      "check": "whether the cluster is OpenShift",
-      "source": "pkg/config/platform.go"
-    }
-  ],
-  "conditionals": [
-    {
-      "condition": "p.IsOpenShift",
-      "resource_kind": "Route",
-      "action": "create",
-      "source": "controllers/reconciler.go"
-    }
-  ]
+  "type": "RBAC_CLUSTER_SCOPE_SENSITIVE",
+  "severity": "high",
+  "resource": "secrets",
+  "verbs": ["create", "update", "patch", "delete"],
+  "source": "config/rbac/role.yaml",
+  "description": "ClusterRole \"manager-role\" grants cluster-wide create/update/patch/delete secrets"
 }
 ```
 
-#### Ingress Routing
+| Type | What it detects |
+|------|-----------------|
+| `RBAC_CLUSTER_SCOPE_SENSITIVE` | ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec |
+| `SECRET_IN_CONTAINER_ARGS` | Container args/command referencing secrets via `$(VAR)`, exposed in /proc/1/cmdline |
+| `CRD_CONFUSED_DEPUTY` | CRDs with user-settable image fields deployed with operator ServiceAccount |
+| `MISSING_AUTH_REQUIREMENT` | Optional auth components with mutual exclusion but no "at least one" rule |
+| `ROUTE_NO_TLS` | OpenShift Routes with no `spec.tls` block |
+| `GHA_UNPINNED_ACTION` | GitHub Actions using tag references instead of SHA pins |
+| `GHA_MISSING_PERMISSIONS` | Workflows without explicit permissions blocks |
+
+**Other types** documented in the JSON structure: Controller Watches, Dependencies, External Connections, Feature Gates, Cache Config, Operator Config, Reconcile Sequences, Prometheus Metrics, Status Conditions, Platform Detection.
+
+---
+
+### Diagram outputs (diagrams/)
+
+**Produced by:** `analyze`, `full-analysis` (in `diagrams/` subdirectory)
+
+Seven files generated from `component-architecture.json`:
+
+| File | Format | What it provides |
+|------|--------|-----------------|
+| `component-report.md` | Markdown | Human-readable architecture summary: CRDs, webhooks, HTTP endpoints, dependencies, services, network policies, ingress/routing, RBAC surface, deployments with security contexts, template files |
+| `component.mmd` | Mermaid | Component architecture diagram showing CRDs, controllers, watches, and external connections |
+| `dependencies.mmd` | Mermaid | Go module dependency graph |
+| `rbac.mmd` | Mermaid | RBAC permission structure: roles, bindings, and resource access |
+| `dataflow.mmd` | Mermaid | Data flow between controllers, CRDs, external systems, and storage |
+| `c4-context.dsl` | Structurizr DSL | C4 context diagram showing system boundaries and external actors |
+| `security-network.txt` | ASCII | Network policy summary: ingress/egress rules, namespace selectors, port restrictions |
+
+`component-report.md` is the most useful for review agents and humans. It contains linked source references (clickable GitHub URLs) for every extracted resource.
+
+---
+
+## Code graph outputs
+
+### security-findings.json
+
+**Produced by:** `full-analysis`, `scan`
+
+Array of findings from three sources: CPG domain queries (CGA-* rules), security evaluation annotations (SEC-* rules), and external SARIF ingestion.
 
 ```json
 [
   {
-    "kind": "Route",
-    "name": "my-route",
-    "hosts": ["app.example.com"],
-    "paths": ["/api"],
-    "backend": "my-service",
-    "tls": false,
-    "source": "internal/controller/config/templates/http-route.yaml.tmpl"
-  },
-  {
-    "kind": "Ingress",
-    "name": "my-ingress",
-    "hosts": ["app.example.com"],
-    "tls": true,
-    "source": "config/networking/ingress.yaml"
-  }
-]
-```
-
-Supported kinds: `Gateway`, `HTTPRoute`, `Ingress`, `VirtualService`, `DestinationRule`, `ServiceEntry`, `Route` (OpenShift). Extracted from YAML manifests and `.yaml.tmpl` template files. RBAC-inferred entries include `rbac_verbs` and `note` fields.
-
-#### Template Files
-
-```json
-[
-  {
-    "path": "internal/controller/config/templates/deployment.yaml.tmpl",
-    "resource_kinds": ["Deployment"],
-    "conditionals": [".Spec.Postgres", ".Spec.MySQL"]
-  }
-]
-```
-
-Go template files (`.yaml.tmpl`) found in the repository. Each entry includes the Kubernetes resource kinds defined in the template and any `{{if}}` conditional guards.
-
-#### Security Annotations
-
-```json
-[
-  {
-    "type": "RBAC_CLUSTER_SCOPE_SENSITIVE",
+    "rule_id": "CGA-S01",
     "severity": "high",
-    "resource": "secrets",
-    "verbs": ["create", "update", "patch", "delete"],
-    "source": "config/rbac/role.yaml",
-    "description": "ClusterRole \"manager-role\" grants cluster-wide create/update/patch/delete secrets"
+    "message": "Webhook handler accepts untrusted input without validation",
+    "file": "pkg/webhook/handler.go",
+    "line": 42,
+    "domain": "security",
+    "architecture_ref": ""
   },
   {
-    "type": "ROUTE_NO_TLS",
-    "severity": "medium",
-    "resource": "http-route",
-    "source": "internal/controller/config/templates/http-route.yaml.tmpl",
-    "description": "Route \"http-route\" has no TLS configuration."
+    "rule_id": "SEC-RBAC-001",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create/update/patch/delete secrets",
+    "file": "config/rbac/role.yaml",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
   }
 ]
 ```
 
-Security evaluation results from `security_eval.go`. These are also surfaced as `SEC-*` findings in `security-findings.json` when running `full-analysis`.
+Finding sources:
 
-| Type | Rule prefix | What it detects |
-|------|-------------|-----------------|
-| `RBAC_CLUSTER_SCOPE_SENSITIVE` | `SEC-RBAC` | ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec |
-| `SECRET_IN_CONTAINER_ARGS` | `SEC-SECRET` | Container args/command referencing secrets via `$(VAR)` |
-| `CRD_CONFUSED_DEPUTY` | `SEC-CRD` | CRDs with user-settable image fields deployed with operator ServiceAccount |
-| `MISSING_AUTH_REQUIREMENT` | `SEC-AUTH` | Optional auth components with mutual exclusion but no "at least one" rule |
-| `ROUTE_NO_TLS` | `SEC-ROUTE` | OpenShift Routes with no `spec.tls` block |
-| `GHA_UNPINNED_ACTION` | `SEC-GHA` | GitHub Actions using tag references instead of SHA pins |
-| `GHA_MISSING_PERMISSIONS` | `SEC-GHA` | Workflows without explicit permissions blocks |
+- **CGA-\* rules**: CPG domain query results from security, testing, upgrade, architecture, and netpolicy domains
+- **SEC-\* rules**: Security evaluation annotations (SEC-RBAC, SEC-SECRET, SEC-ROUTE, SEC-CRD, SEC-AUTH, SEC-GHA)
+- **External SARIF**: Findings ingested via `--import-sarif` flag, with tool name and version preserved
 
-## component-report.md
+### code-graph.json
 
-Generated as part of the `analyze` and `full-analysis` diagram output (in the `diagrams/` directory). A human-readable markdown summary of all extracted architecture data.
+**Produced by:** `full-analysis`, `graph`
 
-Sections: APIs Exposed (CRDs, webhooks, HTTP endpoints), Dependencies (Go modules, internal ODH deps), Network Architecture (services, network policies, ingress), RBAC Surface (cluster roles, role bindings), Deployments (containers, security context, resources, probes), and Operational (metrics, status conditions, feature gates).
+The code property graph. Contains all nodes and edges from tree-sitter parsing and call resolution.
 
-## build-config.json
+```json
+{
+  "schema_version": 2,
+  "nodes": [],
+  "edges": []
+}
+```
+
+**Node kinds**: `Function`, `CallSite`, `HTTPEndpoint`, `DBOperation`, `StructLiteral`, `Variable`, `Parameter`, `BasicBlock`, `Class`, `ExternalFinding`.
+
+**Edge kinds**: `EdgeCalls` (with confidence: CERTAIN/INFERRED/UNCERTAIN), `EdgeDataFlow`, `EdgeContains`, `EdgeStorageLink`, `EdgeTaint`, `EdgeControlFlow`.
+
+### build-config.json
+
+**Produced by:** `full-analysis`, `build-config`
 
 Build metadata extracted from Dockerfiles, OLM bundle, and CI configuration.
 
@@ -386,9 +260,80 @@ Build metadata extracted from Dockerfiles, OLM bundle, and CI configuration.
 }
 ```
 
-## quick-index.json
+### schemas/*.json
 
-Lightweight function and call graph index from tree-sitter parsing. Produced by `quick-index` command.
+**Produced by:** `full-analysis`, `extract-schema`
+
+CRD JSON schemas extracted from `openAPIV3Schema` in CRD YAML files. One file per CRD, named `<group>_<version>_<kind>.json`. Used for contract validation to detect breaking API changes between versions.
+
+---
+
+## SrcLang context bundle (.srclg)
+
+**Produced by:** `context-bundle`
+
+Structured XML format for LLM agent consumption. Contains a domain-specialized view of the repository with semantic annotations, optimized for review agents. Reduces raw source (150K-1M tokens) to 15-25K tokens of security-relevant or architecture-relevant content.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<srclang version="0.0.1" xmlns="https://srclang.dev/ns/core/0">
+  <head>
+    <producer>arch-analyzer 0.2.2</producer>
+    <repository uri="https://github.com/org/my-operator">
+      <commit sha="abc1234"/>
+    </repository>
+    <component>my-operator</component>
+    <extracted>2026-07-14T10:00:00Z</extracted>
+    <layer name="security"/>
+    <languages><language name="go"/></languages>
+    <platform name="RHOAI" components="38">
+      <inbound><edge from="other-component" type="go-module"/></inbound>
+      <outbound><edge to="kserve" type="code-ref"/></outbound>
+    </platform>
+  </head>
+  <body>
+    <layer name="security">
+      <finding id="ext-RBAC_CLUSTER_SCOPE_SENSITIVE-001" domain="extraction"
+               severity="high" rule="RBAC_CLUSTER_SCOPE_SENSITIVE">
+        <source file="config/rbac/role.yaml"/>
+        <title>ClusterRole grants cluster-wide secrets CRUD</title>
+        <description>...</description>
+      </finding>
+      <file path="pkg/webhook/handler.go" language="go">
+        <function name="Handle" kind="method" trust="untrusted" taint-role="source">
+          <source line="42"/>
+          <params><param name="ctx" type="context.Context"/></params>
+          <metrics complexity="8" lines="35"/>
+          <code><![CDATA[func (h *Handler) Handle(...) { ... }]]></code>
+        </function>
+      </file>
+      <resource kind="ClusterRole" name="manager-role">
+        <source file="config/rbac/role.yaml"/>
+        <summary>45 rules</summary>
+      </resource>
+      <relationship kind="calls">
+        <from function="Handle" file="pkg/webhook/handler.go" line="42"/>
+        <to function="Create" file="pkg/client/client.go" resolved="false"/>
+      </relationship>
+    </layer>
+  </body>
+</srclang>
+```
+
+Available layers:
+
+| Layer | Content |
+|-------|---------|
+| `security` | Security-relevant functions with full source code, taint paths, RBAC surface, network policies, findings from CPG queries and extraction annotations |
+| `architecture` | CRDs, controller watches, reconcile sequences, external connections, API surface |
+
+---
+
+## Quick index (quick-index.json)
+
+**Produced by:** `quick-index`
+
+Lightweight function and call graph index from tree-sitter parsing. Runs tree-sitter + call edge resolution only (no taint analysis, no domain queries, no storage linking). Designed for fast function lookup and caller/callee verification.
 
 ```json
 {
@@ -428,193 +373,57 @@ Lightweight function and call graph index from tree-sitter parsing. Produced by 
       "confidence": "certain"
     }
   ],
-  "http_endpoints": [
-    {
-      "name": "handlePredict",
-      "route": "/v1/models/{model}:predict",
-      "method": "POST",
-      "file": "pkg/handler/predict.go",
-      "line": 30
-    }
-  ]
+  "http_endpoints": [],
+  "db_operations": [],
+  "classes": []
 }
 ```
 
-## SrcLang context bundle (.srclg)
+Performance: 70ms for a 282-function repo, 526ms for a 4725-function repo.
 
-Structured XML format for LLM agent consumption. Produced by `context-bundle` command. Contains a domain-specialized view of the repository with semantic annotations.
+---
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<srclang version="0.0.1" xmlns="https://srclang.dev/ns/core/0">
-  <head>
-    <producer>arch-analyzer 0.2.2</producer>
-    <repository uri="https://github.com/org/my-operator">
-      <commit sha="abc1234"/>
-    </repository>
-    <component>my-operator</component>
-    <extracted>2026-07-14T10:00:00Z</extracted>
-    <layer name="security"/>
-    <languages>
-      <language name="go"/>
-    </languages>
-    <platform name="RHOAI" components="38">
-      <inbound>
-        <edge from="other-component" type="go-module"/>
-      </inbound>
-      <outbound>
-        <edge to="kserve" type="code-ref"/>
-      </outbound>
-    </platform>
-  </head>
-  <body>
-    <layer name="security">
-      <finding id="SEC-RBAC-001" domain="extraction" severity="high" rule="RBAC_CLUSTER_SCOPE_SENSITIVE">
-        <source file="config/rbac/role.yaml"/>
-        <title>ClusterRole grants cluster-wide secrets CRUD</title>
-        <description>...</description>
-      </finding>
-      <file path="pkg/webhook/handler.go" language="go">
-        <function name="Handle" kind="method" trust="untrusted" taint-role="source">
-          <source line="42"/>
-          <code><![CDATA[func (h *Handler) Handle(...) { ... }]]></code>
-        </function>
-      </file>
-      <resource kind="ClusterRole" name="manager-role">
-        <source file="config/rbac/role.yaml"/>
-      </resource>
-      <relationship kind="calls">
-        <from function="Handle" file="pkg/webhook/handler.go" line="42"/>
-        <to function="Create" file="pkg/client/client.go" resolved="false"/>
-      </relationship>
-    </layer>
-  </body>
-</srclang>
-```
+## Platform aggregation outputs
 
-Available layers: `security` (security-relevant functions, taint paths, RBAC, network policies, findings) and `architecture` (CRDs, controller watches, reconcile sequences, external connections, API surface).
+**Produced by:** `aggregate`
 
-## code-graph.json
+### platform-architecture.json
 
-The code property graph output. Contains all nodes, edges, basic blocks, and optionally taint findings.
-
-### Top-level structure
+Merged view of all component architectures in a platform.
 
 ```json
 {
-  "schema_version": 2,
-  "nodes": [],
-  "edges": [],
-  "taint_findings": []
+  "platform": "OpenShift AI",
+  "component_count": 38,
+  "components": ["kserve", "odh-model-controller", "..."],
+  "dependency_graph": [
+    {"from": "odh-model-controller", "to": "kserve", "type": "go-module"}
+  ],
+  "component_data": [],
+  "crd_ownership": {},
+  "rbac_cluster_roles": [],
+  "secrets_referenced": [],
+  "services": []
 }
 ```
 
-### Node
+### Platform diagrams
 
-```json
-{
-  "id": "pkg/handler/auth.go::HandleLogin",
-  "kind": "Function",
-  "name": "HandleLogin",
-  "file": "pkg/handler/auth.go",
-  "line": 42,
-  "end_line": 85,
-  "language": "go",
-  "type_name": "",
-  "complexity": 8,
-  "param_names": ["w", "r"],
-  "param_types": ["http.ResponseWriter", "*http.Request"],
-  "return_type": "",
-  "trust_level": "untrusted",
-  "is_test": false,
-  "annotations": {
-    "handles_user_input": true,
-    "sec:handles_request": true
-  }
-}
-```
+| File | Format | What it provides |
+|------|--------|-----------------|
+| `platform-dependencies.mmd` | Mermaid | Cross-component dependency graph |
+| `platform-crd-ownership.mmd` | Mermaid | Which components own which CRDs |
+| `platform-rbac-overview.mmd` | Mermaid | RBAC permissions across all components |
+| `platform-network-topology.mmd` | Mermaid | Network policy mesh across namespaces |
+| `PLATFORM.md` | Markdown | Platform-level summary report |
 
-Node kinds: `File`, `Function`, `Parameter`, `Call`, `StructLiteral`, `Variable`, `BasicBlock`.
-
-Trust levels: `untrusted` (public HTTP, no auth), `semi_trusted` (webhook, auth middleware), `trusted` (controller Reconcile, init).
-
-### Edge
-
-```json
-{
-  "source": "pkg/handler/auth.go::HandleLogin",
-  "target": "pkg/db/users.go::FindUser",
-  "kind": "EdgeCalls",
-  "label": "",
-  "confidence": "CERTAIN"
-}
-```
-
-Edge kinds and labels:
-
-- `EdgeCalls`: function-to-function call (confidence: CERTAIN, INFERRED, UNCERTAIN)
-- `EdgeContains`: file-to-function, function-to-literal containment
-- `EdgeAliases`: type alias relationship
-- `EdgeDataFlow`: intraprocedural data flow (labels: `assigns`, `reads`, `passes_to`, `field_access`, `returns`)
-- `EdgeControlFlow`: CFG edges (labels: `true_branch`, `false_branch`, `fallthrough`, `loop_back`, `loop_exit`, `exception`, `entry`, `exit`)
-
-### Taint Finding
-
-```json
-{
-  "rule": "taint-to-sink",
-  "source": {
-    "id": "pkg/handler/auth.go::HandleLogin::r",
-    "file": "pkg/handler/auth.go",
-    "line": 42
-  },
-  "sink": {
-    "id": "pkg/db/users.go::FindUser::db.Query",
-    "file": "pkg/db/users.go",
-    "line": 67
-  },
-  "path": ["HandleLogin::r", "HandleLogin::username", "FindUser::query", "FindUser::db.Query"],
-  "sanitized": false,
-  "cross_function": true
-}
-```
-
-## security-findings.json
-
-Array of findings from CPG domain queries and security evaluation annotations. Produced by `full-analysis` and `scan` commands.
-
-```json
-[
-  {
-    "rule_id": "CGA-S01",
-    "severity": "high",
-    "message": "Webhook handler accepts untrusted input without validation",
-    "file": "pkg/webhook/handler.go",
-    "line": 42,
-    "domain": "security",
-    "architecture_ref": ""
-  },
-  {
-    "rule_id": "SEC-RBAC-001",
-    "severity": "high",
-    "message": "ClusterRole \"manager-role\" grants cluster-wide create/update/patch/delete secrets",
-    "file": "config/rbac/role.yaml",
-    "domain": "security",
-    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
-  }
-]
-```
-
-Finding sources:
-
-- **CGA-* rules**: CPG domain query results (security, testing, upgrade, architecture, netpolicy domains)
-- **SEC-* rules**: Security evaluation annotations converted to finding format (see [Security Annotations](#security-annotations))
-- **External SARIF**: Findings ingested via `--import-sarif` flag (tool name and version preserved)
-```
+---
 
 ## Security findings (SARIF)
 
-Standard SARIF 2.1.0 format compatible with GitHub Code Scanning:
+**Produced by:** `scan --format sarif`
+
+Standard SARIF 2.1.0 format compatible with GitHub Code Scanning.
 
 ```json
 {
@@ -625,25 +434,12 @@ Standard SARIF 2.1.0 format compatible with GitHub Code Scanning:
       "tool": {
         "driver": {
           "name": "architecture-analyzer",
-          "version": "0.2.0",
-          "rules": [...]
+          "version": "0.2.2",
+          "rules": []
         }
       },
-      "results": [...]
+      "results": []
     }
   ]
-}
-```
-
-## Platform aggregation output
-
-```json
-{
-  "components": ["repo-a", "repo-b", "repo-c"],
-  "aggregated_at": "2026-04-14T10:30:00Z",
-  "crd_ownership": {},
-  "cross_dependencies": [],
-  "rbac_overlap": [],
-  "network_mesh": []
 }
 ```
