@@ -143,6 +143,8 @@ func main() {
 		err = cmdSBOM(args)
 	case "report":
 		err = cmdReport(args)
+	case "tier-report":
+		err = cmdTierReport(args)
 	case "version":
 		fmt.Printf("arch-analyzer %s\n", version)
 	case "help", "-h", "--help":
@@ -208,6 +210,11 @@ Platform commands:
   aggregate-cpg <results-dir>          Merge code graphs into platform-wide CPG
   version-compat <arch.json>           Check API version compatibility against target OCP/k8s
                                        [--target-version ver]
+
+API tier commands:
+  tier-report <platform-json-or-dir>   Generate API tier report from aggregated data
+                                       --tiers api_tiers.yaml [--format markdown|csv|json]
+                                       [--output file]
 
 Combined:
   full-analysis <repo-path>            Run architecture extraction + code graph scan
