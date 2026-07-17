@@ -155,17 +155,23 @@ Supported kinds: `Gateway`, `HTTPRoute`, `Ingress`, `VirtualService`, `Destinati
 }
 ```
 
-| Type | What it detects |
-|------|-----------------|
-| `RBAC_CLUSTER_SCOPE_SENSITIVE` | ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec |
-| `SECRET_IN_CONTAINER_ARGS` | Container args/command referencing secrets via `$(VAR)`, exposed in /proc/1/cmdline |
-| `CRD_CONFUSED_DEPUTY` | CRDs with user-settable image fields deployed with operator ServiceAccount |
-| `MISSING_AUTH_REQUIREMENT` | Optional auth components with mutual exclusion but no "at least one" rule |
-| `ROUTE_NO_TLS` | OpenShift Routes with no `spec.tls` block |
-| `GHA_UNPINNED_ACTION` | GitHub Actions using tag references instead of SHA pins |
-| `GHA_MISSING_PERMISSIONS` | Workflows without explicit permissions blocks |
-
-**Other types** documented in the JSON structure: Controller Watches, Dependencies, External Connections, Feature Gates, Cache Config, Operator Config, Reconcile Sequences, Prometheus Metrics, Status Conditions, Platform Detection.
+| Type | Severity | What it detects |
+|------|----------|-----------------|
+| `RBAC_CLUSTER_SCOPE_SENSITIVE` | high/medium | ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec |
+| `SECRET_IN_CONTAINER_ARGS` | medium | Container args/command referencing secrets via `$(VAR)`, exposed in /proc/1/cmdline |
+| `CRD_CONFUSED_DEPUTY` | high | CRDs with user-settable image fields deployed with operator ServiceAccount |
+| `MISSING_AUTH_REQUIREMENT` | high | Optional auth components with mutual exclusion but no "at least one" rule |
+| `ROUTE_NO_TLS` | medium | OpenShift Routes with no `spec.tls` block |
+| `HARDCODED_SECRET_VALUE` | high | Known placeholder secrets (password, changeme, admin) in manifests |
+| `PERMISSIVE_PASSWORD_ENV` | medium | ALLOW_EMPTY_PASSWORD, DISABLE_AUTH flags set to true |
+| `AUTH_BYPASS_ARG` | medium | Flags like --skip-auth-regex, --insecure-skip-tls-verify in container args |
+| `DEBUG_ENDPOINT_PPROF` | medium | pprof debug endpoint imports/registration in Go source |
+| `KUSTOMIZE_SECURITY_DELETION` | high | Kustomize overlays deleting security resources (NetworkPolicies, RBAC) |
+| `SECRET_IN_URL` | medium | Credentials embedded in URLs (api_key=, token=, password=) |
+| `GHA_MISSING_PERMISSIONS` | high | GitHub Actions workflows without explicit permissions blocks |
+| `GHA_PULL_REQUEST_TARGET` | critical | pull_request_target trigger with checkout of fork code (pwn-request) |
+| `GHA_UNPINNED_ACTION` | medium | GitHub Actions using tag references instead of SHA pins |
+| `SCAFFOLDING_NAME_COLLISION` | medium | Default kubebuilder/operator-sdk names (controller-manager, leader-election-role, etc.) that collide in multi-operator deployments |
 
 ---
 
