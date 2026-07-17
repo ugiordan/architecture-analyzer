@@ -32,6 +32,60 @@ The security domain runs these queries against the CPG:
 | CGA-008 | Dangerous Functions | Usage of known-unsafe functions |
 | CGA-009 | Source Trust | Trust boundary violations in data flow |
 
+## Extraction-phase security checks
+
+In addition to CPG queries, the analyzer runs security checks during the extraction phase. These inspect the parsed architecture data (RBAC, Deployments, Services, workflows) and produce `SecurityAnnotation` findings.
+
+### SCAFFOLDING_NAME_COLLISION
+
+Detects Kubernetes resources using default kubebuilder/operator-sdk scaffolding names that collide when multiple operators are deployed to the same namespace.
+
+- **Severity**: medium
+- **Resources checked**: ClusterRoles, Roles, ClusterRoleBindings, RoleBindings, Deployments, Services
+- **Flagged names**: `controller-manager`, `controller-manager-metrics-monitor`, `controller-manager-metrics-service`, `leader-election-role`, `leader-election-rolebinding`, `manager-role`, `manager-rolebinding`, `proxy-role`, `proxy-rolebinding`, `metrics-reader`, `metrics-auth-role`, `metrics-auth-rolebinding`
+- **Why it matters**: `kubebuilder init` scaffolds all operators with the same generic names. When ODH manages multiple operators (e.g., MLFlow + MCP Lifecycle), these names collide causing ownerReference conflicts at deploy time.
+- **Remediation**: Prefix resource names with the operator name in kustomize overlays (e.g., `mlflow-operator-controller-manager-metrics-monitor`).
+
+### GHA_PULL_REQUEST_TARGET
+
+Detects GitHub Actions workflows using the `pull_request_target` trigger combined with `actions/checkout` of fork code (the "pwn-request" pattern).
+
+- **Severity**: critical
+- **Why it matters**: `pull_request_target` runs with write access to the base repo's secrets. Checking out fork code in that context allows arbitrary code execution with elevated privileges.
+- **FP guards**: only flags when BOTH conditions are met (trigger + fork checkout ref). Default checkout (no `ref:`) is safe.
+
+### GHA_MISSING_PERMISSIONS
+
+Detects GitHub Actions workflows without a top-level `permissions:` block.
+
+- **Severity**: high
+- **Why it matters**: without explicit permissions, the GITHUB_TOKEN gets default permissions which may include write access to contents, packages, and more.
+- **FP guards**: skips reusable-only workflows (`on: workflow_call`). Accepts job-level permissions as sufficient.
+
+### GHA_UNPINNED_ACTION
+
+Detects GitHub Actions referenced by mutable tag instead of SHA pin.
+
+- **Severity**: medium
+- **Why it matters**: a compromised action version can inject malicious code into the workflow. SHA pinning ensures reproducibility.
+- **FP guards**: skips local actions (`./`), Docker actions (`docker://`). Accepts both SHA-1 (40-char) and SHA-256 (64-char) pins.
+
+### Other extraction-phase checks
+
+| Type | Severity | What it detects |
+|------|----------|-----------------|
+| `RBAC_CLUSTER_SCOPE_SENSITIVE` | high/medium | ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec |
+| `SECRET_IN_CONTAINER_ARGS` | medium | Container args/command referencing secrets via `$(VAR)`, exposed in /proc/1/cmdline |
+| `CRD_CONFUSED_DEPUTY` | high | CRDs with user-settable image fields deployed with operator ServiceAccount |
+| `MISSING_AUTH_REQUIREMENT` | high | Optional auth components with mutual exclusion but no "at least one" rule |
+| `ROUTE_NO_TLS` | medium | OpenShift Routes with no `spec.tls` block |
+| `HARDCODED_SECRET_VALUE` | high | Known placeholder secrets (password, changeme, admin) in manifests |
+| `PERMISSIVE_PASSWORD_ENV` | medium | ALLOW_EMPTY_PASSWORD, DISABLE_AUTH flags set to true |
+| `AUTH_BYPASS_ARG` | medium | Flags like --skip-auth-regex, --insecure-skip-tls-verify in container args |
+| `DEBUG_ENDPOINT_PPROF` | medium | pprof debug endpoint imports/registration in Go source |
+| `KUSTOMIZE_SECURITY_DELETION` | high | Kustomize overlays deleting security resources (NetworkPolicies, RBAC) |
+| `SECRET_IN_URL` | medium | Credentials embedded in URLs (api_key=, token=, password=) |
+
 ## How it works
 
 1. **Parse**: Tree-sitter parses all Go source files into ASTs
