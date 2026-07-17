@@ -142,7 +142,9 @@ Supported kinds: `Gateway`, `HTTPRoute`, `Ingress`, `VirtualService`, `Destinati
 }
 ```
 
-**Security Annotations**: Security evaluation results from static analysis of the extracted data. These are also surfaced as `SEC-*` findings in `security-findings.json`.
+### Security Annotations
+
+Security evaluation results from static analysis of the extracted data. These are also surfaced as `SEC-*` findings in `security-findings.json`.
 
 ```json
 {
