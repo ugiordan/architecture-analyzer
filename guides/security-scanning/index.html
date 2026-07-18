@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -787,6 +787,78 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extraction-phase-security-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extraction-phase security checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extraction-phase security checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaffolding_name_collision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCAFFOLDING_NAME_COLLISION
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gha_pull_request_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHA_PULL_REQUEST_TARGET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gha_missing_permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHA_MISSING_PERMISSIONS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gha_unpinned_action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHA_UNPINNED_ACTION
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-extraction-phase-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other extraction-phase checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -26057,6 +26129,78 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#extraction-phase-security-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extraction-phase security checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extraction-phase security checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaffolding_name_collision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCAFFOLDING_NAME_COLLISION
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gha_pull_request_target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHA_PULL_REQUEST_TARGET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gha_missing_permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHA_MISSING_PERMISSIONS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gha_unpinned_action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHA_UNPINNED_ACTION
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-extraction-phase-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other extraction-phase checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -26231,6 +26375,105 @@
 </tr>
 </tbody>
 </table>
+<h2 id="extraction-phase-security-checks">Extraction-phase security checks<a class="headerlink" href="#extraction-phase-security-checks" title="Permanent link">¶</a></h2>
+<p>In addition to CPG queries, the analyzer runs security checks during the extraction phase. These inspect the parsed architecture data (RBAC, Deployments, Services, workflows) and produce <code>SecurityAnnotation</code> findings.</p>
+<h3 id="scaffolding_name_collision">SCAFFOLDING_NAME_COLLISION<a class="headerlink" href="#scaffolding_name_collision" title="Permanent link">¶</a></h3>
+<p>Detects Kubernetes resources using default kubebuilder/operator-sdk scaffolding names that collide when multiple operators are deployed to the same namespace.</p>
+<ul>
+<li><strong>Severity</strong>: medium</li>
+<li><strong>Resources checked</strong>: ClusterRoles, Roles, ClusterRoleBindings, RoleBindings, Deployments, Services</li>
+<li><strong>Flagged names</strong>: <code>controller-manager</code>, <code>controller-manager-metrics-monitor</code>, <code>controller-manager-metrics-service</code>, <code>leader-election-role</code>, <code>leader-election-rolebinding</code>, <code>manager-role</code>, <code>manager-rolebinding</code>, <code>proxy-role</code>, <code>proxy-rolebinding</code>, <code>metrics-reader</code>, <code>metrics-auth-role</code>, <code>metrics-auth-rolebinding</code></li>
+<li><strong>Why it matters</strong>: <code>kubebuilder init</code> scaffolds all operators with the same generic names. When ODH manages multiple operators (e.g., MLFlow + MCP Lifecycle), these names collide causing ownerReference conflicts at deploy time.</li>
+<li><strong>Remediation</strong>: Prefix resource names with the operator name in kustomize overlays (e.g., <code>mlflow-operator-controller-manager-metrics-monitor</code>).</li>
+</ul>
+<h3 id="gha_pull_request_target">GHA_PULL_REQUEST_TARGET<a class="headerlink" href="#gha_pull_request_target" title="Permanent link">¶</a></h3>
+<p>Detects GitHub Actions workflows using the <code>pull_request_target</code> trigger combined with <code>actions/checkout</code> of fork code (the "pwn-request" pattern).</p>
+<ul>
+<li><strong>Severity</strong>: critical</li>
+<li><strong>Why it matters</strong>: <code>pull_request_target</code> runs with write access to the base repo's secrets. Checking out fork code in that context allows arbitrary code execution with elevated privileges.</li>
+<li><strong>FP guards</strong>: only flags when BOTH conditions are met (trigger + fork checkout ref). Default checkout (no <code>ref:</code>) is safe.</li>
+</ul>
+<h3 id="gha_missing_permissions">GHA_MISSING_PERMISSIONS<a class="headerlink" href="#gha_missing_permissions" title="Permanent link">¶</a></h3>
+<p>Detects GitHub Actions workflows without a top-level <code>permissions:</code> block.</p>
+<ul>
+<li><strong>Severity</strong>: high</li>
+<li><strong>Why it matters</strong>: without explicit permissions, the GITHUB_TOKEN gets default permissions which may include write access to contents, packages, and more.</li>
+<li><strong>FP guards</strong>: skips reusable-only workflows (<code>on: workflow_call</code>). Accepts job-level permissions as sufficient.</li>
+</ul>
+<h3 id="gha_unpinned_action">GHA_UNPINNED_ACTION<a class="headerlink" href="#gha_unpinned_action" title="Permanent link">¶</a></h3>
+<p>Detects GitHub Actions referenced by mutable tag instead of SHA pin.</p>
+<ul>
+<li><strong>Severity</strong>: medium</li>
+<li><strong>Why it matters</strong>: a compromised action version can inject malicious code into the workflow. SHA pinning ensures reproducibility.</li>
+<li><strong>FP guards</strong>: skips local actions (<code>./</code>), Docker actions (<code>docker://</code>). Accepts both SHA-1 (40-char) and SHA-256 (64-char) pins.</li>
+</ul>
+<h3 id="other-extraction-phase-checks">Other extraction-phase checks<a class="headerlink" href="#other-extraction-phase-checks" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Severity</th>
+<th>What it detects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RBAC_CLUSTER_SCOPE_SENSITIVE</code></td>
+<td>high/medium</td>
+<td>ClusterRoles granting cluster-wide CRUD on secrets, CRBs, SCCs, nodes, pods/exec</td>
+</tr>
+<tr>
+<td><code>SECRET_IN_CONTAINER_ARGS</code></td>
+<td>medium</td>
+<td>Container args/command referencing secrets via <code>$(VAR)</code>, exposed in /proc/1/cmdline</td>
+</tr>
+<tr>
+<td><code>CRD_CONFUSED_DEPUTY</code></td>
+<td>high</td>
+<td>CRDs with user-settable image fields deployed with operator ServiceAccount</td>
+</tr>
+<tr>
+<td><code>MISSING_AUTH_REQUIREMENT</code></td>
+<td>high</td>
+<td>Optional auth components with mutual exclusion but no "at least one" rule</td>
+</tr>
+<tr>
+<td><code>ROUTE_NO_TLS</code></td>
+<td>medium</td>
+<td>OpenShift Routes with no <code>spec.tls</code> block</td>
+</tr>
+<tr>
+<td><code>HARDCODED_SECRET_VALUE</code></td>
+<td>high</td>
+<td>Known placeholder secrets (password, changeme, admin) in manifests</td>
+</tr>
+<tr>
+<td><code>PERMISSIVE_PASSWORD_ENV</code></td>
+<td>medium</td>
+<td>ALLOW_EMPTY_PASSWORD, DISABLE_AUTH flags set to true</td>
+</tr>
+<tr>
+<td><code>AUTH_BYPASS_ARG</code></td>
+<td>medium</td>
+<td>Flags like --skip-auth-regex, --insecure-skip-tls-verify in container args</td>
+</tr>
+<tr>
+<td><code>DEBUG_ENDPOINT_PPROF</code></td>
+<td>medium</td>
+<td>pprof debug endpoint imports/registration in Go source</td>
+</tr>
+<tr>
+<td><code>KUSTOMIZE_SECURITY_DELETION</code></td>
+<td>high</td>
+<td>Kustomize overlays deleting security resources (NetworkPolicies, RBAC)</td>
+</tr>
+<tr>
+<td><code>SECRET_IN_URL</code></td>
+<td>medium</td>
+<td>Credentials embedded in URLs (api_key=, token=, password=)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">¶</a></h2>
 <ol>
 <li><strong>Parse</strong>: Tree-sitter parses all Go source files into ASTs</li>
@@ -26320,7 +26563,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 22, 2026 15:53:16 UTC">April 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 17, 2026 16:24:59 UTC">July 17, 2026</span>
   </span>
 
     
@@ -26407,7 +26650,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.instant", "navigation.path", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
       
