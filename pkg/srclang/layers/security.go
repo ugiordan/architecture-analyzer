@@ -605,7 +605,7 @@ func flattenPorts(v interface{}) string {
 	return strings.Join(parts, ",")
 }
 
-const maxRelationships = 500
+const maxRelationships = 150
 
 func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer) {
 	selectedFuncs := make(map[string]bool)
