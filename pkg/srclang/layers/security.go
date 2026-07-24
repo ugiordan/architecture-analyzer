@@ -76,6 +76,8 @@ func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchi
 	s.addRelationships(cpg, layer)
 
 	sortFindings(layer)
+	capFunctions(layer)
+	capCodeBodies(layer)
 	return layer, warnings
 }
 
@@ -606,6 +608,134 @@ func flattenPorts(v interface{}) string {
 }
 
 const maxRelationships = 150
+const maxFunctions = 200
+const maxCodeBodies = 60
+const maxCodeBytesTotal = 200_000
+
+func capFunctions(layer *srclang.Layer) {
+	total := 0
+	for _, f := range layer.Files {
+		total += len(f.Functions)
+	}
+	if total <= maxFunctions {
+		return
+	}
+
+	type funcEntry struct {
+		fileIdx int
+		funcIdx int
+		score   int
+	}
+	var entries []funcEntry
+	for fi, f := range layer.Files {
+		for fni, fn := range f.Functions {
+			score := fn.Complexity
+			if fn.TaintRole != "" {
+				score += 20
+			}
+			if fn.Trust == "untrusted" {
+				score += 10
+			}
+			if fn.Code != "" {
+				score += 5
+			}
+			if score == 0 {
+				score = 1
+			}
+			entries = append(entries, funcEntry{fileIdx: fi, funcIdx: fni, score: score})
+		}
+	}
+	sort.Slice(entries, func(i, j int) bool {
+		return entries[i].score > entries[j].score
+	})
+
+	keep := make(map[string]bool)
+	for i, e := range entries {
+		if i >= maxFunctions {
+			break
+		}
+		key := fmt.Sprintf("%d:%d", e.fileIdx, e.funcIdx)
+		keep[key] = true
+	}
+
+	for fi := range layer.Files {
+		var kept []srclang.Function
+		for fni, fn := range layer.Files[fi].Functions {
+			key := fmt.Sprintf("%d:%d", fi, fni)
+			if keep[key] {
+				kept = append(kept, fn)
+			}
+		}
+		layer.Files[fi].Functions = kept
+	}
+
+	// Remove empty files
+	var files []srclang.File
+	for _, f := range layer.Files {
+		if len(f.Functions) > 0 {
+			files = append(files, f)
+		}
+	}
+	layer.Files = files
+}
+
+func capCodeBodies(layer *srclang.Layer) {
+	type funcRef struct {
+		fileIdx int
+		funcIdx int
+		score   int
+		codeLen int
+	}
+
+	var refs []funcRef
+	for fi, f := range layer.Files {
+		for fni, fn := range f.Functions {
+			if fn.Code == "" {
+				continue
+			}
+			score := fn.Complexity
+			if fn.TaintRole == "source" || fn.TaintRole == "sink" {
+				score += 20
+			}
+			if fn.Trust == "untrusted" {
+				score += 10
+			}
+			if score == 0 {
+				score = 1
+			}
+			refs = append(refs, funcRef{
+				fileIdx: fi,
+				funcIdx: fni,
+				score:   score,
+				codeLen: len(fn.Code),
+			})
+		}
+	}
+
+	if len(refs) <= maxCodeBodies {
+		totalBytes := 0
+		for _, r := range refs {
+			totalBytes += r.codeLen
+		}
+		if totalBytes <= maxCodeBytesTotal {
+			return
+		}
+	}
+
+	sort.Slice(refs, func(i, j int) bool {
+		return refs[i].score > refs[j].score
+	})
+
+	totalBytes := 0
+	for i, r := range refs {
+		if i >= maxCodeBodies || totalBytes+r.codeLen > maxCodeBytesTotal {
+			layer.Files[r.fileIdx].Functions[r.funcIdx].Code = ""
+			layer.Files[r.fileIdx].Functions[r.funcIdx].BodyLines = 0
+		} else {
+			totalBytes += r.codeLen
+		}
+	}
+}
 
 func (s *SecuritySelector) addRelationships(cpg *graph.CPG, layer *srclang.Layer) {
 	selectedFuncs := make(map[string]bool)
@@ -764,6 +894,8 @@ func extractReturns(node *graph.Node) []srclang.Return {
 	return []srclang.Return{{Type: node.ReturnType}}
 }
 
+const maxFindings = 200
+
 func sortFindings(layer *srclang.Layer) {
 	severityOrder := map[string]int{
 		"critical": 0, "high": 1, "medium": 2, "low": 3, "info": 4,
@@ -779,4 +911,7 @@ func sortFindings(layer *srclang.Layer) {
 		}
 		return si < sj
 	})
+	if len(layer.Findings) > maxFindings {
+		layer.Findings = layer.Findings[:maxFindings]
+	}
 }
