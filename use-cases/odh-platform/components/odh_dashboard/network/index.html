@@ -26236,19 +26236,20 @@
 
     odh_dashboard["odh-dashboard"]:::component
     odh_dashboard --&gt; svc_0["&amp;lt;MODULE_SERVICE_NAME&amp;gt;\nClusterIP: 0/TCP"]:::svc
-    odh_dashboard --&gt; svc_1["odh-dashboard\nClusterIP: 8443/TCP"]:::svc
-    odh_dashboard --&gt; svc_2["odh-dashboard-automl-ui\nClusterIP: 8643/TCP"]:::svc
-    odh_dashboard --&gt; svc_3["odh-dashboard-autorag-ui\nClusterIP: 8743/TCP"]:::svc
-    odh_dashboard --&gt; svc_4["odh-dashboard-eval-hub-ui\nClusterIP: 8543/TCP"]:::svc
-    odh_dashboard --&gt; svc_5["odh-dashboard-gen-ai-ui\nClusterIP: 8143/TCP"]:::svc
-    odh_dashboard --&gt; svc_6["odh-dashboard-maas-ui\nClusterIP: 8243/TCP"]:::svc
-    odh_dashboard --&gt; svc_7["odh-dashboard-mlflow-ui\nClusterIP: 8343/TCP"]:::svc
-    odh_dashboard --&gt; svc_8["odh-dashboard-model-registry-ui\nClusterIP: 8043/TCP"]:::svc
-    odh_dashboard --&gt; svc_9["rhaii-dashboard\nClusterIP: 4000/TCP"]:::svc
-    odh_dashboard --&gt; svc_10["workspaces-backend\nClusterIP: 4000/TCP"]:::svc
-    odh_dashboard --&gt; svc_11["workspaces-controller-metrics-service\nClusterIP: 8080/TCP"]:::svc
-    odh_dashboard --&gt; svc_12["workspaces-frontend\nClusterIP: 8080/TCP"]:::svc
-    odh_dashboard --&gt; svc_13["workspaces-webhook-service\nClusterIP: 443/TCP"]:::svc
+    odh_dashboard --&gt; svc_1["odh-dashboard\nClusterIP: 8443/TCP,8943/TCP"]:::svc
+    odh_dashboard --&gt; svc_2["odh-dashboard-agent-ops-ui\nClusterIP: 8843/TCP"]:::svc
+    odh_dashboard --&gt; svc_3["odh-dashboard-automl-ui\nClusterIP: 8643/TCP"]:::svc
+    odh_dashboard --&gt; svc_4["odh-dashboard-autorag-ui\nClusterIP: 8743/TCP"]:::svc
+    odh_dashboard --&gt; svc_5["odh-dashboard-eval-hub-ui\nClusterIP: 8543/TCP"]:::svc
+    odh_dashboard --&gt; svc_6["odh-dashboard-gen-ai-ui\nClusterIP: 8143/TCP"]:::svc
+    odh_dashboard --&gt; svc_7["odh-dashboard-maas-ui\nClusterIP: 8243/TCP"]:::svc
+    odh_dashboard --&gt; svc_8["odh-dashboard-mlflow-ui\nClusterIP: 8343/TCP"]:::svc
+    odh_dashboard --&gt; svc_9["odh-dashboard-model-registry-ui\nClusterIP: 8043/TCP"]:::svc
+    odh_dashboard --&gt; svc_10["rhaii-dashboard\nClusterIP: 4000/TCP"]:::svc
+    odh_dashboard --&gt; svc_11["workspaces-backend\nClusterIP: 4000/TCP"]:::svc
+    odh_dashboard --&gt; svc_12["workspaces-controller-metrics-service\nClusterIP: 8080/TCP"]:::svc
+    odh_dashboard --&gt; svc_13["workspaces-frontend\nClusterIP: 8080/TCP"]:::svc
+    odh_dashboard --&gt; svc_14["workspaces-webhook-service\nClusterIP: 443/TCP"]:::svc
     odh_dashboard -.-&gt; ext_s3[["s3\nobject-storage"]]:::ext</code></pre>
 <h3 id="services">Services<a class="headerlink" href="#services" title="Permanent link">¶</a></h3>
 <table>
@@ -26265,85 +26266,91 @@
 <td>&lt;MODULE_SERVICE_NAME&gt;</td>
 <td>ClusterIP</td>
 <td>0/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/templates/service.yaml"><code>manifests/modular-architecture/templates/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/sidecar/templates/service.yaml"><code>manifests/sidecar/templates/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard</td>
 <td>ClusterIP</td>
-<td>8443/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/core-bases/base/service.yaml"><code>manifests/core-bases/base/service.yaml</code></a></td>
+<td>8443/TCP, 8943/TCP</td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/base/service.yaml"><code>manifests/base/service.yaml</code></a></td>
+</tr>
+<tr>
+<td>odh-dashboard-agent-ops-ui</td>
+<td>ClusterIP</td>
+<td>8843/TCP</td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/agent-ops/service.yaml"><code>manifests/modules/agent-ops/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-automl-ui</td>
 <td>ClusterIP</td>
 <td>8643/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/automl/service.yaml"><code>manifests/modular-architecture/modules/automl/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/automl/service.yaml"><code>manifests/modules/automl/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-autorag-ui</td>
 <td>ClusterIP</td>
 <td>8743/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/autorag/service.yaml"><code>manifests/modular-architecture/modules/autorag/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/autorag/service.yaml"><code>manifests/modules/autorag/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-eval-hub-ui</td>
 <td>ClusterIP</td>
 <td>8543/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/eval-hub/service.yaml"><code>manifests/modular-architecture/modules/eval-hub/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/eval-hub/service.yaml"><code>manifests/modules/eval-hub/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-gen-ai-ui</td>
 <td>ClusterIP</td>
 <td>8143/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/gen-ai/service.yaml"><code>manifests/modular-architecture/modules/gen-ai/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/gen-ai/service.yaml"><code>manifests/modules/gen-ai/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-maas-ui</td>
 <td>ClusterIP</td>
 <td>8243/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/maas/service.yaml"><code>manifests/modular-architecture/modules/maas/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/maas/service.yaml"><code>manifests/modules/maas/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-mlflow-ui</td>
 <td>ClusterIP</td>
 <td>8343/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/mlflow/service.yaml"><code>manifests/modular-architecture/modules/mlflow/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/mlflow/service.yaml"><code>manifests/modules/mlflow/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-model-registry-ui</td>
 <td>ClusterIP</td>
 <td>8043/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/model-registry/service.yaml"><code>manifests/modular-architecture/modules/model-registry/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/model-registry/service.yaml"><code>manifests/modules/model-registry/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>rhaii-dashboard</td>
 <td>ClusterIP</td>
 <td>4000/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/distributions/core-bff/manifests/base/service.yaml"><code>distributions/core-bff/manifests/base/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/distributions/core-bff/manifests/base/service.yaml"><code>distributions/core-bff/manifests/base/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-backend</td>
 <td>ClusterIP</td>
 <td>4000/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/backend/manifests/kustomize/base/service.yaml"><code>packages/notebooks/upstream/workspaces/backend/manifests/kustomize/base/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/backend/manifests/kustomize/base/service.yaml"><code>packages/notebooks/upstream/workspaces/backend/manifests/kustomize/base/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-controller-metrics-service</td>
 <td>ClusterIP</td>
 <td>8080/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/prometheus/service.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/prometheus/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/prometheus/service.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/prometheus/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-frontend</td>
 <td>ClusterIP</td>
 <td>8080/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/base/service.yaml"><code>packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/base/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/base/service.yaml"><code>packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/base/service.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-webhook-service</td>
 <td>ClusterIP</td>
 <td>443/TCP</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/webhook/service.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/webhook/service.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/webhook/service.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/webhook/service.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -26366,7 +26373,7 @@
 <td></td>
 <td></td>
 <td>no</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/developing/manifests/istio-gateway/gateway.yaml"><code>packages/notebooks/upstream/developing/manifests/istio-gateway/gateway.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/developing/manifests/istio-gateway/gateway.yaml"><code>packages/notebooks/upstream/developing/manifests/istio-gateway/gateway.yaml</code></a></td>
 </tr>
 <tr>
 <td>Gateway</td>
@@ -26374,7 +26381,7 @@
 <td></td>
 <td></td>
 <td>no</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/testing/manifests/istio-gateway/gateway.yaml"><code>packages/notebooks/upstream/testing/manifests/istio-gateway/gateway.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/testing/manifests/istio-gateway/gateway.yaml"><code>packages/notebooks/upstream/testing/manifests/istio-gateway/gateway.yaml</code></a></td>
 </tr>
 <tr>
 <td>HTTPRoute</td>
@@ -26382,7 +26389,7 @@
 <td></td>
 <td>/</td>
 <td>no</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/core-bases/base/httproute.yaml"><code>manifests/core-bases/base/httproute.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/base/httproute.yaml"><code>manifests/base/httproute.yaml</code></a></td>
 </tr>
 <tr>
 <td>Route</td>
@@ -26390,7 +26397,7 @@
 <td></td>
 <td></td>
 <td>no</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/rbac/odh-dashboard"><code>rbac/odh-dashboard</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/rbac/odh-dashboard"><code>rbac/odh-dashboard</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -26405,79 +26412,79 @@
 </thead>
 <tbody>
 <tr>
-<td><module_name>-allow-ports</module_name></td>
+<td>agent-ops-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/templates/networkpolicy.yaml"><code>manifests/modular-architecture/templates/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/agent-ops/networkpolicy.yaml"><code>manifests/modules/agent-ops/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>automl-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/automl/networkpolicy.yaml"><code>manifests/modular-architecture/modules/automl/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/automl/networkpolicy.yaml"><code>manifests/modules/automl/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>autorag-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/autorag/networkpolicy.yaml"><code>manifests/modular-architecture/modules/autorag/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/autorag/networkpolicy.yaml"><code>manifests/modules/autorag/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>dashboard-perses-access</td>
 <td>Ingress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/observability/rhoai/network-policy.yaml"><code>manifests/observability/rhoai/network-policy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/observability/odh/network-policy.yaml"><code>manifests/observability/odh/network-policy.yaml</code></a></td>
 </tr>
 <tr>
 <td>dashboard-perses-access</td>
 <td>Ingress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/observability/odh/network-policy.yaml"><code>manifests/observability/odh/network-policy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/observability/rhoai/network-policy.yaml"><code>manifests/observability/rhoai/network-policy.yaml</code></a></td>
 </tr>
 <tr>
 <td>default-deny-ingress</td>
 <td>Ingress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/namespace/network-policy-default-deny.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/namespace/network-policy-default-deny.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/namespace/network-policy-default-deny.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/base/namespace/network-policy-default-deny.yaml</code></a></td>
 </tr>
 <tr>
 <td>eval-hub-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/eval-hub/networkpolicy.yaml"><code>manifests/modular-architecture/modules/eval-hub/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/eval-hub/networkpolicy.yaml"><code>manifests/modules/eval-hub/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>gen-ai-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/gen-ai/networkpolicy.yaml"><code>manifests/modular-architecture/modules/gen-ai/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/gen-ai/networkpolicy.yaml"><code>manifests/modules/gen-ai/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>maas-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/maas/networkpolicy.yaml"><code>manifests/modular-architecture/modules/maas/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/maas/networkpolicy.yaml"><code>manifests/modules/maas/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>mlflow-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/mlflow/networkpolicy.yaml"><code>manifests/modular-architecture/modules/mlflow/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/mlflow/networkpolicy.yaml"><code>manifests/modules/mlflow/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>model-registry-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/modules/model-registry/networkpolicy.yaml"><code>manifests/modular-architecture/modules/model-registry/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/modules/model-registry/networkpolicy.yaml"><code>manifests/modules/model-registry/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>odh-dashboard-allow-ports</td>
 <td>Ingress, Egress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/manifests/modular-architecture/networkpolicy.yaml"><code>manifests/modular-architecture/networkpolicy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/manifests/sidecar/networkpolicy.yaml"><code>manifests/sidecar/networkpolicy.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-backend</td>
 <td>Ingress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/backend/manifests/kustomize/components/istio/network-policy.yaml"><code>packages/notebooks/upstream/workspaces/backend/manifests/kustomize/components/istio/network-policy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/backend/manifests/kustomize/components/istio/network-policy.yaml"><code>packages/notebooks/upstream/workspaces/backend/manifests/kustomize/components/istio/network-policy.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-controller</td>
 <td>Ingress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/istio/network-policy.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/istio/network-policy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/istio/network-policy.yaml"><code>packages/notebooks/upstream/workspaces/controller/manifests/kustomize/components/istio/network-policy.yaml</code></a></td>
 </tr>
 <tr>
 <td>workspaces-frontend</td>
 <td>Ingress</td>
-<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/39dac39f40b6fab3dd1a2a04a6b07689d7b47826/packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/components/istio/network-policy.yaml"><code>packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/components/istio/network-policy.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/odh-dashboard/blob/e10d39baed6492ee6ddc389ae325ac35ccc31fee/packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/components/istio/network-policy.yaml"><code>packages/notebooks/upstream/workspaces/frontend/manifests/kustomize/components/istio/network-policy.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -26489,8 +26496,8 @@
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
 
     odh_dashboard["odh-dashboard\nPods"]:::pod
-    np_0__MODULE_NAME__allow_ports{{"&amp;lt;MODULE_NAME&amp;gt;-allow-ports\nIngress, Egress"}}:::policy
-    np_0__MODULE_NAME__allow_ports --&gt; odh_dashboard
+    np_0_agent_ops_allow_ports{{"agent-ops-allow-ports\nIngress, Egress"}}:::policy
+    np_0_agent_ops_allow_ports --&gt; odh_dashboard
     np_1_automl_allow_ports{{"automl-allow-ports\nIngress, Egress"}}:::policy
     np_1_automl_allow_ports --&gt; odh_dashboard
     np_2_autorag_allow_ports{{"autorag-allow-ports\nIngress, Egress"}}:::policy
@@ -26541,7 +26548,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 24, 2026 03:27:50 UTC">July 24, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 25, 2026 03:27:24 UTC">July 25, 2026</span>
   </span>
 
     
