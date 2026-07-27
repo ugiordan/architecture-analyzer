@@ -14,7 +14,25 @@ type Head struct {
 	Layer       string
 	Languages   []Language
 	Platform    *Platform
+	Index       *Index
+	ParentIndex string
 	Diagnostics []Warning
+}
+
+type Index struct {
+	Shards []Shard
+}
+
+type Shard struct {
+	Type  string // "findings" or "functions"
+	Path  string // relative path within .srclg.d/
+	File  string // source file path (for function shards)
+	Count int
+}
+
+type Bundle struct {
+	IndexDoc *Document
+	Shards   map[string]*Document // path -> shard document
 }
 
 type Platform struct {

@@ -57,6 +57,12 @@ func writeHead(b *xmlBuilder, h *Head) {
 	if h.Platform != nil {
 		writePlatform(b, h.Platform)
 	}
+	if h.Index != nil {
+		writeHeadIndex(b, h.Index)
+	}
+	if h.ParentIndex != "" {
+		b.linef(`<parent index="%s"/>`, escAttr(h.ParentIndex))
+	}
 	if len(h.Diagnostics) > 0 {
 		b.open("diagnostics")
 		for _, d := range h.Diagnostics {
@@ -114,6 +120,78 @@ func writePlatform(b *xmlBuilder, p *Platform) {
 		b.close("outbound")
 	}
 	b.close("platform")
+}
+
+func writeHeadIndex(b *xmlBuilder, idx *Index) {
+	b.open("index")
+	for _, s := range idx.Shards {
+		a := fmt.Sprintf(`type="%s" path="%s"`, escAttr(s.Type), escAttr(s.Path))
+		if s.File != "" {
+			a += fmt.Sprintf(` file="%s"`, escAttr(s.File))
+		}
+		if s.Count > 0 {
+			a += fmt.Sprintf(` count="%d"`, s.Count)
+		}
+		b.linef("<shard %s/>", a)
+	}
+	b.close("index")
+}
+
+// WriteIndexDocument writes a compact index document with finding titles
+// (no descriptions/evidence) and function signatures (no code bodies).
+func WriteIndexDocument(w io.Writer, doc *Document) error {
+	compact := compactCopy(doc)
+	return WriteDocument(w, compact)
+}
+
+func compactCopy(doc *Document) *Document {
+	c := &Document{
+		Version: doc.Version,
+		Head:    doc.Head,
+		Body: Body{
+			Layer: Layer{
+				Name:      doc.Body.Layer.Name,
+				Summary:   doc.Body.Layer.Summary,
+				Resources: doc.Body.Layer.Resources,
+				Configs:   doc.Body.Layer.Configs,
+				Imports:   doc.Body.Layer.Imports,
+			},
+		},
+	}
+	for _, f := range doc.Body.Layer.Findings {
+		c.Body.Layer.Findings = append(c.Body.Layer.Findings, Finding{
+			ID:         f.ID,
+			Domain:     f.Domain,
+			Severity:   f.Severity,
+			Rule:       f.Rule,
+			SourceFile: f.SourceFile,
+			SourceLine: f.SourceLine,
+			Title:      f.Title,
+		})
+	}
+	for _, file := range doc.Body.Layer.Files {
+		cf := File{
+			Path:     file.Path,
+			Language: file.Language,
+			Lines:    file.Lines,
+			Summary:  file.Summary,
+		}
+		for _, fn := range file.Functions {
+			cf.Functions = append(cf.Functions, Function{
+				Name:         fn.Name,
+				Kind:         fn.Kind,
+				SourceLine:   fn.SourceLine,
+				ReceiverType: fn.ReceiverType,
+				Params:       fn.Params,
+				Returns:      fn.Returns,
+				Complexity:   fn.Complexity,
+				Trust:        fn.Trust,
+				TaintRole:    fn.TaintRole,
+			})
+		}
+		c.Body.Layer.Files = append(c.Body.Layer.Files, cf)
+	}
+	return c
 }
 
 func writeBody(b *xmlBuilder, body *Body) {

@@ -3,6 +3,7 @@ package compile
 import (
 	"fmt"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/extractor"
@@ -80,6 +81,113 @@ func Compile(opts Options) (*srclang.Document, error) {
 	}
 
 	return doc, nil
+}
+
+const BundleThreshold = 500_000
+
+// SplitBundle splits a large Document into an index document + shard documents.
+// Returns nil if the document is small enough for single-file output.
+func SplitBundle(doc *srclang.Document) *srclang.Bundle {
+	layer := &doc.Body.Layer
+
+	var shards []srclang.Shard
+	shardDocs := make(map[string]*srclang.Document)
+
+	// Shard 1: findings
+	if len(layer.Findings) > 0 {
+		findingsPath := "findings.srclg"
+		shards = append(shards, srclang.Shard{
+			Type:  "findings",
+			Path:  findingsPath,
+			Count: len(layer.Findings),
+		})
+		shardDocs[findingsPath] = &srclang.Document{
+			Version: doc.Version,
+			Head: srclang.Head{
+				Component:   doc.Head.Component,
+				Layer:       doc.Head.Layer,
+				ParentIndex: "index.srclg",
+			},
+			Body: srclang.Body{
+				Layer: srclang.Layer{
+					Name:     layer.Name,
+					Findings: layer.Findings,
+				},
+			},
+		}
+	}
+
+	// Shard per source file (functions with code)
+	for _, file := range layer.Files {
+		hasCode := false
+		for _, fn := range file.Functions {
+			if fn.Code != "" {
+				hasCode = true
+				break
+			}
+		}
+		if !hasCode {
+			continue
+		}
+
+		safeName := sanitizeFilePath(file.Path)
+		shardPath := "files/" + safeName + ".srclg"
+
+		// Collect relationships touching this file's functions
+		fileFuncs := make(map[string]bool)
+		for _, fn := range file.Functions {
+			fileFuncs[fn.Name] = true
+		}
+		var fileRels []srclang.Relationship
+		for _, rel := range layer.Relationships {
+			if (rel.From.File == file.Path && fileFuncs[rel.From.Function]) ||
+				(rel.To.File == file.Path && fileFuncs[rel.To.Function]) {
+				fileRels = append(fileRels, rel)
+			}
+		}
+
+		shards = append(shards, srclang.Shard{
+			Type:  "functions",
+			Path:  shardPath,
+			File:  file.Path,
+			Count: len(file.Functions),
+		})
+		shardDocs[shardPath] = &srclang.Document{
+			Version: doc.Version,
+			Head: srclang.Head{
+				Component:   doc.Head.Component,
+				Layer:       doc.Head.Layer,
+				ParentIndex: "index.srclg",
+			},
+			Body: srclang.Body{
+				Layer: srclang.Layer{
+					Name:          layer.Name,
+					Files:         []srclang.File{file},
+					Relationships: fileRels,
+				},
+			},
+		}
+	}
+
+	// Build index document (compact: no code, no finding descriptions)
+	indexDoc := &srclang.Document{
+		Version: doc.Version,
+		Head:    doc.Head,
+		Body:    doc.Body,
+	}
+	indexDoc.Head.Index = &srclang.Index{Shards: shards}
+
+	return &srclang.Bundle{
+		IndexDoc: indexDoc,
+		Shards:   shardDocs,
+	}
+}
+
+func sanitizeFilePath(path string) string {
+	s := strings.ReplaceAll(path, "/", "_")
+	s = strings.ReplaceAll(s, "\\", "_")
+	s = strings.ReplaceAll(s, "..", "_")
+	return s
 }
 
 func detectLanguages(arch *extractor.ComponentArchitecture) []srclang.Language {

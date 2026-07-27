@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/ugiordan/architecture-analyzer/pkg/extractor"
 	"github.com/ugiordan/architecture-analyzer/pkg/srclang"
@@ -25,13 +27,11 @@ func cmdContextBundle(args []string) error {
 	}
 	repoPath := fs.Arg(0)
 
-	// Extract architecture data
 	arch, err := extractor.ExtractAll(repoPath, nil)
 	if err != nil {
 		return fmt.Errorf("extraction failed: %w", err)
 	}
 
-	// Build CPG for function extraction (needed by SecuritySelector)
 	cpg, err := buildCPG(repoPath)
 	if err != nil {
 		return fmt.Errorf("CPG build failed: %w", err)
@@ -46,7 +46,6 @@ func cmdContextBundle(args []string) error {
 		PlatformFile:        *platformFile,
 	}
 
-	// Optionally run security scan for findings and taint analysis
 	if *withScan {
 		archData := prepareArchData(repoPath, cpg, "")
 		findings, scanErr := runSecurityScan(cpg, *domainList, archData)
@@ -56,7 +55,6 @@ func cmdContextBundle(args []string) error {
 		opts.Findings = findings
 	}
 
-	// Ingest external SARIF findings (kube-chainsaw, tekton-guard, helm-guard, etc.)
 	if *importSARIF != "" {
 		externalFindings, sarifErr := ingestSARIFFiles(cpg, *importSARIF)
 		if sarifErr != nil {
@@ -70,20 +68,66 @@ func cmdContextBundle(args []string) error {
 		return fmt.Errorf("compile failed: %w", err)
 	}
 
-	f, err := os.Create(*output)
+	// Check if the document needs splitting
+	var buf bytes.Buffer
+	if err := srclang.WriteDocument(&buf, doc); err != nil {
+		return fmt.Errorf("serializing document: %w", err)
+	}
+
+	if buf.Len() <= compile.BundleThreshold {
+		// Small enough for single file
+		if err := os.WriteFile(*output, buf.Bytes(), 0o644); err != nil {
+			return fmt.Errorf("writing output: %w", err)
+		}
+		fmt.Printf("SrcLang document written to %s (%s layer, %dKB)\n", *output, *layer, buf.Len()/1024)
+		return nil
+	}
+
+	// Split into directory bundle
+	bundle := compile.SplitBundle(doc)
+	bundleDir := *output + ".d"
+	if err := os.MkdirAll(filepath.Join(bundleDir, "files"), 0o755); err != nil {
+		return fmt.Errorf("creating bundle directory: %w", err)
+	}
+
+	// Write index (compact: no code bodies, no finding descriptions)
+	indexPath := filepath.Join(bundleDir, "index.srclg")
+	indexFile, err := os.Create(indexPath)
 	if err != nil {
-		return fmt.Errorf("creating output file: %w", err)
+		return fmt.Errorf("creating index: %w", err)
 	}
-	defer f.Close()
+	if err := srclang.WriteIndexDocument(indexFile, bundle.IndexDoc); err != nil {
+		indexFile.Close()
+		return fmt.Errorf("writing index: %w", err)
+	}
+	indexFile.Close()
+	indexInfo, _ := os.Stat(indexPath)
 
-	if err := srclang.WriteDocument(f, doc); err != nil {
-		return fmt.Errorf("writing srclang document: %w", err)
+	// Write shards
+	for shardPath, shardDoc := range bundle.Shards {
+		fullPath := filepath.Join(bundleDir, shardPath)
+		if dir := filepath.Dir(fullPath); dir != bundleDir {
+			os.MkdirAll(dir, 0o755)
+		}
+		sf, err := os.Create(fullPath)
+		if err != nil {
+			return fmt.Errorf("creating shard %s: %w", shardPath, err)
+		}
+		if err := srclang.WriteDocument(sf, shardDoc); err != nil {
+			sf.Close()
+			return fmt.Errorf("writing shard %s: %w", shardPath, err)
+		}
+		sf.Close()
 	}
 
-	if err := f.Close(); err != nil {
-		return fmt.Errorf("closing output file: %w", err)
-	}
+	fmt.Printf("SrcLang bundle written to %s/ (%s layer, index %dKB, %d shards)\n",
+		bundleDir, *layer, indexInfo.Size()/1024, len(bundle.Shards))
 
-	fmt.Printf("SrcLang document written to %s (%s layer)\n", *output, *layer)
+	// Also write single-file version (with budget caps applied) for backward compat
+	if err := os.WriteFile(*output, buf.Bytes(), 0o644); err != nil {
+		return fmt.Errorf("writing single-file output: %w", err)
+	}
+	fmt.Printf("SrcLang single-file also written to %s (%dKB, capped)\n", *output, buf.Len()/1024)
+
 	return nil
 }
