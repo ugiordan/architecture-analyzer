@@ -14,7 +14,7 @@ import (
 
 func cmdContextBundle(args []string) error {
 	fs := flag.NewFlagSet("context-bundle", flag.ExitOnError)
-	layer := fs.String("layer", "security", "Domain layer (security, architecture, testing)")
+	layer := fs.String("layer", "security", "Domain layer (security, architecture, testing, upgrade)")
 	output := fs.String("output", "context.srclg", "Output .srclg file")
 	platformFile := fs.String("platform", "", "Path to platform-architecture.json for platform context")
 	withScan := fs.Bool("with-scan", true, "Run CPG scan for findings and taint analysis")

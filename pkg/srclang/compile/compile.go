@@ -41,8 +41,11 @@ func Compile(opts Options) (*srclang.Document, error) {
 	case "testing":
 		sel := layers.NewTestingSelector(opts.RepoPath)
 		layer, warnings = sel.Select(opts.CPG, opts.Arch, opts.Findings, nil)
+	case "upgrade":
+		sel := layers.NewUpgradeSelector(opts.RepoPath)
+		layer, warnings = sel.Select(opts.CPG, opts.Arch, opts.Findings, nil)
 	default:
-		return nil, fmt.Errorf("unsupported layer %q (supports: security, architecture, testing)", opts.Layer)
+		return nil, fmt.Errorf("unsupported layer %q (supports: security, architecture, testing, upgrade)", opts.Layer)
 	}
 
 	doc := &srclang.Document{
