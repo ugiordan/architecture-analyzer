@@ -186,7 +186,7 @@ Code graph commands:
   scan <repo-path>                     Build code graph and run security queries
                                        [--domains d1,d2] [--with-arch] [--import-sarif files]
   context-bundle <repo-path>           Generate SrcLang context bundle for LLM consumption
-                                       [--layer security|architecture|testing|upgrade|netpolicy] [--output context.srclg]
+                                       [--layer security|...|codegen] [--output context.srclg]
                                        [--with-scan] [--domains d1,d2]
   quick-index <repo-path>               Fast function/call index (tree-sitter only, no taint/domains)
                                        [--output file]

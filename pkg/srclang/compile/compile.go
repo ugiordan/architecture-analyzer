@@ -47,8 +47,11 @@ func Compile(opts Options) (*srclang.Document, error) {
 	case "netpolicy":
 		sel := layers.NewNetpolicySelector(opts.RepoPath)
 		layer, warnings = sel.Select(opts.CPG, opts.Arch, opts.Findings, nil)
+	case "codegen":
+		sel := layers.NewCodegenSelector(opts.RepoPath)
+		layer, warnings = sel.Select(opts.CPG, opts.Arch, opts.Findings, opts.SecurityAnnotations)
 	default:
-		return nil, fmt.Errorf("unsupported layer %q (supports: security, architecture, testing, upgrade, netpolicy)", opts.Layer)
+		return nil, fmt.Errorf("unsupported layer %q (supports: security, architecture, testing, upgrade, netpolicy, codegen)", opts.Layer)
 	}
 
 	doc := &srclang.Document{
@@ -94,8 +97,8 @@ func Compile(opts Options) (*srclang.Document, error) {
 
 const BundleThreshold = 500_000
 
-// SplitBundle splits a large Document into an index document + shard documents.
-// Returns nil if the document is small enough for single-file output.
+// SplitBundle splits a Document into an index document + shard documents.
+// The caller should check document size against BundleThreshold before calling.
 func SplitBundle(doc *srclang.Document) *srclang.Bundle {
 	layer := &doc.Body.Layer
 
