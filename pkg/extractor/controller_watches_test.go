@@ -3,7 +3,7 @@ package extractor
 import "testing"
 
 func TestExtractResourceOps(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -45,7 +45,7 @@ func TestExtractResourceOps_FallbackMode(t *testing.T) {
 }
 
 func TestExtractResourceOps_VerbDetection(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}

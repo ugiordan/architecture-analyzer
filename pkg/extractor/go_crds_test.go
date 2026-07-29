@@ -5,7 +5,7 @@ import (
 )
 
 func TestExtractCRDsFromGo(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -41,7 +41,7 @@ func TestExtractCRDsFromGo(t *testing.T) {
 }
 
 func TestExtractCRDsFromGo_SkipsList(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -61,7 +61,7 @@ func TestExtractCRDsFromGo_NilPackages(t *testing.T) {
 }
 
 func TestExtractCRDsFromGo_StorageVersion(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -93,7 +93,7 @@ func TestExtractCRDsFromGo_FallbackMode(t *testing.T) {
 }
 
 func TestExtractCRDsFromGo_FieldCount(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -111,7 +111,7 @@ func TestExtractCRDsFromGo_FieldCount(t *testing.T) {
 }
 
 func TestExtractCRDsFromGo_VersionFromPath(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}

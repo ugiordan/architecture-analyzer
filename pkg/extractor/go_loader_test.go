@@ -44,7 +44,7 @@ func TestLoadGoPackages_BrokenGoMod(t *testing.T) {
 }
 
 func TestLoadGoPackages_FindStructsWithMarker(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("expected non-nil GoPackageSet")
 	}
@@ -85,7 +85,7 @@ func TestLoadGoPackages_FallbackMode(t *testing.T) {
 }
 
 func TestLoadGoPackages_ResolveType(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("expected non-nil GoPackageSet")
 	}
@@ -99,7 +99,7 @@ func TestLoadGoPackages_ResolveType(t *testing.T) {
 }
 
 func TestLoadGoPackages_FindMethodsOnType(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("expected non-nil GoPackageSet")
 	}
@@ -122,7 +122,7 @@ func TestLoadGoPackages_FindMethodsOnType(t *testing.T) {
 }
 
 func TestLoadGoPackages_FindMethodsOnType_NonExistent(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("expected non-nil GoPackageSet")
 	}

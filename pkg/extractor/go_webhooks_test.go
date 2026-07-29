@@ -7,7 +7,7 @@ import (
 )
 
 func TestExtractWebhookBehavior_Mutations(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -36,7 +36,7 @@ func TestExtractWebhookBehavior_Mutations(t *testing.T) {
 }
 
 func TestExtractWebhookBehavior_Validations(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -64,7 +64,7 @@ func TestExtractWebhookBehavior_Validations(t *testing.T) {
 }
 
 func TestExtractWebhookBehavior_TargetType(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -157,7 +157,7 @@ func TestExtractWebhookBehavior_FallbackMode(t *testing.T) {
 
 func TestExtractWebhookBehavior_MethodFollowing(t *testing.T) {
 	// The fixture's Default() calls r.setGPUDefaults(w) which sets w.Spec.GPU
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
@@ -177,7 +177,7 @@ func TestExtractWebhookBehavior_MethodFollowing(t *testing.T) {
 }
 
 func TestExtractWebhookBehavior_MutationCondition(t *testing.T) {
-	pkgs := loadGoPackages(fixtureDir())
+	pkgs := sharedFixturePackages()
 	if pkgs == nil {
 		t.Fatal("failed to load fixture packages")
 	}
