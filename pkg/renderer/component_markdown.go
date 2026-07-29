@@ -217,6 +217,7 @@ func RenderComponentMarkdown(data map[string]interface{}) string {
 				escapeMdCell(strings.Join(images, ", ")),
 			))
 		}
+		renderContainerDetails(b, items)
 	})
 
 	// RBAC section (composite)
@@ -935,6 +936,91 @@ func renderPlatformDetectionMarkdownSection(b *strings.Builder, data map[string]
 		))
 	}
 	b.WriteString("\n")
+}
+
+// renderContainerDetails renders per-container args, command, ports, and
+// security-relevant env vars below the deployment summary table.
+func renderContainerDetails(b *strings.Builder, deployments []map[string]interface{}) {
+	var hasDetails bool
+	for _, dep := range deployments {
+		containers := getSlice(dep, "containers")
+		for _, c := range containers {
+			args := toStringSliceHelper(c["args"])
+			cmd := toStringSliceHelper(c["command"])
+			ports := getSlice(c, "ports")
+			envVars, _ := c["env_vars"].(map[string]interface{})
+			if len(args) > 0 || len(cmd) > 0 || len(ports) > 0 || len(envVars) > 0 {
+				hasDetails = true
+				break
+			}
+		}
+		if hasDetails {
+			break
+		}
+	}
+	if !hasDetails {
+		return
+	}
+
+	b.WriteString("\n#### Container Details\n\n")
+	for _, dep := range deployments {
+		depName := getStr(dep, "name", "")
+		containers := getSlice(dep, "containers")
+		for _, c := range containers {
+			cName := getStr(c, "name", "")
+			args := toStringSliceHelper(c["args"])
+			cmd := toStringSliceHelper(c["command"])
+			ports := getSlice(c, "ports")
+			envVars, _ := c["env_vars"].(map[string]interface{})
+
+			if len(args) == 0 && len(cmd) == 0 && len(ports) == 0 && len(envVars) == 0 {
+				continue
+			}
+
+			b.WriteString(fmt.Sprintf("**%s / %s**\n\n", escapeMdCell(depName), escapeMdCell(cName)))
+			if len(cmd) > 0 {
+				b.WriteString(fmt.Sprintf("- Command: `%s`\n", strings.Join(cmd, " ")))
+			}
+			if len(args) > 0 {
+				b.WriteString("- Args: `")
+				b.WriteString(strings.Join(args, " "))
+				b.WriteString("`\n")
+			}
+			if len(ports) > 0 {
+				b.WriteString(fmt.Sprintf("- Ports: %s\n", formatPorts(ports)))
+			}
+			if len(envVars) > 0 {
+				b.WriteString("- Env: ")
+				parts := make([]string, 0, len(envVars))
+				for k, v := range envVars {
+					parts = append(parts, fmt.Sprintf("`%s=%v`", k, v))
+				}
+				b.WriteString(strings.Join(parts, ", "))
+				b.WriteString("\n")
+			}
+			b.WriteString("\n")
+		}
+	}
+}
+
+func toStringSliceHelper(v interface{}) []string {
+	if v == nil {
+		return nil
+	}
+	items, ok := v.([]interface{})
+	if !ok {
+		return nil
+	}
+	result := make([]string, 0, len(items))
+	for _, item := range items {
+		if s, ok := item.(string); ok {
+			result = append(result, s)
+		}
+	}
+	if len(result) == 0 {
+		return nil
+	}
+	return result
 }
 
 // formatPorts formats port entries for display.
