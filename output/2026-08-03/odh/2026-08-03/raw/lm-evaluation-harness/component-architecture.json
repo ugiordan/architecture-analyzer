@@ -1,0 +1,697 @@
+{
+  "component": "lm-evaluation-harness",
+  "repo": "opendatahub-io/lm-evaluation-harness",
+  "commit_sha": "7dddadbb1a94b5af6d0a90227a62c824162c9826",
+  "extracted_at": "2026-08-03T03:34:21Z",
+  "analyzer_version": "dev",
+  "schema_version": "2",
+  "rbac": {},
+  "dependencies": {
+    "python_packages": [
+      {
+        "name": "datasets",
+        "version": "\u003e=2.16.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "dill",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "evaluate",
+        "version": "\u003e=0.4.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jinja2",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jsonlines",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "more-itertools",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "numpy",
+        "category": "numerical",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pytablewriter",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "rouge-score",
+        "version": "\u003e=0.0.4",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "sacrebleu",
+        "version": "\u003e=1.5.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "scikit-learn",
+        "version": "\u003e=0.24.1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "sqlitedict",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "typing-extensions",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "word2number",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "zstandard",
+        "source": "pyproject.toml",
+        "required": true
+      }
+    ]
+  },
+  "helm": {},
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "anthropic",
+      "target": "",
+      "source": "lm_eval/models/anthropic_llms.py:179"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "lm_eval/tasks/ruler/essays.py:86",
+      "function": "get_essays"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "lm_eval/models/openai_completions.py:379"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "lm_eval/tasks/pisa/utils.py:313",
+      "function": "judge_mcq"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/_cli/run.py:390",
+      "function": "_execute"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/_cli/run.py:391",
+      "function": "_execute"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/_cli/run.py:394",
+      "function": "_execute"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/models/api_models.py:465"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/models/gguf.py:62"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/models/textsynth.py:45",
+      "function": "completion"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/tasks/bbh/_generate_configs.py:38"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/tasks/belebele/_generate_configs.py:42",
+      "function": "query"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/tasks/eus_exams/configs.py:9"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/tasks/realtoxicityprompts/metric.py:46"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/tasks/ruler/qa_utils.py:38",
+      "function": "download_json"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/utils.py:735"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "lm_eval/utils.py:871"
+    },
+    {
+      "type": "api",
+      "service": "wandb",
+      "target": "",
+      "source": "lm_eval/loggers/wandb_logger.py:26",
+      "function": "__init__"
+    },
+    {
+      "type": "api",
+      "service": "wandb",
+      "target": "",
+      "source": "lm_eval/loggers/wandb_logger.py:58",
+      "function": "__init__"
+    }
+  ],
+  "python_k8s_calls": [
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "iterator",
+      "source": "lm_eval/api/task.py:592"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "message",
+      "source": "lm_eval/models/api_models.py:468"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "model_config",
+      "source": "lm_eval/models/vllm_causallms.py:198"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "project",
+      "source": "scripts/zeno_visualize.py:143"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "repo",
+      "source": "lm_eval/loggers/evaluation_tracker.py:289"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "task",
+      "source": "lm_eval/models/api_models.py:600"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "chars",
+      "source": "lm_eval/decontamination/janitor.py:123"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "action",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:531"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "action_or_none",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:152"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all_groups",
+      "source": "lm_eval/api/group.py:128"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all_json_task_names",
+      "source": "lm_eval/tasks/bigbench/push_bigbench_dataset.py:17"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all_tasks",
+      "source": "lm_eval/api/group.py:11"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "answer_choices_list",
+      "source": "lm_eval/api/task.py:1304"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "applicable_actions",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:186"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "arguments",
+      "source": "lm_eval/tasks/unitxt/task.py:142"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "avg_score",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:792"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "batched",
+      "source": "lm_eval/models/api_models.py:644"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "batched_requests",
+      "source": "lm_eval/models/api_models.py:675"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "cache",
+      "source": "lm_eval/models/hf_vlms.py:594"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "cache_hook",
+      "source": "lm_eval/api/model.py:267"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "chunks",
+      "source": "lm_eval/models/utils.py:303"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "config",
+      "source": "lm_eval/evaluator.py:302"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "data_parallel_rank",
+      "source": "lm_eval/models/megatron_lm.py:422"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "dataset_config_names",
+      "source": "lm_eval/tasks/global_piqa/completions/_generate_config.py:22"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "dataset_infos",
+      "source": "lm_eval/tasks/bbh/_generate_configs.py:37"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "default",
+      "source": "lm_eval/models/winml.py:179"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "distribution",
+      "source": "lm_eval/tasks/leaderboard/ifeval/instructions_util.py:36"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "dtype",
+      "source": "lm_eval/models/mamba_lm.py:111"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "ep_devices",
+      "source": "lm_eval/models/winml.py:206"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "grounded_atoms",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:555"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "grouped",
+      "source": "lm_eval/models/neuron_optimum.py:586"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "instruction_args",
+      "source": "lm_eval/tasks/ifeval/multilingual/utils.py:38"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "logits",
+      "source": "lm_eval/models/winml.py:537"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "model",
+      "source": "lm_eval/evaluator.py:241"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "model_info",
+      "source": "lm_eval/evaluator.py:385"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "original",
+      "source": "lm_eval/models/api_models.py:681"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "output",
+      "source": "lm_eval/models/winml.py:418"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pipeline_model_parallel_rank",
+      "source": "lm_eval/models/megatron_lm.py:421"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "rank",
+      "source": "lm_eval/models/megatron_lm.py:427"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "reordered",
+      "source": "lm_eval/models/neuron_optimum.py:438"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "rolling_token_windows",
+      "source": "lm_eval/models/api_models.py:841"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "sampler",
+      "source": "lm_eval/api/task.py:792"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "scores",
+      "source": "lm_eval/tasks/longbench/metrics.py:190"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "sequence",
+      "source": "lm_eval/models/winml.py:756"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "static",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:562"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tensor_model_parallel_rank",
+      "source": "lm_eval/models/megatron_lm.py:420"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "terminal",
+      "source": "lm_eval/tasks/acpbench/gen_2shot/acp_utils.py:97"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tokenizer",
+      "source": "lm_eval/models/anthropic_llms.py:182"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "all_tasks",
+      "source": "lm_eval/_cli/ls.py:73"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "repo_files",
+      "source": "lm_eval/loggers/evaluation_tracker.py:439"
+    }
+  ],
+  "component_refs": [
+    {
+      "target": "vllm",
+      "type": "import",
+      "source": "lm_eval/models/vllm_causallms.py",
+      "evidence": "python import: vllm"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "none",
+    "external_connections": "rich",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "lm-evaluation-harness is a Kubernetes component. connecting to external services: anthropic, httpx, openai, requests, wandb. 15 Python package dependencies (15 required), categories: 1 numerical. Python k8s client with 50 API call(s). references components: vllm (import).",
+  "security_annotations": [
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/new_tasks.yml",
+      "description": "Workflow \"Tasks Modified\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/new_tasks.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "tj-actions/changed-files@v47",
+      "source": ".github/workflows/new_tasks.yml",
+      "description": "Action \"tj-actions/changed-files\" uses mutable ref \"v47\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "astral-sh/setup-uv@v7",
+      "source": ".github/workflows/new_tasks.yml",
+      "description": "Action \"astral-sh/setup-uv\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/publish.yml",
+      "description": "Workflow \"Publish Python distribution to PyPI\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-python@v6",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"actions/setup-python\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "pypa/gh-action-pypi-publish@release/v1",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"pypa/gh-action-pypi-publish\" uses mutable ref \"release/v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "pypa/gh-action-pypi-publish@release/v1",
+      "source": ".github/workflows/publish.yml",
+      "description": "Action \"pypa/gh-action-pypi-publish\" uses mutable ref \"release/v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Workflow \"Unit Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "astral-sh/setup-uv@v7",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"astral-sh/setup-uv\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "pre-commit/action@v3.0.1",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"pre-commit/action\" uses mutable ref \"v3.0.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "astral-sh/setup-uv@v7",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"astral-sh/setup-uv\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/cache@v5",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"actions/cache\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/unit_tests.yml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    }
+  ]
+}
