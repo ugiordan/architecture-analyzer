@@ -26233,7 +26233,7 @@
 <h1 id="trainer-rbac">trainer: RBAC<a class="headerlink" href="#trainer-rbac" title="Permanent link">¶</a></h1>
 <p>ServiceAccount bindings, roles, and resource permissions.</p>
 <h2 id="rbac-overview">RBAC Overview<a class="headerlink" href="#rbac-overview" title="Permanent link">¶</a></h2>
-<p>This component defines a large RBAC surface (121 diagram lines). The graph below groups roles by permission scope.</p>
+<p>This component defines a large RBAC surface (117 diagram lines). The graph below groups roles by permission scope.</p>
 <pre class="mermaid"><code>graph LR
     classDef wide fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef medium fill:#f39c12,stroke:#d68910,color:#fff
@@ -26241,26 +26241,27 @@
     classDef subject fill:#3498db,stroke:#2980b9,color:#fff
 
     subgraph med["Medium Scope (10-30)"]
-    kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\n17 resources"]:::medium
+    kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\n18 resources"]:::medium
     end
     subgraph nar["Narrow Scope (&lt;10)"]
     kubeflow_trainer_admin["kubeflow-trainer-admin"]:::narrow
-    kubeflow_trainer_cache_initializer["kubeflow-trainer-cache-initializer\n4 resources"]:::narrow
-    kubeflow_trainer_edit["kubeflow-trainer-edit\n7 resources"]:::narrow
-    kubeflow_trainer_view["kubeflow-trainer-view\n4 resources"]:::narrow
+    kubeflow_trainer_cache_initializer["kubeflow-trainer-cache-initializer\n3 resources"]:::narrow
+    kubeflow_trainer_edit["kubeflow-trainer-edit\n5 resources"]:::narrow
+    kubeflow_trainer_view["kubeflow-trainer-view\n2 resources"]:::narrow
+    kubeflow_trainer_view_cluster_runtimes["kubeflow-trainer-view-cluster-runtimes\n1 resources"]:::narrow
     training_admin["training-admin\n6 resources"]:::narrow
     training_edit["training-edit\n6 resources"]:::narrow
     training_view["training-view\n6 resources"]:::narrow
+    kubeflow_trainer_public["kubeflow-trainer-public\n1 resources"]:::narrow
     end
 
     subj_kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\nServiceAccount"]:::subject
     subj_kubeflow_trainer_controller_manager --&gt;|binds| kubeflow_trainer_controller_manager
-    subj_notebook_controller_service_account["notebook-controller-service-account\nServiceAccount"]:::subject
-    subj_notebook_controller_service_account --&gt;|binds| kubeflow_trainer_view
-    subj_controller_service_account["controller-service-account\nServiceAccount"]:::subject
-    subj_controller_service_account --&gt;|binds| kubeflow_trainer_view
+    subj_system_authenticated["system:authenticated\nGroup"]:::subject
+    subj_system_authenticated --&gt;|binds| kubeflow_trainer_view_cluster_runtimes
     subj_kubeflow_trainer_cache_initializer["kubeflow-trainer-cache-initializer\nServiceAccount"]:::subject
-    subj_kubeflow_trainer_cache_initializer --&gt;|binds| kubeflow_trainer_cache_initializer</code></pre>
+    subj_kubeflow_trainer_cache_initializer --&gt;|binds| kubeflow_trainer_cache_initializer
+    subj_system_authenticated --&gt;|binds| kubeflow_trainer_public</code></pre>
 <h2 id="bindings">Bindings<a class="headerlink" href="#bindings" title="Permanent link">¶</a></h2>
 <p>Subject-to-role mappings defining who has access to what.</p>
 <table>
@@ -26280,22 +26281,22 @@
 <td>ServiceAccount/kubeflow-trainer-controller-manager</td>
 </tr>
 <tr>
-<td>kubeflow-trainer-view</td>
+<td>kubeflow-trainer-view-cluster-runtimes</td>
 <td>ClusterRoleBinding</td>
-<td>kubeflow-trainer-view</td>
-<td>ServiceAccount/notebook-controller-service-account</td>
-</tr>
-<tr>
-<td>kubeflow-trainer-view</td>
-<td>ClusterRoleBinding</td>
-<td>kubeflow-trainer-view</td>
-<td>ServiceAccount/controller-service-account</td>
+<td>kubeflow-trainer-view-cluster-runtimes</td>
+<td>Group/system:authenticated</td>
 </tr>
 <tr>
 <td>kubeflow-trainer-cache-initializer</td>
 <td>RoleBinding</td>
 <td>kubeflow-trainer-cache-initializer</td>
 <td>ServiceAccount/kubeflow-trainer-cache-initializer</td>
+</tr>
+<tr>
+<td>kubeflow-trainer-public</td>
+<td>RoleBinding</td>
+<td>kubeflow-trainer-public</td>
+<td>Group/system:authenticated</td>
 </tr>
 </tbody>
 </table>
@@ -26316,7 +26317,14 @@
 <td>kubeflow-trainer-cache-initializer</td>
 <td>ClusterRole</td>
 <td></td>
-<td>leaderworkersets, services</td>
+<td>leaderworkersets</td>
+<td>create, get, list, watch</td>
+</tr>
+<tr>
+<td>kubeflow-trainer-cache-initializer</td>
+<td>ClusterRole</td>
+<td></td>
+<td>services</td>
 <td>create, get, list, watch</td>
 </tr>
 <tr>
@@ -26325,13 +26333,6 @@
 <td></td>
 <td>serviceaccounts</td>
 <td>create, delete, get, list, watch</td>
-</tr>
-<tr>
-<td>kubeflow-trainer-cache-initializer</td>
-<td>ClusterRole</td>
-<td></td>
-<td>trainjobs</td>
-<td>get, list, watch</td>
 </tr>
 <tr>
 <td>kubeflow-trainer-controller-manager</td>
@@ -26344,13 +26345,6 @@
 <td>kubeflow-trainer-controller-manager</td>
 <td>ClusterRole</td>
 <td></td>
-<td>events</td>
-<td>create, patch, update, watch</td>
-</tr>
-<tr>
-<td>kubeflow-trainer-controller-manager</td>
-<td>ClusterRole</td>
-<td></td>
 <td>limitranges</td>
 <td>get, list, watch</td>
 </tr>
@@ -26358,7 +26352,14 @@
 <td>kubeflow-trainer-controller-manager</td>
 <td>ClusterRole</td>
 <td></td>
-<td>validatingwebhookconfigurations</td>
+<td>events</td>
+<td>create, patch, update, watch</td>
+</tr>
+<tr>
+<td>kubeflow-trainer-controller-manager</td>
+<td>ClusterRole</td>
+<td></td>
+<td>mutatingwebhookconfigurations, validatingwebhookconfigurations</td>
 <td>get, list, update, watch</td>
 </tr>
 <tr>
@@ -26380,7 +26381,7 @@
 <td>ClusterRole</td>
 <td></td>
 <td>jobsets</td>
-<td>create, get, list, patch, update, watch</td>
+<td>create, delete, get, list, patch, update, watch</td>
 </tr>
 <tr>
 <td>kubeflow-trainer-controller-manager</td>
@@ -26414,7 +26415,7 @@
 <td>kubeflow-trainer-edit</td>
 <td>ClusterRole</td>
 <td></td>
-<td>clustertrainingruntimes, trainingruntimes</td>
+<td>trainingruntimes</td>
 <td>get, list, watch</td>
 </tr>
 <tr>
@@ -26422,49 +26423,28 @@
 <td>ClusterRole</td>
 <td></td>
 <td>trainjobs</td>
-<td>create, delete, get, list, patch, update, watch</td>
+<td>create, patch, get, list, watch, delete</td>
 </tr>
 <tr>
 <td>kubeflow-trainer-edit</td>
 <td>ClusterRole</td>
 <td></td>
-<td>trainjobs/status</td>
-<td>get</td>
-</tr>
-<tr>
-<td>kubeflow-trainer-edit</td>
-<td>ClusterRole</td>
-<td></td>
-<td>pods</td>
-<td>list</td>
-</tr>
-<tr>
-<td>kubeflow-trainer-edit</td>
-<td>ClusterRole</td>
-<td></td>
-<td>pods/log</td>
-<td>get</td>
-</tr>
-<tr>
-<td>kubeflow-trainer-edit</td>
-<td>ClusterRole</td>
-<td></td>
-<td>events</td>
+<td>pods, pods/log, events</td>
 <td>get, list, watch</td>
 </tr>
 <tr>
 <td>kubeflow-trainer-view</td>
 <td>ClusterRole</td>
 <td></td>
-<td>clustertrainingruntimes, trainingruntimes, trainjobs</td>
+<td>trainingruntimes, trainjobs</td>
 <td>get, list, watch</td>
 </tr>
 <tr>
-<td>kubeflow-trainer-view</td>
+<td>kubeflow-trainer-view-cluster-runtimes</td>
 <td>ClusterRole</td>
 <td></td>
-<td>trainjobs/status</td>
-<td>get</td>
+<td>clustertrainingruntimes</td>
+<td>get, list, watch</td>
 </tr>
 <tr>
 <td>training-admin</td>
@@ -26522,6 +26502,13 @@
 <td>trainjobs/status, trainingruntimes/status, clustertrainingruntimes/status</td>
 <td>get</td>
 </tr>
+<tr>
+<td>kubeflow-trainer-public</td>
+<td>Role</td>
+<td></td>
+<td>configmaps</td>
+<td>get, list, watch</td>
+</tr>
 </tbody>
 </table>
 
@@ -26546,7 +26533,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 11, 2026 02:15:29 UTC">August 11, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 12, 2026 02:33:49 UTC">August 12, 2026</span>
   </span>
 
     
