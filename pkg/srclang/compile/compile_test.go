@@ -328,6 +328,30 @@ func TestCompile_WithPlatformFile_InvalidFile(t *testing.T) {
 	}
 }
 
+func TestCompile_NewLayerRoutes(t *testing.T) {
+	layers := []string{"testing", "upgrade", "netpolicy", "codegen"}
+	for _, layer := range layers {
+		t.Run(layer, func(t *testing.T) {
+			opts := Options{
+				RepoPath: t.TempDir(),
+				Layer:    layer,
+				CPG:      graph.NewCPG(),
+				Arch:     &extractor.ComponentArchitecture{Component: "smoke-test", AnalyzerVersion: "0.0.0"},
+			}
+			doc, err := Compile(opts)
+			if err != nil {
+				t.Fatalf("Compile(%q) error: %v", layer, err)
+			}
+			if doc.Head.Layer != layer {
+				t.Errorf("Head.Layer = %q, want %q", doc.Head.Layer, layer)
+			}
+			if doc.Body.Layer.Name != layer {
+				t.Errorf("Body.Layer.Name = %q, want %q", doc.Body.Layer.Name, layer)
+			}
+		})
+	}
+}
+
 func TestCompile_ExtractedTimestamp(t *testing.T) {
 	cpg := graph.NewCPG()
 	arch := &extractor.ComponentArchitecture{
