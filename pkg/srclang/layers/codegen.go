@@ -24,21 +24,6 @@ func NewCodegenSelector(repoPath string) *CodegenSelector {
 	}
 }
 
-func (s *CodegenSelector) safeJoin(file string) (string, bool) {
-	fullPath := filepath.Join(s.repoPath, file)
-	absPath, err := filepath.Abs(fullPath)
-	if err != nil {
-		return "", false
-	}
-	absRepo, err := filepath.Abs(s.repoPath)
-	if err != nil {
-		return "", false
-	}
-	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
-		return "", false
-	}
-	return fullPath, true
-}
 
 func (s *CodegenSelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, annotations []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
 	layer := &srclang.Layer{Name: "codegen"}
@@ -257,7 +242,7 @@ func (s *CodegenSelector) buildFunction(node *graph.Node, warnings *[]srclang.Wa
 	}
 
 	if node.EndLine > 0 && node.Line > 0 && node.EndLine >= node.Line {
-		fullPath, ok := s.safeJoin(node.File)
+		fullPath, ok := safeJoin(s.repoPath,node.File)
 		if !ok {
 			*warnings = append(*warnings, srclang.Warning{
 				File:    node.File,

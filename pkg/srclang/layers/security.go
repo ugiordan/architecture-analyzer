@@ -13,6 +13,23 @@ import (
 	"github.com/ugiordan/architecture-analyzer/pkg/srclang"
 )
 
+// safeJoin resolves repoPath+file and rejects paths that escape repoPath.
+func safeJoin(repoPath, file string) (string, bool) {
+	fullPath := filepath.Join(repoPath, file)
+	absPath, err := filepath.Abs(fullPath)
+	if err != nil {
+		return "", false
+	}
+	absRepo, err := filepath.Abs(repoPath)
+	if err != nil {
+		return "", false
+	}
+	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
+		return "", false
+	}
+	return fullPath, true
+}
+
 var securityAnnotations = map[string]bool{
 	"webhook_handler":   true,
 	"auth_check":        true,
@@ -45,21 +62,6 @@ func NewSecuritySelector(repoPath string) *SecuritySelector {
 	}
 }
 
-func (s *SecuritySelector) safeJoin(file string) (string, bool) {
-	fullPath := filepath.Join(s.repoPath, file)
-	absPath, err := filepath.Abs(fullPath)
-	if err != nil {
-		return "", false
-	}
-	absRepo, err := filepath.Abs(s.repoPath)
-	if err != nil {
-		return "", false
-	}
-	if !strings.HasPrefix(absPath, absRepo+string(filepath.Separator)) && absPath != absRepo {
-		return "", false
-	}
-	return fullPath, true
-}
 
 func (s *SecuritySelector) Select(cpg *graph.CPG, arch *extractor.ComponentArchitecture, findings []query.Finding, extractionAnnotations []extractor.SecurityAnnotation) (*srclang.Layer, []srclang.Warning) {
 	layer := &srclang.Layer{Name: "security"}
@@ -114,7 +116,7 @@ func (s *SecuritySelector) addSecurityFunctions(cpg *graph.CPG, layer *srclang.L
 		}
 
 		if node.EndLine > 0 && node.Line > 0 {
-			fullPath, ok := s.safeJoin(file)
+			fullPath, ok := safeJoin(s.repoPath,file)
 			if !ok {
 				*warnings = append(*warnings, srclang.Warning{
 					File:    file,
@@ -227,7 +229,7 @@ func (s *SecuritySelector) addFindingReferencedFunctions(cpg *graph.CPG, layer *
 			fn.Complexity = node.Complexity
 		}
 		if node.EndLine > 0 && node.Line > 0 {
-			fullPath, ok := s.safeJoin(node.File)
+			fullPath, ok := safeJoin(s.repoPath,node.File)
 			if !ok {
 				*warnings = append(*warnings, srclang.Warning{
 					File:    node.File,
@@ -646,7 +648,13 @@ func capFunctions(layer *srclang.Layer) {
 		}
 	}
 	sort.Slice(entries, func(i, j int) bool {
-		return entries[i].score > entries[j].score
+		if entries[i].score != entries[j].score {
+			return entries[i].score > entries[j].score
+		}
+		if entries[i].fileIdx != entries[j].fileIdx {
+			return entries[i].fileIdx < entries[j].fileIdx
+		}
+		return entries[i].funcIdx < entries[j].funcIdx
 	})
 
 	keep := make(map[string]bool)
@@ -723,7 +731,13 @@ func capCodeBodies(layer *srclang.Layer) {
 	}
 
 	sort.Slice(refs, func(i, j int) bool {
-		return refs[i].score > refs[j].score
+		if refs[i].score != refs[j].score {
+			return refs[i].score > refs[j].score
+		}
+		if refs[i].fileIdx != refs[j].fileIdx {
+			return refs[i].fileIdx < refs[j].fileIdx
+		}
+		return refs[i].funcIdx < refs[j].funcIdx
 	})
 
 	totalBytes := 0
@@ -900,7 +914,7 @@ func sortFindings(layer *srclang.Layer) {
 	severityOrder := map[string]int{
 		"critical": 0, "high": 1, "medium": 2, "low": 3, "info": 4,
 	}
-	sort.Slice(layer.Findings, func(i, j int) bool {
+	sort.SliceStable(layer.Findings, func(i, j int) bool {
 		si, ok := severityOrder[layer.Findings[i].Severity]
 		if !ok {
 			si = 99

@@ -181,7 +181,8 @@ func SplitBundle(doc *srclang.Document) *srclang.Bundle {
 		}
 	}
 
-	// Build index document (compact: no code, no finding descriptions)
+	// Build index document. Use WriteIndexDocument (not WriteDocument) to
+	// serialize it — WriteIndexDocument strips code bodies and descriptions.
 	indexDoc := &srclang.Document{
 		Version: doc.Version,
 		Head:    doc.Head,
