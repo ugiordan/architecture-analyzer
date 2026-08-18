@@ -26720,7 +26720,7 @@
 <p>Also matches the <code>r.Client.Create()</code> and <code>r.client.Create()</code> patterns common in controller-runtime code.</p>
 <h3 id="type-resolution">Type resolution<a class="headerlink" href="#type-resolution" title="Permanent link">¶</a></h3>
 <p>Using <code>go/packages</code> type information, the extractor resolves the concrete type of the object argument to determine the target Kind and API group. For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">svc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Service</span><span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">svc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Service</span><span class="p">{...}</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">r</span><span class="p">.</span><span class="nx">Client</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">svc</span><span class="p">)</span>
 </code></pre></div>
 <p>Resolves to: <code>create Service</code> (group: <code>core/v1</code>).</p>
