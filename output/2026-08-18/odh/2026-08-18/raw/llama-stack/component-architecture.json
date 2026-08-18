@@ -1,0 +1,2472 @@
+{
+  "component": "llama-stack",
+  "repo": "opendatahub-io/llama-stack",
+  "commit_sha": "3abdbaaa9d7b63374d79c28ea60b845a84348f1d",
+  "extracted_at": "2026-08-18T01:38:38Z",
+  "analyzer_version": "dev",
+  "schema_version": "2",
+  "rbac": {},
+  "services": [
+    {
+      "name": "cli-port-default",
+      "source": "benchmarking/k8s-benchmark/openai-mock-server.py:191",
+      "type": "python-source",
+      "ports": [
+        {
+          "port": 8081,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "python_packages": [
+      {
+        "name": "httpx",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jinja2",
+        "version": "\u003e=3.1.6",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jsonschema",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "models-dev",
+        "version": "\u003e=1.0.398",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "openai",
+        "version": "\u003e=2.41.0",
+        "category": "llm-sdk",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pydantic",
+        "version": "\u003e=2.11.9",
+        "category": "serialization",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pyyaml",
+        "version": "\u003e=6.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "rich",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "structlog",
+        "version": "\u003e=24.1.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "termcolor",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "tiktoken",
+        "category": "tokenizer",
+        "source": "pyproject.toml",
+        "required": true
+      }
+    ]
+  },
+  "dockerfiles": [
+    {
+      "path": "containers/Containerfile",
+      "base_image": "${BASE_IMAGE}",
+      "stages": 1,
+      "user": "1001",
+      "issues": [
+        "Unpinned base image: ${BASE_IMAGE}"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "."
+          ],
+          "destination": "/workspace"
+        }
+      ],
+      "build_commands": [
+        {
+          "tool": "pip",
+          "command": "install"
+        },
+        {
+          "tool": "pip",
+          "command": "install"
+        },
+        {
+          "tool": "pip",
+          "command": "install"
+        },
+        {
+          "tool": "pip",
+          "command": "install"
+        },
+        {
+          "tool": "pip",
+          "command": "install"
+        },
+        {
+          "tool": "pip",
+          "command": "install"
+        }
+      ]
+    },
+    {
+      "path": "src/ogx_ui/Containerfile",
+      "base_image": "node:22.5.1-alpine",
+      "stages": 1,
+      "user": "nextjs"
+    }
+  ],
+  "helm": {},
+  "http_endpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/admin/tools",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/batches",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/batches",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/batches/{batch_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/batches/{batch_id}/cancel",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/chat/completions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/chat/completions/{completion_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/chat/completions/{completion_id}/messages",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/completions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/conversations",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/conversations/{conversation_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/conversations/{conversation_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/conversations/{conversation_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/conversations/{conversation_id}/items",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/conversations/{conversation_id}/items",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/conversations/{conversation_id}/items/{item_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/conversations/{conversation_id}/items/{item_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/embeddings",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/files",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/files",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/files/{file_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/files/{file_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/files/{file_id}/content",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/health",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/inspect/routes",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/messages",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/messages/batches",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/messages/batches",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/messages/batches/{message_batch_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/messages/batches/{message_batch_id}/cancel",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/messages/batches/{message_batch_id}/results",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/messages/count_tokens",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models/{model_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/prompts",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/prompts",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/prompts/{prompt_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/prompts/{prompt_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/prompts/{prompt_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/prompts/{prompt_id}/set-default-version",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/prompts/{prompt_id}/versions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/providers",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/providers/{provider_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/responses",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/responses",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/responses/compact",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/responses/{response_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/responses/{response_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/responses/{response_id}/cancel",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/responses/{response_id}/input_items",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector-io/insert",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector-io/query",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/vector_stores/{vector_store_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores/{vector_store_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores/{vector_store_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores/{vector_store_id}/file_batches",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores/{vector_store_id}/file_batches/{batch_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores/{vector_store_id}/file_batches/{batch_id}/files",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores/{vector_store_id}/files",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores/{vector_store_id}/files",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/vector_stores/{vector_store_id}/files/{file_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores/{vector_store_id}/files/{file_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores/{vector_store_id}/files/{file_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/vector_stores/{vector_store_id}/files/{file_id}/content",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/vector_stores/{vector_store_id}/search",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/version",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/connectors",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/connectors/{connector_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/connectors/{connector_id}/tools",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/connectors/{connector_id}/tools/{tool_name}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/health",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/inspect/routes",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/providers",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/providers/{provider_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/admin/version",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/file-processors/jobs",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/file-processors/jobs",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/file-processors/jobs/{job_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/file-processors/jobs/{job_id}/cancel",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/file-processors/process",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/inference/rerank",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/interactions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/skills",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/skills",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1alpha/skills/{skill_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/skills/{skill_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/skills/{skill_id}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/skills/{skill_id}/content",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/skills/{skill_id}/versions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "POST",
+      "path": "/v1alpha/skills/{skill_id}/versions",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1alpha/skills/{skill_id}/versions/{version}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/skills/{skill_id}/versions/{version}",
+      "source": "client-sdks/stainless/openapi.yml"
+    },
+    {
+      "method": "GET",
+      "path": "/v1alpha/skills/{skill_id}/versions/{version}/content",
+      "source": "client-sdks/stainless/openapi.yml"
+    }
+  ],
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "aiohttp",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/nvidia/nvidia.py:164"
+    },
+    {
+      "type": "api",
+      "service": "anthropic",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:470"
+    },
+    {
+      "type": "api",
+      "service": "anthropic",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:487"
+    },
+    {
+      "type": "api",
+      "service": "anthropic",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:503"
+    },
+    {
+      "type": "api",
+      "service": "anthropic",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/anthropic/anthropic.py:55",
+      "function": "list_provider_model_ids"
+    },
+    {
+      "type": "api",
+      "service": "anthropic",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/anthropic/anthropic.py:55",
+      "function": "list_provider_model_ids"
+    },
+    {
+      "type": "api",
+      "service": "chromadb",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/chroma/chroma.py:285",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "cohere",
+      "target": "",
+      "source": "scripts/capture_google_interactions_fixtures.py:107",
+      "function": "main"
+    },
+    {
+      "type": "api",
+      "service": "cohere",
+      "target": "",
+      "source": "src/ogx/providers/remote/file_processor/unstructured_api/unstructured_api.py:111"
+    },
+    {
+      "type": "api",
+      "service": "elasticsearch",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/elasticsearch/elasticsearch.py:401",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "demo/skills_api_demo.py:69",
+      "function": "main"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/core/client.py:106",
+      "function": "_call_streaming"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/core/client.py:89",
+      "function": "_call_non_streaming"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/core/server/auth_providers.py:322",
+      "function": "introspect_token"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/core/server/auth_providers.py:374",
+      "function": "__init__"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/core/server/auth_providers.py:508",
+      "function": "_get_github_user_info"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/core/server/auth_providers.py:601",
+      "function": "validate_token"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/inline/interactions/impl.py:109",
+      "function": "_stream"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/inline/interactions/impl.py:295"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/utils.py:673"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/inline/tool_runtime/file_search/file_search.py:72",
+      "function": "raw_data_from_doc"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/file_processor/docling_serve/docling_serve.py:184"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/file_processor/docling_serve/docling_serve.py:246"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/file_processor/docling_serve/docling_serve.py:299"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/bedrock/bedrock.py:152",
+      "function": "_build_sigv4_http_client"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/meta/meta.py:109"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/meta/meta.py:83"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/ollama/ollama.py:174"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/ollama/ollama.py:216"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/vertexai/utils.py:123",
+      "function": "build_http_options"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/vllm/vllm.py:148",
+      "function": "health"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/vllm/vllm.py:271"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/vllm/vllm.py:293"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/vllm/vllm.py:374"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:109",
+      "function": "_exchange_iam_token"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:244",
+      "function": "_fetch_model_specs"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/tool_runtime/bing_search/bing_search.py:37",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/tool_runtime/brave_search/brave_search.py:107"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/tool_runtime/nimble_search/nimble_search.py:37",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/tool_runtime/tavily_search/tavily_search.py:36",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/tool_runtime/wolfram_alpha/wolfram_alpha.py:88"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/infinispan/infinispan.py:609",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/anthropic_translation.py:520"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/http_client.py:252"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/http_client.py:286",
+      "function": "build_http_client"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/openai_mixin.py:276",
+      "function": "client"
+    },
+    {
+      "type": "api",
+      "service": "httpx",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/prompt_adapter.py:71",
+      "function": "localize_image_content"
+    },
+    {
+      "type": "api",
+      "service": "milvus",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/milvus/milvus.py:490",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "milvus",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/milvus/milvus.py:496",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/cli/ogx_client.py:79",
+      "function": "ogx_client"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "src/ogx/core/library_client.py:41"
+    },
+    {
+      "type": "api",
+      "service": "ogx",
+      "target": "",
+      "source": "src/ogx/testing/api_recorder.py:320",
+      "function": "patch_httpx_for_test_id"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "benchmarking/rag/lib/client.py:27",
+      "function": "create_client"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/agents/agent.py:115"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/agents/agent.py:300"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/agents/agent.py:300"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:104"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:113"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:124"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:132"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:140"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:149"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:158"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:170"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:178"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:187"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:196"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:207"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:215"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:223"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:232"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:24"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:241"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:253"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:262"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:272"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:280"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:291"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:300"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:309"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:32"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:320"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:331"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:342"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:354"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:365"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:376"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:387"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:400"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:45"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:53"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:62"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:74"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:86"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "scripts/openapi_generator/code_samples.py:95"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/cli/connect/claude.py:142",
+      "function": "_fetch_models"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/cli/connect/codex.py:65",
+      "function": "fetch_models"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/cli/connect/opencode.py:85",
+      "function": "_fetch_models"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/files/openai/files.py:112",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/files/openai/files.py:112",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/bedrock/bedrock.py:205",
+      "function": "list_provider_model_ids"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/bedrock/bedrock.py:205",
+      "function": "list_provider_model_ids"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:143",
+      "function": "_ensure_client"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:143",
+      "function": "_ensure_client"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:160",
+      "function": "client"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:160",
+      "function": "client"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/openai_mixin.py:280",
+      "function": "client"
+    },
+    {
+      "type": "api",
+      "service": "openai",
+      "target": "",
+      "source": "src/ogx/providers/utils/inference/openai_mixin.py:280",
+      "function": "client"
+    },
+    {
+      "type": "api",
+      "service": "qdrant",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/qdrant/qdrant.py:348",
+      "function": "initialize"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/tools/mcp_oauth.py:154",
+      "function": "exchange_code_for_token"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/tools/mcp_oauth.py:70",
+      "function": "discover_auth_endpoints"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "client-sdks/openapi/templates/python/lib/tools/mcp_oauth.py:92",
+      "function": "register_client"
+    },
+    {
+      "type": "api",
+      "service": "urllib",
+      "target": "",
+      "source": "src/ogx/testing/api_recorder.py:1120",
+      "function": "_extract_provider_metadata"
+    },
+    {
+      "type": "database",
+      "service": "mongodb",
+      "target": "",
+      "source": "src/ogx/core/storage/kvstore/mongodb/mongodb.py:37",
+      "function": "initialize"
+    },
+    {
+      "type": "database",
+      "service": "postgres",
+      "target": "",
+      "source": "src/ogx/providers/remote/vector_io/pgvector/pgvector.py:810",
+      "function": "_ensure_pool"
+    },
+    {
+      "type": "database",
+      "service": "redis",
+      "target": "redis://{self.host}:{self.port}",
+      "source": "src/ogx/core/storage/datatypes.py:49",
+      "function": "url"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:109",
+      "function": "_ensure_engine"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:129",
+      "function": "create_engine"
+    },
+    {
+      "type": "database",
+      "service": "sqlalchemy",
+      "target": "",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:144",
+      "function": "create_engine"
+    },
+    {
+      "type": "database",
+      "service": "sqlite",
+      "target": "",
+      "source": "src/ogx/providers/inline/vector_io/sqlite_vec/sqlite_vec.py:120",
+      "function": "_create_sqlite_connection"
+    },
+    {
+      "type": "object-storage",
+      "service": "s3",
+      "target": "",
+      "source": "src/ogx/providers/remote/files/s3/files.py:71",
+      "function": "_create_s3_client"
+    }
+  ],
+  "runtime_dependencies": [
+    {
+      "name": "Redis",
+      "type": "cache",
+      "source": "src/ogx/core/storage/datatypes.py:49",
+      "evidence": "uri:redis://",
+      "required": true
+    },
+    {
+      "name": "OpenTelemetry Collector",
+      "type": "observability",
+      "source": "src/ogx/telemetry/__init__.py:93",
+      "evidence": "env:OTEL_EXPORTER_OTLP_ENDPOINT",
+      "required": true
+    },
+    {
+      "name": "kubernetes",
+      "type": "service",
+      "source": "src/ogx/core/datatypes.py:338",
+      "evidence": "dns:kubernetes.default.svc",
+      "required": true
+    }
+  ],
+  "python_k8s_calls": [
+    {
+      "api": "BatchV1Api",
+      "operation": "create",
+      "resource": "process_file_job",
+      "source": "src/ogx_api/file_processors/fastapi_routes.py:210"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "all",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:115"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "batch",
+      "source": "src/ogx_api/batches/fastapi_routes.py:69"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "bucket",
+      "source": "src/ogx/providers/remote/files/s3/files.py:92"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "collection",
+      "source": "src/ogx/providers/remote/vector_io/milvus/milvus.py:124"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "container",
+      "source": "src/ogx_api/containers/fastapi_routes.py:96"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "conversation",
+      "source": "src/ogx_api/conversations/fastapi_routes.py:89"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "counter",
+      "source": "src/ogx/core/server/metrics.py:29"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "default_context",
+      "source": "src/ogx/core/server/auth_providers.py:216"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "engine",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:109"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "error",
+      "source": "src/ogx/testing/providers/_config.py:45"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "from_metadata",
+      "source": "src/ogx/providers/utils/bedrock/refreshable_boto_session.py:97"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "gin_index",
+      "source": "src/ogx/providers/remote/vector_io/pgvector/pgvector.py:238"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "histogram",
+      "source": "src/ogx/core/server/metrics.py:35"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "hnsw_vector_index",
+      "source": "src/ogx/providers/remote/vector_io/pgvector/pgvector.py:219"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "index",
+      "source": "src/ogx/core/jobs/queue.py:86"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "indexes",
+      "source": "src/ogx/providers/remote/vector_io/oci/oci26ai.py:112"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "initialization_options",
+      "source": "tests/common/mcp.py:206"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "interaction",
+      "source": "src/ogx_api/interactions/fastapi_routes.py:137"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "ivfflat_vector_index",
+      "source": "src/ogx/providers/remote/vector_io/pgvector/pgvector.py:281"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "message",
+      "source": "src/ogx/providers/inline/messages/impl.py:250"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "message_batch",
+      "source": "src/ogx_api/messages/fastapi_routes.py:220"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "ogx_app",
+      "source": "scripts/openapi_generator/main.py:44"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "openai_response",
+      "source": "src/ogx/providers/inline/responses/builtin/impl.py:177"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "payload_index",
+      "source": "src/ogx/providers/remote/vector_io/qdrant/qdrant.py:82"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "pool",
+      "source": "src/ogx/core/storage/kvstore/postgres/postgres.py:56"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "prompt",
+      "source": "src/ogx_api/prompts/fastapi_routes.py:110"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "registry_refresh_task",
+      "source": "src/ogx/core/server/server.py:194"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "response",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:1419"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "router",
+      "source": "src/ogx/core/server/fastapi_router_registry.py:41"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "schema",
+      "source": "src/ogx/providers/remote/vector_io/milvus/milvus.py:96"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "session",
+      "source": "docs/docs/getting_started/demo_script.py:89"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "skill",
+      "source": "src/ogx_api/skills/fastapi_routes.py:57"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "skill_version",
+      "source": "src/ogx_api/skills/fastapi_routes.py:125"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "table",
+      "source": "src/ogx/core/connectors/connectors.py:68"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "task",
+      "source": "src/ogx/core/jobs/worker.py:105"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "turn",
+      "source": "client-sdks/openapi/templates/python/lib/agents/event_logger.py:43"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "up_down_counter",
+      "source": "src/ogx/core/server/metrics.py:41"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "chunks",
+      "source": "src/ogx/providers/inline/vector_io/faiss/faiss.py:482"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "collection",
+      "source": "src/ogx/providers/remote/vector_io/chroma/chroma.py:126"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "container",
+      "source": "src/ogx_api/containers/fastapi_routes.py:132"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "container_file",
+      "source": "src/ogx_api/containers/fastapi_routes.py:203"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "default_memory_vector_store_claim",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/memory.py:223"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "many",
+      "source": "src/ogx/core/conversations/conversations.py:185"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "object",
+      "source": "src/ogx/providers/remote/files/s3/files.py:173"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "one",
+      "source": "src/ogx/core/storage/kvstore/mongodb/mongodb.py:77"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "openai_response",
+      "source": "src/ogx/providers/inline/responses/builtin/impl.py:222"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "prompt",
+      "source": "src/ogx_api/prompts/fastapi_routes.py:145"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "response_object",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:1470"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "skill",
+      "source": "src/ogx_api/skills/fastapi_routes.py:95"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "delete",
+      "resource": "skill_version",
+      "source": "src/ogx_api/skills/fastapi_routes.py:169"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all",
+      "source": "src/ogx/core/routing_tables/common.py:238"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "all_with_type",
+      "source": "src/ogx/core/routers/vector_io.py:152"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "api_key",
+      "source": "src/ogx/providers/remote/inference/bedrock/bedrock.py:205"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "auth_error_message",
+      "source": "src/ogx/core/server/auth.py:140"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "available_locations",
+      "source": "tests/external/ogx-api-weather/src/ogx_api_weather/weather.py:44"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "base_url",
+      "source": "src/ogx/providers/inline/interactions/impl.py:228"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "cached",
+      "source": "src/ogx/core/routers/vector_io.py:101"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "chat_completion",
+      "source": "src/ogx/core/routers/inference.py:389"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "client_tools",
+      "source": "client-sdks/openapi/templates/python/lib/agents/react/agent.py:80"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "close_matches",
+      "source": "src/ogx/core/utils/config_resolution.py:124"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "collection",
+      "source": "src/ogx/providers/remote/vector_io/chroma/chroma.py:339"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "columns",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:516"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "connector",
+      "source": "src/ogx/core/admin.py:248"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "connector_tool",
+      "source": "src/ogx/core/admin.py:256"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "container",
+      "source": "src/ogx_api/containers/fastapi_routes.py:120"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "container_file",
+      "source": "src/ogx_api/containers/fastapi_routes.py:174"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "container_file_content",
+      "source": "src/ogx_api/containers/fastapi_routes.py:191"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "context",
+      "source": "src/ogx/core/jobs/worker.py:325"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "conversation",
+      "source": "src/ogx/core/conversations/conversations.py:175"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "conversation_messages",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/memory.py:389"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "credentials",
+      "source": "src/ogx/providers/utils/bedrock/refreshable_boto_session.py:86"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "current",
+      "source": "src/ogx/core/task.py:37"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "current_span",
+      "source": "src/ogx/providers/utils/inference/openai_compat.py:114"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "default_memory_vector_store",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/memory.py:208"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "description",
+      "source": "client-sdks/openapi/templates/python/lib/agents/client_tool.py:63"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "encoding",
+      "source": "src/ogx/providers/inline/responses/builtin/config.py:102"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "event_loop",
+      "source": "src/ogx/providers/inline/file_processor/docling/docling.py:115"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "extra_client_params",
+      "source": "src/ogx/providers/remote/inference/watsonx/watsonx.py:140"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "factory",
+      "source": "src/ogx/cli/stack/lets_go.py:702"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "finished_spans",
+      "source": "tests/integration/telemetry/collectors/in_memory.py:36"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "frozen_credentials",
+      "source": "src/ogx/providers/utils/bedrock/sigv4_auth.py:133"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "headers_from_request",
+      "source": "src/ogx/providers/remote/tool_runtime/model_context_protocol/model_context_protocol.py:54"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "input_schema",
+      "source": "client-sdks/openapi/templates/python/lib/agents/client_tool.py:64"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "interaction",
+      "source": "src/ogx/providers/inline/interactions/impl.py:166"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "json",
+      "source": "benchmarking/k8s-benchmark/openai-mock-server.py:95"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "logger",
+      "source": "src/ogx/log.py:549"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "memory_record",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/memory.py:451"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "meter",
+      "source": "src/ogx/core/server/metrics.py:27"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "meter_provider",
+      "source": "src/ogx/telemetry/__init__.py:106"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "metrics_data",
+      "source": "tests/integration/telemetry/collectors/in_memory.py:41"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "model",
+      "source": "src/ogx/core/routing_tables/models.py:409"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "name",
+      "source": "client-sdks/openapi/templates/python/lib/agents/agent.py:126"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "object",
+      "source": "src/ogx/providers/remote/files/s3/files.py:330"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "object_by_identifier",
+      "source": "src/ogx/core/routers/inference.py:129"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "openai_response",
+      "source": "src/ogx/providers/inline/responses/builtin/impl.py:163"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "or_create_collection",
+      "source": "src/ogx/providers/remote/vector_io/chroma/chroma.py:294"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "passthrough_auth_headers",
+      "source": "src/ogx/providers/inline/interactions/impl.py:237"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pgvector_index_operator_class",
+      "source": "src/ogx/providers/remote/vector_io/pgvector/pgvector.py:596"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pgvector_search_function",
+      "source": "src/ogx/providers/remote/vector_io/pgvector/pgvector.py:299"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "prompt",
+      "source": "src/ogx/core/prompts/prompts.py:184"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "provider_impl",
+      "source": "src/ogx/core/routers/inference.py:134"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "provider_model_id",
+      "source": "src/ogx/providers/utils/inference/model_registry.py:135"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "provider_spec",
+      "source": "src/ogx/core/distribution.py:283"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "providers_health",
+      "source": "src/ogx/core/admin.py:90"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "request_provider_data",
+      "source": "src/ogx/providers/remote/inference/bedrock/bedrock.py:122"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "response_object",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:252"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "result",
+      "source": "tests/integration/conftest.py:30"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "running_loop",
+      "source": "src/ogx/core/jobs/proxy.py:88"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "scoped",
+      "source": "src/ogx/core/jobs/proxy.py:102"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "secret_value",
+      "source": "src/ogx/core/server/auth_providers.py:313"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "session",
+      "source": "src/ogx/providers/utils/tools/mcp.py:436"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "signing_key_from_jwt",
+      "source": "src/ogx/core/server/auth_providers.py:253"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "skill",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:562"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "skill_content",
+      "source": "src/ogx_api/skills/fastapi_routes.py:109"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "skill_version",
+      "source": "src/ogx_api/skills/fastapi_routes.py:146"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "skill_version_content",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:563"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "table_names",
+      "source": "src/ogx/core/storage/sqlstore/sqlalchemy_sqlstore.py:512"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tool",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/streaming.py:1672"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tool_calls",
+      "source": "client-sdks/openapi/templates/python/lib/agents/agent.py:500"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tool_definition",
+      "source": "client-sdks/openapi/templates/python/lib/agents/agent.py:531"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tool_group",
+      "source": "src/ogx/core/routing_tables/toolgroups.py:68"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "tracer",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/streaming.py:127"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "type_hints",
+      "source": "src/ogx/core/library_client.py:1063"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "batches",
+      "source": "src/ogx_api/batches/fastapi_routes.py:111"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "chat_completion_messages",
+      "source": "src/ogx/core/routers/inference.py:397"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "chat_completions",
+      "source": "src/ogx/core/routers/inference.py:379"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "connector_tools",
+      "source": "src/ogx/core/admin.py:253"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "connectors",
+      "source": "src/ogx/core/admin.py:245"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "container_files",
+      "source": "src/ogx_api/containers/fastapi_routes.py:162"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "containers",
+      "source": "src/ogx_api/containers/fastapi_routes.py:108"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "files",
+      "source": "scripts/openapi_generator/code_samples.py:389"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "foundation_models",
+      "source": "src/ogx/providers/remote/inference/bedrock/bedrock.py:192"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "items",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:373"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "message_batches",
+      "source": "src/ogx_api/messages/fastapi_routes.py:268"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "models",
+      "source": "src/ogx/cli/stack/lets_go.py:673"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "openai_response_input_items",
+      "source": "src/ogx/providers/inline/responses/builtin/impl.py:194"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "openai_responses",
+      "source": "src/ogx/providers/inline/responses/builtin/impl.py:185"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "prompt_versions",
+      "source": "src/ogx/core/prompts/prompts.py:146"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "prompts",
+      "source": "src/ogx_api/prompts/fastapi_routes.py:64"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "provider_model_ids",
+      "source": "src/ogx/providers/remote/inference/vertexai/vertexai.py:399"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "providers",
+      "source": "src/ogx/core/admin.py:115"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "response_input_items",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:694"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "responses",
+      "source": "src/ogx/providers/inline/responses/builtin/responses/openai_responses.py:673"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "routes",
+      "source": "src/ogx_api/admin/fastapi_routes.py:107"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "runtime_tools",
+      "source": "src/ogx/core/routing_tables/toolgroups.py:93"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "scoped",
+      "source": "src/ogx/core/jobs/proxy.py:122"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "skill_versions",
+      "source": "src/ogx_api/skills/fastapi_routes.py:137"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "skills",
+      "source": "src/ogx_api/skills/fastapi_routes.py:68"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "stacks",
+      "source": "src/ogx/cli/stack/stack.py:10"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "tools",
+      "source": "client-sdks/openapi/templates/python/lib/tools/mcp_oauth.py:291"
+    }
+  ],
+  "component_refs": [
+    {
+      "target": "model-registry",
+      "type": "import",
+      "source": "src/ogx/distributions/open-benchmark/open_benchmark.py",
+      "evidence": "python import: ogx.providers.utils.inference.model_registry"
+    },
+    {
+      "target": "vllm",
+      "type": "provider",
+      "source": "src/ogx/providers/remote/inference/vllm",
+      "evidence": "directory: src/ogx/providers/remote/inference/vllm"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "rich",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "moderate",
+    "secrets": "none",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "llama-stack is a Kubernetes component. exposing 1 service(s) on ports: 8081. connecting to external services: aiohttp, anthropic, chromadb, cohere, elasticsearch, httpx, milvus, mongodb, ogx, openai, postgres, qdrant, redis, requests, s3, sqlalchemy, sqlite, urllib. runtime dependencies: OpenTelemetry Collector, Redis, kubernetes. 11 Python package dependencies (11 required), categories: 1 llm-sdk, 1 serialization, 1 tokenizer. Python k8s client with 151 API call(s). references components: model-registry (import), vllm (provider).",
+  "security_annotations": [
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/backward-compat.yml",
+      "description": "Workflow \"Backward Compatibility Check\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/codeql.yml",
+      "description": "Workflow \"CodeQL Workflow Security Scan\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/disconnected-readiness.yml",
+      "description": "Workflow \"Disconnected Readiness\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/install-script-ci.yml",
+      "description": "Workflow \"Installer CI\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/integration-auth-tests.yml",
+      "description": "Workflow \"Integration Auth Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/integration-sql-store-tests.yml",
+      "description": "Workflow \"SqlStore Integration Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/integration-vector-io-tests.yml",
+      "description": "Workflow \"Vector IO Integration Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/providers-build.yml",
+      "description": "Workflow \"Test OGX Build\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/release-branch-scheduled-ci.yml",
+      "description": "Workflow \"Release Branch Scheduled CI\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/test-external-provider-module.yml",
+      "description": "Workflow \"Test External Providers Installed via Module\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/test-external.yml",
+      "description": "Workflow \"Test External API and Providers\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/trigger-docs-deploy.yml",
+      "description": "Workflow \"Trigger Docs Deploy\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/ui-unit-tests.yml",
+      "description": "Workflow \"UI Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/unit-tests.yml",
+      "description": "Workflow \"Unit Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    }
+  ]
+}
