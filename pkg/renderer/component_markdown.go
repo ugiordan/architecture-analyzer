@@ -28,8 +28,8 @@ func RenderComponentMarkdown(data map[string]interface{}) string {
 
 	// Sections from existing report.go coverage (conditional)
 	renderCMDSection(&b, data, "CRDs", "crds", func(b *strings.Builder, items []map[string]interface{}, data map[string]interface{}) {
-		b.WriteString("| Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |\n")
-		b.WriteString("|------|-------|---------|-------|--------|------------------|-----------|--------|\n")
+		b.WriteString("| Kind | Group | Version | Scope | API Tier | Fields | Validation Rules | Discovery | Source |\n")
+		b.WriteString("|------|-------|---------|-------|----------|--------|------------------|-----------|--------|\n")
 		for _, crd := range items {
 			discovery := "YAML"
 			if goSrc := getStr(crd, "go_source", ""); goSrc == "go_ast" {
@@ -37,11 +37,12 @@ func RenderComponentMarkdown(data map[string]interface{}) string {
 			} else if goSrc == "go_ast_enriched" {
 				discovery = "YAML + Go AST"
 			}
-			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %d | %s | %s | %s |\n",
+			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | %d | %s | %s | %s |\n",
 				escapeMdCell(getStr(crd, "kind", "")),
 				escapeMdCell(getStr(crd, "group", "")),
 				escapeMdCell(getStr(crd, "version", "")),
 				escapeMdCell(getStr(crd, "scope", "")),
+				escapeMdCell(getStr(crd, "api_tier", "")),
 				getInt(crd, "fields_count"),
 				escapeMdCell(strings.Join(getStringSlice(crd, "validation_rules"), ", ")),
 				discovery,
