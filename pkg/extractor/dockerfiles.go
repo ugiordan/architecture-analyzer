@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -221,6 +222,26 @@ func extractDockerfiles(repoPath string) []DockerfileInfo {
 				}
 			}
 			finalCopies = append(finalCopies, ci)
+		}
+
+		// Make COPY sources repo-root-relative by prefixing the Dockerfile's
+		// directory when it lives in a subdirectory. Assumes build context equals
+		// the Dockerfile's directory (the standard convention).
+		dockerfileDir := filepath.Dir(relativePath(repoPath, fpath))
+		if dockerfileDir != "." {
+			for i := range finalCopies {
+				// Only prefix direct host-copy Sources; --from Sources are container-absolute
+				// paths and URL Sources are not host paths.
+				if finalCopies[i].FromStage == "" && !finalCopies[i].IsURL {
+					for j, src := range finalCopies[i].Sources {
+						finalCopies[i].Sources[j] = prefixPath(dockerfileDir, src)
+					}
+				}
+				// OriginalSources always trace back to host paths from earlier stages.
+				for j, src := range finalCopies[i].OriginalSources {
+					finalCopies[i].OriginalSources[j] = prefixPath(dockerfileDir, src)
+				}
+			}
 		}
 
 		stages := len(fromImages)
@@ -459,6 +480,16 @@ func parseMakeBuild(cmd string) *BuildCommand {
 		return nil
 	}
 	return &BuildCommand{Tool: "make", Command: m[1]}
+}
+
+// prefixPath prepends dir to src using filepath.Join, restoring a trailing
+// slash if the original src had one (filepath.Join strips it).
+func prefixPath(dir, src string) string {
+	joined := filepath.Join(dir, src)
+	if strings.HasSuffix(src, "/") && !strings.HasSuffix(joined, "/") {
+		joined += "/"
+	}
+	return joined
 }
 
 func collectStageHostSources(idx int, hostSources map[int][]string, parents map[int]int) []string {
