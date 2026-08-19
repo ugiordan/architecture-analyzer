@@ -677,11 +677,11 @@ USER 65532:65532
 		isURL           bool
 	}{
 		{
-			name:      "COPY --from=builder: container Sources not prefixed, OriginalSources prefixed",
-			idx:       0,
-			sources:   []string{"/workspace/manager"},
-			fromStage: "builder",
-			destination: ".",
+			name:            "COPY --from=builder: container Sources not prefixed, OriginalSources prefixed",
+			idx:             0,
+			sources:         []string{"/workspace/manager"},
+			fromStage:       "builder",
+			destination:     ".",
 			originalSources: []string{"module/go.mod", "module/go.sum", "module/cmd/main.go"},
 		},
 		{
@@ -715,6 +715,80 @@ USER 65532:65532
 			assertStringSlice(t, "original_sources", ci.OriginalSources, tt.originalSources)
 		})
 	}
+}
+
+func TestPrefixPath(t *testing.T) {
+	tests := []struct {
+		dir  string
+		src  string
+		want string
+	}{
+		// plain path, no trailing slash
+		{"module", "go.mod", "module/go.mod"},
+		// trailing slash preserved
+		{"module", "config/manifests/", "module/config/manifests/"},
+		// deeply nested dir
+		{"a/b/c", "cmd/main.go", "a/b/c/cmd/main.go"},
+		// trailing slash with deep dir
+		{"a/b", "assets/", "a/b/assets/"},
+		// dir is "." — filepath.Join cleans it to src
+		{".", "go.mod", "go.mod"},
+		{".", "config/", "config/"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.dir+"/"+tt.src, func(t *testing.T) {
+			got := prefixPath(tt.dir, tt.src)
+			if got != tt.want {
+				t.Errorf("prefixPath(%q, %q) = %q, want %q", tt.dir, tt.src, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestExtractCopyAddDeepSubdirDockerfile(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+WORKDIR /workspace
+COPY go.mod go.sum ./
+RUN go build -o manager ./cmd/...
+
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.4
+COPY --from=builder /workspace/manager .
+COPY config/ /config/
+`
+
+	dir := t.TempDir()
+	subdir := filepath.Join(dir, "a", "b")
+	if err := os.MkdirAll(subdir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(subdir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result) != 1 {
+		t.Fatalf("expected 1 dockerfile, got %d", len(result))
+	}
+
+	df := result[0]
+	if df.Path != filepath.Join("a", "b", "Dockerfile") {
+		t.Fatalf("path: got %q, want %q", df.Path, filepath.Join("a", "b", "Dockerfile"))
+	}
+	if len(df.CopyInstructions) != 2 {
+		t.Fatalf("expected 2 final-stage copy instructions, got %d", len(df.CopyInstructions))
+	}
+
+	// --from=builder: Sources is container-absolute (not prefixed), OriginalSources prefixed
+	fromCopy := df.CopyInstructions[0]
+	assertStringSlice(t, "from-copy sources", fromCopy.Sources, []string{"/workspace/manager"})
+	assertStringSlice(t, "from-copy original_sources", fromCopy.OriginalSources, []string{
+		filepath.Join("a", "b", "go.mod"),
+		filepath.Join("a", "b", "go.sum"),
+	})
+
+	// COPY config/: host source prefixed with a/b/, trailing slash preserved
+	hostCopy := df.CopyInstructions[1]
+	assertStringSlice(t, "host-copy sources", hostCopy.Sources, []string{filepath.Join("a", "b", "config") + "/"})
 }
 
 func assertStringSlice(t *testing.T, label string, got, want []string) {
