@@ -630,6 +630,93 @@ ADD config/manifests/ /manifests/
 	}
 }
 
+func TestExtractCopyAddSubdirDockerfile(t *testing.T) {
+	dockerfile := `FROM golang:1.22 AS builder
+WORKDIR /workspace
+COPY go.mod go.sum ./
+COPY cmd/main.go /src/
+RUN CGO_ENABLED=0 go build -o manager cmd/main.go
+
+FROM registry.access.redhat.com/ubi9/ubi-minimal:9.4
+WORKDIR /
+COPY --from=builder /workspace/manager .
+COPY config/manifests/ /manifests/
+ADD https://example.com/file.tar.gz /tmp/
+USER 65532:65532
+`
+
+	dir := t.TempDir()
+	subdir := filepath.Join(dir, "module")
+	if err := os.MkdirAll(subdir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(subdir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result) != 1 {
+		t.Fatalf("expected 1 dockerfile, got %d", len(result))
+	}
+
+	df := result[0]
+	if df.Path != "module/Dockerfile" {
+		t.Fatalf("path: got %q, want module/Dockerfile", df.Path)
+	}
+	if len(df.CopyInstructions) != 3 {
+		t.Fatalf("expected 3 final-stage copy instructions, got %d", len(df.CopyInstructions))
+	}
+
+	tests := []struct {
+		name            string
+		idx             int
+		sources         []string
+		destination     string
+		fromStage       string
+		originalSources []string
+		isURL           bool
+	}{
+		{
+			name:      "COPY --from=builder: container Sources not prefixed, OriginalSources prefixed",
+			idx:       0,
+			sources:   []string{"/workspace/manager"},
+			fromStage: "builder",
+			destination: ".",
+			originalSources: []string{"module/go.mod", "module/go.sum", "module/cmd/main.go"},
+		},
+		{
+			name:        "COPY config/manifests/: host Sources prefixed, trailing slash preserved",
+			idx:         1,
+			sources:     []string{"module/config/manifests/"},
+			destination: "/manifests/",
+		},
+		{
+			name:        "ADD URL: not prefixed",
+			idx:         2,
+			sources:     []string{"https://example.com/file.tar.gz"},
+			destination: "/tmp/",
+			isURL:       true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ci := df.CopyInstructions[tt.idx]
+			if ci.FromStage != tt.fromStage {
+				t.Errorf("from_stage: got %q, want %q", ci.FromStage, tt.fromStage)
+			}
+			if ci.IsURL != tt.isURL {
+				t.Errorf("is_url: got %v, want %v", ci.IsURL, tt.isURL)
+			}
+			if ci.Destination != tt.destination {
+				t.Errorf("destination: got %q, want %q", ci.Destination, tt.destination)
+			}
+			assertStringSlice(t, "sources", ci.Sources, tt.sources)
+			assertStringSlice(t, "original_sources", ci.OriginalSources, tt.originalSources)
+		})
+	}
+}
+
 func assertStringSlice(t *testing.T, label string, got, want []string) {
 	t.Helper()
 	if len(got) != len(want) {
