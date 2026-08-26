@@ -26233,7 +26233,7 @@
 <h1 id="odh-dashboard-rbac">odh-dashboard: RBAC<a class="headerlink" href="#odh-dashboard-rbac" title="Permanent link">¶</a></h1>
 <p>ServiceAccount bindings, roles, and resource permissions.</p>
 <h2 id="rbac-overview">RBAC Overview<a class="headerlink" href="#rbac-overview" title="Permanent link">¶</a></h2>
-<p>This component defines a large RBAC surface (285 diagram lines). The graph below groups roles by permission scope.</p>
+<p>This component defines a large RBAC surface (261 diagram lines). The graph below groups roles by permission scope.</p>
 <pre class="mermaid"><code>graph LR
     classDef wide fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef medium fill:#f39c12,stroke:#d68910,color:#fff
@@ -26256,7 +26256,6 @@
     odh_dashboard_maas["odh-dashboard-maas\n3 resources"]:::narrow
     odh_dashboard_mlflow["odh-dashboard-mlflow\n2 resources"]:::narrow
     odh_dashboard_model_registry["odh-dashboard-model-registry\n1 resources"]:::narrow
-    odh_dashboard_modules["odh-dashboard-modules\n10 resources"]:::narrow
     odh_dashboard_notebooks["odh-dashboard-notebooks\n10 resources"]:::narrow
     servingruntimes_config_updater["servingruntimes-config-updater\n2 resources"]:::narrow
     end
@@ -26282,8 +26281,6 @@
     subj_odh_dashboard_mlflow --&gt;|binds| odh_dashboard_mlflow
     subj_odh_dashboard_model_registry["odh-dashboard-model-registry\nServiceAccount"]:::subject
     subj_odh_dashboard_model_registry --&gt;|binds| odh_dashboard_model_registry
-    subj_odh_dashboard_modules["odh-dashboard-modules\nServiceAccount"]:::subject
-    subj_odh_dashboard_modules --&gt;|binds| odh_dashboard_modules
     subj_odh_dashboard --&gt;|binds| cluster_monitoring_view
     subj_odh_dashboard_notebooks["odh-dashboard-notebooks\nServiceAccount"]:::subject
     subj_odh_dashboard_notebooks --&gt;|binds| odh_dashboard_notebooks
@@ -26369,12 +26366,6 @@
 <td>ClusterRoleBinding</td>
 <td>odh-dashboard-model-registry</td>
 <td>ServiceAccount/odh-dashboard-model-registry</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRoleBinding</td>
-<td>odh-dashboard-modules</td>
-<td>ServiceAccount/odh-dashboard-modules</td>
 </tr>
 <tr>
 <td>odh-dashboard-monitoring</td>
@@ -26793,62 +26784,6 @@
 <td>create</td>
 </tr>
 <tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>mlflows</td>
-<td>get, list, watch</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>ingresses</td>
-<td>get, list, watch</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>opentelemetrycollectors</td>
-<td>get, list, create, update, delete</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>subjectaccessreviews</td>
-<td>create</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>users, groups, serviceaccounts</td>
-<td>impersonate</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>sandboxes</td>
-<td>get, list, patch</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>routes</td>
-<td>get, list</td>
-</tr>
-<tr>
-<td>odh-dashboard-modules</td>
-<td>ClusterRole</td>
-<td></td>
-<td>mcpserverregistrations</td>
-<td>get, list</td>
-</tr>
-<tr>
 <td>odh-dashboard-notebooks</td>
 <td>ClusterRole</td>
 <td></td>
@@ -27047,7 +26982,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 25, 2026 01:46:10 UTC">August 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 26, 2026 01:52:08 UTC">August 26, 2026</span>
   </span>
 
     
