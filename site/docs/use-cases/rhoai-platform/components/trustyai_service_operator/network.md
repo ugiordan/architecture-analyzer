@@ -11,16 +11,18 @@ graph LR
 
     trustyai_service_operator["trustyai-service-operator"]:::component
     trustyai_service_operator --> svc_0["trustyai-service-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]:::svc
-    trustyai_service_operator --> svc_1["trustyai-service-operator-metrics-service\nClusterIP: 8080/TCP"]:::svc
+    trustyai_service_operator --> svc_1["trustyai-service-operator-metrics-service\nClusterIP: 8443/TCP"]:::svc
+    trustyai_service_operator --> svc_2["trustyai-service-operator-webhook-service\nClusterIP: 443/TCP"]:::svc
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| trustyai-service-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP | [`kustomize:config/overlays/odh`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/kustomize:config/overlays/odh) |
-| trustyai-service-operator-metrics-service | ClusterIP | 8080/TCP | [`kustomize:config/overlays/odh`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/kustomize:config/overlays/odh) |
+| trustyai-service-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP | [`kustomize:config/overlays/odh`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/870559ac1034accf95ac655072444bf28d36ca19/kustomize:config/overlays/odh) |
+| trustyai-service-operator-metrics-service | ClusterIP | 8443/TCP | [`kustomize:config/overlays/odh`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/870559ac1034accf95ac655072444bf28d36ca19/kustomize:config/overlays/odh) |
+| trustyai-service-operator-webhook-service | ClusterIP | 443/TCP | [`kustomize:config/overlays/odh`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/870559ac1034accf95ac655072444bf28d36ca19/kustomize:config/overlays/odh) |
 
 !!! warning "No Network Policies"
-    No NetworkPolicy resources found. All pod-to-pod traffic is allowed by default.
+    No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.
 

@@ -1,8 +1,11 @@
 # training-operator
 
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
+
+
 **Repository:** kubeflow/training-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-07T15:03:24Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:58:49Z
 
 ## Summary
 
@@ -13,7 +16,7 @@
 | Services | 1 |
 | Secrets | 2 |
 | Cluster Roles | 6 |
-| Controller Watches | 0 |
+| Controller Watches | 1 |
 
 ## Component Architecture
 
@@ -54,14 +57,14 @@ graph LR
 
 ### CRDs
 
-| Group | Version | Kind | Scope | Fields | Validation Rules | Source |
-|-------|---------|------|-------|--------|------------------|--------|
-| kubeflow.org | v1 | JAXJob | Namespaced | 1073 | 1 | [`manifests/base/crds/kubeflow.org_jaxjobs.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/crds/kubeflow.org_jaxjobs.yaml) |
-| kubeflow.org | v1 | MPIJob | Namespaced | 1076 | 1 | [`manifests/base/crds/kubeflow.org_mpijobs.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/crds/kubeflow.org_mpijobs.yaml) |
-| kubeflow.org | v1 | PaddleJob | Namespaced | 1140 | 1 | [`manifests/base/crds/kubeflow.org_paddlejobs.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/crds/kubeflow.org_paddlejobs.yaml) |
-| kubeflow.org | v1 | PyTorchJob | Namespaced | 1150 | 1 | [`manifests/base/crds/kubeflow.org_pytorchjobs.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/crds/kubeflow.org_pytorchjobs.yaml) |
-| kubeflow.org | v1 | TFJob | Namespaced | 1075 | 1 | [`manifests/base/crds/kubeflow.org_tfjobs.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/crds/kubeflow.org_tfjobs.yaml) |
-| kubeflow.org | v1 | XGBoostJob | Namespaced | 1073 | 1 | [`manifests/base/crds/kubeflow.org_xgboostjobs.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/crds/kubeflow.org_xgboostjobs.yaml) |
+| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
+|-------|---------|------|-------|--------|------------------|-----------|--------|
+| kubeflow.org | v1 | JAXJob | Namespaced | 1073 | 1 | YAML | [`manifests/base/crds/kubeflow.org_jaxjobs.yaml`](https://github.com/kubeflow/training-operator/blob/1a74b8ffb9b485b09120cc35f5ec3e27771925aa/manifests/base/crds/kubeflow.org_jaxjobs.yaml) |
+| kubeflow.org | v1 | MPIJob | Namespaced | 1076 | 1 | YAML | [`manifests/base/crds/kubeflow.org_mpijobs.yaml`](https://github.com/kubeflow/training-operator/blob/1a74b8ffb9b485b09120cc35f5ec3e27771925aa/manifests/base/crds/kubeflow.org_mpijobs.yaml) |
+| kubeflow.org | v1 | PaddleJob | Namespaced | 1140 | 1 | YAML | [`manifests/base/crds/kubeflow.org_paddlejobs.yaml`](https://github.com/kubeflow/training-operator/blob/1a74b8ffb9b485b09120cc35f5ec3e27771925aa/manifests/base/crds/kubeflow.org_paddlejobs.yaml) |
+| kubeflow.org | v1 | PyTorchJob | Namespaced | 1150 | 1 | YAML | [`manifests/base/crds/kubeflow.org_pytorchjobs.yaml`](https://github.com/kubeflow/training-operator/blob/1a74b8ffb9b485b09120cc35f5ec3e27771925aa/manifests/base/crds/kubeflow.org_pytorchjobs.yaml) |
+| kubeflow.org | v1 | TFJob | Namespaced | 1075 | 1 | YAML | [`manifests/base/crds/kubeflow.org_tfjobs.yaml`](https://github.com/kubeflow/training-operator/blob/1a74b8ffb9b485b09120cc35f5ec3e27771925aa/manifests/base/crds/kubeflow.org_tfjobs.yaml) |
+| kubeflow.org | v1 | XGBoostJob | Namespaced | 1073 | 1 | YAML | [`manifests/base/crds/kubeflow.org_xgboostjobs.yaml`](https://github.com/kubeflow/training-operator/blob/1a74b8ffb9b485b09120cc35f5ec3e27771925aa/manifests/base/crds/kubeflow.org_xgboostjobs.yaml) |
 
 ## Dependencies
 
@@ -72,7 +75,7 @@ graph LR
 | github.com/go-logr/logr | v1.4.2 |
 | github.com/prometheus/client_golang | v1.20.2 |
 | k8s.io/api | v0.31.3 |
-| k8s.io/apimachinery | v0.31.3 |
+| k8s.io/apimachinery | v0.31.7 |
 | k8s.io/client-go | v0.31.3 |
 | sigs.k8s.io/controller-runtime | v0.19.1 |
 

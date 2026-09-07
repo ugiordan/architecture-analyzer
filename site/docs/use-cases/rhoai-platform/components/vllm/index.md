@@ -1,8 +1,11 @@
 # vllm
 
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
+
+
 **Repository:** red-hat-data-services/vllm  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-08T08:20:19Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T04:03:10Z
 
 ## Summary
 
@@ -10,7 +13,7 @@
 |--------|-------|
 | CRDs | 0 |
 | Deployments | 0 |
-| Services | 3 |
+| Services | 0 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
 | Controller Watches | 0 |
@@ -37,7 +40,7 @@ graph LR
 
 ### CRDs
 
-No CRDs defined.
+No CRDs found in analyzed sources.
 
 ## Dependencies
 

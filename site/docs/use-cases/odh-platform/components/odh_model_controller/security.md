@@ -19,8 +19,8 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| odh-model-controller | manager | ? | ? | ? | [`config/default/manager_webhook_patch.yaml`](https://github.com/opendatahub-io/odh-model-controller/blob/f1f124a8ba8614010feef80eb8ed526e7e7d5e72/config/default/manager_webhook_patch.yaml) |
-| odh-model-controller | manager | ? | ? | ? | [`config/manager/manager.yaml`](https://github.com/opendatahub-io/odh-model-controller/blob/f1f124a8ba8614010feef80eb8ed526e7e7d5e72/config/manager/manager.yaml) |
+| model-serving-api | server | ? | true | ? | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/odh-model-controller/blob/43ebf90dd5af130a94cb3b1857f6ebd45ecd28cf/kustomize:config/overlays/odh) |
+| odh-model-controller | manager | ? | ? | ? | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/odh-model-controller/blob/43ebf90dd5af130a94cb3b1857f6ebd45ecd28cf/kustomize:config/overlays/odh) |
 
 ## Build Security
 
@@ -30,7 +30,5 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 |------|------------|--------|------|-------|---------------|------|--------|
 | `Containerfile` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 2 | 65532:65532 |  | multi-arch |  |  |
 | `Containerfile.server` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | 1000:1000 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
-| `Containerfile.server.konflux` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | ${USER} |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
-| `Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:b9b10f42d7eba7ad4a6d5ef26b7d34fdc892b2ffe59b8d0372ec884008569eb6 | 2 | ${USER} |  | multi-arch |  |  |
-| `dev_tools/Containerfile.devspace` | registry.access.redhat.com/ubi9/go-toolset:1.25@sha256:8c5aeac74b4b60dc2e5e44f6b639186b7ec2fec8f0eb9a36d4a32dcf8e255f52 | 1 | root |  |  |  | Container runs as root user |
+| `dev_tools/Containerfile.devspace` | registry.access.redhat.com/ubi9/go-toolset:1.25.8 | 1 | root |  |  |  | Container runs as root user |
 

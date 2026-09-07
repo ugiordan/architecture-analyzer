@@ -1,11 +1,11 @@
 # vllm-cpu
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** red-hat-data-services/vllm-cpu  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:01Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T04:03:18Z
 
 ## Summary
 
@@ -13,7 +13,7 @@
 |--------|-------|
 | CRDs | 0 |
 | Deployments | 0 |
-| Services | 5 |
+| Services | 1 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
 | Controller Watches | 0 |

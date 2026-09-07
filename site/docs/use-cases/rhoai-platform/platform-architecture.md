@@ -2,22 +2,27 @@
 
 ## CRD Ownership Map
 
-The platform defines 56 CRDs. Each CRD is owned by the component that declares it.
+The platform defines 70 CRDs. Each CRD is owned by the component that declares it.
 
 | Owner | CRDs | Count |
 |-------|------|-------|
 | **ai-gateway-payload-processing** | ExternalModel, ExternalProvider | 2 |
+| **codeflare-operator** | AppWrapper | 1 |
 | **data-science-pipelines** | CompositeController, ControllerRevision, DecoratorController | 3 |
 | **data-science-pipelines-operator** | DataSciencePipelinesApplication, Pipeline, PipelineVersion, ScheduledWorkflow | 4 |
-| **gateway-api-inference-extension** | InferenceModelRewrite, InferenceObjective, InferencePool, InferencePoolImport | 4 |
-| **kserve** | ClusterServingRuntime, ClusterStorageContainer, InferenceGraph, InferenceService, LLMInferenceService, LLMInferenceServiceConfig, LocalModelCache, LocalModelNamespaceCache, LocalModelNode, LocalModelNodeGroup, ServingRuntime, TrainedModel | 12 |
+| **kserve** | ClusterServingRuntime, ClusterStorageContainer, InferenceGraph, InferencePool, InferenceService, LLMInferenceService, LLMInferenceServiceConfig, LocalModelCache, LocalModelNamespaceCache, LocalModelNode, LocalModelNodeGroup, ServingRuntime, TrainedModel | 13 |
 | **kueue** | ClusterQueue, LocalQueue | 2 |
-| **llama-stack-k8s-operator** | LlamaStackDistribution, OGXServer | 2 |
-| **mlflow-operator** | MLflow, MLflowConfig | 2 |
+| **llm-d-inference-scheduler** | InferenceModelRewrite, InferenceObjective | 2 |
+| **mlflow-operator** | MLflow, MLflowConfig, MLflowOperator | 3 |
+| **model-registry-operator** | ModelRegistry | 1 |
 | **modelmesh-serving** | ClusterServingRuntime, InferenceService, Predictor, ServingRuntime | 4 |
+| **odh-model-controller** | Account | 1 |
+| **ogx-k8s-operator** | LlamaStackDistribution, OGXServer | 2 |
+| **rhods-operator** | FeatureTracker | 1 |
 | **spark-operator** | ScheduledSparkApplication, SparkApplication, SparkConnect | 3 |
 | **trainer** | ClusterTrainingRuntime, TrainJob, TrainingRuntime | 3 |
-| **workload-variant-autoscaler** | VariantAutoscaling | 1 |
+| **training-operator** | JAXJob, MPIJob, PaddleJob, PyTorchJob, TFJob, XGBoostJob | 6 |
+| **trustyai-service-operator** | EvalHub, LMEvalJob, TrustyAIService | 3 |
 
 ## Cross-Component Dependencies
 
@@ -25,51 +30,65 @@ Relationships detected through Go module imports and CRD watch patterns.
 
 | From | To | Type |
 |------|----|------|
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferencePool |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| ai-gateway-payload-processing | gateway-api-inference-extension | watches-crd:InferenceObjective |
-| kserve | gateway-api-inference-extension | watches-crd:InferencePool |
-| kserve | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| kserve | gateway-api-inference-extension | watches-crd:InferenceObjective |
+| codeflare-operator | opendatahub-operator | go-module |
+| data-science-pipelines-operator | mlflow-operator | go-module |
+| data-science-pipelines-operator | operator-chaos | go-module |
+| kserve | odh-platform-utilities | go-module |
 | kubeflow | data-science-pipelines-operator | go-module |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferencePool |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceObjective |
+| kubeflow | operator-chaos | go-module |
+| llm-d-inference-scheduler | kserve | watches-crd:InferencePool |
 | mlflow-operator | mlflow-operator | go-module |
+| model-registry-operator | odh-platform-utilities | go-module |
+| model-registry-operator | operator-chaos | go-module |
 | model-registry | kserve | watches-crd:InferenceService |
-| modelmesh-serving | kserve | watches-crd:InferenceGraph |
 | modelmesh-serving | kserve | watches-crd:ServingRuntime |
-| modelmesh-serving | kserve | watches-crd:TrainedModel |
-| modelmesh-serving | kserve | watches-crd:InferenceService |
-| models-as-a-service | kserve | go-module |
 | models-as-a-service | ai-gateway-payload-processing | watches-crd:ExternalModel |
 | odh-cli | opendatahub-operator | go-module |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferenceObjective |
-| kserve | modelmesh-serving | webhook-ref |
-| modelmesh-serving | workload-variant-autoscaler | webhook-ref |
-| spark-operator | workload-variant-autoscaler | webhook-ref |
+| odh-dashboard | mlflow-go | go-module |
+| odh-dashboard | odh-dashboard | go-module |
+| odh-dashboard | odh-platform-utilities | go-module |
+| odh-dashboard | ogx-k8s-operator | go-module |
+| odh-model-controller | kserve | go-module |
+| odh-model-controller | kserve | watches-crd:InferenceGraph |
+| odh-model-controller | kserve | watches-crd:ServingRuntime |
+| odh-model-controller | kserve | watches-crd:LLMInferenceService |
+| odh-model-controller | kserve | watches-crd:InferenceService |
+| ogx-k8s-operator | odh-platform-utilities | go-module |
+| rhods-operator | models-as-a-service | go-module |
+| rhods-operator | odh-platform-utilities | go-module |
+| rhods-operator | rhods-operator | go-module |
+| spark-operator | odh-platform-utilities | go-module |
+| trustyai-service-operator | odh-platform-utilities | go-module |
+| workload-variant-autoscaler | kserve | watches-crd:InferencePool |
+| codeflare-operator | rhods-operator | webhook-ref |
+| model-registry-operator | rhods-operator | webhook-ref |
+| modelmesh-serving | rhods-operator | webhook-ref |
 
-**Tightest coupling:** `modelmesh-serving -> kserve` (4 dependency edges).
+**Tightest coupling:** `odh-model-controller -> kserve` (5 dependency edges).
 
 ## Webhooks
 
-**Total webhooks across platform**: 121
+**Total webhooks across platform**: 95
 
 | Component | Webhooks |
 |-----------|----------|
+| agents-operator | 2 |
+| codeflare-operator | 4 |
 | data-science-pipelines-operator | 1 |
-| distributed-workloads | 40 |
-| kserve | 29 |
+| kserve | 21 |
 | kubeflow | 2 |
-| kuberay | 2 |
-| kueue | 23 |
-| llama-stack-k8s-operator | 1 |
+| kuberay | 4 |
+| kueue | 20 |
 | llm-d-inference-scheduler | 5 |
+| model-registry-operator | 4 |
 | modelmesh-serving | 2 |
-| spark-operator | 6 |
-| trainer | 6 |
-| workload-variant-autoscaler | 4 |
+| models-as-a-service | 4 |
+| odh-model-controller | 8 |
+| ogx-k8s-operator | 1 |
+| rhods-operator | 4 |
+| spark-operator | 8 |
+| trainer | 4 |
+| training-operator | 1 |
 
 ### Cross-Component Webhooks
 
@@ -77,56 +96,29 @@ Webhooks whose service reference points to a different component:
 
 | Webhook | Type | Owner | Target Component | Target Type | Path |
 |---------|------|-------|------------------|-------------|------|
-| inferencegraph.kserve-webhook-server.validator | validating | kserve | modelmesh-serving |  | /validate-serving-kserve-io-v1alpha1-inferencegraph |
-| inferenceservice.kserve-webhook-server.defaulter | mutating | kserve | modelmesh-serving |  | /mutate-serving-kserve-io-v1beta1-inferenceservice |
-| inferenceservice.kserve-webhook-server.pod-mutator | mutating | kserve | modelmesh-serving | Mutator | /mutate-pods |
-| inferenceservice.kserve-webhook-server.validator | validating | kserve | modelmesh-serving |  | /validate-serving-kserve-io-v1beta1-inferenceservice |
-| servingruntime.kserve-webhook-server.validator | validating | kserve | modelmesh-serving | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-servingruntime |
-| trainedmodel.kserve-webhook-server.validator | validating | kserve | modelmesh-serving |  | /validate-serving-kserve-io-v1alpha1-trainedmodel |
-| conversion-unknown | conversion | modelmesh-serving | workload-variant-autoscaler |  | /convert |
-| conversion-unknown | conversion | spark-operator | workload-variant-autoscaler |  | /convert |
+| mappwrapper.kb.io | mutating | codeflare-operator | rhods-operator |  | /mutate-workload-codeflare-dev-v1beta2-appwrapper |
+| mraycluster.ray.openshift.ai | mutating | codeflare-operator | rhods-operator | rayClusterWebhook | /mutate-ray-io-v1-raycluster |
+| vappwrapper.kb.io | validating | codeflare-operator | rhods-operator |  | /validate-workload-codeflare-dev-v1beta2-appwrapper |
+| vraycluster.ray.openshift.ai | validating | codeflare-operator | rhods-operator | rayClusterWebhook | /validate-ray-io-v1-raycluster |
+| conversion-unknown | conversion | model-registry-operator | rhods-operator |  | /convert |
+| conversion-unknown | conversion | modelmesh-serving | rhods-operator |  | /convert |
+
+#### Webhook Behavioral Analysis
+
+Field-level operations extracted from Go AST analysis of webhook handlers:
+
+| Webhook | Owner | Field | Operation | Condition |
+|---------|-------|-------|-----------|----------|
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.containers | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.volumes | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.serviceAccountName | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.initContainers | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | template.spec.volumes | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | template.spec.initContainers | set | ptr.Deref(...) |
 
 ### External Webhooks
 
 | Webhook | Type | Owner | Target Type | Path | Failure Policy |
 |---------|------|-------|-------------|------|----------------|
-| mappwrapper.kb.io | mutating | distributed-workloads |  | /mutate-workload-codeflare-dev-v1beta2-appwrapper | Fail |
-| mclusterqueue.kb.io | mutating | distributed-workloads |  | /mutate-kueue-x-k8s-io-v1beta2-clusterqueue | Fail |
-| mdeployment.kb.io | mutating | distributed-workloads |  | /mutate-apps-v1-deployment | Fail |
-| mjaxjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-jaxjob | Fail |
-| mjob.kb.io | mutating | distributed-workloads |  | /mutate-batch-v1-job | Fail |
-| mjobset.kb.io | mutating | distributed-workloads |  | /mutate-jobset-x-k8s-io-v1alpha2-jobset | Fail |
-| mleaderworkerset.kb.io | mutating | distributed-workloads |  | /mutate-leaderworkerset-x-k8s-io-v1-leaderworkerset | Fail |
-| mmpijob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v2beta1-mpijob | Fail |
-| mpaddlejob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-paddlejob | Fail |
-| mpod.kb.io | mutating | distributed-workloads |  | /mutate--v1-pod | Fail |
-| mpytorchjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-pytorchjob | Fail |
-| mraycluster.kb.io | mutating | distributed-workloads |  | /mutate-ray-io-v1-raycluster | Fail |
-| mrayjob.kb.io | mutating | distributed-workloads |  | /mutate-ray-io-v1-rayjob | Fail |
-| mresourceflavor.kb.io | mutating | distributed-workloads |  | /mutate-kueue-x-k8s-io-v1beta2-resourceflavor | Fail |
-| mstatefulset.kb.io | mutating | distributed-workloads |  | /mutate-apps-v1-statefulset | Fail |
-| mtfjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-tfjob | Fail |
-| mtrainjob.kb.io | mutating | distributed-workloads |  | /mutate-trainer-kubeflow-org-v1alpha1-trainjob | Fail |
-| mworkload.kb.io | mutating | distributed-workloads |  | /mutate-kueue-x-k8s-io-v1beta2-workload | Fail |
-| mxgboostjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-xgboostjob | Fail |
-| vappwrapper.kb.io | validating | distributed-workloads |  | /validate-workload-codeflare-dev-v1beta2-appwrapper | Fail |
-| vclusterqueue.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-clusterqueue | Fail |
-| vcohort.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-cohort | Fail |
-| vdeployment.kb.io | validating | distributed-workloads |  | /validate-apps-v1-deployment | Fail |
-| vjaxjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-jaxjob | Fail |
-| vjob.kb.io | validating | distributed-workloads |  | /validate-batch-v1-job | Fail |
-| vleaderworkerset.kb.io | validating | distributed-workloads |  | /validate-leaderworkerset-x-k8s-io-v1-leaderworkerset | Fail |
-| vmpijob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v2beta1-mpijob | Fail |
-| vpaddlejob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-paddlejob | Fail |
-| vpod.kb.io | validating | distributed-workloads |  | /validate--v1-pod | Fail |
-| vpytorchjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-pytorchjob | Fail |
-| vraycluster.kb.io | validating | distributed-workloads |  | /validate-ray-io-v1-raycluster | Fail |
-| vresourceflavor.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-resourceflavor | Fail |
-| vstatefulset.kb.io | validating | distributed-workloads |  | /validate-apps-v1-statefulset | Fail |
-| vtfjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-tfjob | Fail |
-| vtrainjob.kb.io | validating | distributed-workloads |  | /validate-trainer-kubeflow-org-v1alpha1-trainjob | Fail |
-| vworkload.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-workload | Fail |
-| vxgboostjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-xgboostjob | Fail |
-| clusterservingruntime.kserve-webhook-server.validator | validating | kserve |  | /validate-serving-kserve-io-v1alpha1-clusterservingruntime | Fail |
 | mraycluster.kb.io | mutating | kuberay |  | /mutate-ray-io-v1-raycluster | Fail |
 

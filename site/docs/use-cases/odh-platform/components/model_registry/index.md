@@ -1,11 +1,11 @@
 # model-registry
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** kubeflow/model-registry  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:07:02Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:56:49Z
 
 ## Summary
 
@@ -14,7 +14,7 @@
 | CRDs | 0 |
 | Deployments | 3 |
 | Services | 1 |
-| Secrets | 3 |
+| Secrets | 4 |
 | Cluster Roles | 6 |
 | Controller Watches | 2 |
 
@@ -53,30 +53,16 @@ No CRDs found in analyzed sources.
 | Module | Version |
 |--------|---------|
 | github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| google.golang.org/grpc | v1.67.0 |
-| google.golang.org/grpc | v1.67.0 |
-| k8s.io/api | v0.35.4 |
-| k8s.io/api | v0.34.4 |
+| k8s.io/api | v0.34.5 |
+| k8s.io/api | v0.37.0 |
+| k8s.io/apimachinery | v0.37.0 |
 | k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.4 |
-| k8s.io/apimachinery | v0.35.4 |
+| k8s.io/apimachinery | v0.37.0 |
 | k8s.io/apimachinery | v0.35.2 |
-| k8s.io/client-go | v0.34.4 |
-| k8s.io/client-go | v0.35.3 |
-| k8s.io/client-go | v0.34.4 |
-| sigs.k8s.io/controller-runtime | v0.23.3 |
-| sigs.k8s.io/controller-runtime | v0.22.4 |
-| sigs.k8s.io/controller-runtime | v0.22.4 |
+| k8s.io/client-go | v0.37.0 |
+| k8s.io/client-go | v0.34.5 |
+| k8s.io/client-go | v0.34.5 |
+| sigs.k8s.io/controller-runtime | v0.24.1 |
+| sigs.k8s.io/controller-runtime | v0.22.5 |
+| sigs.k8s.io/controller-runtime | v0.22.5 |
 

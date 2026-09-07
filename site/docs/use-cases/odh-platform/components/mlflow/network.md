@@ -11,13 +11,25 @@ graph LR
 
     mlflow["mlflow"]:::component
     mlflow --> svc_0["env-port-default\npython-source: 9137/TCP"]:::svc
+    mlflow -.-> ext_aiohttp[["aiohttp\napi"]]:::ext
+    mlflow -.-> ext_httpx[["httpx\napi"]]:::ext
+    mlflow -.-> ext_mlflow[["mlflow\napi"]]:::ext
+    mlflow -.-> ext_openai[["openai\napi"]]:::ext
+    mlflow -.-> ext_requests[["requests\napi"]]:::ext
+    mlflow -.-> ext_urllib[["urllib\napi"]]:::ext
+    mlflow -.-> ext_postgres[["postgres\ndatabase"]]:::ext
+    mlflow -.-> ext_redis[["redis\ndatabase"]]:::ext
+    mlflow -.-> ext_sqlalchemy[["sqlalchemy\ndatabase"]]:::ext
+    mlflow -.-> ext_azure_blob[["azure-blob\nobject-storage"]]:::ext
+    mlflow -.-> ext_gcs[["gcs\nobject-storage"]]:::ext
+    mlflow -.-> ext_s3[["s3\nobject-storage"]]:::ext
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| env-port-default | python-source | 9137/TCP | [`dev/benchmarks/gateway/fake_server.py:66`](https://github.com/opendatahub-io/mlflow/blob/9700acd222c8f8b4300ff2bebf4966f448ebadda/dev/benchmarks/gateway/fake_server.py#L66) |
+| env-port-default | python-source | 9137/TCP | [`dev/benchmarks/gateway/fake_server.py:66`](https://github.com/opendatahub-io/mlflow/blob/218c92d73cd0dc5d06cc6604f97ed92d22fc9591/dev/benchmarks/gateway/fake_server.py#L66) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

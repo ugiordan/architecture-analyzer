@@ -14,6 +14,6 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `Dockerfile.konflux.lmes-job` | builder | 5 | 65532:65532 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/python-311:latest; Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: builder |
+| `Dockerfile.konflux.lmes-job` | base-${TARGETARCH} | 5 | 65532:65532 |  | amd64, arm64, multi-arch |  | Unpinned base image: ${CUDA_BASE_IMAGE}; Unpinned base image: ${CUDA_BASE_IMAGE}; Unpinned base image: ${CPU_BASE_IMAGE}; Unpinned base image: ${CPU_BASE_IMAGE}; Unpinned base image: base-${TARGETARCH} |
 | `Dockerfile.lmes-job` | builder | 5 | 65532:65532 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/python-311:latest; Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: builder |
 

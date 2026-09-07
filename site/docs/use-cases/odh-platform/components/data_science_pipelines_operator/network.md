@@ -2,8 +2,6 @@
 
 ## Service Map
 
-*12 unique services (13 total, duplicates from test fixtures collapsed).*
-
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
@@ -14,53 +12,45 @@ graph LR
     data_science_pipelines_operator["data-science-pipelines-operator"]:::component
     data_science_pipelines_operator --> svc_0["data-science-pipelines-operator-service\nClusterIP: 8080/TCP"]:::svc
     data_science_pipelines_operator --> svc_1["ds-pipeline-workflow-controller-metrics-template-value\nClusterIP: 9090/TCP"]:::svc
-    data_science_pipelines_operator --> svc_2["mariadb\nClusterIP: 3306/TCP"]:::svc
-    data_science_pipelines_operator --> svc_3["mariadb-template-value\nClusterIP: 3306/TCP"]:::svc
-    data_science_pipelines_operator --> svc_4["minio\nClusterIP: 9000/TCP,9001/TCP"]:::svc
-    data_science_pipelines_operator --> svc_5["minio-service\nClusterIP: 9000/TCP"]:::svc
-    data_science_pipelines_operator --> svc_6["minio-template-value\nClusterIP: 80/TCP,9000/TCP"]:::svc
-    data_science_pipelines_operator --> svc_7["ml-pipeline\nClusterIP: 8443/TCP,8887/TCP,8888/TCP"]:::svc
-    data_science_pipelines_operator --> svc_8["pypi-server\nClusterIP: 8080/TCP"]:::svc
-    data_science_pipelines_operator --> svc_9["template-value\nClusterIP: 8443/TCP,8887/TCP,8888/TCP"]:::svc
-    data_science_pipelines_operator --> svc_10["template-value\nClusterIP: 8443/TCP"]:::svc
-    data_science_pipelines_operator --> svc_11["the-service\nLoadBalancer: 8666/TCP"]:::svc
+    data_science_pipelines_operator --> svc_2["mariadb-template-value\nClusterIP: 3306/TCP"]:::svc
+    data_science_pipelines_operator --> svc_3["minio-service\nClusterIP: 9000/TCP"]:::svc
+    data_science_pipelines_operator --> svc_4["minio-template-value\nClusterIP: 80/TCP,9000/TCP"]:::svc
+    data_science_pipelines_operator --> svc_5["ml-pipeline\nClusterIP: 8443/TCP,8887/TCP,8888/TCP"]:::svc
+    data_science_pipelines_operator --> svc_6["template-value\nClusterIP: 8443/TCP,8887/TCP,8888/TCP"]:::svc
+    data_science_pipelines_operator --> svc_7["template-value\nClusterIP: 8443/TCP"]:::svc
+    data_science_pipelines_operator -.-> ext_requests[["requests\napi"]]:::ext
     data_science_pipelines_operator -.-> ext_mysql[["mysql\ndatabase"]]:::ext
-    data_science_pipelines_operator -.-> ext_azure_blob[["azure-blob\nobject-storage"]]:::ext
     data_science_pipelines_operator -.-> ext_minio[["minio\nobject-storage"]]:::ext
-    data_science_pipelines_operator -.-> ext_s3[["s3\nobject-storage"]]:::ext
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| data-science-pipelines-operator-service | ClusterIP | 8080/TCP | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/kustomize:config/overlays/odh) |
-| ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP | [`config/internal/workflow-controller/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/workflow-controller/service.yaml.tmpl) |
-| mariadb | ClusterIP | 3306/TCP | [`.github/resources/mariadb/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/.github/resources/mariadb/service.yaml) |
-| mariadb-template-value | ClusterIP | 3306/TCP | [`config/internal/mariadb/default/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/mariadb/default/service.yaml.tmpl) |
-| minio | ClusterIP | 9000/TCP, 9001/TCP | [`.github/resources/minio/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/.github/resources/minio/service.yaml) |
-| minio-service | ClusterIP | 9000/TCP | [`config/internal/minio/default/service.minioservice.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/minio/default/service.minioservice.yaml.tmpl) |
-| minio-template-value | ClusterIP | 9000/TCP, 80/TCP | [`config/internal/minio/default/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/minio/default/service.yaml.tmpl) |
-| ml-pipeline | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP | [`config/internal/apiserver/default/service.ml-pipeline.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/apiserver/default/service.ml-pipeline.yaml.tmpl) |
-| pypi-server | ClusterIP | 8080/TCP | [`.github/resources/pypiserver/base/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/.github/resources/pypiserver/base/service.yaml) |
-| template-value | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP | [`config/internal/apiserver/default/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/apiserver/default/service.yaml.tmpl) |
-| template-value | ClusterIP | 8443/TCP | [`config/internal/webhook/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/webhook/service.yaml.tmpl) |
-| the-service | LoadBalancer | 8666/TCP | [`.gopath-loader/pkg/mod/k8s.io/cli-runtime@v0.35.3/artifacts/kustomization/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/.gopath-loader/pkg/mod/k8s.io/cli-runtime@v0.35.3/artifacts/kustomization/service.yaml) |
-| the-service | LoadBalancer | 8666/TCP | [`.gomod-cache/k8s.io/cli-runtime@v0.35.3/artifacts/kustomization/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/.gomod-cache/k8s.io/cli-runtime@v0.35.3/artifacts/kustomization/service.yaml) |
+| data-science-pipelines-operator-service | ClusterIP | 8080/TCP | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/kustomize:config/overlays/odh) |
+| ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP | [`config/internal/workflow-controller/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/workflow-controller/service.yaml.tmpl) |
+| mariadb-template-value | ClusterIP | 3306/TCP | [`config/internal/mariadb/default/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/mariadb/default/service.yaml.tmpl) |
+| minio-service | ClusterIP | 9000/TCP | [`config/internal/minio/default/service.minioservice.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/minio/default/service.minioservice.yaml.tmpl) |
+| minio-template-value | ClusterIP | 9000/TCP, 80/TCP | [`config/internal/minio/default/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/minio/default/service.yaml.tmpl) |
+| ml-pipeline | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP | [`config/internal/apiserver/default/service.ml-pipeline.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/apiserver/default/service.ml-pipeline.yaml.tmpl) |
+| template-value | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP | [`config/internal/apiserver/default/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/apiserver/default/service.yaml.tmpl) |
+| template-value | ClusterIP | 8443/TCP | [`config/internal/webhook/service.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/webhook/service.yaml.tmpl) |
 
 ### Ingress / Routing
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Ingress | rbac-inferred |  |  | no | [`rbac/manager-role`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/rbac/manager-role) |
-| Route | rbac-inferred |  |  | no | [`rbac/manager-role`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/rbac/manager-role) |
+| Ingress | rbac-inferred |  |  | no | [`rbac/manager-role`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/rbac/manager-role) |
+| Route | ds-pipeline-md-template-value |  |  | yes | [`config/internal/ml-metadata/route/metadata-envoy.route.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/ml-metadata/route/metadata-envoy.route.yaml.tmpl) |
+| Route | minio-template-value |  |  | yes | [`config/internal/minio/route.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/minio/route.yaml.tmpl) |
+| Route | template-value |  |  | yes | [`config/internal/apiserver/route/route.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/apiserver/route/route.yaml.tmpl) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| ds-pipeline-metadata-grpc-template-value | Ingress | [`config/internal/ml-metadata/metadata-grpc.networkpolicy.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/ml-metadata/metadata-grpc.networkpolicy.yaml.tmpl) |
-| mariadb-template-value | Ingress | [`config/internal/mariadb/default/networkpolicy.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/37e72e10bfdf354b91e5a39f36f232a34391bf7f/config/internal/mariadb/default/networkpolicy.yaml.tmpl) |
+| ds-pipeline-metadata-grpc-template-value | Ingress | [`config/internal/ml-metadata/metadata-grpc.networkpolicy.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/ml-metadata/metadata-grpc.networkpolicy.yaml.tmpl) |
+| mariadb-template-value | Ingress | [`config/internal/mariadb/default/networkpolicy.yaml.tmpl`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/3bc87867b7f03c07de694c7165384181f4cda947/config/internal/mariadb/default/networkpolicy.yaml.tmpl) |
 
 ## Network Policy Graph
 

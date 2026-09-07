@@ -8,7 +8,10 @@ Kubernetes secrets referenced by this component. Only names and types are shown,
 
 | Name | Type | Referenced By |
 |------|------|---------------|
+| maas-api-metrics-tls | Opaque | deployment/maas-api |
 | maas-api-serving-cert | kubernetes.io/tls | deployment/maas-api, service/maas-api |
+| maas-controller-metrics-tls | Opaque | deployment/maas-controller |
+| maas-controller-webhook-cert | kubernetes.io/tls | deployment/maas-controller, service/maas-controller-webhook-service |
 
 ## Deployment Security Controls
 
@@ -18,10 +21,10 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| maas-api | maas-api | true | true | ? | [`deployment/base/maas-api/core/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/maas-api/core/deployment.yaml) |
-| maas-api | maas-api | ? | ? | ? | [`deployment/base/maas-api/overlays/tls/deployment-patch.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/maas-api/overlays/tls/deployment-patch.yaml) |
-| maas-controller | manager | ? | ? | ? | [`deployment/base/maas-controller/manager/manager.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/maas-controller/manager/manager.yaml) |
-| payload-processing | payload-processing | ? | true | ? | [`deployment/base/payload-processing/manager/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/payload-processing/manager/deployment.yaml) |
+| maas-api | maas-api | true | true | ? | [`deployment/base/maas-api/core/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/14a17015864b01735eec4fa9c9fe7fbc0008de9e/deployment/base/maas-api/core/deployment.yaml) |
+| maas-api | maas-api | ? | ? | ? | [`deployment/base/maas-api/overlays/tls/deployment-patch.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/14a17015864b01735eec4fa9c9fe7fbc0008de9e/deployment/base/maas-api/overlays/tls/deployment-patch.yaml) |
+| maas-controller | manager | ? | true | ? | [`deployment/base/maas-controller/manager/manager.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/14a17015864b01735eec4fa9c9fe7fbc0008de9e/deployment/base/maas-controller/manager/manager.yaml) |
+| payload-processing | payload-processing | ? | true | ? | [`deployment/base/payload-processing/instance/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/14a17015864b01735eec4fa9c9fe7fbc0008de9e/deployment/base/payload-processing/instance/deployment.yaml) |
 
 ## Build Security
 

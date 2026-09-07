@@ -4,7 +4,7 @@ ServiceAccount bindings, roles, and resource permissions.
 
 ## RBAC Overview
 
-This component defines a large RBAC surface (119 diagram lines). The graph below groups roles by permission scope.
+This component defines a large RBAC surface (123 diagram lines). The graph below groups roles by permission scope.
 
 ```mermaid
 graph LR
@@ -14,26 +14,29 @@ graph LR
     classDef subject fill:#3498db,stroke:#2980b9,color:#fff
 
     subgraph med["Medium Scope (10-30)"]
-    kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\n16 resources"]:::medium
+    kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\n17 resources"]:::medium
     end
     subgraph nar["Narrow Scope (<10)"]
     kubeflow_trainer_admin["kubeflow-trainer-admin"]:::narrow
-    kubeflow_trainer_cache_initializer["kubeflow-trainer-cache-initializer\n4 resources"]:::narrow
-    kubeflow_trainer_edit["kubeflow-trainer-edit\n7 resources"]:::narrow
-    kubeflow_trainer_view["kubeflow-trainer-view\n4 resources"]:::narrow
+    kubeflow_trainer_cache_initializer["kubeflow-trainer-cache-initializer\n3 resources"]:::narrow
+    kubeflow_trainer_edit["kubeflow-trainer-edit\n5 resources"]:::narrow
+    kubeflow_trainer_view["kubeflow-trainer-view\n2 resources"]:::narrow
+    kubeflow_trainer_view_cluster_runtimes["kubeflow-trainer-view-cluster-runtimes\n1 resources"]:::narrow
+    trainer_tls_profile["trainer-tls-profile\n2 resources"]:::narrow
     training_admin["training-admin\n6 resources"]:::narrow
     training_edit["training-edit\n6 resources"]:::narrow
     training_view["training-view\n6 resources"]:::narrow
+    kubeflow_trainer_public["kubeflow-trainer-public\n1 resources"]:::narrow
     end
 
     subj_kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\nServiceAccount"]:::subject
     subj_kubeflow_trainer_controller_manager -->|binds| kubeflow_trainer_controller_manager
-    subj_notebook_controller_service_account["notebook-controller-service-account\nServiceAccount"]:::subject
-    subj_notebook_controller_service_account -->|binds| kubeflow_trainer_view
-    subj_controller_service_account["controller-service-account\nServiceAccount"]:::subject
-    subj_controller_service_account -->|binds| kubeflow_trainer_view
+    subj_system_authenticated["system:authenticated\nGroup"]:::subject
+    subj_system_authenticated -->|binds| kubeflow_trainer_view_cluster_runtimes
+    subj_kubeflow_trainer_controller_manager -->|binds| trainer_tls_profile
     subj_kubeflow_trainer_cache_initializer["kubeflow-trainer-cache-initializer\nServiceAccount"]:::subject
     subj_kubeflow_trainer_cache_initializer -->|binds| kubeflow_trainer_cache_initializer
+    subj_system_authenticated -->|binds| kubeflow_trainer_public
 ```
 
 ## Bindings
@@ -43,9 +46,10 @@ Subject-to-role mappings defining who has access to what.
 | Binding | Type | Role | Subject |
 |---------|------|------|---------|
 | kubeflow-trainer-controller-manager | ClusterRoleBinding | kubeflow-trainer-controller-manager | ServiceAccount/kubeflow-trainer-controller-manager |
-| kubeflow-trainer-view | ClusterRoleBinding | kubeflow-trainer-view | ServiceAccount/notebook-controller-service-account |
-| kubeflow-trainer-view | ClusterRoleBinding | kubeflow-trainer-view | ServiceAccount/controller-service-account |
+| kubeflow-trainer-view-cluster-runtimes | ClusterRoleBinding | kubeflow-trainer-view-cluster-runtimes | Group/system:authenticated |
+| trainer-tls-profile | ClusterRoleBinding | trainer-tls-profile | ServiceAccount/kubeflow-trainer-controller-manager |
 | kubeflow-trainer-cache-initializer | RoleBinding | kubeflow-trainer-cache-initializer | ServiceAccount/kubeflow-trainer-cache-initializer |
+| kubeflow-trainer-public | RoleBinding | kubeflow-trainer-public | Group/system:authenticated |
 
 ## Role Details
 
@@ -53,27 +57,26 @@ Per-rule breakdown of API groups, resources, and verbs for each role.
 
 | Role | Kind | API Groups | Resources | Verbs |
 |------|------|------------|-----------|-------|
-| kubeflow-trainer-cache-initializer | ClusterRole |  | leaderworkersets, services | create, get, list, watch |
+| kubeflow-trainer-cache-initializer | ClusterRole |  | leaderworkersets | create, get, list, watch |
+| kubeflow-trainer-cache-initializer | ClusterRole |  | services | create, get, list, watch |
 | kubeflow-trainer-cache-initializer | ClusterRole |  | serviceaccounts | create, delete, get, list, watch |
-| kubeflow-trainer-cache-initializer | ClusterRole |  | trainjobs | get, list, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | configmaps, secrets | create, get, list, patch, update, watch |
-| kubeflow-trainer-controller-manager | ClusterRole |  | events | create, patch, update, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | limitranges | get, list, watch |
-| kubeflow-trainer-controller-manager | ClusterRole |  | validatingwebhookconfigurations | get, list, update, watch |
+| kubeflow-trainer-controller-manager | ClusterRole |  | events | create, patch, update, watch |
+| kubeflow-trainer-controller-manager | ClusterRole |  | mutatingwebhookconfigurations, validatingwebhookconfigurations | get, list, update, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | leases | create, get, list, update |
-| kubeflow-trainer-controller-manager | ClusterRole |  | jobsets | create, get, list, patch, update, watch |
+| kubeflow-trainer-controller-manager | ClusterRole |  | jobsets | create, delete, get, list, patch, update, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | runtimeclasses | get, list, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | podgroups | create, get, list, patch, update, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | clustertrainingruntimes, trainingruntimes, trainjobs | get, list, patch, update, watch |
 | kubeflow-trainer-controller-manager | ClusterRole |  | clustertrainingruntimes/finalizers, trainingruntimes/finalizers, trainjobs/finalizers, trainjobs/status | get, patch, update |
-| kubeflow-trainer-edit | ClusterRole |  | clustertrainingruntimes, trainingruntimes | get, list, watch |
-| kubeflow-trainer-edit | ClusterRole |  | trainjobs | create, delete, get, list, patch, update, watch |
-| kubeflow-trainer-edit | ClusterRole |  | trainjobs/status | get |
-| kubeflow-trainer-edit | ClusterRole |  | pods | list |
-| kubeflow-trainer-edit | ClusterRole |  | pods/log | get |
-| kubeflow-trainer-edit | ClusterRole |  | events | get, list, watch |
-| kubeflow-trainer-view | ClusterRole |  | clustertrainingruntimes, trainingruntimes, trainjobs | get, list, watch |
-| kubeflow-trainer-view | ClusterRole |  | trainjobs/status | get |
+| kubeflow-trainer-edit | ClusterRole |  | trainingruntimes | get, list, watch |
+| kubeflow-trainer-edit | ClusterRole |  | trainjobs | create, patch, get, list, watch, delete |
+| kubeflow-trainer-edit | ClusterRole |  | pods, pods/log, events | get, list, watch |
+| kubeflow-trainer-view | ClusterRole |  | trainingruntimes, trainjobs | get, list, watch |
+| kubeflow-trainer-view-cluster-runtimes | ClusterRole |  | clustertrainingruntimes | get, list, watch |
+| trainer-tls-profile | ClusterRole |  | apiservers | get |
+| trainer-tls-profile | ClusterRole |  | apiservers | list, watch |
 | training-admin | ClusterRole |  | trainjobs, trainingruntimes, clustertrainingruntimes | create, delete, get, list, patch, update, watch |
 | training-admin | ClusterRole |  | trainjobs/status, trainingruntimes/status, clustertrainingruntimes/status | get |
 | training-edit | ClusterRole |  | trainjobs | create, delete, get, list, patch, update, watch |
@@ -82,67 +85,5 @@ Per-rule breakdown of API groups, resources, and verbs for each role.
 | training-edit | ClusterRole |  | trainingruntimes/status, clustertrainingruntimes/status | get |
 | training-view | ClusterRole |  | trainjobs, trainingruntimes, clustertrainingruntimes | get, list, watch |
 | training-view | ClusterRole |  | trainjobs/status, trainingruntimes/status, clustertrainingruntimes/status | get |
-
-### Cluster Roles
-
-| Name | Resources | Verbs | Source |
-|------|-----------|-------|--------|
-| kubeflow-trainer-cache-initializer | leaderworkersets, services | create, get, list, watch | [`manifests/overlays/data-cache/cluster_role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/data-cache/cluster_role.yaml) |
-| kubeflow-trainer-cache-initializer | serviceaccounts | create, delete, get, list, watch | [`manifests/overlays/data-cache/cluster_role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/data-cache/cluster_role.yaml) |
-| kubeflow-trainer-cache-initializer | trainjobs | get, list, watch | [`manifests/overlays/data-cache/cluster_role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/data-cache/cluster_role.yaml) |
-| kubeflow-trainer-controller-manager | configmaps, secrets | create, get, list, patch, update, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | events | create, patch, update, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | limitranges | get, list, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | validatingwebhookconfigurations | get, list, update, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | leases | create, get, list, update | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | jobsets | create, get, list, patch, update, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | runtimeclasses | get, list, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | podgroups | create, get, list, patch, update, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | clustertrainingruntimes, trainingruntimes, trainjobs | get, list, patch, update, watch | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-controller-manager | clustertrainingruntimes/finalizers, trainingruntimes/finalizers, trainjobs/finalizers, trainjobs/status | get, patch, update | [`manifests/base/rbac/role.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/base/rbac/role.yaml) |
-| kubeflow-trainer-edit | clustertrainingruntimes, trainingruntimes | get, list, watch | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-edit | trainjobs | create, delete, get, list, patch, update, watch | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-edit | trainjobs/status | get | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-edit | pods | list | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-edit | pods/log | get | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-edit | events | get, list, watch | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-view | clustertrainingruntimes, trainingruntimes, trainjobs | get, list, watch | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-view | trainjobs/status | get | [`manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| training-admin | trainjobs, trainingruntimes, clustertrainingruntimes | create, delete, get, list, patch, update, watch | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-admin | trainjobs/status, trainingruntimes/status, clustertrainingruntimes/status | get | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-edit | trainjobs | create, delete, get, list, patch, update, watch | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-edit | trainjobs/status | get | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-edit | trainingruntimes, clustertrainingruntimes | get, list, watch | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-edit | trainingruntimes/status, clustertrainingruntimes/status | get | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-view | trainjobs, trainingruntimes, clustertrainingruntimes | get, list, watch | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-| training-view | trainjobs/status, trainingruntimes/status, clustertrainingruntimes/status | get | [`manifests/rhoai/kubeflow-training-roles.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/manifests/rhoai/kubeflow-training-roles.yaml) |
-
-### Kubebuilder RBAC Markers
-
-Kubebuilder `+kubebuilder:rbac` markers declare the RBAC requirements of controller reconcilers. These are the source of truth for generated ClusterRole manifests. 22 markers found.
-
-| File | Line | Groups | Resources | Verbs |
-|------|------|--------|-----------|-------|
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:96`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L96) | 96 | "" | events | create, watch, update, patch |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:97`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L97) | 97 | jobset.x-k8s.io | jobsets | get, list, watch, create, update, patch, delete |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:98`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L98) | 98 | jobset.x-k8s.io | jobsets/status | get, update, patch |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:99`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L99) | 99 | jobset.x-k8s.io | jobsets/finalizers | update |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:100`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L100) | 100 | batch | jobs | get, list, watch, create, update, patch, delete |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:101`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L101) | 101 | batch | jobs/status | get, patch, update |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:102`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L102) | 102 | core | services | get, list, watch, create, update, patch, delete |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go:46`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go#L46) | 46 | "" | secrets | get, list, watch, update |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go:47`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go#L47) | 47 | "admissionregistration.k8s.io" | mutatingwebhookconfigurations | get, list, watch, update |
-| [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go:48`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go#L48) | 48 | "admissionregistration.k8s.io" | validatingwebhookconfigurations | get, list, watch, update |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:96`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L96) | 96 | "" | events | create, watch, update, patch |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:97`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L97) | 97 | jobset.x-k8s.io | jobsets | get, list, watch, create, update, patch, delete |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:98`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L98) | 98 | jobset.x-k8s.io | jobsets/status | get, update, patch |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:99`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L99) | 99 | jobset.x-k8s.io | jobsets/finalizers | update |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:100`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L100) | 100 | batch | jobs | get, list, watch, create, update, patch, delete |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:101`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L101) | 101 | batch | jobs/status | get, patch, update |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go:102`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/controllers/jobset_controller.go#L102) | 102 | core | services | get, list, watch, create, update, patch, delete |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go:46`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go#L46) | 46 | "" | secrets | get, list, watch, update |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go:47`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go#L47) | 47 | "admissionregistration.k8s.io" | mutatingwebhookconfigurations | get, list, watch, update |
-| [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go:48`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/pkg/util/cert/cert.go#L48) | 48 | "admissionregistration.k8s.io" | validatingwebhookconfigurations | get, list, watch, update |
-| [`pkg/util/cert/cert.go:51`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/pkg/util/cert/cert.go#L51) | 51 | "" | secrets | get, list, watch, update |
-| [`pkg/util/cert/cert.go:52`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/pkg/util/cert/cert.go#L52) | 52 | "admissionregistration.k8s.io" | validatingwebhookconfigurations | get, list, watch, update |
+| kubeflow-trainer-public | Role |  | configmaps | get, list, watch |
 

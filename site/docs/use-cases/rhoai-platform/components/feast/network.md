@@ -11,10 +11,20 @@ graph LR
 
     feast["feast"]:::component
     feast --> svc_0["uvicorn-server\npython-source: 6566/TCP"]:::svc
+    feast -.-> ext_elasticsearch[["elasticsearch\napi"]]:::ext
+    feast -.-> ext_milvus[["milvus\napi"]]:::ext
+    feast -.-> ext_mlflow[["mlflow\napi"]]:::ext
+    feast -.-> ext_qdrant[["qdrant\napi"]]:::ext
+    feast -.-> ext_requests[["requests\napi"]]:::ext
+    feast -.-> ext_weaviate[["weaviate\napi"]]:::ext
+    feast -.-> ext_mongodb[["mongodb\ndatabase"]]:::ext
+    feast -.-> ext_mysql[["mysql\ndatabase"]]:::ext
     feast -.-> ext_postgres[["postgres\ndatabase"]]:::ext
     feast -.-> ext_redis[["redis\ndatabase"]]:::ext
+    feast -.-> ext_sqlalchemy[["sqlalchemy\ndatabase"]]:::ext
     feast -.-> ext_sqlite[["sqlite\ndatabase"]]:::ext
     feast -.-> ext_grpc[["grpc\ngrpc"]]:::ext
+    feast -.-> ext_azure_blob[["azure-blob\nobject-storage"]]:::ext
     feast -.-> ext_gcs[["gcs\nobject-storage"]]:::ext
     feast -.-> ext_s3[["s3\nobject-storage"]]:::ext
 ```
@@ -23,7 +33,7 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| uvicorn-server | python-source | 6566/TCP | [`infra/scripts/feature_server_docker_smoke.py:38`](https://github.com/feast-dev/feast/blob/0ab134e67b808322415520a6f071e722ef5a9b45/infra/scripts/feature_server_docker_smoke.py#L38) |
+| uvicorn-server | python-source | 6566/TCP | [`infra/scripts/feature_server_docker_smoke.py:45`](https://github.com/feast-dev/feast/blob/3d770a5a3d77012cc32ac53d571ffde7586de732/infra/scripts/feature_server_docker_smoke.py#L45) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

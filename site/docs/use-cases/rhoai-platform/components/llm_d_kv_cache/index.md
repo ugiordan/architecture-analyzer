@@ -1,11 +1,11 @@
 # llm-d-kv-cache
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** llm-d/llm-d-kv-cache  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:13:33Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T04:01:12Z
 
 ## Summary
 
@@ -48,80 +48,12 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.1 |
 | github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/common | v0.62.0 |
-| github.com/prometheus/common | v0.62.0 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.15.1 |
-| google.golang.org/grpc | v1.77.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.67.0 |
-| google.golang.org/grpc | v1.77.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.68.1 |
-| google.golang.org/grpc | v1.68.1 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.77.0 |
-| google.golang.org/grpc | v1.67.0 |
-| k8s.io/api | v0.33.8 |
-| k8s.io/api | v0.33.0 |
-| k8s.io/api | v0.33.8 |
-| k8s.io/api | v0.33.8 |
-| k8s.io/api | v0.33.0 |
-| k8s.io/api | v0.33.0 |
-| k8s.io/api | v0.33.0 |
-| k8s.io/apiextensions-apiserver | v0.33.0 |
-| k8s.io/apiextensions-apiserver | v0.33.0 |
-| k8s.io/apimachinery | v0.33.0 |
-| k8s.io/apimachinery | v0.33.8 |
-| k8s.io/apimachinery | v0.33.0 |
-| k8s.io/apimachinery | v0.33.0 |
-| k8s.io/apimachinery | v0.33.8 |
-| k8s.io/apimachinery | v0.33.8 |
-| k8s.io/apimachinery | v0.33.8 |
-| k8s.io/apimachinery | v0.33.0 |
-| k8s.io/apimachinery | v0.33.8 |
-| k8s.io/apiserver | v0.33.0 |
-| k8s.io/apiserver | v0.33.0 |
-| k8s.io/apiserver | v0.33.0 |
-| k8s.io/apiserver | v0.33.0 |
-| k8s.io/client-go | v0.33.8 |
-| k8s.io/client-go | v0.33.0 |
-| k8s.io/client-go | v0.33.0 |
-| k8s.io/client-go | v0.33.0 |
-| k8s.io/client-go | v0.33.0 |
+| github.com/prometheus/client_golang | v1.23.2 |
+| github.com/prometheus/client_model | v0.6.2 |
+| google.golang.org/grpc | v1.81.1 |
+| k8s.io/api | v0.33.11 |
+| k8s.io/apimachinery | v0.33.11 |
+| k8s.io/client-go | v0.33.11 |
 | sigs.k8s.io/controller-runtime | v0.21.0 |
 

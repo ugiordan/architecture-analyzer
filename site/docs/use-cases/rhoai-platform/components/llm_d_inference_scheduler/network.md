@@ -11,41 +11,39 @@ graph LR
 
     llm_d_inference_scheduler["llm-d-inference-scheduler"]:::component
     llm_d_inference_scheduler --> svc_0["${EPP_NAME}\nClusterIP: 5557/TCP,9002/TCP,9090/TCP"]:::svc
-    llm_d_inference_scheduler --> svc_1["inference-gateway-istio-nodeport\nNodePort: 15021/TCP,80/TCP"]:::svc
-    llm_d_inference_scheduler --> svc_2["istiod-llm-d-gateway\nClusterIP: 15010/TCP,15012/TCP,15014/TCP,443/TCP"]:::svc
-    llm_d_inference_scheduler --> svc_3["service\nClusterIP: 8080/TCP"]:::svc
-    llm_d_inference_scheduler --> svc_4["uvicorn-server\npython-source: 8000/TCP"]:::svc
-    llm_d_inference_scheduler -.-> ext_redis[["redis\ndatabase"]]:::ext
-    llm_d_inference_scheduler -.-> ext_grpc[["grpc\ngrpc"]]:::ext
+    llm_d_inference_scheduler --> svc_1["e2e-epp\nClusterIP: 5557/TCP,9002/TCP"]:::svc
+    llm_d_inference_scheduler --> svc_2["e2e-epp-health\nNodePort: 9003/TCP"]:::svc
+    llm_d_inference_scheduler --> svc_3["e2e-epp-metrics\nNodePort: 9090/TCP"]:::svc
+    llm_d_inference_scheduler --> svc_4["inference-gateway-istio-nodeport\nNodePort: 15021/TCP,80/TCP"]:::svc
+    llm_d_inference_scheduler --> svc_5["istiod-llm-d-gateway\nClusterIP: 15010/TCP,15012/TCP,15014/TCP,443/TCP"]:::svc
+    llm_d_inference_scheduler --> svc_6["service\nClusterIP: 8080/TCP"]:::svc
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| ${EPP_NAME} | ClusterIP | 9002/TCP, 5557/TCP, 9090/TCP | [`deploy/components/inference-gateway/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/components/inference-gateway/services.yaml) |
-| inference-gateway-istio-nodeport | NodePort | 15021/TCP, 80/TCP | [`deploy/environments/dev/base-kind-istio/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/environments/dev/base-kind-istio/services.yaml) |
-| istiod-llm-d-gateway | ClusterIP | 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP | [`deploy/components/istio-control-plane/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/components/istio-control-plane/services.yaml) |
-| service | ClusterIP | 8080/TCP | [`deploy/environments/kubernetes-base/common/service.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/environments/kubernetes-base/common/service.yaml) |
-| uvicorn-server | python-source | 8000/TCP | [`.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/latencypredictor/training_server.py:2171`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/latencypredictor/training_server.py#L2171) |
+| ${EPP_NAME} | ClusterIP | 9002/TCP, 5557/TCP, 9090/TCP | [`deploy/components/inference-gateway/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/components/inference-gateway/services.yaml) |
+| e2e-epp | ClusterIP | 9002/TCP, 5557/TCP | [`deploy/environments/dev/e2e-infra/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/dev/e2e-infra/services.yaml) |
+| e2e-epp-health | NodePort | 9003/TCP | [`deploy/environments/dev/e2e-infra/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/dev/e2e-infra/services.yaml) |
+| e2e-epp-metrics | NodePort | 9090/TCP | [`deploy/environments/dev/e2e-infra/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/dev/e2e-infra/services.yaml) |
+| inference-gateway-istio-nodeport | NodePort | 15021/TCP, 80/TCP | [`deploy/environments/dev/base-kind-istio/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/dev/base-kind-istio/services.yaml) |
+| istiod-llm-d-gateway | ClusterIP | 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP | [`deploy/components/istio-control-plane/services.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/components/istio-control-plane/services.yaml) |
+| service | ClusterIP | 8080/TCP | [`deploy/environments/kubernetes-base/common/service.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/kubernetes-base/common/service.yaml) |
 
 ### Ingress / Routing
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Gateway | inference-gateway |  |  | no | [`.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/agentgateway/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/agentgateway/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/envoyaigateway/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/envoyaigateway/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/gke/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/gke/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/istio/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/istio/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/nginxgatewayfabric/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gomod-cache/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/nginxgatewayfabric/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/agentgateway/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/agentgateway/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/envoyaigateway/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/envoyaigateway/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/gke/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/gke/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/istio/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/istio/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/nginxgatewayfabric/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/.gopath-loader/pkg/mod/sigs.k8s.io/gateway-api-inference-extension@v1.5.0/config/manifests/gateway/nginxgatewayfabric/gateway.yaml) |
-| Gateway | inference-gateway |  |  | no | [`deploy/components/inference-gateway/gateways.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/components/inference-gateway/gateways.yaml) |
-| HTTPRoute | ${POOL_NAME}-inference-route |  | / | no | [`deploy/components/inference-gateway/httproutes.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/components/inference-gateway/httproutes.yaml) |
-| Route | route |  |  | yes | [`deploy/environments/kubernetes-base/openshift/route.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/5004a7bea77047d43279cf5171976fb940a417ff/deploy/environments/kubernetes-base/openshift/route.yaml) |
+| Gateway | inference-gateway |  |  | no | [`config/manifests/gateway/agentgateway/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/config/manifests/gateway/agentgateway/gateway.yaml) |
+| Gateway | inference-gateway |  |  | no | [`config/manifests/gateway/envoyaigateway/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/config/manifests/gateway/envoyaigateway/gateway.yaml) |
+| Gateway | inference-gateway |  |  | no | [`config/manifests/gateway/gke/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/config/manifests/gateway/gke/gateway.yaml) |
+| Gateway | inference-gateway |  |  | no | [`config/manifests/gateway/istio/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/config/manifests/gateway/istio/gateway.yaml) |
+| Gateway | inference-gateway |  |  | no | [`config/manifests/gateway/nginxgatewayfabric/gateway.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/config/manifests/gateway/nginxgatewayfabric/gateway.yaml) |
+| Gateway | inference-gateway |  |  | no | [`deploy/components/inference-gateway/gateways.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/components/inference-gateway/gateways.yaml) |
+| HTTPRoute | ${POOL_NAME}-inference-route |  | / | no | [`deploy/components/inference-gateway/httproutes.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/components/inference-gateway/httproutes.yaml) |
+| Route | route |  |  | yes | [`deploy/environments/kubernetes-base/openshift/route.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/kubernetes-base/openshift/route.yaml) |
+| Route | route |  |  | no | [`deploy/environments/kubernetes-base/openshift/patch-route.yaml`](https://github.com/llm-d/llm-d-inference-scheduler/blob/93b81aa4c54829fc7348d4e84830bd01c40338e0/deploy/environments/kubernetes-base/openshift/patch-route.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

@@ -11,18 +11,17 @@ graph LR
 
     model_registry["model-registry"]:::component
     model_registry --> svc_0["model-catalog\nClusterIP: 8080/TCP"]:::svc
-    model_registry -.-> ext_mongodb[["mongodb\ndatabase"]]:::ext
-    model_registry -.-> ext_mysql[["mysql\ndatabase"]]:::ext
-    model_registry -.-> ext_postgres[["postgres\ndatabase"]]:::ext
-    model_registry -.-> ext_sqlite[["sqlite\ndatabase"]]:::ext
-    model_registry -.-> ext_gcs[["gcs\nobject-storage"]]:::ext
+    model_registry -.-> ext_aiohttp[["aiohttp\napi"]]:::ext
+    model_registry -.-> ext_requests[["requests\napi"]]:::ext
+    model_registry -.-> ext_urllib[["urllib\napi"]]:::ext
+    model_registry -.-> ext_s3[["s3\nobject-storage"]]:::ext
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| model-catalog | ClusterIP | 8080/TCP | [`manifests/kustomize/options/catalog/base/service.yaml`](https://github.com/kubeflow/model-registry/blob/fc7ab609764b013f0c6c7bd10c9ec9ef4f672972/manifests/kustomize/options/catalog/base/service.yaml) |
+| model-catalog | ClusterIP | 8080/TCP | [`manifests/kustomize/options/catalog/base/service.yaml`](https://github.com/kubeflow/model-registry/blob/75376c10211d5678fad2b267b226a92d8bdba6bf/manifests/kustomize/options/catalog/base/service.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

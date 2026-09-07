@@ -1,22 +1,22 @@
 # spark-operator
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** kubeflow/spark-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:07:41Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:57:01Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 3 |
-| Deployments | 13 |
-| Services | 3 |
+| Deployments | 4 |
+| Services | 1 |
 | Secrets | 1 |
-| Cluster Roles | 5 |
-| Controller Watches | 10 |
+| Cluster Roles | 6 |
+| Controller Watches | 15 |
 
 ## Component Architecture
 
@@ -35,30 +35,12 @@ graph LR
     subgraph controller["spark-operator Controller"]
         dep_1["controller-manager"]
         class dep_1 controller
-        dep_2["controller-manager"]
+        dep_2["spark-operator-controller"]
         class dep_2 controller
-        dep_3["controller-manager"]
+        dep_3["spark-operator-module-controller-manager"]
         class dep_3 controller
-        dep_4["controller-manager"]
+        dep_4["spark-operator-webhook"]
         class dep_4 controller
-        dep_5["controller-manager"]
-        class dep_5 controller
-        dep_6["controller-manager"]
-        class dep_6 controller
-        dep_7["controller-manager"]
-        class dep_7 controller
-        dep_8["peaks"]
-        class dep_8 controller
-        dep_9["peaks"]
-        class dep_9 controller
-        dep_10["spark-operator-controller"]
-        class dep_10 controller
-        dep_11["spark-operator-webhook"]
-        class dep_11 controller
-        dep_12["the-deployment"]
-        class dep_12 controller
-        dep_13["the-deployment"]
-        class dep_13 controller
     end
 
     crd_SparkConnect{{"SparkConnect\nsparkoperator.k8s.io/v1alpha1"}}
@@ -68,164 +50,65 @@ graph LR
     class crd_ScheduledSparkApplication crd
     crd_SparkApplication{{"SparkApplication\nsparkoperator.k8s.io/v1beta2"}}
     class crd_SparkApplication crd
-    watch_14["Pod"] -->|"Watches"| controller
-    class watch_14 external
+    controller -->|"Owns"| owned_5["ClusterRole"]
+    class owned_5 owned
+    controller -->|"Owns"| owned_6["ClusterRoleBinding"]
+    class owned_6 owned
+    controller -->|"Owns"| owned_7["ConfigMap"]
+    class owned_7 owned
+    controller -->|"Owns"| owned_8["CustomResourceDefinition"]
+    class owned_8 owned
+    controller -->|"Owns"| owned_9["Deployment"]
+    class owned_9 owned
+    controller -->|"Owns"| owned_10["MutatingWebhookConfiguration"]
+    class owned_10 owned
+    controller -->|"Owns"| owned_11["NetworkPolicy"]
+    class owned_11 owned
+    controller -->|"Owns"| owned_12["Role"]
+    class owned_12 owned
+    controller -->|"Owns"| owned_13["RoleBinding"]
+    class owned_13 owned
+    controller -->|"Owns"| owned_14["Service"]
+    class owned_14 owned
+    controller -->|"Owns"| owned_15["ServiceAccount"]
+    class owned_15 owned
+    controller -->|"Owns"| owned_16["ValidatingWebhookConfiguration"]
+    class owned_16 owned
+    controller -.->|"depends on"| odh_17["odh-platform-utilities"]
+    class odh_17 dep
 ```
 
 ### CRDs
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
 |-------|---------|------|-------|--------|------------------|-----------|--------|
-| sparkoperator.k8s.io | v1alpha1 | SparkConnect | Namespaced | 95 | 0 | YAML | [`config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml) |
-| sparkoperator.k8s.io | v1beta2 | ScheduledSparkApplication | Namespaced | 1676 | 0 | YAML | [`config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml) |
-| sparkoperator.k8s.io | v1beta2 | SparkApplication | Namespaced | 1679 | 0 | YAML | [`config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml) |
+| sparkoperator.k8s.io | v1alpha1 | SparkConnect | Namespaced | 95 | 0 | YAML | [`config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml`](https://github.com/kubeflow/spark-operator/blob/ba4f90ed3a4296379cb602b3bcab96524cb92690/config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml) |
+| sparkoperator.k8s.io | v1beta2 | ScheduledSparkApplication | Namespaced | 1741 | 0 | YAML | [`config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/ba4f90ed3a4296379cb602b3bcab96524cb92690/config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml) |
+| sparkoperator.k8s.io | v1beta2 | SparkApplication | Namespaced | 1744 | 0 | YAML | [`config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml`](https://github.com/kubeflow/spark-operator/blob/ba4f90ed3a4296379cb602b3bcab96524cb92690/config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml) |
 
 ## Dependencies
+
+### Internal Platform Dependencies
+
+| Component | Interaction |
+|-----------|-------------|
+| odh-platform-utilities | Go module dependency: github.com/opendatahub-io/odh-platform-utilities |
 
 ### Key External Dependencies
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.3.0 |
 | github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/prometheus/client_golang | v1.19.1 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.19.1 |
-| github.com/prometheus/client_golang | v1.16.0 |
-| github.com/prometheus/client_golang | v1.19.1 |
-| github.com/prometheus/client_golang | v1.16.0 |
-| github.com/prometheus/client_golang | v1.19.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.55.0 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.55.0 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.59.0 |
-| google.golang.org/grpc | v1.65.0 |
-| google.golang.org/grpc | v1.65.0 |
-| google.golang.org/grpc | v1.65.0 |
-| google.golang.org/grpc | v1.65.0 |
-| google.golang.org/grpc | v1.59.0 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.1 |
-| k8s.io/api | v0.26.2 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.7 |
-| k8s.io/api | v0.26.2 |
-| k8s.io/api | v0.32.7 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.1 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.30.1 |
-| k8s.io/api | v0.33.3 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.32.5 |
-| k8s.io/api | v0.30.1 |
-| k8s.io/api | v0.33.3 |
-| k8s.io/apiextensions-apiserver | v0.32.1 |
-| k8s.io/apiextensions-apiserver | v0.33.3 |
-| k8s.io/apiextensions-apiserver | v0.33.3 |
-| k8s.io/apiextensions-apiserver | v0.32.5 |
-| k8s.io/apiextensions-apiserver | v0.32.1 |
-| k8s.io/apimachinery | v0.30.1 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.27.4 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.27.4 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.33.3 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.1 |
-| k8s.io/apimachinery | v0.30.1 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.7 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.33.3 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.7 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.5 |
-| k8s.io/apimachinery | v0.32.1 |
-| k8s.io/apiserver | v0.26.2 |
-| k8s.io/apiserver | v0.32.5 |
-| k8s.io/apiserver | v0.33.3 |
-| k8s.io/apiserver | v0.32.5 |
-| k8s.io/apiserver | v0.32.7 |
-| k8s.io/apiserver | v0.30.1 |
-| k8s.io/apiserver | v0.32.7 |
-| k8s.io/apiserver | v0.32.1 |
-| k8s.io/apiserver | v0.30.1 |
-| k8s.io/apiserver | v0.33.3 |
-| k8s.io/apiserver | v0.32.5 |
-| k8s.io/apiserver | v0.32.1 |
-| k8s.io/apiserver | v0.26.2 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.33.3 |
-| k8s.io/client-go | v0.30.1 |
-| k8s.io/client-go | v0.32.7 |
-| k8s.io/client-go | v0.26.2 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.7 |
-| k8s.io/client-go | v0.30.1 |
-| k8s.io/client-go | v0.26.2 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.33.3 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.1 |
-| k8s.io/client-go | v0.32.1 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.5 |
-| k8s.io/client-go | v0.32.5 |
-| sigs.k8s.io/controller-runtime | v0.20.4 |
-| sigs.k8s.io/controller-runtime | v0.20.4 |
-| sigs.k8s.io/controller-runtime | v0.20.4 |
+| k8s.io/api | v0.35.4 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/apiextensions-apiserver | v0.35.2 |
+| k8s.io/apiextensions-apiserver | v0.35.4 |
+| k8s.io/apimachinery | v0.35.4 |
+| k8s.io/apimachinery | v0.35.4 |
+| k8s.io/apiserver | v0.35.4 |
+| k8s.io/client-go | v0.35.2 |
+| k8s.io/client-go | v0.35.4 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

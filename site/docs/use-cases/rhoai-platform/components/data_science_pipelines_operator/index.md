@@ -1,20 +1,20 @@
 # data-science-pipelines-operator
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** opendatahub-io/data-science-pipelines-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:08:06Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:57:07Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 4 |
-| Deployments | 5 |
-| Services | 13 |
-| Secrets | 4 |
+| Deployments | 8 |
+| Services | 8 |
+| Secrets | 0 |
 | Cluster Roles | 4 |
 | Controller Watches | 12 |
 
@@ -35,14 +35,20 @@ graph LR
     subgraph controller["data-science-pipelines-operator Controller"]
         dep_1["data-science-pipelines-operator-controller-manager"]
         class dep_1 controller
-        dep_2["mariadb"]
+        dep_2["ds-pipeline-workflow-controller-template-value"]
         class dep_2 controller
-        dep_3["minio"]
+        dep_3["mariadb-template-value"]
         class dep_3 controller
-        dep_4["the-deployment"]
+        dep_4["minio-template-value"]
         class dep_4 controller
-        dep_5["the-deployment"]
+        dep_5["template-value"]
         class dep_5 controller
+        dep_6["template-value"]
+        class dep_6 controller
+        dep_7["template-value"]
+        class dep_7 controller
+        dep_8["template-value"]
+        class dep_8 controller
     end
 
     crd_DataSciencePipelinesApplication{{"DataSciencePipelinesApplication\ndatasciencepipelinesapplications.opendatahub.io/v1"}}
@@ -54,123 +60,58 @@ graph LR
     class crd_Pipeline crd
     crd_PipelineVersion{{"PipelineVersion\npipelines.kubeflow.org/v2beta1"}}
     class crd_PipelineVersion crd
-    controller -->|"Owns"| owned_6["ConfigMap"]
-    class owned_6 owned
-    controller -->|"Owns"| owned_7["Deployment"]
-    class owned_7 owned
-    controller -->|"Owns"| owned_8["NetworkPolicy"]
-    class owned_8 owned
-    controller -->|"Owns"| owned_9["PersistentVolumeClaim"]
+    controller -->|"Owns"| owned_9["ConfigMap"]
     class owned_9 owned
-    controller -->|"Owns"| owned_10["Role"]
+    controller -->|"Owns"| owned_10["Deployment"]
     class owned_10 owned
-    controller -->|"Owns"| owned_11["RoleBinding"]
+    controller -->|"Owns"| owned_11["NetworkPolicy"]
     class owned_11 owned
-    controller -->|"Owns"| owned_12["Route"]
+    controller -->|"Owns"| owned_12["PersistentVolumeClaim"]
     class owned_12 owned
-    controller -->|"Owns"| owned_13["Secret"]
+    controller -->|"Owns"| owned_13["Role"]
     class owned_13 owned
-    controller -->|"Owns"| owned_14["Service"]
+    controller -->|"Owns"| owned_14["RoleBinding"]
     class owned_14 owned
-    controller -->|"Owns"| owned_15["ServiceAccount"]
+    controller -->|"Owns"| owned_15["Route"]
     class owned_15 owned
+    controller -->|"Owns"| owned_16["Secret"]
+    class owned_16 owned
+    controller -->|"Owns"| owned_17["Service"]
+    class owned_17 owned
+    controller -->|"Owns"| owned_18["ServiceAccount"]
+    class owned_18 owned
+    controller -.->|"depends on"| odh_19["mlflow-operator"]
+    class odh_19 dep
+    controller -.->|"depends on"| odh_20["operator-chaos"]
+    class odh_20 dep
 ```
 
 ### CRDs
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
 |-------|---------|------|-------|--------|------------------|-----------|--------|
-| datasciencepipelinesapplications.opendatahub.io | v1 | DataSciencePipelinesApplication | Namespaced | 205 | 2 | YAML | [`config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/9ca71d78592a3ed510685ea5cc1c74f047bf5dc7/config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml) |
-| kubeflow.org | v1beta1 | ScheduledWorkflow | Namespaced | 5 | 0 | YAML | [`config/crd/bases/scheduledworkflows.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/9ca71d78592a3ed510685ea5cc1c74f047bf5dc7/config/crd/bases/scheduledworkflows.yaml) |
-| pipelines.kubeflow.org | v2beta1 | Pipeline | Namespaced | 7 | 0 | YAML | [`config/crd/bases/pipelines.kubeflow.org_pipelines.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/9ca71d78592a3ed510685ea5cc1c74f047bf5dc7/config/crd/bases/pipelines.kubeflow.org_pipelines.yaml) |
-| pipelines.kubeflow.org | v2beta1 | PipelineVersion | Namespaced | 18 | 0 | YAML | [`config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/9ca71d78592a3ed510685ea5cc1c74f047bf5dc7/config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml) |
+| datasciencepipelinesapplications.opendatahub.io | v1 | DataSciencePipelinesApplication | Namespaced | 208 | 2 | YAML | [`config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/17634f8eb9c92fcc6a71f9f4d5e38cda37cd762c/config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml) |
+| kubeflow.org | v1beta1 | ScheduledWorkflow | Namespaced | 5 | 0 | YAML | [`config/crd/bases/scheduledworkflows.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/17634f8eb9c92fcc6a71f9f4d5e38cda37cd762c/config/crd/bases/scheduledworkflows.yaml) |
+| pipelines.kubeflow.org | v2beta1 | Pipeline | Namespaced | 7 | 0 | YAML | [`config/crd/bases/pipelines.kubeflow.org_pipelines.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/17634f8eb9c92fcc6a71f9f4d5e38cda37cd762c/config/crd/bases/pipelines.kubeflow.org_pipelines.yaml) |
+| pipelines.kubeflow.org | v2beta1 | PipelineVersion | Namespaced | 19 | 0 | YAML | [`config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml`](https://github.com/opendatahub-io/data-science-pipelines-operator/blob/17634f8eb9c92fcc6a71f9f4d5e38cda37cd762c/config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml) |
 
 ## Dependencies
+
+### Internal Platform Dependencies
+
+| Component | Interaction |
+|-----------|-------------|
+| mlflow-operator | Go module dependency: github.com/opendatahub-io/mlflow-operator/api |
+| operator-chaos | Go module dependency: github.com/opendatahub-io/operator-chaos |
 
 ### Key External Dependencies
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.1 |
 | github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.72.2 |
-| google.golang.org/grpc | v1.72.2 |
-| k8s.io/api | v0.21.3 |
-| k8s.io/api | v0.22.5 |
 | k8s.io/api | v0.35.3 |
-| k8s.io/api | v0.35.0 |
-| k8s.io/api | v0.35.0 |
-| k8s.io/api | v0.35.3 |
-| k8s.io/api | v0.35.1 |
-| k8s.io/api | v0.35.3 |
-| k8s.io/api | v0.35.1 |
-| k8s.io/api | v0.35.3 |
-| k8s.io/api | v0.21.3 |
-| k8s.io/api | v0.22.5 |
-| k8s.io/api | v0.35.3 |
-| k8s.io/api | v0.35.3 |
-| k8s.io/api | v0.35.3 |
-| k8s.io/apiextensions-apiserver | v0.35.0 |
-| k8s.io/apiextensions-apiserver | v0.35.0 |
-| k8s.io/apimachinery | v0.35.1 |
-| k8s.io/apimachinery | v0.35.0 |
 | k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.22.5 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.35.1 |
-| k8s.io/apimachinery | v0.22.5 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.19.7 |
-| k8s.io/apimachinery | v0.21.3 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.35.3 |
-| k8s.io/apimachinery | v0.19.7 |
-| k8s.io/apimachinery | v0.21.3 |
-| k8s.io/apimachinery | v0.35.0 |
-| k8s.io/apiserver | v0.35.0 |
-| k8s.io/apiserver | v0.35.3 |
-| k8s.io/apiserver | v0.35.0 |
-| k8s.io/apiserver | v0.35.3 |
-| k8s.io/client-go | v0.22.5 |
-| k8s.io/client-go | v0.35.0 |
-| k8s.io/client-go | v0.21.3 |
 | k8s.io/client-go | v0.35.3 |
-| k8s.io/client-go | v0.35.3 |
-| k8s.io/client-go | v0.21.3 |
-| k8s.io/client-go | v0.35.0 |
-| k8s.io/client-go | v0.35.3 |
-| k8s.io/client-go | v0.35.3 |
-| k8s.io/client-go | v0.35.3 |
-| k8s.io/client-go | v0.22.5 |
 | sigs.k8s.io/controller-runtime | v0.23.3 |
-| sigs.k8s.io/controller-runtime | v0.7.2 |
-| sigs.k8s.io/controller-runtime | v0.7.2 |
 

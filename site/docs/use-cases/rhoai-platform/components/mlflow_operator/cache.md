@@ -24,8 +24,8 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 | corev1.Secret | label | label selector |
 | corev1.Service | label | label selector |
 | corev1.ServiceAccount | label | label selector |
-| rbacv1.ClusterRole | label | label selector |
-| rbacv1.ClusterRoleBinding | label | label selector |
+| rbacv1.ClusterRole | field | field selector |
+| rbacv1.ClusterRoleBinding | field | field selector |
 
 ### Issues
 
@@ -35,5 +35,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 - Type CronJob is watched but has no cache filter (cluster-wide informer)
 - Type HTTPRoute is watched but has no cache filter (cluster-wide informer)
 - Type MLflow is watched but has no cache filter (cluster-wide informer)
+- Type MLflowOperator is watched but has no cache filter (cluster-wide informer)
+- Type Namespace is watched but has no cache filter (cluster-wide informer)
 - Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)
 

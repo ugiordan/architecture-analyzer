@@ -1,11 +1,11 @@
 # rest-proxy
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** kserve/rest-proxy  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:18:13Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T04:03:13Z
 
 ## Summary
 
@@ -16,7 +16,7 @@
 | Services | 0 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
-| Controller Watches | 4 |
+| Controller Watches | 0 |
 
 ## Component Architecture
 
@@ -36,9 +36,6 @@ graph LR
         ctrl_1["Controller"]
         class ctrl_1 controller
     end
-
-    watch_2["Kind"] -->|"Watches"| controller
-    class watch_2 external
 ```
 
 ### CRDs
@@ -51,30 +48,6 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.2.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.2.3 |
-| github.com/go-logr/zapr | v1.2.3 |
-| github.com/go-logr/zapr | v1.2.3 |
-| github.com/prometheus/client_golang | v1.14.0 |
-| github.com/prometheus/client_golang | v1.14.0 |
-| github.com/prometheus/client_model | v0.3.0 |
-| github.com/prometheus/client_model | v0.3.0 |
-| google.golang.org/grpc | v1.54.0 |
 | google.golang.org/grpc | v1.56.3 |
-| google.golang.org/grpc | v1.51.0 |
-| google.golang.org/grpc | v1.54.0 |
-| google.golang.org/grpc | v1.51.0 |
-| k8s.io/api | v0.26.0 |
-| k8s.io/api | v0.26.0 |
-| k8s.io/apiextensions-apiserver | v0.26.0 |
-| k8s.io/apiextensions-apiserver | v0.26.0 |
-| k8s.io/apimachinery | v0.26.0 |
-| k8s.io/apimachinery | v0.26.0 |
-| k8s.io/client-go | v0.26.0 |
-| k8s.io/client-go | v0.26.0 |
 | sigs.k8s.io/controller-runtime | v0.14.1 |
 

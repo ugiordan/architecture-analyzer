@@ -18,6 +18,6 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | `ml_metadata/tools/docker_build/Dockerfile.manylinux2010` | gcr.io/tfx-oss-public/manylinux2014-bazel:bazel-5.3.0 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `ml_metadata/tools/docker_server/Dockerfile` | ubuntu:20.04 | 2 |  |  |  |  | No USER directive found (defaults to root) |
 | `ml_metadata/tools/docker_server/Dockerfile.fedora` | fedora:38 | 2 |  |  |  |  | No USER directive found (defaults to root) |
-| `ml_metadata/tools/docker_server/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 2 | 65534:65534 |  |  |  |  |
+| `ml_metadata/tools/docker_server/Dockerfile.konflux` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a | 2 | 65534:65534 |  |  |  |  |
 | `ml_metadata/tools/docker_server/Dockerfile.redhat` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | 65534:65534 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest; Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
 

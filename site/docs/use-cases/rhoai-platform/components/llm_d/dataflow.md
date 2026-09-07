@@ -15,7 +15,23 @@ sequenceDiagram
     %% Static dataflow for llm-d
 
     participant KubernetesAPI as Kubernetes API
+    participant fma_requester as fma-requester
     participant interactive_pod as interactive-pod
+    participant llm_d_coordinator as llm-d-coordinator
+    participant mooncake_master_store as mooncake-master-store
+    participant render as render
+
+
+    Note over fma_requester: Exposed Services
+    Note right of fma_requester: mooncake-client:50052/TCP [rpc]
+    Note right of fma_requester: mooncake-master-store:50051/TCP [rpc]
+    Note right of fma_requester: mooncake-master-store:8080/TCP [metadata]
+    Note right of fma_requester: mooncake-master-store:9003/TCP [metrics]
+    Note right of fma_requester: render:8000/TCP [render-http]
+    Note right of fma_requester: render:8000/TCP [render-http]
+    Note right of fma_requester: render:8000/TCP [render-http]
+    Note right of fma_requester: render:8000/TCP [render-http]
+    Note right of fma_requester: render:8000/TCP [render-http]
 ```
 
 ## Configuration
@@ -26,9 +42,11 @@ ConfigMaps and Helm values that control this component's runtime behavior.
 
 | Name | Data Keys | Source |
 |------|-----------|--------|
-| llm-d-inference-gateway | deployment, service | [`guides/recipes/gateway/istio/configmap.yaml`](https://github.com/llm-d/llm-d/blob/5bc8871217b23586fb778f24bfbcf41bacc7ec4b/guides/recipes/gateway/istio/configmap.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/cks/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/5bc8871217b23586fb778f24bfbcf41bacc7ec4b/guides/workload-autoscaling/wva-config/platform/cks/configmap-patch.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/generic/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/5bc8871217b23586fb778f24bfbcf41bacc7ec4b/guides/workload-autoscaling/wva-config/platform/generic/configmap-patch.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/gke/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/5bc8871217b23586fb778f24bfbcf41bacc7ec4b/guides/workload-autoscaling/wva-config/platform/gke/configmap-patch.yaml) |
-| workload-variant-autoscaler-wva-variantautoscaling-config | PROMETHEUS_BASE_URL, PROMETHEUS_CA_CERT_PATH, PROMETHEUS_TLS_INSECURE_SKIP_VERIFY | [`guides/workload-autoscaling/wva-config/platform/ocp/configmap-patch.yaml`](https://github.com/llm-d/llm-d/blob/5bc8871217b23586fb778f24bfbcf41bacc7ec4b/guides/workload-autoscaling/wva-config/platform/ocp/configmap-patch.yaml) |
+| deepseek-model-mapping | baseModel | [`guides/multi-model-routing/manifests/configmaps.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/guides/multi-model-routing/manifests/configmaps.yaml) |
+| llm-d-coordinator-config | coordinator.yaml | [`guides/coord-disaggregation/coordinator/configmap.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/guides/coord-disaggregation/coordinator/configmap.yaml) |
+| llm-d-inference-gateway | deployment, service | [`guides/recipes/gateway/istio/configmap.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/guides/recipes/gateway/istio/configmap.yaml) |
+| mooncake-master-store-config | master.yaml | [`helpers/mooncake-master-store/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/helpers/mooncake-master-store/base/configmap.yaml) |
+| mooncake-store-config | mooncake_config.json | [`guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/cpu/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/cpu/base/configmap.yaml) |
+| mooncake-store-config | mooncake_config.json | [`guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/fs/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/fs/base/configmap.yaml) |
+| qwen-model-mapping | baseModel | [`guides/multi-model-routing/manifests/configmaps.yaml`](https://github.com/llm-d/llm-d/blob/080c14d957755da4cc363745638619fc748558f1/guides/multi-model-routing/manifests/configmaps.yaml) |
 

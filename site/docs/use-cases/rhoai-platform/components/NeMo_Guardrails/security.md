@@ -14,9 +14,8 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `.devcontainer/Dockerfile` | mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT} | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `Dockerfile` | python:3.12-slim | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `Dockerfile.konflux` | registry.access.redhat.com/ubi9/python-312:latest | 8 | 1001 |  | multi-arch |  | Unpinned base image: packages-build; Unpinned base image: packages-build; Unpinned base image: packages-build; Unpinned base image: packages-build; Unpinned base image: packages-build; Unpinned base image: registry.access.redhat.com/ubi9/python-312:latest |
+| `Dockerfile.konflux` | ${BASE} | 6 | 1001 |  |  |  | Unpinned base image: ${MODELCAR_MINILM}; Unpinned base image: ${MODELCAR_SNOWFLAKE}; Unpinned base image: ${MODELCAR_SPACY}; Unpinned base image: ${MODELCAR_NLTK}; Unpinned base image: ${BASE}; Unpinned base image: ${BASE} |
 | `Dockerfile.server` | registry.access.redhat.com/ubi9/python-312:latest | 2 | 1001 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/python-312:latest; Unpinned base image: registry.access.redhat.com/ubi9/python-312:latest |
 | `nemoguardrails/library/factchecking/align_score/Dockerfile` | python:3.10 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `nemoguardrails/library/jailbreak_detection/Dockerfile` | python:3.11-slim | 1 |  |  |  |  | No USER directive found (defaults to root) |

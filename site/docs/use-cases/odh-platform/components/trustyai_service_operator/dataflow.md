@@ -6,20 +6,42 @@ Kubernetes resources this controller monitors for changes. Each watch triggers r
 
 | Type | GVK | Source |
 |------|-----|--------|
-| For | batch/v1/Job | [`controllers/evalhub/evaluation_job_failure_reconciler.go:185`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evaluation_job_failure_reconciler.go#L185) |
-| For | evalhub/v1alpha1/EvalHub | [`controllers/evalhub/evalhub_controller.go:250`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evalhub_controller.go#L250) |
-| For | gorch/v1alpha1/GuardrailsOrchestrator | [`controllers/gorch/guardrailsorchestrator_controller.go:410`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/gorch/guardrailsorchestrator_controller.go#L410) |
-| For | kueue/v1beta1/Workload | [`controllers/evalhub/evaluation_failed_kueue_workloads_reconciler.go:76`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evaluation_failed_kueue_workloads_reconciler.go#L76) |
-| For | lmes/v1alpha1/LMEvalJob | [`controllers/lmes/lmevaljob_controller.go:299`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/lmes/lmevaljob_controller.go#L299) |
-| For | nemo_guardrails/v1alpha1/NemoGuardrails | [`controllers/nemo_guardrails/nemoguardrail_controller.go:215`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/nemo_guardrails/nemoguardrail_controller.go#L215) |
-| For | tas/v1alpha1/TrustyAIService | [`controllers/tas/trustyaiservice_controller.go:279`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/tas/trustyaiservice_controller.go#L279) |
-| Owns | /v1/ConfigMap | [`controllers/evalhub/evalhub_controller.go:253`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evalhub_controller.go#L253) |
-| Owns | /v1/Service | [`controllers/evalhub/evalhub_controller.go:252`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evalhub_controller.go#L252) |
-| Owns | apps/v1/Deployment | [`controllers/gorch/guardrailsorchestrator_controller.go:411`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/gorch/guardrailsorchestrator_controller.go#L411) |
-| Owns | apps/v1/Deployment | [`controllers/tas/trustyaiservice_controller.go:280`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/tas/trustyaiservice_controller.go#L280) |
-| Owns | apps/v1/Deployment | [`controllers/evalhub/evalhub_controller.go:251`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evalhub_controller.go#L251) |
-| Watches | /v1/Namespace | [`controllers/evalhub/evalhub_controller.go:254`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/evalhub/evalhub_controller.go#L254) |
-| Watches | serving/v1beta1/InferenceService | [`controllers/tas/trustyaiservice_controller.go:281`](https://github.com/red-hat-data-services/trustyai-service-operator/blob/6b52d04c51b89713876a2f783e3dd0729ad34065/controllers/tas/trustyaiservice_controller.go#L281) |
+| For | apis/v1alpha1/TrustyAI | [`trustyai-operator-module/pkg/trustyaimodule/reconciler.go:416`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/trustyai-operator-module/pkg/trustyaimodule/reconciler.go#L416) |
+| For | batch/v1/Job | [`controllers/evalhub/evaluation_job_failure_reconciler.go:204`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evaluation_job_failure_reconciler.go#L204) |
+| For | evalhub/v1/EvalHub | [`controllers/evalhub/evalhub_controller.go:370`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L370) |
+| For | gorch/v1alpha1/GuardrailsOrchestrator | [`controllers/gorch/guardrailsorchestrator_controller.go:410`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/gorch/guardrailsorchestrator_controller.go#L410) |
+| For | kueue/v1beta1/Workload | [`controllers/evalhub/evaluation_failed_kueue_workloads_reconciler.go:90`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evaluation_failed_kueue_workloads_reconciler.go#L90) |
+| For | lmes/v1alpha1/LMEvalJob | [`controllers/lmes/lmevaljob_controller.go:341`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/lmes/lmevaljob_controller.go#L341) |
+| For | nemo_guardrails/v1alpha1/NemoGuardrails | [`controllers/nemo_guardrails/nemoguardrail_controller.go:262`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/nemo_guardrails/nemoguardrail_controller.go#L262) |
+| For | tas/v1/TrustyAIService | [`controllers/tas/trustyaiservice_controller.go:315`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/tas/trustyaiservice_controller.go#L315) |
+| Owns | /v1/ConfigMap | [`controllers/evalhub/evalhub_controller.go:373`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L373) |
+| Owns | /v1/Service | [`controllers/evalhub/evalhub_controller.go:372`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L372) |
+| Owns | apps/v1/Deployment | [`controllers/tas/trustyaiservice_controller.go:316`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/tas/trustyaiservice_controller.go#L316) |
+| Owns | apps/v1/Deployment | [`controllers/gorch/guardrailsorchestrator_controller.go:411`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/gorch/guardrailsorchestrator_controller.go#L411) |
+| Owns | apps/v1/Deployment | [`controllers/evalhub/evalhub_controller.go:371`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L371) |
+| Owns | monitoring/v1/ServiceMonitor | [`controllers/evalhub/evalhub_controller.go:378`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L378) |
+| Watches | /v1/ConfigMap | [`controllers/evalhub/evalhub_controller.go:375`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L375) |
+| Watches | /v1/Namespace | [`controllers/evalhub/evalhub_controller.go:374`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/evalhub/evalhub_controller.go#L374) |
+| Watches | serving/v1beta1/InferenceService | [`controllers/tas/trustyaiservice_controller.go:317`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/285d221d65b92c891a5c47baa7c48662ab9c6bd5/controllers/tas/trustyaiservice_controller.go#L317) |
+
+### Programmatic Resource Operations
+
+| Verb | Kind | Group | Condition |
+|------|------|-------|----------|
+| create | ConfigMap |  |  |
+| update | ConfigMap |  |  |
+| create | Deployment | apps |  |
+| update | Deployment | apps |  |
+| update | EvalHub | evalhub |  |
+| patch | Job | batch |  |
+| create | Route | route |  |
+| update | Route | route |  |
+| create | Service |  |  |
+| update | Service |  |  |
+| create | ServiceMonitor | monitoring |  |
+| delete | ServiceMonitor | monitoring |  |
+| update | LMEvalJob | lmes |  |
+| update | TrustyAIService | tas |  |
 
 ## Reconciliation Flow
 
@@ -32,6 +54,7 @@ sequenceDiagram
     participant KubernetesAPI as Kubernetes API
     participant trustyai_service_operator_controller_manager as trustyai-service-operator-controller-manager
 
+    KubernetesAPI->>+trustyai_service_operator_controller_manager: Watch TrustyAI (reconcile)
     KubernetesAPI->>+trustyai_service_operator_controller_manager: Watch Job (reconcile)
     KubernetesAPI->>+trustyai_service_operator_controller_manager: Watch EvalHub (reconcile)
     KubernetesAPI->>+trustyai_service_operator_controller_manager: Watch GuardrailsOrchestrator (reconcile)
@@ -44,12 +67,22 @@ sequenceDiagram
     trustyai_service_operator_controller_manager->>KubernetesAPI: Create/Update Deployment
     trustyai_service_operator_controller_manager->>KubernetesAPI: Create/Update Deployment
     trustyai_service_operator_controller_manager->>KubernetesAPI: Create/Update Deployment
+    trustyai_service_operator_controller_manager->>KubernetesAPI: Create/Update ServiceMonitor
+    KubernetesAPI-->>+trustyai_service_operator_controller_manager: Watch ConfigMap (informer)
     KubernetesAPI-->>+trustyai_service_operator_controller_manager: Watch Namespace (informer)
     KubernetesAPI-->>+trustyai_service_operator_controller_manager: Watch InferenceService (informer)
 
     Note over trustyai_service_operator_controller_manager: Exposed Services
     Note right of trustyai_service_operator_controller_manager: trustyai-service-operator-controller-manager-metrics-service:8443/TCP [https]
-    Note right of trustyai_service_operator_controller_manager: trustyai-service-operator-metrics-service:8080/TCP [metrics]
+    Note right of trustyai_service_operator_controller_manager: trustyai-service-operator-metrics-service:8443/TCP [https]
+    Note right of trustyai_service_operator_controller_manager: trustyai-service-operator-webhook-service:443/TCP []
+
+    Note over KubernetesAPI: Defined CRDs
+    Note right of KubernetesAPI: EvalHub (trustyai.opendatahub.io/v1)
+    Note right of KubernetesAPI: TrustyAIService (trustyai.opendatahub.io/v1)
+    Note right of KubernetesAPI: EvalHub (trustyai.opendatahub.io/v1alpha1)
+    Note right of KubernetesAPI: LMEvalJob (trustyai.opendatahub.io/v1alpha1)
+    Note right of KubernetesAPI: TrustyAIService (trustyai.opendatahub.io/v1alpha1)
 ```
 
 ## Configuration

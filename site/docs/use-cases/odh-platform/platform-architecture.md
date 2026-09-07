@@ -2,22 +2,27 @@
 
 ## CRD Ownership Map
 
-The platform defines 80 CRDs. Each CRD is owned by the component that declares it.
+The platform defines 94 CRDs. Each CRD is owned by the component that declares it.
 
 | Owner | CRDs | Count |
 |-------|------|-------|
+| **codeflare-operator** | AppWrapper | 1 |
 | **data-science-pipelines** | CompositeController, ControllerRevision, DecoratorController | 3 |
 | **data-science-pipelines-operator** | DataSciencePipelinesApplication, Pipeline, PipelineVersion, ScheduledWorkflow | 4 |
-| **gateway-api-inference-extension** | InferenceModelRewrite, InferenceObjective, InferencePool, InferencePoolImport | 4 |
-| **kserve** | ClusterServingRuntime, ClusterStorageContainer, InferenceGraph, InferenceService, LLMInferenceService, LLMInferenceServiceConfig, LocalModelCache, LocalModelNamespaceCache, LocalModelNode, LocalModelNodeGroup, ServingRuntime, TrainedModel | 12 |
+| **kserve** | ClusterServingRuntime, ClusterStorageContainer, InferenceGraph, InferencePool, InferenceService, LLMInferenceService, LLMInferenceServiceConfig, LocalModelCache, LocalModelNamespaceCache, LocalModelNode, LocalModelNodeGroup, ServingRuntime, TrainedModel | 13 |
 | **kserve-autogluon-server** | ClusterServingRuntime, ClusterStorageContainer, InferenceGraph, InferenceService, LLMInferenceService, LLMInferenceServiceConfig, LocalModelCache, LocalModelNamespaceCache, LocalModelNode, LocalModelNodeGroup, ServingRuntime, TrainedModel | 12 |
 | **kueue** | ClusterQueue, LocalQueue | 2 |
-| **llama-stack-k8s-operator** | LlamaStackDistribution, OGXServer | 2 |
-| **mlflow-operator** | MLflow, MLflowConfig | 2 |
+| **llm-d-inference-scheduler** | InferenceModelRewrite, InferenceObjective | 2 |
+| **mlflow-operator** | MLflow, MLflowConfig, MLflowOperator | 3 |
+| **model-registry-operator** | ModelRegistry | 1 |
 | **modelmesh-serving** | ClusterServingRuntime, InferenceService, Predictor, ServingRuntime | 4 |
+| **odh-model-controller** | Account | 1 |
+| **ogx-k8s-operator** | LlamaStackDistribution, OGXServer | 2 |
+| **opendatahub-operator** | FeatureTracker | 1 |
 | **spark-operator** | ScheduledSparkApplication, SparkApplication, SparkConnect | 3 |
 | **trainer** | ClusterTrainingRuntime, TrainJob, TrainingRuntime | 3 |
-| **workload-variant-autoscaler** | VariantAutoscaling | 1 |
+| **training-operator** | JAXJob, MPIJob, PaddleJob, PyTorchJob, TFJob, XGBoostJob | 6 |
+| **trustyai-service-operator** | EvalHub, LMEvalJob, TrustyAIService | 3 |
 
 ## Cross-Component Dependencies
 
@@ -25,56 +30,73 @@ Relationships detected through Go module imports and CRD watch patterns.
 
 | From | To | Type |
 |------|----|------|
-| kserve-autogluon-server | gateway-api-inference-extension | watches-crd:InferencePool |
-| kserve-autogluon-server | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| kserve-autogluon-server | gateway-api-inference-extension | watches-crd:InferenceObjective |
-| kserve-autogluon-server | kserve | watches-crd:InferenceGraph |
-| kserve-autogluon-server | kserve | watches-crd:LocalModelCache |
-| kserve-autogluon-server | kserve | watches-crd:LocalModelNamespaceCache |
-| kserve-autogluon-server | kserve | watches-crd:LocalModelNode |
-| kserve-autogluon-server | kserve | watches-crd:TrainedModel |
-| kserve-autogluon-server | kserve | watches-crd:LLMInferenceService |
-| kserve-autogluon-server | kserve | watches-crd:InferenceService |
+| codeflare-operator | opendatahub-operator | go-module |
+| data-science-pipelines-operator | mlflow-operator | go-module |
+| data-science-pipelines-operator | operator-chaos | go-module |
+| kserve | odh-platform-utilities | go-module |
+| kserve | kserve-autogluon-server | watches-crd:InferenceGraph |
+| kserve | kserve-autogluon-server | watches-crd:LocalModelCache |
+| kserve | kserve-autogluon-server | watches-crd:LocalModelNamespaceCache |
+| kserve | kserve-autogluon-server | watches-crd:LocalModelNode |
+| kserve | kserve-autogluon-server | watches-crd:TrainedModel |
+| kserve | kserve-autogluon-server | watches-crd:LLMInferenceService |
+| kserve | kserve-autogluon-server | watches-crd:LLMInferenceServiceConfig |
+| kserve | kserve-autogluon-server | watches-crd:InferenceService |
 | kubeflow | data-science-pipelines-operator | go-module |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferencePool |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceModelRewrite |
-| llm-d-inference-scheduler | gateway-api-inference-extension | watches-crd:InferenceObjective |
+| kubeflow | operator-chaos | go-module |
+| llm-d-inference-scheduler | kserve | watches-crd:InferencePool |
 | mlflow-operator | mlflow-operator | go-module |
-| model-registry | kserve | watches-crd:InferenceService |
-| modelmesh-serving | kserve | watches-crd:InferenceGraph |
-| modelmesh-serving | kserve | watches-crd:ServingRuntime |
-| modelmesh-serving | kserve | watches-crd:TrainedModel |
-| modelmesh-serving | kserve | watches-crd:InferenceService |
-| models-as-a-service | kserve | go-module |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferencePool |
-| workload-variant-autoscaler | gateway-api-inference-extension | watches-crd:InferenceObjective |
-| kserve | modelmesh-serving | webhook-ref |
-| kserve | kserve-autogluon-server | webhook-ref |
-| kserve-autogluon-server | modelmesh-serving | webhook-ref |
-| modelmesh-serving | kuberay | webhook-ref |
-| spark-operator | kuberay | webhook-ref |
+| model-registry-operator | odh-platform-utilities | go-module |
+| model-registry-operator | operator-chaos | go-module |
+| model-registry | kserve-autogluon-server | watches-crd:InferenceService |
+| modelmesh-serving | kserve-autogluon-server | watches-crd:ServingRuntime |
+| odh-dashboard | mlflow-go | go-module |
+| odh-dashboard | odh-dashboard | go-module |
+| odh-dashboard | odh-platform-utilities | go-module |
+| odh-dashboard | ogx-k8s-operator | go-module |
+| odh-model-controller | kserve | go-module |
+| odh-model-controller | kserve-autogluon-server | watches-crd:InferenceGraph |
+| odh-model-controller | kserve-autogluon-server | watches-crd:ServingRuntime |
+| odh-model-controller | kserve-autogluon-server | watches-crd:LLMInferenceService |
+| odh-model-controller | kserve-autogluon-server | watches-crd:InferenceService |
+| ogx-k8s-operator | odh-platform-utilities | go-module |
+| opendatahub-operator | models-as-a-service | go-module |
+| opendatahub-operator | odh-platform-utilities | go-module |
+| opendatahub-operator | opendatahub-operator | go-module |
+| spark-operator | odh-platform-utilities | go-module |
+| trustyai-service-operator | odh-platform-utilities | go-module |
+| workload-variant-autoscaler | kserve | watches-crd:InferencePool |
+| codeflare-operator | opendatahub-operator | webhook-ref |
+| kserve-autogluon-server | kserve | webhook-ref |
+| model-registry-operator | opendatahub-operator | webhook-ref |
+| modelmesh-serving | opendatahub-operator | webhook-ref |
 
-**Tightest coupling:** `kserve-autogluon-server -> kserve` (7 dependency edges).
+**Tightest coupling:** `kserve -> kserve-autogluon-server` (8 dependency edges).
 
 ## Webhooks
 
-**Total webhooks across platform**: 153
+**Total webhooks across platform**: 116
 
 | Component | Webhooks |
 |-----------|----------|
+| agents-operator | 2 |
+| codeflare-operator | 4 |
 | data-science-pipelines-operator | 1 |
-| distributed-workloads | 40 |
-| kserve | 31 |
-| kserve-autogluon-server | 29 |
+| kserve | 21 |
+| kserve-autogluon-server | 21 |
 | kubeflow | 2 |
-| kuberay | 3 |
-| kueue | 23 |
-| llama-stack-k8s-operator | 1 |
+| kuberay | 4 |
+| kueue | 20 |
 | llm-d-inference-scheduler | 5 |
+| model-registry-operator | 4 |
 | modelmesh-serving | 2 |
-| spark-operator | 6 |
-| trainer | 6 |
-| workload-variant-autoscaler | 4 |
+| models-as-a-service | 4 |
+| odh-model-controller | 8 |
+| ogx-k8s-operator | 1 |
+| opendatahub-operator | 4 |
+| spark-operator | 8 |
+| trainer | 4 |
+| training-operator | 1 |
 
 ### Cross-Component Webhooks
 
@@ -82,30 +104,27 @@ Webhooks whose service reference points to a different component:
 
 | Webhook | Type | Owner | Target Component | Target Type | Path |
 |---------|------|-------|------------------|-------------|------|
-| clusterservingruntime.kserve-webhook-server.validator | validating | kserve | modelmesh-serving | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-clusterservingruntime |
-| conversion-unknown | conversion | kserve | kserve-autogluon-server |  | /convert |
-| inferencegraph.kserve-webhook-server.validator | validating | kserve | modelmesh-serving |  | /validate-serving-kserve-io-v1alpha1-inferencegraph |
-| inferenceservice.kserve-webhook-server.defaulter | mutating | kserve | modelmesh-serving |  | /mutate-serving-kserve-io-v1beta1-inferenceservice |
-| inferenceservice.kserve-webhook-server.pod-mutator | mutating | kserve | modelmesh-serving | Mutator | /mutate-pods |
-| inferenceservice.kserve-webhook-server.validator | validating | kserve | modelmesh-serving |  | /validate-serving-kserve-io-v1beta1-inferenceservice |
-| llminferenceservice.kserve-webhook-server.v1alpha1.defaulter | mutating | kserve | kserve-autogluon-server | LLMInferenceServiceDefaulterV1Alpha1 | /mutate-serving-kserve-io-v1alpha1-llminferenceservice |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | validating | kserve | kserve-autogluon-server | LLMInferenceServiceValidator | /validate-serving-kserve-io-v1alpha1-llminferenceservice |
-| llminferenceservice.kserve-webhook-server.v1alpha2.defaulter | mutating | kserve | kserve-autogluon-server | LLMInferenceServiceDefaulterV1Alpha2 | /mutate-serving-kserve-io-v1alpha2-llminferenceservice |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | validating | kserve | kserve-autogluon-server | LLMInferenceServiceValidator | /validate-serving-kserve-io-v1alpha2-llminferenceservice |
-| llminferenceserviceconfig.kserve-webhook-server.v1alpha1.validator | validating | kserve | kserve-autogluon-server | LLMInferenceServiceConfigValidator | /validate-serving-kserve-io-v1alpha1-llminferenceserviceconfig |
-| llminferenceserviceconfig.kserve-webhook-server.v1alpha2.validator | validating | kserve | kserve-autogluon-server | LLMInferenceServiceConfigValidator | /validate-serving-kserve-io-v1alpha2-llminferenceserviceconfig |
-| localmodelcache.kserve-webhook-server.validator | validating | kserve | kserve-autogluon-server |  | /validate-serving-kserve-io-v1alpha1-localmodelcache |
-| servingruntime.kserve-webhook-server.validator | validating | kserve | modelmesh-serving | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-servingruntime |
-| trainedmodel.kserve-webhook-server.validator | validating | kserve | modelmesh-serving |  | /validate-serving-kserve-io-v1alpha1-trainedmodel |
-| clusterservingruntime.kserve-webhook-server.validator | validating | kserve-autogluon-server | modelmesh-serving | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-clusterservingruntime |
-| inferencegraph.kserve-webhook-server.validator | validating | kserve-autogluon-server | modelmesh-serving |  | /validate-serving-kserve-io-v1alpha1-inferencegraph |
-| inferenceservice.kserve-webhook-server.defaulter | mutating | kserve-autogluon-server | modelmesh-serving |  | /mutate-serving-kserve-io-v1beta1-inferenceservice |
-| inferenceservice.kserve-webhook-server.pod-mutator | mutating | kserve-autogluon-server | modelmesh-serving | Mutator | /mutate-pods |
-| inferenceservice.kserve-webhook-server.validator | validating | kserve-autogluon-server | modelmesh-serving |  | /validate-serving-kserve-io-v1beta1-inferenceservice |
-| servingruntime.kserve-webhook-server.validator | validating | kserve-autogluon-server | modelmesh-serving | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-servingruntime |
-| trainedmodel.kserve-webhook-server.validator | validating | kserve-autogluon-server | modelmesh-serving |  | /validate-serving-kserve-io-v1alpha1-trainedmodel |
-| conversion-unknown | conversion | modelmesh-serving | kuberay |  | /convert |
-| conversion-unknown | conversion | spark-operator | kuberay |  | /convert |
+| mappwrapper.kb.io | mutating | codeflare-operator | opendatahub-operator |  | /mutate-workload-codeflare-dev-v1beta2-appwrapper |
+| mraycluster.ray.openshift.ai | mutating | codeflare-operator | opendatahub-operator | rayClusterWebhook | /mutate-ray-io-v1-raycluster |
+| vappwrapper.kb.io | validating | codeflare-operator | opendatahub-operator |  | /validate-workload-codeflare-dev-v1beta2-appwrapper |
+| vraycluster.ray.openshift.ai | validating | codeflare-operator | opendatahub-operator | rayClusterWebhook | /validate-ray-io-v1-raycluster |
+| clusterservingruntime.kserve-webhook-server.validator | validating | kserve-autogluon-server | kserve | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-clusterservingruntime |
+| conversion-unknown | conversion | kserve-autogluon-server | kserve |  | /convert |
+| inferencegraph.kserve-webhook-server.validator | validating | kserve-autogluon-server | kserve |  | /validate-serving-kserve-io-v1alpha1-inferencegraph |
+| inferenceservice.kserve-webhook-server.defaulter | mutating | kserve-autogluon-server | kserve |  | /mutate-serving-kserve-io-v1beta1-inferenceservice |
+| inferenceservice.kserve-webhook-server.pod-mutator | mutating | kserve-autogluon-server | kserve | Mutator | /mutate-pods |
+| inferenceservice.kserve-webhook-server.validator | validating | kserve-autogluon-server | kserve |  | /validate-serving-kserve-io-v1beta1-inferenceservice |
+| llminferenceservice.kserve-webhook-server.v1alpha1.defaulter | mutating | kserve-autogluon-server | kserve | LLMInferenceServiceDefaulterV1Alpha1 | /mutate-serving-kserve-io-v1alpha1-llminferenceservice |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | validating | kserve-autogluon-server | kserve | LLMInferenceServiceValidator | /validate-serving-kserve-io-v1alpha1-llminferenceservice |
+| llminferenceservice.kserve-webhook-server.v1alpha2.defaulter | mutating | kserve-autogluon-server | kserve | LLMInferenceServiceDefaulterV1Alpha2 | /mutate-serving-kserve-io-v1alpha2-llminferenceservice |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | validating | kserve-autogluon-server | kserve | LLMInferenceServiceValidator | /validate-serving-kserve-io-v1alpha2-llminferenceservice |
+| llminferenceserviceconfig.kserve-webhook-server.v1alpha1.validator | validating | kserve-autogluon-server | kserve | LLMInferenceServiceConfigValidator | /validate-serving-kserve-io-v1alpha1-llminferenceserviceconfig |
+| llminferenceserviceconfig.kserve-webhook-server.v1alpha2.validator | validating | kserve-autogluon-server | kserve | LLMInferenceServiceConfigValidator | /validate-serving-kserve-io-v1alpha2-llminferenceserviceconfig |
+| localmodelcache.kserve-webhook-server.validator | validating | kserve-autogluon-server | kserve |  | /validate-serving-kserve-io-v1alpha1-localmodelcache |
+| servingruntime.kserve-webhook-server.validator | validating | kserve-autogluon-server | kserve | ServingRuntimeValidator | /validate-serving-kserve-io-v1alpha1-servingruntime |
+| trainedmodel.kserve-webhook-server.validator | validating | kserve-autogluon-server | kserve |  | /validate-serving-kserve-io-v1alpha1-trainedmodel |
+| conversion-unknown | conversion | model-registry-operator | opendatahub-operator |  | /convert |
+| conversion-unknown | conversion | modelmesh-serving | opendatahub-operator |  | /convert |
 
 #### Webhook Behavioral Analysis
 
@@ -113,69 +132,39 @@ Field-level operations extracted from Go AST analysis of webhook handlers:
 
 | Webhook | Owner | Field | Operation | Condition |
 |---------|-------|-------|-----------|----------|
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | spec | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | worker | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | dataLocal | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | data | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | pipeline | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | replicas | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | inline | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve | ref.name | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | spec | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | worker | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | dataLocal | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | data | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | pipeline | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | replicas | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | inline | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | ref.name | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | maxRank | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | maxAdapters | invalid |  |
-| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve | maxCpuAdapters | invalid |  |
-| llminferenceserviceconfig.kserve-webhook-server.v1alpha1.validator | kserve | spec.baseRefs | forbidden |  |
-| llminferenceserviceconfig.kserve-webhook-server.v1alpha1.validator | kserve | replicas | invalid |  |
-| llminferenceserviceconfig.kserve-webhook-server.v1alpha2.validator | kserve | spec.baseRefs | forbidden |  |
-| llminferenceserviceconfig.kserve-webhook-server.v1alpha2.validator | kserve | replicas | invalid |  |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.containers | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.volumes | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.serviceAccountName | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | spec.headGroupSpec.template.spec.initContainers | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | template.spec.volumes | set | ptr.Deref(...) |
+| mraycluster.ray.openshift.ai | codeflare-operator | template.spec.initContainers | set | ptr.Deref(...) |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | spec | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | worker | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | dataLocal | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | data | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | pipeline | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | replicas | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | inline | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | ref.name | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | spec | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | worker | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | dataLocal | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | data | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | pipeline | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | replicas | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | inline | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | ref.name | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | maxRank | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | maxAdapters | invalid |  |
+| llminferenceservice.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | maxCpuAdapters | invalid |  |
+| llminferenceserviceconfig.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | spec.baseRefs | forbidden |  |
+| llminferenceserviceconfig.kserve-webhook-server.v1alpha1.validator | kserve-autogluon-server | replicas | invalid |  |
+| llminferenceserviceconfig.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | spec.baseRefs | forbidden |  |
+| llminferenceserviceconfig.kserve-webhook-server.v1alpha2.validator | kserve-autogluon-server | replicas | invalid |  |
 
 ### External Webhooks
 
 | Webhook | Type | Owner | Target Type | Path | Failure Policy |
 |---------|------|-------|-------------|------|----------------|
-| mappwrapper.kb.io | mutating | distributed-workloads |  | /mutate-workload-codeflare-dev-v1beta2-appwrapper | Fail |
-| mclusterqueue.kb.io | mutating | distributed-workloads |  | /mutate-kueue-x-k8s-io-v1beta2-clusterqueue | Fail |
-| mdeployment.kb.io | mutating | distributed-workloads |  | /mutate-apps-v1-deployment | Fail |
-| mjaxjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-jaxjob | Fail |
-| mjob.kb.io | mutating | distributed-workloads |  | /mutate-batch-v1-job | Fail |
-| mjobset.kb.io | mutating | distributed-workloads |  | /mutate-jobset-x-k8s-io-v1alpha2-jobset | Fail |
-| mleaderworkerset.kb.io | mutating | distributed-workloads |  | /mutate-leaderworkerset-x-k8s-io-v1-leaderworkerset | Fail |
-| mmpijob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v2beta1-mpijob | Fail |
-| mpaddlejob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-paddlejob | Fail |
-| mpod.kb.io | mutating | distributed-workloads |  | /mutate--v1-pod | Fail |
-| mpytorchjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-pytorchjob | Fail |
-| mraycluster.kb.io | mutating | distributed-workloads |  | /mutate-ray-io-v1-raycluster | Fail |
-| mrayjob.kb.io | mutating | distributed-workloads |  | /mutate-ray-io-v1-rayjob | Fail |
-| mresourceflavor.kb.io | mutating | distributed-workloads |  | /mutate-kueue-x-k8s-io-v1beta2-resourceflavor | Fail |
-| mstatefulset.kb.io | mutating | distributed-workloads |  | /mutate-apps-v1-statefulset | Fail |
-| mtfjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-tfjob | Fail |
-| mtrainjob.kb.io | mutating | distributed-workloads |  | /mutate-trainer-kubeflow-org-v1alpha1-trainjob | Fail |
-| mworkload.kb.io | mutating | distributed-workloads |  | /mutate-kueue-x-k8s-io-v1beta2-workload | Fail |
-| mxgboostjob.kb.io | mutating | distributed-workloads |  | /mutate-kubeflow-org-v1-xgboostjob | Fail |
-| vappwrapper.kb.io | validating | distributed-workloads |  | /validate-workload-codeflare-dev-v1beta2-appwrapper | Fail |
-| vclusterqueue.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-clusterqueue | Fail |
-| vcohort.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-cohort | Fail |
-| vdeployment.kb.io | validating | distributed-workloads |  | /validate-apps-v1-deployment | Fail |
-| vjaxjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-jaxjob | Fail |
-| vjob.kb.io | validating | distributed-workloads |  | /validate-batch-v1-job | Fail |
-| vleaderworkerset.kb.io | validating | distributed-workloads |  | /validate-leaderworkerset-x-k8s-io-v1-leaderworkerset | Fail |
-| vmpijob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v2beta1-mpijob | Fail |
-| vpaddlejob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-paddlejob | Fail |
-| vpod.kb.io | validating | distributed-workloads |  | /validate--v1-pod | Fail |
-| vpytorchjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-pytorchjob | Fail |
-| vraycluster.kb.io | validating | distributed-workloads |  | /validate-ray-io-v1-raycluster | Fail |
-| vresourceflavor.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-resourceflavor | Fail |
-| vstatefulset.kb.io | validating | distributed-workloads |  | /validate-apps-v1-statefulset | Fail |
-| vtfjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-tfjob | Fail |
-| vtrainjob.kb.io | validating | distributed-workloads |  | /validate-trainer-kubeflow-org-v1alpha1-trainjob | Fail |
-| vworkload.kb.io | validating | distributed-workloads |  | /validate-kueue-x-k8s-io-v1beta2-workload | Fail |
-| vxgboostjob.kb.io | validating | distributed-workloads |  | /validate-kubeflow-org-v1-xgboostjob | Fail |
+| mraycluster.kb.io | mutating | kuberay |  | /mutate-ray-io-v1-raycluster | Fail |
 

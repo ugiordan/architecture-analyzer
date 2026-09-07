@@ -1,11 +1,11 @@
 # llm-d-routing-sidecar
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** llm-d/llm-d-routing-sidecar  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:13:31Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T04:01:14Z
 
 ## Summary
 
@@ -49,14 +49,6 @@ No CRDs found in analyzed sources.
 | Module | Version |
 |--------|---------|
 | github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.1 |
-| k8s.io/api | v0.31.3 |
-| k8s.io/api | v0.31.3 |
-| k8s.io/apimachinery | v0.31.3 |
-| k8s.io/apimachinery | v0.31.3 |
 | k8s.io/apimachinery | v0.31.3 |
 | k8s.io/client-go | v0.31.3 |
 

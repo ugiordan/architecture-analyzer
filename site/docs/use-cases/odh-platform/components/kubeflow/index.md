@@ -1,11 +1,11 @@
 # kubeflow
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** opendatahub-io/kubeflow  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:06:11Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:56:37Z
 
 ## Summary
 
@@ -71,6 +71,10 @@ graph LR
     class watch_17 external
     controller -.->|"depends on"| odh_18["data-science-pipelines-operator"]
     class odh_18 dep
+    controller -.->|"depends on"| odh_19["operator-chaos"]
+    class odh_19 dep
+    controller -.->|"depends on"| odh_20["operator-chaos"]
+    class odh_20 dep
 ```
 
 ### CRDs
@@ -84,6 +88,8 @@ No CRDs found in analyzed sources.
 | Component | Interaction |
 |-----------|-------------|
 | data-science-pipelines-operator | Go module dependency: github.com/opendatahub-io/data-science-pipelines-operator |
+| operator-chaos | Go module dependency: github.com/opendatahub-io/operator-chaos |
+| operator-chaos | Go module dependency: github.com/opendatahub-io/operator-chaos |
 
 ### Key External Dependencies
 
@@ -92,13 +98,13 @@ No CRDs found in analyzed sources.
 | github.com/go-logr/logr | v1.4.3 |
 | github.com/go-logr/logr | v1.4.3 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| k8s.io/api | v0.33.7 |
-| k8s.io/api | v0.33.7 |
-| k8s.io/apiextensions-apiserver | v0.33.7 |
-| k8s.io/apimachinery | v0.33.7 |
-| k8s.io/apimachinery | v0.33.7 |
-| k8s.io/client-go | v0.33.7 |
-| k8s.io/client-go | v0.33.7 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/apiextensions-apiserver | v0.35.1 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/client-go | v0.35.2 |
+| k8s.io/client-go | v0.35.2 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

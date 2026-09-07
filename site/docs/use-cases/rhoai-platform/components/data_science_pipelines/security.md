@@ -19,17 +19,16 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| cache-server | server | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/cache/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/cache/deployment-patch.yaml) |
-| kubeflow-pipelines-profile-controller | profile-controller | true | ? | ? | [`manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/deployment.yaml) |
-| metadata-writer | main | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/metadata-writer/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/metadata-writer/deployment-patch.yaml) |
-| ml-pipeline | ml-pipeline-api-server | ? | ? | ? | [`manifests/kustomize/env/cert-manager/platform-agnostic-k8s-native/patches/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/env/cert-manager/platform-agnostic-k8s-native/patches/deployment.yaml) |
-| ml-pipeline | ml-pipeline-api-server | ? | ? | ? | [`manifests/kustomize/env/cert-manager/platform-agnostic-multi-user-k8s-native/patches/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/env/cert-manager/platform-agnostic-multi-user-k8s-native/patches/deployment.yaml) |
-| ml-pipeline | ml-pipeline-api-server | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/api-service/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/api-service/deployment-patch.yaml) |
-| ml-pipeline-persistenceagent | ml-pipeline-persistenceagent | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/persistence-agent/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/persistence-agent/deployment-patch.yaml) |
-| ml-pipeline-scheduledworkflow | ml-pipeline-scheduledworkflow | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/scheduled-workflow/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/scheduled-workflow/deployment-patch.yaml) |
-| ml-pipeline-ui | ml-pipeline-ui | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/pipelines-ui/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/pipelines-ui/deployment-patch.yaml) |
-| ml-pipeline-viewer-crd | ml-pipeline-viewer-crd | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/viewer-controller/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/manifests/kustomize/base/installs/multi-user/viewer-controller/deployment-patch.yaml) |
-| squid | squid | ? | ? | ? | [`.github/resources/squid/manifests/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/e2ec0bbe88f33623a3bca8c5cd81b4be2fb89118/.github/resources/squid/manifests/deployment.yaml) |
+| cache-server | server | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/cache/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/cache/deployment-patch.yaml) |
+| kubeflow-pipelines-profile-controller | profile-controller | true | ? | ? | [`manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/deployment.yaml) |
+| metadata-writer | main | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/metadata-writer/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/metadata-writer/deployment-patch.yaml) |
+| ml-pipeline | ml-pipeline-api-server | ? | ? | ? | [`manifests/kustomize/env/cert-manager/platform-agnostic-k8s-native/patches/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/env/cert-manager/platform-agnostic-k8s-native/patches/deployment.yaml) |
+| ml-pipeline | ml-pipeline-api-server | ? | ? | ? | [`manifests/kustomize/env/cert-manager/platform-agnostic-multi-user-k8s-native/patches/deployment.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/env/cert-manager/platform-agnostic-multi-user-k8s-native/patches/deployment.yaml) |
+| ml-pipeline | ml-pipeline-api-server | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/api-service/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/api-service/deployment-patch.yaml) |
+| ml-pipeline-persistenceagent | ml-pipeline-persistenceagent | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/persistence-agent/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/persistence-agent/deployment-patch.yaml) |
+| ml-pipeline-scheduledworkflow | ml-pipeline-scheduledworkflow | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/scheduled-workflow/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/scheduled-workflow/deployment-patch.yaml) |
+| ml-pipeline-ui | ml-pipeline-ui | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/pipelines-ui/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/pipelines-ui/deployment-patch.yaml) |
+| ml-pipeline-viewer-crd | ml-pipeline-viewer-crd | ? | ? | ? | [`manifests/kustomize/base/installs/multi-user/viewer-controller/deployment-patch.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/f8fa61de9f613463b85559dac231d552968bb02f/manifests/kustomize/base/installs/multi-user/viewer-controller/deployment-patch.yaml) |
 
 ## Build Security
 
@@ -37,93 +36,27 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `.github/resources/squid/Containerfile` | quay.io/fedora/fedora:41 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/cloud.google.com/go@v0.121.2/.devcontainer/Dockerfile` | mcr.microsoft.com/devcontainers/go:${VARIANT} | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/argoproj/argo-workflows/v3@v3.7.11/.devcontainer/builder/Dockerfile` | mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04 | 1 |  |  | multi-arch |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/argoproj/argo-workflows/v3@v3.7.11/Dockerfile` | gcr.io/distroless/static | 10 | 8737 |  |  |  | Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: gcr.io/distroless/static; Unpinned base image: argoexec-base; Unpinned base image: argoexec-base; Unpinned base image: gcr.io/distroless/static; Unpinned base image: gcr.io/distroless/static |
-| `.gomod-cache/github.com/argoproj/argo-workflows/v3@v3.7.11/Dockerfile.windows` | argoexec-base | 4 | Administrator |  |  |  | Unpinned base image: builder; Unpinned base image: argoexec-base |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.golang-tip` | buildpack-deps:buster-scm | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.10` | golang:1.10 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.11` | golang:1.11 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.12` | golang:1.12 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.13` | golang:1.13 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.14` | golang:1.14 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.15` | golang:1.15 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.16` | golang:1.16 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.17` | golang:1.17 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.18` | golang:1.18 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.19` | golang:1.19 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.5` | golang:1.5 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.6` | golang:1.6 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.7` | golang:1.7 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.8` | golang:1.8 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.9` | golang:1.9 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.gotip` | aws-golang:tip | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/envoyproxy/protoc-gen-validate@v1.3.0/Dockerfile` | ubuntu:focal | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/google/addlicense@v0.0.0-20200906110928-a0294312aa76/Dockerfile` | golang:1-alpine | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/grpc-ecosystem/grpc-gateway/v2@v2.27.1/.github/Dockerfile` | golang:1.24.4 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/.circleci/Dockerfile` | golang:1.15.3 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/mattn/go-sqlite3@v1.14.34/_example/simple/Dockerfile` | scratch | 2 |  |  |  |  | Unpinned base image: scratch; No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/pelletier/go-toml/v2@v2.2.4/Dockerfile` | scratch | 1 |  |  |  |  | Unpinned base image: scratch; No USER directive found (defaults to root) |
-| `.gomod-cache/github.com/prometheus/client_golang@v1.23.2/Dockerfile` | quay.io/prometheus/busybox:latest | 2 |  |  |  |  | Unpinned base image: quay.io/prometheus/busybox:latest; No USER directive found (defaults to root) |
-| `.gomod-cache/golang.org/toolchain@v0.0.1-go1.25.7.linux-amd64/src/crypto/internal/boring/Dockerfile` | $ubuntu:focal | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/golang.org/toolchain@v0.0.1-go1.25.7.linux-amd64/src/crypto/internal/fips140/nistec/fiat/Dockerfile` | coqorg/coq:8.13.2 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/golang.org/x/net@v0.51.0/internal/quic/cmd/interop/Dockerfile` | martenseemann/quic-network-simulator-endpoint:latest | 2 |  |  | multi-arch |  | Unpinned base image: martenseemann/quic-network-simulator-endpoint:latest; Unpinned base image: martenseemann/quic-network-simulator-endpoint:latest; No USER directive found (defaults to root) |
-| `.gomod-cache/golang.org/x/sys@v0.41.0/unix/linux/Dockerfile` | ubuntu:25.04 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gomod-cache/k8s.io/apiextensions-apiserver@v0.35.2/artifacts/simple-image/Dockerfile` | gcr.io/distroless/base-debian10:latest | 1 |  |  |  |  | Unpinned base image: gcr.io/distroless/base-debian10:latest; No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/cloud.google.com/go@v0.121.2/.devcontainer/Dockerfile` | mcr.microsoft.com/devcontainers/go:${VARIANT} | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/argoproj/argo-workflows/v3@v3.7.11/.devcontainer/builder/Dockerfile` | mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04 | 1 |  |  | multi-arch |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/argoproj/argo-workflows/v3@v3.7.11/Dockerfile` | gcr.io/distroless/static | 10 | 8737 |  |  |  | Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: builder; Unpinned base image: gcr.io/distroless/static; Unpinned base image: argoexec-base; Unpinned base image: argoexec-base; Unpinned base image: gcr.io/distroless/static; Unpinned base image: gcr.io/distroless/static |
-| `.gopath-loader/pkg/mod/github.com/argoproj/argo-workflows/v3@v3.7.11/Dockerfile.windows` | argoexec-base | 4 | Administrator |  |  |  | Unpinned base image: builder; Unpinned base image: argoexec-base |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.golang-tip` | buildpack-deps:buster-scm | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.10` | golang:1.10 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.11` | golang:1.11 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.12` | golang:1.12 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.13` | golang:1.13 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.14` | golang:1.14 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.15` | golang:1.15 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.16` | golang:1.16 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.17` | golang:1.17 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.18` | golang:1.18 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.19` | golang:1.19 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.5` | golang:1.5 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.6` | golang:1.6 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.7` | golang:1.7 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.8` | golang:1.8 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.go1.9` | golang:1.9 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/aws/aws-sdk-go@v1.55.5/awstesting/sandbox/Dockerfile.test.gotip` | aws-golang:tip | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v1.3.0/Dockerfile` | ubuntu:focal | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/google/addlicense@v0.0.0-20200906110928-a0294312aa76/Dockerfile` | golang:1-alpine | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/grpc-ecosystem/grpc-gateway/v2@v2.27.1/.github/Dockerfile` | golang:1.24.4 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.16.0/.circleci/Dockerfile` | golang:1.15.3 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/mattn/go-sqlite3@v1.14.34/_example/simple/Dockerfile` | scratch | 2 |  |  |  |  | Unpinned base image: scratch; No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/pelletier/go-toml/v2@v2.2.4/Dockerfile` | scratch | 1 |  |  |  |  | Unpinned base image: scratch; No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/github.com/prometheus/client_golang@v1.23.2/Dockerfile` | quay.io/prometheus/busybox:latest | 2 |  |  |  |  | Unpinned base image: quay.io/prometheus/busybox:latest; No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/golang.org/toolchain@v0.0.1-go1.25.7.linux-amd64/src/crypto/internal/boring/Dockerfile` | $ubuntu:focal | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/golang.org/toolchain@v0.0.1-go1.25.7.linux-amd64/src/crypto/internal/fips140/nistec/fiat/Dockerfile` | coqorg/coq:8.13.2 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/golang.org/x/net@v0.51.0/internal/quic/cmd/interop/Dockerfile` | martenseemann/quic-network-simulator-endpoint:latest | 2 |  |  | multi-arch |  | Unpinned base image: martenseemann/quic-network-simulator-endpoint:latest; Unpinned base image: martenseemann/quic-network-simulator-endpoint:latest; No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/golang.org/x/sys@v0.41.0/unix/linux/Dockerfile` | ubuntu:25.04 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `.gopath-loader/pkg/mod/k8s.io/apiextensions-apiserver@v0.35.2/artifacts/simple-image/Dockerfile` | gcr.io/distroless/base-debian10:latest | 1 |  |  |  |  | Unpinned base image: gcr.io/distroless/base-debian10:latest; No USER directive found (defaults to root) |
-| `backend/Dockerfile` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 3 | 1001 |  | multi-arch | yes | Unpinned base image: registry.access.redhat.com/ubi9/python-311 |
+| `backend/Dockerfile` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 10 | 1001 |  | multi-arch |  | Unpinned base image: go-toolset-${BUILDER_ARCH}; Unpinned base image: python-311-${BUILDER_ARCH}; Unpinned base image: ubi-minimal-${TARGETARCH} |
 | `backend/Dockerfile.cacheserver` | alpine:3.21 | 2 | appuser |  |  |  |  |
 | `backend/Dockerfile.conformance` | alpine:3.21 | 2 |  |  |  |  | No USER directive found (defaults to root) |
-| `backend/Dockerfile.driver` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 2 | 65534 |  | multi-arch | yes |  |
-| `backend/Dockerfile.konflux.api` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 2 | 1001 |  |  |  |  |
-| `backend/Dockerfile.konflux.driver` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 2 | root |  | multi-arch |  | Container runs as root user |
-| `backend/Dockerfile.konflux.launcher` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 2 | root |  | multi-arch |  | Container runs as root user |
-| `backend/Dockerfile.konflux.persistenceagent` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 2 | root |  |  |  | Container runs as root user |
-| `backend/Dockerfile.konflux.scheduledworkflow` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede | 2 | root |  |  |  | Container runs as root user |
-| `backend/Dockerfile.launcher` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 2 | 65534 |  | multi-arch | yes |  |
-| `backend/Dockerfile.persistenceagent` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 2 | root |  | multi-arch | yes | Container runs as root user |
-| `backend/Dockerfile.scheduledworkflow` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 2 | root |  | multi-arch | yes | Container runs as root user |
+| `backend/Dockerfile.driver` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 4 | 65534 |  | multi-arch |  | Unpinned base image: go-toolset-${BUILDER_ARCH} |
+| `backend/Dockerfile.konflux.api` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a | 2 | 1001 |  |  |  |  |
+| `backend/Dockerfile.konflux.driver` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a | 2 | root |  | multi-arch |  | Container runs as root user |
+| `backend/Dockerfile.konflux.launcher` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a | 2 | root |  | multi-arch |  | Container runs as root user |
+| `backend/Dockerfile.konflux.persistenceagent` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a | 2 | root |  |  |  | Container runs as root user |
+| `backend/Dockerfile.konflux.scheduledworkflow` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a | 2 | root |  |  |  | Container runs as root user |
+| `backend/Dockerfile.launcher` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 4 | 65534 |  | multi-arch |  | Unpinned base image: go-toolset-${BUILDER_ARCH} |
+| `backend/Dockerfile.persistenceagent` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 4 | root |  | multi-arch |  | Unpinned base image: go-toolset-${BUILDER_ARCH}; Container runs as root user |
+| `backend/Dockerfile.scheduledworkflow` | registry.access.redhat.com/ubi9/ubi-minimal:9.5 | 7 | root |  | multi-arch |  | Unpinned base image: go-toolset-${BUILDER_ARCH}; Unpinned base image: ubi-minimal-${BUILDER_ARCH}; Container runs as root user |
 | `backend/Dockerfile.viewercontroller` | alpine:3.21 | 2 |  |  |  |  | No USER directive found (defaults to root) |
 | `backend/Dockerfile.visualization` | python:3.11-slim | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `backend/api/Dockerfile` | golang:1.25.7 | 1 |  |  |  |  | No USER directive found (defaults to root) |
+| `backend/api/Dockerfile` | golang:1.26.3@sha256:b54cbf583d390341599d7bcbc062425c081105cc5ef6d170ced98ef9d047c716 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `backend/metadata_writer/Dockerfile` | python:3.11-slim | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `backend/src/cache/deployer/Dockerfile` | gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `components/aws/athena/Dockerfile` | ubuntu:16.04 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `components/aws/emr/Dockerfile` | ubuntu:16.04 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `components/aws/sagemaker/Dockerfile` | public.ecr.aws/amazonlinux/amazonlinux:2 | 1 |  |  |  |  | No USER directive found (defaults to root) |
+| `components/aws/sagemaker/v2.Dockerfile` | public.ecr.aws/amazonlinux/amazonlinux:2 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `components/google-cloud/Dockerfile` | marketplace.gcr.io/google/ubuntu2404:latest | 1 |  |  |  |  | Unpinned base image: marketplace.gcr.io/google/ubuntu2404:latest; No USER directive found (defaults to root) |
 | `components/kserve/Dockerfile` | python:3.11-slim-bullseye | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `frontend/Dockerfile` | node:${NODE_VERSION}-${BASE_IMAGE} | 2 |  |  |  |  | No USER directive found (defaults to root) |

@@ -8,7 +8,7 @@ No services found in analyzed sources.
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Route | trustyai |  |  | yes | [`explainability-service/manifests/base/route.yaml`](https://github.com/red-hat-data-services/trustyai-explainability/blob/ee0b2b22cb42f0f60431192315488f3b195137d9/explainability-service/manifests/base/route.yaml) |
+| Route | trustyai |  |  | yes | [`explainability-service/manifests/base/route.yaml`](https://github.com/red-hat-data-services/trustyai-explainability/blob/504a96afbdbc9563ea33b660724dcf8ef7449306/explainability-service/manifests/base/route.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

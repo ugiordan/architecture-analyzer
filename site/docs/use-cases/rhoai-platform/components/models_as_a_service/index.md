@@ -1,11 +1,11 @@
 # models-as-a-service
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** red-hat-data-services/models-as-a-service  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:07:16Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:57:17Z
 
 ## Summary
 
@@ -13,10 +13,10 @@
 |--------|-------|
 | CRDs | 0 |
 | Deployments | 4 |
-| Services | 3 |
-| Secrets | 1 |
+| Services | 4 |
+| Secrets | 3 |
 | Cluster Roles | 0 |
-| Controller Watches | 14 |
+| Controller Watches | 20 |
 
 ## Component Architecture
 
@@ -43,18 +43,20 @@ graph LR
         class dep_4 controller
     end
 
-    watch_5["HTTPRoute"] -->|"Watches"| controller
+    watch_5["AITenant"] -->|"Watches"| controller
     class watch_5 external
-    watch_6["LLMInferenceService"] -->|"Watches"| controller
+    watch_6["HTTPRoute"] -->|"Watches"| controller
     class watch_6 external
-    watch_7["MaaSAuthPolicy"] -->|"Watches"| controller
+    watch_7["LLMInferenceService"] -->|"Watches"| controller
     class watch_7 external
-    watch_8["MaaSModelRef"] -->|"Watches"| controller
+    watch_8["MaaSAuthPolicy"] -->|"Watches"| controller
     class watch_8 external
-    watch_9["MaaSSubscription"] -->|"Watches"| controller
+    watch_9["MaaSModelRef"] -->|"Watches"| controller
     class watch_9 external
-    controller -.->|"depends on"| odh_10["kserve"]
-    class odh_10 dep
+    watch_10["MaaSSubscription"] -->|"Watches"| controller
+    class watch_10 external
+    watch_11["Namespace"] -->|"Watches"| controller
+    class watch_11 external
 ```
 
 ### CRDs
@@ -63,12 +65,6 @@ No CRDs found in analyzed sources.
 
 ## Dependencies
 
-### Internal Platform Dependencies
-
-| Component | Interaction |
-|-----------|-------------|
-| kserve | Go module dependency: github.com/opendatahub-io/kserve |
-
 ### Key External Dependencies
 
 | Module | Version |
@@ -76,12 +72,13 @@ No CRDs found in analyzed sources.
 | github.com/go-logr/logr | v1.4.3 |
 | github.com/prometheus/client_golang | v1.23.2 |
 | github.com/prometheus/client_model | v0.6.2 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.33.1 |
-| k8s.io/apiextensions-apiserver | v0.33.1 |
-| k8s.io/apimachinery | v0.33.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.33.1 |
-| sigs.k8s.io/controller-runtime | v0.20.4 |
+| google.golang.org/grpc | v1.82.1 |
+| k8s.io/api | v0.35.1 |
+| k8s.io/api | v0.35.3 |
+| k8s.io/apiextensions-apiserver | v0.35.3 |
+| k8s.io/apimachinery | v0.35.3 |
+| k8s.io/apimachinery | v0.35.1 |
+| k8s.io/client-go | v0.35.3 |
+| k8s.io/client-go | v0.35.1 |
+| sigs.k8s.io/controller-runtime | v0.22.5 |
 

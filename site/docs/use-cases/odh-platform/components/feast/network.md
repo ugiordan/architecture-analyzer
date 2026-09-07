@@ -1,3 +1,41 @@
-# feast - network
+# feast: Network
 
-> Pending next CI scan run.
+## Service Map
+
+```mermaid
+graph LR
+    classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
+    classDef ext fill:#e74c3c,stroke:#c0392b,color:#fff
+
+    feast["feast"]:::component
+    feast --> svc_0["uvicorn-server\npython-source: 6566/TCP"]:::svc
+    feast -.-> ext_elasticsearch[["elasticsearch\napi"]]:::ext
+    feast -.-> ext_milvus[["milvus\napi"]]:::ext
+    feast -.-> ext_mlflow[["mlflow\napi"]]:::ext
+    feast -.-> ext_qdrant[["qdrant\napi"]]:::ext
+    feast -.-> ext_requests[["requests\napi"]]:::ext
+    feast -.-> ext_urllib[["urllib\napi"]]:::ext
+    feast -.-> ext_weaviate[["weaviate\napi"]]:::ext
+    feast -.-> ext_mongodb[["mongodb\ndatabase"]]:::ext
+    feast -.-> ext_mysql[["mysql\ndatabase"]]:::ext
+    feast -.-> ext_postgres[["postgres\ndatabase"]]:::ext
+    feast -.-> ext_redis[["redis\ndatabase"]]:::ext
+    feast -.-> ext_sqlalchemy[["sqlalchemy\ndatabase"]]:::ext
+    feast -.-> ext_sqlite[["sqlite\ndatabase"]]:::ext
+    feast -.-> ext_grpc[["grpc\ngrpc"]]:::ext
+    feast -.-> ext_azure_blob[["azure-blob\nobject-storage"]]:::ext
+    feast -.-> ext_gcs[["gcs\nobject-storage"]]:::ext
+    feast -.-> ext_s3[["s3\nobject-storage"]]:::ext
+```
+
+### Services
+
+| Name | Type | Ports | Source |
+|------|------|-------|--------|
+| uvicorn-server | python-source | 6566/TCP | [`infra/scripts/feature_server_docker_smoke.py:45`](https://github.com/feast-dev/feast/blob/6ad332bf6c06499319483b0d3c87d96165c41d53/infra/scripts/feature_server_docker_smoke.py#L45) |
+
+!!! warning "No Network Policies"
+    No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.
+

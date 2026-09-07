@@ -15,7 +15,7 @@ Interactive service mesh view of the platform. Drag nodes to rearrange, hover to
 </div>
 <div class="cytoscape-topology">
   <script type="application/json">
-  {"components":[{"id":"MLServer","name":"MLServer","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"NeMo_Guardrails","name":"NeMo-Guardrails","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"ai_gateway_payload_processing","name":"ai-gateway-payload-processing","serviceCount":1,"netpolCount":0,"hasIngress":true},{"id":"ai4rag","name":"ai4rag","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"argo_workflows","name":"argo-workflows","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"batch_gateway","name":"batch-gateway","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"caikit_nlp","name":"caikit-nlp","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"caikit_tgis_serving","name":"caikit-tgis-serving","serviceCount":0,"netpolCount":1,"hasIngress":true},{"id":"codeflare_sdk","name":"codeflare-sdk","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"data_science_pipelines","name":"data-science-pipelines","serviceCount":2,"netpolCount":1,"hasIngress":true},{"id":"data_science_pipelines_operator","name":"data-science-pipelines-operator","serviceCount":11,"netpolCount":2,"hasIngress":true},{"id":"distributed_workloads","name":"distributed-workloads","serviceCount":4,"netpolCount":0,"hasIngress":false},{"id":"eval_hub","name":"eval-hub","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"feast","name":"feast","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"fms_guardrails_orchestrator","name":"fms-guardrails-orchestrator","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"fms_hf_tuning","name":"fms-hf-tuning","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"gateway_api_inference_extension","name":"gateway-api-inference-extension","serviceCount":1,"netpolCount":0,"hasIngress":true},{"id":"guardrails_regex_detector","name":"guardrails-regex-detector","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"kserve","name":"kserve","serviceCount":12,"netpolCount":1,"hasIngress":true},{"id":"kube_auth_proxy","name":"kube-auth-proxy","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"kube_rbac_proxy","name":"kube-rbac-proxy","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"kubeflow","name":"kubeflow","serviceCount":2,"netpolCount":0,"hasIngress":false},{"id":"kuberay","name":"kuberay","serviceCount":3,"netpolCount":0,"hasIngress":false},{"id":"kueue","name":"kueue","serviceCount":5,"netpolCount":0,"hasIngress":true},{"id":"llama_stack","name":"llama-stack","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"llama_stack_k8s_operator","name":"llama-stack-k8s-operator","serviceCount":2,"netpolCount":1,"hasIngress":true},{"id":"llm_d","name":"llm-d","serviceCount":0,"netpolCount":0,"hasIngress":true},{"id":"llm_d_inference_scheduler","name":"llm-d-inference-scheduler","serviceCount":5,"netpolCount":0,"hasIngress":true},{"id":"llm_d_kv_cache","name":"llm-d-kv-cache","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"llm_d_routing_sidecar","name":"llm-d-routing-sidecar","serviceCount":1,"netpolCount":0,"hasIngress":true},{"id":"lm_evaluation_harness","name":"lm-evaluation-harness","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"ml_metadata","name":"ml-metadata","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"mlflow_operator","name":"mlflow-operator","serviceCount":3,"netpolCount":1,"hasIngress":true},{"id":"model_metadata_collection","name":"model-metadata-collection","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"model_registry","name":"model-registry","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"modelmesh_runtime_adapter","name":"modelmesh-runtime-adapter","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"modelmesh_serving","name":"modelmesh-serving","serviceCount":7,"netpolCount":4,"hasIngress":false},{"id":"models_as_a_service","name":"models-as-a-service","serviceCount":2,"netpolCount":6,"hasIngress":true},{"id":"notebooks","name":"notebooks","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"notebooks_downstream","name":"notebooks-downstream","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"odh_cli","name":"odh-cli","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"odh_deployer","name":"odh-deployer","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"openvino_model_server","name":"openvino_model_server","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"pipelines_components","name":"pipelines-components","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"rest_proxy","name":"rest-proxy","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"rhds_llama_stack_distribution","name":"rhds-llama-stack-distribution","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"spark_operator","name":"spark-operator","serviceCount":2,"netpolCount":1,"hasIngress":true},{"id":"text_generation_inference","name":"text-generation-inference","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"trainer","name":"trainer","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"trustyai_explainability","name":"trustyai-explainability","serviceCount":0,"netpolCount":0,"hasIngress":true},{"id":"vllm_cpu","name":"vllm-cpu","serviceCount":3,"netpolCount":0,"hasIngress":false},{"id":"vllm_gaudi","name":"vllm-gaudi","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"vllm_orchestrator_gateway","name":"vllm-orchestrator-gateway","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"vllm_rocm","name":"vllm-rocm","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"vllm_spyre","name":"vllm-spyre","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"workload_variant_autoscaler","name":"workload-variant-autoscaler","serviceCount":5,"netpolCount":0,"hasIngress":true}],"services":[{"id":"NeMo_Guardrails_svc_0","name":"env-port-default","parent":"NeMo_Guardrails","ports":"1235"},{"id":"ai_gateway_payload_processing_svc_0","name":"uvicorn-server","parent":"ai_gateway_payload_processing","ports":"8000"},{"id":"argo_workflows_svc_0","name":"the-service","parent":"argo_workflows","ports":"8666"},{"id":"data_science_pipelines_svc_0","name":"kubeflow-pipelines-profile-controller","parent":"data_science_pipelines","ports":"80"},{"id":"data_science_pipelines_svc_1","name":"squid","parent":"data_science_pipelines","ports":"3128"},{"id":"data_science_pipelines_operator_svc_0","name":"data-science-pipelines-operator-service","parent":"data_science_pipelines_operator","ports":"8080"},{"id":"data_science_pipelines_operator_svc_1","name":"ds-pipeline-workflow-controller-metrics-template-value","parent":"data_science_pipelines_operator","ports":"9090"},{"id":"data_science_pipelines_operator_svc_2","name":"mariadb","parent":"data_science_pipelines_operator","ports":"3306"},{"id":"data_science_pipelines_operator_svc_3","name":"mariadb-template-value","parent":"data_science_pipelines_operator","ports":"3306"},{"id":"data_science_pipelines_operator_svc_4","name":"minio","parent":"data_science_pipelines_operator","ports":"9000,9001"},{"id":"data_science_pipelines_operator_svc_5","name":"minio-service","parent":"data_science_pipelines_operator","ports":"9000"},{"id":"data_science_pipelines_operator_svc_6","name":"minio-template-value","parent":"data_science_pipelines_operator","ports":"9000,80"},{"id":"data_science_pipelines_operator_svc_7","name":"ml-pipeline","parent":"data_science_pipelines_operator","ports":"8443,8888,8887"},{"id":"data_science_pipelines_operator_svc_8","name":"pypi-server","parent":"data_science_pipelines_operator","ports":"8080"},{"id":"data_science_pipelines_operator_svc_9","name":"template-value","parent":"data_science_pipelines_operator","ports":"8443,8888,8887"},{"id":"data_science_pipelines_operator_svc_10","name":"the-service","parent":"data_science_pipelines_operator","ports":"8666"},{"id":"distributed_workloads_svc_0","name":"kuberay-operator","parent":"distributed_workloads","ports":"8080"},{"id":"distributed_workloads_svc_1","name":"training-operator","parent":"distributed_workloads","ports":"8080"},{"id":"distributed_workloads_svc_2","name":"visibility-server","parent":"distributed_workloads","ports":"443"},{"id":"distributed_workloads_svc_3","name":"webhook-service","parent":"distributed_workloads","ports":"443"},{"id":"feast_svc_0","name":"uvicorn-server","parent":"feast","ports":"6566"},{"id":"gateway_api_inference_extension_svc_0","name":"uvicorn-server","parent":"gateway_api_inference_extension","ports":"8000"},{"id":"kserve_svc_0","name":"cli-port-default","parent":"kserve","ports":"80"},{"id":"kserve_svc_1","name":"keda-admission-webhooks","parent":"kserve","ports":"443,8080"},{"id":"kserve_svc_2","name":"keda-metrics-apiserver","parent":"kserve","ports":"443,8080"},{"id":"kserve_svc_3","name":"keda-operator","parent":"kserve","ports":"9666,8080"},{"id":"kserve_svc_4","name":"kserve-controller-manager-metrics-service","parent":"kserve","ports":"8443"},{"id":"kserve_svc_5","name":"kserve-controller-manager-service","parent":"kserve","ports":"8443"},{"id":"kserve_svc_6","name":"kserve-webhook-server-service","parent":"kserve","ports":"443"},{"id":"kserve_svc_7","name":"llmisvc-controller-manager-service","parent":"kserve","ports":"8443"},{"id":"kserve_svc_8","name":"llmisvc-webhook-server-service","parent":"kserve","ports":"443"},{"id":"kserve_svc_9","name":"localmodel-webhook-server-service","parent":"kserve","ports":"443"},{"id":"kserve_svc_10","name":"uvicorn-server","parent":"kserve","ports":"8000"},{"id":"kserve_svc_11","name":"webhook-service","parent":"kserve","ports":"443"},{"id":"kubeflow_svc_0","name":"service","parent":"kubeflow","ports":"443"},{"id":"kubeflow_svc_1","name":"webhook-service","parent":"kubeflow","ports":"443"},{"id":"kuberay_svc_0","name":"kuberay-operator","parent":"kuberay","ports":"8080"},{"id":"kuberay_svc_1","name":"the-service","parent":"kuberay","ports":"8666"},{"id":"kuberay_svc_2","name":"webhook-service","parent":"kuberay","ports":"443"},{"id":"kueue_svc_0","name":"kuberay-operator","parent":"kueue","ports":"8080"},{"id":"kueue_svc_1","name":"the-service","parent":"kueue","ports":"8666"},{"id":"kueue_svc_2","name":"training-operator","parent":"kueue","ports":"8080,443"},{"id":"kueue_svc_3","name":"visibility-server","parent":"kueue","ports":"443"},{"id":"kueue_svc_4","name":"webhook-service","parent":"kueue","ports":"443"},{"id":"llama_stack_k8s_operator_svc_0","name":"ogx-k8s-operator-controller-manager-metrics-service","parent":"llama_stack_k8s_operator","ports":"8443"},{"id":"llama_stack_k8s_operator_svc_1","name":"ogx-k8s-operator-webhook-service","parent":"llama_stack_k8s_operator","ports":"443"},{"id":"llm_d_inference_scheduler_svc_0","name":"${EPP_NAME}","parent":"llm_d_inference_scheduler","ports":"9002,5557,9090"},{"id":"llm_d_inference_scheduler_svc_1","name":"inference-gateway-istio-nodeport","parent":"llm_d_inference_scheduler","ports":"15021,80"},{"id":"llm_d_inference_scheduler_svc_2","name":"istiod-llm-d-gateway","parent":"llm_d_inference_scheduler","ports":"15010,15012,443,15014"},{"id":"llm_d_inference_scheduler_svc_3","name":"service","parent":"llm_d_inference_scheduler","ports":"8080"},{"id":"llm_d_inference_scheduler_svc_4","name":"uvicorn-server","parent":"llm_d_inference_scheduler","ports":"8000"},{"id":"llm_d_routing_sidecar_svc_0","name":"service","parent":"llm_d_routing_sidecar","ports":"8080"},{"id":"mlflow_operator_svc_0","name":"minio-service","parent":"mlflow_operator","ports":"9000"},{"id":"mlflow_operator_svc_1","name":"mlflow-operator-controller-manager-metrics-service","parent":"mlflow_operator","ports":"8443"},{"id":"mlflow_operator_svc_2","name":"postgres-service","parent":"mlflow_operator","ports":"5432"},{"id":"model_registry_svc_0","name":"model-catalog","parent":"model_registry","ports":"8080"},{"id":"modelmesh_serving_svc_0","name":"cli-port-default","parent":"modelmesh_serving","ports":"80"},{"id":"modelmesh_serving_svc_1","name":"etcd","parent":"modelmesh_serving","ports":"2379"},{"id":"modelmesh_serving_svc_2","name":"kserve-controller-manager-service","parent":"modelmesh_serving","ports":"8443"},{"id":"modelmesh_serving_svc_3","name":"kserve-webhook-server-service","parent":"modelmesh_serving","ports":"443"},{"id":"modelmesh_serving_svc_4","name":"modelmesh-controller","parent":"modelmesh_serving","ports":"8080"},{"id":"modelmesh_serving_svc_5","name":"modelmesh-webhook-server-service","parent":"modelmesh_serving","ports":"9443"},{"id":"modelmesh_serving_svc_6","name":"models-server","parent":"modelmesh_serving","ports":"8080"},{"id":"models_as_a_service_svc_0","name":"maas-api","parent":"models_as_a_service","ports":"8080,9090"},{"id":"models_as_a_service_svc_1","name":"payload-processing","parent":"models_as_a_service","ports":"9004"},{"id":"notebooks_svc_0","name":"notebook","parent":"notebooks","ports":"8888"},{"id":"notebooks_downstream_svc_0","name":"notebook","parent":"notebooks_downstream","ports":"8888"},{"id":"odh_cli_svc_0","name":"the-service","parent":"odh_cli","ports":"8666"},{"id":"spark_operator_svc_0","name":"spark-operator-webhook-svc","parent":"spark_operator","ports":"443"},{"id":"spark_operator_svc_1","name":"the-service","parent":"spark_operator","ports":"8666"},{"id":"text_generation_inference_svc_0","name":"inference-server","parent":"text_generation_inference","ports":"8033"},{"id":"trainer_svc_0","name":"webhook-service","parent":"trainer","ports":"443"},{"id":"vllm_cpu_svc_0","name":"cli-port-default","parent":"vllm_cpu","ports":"8000"},{"id":"vllm_cpu_svc_1","name":"disagg_proxy_p2p_nccl_xpyd-server","parent":"vllm_cpu","ports":"10001"},{"id":"vllm_cpu_svc_2","name":"moriio_toy_proxy_server-server","parent":"vllm_cpu","ports":"10001"},{"id":"vllm_gaudi_svc_0","name":"cli-port-default","parent":"vllm_gaudi","ports":"8000"},{"id":"workload_variant_autoscaler_svc_0","name":"keda-admission-webhooks","parent":"workload_variant_autoscaler","ports":"443,8080"},{"id":"workload_variant_autoscaler_svc_1","name":"keda-metrics-apiserver","parent":"workload_variant_autoscaler","ports":"443,8080"},{"id":"workload_variant_autoscaler_svc_2","name":"keda-operator","parent":"workload_variant_autoscaler","ports":"9666,8080"},{"id":"workload_variant_autoscaler_svc_3","name":"uvicorn-server","parent":"workload_variant_autoscaler","ports":"8000"},{"id":"workload_variant_autoscaler_svc_4","name":"webhook-service","parent":"workload_variant_autoscaler","ports":"443"}],"externals":[{"id":"ext_grpc","name":"grpc","type":"grpc"},{"id":"ext_mysql","name":"mysql","type":"database"},{"id":"ext_postgres","name":"postgres","type":"database"},{"id":"ext_redis","name":"redis","type":"database"},{"id":"ext_sqlite","name":"sqlite","type":"database"},{"id":"ext_kafka","name":"kafka","type":"messaging"},{"id":"ext_azure_blob","name":"azure-blob","type":"object-storage"},{"id":"ext_gcs","name":"gcs","type":"object-storage"},{"id":"ext_minio","name":"minio","type":"object-storage"},{"id":"ext_s3","name":"s3","type":"object-storage"},{"id":"ext_etcd","name":"etcd","type":"database"},{"id":"ext_mongodb","name":"mongodb","type":"database"},{"id":"ext_rabbitmq","name":"rabbitmq","type":"messaging"}],"edges":[{"from":"ai_gateway_payload_processing","to":"gateway_api_inference_extension","type":"watches"},{"from":"kserve","to":"gateway_api_inference_extension","type":"watches"},{"from":"kubeflow","to":"data_science_pipelines_operator","type":"module"},{"from":"llm_d_inference_scheduler","to":"gateway_api_inference_extension","type":"watches"},{"from":"model_registry","to":"kserve","type":"watches"},{"from":"modelmesh_serving","to":"kserve","type":"watches"},{"from":"models_as_a_service","to":"kserve","type":"module"},{"from":"models_as_a_service","to":"ai_gateway_payload_processing","type":"watches"},{"from":"odh_cli","to":"opendatahub_operator","type":"module"},{"from":"workload_variant_autoscaler","to":"gateway_api_inference_extension","type":"watches"},{"from":"kserve","to":"modelmesh_serving","type":"module"},{"from":"modelmesh_serving","to":"workload_variant_autoscaler","type":"module"},{"from":"spark_operator","to":"workload_variant_autoscaler","type":"module"},{"from":"ai_gateway_payload_processing","to":"ext_grpc","type":"external"},{"from":"argo_workflows","to":"ext_mysql","type":"external"},{"from":"argo_workflows","to":"ext_postgres","type":"external"},{"from":"argo_workflows","to":"ext_redis","type":"external"},{"from":"argo_workflows","to":"ext_sqlite","type":"external"},{"from":"argo_workflows","to":"ext_grpc","type":"external"},{"from":"argo_workflows","to":"ext_kafka","type":"external"},{"from":"argo_workflows","to":"ext_azure_blob","type":"external"},{"from":"argo_workflows","to":"ext_gcs","type":"external"},{"from":"argo_workflows","to":"ext_minio","type":"external"},{"from":"argo_workflows","to":"ext_s3","type":"external"},{"from":"batch_gateway","to":"ext_postgres","type":"external"},{"from":"batch_gateway","to":"ext_redis","type":"external"},{"from":"batch_gateway","to":"ext_grpc","type":"external"},{"from":"batch_gateway","to":"ext_s3","type":"external"},{"from":"data_science_pipelines","to":"ext_postgres","type":"external"},{"from":"data_science_pipelines","to":"ext_sqlite","type":"external"},{"from":"data_science_pipelines","to":"ext_grpc","type":"external"},{"from":"data_science_pipelines","to":"ext_azure_blob","type":"external"},{"from":"data_science_pipelines","to":"ext_gcs","type":"external"},{"from":"data_science_pipelines","to":"ext_minio","type":"external"},{"from":"data_science_pipelines","to":"ext_s3","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_mysql","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_azure_blob","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_minio","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_s3","type":"external"},{"from":"distributed_workloads","to":"ext_grpc","type":"external"},{"from":"distributed_workloads","to":"ext_azure_blob","type":"external"},{"from":"distributed_workloads","to":"ext_minio","type":"external"},{"from":"distributed_workloads","to":"ext_s3","type":"external"},{"from":"eval_hub","to":"ext_etcd","type":"external"},{"from":"eval_hub","to":"ext_postgres","type":"external"},{"from":"eval_hub","to":"ext_grpc","type":"external"},{"from":"eval_hub","to":"ext_s3","type":"external"},{"from":"feast","to":"ext_postgres","type":"external"},{"from":"feast","to":"ext_redis","type":"external"},{"from":"feast","to":"ext_sqlite","type":"external"},{"from":"feast","to":"ext_grpc","type":"external"},{"from":"feast","to":"ext_gcs","type":"external"},{"from":"feast","to":"ext_s3","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_etcd","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_mongodb","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_mysql","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_sqlite","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_grpc","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_kafka","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_rabbitmq","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_gcs","type":"external"},{"from":"gateway_api_inference_extension","to":"ext_s3","type":"external"},{"from":"kserve","to":"ext_etcd","type":"external"},{"from":"kserve","to":"ext_mongodb","type":"external"},{"from":"kserve","to":"ext_mysql","type":"external"},{"from":"kserve","to":"ext_redis","type":"external"},{"from":"kserve","to":"ext_grpc","type":"external"},{"from":"kserve","to":"ext_azure_blob","type":"external"},{"from":"kserve","to":"ext_gcs","type":"external"},{"from":"kserve","to":"ext_s3","type":"external"},{"from":"kube_auth_proxy","to":"ext_etcd","type":"external"},{"from":"kube_auth_proxy","to":"ext_redis","type":"external"},{"from":"kube_auth_proxy","to":"ext_grpc","type":"external"},{"from":"kube_rbac_proxy","to":"ext_etcd","type":"external"},{"from":"kube_rbac_proxy","to":"ext_grpc","type":"external"},{"from":"kuberay","to":"ext_grpc","type":"external"},{"from":"kuberay","to":"ext_azure_blob","type":"external"},{"from":"kueue","to":"ext_etcd","type":"external"},{"from":"kueue","to":"ext_grpc","type":"external"},{"from":"llm_d_inference_scheduler","to":"ext_redis","type":"external"},{"from":"llm_d_inference_scheduler","to":"ext_grpc","type":"external"},{"from":"llm_d_kv_cache","to":"ext_redis","type":"external"},{"from":"llm_d_kv_cache","to":"ext_grpc","type":"external"},{"from":"mlflow_operator","to":"ext_grpc","type":"external"},{"from":"mlflow_operator","to":"ext_azure_blob","type":"external"},{"from":"model_metadata_collection","to":"ext_sqlite","type":"external"},{"from":"model_metadata_collection","to":"ext_grpc","type":"external"},{"from":"model_metadata_collection","to":"ext_s3","type":"external"},{"from":"model_registry","to":"ext_mongodb","type":"external"},{"from":"model_registry","to":"ext_mysql","type":"external"},{"from":"model_registry","to":"ext_postgres","type":"external"},{"from":"model_registry","to":"ext_sqlite","type":"external"},{"from":"model_registry","to":"ext_gcs","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_mysql","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_grpc","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_azure_blob","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_gcs","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_s3","type":"external"},{"from":"modelmesh_serving","to":"ext_etcd","type":"external"},{"from":"modelmesh_serving","to":"ext_mysql","type":"external"},{"from":"modelmesh_serving","to":"ext_grpc","type":"external"},{"from":"modelmesh_serving","to":"ext_azure_blob","type":"external"},{"from":"modelmesh_serving","to":"ext_gcs","type":"external"},{"from":"modelmesh_serving","to":"ext_s3","type":"external"},{"from":"odh_cli","to":"ext_grpc","type":"external"},{"from":"openvino_model_server","to":"ext_grpc","type":"external"},{"from":"rest_proxy","to":"ext_grpc","type":"external"},{"from":"spark_operator","to":"ext_postgres","type":"external"},{"from":"spark_operator","to":"ext_sqlite","type":"external"},{"from":"spark_operator","to":"ext_grpc","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_etcd","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_mongodb","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_mysql","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_redis","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_grpc","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_azure_blob","type":"external"},{"from":"workload_variant_autoscaler","to":"ext_gcs","type":"external"}]}
+  {"components":[{"id":"MLServer","name":"MLServer","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"NeMo_Guardrails","name":"NeMo-Guardrails","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"agents_operator","name":"agents-operator","serviceCount":2,"netpolCount":1,"hasIngress":true},{"id":"ai_gateway_payload_processing","name":"ai-gateway-payload-processing","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"ai4rag","name":"ai4rag","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"argo_workflows","name":"argo-workflows","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"batch_gateway","name":"batch-gateway","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"caikit_nlp","name":"caikit-nlp","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"caikit_tgis_serving","name":"caikit-tgis-serving","serviceCount":0,"netpolCount":1,"hasIngress":true},{"id":"codeflare_operator","name":"codeflare-operator","serviceCount":1,"netpolCount":0,"hasIngress":true},{"id":"codeflare_sdk","name":"codeflare-sdk","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"data_science_pipelines","name":"data-science-pipelines","serviceCount":1,"netpolCount":1,"hasIngress":true},{"id":"data_science_pipelines_operator","name":"data-science-pipelines-operator","serviceCount":7,"netpolCount":2,"hasIngress":true},{"id":"distributed_workloads","name":"distributed-workloads","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"eval_hub","name":"eval-hub","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"feast","name":"feast","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"fms_guardrails_orchestrator","name":"fms-guardrails-orchestrator","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"fms_hf_tuning","name":"fms-hf-tuning","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"guardrails_regex_detector","name":"guardrails-regex-detector","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"kserve","name":"kserve","serviceCount":8,"netpolCount":2,"hasIngress":true},{"id":"kube_auth_proxy","name":"kube-auth-proxy","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"kube_rbac_proxy","name":"kube-rbac-proxy","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"kubeflow","name":"kubeflow","serviceCount":2,"netpolCount":0,"hasIngress":false},{"id":"kuberay","name":"kuberay","serviceCount":2,"netpolCount":0,"hasIngress":false},{"id":"kueue","name":"kueue","serviceCount":2,"netpolCount":0,"hasIngress":false},{"id":"llama_stack","name":"llama-stack","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"llm_d","name":"llm-d","serviceCount":3,"netpolCount":0,"hasIngress":true},{"id":"llm_d_inference_scheduler","name":"llm-d-inference-scheduler","serviceCount":7,"netpolCount":0,"hasIngress":true},{"id":"llm_d_kv_cache","name":"llm-d-kv-cache","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"llm_d_routing_sidecar","name":"llm-d-routing-sidecar","serviceCount":1,"netpolCount":0,"hasIngress":true},{"id":"lm_evaluation_harness","name":"lm-evaluation-harness","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"ml_metadata","name":"ml-metadata","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"mlflow_operator","name":"mlflow-operator","serviceCount":1,"netpolCount":0,"hasIngress":true},{"id":"model_metadata_collection","name":"model-metadata-collection","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"model_registry","name":"model-registry","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"model_registry_operator","name":"model-registry-operator","serviceCount":4,"netpolCount":4,"hasIngress":true},{"id":"modelmesh_runtime_adapter","name":"modelmesh-runtime-adapter","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"modelmesh_serving","name":"modelmesh-serving","serviceCount":3,"netpolCount":4,"hasIngress":false},{"id":"models_as_a_service","name":"models-as-a-service","serviceCount":3,"netpolCount":10,"hasIngress":true},{"id":"notebooks","name":"notebooks","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"notebooks_downstream","name":"notebooks-downstream","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"odh_cli","name":"odh-cli","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"odh_dashboard","name":"odh-dashboard","serviceCount":16,"netpolCount":17,"hasIngress":true},{"id":"odh_deployer","name":"odh-deployer","serviceCount":0,"netpolCount":0,"hasIngress":true},{"id":"odh_model_controller","name":"odh-model-controller","serviceCount":3,"netpolCount":0,"hasIngress":true},{"id":"ogx_k8s_operator","name":"ogx-k8s-operator","serviceCount":2,"netpolCount":1,"hasIngress":true},{"id":"openvino_model_server","name":"openvino_model_server","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"pipelines_components","name":"pipelines-components","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"rest_proxy","name":"rest-proxy","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"rhds_llama_stack_distribution","name":"rhds-llama-stack-distribution","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"rhods_operator","name":"rhods-operator","serviceCount":1,"netpolCount":2,"hasIngress":false},{"id":"spark_operator","name":"spark-operator","serviceCount":1,"netpolCount":1,"hasIngress":true},{"id":"text_generation_inference","name":"text-generation-inference","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"trainer","name":"trainer","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"training_operator","name":"training-operator","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"trustyai_explainability","name":"trustyai-explainability","serviceCount":0,"netpolCount":0,"hasIngress":true},{"id":"trustyai_service_operator","name":"trustyai-service-operator","serviceCount":3,"netpolCount":0,"hasIngress":false},{"id":"vllm","name":"vllm","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"vllm_cpu","name":"vllm-cpu","serviceCount":1,"netpolCount":0,"hasIngress":false},{"id":"vllm_gaudi","name":"vllm-gaudi","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"vllm_orchestrator_gateway","name":"vllm-orchestrator-gateway","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"vllm_rocm","name":"vllm-rocm","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"vllm_spyre","name":"vllm-spyre","serviceCount":0,"netpolCount":0,"hasIngress":false},{"id":"workload_variant_autoscaler","name":"workload-variant-autoscaler","serviceCount":1,"netpolCount":0,"hasIngress":false}],"services":[{"id":"agents_operator_svc_0","name":"bundle-service","parent":"agents_operator","ports":"8080"},{"id":"agents_operator_svc_1","name":"webhook-service","parent":"agents_operator","ports":"443"},{"id":"codeflare_operator_svc_0","name":"webhook-service","parent":"codeflare_operator","ports":"443"},{"id":"data_science_pipelines_svc_0","name":"kubeflow-pipelines-profile-controller","parent":"data_science_pipelines","ports":"80"},{"id":"data_science_pipelines_operator_svc_0","name":"data-science-pipelines-operator-service","parent":"data_science_pipelines_operator","ports":"8080"},{"id":"data_science_pipelines_operator_svc_1","name":"ds-pipeline-workflow-controller-metrics-template-value","parent":"data_science_pipelines_operator","ports":"9090"},{"id":"data_science_pipelines_operator_svc_2","name":"mariadb-template-value","parent":"data_science_pipelines_operator","ports":"3306"},{"id":"data_science_pipelines_operator_svc_3","name":"minio-service","parent":"data_science_pipelines_operator","ports":"9000"},{"id":"data_science_pipelines_operator_svc_4","name":"minio-template-value","parent":"data_science_pipelines_operator","ports":"9000,80"},{"id":"data_science_pipelines_operator_svc_5","name":"ml-pipeline","parent":"data_science_pipelines_operator","ports":"8443,8888,8887"},{"id":"data_science_pipelines_operator_svc_6","name":"template-value","parent":"data_science_pipelines_operator","ports":"8443,8888,8887"},{"id":"feast_svc_0","name":"uvicorn-server","parent":"feast","ports":"6566"},{"id":"kserve_svc_0","name":"kserve-controller-manager-metrics-service","parent":"kserve","ports":"8443"},{"id":"kserve_svc_1","name":"kserve-controller-manager-service","parent":"kserve","ports":"8443"},{"id":"kserve_svc_2","name":"kserve-webhook-server-service","parent":"kserve","ports":"443"},{"id":"kserve_svc_3","name":"llmisvc-controller-manager-service","parent":"kserve","ports":"8443"},{"id":"kserve_svc_4","name":"llmisvc-webhook-server-service","parent":"kserve","ports":"443"},{"id":"kserve_svc_5","name":"localmodel-webhook-server-service","parent":"kserve","ports":"443"},{"id":"kserve_svc_6","name":"model-serving-api","parent":"kserve","ports":"443,8080"},{"id":"kserve_svc_7","name":"odh-model-controller-webhook-service","parent":"kserve","ports":"443"},{"id":"kubeflow_svc_0","name":"service","parent":"kubeflow","ports":"443"},{"id":"kubeflow_svc_1","name":"webhook-service","parent":"kubeflow","ports":"443"},{"id":"kuberay_svc_0","name":"kuberay-operator","parent":"kuberay","ports":"8080"},{"id":"kuberay_svc_1","name":"webhook-service","parent":"kuberay","ports":"443"},{"id":"kueue_svc_0","name":"visibility-server","parent":"kueue","ports":"443"},{"id":"kueue_svc_1","name":"webhook-service","parent":"kueue","ports":"443"},{"id":"llm_d_svc_0","name":"mooncake-client","parent":"llm_d","ports":"50052"},{"id":"llm_d_svc_1","name":"mooncake-master-store","parent":"llm_d","ports":"50051,8080,9003"},{"id":"llm_d_svc_2","name":"render","parent":"llm_d","ports":"8000"},{"id":"llm_d_inference_scheduler_svc_0","name":"${EPP_NAME}","parent":"llm_d_inference_scheduler","ports":"9002,5557,9090"},{"id":"llm_d_inference_scheduler_svc_1","name":"e2e-epp","parent":"llm_d_inference_scheduler","ports":"9002,5557"},{"id":"llm_d_inference_scheduler_svc_2","name":"e2e-epp-health","parent":"llm_d_inference_scheduler","ports":"9003"},{"id":"llm_d_inference_scheduler_svc_3","name":"e2e-epp-metrics","parent":"llm_d_inference_scheduler","ports":"9090"},{"id":"llm_d_inference_scheduler_svc_4","name":"inference-gateway-istio-nodeport","parent":"llm_d_inference_scheduler","ports":"15021,80"},{"id":"llm_d_inference_scheduler_svc_5","name":"istiod-llm-d-gateway","parent":"llm_d_inference_scheduler","ports":"15010,15012,443,15014"},{"id":"llm_d_inference_scheduler_svc_6","name":"service","parent":"llm_d_inference_scheduler","ports":"8080"},{"id":"llm_d_routing_sidecar_svc_0","name":"service","parent":"llm_d_routing_sidecar","ports":"8080"},{"id":"mlflow_operator_svc_0","name":"mlflow-operator-controller-manager-metrics-service","parent":"mlflow_operator","ports":"8443"},{"id":"model_registry_svc_0","name":"model-catalog","parent":"model_registry","ports":"8080"},{"id":"model_registry_operator_svc_0","name":"catalog-webhook-service","parent":"model_registry_operator","ports":"443"},{"id":"model_registry_operator_svc_1","name":"model-registry-operator-controller-manager-metrics-service","parent":"model_registry_operator","ports":"8443"},{"id":"model_registry_operator_svc_2","name":"model-registry-operator-webhook-service","parent":"model_registry_operator","ports":"443"},{"id":"model_registry_operator_svc_3","name":"template-value-postgres","parent":"model_registry_operator","ports":"5432"},{"id":"modelmesh_serving_svc_0","name":"etcd","parent":"modelmesh_serving","ports":"2379"},{"id":"modelmesh_serving_svc_1","name":"modelmesh-controller","parent":"modelmesh_serving","ports":"8080"},{"id":"modelmesh_serving_svc_2","name":"modelmesh-webhook-server-service","parent":"modelmesh_serving","ports":"9443"},{"id":"models_as_a_service_svc_0","name":"maas-api","parent":"models_as_a_service","ports":"8080,9090"},{"id":"models_as_a_service_svc_1","name":"maas-controller-webhook-service","parent":"models_as_a_service","ports":"443"},{"id":"models_as_a_service_svc_2","name":"payload-processing","parent":"models_as_a_service","ports":"9004"},{"id":"notebooks_svc_0","name":"notebook","parent":"notebooks","ports":"8888"},{"id":"notebooks_downstream_svc_0","name":"notebook","parent":"notebooks_downstream","ports":"8888"},{"id":"odh_dashboard_svc_0","name":"odh-dashboard","parent":"odh_dashboard","ports":"8443,8943"},{"id":"odh_dashboard_svc_1","name":"odh-dashboard-agent-ops-ui","parent":"odh_dashboard","ports":"8843"},{"id":"odh_dashboard_svc_2","name":"odh-dashboard-automl-ui","parent":"odh_dashboard","ports":"8643"},{"id":"odh_dashboard_svc_3","name":"odh-dashboard-autorag-ui","parent":"odh_dashboard","ports":"8743"},{"id":"odh_dashboard_svc_4","name":"odh-dashboard-data-registry-ui","parent":"odh_dashboard","ports":"9043"},{"id":"odh_dashboard_svc_5","name":"odh-dashboard-eval-hub-ui","parent":"odh_dashboard","ports":"8543"},{"id":"odh_dashboard_svc_6","name":"odh-dashboard-gen-ai-ui","parent":"odh_dashboard","ports":"8143"},{"id":"odh_dashboard_svc_7","name":"odh-dashboard-maas-ui","parent":"odh_dashboard","ports":"8243"},{"id":"odh_dashboard_svc_8","name":"odh-dashboard-mlflow-ui","parent":"odh_dashboard","ports":"8343"},{"id":"odh_dashboard_svc_9","name":"odh-dashboard-model-registry-ui","parent":"odh_dashboard","ports":"8043"},{"id":"odh_dashboard_svc_10","name":"odh-dashboard-notebooks-ui","parent":"odh_dashboard","ports":"9043"},{"id":"odh_dashboard_svc_11","name":"rhaii-dashboard","parent":"odh_dashboard","ports":"4000"},{"id":"odh_dashboard_svc_12","name":"workspaces-backend","parent":"odh_dashboard","ports":"4000"},{"id":"odh_dashboard_svc_13","name":"workspaces-controller-metrics-service","parent":"odh_dashboard","ports":"8080"},{"id":"odh_dashboard_svc_14","name":"workspaces-frontend","parent":"odh_dashboard","ports":"8080"},{"id":"odh_dashboard_svc_15","name":"workspaces-webhook-service","parent":"odh_dashboard","ports":"443"},{"id":"odh_model_controller_svc_0","name":"model-serving-api","parent":"odh_model_controller","ports":"443,8080"},{"id":"odh_model_controller_svc_1","name":"odh-model-controller-metrics-service","parent":"odh_model_controller","ports":"8443"},{"id":"odh_model_controller_svc_2","name":"odh-model-controller-webhook-service","parent":"odh_model_controller","ports":"443"},{"id":"ogx_k8s_operator_svc_0","name":"ogx-k8s-operator-controller-manager-metrics-service","parent":"ogx_k8s_operator","ports":"8443"},{"id":"ogx_k8s_operator_svc_1","name":"ogx-k8s-operator-webhook-service","parent":"ogx_k8s_operator","ports":"443"},{"id":"rhods_operator_svc_0","name":"webhook-service","parent":"rhods_operator","ports":"443"},{"id":"spark_operator_svc_0","name":"spark-operator-webhook-svc","parent":"spark_operator","ports":"443"},{"id":"text_generation_inference_svc_0","name":"inference-server","parent":"text_generation_inference","ports":"8033"},{"id":"training_operator_svc_0","name":"training-operator","parent":"training_operator","ports":"8080,443"},{"id":"trustyai_service_operator_svc_0","name":"trustyai-service-operator-controller-manager-metrics-service","parent":"trustyai_service_operator","ports":"8443"},{"id":"trustyai_service_operator_svc_1","name":"trustyai-service-operator-metrics-service","parent":"trustyai_service_operator","ports":"8443"},{"id":"trustyai_service_operator_svc_2","name":"trustyai-service-operator-webhook-service","parent":"trustyai_service_operator","ports":"443"},{"id":"vllm_cpu_svc_0","name":"cli-port-default","parent":"vllm_cpu","ports":"8000"},{"id":"workload_variant_autoscaler_svc_0","name":"controller-manager-metrics-service","parent":"workload_variant_autoscaler","ports":"8443"}],"externals":[{"id":"ext_requests","name":"requests","type":"api"},{"id":"ext_kafka","name":"kafka","type":"messaging"},{"id":"ext_aiohttp","name":"aiohttp","type":"api"},{"id":"ext_httpx","name":"httpx","type":"api"},{"id":"ext_openai","name":"openai","type":"api"},{"id":"ext_urllib","name":"urllib","type":"api"},{"id":"ext_redis","name":"redis","type":"database"},{"id":"ext_sqlalchemy","name":"sqlalchemy","type":"database"},{"id":"ext_chromadb","name":"chromadb","type":"api"},{"id":"ext_milvus","name":"milvus","type":"api"},{"id":"ext_grpc","name":"grpc","type":"grpc"},{"id":"ext_azure_blob","name":"azure-blob","type":"object-storage"},{"id":"ext_gcs","name":"gcs","type":"object-storage"},{"id":"ext_s3","name":"s3","type":"object-storage"},{"id":"ext_minio","name":"minio","type":"object-storage"},{"id":"ext_mysql","name":"mysql","type":"database"},{"id":"ext_elasticsearch","name":"elasticsearch","type":"api"},{"id":"ext_mlflow","name":"mlflow","type":"api"},{"id":"ext_qdrant","name":"qdrant","type":"api"},{"id":"ext_weaviate","name":"weaviate","type":"api"},{"id":"ext_mongodb","name":"mongodb","type":"database"},{"id":"ext_postgres","name":"postgres","type":"database"},{"id":"ext_sqlite","name":"sqlite","type":"database"},{"id":"ext_llama_stack","name":"llama-stack","type":"api"},{"id":"ext_anthropic","name":"anthropic","type":"api"},{"id":"ext_wandb","name":"wandb","type":"api"}],"edges":[{"from":"codeflare_operator","to":"opendatahub_operator","type":"module"},{"from":"data_science_pipelines_operator","to":"mlflow_operator","type":"module"},{"from":"data_science_pipelines_operator","to":"operator_chaos","type":"module"},{"from":"kserve","to":"odh_platform_utilities","type":"module"},{"from":"kubeflow","to":"data_science_pipelines_operator","type":"module"},{"from":"kubeflow","to":"operator_chaos","type":"module"},{"from":"llm_d_inference_scheduler","to":"kserve","type":"watches"},{"from":"model_registry_operator","to":"odh_platform_utilities","type":"module"},{"from":"model_registry_operator","to":"operator_chaos","type":"module"},{"from":"model_registry","to":"kserve","type":"watches"},{"from":"modelmesh_serving","to":"kserve","type":"watches"},{"from":"models_as_a_service","to":"ai_gateway_payload_processing","type":"watches"},{"from":"odh_cli","to":"opendatahub_operator","type":"module"},{"from":"odh_dashboard","to":"mlflow_go","type":"module"},{"from":"odh_dashboard","to":"odh_platform_utilities","type":"module"},{"from":"odh_dashboard","to":"ogx_k8s_operator","type":"module"},{"from":"odh_model_controller","to":"kserve","type":"watches"},{"from":"ogx_k8s_operator","to":"odh_platform_utilities","type":"module"},{"from":"rhods_operator","to":"models_as_a_service","type":"module"},{"from":"rhods_operator","to":"odh_platform_utilities","type":"module"},{"from":"spark_operator","to":"odh_platform_utilities","type":"module"},{"from":"trustyai_service_operator","to":"odh_platform_utilities","type":"module"},{"from":"workload_variant_autoscaler","to":"kserve","type":"watches"},{"from":"codeflare_operator","to":"rhods_operator","type":"module"},{"from":"model_registry_operator","to":"rhods_operator","type":"module"},{"from":"modelmesh_serving","to":"rhods_operator","type":"module"},{"from":"MLServer","to":"ext_requests","type":"external"},{"from":"MLServer","to":"ext_kafka","type":"external"},{"from":"NeMo_Guardrails","to":"ext_aiohttp","type":"external"},{"from":"NeMo_Guardrails","to":"ext_httpx","type":"external"},{"from":"NeMo_Guardrails","to":"ext_openai","type":"external"},{"from":"NeMo_Guardrails","to":"ext_urllib","type":"external"},{"from":"NeMo_Guardrails","to":"ext_redis","type":"external"},{"from":"NeMo_Guardrails","to":"ext_sqlalchemy","type":"external"},{"from":"agents_operator","to":"ext_urllib","type":"external"},{"from":"ai4rag","to":"ext_chromadb","type":"external"},{"from":"ai4rag","to":"ext_httpx","type":"external"},{"from":"ai4rag","to":"ext_milvus","type":"external"},{"from":"ai4rag","to":"ext_openai","type":"external"},{"from":"argo_workflows","to":"ext_grpc","type":"external"},{"from":"argo_workflows","to":"ext_azure_blob","type":"external"},{"from":"argo_workflows","to":"ext_gcs","type":"external"},{"from":"batch_gateway","to":"ext_urllib","type":"external"},{"from":"batch_gateway","to":"ext_redis","type":"external"},{"from":"batch_gateway","to":"ext_s3","type":"external"},{"from":"codeflare_sdk","to":"ext_requests","type":"external"},{"from":"data_science_pipelines","to":"ext_requests","type":"external"},{"from":"data_science_pipelines","to":"ext_grpc","type":"external"},{"from":"data_science_pipelines","to":"ext_gcs","type":"external"},{"from":"data_science_pipelines","to":"ext_minio","type":"external"},{"from":"data_science_pipelines","to":"ext_s3","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_requests","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_mysql","type":"external"},{"from":"data_science_pipelines_operator","to":"ext_minio","type":"external"},{"from":"eval_hub","to":"ext_requests","type":"external"},{"from":"eval_hub","to":"ext_s3","type":"external"},{"from":"feast","to":"ext_elasticsearch","type":"external"},{"from":"feast","to":"ext_milvus","type":"external"},{"from":"feast","to":"ext_mlflow","type":"external"},{"from":"feast","to":"ext_qdrant","type":"external"},{"from":"feast","to":"ext_requests","type":"external"},{"from":"feast","to":"ext_weaviate","type":"external"},{"from":"feast","to":"ext_mongodb","type":"external"},{"from":"feast","to":"ext_mysql","type":"external"},{"from":"feast","to":"ext_postgres","type":"external"},{"from":"feast","to":"ext_redis","type":"external"},{"from":"feast","to":"ext_sqlalchemy","type":"external"},{"from":"feast","to":"ext_sqlite","type":"external"},{"from":"feast","to":"ext_grpc","type":"external"},{"from":"feast","to":"ext_azure_blob","type":"external"},{"from":"feast","to":"ext_gcs","type":"external"},{"from":"feast","to":"ext_s3","type":"external"},{"from":"kserve","to":"ext_httpx","type":"external"},{"from":"kserve","to":"ext_requests","type":"external"},{"from":"kserve","to":"ext_weaviate","type":"external"},{"from":"kserve","to":"ext_azure_blob","type":"external"},{"from":"kserve","to":"ext_gcs","type":"external"},{"from":"kserve","to":"ext_s3","type":"external"},{"from":"kube_auth_proxy","to":"ext_redis","type":"external"},{"from":"kubeflow","to":"ext_requests","type":"external"},{"from":"kuberay","to":"ext_requests","type":"external"},{"from":"kuberay","to":"ext_urllib","type":"external"},{"from":"kuberay","to":"ext_grpc","type":"external"},{"from":"kuberay","to":"ext_azure_blob","type":"external"},{"from":"kuberay","to":"ext_gcs","type":"external"},{"from":"llama_stack","to":"ext_aiohttp","type":"external"},{"from":"llama_stack","to":"ext_chromadb","type":"external"},{"from":"llama_stack","to":"ext_httpx","type":"external"},{"from":"llama_stack","to":"ext_llama_stack","type":"external"},{"from":"llama_stack","to":"ext_milvus","type":"external"},{"from":"llama_stack","to":"ext_openai","type":"external"},{"from":"llama_stack","to":"ext_qdrant","type":"external"},{"from":"llama_stack","to":"ext_requests","type":"external"},{"from":"llama_stack","to":"ext_mongodb","type":"external"},{"from":"llama_stack","to":"ext_postgres","type":"external"},{"from":"llama_stack","to":"ext_redis","type":"external"},{"from":"llama_stack","to":"ext_sqlalchemy","type":"external"},{"from":"llama_stack","to":"ext_sqlite","type":"external"},{"from":"llm_d_kv_cache","to":"ext_redis","type":"external"},{"from":"llm_d_kv_cache","to":"ext_sqlalchemy","type":"external"},{"from":"lm_evaluation_harness","to":"ext_anthropic","type":"external"},{"from":"lm_evaluation_harness","to":"ext_requests","type":"external"},{"from":"lm_evaluation_harness","to":"ext_wandb","type":"external"},{"from":"mlflow_operator","to":"ext_mlflow","type":"external"},{"from":"model_registry","to":"ext_aiohttp","type":"external"},{"from":"model_registry","to":"ext_requests","type":"external"},{"from":"model_registry","to":"ext_urllib","type":"external"},{"from":"model_registry","to":"ext_s3","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_grpc","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_azure_blob","type":"external"},{"from":"modelmesh_runtime_adapter","to":"ext_gcs","type":"external"},{"from":"modelmesh_serving","to":"ext_azure_blob","type":"external"},{"from":"notebooks","to":"ext_requests","type":"external"},{"from":"notebooks","to":"ext_urllib","type":"external"},{"from":"notebooks","to":"ext_minio","type":"external"},{"from":"notebooks_downstream","to":"ext_requests","type":"external"},{"from":"notebooks_downstream","to":"ext_minio","type":"external"},{"from":"odh_dashboard","to":"ext_s3","type":"external"},{"from":"odh_model_controller","to":"ext_s3","type":"external"},{"from":"openvino_model_server","to":"ext_aiohttp","type":"external"},{"from":"openvino_model_server","to":"ext_openai","type":"external"},{"from":"openvino_model_server","to":"ext_requests","type":"external"},{"from":"openvino_model_server","to":"ext_urllib","type":"external"},{"from":"openvino_model_server","to":"ext_weaviate","type":"external"},{"from":"openvino_model_server","to":"ext_mongodb","type":"external"},{"from":"openvino_model_server","to":"ext_grpc","type":"external"},{"from":"pipelines_components","to":"ext_milvus","type":"external"},{"from":"pipelines_components","to":"ext_requests","type":"external"},{"from":"pipelines_components","to":"ext_gcs","type":"external"},{"from":"pipelines_components","to":"ext_s3","type":"external"},{"from":"rest_proxy","to":"ext_grpc","type":"external"},{"from":"rhods_operator","to":"ext_s3","type":"external"},{"from":"text_generation_inference","to":"ext_grpc","type":"external"},{"from":"trustyai_explainability","to":"ext_requests","type":"external"},{"from":"vllm_cpu","to":"ext_aiohttp","type":"external"},{"from":"vllm_cpu","to":"ext_httpx","type":"external"},{"from":"vllm_cpu","to":"ext_openai","type":"external"},{"from":"vllm_cpu","to":"ext_requests","type":"external"},{"from":"vllm_cpu","to":"ext_urllib","type":"external"},{"from":"vllm_cpu","to":"ext_sqlalchemy","type":"external"},{"from":"vllm_cpu","to":"ext_s3","type":"external"}]}
   </script>
 </div>
 <div class="topology-legend">
@@ -37,135 +37,83 @@ Services referenced across component boundaries. When component A defines a serv
 graph LR
     classDef comp fill:#3498db,stroke:#2980b9,color:#fff
 
-    ai_gateway_payload_processing["ai-gateway-payload-processing"]:::comp
-    argo_workflows["argo-workflows"]:::comp
-    data_science_pipelines_operator["data-science-pipelines-operator"]:::comp
-    distributed_workloads["distributed-workloads"]:::comp
-    feast["feast"]:::comp
-    gateway_api_inference_extension["gateway-api-inference-extension"]:::comp
     kserve["kserve"]:::comp
-    kuberay["kuberay"]:::comp
-    kueue["kueue"]:::comp
-    llm_d_inference_scheduler["llm-d-inference-scheduler"]:::comp
-    mlflow_operator["mlflow-operator"]:::comp
-    modelmesh_serving["modelmesh-serving"]:::comp
     notebooks["notebooks"]:::comp
     notebooks_downstream["notebooks-downstream"]:::comp
-    odh_cli["odh-cli"]:::comp
-    spark_operator["spark-operator"]:::comp
-    vllm_cpu["vllm-cpu"]:::comp
-    vllm_gaudi["vllm-gaudi"]:::comp
-    workload_variant_autoscaler["workload-variant-autoscaler"]:::comp
+    odh_model_controller["odh-model-controller"]:::comp
 
-    kueue -.->|"visibility-server"| distributed_workloads
-    modelmesh_serving -.->|"kserve-controller-manager-service"| kserve
-    modelmesh_serving -.->|"cli-port-default"| kserve
-    vllm_cpu -.->|"cli-port-default"| kserve
-    vllm_gaudi -.->|"cli-port-default"| kserve
-    data_science_pipelines_operator -.->|"the-service"| argo_workflows
-    kuberay -.->|"the-service"| argo_workflows
-    kueue -.->|"the-service"| argo_workflows
-    odh_cli -.->|"the-service"| argo_workflows
-    spark_operator -.->|"the-service"| argo_workflows
     notebooks_downstream -.->|"notebook"| notebooks
-    kueue -.->|"training-operator"| distributed_workloads
-    feast -.->|"uvicorn-server"| ai_gateway_payload_processing
-    gateway_api_inference_extension -.->|"uvicorn-server"| ai_gateway_payload_processing
-    kserve -.->|"uvicorn-server"| ai_gateway_payload_processing
-    llm_d_inference_scheduler -.->|"uvicorn-server"| ai_gateway_payload_processing
-    workload_variant_autoscaler -.->|"uvicorn-server"| ai_gateway_payload_processing
-    workload_variant_autoscaler -.->|"keda-operator"| kserve
-    mlflow_operator -.->|"minio-service"| data_science_pipelines_operator
-    kuberay -.->|"kuberay-operator"| distributed_workloads
-    kueue -.->|"kuberay-operator"| distributed_workloads
+    odh_model_controller -.->|"model-serving-api"| kserve
 ```
 
 ## Services by Component
 
 | Component | Services | Webhook (443) | Metrics (8443) | Data |
 |-----------|----------|---------------|----------------|------|
-| NeMo-Guardrails | 1 | 0 | 0 | 1 |
-| ai-gateway-payload-processing | 1 | 0 | 0 | 1 |
-| argo-workflows | 1 | 0 | 0 | 1 |
-| data-science-pipelines | 2 | 0 | 0 | 2 |
-| data-science-pipelines-operator | 11 | 0 | 2 | 9 |
-| distributed-workloads | 4 | 2 | 0 | 2 |
+| agents-operator | 2 | 1 | 0 | 1 |
+| codeflare-operator | 1 | 1 | 0 | 0 |
+| data-science-pipelines | 1 | 0 | 0 | 1 |
+| data-science-pipelines-operator | 7 | 0 | 2 | 5 |
 | feast | 1 | 0 | 0 | 1 |
-| gateway-api-inference-extension | 1 | 0 | 0 | 1 |
-| kserve | 12 | 6 | 3 | 3 |
+| kserve | 8 | 5 | 3 | 0 |
 | kubeflow | 2 | 2 | 0 | 0 |
-| kuberay | 3 | 1 | 0 | 2 |
-| kueue | 5 | 3 | 0 | 2 |
-| llama-stack-k8s-operator | 2 | 1 | 1 | 0 |
-| llm-d-inference-scheduler | 5 | 1 | 0 | 4 |
+| kuberay | 2 | 1 | 0 | 1 |
+| kueue | 2 | 2 | 0 | 0 |
+| llm-d | 3 | 0 | 0 | 3 |
+| llm-d-inference-scheduler | 7 | 1 | 0 | 6 |
 | llm-d-routing-sidecar | 1 | 0 | 0 | 1 |
-| mlflow-operator | 3 | 0 | 1 | 2 |
+| mlflow-operator | 1 | 0 | 1 | 0 |
 | model-registry | 1 | 0 | 0 | 1 |
-| modelmesh-serving | 7 | 1 | 1 | 5 |
-| models-as-a-service | 2 | 0 | 0 | 2 |
+| model-registry-operator | 4 | 2 | 1 | 1 |
+| modelmesh-serving | 3 | 0 | 0 | 3 |
+| models-as-a-service | 3 | 1 | 0 | 2 |
 | notebooks | 1 | 0 | 0 | 1 |
 | notebooks-downstream | 1 | 0 | 0 | 1 |
-| odh-cli | 1 | 0 | 0 | 1 |
-| spark-operator | 2 | 1 | 0 | 1 |
+| odh-dashboard | 16 | 1 | 1 | 14 |
+| odh-model-controller | 3 | 2 | 1 | 0 |
+| ogx-k8s-operator | 2 | 1 | 1 | 0 |
+| rhods-operator | 1 | 1 | 0 | 0 |
+| spark-operator | 1 | 1 | 0 | 0 |
 | text-generation-inference | 1 | 0 | 0 | 1 |
-| trainer | 1 | 1 | 0 | 0 |
-| vllm-cpu | 3 | 0 | 0 | 3 |
-| vllm-gaudi | 1 | 0 | 0 | 1 |
-| workload-variant-autoscaler | 5 | 3 | 0 | 2 |
+| training-operator | 1 | 1 | 0 | 0 |
+| trustyai-service-operator | 3 | 1 | 2 | 0 |
+| vllm-cpu | 1 | 0 | 0 | 1 |
+| workload-variant-autoscaler | 1 | 0 | 1 | 0 |
 
 ## Service Detail
 
 Per-component service breakdown with exact port numbers and protocols.
 
-### NeMo-Guardrails (1 services)
+### agents-operator (2 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| env-port-default | python-source | 1235/TCP |
+| bundle-service | ClusterIP | 8080/TCP |
+| webhook-service | ClusterIP | 443/TCP |
 
-### ai-gateway-payload-processing (1 services)
-
-| Service | Type | Ports |
-|---------|------|-------|
-| uvicorn-server | python-source | 8000/TCP |
-
-### argo-workflows (1 services)
+### codeflare-operator (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| the-service | LoadBalancer | 8666/TCP |
+| webhook-service | ClusterIP | 443/TCP |
 
-### data-science-pipelines (2 services)
+### data-science-pipelines (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP |
-| squid | ClusterIP | 3128/TCP |
 
-### data-science-pipelines-operator (11 services)
+### data-science-pipelines-operator (7 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | data-science-pipelines-operator-service | ClusterIP | 8080/TCP |
 | ds-pipeline-workflow-controller-metrics-template-value | ClusterIP | 9090/TCP |
-| mariadb | ClusterIP | 3306/TCP |
 | mariadb-template-value | ClusterIP | 3306/TCP |
-| minio | ClusterIP | 9000/TCP, 9001/TCP |
 | minio-service | ClusterIP | 9000/TCP |
 | minio-template-value | ClusterIP | 9000/TCP, 80/TCP |
 | ml-pipeline | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP |
-| pypi-server | ClusterIP | 8080/TCP |
 | template-value | ClusterIP | 8443/TCP, 8888/TCP, 8887/TCP |
-| the-service | LoadBalancer | 8666/TCP |
-
-### distributed-workloads (4 services)
-
-| Service | Type | Ports |
-|---------|------|-------|
-| kuberay-operator | ClusterIP | 8080/TCP |
-| training-operator | ClusterIP | 8080/TCP |
-| visibility-server | ClusterIP | 443/TCP |
-| webhook-service | ClusterIP | 443/TCP |
 
 ### feast (1 services)
 
@@ -173,28 +121,18 @@ Per-component service breakdown with exact port numbers and protocols.
 |---------|------|-------|
 | uvicorn-server | python-source | 6566/TCP |
 
-### gateway-api-inference-extension (1 services)
+### kserve (8 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| uvicorn-server | python-source | 8000/TCP |
-
-### kserve (12 services)
-
-| Service | Type | Ports |
-|---------|------|-------|
-| cli-port-default | python-source | 80/TCP |
-| keda-admission-webhooks | ClusterIP | 443/TCP, 8080/TCP |
-| keda-metrics-apiserver | ClusterIP | 443/TCP, 8080/TCP |
-| keda-operator | ClusterIP | 9666/TCP, 8080/TCP |
 | kserve-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | kserve-controller-manager-service | ClusterIP | 8443/TCP |
 | kserve-webhook-server-service | ClusterIP | 443/TCP |
 | llmisvc-controller-manager-service | ClusterIP | 8443/TCP |
 | llmisvc-webhook-server-service | ClusterIP | 443/TCP |
 | localmodel-webhook-server-service | ClusterIP | 443/TCP |
-| uvicorn-server | python-source | 8000/TCP |
-| webhook-service | ClusterIP | 443/TCP |
+| model-serving-api | ClusterIP | 443/TCP, 8080/TCP |
+| odh-model-controller-webhook-service | ClusterIP | 443/TCP |
 
 ### kubeflow (2 services)
 
@@ -203,40 +141,39 @@ Per-component service breakdown with exact port numbers and protocols.
 | service | ClusterIP | 443/TCP |
 | webhook-service | ClusterIP | 443/TCP |
 
-### kuberay (3 services)
+### kuberay (2 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | kuberay-operator | ClusterIP | 8080/TCP |
-| the-service | LoadBalancer | 8666/TCP |
 | webhook-service | ClusterIP | 443/TCP |
 
-### kueue (5 services)
+### kueue (2 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| kuberay-operator | ClusterIP | 8080/TCP |
-| the-service | LoadBalancer | 8666/TCP |
-| training-operator | ClusterIP | 8080/TCP, 443/TCP |
 | visibility-server | ClusterIP | 443/TCP |
 | webhook-service | ClusterIP | 443/TCP |
 
-### llama-stack-k8s-operator (2 services)
+### llm-d (3 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
-| ogx-k8s-operator-webhook-service | ClusterIP | 443/TCP |
+| mooncake-client | ClusterIP | 50052/TCP |
+| mooncake-master-store | ClusterIP | 50051/TCP, 8080/TCP, 9003/TCP |
+| render | ClusterIP | 8000/TCP |
 
-### llm-d-inference-scheduler (5 services)
+### llm-d-inference-scheduler (7 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | ${EPP_NAME} | ClusterIP | 9002/TCP, 5557/TCP, 9090/TCP |
+| e2e-epp | ClusterIP | 9002/TCP, 5557/TCP |
+| e2e-epp-health | NodePort | 9003/TCP |
+| e2e-epp-metrics | NodePort | 9090/TCP |
 | inference-gateway-istio-nodeport | NodePort | 15021/TCP, 80/TCP |
 | istiod-llm-d-gateway | ClusterIP | 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP |
 | service | ClusterIP | 8080/TCP |
-| uvicorn-server | python-source | 8000/TCP |
 
 ### llm-d-routing-sidecar (1 services)
 
@@ -244,13 +181,11 @@ Per-component service breakdown with exact port numbers and protocols.
 |---------|------|-------|
 | service | ClusterIP | 8080/TCP |
 
-### mlflow-operator (3 services)
+### mlflow-operator (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| minio-service | ClusterIP | 9000/TCP |
 | mlflow-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
-| postgres-service | ClusterIP | 5432/TCP |
 
 ### model-registry (1 services)
 
@@ -258,23 +193,29 @@ Per-component service breakdown with exact port numbers and protocols.
 |---------|------|-------|
 | model-catalog | ClusterIP | 8080/TCP |
 
-### modelmesh-serving (7 services)
+### model-registry-operator (4 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| cli-port-default | python-source | 80/TCP |
+| catalog-webhook-service | ClusterIP | 443/TCP |
+| model-registry-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| model-registry-operator-webhook-service | ClusterIP | 443/TCP |
+| template-value-postgres | ClusterIP | 5432/TCP |
+
+### modelmesh-serving (3 services)
+
+| Service | Type | Ports |
+|---------|------|-------|
 | etcd | ClusterIP | 2379/TCP |
-| kserve-controller-manager-service | ClusterIP | 8443/TCP |
-| kserve-webhook-server-service | ClusterIP | 443/TCP |
 | modelmesh-controller | ClusterIP | 8080/TCP |
 | modelmesh-webhook-server-service | ClusterIP | 9443/TCP |
-| models-server | python-source | 8080/TCP |
 
-### models-as-a-service (2 services)
+### models-as-a-service (3 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | maas-api | ClusterIP | 8080/TCP, 9090/TCP |
+| maas-controller-webhook-service | ClusterIP | 443/TCP |
 | payload-processing | ClusterIP | 9004/TCP |
 
 ### notebooks (1 services)
@@ -289,18 +230,53 @@ Per-component service breakdown with exact port numbers and protocols.
 |---------|------|-------|
 | notebook | ClusterIP | 8888/TCP |
 
-### odh-cli (1 services)
+### odh-dashboard (16 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| the-service | LoadBalancer | 8666/TCP |
+| odh-dashboard | ClusterIP | 8443/TCP, 8943/TCP |
+| odh-dashboard-agent-ops-ui | ClusterIP | 8843/TCP |
+| odh-dashboard-automl-ui | ClusterIP | 8643/TCP |
+| odh-dashboard-autorag-ui | ClusterIP | 8743/TCP |
+| odh-dashboard-data-registry-ui | ClusterIP | 9043/TCP |
+| odh-dashboard-eval-hub-ui | ClusterIP | 8543/TCP |
+| odh-dashboard-gen-ai-ui | ClusterIP | 8143/TCP |
+| odh-dashboard-maas-ui | ClusterIP | 8243/TCP |
+| odh-dashboard-mlflow-ui | ClusterIP | 8343/TCP |
+| odh-dashboard-model-registry-ui | ClusterIP | 8043/TCP |
+| odh-dashboard-notebooks-ui | ClusterIP | 9043/TCP |
+| rhaii-dashboard | ClusterIP | 4000/TCP |
+| workspaces-backend | ClusterIP | 4000/TCP |
+| workspaces-controller-metrics-service | ClusterIP | 8080/TCP |
+| workspaces-frontend | ClusterIP | 8080/TCP |
+| workspaces-webhook-service | ClusterIP | 443/TCP |
 
-### spark-operator (2 services)
+### odh-model-controller (3 services)
+
+| Service | Type | Ports |
+|---------|------|-------|
+| model-serving-api | ClusterIP | 443/TCP, 8080/TCP |
+| odh-model-controller-metrics-service | ClusterIP | 8443/TCP |
+| odh-model-controller-webhook-service | ClusterIP | 443/TCP |
+
+### ogx-k8s-operator (2 services)
+
+| Service | Type | Ports |
+|---------|------|-------|
+| ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| ogx-k8s-operator-webhook-service | ClusterIP | 443/TCP |
+
+### rhods-operator (1 services)
+
+| Service | Type | Ports |
+|---------|------|-------|
+| webhook-service | ClusterIP | 443/TCP |
+
+### spark-operator (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | spark-operator-webhook-svc | ClusterIP | 443/TCP |
-| the-service | LoadBalancer | 8666/TCP |
 
 ### text-generation-inference (1 services)
 
@@ -308,64 +284,68 @@ Per-component service breakdown with exact port numbers and protocols.
 |---------|------|-------|
 | inference-server | ClusterIP | 8033/TCP |
 
-### trainer (1 services)
+### training-operator (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| webhook-service | ClusterIP | 443/TCP |
+| training-operator | ClusterIP | 8080/TCP, 443/TCP |
 
-### vllm-cpu (3 services)
+### trustyai-service-operator (3 services)
+
+| Service | Type | Ports |
+|---------|------|-------|
+| trustyai-service-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
+| trustyai-service-operator-metrics-service | ClusterIP | 8443/TCP |
+| trustyai-service-operator-webhook-service | ClusterIP | 443/TCP |
+
+### vllm-cpu (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
 | cli-port-default | python-source | 8000/TCP |
-| disagg_proxy_p2p_nccl_xpyd-server | python-source | 10001/TCP |
-| moriio_toy_proxy_server-server | python-source | 10001/TCP |
 
-### vllm-gaudi (1 services)
+### workload-variant-autoscaler (1 services)
 
 | Service | Type | Ports |
 |---------|------|-------|
-| cli-port-default | python-source | 8000/TCP |
-
-### workload-variant-autoscaler (5 services)
-
-| Service | Type | Ports |
-|---------|------|-------|
-| keda-admission-webhooks | ClusterIP | 443/TCP, 8080/TCP |
-| keda-metrics-apiserver | ClusterIP | 443/TCP, 8080/TCP |
-| keda-operator | ClusterIP | 9666/TCP, 8080/TCP |
-| uvicorn-server | python-source | 8000/TCP |
-| webhook-service | ClusterIP | 443/TCP |
+| controller-manager-metrics-service | ClusterIP | 8443/TCP |
 
 ## Port Patterns
 
-- **10001/TCP**: disagg_proxy_p2p_nccl_xpyd-server, moriio_toy_proxy_server-server
-- **1235/TCP**: env-port-default
 - **15010/TCP**: istiod-llm-d-gateway
 - **15012/TCP**: istiod-llm-d-gateway
 - **15014/TCP**: istiod-llm-d-gateway
 - **15021/TCP**: inference-gateway-istio-nodeport
 - **2379/TCP**: etcd
-- **3128/TCP**: squid
-- **3306/TCP**: mariadb, mariadb-template-value
-- **443/TCP**: visibility-server, webhook-service, keda-admission-webhooks, keda-metrics-apiserver, kserve-webhook-server-service, llmisvc-webhook-server-service, localmodel-webhook-server-service, webhook-service, service, webhook-service, webhook-service, training-operator, visibility-server, webhook-service, ogx-k8s-operator-webhook-service, istiod-llm-d-gateway, kserve-webhook-server-service, spark-operator-webhook-svc, webhook-service, keda-admission-webhooks, keda-metrics-apiserver, webhook-service
-- **5432/TCP**: postgres-service
-- **5557/TCP**: ${EPP_NAME}
+- **3306/TCP**: mariadb-template-value
+- **4000/TCP**: rhaii-dashboard, workspaces-backend
+- **443/TCP**: webhook-service, webhook-service, kserve-webhook-server-service, llmisvc-webhook-server-service, localmodel-webhook-server-service, model-serving-api, odh-model-controller-webhook-service, service, webhook-service, webhook-service, visibility-server, webhook-service, istiod-llm-d-gateway, catalog-webhook-service, model-registry-operator-webhook-service, maas-controller-webhook-service, workspaces-webhook-service, model-serving-api, odh-model-controller-webhook-service, ogx-k8s-operator-webhook-service, webhook-service, spark-operator-webhook-svc, training-operator, trustyai-service-operator-webhook-service
+- **50051/TCP**: mooncake-master-store
+- **50052/TCP**: mooncake-client
+- **5432/TCP**: template-value-postgres
+- **5557/TCP**: ${EPP_NAME}, e2e-epp
 - **6566/TCP**: uvicorn-server
-- **80/TCP**: minio-template-value, kubeflow-pipelines-profile-controller, cli-port-default, inference-gateway-istio-nodeport, cli-port-default
-- **8000/TCP**: uvicorn-server, uvicorn-server, uvicorn-server, uvicorn-server, cli-port-default, cli-port-default, uvicorn-server
+- **80/TCP**: minio-template-value, kubeflow-pipelines-profile-controller, inference-gateway-istio-nodeport
+- **8000/TCP**: render, cli-port-default
 - **8033/TCP**: inference-server
-- **8080/TCP**: data-science-pipelines-operator-service, pypi-server, kuberay-operator, training-operator, keda-admission-webhooks, keda-metrics-apiserver, keda-operator, kuberay-operator, kuberay-operator, training-operator, service, service, model-catalog, modelmesh-controller, models-server, maas-api, keda-admission-webhooks, keda-metrics-apiserver, keda-operator
-- **8443/TCP**: ml-pipeline, template-value, kserve-controller-manager-metrics-service, kserve-controller-manager-service, llmisvc-controller-manager-service, ogx-k8s-operator-controller-manager-metrics-service, mlflow-operator-controller-manager-metrics-service, kserve-controller-manager-service
-- **8666/TCP**: the-service, the-service, the-service, the-service, the-service, the-service
+- **8043/TCP**: odh-dashboard-model-registry-ui
+- **8080/TCP**: mooncake-master-store, bundle-service, data-science-pipelines-operator-service, model-serving-api, kuberay-operator, service, service, model-catalog, modelmesh-controller, maas-api, workspaces-controller-metrics-service, workspaces-frontend, model-serving-api, training-operator
+- **8143/TCP**: odh-dashboard-gen-ai-ui
+- **8243/TCP**: odh-dashboard-maas-ui
+- **8343/TCP**: odh-dashboard-mlflow-ui
+- **8443/TCP**: ml-pipeline, template-value, kserve-controller-manager-metrics-service, kserve-controller-manager-service, llmisvc-controller-manager-service, mlflow-operator-controller-manager-metrics-service, model-registry-operator-controller-manager-metrics-service, odh-dashboard, odh-model-controller-metrics-service, ogx-k8s-operator-controller-manager-metrics-service, trustyai-service-operator-controller-manager-metrics-service, trustyai-service-operator-metrics-service, controller-manager-metrics-service
+- **8543/TCP**: odh-dashboard-eval-hub-ui
+- **8643/TCP**: odh-dashboard-automl-ui
+- **8743/TCP**: odh-dashboard-autorag-ui
+- **8843/TCP**: odh-dashboard-agent-ops-ui
 - **8887/TCP**: ml-pipeline, template-value
 - **8888/TCP**: ml-pipeline, template-value, notebook, notebook
-- **9000/TCP**: minio, minio-service, minio-template-value, minio-service
-- **9001/TCP**: minio
-- **9002/TCP**: ${EPP_NAME}
+- **8943/TCP**: odh-dashboard
+- **9000/TCP**: minio-service, minio-template-value
+- **9002/TCP**: ${EPP_NAME}, e2e-epp
+- **9003/TCP**: mooncake-master-store, e2e-epp-health
 - **9004/TCP**: payload-processing
-- **9090/TCP**: ds-pipeline-workflow-controller-metrics-template-value, ${EPP_NAME}, maas-api
+- **9043/TCP**: odh-dashboard-data-registry-ui, odh-dashboard-notebooks-ui
+- **9090/TCP**: ds-pipeline-workflow-controller-metrics-template-value, ${EPP_NAME}, e2e-epp-metrics, maas-api
 - **9443/TCP**: modelmesh-webhook-server-service
-- **9666/TCP**: keda-operator, keda-operator
 

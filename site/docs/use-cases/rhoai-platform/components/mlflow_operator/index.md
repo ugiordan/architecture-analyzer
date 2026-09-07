@@ -1,22 +1,22 @@
 # mlflow-operator
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** opendatahub-io/mlflow-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:08:10Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:58:46Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| CRDs | 2 |
-| Deployments | 2 |
-| Services | 3 |
-| Secrets | 2 |
+| CRDs | 3 |
+| Deployments | 1 |
+| Services | 1 |
+| Secrets | 1 |
 | Cluster Roles | 6 |
-| Controller Watches | 14 |
+| Controller Watches | 17 |
 
 ## Component Architecture
 
@@ -35,38 +35,41 @@ graph LR
     subgraph controller["mlflow-operator Controller"]
         dep_1["mlflow-operator-controller-manager"]
         class dep_1 controller
-        dep_2["postgres-deployment"]
-        class dep_2 controller
     end
 
+    crd_MLflowOperator{{"MLflowOperator\ncomponents.platform.opendatahub.io/v1alpha1"}}
+    class crd_MLflowOperator crd
+    crd_MLflowOperator -->|"For (reconciles)"| controller
     crd_MLflowConfig{{"MLflowConfig\nmlflow.kubeflow.org/v1"}}
     class crd_MLflowConfig crd
     crd_MLflow{{"MLflow\nmlflow.opendatahub.io/v1"}}
     class crd_MLflow crd
     crd_MLflow -->|"For (reconciles)"| controller
-    controller -->|"Owns"| owned_3["ClusterRoleBinding"]
+    controller -->|"Owns"| owned_2["ConsoleLink"]
+    class owned_2 owned
+    controller -->|"Owns"| owned_3["CronJob"]
     class owned_3 owned
-    controller -->|"Owns"| owned_4["ConsoleLink"]
+    controller -->|"Owns"| owned_4["Deployment"]
     class owned_4 owned
-    controller -->|"Owns"| owned_5["CronJob"]
+    controller -->|"Owns"| owned_5["HTTPRoute"]
     class owned_5 owned
-    controller -->|"Owns"| owned_6["Deployment"]
+    controller -->|"Owns"| owned_6["Job"]
     class owned_6 owned
-    controller -->|"Owns"| owned_7["HTTPRoute"]
+    controller -->|"Owns"| owned_7["PersistentVolumeClaim"]
     class owned_7 owned
-    controller -->|"Owns"| owned_8["Job"]
+    controller -->|"Owns"| owned_8["Secret"]
     class owned_8 owned
-    controller -->|"Owns"| owned_9["PersistentVolumeClaim"]
+    controller -->|"Owns"| owned_9["Service"]
     class owned_9 owned
-    controller -->|"Owns"| owned_10["Secret"]
+    controller -->|"Owns"| owned_10["ServiceAccount"]
     class owned_10 owned
-    controller -->|"Owns"| owned_11["Service"]
+    controller -->|"Owns"| owned_11["ServiceMonitor"]
     class owned_11 owned
-    controller -->|"Owns"| owned_12["ServiceAccount"]
-    class owned_12 owned
-    controller -->|"Owns"| owned_13["ServiceMonitor"]
-    class owned_13 owned
-    watch_14["ClusterRole"] -->|"Watches"| controller
+    watch_12["ClusterRole"] -->|"Watches"| controller
+    class watch_12 external
+    watch_13["ClusterRoleBinding"] -->|"Watches"| controller
+    class watch_13 external
+    watch_14["MLflow"] -->|"Watches"| controller
     class watch_14 external
     controller -.->|"depends on"| odh_15["mlflow-operator"]
     class odh_15 dep
@@ -76,8 +79,9 @@ graph LR
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
 |-------|---------|------|-------|--------|------------------|-----------|--------|
-| mlflow.kubeflow.org | v1 | MLflowConfig | Namespaced | 6 | 4 | YAML | [`config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/86a90b725262cd98b694659bfabc4e12168959a4/config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml) |
-| mlflow.opendatahub.io | v1 | MLflow | Cluster | 321 | 19 | YAML | [`config/crd/bases/mlflow.opendatahub.io_mlflows.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/86a90b725262cd98b694659bfabc4e12168959a4/config/crd/bases/mlflow.opendatahub.io_mlflows.yaml) |
+| components.platform.opendatahub.io | v1alpha1 | MLflowOperator | Cluster | 24 | 1 | YAML | [`config/crd/bases/components.platform.opendatahub.io_mlflowoperators.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/e7010bc04ff675ba5dcccaf88a939f5c5c53fd79/config/crd/bases/components.platform.opendatahub.io_mlflowoperators.yaml) |
+| mlflow.kubeflow.org | v1 | MLflowConfig | Namespaced | 6 | 4 | YAML | [`config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/e7010bc04ff675ba5dcccaf88a939f5c5c53fd79/config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml) |
+| mlflow.opendatahub.io | v1 | MLflow | Cluster | 346 | 29 | YAML | [`config/crd/bases/mlflow.opendatahub.io_mlflows.yaml`](https://github.com/opendatahub-io/mlflow-operator/blob/e7010bc04ff675ba5dcccaf88a939f5c5c53fd79/config/crd/bases/mlflow.opendatahub.io_mlflows.yaml) |
 
 ## Dependencies
 
@@ -91,144 +95,12 @@ graph LR
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
 | github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring | v0.89.0 |
-| github.com/prometheus/client_golang | v1.11.1 |
-| github.com/prometheus/client_golang | v1.11.1 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.62.0 |
-| github.com/prometheus/common | v0.65.0 |
-| github.com/prometheus/common | v0.62.0 |
-| github.com/prometheus/common | v0.65.0 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.56.3 |
-| google.golang.org/grpc | v1.72.1 |
-| google.golang.org/grpc | v1.56.3 |
-| google.golang.org/grpc | v1.78.0 |
-| google.golang.org/grpc | v1.72.1 |
-| google.golang.org/grpc | v1.78.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.78.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.72.1 |
-| google.golang.org/grpc | v1.72.1 |
-| google.golang.org/grpc | v1.78.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc/cmd/protoc-gen-go-grpc | v1.5.1 |
-| google.golang.org/grpc/cmd/protoc-gen-go-grpc | v1.5.1 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.2 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.0 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.0 |
-| k8s.io/apiextensions-apiserver | v0.34.0 |
-| k8s.io/apiextensions-apiserver | v0.34.0 |
-| k8s.io/apiextensions-apiserver | v0.34.1 |
-| k8s.io/apiextensions-apiserver | v0.34.1 |
-| k8s.io/apiextensions-apiserver | v0.34.3 |
-| k8s.io/apiextensions-apiserver | v0.34.3 |
-| k8s.io/apiextensions-apiserver | v0.34.1 |
-| k8s.io/apiextensions-apiserver | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.2 |
-| k8s.io/apimachinery | v0.34.0 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apimachinery | v0.34.0 |
-| k8s.io/apiserver | v0.34.0 |
-| k8s.io/apiserver | v0.34.3 |
-| k8s.io/apiserver | v0.34.0 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.3 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.0 |
-| k8s.io/client-go | v0.34.0 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.3 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| sigs.k8s.io/controller-runtime | v0.22.3 |
-| sigs.k8s.io/controller-runtime | v0.22.1 |
-| sigs.k8s.io/controller-runtime | v0.22.3 |
-| sigs.k8s.io/controller-runtime | v0.22.4 |
-| sigs.k8s.io/controller-runtime | v0.22.4 |
-| sigs.k8s.io/controller-runtime | v0.22.1 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/client-go | v0.35.2 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

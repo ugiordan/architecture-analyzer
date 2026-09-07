@@ -1,8 +1,11 @@
 # codeflare-operator
 
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
+
+
 **Repository:** project-codeflare/codeflare-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-07T15:03:41Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T03:56:52Z
 
 ## Summary
 
@@ -13,7 +16,7 @@
 | Services | 1 |
 | Secrets | 1 |
 | Cluster Roles | 3 |
-| Controller Watches | 8 |
+| Controller Watches | 9 |
 
 ## Component Architecture
 
@@ -58,9 +61,9 @@ graph LR
 
 ### CRDs
 
-| Group | Version | Kind | Scope | Fields | Validation Rules | Source |
-|-------|---------|------|-------|--------|------------------|--------|
-| workload.codeflare.dev | v1beta2 | AppWrapper | Namespaced | 50 | 0 | [`config/crd/crd-appwrapper.yml`](https://github.com/project-codeflare/codeflare-operator/blob/7c44564dcefd68bacf6cf7f759e6be92e4d95c11/config/crd/crd-appwrapper.yml) |
+| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
+|-------|---------|------|-------|--------|------------------|-----------|--------|
+| workload.codeflare.dev | v1beta2 | AppWrapper | Namespaced | 50 | 0 | YAML | [`config/crd/crd-appwrapper.yml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/crd/crd-appwrapper.yml) |
 
 ## Dependencies
 

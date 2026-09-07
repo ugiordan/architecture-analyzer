@@ -11,21 +11,20 @@ graph LR
 
     vllm_cpu["vllm-cpu"]:::component
     vllm_cpu --> svc_0["cli-port-default\npython-source: 8000/TCP"]:::svc
-    vllm_cpu --> svc_1["cli-port-default\npython-source: 8006/TCP"]:::svc
-    vllm_cpu --> svc_2["cli-port-default\npython-source: 8001/TCP"]:::svc
-    vllm_cpu --> svc_3["disagg_proxy_p2p_nccl_xpyd-server\npython-source: 10001/TCP"]:::svc
-    vllm_cpu --> svc_4["moriio_toy_proxy_server-server\npython-source: 10001/TCP"]:::svc
+    vllm_cpu -.-> ext_aiohttp[["aiohttp\napi"]]:::ext
+    vllm_cpu -.-> ext_httpx[["httpx\napi"]]:::ext
+    vllm_cpu -.-> ext_openai[["openai\napi"]]:::ext
+    vllm_cpu -.-> ext_requests[["requests\napi"]]:::ext
+    vllm_cpu -.-> ext_urllib[["urllib\napi"]]:::ext
+    vllm_cpu -.-> ext_sqlalchemy[["sqlalchemy\ndatabase"]]:::ext
+    vllm_cpu -.-> ext_s3[["s3\nobject-storage"]]:::ext
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| cli-port-default | python-source | 8000/TCP | [`benchmarks/benchmark_serving_structured_output.py:869`](https://github.com/red-hat-data-services/vllm-cpu/blob/4a21dc6fdc261bc6cd2b1200af5c3a495c5fc29b/benchmarks/benchmark_serving_structured_output.py#L869) |
-| cli-port-default | python-source | 8006/TCP | [`examples/online_serving/elastic_ep/scale.py:41`](https://github.com/red-hat-data-services/vllm-cpu/blob/4a21dc6fdc261bc6cd2b1200af5c3a495c5fc29b/examples/online_serving/elastic_ep/scale.py#L41) |
-| cli-port-default | python-source | 8001/TCP | [`examples/online_serving/gradio_openai_chatbot_webserver.py:75`](https://github.com/red-hat-data-services/vllm-cpu/blob/4a21dc6fdc261bc6cd2b1200af5c3a495c5fc29b/examples/online_serving/gradio_openai_chatbot_webserver.py#L75) |
-| disagg_proxy_p2p_nccl_xpyd-server | python-source | 10001/TCP | [`examples/online_serving/disaggregated_serving_p2p_nccl_xpyd/disagg_proxy_p2p_nccl_xpyd.py:189`](https://github.com/red-hat-data-services/vllm-cpu/blob/4a21dc6fdc261bc6cd2b1200af5c3a495c5fc29b/examples/online_serving/disaggregated_serving_p2p_nccl_xpyd/disagg_proxy_p2p_nccl_xpyd.py#L189) |
-| moriio_toy_proxy_server-server | python-source | 10001/TCP | [`examples/online_serving/disaggregated_serving/moriio_toy_proxy_server.py:305`](https://github.com/red-hat-data-services/vllm-cpu/blob/4a21dc6fdc261bc6cd2b1200af5c3a495c5fc29b/examples/online_serving/disaggregated_serving/moriio_toy_proxy_server.py#L305) |
+| cli-port-default | python-source | 8000/TCP | [`benchmarks/benchmark_serving_structured_output.py:905`](https://github.com/red-hat-data-services/vllm-cpu/blob/a7f683ee6b25b07450044e5dd324a61163da3a9a/benchmarks/benchmark_serving_structured_output.py#L905) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

@@ -1,20 +1,20 @@
 # llm-d
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-07** (2026-09-07)
 
 
 **Repository:** llm-d/llm-d  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:44Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-07T04:03:29Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 0 |
-| Deployments | 1 |
-| Services | 0 |
-| Secrets | 0 |
+| Deployments | 6 |
+| Services | 7 |
+| Secrets | 1 |
 | Cluster Roles | 0 |
 | Controller Watches | 0 |
 
@@ -33,8 +33,18 @@ graph LR
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
 
     subgraph controller["llm-d Controller"]
-        dep_1["interactive-pod"]
+        dep_1["fma-requester"]
         class dep_1 controller
+        dep_2["interactive-pod"]
+        class dep_2 controller
+        dep_3["llm-d-coordinator"]
+        class dep_3 controller
+        dep_4["mooncake-master-store"]
+        class dep_4 controller
+        dep_5["render"]
+        class dep_5 controller
+        dep_6["render"]
+        class dep_6 controller
     end
 ```
 

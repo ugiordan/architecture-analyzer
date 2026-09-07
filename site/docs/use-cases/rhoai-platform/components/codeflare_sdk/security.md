@@ -12,7 +12,5 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 Dockerfile patterns and base image analysis. Covers supply chain security: base images, build stages, runtime user, FIPS compliance.
 
-| Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
-|------|------------|--------|------|-------|---------------|------|--------|
-| `.github/build/Containerfile` | registry.redhat.io/ubi9/python-39:latest | 1 | $USERID |  |  |  | Unpinned base image: registry.redhat.io/ubi9/python-39:latest |
+No Dockerfiles found in analyzed sources.
 
