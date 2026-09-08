@@ -26233,7 +26233,7 @@
 <h1 id="odh-dashboard-rbac">odh-dashboard: RBAC<a class="headerlink" href="#odh-dashboard-rbac" title="Permanent link">¶</a></h1>
 <p>ServiceAccount bindings, roles, and resource permissions.</p>
 <h2 id="rbac-overview">RBAC Overview<a class="headerlink" href="#rbac-overview" title="Permanent link">¶</a></h2>
-<p>This component defines a large RBAC surface (261 diagram lines). The graph below groups roles by permission scope.</p>
+<p>This component defines a large RBAC surface (269 diagram lines). The graph below groups roles by permission scope.</p>
 <pre class="mermaid"><code>graph LR
     classDef wide fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef medium fill:#f39c12,stroke:#d68910,color:#fff
@@ -26248,6 +26248,7 @@
     odh_dashboard["odh-dashboard\n19 resources"]:::medium
     end
     subgraph nar["Narrow Scope (&lt;10)"]
+    maas_consumer_portal["maas-consumer-portal\n2 resources"]:::narrow
     odh_dashboard_agent_ops["odh-dashboard-agent-ops\n4 resources"]:::narrow
     odh_dashboard_automl["odh-dashboard-automl\n1 resources"]:::narrow
     odh_dashboard_autorag["odh-dashboard-autorag\n1 resources"]:::narrow
@@ -26260,6 +26261,8 @@
     servingruntimes_config_updater["servingruntimes-config-updater\n2 resources"]:::narrow
     end
 
+    subj_maas_consumer_portal["maas-consumer-portal\nServiceAccount"]:::subject
+    subj_maas_consumer_portal --&gt;|binds| maas_consumer_portal
     subj_odh_dashboard["odh-dashboard\nServiceAccount"]:::subject
     subj_odh_dashboard --&gt;|binds| odh_dashboard
     subj_odh_dashboard_agent_ops["odh-dashboard-agent-ops\nServiceAccount"]:::subject
@@ -26301,6 +26304,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>maas-consumer-portal</td>
+<td>ClusterRoleBinding</td>
+<td>maas-consumer-portal</td>
+<td>ServiceAccount/maas-consumer-portal</td>
+</tr>
 <tr>
 <td>odh-dashboard</td>
 <td>ClusterRoleBinding</td>
@@ -26412,6 +26421,20 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>maas-consumer-portal</td>
+<td>ClusterRole</td>
+<td></td>
+<td>datascienceclusters</td>
+<td>get, list</td>
+</tr>
+<tr>
+<td>maas-consumer-portal</td>
+<td>ClusterRole</td>
+<td></td>
+<td>ingresses</td>
+<td>get</td>
+</tr>
 <tr>
 <td>odh-dashboard</td>
 <td>ClusterRole</td>
@@ -26982,7 +27005,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 04:07:37 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 8, 2026 04:11:28 UTC">September 8, 2026</span>
   </span>
 
     
