@@ -26197,11 +26197,11 @@
 
 <h1 id="odh-dashboard">odh-dashboard<a class="headerlink" href="#odh-dashboard" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-09-09</strong> (2026-09-09)</p>
+<p><strong>Architecture snapshot: 2026-09-10</strong> (2026-09-10)</p>
 </blockquote>
 <p><strong>Repository:</strong> opendatahub-io/odh-dashboard<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-09-09T04:04:46Z</p>
+<strong>Extracted:</strong> 2026-09-10T04:03:41Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -26217,19 +26217,19 @@
 </tr>
 <tr>
 <td>Deployments</td>
-<td>23</td>
+<td>24</td>
 </tr>
 <tr>
 <td>Services</td>
-<td>17</td>
+<td>18</td>
 </tr>
 <tr>
 <td>Secrets</td>
-<td>16</td>
+<td>17</td>
 </tr>
 <tr>
 <td>Cluster Roles</td>
-<td>12</td>
+<td>13</td>
 </tr>
 <tr>
 <td>Controller Watches</td>
@@ -26257,31 +26257,31 @@
         class dep_3 controller
         dep_4["dashboard-operator"]
         class dep_4 controller
-        dep_5["data-registry-ui"]
+        dep_5["data-connect-hub-ui"]
         class dep_5 controller
-        dep_6["eval-hub-ui"]
+        dep_6["data-registry-ui"]
         class dep_6 controller
-        dep_7["gen-ai-ui"]
+        dep_7["eval-hub-ui"]
         class dep_7 controller
-        dep_8["maas-consumer-portal"]
+        dep_8["gen-ai-ui"]
         class dep_8 controller
-        dep_9["maas-ui"]
+        dep_9["maas-consumer-portal"]
         class dep_9 controller
-        dep_10["mlflow-ui"]
+        dep_10["maas-ui"]
         class dep_10 controller
-        dep_11["model-registry-ui"]
+        dep_11["mlflow-ui"]
         class dep_11 controller
-        dep_12["notebooks-ui"]
+        dep_12["model-registry-ui"]
         class dep_12 controller
-        dep_13["odh-dashboard"]
+        dep_13["notebooks-ui"]
         class dep_13 controller
-        dep_14["rhaii-dashboard"]
+        dep_14["odh-dashboard"]
         class dep_14 controller
-        dep_15["workspaces-backend"]
+        dep_15["rhaii-dashboard"]
         class dep_15 controller
         dep_16["workspaces-backend"]
         class dep_16 controller
-        dep_17["workspaces-controller"]
+        dep_17["workspaces-backend"]
         class dep_17 controller
         dep_18["workspaces-controller"]
         class dep_18 controller
@@ -26293,46 +26293,68 @@
         class dep_21 controller
         dep_22["workspaces-controller"]
         class dep_22 controller
-        dep_23["workspaces-frontend"]
+        dep_23["workspaces-controller"]
         class dep_23 controller
+        dep_24["workspaces-frontend"]
+        class dep_24 controller
     end
 
-    controller --&gt;|"Owns"| owned_24["ClusterRole"]
-    class owned_24 owned
-    controller --&gt;|"Owns"| owned_25["ClusterRoleBinding"]
+    controller --&gt;|"Owns"| owned_25["ClusterRole"]
     class owned_25 owned
-    controller --&gt;|"Owns"| owned_26["ConfigMap"]
+    controller --&gt;|"Owns"| owned_26["ClusterRoleBinding"]
     class owned_26 owned
-    controller --&gt;|"Owns"| owned_27["Deployment"]
+    controller --&gt;|"Owns"| owned_27["ConfigMap"]
     class owned_27 owned
-    controller --&gt;|"Owns"| owned_28["NetworkPolicy"]
+    controller --&gt;|"Owns"| owned_28["Deployment"]
     class owned_28 owned
-    controller --&gt;|"Owns"| owned_29["PodDisruptionBudget"]
+    controller --&gt;|"Owns"| owned_29["NetworkPolicy"]
     class owned_29 owned
-    controller --&gt;|"Owns"| owned_30["Secret"]
+    controller --&gt;|"Owns"| owned_30["PodDisruptionBudget"]
     class owned_30 owned
-    controller --&gt;|"Owns"| owned_31["Service"]
+    controller --&gt;|"Owns"| owned_31["Secret"]
     class owned_31 owned
-    controller --&gt;|"Owns"| owned_32["ServiceAccount"]
+    controller --&gt;|"Owns"| owned_32["Service"]
     class owned_32 owned
-    controller --&gt;|"Owns"| owned_33["StatefulSet"]
+    controller --&gt;|"Owns"| owned_33["ServiceAccount"]
     class owned_33 owned
-    controller --&gt;|"Owns"| owned_34["VirtualService"]
+    controller --&gt;|"Owns"| owned_34["StatefulSet"]
     class owned_34 owned
-    controller -.-&gt;|"depends on"| odh_35["mlflow-go"]
-    class odh_35 dep
+    controller --&gt;|"Owns"| owned_35["VirtualService"]
+    class owned_35 owned
     controller -.-&gt;|"depends on"| odh_36["mlflow-go"]
     class odh_36 dep
-    controller -.-&gt;|"depends on"| odh_37["odh-dashboard"]
+    controller -.-&gt;|"depends on"| odh_37["mlflow-go"]
     class odh_37 dep
     controller -.-&gt;|"depends on"| odh_38["odh-dashboard"]
     class odh_38 dep
-    controller -.-&gt;|"depends on"| odh_39["odh-platform-utilities"]
+    controller -.-&gt;|"depends on"| odh_39["odh-dashboard"]
     class odh_39 dep
-    controller -.-&gt;|"depends on"| odh_40["ogx-k8s-operator"]
+    controller -.-&gt;|"depends on"| odh_40["odh-dashboard"]
     class odh_40 dep
-    controller -.-&gt;|"depends on"| odh_41["operator-chaos"]
-    class odh_41 dep</code></pre>
+    controller -.-&gt;|"depends on"| odh_41["odh-dashboard"]
+    class odh_41 dep
+    controller -.-&gt;|"depends on"| odh_42["odh-dashboard"]
+    class odh_42 dep
+    controller -.-&gt;|"depends on"| odh_43["odh-dashboard"]
+    class odh_43 dep
+    controller -.-&gt;|"depends on"| odh_44["odh-dashboard"]
+    class odh_44 dep
+    controller -.-&gt;|"depends on"| odh_45["odh-dashboard"]
+    class odh_45 dep
+    controller -.-&gt;|"depends on"| odh_46["odh-dashboard"]
+    class odh_46 dep
+    controller -.-&gt;|"depends on"| odh_47["odh-dashboard"]
+    class odh_47 dep
+    controller -.-&gt;|"depends on"| odh_48["odh-dashboard"]
+    class odh_48 dep
+    controller -.-&gt;|"depends on"| odh_49["odh-dashboard"]
+    class odh_49 dep
+    controller -.-&gt;|"depends on"| odh_50["odh-platform-utilities"]
+    class odh_50 dep
+    controller -.-&gt;|"depends on"| odh_51["ogx-k8s-operator"]
+    class odh_51 dep
+    controller -.-&gt;|"depends on"| odh_52["operator-chaos"]
+    class odh_52 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <p>No CRDs found in analyzed sources.</p>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
@@ -26355,11 +26377,51 @@
 </tr>
 <tr>
 <td>odh-dashboard</td>
-<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/packages/autox-core/services</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
 </tr>
 <tr>
 <td>odh-dashboard</td>
 <td>Go module dependency: github.com/opendatahub-io/odh-dashboard/packages/autox-core/services</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/packages/autox-core/services</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
+</tr>
+<tr>
+<td>odh-dashboard</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-dashboard/pkg/tls</td>
 </tr>
 <tr>
 <td>odh-platform-utilities</td>
@@ -26394,26 +26456,6 @@
 </tr>
 <tr>
 <td>k8s.io/api</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/api</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/api</td>
-<td>v0.36.2</td>
-</tr>
-<tr>
-<td>k8s.io/api</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/api</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/api</td>
 <td>v0.36.3</td>
 </tr>
 <tr>
@@ -26422,11 +26464,15 @@
 </tr>
 <tr>
 <td>k8s.io/api</td>
+<td>v0.34.1</td>
+</tr>
+<tr>
+<td>k8s.io/api</td>
 <td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/api</td>
-<td>v0.34.1</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/api</td>
@@ -26445,19 +26491,35 @@
 <td>v0.34.3</td>
 </tr>
 <tr>
-<td>k8s.io/apiextensions-apiserver</td>
-<td>v0.34.1</td>
+<td>k8s.io/api</td>
+<td>v0.36.2</td>
+</tr>
+<tr>
+<td>k8s.io/api</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/api</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/api</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/api</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/apiextensions-apiserver</td>
-<td>v0.34.3</td>
+<td>v0.34.1</td>
 </tr>
 <tr>
 <td>k8s.io/apiextensions-apiserver</td>
 <td>v0.36.1</td>
 </tr>
 <tr>
-<td>k8s.io/apimachinery</td>
+<td>k8s.io/apiextensions-apiserver</td>
 <td>v0.34.3</td>
 </tr>
 <tr>
@@ -26466,15 +26528,11 @@
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
-<td>v0.34.1</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/apimachinery</td>
-<td>v0.36.2</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
@@ -26486,7 +26544,7 @@
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
-<td>v0.34.1</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
@@ -26498,7 +26556,15 @@
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
-<td>v0.34.1</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/apimachinery</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/apimachinery</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
@@ -26507,6 +26573,14 @@
 <tr>
 <td>k8s.io/apimachinery</td>
 <td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/apimachinery</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/apimachinery</td>
+<td>v0.36.2</td>
 </tr>
 <tr>
 <td>k8s.io/apimachinery</td>
@@ -26518,7 +26592,7 @@
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
-<td>v0.34.1</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
@@ -26527,6 +26601,10 @@
 <tr>
 <td>k8s.io/client-go</td>
 <td>v0.34.1</td>
+</tr>
+<tr>
+<td>k8s.io/client-go</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
@@ -26538,18 +26616,6 @@
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
-<td>v0.36.1</td>
-</tr>
-<tr>
-<td>k8s.io/client-go</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/client-go</td>
-<td>v0.34.3</td>
-</tr>
-<tr>
-<td>k8s.io/client-go</td>
 <td>v0.34.1</td>
 </tr>
 <tr>
@@ -26558,11 +26624,7 @@
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
-<td>v0.34.1</td>
-</tr>
-<tr>
-<td>k8s.io/client-go</td>
-<td>v0.34.1</td>
+<td>v0.36.1</td>
 </tr>
 <tr>
 <td>k8s.io/client-go</td>
@@ -26573,20 +26635,24 @@
 <td>v0.34.3</td>
 </tr>
 <tr>
-<td>sigs.k8s.io/controller-runtime</td>
-<td>v0.24.1</td>
+<td>k8s.io/client-go</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
-<td>sigs.k8s.io/controller-runtime</td>
-<td>v0.22.3</td>
+<td>k8s.io/client-go</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
-<td>sigs.k8s.io/controller-runtime</td>
-<td>v0.24.1</td>
+<td>k8s.io/client-go</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
-<td>sigs.k8s.io/controller-runtime</td>
-<td>v0.22.3</td>
+<td>k8s.io/client-go</td>
+<td>v0.34.3</td>
+</tr>
+<tr>
+<td>k8s.io/client-go</td>
+<td>v0.34.3</td>
 </tr>
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
@@ -26595,6 +26661,10 @@
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
 <td>v0.22.1</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.22.3</td>
 </tr>
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
@@ -26606,15 +26676,31 @@
 </tr>
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
-<td>v0.22.3</td>
-</tr>
-<tr>
-<td>sigs.k8s.io/controller-runtime</td>
-<td>v0.22.3</td>
+<td>v0.24.1</td>
 </tr>
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
 <td>v0.22.1</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.22.3</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.24.1</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.22.3</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.22.3</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.22.3</td>
 </tr>
 </tbody>
 </table>
@@ -26640,7 +26726,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 04:15:38 UTC">September 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 10, 2026 04:18:22 UTC">September 10, 2026</span>
   </span>
 
     

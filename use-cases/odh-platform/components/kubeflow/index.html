@@ -26197,11 +26197,11 @@
 
 <h1 id="kubeflow">kubeflow<a class="headerlink" href="#kubeflow" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-09-09</strong> (2026-09-09)</p>
+<p><strong>Architecture snapshot: 2026-09-10</strong> (2026-09-10)</p>
 </blockquote>
 <p><strong>Repository:</strong> opendatahub-io/kubeflow<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-09-09T04:04:40Z</p>
+<strong>Extracted:</strong> 2026-09-10T04:03:39Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -26217,7 +26217,7 @@
 </tr>
 <tr>
 <td>Deployments</td>
-<td>7</td>
+<td>9</td>
 </tr>
 <tr>
 <td>Services</td>
@@ -26225,7 +26225,7 @@
 </tr>
 <tr>
 <td>Secrets</td>
-<td>2</td>
+<td>4</td>
 </tr>
 <tr>
 <td>Cluster Roles</td>
@@ -26261,36 +26261,40 @@
         class dep_5 controller
         dep_6["deployment"]
         class dep_6 controller
-        dep_7["manager"]
+        dep_7["deployment"]
         class dep_7 controller
+        dep_8["manager"]
+        class dep_8 controller
+        dep_9["manager"]
+        class dep_9 controller
     end
 
-    controller --&gt;|"Owns"| owned_8["ConfigMap"]
-    class owned_8 owned
-    controller --&gt;|"Owns"| owned_9["NetworkPolicy"]
-    class owned_9 owned
-    controller --&gt;|"Owns"| owned_10["RoleBinding"]
+    controller --&gt;|"Owns"| owned_10["ConfigMap"]
     class owned_10 owned
-    controller --&gt;|"Owns"| owned_11["Secret"]
+    controller --&gt;|"Owns"| owned_11["NetworkPolicy"]
     class owned_11 owned
-    controller --&gt;|"Owns"| owned_12["Service"]
+    controller --&gt;|"Owns"| owned_12["RoleBinding"]
     class owned_12 owned
-    controller --&gt;|"Owns"| owned_13["ServiceAccount"]
+    controller --&gt;|"Owns"| owned_13["Secret"]
     class owned_13 owned
-    controller --&gt;|"Owns"| owned_14["StatefulSet"]
+    controller --&gt;|"Owns"| owned_14["Service"]
     class owned_14 owned
-    watch_15["ConfigMap"] --&gt;|"Watches"| controller
-    class watch_15 external
-    watch_16["HTTPRoute"] --&gt;|"Watches"| controller
-    class watch_16 external
-    watch_17["ReferenceGrant"] --&gt;|"Watches"| controller
+    controller --&gt;|"Owns"| owned_15["ServiceAccount"]
+    class owned_15 owned
+    controller --&gt;|"Owns"| owned_16["StatefulSet"]
+    class owned_16 owned
+    watch_17["ConfigMap"] --&gt;|"Watches"| controller
     class watch_17 external
-    controller -.-&gt;|"depends on"| odh_18["data-science-pipelines-operator"]
-    class odh_18 dep
-    controller -.-&gt;|"depends on"| odh_19["operator-chaos"]
-    class odh_19 dep
-    controller -.-&gt;|"depends on"| odh_20["operator-chaos"]
-    class odh_20 dep</code></pre>
+    watch_18["HTTPRoute"] --&gt;|"Watches"| controller
+    class watch_18 external
+    watch_19["ReferenceGrant"] --&gt;|"Watches"| controller
+    class watch_19 external
+    controller -.-&gt;|"depends on"| odh_20["data-science-pipelines-operator"]
+    class odh_20 dep
+    controller -.-&gt;|"depends on"| odh_21["operator-chaos"]
+    class odh_21 dep
+    controller -.-&gt;|"depends on"| odh_22["operator-chaos"]
+    class odh_22 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <p>No CRDs found in analyzed sources.</p>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
@@ -26398,7 +26402,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 9, 2026 04:15:38 UTC">September 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 10, 2026 04:18:22 UTC">September 10, 2026</span>
   </span>
 
     
