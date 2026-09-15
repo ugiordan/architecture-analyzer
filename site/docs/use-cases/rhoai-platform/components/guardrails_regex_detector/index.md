@@ -1,11 +1,11 @@
 # guardrails-regex-detector
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-15** (2026-09-15)
 
 
 **Repository:** red-hat-data-services/guardrails-regex-detector  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:17:09Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-15T04:26:16Z
 
 ## Summary
 
