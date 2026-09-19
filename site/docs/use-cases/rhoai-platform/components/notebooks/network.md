@@ -2,7 +2,7 @@
 
 ## Service Map
 
-*1 unique services (8 total, duplicates from test fixtures collapsed).*
+*1 unique services (9 total, duplicates from test fixtures collapsed).*
 
 ```mermaid
 graph LR
@@ -13,20 +13,24 @@ graph LR
 
     notebooks["notebooks"]:::component
     notebooks --> svc_0["notebook\nClusterIP: 8888/TCP"]:::svc
+    notebooks -.-> ext_requests[["requests\napi"]]:::ext
+    notebooks -.-> ext_urllib[["urllib\napi"]]:::ext
+    notebooks -.-> ext_minio[["minio\nobject-storage"]]:::ext
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| notebook | ClusterIP | 8888/TCP | [`jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
-| notebook | ClusterIP | 8888/TCP | [`jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/56244dc2e4f1687c0a60605a747df001797ea312/jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/baseline/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/baseline/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/datascience/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/minimal/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/pytorch+llmcompressor/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/rocm/pytorch/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/rocm/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/tensorflow/ubi9-python-3.12/kustomize/base/service.yaml) |
+| notebook | ClusterIP | 8888/TCP | [`jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml`](https://github.com/red-hat-data-services/notebooks/blob/1a2ea907a5cd75d79f0fa6aa7ce4981eb9f15e4a/jupyter/trustyai/ubi9-python-3.12/kustomize/base/service.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

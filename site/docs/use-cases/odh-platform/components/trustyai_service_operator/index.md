@@ -1,19 +1,22 @@
 # trustyai-service-operator
 
-**Repository:** red-hat-data-services/trustyai-service-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-08T08:13:54Z
+> **Architecture snapshot: 2026-09-19** (2026-09-19)
+
+
+**Repository:** trustyai-explainability/trustyai-service-operator  
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-19T04:03:36Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| CRDs | 0 |
+| CRDs | 5 |
 | Deployments | 1 |
-| Services | 2 |
-| Secrets | 0 |
+| Services | 3 |
+| Secrets | 1 |
 | Cluster Roles | 0 |
-| Controller Watches | 14 |
+| Controller Watches | 22 |
 
 ## Component Architecture
 
@@ -34,34 +37,75 @@ graph LR
         class dep_1 controller
     end
 
+    crd_EvalHub{{"EvalHub\ntrustyai.opendatahub.io/v1"}}
+    class crd_EvalHub crd
+    crd_EvalHub -->|"For (reconciles)"| controller
+    crd_TrustyAIService{{"TrustyAIService\ntrustyai.opendatahub.io/v1"}}
+    class crd_TrustyAIService crd
+    crd_TrustyAIService -->|"For (reconciles)"| controller
+    crd_EvalHub{{"EvalHub\ntrustyai.opendatahub.io/v1alpha1"}}
+    class crd_EvalHub crd
+    crd_EvalHub -->|"For (reconciles)"| controller
+    crd_LMEvalJob{{"LMEvalJob\ntrustyai.opendatahub.io/v1alpha1"}}
+    class crd_LMEvalJob crd
+    crd_LMEvalJob -->|"For (reconciles)"| controller
+    crd_TrustyAIService{{"TrustyAIService\ntrustyai.opendatahub.io/v1alpha1"}}
+    class crd_TrustyAIService crd
+    crd_TrustyAIService -->|"For (reconciles)"| controller
     controller -->|"Owns"| owned_2["ConfigMap"]
     class owned_2 owned
     controller -->|"Owns"| owned_3["Deployment"]
     class owned_3 owned
-    controller -->|"Owns"| owned_4["Service"]
+    controller -->|"Owns"| owned_4["RoleBinding"]
     class owned_4 owned
-    watch_5["InferenceService"] -->|"Watches"| controller
-    class watch_5 external
-    watch_6["Namespace"] -->|"Watches"| controller
-    class watch_6 external
+    controller -->|"Owns"| owned_5["Service"]
+    class owned_5 owned
+    controller -->|"Owns"| owned_6["ServiceAccount"]
+    class owned_6 owned
+    controller -->|"Owns"| owned_7["ServiceMonitor"]
+    class owned_7 owned
+    watch_8["ConfigMap"] -->|"Watches"| controller
+    class watch_8 external
+    watch_9["InferenceService"] -->|"Watches"| controller
+    class watch_9 external
+    watch_10["Namespace"] -->|"Watches"| controller
+    class watch_10 external
+    controller -.->|"depends on"| odh_11["odh-platform-utilities"]
+    class odh_11 dep
 ```
 
 ### CRDs
 
-No CRDs defined.
+| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
+|-------|---------|------|-------|--------|------------------|-----------|--------|
+| trustyai.opendatahub.io | v1 | EvalHub | Namespaced | 19 | 0 | Go AST | [`/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1/evalhub_types.go`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/7838ba58fffca619610c6b260c4ec87c031d0a27//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1/evalhub_types.go) |
+| trustyai.opendatahub.io | v1 | TrustyAIService | Namespaced | 19 | 0 | Go AST | [`/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1/trustyaiservice_types.go`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/7838ba58fffca619610c6b260c4ec87c031d0a27//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1/trustyaiservice_types.go) |
+| trustyai.opendatahub.io | v1alpha1 | EvalHub | Namespaced | 19 | 0 | Go AST | [`/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1alpha1/evalhub_types.go`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/7838ba58fffca619610c6b260c4ec87c031d0a27//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/evalhub/v1alpha1/evalhub_types.go) |
+| trustyai.opendatahub.io | v1alpha1 | LMEvalJob | Namespaced | 19 | 0 | Go AST | [`/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/lmes/v1alpha1/lmevaljob_types.go`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/7838ba58fffca619610c6b260c4ec87c031d0a27//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/lmes/v1alpha1/lmevaljob_types.go) |
+| trustyai.opendatahub.io | v1alpha1 | TrustyAIService | Namespaced | 19 | 0 | Go AST | [`/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1alpha1/trustyaiservice_types.go`](https://github.com/trustyai-explainability/trustyai-service-operator/blob/7838ba58fffca619610c6b260c4ec87c031d0a27//home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/api/tas/v1alpha1/trustyaiservice_types.go) |
 
 ## Dependencies
+
+### Internal Platform Dependencies
+
+| Component | Interaction |
+|-----------|-------------|
+| odh-platform-utilities | Go module dependency: github.com/opendatahub-io/odh-platform-utilities |
 
 ### Key External Dependencies
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring | v0.64.1 |
-| github.com/prometheus/client_golang | v1.18.0 |
-| k8s.io/api | v0.29.2 |
-| k8s.io/apiextensions-apiserver | v0.29.0 |
-| k8s.io/apimachinery | v0.29.2 |
-| k8s.io/client-go | v0.29.2 |
-| sigs.k8s.io/controller-runtime | v0.17.0 |
+| github.com/go-logr/logr | v1.4.4 |
+| github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring | v0.74.0 |
+| github.com/prometheus/client_golang | v1.24.1 |
+| k8s.io/api | v0.35.3 |
+| k8s.io/api | v0.34.5 |
+| k8s.io/apiextensions-apiserver | v0.34.5 |
+| k8s.io/apimachinery | v0.35.4 |
+| k8s.io/apimachinery | v0.34.5 |
+| k8s.io/client-go | v0.34.5 |
+| k8s.io/client-go | v0.35.3 |
+| sigs.k8s.io/controller-runtime | v0.22.5 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

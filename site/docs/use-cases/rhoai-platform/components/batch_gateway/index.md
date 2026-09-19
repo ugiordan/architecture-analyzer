@@ -1,11 +1,11 @@
 # batch-gateway
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-19** (2026-09-19)
 
 
-**Repository:** llm-d-incubation/batch-gateway  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:16:21Z
+**Repository:** llm-d/batch-gateway  
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-19T04:08:55Z
 
 ## Summary
 
@@ -48,33 +48,10 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.79.3 |
-| google.golang.org/grpc | v1.79.3 |
-| google.golang.org/grpc | v1.80.0 |
-| google.golang.org/grpc | v1.79.2 |
-| google.golang.org/grpc | v1.80.0 |
-| google.golang.org/grpc | v1.79.1 |
-| google.golang.org/grpc | v1.79.2 |
-| google.golang.org/grpc | v1.79.1 |
+| github.com/go-logr/logr | v1.4.4 |
+| github.com/prometheus/client_golang | v1.24.1 |
+| github.com/prometheus/client_model | v0.6.3 |
+| k8s.io/api | v0.36.4 |
+| k8s.io/apimachinery | v0.36.4 |
+| k8s.io/client-go | v0.36.4 |
 

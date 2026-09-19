@@ -1,11 +1,11 @@
 # llama-stack
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-19** (2026-09-19)
 
 
 **Repository:** red-hat-data-services/llama-stack  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:15:57Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-19T04:09:08Z
 
 ## Summary
 

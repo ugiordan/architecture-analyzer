@@ -17,13 +17,14 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| service | ClusterIP | 8080/TCP | [`deploy/common/service.yaml`](https://github.com/llm-d/llm-d-routing-sidecar/blob/cc502d185a124d82170df5675b7ec9a533acfd4f/deploy/common/service.yaml) |
+| service | ClusterIP | 8080/TCP | [`deploy/common/service.yaml`](https://github.com/llm-d/llm-d-routing-sidecar/blob/214ed72b3bcd2ea0d66ae2f15d82e0037a726c06/deploy/common/service.yaml) |
 
 ### Ingress / Routing
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Route | route |  |  | yes | [`deploy/openshift/route.yaml`](https://github.com/llm-d/llm-d-routing-sidecar/blob/cc502d185a124d82170df5675b7ec9a533acfd4f/deploy/openshift/route.yaml) |
+| Route | route |  |  | yes | [`deploy/openshift/route.yaml`](https://github.com/llm-d/llm-d-routing-sidecar/blob/214ed72b3bcd2ea0d66ae2f15d82e0037a726c06/deploy/openshift/route.yaml) |
+| Route | route |  |  | no | [`deploy/openshift/patch-route.yaml`](https://github.com/llm-d/llm-d-routing-sidecar/blob/214ed72b3bcd2ea0d66ae2f15d82e0037a726c06/deploy/openshift/patch-route.yaml) |
 
 !!! warning "No Network Policies"
     No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.

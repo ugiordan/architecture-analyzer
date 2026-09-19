@@ -8,7 +8,10 @@ Kubernetes secrets referenced by this component. Only names and types are shown,
 
 | Name | Type | Referenced By |
 |------|------|---------------|
+| maas-api-metrics-tls | Opaque | deployment/maas-api |
 | maas-api-serving-cert | kubernetes.io/tls | deployment/maas-api, service/maas-api |
+| maas-controller-metrics-tls | Opaque | deployment/maas-controller |
+| maas-controller-webhook-cert | kubernetes.io/tls | deployment/maas-controller, service/maas-controller-webhook-service |
 
 ## Deployment Security Controls
 
@@ -18,10 +21,10 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| maas-api | maas-api | true | true | ? | [`deployment/base/maas-api/core/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/maas-api/core/deployment.yaml) |
-| maas-api | maas-api | ? | ? | ? | [`deployment/base/maas-api/overlays/tls/deployment-patch.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/maas-api/overlays/tls/deployment-patch.yaml) |
-| maas-controller | manager | ? | ? | ? | [`deployment/base/maas-controller/manager/manager.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/maas-controller/manager/manager.yaml) |
-| payload-processing | payload-processing | ? | true | ? | [`deployment/base/payload-processing/manager/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/b4f20ec750ff2d0fe546a34058e01fe03ae3a7e6/deployment/base/payload-processing/manager/deployment.yaml) |
+| maas-api | maas-api | true | true | ? | [`deployment/base/maas-api/core/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/81e133b38b68d9fc1b9d04cc910c8996bd5a80a8/deployment/base/maas-api/core/deployment.yaml) |
+| maas-api | maas-api | ? | ? | ? | [`deployment/base/maas-api/overlays/tls/deployment-patch.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/81e133b38b68d9fc1b9d04cc910c8996bd5a80a8/deployment/base/maas-api/overlays/tls/deployment-patch.yaml) |
+| maas-controller | manager | ? | true | ? | [`deployment/base/maas-controller/manager/manager.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/81e133b38b68d9fc1b9d04cc910c8996bd5a80a8/deployment/base/maas-controller/manager/manager.yaml) |
+| payload-processing | payload-processing | ? | true | ? | [`deployment/base/payload-processing/instance/deployment.yaml`](https://github.com/opendatahub-io/models-as-a-service/blob/81e133b38b68d9fc1b9d04cc910c8996bd5a80a8/deployment/base/payload-processing/instance/deployment.yaml) |
 
 ## Build Security
 
@@ -33,4 +36,6 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | `maas-api/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:80f3902b6dcb47005a90e14140eef9080ccc1bb22df70ee16b27d5891524edb2 | 2 | 1001 |  | multi-arch |  |  |
 | `maas-controller/Dockerfile` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | 1001 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
 | `maas-controller/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183 | 2 | 1001 |  | multi-arch |  |  |
+| `maas-discovery/Dockerfile` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | 1001 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
+| `maas-discovery/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:80f3902b6dcb47005a90e14140eef9080ccc1bb22df70ee16b27d5891524edb2 | 2 | 1001 |  | multi-arch |  |  |
 

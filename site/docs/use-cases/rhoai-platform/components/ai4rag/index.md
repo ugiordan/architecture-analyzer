@@ -1,11 +1,11 @@
 # ai4rag
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-19** (2026-09-19)
 
 
 **Repository:** IBM/ai4rag  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:40Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-19T04:09:56Z
 
 ## Summary
 
