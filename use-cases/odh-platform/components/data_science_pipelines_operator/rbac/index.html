@@ -26233,7 +26233,7 @@
 <h1 id="data-science-pipelines-operator-rbac">data-science-pipelines-operator: RBAC<a class="headerlink" href="#data-science-pipelines-operator-rbac" title="Permanent link">¶</a></h1>
 <p>ServiceAccount bindings, roles, and resource permissions.</p>
 <h2 id="rbac-overview">RBAC Overview<a class="headerlink" href="#rbac-overview" title="Permanent link">¶</a></h2>
-<p>This component defines a large RBAC surface (239 diagram lines). The graph below groups roles by permission scope.</p>
+<p>This component defines a large RBAC surface (249 diagram lines). The graph below groups roles by permission scope.</p>
 <pre class="mermaid"><code>graph LR
     classDef wide fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef medium fill:#f39c12,stroke:#d68910,color:#fff
@@ -26241,7 +26241,7 @@
     classDef subject fill:#3498db,stroke:#2980b9,color:#fff
 
     subgraph wide["Wide Scope (&gt;30 resources)"]
-    manager_role["manager-role\n78 resources"]:::wide
+    manager_role["manager-role\n80 resources"]:::wide
     end
     subgraph med["Medium Scope (10-30)"]
     manager_argo_role["manager-argo-role\n22 resources"]:::medium
@@ -26250,12 +26250,14 @@
     aggregate_dspa_admin_edit["aggregate-dspa-admin-edit\n4 resources"]:::narrow
     aggregate_dspa_admin_view["aggregate-dspa-admin-view\n4 resources"]:::narrow
     leader_election_role["leader-election-role\n3 resources"]:::narrow
+    prometheusrule_manager_role["prometheusrule-manager-role\n1 resources"]:::narrow
     end
 
     subj_controller_manager["controller-manager\nServiceAccount"]:::subject
     subj_controller_manager --&gt;|binds| manager_argo_role
     subj_controller_manager --&gt;|binds| manager_role
-    subj_controller_manager --&gt;|binds| leader_election_role</code></pre>
+    subj_controller_manager --&gt;|binds| leader_election_role
+    subj_controller_manager --&gt;|binds| prometheusrule_manager_role</code></pre>
 <h2 id="bindings">Bindings<a class="headerlink" href="#bindings" title="Permanent link">¶</a></h2>
 <p>Subject-to-role mappings defining who has access to what.</p>
 <table>
@@ -26284,6 +26286,12 @@
 <td>leader-election-rolebinding</td>
 <td>RoleBinding</td>
 <td>leader-election-role</td>
+<td>ServiceAccount/controller-manager</td>
+</tr>
+<tr>
+<td>prometheusrule-manager-rolebinding</td>
+<td>RoleBinding</td>
+<td>prometheusrule-manager-role</td>
 <td>ServiceAccount/controller-manager</td>
 </tr>
 </tbody>
@@ -26467,14 +26475,14 @@
 <td>ClusterRole</td>
 <td></td>
 <td>customresourcedefinitions</td>
-<td>create, list, watch</td>
+<td>get, list, patch, update, watch</td>
 </tr>
 <tr>
 <td>manager-role</td>
 <td>ClusterRole</td>
 <td></td>
 <td>customresourcedefinitions</td>
-<td>get, patch, update</td>
+<td>list, watch</td>
 </tr>
 <tr>
 <td>manager-role</td>
@@ -26543,6 +26551,13 @@
 <td>manager-role</td>
 <td>ClusterRole</td>
 <td></td>
+<td>datasciencepipelines</td>
+<td>delete, get</td>
+</tr>
+<tr>
+<td>manager-role</td>
+<td>ClusterRole</td>
+<td></td>
 <td>datasciencepipelinesapplications, datasciencepipelinesapplications/api</td>
 <td>create, delete, get, list, patch, update, watch</td>
 </tr>
@@ -26594,6 +26609,13 @@
 <td></td>
 <td>servicemonitors</td>
 <td>create, delete, get, list, patch, update, watch</td>
+</tr>
+<tr>
+<td>manager-role</td>
+<td>ClusterRole</td>
+<td></td>
+<td>prometheusrules</td>
+<td>get, patch, update</td>
 </tr>
 <tr>
 <td>manager-role</td>
@@ -26693,6 +26715,13 @@
 <td>events</td>
 <td>create, patch</td>
 </tr>
+<tr>
+<td>prometheusrule-manager-role</td>
+<td>Role</td>
+<td></td>
+<td>prometheusrules</td>
+<td>create</td>
+</tr>
 </tbody>
 </table>
 
@@ -26717,7 +26746,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 18, 2026 04:17:06 UTC">September 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 19, 2026 04:13:23 UTC">September 19, 2026</span>
   </span>
 
     
