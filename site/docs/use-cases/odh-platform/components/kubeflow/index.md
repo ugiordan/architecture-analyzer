@@ -1,20 +1,20 @@
 # kubeflow
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-26** (2026-09-26)
 
 
 **Repository:** opendatahub-io/kubeflow  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:06:11Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-26T04:25:51Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 0 |
-| Deployments | 7 |
+| Deployments | 9 |
 | Services | 3 |
-| Secrets | 2 |
+| Secrets | 4 |
 | Cluster Roles | 0 |
 | Controller Watches | 14 |
 
@@ -45,32 +45,40 @@ graph LR
         class dep_5 controller
         dep_6["deployment"]
         class dep_6 controller
-        dep_7["manager"]
+        dep_7["deployment"]
         class dep_7 controller
+        dep_8["manager"]
+        class dep_8 controller
+        dep_9["manager"]
+        class dep_9 controller
     end
 
-    controller -->|"Owns"| owned_8["ConfigMap"]
-    class owned_8 owned
-    controller -->|"Owns"| owned_9["NetworkPolicy"]
-    class owned_9 owned
-    controller -->|"Owns"| owned_10["RoleBinding"]
+    controller -->|"Owns"| owned_10["ConfigMap"]
     class owned_10 owned
-    controller -->|"Owns"| owned_11["Secret"]
+    controller -->|"Owns"| owned_11["NetworkPolicy"]
     class owned_11 owned
-    controller -->|"Owns"| owned_12["Service"]
+    controller -->|"Owns"| owned_12["RoleBinding"]
     class owned_12 owned
-    controller -->|"Owns"| owned_13["ServiceAccount"]
+    controller -->|"Owns"| owned_13["Secret"]
     class owned_13 owned
-    controller -->|"Owns"| owned_14["StatefulSet"]
+    controller -->|"Owns"| owned_14["Service"]
     class owned_14 owned
-    watch_15["ConfigMap"] -->|"Watches"| controller
-    class watch_15 external
-    watch_16["HTTPRoute"] -->|"Watches"| controller
-    class watch_16 external
-    watch_17["ReferenceGrant"] -->|"Watches"| controller
+    controller -->|"Owns"| owned_15["ServiceAccount"]
+    class owned_15 owned
+    controller -->|"Owns"| owned_16["StatefulSet"]
+    class owned_16 owned
+    watch_17["ConfigMap"] -->|"Watches"| controller
     class watch_17 external
-    controller -.->|"depends on"| odh_18["data-science-pipelines-operator"]
-    class odh_18 dep
+    watch_18["HTTPRoute"] -->|"Watches"| controller
+    class watch_18 external
+    watch_19["ReferenceGrant"] -->|"Watches"| controller
+    class watch_19 external
+    controller -.->|"depends on"| odh_20["data-science-pipelines-operator"]
+    class odh_20 dep
+    controller -.->|"depends on"| odh_21["operator-chaos"]
+    class odh_21 dep
+    controller -.->|"depends on"| odh_22["operator-chaos"]
+    class odh_22 dep
 ```
 
 ### CRDs
@@ -84,21 +92,23 @@ No CRDs found in analyzed sources.
 | Component | Interaction |
 |-----------|-------------|
 | data-science-pipelines-operator | Go module dependency: github.com/opendatahub-io/data-science-pipelines-operator |
+| operator-chaos | Go module dependency: github.com/opendatahub-io/operator-chaos |
+| operator-chaos | Go module dependency: github.com/opendatahub-io/operator-chaos |
 
 ### Key External Dependencies
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
+| github.com/go-logr/logr | v1.4.4 |
+| github.com/go-logr/logr | v1.4.4 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| k8s.io/api | v0.33.7 |
-| k8s.io/api | v0.33.7 |
-| k8s.io/apiextensions-apiserver | v0.33.7 |
-| k8s.io/apimachinery | v0.33.7 |
-| k8s.io/apimachinery | v0.33.7 |
-| k8s.io/client-go | v0.33.7 |
-| k8s.io/client-go | v0.33.7 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/apiextensions-apiserver | v0.35.1 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/client-go | v0.35.2 |
+| k8s.io/client-go | v0.35.2 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

@@ -1,6 +1,6 @@
 # RBAC Surface
 
-63 cluster roles across the platform.
+112 cluster roles across the platform.
 
 ## Permission Scope by Component
 
@@ -14,14 +14,21 @@ How many distinct Kubernetes resource types can each component's most powerful C
 <div style="display: flex; align-items: center; gap: 8px;">
   <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">argo-workflows</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 38%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 26%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
   <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">21</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">codeflare-operator</span>
+  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
+    <div style="width: 42%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+  </div>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">34</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
   <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">data-science-pipelines</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 23%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 16%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
   <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">13</span>
 </div>
@@ -30,63 +37,91 @@ How many distinct Kubernetes resource types can each component's most powerful C
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
     <div style="width: 100%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
-  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">55</span>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">80</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
   <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">kserve</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 76%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 53%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
-  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">42</span>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">43</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
   <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">kserve-autogluon-server</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 76%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 52%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
   <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">42</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
-  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">llama-stack-k8s-operator</span>
-  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 32%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
-  </div>
-  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">18</span>
-</div>
-<div style="display: flex; align-items: center; gap: 8px;">
   <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">mlflow-operator</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 23%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 28%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
-  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">13</span>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">23</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
   <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">model-registry</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 5%; background: #27ae60; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 3%; background: #27ae60; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
   <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">3</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
-  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">spark-operator</span>
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">model-registry-operator</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 27%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 35%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
-  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">15</span>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">28</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
-  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">trainer</span>
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">odh-dashboard</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 29%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 43%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+  </div>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">35</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">odh-model-controller</span>
+  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
+    <div style="width: 52%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+  </div>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">42</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">ogx-k8s-operator</span>
+  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
+    <div style="width: 32%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+  </div>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">26</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">opendatahub-operator</span>
+  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
+    <div style="width: 2%; background: #27ae60; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+  </div>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">2</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">spark-operator</span>
+  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
+    <div style="width: 20%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
   <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">16</span>
 </div>
 <div style="display: flex; align-items: center; gap: 8px;">
-  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">workload-variant-autoscaler</span>
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">trainer</span>
   <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
-    <div style="width: 40%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+    <div style="width: 23%; background: #f39c12; height: 100%; border-radius: 4px; min-width: 20px;"></div>
   </div>
-  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">22</span>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">19</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px;">
+  <span style="min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;">training-operator</span>
+  <div style="flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;">
+    <div style="width: 40%; background: #e74c3c; height: 100%; border-radius: 4px; min-width: 20px;"></div>
+  </div>
+  <span style="min-width: 30px; font-size: 0.85em; font-weight: 600;">32</span>
 </div>
 </div>
 </div>
@@ -95,16 +130,13 @@ How many distinct Kubernetes resource types can each component's most powerful C
 
 Subject-to-role bindings across all platform components. Edge direction shows who has access to what.
 
+*56 bindings total. Showing the first 50.*
+
 ```mermaid
 graph LR
     classDef role fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef subject fill:#3498db,stroke:#2980b9,color:#fff
 
-    sa_kserve_controller_manager["kserve-controller-manager\nServiceAccount"]:::subject
-    role_kserve_manager_role["kserve-manager-role"]:::role
-    sa_kserve_controller_manager -->|kserve| role_kserve_manager_role
-    role_kserve_proxy_role["kserve-proxy-role"]:::role
-    sa_kserve_controller_manager -->|kserve| role_kserve_proxy_role
     sa_argo["argo\nServiceAccount"]:::subject
     role_argo_cluster_role["argo-cluster-role"]:::role
     sa_argo -->|argo-workflows| role_argo_cluster_role
@@ -112,9 +144,10 @@ graph LR
     role_argo_server_cluster_role["argo-server-cluster-role"]:::role
     sa_argo_server -->|argo-workflows| role_argo_server_cluster_role
     sa_controller_manager["controller-manager\nServiceAccount"]:::subject
+    role_manager_role["manager-role"]:::role
+    sa_controller_manager -->|codeflare-operator| role_manager_role
     role_manager_argo_role["manager-argo-role"]:::role
     sa_controller_manager -->|data-science-pipelines-operator| role_manager_argo_role
-    role_manager_role["manager-role"]:::role
     sa_controller_manager -->|data-science-pipelines-operator| role_manager_role
     sa_kubeflow_pipelines_cache["kubeflow-pipelines-cache\nServiceAccount"]:::subject
     role_kubeflow_pipelines_cache_role["kubeflow-pipelines-cache-role"]:::role
@@ -143,14 +176,18 @@ graph LR
     sa_ml_pipeline_viewer_crd_service_account["ml-pipeline-viewer-crd-service-account\nServiceAccount"]:::subject
     role_ml_pipeline_viewer_controller_role["ml-pipeline-viewer-controller-role"]:::role
     sa_ml_pipeline_viewer_crd_service_account -->|data-science-pipelines| role_ml_pipeline_viewer_controller_role
+    sa_kserve_controller_manager["kserve-controller-manager\nServiceAccount"]:::subject
+    role_kserve_manager_role["kserve-manager-role"]:::role
     sa_kserve_controller_manager -->|kserve-autogluon-server| role_kserve_manager_role
+    role_kserve_proxy_role["kserve-proxy-role"]:::role
     sa_kserve_controller_manager -->|kserve-autogluon-server| role_kserve_proxy_role
-    sa_controller_manager -->|llama-stack-k8s-operator| role_manager_role
-    role_proxy_role["proxy-role"]:::role
-    sa_controller_manager -->|llama-stack-k8s-operator| role_proxy_role
+    sa_kserve_controller_manager -->|kserve| role_kserve_manager_role
+    sa_kserve_controller_manager -->|kserve| role_kserve_proxy_role
     sa_controller_manager -->|mlflow-operator| role_manager_role
     role_metrics_auth_role["metrics-auth-role"]:::role
     sa_controller_manager -->|mlflow-operator| role_metrics_auth_role
+    sa_controller_manager -->|model-registry-operator| role_manager_role
+    sa_controller_manager -->|model-registry-operator| role_metrics_auth_role
     sa_controller_manager -->|model-registry| role_metrics_auth_role
     sa_model_registry_ui["model-registry-ui\nServiceAccount"]:::subject
     role_model_registry_create_sars["model-registry-create-sars"]:::role
@@ -161,28 +198,64 @@ graph LR
     sa_model_registry_ui -->|model-registry| role_model_registry_retrieve_clusterrolebindings
     role_model_registry_ui_services_reader["model-registry-ui-services-reader"]:::role
     sa_model_registry_ui -->|model-registry| role_model_registry_ui_services_reader
+    sa_maas_consumer_portal["maas-consumer-portal\nServiceAccount"]:::subject
+    role_maas_consumer_portal["maas-consumer-portal"]:::role
+    sa_maas_consumer_portal -->|odh-dashboard| role_maas_consumer_portal
+    sa_odh_dashboard["odh-dashboard\nServiceAccount"]:::subject
+    role_odh_dashboard["odh-dashboard"]:::role
+    sa_odh_dashboard -->|odh-dashboard| role_odh_dashboard
+    sa_odh_dashboard_agent_ops["odh-dashboard-agent-ops\nServiceAccount"]:::subject
+    role_odh_dashboard_agent_ops["odh-dashboard-agent-ops"]:::role
+    sa_odh_dashboard_agent_ops -->|odh-dashboard| role_odh_dashboard_agent_ops
+    role_system_auth_delegator["system:auth-delegator"]:::role
+    sa_odh_dashboard -->|odh-dashboard| role_system_auth_delegator
+    sa_odh_dashboard_automl["odh-dashboard-automl\nServiceAccount"]:::subject
+    role_odh_dashboard_automl["odh-dashboard-automl"]:::role
+    sa_odh_dashboard_automl -->|odh-dashboard| role_odh_dashboard_automl
+    sa_odh_dashboard_autorag["odh-dashboard-autorag\nServiceAccount"]:::subject
+    role_odh_dashboard_autorag["odh-dashboard-autorag"]:::role
+    sa_odh_dashboard_autorag -->|odh-dashboard| role_odh_dashboard_autorag
+    sa_odh_dashboard_data_connect_hub_ui["odh-dashboard-data-connect-hub-ui\nServiceAccount"]:::subject
+    role_odh_dashboard_data_connect_hub_ui["odh-dashboard-data-connect-hub-ui"]:::role
+    sa_odh_dashboard_data_connect_hub_ui -->|odh-dashboard| role_odh_dashboard_data_connect_hub_ui
+    sa_odh_dashboard_data_registry_ui["odh-dashboard-data-registry-ui\nServiceAccount"]:::subject
+    role_odh_dashboard_data_registry_ui["odh-dashboard-data-registry-ui"]:::role
+    sa_odh_dashboard_data_registry_ui -->|odh-dashboard| role_odh_dashboard_data_registry_ui
+    sa_odh_dashboard_eval_hub["odh-dashboard-eval-hub\nServiceAccount"]:::subject
+    role_odh_dashboard_eval_hub["odh-dashboard-eval-hub"]:::role
+    sa_odh_dashboard_eval_hub -->|odh-dashboard| role_odh_dashboard_eval_hub
+    sa_odh_dashboard_gen_ai["odh-dashboard-gen-ai\nServiceAccount"]:::subject
+    role_odh_dashboard_gen_ai["odh-dashboard-gen-ai"]:::role
+    sa_odh_dashboard_gen_ai -->|odh-dashboard| role_odh_dashboard_gen_ai
+    sa_odh_dashboard_maas["odh-dashboard-maas\nServiceAccount"]:::subject
+    role_odh_dashboard_maas["odh-dashboard-maas"]:::role
+    sa_odh_dashboard_maas -->|odh-dashboard| role_odh_dashboard_maas
+    sa_odh_dashboard_mlflow["odh-dashboard-mlflow\nServiceAccount"]:::subject
+    role_odh_dashboard_mlflow["odh-dashboard-mlflow"]:::role
+    sa_odh_dashboard_mlflow -->|odh-dashboard| role_odh_dashboard_mlflow
+    sa_odh_dashboard_model_registry["odh-dashboard-model-registry\nServiceAccount"]:::subject
+    role_odh_dashboard_model_registry["odh-dashboard-model-registry"]:::role
+    sa_odh_dashboard_model_registry -->|odh-dashboard| role_odh_dashboard_model_registry
+    role_cluster_monitoring_view["cluster-monitoring-view"]:::role
+    sa_odh_dashboard -->|odh-dashboard| role_cluster_monitoring_view
+    sa_odh_dashboard_notebooks["odh-dashboard-notebooks\nServiceAccount"]:::subject
+    role_odh_dashboard_notebooks["odh-dashboard-notebooks"]:::role
+    sa_odh_dashboard_notebooks -->|odh-dashboard| role_odh_dashboard_notebooks
+    sa_controller_manager -->|odh-model-controller| role_metrics_auth_role
+    sa_odh_model_controller["odh-model-controller\nServiceAccount"]:::subject
+    role_odh_model_controller_role["odh-model-controller-role"]:::role
+    sa_odh_model_controller -->|odh-model-controller| role_odh_model_controller_role
+    role_proxy_role["proxy-role"]:::role
+    sa_odh_model_controller -->|odh-model-controller| role_proxy_role
+    sa_controller_manager -->|ogx-k8s-operator| role_manager_role
+    sa_controller_manager -->|ogx-k8s-operator| role_proxy_role
+    role_controller_manager_role["controller-manager-role"]:::role
+    sa_controller_manager -->|opendatahub-operator| role_controller_manager_role
     sa_spark_operator_controller["spark-operator-controller\nServiceAccount"]:::subject
     role_spark_operator_controller["spark-operator-controller"]:::role
     sa_spark_operator_controller -->|spark-operator| role_spark_operator_controller
-    sa_kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager\nServiceAccount"]:::subject
-    role_kubeflow_trainer_controller_manager["kubeflow-trainer-controller-manager"]:::role
-    sa_kubeflow_trainer_controller_manager -->|trainer| role_kubeflow_trainer_controller_manager
-    sa_notebook_controller_service_account["notebook-controller-service-account\nServiceAccount"]:::subject
-    role_kubeflow_trainer_view["kubeflow-trainer-view"]:::role
-    sa_notebook_controller_service_account -->|trainer| role_kubeflow_trainer_view
-    sa_controller_service_account["controller-service-account\nServiceAccount"]:::subject
-    sa_controller_service_account -->|trainer| role_kubeflow_trainer_view
-    sa_epp_metrics_reader["epp-metrics-reader\nServiceAccount"]:::subject
-    role_epp_metrics_reader_role["epp-metrics-reader-role"]:::role
-    sa_epp_metrics_reader -->|workload-variant-autoscaler| role_epp_metrics_reader_role
-    sa_controller_manager -->|workload-variant-autoscaler| role_manager_role
-    sa_workload_variant_autoscaler_controller_manager["workload-variant-autoscaler-controller-manager\nServiceAccount"]:::subject
-    sa_workload_variant_autoscaler_controller_manager -->|workload-variant-autoscaler| role_metrics_auth_role
-    sa_kube_prometheus_stack_prometheus["kube-prometheus-stack-prometheus\nServiceAccount"]:::subject
-    role_metrics_reader["metrics-reader"]:::role
-    sa_kube_prometheus_stack_prometheus -->|workload-variant-autoscaler| role_metrics_reader
-    role_workload_variant_autoscaler_metrics_auth_role["workload-variant-autoscaler-metrics-auth-role"]:::role
-    sa_kube_prometheus_stack_prometheus -->|workload-variant-autoscaler| role_workload_variant_autoscaler_metrics_auth_role
+    role_spark_operator_tls_profile["spark-operator-tls-profile"]:::role
+    sa_spark_operator_controller -->|spark-operator| role_spark_operator_tls_profile
 ```
 
 ## Roles by Component
@@ -190,14 +263,19 @@ graph LR
 | Component | Roles | Widest Role | Resources | Scope |
 |-----------|-------|-------------|-----------|-------|
 | argo-workflows | 5 | argo-cluster-role | 21 | medium |
+| codeflare-operator | 3 | manager-role | 34 | **wide** |
 | data-science-pipelines | 13 | aggregate-to-kubeflow-pipelines-edit | 13 | medium |
-| data-science-pipelines-operator | 4 | manager-role | 55 | **wide** |
-| kserve | 2 | kserve-manager-role | 42 | **wide** |
+| data-science-pipelines-operator | 4 | manager-role | 80 | **wide** |
+| kserve | 2 | kserve-manager-role | 43 | **wide** |
 | kserve-autogluon-server | 2 | kserve-manager-role | 42 | **wide** |
-| llama-stack-k8s-operator | 5 | manager-role | 18 | medium |
-| mlflow-operator | 6 | mlflow-edit | 13 | medium |
+| mlflow-operator | 6 | manager-role | 23 | medium |
 | model-registry | 6 | model-registry-manager-role | 3 | narrow |
-| spark-operator | 5 | spark-operator-controller | 15 | medium |
-| trainer | 8 | kubeflow-trainer-controller-manager | 16 | medium |
-| workload-variant-autoscaler | 7 | manager-role | 22 | medium |
+| model-registry-operator | 6 | manager-role | 28 | medium |
+| odh-dashboard | 13 | odh-dashboard | 35 | **wide** |
+| odh-model-controller | 7 | odh-model-controller-role | 42 | **wide** |
+| ogx-k8s-operator | 5 | manager-role | 26 | medium |
+| opendatahub-operator | 17 | ray-viewer-role | 2 | narrow |
+| spark-operator | 6 | spark-operator-controller | 16 | medium |
+| trainer | 11 | kubeflow-trainer-controller-manager | 19 | medium |
+| training-operator | 6 | training-operator | 32 | **wide** |
 

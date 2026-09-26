@@ -15,4 +15,5 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
 | `build/Dockerfile` | release-base | 6 | ${USER} |  |  |  | Unpinned base image: base; Unpinned base image: base; Unpinned base image: cuda-base; Unpinned base image: cuda-devel; Unpinned base image: release-base |
+| `build/nvcr.Dockerfile` | nvcr.io/nvidia/pytorch:${NVCR_IMAGE_VERSION} | 2 |  |  |  |  | No USER directive found (defaults to root) |
 

@@ -1,11 +1,11 @@
 # NeMo-Guardrails
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-09-26** (2026-09-26)
 
 
 **Repository:** red-hat-data-services/NeMo-Guardrails  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:17:09Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-09-26T04:32:51Z
 
 ## Summary
 
@@ -13,7 +13,7 @@
 |--------|-------|
 | CRDs | 0 |
 | Deployments | 0 |
-| Services | 1 |
+| Services | 0 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
 | Controller Watches | 0 |
