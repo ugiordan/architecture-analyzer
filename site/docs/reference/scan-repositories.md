@@ -1,0 +1,132 @@
+# Configured Scan Repositories
+
+Source: [`scan-config.yaml`](https://github.com/ugiordan/architecture-analyzer/blob/main/scan-config.yaml)
+
+This is the deduplicated union of configured repositories after removing
+`opendatahub-io/modelmesh`. The same repository can be used by both `odh` and
+`rhoai`; the platform column records where it appears.
+
+Total unique repositories: **106**.
+
+The ODH platform uses `trainer-operator`. The downstream RHOAI platform still
+uses `training-operator` until its downstream repository is renamed or replaced.
+`trainer` is a separate configured repository.
+
+## opendatahub-io
+
+42 repositories:
+
+- [agents-operator](https://github.com/opendatahub-io/agents-operator) (`odh`)
+- [argo-workflows](https://github.com/opendatahub-io/argo-workflows) (`odh`)
+- [batch-gateway](https://github.com/opendatahub-io/batch-gateway) (`odh`)
+- [codeflare-operator](https://github.com/opendatahub-io/codeflare-operator) (`odh`)
+- [data-science-pipelines](https://github.com/opendatahub-io/data-science-pipelines) (`odh`)
+- [data-science-pipelines-operator](https://github.com/opendatahub-io/data-science-pipelines-operator) (`odh`)
+- [distributed-workloads](https://github.com/opendatahub-io/distributed-workloads) (`odh`)
+- [eval-hub](https://github.com/opendatahub-io/eval-hub) (`odh`)
+- [feast](https://github.com/opendatahub-io/feast) (`odh`)
+- [fms-guardrails-orchestrator](https://github.com/opendatahub-io/fms-guardrails-orchestrator) (`odh`)
+- [guardrails-detectors](https://github.com/opendatahub-io/guardrails-detectors) (`odh`)
+- [kserve](https://github.com/opendatahub-io/kserve) (`odh`)
+- [kserve-autogluon-server](https://github.com/opendatahub-io/kserve-autogluon-server) (`odh`)
+- [kale](https://github.com/opendatahub-io/kale) (`odh`)
+- [kube-auth-proxy](https://github.com/opendatahub-io/kube-auth-proxy) (`odh`)
+- [kube-rbac-proxy](https://github.com/opendatahub-io/kube-rbac-proxy) (`odh`)
+- [kubeflow](https://github.com/opendatahub-io/kubeflow) (`odh`)
+- [kuberay](https://github.com/opendatahub-io/kuberay) (`odh`)
+- [kueue](https://github.com/opendatahub-io/kueue) (`odh`)
+- [llama-stack](https://github.com/opendatahub-io/llama-stack) (`odh`)
+- [llama-stack-provider-trustyai-garak](https://github.com/opendatahub-io/llama-stack-provider-trustyai-garak) (`odh`)
+- [llm-d-inference-scheduler](https://github.com/opendatahub-io/llm-d-inference-scheduler) (`odh`)
+- [llm-d-kv-cache](https://github.com/opendatahub-io/llm-d-kv-cache) (`odh`)
+- [lm-evaluation-harness](https://github.com/opendatahub-io/lm-evaluation-harness) (`odh`)
+- [mlflow](https://github.com/opendatahub-io/mlflow) (`odh`)
+- [mlflow-operator](https://github.com/opendatahub-io/mlflow-operator) (`odh`)
+- [mcp-lifecycle-module-operator](https://github.com/opendatahub-io/mcp-lifecycle-module-operator) (`odh`)
+- [model-registry](https://github.com/opendatahub-io/model-registry) (`odh`)
+- [model-registry-operator](https://github.com/opendatahub-io/model-registry-operator) (`odh`)
+- [modelmesh-serving](https://github.com/opendatahub-io/modelmesh-serving) (`odh`)
+- [models-as-a-service](https://github.com/opendatahub-io/models-as-a-service) (`odh`)
+- [praxis-extproc](https://github.com/opendatahub-io/praxis-extproc) (`odh`)
+- [notebooks](https://github.com/opendatahub-io/notebooks) (`odh`)
+- [odh-dashboard](https://github.com/opendatahub-io/odh-dashboard) (`odh`)
+- [odh-model-controller](https://github.com/opendatahub-io/odh-model-controller) (`odh`)
+- [ogx-k8s-operator](https://github.com/opendatahub-io/ogx-k8s-operator) (`odh`)
+- [opendatahub-operator](https://github.com/opendatahub-io/opendatahub-operator) (`odh`)
+- [spark-operator](https://github.com/opendatahub-io/spark-operator) (`odh`)
+- [trainer](https://github.com/opendatahub-io/trainer) (`odh`)
+- [trainer-operator](https://github.com/opendatahub-io/trainer-operator) (`odh`)
+- [trustyai-service-operator](https://github.com/opendatahub-io/trustyai-service-operator) (`odh`)
+- [workload-variant-autoscaler](https://github.com/opendatahub-io/workload-variant-autoscaler) (`odh`)
+
+## red-hat-data-services
+
+62 repositories:
+
+- [MLServer](https://github.com/red-hat-data-services/MLServer) (`rhoai`)
+- [NeMo-Guardrails](https://github.com/red-hat-data-services/NeMo-Guardrails) (`rhoai`)
+- [agents-operator](https://github.com/red-hat-data-services/agents-operator) (`rhoai`)
+- [ai-gateway-payload-processing](https://github.com/red-hat-data-services/ai-gateway-payload-processing) (`rhoai`)
+- [argo-workflows](https://github.com/red-hat-data-services/argo-workflows) (`rhoai`)
+- [batch-gateway](https://github.com/red-hat-data-services/batch-gateway) (`rhoai`)
+- [caikit-nlp](https://github.com/red-hat-data-services/caikit-nlp) (`rhoai`)
+- [caikit-tgis-serving](https://github.com/red-hat-data-services/caikit-tgis-serving) (`rhoai`)
+- [codeflare-operator](https://github.com/red-hat-data-services/codeflare-operator) (`rhoai`)
+- [codeflare-sdk](https://github.com/red-hat-data-services/codeflare-sdk) (`rhoai`)
+- [data-science-pipelines](https://github.com/red-hat-data-services/data-science-pipelines) (`rhoai`)
+- [data-science-pipelines-operator](https://github.com/red-hat-data-services/data-science-pipelines-operator) (`rhoai`)
+- [distributed-workloads](https://github.com/red-hat-data-services/distributed-workloads) (`rhoai`)
+- [eval-hub](https://github.com/red-hat-data-services/eval-hub) (`rhoai`)
+- [feast](https://github.com/red-hat-data-services/feast) (`rhoai`)
+- [fms-guardrails-orchestrator](https://github.com/red-hat-data-services/fms-guardrails-orchestrator) (`rhoai`)
+- [fms-hf-tuning](https://github.com/red-hat-data-services/fms-hf-tuning) (`rhoai`)
+- [guardrails-regex-detector](https://github.com/red-hat-data-services/guardrails-regex-detector) (`rhoai`)
+- [kserve](https://github.com/red-hat-data-services/kserve) (`rhoai`)
+- [kube-auth-proxy](https://github.com/red-hat-data-services/kube-auth-proxy) (`rhoai`)
+- [kube-rbac-proxy](https://github.com/red-hat-data-services/kube-rbac-proxy) (`rhoai`)
+- [kubeflow](https://github.com/red-hat-data-services/kubeflow) (`rhoai`)
+- [kuberay](https://github.com/red-hat-data-services/kuberay) (`rhoai`)
+- [kueue](https://github.com/red-hat-data-services/kueue) (`rhoai`)
+- [llama-stack](https://github.com/red-hat-data-services/llama-stack) (`rhoai`)
+- [llm-d-inference-scheduler](https://github.com/red-hat-data-services/llm-d-inference-scheduler) (`rhoai`)
+- [llm-d-kv-cache](https://github.com/red-hat-data-services/llm-d-kv-cache) (`rhoai`)
+- [llm-d-routing-sidecar](https://github.com/red-hat-data-services/llm-d-routing-sidecar) (`rhoai`)
+- [lm-evaluation-harness](https://github.com/red-hat-data-services/lm-evaluation-harness) (`rhoai`)
+- [ml-metadata](https://github.com/red-hat-data-services/ml-metadata) (`rhoai`)
+- [mlflow-operator](https://github.com/red-hat-data-services/mlflow-operator) (`rhoai`)
+- [model-metadata-collection](https://github.com/red-hat-data-services/model-metadata-collection) (`rhoai`)
+- [model-registry](https://github.com/red-hat-data-services/model-registry) (`rhoai`)
+- [model-registry-operator](https://github.com/red-hat-data-services/model-registry-operator) (`rhoai`)
+- [modelmesh-runtime-adapter](https://github.com/red-hat-data-services/modelmesh-runtime-adapter) (`rhoai`)
+- [modelmesh-serving](https://github.com/red-hat-data-services/modelmesh-serving) (`rhoai`)
+- [models-as-a-service](https://github.com/red-hat-data-services/models-as-a-service) (`rhoai`)
+- [notebooks](https://github.com/red-hat-data-services/notebooks) (`rhoai`)
+- [notebooks-downstream](https://github.com/red-hat-data-services/notebooks-downstream) (`rhoai`)
+- [odh-cli](https://github.com/red-hat-data-services/odh-cli) (`rhoai`)
+- [odh-dashboard](https://github.com/red-hat-data-services/odh-dashboard) (`rhoai`)
+- [odh-deployer](https://github.com/red-hat-data-services/odh-deployer) (`rhoai`)
+- [odh-model-controller](https://github.com/red-hat-data-services/odh-model-controller) (`rhoai`)
+- [ogx-k8s-operator](https://github.com/red-hat-data-services/ogx-k8s-operator) (`rhoai`)
+- [openvino_model_server](https://github.com/red-hat-data-services/openvino_model_server) (`rhoai`)
+- [pipelines-components](https://github.com/red-hat-data-services/pipelines-components) (`rhoai`)
+- [rest-proxy](https://github.com/red-hat-data-services/rest-proxy) (`rhoai`)
+- [rhds-llama-stack-distribution](https://github.com/red-hat-data-services/rhds-llama-stack-distribution) (`rhoai`)
+- [rhods-operator](https://github.com/red-hat-data-services/rhods-operator) (`rhoai`)
+- [spark-operator](https://github.com/red-hat-data-services/spark-operator) (`rhoai`)
+- [text-generation-inference](https://github.com/red-hat-data-services/text-generation-inference) (`rhoai`)
+- [trainer](https://github.com/red-hat-data-services/trainer) (`rhoai`)
+- [training-operator](https://github.com/red-hat-data-services/training-operator) (`rhoai`)
+- [trustyai-explainability](https://github.com/red-hat-data-services/trustyai-explainability) (`rhoai`)
+- [trustyai-service-operator](https://github.com/red-hat-data-services/trustyai-service-operator) (`rhoai`)
+- [vllm](https://github.com/red-hat-data-services/vllm) (`rhoai`)
+- [vllm-cpu](https://github.com/red-hat-data-services/vllm-cpu) (`rhoai`)
+- [vllm-gaudi](https://github.com/red-hat-data-services/vllm-gaudi) (`rhoai`)
+- [vllm-orchestrator-gateway](https://github.com/red-hat-data-services/vllm-orchestrator-gateway) (`rhoai`)
+- [vllm-rocm](https://github.com/red-hat-data-services/vllm-rocm) (`rhoai`)
+- [vllm-spyre](https://github.com/red-hat-data-services/vllm-spyre) (`rhoai`)
+- [workload-variant-autoscaler](https://github.com/red-hat-data-services/workload-variant-autoscaler) (`rhoai`)
+
+## External repositories
+
+- [IBM/ai4rag](https://github.com/IBM/ai4rag) (`odh`, `rhoai`)
+- [llm-d/llm-d](https://github.com/llm-d/llm-d) (`odh`, `rhoai`)
