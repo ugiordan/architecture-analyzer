@@ -5,8 +5,8 @@
     "odh-operator"
   ],
   "repo": "opendatahub-io/opendatahub-operator",
-  "commit_sha": "f2bbf2852006329badb18bae2e19a3dddc09df97",
-  "extracted_at": "2026-09-30T11:07:40Z",
+  "commit_sha": "ec7c3cd1db0c4011a912a751dc4c3fbdda61c254",
+  "extracted_at": "2026-09-30T15:06:56Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -3445,15 +3445,12 @@
     },
     {
       "path": "Dockerfiles/e2e-tests/e2e-tests.Dockerfile",
-      "base_image": "golang:$GOLANG_VERSION",
+      "base_image": "registry.access.redhat.com/ubi9/go-toolset:$GOLANG_VERSION",
       "build_stage_images": [
         "registry.access.redhat.com/ubi9/go-toolset:$GOLANG_VERSION"
       ],
       "stages": 2,
-      "user": "root",
-      "issues": [
-        "Container runs as root user"
-      ],
+      "user": "1001",
       "architectures": [
         "multi-arch"
       ],
@@ -3490,7 +3487,7 @@
           "sources": [
             "/workspace/test-retry"
           ],
-          "destination": "/go/bin/test-retry",
+          "destination": "/usr/local/bin/test-retry",
           "from_stage": "builder",
           "original_sources": [
             "Dockerfiles/e2e-tests/go.mod",
@@ -3789,40 +3786,6 @@
     {
       "name": "Defaulter-webhook",
       "type": "mutating",
-      "path": "/mutate-datasciencecluster-v1",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "mutations": [
-        {
-          "field": "registriesNamespace",
-          "operation": "set",
-          "condition": "modelRegistry.ManagementState == operatorv1.Managed \u0026\u0026 modelRegistry.RegistriesNamespace == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
-            "line": 85
-          }
-        },
-        {
-          "field": "nim.managementState",
-          "operation": "set",
-          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
-            "line": 94
-          }
-        }
-      ],
-      "target_type": "Defaulter"
-    },
-    {
-      "name": "Defaulter-webhook",
-      "type": "mutating",
       "path": "/mutate-datasciencecluster-v2",
       "sources": [
         {
@@ -3848,6 +3811,40 @@
           "source": {
             "type": "go_handler",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v2/defaulting.go",
+            "line": 94
+          }
+        }
+      ],
+      "target_type": "Defaulter"
+    },
+    {
+      "name": "Defaulter-webhook",
+      "type": "mutating",
+      "path": "/mutate-datasciencecluster-v1",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "mutations": [
+        {
+          "field": "registriesNamespace",
+          "operation": "set",
+          "condition": "modelRegistry.ManagementState == operatorv1.Managed \u0026\u0026 modelRegistry.RegistriesNamespace == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
+            "line": 85
+          }
+        },
+        {
+          "field": "nim.managementState",
+          "operation": "set",
+          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
             "line": 94
           }
         }

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/guardrails-regex-detector |
 | Commit | 5c6116749e66a3496f7a5ac7427219f294df7ec3 |
-| Extracted | 2026-09-30T11:14:10Z |
+| Extracted | 2026-09-30T15:14:08Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

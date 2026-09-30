@@ -1,8 +1,8 @@
 {
   "component": "llm-d-inference-scheduler",
   "repo": "llm-d/llm-d-inference-scheduler",
-  "commit_sha": "a20a2974d9552a0442616644a174a524716222fc",
-  "extracted_at": "2026-09-30T11:11:58Z",
+  "commit_sha": "7ca534a1ced2771cd3265ea9381dffeb90097c5f",
+  "extracted_at": "2026-09-30T15:11:14Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -863,7 +863,7 @@
     }
   ],
   "dependencies": {
-    "go_version": "1.26.5",
+    "go_version": "1.26.6",
     "go_modules": [
       {
         "module": "cloud.google.com/go/aiplatform",
@@ -1091,35 +1091,35 @@
       },
       {
         "module": "k8s.io/api",
-        "version": "v0.36.4",
+        "version": "v0.36.5",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/apiextensions-apiserver",
-        "version": "v0.36.4",
+        "version": "v0.36.5",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/apimachinery",
-        "version": "v0.36.4",
+        "version": "v0.36.5",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/client-go",
-        "version": "v0.36.4",
+        "version": "v0.36.5",
         "category": "k8s-client",
         "purpose": "Kubernetes API client"
       },
       {
         "module": "k8s.io/code-generator",
-        "version": "v0.36.4"
+        "version": "v0.36.5"
       },
       {
         "module": "k8s.io/component-base",
-        "version": "v0.36.4",
+        "version": "v0.36.5",
         "category": "k8s-api",
         "purpose": "Kubernetes component base library"
       },
@@ -1325,7 +1325,7 @@
       "path": "Dockerfile.konflux.coordinator",
       "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1788217333@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a",
       "build_stage_images": [
-        "registry.access.redhat.com/ubi9/go-toolset:1.26.5@sha256:91d07f2b7f402fe2379fd62eb2fff975c814a595e2ff2988fd7c580568f5f90c"
+        "registry.access.redhat.com/ubi9/go-toolset:1.26.7@sha256:0a4666f7a4eb0644c97a73cba198eb268691b270d97831822689e7a2088f87be"
       ],
       "stages": 2,
       "user": "65532:65532",
@@ -1386,7 +1386,7 @@
       "path": "Dockerfile.konflux.epp",
       "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1788217333@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a",
       "build_stage_images": [
-        "registry.access.redhat.com/ubi9/go-toolset:1.26.5@sha256:91d07f2b7f402fe2379fd62eb2fff975c814a595e2ff2988fd7c580568f5f90c"
+        "registry.access.redhat.com/ubi9/go-toolset:1.26.7@sha256:0a4666f7a4eb0644c97a73cba198eb268691b270d97831822689e7a2088f87be"
       ],
       "stages": 2,
       "user": "65532:65532",
@@ -1434,7 +1434,7 @@
       "path": "Dockerfile.konflux.sidecar",
       "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1788217333@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a",
       "build_stage_images": [
-        "registry.access.redhat.com/ubi9/go-toolset:1.26.5@sha256:91d07f2b7f402fe2379fd62eb2fff975c814a595e2ff2988fd7c580568f5f90c"
+        "registry.access.redhat.com/ubi9/go-toolset:1.26.7@sha256:0a4666f7a4eb0644c97a73cba198eb268691b270d97831822689e7a2088f87be"
       ],
       "stages": 2,
       "user": "65532:65532",
@@ -1711,7 +1711,7 @@
     {
       "method": "*",
       "path": "/",
-      "source": "pkg/sidecar/proxy/proxy.go:616"
+      "source": "pkg/sidecar/proxy/proxy.go:618"
     },
     {
       "method": "*",
@@ -1726,17 +1726,17 @@
     {
       "method": "*",
       "path": "/metrics",
-      "source": "pkg/sidecar/proxy/dns_metrics.go:140"
+      "source": "pkg/sidecar/proxy/dns_metrics.go:144"
     },
     {
       "method": "*",
       "path": "GET /health",
-      "source": "pkg/sidecar/proxy/proxy.go:605"
+      "source": "pkg/sidecar/proxy/proxy.go:607"
     },
     {
       "method": "*",
       "path": "POST ",
-      "source": "pkg/sidecar/proxy/proxy.go:611"
+      "source": "pkg/sidecar/proxy/proxy.go:613"
     }
   ],
   "ingress_routing": [
@@ -3460,6 +3460,12 @@
       "source": "pkg/common/request/constants.go"
     },
     {
+      "name": "FieldImageURL",
+      "value": "image_url",
+      "category": "image",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
       "name": "FieldInput",
       "value": "input",
       "category": "general",
@@ -3468,6 +3474,12 @@
     {
       "name": "FieldKVTransferParams",
       "value": "kv_transfer_params",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "FieldMMProcessorKwargs",
+      "value": "mm_processor_kwargs",
       "category": "general",
       "source": "pkg/common/request/constants.go"
     },
@@ -3490,8 +3502,32 @@
       "source": "pkg/common/request/constants.go"
     },
     {
+      "name": "FieldMediaIOKwargs",
+      "value": "media_io_kwargs",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "FieldMessages",
+      "value": "messages",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
       "name": "FieldMinTokens",
       "value": "min_tokens",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "FieldModel",
+      "value": "model",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "FieldOutput",
+      "value": "output",
       "category": "general",
       "source": "pkg/common/request/constants.go"
     },
@@ -3526,8 +3562,20 @@
       "source": "pkg/common/request/constants.go"
     },
     {
+      "name": "FieldRole",
+      "value": "role",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
       "name": "FieldSamplingParams",
       "value": "sampling_params",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "FieldStore",
+      "value": "store",
       "category": "general",
       "source": "pkg/common/request/constants.go"
     },
@@ -3544,6 +3592,60 @@
       "source": "pkg/common/request/constants.go"
     },
     {
+      "name": "FieldType",
+      "value": "type",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "FieldURL",
+      "value": "url",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeAudioURL",
+      "value": "audio_url",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeComputerScreenshot",
+      "value": "computer_screenshot",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeImageURL",
+      "value": "image_url",
+      "category": "image",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeInputAudio",
+      "value": "input_audio",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeInputFile",
+      "value": "input_file",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeInputImage",
+      "value": "input_image",
+      "category": "image",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "PartTypeVideoURL",
+      "value": "video_url",
+      "category": "general",
+      "source": "pkg/common/request/constants.go"
+    },
+    {
       "name": "RequestIDHeaderKey",
       "value": "x-request-id",
       "category": "general",
@@ -3555,6 +3657,20 @@
       "category": "general",
       "doc": "RevisionDecisionIDHeaderKey identifies requests that belong to the same\nrollout decision. This is needed only for roles such as encode that create\nseveral parallel subrequests from one user request (for example, one per\nimage). The coordinator must give every subrequest the same value so they\nuse the same revision.",
       "source": "pkg/common/request/constants.go"
+    },
+    {
+      "name": "encoderPassthroughFields",
+      "value": "[]string{\n\tFieldModel,\n\tFieldMMProcessorKwargs,\n\tFieldMediaIOKwargs,\n}",
+      "category": "general",
+      "doc": "encoderPassthroughFields are the client fields NewEncoderPrimingBody\nforwards: both kwargs fields change preprocessing and feed vLLM's multimodal\nhash, so an encoder primed at the deployment default stores its entry under a\nhash the prefiller never looks up.",
+      "source": "pkg/common/request/content.go"
+    },
+    {
+      "name": "fileHydrationPartTypes",
+      "value": "map[string]bool{\n\tPartTypeInputImage:\t\ttrue,\n\tPartTypeInputFile:\t\ttrue,\n\tPartTypeComputerScreenshot:\ttrue,\n}",
+      "category": "general",
+      "doc": "fileHydrationPartTypes are the content part types whose FieldFileID names a\nFiles API upload. A file_id on any other object names no upload the router\nwould have to hydrate: an annotation on a replayed assistant turn carries one\nunder a type this map does not hold, so the walk passes over it.",
+      "source": "pkg/common/request/tokens.go"
     },
     {
       "name": "DataParallelEndpointHeader",
@@ -9959,6 +10075,49 @@
       "source": "pkg/sidecar/constants/constants.go"
     },
     {
+      "name": "DisaggTypeED",
+      "value": "encode-decode",
+      "category": "general",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "DisaggTypeEPD",
+      "value": "encode-prefill-decode",
+      "category": "general",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "DisaggTypePD",
+      "value": "prefill-decode",
+      "category": "general",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "StageDecode",
+      "value": "decode",
+      "category": "general",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "StageEncode",
+      "value": "encode",
+      "category": "general",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "StagePrefill",
+      "value": "prefill",
+      "category": "general",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "subsystem",
+      "value": "llm_d_disagg_sidecar",
+      "category": "general",
+      "doc": "subsystem is the Prometheus subsystem for the disaggregation sidecar metrics.",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
       "name": "inferencePoolGroupToVersion",
       "value": "map[string]string{\n\trouting.InferencePoolAPIGroup:\t\t\"v1\",\n\t\"inference.networking.x-k8s.io\":\t\"v1alpha2\",\n}",
       "category": "general",
@@ -9993,7 +10152,7 @@
     },
     {
       "name": "mmTypes",
-      "value": "map[string]bool{\n\t\"image_url\":\ttrue,\n\t\"audio_url\":\ttrue,\n\t\"video_url\":\ttrue,\n\t\"input_audio\":\ttrue,\n}",
+      "value": "map[string]bool{\n\treqcommon.PartTypeImageURL:\ttrue,\n\treqcommon.PartTypeAudioURL:\ttrue,\n\treqcommon.PartTypeVideoURL:\ttrue,\n\treqcommon.PartTypeInputAudio:\ttrue,\n\treqcommon.PartTypeInputImage:\ttrue,\n}",
       "category": "general",
       "doc": "Multimodal content types that need encoder processing.",
       "source": "pkg/sidecar/proxy/connector_ec_common.go"
@@ -10022,24 +10181,6 @@
       "value": "length",
       "category": "general",
       "doc": "finishReasonLength is the finish reason when max_tokens was reached.",
-      "source": "pkg/sidecar/proxy/decode.go"
-    },
-    {
-      "name": "requestFieldContent",
-      "value": "content",
-      "category": "general",
-      "source": "pkg/sidecar/proxy/decode.go"
-    },
-    {
-      "name": "requestFieldMessages",
-      "value": "messages",
-      "category": "general",
-      "source": "pkg/sidecar/proxy/decode.go"
-    },
-    {
-      "name": "requestFieldRole",
-      "value": "role",
-      "category": "general",
       "source": "pkg/sidecar/proxy/decode.go"
     },
     {
@@ -10127,7 +10268,7 @@
       "name": "envMoRIIOMetricsAddr",
       "value": "MORIIO_METRICS_ADDR",
       "category": "general",
-      "doc": "envMoRIIOMetricsAddr is a backward-compatible fallback for enabling the\nPrometheus scrape endpoint. When set to a listen address (e.g. \":9090\") and\nthe --metrics-port flag is unset, the sidecar serves the shared\ncontroller-runtime metrics registry (which carries the moriio_dns_* counters)\nat /metrics on that address. The --metrics-port flag takes precedence. Empty\n(with no flag) disables it. Kept on a separate address so it never clashes\nwith the data-plane proxy port.",
+      "doc": "envMoRIIOMetricsAddr is a backward-compatible fallback for enabling the\nPrometheus scrape endpoint. When set to a listen address (e.g. \":9090\") and\nthe --metrics-port flag is unset, the sidecar serves the shared\ncontroller-runtime metrics registry (which carries the moriio_dns_* and\nllm_d_disagg_sidecar_* counters) at /metrics on that address. The\n--metrics-port flag takes precedence. Empty (with no flag) disables it.\nKept on a separate address so it never clashes with the data-plane proxy\nport.",
       "source": "pkg/sidecar/proxy/dns_metrics.go"
     },
     {
@@ -10832,6 +10973,11 @@
       "source": "pkg/epp/metrics/llm_d_router_metrics.go"
     },
     {
+      "name": "decode_duration_seconds",
+      "type": "histogram",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
       "name": "disagg_decision_total",
       "type": "counter",
       "labels": [
@@ -10841,6 +10987,19 @@
         "decision_type"
       ],
       "source": "pkg/epp/framework/plugins/scheduling/profilehandler/disagg/metrics.go"
+    },
+    {
+      "name": "disagg_requests_total",
+      "type": "counter",
+      "labels": [
+        "disagg_type"
+      ],
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
+      "name": "encode_duration_seconds",
+      "type": "histogram",
+      "source": "pkg/sidecar/metrics/metrics.go"
     },
     {
       "name": "encoder_cache_hit_ratio",
@@ -11243,6 +11402,11 @@
       "source": "pkg/epp/metrics/llm_d_router_metrics.go"
     },
     {
+      "name": "prefill_duration_seconds",
+      "type": "histogram",
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
       "name": "prefix_cache_affinity_filter_decisions_total",
       "type": "counter",
       "labels": [
@@ -11348,6 +11512,14 @@
       "source": "pkg/epp/metrics/llm_d_router_metrics.go"
     },
     {
+      "name": "request_errors_total",
+      "type": "counter",
+      "labels": [
+        "stage"
+      ],
+      "source": "pkg/sidecar/metrics/metrics.go"
+    },
+    {
       "name": "request_input_tokens",
       "type": "histogram",
       "source": "pkg/epp/metrics/llm_d_router_metrics.go"
@@ -11407,12 +11579,12 @@
     {
       "name": "request_size_bytes",
       "type": "histogram",
-      "source": "pkg/epp/metrics/llm_d_router_metrics.go"
+      "source": "pkg/coordinator/metrics/llm_d_coordinator_metrics.go"
     },
     {
       "name": "request_size_bytes",
       "type": "histogram",
-      "source": "pkg/coordinator/metrics/llm_d_coordinator_metrics.go"
+      "source": "pkg/epp/metrics/llm_d_router_metrics.go"
     },
     {
       "name": "request_slo_violation_total",
@@ -11439,12 +11611,12 @@
     {
       "name": "request_total",
       "type": "counter",
-      "source": "pkg/coordinator/metrics/llm_d_coordinator_metrics.go"
+      "source": "pkg/epp/metrics/llm_d_router_metrics.go"
     },
     {
       "name": "request_total",
       "type": "counter",
-      "source": "pkg/epp/metrics/llm_d_router_metrics.go"
+      "source": "pkg/coordinator/metrics/llm_d_coordinator_metrics.go"
     },
     {
       "name": "request_tpot_prediction_duration_seconds",
@@ -11472,6 +11644,14 @@
       "name": "request_ttft_seconds",
       "type": "histogram",
       "source": "pkg/epp/metrics/llm_d_router_metrics.go"
+    },
+    {
+      "name": "requests_total",
+      "type": "counter",
+      "labels": [
+        "api_type"
+      ],
+      "source": "pkg/sidecar/metrics/metrics.go"
     },
     {
       "name": "reresolve_total",
@@ -11579,14 +11759,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "deployment-template",
+      "context": "deployment",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "deployment",
+      "context": "deployment-template",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
@@ -11607,7 +11787,7 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "role",
+      "context": "clusterrole",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -11621,14 +11801,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "clusterrolebinding",
+      "context": "role",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "clusterrole",
+      "context": "clusterrolebinding",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -11677,14 +11857,14 @@
       "label": "istio.io/rev",
       "integration": "Istio",
       "type": "label",
-      "context": "deployment",
+      "context": "deployment-template",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
       "label": "istio.io/rev",
       "integration": "Istio",
       "type": "label",
-      "context": "deployment-template",
+      "context": "deployment",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
@@ -11829,7 +12009,7 @@
     "status_conditions": "none",
     "webhooks": "moderate"
   },
-  "summary": "llm-d-inference-scheduler is a Kubernetes component. managing 2 CRD(s): InferenceModelRewrite, InferenceObjective. deploying 8 workload(s) (${EPP_NAME}, istiod-llm-d-gateway, vllm-d, vllm-e, vllm-omni, vllm-p, llm-d-coordinator, 0) with 8 container(s). watching 4 resource type(s). exposing 4 service(s) on ports: 15010, 15012, 15014, 15021, 443, 5557, 80, 8080, 9002, 9090. Dockerfile EXPOSE ports: 5557, 8080, 9002, 9003, 9090. with 5 webhook(s) (1 validating, 4 mutating). with 1 HorizontalPodAutoscaler(s). connecting to external services: redis. runtime dependencies: Redis, pod-name. with 1361 operator config constants (11 image references, 6 env vars). exposing 104 Prometheus metrics. with 12 ingress route(s). integrates with Istio, Prometheus, management relationship via labels/annotations. kustomize overlays: config/crd. references components: vllm (adapter). mounts 3 ConfigMap(s) as volumes: epp-config, istio-ca-root-cert, llm-d-coordinator-config.",
+  "summary": "llm-d-inference-scheduler is a Kubernetes component. managing 2 CRD(s): InferenceModelRewrite, InferenceObjective. deploying 8 workload(s) (${EPP_NAME}, istiod-llm-d-gateway, vllm-d, vllm-e, vllm-omni, vllm-p, llm-d-coordinator, 0) with 8 container(s). watching 4 resource type(s). exposing 4 service(s) on ports: 15010, 15012, 15014, 15021, 443, 5557, 80, 8080, 9002, 9090. Dockerfile EXPOSE ports: 5557, 8080, 9002, 9003, 9090. with 5 webhook(s) (1 validating, 4 mutating). with 1 HorizontalPodAutoscaler(s). connecting to external services: redis. runtime dependencies: Redis, pod-name. with 1384 operator config constants (14 image references, 6 env vars). exposing 110 Prometheus metrics. with 12 ingress route(s). integrates with Istio, Prometheus, management relationship via labels/annotations. kustomize overlays: config/crd. references components: vllm (adapter). mounts 3 ConfigMap(s) as volumes: epp-config, istio-ca-root-cert, llm-d-coordinator-config.",
   "go_ast_mode": "full",
   "security_annotations": [
     {
@@ -11849,9 +12029,9 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "crate-ci/typos@v1.50.2",
+      "resource": "crate-ci/typos@v1.50.3",
       "source": ".github/workflows/check-typos.yaml",
-      "description": "Action \"crate-ci/typos\" uses mutable ref \"v1.50.2\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"crate-ci/typos\" uses mutable ref \"v1.50.3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -11947,6 +12127,34 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "dorny/paths-filter@v4",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/cache@v6",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/cache\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "actions/upload-artifact@v7",
       "source": ".github/workflows/ci-coordinator.yaml",
       "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -11985,34 +12193,6 @@
       "resource": "actions/download-artifact@v8",
       "source": ".github/workflows/ci-coordinator.yaml",
       "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "dorny/paths-filter@v4",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/cache@v6",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/cache\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -12076,6 +12256,34 @@
       "resource": "actions/checkout@v7",
       "source": ".github/workflows/ci-lint.yaml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -12186,34 +12394,6 @@
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
       "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
       "source": ".github/workflows/ci-release.yaml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
@@ -12269,9 +12449,9 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "dorny/paths-filter@v4",
+      "resource": "lycheeverse/lychee-action@v2.9.0",
       "source": ".github/workflows/md-link-check.yml",
-      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"lycheeverse/lychee-action\" uses mutable ref \"v2.9.0\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -12283,9 +12463,9 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "lycheeverse/lychee-action@v2.9.0",
+      "resource": "dorny/paths-filter@v4",
       "source": ".github/workflows/md-link-check.yml",
-      "description": "Action \"lycheeverse/lychee-action\" uses mutable ref \"v2.9.0\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -12346,9 +12526,9 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/github-script@v7",
+      "resource": "actions/github-script@v9",
       "source": ".github/workflows/pr-rebase.yaml",
-      "description": "Action \"actions/github-script\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/github-script\" uses mutable ref \"v9\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/vllm |
 | Commit | b811c9e938c90baab85ded3f13c2f2b4f3fb6d55 |
-| Extracted | 2026-09-30T11:14:33Z |
+| Extracted | 2026-09-30T15:14:26Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

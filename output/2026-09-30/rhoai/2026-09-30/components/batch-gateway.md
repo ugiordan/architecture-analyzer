@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | llm-d/batch-gateway |
 | Commit | 100ac26c27af0d66ea72fbb9c1cd004e88f24d48 |
-| Extracted | 2026-09-30T11:13:38Z |
+| Extracted | 2026-09-30T15:13:19Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

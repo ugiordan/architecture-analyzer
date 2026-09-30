@@ -1,8 +1,8 @@
 {
   "component": "batch-gateway",
   "repo": "llm-d/batch-gateway",
-  "commit_sha": "12788ad28ae5e992570769b09a544aa02e85ca7c",
-  "extracted_at": "2026-09-30T11:11:55Z",
+  "commit_sha": "cba9a5e806bea5d2e830bbcc9eeb32c8c8651455",
+  "extracted_at": "2026-09-30T15:11:28Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "rbac": {},
@@ -96,12 +96,6 @@
       {
         "module": "github.com/quasilyte/go-ruleguard/dsl",
         "version": "v0.3.23"
-      },
-      {
-        "module": "github.com/redis/go-redis/extra/redisotel/v9",
-        "version": "v9.22.0",
-        "category": "storage",
-        "purpose": "Redis client"
       },
       {
         "module": "github.com/redis/go-redis/v9",
@@ -445,12 +439,12 @@
     {
       "method": "*",
       "path": "/health",
-      "source": "cmd/batch-gc/main.go:172"
+      "source": "cmd/batch-gc/main.go:178"
     },
     {
       "method": "*",
       "path": "/metrics",
-      "source": "cmd/batch-gc/main.go:171"
+      "source": "cmd/batch-gc/main.go:177"
     }
   ],
   "external_connections": [
@@ -460,13 +454,6 @@
       "target": "",
       "source": "benchmarks/benchmark.py:1011",
       "function": "query_prometheus"
-    },
-    {
-      "type": "database",
-      "service": "redis",
-      "target": "",
-      "source": "internal/util/redis/redis_client.go:144",
-      "function": "NewRedisClient"
     },
     {
       "type": "database",
@@ -490,6 +477,12 @@
       "type": "common.ApiHandler",
       "category": "general",
       "doc": "Compile-time check: BatchAPIHandler implements common.ApiHandler.",
+      "source": "internal/apiserver/batch/batch_handler.go"
+    },
+    {
+      "name": "maxCancelAttempts",
+      "value": "3",
+      "category": "general",
       "source": "internal/apiserver/batch/batch_handler.go"
     },
     {
@@ -760,18 +753,10 @@
     },
     {
       "name": "_",
-      "value": "(*MockBatchStatusClient)(nil)",
-      "type": "api.BatchStatusClient",
+      "value": "(*PostgresBatchDBClient)(nil)",
+      "type": "api.BatchProgressDBClient",
       "category": "general",
-      "doc": "Compile-time check: MockBatchStatusClient implements api.BatchStatusClient.",
-      "source": "internal/database/mock/mock_status_client.go"
-    },
-    {
-      "name": "_",
-      "value": "(*batchDescriptor)(nil)",
-      "type": "TableDescriptor",
-      "category": "general",
-      "doc": "Compile-time check: batchDescriptor implements TableDescriptor.",
+      "doc": "Compile-time checks.",
       "source": "internal/database/postgresql/batch_db.go"
     },
     {
@@ -804,6 +789,69 @@
       "category": "general",
       "doc": "nonTerminalCondition is the SQL WHERE clause fragment that filters for\nnon-terminal batch statuses. Computed once since terminal statuses are fixed.",
       "source": "internal/database/postgresql/batch_db.go"
+    },
+    {
+      "name": "_",
+      "value": "(*PostgresBatchEventClient)(nil)",
+      "type": "api.BatchEventChannelClient",
+      "category": "general",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "channelEvents",
+      "value": "batch_events",
+      "category": "general",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "ecAckEventsSQL",
+      "value": "DELETE FROM batch_events WHERE job_id = $1 AND id = ANY($2)",
+      "category": "general",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "ecDrainEventsSQL",
+      "value": "SELECT id, event_type FROM batch_events\nWHERE job_id = $1 AND expires_at \u003e EXTRACT(EPOCH FROM NOW())::BIGINT\nORDER BY id LIMIT $2",
+      "category": "general",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "ecPurgeExpiredEventsSQL",
+      "value": "DELETE FROM batch_events\nWHERE expires_at \u003c EXTRACT(EPOCH FROM NOW())::BIGINT",
+      "category": "general",
+      "doc": "ecPurgeExpiredEventsSQL deletes events that are past their TTL and were\nnever consumed. The drain above only removes unexpired rows, so without\nthis sweep the table would grow without bound. Uses\nidx_batch_events_expires_at.",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "ecSendEventSQL",
+      "value": "`WITH ins AS (\n\tINSERT INTO batch_events (job_id, event_type, expires_at)\n\tVALUES ($1, $2, $3)\n\tRETURNING job_id\n)\nSELECT pg_notify('` + channelEvents + `', (SELECT job_id FROM ins))`",
+      "category": "general",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "errEventChannelFull",
+      "value": "errors.New(\"event channel full\")",
+      "category": "general",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "eventChanBufSize",
+      "value": "100",
+      "category": "resource",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "eventRescanInterval",
+      "value": "30 * time.Second",
+      "category": "timeout",
+      "doc": "eventRescanInterval is how often the dispatcher re-drains every\nsubscribed job as a delivery backstop (see runEventDispatcher).",
+      "source": "internal/database/postgresql/batch_event.go"
+    },
+    {
+      "name": "eventSweepInterval",
+      "value": "30 * time.Second",
+      "category": "timeout",
+      "source": "internal/database/postgresql/batch_event.go"
     },
     {
       "name": "_",
@@ -868,169 +916,6 @@
       "value": "purpose",
       "category": "general",
       "source": "internal/database/postgresql/file_db.go"
-    },
-    {
-      "name": "_",
-      "value": "(*ExchangeDBClientRedis)(nil)",
-      "type": "db_api.BatchPriorityQueueClient",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "cmdTimeout",
-      "value": "20 * time.Second",
-      "category": "timeout",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "eventChanSize",
-      "value": "100",
-      "category": "resource",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "eventChanTimeout",
-      "value": "20 * time.Second",
-      "category": "timeout",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "eventKeysPrefix",
-      "value": "keysPrefix + \"event:\"",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "eventReadCount",
-      "value": "4",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "eventReadTimeout",
-      "value": "20 * time.Second",
-      "category": "timeout",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameExpiry",
-      "value": "expiry",
-      "category": "timeout",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameID",
-      "value": "ID",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNamePurpose",
-      "value": "purpose",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameSpec",
-      "value": "spec",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameStatus",
-      "value": "status",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameTags",
-      "value": "tags",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameTenantID",
-      "value": "tenantID",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "fieldNameVersion",
-      "value": "ver",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "itemTypeBatch",
-      "value": "batch",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "itemTypeFile",
-      "value": "file",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "keysPrefix",
-      "value": "llmd_batch:",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "logFreqDefault",
-      "value": "10 * time.Minute",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "priorityQueueKeyName",
-      "value": "queueKeysPrefix + \"priority\"",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "queueKeysPrefix",
-      "value": "keysPrefix + \"queue:\"",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "redisScriptPQGetIDs",
-      "value": "goredis.NewScript(pqGetIDsLua)",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "routineStopTimeout",
-      "value": "20 * time.Second",
-      "category": "timeout",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "statusKeysPrefix",
-      "value": "keysPrefix + \"status:\"",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "storeKeysPrefix",
-      "value": "keysPrefix + \"store:\"",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "ttlSecDefault",
-      "value": "60 * 60 * 24 * 60",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
-    },
-    {
-      "name": "versionV1",
-      "value": "1",
-      "category": "general",
-      "source": "internal/database/redis/redis_ds_client.go"
     },
     {
       "name": "ErrFileExists",
@@ -1414,6 +1299,12 @@
     {
       "name": "ResultFailed",
       "value": "failed",
+      "category": "general",
+      "source": "internal/processor/metrics/metrics.go"
+    },
+    {
+      "name": "ResultLostOwnership",
+      "value": "lost_ownership",
       "category": "general",
       "source": "internal/processor/metrics/metrics.go"
     },
@@ -2079,7 +1970,7 @@
       "name": "AttrRequestTotal",
       "value": "batch.request.total",
       "category": "general",
-      "doc": "Job-level request counts as span attributes for persistent trace-based analysis.\nThese complement the ephemeral Redis progress store (UpdateProgressCounts),\nwhich is TTL-based and used for real-time status polling only.",
+      "doc": "Job-level request counts as span attributes for persistent trace-based analysis.\nThese complement the in-DB progress updates (UpdateProgressCounts),\nwhich are used for real-time status polling only.",
       "source": "internal/util/otel/otel.go"
     },
     {
@@ -2123,12 +2014,6 @@
       "value": "otlp",
       "category": "general",
       "source": "internal/util/otel/otel.go"
-    },
-    {
-      "name": "REDIS_PING_WAIT_SEC",
-      "value": "10",
-      "category": "env_var",
-      "source": "internal/util/redis/redis_client.go"
     },
     {
       "name": "_",
@@ -2539,7 +2424,7 @@
     "status_conditions": "none",
     "webhooks": "none"
   },
-  "summary": "batch-gateway is a Kubernetes component. connecting to external services: redis, s3, urllib. runtime dependencies: OpenTelemetry Collector. with 273 operator config constants (4 env vars). exposing 28 Prometheus metrics.",
+  "summary": "batch-gateway is a Kubernetes component. connecting to external services: redis, s3, urllib. runtime dependencies: OpenTelemetry Collector. with 256 operator config constants (3 env vars). exposing 28 Prometheus metrics.",
   "go_ast_mode": "full",
   "security_annotations": [
     {

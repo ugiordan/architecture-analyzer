@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/mlflow-operator |
 | Commit | a29587217b3df52bb31a45797e0bdfbe4910c767 |
-| Extracted | 2026-09-30T11:07:35Z |
+| Extracted | 2026-09-30T15:06:46Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -55,7 +55,7 @@
 
 **mlflow-operator-controller-manager / manager**
 
-- Env: `ENABLE_NAMESPACE_RBAC=true`, `GATEWAY_NAME=data-science-gateway`, `MLFLOW_IMAGE=quay.io/opendatahub/mlflow:odh-stable`, `MLFLOW_URL=https://www.gateway-hostname-placeholder-with-mlflow-path.com`, `RESOURCE_NAME_PREFIX=mlflow-operator-`, `SECTION_TITLE=MLflow`, `ENABLE_MLFLOW_OPERATOR_MODULE_CONTROLLER=false`
+- Env: `ENABLE_MLFLOW_OPERATOR_MODULE_CONTROLLER=false`, `ENABLE_NAMESPACE_RBAC=true`, `GATEWAY_NAME=data-science-gateway`, `MLFLOW_IMAGE=quay.io/opendatahub/mlflow:odh-stable`, `MLFLOW_URL=https://www.gateway-hostname-placeholder-with-mlflow-path.com`, `RESOURCE_NAME_PREFIX=mlflow-operator-`, `SECTION_TITLE=MLflow`
 
 
 

@@ -11,7 +11,7 @@
 | Repository | red-hat-data-services/odh-dashboard |
 | Aliases | ODH Dashboard |
 | Commit | d43d9256c44162356a84e84789fc5e7a6abbc8dc |
-| Extracted | 2026-09-30T11:08:09Z |
+| Extracted | 2026-09-30T15:09:18Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -20,8 +20,8 @@
 
 | Method | Path | Description | Source |
 |--------|------|-------------|--------|
-| * | / |  | [`distributions/core-bff/bff/internal/api/routes.go:102`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/distributions/core-bff/bff/internal/api/routes.go#L102) |
 | * | / |  | [`packages/notebooks/upstream/workspaces/backend/api/app.go:151`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/notebooks/upstream/workspaces/backend/api/app.go#L151) |
+| * | / |  | [`distributions/core-bff/bff/internal/api/routes.go:102`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/distributions/core-bff/bff/internal/api/routes.go#L102) |
 | GET | /api/v1/all-groups |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/maas/bff/openapi.yaml) |
 | GET | /api/v1/all-maas-models |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/maas/bff/openapi.yaml) |
 | GET | /api/v1/all-policies |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/maas/bff/openapi.yaml) |
@@ -64,10 +64,10 @@
 | GET | /api/v1alpha1/data/connections |  | [`packages/data-connect-hub/bff/internal/api/connections_handler.go:82`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/data-connect-hub/bff/internal/api/connections_handler.go#L82) |
 | DELETE | /api/v1alpha1/data/connections/ |  | [`packages/data-connect-hub/bff/internal/api/connection_delete_handler.go:54`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/data-connect-hub/bff/internal/api/connection_delete_handler.go#L54) |
 | POST | /api/v1alpha1/data/connections/ |  | [`packages/data-connect-hub/bff/internal/api/connection_readiness_handler.go:57`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/data-connect-hub/bff/internal/api/connection_readiness_handler.go#L57) |
-| GET | /healthcheck |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/maas/bff/openapi.yaml) |
+| GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/model-registry/upstream/bff/openapi/swagger.json) |
 | GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/model-registry/upstream/bff/openapi/swagger.yaml) |
-| GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
+| GET | /healthcheck |  | [`packages/maas/bff/openapi.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/maas/bff/openapi.yaml) |
 | GET | /namespaces |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | POST | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/d43d9256c44162356a84e84789fc5e7a6abbc8dc/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |

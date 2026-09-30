@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | ray-project/kuberay |
 | Commit | 4e75db923ba5396bb76d6e5f5c09b678cdb5552b |
-| Extracted | 2026-09-30T11:11:51Z |
+| Extracted | 2026-09-30T15:11:47Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

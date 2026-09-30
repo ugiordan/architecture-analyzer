@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/notebooks |
 | Commit | 486cc56b35fbe1ef3f5fbd3ed0263bc0aa15a25e |
-| Extracted | 2026-09-30T11:07:26Z |
+| Extracted | 2026-09-30T15:06:42Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

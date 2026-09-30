@@ -11,7 +11,7 @@
 | Repository | trustyai-explainability/trustyai-service-operator |
 | Aliases | TrustyAI operator |
 | Commit | 9d8d4d27822198dd16d2b3e7be27864229f68056 |
-| Extracted | 2026-09-30T11:08:12Z |
+| Extracted | 2026-09-30T15:08:46Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -47,7 +47,7 @@
 **trustyai-service-operator-controller-manager / manager**
 
 - Ports: 0/TCP (webhook-server)
-- Env: `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_VLLM_ORCHESTRATOR_GATEWAY_IMAGE=quay.io/opendatahub/vllm-orchestrator-gateway:latest`, `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_BUILT_IN_DETECTOR_IMAGE=quay.io/opendatahub/odh-built-in-detector:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_FMS_GUARDRAILS_ORCHESTRATOR_IMAGE=quay.io/opendatahub/ta-guardrails-orchestrator:latest`
+- Env: `RELATED_IMAGE_ODH_TRUSTYAI_VLLM_ORCHESTRATOR_GATEWAY_IMAGE=quay.io/opendatahub/vllm-orchestrator-gateway:latest`, `RELATED_IMAGE_ODH_BUILT_IN_DETECTOR_IMAGE=quay.io/opendatahub/odh-built-in-detector:latest`, `RELATED_IMAGE_ODH_FMS_GUARDRAILS_ORCHESTRATOR_IMAGE=quay.io/opendatahub/ta-guardrails-orchestrator:latest`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`
 
 
 

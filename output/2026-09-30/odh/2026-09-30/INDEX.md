@@ -2,7 +2,7 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-09-30T11:20:00Z  
+**Generated**: 2026-09-30T15:20:32Z  
 **Components**: 44  
 
 ## How to Find Information
@@ -46,7 +46,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | agents-operator |  | 0 | 2 | 52 | [agents-operator.md](components/agents-operator.md) |
 | ai4rag |  | 0 | 0 | 23 | [ai4rag.md](components/ai4rag.md) |
 | argo-workflows |  | 0 | 0 | 105 | [argo-workflows.md](components/argo-workflows.md) |
-| batch-gateway |  | 0 | 0 | 38 | [batch-gateway.md](components/batch-gateway.md) |
+| batch-gateway |  | 0 | 0 | 36 | [batch-gateway.md](components/batch-gateway.md) |
 | codeflare-operator | CodeFlare operator | 1 | 1 | 23 | [codeflare-operator.md](components/codeflare-operator.md) |
 | data-science-pipelines | DSP, dsp | 3 | 1 | 195 | [data-science-pipelines.md](components/data-science-pipelines.md) |
 | data-science-pipelines-operator | DSPO, dspo | 5 | 8 | 34 | [data-science-pipelines-operator.md](components/data-science-pipelines-operator.md) |

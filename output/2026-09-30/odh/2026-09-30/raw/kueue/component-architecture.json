@@ -2,7 +2,7 @@
   "component": "kueue",
   "repo": "opendatahub-io/kueue",
   "commit_sha": "97024bd289d2cc5c9369b40d9f3483ab1483143d",
-  "extracted_at": "2026-09-30T11:11:03Z",
+  "extracted_at": "2026-09-30T15:11:00Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -1237,43 +1237,7 @@
     {
       "name": "JobControl-webhook",
       "type": "validating",
-      "path": "/validate-kubeflow-org-v1-paddlejob",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "JobControl"
-    },
-    {
-      "name": "JobControl-webhook",
-      "type": "mutating",
-      "path": "/mutate-kubeflow-org-v1-paddlejob",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "JobControl"
-    },
-    {
-      "name": "JobControl-webhook",
-      "type": "validating",
       "path": "/validate-kubeflow-org-v1-tfjob",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "JobControl"
-    },
-    {
-      "name": "JobControl-webhook",
-      "type": "mutating",
-      "path": "/mutate-kubeflow-org-v1-pytorchjob",
       "sources": [
         {
           "type": "go_ast",
@@ -1297,7 +1261,7 @@
     {
       "name": "JobControl-webhook",
       "type": "validating",
-      "path": "/validate-kubeflow-org-v1-xgboostjob",
+      "path": "/validate-kubeflow-org-v1-paddlejob",
       "sources": [
         {
           "type": "go_ast",
@@ -1308,8 +1272,8 @@
     },
     {
       "name": "JobControl-webhook",
-      "type": "mutating",
-      "path": "/mutate-kubeflow-org-v1-tfjob",
+      "type": "validating",
+      "path": "/validate-kubeflow-org-v1-xgboostjob",
       "sources": [
         {
           "type": "go_ast",
@@ -1331,16 +1295,40 @@
       "target_type": "JobControl"
     },
     {
-      "name": "JobSetWebhook-webhook",
-      "type": "validating",
-      "path": "/validate-jobset-x-k8s-io-v1alpha2-jobset",
+      "name": "JobControl-webhook",
+      "type": "mutating",
+      "path": "/mutate-kubeflow-org-v1-paddlejob",
       "sources": [
         {
           "type": "go_ast",
           "file": ""
         }
       ],
-      "target_type": "JobSetWebhook"
+      "target_type": "JobControl"
+    },
+    {
+      "name": "JobControl-webhook",
+      "type": "mutating",
+      "path": "/mutate-kubeflow-org-v1-pytorchjob",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "JobControl"
+    },
+    {
+      "name": "JobControl-webhook",
+      "type": "mutating",
+      "path": "/mutate-kubeflow-org-v1-tfjob",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "JobControl"
     },
     {
       "name": "JobSetWebhook-webhook",
@@ -1353,6 +1341,30 @@
         }
       ],
       "target_type": "JobSetWebhook"
+    },
+    {
+      "name": "JobSetWebhook-webhook",
+      "type": "validating",
+      "path": "/validate-jobset-x-k8s-io-v1alpha2-jobset",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "JobSetWebhook"
+    },
+    {
+      "name": "JobWebhook-webhook",
+      "type": "mutating",
+      "path": "/mutate-batch-v1-job",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "JobWebhook"
     },
     {
       "name": "JobWebhook-webhook",
@@ -1373,18 +1385,6 @@
             "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/job/job_webhook.go",
             "line": 137
           }
-        }
-      ],
-      "target_type": "JobWebhook"
-    },
-    {
-      "name": "JobWebhook-webhook",
-      "type": "mutating",
-      "path": "/mutate-batch-v1-job",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
         }
       ],
       "target_type": "JobWebhook"
@@ -1545,8 +1545,8 @@
     },
     {
       "name": "ResourceFlavorWebhook-webhook",
-      "type": "mutating",
-      "path": "/mutate-kueue-x-k8s-io-v1beta1-resourceflavor",
+      "type": "validating",
+      "path": "/validate-kueue-x-k8s-io-v1beta1-resourceflavor",
       "sources": [
         {
           "type": "go_ast",
@@ -1557,8 +1557,8 @@
     },
     {
       "name": "ResourceFlavorWebhook-webhook",
-      "type": "validating",
-      "path": "/validate-kueue-x-k8s-io-v1beta1-resourceflavor",
+      "type": "mutating",
+      "path": "/mutate-kueue-x-k8s-io-v1beta1-resourceflavor",
       "sources": [
         {
           "type": "go_ast",
@@ -1581,32 +1581,8 @@
     },
     {
       "name": "Webhook-webhook",
-      "type": "validating",
-      "path": "/validate-apps-v1-statefulset",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "Webhook"
-    },
-    {
-      "name": "Webhook-webhook",
-      "type": "validating",
-      "path": "/validate-apps-v1-deployment",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "Webhook"
-    },
-    {
-      "name": "Webhook-webhook",
       "type": "mutating",
-      "path": "/mutate-apps-v1-statefulset",
+      "path": "/mutate-leaderworkerset-x-k8s-io-v1-leaderworkerset",
       "sources": [
         {
           "type": "go_ast",
@@ -1615,24 +1591,36 @@
       ],
       "mutations": [
         {
-          "field": "spec.template.annotations",
+          "field": "labels",
           "operation": "set",
-          "condition": "suspend \u0026\u0026 ss.Spec.Template.Annotations == nil",
+          "condition": "priorityClass != \"\" \u0026\u0026 podTemplateSpec.Labels == nil",
           "source": {
             "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/statefulset/statefulset_webhook.go",
-            "line": 81
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/leaderworkerset/leaderworkerset_webhook.go",
+            "line": 90
           }
         },
         {
-          "field": "spec.template.labels",
+          "field": "annotations",
           "operation": "set",
-          "condition": "suspend \u0026\u0026 ss.Spec.Template.Labels == nil",
+          "condition": "podTemplateSpec.Annotations == nil",
           "source": {
             "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/statefulset/statefulset_webhook.go",
-            "line": 85
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/leaderworkerset/leaderworkerset_webhook.go",
+            "line": 96
           }
+        }
+      ],
+      "target_type": "Webhook"
+    },
+    {
+      "name": "Webhook-webhook",
+      "type": "validating",
+      "path": "/validate-apps-v1-statefulset",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
         }
       ],
       "target_type": "Webhook"
@@ -1674,7 +1662,7 @@
     {
       "name": "Webhook-webhook",
       "type": "mutating",
-      "path": "/mutate-leaderworkerset-x-k8s-io-v1-leaderworkerset",
+      "path": "/mutate-apps-v1-statefulset",
       "sources": [
         {
           "type": "go_ast",
@@ -1683,32 +1671,44 @@
       ],
       "mutations": [
         {
-          "field": "labels",
+          "field": "spec.template.annotations",
           "operation": "set",
-          "condition": "priorityClass != \"\" \u0026\u0026 podTemplateSpec.Labels == nil",
+          "condition": "suspend \u0026\u0026 ss.Spec.Template.Annotations == nil",
           "source": {
             "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/leaderworkerset/leaderworkerset_webhook.go",
-            "line": 90
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/statefulset/statefulset_webhook.go",
+            "line": 81
           }
         },
         {
-          "field": "annotations",
+          "field": "spec.template.labels",
           "operation": "set",
-          "condition": "podTemplateSpec.Annotations == nil",
+          "condition": "suspend \u0026\u0026 ss.Spec.Template.Labels == nil",
           "source": {
             "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/leaderworkerset/leaderworkerset_webhook.go",
-            "line": 96
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/kueue/pkg/controller/jobs/statefulset/statefulset_webhook.go",
+            "line": 85
           }
         }
       ],
       "target_type": "Webhook"
     },
     {
-      "name": "WorkloadWebhook-webhook",
+      "name": "Webhook-webhook",
       "type": "validating",
-      "path": "/validate-kueue-x-k8s-io-v1beta1-workload",
+      "path": "/validate-apps-v1-deployment",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "Webhook"
+    },
+    {
+      "name": "WorkloadWebhook-webhook",
+      "type": "mutating",
+      "path": "/mutate-kueue-x-k8s-io-v1beta1-workload",
       "sources": [
         {
           "type": "go_ast",
@@ -1719,8 +1719,8 @@
     },
     {
       "name": "WorkloadWebhook-webhook",
-      "type": "mutating",
-      "path": "/mutate-kueue-x-k8s-io-v1beta1-workload",
+      "type": "validating",
+      "path": "/validate-kueue-x-k8s-io-v1beta1-workload",
       "sources": [
         {
           "type": "go_ast",

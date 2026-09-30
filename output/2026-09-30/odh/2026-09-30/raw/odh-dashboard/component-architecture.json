@@ -4,8 +4,8 @@
     "ODH Dashboard"
   ],
   "repo": "opendatahub-io/odh-dashboard",
-  "commit_sha": "ce662ab0bff4ad4abb5bacc3f8ffbb8d1bd65bde",
-  "extracted_at": "2026-09-30T11:07:28Z",
+  "commit_sha": "37b626c1e11e4786d63bda6126ca50f339d22f5e",
+  "extracted_at": "2026-09-30T15:06:59Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "rbac": {
@@ -5514,7 +5514,7 @@
       "type": "For",
       "gvk": "api/v1alpha1/Dashboard",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1037"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1041"
     },
     {
       "type": "For",
@@ -5532,19 +5532,19 @@
       "type": "Owns",
       "gvk": "/v1/ConfigMap",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1040"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1044"
     },
     {
       "type": "Owns",
       "gvk": "/v1/Secret",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1042"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1046"
     },
     {
       "type": "Owns",
       "gvk": "/v1/Service",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1039"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1043"
     },
     {
       "type": "Owns",
@@ -5562,13 +5562,13 @@
       "type": "Owns",
       "gvk": "/v1/ServiceAccount",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1041"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1045"
     },
     {
       "type": "Owns",
       "gvk": "apps/v1/Deployment",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1038"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1042"
     },
     {
       "type": "Owns",
@@ -5580,7 +5580,7 @@
       "type": "Owns",
       "gvk": "networking.k8s.io/v1/NetworkPolicy",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1043"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1047"
     },
     {
       "type": "Owns",
@@ -5592,19 +5592,19 @@
       "type": "Owns",
       "gvk": "policy/v1/PodDisruptionBudget",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1046"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1050"
     },
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/ClusterRole",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1044"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1048"
     },
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/ClusterRoleBinding",
       "controller": "DashboardReconciler",
-      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1045"
+      "source": "dashboard-operator/internal/controller/dashboard_reconciler.go:1049"
     },
     {
       "type": "Owns",
@@ -9620,12 +9620,7 @@
     {
       "method": "GET",
       "path": "/healthcheck",
-      "source": "packages/model-registry/upstream/bff/openapi/swagger.json"
-    },
-    {
-      "method": "GET",
-      "path": "/healthcheck",
-      "source": "packages/maas/bff/openapi.yaml"
+      "source": "packages/notebooks/upstream/workspaces/backend/openapi/swagger.json"
     },
     {
       "method": "GET",
@@ -9635,7 +9630,12 @@
     {
       "method": "GET",
       "path": "/healthcheck",
-      "source": "packages/notebooks/upstream/workspaces/backend/openapi/swagger.json"
+      "source": "packages/model-registry/upstream/bff/openapi/swagger.json"
+    },
+    {
+      "method": "GET",
+      "path": "/healthcheck",
+      "source": "packages/maas/bff/openapi.yaml"
     },
     {
       "method": "GET",
@@ -10223,6 +10223,12 @@
       "value": "8943",
       "category": "port",
       "doc": "coreBffPort is the port core-bff listens on within the main dashboard pod/service.",
+      "source": "dashboard-operator/internal/controller/module_deploy.go"
+    },
+    {
+      "name": "dataConnectHubModuleName",
+      "value": "dataConnectHub",
+      "category": "general",
       "source": "dashboard-operator/internal/controller/module_deploy.go"
     },
     {
@@ -14570,7 +14576,7 @@
       "name": "XUserHeader",
       "value": "X-User",
       "category": "general",
-      "doc": "XUserHeader is a caller-asserted identity header that some upstream APIs trust for\nattribution (e.g. the Data Registry API's `registered_by` field). Proxies must strip any\ncaller-supplied value rather than forwarding it verbatim, the same way Authorization is\nnever copied as-is from the incoming request.",
+      "doc": "XUserHeader is a caller-asserted identity header that some upstream APIs trust for\nattribution. Proxies must strip any\ncaller-supplied value rather than forwarding it verbatim, the same way Authorization is\nnever copied as-is from the incoming request.",
       "source": "packages/data-registry/bff/internal/constants/keys.go"
     },
     {
@@ -15466,12 +15472,6 @@
       "name": "errSandboxMCPDashboardConfigRead",
       "value": "errors.New(\"failed to read dashboard MCP server ConfigMap\")",
       "category": "general",
-      "source": "packages/gen-ai/bff/internal/api/sandbox_deployment_handler.go"
-    },
-    {
-      "name": "mockSandboxOGXImage",
-      "value": "example.com/ogx:mock",
-      "category": "image",
       "source": "packages/gen-ai/bff/internal/api/sandbox_deployment_handler.go"
     },
     {
@@ -23481,7 +23481,7 @@
     "status_conditions": "none",
     "webhooks": "none"
   },
-  "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 24 workload(s) (rhaii-dashboard, odh-dashboard, maas-consumer-portal, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 26 container(s). watching 15 resource type(s). exposing 18 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080. protected by 20 network policy/policies. with 1 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-lsd, mock-predictor, s, sample-support-agent. with 1998 operator config constants (33 image references). with 5 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: cluster-monitoring-view, system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, import), trustyai-service-operator (import). mounts 3 ConfigMap(s) as volumes: kube-rbac-proxy-config, maas-consumer-portal-federation-config, odh-trusted-ca-bundle.",
+  "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 24 workload(s) (rhaii-dashboard, odh-dashboard, maas-consumer-portal, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 26 container(s). watching 15 resource type(s). exposing 18 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080. protected by 20 network policy/policies. with 1 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-lsd, mock-predictor, s, sample-support-agent. with 1998 operator config constants (32 image references). with 5 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: cluster-monitoring-view, system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, import), trustyai-service-operator (import). mounts 3 ConfigMap(s) as volumes: kube-rbac-proxy-config, maas-consumer-portal-federation-config, odh-trusted-ca-bundle.",
   "security_annotations": [
     {
       "type": "RBAC_CLUSTER_SCOPE_SENSITIVE",

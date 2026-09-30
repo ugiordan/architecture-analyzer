@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/odh-cli |
 | Commit | 0f09d14774ff3663dd9dcfb80b80417a999d0ba9 |
-| Extracted | 2026-09-30T11:14:02Z |
+| Extracted | 2026-09-30T15:13:51Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/workload-variant-autoscaler |
 | Commit | 9fe6faaa40e65ca6e16805c8d6aabb0faf929b4e |
-| Extracted | 2026-09-30T11:13:45Z |
+| Extracted | 2026-09-30T15:13:21Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

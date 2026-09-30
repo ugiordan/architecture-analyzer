@@ -1,8 +1,8 @@
 {
   "component": "pipelines-components",
   "repo": "red-hat-data-services/pipelines-components",
-  "commit_sha": "070c6490e73ea262073fb08caa7630b6205732db",
-  "extracted_at": "2026-09-30T11:14:21Z",
+  "commit_sha": "4a899daf82a1a7bd354fc8cbcf6758ba6a6bb82d",
+  "extracted_at": "2026-09-30T15:14:18Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "rbac": {},
@@ -359,12 +359,14 @@
       "path": "Dockerfile.konflux.autorag",
       "base_image": "${BASE_IMAGE}",
       "build_stage_images": [
-        "${DOCLING_OGX_MODELCAR}"
+        "${DOCLING_OGX_MODELCAR}",
+        "${WHISPER_MODELCAR}"
       ],
-      "stages": 2,
+      "stages": 3,
       "user": "default",
       "issues": [
         "Unpinned base image: ${DOCLING_OGX_MODELCAR}",
+        "Unpinned base image: ${WHISPER_MODELCAR}",
         "Unpinned base image: ${BASE_IMAGE}"
       ],
       "copy_instructions": [
@@ -380,6 +382,13 @@
           ],
           "destination": "/opt/app-root/docling-artifacts/models/",
           "from_stage": "docling-ogx-modelcar"
+        },
+        {
+          "sources": [
+            "/models/"
+          ],
+          "destination": "/opt/app-root/docling-artifacts/models/",
+          "from_stage": "whisper-modelcar"
         }
       ],
       "build_commands": [
