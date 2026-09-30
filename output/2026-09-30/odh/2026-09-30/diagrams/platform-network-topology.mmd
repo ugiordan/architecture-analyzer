@@ -160,49 +160,49 @@ graph LR
     class llm_d_inference_scheduler component
     llm_d_inference_scheduler --> svc_39["service\nClusterIP: 8080/TCP"]
     class svc_39 service
+    mcp_lifecycle_module_operator["mcp-lifecycle-module-operator"]
+    class mcp_lifecycle_module_operator component
+    mcp_lifecycle_module_operator --> svc_40["webhook-service\nClusterIP: 443/TCP"]
+    class svc_40 service
     mlflow_operator["mlflow-operator"]
     class mlflow_operator component
-    mlflow_operator --> svc_40["mlflow-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
-    class svc_40 service
+    mlflow_operator --> svc_41["mlflow-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    class svc_41 service
     mlflow["mlflow"]
     class mlflow component
-    mlflow --> svc_41["env-port-default\npython-source: 9137/TCP"]
-    class svc_41 service
-    model_registry_operator["model-registry-operator"]
-    class model_registry_operator component
-    model_registry_operator --> svc_42["catalog-webhook-service\nClusterIP: 443/TCP"]
+    mlflow --> svc_42["env-port-default\npython-source: 9137/TCP"]
     class svc_42 service
     model_registry_operator["model-registry-operator"]
     class model_registry_operator component
-    model_registry_operator --> svc_43["model-registry-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
+    model_registry_operator --> svc_43["catalog-webhook-service\nClusterIP: 443/TCP"]
     class svc_43 service
     model_registry_operator["model-registry-operator"]
     class model_registry_operator component
-    model_registry_operator --> svc_44["model-registry-operator-webhook-service\nClusterIP: 443/TCP"]
+    model_registry_operator --> svc_44["model-registry-operator-controller-manager-metrics-service\nClusterIP: 8443/TCP"]
     class svc_44 service
     model_registry_operator["model-registry-operator"]
     class model_registry_operator component
-    model_registry_operator --> svc_45["template-value-postgres\nClusterIP: 5432/TCP"]
+    model_registry_operator --> svc_45["model-registry-operator-webhook-service\nClusterIP: 443/TCP"]
     class svc_45 service
+    model_registry_operator["model-registry-operator"]
+    class model_registry_operator component
+    model_registry_operator --> svc_46["template-value-postgres\nClusterIP: 5432/TCP"]
+    class svc_46 service
     model_registry["model-registry"]
     class model_registry component
-    model_registry --> svc_46["model-catalog\nClusterIP: 8080/TCP"]
-    class svc_46 service
-    modelmesh_serving["modelmesh-serving"]
-    class modelmesh_serving component
-    modelmesh_serving --> svc_47["etcd\nClusterIP: 2379/TCP"]
+    model_registry --> svc_47["model-catalog\nClusterIP: 8080/TCP"]
     class svc_47 service
     modelmesh_serving["modelmesh-serving"]
     class modelmesh_serving component
-    modelmesh_serving --> svc_48["modelmesh-controller\nClusterIP: 8080/TCP"]
+    modelmesh_serving --> svc_48["etcd\nClusterIP: 2379/TCP"]
     class svc_48 service
     modelmesh_serving["modelmesh-serving"]
     class modelmesh_serving component
-    modelmesh_serving --> svc_49["modelmesh-webhook-server-service\nClusterIP: 9443/TCP"]
+    modelmesh_serving --> svc_49["modelmesh-controller\nClusterIP: 8080/TCP"]
     class svc_49 service
-    modelmesh["modelmesh"]
-    class modelmesh component
-    modelmesh --> svc_50["model-mesh\nClusterIP: 8033/TCP"]
+    modelmesh_serving["modelmesh-serving"]
+    class modelmesh_serving component
+    modelmesh_serving --> svc_50["modelmesh-webhook-server-service\nClusterIP: 9443/TCP"]
     class svc_50 service
     models_as_a_service["models-as-a-service"]
     class models_as_a_service component
@@ -320,13 +320,13 @@ graph LR
     class opendatahub_operator component
     opendatahub_operator --> svc_79["webhook-service\nClusterIP: 443/TCP"]
     class svc_79 service
+    praxis_extproc["praxis-extproc"]
+    class praxis_extproc component
+    praxis_extproc --> svc_80["payload-processing\nClusterIP: 9004/TCP"]
+    class svc_80 service
     spark_operator["spark-operator"]
     class spark_operator component
-    spark_operator --> svc_80["spark-operator-webhook-svc\nClusterIP: 443/TCP"]
-    class svc_80 service
-    training_operator["training-operator"]
-    class training_operator component
-    training_operator --> svc_81["training-operator\nClusterIP: 8080/TCP, 443/TCP"]
+    spark_operator --> svc_81["spark-operator-webhook-svc\nClusterIP: 443/TCP"]
     class svc_81 service
     trustyai_service_operator["trustyai-service-operator"]
     class trustyai_service_operator component

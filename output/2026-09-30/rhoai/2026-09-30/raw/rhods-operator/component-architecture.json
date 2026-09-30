@@ -6,7 +6,7 @@
   ],
   "repo": "opendatahub-io/rhods-operator",
   "commit_sha": "9bf35d201fbb30e6e4ccb1b10eb3b92245ee8cb2",
-  "extracted_at": "2026-09-30T05:01:34Z",
+  "extracted_at": "2026-09-30T11:09:12Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -3928,40 +3928,6 @@
     {
       "name": "Defaulter-webhook",
       "type": "mutating",
-      "path": "/mutate-datasciencecluster-v1",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "mutations": [
-        {
-          "field": "registriesNamespace",
-          "operation": "set",
-          "condition": "modelRegistry.ManagementState == operatorv1.Managed \u0026\u0026 modelRegistry.RegistriesNamespace == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
-            "line": 85
-          }
-        },
-        {
-          "field": "nim.managementState",
-          "operation": "set",
-          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
-            "line": 94
-          }
-        }
-      ],
-      "target_type": "Defaulter"
-    },
-    {
-      "name": "Defaulter-webhook",
-      "type": "mutating",
       "path": "/mutate-datasciencecluster-v2",
       "sources": [
         {
@@ -3994,6 +3960,40 @@
       "target_type": "Defaulter"
     },
     {
+      "name": "Defaulter-webhook",
+      "type": "mutating",
+      "path": "/mutate-datasciencecluster-v1",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "mutations": [
+        {
+          "field": "registriesNamespace",
+          "operation": "set",
+          "condition": "modelRegistry.ManagementState == operatorv1.Managed \u0026\u0026 modelRegistry.RegistriesNamespace == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
+            "line": 85
+          }
+        },
+        {
+          "field": "nim.managementState",
+          "operation": "set",
+          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v1/defaulting.go",
+            "line": 94
+          }
+        }
+      ],
+      "target_type": "Defaulter"
+    },
+    {
       "name": "Injector-webhook",
       "type": "mutating",
       "path": "/mutate-prometheus-monitors",
@@ -4004,6 +4004,18 @@
         }
       ],
       "target_type": "Injector"
+    },
+    {
+      "name": "Validator-webhook",
+      "type": "validating",
+      "path": "/validate-datasciencecluster-v1",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "Validator"
     },
     {
       "name": "Validator-webhook",
@@ -4033,18 +4045,6 @@
       "name": "Validator-webhook",
       "type": "validating",
       "path": "/validate-dscinitialization-v2",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "Validator"
-    },
-    {
-      "name": "Validator-webhook",
-      "type": "validating",
-      "path": "/validate-datasciencecluster-v1",
       "sources": [
         {
           "type": "go_ast",

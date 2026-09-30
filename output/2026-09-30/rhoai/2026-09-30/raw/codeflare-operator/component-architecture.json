@@ -5,7 +5,7 @@
   ],
   "repo": "project-codeflare/codeflare-operator",
   "commit_sha": "2d7cf949d1a6c7ae660694c7dac4f4d7ead5d4a9",
-  "extracted_at": "2026-09-30T04:59:27Z",
+  "extracted_at": "2026-09-30T11:07:55Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -2169,6 +2169,13 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "actions/checkout@v4",
+      "source": ".github/workflows/build-and-push.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "actions/setup-go@v5",
       "source": ".github/workflows/build-and-push.yaml",
       "description": "Action \"actions/setup-go\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -2179,13 +2186,6 @@
       "resource": "redhat-actions/podman-login@v1",
       "source": ".github/workflows/build-and-push.yaml",
       "description": "Action \"redhat-actions/podman-login\" uses mutable ref \"v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v4",
-      "source": ".github/workflows/build-and-push.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_MISSING_PERMISSIONS",

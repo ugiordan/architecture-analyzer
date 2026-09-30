@@ -4,8 +4,8 @@
     "ODH Dashboard"
   ],
   "repo": "opendatahub-io/odh-dashboard",
-  "commit_sha": "b614b5d6e4e3c9e8a68c01e2a3ab637a6bcf8f56",
-  "extracted_at": "2026-09-30T04:59:09Z",
+  "commit_sha": "ce662ab0bff4ad4abb5bacc3f8ffbb8d1bd65bde",
+  "extracted_at": "2026-09-30T11:07:28Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "rbac": {
@@ -5846,7 +5846,7 @@
       },
       {
         "module": "github.com/onsi/ginkgo/v2",
-        "version": "v2.32.1",
+        "version": "v2.33.0",
         "category": "testing",
         "purpose": "BDD testing framework"
       },
@@ -6721,7 +6721,7 @@
       }
     ],
     "issues": [
-      "k8s.io modules span multiple minor versions: v0.34 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/apiserver, k8s.io/client-go, k8s.io/metrics, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/apimachinery, k8s.io/client-go); v0.37 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.36 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/streaming, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go)"
+      "k8s.io modules span multiple minor versions: v0.36 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/streaming, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.34 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/apiserver, k8s.io/client-go, k8s.io/metrics, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/apimachinery, k8s.io/client-go); v0.37 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go)"
     ]
   },
   "secrets_referenced": [
@@ -9620,22 +9620,22 @@
     {
       "method": "GET",
       "path": "/healthcheck",
-      "source": "packages/model-registry/upstream/bff/openapi/swagger.yaml"
-    },
-    {
-      "method": "GET",
-      "path": "/healthcheck",
       "source": "packages/model-registry/upstream/bff/openapi/swagger.json"
     },
     {
       "method": "GET",
       "path": "/healthcheck",
-      "source": "packages/notebooks/upstream/workspaces/backend/openapi/swagger.json"
+      "source": "packages/maas/bff/openapi.yaml"
     },
     {
       "method": "GET",
       "path": "/healthcheck",
-      "source": "packages/maas/bff/openapi.yaml"
+      "source": "packages/model-registry/upstream/bff/openapi/swagger.yaml"
+    },
+    {
+      "method": "GET",
+      "path": "/healthcheck",
+      "source": "packages/notebooks/upstream/workspaces/backend/openapi/swagger.json"
     },
     {
       "method": "GET",
@@ -15499,6 +15499,18 @@
       "source": "packages/gen-ai/bff/internal/api/sandbox_deployment_prompt.go"
     },
     {
+      "name": "agentDeploymentConfigTimeout",
+      "value": "10 * time.Second",
+      "category": "timeout",
+      "source": "packages/gen-ai/bff/internal/api/sandbox_deployments_handler.go"
+    },
+    {
+      "name": "maxAgentDeploymentConfigBytes",
+      "value": "1 \u003c\u003c 20",
+      "category": "general",
+      "source": "packages/gen-ai/bff/internal/api/sandbox_deployments_handler.go"
+    },
+    {
       "name": "sandboxDiscoveryInterval",
       "value": "30 * time.Second",
       "category": "timeout",
@@ -15536,6 +15548,12 @@
       "category": "general",
       "doc": "DefaultAuthTokenHeader is the default header for token extraction.\nFor ODH/RHOAI deployments, this is 'x-forwarded-access-token'.\nOverride via CLI flag or AUTH_TOKEN_HEADER env var for other setups.",
       "source": "packages/gen-ai/bff/internal/config/environment.go"
+    },
+    {
+      "name": "AgentDeploymentIDPath",
+      "value": "AgentDeploymentsPath + \"/:id\"",
+      "category": "general",
+      "source": "packages/gen-ai/bff/internal/constants/api_constants.go"
     },
     {
       "name": "AgentDeploymentsPath",
@@ -17056,6 +17074,24 @@
       "value": "/opt/custom",
       "category": "general",
       "source": "packages/gen-ai/bff/internal/integrations/kubernetes/sandbox_cr.go"
+    },
+    {
+      "name": "agentDeploymentStateCreating",
+      "value": "creating",
+      "category": "general",
+      "source": "packages/gen-ai/bff/internal/integrations/kubernetes/sandbox_deployments.go"
+    },
+    {
+      "name": "agentDeploymentStateFailed",
+      "value": "failed",
+      "category": "general",
+      "source": "packages/gen-ai/bff/internal/integrations/kubernetes/sandbox_deployments.go"
+    },
+    {
+      "name": "agentDeploymentStateReady",
+      "value": "ready",
+      "category": "general",
+      "source": "packages/gen-ai/bff/internal/integrations/kubernetes/sandbox_deployments.go"
     },
     {
       "name": "mcpServerIDAnnotation",
@@ -20141,6 +20177,41 @@
       "name": "McpDeploymentModeRemote",
       "value": "remote",
       "type": "McpDeploymentMode",
+      "category": "general",
+      "source": "packages/model-registry/upstream/bff/internal/models/mcp_server_catalog.go"
+    },
+    {
+      "name": "McpStoragePermissionsReadOnly",
+      "value": "ReadOnly",
+      "type": "McpStoragePermissions",
+      "category": "general",
+      "source": "packages/model-registry/upstream/bff/internal/models/mcp_server_catalog.go"
+    },
+    {
+      "name": "McpStoragePermissionsReadWrite",
+      "value": "ReadWrite",
+      "type": "McpStoragePermissions",
+      "category": "general",
+      "source": "packages/model-registry/upstream/bff/internal/models/mcp_server_catalog.go"
+    },
+    {
+      "name": "McpStorageSourceTypeConfigMap",
+      "value": "ConfigMap",
+      "type": "McpStorageSourceType",
+      "category": "general",
+      "source": "packages/model-registry/upstream/bff/internal/models/mcp_server_catalog.go"
+    },
+    {
+      "name": "McpStorageSourceTypeEmptyDir",
+      "value": "EmptyDir",
+      "type": "McpStorageSourceType",
+      "category": "general",
+      "source": "packages/model-registry/upstream/bff/internal/models/mcp_server_catalog.go"
+    },
+    {
+      "name": "McpStorageSourceTypeSecret",
+      "value": "Secret",
+      "type": "McpStorageSourceType",
       "category": "general",
       "source": "packages/model-registry/upstream/bff/internal/models/mcp_server_catalog.go"
     },
@@ -23410,7 +23481,7 @@
     "status_conditions": "none",
     "webhooks": "none"
   },
-  "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 24 workload(s) (rhaii-dashboard, odh-dashboard, maas-consumer-portal, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 26 container(s). watching 15 resource type(s). exposing 18 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080. protected by 20 network policy/policies. with 1 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-lsd, mock-predictor, s, sample-support-agent. with 1987 operator config constants (33 image references). with 5 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: cluster-monitoring-view, system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, import), trustyai-service-operator (import). mounts 3 ConfigMap(s) as volumes: kube-rbac-proxy-config, maas-consumer-portal-federation-config, odh-trusted-ca-bundle.",
+  "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 24 workload(s) (rhaii-dashboard, odh-dashboard, maas-consumer-portal, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 26 container(s). watching 15 resource type(s). exposing 18 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080. protected by 20 network policy/policies. with 1 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-lsd, mock-predictor, s, sample-support-agent. with 1998 operator config constants (33 image references). with 5 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: cluster-monitoring-view, system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, import), trustyai-service-operator (import). mounts 3 ConfigMap(s) as volumes: kube-rbac-proxy-config, maas-consumer-portal-federation-config, odh-trusted-ca-bundle.",
   "security_annotations": [
     {
       "type": "RBAC_CLUSTER_SCOPE_SENSITIVE",

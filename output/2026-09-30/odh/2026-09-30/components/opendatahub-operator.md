@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/opendatahub-operator |
 | Aliases | ODH operator, odh-operator |
 | Commit | f2bbf2852006329badb18bae2e19a3dddc09df97 |
-| Extracted | 2026-09-30T04:59:23Z |
+| Extracted | 2026-09-30T11:07:40Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

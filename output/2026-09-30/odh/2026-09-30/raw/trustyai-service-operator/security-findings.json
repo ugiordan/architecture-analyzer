@@ -29,10 +29,19 @@
   {
     "rule_id": "CGA-010",
     "severity": "medium",
-    "message": "Security-sensitive function operatorOnlyFailureFromPods has high cyclomatic complexity (12), increasing review difficulty",
+    "message": "Security-sensitive function operatorOnlyFailureFromPods has high cyclomatic complexity (14), increasing review difficulty",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-    "line": 589,
-    "node_id": "fn_756c02de54747e33",
+    "line": 597,
+    "node_id": "fn_5adae9319b92534f",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function failedMountEventMessage has high cyclomatic complexity (16), increasing review difficulty",
+    "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
+    "line": 838,
+    "node_id": "fn_99e0ac12b378bb49",
     "domain": "security"
   },
   {
@@ -69,15 +78,6 @@
     "file": "controllers/nemo_guardrails/deployment.go",
     "line": 72,
     "node_id": "fn_14e859151b40172b",
-    "domain": "security"
-  },
-  {
-    "rule_id": "CGA-010",
-    "severity": "medium",
-    "message": "Security-sensitive function discoverMCPGateway has high cyclomatic complexity (12), increasing review difficulty",
-    "file": "controllers/nemo_guardrails/mcp_gateway.go",
-    "line": 33,
-    "node_id": "fn_f66cd542388ffa2d",
     "domain": "security"
   },
   {
@@ -140,8 +140,8 @@
     "severity": "medium",
     "message": "Function TestReconcileCollectionConfigMapsAppliesSystemCollectionOverride makes external connections with no NetworkPolicy restricting egress",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 136,
-    "node_id": "fn_b1a7cd63238cbe23",
+    "line": 142,
+    "node_id": "fn_9dc22486e57cc264",
     "domain": "security",
     "architecture_ref": "network_policies: none defined"
   },
@@ -150,8 +150,18 @@
     "severity": "medium",
     "message": "Function TestReconcileCollectionConfigMapsDoesNotPartiallyUpdateOnInvalidOverride makes external connections with no NetworkPolicy restricting egress",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 198,
-    "node_id": "fn_de7d184674ae072d",
+    "line": 204,
+    "node_id": "fn_4b62bafb86a48082",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function readCollectionConfig makes external connections with no NetworkPolicy restricting egress",
+    "file": "controllers/evalhub/collection_overrides_test.go",
+    "line": 408,
+    "node_id": "fn_6e863e107842ab5b",
     "domain": "security",
     "architecture_ref": "network_policies: none defined"
   },
@@ -170,8 +180,8 @@
     "severity": "medium",
     "message": "Function postEvalHubBenchmarkFailed makes external connections with no NetworkPolicy restricting egress",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-    "line": 934,
-    "node_id": "fn_c60f4f3aa89b3e52",
+    "line": 1147,
+    "node_id": "fn_79641ed6c54f6d4f",
     "domain": "security",
     "architecture_ref": "network_policies: none defined"
   },
@@ -932,19 +942,19 @@
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026nemoguardrailsv1alpha1.NemoGuardrails{}).\n\t\t// Watch for changes to ConfigMaps referenced by NemoGuardrails CRs.\n\t\t// OnlyMetadata caches only object metadata (~1KB each) instead of full\n\t\t// objects, preventing OOM when many ConfigMaps exist cluster-wide.\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(ctx context.Context, obj client.Object) []ctrl.Request {\n\t\t\t\tvar requests []ctrl.Request\n\t\t\t\tvar nemoGuardrailsList nemoguardrailsv1alpha1.NemoGuardrailsList\n\t\t\t\tif err := r.List(ctx, \u0026nemoGuardrailsList, \u0026client.ListOptions{Namespace: obj.GetNamespace()}); err != nil {\n\t\t\t\t\treturn nil\n\t\t\t\t}\n\t\t\t\tfor _, ng := range nemoGuardrailsList.Items {\n\t\t\t\t\tfor _, nemoConfig := range ng.Spec.NemoConfigs {\n\t\t\t\t\t\tfor _, cmName := range nemoConfig.ConfigMaps {\n\t\t\t\t\t\t\tif cmName == obj.GetName() {\n\t\t\t\t\t\t\t\trequests = append(requests, ctrl.Request{\n\t\t\t\t\t\t\t\t\tNamespacedName: types.NamespacedName{\n\t\t\t\t\t\t\t\t\t\tName:      ng.Name,\n\t\t\t\t\t\t\t\t\t\tNamespace: ng.Namespace,\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\treturn requests\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.Or(\n\t\t\t\tpredicate.AnnotationChangedPredicate{},\n\t\t\t\tpredicate.ResourceVersionChangedPredicate{},\n\t\t\t\tpredicate.GenerationChangedPredicate{},\n\t\t\t)),\n\t\t\tbuilder.OnlyMetadata,\n\t\t).\n\t\tComplete at controllers/nemo_guardrails/nemoguardrail_controller.go:279 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026nemoguardrailsv1alpha1.NemoGuardrails{}).\n\t\t// Watch for changes to ConfigMaps referenced by NemoGuardrails CRs.\n\t\t// OnlyMetadata caches only object metadata (~1KB each) instead of full\n\t\t// objects, preventing OOM when many ConfigMaps exist cluster-wide.\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(ctx context.Context, obj client.Object) []ctrl.Request {\n\t\t\t\tvar requests []ctrl.Request\n\t\t\t\tvar nemoGuardrailsList nemoguardrailsv1alpha1.NemoGuardrailsList\n\t\t\t\tif err := r.List(ctx, \u0026nemoGuardrailsList, \u0026client.ListOptions{Namespace: obj.GetNamespace()}); err != nil {\n\t\t\t\t\treturn nil\n\t\t\t\t}\n\t\t\t\tfor _, ng := range nemoGuardrailsList.Items {\n\t\t\t\t\tfor _, nemoConfig := range ng.Spec.NemoConfigs {\n\t\t\t\t\t\tfor _, cmName := range nemoConfig.ConfigMaps {\n\t\t\t\t\t\t\tif cmName == obj.GetName() {\n\t\t\t\t\t\t\t\trequests = append(requests, ctrl.Request{\n\t\t\t\t\t\t\t\t\tNamespacedName: types.NamespacedName{\n\t\t\t\t\t\t\t\t\t\tName:      ng.Name,\n\t\t\t\t\t\t\t\t\t\tNamespace: ng.Namespace,\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\treturn requests\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.Or(\n\t\t\t\tpredicate.AnnotationChangedPredicate{},\n\t\t\t\tpredicate.ResourceVersionChangedPredicate{},\n\t\t\t\tpredicate.GenerationChangedPredicate{},\n\t\t\t)),\n\t\t\tbuilder.OnlyMetadata,\n\t\t).\n\t\tComplete at controllers/nemo_guardrails/nemoguardrail_controller.go:232 (v1alpha1/v1beta1 may change between versions)",
     "file": "controllers/nemo_guardrails/nemoguardrail_controller.go",
-    "line": 279,
-    "node_id": "call_2e2015ecefb1ef7a",
+    "line": 232,
+    "node_id": "call_470db0c8acf7eb8e",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026nemoguardrailsv1alpha1.NemoGuardrails{}).\n\t\t// Watch for changes to ConfigMaps referenced by NemoGuardrails CRs.\n\t\t// OnlyMetadata caches only object metadata (~1KB each) instead of full\n\t\t// objects, preventing OOM when many ConfigMaps exist cluster-wide.\n\t\tWatches at controllers/nemo_guardrails/nemoguardrail_controller.go:279 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026nemoguardrailsv1alpha1.NemoGuardrails{}).\n\t\t// Watch for changes to ConfigMaps referenced by NemoGuardrails CRs.\n\t\t// OnlyMetadata caches only object metadata (~1KB each) instead of full\n\t\t// objects, preventing OOM when many ConfigMaps exist cluster-wide.\n\t\tWatches at controllers/nemo_guardrails/nemoguardrail_controller.go:232 (v1alpha1/v1beta1 may change between versions)",
     "file": "controllers/nemo_guardrails/nemoguardrail_controller.go",
-    "line": 279,
-    "node_id": "call_0c0d233a0fb73dd0",
+    "line": 232,
+    "node_id": "call_3fb3dfd910b3e9ea",
     "domain": "upgrade"
   },
   {
@@ -1033,8 +1043,8 @@
     "severity": "low",
     "message": "Function Reconcile is tested with fake client but never with envtest",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-    "line": 326,
-    "node_id": "fn_1282f368b7062d72",
+    "line": 334,
+    "node_id": "fn_67053c9d5bc6f08f",
     "domain": "testing"
   },
   {
@@ -1141,8 +1151,8 @@
     "severity": "medium",
     "message": "Test function TestRenderCollectionConfigMapData has no error path assertions",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 23,
-    "node_id": "fn_b27bdc4e5fdb5bfd",
+    "line": 29,
+    "node_id": "fn_f90aa4d9d6e627de",
     "domain": "testing"
   },
   {
@@ -1150,8 +1160,8 @@
     "severity": "medium",
     "message": "Test function TestCollectionOverridesByName has no error path assertions",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 92,
-    "node_id": "fn_4aceaa3a6eecc91f",
+    "line": 98,
+    "node_id": "fn_248da4143a5fb95c",
     "domain": "testing"
   },
   {
@@ -1159,8 +1169,8 @@
     "severity": "medium",
     "message": "Test function TestReconcileCollectionConfigMapsRejectsUnselectedOverrideWithoutCollections has no error path assertions",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 124,
-    "node_id": "fn_c09a6624762dd31b",
+    "line": 130,
+    "node_id": "fn_84300d1270157b76",
     "domain": "testing"
   },
   {
@@ -1168,8 +1178,8 @@
     "severity": "medium",
     "message": "Test function TestReconcileCollectionConfigMapsAppliesSystemCollectionOverride has no error path assertions",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 136,
-    "node_id": "fn_b1a7cd63238cbe23",
+    "line": 142,
+    "node_id": "fn_9dc22486e57cc264",
     "domain": "testing"
   },
   {
@@ -1177,8 +1187,8 @@
     "severity": "medium",
     "message": "Test function TestReconcileCollectionConfigMapsDoesNotPartiallyUpdateOnInvalidOverride has no error path assertions",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 198,
-    "node_id": "fn_de7d184674ae072d",
+    "line": 204,
+    "node_id": "fn_4b62bafb86a48082",
     "domain": "testing"
   },
   {
@@ -1186,8 +1196,8 @@
     "severity": "medium",
     "message": "Test function TestReconcileCollectionConfigMapsRejectsOverrideForTenantFallback has no error path assertions",
     "file": "controllers/evalhub/collection_overrides_test.go",
-    "line": 250,
-    "node_id": "fn_8b4f356a5462d7df",
+    "line": 256,
+    "node_id": "fn_330467cc01479ed5",
     "domain": "testing"
   },
   {
@@ -1204,8 +1214,8 @@
     "severity": "medium",
     "message": "Test function TestJobFailureReconciler_ServerAlreadyHandled_NoEvent has no error path assertions",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
-    "line": 150,
-    "node_id": "fn_d9606a3cf925b2f0",
+    "line": 152,
+    "node_id": "fn_1efc47b0edf46195",
     "domain": "testing"
   },
   {
@@ -1213,8 +1223,8 @@
     "severity": "medium",
     "message": "Test function TestJobFailureReconciler_FailureAlreadyReported_RetainsJob has no error path assertions",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
-    "line": 180,
-    "node_id": "fn_40c9d4a60054ea6e",
+    "line": 182,
+    "node_id": "fn_1068b35d6f94db32",
     "domain": "testing"
   },
   {
@@ -1222,8 +1232,8 @@
     "severity": "medium",
     "message": "Test function TestJobFailureReconciler_OOMKill_EmitsEventAndPatchesJob has no error path assertions",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
-    "line": 210,
-    "node_id": "fn_0b1d5a053b67df2e",
+    "line": 212,
+    "node_id": "fn_cf76c1561fd08aec",
     "domain": "testing"
   },
   {
@@ -1231,8 +1241,26 @@
     "severity": "medium",
     "message": "Test function TestJobFailureReconciler_ImagePullError_EmitsEventAndPatchesJob has no error path assertions",
     "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
-    "line": 266,
-    "node_id": "fn_9db28c191a6310c9",
+    "line": 268,
+    "node_id": "fn_5fc56a36683a449a",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestJobFailureReconciler_FailedMount_EmitsEventAndPatchesJob has no error path assertions",
+    "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
+    "line": 317,
+    "node_id": "fn_d608bdf7acfcca3b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestJobFailureReconciler_StaleFailedMount_DoesNotFail has no error path assertions",
+    "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
+    "line": 400,
+    "node_id": "fn_a2b9bbbe43e651a0",
     "domain": "testing"
   },
   {
@@ -2669,62 +2697,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File api/evalhub/v1alpha1/conversion_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "api/evalhub/v1alpha1/conversion_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File controllers/evalhub/metrics_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "controllers/evalhub/metrics_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/tracing/tracing_test.go has 14 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/tracing/tracing_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File controllers/evalhub/tracing_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "controllers/evalhub/tracing_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/tls/watcher_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/tls/watcher_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File controllers/lmes/driver/driver_test.go has 14 non-table-driven tests (consolidation opportunity)",
-    "file": "controllers/lmes/driver/driver_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File controllers/lmes/lmevaljob_controller_test.go has 27 non-table-driven tests (consolidation opportunity)",
-    "file": "controllers/lmes/lmevaljob_controller_test.go",
+    "message": "File controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "controllers/evalhub/evaluation_job_failure_reconciler_lifecycle_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -2741,8 +2715,71 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
+    "message": "File pkg/tracing/tracing_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/tracing/tracing_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File controllers/evalhub/metrics_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "controllers/evalhub/metrics_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File controllers/lmes/lmevaljob_controller_test.go has 27 non-table-driven tests (consolidation opportunity)",
+    "file": "controllers/lmes/lmevaljob_controller_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File api/evalhub/v1alpha1/conversion_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "api/evalhub/v1alpha1/conversion_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File controllers/lmes/driver/driver_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "controllers/lmes/driver/driver_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
     "message": "File pkg/tls/proxy_test.go has 6 non-table-driven tests (consolidation opportunity)",
     "file": "pkg/tls/proxy_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/tls/watcher_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/tls/watcher_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File controllers/evalhub/tracing_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "controllers/evalhub/tracing_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"

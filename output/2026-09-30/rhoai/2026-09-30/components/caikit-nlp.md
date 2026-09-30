@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/caikit-nlp |
 | Commit | 057ce060da00b060dcf1127b408568b8fa3ba86e |
-| Extracted | 2026-09-30T05:05:27Z |
+| Extracted | 2026-09-30T11:13:59Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

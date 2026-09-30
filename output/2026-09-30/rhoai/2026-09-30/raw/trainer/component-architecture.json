@@ -2,7 +2,7 @@
   "component": "trainer",
   "repo": "kubeflow/trainer",
   "commit_sha": "0084033056e696bb9efa40266d3bf9d2c058fcf3",
-  "extracted_at": "2026-09-30T05:00:00Z",
+  "extracted_at": "2026-09-30T11:09:47Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -28,15 +28,15 @@
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
+        "self == oldSelf",
+        "self == oldSelf",
+        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
+        "self == oldSelf",
         "!has(oldSelf.schedulingConstraints) || has(self.schedulingConstraints)",
         "!has(oldSelf.disruptionMode) || has(self.disruptionMode)",
         "!has(oldSelf.resourceClaims) || has(self.resourceClaims)",
         "self == oldSelf",
         "self == oldSelf",
-        "self == oldSelf",
-        "self == oldSelf",
-        "self == oldSelf",
-        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
         "self == oldSelf"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml"
@@ -93,13 +93,13 @@
         "self.metadata.name.matches('^[a-z]([-a-z0-9]*[a-z0-9])?$')",
         "size(self.metadata.name) \u003c= 63",
         "self == oldSelf",
+        "self \u003e= 1",
+        "self == oldSelf",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
         "self in ['trainer.kubeflow.org/trainjob-controller', 'kueue.x-k8s.io/multikueue']",
         "self == oldSelf",
         "self == oldSelf",
-        "self == oldSelf",
-        "self \u003e= 1",
         "has(self.lastUpdatedTime)"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml"
@@ -118,11 +118,11 @@
       ],
       "fields_count": 1307,
       "validation_rules": [
-        "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
-        "!self.exists(c, c == 'node')",
-        "self \u003e= 1",
-        "self \u003e= 1",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
+        "self == oldSelf",
+        "self == oldSelf",
+        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
+        "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
         "!has(oldSelf.schedulingConstraints) || has(self.schedulingConstraints)",
@@ -132,10 +132,10 @@
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
-        "self == oldSelf",
-        "self == oldSelf",
-        "self == oldSelf",
-        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)"
+        "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
+        "self \u003e= 1",
+        "self \u003e= 1",
+        "!self.exists(c, c == 'node')"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml"
     }

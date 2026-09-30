@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | llm-d/llm-d-inference-scheduler |
 | Commit | 530982f83005d81c4910b3e1eb1d24bd5b0b7fd5 |
-| Extracted | 2026-09-30T05:04:13Z |
+| Extracted | 2026-09-30T11:12:47Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

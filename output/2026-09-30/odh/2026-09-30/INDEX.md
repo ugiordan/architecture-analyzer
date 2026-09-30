@@ -2,8 +2,8 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-09-30T05:10:14Z  
-**Components**: 42  
+**Generated**: 2026-09-30T11:20:00Z  
+**Components**: 44  
 
 ## How to Find Information
 
@@ -55,6 +55,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | feast |  | 0 | 1 | 162 | [feast.md](components/feast.md) |
 | fms-guardrails-orchestrator |  | 0 | 0 | 0 | [fms-guardrails-orchestrator.md](components/fms-guardrails-orchestrator.md) |
 | guardrails-detectors |  | 0 | 0 | 1 | [guardrails-detectors.md](components/guardrails-detectors.md) |
+| kale |  | 0 | 0 | 19 | [kale.md](components/kale.md) |
 | kserve | KServe | 35 | 6 | 127 | [kserve.md](components/kserve.md) |
 | kserve-autogluon-server |  | 26 | 6 | 82 | [kserve-autogluon-server.md](components/kserve-autogluon-server.md) |
 | kube-auth-proxy |  | 0 | 0 | 42 | [kube-auth-proxy.md](components/kube-auth-proxy.md) |
@@ -68,11 +69,11 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | llm-d-inference-scheduler |  | 2 | 4 | 65 | [llm-d-inference-scheduler.md](components/llm-d-inference-scheduler.md) |
 | llm-d-kv-cache |  | 0 | 0 | 35 | [llm-d-kv-cache.md](components/llm-d-kv-cache.md) |
 | lm-evaluation-harness |  | 0 | 0 | 33 | [lm-evaluation-harness.md](components/lm-evaluation-harness.md) |
+| mcp-lifecycle-module-operator | MCP Lifecycle Module operator, MCP Lifecycle operator | 1 | 1 | 13 | [mcp-lifecycle-module-operator.md](components/mcp-lifecycle-module-operator.md) |
 | mlflow |  | 0 | 1 | 767 | [mlflow.md](components/mlflow.md) |
 | mlflow-operator |  | 3 | 1 | 24 | [mlflow-operator.md](components/mlflow-operator.md) |
 | model-registry |  | 0 | 1 | 86 | [model-registry.md](components/model-registry.md) |
 | model-registry-operator | Model Registry operator | 1 | 5 | 21 | [model-registry-operator.md](components/model-registry-operator.md) |
-| modelmesh |  | 0 | 1 | 0 | [modelmesh.md](components/modelmesh.md) |
 | modelmesh-serving | ModelMesh | 4 | 3 | 29 | [modelmesh-serving.md](components/modelmesh-serving.md) |
 | models-as-a-service |  | 0 | 5 | 63 | [models-as-a-service.md](components/models-as-a-service.md) |
 | notebooks |  | 0 | 9 | 15 | [notebooks.md](components/notebooks.md) |
@@ -80,9 +81,10 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | odh-model-controller | ODH Model Controller, omc | 1 | 3 | 48 | [odh-model-controller.md](components/odh-model-controller.md) |
 | ogx-k8s-operator |  | 2 | 2 | 33 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | opendatahub-operator | ODH operator, odh-operator | 1 | 3 | 100 | [opendatahub-operator.md](components/opendatahub-operator.md) |
+| praxis-extproc |  | 0 | 1 | 0 | [praxis-extproc.md](components/praxis-extproc.md) |
 | spark-operator |  | 3 | 1 | 38 | [spark-operator.md](components/spark-operator.md) |
 | trainer |  | 4 | 0 | 28 | [trainer.md](components/trainer.md) |
-| training-operator | Training operator, Kubeflow Training operator | 6 | 1 | 22 | [training-operator.md](components/training-operator.md) |
+| trainer-operator | Trainer operator, Kubeflow Trainer operator | 1 | 0 | 18 | [trainer-operator.md](components/trainer-operator.md) |
 | trustyai-service-operator | TrustyAI operator | 5 | 3 | 40 | [trustyai-service-operator.md](components/trustyai-service-operator.md) |
 | workload-variant-autoscaler |  | 0 | 1 | 25 | [workload-variant-autoscaler.md](components/workload-variant-autoscaler.md) |
 

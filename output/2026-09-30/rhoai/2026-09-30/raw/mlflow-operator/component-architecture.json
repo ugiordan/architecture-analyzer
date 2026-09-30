@@ -2,7 +2,7 @@
   "component": "mlflow-operator",
   "repo": "opendatahub-io/mlflow-operator",
   "commit_sha": "7948a12113ee4af009b6608e21c70ccf83d3ca1d",
-  "extracted_at": "2026-09-30T05:02:04Z",
+  "extracted_at": "2026-09-30T11:09:06Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -97,8 +97,8 @@
         "!has(self.traceArchival) || !self.traceArchival.enabled || !has(self.storage) || !((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom)) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')",
         "!has(oldSelf.storage) || (has(self.storage) \u0026\u0026 ((!has(oldSelf.storage.accessModes) \u0026\u0026 (!has(self.storage.accessModes) || self.storage.accessModes == ['ReadWriteOnce'])) || (has(oldSelf.storage.accessModes) \u0026\u0026 has(self.storage.accessModes) \u0026\u0026 self.storage.accessModes == oldSelf.storage.accessModes)))",
         "self.all(key, size(self[key]) \u003c= 63)",
-        "self.all(key, size(self[key]) \u003c= 63)",
-        "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))"
+        "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
+        "self.all(key, size(self[key]) \u003c= 63)"
       ],
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml"
     }
@@ -3641,17 +3641,17 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml",
-      "field": "spec.image.imagePullPolicy",
+      "field": "spec.image.image",
       "crd_kind": "MLflow",
-      "description": "CRD MLflow has user-settable image field \"spec.image.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD MLflow has user-settable image field \"spec.image.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml",
-      "field": "spec.image.image",
+      "field": "spec.image.imagePullPolicy",
       "crd_kind": "MLflow",
-      "description": "CRD MLflow has user-settable image field \"spec.image.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD MLflow has user-settable image field \"spec.image.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "GHA_MISSING_PERMISSIONS",

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | red-hat-data-services/models-as-a-service |
 | Commit | 073afaf9dbbb95dcc98ed69dadb723f811b426f7 |
-| Extracted | 2026-09-30T05:02:03Z |
+| Extracted | 2026-09-30T11:09:05Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -266,7 +266,7 @@
 
 | Name | Type | Evidence |
 |------|------|----------|
-| PostgreSQL | database | uri:postgresql:// |
+| PostgreSQL | database | uri:postgres:// |
 | OpenTelemetry Collector | observability | env:OTEL_TRACES_EXPORTER |
 | kubernetes | service | dns:kubernetes.default.svc |
 

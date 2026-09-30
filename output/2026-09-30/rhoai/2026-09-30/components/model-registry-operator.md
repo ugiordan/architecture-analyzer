@@ -11,7 +11,7 @@
 | Repository | opendatahub-io/model-registry-operator |
 | Aliases | Model Registry operator |
 | Commit | cbb3310c1489ef0e06942e444c80e0146f41c9dd |
-| Extracted | 2026-09-30T04:59:28Z |
+| Extracted | 2026-09-30T11:10:03Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -84,12 +84,12 @@
 **catalog-controller-manager / manager**
 
 - Ports: 0/TCP (webhook-server)
-- Env: `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/openshift/origin-kube-rbac-proxy:latest`
+- Env: `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/openshift/origin-kube-rbac-proxy:latest`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`
 
 **model-registry-operator-controller-manager / manager**
 
 - Ports: 0/TCP (webhook-server), 0/TCP (https)
-- Env: `ENABLE_WEBHOOKS=true`, `OAUTH_PROXY_IMAGE=quay.io/openshift/origin-oauth-proxy:latest`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/openshift/origin-kube-rbac-proxy:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_IMAGE=quay.io/opendatahub/model-registry:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `STORAGE_MIGRATION_SOURCE_VERSION=v1alpha1`, `STORAGE_MIGRATION_TARGET_VERSION=v1beta1`, `CREATE_AUTH_RESOURCES=true`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`
+- Env: `OAUTH_PROXY_IMAGE=quay.io/openshift/origin-oauth-proxy:latest`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/openshift/origin-kube-rbac-proxy:latest`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_IMAGE=quay.io/opendatahub/model-registry:latest`, `STORAGE_MIGRATION_SOURCE_VERSION=v1alpha1`, `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `STORAGE_MIGRATION_TARGET_VERSION=v1beta1`, `CREATE_AUTH_RESOURCES=true`
 
 **template-value / rest-container**
 

@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | feast-dev/feast |
 | Commit | 4ea7406e86a51016db1942a319ba8d1bcc6d5efa |
-| Extracted | 2026-09-30T05:02:37Z |
+| Extracted | 2026-09-30T11:10:21Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

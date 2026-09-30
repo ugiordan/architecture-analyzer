@@ -10,7 +10,7 @@
 |-------|-------|
 | Repository | opendatahub-io/model-metadata-collection |
 | Commit | f8f7c98b980df3fe273199c22bf4effce6fa4df6 |
-| Extracted | 2026-09-30T05:05:53Z |
+| Extracted | 2026-09-30T11:14:20Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -3,7 +3,7 @@
 
 ## Summary
 
-112 interactions across 49 components.
+110 interactions across 48 components.
 
 ## All Interactions
 
@@ -66,8 +66,6 @@
 | odh-cli | kueue | component-ref:provider | directory: pkg/lint/checks/components/kueue |
 | odh-cli | llama-stack | component-ref:import | go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/llamastack |
 | odh-cli | llama-stack | component-ref:provider | directory: pkg/lint/checks/components/llamastack |
-| odh-cli | modelmesh | component-ref:import | go import: github.com/opendatahub-io/odh-cli/pkg/lint/checks/components/modelmesh |
-| odh-cli | modelmesh | component-ref:provider | directory: pkg/lint/checks/components/modelmesh |
 | odh-cli | notebooks | component-ref:import | go import: github.com/opendatahub-io/odh-cli/pkg/backup/dependencies/notebooks |
 | odh-cli | opendatahub-operator | component-ref:import | go import: github.com/opendatahub-io/opendatahub-operator/pkg/clusterhealth |
 | odh-cli | opendatahub-operator | go-module | import dependency |
@@ -233,10 +231,6 @@
 
 **Depends on:** odh-platform-utilities (go-module), operator-chaos (go-module), rhods-operator (webhook-ref)  
 
-### modelmesh
-
-**Used by:** odh-cli (component-ref:import), odh-cli (component-ref:provider)  
-
 ### modelmesh-runtime-adapter
 
 **Depends on:** kserve (component-ref:import)  
@@ -256,7 +250,7 @@
 
 ### odh-cli
 
-**Depends on:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), kserve (component-ref:import), kserve (component-ref:provider), kueue (component-ref:import), kueue (component-ref:provider), llama-stack (component-ref:import), llama-stack (component-ref:provider), modelmesh (component-ref:import), modelmesh (component-ref:provider), notebooks (component-ref:import), opendatahub-operator (component-ref:import), opendatahub-operator (go-module), trainer (component-ref:import), training-operator (component-ref:import), training-operator (component-ref:provider)  
+**Depends on:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), kserve (component-ref:import), kserve (component-ref:provider), kueue (component-ref:import), kueue (component-ref:provider), llama-stack (component-ref:import), llama-stack (component-ref:provider), notebooks (component-ref:import), opendatahub-operator (component-ref:import), opendatahub-operator (go-module), trainer (component-ref:import), training-operator (component-ref:import), training-operator (component-ref:provider)  
 
 ### odh-dashboard
 

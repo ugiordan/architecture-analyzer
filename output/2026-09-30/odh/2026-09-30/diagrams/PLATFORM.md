@@ -8,12 +8,12 @@
 
 | Metric | Count |
 |--------|-------|
-| Components | 42 |
-| CRDs | 104 |
+| Components | 44 |
+| CRDs | 100 |
 | Services | 85 |
 | Secrets | 70 |
-| Cluster Roles | 112 |
-| Cross-Component Dependencies | 42 |
+| Cluster Roles | 122 |
+| Cross-Component Dependencies | 44 |
 
 ## Component Registry
 
@@ -31,6 +31,7 @@
 | feast |
 | fms-guardrails-orchestrator |
 | guardrails-detectors |
+| kale |
 | kserve |
 | kserve-autogluon-server |
 | kube-auth-proxy |
@@ -44,11 +45,11 @@
 | llm-d-inference-scheduler |
 | llm-d-kv-cache |
 | lm-evaluation-harness |
+| mcp-lifecycle-module-operator |
 | mlflow |
 | mlflow-operator |
 | model-registry |
 | model-registry-operator |
-| modelmesh |
 | modelmesh-serving |
 | models-as-a-service |
 | notebooks |
@@ -56,9 +57,10 @@
 | odh-model-controller |
 | ogx-k8s-operator |
 | opendatahub-operator |
+| praxis-extproc |
 | spark-operator |
 | trainer |
-| training-operator |
+| trainer-operator |
 | trustyai-service-operator |
 | workload-variant-autoscaler |
 
@@ -96,6 +98,7 @@
 | kueue | LocalQueue |
 | llm-d-inference-scheduler | InferenceModelRewrite |
 | llm-d-inference-scheduler | InferenceObjective |
+| mcp-lifecycle-module-operator | MCPLifecycleOperator |
 | mlflow-operator | MLflow |
 | mlflow-operator | MLflowConfig |
 | mlflow-operator | MLflowOperator |
@@ -112,12 +115,7 @@
 | trainer | OptimizationJob |
 | trainer | TrainJob |
 | trainer | TrainingRuntime |
-| training-operator | JAXJob |
-| training-operator | MPIJob |
-| training-operator | PaddleJob |
-| training-operator | PyTorchJob |
-| training-operator | TFJob |
-| training-operator | XGBoostJob |
+| trainer-operator | Trainer |
 | trustyai-service-operator | EvalHub |
 | trustyai-service-operator | LMEvalJob |
 | trustyai-service-operator | TrustyAIService |
@@ -142,6 +140,7 @@
 | kubeflow | data-science-pipelines-operator | go-module |
 | kubeflow | operator-chaos | go-module |
 | llm-d-inference-scheduler | kserve | watches-crd:InferencePool |
+| mcp-lifecycle-module-operator | odh-platform-utilities | go-module |
 | mlflow-operator | mlflow-operator | go-module |
 | model-registry-operator | odh-platform-utilities | go-module |
 | model-registry-operator | operator-chaos | go-module |
@@ -162,6 +161,7 @@
 | opendatahub-operator | odh-platform-utilities | go-module |
 | opendatahub-operator | opendatahub-operator | go-module |
 | spark-operator | odh-platform-utilities | go-module |
+| trainer-operator | odh-platform-utilities | go-module |
 | trustyai-service-operator | odh-platform-utilities | go-module |
 | workload-variant-autoscaler | kserve | watches-crd:InferencePool |
 | codeflare-operator | opendatahub-operator | webhook-ref |
@@ -194,6 +194,7 @@
 | cacerts | llm-d-inference-scheduler | Opaque |
 | istio-kubeconfig | llm-d-inference-scheduler | Opaque |
 | istiod-tls | llm-d-inference-scheduler | Opaque |
+| webhook-server-cert | mcp-lifecycle-module-operator | Opaque |
 | controller-manager-metrics-tls | mlflow-operator | Opaque |
 | aihub-controller-manager-metrics-tls | model-registry-operator | Opaque |
 | catalog-webhook-service | model-registry-operator | Opaque |
@@ -237,9 +238,8 @@
 | redhat-ods-operator-controller-webhook-cert | opendatahub-operator | kubernetes.io/tls |
 | rhods-operator-metrics-tls | opendatahub-operator | Opaque |
 | webhook-server-cert | spark-operator | Opaque |
+| kubeflow-trainer-webhook-cert | trainer-operator | Opaque |
 | kubeflow-trainer-webhook-cert | trainer | Opaque |
-| kubeflow-training-operator-webhook-cert | training-operator | Opaque |
-| training-operator-webhook-cert | training-operator | Opaque |
 | webhook-server-cert | trustyai-service-operator | kubernetes.io/tls |
 | epp-metrics-token | workload-variant-autoscaler | Opaque |
 | metrics-server-cert | workload-variant-autoscaler | Opaque |
@@ -277,6 +277,7 @@
 | kserve-autogluon-server | kserve-proxy-role | 2 |
 | kserve | kserve-manager-role | 40 |
 | kserve | kserve-proxy-role | 2 |
+| mcp-lifecycle-module-operator | manager-role | 36 |
 | mlflow-operator | manager-role | 23 |
 | mlflow-operator | metrics-auth-role | 2 |
 | mlflow-operator | metrics-reader | 0 |
@@ -343,6 +344,21 @@
 | spark-operator | spark-operator-sparkapplication-editor-role | 2 |
 | spark-operator | spark-operator-sparkapplication-viewer-role | 2 |
 | spark-operator | spark-operator-tls-profile | 2 |
+| trainer-operator | kubeflow-trainer-admin | 0 |
+| trainer-operator | kubeflow-trainer-cache-initializer | 3 |
+| trainer-operator | kubeflow-trainer-controller-manager | 19 |
+| trainer-operator | kubeflow-trainer-edit | 5 |
+| trainer-operator | kubeflow-trainer-view | 2 |
+| trainer-operator | kubeflow-trainer-view-cluster-runtimes | 1 |
+| trainer-operator | manager-role | 48 |
+| trainer-operator | metrics-reader | 0 |
+| trainer-operator | trainer-admin-role | 2 |
+| trainer-operator | trainer-metrics-reader | 0 |
+| trainer-operator | trainer-tls-profile | 2 |
+| trainer-operator | trainer-viewer-role | 2 |
+| trainer-operator | training-admin | 6 |
+| trainer-operator | training-edit | 6 |
+| trainer-operator | training-view | 6 |
 | trainer | kubeflow-trainer-admin | 0 |
 | trainer | kubeflow-trainer-cache-initializer | 3 |
 | trainer | kubeflow-trainer-controller-manager | 19 |
@@ -354,12 +370,6 @@
 | trainer | training-admin | 6 |
 | trainer | training-edit | 6 |
 | trainer | training-view | 6 |
-| training-operator | kubeflow-training-admin | 0 |
-| training-operator | kubeflow-training-edit | 15 |
-| training-operator | kubeflow-training-view | 13 |
-| training-operator | training-edit | 12 |
-| training-operator | training-operator | 32 |
-| training-operator | training-view | 12 |
 
 ## Network Topology
 
@@ -404,6 +414,7 @@
 | llm-d-inference-scheduler | inference-gateway-istio-nodeport | NodePort | 15021/TCP, 80/TCP |
 | llm-d-inference-scheduler | istiod-llm-d-gateway | ClusterIP | 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP |
 | llm-d-inference-scheduler | service | ClusterIP | 8080/TCP |
+| mcp-lifecycle-module-operator | webhook-service | ClusterIP | 443/TCP |
 | mlflow-operator | mlflow-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | mlflow | env-port-default | python-source | 9137/TCP |
 | model-registry-operator | catalog-webhook-service | ClusterIP | 443/TCP |
@@ -414,7 +425,6 @@
 | modelmesh-serving | etcd | ClusterIP | 2379/TCP |
 | modelmesh-serving | modelmesh-controller | ClusterIP | 8080/TCP |
 | modelmesh-serving | modelmesh-webhook-server-service | ClusterIP | 9443/TCP |
-| modelmesh | model-mesh | ClusterIP | 8033/TCP |
 | models-as-a-service | maas-api | ClusterIP | 8080/TCP |
 | models-as-a-service | maas-controller-webhook-service | ClusterIP | 443/TCP |
 | models-as-a-service | maas-discovery | ClusterIP | 8443/TCP |
@@ -444,8 +454,8 @@
 | ogx-k8s-operator | ogx-k8s-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | ogx-k8s-operator | ogx-k8s-operator-webhook-service | ClusterIP | 443/TCP |
 | opendatahub-operator | webhook-service | ClusterIP | 443/TCP |
+| praxis-extproc | payload-processing | ClusterIP | 9004/TCP |
 | spark-operator | spark-operator-webhook-svc | ClusterIP | 443/TCP |
-| training-operator | training-operator | ClusterIP | 8080/TCP, 443/TCP |
 | trustyai-service-operator | trustyai-service-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | trustyai-service-operator | trustyai-service-operator-metrics-service | ClusterIP | 8443/TCP |
 | trustyai-service-operator | trustyai-service-operator-webhook-service | ClusterIP | 443/TCP |

@@ -3,7 +3,7 @@
 
 ## Summary
 
-103 interactions across 37 components.
+104 interactions across 38 components.
 
 ## All Interactions
 
@@ -54,6 +54,7 @@
 | llm-d-kv-cache | vllm | component-ref:adapter | file: pkg/kvevents/engineadapter/vllm_adapter.go |
 | llm-d-kv-cache | vllm | component-ref:import | python import: vllm |
 | lm-evaluation-harness | vllm | component-ref:import | python import: vllm |
+| mcp-lifecycle-module-operator | odh-platform-utilities | go-module | import dependency |
 | mlflow | model-registry | component-ref:import | python import: mlflow.entities.model_registry |
 | mlflow-operator | mlflow | component-ref:import | python import: mlflow.store.db.utils |
 | mlflow-operator | mlflow-operator | go-module | import dependency |
@@ -105,7 +106,7 @@
 | opendatahub-operator | spark-operator | component-ref:import | go import: github.com/opendatahub-io/opendatahub-operator/v2/internal/controller/modules/sparkoperator |
 | opendatahub-operator | trainer | component-ref:import | go import: github.com/opendatahub-io/opendatahub-operator/v2/internal/controller/modules/trainer |
 | spark-operator | odh-platform-utilities | go-module | import dependency |
-| training-operator | kubeflow | component-ref:import | go import: github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1 |
+| trainer-operator | odh-platform-utilities | go-module | import dependency |
 | trustyai-service-operator | eval-hub | component-ref:import | go import: github.com/trustyai-explainability/trustyai-service-operator/api/evalhub/v1 |
 | trustyai-service-operator | eval-hub | component-ref:provider | directory: config/components/evalhub |
 | trustyai-service-operator | kserve | component-ref:import | go import: github.com/kserve/kserve/pkg/apis/serving/v1alpha1 |
@@ -158,7 +159,7 @@
 ### kubeflow
 
 **Depends on:** data-science-pipelines-operator (go-module), operator-chaos (go-module)  
-**Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), model-registry (component-ref:import), odh-dashboard (component-ref:import), odh-model-controller (component-ref:import), training-operator (component-ref:import)  
+**Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), model-registry (component-ref:import), odh-dashboard (component-ref:import), odh-model-controller (component-ref:import)  
 
 ### kuberay
 
@@ -193,6 +194,10 @@
 ### lm-evaluation-harness
 
 **Depends on:** vllm (component-ref:import)  
+
+### mcp-lifecycle-module-operator
+
+**Depends on:** odh-platform-utilities (go-module)  
 
 ### mlflow
 
@@ -237,7 +242,7 @@
 
 ### odh-platform-utilities
 
-**Used by:** data-science-pipelines-operator (go-module), kserve (go-module), model-registry-operator (go-module), odh-dashboard (go-module), ogx-k8s-operator (go-module), opendatahub-operator (go-module), spark-operator (go-module), trustyai-service-operator (go-module)  
+**Used by:** data-science-pipelines-operator (go-module), kserve (go-module), mcp-lifecycle-module-operator (go-module), model-registry-operator (go-module), odh-dashboard (go-module), ogx-k8s-operator (go-module), opendatahub-operator (go-module), spark-operator (go-module), trainer-operator (go-module), trustyai-service-operator (go-module)  
 
 ### ogx-k8s-operator
 
@@ -262,9 +267,9 @@
 
 **Used by:** data-science-pipelines (component-ref:import), data-science-pipelines (component-ref:provider), opendatahub-operator (component-ref:import)  
 
-### training-operator
+### trainer-operator
 
-**Depends on:** kubeflow (component-ref:import)  
+**Depends on:** odh-platform-utilities (go-module)  
 
 ### trustyai-service-operator
 

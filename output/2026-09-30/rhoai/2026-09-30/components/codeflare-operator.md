@@ -11,7 +11,7 @@
 | Repository | project-codeflare/codeflare-operator |
 | Aliases | CodeFlare operator |
 | Commit | 2d7cf949d1a6c7ae660694c7dac4f4d7ead5d4a9 |
-| Extracted | 2026-09-30T04:59:27Z |
+| Extracted | 2026-09-30T11:07:55Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

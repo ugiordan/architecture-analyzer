@@ -4,8 +4,8 @@
     "TrustyAI operator"
   ],
   "repo": "trustyai-explainability/trustyai-service-operator",
-  "commit_sha": "2623485527091bf91d8884858d549901ff0c8496",
-  "extracted_at": "2026-09-30T04:59:34Z",
+  "commit_sha": "9d8d4d27822198dd16d2b3e7be27864229f68056",
+  "extracted_at": "2026-09-30T11:08:12Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -615,7 +615,7 @@
       },
       {
         "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-        "line": 102,
+        "line": 103,
         "marker": "+kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;patch",
         "parsed": {
           "groups": [
@@ -634,7 +634,7 @@
       },
       {
         "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-        "line": 103,
+        "line": 104,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=namespaces,verbs=get;list;watch",
         "parsed": {
           "groups": [
@@ -652,7 +652,7 @@
       },
       {
         "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-        "line": 104,
+        "line": 105,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=pods,verbs=get;list;watch",
         "parsed": {
           "groups": [
@@ -670,7 +670,7 @@
       },
       {
         "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-        "line": 105,
+        "line": 106,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=pods/log,verbs=get",
         "parsed": {
           "groups": [
@@ -686,8 +686,8 @@
       },
       {
         "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-        "line": 106,
-        "marker": "+kubebuilder:rbac:groups=\"\",resources=events,verbs=create;patch",
+        "line": 107,
+        "marker": "+kubebuilder:rbac:groups=\"\",resources=events,verbs=create;patch;list",
         "parsed": {
           "groups": [
             "\"\""
@@ -697,13 +697,14 @@
           ],
           "verbs": [
             "create",
-            "patch"
+            "patch",
+            "list"
           ]
         }
       },
       {
         "file": "controllers/evalhub/evaluation_job_failure_reconciler.go",
-        "line": 107,
+        "line": 108,
         "marker": "+kubebuilder:rbac:groups=trustyai.opendatahub.io,resources=evalhubs,verbs=get;list;watch",
         "parsed": {
           "groups": [
@@ -1556,7 +1557,7 @@
       "type": "For",
       "gvk": "batch/v1/Job",
       "controller": "EvalHubEvaluationJobFailureReconciler",
-      "source": "controllers/evalhub/evaluation_job_failure_reconciler.go:203"
+      "source": "controllers/evalhub/evaluation_job_failure_reconciler.go:210"
     },
     {
       "type": "For",
@@ -1586,7 +1587,7 @@
       "type": "For",
       "gvk": "nemo_guardrails/v1alpha1/NemoGuardrails",
       "controller": "NemoGuardrailsReconciler",
-      "source": "controllers/nemo_guardrails/nemoguardrail_controller.go:280"
+      "source": "controllers/nemo_guardrails/nemoguardrail_controller.go:233"
     },
     {
       "type": "For",
@@ -1732,7 +1733,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/evaluation_job_failure_reconciler.go",
-            "line": 443
+            "line": 451
           }
         },
         {
@@ -1810,7 +1811,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/nemo_guardrails/nemoguardrail_controller.go",
-            "line": 111
+            "line": 108
           }
         },
         {
@@ -4459,79 +4460,6 @@
       "source": "api/lmes/v1alpha1/lmevaljob_types.go:95"
     },
     {
-      "name": "MCPGatewayStatus",
-      "fields": [
-        {
-          "name": "MCPGatewayFound",
-          "type": "bool",
-          "json_tag": "mcpGatewayFound",
-          "required": true
-        },
-        {
-          "name": "MCPGatewayError",
-          "type": "string",
-          "json_tag": "mcpGatewayError,omitempty"
-        }
-      ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:108",
-      "is_status": true
-    },
-    {
-      "name": "BBRPluginStatus",
-      "fields": [
-        {
-          "name": "BBRPluginFound",
-          "type": "bool",
-          "json_tag": "bbrPluginFound",
-          "required": true
-        },
-        {
-          "name": "BBRPluginError",
-          "type": "string",
-          "json_tag": "bbrPluginError,omitempty"
-        }
-      ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:113",
-      "is_status": true
-    },
-    {
-      "name": "NemoGuardrailStatus",
-      "doc": "NemoGuardrailStatus defines the observed state of NemoGuardrails",
-      "fields": [
-        {
-          "name": "Phase",
-          "type": "string",
-          "json_tag": "phase,omitempty"
-        },
-        {
-          "name": "Conditions",
-          "type": "[]common.Condition",
-          "json_tag": "conditions,omitempty",
-          "doc": "Conditions describes the state of the NemoGuardrails resource."
-        },
-        {
-          "name": "CA",
-          "type": "*CAStatus",
-          "json_tag": "ca,omitempty",
-          "doc": "CA describes the status of the CA configmaps"
-        },
-        {
-          "name": "MCP",
-          "type": "*MCPGatewayStatus",
-          "json_tag": "mcpGateway,omitempty",
-          "doc": "MCP describes the status of the MCP-related resources"
-        },
-        {
-          "name": "BBRPlugin",
-          "type": "*BBRPluginStatus",
-          "json_tag": "bbrPlugin,omitempty",
-          "doc": "BBRPlugin describes the status of the BBR plugin"
-        }
-      ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:119",
-      "is_status": true
-    },
-    {
       "name": "NemoGuardrails",
       "doc": "NemoGuardrails is the Schema for the nemoguardrails API",
       "fields": [
@@ -4558,7 +4486,7 @@
           "json_tag": "status,omitempty"
         }
       ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:141"
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:111"
     },
     {
       "name": "NemoGuardrailsList",
@@ -4583,7 +4511,7 @@
           "required": true
         }
       ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:152"
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:122"
     },
     {
       "name": "NemoConfig",
@@ -4612,31 +4540,6 @@
         }
       ],
       "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:29"
-    },
-    {
-      "name": "MCPGatewayConfig",
-      "doc": "MCPGatewayConfig holds the name and namespace of the MCPGatewayExtension resource",
-      "fields": [
-        {
-          "name": "Name",
-          "type": "string",
-          "json_tag": "name,omitempty",
-          "doc": "MCPGatewayName is the name of the MCPGatewayExtension resource",
-          "markers": [
-            "+kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9.]*[a-z0-9])?)?$`"
-          ]
-        },
-        {
-          "name": "Namespace",
-          "type": "string",
-          "json_tag": "namespace,omitempty",
-          "doc": "MCPGatewayNamespace is the namespace of the MCPGatewayExtension resource",
-          "markers": [
-            "+kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9.]*[a-z0-9])?)?$`"
-          ]
-        }
-      ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:40"
     },
     {
       "name": "NemoGuardrailsSpec",
@@ -4688,7 +4591,7 @@
           "default": "true"
         }
       ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:52",
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:40",
       "is_spec": true
     },
     {
@@ -4702,7 +4605,7 @@
           "doc": "Pod defines pod-level scheduling constraints"
         }
       ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:77"
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:65"
     },
     {
       "name": "NemoGuardrailsPodTemplate",
@@ -4725,15 +4628,9 @@
           "type": "map[string]string",
           "json_tag": "nodeSelector,omitempty",
           "doc": "NodeSelector is a map of key-value pairs for node scheduling"
-        },
-        {
-          "name": "MCPGateway",
-          "type": "*MCPGatewayConfig",
-          "json_tag": "mcpGateway,omitempty",
-          "doc": "MCPGateway is the name and namespace of the MCPGatewayExtension resource"
         }
       ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:84"
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:72"
     },
     {
       "name": "CAStatus",
@@ -4771,7 +4668,32 @@
           "json_tag": "userCAError,omitempty"
         }
       ],
-      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:99",
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:84",
+      "is_status": true
+    },
+    {
+      "name": "NemoGuardrailStatus",
+      "doc": "NemoGuardrailStatus defines the observed state of NemoGuardrails",
+      "fields": [
+        {
+          "name": "Phase",
+          "type": "string",
+          "json_tag": "phase,omitempty"
+        },
+        {
+          "name": "Conditions",
+          "type": "[]common.Condition",
+          "json_tag": "conditions,omitempty",
+          "doc": "Conditions describes the state of the NemoGuardrails resource."
+        },
+        {
+          "name": "CA",
+          "type": "*CAStatus",
+          "json_tag": "ca,omitempty",
+          "doc": "CA describes the status of the CA configmaps"
+        }
+      ],
+      "source": "api/nemo_guardrails/v1alpha1/nemoguardrails_types.go:94",
       "is_status": true
     },
     {
@@ -6444,6 +6366,18 @@
       "source": "controllers/evalhub/evaluation_job_failure_reconciler.go"
     },
     {
+      "name": "eventReasonFailedAttachVolume",
+      "value": "FailedAttachVolume",
+      "category": "general",
+      "source": "controllers/evalhub/evaluation_job_failure_reconciler.go"
+    },
+    {
+      "name": "eventReasonFailedMount",
+      "value": "FailedMount",
+      "category": "general",
+      "source": "controllers/evalhub/evaluation_job_failure_reconciler.go"
+    },
+    {
       "name": "eventsPathFmt",
       "value": "%s/api/v1/evaluations/jobs/%s/events",
       "category": "general",
@@ -6497,13 +6431,20 @@
       "name": "schedulingGracePeriod",
       "value": "2 * time.Minute",
       "category": "general",
-      "doc": "schedulingGracePeriod is how long a pod may remain Unschedulable before the operator treats it as\na terminal failure. This allows transient conditions (e.g. autoscaler node provisioning) to resolve\nbefore EvalHub is notified. Permanent conditions (e.g. missing PVC) still fire after the period.",
+      "doc": "schedulingGracePeriod is how long a pod may remain Unschedulable before the operator treats it as\na terminal failure. This allows transient conditions (e.g. autoscaler node provisioning) to resolve\nbefore EvalHub is notified. Permanent conditions (e.g. missing PVC) still fire after the period.\nThe same window is used for volume-mount detection grace, \"recent\" FailedMount Events, and the\ninterval between post-grace FailedMount rechecks.",
       "source": "controllers/evalhub/evaluation_job_failure_reconciler.go"
     },
     {
       "name": "sidecarContainerName",
       "value": "sidecar",
       "category": "general",
+      "source": "controllers/evalhub/evaluation_job_failure_reconciler.go"
+    },
+    {
+      "name": "volumeMountWatchMaxAge",
+      "value": "10 * time.Minute",
+      "category": "general",
+      "doc": "volumeMountWatchMaxAge caps how long after schedule we keep rechecking for FailedMount Events.\nAfter the initial grace period, requeues continue on schedulingGracePeriod until this cap so a\nlate-arriving FailedMount is still observed without unbounded polling.",
       "source": "controllers/evalhub/evaluation_job_failure_reconciler.go"
     },
     {
@@ -7699,30 +7640,6 @@
       "value": "deployment.tmpl.yaml",
       "category": "general",
       "source": "controllers/nemo_guardrails/deployment.go"
-    },
-    {
-      "name": "bbrSubFilterName",
-      "value": "envoy.filters.http.ext_proc.bbr",
-      "category": "general",
-      "source": "controllers/nemo_guardrails/envoy_filter.go"
-    },
-    {
-      "name": "envoyFilterName",
-      "value": "mcp-sse-strip",
-      "category": "general",
-      "source": "controllers/nemo_guardrails/envoy_filter.go"
-    },
-    {
-      "name": "envoyFilterTemplatePath",
-      "value": "envoy-filter.tmpl.yaml",
-      "category": "general",
-      "source": "controllers/nemo_guardrails/envoy_filter.go"
-    },
-    {
-      "name": "mcpGatewayExtensionGVK",
-      "value": "schema.GroupVersionKind{\n\tGroup:\t\t\"mcp.kuadrant.io\",\n\tVersion:\t\"v1alpha1\",\n\tKind:\t\t\"MCPGatewayExtensionList\",\n}",
-      "category": "general",
-      "source": "controllers/nemo_guardrails/mcp_gateway.go"
     },
     {
       "name": "caBundleTemplate",
@@ -9766,7 +9683,7 @@
     "status_conditions": "rich",
     "webhooks": "none"
   },
-  "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 17 resource type(s). exposing 3 service(s) on ports: 443, 8443. runtime dependencies: OpenTelemetry Collector. defining 26 API spec type(s) across 82 struct(s) with 357 total fields. with 518 operator config constants (36 image references, 7 env vars). following 53 reconciliation steps across 5 controller(s). reporting 14 status condition types. integrates with Istio, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/gorch, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
+  "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 17 resource type(s). exposing 3 service(s) on ports: 443, 8443. runtime dependencies: OpenTelemetry Collector. defining 26 API spec type(s) across 79 struct(s) with 348 total fields. with 517 operator config constants (36 image references, 7 env vars). following 53 reconciliation steps across 5 controller(s). reporting 14 status condition types. integrates with Istio, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/gorch, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
   "go_ast_mode": "full",
   "security_annotations": [
     {
