@@ -7,7 +7,7 @@ The architecture analyzer produces several output files depending on the command
 | Command | Output files |
 |---------|-------------|
 | `analyze` | `component-architecture.json`, `diagrams/*` (7 files) |
-| `full-analysis` | All `analyze` outputs + `security-findings.json`, `code-graph.json`, `build-config.json`, `schemas/*.json`, `snapshot-metadata.json` |
+| `full-analysis` | All `analyze` outputs + `security-findings.json`, `code-graph.json`, `build-config.json`, `schemas/*.json`, `context.srclg`, `snapshot-metadata.json` |
 | `scan` | `security-findings.json` (or SARIF) |
 | `context-bundle` | `.srclg` (SrcLang XML) |
 | `quick-index` | `quick-index.json` |
@@ -366,7 +366,7 @@ CRD JSON schemas extracted from `openAPIV3Schema` in CRD YAML files. One file pe
 
 ## SrcLang context bundle (.srclg)
 
-**Produced by:** `context-bundle`
+**Produced by:** `full-analysis` (always, as `context.srclg`), `context-bundle` (on demand, any layer)
 
 Structured XML format for LLM agent consumption. Contains a domain-specialized view of the repository with semantic annotations, optimized for review agents. Reduces raw source (150K-1M tokens) to 15-25K tokens of security-relevant or architecture-relevant content.
 

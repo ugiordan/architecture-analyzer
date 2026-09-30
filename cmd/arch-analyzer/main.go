@@ -26,6 +26,7 @@ import (
 	"github.com/ugiordan/architecture-analyzer/pkg/graph"
 	"github.com/ugiordan/architecture-analyzer/pkg/query"
 	"github.com/ugiordan/architecture-analyzer/pkg/renderer"
+	"github.com/ugiordan/architecture-analyzer/pkg/srclang/compile"
 	"github.com/ugiordan/architecture-analyzer/pkg/validator"
 )
 
@@ -1023,6 +1024,26 @@ func cmdFullAnalysis(args []string) error {
 			fmt.Fprintf(os.Stderr, "Warning: failed to write code graph: %v\n", wErr)
 		} else {
 			fmt.Printf("Code graph written to: %s\n", graphPath)
+		}
+
+		// SrcLang context bundle for LLM consumption (reuses the CPG in memory)
+		fmt.Println("\n=== SrcLang Context Bundle ===")
+		var secAnnotations []extractor.SecurityAnnotation
+		if archResult != nil {
+			secAnnotations = archResult.SecurityAnnotations
+		}
+		bundleDoc, cbErr := compile.Compile(compile.Options{
+			RepoPath:            repoPath,
+			Layer:               "security",
+			CPG:                 cpg,
+			Arch:                archResult,
+			Findings:            findings,
+			SecurityAnnotations: secAnnotations,
+		})
+		if cbErr != nil {
+			fmt.Fprintf(os.Stderr, "Warning: SrcLang compile failed: %v\n", cbErr)
+		} else if wErr := writeContextBundle(filepath.Join(outDir, "context.srclg"), "security", bundleDoc); wErr != nil {
+			fmt.Fprintf(os.Stderr, "Warning: SrcLang write failed: %v\n", wErr)
 		}
 	}
 

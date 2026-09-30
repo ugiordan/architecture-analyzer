@@ -68,7 +68,14 @@ func cmdContextBundle(args []string) error {
 		return fmt.Errorf("compile failed: %w", err)
 	}
 
-	// Check if the document needs splitting
+	return writeContextBundle(*output, *layer, doc)
+}
+
+// writeContextBundle writes a compiled SrcLang document to outputPath as a
+// single .srclg file, or splits it into a directory bundle (outputPath +
+// ".d") when it exceeds the bundle threshold. Shared by the context-bundle
+// command and full-analysis.
+func writeContextBundle(outputPath, layer string, doc *srclang.Document) error {
 	var buf bytes.Buffer
 	if err := srclang.WriteDocument(&buf, doc); err != nil {
 		return fmt.Errorf("serializing document: %w", err)
@@ -76,16 +83,16 @@ func cmdContextBundle(args []string) error {
 
 	if buf.Len() <= compile.BundleThreshold {
 		// Small enough for single file
-		if err := os.WriteFile(*output, buf.Bytes(), 0o644); err != nil {
+		if err := os.WriteFile(outputPath, buf.Bytes(), 0o644); err != nil {
 			return fmt.Errorf("writing output: %w", err)
 		}
-		fmt.Printf("SrcLang document written to %s (%s layer, %dKB)\n", *output, *layer, buf.Len()/1024)
+		fmt.Printf("SrcLang document written to %s (%s layer, %dKB)\n", outputPath, layer, buf.Len()/1024)
 		return nil
 	}
 
 	// Split into directory bundle
 	bundle := compile.SplitBundle(doc)
-	bundleDir := *output + ".d"
+	bundleDir := outputPath + ".d"
 	if err := os.MkdirAll(filepath.Join(bundleDir, "files"), 0o755); err != nil {
 		return fmt.Errorf("creating bundle directory: %w", err)
 	}
@@ -121,13 +128,13 @@ func cmdContextBundle(args []string) error {
 	}
 
 	fmt.Printf("SrcLang bundle written to %s/ (%s layer, index %dKB, %d shards)\n",
-		bundleDir, *layer, indexInfo.Size()/1024, len(bundle.Shards))
+		bundleDir, layer, indexInfo.Size()/1024, len(bundle.Shards))
 
 	// Also write single-file version (with budget caps applied) for backward compat
-	if err := os.WriteFile(*output, buf.Bytes(), 0o644); err != nil {
+	if err := os.WriteFile(outputPath, buf.Bytes(), 0o644); err != nil {
 		return fmt.Errorf("writing single-file output: %w", err)
 	}
-	fmt.Printf("SrcLang single-file also written to %s (%dKB, capped)\n", *output, buf.Len()/1024)
+	fmt.Printf("SrcLang single-file also written to %s (%dKB, capped)\n", outputPath, buf.Len()/1024)
 
 	return nil
 }
