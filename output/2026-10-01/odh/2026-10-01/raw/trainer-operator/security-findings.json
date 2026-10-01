@@ -1,0 +1,958 @@
+[
+  {
+    "rule_id": "CGA-007",
+    "severity": "medium",
+    "message": "ByObject{} at cmd/main.go:125 has no Field or Label selector (unfiltered cache may cause OOM)",
+    "file": "cmd/main.go",
+    "line": 125,
+    "node_id": "struct_3493ced830227088",
+    "domain": "security",
+    "architecture_ref": "cache_issues: No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior; Type ConfigMap is watched but has no cache filter (cluster-wide informer)"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function main has high cyclomatic complexity (14), increasing review difficulty",
+    "file": "cmd/main.go",
+    "line": 71,
+    "node_id": "fn_3d128cb8903ff261",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function TestMain has high cyclomatic complexity (16), increasing review difficulty",
+    "file": "internal/controller/suite_test.go",
+    "line": 59,
+    "node_id": "fn_362eda3f38e65d01",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestReconcileManaged makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 56,
+    "node_id": "fn_483427befc1f6919",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestReconcileDelete makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 98,
+    "node_id": "fn_e87c3f1a3bdf6ec0",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function TestReconcileDeleteAndRecreate makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 400,
+    "node_id": "fn_20138405cdb9d6bf",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function getTrainer makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 591,
+    "node_id": "fn_11cc674cc20ad5b6",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function cleanupTrainer makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 606,
+    "node_id": "fn_a748b531f2ed489c",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function cleanupNamespace makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 622,
+    "node_id": "fn_65519f7d2ed0edbc",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function deleteJobSetCRDAndWait makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 671,
+    "node_id": "fn_d78eb25fa20c9587",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-014",
+    "severity": "medium",
+    "message": "Function Get makes external connections with no NetworkPolicy restricting egress",
+    "file": "internal/tls/profile_test.go",
+    "line": 60,
+    "node_id": "fn_76dea66ce1f589db",
+    "domain": "security",
+    "architecture_ref": "network_policies: none defined"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: componentsv1alpha1.AddToScheme at cmd/main.go:65 (v1alpha1/v1beta1 may change between versions)",
+    "file": "cmd/main.go",
+    "line": 65,
+    "node_id": "call_51e30f125366d019",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: trainerv1alpha1.AddToScheme at cmd/main.go:66 (v1alpha1/v1beta1 may change between versions)",
+    "file": "cmd/main.go",
+    "line": 66,
+    "node_id": "call_4218eb5f4476fa08",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction(fwdeployments.NewAction(fwdeployments.InNamespaceFn(nsFn))).\n\t\tWithAction(m.stripRuntimeFinalizers).\n\t\t// GC deletes stale resources from previous versions that are no longer\n\t\t// rendered. OnlyCollectOwned is false because cluster-scoped resources\n\t\t// (e.g. ClusterTrainingRuntimes) can't have owner references to the\n\t\t// namespace-scoped Trainer CR. Training runtimes are marked unremovable\n\t\t// here — they're cleaned up explicitly in the finalizer via the dynamic\n\t\t// client to handle the upstream trainer controller's resource-in-use\n\t\t// finalizer.\n\t\tWithAction(fwgc.NewAction(nsFn,\n\t\t\tfwgc.WithOnlyCollectOwned(false),\n\t\t\tfwgc.WithUnremovables(clusterTrainingRuntimeGVK, trainingRuntimeGVK))).\n\t\tWithFinalizer(m.cleanup).\n\t\tWithConditions(\"DeploymentsAvailable\").\n\t\tWithReconcilerOpts(reconciler.WithFinalizerName(finalizerName)).\n\t\tBuild at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_b2fb332e3ea8a845",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction(fwdeployments.NewAction(fwdeployments.InNamespaceFn(nsFn))).\n\t\tWithAction(m.stripRuntimeFinalizers).\n\t\t// GC deletes stale resources from previous versions that are no longer\n\t\t// rendered. OnlyCollectOwned is false because cluster-scoped resources\n\t\t// (e.g. ClusterTrainingRuntimes) can't have owner references to the\n\t\t// namespace-scoped Trainer CR. Training runtimes are marked unremovable\n\t\t// here — they're cleaned up explicitly in the finalizer via the dynamic\n\t\t// client to handle the upstream trainer controller's resource-in-use\n\t\t// finalizer.\n\t\tWithAction(fwgc.NewAction(nsFn,\n\t\t\tfwgc.WithOnlyCollectOwned(false),\n\t\t\tfwgc.WithUnremovables(clusterTrainingRuntimeGVK, trainingRuntimeGVK))).\n\t\tWithFinalizer(m.cleanup).\n\t\tWithConditions(\"DeploymentsAvailable\").\n\t\tWithReconcilerOpts at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_d406f8be5a0117a0",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction(fwdeployments.NewAction(fwdeployments.InNamespaceFn(nsFn))).\n\t\tWithAction(m.stripRuntimeFinalizers).\n\t\t// GC deletes stale resources from previous versions that are no longer\n\t\t// rendered. OnlyCollectOwned is false because cluster-scoped resources\n\t\t// (e.g. ClusterTrainingRuntimes) can't have owner references to the\n\t\t// namespace-scoped Trainer CR. Training runtimes are marked unremovable\n\t\t// here — they're cleaned up explicitly in the finalizer via the dynamic\n\t\t// client to handle the upstream trainer controller's resource-in-use\n\t\t// finalizer.\n\t\tWithAction(fwgc.NewAction(nsFn,\n\t\t\tfwgc.WithOnlyCollectOwned(false),\n\t\t\tfwgc.WithUnremovables(clusterTrainingRuntimeGVK, trainingRuntimeGVK))).\n\t\tWithFinalizer(m.cleanup).\n\t\tWithConditions at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_9d7cd9f5df1e69d8",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction(fwdeployments.NewAction(fwdeployments.InNamespaceFn(nsFn))).\n\t\tWithAction(m.stripRuntimeFinalizers).\n\t\t// GC deletes stale resources from previous versions that are no longer\n\t\t// rendered. OnlyCollectOwned is false because cluster-scoped resources\n\t\t// (e.g. ClusterTrainingRuntimes) can't have owner references to the\n\t\t// namespace-scoped Trainer CR. Training runtimes are marked unremovable\n\t\t// here — they're cleaned up explicitly in the finalizer via the dynamic\n\t\t// client to handle the upstream trainer controller's resource-in-use\n\t\t// finalizer.\n\t\tWithAction(fwgc.NewAction(nsFn,\n\t\t\tfwgc.WithOnlyCollectOwned(false),\n\t\t\tfwgc.WithUnremovables(clusterTrainingRuntimeGVK, trainingRuntimeGVK))).\n\t\tWithFinalizer at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_c1a025f4cb4e8514",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction(fwdeployments.NewAction(fwdeployments.InNamespaceFn(nsFn))).\n\t\tWithAction(m.stripRuntimeFinalizers).\n\t\t// GC deletes stale resources from previous versions that are no longer\n\t\t// rendered. OnlyCollectOwned is false because cluster-scoped resources\n\t\t// (e.g. ClusterTrainingRuntimes) can't have owner references to the\n\t\t// namespace-scoped Trainer CR. Training runtimes are marked unremovable\n\t\t// here — they're cleaned up explicitly in the finalizer via the dynamic\n\t\t// client to handle the upstream trainer controller's resource-in-use\n\t\t// finalizer.\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_d1f22ad942945538",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction(fwdeployments.NewAction(fwdeployments.InNamespaceFn(nsFn))).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_dd5ec1e984038055",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction(withImmutableFieldRecovery(fwdeploy.NewAction(\n\t\t\tfwdeploy.WithCache(),\n\t\t\tfwdeploy.WithFieldOwner(\"trainer-module-controller\"),\n\t\t\tfwdeploy.WithApplyOrder(),\n\t\t))).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_8aec4455785bfd11",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction(m.renderManifests).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_30875937efc1f524",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction(m.updateReleases).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_316ed4504ba20f80",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction(m.ensureNamespace).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_7ed9fbac4d8c499c",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction(m.checkDependencies).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_097b36c5675c84cf",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK(jobSetOperatorGVK,\n\t\t\treconciler.WithEventHandler(handlers.ToNamed(TrainerInstanceName)),\n\t\t\treconciler.WithPredicates(dependent.New(dependent.WithWatchStatus(true))),\n\t\t\treconciler.Dynamic(reconciler.CrdExists(jobSetOperatorGVK))).\n\t\tWithAction at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_d595c63784605891",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches(\u0026admissionv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesGVK at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_7e1a051239ba86b1",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches(\u0026corev1.ConfigMap{}).\n\t\tWatches at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_55fc6b019de088ed",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches(\u0026corev1.Service{}).\n\t\tWatches at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_f37a088d3ab622ff",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches(\u0026appsv1.Deployment{},\n\t\t\treconciler.WithPredicates(predicates.DefaultDeploymentPredicate)).\n\t\tWatches at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_a98ddf2063c5f8ca",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: reconciler.ReconcilerFor(mgr, \u0026componentsv1alpha1.Trainer{}).\n\t\tWatches at internal/controller/trainer_controller.go:193 (v1alpha1/v1beta1 may change between versions)",
+    "file": "internal/controller/trainer_controller.go",
+    "line": 193,
+    "node_id": "call_23445b45eb1eff07",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestTrainerCommonTypeConversion has no error path assertions",
+    "file": "api/v1alpha1/trainer_platformobject_test.go",
+    "line": 27,
+    "node_id": "fn_aeb246fcb5aa60e5",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestPlatformObjectInterface has no error path assertions",
+    "file": "api/v1alpha1/trainer_types_test.go",
+    "line": 27,
+    "node_id": "fn_0d4a0f10aa7ddae4",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetAvailableWhenCRDExistsAndEstablished has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 52,
+    "node_id": "fn_27b6f72a60f5da76",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetAvailableWhenCRDDoesNotExist has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 87,
+    "node_id": "fn_ffab9bcbb0c5fd5c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetAvailableWhenCRDNotEstablished has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 106,
+    "node_id": "fn_61b805958b5dd35c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestGetJobSetMissingMessage has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 141,
+    "node_id": "fn_79a1cd5af1bf54c7",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorCRWhenCRDExistsButCRDoesNotExist has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 151,
+    "node_id": "fn_385c7ba99b5f49a3",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorCRWhenCRDAndCRExist has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 207,
+    "node_id": "fn_d7a00f19078dfcab",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestGetJobSetOperatorCRMissingMessage has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 272,
+    "node_id": "fn_1a1de80a6f40bb1e",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorInstalledWhenNoOperatorFound has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 281,
+    "node_id": "fn_9cfcf4df1d122c4b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorInstalledViaClusterExtension has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 300,
+    "node_id": "fn_64b694fc3bfe0331",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestGetJobSetOperatorNotInstalledMessage has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 311,
+    "node_id": "fn_eb18a38ca7670386",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorHealthWhenHealthy has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 320,
+    "node_id": "fn_0e46c51290d89c42",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorHealthWhenNoConditions has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 335,
+    "node_id": "fn_a91a5cc3e0a71b45",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorHealthWhenDegradedTrue has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 348,
+    "node_id": "fn_450c2d1b1f134e44",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorHealthWhenAvailableFalse has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 365,
+    "node_id": "fn_8a46d08b025ac861",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCheckJobSetOperatorHealthWithMultipleDegradedConditions has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 380,
+    "node_id": "fn_ffd989bab67c7a92",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestIsJobSetOperatorConditionDegraded has no error path assertions",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 397,
+    "node_id": "fn_61a6c8c3c51b776b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveImageStreamParamsUsesDefaults has no error path assertions",
+    "file": "internal/controller/imagestreams_test.go",
+    "line": 27,
+    "node_id": "fn_e2264816d5adf05b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveImageStreamParamsEnvVarOverride has no error path assertions",
+    "file": "internal/controller/imagestreams_test.go",
+    "line": 42,
+    "node_id": "fn_aaae659f3e6a18ca",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveImageStreamParamsMissingFile has no error path assertions",
+    "file": "internal/controller/imagestreams_test.go",
+    "line": 60,
+    "node_id": "fn_cb0b15912bdb0a84",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestFilterConfigMaps has no error path assertions",
+    "file": "internal/controller/manifests_test.go",
+    "line": 10,
+    "node_id": "fn_86f64c495cb7e047",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReadParams has no error path assertions",
+    "file": "internal/controller/params_test.go",
+    "line": 27,
+    "node_id": "fn_262f68a05e5fe8a9",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestWriteParams has no error path assertions",
+    "file": "internal/controller/params_test.go",
+    "line": 42,
+    "node_id": "fn_a2ce7fa7f2da7d7f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestApplyParamOverridesFromEnv has no error path assertions",
+    "file": "internal/controller/params_test.go",
+    "line": 56,
+    "node_id": "fn_cffb2f268b13991f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestApplyParamOverridesMissingParamsEnv has no error path assertions",
+    "file": "internal/controller/params_test.go",
+    "line": 72,
+    "node_id": "fn_ea9a82d93b4070d2",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestApplyStaticParams has no error path assertions",
+    "file": "internal/controller/params_test.go",
+    "line": 78,
+    "node_id": "fn_5558ea2fb4cdc454",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestApplyStaticParamsMissingParamsEnv has no error path assertions",
+    "file": "internal/controller/params_test.go",
+    "line": 93,
+    "node_id": "fn_4f25a0f45521c096",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMain has no error path assertions",
+    "file": "internal/controller/suite_test.go",
+    "line": 59,
+    "node_id": "fn_362eda3f38e65d01",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileManaged has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 56,
+    "node_id": "fn_483427befc1f6919",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileDelete has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 98,
+    "node_id": "fn_e87c3f1a3bdf6ec0",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileNotFound has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 130,
+    "node_id": "fn_a2fe053786c43fc9",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestSingletonNameValidation has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 143,
+    "node_id": "fn_e295c443bffa57d6",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveNamespace has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 157,
+    "node_id": "fn_40d186385bb2f51c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCleanupTrainerResourcesDeletesLabeledResources has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 169,
+    "node_id": "fn_cec00dd5b5762a8e",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestRemoveRuntimeFinalizersStripsAllFinalizers has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 212,
+    "node_id": "fn_d2114a885c68fc82",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestGetComponentReleases has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 270,
+    "node_id": "fn_859ae152d049272b",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileManagedPopulatesReleases has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 284,
+    "node_id": "fn_3b44dddd082ab63c",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestPlatformVersionHandshake has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 316,
+    "node_id": "fn_a58df84bb0779670",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileDeleteAndRecreate has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 400,
+    "node_id": "fn_20138405cdb9d6bf",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileDegradedWhenDependencyMissing has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 461,
+    "node_id": "fn_7fdc431bbf3d9182",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestEnsureNamespaceAlreadyExists has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 515,
+    "node_id": "fn_03882c7c8010b87d",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestIsImmutableFieldError has no error path assertions",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 534,
+    "node_id": "fn_e5fb1a0cc0a3ab42",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestMetricsServerOptions has no error path assertions",
+    "file": "internal/tls/metrics_test.go",
+    "line": 36,
+    "node_id": "fn_4ba52b2dd7ffda16",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolve has no error path assertions",
+    "file": "internal/tls/profile_test.go",
+    "line": 68,
+    "node_id": "fn_cb234c877fa1127d",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveAppliesTLSGroups has no error path assertions",
+    "file": "internal/tls/profile_test.go",
+    "line": 201,
+    "node_id": "fn_01e0545b4d0055b2",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestResolveFailsClosedWhenAdherenceReadIsTransient has no error path assertions",
+    "file": "internal/tls/profile_test.go",
+    "line": 231,
+    "node_id": "fn_9e23cb66300c0663",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestSetupWatcherSkipsWhenProfileNotFetched has no error path assertions",
+    "file": "internal/tls/profile_test.go",
+    "line": 253,
+    "node_id": "fn_223d1c593e7471f6",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestSetupWatcherSkipsNilResult has no error path assertions",
+    "file": "internal/tls/profile_test.go",
+    "line": 259,
+    "node_id": "fn_477375ad4a00b36a",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestNewSecurityProfileWatcherCallbacks has no error path assertions",
+    "file": "internal/tls/profile_test.go",
+    "line": 264,
+    "node_id": "fn_028c33c4a96890e8",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File internal/controller/params_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "internal/controller/params_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File internal/controller/trainer_controller_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "internal/controller/trainer_controller_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File internal/controller/dependencies_test.go has 16 non-table-driven tests (consolidation opportunity)",
+    "file": "internal/controller/dependencies_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "SEC-RBAC-001",
+    "severity": "high",
+    "message": "ClusterRole \"kubeflow-trainer-cache-initializer\" grants cluster-wide create/delete serviceaccounts",
+    "file": "manifests/trainer/overlays/data-cache/cluster_role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-002",
+    "severity": "medium",
+    "message": "ClusterRole \"kubeflow-trainer-controller-manager\" grants cluster-wide create/patch/update configmaps",
+    "file": "manifests/trainer/base/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-003",
+    "severity": "high",
+    "message": "ClusterRole \"kubeflow-trainer-controller-manager\" grants cluster-wide create/patch/update secrets",
+    "file": "manifests/trainer/base/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-004",
+    "severity": "medium",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create/delete/patch/update configmaps",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-005",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create/delete/patch/update secrets",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-006",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create serviceaccounts",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-007",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide delete/patch/update serviceaccounts",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-008",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide delete/patch/update clusterrolebindings",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-009",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create clusterrolebindings",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-010",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create clusterroles",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-011",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create rolebindings",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-012",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide create roles",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-013",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide delete/patch/update clusterroles",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-014",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide delete/patch/update rolebindings",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-RBAC-015",
+    "severity": "high",
+    "message": "ClusterRole \"manager-role\" grants cluster-wide delete/patch/update roles",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:RBAC_CLUSTER_SCOPE_SENSITIVE"
+  },
+  {
+    "rule_id": "SEC-EVAL-001",
+    "severity": "high",
+    "message": "Workflow \"Disconnected Readiness\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.).",
+    "file": ".github/workflows/disconnected-readiness.yml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:GHA_MISSING_PERMISSIONS"
+  },
+  {
+    "rule_id": "SEC-EVAL-002",
+    "severity": "medium",
+    "message": "ClusterRole uses default kubebuilder name \"manager-role\". When multiple operators are deployed, these generic names collide. Prefix with the operator name.",
+    "file": "config/rbac/role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:SCAFFOLDING_NAME_COLLISION"
+  },
+  {
+    "rule_id": "SEC-EVAL-003",
+    "severity": "medium",
+    "message": "ClusterRole uses default kubebuilder name \"metrics-reader\". When multiple operators are deployed, these generic names collide. Prefix with the operator name.",
+    "file": "config/rbac/metrics_reader_role.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:SCAFFOLDING_NAME_COLLISION"
+  },
+  {
+    "rule_id": "SEC-EVAL-004",
+    "severity": "medium",
+    "message": "ClusterRoleBinding uses default kubebuilder name \"manager-rolebinding\". Prefix with the operator name to avoid collisions.",
+    "file": "config/rbac/role_binding.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:SCAFFOLDING_NAME_COLLISION"
+  },
+  {
+    "rule_id": "SEC-EVAL-005",
+    "severity": "medium",
+    "message": "Deployment uses default kubebuilder name \"controller-manager\". Prefix with the operator name to avoid collisions.",
+    "file": "config/manager/manager.yaml",
+    "line": 0,
+    "node_id": "",
+    "domain": "security",
+    "architecture_ref": "security_annotations:SCAFFOLDING_NAME_COLLISION"
+  }
+]
