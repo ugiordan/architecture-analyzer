@@ -1,11 +1,11 @@
 # mlflow
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-03** (2026-10-03)
 
 
 **Repository:** opendatahub-io/mlflow  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:15:03Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-03T04:50:38Z
 
 ## Summary
 

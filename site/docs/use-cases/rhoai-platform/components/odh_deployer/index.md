@@ -1,11 +1,11 @@
 # odh-deployer
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-03** (2026-10-03)
 
 
 **Repository:** red-hat-data-services/odh-deployer  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:16:25Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-03T04:50:59Z
 
 ## Summary
 

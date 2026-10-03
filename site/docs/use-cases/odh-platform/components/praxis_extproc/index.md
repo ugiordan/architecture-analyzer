@@ -1,0 +1,46 @@
+# praxis-extproc
+
+> **Architecture snapshot: 2026-10-03** (2026-10-03)
+
+
+**Repository:** opendatahub-io/praxis-extproc  
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-03T04:50:40Z
+
+## Summary
+
+| Metric | Count |
+|--------|-------|
+| CRDs | 0 |
+| Deployments | 1 |
+| Services | 1 |
+| Secrets | 0 |
+| Cluster Roles | 0 |
+| Controller Watches | 0 |
+
+## Component Architecture
+
+CRDs, controllers, and owned Kubernetes resources.
+
+```mermaid
+graph LR
+    %% Component architecture for praxis-extproc
+
+    classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
+    classDef controller fill:#3498db,stroke:#2980b9,color:#fff
+    classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
+    classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
+
+    subgraph controller["praxis-extproc Controller"]
+        dep_1["payload-processing"]
+        class dep_1 controller
+    end
+```
+
+### CRDs
+
+No CRDs found in analyzed sources.
+
+## Dependencies
+

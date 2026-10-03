@@ -1,8 +1,11 @@
 # odh-model-controller
 
+> **Architecture snapshot: 2026-10-03** (2026-10-03)
+
+
 **Repository:** opendatahub-io/odh-model-controller  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-07T15:05:36Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-03T04:45:11Z
 
 ## Summary
 
@@ -10,10 +13,10 @@
 |--------|-------|
 | CRDs | 1 |
 | Deployments | 2 |
-| Services | 2 |
+| Services | 3 |
 | Secrets | 2 |
 | Cluster Roles | 7 |
-| Controller Watches | 41 |
+| Controller Watches | 48 |
 
 ## Component Architecture
 
@@ -30,7 +33,7 @@ graph LR
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
 
     subgraph controller["odh-model-controller Controller"]
-        dep_1["odh-model-controller"]
+        dep_1["model-serving-api"]
         class dep_1 controller
         dep_2["odh-model-controller"]
         class dep_2 controller
@@ -73,11 +76,11 @@ graph LR
     class owned_18 owned
     controller -->|"Owns"| owned_19["TriggerAuthentication"]
     class owned_19 owned
-    watch_20["AuthPolicy"] -->|"Watches"| controller
+    watch_20["Account"] -->|"Watches"| controller
     class watch_20 external
-    watch_21["Authorino"] -->|"Watches"| controller
+    watch_21["AuthPolicy"] -->|"Watches"| controller
     class watch_21 external
-    watch_22["ConfigMap"] -->|"Watches"| controller
+    watch_22["Authorino"] -->|"Watches"| controller
     class watch_22 external
     watch_23["Kuadrant"] -->|"Watches"| controller
     class watch_23 external
@@ -99,9 +102,9 @@ graph LR
 
 ### CRDs
 
-| Group | Version | Kind | Scope | Fields | Validation Rules | Source |
-|-------|---------|------|-------|--------|------------------|--------|
-| nim.opendatahub.io | v1 | Account | Namespaced | 57 | 0 | [`config/crd/bases/nim.opendatahub.io_accounts.yaml`](https://github.com/opendatahub-io/odh-model-controller/blob/f1f124a8ba8614010feef80eb8ed526e7e7d5e72/config/crd/bases/nim.opendatahub.io_accounts.yaml) |
+| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
+|-------|---------|------|-------|--------|------------------|-----------|--------|
+| nim.opendatahub.io | v1 | Account | Namespaced | 57 | 0 | YAML | [`config/crd/bases/nim.opendatahub.io_accounts.yaml`](https://github.com/opendatahub-io/odh-model-controller/blob/25e10f4f7bb8988f0ac3f771587cf1ba7fbc7334/config/crd/bases/nim.opendatahub.io_accounts.yaml) |
 
 ## Dependencies
 
@@ -117,12 +120,12 @@ graph LR
 |--------|---------|
 | github.com/go-logr/logr | v1.4.3 |
 | github.com/go-logr/zapr | v1.3.0 |
-| github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring | v0.89.0 |
+| github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring | v0.91.0 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| k8s.io/api | v0.34.3 |
-| k8s.io/apiextensions-apiserver | v0.34.3 |
-| k8s.io/apimachinery | v0.34.3 |
-| k8s.io/apiserver | v0.34.3 |
-| k8s.io/client-go | v0.34.3 |
-| sigs.k8s.io/controller-runtime | v0.19.7 |
+| k8s.io/api | v0.36.0 |
+| k8s.io/apiextensions-apiserver | v0.36.0 |
+| k8s.io/apimachinery | v0.36.0 |
+| k8s.io/apiserver | v0.36.0 |
+| k8s.io/client-go | v0.36.0 |
+| sigs.k8s.io/controller-runtime | v0.24.1 |
 
