@@ -1,0 +1,508 @@
+{
+  "component": "kale",
+  "repo": "opendatahub-io/kale",
+  "commit_sha": "8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7",
+  "extracted_at": "2026-10-04T05:21:22Z",
+  "analyzer_version": "dev",
+  "schema_version": "2",
+  "rbac": {},
+  "dependencies": {
+    "python_packages": [
+      {
+        "name": "astor",
+        "version": "\u003e=0.8.1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "autopep8",
+        "version": "\u003e=2.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "dill",
+        "version": "\u003e=0.3.8",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "ipykernel",
+        "version": "\u003e=6.29.5",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "ipython",
+        "version": "\u003e=8.30.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jinja2",
+        "version": "\u003e=3.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jupyter-client",
+        "version": "\u003e=8.6.3",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "jupyter-core",
+        "version": "\u003e=5.8.1",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "kfp",
+        "version": "\u003e=2.16.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "kubernetes",
+        "version": "\u003e=30.0.0",
+        "category": "k8s-client",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "nbconvert",
+        "version": "\u003e=7.16.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "nbformat",
+        "version": "\u003e=5.10.4",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "networkx",
+        "version": "\u003e=3.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "notebook",
+        "version": "\u003e=7.4.4",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "packaging",
+        "version": "\u003e=25.0",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "progress",
+        "version": "\u003e=1.5",
+        "source": "pyproject.toml",
+        "required": true
+      },
+      {
+        "name": "pyflakes",
+        "version": "\u003e=3.0.0",
+        "source": "pyproject.toml",
+        "required": true
+      }
+    ]
+  },
+  "dockerfiles": [
+    {
+      "path": "docker/Dockerfile",
+      "base_image": "${BASE_IMAGE}",
+      "stages": 1,
+      "user": "1000",
+      "issues": [
+        "Unpinned base image: ${BASE_IMAGE}"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "docker/dist/*.whl"
+          ],
+          "destination": "/tmp/wheels/"
+        }
+      ],
+      "build_commands": [
+        {
+          "tool": "pip",
+          "command": "install"
+        }
+      ]
+    }
+  ],
+  "helm": {},
+  "external_connections": [
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "kale/common/jputils.py:382",
+      "function": "get_notebook_path"
+    },
+    {
+      "type": "api",
+      "service": "requests",
+      "target": "",
+      "source": "kale/common/jputils.py:385",
+      "function": "get_notebook_path"
+    }
+  ],
+  "python_k8s_calls": [
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "experiment",
+      "source": "kale/common/kfputils.py:177"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "create",
+      "resource": "run_from_pipeline_package",
+      "source": "kale/common/kfputils.py:203"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "args",
+      "source": "docs/source/conf.py:131"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "authenticator",
+      "source": "kale/common/kfp_client_factory.py:72"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "co_client",
+      "source": "kale/common/katibutils.py:216"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "connection_file",
+      "source": "kale/common/jputils.py:371"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "default_base_image_from_env",
+      "source": "kale/pipeline.py:168"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "experiment",
+      "source": "kale/common/kfputils.py:289"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "function_calls",
+      "source": "kale/processors/nbprocessor.py:856"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "function_source",
+      "source": "kale/step.py:170"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "imports_and_functions",
+      "source": "kale/cli.py:138"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "ipython",
+      "source": "kale/common/utils.py:122"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "kfp_client",
+      "source": "kale/common/kfputils.py:53"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "kfp_healthz",
+      "source": "kale/rpc/kfp.py:34"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "kfp_run_metrics",
+      "source": "kale/common/katibutils.py:200"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "leaf_steps",
+      "source": "kale/processors/nbprocessor.py:692"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "main_source_path",
+      "source": "kale/pipeline.py:151"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "marshal_candidates",
+      "source": "kale/processors/nbprocessor.py:714"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "msg",
+      "source": "kale/common/jputils.py:203"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "namespace",
+      "source": "kale/common/katibutils.py:152"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "or_create_logger",
+      "source": "kale/__init__.py:56"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "ordered_ancestors",
+      "source": "kale/compiler.py:233"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "origin",
+      "source": "docs/source/conf.py:130"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pipeline",
+      "source": "kale/common/kfputils.py:178"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pipeline_metrics_source",
+      "source": "kale/rpc/nb.py:163"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pipeline_parameters_source",
+      "source": "kale/rpc/nb.py:135"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pipeline_version",
+      "source": "kale/common/kfputils.py:182"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pod",
+      "source": "kale/common/kfutils.py:73"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "pypi_package",
+      "source": "kale/common/imports.py:395"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "run",
+      "source": "kale/common/kfputils.py:279"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "security_context_from_env",
+      "source": "kale/pipeline.py:218"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "step",
+      "source": "kale/compiler.py:237"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "trailing_variable",
+      "source": "kale/processors/nbprocessor.py:939"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "v1_client",
+      "source": "kale/common/podutils.py:48"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "get",
+      "resource": "workflow_from_run",
+      "source": "kale/common/katibutils.py:172"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "experiments",
+      "source": "kale/rpc/kfp.py:45"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "pipeline_versions",
+      "source": "kale/common/kfputils.py:83"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "pipelines",
+      "source": "kale/common/kfputils.py:57"
+    },
+    {
+      "api": "CoreV1Api",
+      "operation": "list",
+      "resource": "running_servers",
+      "source": "kale/common/jputils.py:378"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "create",
+      "resource": "custom_object",
+      "source": "kale/common/katibutils.py:343"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "get",
+      "resource": "custom_object",
+      "source": "kale/common/katibutils.py:217"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "list",
+      "resource": "custom_object",
+      "source": "kale/common/katibutils.py:354"
+    },
+    {
+      "api": "CustomObjectsApi",
+      "operation": "patch",
+      "resource": "custom_object",
+      "source": "kale/common/k8sutils.py:67"
+    },
+    {
+      "api": "kubernetes",
+      "operation": "import",
+      "resource": "",
+      "source": "kale/common/k8sutils.py:15"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "sparse",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "kale is a Kubernetes component. connecting to external services: requests. 17 Python package dependencies (17 required), categories: 1 k8s-client. Python k8s client with 43 API call(s).",
+  "security_annotations": [
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/build_backend.yml",
+      "description": "Workflow \"Kale Backend CI\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/build_labextension.yml",
+      "description": "Workflow \"Build Kale Jupyter Labextension\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/check-pr-title.yaml",
+      "description": "Workflow \"Check PR Title\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "amannn/action-semantic-pull-request@v6.1.1",
+      "source": ".github/workflows/check-pr-title.yaml",
+      "description": "Action \"amannn/action-semantic-pull-request\" uses mutable ref \"v6.1.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/disconnected-readiness.yml",
+      "description": "Workflow \"Disconnected Readiness\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/docs.yaml",
+      "description": "Workflow \"Docs\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/e2e-test.yml",
+      "description": "Workflow \"E2E Test\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/license-check.yml",
+      "description": "Workflow \"License Header Check\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/release.yml",
+      "description": "Workflow \"Release\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    }
+  ]
+}
