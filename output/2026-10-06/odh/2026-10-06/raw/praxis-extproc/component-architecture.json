@@ -1,0 +1,320 @@
+{
+  "component": "praxis-extproc",
+  "repo": "opendatahub-io/praxis-extproc",
+  "commit_sha": "028e3dec3e6627420048e6446995b1089bdb1c7e",
+  "extracted_at": "2026-10-06T05:53:24Z",
+  "analyzer_version": "dev",
+  "schema_version": "2",
+  "rbac": {},
+  "services": [
+    {
+      "name": "payload-processing",
+      "source": "deploy/base/instance/service.yaml",
+      "type": "ClusterIP",
+      "ports": [
+        {
+          "port": 9004,
+          "targetPort": 9004,
+          "protocol": "TCP"
+        }
+      ],
+      "selector": {
+        "app": "payload-processing"
+      },
+      "target_deployment": "payload-processing"
+    }
+  ],
+  "deployments": [
+    {
+      "name": "payload-processing",
+      "kind": "Deployment",
+      "source": "deploy/base/instance/deployment.yaml",
+      "replicas": 1,
+      "automount_service_account_token": true,
+      "containers": [
+        {
+          "name": "payload-processing",
+          "image": "praxis-extproc",
+          "args": [
+            "-c",
+            "/etc/praxis/extproc.yaml"
+          ],
+          "ports": [
+            {
+              "name": "grpc",
+              "containerPort": 9004,
+              "protocol": "TCP"
+            },
+            {
+              "name": "health",
+              "containerPort": 50052,
+              "protocol": "TCP"
+            },
+            {
+              "name": "metrics",
+              "containerPort": 9090,
+              "protocol": "TCP"
+            }
+          ],
+          "security_context": {
+            "allowPrivilegeEscalation": false,
+            "capabilities": {
+              "add": [],
+              "drop": [
+                "ALL"
+              ]
+            },
+            "readOnlyRootFilesystem": true,
+            "runAsNonRoot": true,
+            "seccompProfile": {
+              "type": "RuntimeDefault"
+            }
+          },
+          "volume_mounts": [
+            {
+              "configMap": "payload-processing-plugins",
+              "mountPath": "/etc/praxis",
+              "name": "plugins-config-volume"
+            }
+          ],
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "50m",
+              "memory": "64Mi"
+            }
+          },
+          "liveness_probe": {
+            "type": "tcpSocket",
+            "port": "health"
+          },
+          "readiness_probe": {
+            "type": "grpc",
+            "port": 50052
+          }
+        }
+      ],
+      "issues": [
+        "no PodDisruptionBudget configured",
+        "no HorizontalPodAutoscaler configured"
+      ]
+    }
+  ],
+  "network_policies": [
+    {
+      "name": "payload-processing",
+      "source": "deploy/overlays/odh/networking/networkpolicy.yaml",
+      "policy_types": [
+        "Ingress",
+        "Egress"
+      ],
+      "ingress_rules": [
+        {
+          "from": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "openshift-ingress"
+                }
+              },
+              "podSelector": {
+                "matchLabels": {
+                  "gateway.istio.io/managed": "istio.io-gateway-controller"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "port": 9004,
+              "protocol": "TCP"
+            }
+          ]
+        },
+        {
+          "from": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "openshift-monitoring"
+                }
+              }
+            },
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "openshift-user-workload-monitoring"
+                }
+              }
+            }
+          ],
+          "ports": [
+            {
+              "port": 9090,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ],
+      "egress_rules": [
+        {
+          "ports": [
+            {
+              "port": 53,
+              "protocol": "UDP"
+            },
+            {
+              "port": 53,
+              "protocol": "TCP"
+            },
+            {
+              "port": 5353,
+              "protocol": "UDP"
+            },
+            {
+              "port": 5353,
+              "protocol": "TCP"
+            }
+          ],
+          "to": []
+        },
+        {
+          "ports": [
+            {
+              "port": 443,
+              "protocol": "TCP"
+            },
+            {
+              "port": 6443,
+              "protocol": "TCP"
+            }
+          ],
+          "to": []
+        }
+      ],
+      "issues": [
+        "empty podSelector (applies to all pods in namespace)"
+      ]
+    }
+  ],
+  "dependencies": {},
+  "dockerfiles": [
+    {
+      "path": "Containerfile",
+      "base_image": "registry.access.redhat.com/ubi9/ubi-minimal@${UBI9_MINIMAL_DIGEST}",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/ubi@${UBI9_DIGEST}",
+        "toolchain",
+        "builder"
+      ],
+      "stages": 4,
+      "user": "1001",
+      "exposed_ports": [
+        50051,
+        50052,
+        9090
+      ],
+      "issues": [
+        "Unpinned base image: toolchain",
+        "Unpinned base image: builder"
+      ],
+      "copy_instructions": [
+        {
+          "sources": [
+            "/out/praxis-extproc"
+          ],
+          "destination": "/usr/local/bin/praxis-extproc",
+          "from_stage": "builder",
+          "original_sources": [
+            "Cargo.toml",
+            "Cargo.lock",
+            "proto",
+            "src",
+            "xtask"
+          ]
+        }
+      ],
+      "build_commands": [
+        {
+          "tool": "go",
+          "command": "build"
+        }
+      ]
+    }
+  ],
+  "helm": {},
+  "configmaps": [
+    {
+      "name": "payload-processing-plugins",
+      "data_keys": [
+        "extproc.yaml",
+        "pre-extproc.yaml"
+      ],
+      "source": "deploy/base/config/configmap.yaml"
+    },
+    {
+      "name": "payload-processing-plugins",
+      "data_keys": [
+        "extproc.yaml"
+      ],
+      "source": "deploy/overlays/demo/workload/configmap-patch.yaml"
+    }
+  ],
+  "label_contracts": [
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "namespace",
+      "source": "deploy/overlays/demo/workload/namespace.yaml"
+    }
+  ],
+  "configmap_volumes": [
+    {
+      "deployment_name": "payload-processing",
+      "container_name": "payload-processing",
+      "volume_name": "plugins-config-volume",
+      "mount_path": "/etc/praxis",
+      "configmap_name": "payload-processing-plugins",
+      "source": "deploy/base/instance/deployment.yaml"
+    }
+  ],
+  "data_coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "sparse",
+    "configmaps": "sparse",
+    "crds": "none",
+    "deployments": "sparse",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "sparse",
+    "network_policies": "sparse",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  },
+  "summary": "praxis-extproc is a Kubernetes component. deploying 1 workload(s) (payload-processing) with 1 container(s). exposing 1 service(s) on ports: 9004. Dockerfile EXPOSE ports: 9090, 50051, 50052. protected by 1 network policy/policies. integrates with management relationship via labels/annotations. mounts 1 ConfigMap(s) as volumes: payload-processing-plugins.",
+  "security_annotations": [
+    {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/tests.yaml",
+      "description": "Workflow \"Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    }
+  ]
+}
