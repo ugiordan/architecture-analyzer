@@ -27037,11 +27037,11 @@
 
 <h1 id="kserve">kserve<a class="headerlink" href="#kserve" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-10-05</strong> (2026-10-05)</p>
+<p><strong>Architecture snapshot: 2026-10-06</strong> (2026-10-06)</p>
 </blockquote>
 <p><strong>Repository:</strong> kserve/kserve<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-10-05T05:01:38Z</p>
+<strong>Extracted:</strong> 2026-10-06T05:48:39Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -27073,7 +27073,7 @@
 </tr>
 <tr>
 <td>Controller Watches</td>
-<td>81</td>
+<td>79</td>
 </tr>
 </tbody>
 </table>
@@ -27225,62 +27225,58 @@
     class owned_22 owned
     controller --&gt;|"Owns"| owned_23["PersistentVolumeClaim"]
     class owned_23 owned
-    controller --&gt;|"Owns"| owned_24["PodMonitor"]
+    controller --&gt;|"Owns"| owned_24["ResourceClaimTemplate"]
     class owned_24 owned
-    controller --&gt;|"Owns"| owned_25["ResourceClaimTemplate"]
+    controller --&gt;|"Owns"| owned_25["Role"]
     class owned_25 owned
-    controller --&gt;|"Owns"| owned_26["Role"]
+    controller --&gt;|"Owns"| owned_26["RoleBinding"]
     class owned_26 owned
-    controller --&gt;|"Owns"| owned_27["RoleBinding"]
+    controller --&gt;|"Owns"| owned_27["ScaledObject"]
     class owned_27 owned
-    controller --&gt;|"Owns"| owned_28["Route"]
+    controller --&gt;|"Owns"| owned_28["Secret"]
     class owned_28 owned
-    controller --&gt;|"Owns"| owned_29["ScaledObject"]
+    controller --&gt;|"Owns"| owned_29["SecurityContextConstraints"]
     class owned_29 owned
-    controller --&gt;|"Owns"| owned_30["Secret"]
+    controller --&gt;|"Owns"| owned_30["Service"]
     class owned_30 owned
-    controller --&gt;|"Owns"| owned_31["SecurityContextConstraints"]
+    controller --&gt;|"Owns"| owned_31["ServiceAccount"]
     class owned_31 owned
-    controller --&gt;|"Owns"| owned_32["Service"]
+    controller --&gt;|"Owns"| owned_32["ValidatingWebhookConfiguration"]
     class owned_32 owned
-    controller --&gt;|"Owns"| owned_33["ServiceAccount"]
+    controller --&gt;|"Owns"| owned_33["VirtualService"]
     class owned_33 owned
-    controller --&gt;|"Owns"| owned_34["ServiceMonitor"]
-    class owned_34 owned
-    controller --&gt;|"Owns"| owned_35["ValidatingWebhookConfiguration"]
-    class owned_35 owned
-    controller --&gt;|"Owns"| owned_36["VirtualService"]
-    class owned_36 owned
-    watch_37["ClusterServingRuntime"] --&gt;|"Watches"| controller
+    watch_34["ClusterServingRuntime"] --&gt;|"Watches"| controller
+    class watch_34 external
+    watch_35["ConfigMap"] --&gt;|"Watches"| controller
+    class watch_35 external
+    watch_36["Gateway"] --&gt;|"Watches"| controller
+    class watch_36 external
+    watch_37["HTTPRoute"] --&gt;|"Watches"| controller
     class watch_37 external
-    watch_38["ConfigMap"] --&gt;|"Watches"| controller
+    watch_38["InferencePool"] --&gt;|"Watches"| controller
     class watch_38 external
-    watch_39["Gateway"] --&gt;|"Watches"| controller
+    watch_39["InferenceService"] --&gt;|"Watches"| controller
     class watch_39 external
-    watch_40["HTTPRoute"] --&gt;|"Watches"| controller
+    watch_40["LLMInferenceService"] --&gt;|"Watches"| controller
     class watch_40 external
-    watch_41["InferencePool"] --&gt;|"Watches"| controller
+    watch_41["LLMInferenceServiceConfig"] --&gt;|"Watches"| controller
     class watch_41 external
-    watch_42["InferenceService"] --&gt;|"Watches"| controller
+    watch_42["LocalModelNamespaceCache"] --&gt;|"Watches"| controller
     class watch_42 external
-    watch_43["LLMInferenceService"] --&gt;|"Watches"| controller
+    watch_43["LocalModelNode"] --&gt;|"Watches"| controller
     class watch_43 external
-    watch_44["LLMInferenceServiceConfig"] --&gt;|"Watches"| controller
+    watch_44["Node"] --&gt;|"Watches"| controller
     class watch_44 external
-    watch_45["LocalModelNamespaceCache"] --&gt;|"Watches"| controller
+    watch_45["PersistentVolumeClaim"] --&gt;|"Watches"| controller
     class watch_45 external
-    watch_46["LocalModelNode"] --&gt;|"Watches"| controller
+    watch_46["Pod"] --&gt;|"Watches"| controller
     class watch_46 external
-    watch_47["Node"] --&gt;|"Watches"| controller
+    watch_47["RuntimeClass"] --&gt;|"Watches"| controller
     class watch_47 external
-    watch_48["PersistentVolumeClaim"] --&gt;|"Watches"| controller
+    watch_48["ServingRuntime"] --&gt;|"Watches"| controller
     class watch_48 external
-    watch_49["Pod"] --&gt;|"Watches"| controller
-    class watch_49 external
-    watch_50["ServingRuntime"] --&gt;|"Watches"| controller
-    class watch_50 external
-    controller -.-&gt;|"depends on"| odh_51["odh-platform-utilities"]
-    class odh_51 dep</code></pre>
+    controller -.-&gt;|"depends on"| odh_49["odh-platform-utilities"]
+    class odh_49 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -27304,7 +27300,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27314,7 +27310,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/storage_container_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/storage_container_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/storage_container_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/storage_container_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27324,7 +27320,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/inference_graph.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/inference_graph.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/inference_graph.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/inference_graph.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27334,7 +27330,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27344,7 +27340,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_capture_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_capture_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_capture_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_capture_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27354,7 +27350,7 @@
 <td>18</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27364,7 +27360,7 @@
 <td>18</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_group_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_group_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_group_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/kernel_cache_node_group_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27374,7 +27370,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27384,7 +27380,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/llm_inference_service_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27394,7 +27390,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_cache_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_cache_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_cache_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_cache_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27404,7 +27400,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_namespace_cache_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_namespace_cache_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_namespace_cache_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_namespace_cache_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27414,7 +27410,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27424,7 +27420,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_group_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_group_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_group_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/local_model_node_group_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27434,7 +27430,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/servingruntime_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27444,7 +27440,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/trained_model.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/trained_model.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/trained_model.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha1/trained_model.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27454,7 +27450,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27464,7 +27460,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1alpha2/llm_inference_service_types.go</code></a></td>
 </tr>
 <tr>
 <td></td>
@@ -27474,7 +27470,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1beta1/inference_service.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1beta1/inference_service.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1beta1/inference_service.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/serving/v1beta1/inference_service.go</code></a></td>
 </tr>
 <tr>
 <td>inference.networking.x-k8s.io</td>
@@ -27484,7 +27480,7 @@
 <td>19</td>
 <td>0</td>
 <td>Go AST</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/gie/v1alpha2pool/inferencepool_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/gie/v1alpha2pool/inferencepool_types.go</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea//home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/gie/v1alpha2pool/inferencepool_types.go"><code>/home/runner/work/_temp/arch-analyzer-repos/kserve/pkg/apis/gie/v1alpha2pool/inferencepool_types.go</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27494,7 +27490,7 @@
 <td>1193</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/serving.kserve.io_clusterservingruntimes.yaml"><code>config/crd/full/serving.kserve.io_clusterservingruntimes.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/serving.kserve.io_clusterservingruntimes.yaml"><code>config/crd/full/serving.kserve.io_clusterservingruntimes.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27504,7 +27500,7 @@
 <td>216</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/clusterstoragecontainer/serving.kserve.io_clusterstoragecontainers.yaml"><code>config/crd/full/clusterstoragecontainer/serving.kserve.io_clusterstoragecontainers.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/clusterstoragecontainer/serving.kserve.io_clusterstoragecontainers.yaml"><code>config/crd/full/clusterstoragecontainer/serving.kserve.io_clusterstoragecontainers.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27514,7 +27510,7 @@
 <td>150</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/serving.kserve.io_inferencegraphs.yaml"><code>config/crd/full/serving.kserve.io_inferencegraphs.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/serving.kserve.io_inferencegraphs.yaml"><code>config/crd/full/serving.kserve.io_inferencegraphs.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27524,7 +27520,7 @@
 <td>49</td>
 <td>4</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/kernelcache/serving.kserve.io_kernelcaches.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcaches.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/kernelcache/serving.kserve.io_kernelcaches.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcaches.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27534,7 +27530,7 @@
 <td>53</td>
 <td>5</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/kernelcache/serving.kserve.io_kernelcachecaptures.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcachecaptures.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/kernelcache/serving.kserve.io_kernelcachecaptures.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcachecaptures.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27544,7 +27540,7 @@
 <td>20</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/kernelcache/serving.kserve.io_kernelcachenodes.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcachenodes.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/kernelcache/serving.kserve.io_kernelcachenodes.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcachenodes.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27554,7 +27550,7 @@
 <td>11</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/kernelcache/serving.kserve.io_kernelcachenodegroups.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcachenodegroups.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/kernelcache/serving.kserve.io_kernelcachenodegroups.yaml"><code>config/crd/full/kernelcache/serving.kserve.io_kernelcachenodegroups.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27564,7 +27560,7 @@
 <td>30</td>
 <td>1</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/localmodel/serving.kserve.io_localmodelcaches.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelcaches.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/localmodel/serving.kserve.io_localmodelcaches.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelcaches.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27574,7 +27570,7 @@
 <td>31</td>
 <td>5</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/localmodel/serving.kserve.io_localmodelnamespacecaches.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelnamespacecaches.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/localmodel/serving.kserve.io_localmodelnamespacecaches.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelnamespacecaches.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27584,7 +27580,7 @@
 <td>15</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/localmodel/serving.kserve.io_localmodelnodes.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelnodes.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/localmodel/serving.kserve.io_localmodelnodes.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelnodes.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27594,7 +27590,7 @@
 <td>220</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/localmodel/serving.kserve.io_localmodelnodegroups.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelnodegroups.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/localmodel/serving.kserve.io_localmodelnodegroups.yaml"><code>config/crd/full/localmodel/serving.kserve.io_localmodelnodegroups.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27604,7 +27600,7 @@
 <td>1193</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/serving.kserve.io_servingruntimes.yaml"><code>config/crd/full/serving.kserve.io_servingruntimes.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/serving.kserve.io_servingruntimes.yaml"><code>config/crd/full/serving.kserve.io_servingruntimes.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27614,7 +27610,7 @@
 <td>25</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/serving.kserve.io_trainedmodels.yaml"><code>config/crd/full/serving.kserve.io_trainedmodels.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/serving.kserve.io_trainedmodels.yaml"><code>config/crd/full/serving.kserve.io_trainedmodels.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27624,7 +27620,7 @@
 <td>7065</td>
 <td>130</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/llmisvc/serving.kserve.io_llminferenceservices.yaml"><code>config/crd/full/llmisvc/serving.kserve.io_llminferenceservices.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/llmisvc/serving.kserve.io_llminferenceservices.yaml"><code>config/crd/full/llmisvc/serving.kserve.io_llminferenceservices.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27634,7 +27630,7 @@
 <td>6991</td>
 <td>28</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/llmisvc/serving.kserve.io_llminferenceserviceconfigs.yaml"><code>config/crd/full/llmisvc/serving.kserve.io_llminferenceserviceconfigs.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/llmisvc/serving.kserve.io_llminferenceserviceconfigs.yaml"><code>config/crd/full/llmisvc/serving.kserve.io_llminferenceserviceconfigs.yaml</code></a></td>
 </tr>
 <tr>
 <td>serving.kserve.io</td>
@@ -27644,7 +27640,7 @@
 <td>11244</td>
 <td>0</td>
 <td>YAML</td>
-<td><a href="https://github.com/kserve/kserve/blob/bd8b9184daba8e98c3fed433e9bae80d4d06d16f/config/crd/full/serving.kserve.io_inferenceservices.yaml"><code>config/crd/full/serving.kserve.io_inferenceservices.yaml</code></a></td>
+<td><a href="https://github.com/kserve/kserve/blob/64dcf99261195fcaba4eb6c3746f69d7d67e25ea/config/crd/full/serving.kserve.io_inferenceservices.yaml"><code>config/crd/full/serving.kserve.io_inferenceservices.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -27765,7 +27761,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 5, 2026 05:11:47 UTC">October 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 06:00:10 UTC">October 6, 2026</span>
   </span>
 
     
