@@ -27089,7 +27089,7 @@
     odh_dashboard["odh-dashboard\n19 resources"]:::medium
     end
     subgraph nar["Narrow Scope (&lt;10)"]
-    maas_consumer_portal["maas-consumer-portal\n2 resources"]:::narrow
+    maas_portal["maas-portal\n2 resources"]:::narrow
     odh_dashboard_agent_ops["odh-dashboard-agent-ops\n5 resources"]:::narrow
     odh_dashboard_automl["odh-dashboard-automl\n2 resources"]:::narrow
     odh_dashboard_autorag["odh-dashboard-autorag\n2 resources"]:::narrow
@@ -27099,13 +27099,13 @@
     odh_dashboard_maas["odh-dashboard-maas\n4 resources"]:::narrow
     odh_dashboard_mlflow["odh-dashboard-mlflow\n3 resources"]:::narrow
     odh_dashboard_model_registry["odh-dashboard-model-registry\n2 resources"]:::narrow
-    maas_consumer_portal_opendatahub_operator_subscription["maas-consumer-portal-opendatahub-operator-subscription\n1 resources"]:::narrow
-    maas_consumer_portal_rhods_operator_subscription["maas-consumer-portal-rhods-operator-subscription\n1 resources"]:::narrow
+    maas_portal_opendatahub_operator_subscription["maas-portal-opendatahub-operator-subscription\n1 resources"]:::narrow
+    maas_portal_rhods_operator_subscription["maas-portal-rhods-operator-subscription\n1 resources"]:::narrow
     servingruntimes_config_updater["servingruntimes-config-updater\n2 resources"]:::narrow
     end
 
-    subj_maas_consumer_portal["maas-consumer-portal\nServiceAccount"]:::subject
-    subj_maas_consumer_portal --&gt;|binds| maas_consumer_portal
+    subj_maas_portal["maas-portal\nServiceAccount"]:::subject
+    subj_maas_portal --&gt;|binds| maas_portal
     subj_odh_dashboard["odh-dashboard\nServiceAccount"]:::subject
     subj_odh_dashboard --&gt;|binds| odh_dashboard
     subj_odh_dashboard_agent_ops["odh-dashboard-agent-ops\nServiceAccount"]:::subject
@@ -27133,8 +27133,8 @@
     subj_odh_dashboard_notebooks --&gt;|binds| odh_dashboard_notebooks
     subj_system_serviceaccounts["system:serviceaccounts\nGroup"]:::subject
     subj_system_serviceaccounts --&gt;|binds| system_image_puller
-    subj_maas_consumer_portal --&gt;|binds| maas_consumer_portal_opendatahub_operator_subscription
-    subj_maas_consumer_portal --&gt;|binds| maas_consumer_portal_rhods_operator_subscription
+    subj_maas_portal --&gt;|binds| maas_portal_opendatahub_operator_subscription
+    subj_maas_portal --&gt;|binds| maas_portal_rhods_operator_subscription
     subj_odh_dashboard --&gt;|binds| odh_dashboard
     subj_system_authenticated["system:authenticated\nGroup"]:::subject
     subj_system_authenticated --&gt;|binds| servingruntimes_config_updater</code></pre>
@@ -27151,10 +27151,10 @@
 </thead>
 <tbody>
 <tr>
-<td>maas-consumer-portal</td>
+<td>maas-portal</td>
 <td>ClusterRoleBinding</td>
-<td>maas-consumer-portal</td>
-<td>ServiceAccount/maas-consumer-portal</td>
+<td>maas-portal</td>
+<td>ServiceAccount/maas-portal</td>
 </tr>
 <tr>
 <td>odh-dashboard</td>
@@ -27241,16 +27241,16 @@
 <td>Group/system:serviceaccounts</td>
 </tr>
 <tr>
-<td>maas-consumer-portal-opendatahub-operator-subscription</td>
+<td>maas-portal-opendatahub-operator-subscription</td>
 <td>RoleBinding</td>
-<td>maas-consumer-portal-opendatahub-operator-subscription</td>
-<td>ServiceAccount/maas-consumer-portal</td>
+<td>maas-portal-opendatahub-operator-subscription</td>
+<td>ServiceAccount/maas-portal</td>
 </tr>
 <tr>
-<td>maas-consumer-portal-rhods-operator-subscription</td>
+<td>maas-portal-rhods-operator-subscription</td>
 <td>RoleBinding</td>
-<td>maas-consumer-portal-rhods-operator-subscription</td>
-<td>ServiceAccount/maas-consumer-portal</td>
+<td>maas-portal-rhods-operator-subscription</td>
+<td>ServiceAccount/maas-portal</td>
 </tr>
 <tr>
 <td>odh-dashboard</td>
@@ -27280,14 +27280,14 @@
 </thead>
 <tbody>
 <tr>
-<td>maas-consumer-portal</td>
+<td>maas-portal</td>
 <td>ClusterRole</td>
 <td></td>
 <td>datascienceclusters</td>
 <td>get, list</td>
 </tr>
 <tr>
-<td>maas-consumer-portal</td>
+<td>maas-portal</td>
 <td>ClusterRole</td>
 <td></td>
 <td>ingresses</td>
@@ -27826,14 +27826,14 @@
 <td>create</td>
 </tr>
 <tr>
-<td>maas-consumer-portal-opendatahub-operator-subscription</td>
+<td>maas-portal-opendatahub-operator-subscription</td>
 <td>Role</td>
 <td></td>
 <td>subscriptions</td>
 <td>get</td>
 </tr>
 <tr>
-<td>maas-consumer-portal-rhods-operator-subscription</td>
+<td>maas-portal-rhods-operator-subscription</td>
 <td>Role</td>
 <td></td>
 <td>subscriptions</td>
@@ -27996,7 +27996,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 05:45:06 UTC">October 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 05:29:21 UTC">October 10, 2026</span>
   </span>
 
     
