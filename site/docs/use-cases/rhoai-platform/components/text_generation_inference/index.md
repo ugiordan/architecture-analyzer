@@ -1,11 +1,11 @@
 # text-generation-inference
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-10** (2026-10-10)
 
 
 **Repository:** red-hat-data-services/text-generation-inference  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:17:20Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-10T05:23:26Z
 
 ## Summary
 

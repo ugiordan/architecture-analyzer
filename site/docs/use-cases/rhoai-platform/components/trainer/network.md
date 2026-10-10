@@ -1,27 +1,30 @@
 # trainer: Network
 
-## Service Map
+### Services
 
-*1 unique services (2 total, duplicates from test fixtures collapsed).*
+No services found in analyzed sources.
+
+### Network Policies
+
+| Name | Policy Types | Source |
+|------|-------------|--------|
+| kubeflow-trainer-controller-manager | Ingress | [`manifests/rhoai/networkpolicy-ingress.yaml`](https://github.com/kubeflow/trainer/blob/3a92cc92023fe5478ebf78193f63c9ca94c64e09/manifests/rhoai/networkpolicy-ingress.yaml) |
+| kubeflow-trainer-controller-manager-egress | Egress | [`manifests/rhoai/networkpolicy-egress.yaml`](https://github.com/kubeflow/trainer/blob/3a92cc92023fe5478ebf78193f63c9ca94c64e09/manifests/rhoai/networkpolicy-egress.yaml) |
+
+## Network Policy Graph
+
+Visual representation of NetworkPolicy rules. Ingress rules show what traffic is allowed into pods, egress rules show what traffic is allowed out.
 
 ```mermaid
 graph LR
-    classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
-    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
-    classDef component fill:#3498db,stroke:#2980b9,color:#fff
-    classDef ext fill:#e74c3c,stroke:#c0392b,color:#fff
+    classDef policy fill:#e74c3c,stroke:#c0392b,color:#fff
+    classDef pod fill:#3498db,stroke:#2980b9,color:#fff
+    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
 
-    trainer["trainer"]:::component
-    trainer --> svc_0["webhook-service\nClusterIP: 443/TCP"]:::svc
+    trainer["trainer\nPods"]:::pod
+    np_0_kubeflow_trainer_controller_manager{{"kubeflow-trainer-controller-manager\nIngress"}}:::policy
+    np_0_kubeflow_trainer_controller_manager --> trainer
+    np_1_kubeflow_trainer_controller_manager_egress{{"kubeflow-trainer-controller-manager-egress\nEgress"}}:::policy
+    np_1_kubeflow_trainer_controller_manager_egress --> trainer
 ```
-
-### Services
-
-| Name | Type | Ports | Source |
-|------|------|-------|--------|
-| webhook-service | ClusterIP | 443/TCP | [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml) |
-| webhook-service | ClusterIP | 443/TCP | [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml) |
-
-!!! warning "No Network Policies"
-    No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.
 

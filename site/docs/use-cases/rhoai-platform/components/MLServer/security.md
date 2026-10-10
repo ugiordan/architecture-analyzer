@@ -14,6 +14,8 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `Dockerfile` | ${BASE_IMAGE} | 2 | 1000 |  |  |  | Unpinned base image: ${BASE_IMAGE}; Unpinned base image: ${BASE_IMAGE} |
-| `Dockerfile.konflux` | ${BASE_IMAGE} | 1 | 1000 |  |  |  | Unpinned base image: ${BASE_IMAGE} |
+| `Dockerfile` | mlserver.settings | 4 | 1000 |  |  |  | Unpinned base image: ${BASE_IMAGE}; Unpinned base image: ${BASE_IMAGE}; Unpinned base image: pathlib; Unpinned base image: mlserver.settings |
+| `Dockerfile.cuda` | mlserver.settings | 4 | 1000 |  |  |  | Unpinned base image: ${BASE_IMAGE}; Unpinned base image: ${BASE_IMAGE}; Unpinned base image: pathlib; Unpinned base image: mlserver.settings |
+| `Dockerfile.konflux` | mlserver.settings | 3 | 1000 |  |  |  | Unpinned base image: ${BASE_IMAGE}; Unpinned base image: pathlib; Unpinned base image: mlserver.settings |
+| `Dockerfile.konflux.cuda` | mlserver.settings | 3 | 1000 |  |  |  | Unpinned base image: ${BASE_IMAGE}; Unpinned base image: pathlib; Unpinned base image: mlserver.settings |
 

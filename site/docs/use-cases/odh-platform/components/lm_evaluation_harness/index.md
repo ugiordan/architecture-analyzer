@@ -1,11 +1,11 @@
 # lm-evaluation-harness
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-10** (2026-10-10)
 
 
 **Repository:** opendatahub-io/lm-evaluation-harness  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:10:42Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-10T05:21:14Z
 
 ## Summary
 

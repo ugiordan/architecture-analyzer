@@ -10,7 +10,8 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 |----------|-------|
 | Manager file | `cmd/main.go` |
 | Cache scope | cluster-wide |
-| DefaultTransform | no |
+| DefaultTransform | yes |
+| GOMEMLIMIT | 1800MiB |
 | Memory limit | 2Gi |
 
 ### Filtered Types
@@ -20,15 +21,17 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 | corev1.Pod | label | component=predictor |
 | corev1.Secret | label | opendatahub.io/managed=true |
 
+### Cache-Bypassed Types (DisableFor)
+
+- corev1.ConfigMap
+
 ### Issues
 
-- No DefaultTransform: managedFields cached for all objects (wasted memory)
-- No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)
+- Cache bypass (DisableFor) configured for corev1.ConfigMap. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)
 - Type Account is watched but has no cache filter (cluster-wide informer)
 - Type AuthPolicy is watched but has no cache filter (cluster-wide informer)
 - Type Authorino is watched but has no cache filter (cluster-wide informer)
 - Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)
-- Type ConfigMap is watched but has no cache filter (cluster-wide informer)
 - Type EnvoyFilter is watched but has no cache filter (cluster-wide informer)
 - Type Gateway is watched but has no cache filter (cluster-wide informer)
 - Type InferenceGraph is watched but has no cache filter (cluster-wide informer)

@@ -12,5 +12,7 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 Dockerfile patterns and base image analysis. Covers supply chain security: base images, build stages, runtime user, FIPS compliance.
 
-No Dockerfiles found in analyzed sources.
+| Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
+|------|------------|--------|------|-------|---------------|------|--------|
+| `ai4rag/assets_generator/starter_kit_templates/agentic_rag/Containerfile.openshell` | ${BASE_IMAGE} | 1 | 1001 |  |  |  | Unpinned base image: ${BASE_IMAGE} |
 

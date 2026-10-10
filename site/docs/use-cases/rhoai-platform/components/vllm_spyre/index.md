@@ -1,11 +1,11 @@
 # vllm-spyre
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-10** (2026-10-10)
 
 
 **Repository:** red-hat-data-services/vllm-spyre  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:33Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-10T05:23:57Z
 
 ## Summary
 

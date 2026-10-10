@@ -16,11 +16,19 @@ sequenceDiagram
 
     participant KubernetesAPI as Kubernetes API
     participant NeMo_Guardrails as NeMo-Guardrails
-
-
-    Note over NeMo_Guardrails: Exposed Services
-    Note right of NeMo_Guardrails: env-port-default:1235/TCP []
 ```
+
+### HTTP Endpoints
+
+| Method | Path | Source |
+|--------|------|--------|
+| GET | / | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
+| GET | /healthz | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
+| GET | /v1/challenges | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
+| POST | /v1/chat/completions | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
+| GET | /v1/health | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
+| GET | /v1/models | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
+| GET | /v1/rails/configs | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/0a26145b25bf7984e7f87feb328c6b7bfe1660ce/fern/openapi.yml) |
 
 ## Configuration
 
