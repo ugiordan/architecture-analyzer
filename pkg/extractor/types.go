@@ -1,5 +1,9 @@
 package extractor
 
+import (
+	"github.com/ugiordan/architecture-analyzer/pkg/config"
+)
+
 // ExtractOptions configures the extraction process.
 type ExtractOptions struct {
 	// Org overrides the auto-detected GitHub organization.
@@ -17,6 +21,8 @@ type ExtractOptions struct {
 	KnownComponents []string
 	// Extractors lists extractor groups to run (empty = all).
 	Extractors []string
+	// APITiersConfig, when set, enriches extracted CRDs with tier assignments.
+	APITiersConfig *config.APITiersConfig
 }
 
 // DefaultModulePrefixes returns the standard internal module prefixes for the analyzed platform.
@@ -106,6 +112,7 @@ type CRD struct {
 	GoSource        string       `json:"go_source,omitempty"`
 	HubVersion      string       `json:"hub_version,omitempty"`
 	SpokeVersions   []string     `json:"spoke_versions,omitempty"`
+	APITier         string       `json:"api_tier,omitempty"`
 }
 
 // CRDVersion represents a single served version of a CRD.

@@ -290,8 +290,11 @@ func renderPlatformArchDocPage(data map[string]interface{}) string {
 	b.WriteString(fmt.Sprintf("The platform defines %d CRDs. Each CRD is owned by the component that declares it.\n\n", len(crds)))
 
 	if len(crds) > 0 {
-		// Group CRDs by owner from the crds array directly
-		ownerCRDs := make(map[string][]string)
+		type crdInfo struct {
+			kind string
+			tier string
+		}
+		ownerCRDs := make(map[string][]crdInfo)
 		seen := make(map[string]bool)
 		for _, crd := range crds {
 			owner := getStr(crd, "owner", "")
@@ -304,7 +307,10 @@ func renderPlatformArchDocPage(data map[string]interface{}) string {
 				continue
 			}
 			seen[key] = true
-			ownerCRDs[owner] = append(ownerCRDs[owner], kind)
+			ownerCRDs[owner] = append(ownerCRDs[owner], crdInfo{
+				kind: kind,
+				tier: getStr(crd, "api_tier", ""),
+			})
 		}
 
 		owners := make([]string, 0, len(ownerCRDs))
@@ -313,12 +319,26 @@ func renderPlatformArchDocPage(data map[string]interface{}) string {
 		}
 		sort.Strings(owners)
 
-		b.WriteString("| Owner | CRDs | Count |\n")
-		b.WriteString("|-------|------|-------|\n")
+		b.WriteString("| Owner | CRDs | API Tier | Count |\n")
+		b.WriteString("|-------|------|----------|-------|\n")
 		for _, owner := range owners {
-			kinds := ownerCRDs[owner]
-			sort.Strings(kinds)
-			b.WriteString(fmt.Sprintf("| **%s** | %s | %d |\n", owner, strings.Join(kinds, ", "), len(kinds)))
+			infos := ownerCRDs[owner]
+			sort.Slice(infos, func(i, j int) bool { return infos[i].kind < infos[j].kind })
+			kinds := make([]string, len(infos))
+			tiers := make(map[string]bool)
+			for i, info := range infos {
+				kinds[i] = info.kind
+				if info.tier != "" {
+					tiers[info.tier] = true
+				}
+			}
+			tierList := make([]string, 0, len(tiers))
+			for t := range tiers {
+				tierList = append(tierList, t)
+			}
+			sort.Strings(tierList)
+			b.WriteString(fmt.Sprintf("| **%s** | %s | %s | %d |\n",
+				owner, strings.Join(kinds, ", "), strings.Join(tierList, ", "), len(kinds)))
 		}
 		b.WriteString("\n")
 	}
