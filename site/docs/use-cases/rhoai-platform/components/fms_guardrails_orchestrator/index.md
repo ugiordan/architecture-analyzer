@@ -1,11 +1,11 @@
 # fms-guardrails-orchestrator
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-17** (2026-10-17)
 
 
 **Repository:** red-hat-data-services/fms-guardrails-orchestrator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:11:12Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-17T03:54:43Z
 
 ## Summary
 

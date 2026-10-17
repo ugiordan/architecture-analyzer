@@ -14,12 +14,12 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal:9.7 | 3 | 1001 |  |  |  |  |
+| `Dockerfile.konflux` | ${BASE_IMAGE} | 3 | 1001 |  |  |  | Unpinned base image: ${BASE_IMAGE} |
 | `dev/Dockerfile.protos` | python:3.10-slim | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `dev/Dockerfile.protos.dockerignore` |  | 0 |  |  |  |  | No USER directive found (defaults to root) |
-| `docker/Dockerfile` | python:3.10-slim-bullseye@sha256:f1fb49e4d5501ac93d0ca519fb7ee6250842245aba8612926a46a0832a1ed089 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `docker/Dockerfile.full` | python:3.10-slim-bullseye@sha256:f1fb49e4d5501ac93d0ca519fb7ee6250842245aba8612926a46a0832a1ed089 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `docker/Dockerfile.full.dev` | python:3.10-slim-bullseye@sha256:f1fb49e4d5501ac93d0ca519fb7ee6250842245aba8612926a46a0832a1ed089 | 1 |  |  |  |  | No USER directive found (defaults to root) |
+| `docker/Dockerfile` | python:3.11-slim-trixie@sha256:90744cff8f32887f075c47d747a173ff333e9e98801667af93c357fa9f5e28ff | 1 |  |  |  |  | No USER directive found (defaults to root) |
+| `docker/Dockerfile.full` | python:3.11-slim-trixie@sha256:90744cff8f32887f075c47d747a173ff333e9e98801667af93c357fa9f5e28ff | 1 |  |  |  |  | No USER directive found (defaults to root) |
+| `docker/Dockerfile.full.dev` | python:3.11-slim-trixie@sha256:90744cff8f32887f075c47d747a173ff333e9e98801667af93c357fa9f5e28ff | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `mlflow/R/mlflow/Dockerfile.dev` | rocker/r-ver:4.4.2 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `mlflow/R/mlflow/Dockerfile.r-devel` | rocker/r-ver:devel | 1 |  |  |  |  | No USER directive found (defaults to root) |
 

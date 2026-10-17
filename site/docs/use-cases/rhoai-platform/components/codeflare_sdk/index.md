@@ -1,11 +1,11 @@
 # codeflare-sdk
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-17** (2026-10-17)
 
 
 **Repository:** red-hat-data-services/codeflare-sdk  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:16:36Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-17T03:56:46Z
 
 ## Summary
 

@@ -1,11 +1,11 @@
 # vllm-rocm
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-17** (2026-10-17)
 
 
 **Repository:** red-hat-data-services/vllm-rocm  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:32Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-17T03:57:35Z
 
 ## Summary
 

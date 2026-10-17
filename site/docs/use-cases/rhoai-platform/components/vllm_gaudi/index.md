@@ -1,11 +1,11 @@
 # vllm-gaudi
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-17** (2026-10-17)
 
 
 **Repository:** red-hat-data-services/vllm-gaudi  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:31Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-17T03:57:35Z
 
 ## Summary
 
@@ -13,7 +13,7 @@
 |--------|-------|
 | CRDs | 0 |
 | Deployments | 0 |
-| Services | 1 |
+| Services | 0 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
 | Controller Watches | 0 |

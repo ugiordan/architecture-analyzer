@@ -1,20 +1,20 @@
 # feast
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-17** (2026-10-17)
 
 
 **Repository:** feast-dev/feast  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:20:29Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-17T03:57:48Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 0 |
-| Deployments | 2 |
+| Deployments | 3 |
 | Services | 1 |
-| Secrets | 0 |
+| Secrets | 1 |
 | Cluster Roles | 0 |
 | Controller Watches | 13 |
 
@@ -37,32 +37,34 @@ graph LR
         class dep_1 controller
         dep_2["controller-manager"]
         class dep_2 controller
+        dep_3["controller-manager"]
+        class dep_3 controller
     end
 
-    controller -->|"Owns"| owned_3["ConfigMap"]
-    class owned_3 owned
-    controller -->|"Owns"| owned_4["CronJob"]
+    controller -->|"Owns"| owned_4["ConfigMap"]
     class owned_4 owned
-    controller -->|"Owns"| owned_5["Deployment"]
+    controller -->|"Owns"| owned_5["CronJob"]
     class owned_5 owned
-    controller -->|"Owns"| owned_6["HorizontalPodAutoscaler"]
+    controller -->|"Owns"| owned_6["Deployment"]
     class owned_6 owned
-    controller -->|"Owns"| owned_7["PersistentVolumeClaim"]
+    controller -->|"Owns"| owned_7["HorizontalPodAutoscaler"]
     class owned_7 owned
-    controller -->|"Owns"| owned_8["PodDisruptionBudget"]
+    controller -->|"Owns"| owned_8["PersistentVolumeClaim"]
     class owned_8 owned
-    controller -->|"Owns"| owned_9["Role"]
+    controller -->|"Owns"| owned_9["PodDisruptionBudget"]
     class owned_9 owned
-    controller -->|"Owns"| owned_10["RoleBinding"]
+    controller -->|"Owns"| owned_10["Role"]
     class owned_10 owned
-    controller -->|"Owns"| owned_11["Route"]
+    controller -->|"Owns"| owned_11["RoleBinding"]
     class owned_11 owned
-    controller -->|"Owns"| owned_12["Service"]
+    controller -->|"Owns"| owned_12["Route"]
     class owned_12 owned
-    controller -->|"Owns"| owned_13["ServiceAccount"]
+    controller -->|"Owns"| owned_13["Service"]
     class owned_13 owned
-    watch_14["FeatureStore"] -->|"Watches"| controller
-    class watch_14 external
+    controller -->|"Owns"| owned_14["ServiceAccount"]
+    class owned_14 owned
+    watch_15["FeatureStore"] -->|"Watches"| controller
+    class watch_15 external
 ```
 
 ### CRDs
@@ -75,86 +77,13 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/prometheus-operator/prometheus-operator/pkg/client | v0.75.0 |
+| github.com/prometheus-operator/prometheus-operator/pkg/client | v0.83.0 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.14.0 |
-| github.com/prometheus/client_golang | v1.14.0 |
-| github.com/prometheus/client_golang | v1.0.0 |
-| github.com/prometheus/client_golang | v1.0.0 |
-| github.com/prometheus/client_model | v0.3.0 |
-| github.com/prometheus/client_model | v0.6.1 |
+| github.com/prometheus/client_golang | v1.24.1 |
 | github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.3.0 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.59.0 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.61.1 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.59.0 |
-| google.golang.org/grpc | v1.73.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.58.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.73.0 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.61.1 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.58.2 |
-| google.golang.org/grpc/examples | v0.0.0-20230224211313-3775f633ce20 |
-| google.golang.org/grpc/examples | v0.0.0-20230224211313-3775f633ce20 |
-| k8s.io/api | v0.33.0 |
-| k8s.io/apiextensions-apiserver | v0.33.0 |
-| k8s.io/apimachinery | v0.33.0 |
-| k8s.io/client-go | v0.33.0 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
+| google.golang.org/grpc | v1.84.0 |
+| k8s.io/api | v0.35.2 |
+| k8s.io/apimachinery | v0.35.2 |
+| k8s.io/client-go | v0.35.2 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

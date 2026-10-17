@@ -8,14 +8,14 @@ No services found in analyzed sources.
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Gateway | knative-ingress-gateway |  |  | no | [`demo/kserve/custom-manifests/serverless/gateways.yaml`](https://github.com/red-hat-data-services/caikit-tgis-serving/blob/27e5ef01c74822e835e3ae7d55c69d747be718fd/demo/kserve/custom-manifests/serverless/gateways.yaml) |
-| Gateway | knative-local-gateway |  |  | no | [`demo/kserve/custom-manifests/serverless/gateways.yaml`](https://github.com/red-hat-data-services/caikit-tgis-serving/blob/27e5ef01c74822e835e3ae7d55c69d747be718fd/demo/kserve/custom-manifests/serverless/gateways.yaml) |
+| Gateway | knative-ingress-gateway |  |  | no | [`demo/kserve/custom-manifests/serverless/gateways.yaml`](https://github.com/red-hat-data-services/caikit-tgis-serving/blob/3df45d433ca03cbc9f85ca2a5e46bbdfc5e06f57/demo/kserve/custom-manifests/serverless/gateways.yaml) |
+| Gateway | knative-local-gateway |  |  | no | [`demo/kserve/custom-manifests/serverless/gateways.yaml`](https://github.com/red-hat-data-services/caikit-tgis-serving/blob/3df45d433ca03cbc9f85ca2a5e46bbdfc5e06f57/demo/kserve/custom-manifests/serverless/gateways.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| allow-from-openshift-monitoring-ns | Ingress | [`demo/kserve/custom-manifests/metrics/networkpolicy-uwm.yaml`](https://github.com/red-hat-data-services/caikit-tgis-serving/blob/27e5ef01c74822e835e3ae7d55c69d747be718fd/demo/kserve/custom-manifests/metrics/networkpolicy-uwm.yaml) |
+| allow-from-openshift-monitoring-ns | Ingress | [`demo/kserve/custom-manifests/metrics/networkpolicy-uwm.yaml`](https://github.com/red-hat-data-services/caikit-tgis-serving/blob/3df45d433ca03cbc9f85ca2a5e46bbdfc5e06f57/demo/kserve/custom-manifests/metrics/networkpolicy-uwm.yaml) |
 
 ## Network Policy Graph
 
