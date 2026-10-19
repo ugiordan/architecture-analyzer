@@ -335,9 +335,12 @@ networkPolicy:
 
 func TestExtractAll(t *testing.T) {
 	root := setupTestRepo(t)
-	arch, err := ExtractAll(root, nil)
+	arch, err := ExtractAll(root, &ExtractOptions{Org: "opendatahub-io"})
 	if err != nil {
 		t.Fatalf("ExtractAll failed: %v", err)
+	}
+	if want := "opendatahub-io/" + arch.Component; arch.Repo != want {
+		t.Errorf("expected explicit repository owner %q, got %q", want, arch.Repo)
 	}
 
 	if arch.Component == "" {

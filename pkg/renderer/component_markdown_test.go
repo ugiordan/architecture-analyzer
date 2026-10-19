@@ -105,6 +105,12 @@ func TestRenderComponentMarkdown_SourceLinks(t *testing.T) {
 	if !strings.Contains(result, "github.com/org/repo/blob/abc123/api/v1/types.go#L10") {
 		t.Error("missing source link in CRDs table")
 	}
+	if !strings.Contains(result, "| Repository | [org/repo](https://github.com/org/repo) |") {
+		t.Error("repository metadata should link to the GitHub repository")
+	}
+	if !strings.Contains(result, "| Commit | [abc123](https://github.com/org/repo/commit/abc123) |") {
+		t.Error("commit metadata should link to the GitHub commit")
+	}
 }
 
 func TestRenderComponentMarkdown_NewSections(t *testing.T) {

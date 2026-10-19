@@ -160,10 +160,20 @@ func sourceLink(data map[string]interface{}, source string) string {
 	// Escape markdown-significant chars in file paths to prevent link injection.
 	safeFile := strings.ReplaceAll(file, ")", "%29")
 	safeFile = strings.ReplaceAll(safeFile, "(", "%28")
-	url := fmt.Sprintf("https://github.com/%s/blob/%s/%s%s", repo, sha, safeFile, anchor)
+	url := fmt.Sprintf("%s/blob/%s/%s%s", githubRepoURL(repo), sha, safeFile, anchor)
 	safeSource := strings.ReplaceAll(source, "]", "\\]")
 	safeSource = strings.ReplaceAll(safeSource, "`", "")
 	return fmt.Sprintf("[`%s`](%s)", safeSource, url)
+}
+
+// githubRepoURL returns the canonical GitHub URL for repository identifiers
+// emitted as either owner/repo or github.com/owner/repo.
+func githubRepoURL(repo string) string {
+	repo = strings.TrimPrefix(repo, "https://github.com/")
+	repo = strings.TrimPrefix(repo, "http://github.com/")
+	repo = strings.TrimPrefix(repo, "github.com/")
+	repo = strings.TrimSuffix(repo, ".git")
+	return "https://github.com/" + repo
 }
 
 // GetStr is the exported version of getStr for use by CLI commands.

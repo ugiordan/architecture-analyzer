@@ -114,6 +114,7 @@ jobs:
         id: analyze
         env:
           REPO: ${{ matrix.repo }}
+          SCAN_PLATFORM: odh
           FORCE_RESCAN: ${{ inputs.force_rescan == true && '1' || '0' }}
         run: |
           chmod +x arch-analyzer
@@ -162,6 +163,7 @@ jobs:
         id: analyze
         env:
           REPO: ${{ matrix.repo }}
+          SCAN_PLATFORM: rhoai
           FORCE_RESCAN: ${{ inputs.force_rescan == true && '1' || '0' }}
         run: |
           chmod +x arch-analyzer

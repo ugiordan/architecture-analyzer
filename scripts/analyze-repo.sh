@@ -19,6 +19,7 @@ export GOMEMLIMIT="${GOMEMLIMIT:-5500MiB}"
 REPO="${1:?Usage: analyze-repo.sh <org/repo> <results-base-dir> [version-label]}"
 RESULTS_BASE="${2:?Usage: analyze-repo.sh <org/repo> <results-base-dir> [version-label]}"
 VERSION_LABEL="${3:-}"
+SCAN_PLATFORM="${SCAN_PLATFORM:-}"
 
 # SIGTERM/SIGINT trap: when GitHub Actions timeout kills the process,
 # clean up and exit 0 so the job shows a warning, not a red error.
@@ -65,10 +66,39 @@ CLONE_DIR="${CLONE_BASE}/${SHORT}"
 export GOTMPDIR="${RUNNER_TEMP:-/tmp}/gotmp"
 mkdir -p "${GOTMPDIR}"
 
-# Clone (shallow)
-echo "[*] Cloning ${REPO}..."
+# ODH forks are scanned from their main/master branch, not inferred upstream
+# module paths. Repositories without either branch can set a repo_branches
+# override in scan-config.yaml.
+REPO_URL="https://github.com/${REPO}.git"
+SOURCE_BRANCH=""
+if [ "${SCAN_PLATFORM}" = "odh" ] && [ "${ORG}" = "opendatahub-io" ]; then
+    if command -v yq &>/dev/null; then
+        SOURCE_BRANCH=$(yq -r ".platforms.odh.repo_branches.\"${REPO}\" // \"\"" "${ANALYZER_DIR}/scan-config.yaml" 2>/dev/null || true)
+    fi
+    if [ -z "${SOURCE_BRANCH}" ]; then
+        DEFAULT_BRANCH=$(git ls-remote --symref "${REPO_URL}" HEAD 2>/dev/null | awk '$1 == "ref:" && $2 ~ /^refs\/heads\// { sub("refs/heads/", "", $2); print $2; exit }')
+        if [ "${DEFAULT_BRANCH}" = "main" ] || [ "${DEFAULT_BRANCH}" = "master" ]; then
+            SOURCE_BRANCH="${DEFAULT_BRANCH}"
+        elif git ls-remote --exit-code --heads "${REPO_URL}" refs/heads/main >/dev/null 2>&1; then
+            SOURCE_BRANCH="main"
+        elif git ls-remote --exit-code --heads "${REPO_URL}" refs/heads/master >/dev/null 2>&1; then
+            SOURCE_BRANCH="master"
+        else
+            echo "::error::${REPO} has no main/master branch and no repo_branches override" >&2
+            exit 1
+        fi
+    fi
+fi
+
+CLONE_ARGS=(--depth 1)
+if [ -n "${SOURCE_BRANCH}" ]; then
+    CLONE_ARGS+=(--branch "${SOURCE_BRANCH}")
+    echo "[*] Cloning ${REPO} at ${SOURCE_BRANCH}..."
+else
+    echo "[*] Cloning ${REPO} at its default branch..."
+fi
 rm -rf "${CLONE_DIR}"
-git clone --depth 1 "https://github.com/${REPO}.git" "${CLONE_DIR}" 2>/dev/null || {
+git clone "${CLONE_ARGS[@]}" "${REPO_URL}" "${CLONE_DIR}" 2>/dev/null || {
     echo "::warning::Skipping ${REPO}: clone failed (repo may be private or inaccessible)"
     exit 0
 }
@@ -145,7 +175,7 @@ if [ -n "${VERSION_LABEL}" ]; then
     VERSION_ARGS="-version ${VERSION_LABEL}"
 fi
 ANALYSIS_TIMEOUT="${ANALYSIS_TIMEOUT:-2400}"
-FULL_ARGS=(-output-dir "${OUTDIR}")
+FULL_ARGS=(-output-dir "${OUTDIR}" -org "${ORG}")
 if [ -n "${VERSION_ARGS}" ]; then
     FULL_ARGS+=(${VERSION_ARGS})
 fi

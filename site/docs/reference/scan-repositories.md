@@ -8,6 +8,9 @@ This is the deduplicated union of configured repositories after removing
 
 Total unique repositories: **106**.
 
+ODH repositories owned by `opendatahub-io` are scanned from their `main` or
+`master` branch. `opendatahub-io/kueue` uses `stable-2.x`, its available ODH branch.
+
 The ODH platform uses `trainer-operator`. The downstream RHOAI platform still
 uses `training-operator` until its downstream repository is renamed or replaced.
 `trainer` is a separate configured repository.

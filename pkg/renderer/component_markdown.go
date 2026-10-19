@@ -574,13 +574,23 @@ func renderMetadataSection(b *strings.Builder, data map[string]interface{}) {
 	b.WriteString("\n## Metadata\n\n")
 	b.WriteString("| Field | Value |\n")
 	b.WriteString("|-------|-------|\n")
-	b.WriteString(fmt.Sprintf("| Repository | %s |\n", escapeMdCell(getStr(data, "repo", ""))))
+	repo := getStr(data, "repo", "")
+	if repo != "" {
+		b.WriteString(fmt.Sprintf("| Repository | [%s](%s) |\n", escapeMdCell(repo), githubRepoURL(repo)))
+	} else {
+		b.WriteString("| Repository |  |\n")
+	}
 	aliases := getStringSlice(data, "aliases")
 	if len(aliases) > 0 {
 		b.WriteString(fmt.Sprintf("| Aliases | %s |\n", escapeMdCell(strings.Join(aliases, ", "))))
 	}
 	if sha := getStr(data, "commit_sha", ""); sha != "" {
-		b.WriteString(fmt.Sprintf("| Commit | %s |\n", escapeMdCell(sha)))
+		if repo != "" {
+			commitURL := githubRepoURL(repo) + "/commit/" + sha
+			b.WriteString(fmt.Sprintf("| Commit | [%s](%s) |\n", escapeMdCell(sha), commitURL))
+		} else {
+			b.WriteString(fmt.Sprintf("| Commit | %s |\n", escapeMdCell(sha)))
+		}
 	}
 	b.WriteString(fmt.Sprintf("| Extracted | %s |\n", escapeMdCell(getStr(data, "extracted_at", ""))))
 	b.WriteString(fmt.Sprintf("| Analyzer Version | %s |\n", escapeMdCell(getStr(data, "analyzer_version", ""))))
