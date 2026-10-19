@@ -8,10 +8,10 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | project-codeflare/codeflare-operator |
+| Repository | [opendatahub-io/codeflare-operator](https://github.com/opendatahub-io/codeflare-operator) |
 | Aliases | CodeFlare operator |
-| Commit | fb0d403419a114d26adcf65215b6a89e723667d8 |
-| Extracted | 2026-10-19T04:06:02Z |
+| Commit | [fb0d403419a114d26adcf65215b6a89e723667d8](https://github.com/opendatahub-io/codeflare-operator/commit/fb0d403419a114d26adcf65215b6a89e723667d8) |
+| Extracted | 2026-10-19T10:33:36Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -20,19 +20,19 @@
 
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
-| AppWrapper | workload.codeflare.dev | v1beta2 | Namespaced | 50 |  | YAML | [`config/crd/crd-appwrapper.yml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/crd/crd-appwrapper.yml) |
+| AppWrapper | workload.codeflare.dev | v1beta2 | Namespaced | 50 |  | YAML | [`config/crd/crd-appwrapper.yml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/crd/crd-appwrapper.yml) |
 
 
 ## Webhooks
 
 | Name | Type | Resources | Operations | Overlays | Enable Condition | Sources |
 |------|------|-----------|------------|----------|------------------|----------|
-| mappwrapper.kb.io | mutating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
-| mappwrapper.kb.io | mutating |  |  |  |  | [`pkg/controllers/appwrapper_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go), [`pkg/controllers/appwrapper_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go) |
-| mraycluster.ray.openshift.ai | mutating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
-| vappwrapper.kb.io | validating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
-| vappwrapper.kb.io | validating |  |  |  |  | [`pkg/controllers/appwrapper_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go), [`pkg/controllers/appwrapper_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go) |
-| vraycluster.ray.openshift.ai | validating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
+| mappwrapper.kb.io | mutating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
+| mappwrapper.kb.io | mutating |  |  |  |  | [`pkg/controllers/appwrapper_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go), [`pkg/controllers/appwrapper_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go) |
+| mraycluster.ray.openshift.ai | mutating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
+| vappwrapper.kb.io | validating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
+| vappwrapper.kb.io | validating |  |  |  |  | [`pkg/controllers/appwrapper_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go), [`pkg/controllers/appwrapper_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/appwrapper_webhook.go) |
+| vraycluster.ray.openshift.ai | validating |  |  |  |  | [`config/webhook/manifests.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/manifests.yaml) |
 
 ### mraycluster.ray.openshift.ai Behavior
 
@@ -50,7 +50,7 @@
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| webhook-service | ClusterIP | 443/TCP | [`config/webhook/service.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/service.yaml) |
+| webhook-service | ClusterIP | 443/TCP | [`config/webhook/service.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/webhook/service.yaml) |
 
 
 ## Ingress Routing
@@ -87,9 +87,9 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| appwrapper-editor-role | 2 resources | [`config/rbac/appwrapper_editor_role.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/appwrapper_editor_role.yaml) |
-| manager-role | 34 resources | [`config/rbac/role.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/role.yaml) |
-| viewer-role | 2 resources | [`config/rbac/appwrapper_viewer_role.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/appwrapper_viewer_role.yaml) |
+| appwrapper-editor-role | 2 resources | [`config/rbac/appwrapper_editor_role.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/appwrapper_editor_role.yaml) |
+| manager-role | 34 resources | [`config/rbac/role.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/role.yaml) |
+| viewer-role | 2 resources | [`config/rbac/appwrapper_viewer_role.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/appwrapper_viewer_role.yaml) |
 
 ### Cluster Role Bindings
 
@@ -101,7 +101,7 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| leader-election-role | 3 resources | [`config/rbac/leader_election_role.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/leader_election_role.yaml) |
+| leader-election-role | 3 resources | [`config/rbac/leader_election_role.yaml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/rbac/leader_election_role.yaml) |
 
 ### Role Bindings
 
@@ -183,14 +183,14 @@
 
 | GVK | Watch Type | Source |
 |-----|-----------|--------|
-| ray/v1/RayCluster | For | [`pkg/controllers/raycluster_controller.go:680`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L680) |
-| /v1/Secret | Owns | [`pkg/controllers/raycluster_controller.go:683`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L683) |
-| /v1/Service | Owns | [`pkg/controllers/raycluster_controller.go:682`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L682) |
-| /v1/ServiceAccount | Owns | [`pkg/controllers/raycluster_controller.go:681`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L681) |
-| networking.k8s.io/v1/Ingress | Owns | [`pkg/controllers/raycluster_controller.go:684`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L684) |
-| networking.k8s.io/v1/NetworkPolicy | Owns | [`pkg/controllers/raycluster_controller.go:685`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L685) |
-| route/v1/Route | Owns | [`pkg/controllers/raycluster_controller.go:705`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L705) |
-| rbac.authorization.k8s.io/v1/ClusterRoleBinding | Watches | [`pkg/controllers/raycluster_controller.go:686`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L686) |
+| ray/v1/RayCluster | For | [`pkg/controllers/raycluster_controller.go:680`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L680) |
+| /v1/Secret | Owns | [`pkg/controllers/raycluster_controller.go:683`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L683) |
+| /v1/Service | Owns | [`pkg/controllers/raycluster_controller.go:682`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L682) |
+| /v1/ServiceAccount | Owns | [`pkg/controllers/raycluster_controller.go:681`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L681) |
+| networking.k8s.io/v1/Ingress | Owns | [`pkg/controllers/raycluster_controller.go:684`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L684) |
+| networking.k8s.io/v1/NetworkPolicy | Owns | [`pkg/controllers/raycluster_controller.go:685`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L685) |
+| route/v1/Route | Owns | [`pkg/controllers/raycluster_controller.go:705`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L705) |
+| rbac.authorization.k8s.io/v1/ClusterRoleBinding | Watches | [`pkg/controllers/raycluster_controller.go:686`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go#L686) |
 
 ### Programmatic Resource Operations
 
@@ -223,47 +223,47 @@
 
 | Name | Value | Source |
 |------|-------|--------|
-| CertGeneratorImage | getEnv("CERT_GENERATOR_IMAGE", "registry.redhat.io/ubi9@sha256:770cf07083e1c85ae69c25181a205b7cdef63c11b794c89b3b487d4670b4c328") | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
-| OAuthProxyImage | getEnv("OAUTH_PROXY_IMAGE", "registry.redhat.io/openshift4/ose-oauth-proxy@sha256:1ea6a01bf3e63cdcf125c6064cbd4a4a270deaf0f157b3eabb78f60556840366") | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| CertGeneratorImage | getEnv("CERT_GENERATOR_IMAGE", "registry.redhat.io/ubi9@sha256:770cf07083e1c85ae69c25181a205b7cdef63c11b794c89b3b487d4670b4c328") | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| OAuthProxyImage | getEnv("OAUTH_PROXY_IMAGE", "registry.redhat.io/openshift4/ose-oauth-proxy@sha256:1ea6a01bf3e63cdcf125c6064cbd4a4a270deaf0f157b3eabb78f60556840366") | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
 
 ### Other Constants
 
 | Name | Value | Source |
 |------|-------|--------|
-| AppWrapperVersion | UNKNOWN | [`main.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
-| BuildDate | UNKNOWN | [`main.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
-| OperatorVersion | UNKNOWN | [`main.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
-| rayclusterAPI | rayclusters.ray.io | [`main.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
-| scheme | runtime.NewScheme() | [`main.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
-| setupLog | ctrl.Log.WithName("setup") | [`main.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
-| defaultDSCINamespace | default-dsci | [`pkg/controllers/constants.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
-| kubeRayDefaultNamespace | ray-system | [`pkg/controllers/constants.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
-| kubeRayOperatorNamespace | kuberay-operator | [`pkg/controllers/constants.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
-| odhNamespace | opendatahub | [`pkg/controllers/constants.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
-| rhdsAppsNamespace | redhat-ods-applications | [`pkg/controllers/constants.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
-| CACertKey | ca.crt | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| CAPrivateKeyKey | ca.key | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| RayClusterNameLabel | ray.openshift.ai/cluster-name | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| controllerName | codeflare-raycluster-controller | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| deleteOptions | client.DeleteOptions{PropagationPolicy: &amp;deletePolicy} | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| deletePolicy | metav1.DeletePropagationForeground | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| ingressServicePortName | dashboard | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| logRequeueing | requeueing | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| oAuthFinalizer | ray.openshift.ai/oauth-finalizer | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| oAuthServicePort | 443 | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| oAuthServicePortName | oauth-proxy | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| requeueTime | 10 | [`pkg/controllers/raycluster_controller.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
-| _ | &amp;rayClusterWebhook{} | [`pkg/controllers/raycluster_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
-| initContainerName | create-cert | [`pkg/controllers/raycluster_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
-| oauthProxyContainerName | oauth-proxy | [`pkg/controllers/raycluster_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
-| oauthProxyVolumeName | proxy-tls-secret | [`pkg/controllers/raycluster_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
-| rayclusterlog | logf.Log.WithName("raycluster-resource") | [`pkg/controllers/raycluster_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
-| versionAnnotation | ray.openshift.ai/version | [`pkg/controllers/raycluster_webhook.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
-| byContainerName | compare[corev1.Container]( 	func(c1, c2 corev1.Container) bool { 		return c1.Name == c2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
-| byEnvVarName | compare[corev1.EnvVar]( 	func(e1, e2 corev1.EnvVar) bool { 		return e1.Name == e2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
-| byVolumeMountName | compare[corev1.VolumeMount]( 	func(v1, v2 corev1.VolumeMount) bool { 		return v1.Name == v2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
-| byVolumeName | compare[corev1.Volume]( 	func(v1, v2 corev1.Volume) bool { 		return v1.Name == v2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
-| hashLength | 8 | [`pkg/controllers/support.go`](https://github.com/project-codeflare/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| AppWrapperVersion | UNKNOWN | [`main.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
+| BuildDate | UNKNOWN | [`main.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
+| OperatorVersion | UNKNOWN | [`main.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
+| rayclusterAPI | rayclusters.ray.io | [`main.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
+| scheme | runtime.NewScheme() | [`main.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
+| setupLog | ctrl.Log.WithName("setup") | [`main.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/main.go) |
+| defaultDSCINamespace | default-dsci | [`pkg/controllers/constants.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
+| kubeRayDefaultNamespace | ray-system | [`pkg/controllers/constants.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
+| kubeRayOperatorNamespace | kuberay-operator | [`pkg/controllers/constants.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
+| odhNamespace | opendatahub | [`pkg/controllers/constants.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
+| rhdsAppsNamespace | redhat-ods-applications | [`pkg/controllers/constants.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/constants.go) |
+| CACertKey | ca.crt | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| CAPrivateKeyKey | ca.key | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| RayClusterNameLabel | ray.openshift.ai/cluster-name | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| controllerName | codeflare-raycluster-controller | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| deleteOptions | client.DeleteOptions{PropagationPolicy: &amp;deletePolicy} | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| deletePolicy | metav1.DeletePropagationForeground | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| ingressServicePortName | dashboard | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| logRequeueing | requeueing | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| oAuthFinalizer | ray.openshift.ai/oauth-finalizer | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| oAuthServicePort | 443 | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| oAuthServicePortName | oauth-proxy | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| requeueTime | 10 | [`pkg/controllers/raycluster_controller.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_controller.go) |
+| _ | &amp;rayClusterWebhook{} | [`pkg/controllers/raycluster_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
+| initContainerName | create-cert | [`pkg/controllers/raycluster_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
+| oauthProxyContainerName | oauth-proxy | [`pkg/controllers/raycluster_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
+| oauthProxyVolumeName | proxy-tls-secret | [`pkg/controllers/raycluster_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
+| rayclusterlog | logf.Log.WithName("raycluster-resource") | [`pkg/controllers/raycluster_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
+| versionAnnotation | ray.openshift.ai/version | [`pkg/controllers/raycluster_webhook.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/raycluster_webhook.go) |
+| byContainerName | compare[corev1.Container]( 	func(c1, c2 corev1.Container) bool { 		return c1.Name == c2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| byEnvVarName | compare[corev1.EnvVar]( 	func(e1, e2 corev1.EnvVar) bool { 		return e1.Name == e2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| byVolumeMountName | compare[corev1.VolumeMount]( 	func(v1, v2 corev1.VolumeMount) bool { 		return v1.Name == v2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| byVolumeName | compare[corev1.Volume]( 	func(v1, v2 corev1.Volume) bool { 		return v1.Name == v2.Name 	}) | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
+| hashLength | 8 | [`pkg/controllers/support.go`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/pkg/controllers/support.go) |
 
 
 ## Label Contracts

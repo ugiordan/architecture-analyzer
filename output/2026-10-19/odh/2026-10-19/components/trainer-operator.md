@@ -8,10 +8,10 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/trainer-operator |
+| Repository | [opendatahub-io/trainer-operator](https://github.com/opendatahub-io/trainer-operator) |
 | Aliases | Trainer operator, Kubeflow Trainer operator |
-| Commit | 3fce910b63f79db79ef3ebfb6687baabdd8d9c80 |
-| Extracted | 2026-10-19T04:06:09Z |
+| Commit | [ab55bc88be012f2b6105440fd157fe1b07033ed0](https://github.com/opendatahub-io/trainer-operator/commit/ab55bc88be012f2b6105440fd157fe1b07033ed0) |
+| Extracted | 2026-10-19T10:33:40Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -20,7 +20,7 @@
 
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
-| Trainer | components.platform.opendatahub.io | v1alpha1 | Cluster | 30 | self.metadata.name == 'default-trainer' | YAML | [`config/crd/bases/components.platform.opendatahub.io_trainers.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/config/crd/bases/components.platform.opendatahub.io_trainers.yaml) |
+| Trainer | components.platform.opendatahub.io | v1alpha1 | Cluster | 30 | self.metadata.name == 'default-trainer' | YAML | [`config/crd/bases/components.platform.opendatahub.io_trainers.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/config/crd/bases/components.platform.opendatahub.io_trainers.yaml) |
 
 
 ## Network Policies
@@ -68,21 +68,21 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| kubeflow-trainer-admin | 0 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-cache-initializer | 3 resources | [`manifests/trainer/overlays/data-cache/cluster_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/overlays/data-cache/cluster_role.yaml) |
-| kubeflow-trainer-controller-manager | 24 resources | [`manifests/trainer/base/rbac/role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/base/rbac/role.yaml) |
-| kubeflow-trainer-edit | 5 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-view | 2 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| kubeflow-trainer-view-cluster-runtimes | 1 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
-| manager-role | 51 resources | [`config/rbac/role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/config/rbac/role.yaml) |
-| metrics-reader | 0 resources | [`config/rbac/metrics_reader_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/config/rbac/metrics_reader_role.yaml) |
-| trainer-admin-role | 2 resources | [`config/rbac/trainer_admin_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/config/rbac/trainer_admin_role.yaml) |
-| trainer-metrics-reader | 0 resources | [`manifests/trainer/rhoai/rbac/tls/metrics-reader-clusterrole.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/rhoai/rbac/tls/metrics-reader-clusterrole.yaml) |
-| trainer-tls-profile | 2 resources | [`manifests/trainer/rhoai/rbac/tls/clusterrole.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/rhoai/rbac/tls/clusterrole.yaml) |
-| trainer-viewer-role | 2 resources | [`config/rbac/trainer_viewer_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/config/rbac/trainer_viewer_role.yaml) |
-| training-admin | 6 resources | [`manifests/trainer/rhoai/kubeflow-training-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/rhoai/kubeflow-training-roles.yaml) |
-| training-edit | 6 resources | [`manifests/trainer/rhoai/kubeflow-training-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/rhoai/kubeflow-training-roles.yaml) |
-| training-view | 6 resources | [`manifests/trainer/rhoai/kubeflow-training-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/rhoai/kubeflow-training-roles.yaml) |
+| kubeflow-trainer-admin | 0 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
+| kubeflow-trainer-cache-initializer | 3 resources | [`manifests/trainer/overlays/data-cache/cluster_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/overlays/data-cache/cluster_role.yaml) |
+| kubeflow-trainer-controller-manager | 24 resources | [`manifests/trainer/base/rbac/role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/base/rbac/role.yaml) |
+| kubeflow-trainer-edit | 5 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
+| kubeflow-trainer-view | 2 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
+| kubeflow-trainer-view-cluster-runtimes | 1 resources | [`manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/overlays/kubeflow-platform/kubeflow-trainer-roles.yaml) |
+| manager-role | 51 resources | [`config/rbac/role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/config/rbac/role.yaml) |
+| metrics-reader | 0 resources | [`config/rbac/metrics_reader_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/config/rbac/metrics_reader_role.yaml) |
+| trainer-admin-role | 2 resources | [`config/rbac/trainer_admin_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/config/rbac/trainer_admin_role.yaml) |
+| trainer-metrics-reader | 0 resources | [`manifests/trainer/rhoai/rbac/tls/metrics-reader-clusterrole.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/rhoai/rbac/tls/metrics-reader-clusterrole.yaml) |
+| trainer-tls-profile | 2 resources | [`manifests/trainer/rhoai/rbac/tls/clusterrole.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/rhoai/rbac/tls/clusterrole.yaml) |
+| trainer-viewer-role | 2 resources | [`config/rbac/trainer_viewer_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/config/rbac/trainer_viewer_role.yaml) |
+| training-admin | 6 resources | [`manifests/trainer/rhoai/kubeflow-training-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/rhoai/kubeflow-training-roles.yaml) |
+| training-edit | 6 resources | [`manifests/trainer/rhoai/kubeflow-training-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/rhoai/kubeflow-training-roles.yaml) |
+| training-view | 6 resources | [`manifests/trainer/rhoai/kubeflow-training-roles.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/rhoai/kubeflow-training-roles.yaml) |
 
 ### Cluster Role Bindings
 
@@ -98,7 +98,7 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| kubeflow-trainer-public | 1 resources | [`manifests/trainer/base/rbac/public_configmap_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/manifests/trainer/base/rbac/public_configmap_role.yaml) |
+| kubeflow-trainer-public | 1 resources | [`manifests/trainer/base/rbac/public_configmap_role.yaml`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/manifests/trainer/base/rbac/public_configmap_role.yaml) |
 
 ### Role Bindings
 
@@ -138,8 +138,8 @@
 | github.com/go-logr/logr | v1.4.3 |
 | github.com/kubeflow/trainer/v2 | v2.2.1 |
 | github.com/onsi/gomega | v1.40.0 |
-| github.com/opendatahub-io/odh-platform-utilities | v0.4.0 |
-| github.com/opendatahub-io/odh-platform-utilities/framework | v0.0.0-20260805122551-b8da1945829a |
+| github.com/opendatahub-io/odh-platform-utilities | v0.5.0 |
+| github.com/opendatahub-io/odh-platform-utilities/framework | v0.0.0-20261008120904-ac2a1a5991a3 |
 | github.com/openshift/api | v0.0.0-20260805215214-cfb63858e9d7 |
 | github.com/openshift/controller-runtime-common | v0.0.0-20260813135806-e1187ec555fc |
 | github.com/openshift/library-go | v0.0.0-20260807194649-ee0a87843dda |
@@ -156,10 +156,10 @@
 
 | GVK | Watch Type | Source |
 |-----|-----------|--------|
-| /v1/ConfigMap | Watches | [`internal/controller/trainer_controller.go:200`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go#L200) |
-| /v1/Service | Watches | [`internal/controller/trainer_controller.go:199`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go#L199) |
-| admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration | Watches | [`internal/controller/trainer_controller.go:201`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go#L201) |
-| apps/v1/Deployment | Watches | [`internal/controller/trainer_controller.go:197`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go#L197) |
+| /v1/ConfigMap | Watches | [`internal/controller/trainer_controller.go:199`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go#L199) |
+| /v1/Service | Watches | [`internal/controller/trainer_controller.go:198`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go#L198) |
+| admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration | Watches | [`internal/controller/trainer_controller.go:200`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go#L200) |
+| apps/v1/Deployment | Watches | [`internal/controller/trainer_controller.go:196`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go#L196) |
 
 
 ## Dockerfiles
@@ -183,66 +183,66 @@
 
 | Name | Value | Source |
 |------|-------|--------|
-| imageParamControllerImage | odh-kubeflow-trainer-controller-image | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| relatedImageModelOptCuda | RELATED_IMAGE_RHAII_MODEL_OPT_CUDA_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| relatedImageThTorchCpu | RELATED_IMAGE_ODH_TH_TORCH_CPU_PY312_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| relatedImageThTorchCuda | RELATED_IMAGE_ODH_TH_TORCH_CUDA_PY312_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| relatedImageThTorchRocm | RELATED_IMAGE_ODH_TH_TORCH_ROCM_PY312_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| relatedImageVllm | RELATED_IMAGE_RHAII_VLLM_CUDA_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| trainerImageParamMap | map[string]string{ 	imageParamControllerImage: "RELATED_IMAGE_ODH_TRAINER_IMAGE", } | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
+| imageParamControllerImage | odh-kubeflow-trainer-controller-image | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| relatedImageModelOptCuda | RELATED_IMAGE_RHAII_MODEL_OPT_CUDA_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| relatedImageThTorchCpu | RELATED_IMAGE_ODH_TH_TORCH_CPU_PY312_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| relatedImageThTorchCuda | RELATED_IMAGE_ODH_TH_TORCH_CUDA_PY312_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| relatedImageThTorchRocm | RELATED_IMAGE_ODH_TH_TORCH_ROCM_PY312_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| relatedImageVllm | RELATED_IMAGE_RHAII_VLLM_CUDA_IMAGE | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| trainerImageParamMap | map[string]string{ 	imageParamControllerImage: "RELATED_IMAGE_ODH_TRAINER_IMAGE", } | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
 
 ### Other Constants
 
 | Name | Value | Source |
 |------|-------|--------|
-| AddToScheme | SchemeBuilder.AddToScheme | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/groupversion_info.go) |
-| GroupVersion | schema.GroupVersion{Group: "components.platform.opendatahub.io", Version: "v1alpha1"} | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/groupversion_info.go) |
-| SchemeBuilder | runtime.NewSchemeBuilder(addKnownTypes) | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/groupversion_info.go) |
-| _ | &amp;Trainer{} | [`api/v1alpha1/trainer_types.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/trainer_types.go) |
-| scheme | runtime.NewScheme() | [`cmd/main.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/cmd/main.go) |
-| setupLog | ctrl.Log.WithName("setup") | [`cmd/main.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/cmd/main.go) |
-| trainerPartOf | trainer | [`cmd/main.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/cmd/main.go) |
-| jobSetCRDName | jobsets.jobset.x-k8s.io | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetGroup | jobset.x-k8s.io | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetKind | JobSet | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetOperatorAPIVersion | v1 | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetOperatorCRName | cluster | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetOperatorGroup | operator.openshift.io | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetOperatorKind | JobSetOperator | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetOperatorName | jobset-operator | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| jobSetVersion | v1alpha2 | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/dependencies.go) |
-| defaultOverlay | rhoai | [`internal/controller/manifests.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/manifests.go) |
-| paramOperatorNamespace | operator-namespace | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/params.go) |
-| TrainerInstanceName | default-trainer | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| clusterTrainingRuntime | ClusterTrainingRuntime | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| clusterTrainingRuntimeGVK | schema.GroupVersionKind{ 	Group:		trainerKubeflowGroup, 	Version:	trainerKubeflowVersion, 	Kind:		"ClusterTrainingRuntime", } | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| clusterTrainingRuntimeResource | clustertrainingruntimes | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| defaultNamespace | opendatahub | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| degradedCondition | string(common.ConditionTypeDegraded) | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| finalizerName | components.platform.opendatahub.io/trainer-cleanup | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| jobSetOperatorGVK | schema.GroupVersionKind{ 	Group:		jobSetOperatorGroup, 	Version:	jobSetOperatorAPIVersion, 	Kind:		jobSetOperatorKind, } | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| legacyTrainerFinalizer | trainer.kubeflow.org/resource-in-use | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| platformConfigMapName | odh-trainer-config | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| platformReleaseName | platform | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| platformVersionKey | platformVersion | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| trainerKubeflowGroup | trainer.kubeflow.org | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| trainerKubeflowVersion | v1alpha1 | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| trainerPartOf | trainer | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| trainingRuntime | TrainingRuntime | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| trainingRuntimeGVK | schema.GroupVersionKind{ 	Group:		trainerKubeflowGroup, 	Version:	trainerKubeflowVersion, 	Kind:		trainingRuntime, } | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| trainingRuntimeResource | trainingruntimes | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/controller/trainer_controller.go) |
-| bootstrapTimeout | 10 * time.Second | [`internal/tls/profile.go`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/internal/tls/profile.go) |
+| AddToScheme | SchemeBuilder.AddToScheme | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/groupversion_info.go) |
+| GroupVersion | schema.GroupVersion{Group: "components.platform.opendatahub.io", Version: "v1alpha1"} | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/groupversion_info.go) |
+| SchemeBuilder | runtime.NewSchemeBuilder(addKnownTypes) | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/groupversion_info.go) |
+| _ | &amp;Trainer{} | [`api/v1alpha1/trainer_types.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/trainer_types.go) |
+| scheme | runtime.NewScheme() | [`cmd/main.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/cmd/main.go) |
+| setupLog | ctrl.Log.WithName("setup") | [`cmd/main.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/cmd/main.go) |
+| trainerPartOf | trainer | [`cmd/main.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/cmd/main.go) |
+| jobSetCRDName | jobsets.jobset.x-k8s.io | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetGroup | jobset.x-k8s.io | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetKind | JobSet | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetOperatorAPIVersion | v1 | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetOperatorCRName | cluster | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetOperatorGroup | operator.openshift.io | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetOperatorKind | JobSetOperator | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetOperatorName | jobset-operator | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| jobSetVersion | v1alpha2 | [`internal/controller/dependencies.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/dependencies.go) |
+| defaultOverlay | rhoai | [`internal/controller/manifests.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/manifests.go) |
+| paramOperatorNamespace | operator-namespace | [`internal/controller/params.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/params.go) |
+| TrainerInstanceName | default-trainer | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| clusterTrainingRuntime | ClusterTrainingRuntime | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| clusterTrainingRuntimeGVK | schema.GroupVersionKind{ 	Group:		trainerKubeflowGroup, 	Version:	trainerKubeflowVersion, 	Kind:		"ClusterTrainingRuntime", } | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| clusterTrainingRuntimeResource | clustertrainingruntimes | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| defaultNamespace | opendatahub | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| degradedCondition | fwapi.ConditionTypeDegraded | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| finalizerName | components.platform.opendatahub.io/trainer-cleanup | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| jobSetOperatorGVK | schema.GroupVersionKind{ 	Group:		jobSetOperatorGroup, 	Version:	jobSetOperatorAPIVersion, 	Kind:		jobSetOperatorKind, } | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| legacyTrainerFinalizer | trainer.kubeflow.org/resource-in-use | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| platformConfigMapName | odh-trainer-config | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| platformReleaseName | platform | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| platformVersionKey | platformVersion | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| trainerKubeflowGroup | trainer.kubeflow.org | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| trainerKubeflowVersion | v1alpha1 | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| trainerPartOf | trainer | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| trainingRuntime | TrainingRuntime | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| trainingRuntimeGVK | schema.GroupVersionKind{ 	Group:		trainerKubeflowGroup, 	Version:	trainerKubeflowVersion, 	Kind:		trainingRuntime, } | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| trainingRuntimeResource | trainingruntimes | [`internal/controller/trainer_controller.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/controller/trainer_controller.go) |
+| bootstrapTimeout | 10 * time.Second | [`internal/tls/profile.go`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/internal/tls/profile.go) |
 
 
 ## API Types
 
 | Type Name | Kind | Fields | Spec? | Source |
 |-----------|------|--------|-------|--------|
-| ControllerResources |  | 0 | false | [`api/v1alpha1/trainer_types.go:25`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/trainer_types.go#L25) |
-| TrainerSpec |  | 0 | true | [`api/v1alpha1/trainer_types.go:30`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/trainer_types.go#L30) |
-| TrainerStatus |  | 0 | false | [`api/v1alpha1/trainer_types.go:40`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/trainer_types.go#L40) |
-| Trainer |  | 0 | false | [`api/v1alpha1/trainer_types.go:54`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/trainer_types.go#L54) |
-| TrainerList |  | 0 | false | [`api/v1alpha1/trainer_types.go:65`](https://github.com/opendatahub-io/trainer-operator/blob/3fce910b63f79db79ef3ebfb6687baabdd8d9c80/api/v1alpha1/trainer_types.go#L65) |
+| ControllerResources |  | 0 | false | [`api/v1alpha1/trainer_types.go:25`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/trainer_types.go#L25) |
+| TrainerSpec |  | 0 | true | [`api/v1alpha1/trainer_types.go:30`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/trainer_types.go#L30) |
+| TrainerStatus |  | 0 | false | [`api/v1alpha1/trainer_types.go:40`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/trainer_types.go#L40) |
+| Trainer |  | 0 | false | [`api/v1alpha1/trainer_types.go:54`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/trainer_types.go#L54) |
+| TrainerList |  | 0 | false | [`api/v1alpha1/trainer_types.go:65`](https://github.com/opendatahub-io/trainer-operator/blob/ab55bc88be012f2b6105440fd157fe1b07033ed0/api/v1alpha1/trainer_types.go#L65) |
 
 
 ## Label Contracts

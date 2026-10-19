@@ -10,10 +10,10 @@
 |--------|-------|
 | Components | 44 |
 | CRDs | 99 |
-| Services | 85 |
-| Secrets | 70 |
+| Services | 84 |
+| Secrets | 68 |
 | Cluster Roles | 124 |
-| Cross-Component Dependencies | 48 |
+| Cross-Component Dependencies | 47 |
 
 ## Component Registry
 
@@ -160,7 +160,6 @@
 | odh-model-controller | kserve-autogluon-server | watches-crd:ServingRuntime |
 | odh-model-controller | kserve-autogluon-server | watches-crd:LLMInferenceService |
 | odh-model-controller | kserve-autogluon-server | watches-crd:InferenceService |
-| ogx-k8s-operator | odh-platform-utilities | go-module |
 | opendatahub-operator | odh-platform-utilities | go-module |
 | opendatahub-operator | opendatahub-operator | go-module |
 | spark-operator | odh-platform-utilities | go-module |
@@ -192,7 +191,6 @@
 | odh-notebook-controller-metrics-tls | kubeflow | Opaque |
 | odh-notebook-controller-webhook-cert | kubeflow | kubernetes.io/tls |
 | webhook-server-cert | kubeflow | Opaque |
-| webhook-server-cert | kuberay | Opaque |
 | webhook-server-cert | kueue | Opaque |
 | cacerts | llm-d-inference-scheduler | Opaque |
 | istio-kubeconfig | llm-d-inference-scheduler | Opaque |
@@ -234,7 +232,6 @@
 | workspaces-controller-webhook-cert | odh-dashboard | Opaque |
 | model-serving-api-tls | odh-model-controller | kubernetes.io/tls |
 | odh-model-controller-webhook-cert | odh-model-controller | kubernetes.io/tls |
-| ogx-k8s-operator-controller-manager-metrics-service-tls | ogx-k8s-operator | Opaque |
 | ogx-k8s-operator-webhook-cert | ogx-k8s-operator | Opaque |
 | opendatahub-operator-controller-webhook-cert | opendatahub-operator | kubernetes.io/tls |
 | opendatahub-operator-metrics-tls | opendatahub-operator | Opaque |
@@ -319,12 +316,12 @@
 | odh-model-controller | kserve-prometheus-k8s | 3 |
 | odh-model-controller | metrics-auth-role | 2 |
 | odh-model-controller | metrics-reader | 0 |
-| odh-model-controller | odh-model-controller-role | 44 |
+| odh-model-controller | odh-model-controller-role | 42 |
 | odh-model-controller | proxy-role | 2 |
-| ogx-k8s-operator | manager-role | 26 |
+| ogx-k8s-operator | manager-role | 18 |
 | ogx-k8s-operator | metrics-reader | 0 |
-| ogx-k8s-operator | ogxserver-editor-role | 2 |
-| ogx-k8s-operator | ogxserver-viewer-role | 2 |
+| ogx-k8s-operator | ogxs-editor-role | 2 |
+| ogx-k8s-operator | ogxs-viewer-role | 2 |
 | ogx-k8s-operator | proxy-role | 2 |
 | opendatahub-operator | auth-editor-role | 2 |
 | opendatahub-operator | auth-viewer-role | 2 |
@@ -411,7 +408,6 @@
 | kubeflow | service | ClusterIP | 443/TCP |
 | kubeflow | webhook-service | ClusterIP | 443/TCP |
 | kuberay | kuberay-operator | ClusterIP | 8080/TCP |
-| kuberay | webhook-service | ClusterIP | 443/TCP |
 | kueue | visibility-server | ClusterIP | 443/TCP |
 | kueue | webhook-service | ClusterIP | 443/TCP |
 | llama-stack | cli-port-default | python-source | 8081/TCP |

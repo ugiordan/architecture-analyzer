@@ -2,7 +2,7 @@
   "component": "mlflow-operator",
   "repo": "opendatahub-io/mlflow-operator",
   "commit_sha": "e0560763494dc93f858f479d7ef973c81cb5747a",
-  "extracted_at": "2026-10-19T04:08:37Z",
+  "extracted_at": "2026-10-19T10:33:39Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -39,9 +39,9 @@
       "fields_count": 6,
       "validation_rules": [
         "self.metadata.name == 'mlflow'",
-        "self == 'mlflow-artifact-connection'",
         "self == '' || !self.startsWith('/')",
-        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')"
+        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')",
+        "self == 'mlflow-artifact-connection'"
       ],
       "source": "config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml"
     },
@@ -96,9 +96,9 @@
         "!has(self.replicas) || self.replicas \u003c= 1 || !has(self.storage) || (has(self.artifactsServer) \u0026\u0026 self.artifactsServer.enabled) || !(((!has(self.env) || !self.env.exists(e, e.name == 'MLFLOW_BACKEND_STORE_URI')) \u0026\u0026 ((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom))) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom) || (has(self.readReplicaBackendStoreUri) \u0026\u0026 (self.readReplicaBackendStoreUri.startsWith('sqlite://') || self.readReplicaBackendStoreUri.startsWith('sqlite+'))) || has(self.readReplicaBackendStoreUriFrom) || (has(self.serveArtifacts) \u0026\u0026 self.serveArtifacts \u0026\u0026 has(self.artifactsDestination) \u0026\u0026 self.artifactsDestination.startsWith('file://'))) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')",
         "!has(self.traceArchival) || !self.traceArchival.enabled || !has(self.storage) || !(((!has(self.env) || !self.env.exists(e, e.name == 'MLFLOW_BACKEND_STORE_URI')) \u0026\u0026 ((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom))) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom)) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')",
         "!has(oldSelf.storage) || (has(self.storage) \u0026\u0026 ((!has(oldSelf.storage.accessModes) \u0026\u0026 (!has(self.storage.accessModes) || self.storage.accessModes == ['ReadWriteOnce'])) || (has(oldSelf.storage.accessModes) \u0026\u0026 has(self.storage.accessModes) \u0026\u0026 self.storage.accessModes == oldSelf.storage.accessModes)))",
-        "self.all(key, size(self[key]) \u003c= 63)",
-        "self.all(key, size(self[key]) \u003c= 63)",
         "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
+        "self.all(key, size(self[key]) \u003c= 63)",
+        "self.all(key, size(self[key]) \u003c= 63)",
         "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))"
       ],
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml"

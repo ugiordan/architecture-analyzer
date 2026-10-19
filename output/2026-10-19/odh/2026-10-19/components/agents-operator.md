@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/agents-operator |
-| Commit | f3227ee249b7edb9cd6988b4514e0b265e7174b0 |
-| Extracted | 2026-10-19T04:05:54Z |
+| Repository | [opendatahub-io/agents-operator](https://github.com/opendatahub-io/agents-operator) |
+| Commit | [f3227ee249b7edb9cd6988b4514e0b265e7174b0](https://github.com/opendatahub-io/agents-operator/commit/f3227ee249b7edb9cd6988b4514e0b265e7174b0) |
+| Extracted | 2026-10-19T10:33:30Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

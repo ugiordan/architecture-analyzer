@@ -1,8 +1,8 @@
 {
   "component": "ogx-k8s-operator",
-  "repo": "ogx-ai/ogx-k8s-operator",
-  "commit_sha": "a0e2c4958436451c170122b138503cf28972fbdd",
-  "extracted_at": "2026-10-19T04:08:33Z",
+  "repo": "opendatahub-io/ogx-k8s-operator",
+  "commit_sha": "e2e94610d6d884caae50b8615b3b67d3df9f6518",
+  "extracted_at": "2026-10-19T10:33:51Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -18,7 +18,7 @@
           "storage": true
         }
       ],
-      "fields_count": 372,
+      "fields_count": 371,
       "validation_rules": [
         "!(has(self.name) \u0026\u0026 has(self.image))"
       ],
@@ -36,43 +36,46 @@
           "storage": true
         }
       ],
-      "fields_count": 966,
+      "fields_count": 892,
       "validation_rules": [
         "!has(self.overrideConfig) || !has(self.providers)",
         "!has(self.overrideConfig) || !has(self.resources)",
         "!has(self.overrideConfig) || !has(self.storage)",
         "!has(self.overrideConfig) || !has(self.disabledAPIs)",
-        "!has(self.overrideConfig) || !has(self.baseConfig)",
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'inference') || !has(self.providers.inference)",
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'vector_io') || !has(self.providers.vectorIo)",
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'tool_runtime') || !has(self.providers.toolRuntime)",
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'files') || !has(self.providers.files)",
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'batches') || !has(self.providers.batches)",
         "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'responses') || !has(self.providers.responses)",
-        "!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'file_processors') || !has(self.providers.fileProcessors)",
         "self.type != 'redis' || has(self.endpoint)",
         "!has(self.endpoint) || self.type == 'redis'",
         "!has(self.password) || self.type == 'redis'",
         "self.type != 'postgres' || has(self.connectionString)",
         "!has(self.connectionString) || self.type == 'postgres'",
-        "(has(self.podSelector.matchLabels) \u0026\u0026 size(self.podSelector.matchLabels) \u003e 0) || (has(self.podSelector.matchExpressions) \u0026\u0026 size(self.podSelector.matchExpressions) \u003e 0)",
-        "!has(self.provider) || self.provider.size() \u003e 0",
-        "!has(self.modelType) || self.modelType.size() \u003e 0",
-        "!has(self.quantization) || self.quantization.size() \u003e 0",
-        "has(self.minAvailable) || has(self.maxUnavailable)",
-        "!(has(self.minAvailable) \u0026\u0026 has(self.maxUnavailable))",
-        "!has(self.serviceAccountName) || self.serviceAccountName.size() \u003e 0",
-        "!has(self.mountPath) || self.mountPath.size() \u003e 0",
-        "!has(self.size) || quantity(self.size).isGreaterThan(quantity('0'))",
-        "!has(self.minReplicas) || self.maxReplicas \u003e= self.minReplicas",
         "!(has(self.name) \u0026\u0026 has(self.image))",
         "has(self.name) || has(self.image)",
         "!has(self.hostname) || self.hostname.size() \u003e 0",
-        "!self.enabled || has(self.tls)",
-        "!self.enabled || has(self.hostname)",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.baseUrl) || self.baseUrl.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "!has(self.consistencyLevel) || self.consistencyLevel.size() \u003e 0",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "!has(self.host) || self.host.size() \u003e 0",
+        "!has(self.db) || self.db.size() \u003e 0",
+        "!has(self.user) || self.user.size() \u003e 0",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "has(self.hnsw) || has(self.ivfFlat)",
+        "!(has(self.hnsw) \u0026\u0026 has(self.ivfFlat))",
+        "has(self.url) || has(self.host)",
+        "!has(self.url) || self.url.size() \u003e 0",
+        "!has(self.host) || self.host.size() \u003e 0",
+        "!has(self.location) || self.location.size() \u003e 0",
+        "!has(self.prefix) || self.prefix.size() \u003e 0",
+        "!has(self.id) || self.id.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
@@ -81,8 +84,6 @@
         "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.region) || self.region.size() \u003e 0",
         "!has(self.endpointUrl) || self.endpointUrl.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.awsRoleArn) || self.awsRoleArn.size() \u003e 0",
         "!has(self.awsWebIdentityTokenFile) || self.awsWebIdentityTokenFile.size() \u003e 0",
         "!has(self.awsRoleSessionName) || self.awsRoleSessionName.size() \u003e 0",
@@ -126,6 +127,8 @@
         "!has(self.http) || self.http.size() \u003e 0",
         "!has(self.https) || self.https.size() \u003e 0",
         "!has(self.cacert) || self.cacert.size() \u003e 0",
+        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
+        "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.summarizationPrompt) || self.summarizationPrompt.size() \u003e 0",
         "!has(self.summaryPrefix) || self.summaryPrefix.size() \u003e 0",
         "!has(self.summarizationModel) || self.summarizationModel.size() \u003e 0",
@@ -144,28 +147,15 @@
         "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
         "!has(self.id) || self.id.size() \u003e 0",
         "!has(self.id) || self.id.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.host) || self.host.size() \u003e 0",
-        "!has(self.db) || self.db.size() \u003e 0",
-        "!has(self.user) || self.user.size() \u003e 0",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "has(self.hnsw) || has(self.ivfFlat)",
-        "!(has(self.hnsw) \u0026\u0026 has(self.ivfFlat))",
-        "has(self.url) || has(self.host)",
-        "!has(self.url) || self.url.size() \u003e 0",
-        "!has(self.host) || self.host.size() \u003e 0",
-        "!has(self.location) || self.location.size() \u003e 0",
-        "!has(self.prefix) || self.prefix.size() \u003e 0",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "!has(self.consistencyLevel) || self.consistencyLevel.size() \u003e 0",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0",
-        "self.type.startsWith('remote::') || self.type.startsWith('inline::')",
-        "!has(self.id) || self.id.size() \u003e 0"
+        "!has(self.provider) || self.provider.size() \u003e 0",
+        "!has(self.modelType) || self.modelType.size() \u003e 0",
+        "!has(self.quantization) || self.quantization.size() \u003e 0",
+        "!has(self.serviceAccountName) || self.serviceAccountName.size() \u003e 0",
+        "has(self.minAvailable) || has(self.maxUnavailable)",
+        "!(has(self.minAvailable) \u0026\u0026 has(self.maxUnavailable))",
+        "!has(self.mountPath) || self.mountPath.size() \u003e 0",
+        "!has(self.size) || quantity(self.size).isGreaterThan(quantity('0'))",
+        "!has(self.minReplicas) || self.maxReplicas \u003e= self.minReplicas"
       ],
       "source": "config/crd/bases/ogx.io_ogxservers.yaml"
     }
@@ -198,35 +188,10 @@
               ""
             ],
             "resources": [
-              "events"
-            ],
-            "verbs": [
-              "create",
-              "patch"
-            ]
-          },
-          {
-            "apiGroups": [
-              ""
-            ],
-            "resources": [
               "pods"
             ],
             "verbs": [
               "list"
-            ]
-          },
-          {
-            "apiGroups": [
-              ""
-            ],
-            "resources": [
-              "secrets"
-            ],
-            "verbs": [
-              "get",
-              "list",
-              "watch"
             ]
           },
           {
@@ -249,19 +214,6 @@
           },
           {
             "apiGroups": [
-              "apiextensions.k8s.io"
-            ],
-            "resources": [
-              "customresourcedefinitions"
-            ],
-            "verbs": [
-              "get",
-              "list",
-              "watch"
-            ]
-          },
-          {
-            "apiGroups": [
               "apps"
             ],
             "resources": [
@@ -279,82 +231,10 @@
           },
           {
             "apiGroups": [
-              "apps"
-            ],
-            "resources": [
-              "replicasets"
-            ],
-            "verbs": [
-              "get",
-              "list",
-              "watch"
-            ]
-          },
-          {
-            "apiGroups": [
               "autoscaling"
             ],
             "resources": [
               "horizontalpodautoscalers"
-            ],
-            "verbs": [
-              "create",
-              "delete",
-              "get",
-              "list",
-              "patch",
-              "update",
-              "watch"
-            ]
-          },
-          {
-            "apiGroups": [
-              "batch"
-            ],
-            "resources": [
-              "jobs"
-            ],
-            "verbs": [
-              "create",
-              "delete",
-              "get",
-              "list",
-              "patch",
-              "update",
-              "watch"
-            ]
-          },
-          {
-            "apiGroups": [
-              "batch"
-            ],
-            "resources": [
-              "jobs/status"
-            ],
-            "verbs": [
-              "get"
-            ]
-          },
-          {
-            "apiGroups": [
-              "config.openshift.io"
-            ],
-            "resources": [
-              "apiservers"
-            ],
-            "verbs": [
-              "get",
-              "list",
-              "watch"
-            ]
-          },
-          {
-            "apiGroups": [
-              "monitoring.coreos.com"
-            ],
-            "resources": [
-              "prometheusrules",
-              "servicemonitors"
             ],
             "verbs": [
               "create",
@@ -494,9 +374,20 @@
             ],
             "verbs": [
               "use"
+            ]
+          },
+          {
+            "apiGroups": [
+              "security.openshift.io"
+            ],
+            "resources": [
+              "securitycontextconstraints"
+            ],
+            "verbs": [
+              "use"
             ],
             "resourceNames": [
-              "nonroot-v2"
+              "anyuid"
             ]
           }
         ]
@@ -515,8 +406,8 @@
         ]
       },
       {
-        "name": "ogxserver-editor-role",
-        "source": "config/rbac/ogxserver_editor_role.yaml",
+        "name": "ogxs-editor-role",
+        "source": "config/rbac/ogxs_editor_role.yaml",
         "rules": [
           {
             "apiGroups": [
@@ -549,8 +440,8 @@
         ]
       },
       {
-        "name": "ogxserver-viewer-role",
-        "source": "config/rbac/ogxserver_viewer_role.yaml",
+        "name": "ogxs-viewer-role",
+        "source": "config/rbac/ogxs_viewer_role.yaml",
         "rules": [
           {
             "apiGroups": [
@@ -782,25 +673,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 11,
-        "marker": "+kubebuilder:rbac:groups=apps,resources=replicasets,verbs=get;list;watch",
-        "parsed": {
-          "groups": [
-            "apps"
-          ],
-          "resources": [
-            "replicasets"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 14,
+        "line": 12,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=services,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -822,7 +695,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 18,
+        "line": 16,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=pods,verbs=list",
         "parsed": {
           "groups": [
@@ -838,7 +711,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 21,
+        "line": 19,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=serviceaccounts,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -860,7 +733,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 23,
+        "line": 21,
         "marker": "+kubebuilder:rbac:groups=rbac.authorization.k8s.io,resources=clusterrolebindings,verbs=get;list;delete",
         "parsed": {
           "groups": [
@@ -878,7 +751,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 24,
+        "line": 22,
         "marker": "+kubebuilder:rbac:groups=rbac.authorization.k8s.io,resources=clusterroles,verbs=get;list;watch",
         "parsed": {
           "groups": [
@@ -896,7 +769,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 27,
+        "line": 25,
         "marker": "+kubebuilder:rbac:groups=rbac.authorization.k8s.io,resources=rolebindings,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -918,14 +791,11 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 29,
-        "marker": "+kubebuilder:rbac:groups=security.openshift.io,resources=securitycontextconstraints,resourceNames=nonroot-v2,verbs=use",
+        "line": 27,
+        "marker": "+kubebuilder:rbac:groups=security.openshift.io,resources=securitycontextconstraints,verbs=use",
         "parsed": {
           "groups": [
             "security.openshift.io"
-          ],
-          "resourceNames": [
-            "nonroot-v2"
           ],
           "resources": [
             "securitycontextconstraints"
@@ -937,7 +807,26 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 31,
+        "line": 28,
+        "marker": "+kubebuilder:rbac:groups=security.openshift.io,resources=securitycontextconstraints,resourceNames=anyuid,verbs=use",
+        "parsed": {
+          "groups": [
+            "security.openshift.io"
+          ],
+          "resourceNames": [
+            "anyuid"
+          ],
+          "resources": [
+            "securitycontextconstraints"
+          ],
+          "verbs": [
+            "use"
+          ]
+        }
+      },
+      {
+        "file": "controllers/kubebuilder_rbac.go",
+        "line": 30,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=persistentvolumeclaims,verbs=get;list;watch;create;update;patch",
         "parsed": {
           "groups": [
@@ -958,25 +847,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 34,
-        "marker": "+kubebuilder:rbac:groups=\"\",resources=secrets,verbs=get;list;watch",
-        "parsed": {
-          "groups": [
-            "\"\""
-          ],
-          "resources": [
-            "secrets"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 37,
+        "line": 33,
         "marker": "+kubebuilder:rbac:groups=\"\",resources=configmaps,verbs=get;list;watch;create;update;patch",
         "parsed": {
           "groups": [
@@ -997,7 +868,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 40,
+        "line": 36,
         "marker": "+kubebuilder:rbac:groups=networking.k8s.io,resources=networkpolicies,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -1019,7 +890,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 43,
+        "line": 39,
         "marker": "+kubebuilder:rbac:groups=networking.k8s.io,resources=ingresses,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -1041,7 +912,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 46,
+        "line": 42,
         "marker": "+kubebuilder:rbac:groups=policy,resources=poddisruptionbudgets,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -1063,62 +934,7 @@
       },
       {
         "file": "controllers/kubebuilder_rbac.go",
-        "line": 49,
-        "marker": "+kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;create;update;patch;delete",
-        "parsed": {
-          "groups": [
-            "batch"
-          ],
-          "resources": [
-            "jobs"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch",
-            "create",
-            "update",
-            "patch",
-            "delete"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 50,
-        "marker": "+kubebuilder:rbac:groups=batch,resources=jobs/status,verbs=get",
-        "parsed": {
-          "groups": [
-            "batch"
-          ],
-          "resources": [
-            "jobs/status"
-          ],
-          "verbs": [
-            "get"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 53,
-        "marker": "+kubebuilder:rbac:groups=\"\",resources=events,verbs=create;patch",
-        "parsed": {
-          "groups": [
-            "\"\""
-          ],
-          "resources": [
-            "events"
-          ],
-          "verbs": [
-            "create",
-            "patch"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 56,
+        "line": 45,
         "marker": "+kubebuilder:rbac:groups=autoscaling,resources=horizontalpodautoscalers,verbs=get;list;watch;create;update;patch;delete",
         "parsed": {
           "groups": [
@@ -1137,93 +953,13 @@
             "delete"
           ]
         }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 59,
-        "marker": "+kubebuilder:rbac:groups=monitoring.coreos.com,resources=servicemonitors,verbs=get;list;watch;create;update;patch;delete",
-        "parsed": {
-          "groups": [
-            "monitoring.coreos.com"
-          ],
-          "resources": [
-            "servicemonitors"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch",
-            "create",
-            "update",
-            "patch",
-            "delete"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 60,
-        "marker": "+kubebuilder:rbac:groups=monitoring.coreos.com,resources=prometheusrules,verbs=get;list;watch;create;update;patch;delete",
-        "parsed": {
-          "groups": [
-            "monitoring.coreos.com"
-          ],
-          "resources": [
-            "prometheusrules"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch",
-            "create",
-            "update",
-            "patch",
-            "delete"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 63,
-        "marker": "+kubebuilder:rbac:groups=apiextensions.k8s.io,resources=customresourcedefinitions,verbs=get;list;watch",
-        "parsed": {
-          "groups": [
-            "apiextensions.k8s.io"
-          ],
-          "resources": [
-            "customresourcedefinitions"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch"
-          ]
-        }
-      },
-      {
-        "file": "controllers/kubebuilder_rbac.go",
-        "line": 67,
-        "marker": "+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch",
-        "parsed": {
-          "groups": [
-            "config.openshift.io"
-          ],
-          "resources": [
-            "apiservers"
-          ],
-          "verbs": [
-            "get",
-            "list",
-            "watch"
-          ]
-        }
       }
     ]
   },
   "services": [
     {
       "name": "ogx-k8s-operator-controller-manager-metrics-service",
-      "source": "kustomize:config/overlays/odh",
+      "source": "kustomize:config/overlays/cert-manager",
       "type": "ClusterIP",
       "ports": [
         {
@@ -1241,7 +977,7 @@
     },
     {
       "name": "ogx-k8s-operator-webhook-service",
-      "source": "kustomize:config/overlays/odh",
+      "source": "kustomize:config/overlays/cert-manager",
       "type": "ClusterIP",
       "ports": [
         {
@@ -1272,19 +1008,14 @@
     {
       "name": "ogx-k8s-operator-controller-manager",
       "kind": "Deployment",
-      "source": "kustomize:config/overlays/odh",
+      "source": "kustomize:config/overlays/cert-manager",
       "replicas": 1,
       "service_account": "ogx-k8s-operator-controller-manager",
       "containers": [
         {
           "name": "manager",
-          "image": "quay.io/opendatahub/odh-ogx-k8s-operator:odh-stable",
+          "image": "quay.io/ogx-ai/ogx-k8s-operator:latest",
           "ports": [
-            {
-              "name": "https",
-              "containerPort": 8443,
-              "protocol": "TCP"
-            },
             {
               "name": "webhook-server",
               "containerPort": 9443,
@@ -1300,11 +1031,6 @@
             }
           },
           "volume_mounts": [
-            {
-              "mountPath": "/etc/metrics-certs",
-              "name": "metrics-certs",
-              "secret": "ogx-k8s-operator-controller-manager-metrics-service-tls"
-            },
             {
               "mountPath": "/tmp/k8s-webhook-server/serving-certs",
               "name": "cert",
@@ -1323,8 +1049,7 @@
           },
           "env_vars": {
             "GOMEMLIMIT": "800MiB",
-            "OPERATOR_VERSION": "\"0.15.0\"",
-            "RELATED_IMAGE_ODH_OGX_CORE_IMAGE": "quay.io/opendatahub/odh-ogx-core:latest"
+            "OPERATOR_VERSION": "latest"
           },
           "liveness_probe": {
             "type": "httpGet",
@@ -1336,117 +1061,6 @@
             "path": "/readyz",
             "port": 8081
           }
-        }
-      ],
-      "issues": [
-        "no HorizontalPodAutoscaler configured"
-      ]
-    },
-    {
-      "name": "operator",
-      "kind": "Deployment",
-      "source": "ogx-module/config/manager/manager.yaml",
-      "replicas": 1,
-      "service_account": "operator",
-      "automount_service_account_token": true,
-      "containers": [
-        {
-          "name": "manager",
-          "image": "controller:latest",
-          "command": [
-            "/manager"
-          ],
-          "args": [
-            "--leader-elect"
-          ],
-          "ports": [
-            {
-              "name": "health",
-              "containerPort": 8081,
-              "protocol": "TCP"
-            }
-          ],
-          "security_context": {
-            "allowPrivilegeEscalation": false,
-            "capabilities": {
-              "add": [],
-              "drop": [
-                "ALL"
-              ]
-            },
-            "readOnlyRootFilesystem": true
-          },
-          "volume_mounts": [
-            {
-              "configMap": "config",
-              "mountPath": "/etc/controller/config",
-              "name": "config"
-            },
-            {
-              "emptyDir": true,
-              "mountPath": "/opt/manifests",
-              "name": "manifests"
-            }
-          ],
-          "resources": {
-            "limits": {
-              "cpu": "500m",
-              "memory": "512Mi"
-            },
-            "requests": {
-              "cpu": "10m",
-              "memory": "128Mi"
-            }
-          },
-          "liveness_probe": {
-            "type": "httpGet",
-            "path": "/healthz",
-            "port": 8081
-          },
-          "readiness_probe": {
-            "type": "httpGet",
-            "path": "/readyz",
-            "port": 8081
-          }
-        }
-      ],
-      "init_containers": [
-        {
-          "name": "copy-manifests",
-          "image": "controller:latest",
-          "command": [
-            "cp",
-            "-r",
-            "/manifests/.",
-            "/opt/manifests/"
-          ],
-          "security_context": {
-            "allowPrivilegeEscalation": false,
-            "capabilities": {
-              "add": [],
-              "drop": [
-                "ALL"
-              ]
-            },
-            "readOnlyRootFilesystem": true
-          },
-          "volume_mounts": [
-            {
-              "emptyDir": true,
-              "mountPath": "/opt/manifests",
-              "name": "manifests"
-            }
-          ],
-          "resources": {
-            "limits": {},
-            "requests": {}
-          },
-          "issues": [
-            "no resource limits configured",
-            "no resource requests configured",
-            "no liveness probe configured",
-            "no readiness probe configured"
-          ]
         }
       ],
       "issues": [
@@ -1475,133 +1089,55 @@
       "type": "For",
       "gvk": "api/v1beta1/OGXServer",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:846"
-    },
-    {
-      "type": "For",
-      "gvk": "apis/v1alpha1/OGX",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:140"
+      "source": "controllers/ogxserver_controller.go:620"
     },
     {
       "type": "Owns",
       "gvk": "/v1/ConfigMap",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:853"
-    },
-    {
-      "type": "Owns",
-      "gvk": "/v1/ConfigMap",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:142"
+      "source": "controllers/ogxserver_controller.go:627"
     },
     {
       "type": "Owns",
       "gvk": "/v1/PersistentVolumeClaim",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:867"
+      "source": "controllers/ogxserver_controller.go:635"
     },
     {
       "type": "Owns",
       "gvk": "/v1/Service",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:852"
-    },
-    {
-      "type": "Owns",
-      "gvk": "/v1/Service",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:143"
-    },
-    {
-      "type": "Owns",
-      "gvk": "/v1/ServiceAccount",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:144"
-    },
-    {
-      "type": "Owns",
-      "gvk": "admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:150"
-    },
-    {
-      "type": "Owns",
-      "gvk": "apiextensions.k8s.io/v1/CustomResourceDefinition",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:151"
+      "source": "controllers/ogxserver_controller.go:626"
     },
     {
       "type": "Owns",
       "gvk": "apps/v1/Deployment",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:849"
-    },
-    {
-      "type": "Owns",
-      "gvk": "apps/v1/Deployment",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:141"
+      "source": "controllers/ogxserver_controller.go:623"
     },
     {
       "type": "Owns",
       "gvk": "autoscaling/v2/HorizontalPodAutoscaler",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:851"
-    },
-    {
-      "type": "Owns",
-      "gvk": "batch/v1/Job",
-      "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:854"
+      "source": "controllers/ogxserver_controller.go:625"
     },
     {
       "type": "Owns",
       "gvk": "networking.k8s.io/v1/Ingress",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:866"
+      "source": "controllers/ogxserver_controller.go:634"
     },
     {
       "type": "Owns",
       "gvk": "networking.k8s.io/v1/NetworkPolicy",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:865"
-    },
-    {
-      "type": "Owns",
-      "gvk": "policy/v1/PodDisruptionBudget",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:145"
+      "source": "controllers/ogxserver_controller.go:633"
     },
     {
       "type": "Owns",
       "gvk": "policy/v1/PodDisruptionBudget",
       "controller": "OGXServerReconciler",
-      "source": "controllers/ogxserver_controller.go:850"
-    },
-    {
-      "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/ClusterRole",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:148"
-    },
-    {
-      "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/ClusterRoleBinding",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:149"
-    },
-    {
-      "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/Role",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:146"
-    },
-    {
-      "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
-      "controller": "Reconciler",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go:147"
+      "source": "controllers/ogxserver_controller.go:624"
     },
     {
       "type": "resource_ops",
@@ -1614,7 +1150,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/ogx-k8s-operator/controllers/ogxserver_controller.go",
-            "line": 818
+            "line": 599
           }
         },
         {
@@ -1623,7 +1159,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/ogx-k8s-operator/controllers/ogxserver_controller.go",
-            "line": 1810
+            "line": 1422
           }
         },
         {
@@ -1632,7 +1168,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/ogx-k8s-operator/controllers/ogxserver_controller.go",
-            "line": 1822
+            "line": 1434
           }
         }
       ]
@@ -1642,16 +1178,12 @@
     "go_version": "1.25.8",
     "go_modules": [
       {
-        "module": "github.com/distribution/reference",
-        "version": "v0.6.0"
-      },
-      {
         "module": "github.com/go-logr/logr",
-        "version": "v1.4.4"
+        "version": "v1.4.3"
       },
       {
         "module": "github.com/go-openapi/jsonpointer",
-        "version": "v1.0.0"
+        "version": "v0.22.5"
       },
       {
         "module": "github.com/google/go-cmp",
@@ -1659,37 +1191,9 @@
       },
       {
         "module": "github.com/google/go-containerregistry",
-        "version": "v0.22.1",
+        "version": "v0.20.7",
         "category": "container",
         "purpose": "Container image registry client"
-      },
-      {
-        "module": "github.com/opendatahub-io/odh-platform-utilities",
-        "version": "v0.0.0-20260506180717-e15e712db78d"
-      },
-      {
-        "module": "github.com/openshift/api",
-        "version": "v0.0.0-20260610192510-1b2a074e0bd6",
-        "category": "openshift",
-        "purpose": "OpenShift API types"
-      },
-      {
-        "module": "github.com/openshift/controller-runtime-common",
-        "version": "v0.0.0-20260428152732-64ee174f5e2e"
-      },
-      {
-        "module": "github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring",
-        "version": "v0.82.0"
-      },
-      {
-        "module": "github.com/spf13/viper",
-        "version": "v1.21.0"
-      },
-      {
-        "module": "github.com/stretchr/testify",
-        "version": "v1.12.1",
-        "category": "testing",
-        "purpose": "Test assertions library"
       },
       {
         "module": "github.com/stretchr/testify",
@@ -1699,7 +1203,7 @@
       },
       {
         "module": "go.uber.org/zap",
-        "version": "v1.28.0"
+        "version": "v1.27.1"
       },
       {
         "module": "gopkg.in/yaml.v2",
@@ -1714,74 +1218,32 @@
         "purpose": "YAML parser"
       },
       {
-        "module": "gopkg.in/yaml.v3",
-        "version": "v3.0.1",
-        "category": "serialization",
-        "purpose": "YAML parser"
-      },
-      {
         "module": "k8s.io/api",
-        "version": "v0.35.2",
-        "category": "k8s-api",
-        "purpose": "Kubernetes API types"
-      },
-      {
-        "module": "k8s.io/api",
-        "version": "v0.35.2",
+        "version": "v0.34.3",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/apiextensions-apiserver",
-        "version": "v0.35.2",
-        "category": "k8s-api",
-        "purpose": "Kubernetes API types"
-      },
-      {
-        "module": "k8s.io/apiextensions-apiserver",
-        "version": "v0.35.1",
+        "version": "v0.34.3",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/apimachinery",
-        "version": "v0.35.2",
-        "category": "k8s-api",
-        "purpose": "Kubernetes API types"
-      },
-      {
-        "module": "k8s.io/apimachinery",
-        "version": "v0.35.4",
+        "version": "v0.34.3",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/client-go",
-        "version": "v0.35.2",
+        "version": "v0.34.3",
         "category": "k8s-client",
         "purpose": "Kubernetes API client"
       },
       {
-        "module": "k8s.io/client-go",
-        "version": "v0.35.2",
-        "category": "k8s-client",
-        "purpose": "Kubernetes API client"
-      },
-      {
-        "module": "k8s.io/utils",
-        "version": "v0.0.0-20260210185600-b8788abfbbc2",
-        "category": "k8s-api",
-        "purpose": "Kubernetes utility library"
-      },
-      {
         "module": "sigs.k8s.io/controller-runtime",
-        "version": "v0.23.3",
-        "category": "controller-framework",
-        "purpose": "Kubernetes controller framework"
-      },
-      {
-        "module": "sigs.k8s.io/controller-runtime",
-        "version": "v0.23.3",
+        "version": "v0.22.4",
         "category": "controller-framework",
         "purpose": "Kubernetes controller framework"
       },
@@ -1798,34 +1260,14 @@
         "purpose": "Kustomize configuration management"
       },
       {
-        "module": "sigs.k8s.io/kustomize/kyaml",
-        "version": "v0.21.0",
-        "category": "operator-tooling",
-        "purpose": "Kustomize configuration management"
-      },
-      {
         "module": "sigs.k8s.io/yaml",
         "version": "v1.6.0",
         "category": "serialization",
         "purpose": "Kubernetes YAML parser"
       }
-    ],
-    "internal_odh": [
-      {
-        "component": "odh-platform-utilities",
-        "interaction": "Go module dependency: github.com/opendatahub-io/odh-platform-utilities"
-      }
     ]
   },
   "secrets_referenced": [
-    {
-      "name": "ogx-k8s-operator-controller-manager-metrics-service-tls",
-      "type": "Opaque",
-      "referenced_by": [
-        "deployment/controller-manager"
-      ],
-      "provisioned_by": "volume-mounted"
-    },
     {
       "name": "ogx-k8s-operator-webhook-cert",
       "type": "Opaque",
@@ -1897,69 +1339,6 @@
           "output": "manager"
         }
       ]
-    },
-    {
-      "path": "ogx-module/Dockerfile",
-      "base_image": "registry.access.redhat.com/ubi9/ubi-micro:latest",
-      "build_stage_images": [
-        "registry.access.redhat.com/ubi9/go-toolset:${GOLANG_VERSION}"
-      ],
-      "stages": 2,
-      "user": "65532:65532",
-      "issues": [
-        "Unpinned base image: registry.access.redhat.com/ubi9/ubi-micro:latest"
-      ],
-      "architectures": [
-        "multi-arch"
-      ],
-      "build_args": {
-        "GOLANG_VERSION": "1.25",
-        "TARGETARCH": "amd64",
-        "TARGETOS": "linux",
-        "TARGETPLATFORM": ""
-      },
-      "copy_instructions": [
-        {
-          "sources": [
-            "/workspace/bin/manager"
-          ],
-          "destination": ".",
-          "from_stage": "builder",
-          "original_sources": [
-            "ogx-module/ogx-module/go.mod",
-            "ogx-module/ogx-module/go.sum",
-            "ogx-module/ogx-module/cmd/",
-            "ogx-module/ogx-module/internal/",
-            "ogx-module/ogx-module/pkg/",
-            "ogx-module/ogx-module/hack/",
-            "ogx-module/config/"
-          ]
-        },
-        {
-          "sources": [
-            "/workspace/ogx-module/config/manifests/"
-          ],
-          "destination": "/manifests/",
-          "from_stage": "builder",
-          "original_sources": [
-            "ogx-module/ogx-module/go.mod",
-            "ogx-module/ogx-module/go.sum",
-            "ogx-module/ogx-module/cmd/",
-            "ogx-module/ogx-module/internal/",
-            "ogx-module/ogx-module/pkg/",
-            "ogx-module/ogx-module/hack/",
-            "ogx-module/config/"
-          ]
-        }
-      ],
-      "build_commands": [
-        {
-          "tool": "go",
-          "command": "build",
-          "entry_point": "./cmd/ogx-module",
-          "output": "/workspace/bin/manager"
-        }
-      ]
     }
   ],
   "helm": {},
@@ -1967,7 +1346,7 @@
     {
       "name": "vogxserver.kb.io",
       "type": "validating",
-      "service_ref": "opendatahub/ogx-k8s-operator-webhook-service",
+      "service_ref": "ogx-k8s-operator-system/ogx-k8s-operator-webhook-service",
       "path": "/validate-ogx-io-v1beta1-ogxserver",
       "port": 9443,
       "failure_policy": "Fail",
@@ -1995,22 +1374,13 @@
         },
         {
           "type": "kustomize_overlay",
-          "file": "kustomize:config/overlays/odh (ogx-k8s-operator-validating-webhook-configuration)"
+          "file": "kustomize:config/overlays/cert-manager (ogx-k8s-operator-validating-webhook-configuration)"
         }
       ],
       "overlays": [
-        "config/overlays/odh"
+        "config/overlays/cert-manager"
       ],
       "target_type": "OGXServerValidator"
-    }
-  ],
-  "configmaps": [
-    {
-      "name": "config",
-      "data_keys": [
-        "platform-name"
-      ],
-      "source": "ogx-module/config/manager/configmap.yaml"
     }
   ],
   "ingress_routing": [
@@ -2032,8 +1402,8 @@
     }
   ],
   "cache_config": {
-    "manager_file": "ogx-module/cmd/ogx-module/main.go",
-    "cache_scope": "namespace-scoped",
+    "manager_file": "main.go",
+    "cache_scope": "cluster-wide",
     "filtered_types": [
       {
         "type": "appsv1.Deployment",
@@ -2046,11 +1416,6 @@
         "filter": "label selector"
       },
       {
-        "type": "batchv1.Job",
-        "filter_kind": "label",
-        "filter": "label selector"
-      },
-      {
         "type": "corev1.ConfigMap",
         "filter_kind": "label",
         "filter": "controllers.WatchLabelKey=controllers.WatchLabelValue (constants, resolved at runtime)"
@@ -2059,11 +1424,6 @@
         "type": "corev1.PersistentVolumeClaim",
         "filter_kind": "label",
         "filter": "label selector"
-      },
-      {
-        "type": "corev1.Secret",
-        "filter_kind": "label",
-        "filter": "controllers.WatchLabelKey=controllers.WatchLabelValue (constants, resolved at runtime)"
       },
       {
         "type": "corev1.Service",
@@ -2093,15 +1453,7 @@
     "gomemlimit_ratio": 78.1,
     "issues": [
       "GOMEMLIMIT ratio 78.1% is below recommended 80% minimum (GC cannot pressure-tune effectively)",
-      "Type ClusterRole is watched but has no cache filter (cluster-wide informer)",
-      "Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)",
-      "Type CustomResourceDefinition is watched but has no cache filter (cluster-wide informer)",
-      "Type OGX is watched but has no cache filter (cluster-wide informer)",
-      "Type OGXServer is watched but has no cache filter (cluster-wide informer)",
-      "Type Role is watched but has no cache filter (cluster-wide informer)",
-      "Type RoleBinding is watched but has no cache filter (cluster-wide informer)",
-      "Type ServiceAccount is watched but has no cache filter (cluster-wide informer)",
-      "Type ValidatingWebhookConfiguration is watched but has no cache filter (cluster-wide informer)"
+      "Type OGXServer is watched but has no cache filter (cluster-wide informer)"
     ]
   },
   "pod_disruption_budgets": [
@@ -2111,7 +1463,7 @@
       "selector": {
         "app.kubernetes.io/name": "ogx-k8s-operator"
       },
-      "source": "kustomize:config/overlays/odh"
+      "source": "kustomize:config/overlays/cert-manager"
     },
     {
       "name": "pdb",
@@ -2720,37 +2072,6 @@
       "is_spec": true
     },
     {
-      "name": "SecretKeyRef",
-      "doc": "SecretKeyRef references a specific key in a Kubernetes Secret. The Secret must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\" to be detected by the operator's cache.",
-      "fields": [
-        {
-          "name": "Name",
-          "type": "string",
-          "json_tag": "name",
-          "doc": "Name is the name of the Kubernetes Secret.",
-          "markers": [
-            "+kubebuilder:validation:Required",
-            "+kubebuilder:validation:MinLength=1"
-          ],
-          "required": true
-        },
-        {
-          "name": "Key",
-          "type": "string",
-          "json_tag": "key",
-          "doc": "Key is the key within the Secret.",
-          "markers": [
-            "+kubebuilder:validation:Required",
-            "+kubebuilder:validation:MinLength=1",
-            "+kubebuilder:validation:MaxLength=253",
-            "+kubebuilder:validation:Pattern=\"^[a-zA-Z0-9]([a-zA-Z0-9\\\\-_.]*[a-zA-Z0-9])?$\""
-          ],
-          "required": true
-        }
-      ],
-      "source": "api/v1beta1/ogxserver_types.go:106"
-    },
-    {
       "name": "ConfigMapKeyRef",
       "doc": "ConfigMapKeyRef references a key within a ConfigMap. The ConfigMap must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\" to be detected by the operator's cache.",
       "fields": [
@@ -2779,7 +2100,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:122"
+      "source": "api/v1beta1/ogxserver_types.go:106"
     },
     {
       "name": "ModelConfig",
@@ -2826,11 +2147,11 @@
         "+kubebuilder:validation:XValidation:rule=\"!has(self.modelType) || self.modelType.size() \u003e 0\",message=\"modelType must not be empty if specified\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.quantization) || self.quantization.size() \u003e 0\",message=\"quantization must not be empty if specified\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:139"
+      "source": "api/v1beta1/ogxserver_types.go:123"
     },
     {
       "name": "ResourcesSpec",
-      "doc": "ResourcesSpec defines declarative registration of models.",
+      "doc": "ResourcesSpec defines declarative registration of models, tools, and shields.",
       "fields": [
         {
           "name": "Models",
@@ -2840,9 +2161,29 @@
           "markers": [
             "+kubebuilder:validation:MinItems=1"
           ]
+        },
+        {
+          "name": "Tools",
+          "type": "[]string",
+          "json_tag": "tools,omitempty",
+          "doc": "Tools are tool group names to register with the toolRuntime provider.",
+          "markers": [
+            "+kubebuilder:validation:MinItems=1",
+            "+kubebuilder:validation:items:MinLength=1"
+          ]
+        },
+        {
+          "name": "Shields",
+          "type": "[]string",
+          "json_tag": "shields,omitempty",
+          "doc": "Shields to register by name.",
+          "markers": [
+            "+kubebuilder:validation:MinItems=1",
+            "+kubebuilder:validation:items:MinLength=1"
+          ]
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:160",
+      "source": "api/v1beta1/ogxserver_types.go:144",
       "is_spec": true
     },
     {
@@ -2879,7 +2220,7 @@
         "+kubebuilder:validation:XValidation:rule=\"!has(self.endpoint) || self.type == 'redis'\",message=\"endpoint is only valid when type is redis\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.password) || self.type == 'redis'\",message=\"password is only valid when type is redis\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:171",
+      "source": "api/v1beta1/ogxserver_types.go:165",
       "is_spec": true
     },
     {
@@ -2909,7 +2250,7 @@
         "+kubebuilder:validation:XValidation:rule=\"self.type != 'postgres' || has(self.connectionString)\",message=\"connectionString is required when type is postgres\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.connectionString) || self.type == 'postgres'\",message=\"connectionString is only valid when type is postgres\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:190",
+      "source": "api/v1beta1/ogxserver_types.go:184",
       "is_spec": true
     },
     {
@@ -2929,7 +2270,7 @@
           "doc": "SQL configures SQL storage."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:205",
+      "source": "api/v1beta1/ogxserver_types.go:199",
       "is_spec": true
     },
     {
@@ -2949,7 +2290,7 @@
           "secret_ref": true
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:215",
+      "source": "api/v1beta1/ogxserver_types.go:209",
       "is_spec": true
     },
     {
@@ -2966,7 +2307,7 @@
           ]
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:226"
+      "source": "api/v1beta1/ogxserver_types.go:220"
     },
     {
       "name": "IdentityConfig",
@@ -2994,7 +2335,7 @@
           "secret_ref": true
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:237"
+      "source": "api/v1beta1/ogxserver_types.go:231"
     },
     {
       "name": "TLSClientConfig",
@@ -3013,11 +2354,11 @@
           "doc": "Identity configures client certificate and key for mTLS authentication with providers and backends."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:251"
+      "source": "api/v1beta1/ogxserver_types.go:245"
     },
     {
       "name": "NetworkPolicySpec",
-      "doc": "NetworkPolicySpec configures the operator-managed NetworkPolicy for this server. The operator always enforces a mandatory ingress lock-down: OGX accepts traffic on the service port only from Praxis pods (the internal API front-end) plus the operator namespace (control-plane status polling). These mandatory rules cannot be removed via this spec; set Enabled=false to disable the NetworkPolicy entirely as an escape hatch. Egress is unrestricted by default. It is only enforced when egress rules are provided.",
+      "doc": "NetworkPolicySpec configures the operator-managed NetworkPolicy for this server. Ingress is always enforced unless explicitly omitted from policyTypes. The operator always includes default ingress rules (allow from same-namespace and operator-namespace on the service port), merging them with any user-specified rules. Egress is unrestricted by default. It is only enforced when egress rules are provided or \"Egress\" is explicitly included in policyTypes. When any egress rules are configured, or when \"Egress\" is explicitly included in policyTypes, a kube-dns egress rule is auto-injected to prevent DNS breakage.",
       "fields": [
         {
           "name": "Enabled",
@@ -3042,7 +2383,7 @@
           "name": "Ingress",
           "type": "[]networkingv1.NetworkPolicyIngressRule",
           "json_tag": "ingress,omitempty",
-          "doc": "Ingress defines additional ingress rules, appended to the mandatory operator rules (allow from Praxis pods and the operator namespace on the service port). User rules are additive and cannot remove the mandatory Praxis lock-down."
+          "doc": "Ingress defines additional ingress rules, merged with operator defaults (allow from same-namespace and operator-namespace on the service port)."
         },
         {
           "name": "Egress",
@@ -3051,7 +2392,7 @@
           "doc": "Egress rules. When non-empty, a kube-dns egress rule is auto-injected to prevent DNS breakage."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:270",
+      "source": "api/v1beta1/ogxserver_types.go:267",
       "is_spec": true
     },
     {
@@ -3072,21 +2413,13 @@
           "name": "Hostname",
           "type": "string",
           "json_tag": "hostname,omitempty",
-          "doc": "Hostname sets the hostname for the external endpoint. Required when external access is enabled for TLS SNI routing."
-        },
-        {
-          "name": "TLS",
-          "type": "*TLSSpec",
-          "json_tag": "tls,omitempty",
-          "doc": "TLS configures TLS for the external Ingress. Required when external access is enabled. The referenced Secret must contain a valid TLS certificate for the specified hostname."
+          "doc": "Hostname sets a custom hostname for the external endpoint. When omitted, an auto-generated hostname is used."
         }
       ],
       "markers": [
-        "+kubebuilder:validation:XValidation:rule=\"!has(self.hostname) || self.hostname.size() \u003e 0\",message=\"hostname must not be empty if specified\"",
-        "+kubebuilder:validation:XValidation:rule=\"!self.enabled || has(self.tls)\",message=\"tls is required when external access is enabled\"",
-        "+kubebuilder:validation:XValidation:rule=\"!self.enabled || has(self.hostname)\",message=\"hostname is required when external access is enabled\""
+        "+kubebuilder:validation:XValidation:rule=\"!has(self.hostname) || self.hostname.size() \u003e 0\",message=\"hostname must not be empty if specified\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:298"
+      "source": "api/v1beta1/ogxserver_types.go:292"
     },
     {
       "name": "NetworkSpec",
@@ -3123,35 +2456,7 @@
           "doc": "Policy configures the operator-managed NetworkPolicy. When nil, the operator creates a default NetworkPolicy with safe ingress rules."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:315",
-      "is_spec": true
-    },
-    {
-      "name": "MonitoringSpec",
-      "doc": "MonitoringSpec configures Prometheus monitoring for this OGXServer instance.",
-      "fields": [
-        {
-          "name": "Enabled",
-          "type": "*bool",
-          "json_tag": "enabled,omitempty",
-          "doc": "Enabled controls whether the operator creates monitoring resources (ServiceMonitor, PrometheusRule) for this server. Defaults to true. Set to false to disable monitoring without removing the config.",
-          "markers": [
-            "+kubebuilder:default:=true"
-          ],
-          "default": "=true"
-        },
-        {
-          "name": "MetricsPort",
-          "type": "*int32",
-          "json_tag": "metricsPort,omitempty",
-          "doc": "MetricsPort is the port serving the /metrics endpoint. When omitted, metrics are served on the main API port.",
-          "markers": [
-            "+kubebuilder:validation:Minimum=1",
-            "+kubebuilder:validation:Maximum=65535"
-          ]
-        }
-      ],
-      "source": "api/v1beta1/ogxserver_types.go:336",
+      "source": "api/v1beta1/ogxserver_types.go:304",
       "is_spec": true
     },
     {
@@ -3179,7 +2484,7 @@
         "+kubebuilder:validation:XValidation:rule=\"!has(self.mountPath) || self.mountPath.size() \u003e 0\",message=\"mountPath must not be empty if specified\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.size) || quantity(self.size).isGreaterThan(quantity('0'))\",message=\"size must be a positive quantity\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:354",
+      "source": "api/v1beta1/ogxserver_types.go:327",
       "is_spec": true
     },
     {
@@ -3203,7 +2508,7 @@
         "+kubebuilder:validation:XValidation:rule=\"has(self.minAvailable) || has(self.maxUnavailable)\",message=\"at least one of minAvailable or maxUnavailable must be specified\"",
         "+kubebuilder:validation:XValidation:rule=\"!(has(self.minAvailable) \u0026\u0026 has(self.maxUnavailable))\",message=\"minAvailable and maxUnavailable are mutually exclusive\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:367",
+      "source": "api/v1beta1/ogxserver_types.go:340",
       "is_spec": true
     },
     {
@@ -3254,7 +2559,7 @@
       "markers": [
         "+kubebuilder:validation:XValidation:rule=\"!has(self.minReplicas) || self.maxReplicas \u003e= self.minReplicas\",message=\"maxReplicas must be greater than or equal to minReplicas\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:378",
+      "source": "api/v1beta1/ogxserver_types.go:351",
       "is_spec": true
     },
     {
@@ -3318,7 +2623,7 @@
       "markers": [
         "+kubebuilder:validation:XValidation:rule=\"!has(self.serviceAccountName) || self.serviceAccountName.size() \u003e 0\",message=\"serviceAccountName must not be empty if specified\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:401"
+      "source": "api/v1beta1/ogxserver_types.go:374"
     },
     {
       "name": "WorkloadSpec",
@@ -3348,16 +2653,7 @@
           "name": "Resources",
           "type": "*corev1.ResourceRequirements",
           "json_tag": "resources,omitempty",
-          "doc": "Resources defines CPU/memory requests and limits, and optional DRA resource claim references consumed by the OGX container."
-        },
-        {
-          "name": "ResourceClaims",
-          "type": "[]corev1.PodResourceClaim",
-          "json_tag": "resourceClaims,omitempty",
-          "doc": "ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. Containers consume allocated resources by name via spec.workload.resources.claims. +listType=map +listMapKey=name",
-          "markers": [
-            "+kubebuilder:validation:MinItems=1"
-          ]
+          "doc": "Resources defines CPU/memory requests and limits."
         },
         {
           "name": "Autoscaling",
@@ -3393,93 +2689,7 @@
           "doc": "Overrides allows pod-level customization."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:430",
-      "is_spec": true
-    },
-    {
-      "name": "PraxisSelector",
-      "doc": "PraxisSelector identifies the target Praxis instance by namespace and Pod label selector. nolint:lll // kubebuilder markers cannot be split across lines.",
-      "fields": [
-        {
-          "name": "Namespace",
-          "type": "string",
-          "json_tag": "namespace",
-          "doc": "Namespace is the namespace of the Praxis instance.",
-          "markers": [
-            "+kubebuilder:validation:MinLength=1"
-          ],
-          "required": true
-        },
-        {
-          "name": "PodSelector",
-          "type": "metav1.LabelSelector",
-          "json_tag": "podSelector",
-          "doc": "PodSelector selects the Praxis Pods by label.",
-          "required": true
-        }
-      ],
-      "markers": [
-        "+kubebuilder:validation:XValidation:rule=\"(has(self.podSelector.matchLabels) \u0026\u0026 size(self.podSelector.matchLabels) \u003e 0) || (has(self.podSelector.matchExpressions) \u0026\u0026 size(self.podSelector.matchExpressions) \u003e 0)\",message=\"podSelector must not be empty\""
-      ],
-      "source": "api/v1beta1/ogxserver_types.go:474"
-    },
-    {
-      "name": "MigrationJobSpec",
-      "doc": "MigrationJobSpec configures the Job that migrates OGX data to Praxis. Migration is opt-in: the Job is created only when praxisMode is enabled and this field is set. Only Responses and Conversations (plus conversation items) are migrated; Files/Vector Stores/ingestion remain OGX-owned.",
-      "fields": [
-        {
-          "name": "Enabled",
-          "type": "*bool",
-          "json_tag": "enabled,omitempty",
-          "doc": "Enabled controls whether the DB migration job is enabled. Defaults to true when migrationJob is present.",
-          "markers": [
-            "+kubebuilder:default:=true"
-          ],
-          "default": "=true"
-        },
-        {
-          "name": "TargetConnectionString",
-          "type": "*SecretKeyRef",
-          "json_tag": "targetConnectionString",
-          "doc": "TargetConnectionString references a Secret containing the PostgreSQL connection string that the migration Job writes to (PRAXIS_DATABASE_URL). Required when migrationJob is set. Must point at the Praxis database, not the OGX source: both default schemas include openai_conversations. The Secret must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\".",
-          "markers": [
-            "+kubebuilder:validation:Required"
-          ],
-          "required": true,
-          "secret_ref": true
-        }
-      ],
-      "source": "api/v1beta1/ogxserver_types.go:486",
-      "is_spec": true
-    },
-    {
-      "name": "PraxisModeSpec",
-      "doc": "PraxisMode configures integration with an existing Praxis instance that acts as gateway for this OGX server.",
-      "fields": [
-        {
-          "name": "Enabled",
-          "type": "*bool",
-          "json_tag": "enabled,omitempty",
-          "doc": "Enabled controls whether Praxis mode is enabled. Defaults to true when PraxisMode is provided.",
-          "markers": [
-            "+kubebuilder:default:=true"
-          ],
-          "default": "=true"
-        },
-        {
-          "name": "PraxisSelector",
-          "type": "*PraxisSelector",
-          "json_tag": "praxisSelector,omitempty",
-          "doc": "PraxisSelector identifies the Praxis instance that is the gateway to the OGX server. Defaults to the cluster's default Praxis instance if omitted."
-        },
-        {
-          "name": "MigrationJob",
-          "type": "*MigrationJobSpec",
-          "json_tag": "migrationJob,omitempty",
-          "doc": "MigrationJob configures the DB migration Job that migrates OGX data to Praxis. When omitted the Job is not created."
-        }
-      ],
-      "source": "api/v1beta1/ogxserver_types.go:505",
+      "source": "api/v1beta1/ogxserver_types.go:403",
       "is_spec": true
     },
     {
@@ -3506,7 +2716,7 @@
           "name": "Resources",
           "type": "*ResourcesSpec",
           "json_tag": "resources,omitempty",
-          "doc": "Resources declares models to register. Mutually exclusive with overrideConfig."
+          "doc": "Resources declares models, tools, and shields to register. Mutually exclusive with overrideConfig."
         },
         {
           "name": "Storage",
@@ -3521,17 +2731,8 @@
           "doc": "DisabledAPIs lists API names to remove from the generated config. Mutually exclusive with overrideConfig.",
           "markers": [
             "+kubebuilder:validation:MinItems=1",
-            "+kubebuilder:validation:MaxItems=8",
-            "+kubebuilder:validation:items:Enum=batches;conversations;file_processors;inference;responses;tool_runtime;vector_io;files"
-          ]
-        },
-        {
-          "name": "RegistryRefreshIntervalSeconds",
-          "type": "*int32",
-          "json_tag": "registryRefreshIntervalSeconds,omitempty",
-          "doc": "RegistryRefreshIntervalSeconds configures how often the server refreshes its model registry, in seconds. When omitted, the server's built-in default is used.",
-          "markers": [
-            "+kubebuilder:validation:Minimum=1"
+            "+kubebuilder:validation:MaxItems=6",
+            "+kubebuilder:validation:items:Enum=batches;inference;responses;tool_runtime;vector_io;files"
           ]
         },
         {
@@ -3553,28 +2754,10 @@
           "doc": "Workload consolidates Kubernetes deployment settings."
         },
         {
-          "name": "Monitoring",
-          "type": "*MonitoringSpec",
-          "json_tag": "monitoring,omitempty",
-          "doc": "Monitoring configures Prometheus monitoring and observability."
-        },
-        {
-          "name": "BaseConfig",
-          "type": "*ConfigMapKeyRef",
-          "json_tag": "baseConfig,omitempty",
-          "doc": "BaseConfig references a ConfigMap key containing the base config.yaml used as the starting point for declarative config generation. When set, this takes precedence over OCI label resolution. Mutually exclusive with overrideConfig. The ConfigMap must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\"."
-        },
-        {
           "name": "OverrideConfig",
           "type": "*ConfigMapKeyRef",
           "json_tag": "overrideConfig,omitempty",
-          "doc": "OverrideConfig references a ConfigMap key containing a full config.yaml override. Mutually exclusive with providers, resources, storage, disabledAPIs, and baseConfig. The ConfigMap must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\"."
-        },
-        {
-          "name": "PraxisMode",
-          "type": "*PraxisModeSpec",
-          "json_tag": "praxisMode,omitempty",
-          "doc": "PraxisMode configures integration with an existing Praxis instance that acts as gateway for this OGX server."
+          "doc": "OverrideConfig references a ConfigMap key containing a full config.yaml override. Mutually exclusive with providers, resources, storage, and disabledAPIs. The ConfigMap must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\"."
         }
       ],
       "markers": [
@@ -3582,16 +2765,14 @@
         "+kubebuilder:validation:XValidation:rule=\"!has(self.overrideConfig) || !has(self.resources)\",message=\"overrideConfig and resources are mutually exclusive\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.overrideConfig) || !has(self.storage)\",message=\"overrideConfig and storage are mutually exclusive\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.overrideConfig) || !has(self.disabledAPIs)\",message=\"overrideConfig and disabledAPIs are mutually exclusive\"",
-        "+kubebuilder:validation:XValidation:rule=\"!has(self.overrideConfig) || !has(self.baseConfig)\",message=\"overrideConfig and baseConfig are mutually exclusive\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'inference') || !has(self.providers.inference)\",message=\"inference cannot be both in providers and disabledAPIs\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'vector_io') || !has(self.providers.vectorIo)\",message=\"vector_io cannot be both in providers and disabledAPIs\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'tool_runtime') || !has(self.providers.toolRuntime)\",message=\"tool_runtime cannot be both in providers and disabledAPIs\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'files') || !has(self.providers.files)\",message=\"files cannot be both in providers and disabledAPIs\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'batches') || !has(self.providers.batches)\",message=\"batches cannot be both in providers and disabledAPIs\"",
-        "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'responses') || !has(self.providers.responses)\",message=\"responses cannot be both in providers and disabledAPIs\"",
-        "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'file_processors') || !has(self.providers.fileProcessors)\",message=\"file_processors cannot be both in providers and disabledAPIs\""
+        "+kubebuilder:validation:XValidation:rule=\"!has(self.providers) || !has(self.disabledAPIs) || !self.disabledAPIs.exists(d, d == 'responses') || !has(self.providers.responses)\",message=\"responses cannot be both in providers and disabledAPIs\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:538",
+      "source": "api/v1beta1/ogxserver_types.go:447",
       "is_spec": true
     },
     {
@@ -3611,7 +2792,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:622",
+      "source": "api/v1beta1/ogxserver_types.go:501",
       "is_status": true
     },
     {
@@ -3649,7 +2830,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:628"
+      "source": "api/v1beta1/ogxserver_types.go:507"
     },
     {
       "name": "DistributionConfig",
@@ -3671,7 +2852,7 @@
           "json_tag": "availableDistributions,omitempty"
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:637"
+      "source": "api/v1beta1/ogxserver_types.go:516"
     },
     {
       "name": "VersionInfo",
@@ -3693,7 +2874,7 @@
           "json_tag": "lastUpdated,omitempty"
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:644"
+      "source": "api/v1beta1/ogxserver_types.go:523"
     },
     {
       "name": "ResolvedDistributionStatus",
@@ -3709,7 +2890,7 @@
           "name": "ConfigSource",
           "type": "string",
           "json_tag": "configSource,omitempty",
-          "doc": "ConfigSource indicates the base config origin (for example \"configmap\" or \"oci-label\")."
+          "doc": "ConfigSource indicates the config origin: \"embedded\" or \"oci-label\"."
         },
         {
           "name": "ConfigHash",
@@ -3718,7 +2899,7 @@
           "doc": "ConfigHash is the SHA256 hash of the base config used."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:651",
+      "source": "api/v1beta1/ogxserver_types.go:530",
       "is_status": true
     },
     {
@@ -3762,51 +2943,7 @@
           "doc": "ConfigVersion is the config.yaml schema version."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:661",
-      "is_status": true
-    },
-    {
-      "name": "MigrationStatus",
-      "doc": "MigrationStatus tracks operator-managed Praxis migration progress.",
-      "fields": [
-        {
-          "name": "Phase",
-          "type": "MigrationPhase",
-          "json_tag": "phase,omitempty",
-          "doc": "Phase is the high-level migration orchestration phase."
-        },
-        {
-          "name": "ObservedGeneration",
-          "type": "int64",
-          "json_tag": "observedGeneration,omitempty",
-          "doc": "ObservedGeneration is the OGXServer generation last considered for migration."
-        },
-        {
-          "name": "AttemptKey",
-          "type": "string",
-          "json_tag": "attemptKey,omitempty",
-          "doc": "AttemptKey identifies the current migration attempt (Secret/config/image fingerprint)."
-        },
-        {
-          "name": "JobName",
-          "type": "string",
-          "json_tag": "jobName,omitempty",
-          "doc": "JobName is the Kubernetes Job created for this attempt."
-        },
-        {
-          "name": "Message",
-          "type": "string",
-          "json_tag": "message,omitempty",
-          "doc": "Message is a human-readable summary of the current migration state."
-        },
-        {
-          "name": "SoftRollbackWarning",
-          "type": "string",
-          "json_tag": "softRollbackWarning,omitempty",
-          "doc": "SoftRollbackWarning warns that only soft rollback is supported."
-        }
-      ],
-      "source": "api/v1beta1/ogxserver_types.go:694",
+      "source": "api/v1beta1/ogxserver_types.go:540",
       "is_status": true
     },
     {
@@ -3844,12 +2981,6 @@
           "doc": "ConfigGeneration tracks config generation details."
         },
         {
-          "name": "Migration",
-          "type": "*MigrationStatus",
-          "json_tag": "migration,omitempty",
-          "doc": "Migration tracks Praxis Responses/Conversations migration orchestration."
-        },
-        {
           "name": "Conditions",
           "type": "[]metav1.Condition",
           "json_tag": "conditions,omitempty",
@@ -3874,7 +3005,7 @@
           "doc": "ExternalURL is the external URL when external access is configured."
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:716",
+      "source": "api/v1beta1/ogxserver_types.go:556",
       "is_status": true
     },
     {
@@ -3905,7 +3036,7 @@
           "json_tag": "status,omitempty"
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:755"
+      "source": "api/v1beta1/ogxserver_types.go:593"
     },
     {
       "name": "OGXServerList",
@@ -3930,7 +3061,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta1/ogxserver_types.go:766"
+      "source": "api/v1beta1/ogxserver_types.go:604"
     },
     {
       "name": "DistributionSpec",
@@ -3953,8 +3084,39 @@
         "+kubebuilder:validation:XValidation:rule=\"!(has(self.name) \u0026\u0026 has(self.image))\",message=\"only one of name or image can be specified\"",
         "+kubebuilder:validation:XValidation:rule=\"has(self.name) || has(self.image)\",message=\"one of name or image must be specified\""
       ],
-      "source": "api/v1beta1/ogxserver_types.go:93",
+      "source": "api/v1beta1/ogxserver_types.go:77",
       "is_spec": true
+    },
+    {
+      "name": "SecretKeyRef",
+      "doc": "SecretKeyRef references a specific key in a Kubernetes Secret. The Secret must be in the same namespace as the OGXServer and must have the label ogx.io/watch: \"true\" to be detected by the operator's cache.",
+      "fields": [
+        {
+          "name": "Name",
+          "type": "string",
+          "json_tag": "name",
+          "doc": "Name is the name of the Kubernetes Secret.",
+          "markers": [
+            "+kubebuilder:validation:Required",
+            "+kubebuilder:validation:MinLength=1"
+          ],
+          "required": true
+        },
+        {
+          "name": "Key",
+          "type": "string",
+          "json_tag": "key",
+          "doc": "Key is the key within the Secret.",
+          "markers": [
+            "+kubebuilder:validation:Required",
+            "+kubebuilder:validation:MinLength=1",
+            "+kubebuilder:validation:MaxLength=253",
+            "+kubebuilder:validation:Pattern=\"^[a-zA-Z0-9]([a-zA-Z0-9\\\\-_.]*[a-zA-Z0-9])?$\""
+          ],
+          "required": true
+        }
+      ],
+      "source": "api/v1beta1/ogxserver_types.go:90"
     },
     {
       "name": "RoutedProviderBase",
@@ -4048,11 +3210,6 @@
           "name": "Responses",
           "type": "*ResponsesProvidersSpec",
           "json_tag": "responses,omitempty"
-        },
-        {
-          "name": "FileProcessors",
-          "type": "*FileProcessorsProvidersSpec",
-          "json_tag": "fileProcessors,omitempty"
         }
       ],
       "source": "api/v1beta1/provider_types.go:72",
@@ -4104,7 +3261,7 @@
     },
     {
       "name": "DefaultMountPath",
-      "value": "/opt/app-root/src/.llama/distributions/rh/",
+      "value": "/.llama",
       "category": "general",
       "doc": "DefaultMountPath is the default mount path for storage",
       "source": "api/v1alpha1/llamastackdistribution_types.go"
@@ -4254,38 +3411,10 @@
       "source": "api/v1beta1/ogxserver_types.go"
     },
     {
-      "name": "DefaultMetricsPortName",
-      "value": "metrics",
-      "category": "general",
-      "doc": "DefaultMetricsPortName is the port name used when a dedicated metrics port is configured.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
       "name": "DefaultMountPath",
       "value": "/.ogx",
       "category": "general",
       "doc": "DefaultMountPath is the default mount path for storage.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "DefaultNamespaceNameLabel",
-      "value": "kubernetes.io/metadata.name",
-      "category": "general",
-      "doc": "DefaultNamespaceNameLabel is the well-known Kubernetes label the API server sets on every\nnamespace to its own name; it is used to select a namespace by name in a NetworkPolicy peer.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "DefaultPraxisNamespace",
-      "value": "openshift-ingress",
-      "category": "general",
-      "doc": "DefaultPraxisNamespace is the namespace Praxis (MaaS) pods run in by default. The PoC\noperator places the extproc/Praxis servers in openshift-ingress, so the fail-safe\nNetworkPolicy peer pins its namespaceSelector to this namespace. This is provisional and\npending confirmation with the MaaS team; override it per-CR via\nspec.praxisMode.praxisSelector if Praxis runs elsewhere.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "DefaultPraxisPodLabelValue",
-      "value": "payload-processing",
-      "category": "general",
-      "doc": "DefaultPraxisPodLabelValue is the value of the \"app\" label identifying Praxis\n(MaaS Gateway) pods. Praxis is the only application workload permitted to reach\nOGX; this value is used as the fail-safe NetworkPolicy ingress peer when a CR's\nspec.praxisMode.praxisSelector is not set.",
       "source": "api/v1beta1/ogxserver_types.go"
     },
     {
@@ -4322,46 +3451,6 @@
       "value": "resource.MustParse(\"10Gi\")",
       "category": "resource",
       "doc": "DefaultStorageSize is the default size for persistent storage.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "MigrationPhaseFailed",
-      "value": "Failed",
-      "type": "MigrationPhase",
-      "category": "general",
-      "doc": "MigrationPhaseFailed indicates the migration Job failed.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "MigrationPhasePending",
-      "value": "Pending",
-      "type": "MigrationPhase",
-      "category": "general",
-      "doc": "MigrationPhasePending indicates migration has not started or is not opted in.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "MigrationPhasePreflightFailed",
-      "value": "PreflightFailed",
-      "type": "MigrationPhase",
-      "category": "general",
-      "doc": "MigrationPhasePreflightFailed indicates preflight checks failed.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "MigrationPhaseRunning",
-      "value": "Running",
-      "type": "MigrationPhase",
-      "category": "general",
-      "doc": "MigrationPhaseRunning indicates the migration Job is active.",
-      "source": "api/v1beta1/ogxserver_types.go"
-    },
-    {
-      "name": "MigrationPhaseValidated",
-      "value": "Validated",
-      "type": "MigrationPhase",
-      "category": "general",
-      "doc": "MigrationPhaseValidated indicates the migration Job completed.",
       "source": "api/v1beta1/ogxserver_types.go"
     },
     {
@@ -4414,15 +3503,9 @@
       "source": "api/v1beta1/ogxserver_types.go"
     },
     {
-      "name": "DeprecatedDistributions",
-      "value": "map[string]string{\n\t\"rh-dev\": \"rh\",\n}",
-      "category": "general",
-      "doc": "DeprecatedDistributions maps deprecated distribution names to their replacements.",
-      "source": "api/v1beta1/ogxserver_webhook.go"
-    },
-    {
       "name": "_",
       "value": "\u0026OGXServerValidator{}",
+      "type": "admission.CustomValidator",
       "category": "general",
       "source": "api/v1beta1/ogxserver_webhook.go"
     },
@@ -4431,100 +3514,6 @@
       "value": "logf.Log.WithName(\"ogxserver-webhook\")",
       "category": "general",
       "source": "api/v1beta1/ogxserver_webhook.go"
-    },
-    {
-      "name": "configMapRetention",
-      "value": "2",
-      "category": "general",
-      "doc": "configMapRetention is the number of generated ConfigMaps to retain.",
-      "source": "controllers/configmap_reconciler.go"
-    },
-    {
-      "name": "errReferencedConfigMapKeyNotFound",
-      "value": "errors.New(\"failed to find referenced ConfigMap key\")",
-      "category": "general",
-      "source": "controllers/configmap_reconciler.go"
-    },
-    {
-      "name": "generatedConfigKeyName",
-      "value": "config.yaml",
-      "category": "general",
-      "doc": "generatedConfigKeyName is the key used in the generated ConfigMap data.",
-      "source": "controllers/configmap_reconciler.go"
-    },
-    {
-      "name": "generatedConfigLabel",
-      "value": "ogx.io/generated-config",
-      "category": "general",
-      "doc": "generatedConfigLabel identifies operator-generated ConfigMaps.",
-      "source": "controllers/configmap_reconciler.go"
-    },
-    {
-      "name": "migrationActiveDeadlineSecs",
-      "value": "int64(3600)",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationAttemptAnnotation",
-      "value": "ogx.io/migration-attempt",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationComponentLabelKey",
-      "value": "app.kubernetes.io/component",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationComponentLabelValue",
-      "value": "praxis-migration",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationContainerName",
-      "value": "ogx-praxis-migration",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationJobBackoffLimit",
-      "value": "int32(2)",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationJobNameSuffix",
-      "value": "-praxis-migration",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationJobShell",
-      "value": "\"set -eu; \" +\n\t\"ogx migrate praxis --dry-run \\\"$OGX_CONFIG\\\" \u0026\u0026 \" +\n\t\"ogx migrate praxis \\\"$OGX_CONFIG\\\"\"",
-      "category": "general",
-      "doc": "dash as /bin/sh rejects pipefail.",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationManagedLabelKey",
-      "value": "managedByLabelKey",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "migrationManagedLabelValue",
-      "value": "managedByLabelVal",
-      "category": "general",
-      "source": "controllers/migration_job.go"
-    },
-    {
-      "name": "praxisDatabaseURLEnv",
-      "value": "PRAXIS_DATABASE_URL",
-      "category": "general",
-      "source": "controllers/migration_job.go"
     },
     {
       "name": "IngressNameSuffix",
@@ -4598,28 +3587,9 @@
       "source": "controllers/ogxserver_controller.go"
     },
     {
-      "name": "managedByLabelKey",
-      "value": "app.kubernetes.io/managed-by",
-      "category": "general",
-      "source": "controllers/ogxserver_controller.go"
-    },
-    {
-      "name": "managedByLabelVal",
-      "value": "ogx-operator",
-      "category": "general",
-      "source": "controllers/ogxserver_controller.go"
-    },
-    {
       "name": "manifestsBasePath",
       "value": "manifests/base",
       "category": "general",
-      "source": "controllers/ogxserver_controller.go"
-    },
-    {
-      "name": "migrationRequeueAfter",
-      "value": "15 * time.Second",
-      "category": "timeout",
-      "doc": "migrationRequeueAfter is how often to requeue while a migration Job is active.",
       "source": "controllers/ogxserver_controller.go"
     },
     {
@@ -4636,17 +3606,17 @@
       "source": "controllers/ogxserver_controller.go"
     },
     {
+      "name": "FSGroup",
+      "value": "int64(1001)",
+      "category": "general",
+      "doc": "FSGroup is the filesystem group ID for the pod.\nThis is the default group ID for the llama-stack server.",
+      "source": "controllers/resource_helper.go"
+    },
+    {
       "name": "defaultHPACPUUtilization",
       "value": "int32(80)",
       "category": "resource",
       "doc": "defaultHPACPUUtilization defines the fallback HPA CPU target percentage.",
-      "source": "controllers/resource_helper.go"
-    },
-    {
-      "name": "defaultMetricsPort",
-      "value": "int32(9464)",
-      "category": "general",
-      "doc": "defaultMetricsPort is the default port for the OGX metrics endpoint.",
       "source": "controllers/resource_helper.go"
     },
     {
@@ -4657,8 +3627,8 @@
       "source": "controllers/resource_helper.go"
     },
     {
-      "name": "ogxConfigPath",
-      "value": "/etc/ogx/config.yaml",
+      "name": "llamaStackConfigPath",
+      "value": "/etc/llama-stack/config.yaml",
       "category": "general",
       "source": "controllers/resource_helper.go"
     },
@@ -4684,6 +3654,13 @@
       "name": "startupProbeTimeoutSeconds",
       "value": "30",
       "category": "timeout",
+      "source": "controllers/resource_helper.go"
+    },
+    {
+      "name": "startupScript",
+      "value": "\nset -e\n\n# Determine which CLI to use based on llama-stack version\nVERSION_CODE=$(python -c \"\nimport sys\nfrom importlib.metadata import version\nfrom packaging import version as pkg_version\n\ntry:\n    llama_version = version('llama_stack')\n    print(f'Detected llama-stack version: {llama_version}', file=sys.stderr)\n\n    v = pkg_version.parse(llama_version)\n    # Use base_version to ignore pre-release/post-release/dev suffixes\n    # This ensures that 0.3.0rc2, 0.3.0alpha1, etc. are treated as 0.3.0\n    base_v = pkg_version.parse(v.base_version)\n\n    if base_v \u003c pkg_version.parse('0.2.17'):\n        print('Using legacy module path (llama_stack.distribution.server.server)', file=sys.stderr)\n        print(0)\n    elif base_v \u003c pkg_version.parse('0.3.0'):\n        print('Using core module path (llama_stack.core.server.server)', file=sys.stderr)\n        print(1)\n    else:\n        print('Using uvicorn CLI command', file=sys.stderr)\n        print(2)\nexcept Exception as e:\n    print(f'Version detection failed, defaulting to new CLI: {e}', file=sys.stderr)\n    print(2)\n\")\n\nPORT=${LLS_PORT:-8321}\nWORKERS=${LLS_WORKERS:-1}\n\n# Execute the appropriate CLI based on version\ncase $VERSION_CODE in\n    0) python3 -m llama_stack.distribution.server.server --config /etc/llama-stack/config.yaml ;;\n    1) python3 -m llama_stack.core.server.server /etc/llama-stack/config.yaml ;;\n    2) exec uvicorn llama_stack.core.server.server:create_app --host 0.0.0.0 --port \"$PORT\" --workers \"$WORKERS\" --factory ;;\n    *) echo \"Invalid version code: $VERSION_CODE, using uvicorn CLI command\"; \\\n       exec uvicorn llama_stack.core.server.server:create_app --host 0.0.0.0 --port \"$PORT\" --workers \"$WORKERS\" --factory ;;\nesac",
+      "category": "general",
+      "doc": "startupScript is the script that will be used to start the server.",
       "source": "controllers/resource_helper.go"
     },
     {
@@ -4729,12 +3706,6 @@
       "source": "controllers/status.go"
     },
     {
-      "name": "errTLSProfileChanged",
-      "value": "errors.New(\"TLS profile changed, restarting\")",
-      "category": "general",
-      "source": "main.go"
-    },
-    {
       "name": "scheme",
       "value": "runtime.NewScheme()",
       "category": "general",
@@ -4745,371 +3716,6 @@
       "value": "ctrl.Log.WithName(\"setup\")",
       "category": "general",
       "source": "main.go"
-    },
-    {
-      "name": "scheme",
-      "value": "clientgoscheme.Scheme",
-      "category": "general",
-      "source": "ogx-module/cmd/ogx-module/main.go"
-    },
-    {
-      "name": "setupLog",
-      "value": "ctrl.Log.WithName(\"setup\")",
-      "category": "general",
-      "source": "ogx-module/cmd/ogx-module/main.go"
-    },
-    {
-      "name": "componentName",
-      "value": "platformv1alpha1.OGXComponentName",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "conditionTypeRootOperatorReady",
-      "value": "RootOperatorReady",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "conditionTypeRootWebhookReady",
-      "value": "RootWebhookReady",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "crdGVK",
-      "value": "extv1.SchemeGroupVersion.WithKind(\"CustomResourceDefinition\")",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "deploymentGVK",
-      "value": "appsv1.SchemeGroupVersion.WithKind(\"Deployment\")",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "imageParamEnvMap",
-      "value": "map[string][]string{\n\t\"RELATED_IMAGE_ODH_OGX_K8S_OPERATOR_IMAGE\":\t{\"RELATED_IMAGE_ODH_OGX_K8S_OPERATOR_IMAGE\"},\n\t\"RELATED_IMAGE_ODH_OGX_CORE_IMAGE\":\t\t{\"RELATED_IMAGE_ODH_OGX_CORE_IMAGE\"},\n}",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "namespaceGVK",
-      "value": "corev1.SchemeGroupVersion.WithKind(\"Namespace\")",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "ogxFinalizer",
-      "value": "components.platform.opendatahub.io/ogx-finalizer",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "ogxServerDeploymentReady",
-      "value": "DeploymentReady",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "ogxServerGVK",
-      "value": "schema.GroupVersionKind{Group: \"ogx.io\", Version: \"v1beta1\", Kind: \"OGXServer\"}",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "ogxServerHealthCheck",
-      "value": "HealthCheck",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "overlayODH",
-      "value": "overlays/odh",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "overlayRhoai",
-      "value": "overlays/rhoai",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "paramsFileName",
-      "value": "params.env",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "platformConfigCMName",
-      "value": "\"odh-\" + componentName + \"-config\"",
-      "category": "general",
-      "doc": "platformConfigCMName is the ODH-managed ConfigMap (odh-\u003cmodule\u003e-config)\nthat carries data.platformVersion for the version handshake.",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "platformReleaseName",
-      "value": "platform",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "platformVersionDataKey",
-      "value": "platformVersion",
-      "category": "general",
-      "doc": "platformVersionDataKey is the camelCase key injected by the platform\noperator. The kebab-case config key is accepted as a fallback.",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "prometheusRuleGVK",
-      "value": "schema.GroupVersionKind{Group: \"monitoring.coreos.com\", Version: \"v1\", Kind: \"PrometheusRule\"}",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "serviceMonitorGVK",
-      "value": "schema.GroupVersionKind{Group: \"monitoring.coreos.com\", Version: \"v1\", Kind: \"ServiceMonitor\"}",
-      "category": "general",
-      "source": "ogx-module/internal/controller/ogx/reconciler.go"
-    },
-    {
-      "name": "AddToScheme",
-      "value": "SchemeBuilder.AddToScheme",
-      "category": "general",
-      "source": "ogx-module/pkg/apis/v1alpha1/groupversion_info.go"
-    },
-    {
-      "name": "GroupVersion",
-      "value": "schema.GroupVersion{Group: \"components.platform.opendatahub.io\", Version: \"v1alpha1\"}",
-      "category": "general",
-      "source": "ogx-module/pkg/apis/v1alpha1/groupversion_info.go"
-    },
-    {
-      "name": "SchemeBuilder",
-      "value": "\u0026scheme.Builder{GroupVersion: GroupVersion}",
-      "category": "general",
-      "source": "ogx-module/pkg/apis/v1alpha1/groupversion_info.go"
-    },
-    {
-      "name": "OGXComponentName",
-      "value": "ogx",
-      "category": "general",
-      "source": "ogx-module/pkg/apis/v1alpha1/ogx_types.go"
-    },
-    {
-      "name": "OGXInstanceName",
-      "value": "default-ogx",
-      "category": "general",
-      "source": "ogx-module/pkg/apis/v1alpha1/ogx_types.go"
-    },
-    {
-      "name": "OGXKind",
-      "value": "OGX",
-      "category": "general",
-      "source": "ogx-module/pkg/apis/v1alpha1/ogx_types.go"
-    },
-    {
-      "name": "_",
-      "value": "(*OGX)(nil)",
-      "type": "common.PlatformObject",
-      "category": "general",
-      "doc": "Compile-time interface assertion for the shared platform contract.",
-      "source": "ogx-module/pkg/apis/v1alpha1/ogx_types.go"
-    },
-    {
-      "name": "ConfigPathEnvVar",
-      "value": "ODH_MODULE_OPERATOR_CONFIGURATION_PATH",
-      "category": "general",
-      "doc": "ConfigPathEnvVar points to the directory where the projected module\nconfiguration ConfigMap is mounted.",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultApplicationsNS",
-      "value": "opendatahub",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultHealthBindAddr",
-      "value": ":8081",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultLeaderElectEnabled",
-      "value": "true",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultLeaderElectID",
-      "value": "opendatahub-ogx-operator-lock",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultManifestsPath",
-      "value": "config/manifests",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultMetricsBindAddr",
-      "value": ":8080",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultPlatformName",
-      "value": "OpenDataHub",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "DefaultPlatformVersion",
-      "value": "unknown",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "EnvPrefix",
-      "value": "ODH_MODULE_OPERATOR",
-      "category": "general",
-      "doc": "EnvPrefix is the prefix used for environment variable overrides.",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyApplicationsNS",
-      "value": "applications-namespace",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyHealthBindAddr",
-      "value": "controller.health.bind-address",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyLeaderElectEnabled",
-      "value": "controller.leader-election.enabled",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyLeaderElectID",
-      "value": "controller.leader-election.id",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyManifestsPath",
-      "value": "manifests-path",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyMetricsBindAddr",
-      "value": "controller.metrics.bind-address",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyPlatformName",
-      "value": "platform-name",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "KeyPlatformVersion",
-      "value": "platform-version",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "structuredExtensions",
-      "value": "map[string]bool{\n\t\"yaml\":\ttrue,\n\t\"yml\":\ttrue,\n\t\"json\":\ttrue,\n}",
-      "category": "general",
-      "source": "ogx-module/pkg/config/config.go"
-    },
-    {
-      "name": "praxisServedAPIs",
-      "value": "[]string{\"responses\", \"conversations\"}",
-      "category": "general",
-      "doc": "praxisServedAPIs lists the APIs served by Praxis rather than OGX. In Praxis-fronted mode the\noperator disables these in OGX's generated config (Praxis serves them), without mutating the\nuser's CR.",
-      "source": "pkg/config/generator.go"
-    },
-    {
-      "name": "praxisVectorStoreTable",
-      "value": "openai_vector_stores",
-      "category": "general",
-      "doc": "praxisVectorStoreTable names the SQL table holding per-tenant vector-store metadata when the\noperator has to declare the store itself. See applyPraxisVectorStoreMetadata.",
-      "source": "pkg/config/generator.go"
-    },
-    {
-      "name": "configBlobLimit",
-      "value": "1 \u003c\u003c 20",
-      "category": "general",
-      "source": "pkg/config/oci_fetcher.go"
-    },
-    {
-      "name": "ociHTTPClient",
-      "value": "\u0026http.Client{Timeout: ociHTTPTimeout}",
-      "category": "general",
-      "source": "pkg/config/oci_fetcher.go"
-    },
-    {
-      "name": "ociHTTPTimeout",
-      "value": "30 * time.Second",
-      "category": "timeout",
-      "source": "pkg/config/oci_fetcher.go"
-    },
-    {
-      "name": "OCIConfigLabelPrefix",
-      "value": "com.ogx.config.",
-      "category": "general",
-      "doc": "OCIConfigLabelPrefix prefixes the per-file base64-encoded config labels.",
-      "source": "pkg/config/resolver.go"
-    },
-    {
-      "name": "OCIConfigListLabel",
-      "value": "com.ogx.distribution.configs",
-      "category": "general",
-      "doc": "OCIConfigListLabel is the OCI metadata label listing available config filenames.",
-      "source": "pkg/config/resolver.go"
-    },
-    {
-      "name": "OCIDefaultConfigLabel",
-      "value": "com.ogx.distribution.default-config",
-      "category": "general",
-      "doc": "OCIDefaultConfigLabel identifies which config filename is the runtime default.",
-      "source": "pkg/config/resolver.go"
-    },
-    {
-      "name": "maxOCICacheEntries",
-      "value": "64",
-      "category": "general",
-      "source": "pkg/config/resolver.go"
-    },
-    {
-      "name": "defaultModelType",
-      "value": "llm",
-      "category": "general",
-      "source": "pkg/config/resource.go"
-    },
-    {
-      "name": "envVarNameRegex",
-      "value": "regexp.MustCompile(`^[A-Z_][A-Z0-9_]*$`)",
-      "category": "general",
-      "source": "pkg/config/secret.go"
-    },
-    {
-      "name": "envVarPrefix",
-      "value": "OGX",
-      "category": "general",
-      "source": "pkg/config/secret.go"
     },
     {
       "name": "deploymentKind",
@@ -5134,7 +3740,7 @@
       "name": "openShiftIngressPolicyGroupLabelKey",
       "value": "network.openshift.io/policy-group",
       "category": "general",
-      "doc": "Allow traffic from OpenShift router (ingress) and monitoring namespaces.",
+      "doc": "Allow traffic from OpenShift router namespaces.",
       "source": "pkg/deploy/plugins/networkpolicy_transformer.go"
     },
     {
@@ -5142,54 +3748,11 @@
       "value": "ingress",
       "category": "general",
       "source": "pkg/deploy/plugins/networkpolicy_transformer.go"
-    },
-    {
-      "name": "openShiftMonitoringPolicyGroupValue",
-      "value": "monitoring",
-      "category": "general",
-      "source": "pkg/deploy/plugins/networkpolicy_transformer.go"
-    },
-    {
-      "name": "serviceKind",
-      "value": "Service",
-      "category": "general",
-      "source": "pkg/deploy/plugins/service_transformer.go"
-    },
-    {
-      "name": "defaultMetricsPort",
-      "value": "int32(9464)",
-      "category": "general",
-      "source": "pkg/deploy/utils.go"
-    },
-    {
-      "name": "EnableNetworkPolicyKey",
-      "value": "enableNetworkPolicy",
-      "category": "general",
-      "doc": "EnableNetworkPolicyKey is the key for the network policy feature flag.",
-      "source": "pkg/featureflags/featureflags.go"
-    },
-    {
-      "name": "FeatureFlagsKey",
-      "value": "featureFlags",
-      "category": "general",
-      "doc": "FeatureFlagsKey is the key used in the ConfigMap to store feature flags.",
-      "source": "pkg/featureflags/featureflags.go"
-    },
-    {
-      "name": "NetworkPolicyDefaultValue",
-      "value": "true",
-      "category": "general",
-      "doc": "NetworkPolicyDefaultValue is the default value for the network policy feature flag.",
-      "source": "pkg/featureflags/featureflags.go"
     }
   ],
   "status_conditions": [
     {
       "type": "AdoptionConfigInvalid",
-      "source": "controllers/status.go"
-    },
-    {
-      "type": "ConfigGenerated",
       "source": "controllers/status.go"
     },
     {
@@ -5205,34 +3768,7 @@
       "source": "controllers/status.go"
     },
     {
-      "type": "MigrationJobSucceeded",
-      "source": "controllers/status.go"
-    },
-    {
-      "type": "MigrationPreflightReady",
-      "source": "controllers/status.go"
-    },
-    {
-      "type": "MigrationValidated",
-      "source": "controllers/status.go"
-    },
-    {
       "type": "NetworkingAdopted",
-      "source": "controllers/status.go"
-    },
-    {
-      "type": "PraxisCutoverNotReady",
-      "reasons": [
-        "SoftRollbackOnly"
-      ],
-      "source": "controllers/status.go"
-    },
-    {
-      "type": "PraxisCutoverReady",
-      "source": "controllers/status.go"
-    },
-    {
-      "type": "PraxisReachable",
       "source": "controllers/status.go"
     },
     {
@@ -5248,10 +3784,6 @@
       "source": "controllers/status.go"
     },
     {
-      "type": "SoftRollbackAvailable",
-      "source": "controllers/status.go"
-    },
-    {
       "type": "Storage is ready",
       "source": "controllers/status.go"
     },
@@ -5262,19 +3794,6 @@
     {
       "type": "StorageReady",
       "source": "controllers/status.go"
-    },
-    {
-      "type": "TLSConfigured",
-      "source": "controllers/status.go"
-    }
-  ],
-  "runtime_dependencies": [
-    {
-      "name": "PostgreSQL",
-      "type": "database",
-      "source": "config/manager/manager.yaml",
-      "evidence": "env:RELATED_IMAGE_POSTGRES_DEMO",
-      "required": true
     }
   ],
   "label_contracts": [
@@ -5283,28 +3802,42 @@
       "integration": "management relationship",
       "type": "label",
       "context": "source-code",
-      "source": "controllers/network_resources.go:54"
+      "source": "controllers/network_resources.go:53"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
       "context": "source-code",
-      "source": "controllers/ogxserver_controller.go:74"
+      "source": "controllers/ogxserver_controller.go:1403"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
       "context": "source-code",
-      "source": "main.go:112"
+      "source": "controllers/ogxserver_controller.go:682"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
       "context": "source-code",
-      "source": "pkg/cluster/cluster.go:100"
+      "source": "controllers/ogxserver_controller.go:783"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "main.go:89"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "source-code",
+      "source": "pkg/cluster/cluster.go:92"
     }
   ],
   "kustomize_overlay_refs": [
@@ -5379,60 +3912,21 @@
       "source": "config/overlays/cert-manager/kustomization.yaml"
     },
     {
-      "overlay": "config/overlays/odh",
-      "resources": [
-        "../openshift"
-      ],
-      "patches": [
-        "delete-namespace.yaml"
-      ],
-      "configmap_generators": [
-        "params"
-      ],
-      "namespace": "opendatahub",
-      "replacements": 3,
-      "source": "config/overlays/odh/kustomization.yaml"
-    },
-    {
       "overlay": "config/overlays/openshift",
       "resources": [
-        "../../default",
-        "../../prometheus",
-        "rbac/tls/metrics-auth-clusterrole.yaml",
-        "rbac/tls/metrics-auth-clusterrolebinding.yaml",
-        "rbac/tls/tls-profile-clusterrole.yaml",
-        "rbac/tls/tls-profile-clusterrolebinding.yaml"
+        "../../default"
       ],
       "patches": [
         "Service webhook-service",
-        "ServiceMonitor controller-manager-metrics-monitor",
-        "ValidatingWebhookConfiguration",
-        "manager_metrics_patch.yaml",
-        "metrics_service_tls_patch.yaml"
+        "ValidatingWebhookConfiguration"
       ],
       "source": "config/overlays/openshift/kustomization.yaml"
-    },
-    {
-      "overlay": "config/overlays/rhoai",
-      "resources": [
-        "../openshift"
-      ],
-      "patches": [
-        "delete-namespace.yaml"
-      ],
-      "configmap_generators": [
-        "params"
-      ],
-      "namespace": "redhat-ods-applications",
-      "replacements": 3,
-      "source": "config/overlays/rhoai/kustomization.yaml"
     },
     {
       "overlay": "config/prometheus",
       "resources": [
         "monitor.yaml"
       ],
-      "name_prefix": "ogx-k8s-operator-",
       "source": "config/prometheus/kustomization.yaml"
     },
     {
@@ -5444,8 +3938,8 @@
         "auth_proxy_service.yaml",
         "leader_election_role.yaml",
         "leader_election_role_binding.yaml",
-        "ogxserver_editor_role.yaml",
-        "ogxserver_viewer_role.yaml",
+        "ogxs_editor_role.yaml",
+        "ogxs_viewer_role.yaml",
         "role.yaml",
         "role_binding.yaml",
         "service_account.yaml"
@@ -5472,28 +3966,18 @@
       "source": "config/webhook/kustomization.yaml"
     }
   ],
-  "configmap_volumes": [
-    {
-      "deployment_name": "operator",
-      "container_name": "manager",
-      "volume_name": "config",
-      "mount_path": "/etc/controller/config",
-      "configmap_name": "config",
-      "source": "ogx-module/config/manager/manager.yaml"
-    }
-  ],
   "data_coverage": {
     "api_types": "rich",
     "component_refs": "none",
-    "configmap_volumes": "sparse",
-    "configmaps": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
     "crds": "sparse",
-    "deployments": "moderate",
+    "deployments": "sparse",
     "dockerfiles": "sparse",
     "external_connections": "none",
     "ingress_routing": "sparse",
     "kustomize_overlay_refs": "rich",
-    "label_contracts": "moderate",
+    "label_contracts": "rich",
     "network_policies": "sparse",
     "operator_config": "rich",
     "platform_detection": "none",
@@ -5501,14 +3985,14 @@
     "python_k8s_calls": "none",
     "rbac": "rich",
     "reconcile_sequences": "none",
-    "runtime_dependencies": "sparse",
+    "runtime_dependencies": "none",
     "secrets": "sparse",
     "services": "sparse",
     "serving_runtime_refs": "none",
     "status_conditions": "rich",
     "webhooks": "sparse"
   },
-  "summary": "ogx-k8s-operator is a Kubernetes component. managing 2 CRD(s): LlamaStackDistribution, OGXServer. deploying 3 workload(s) (deployment, ogx-k8s-operator-controller-manager, operator) with 2 container(s). watching 19 resource type(s). exposing 2 service(s) on ports: 443, 8443. with 1 webhook(s) (1 validating). protected by 1 network policy/policies. with 2 PodDisruptionBudget(s). with 1 HorizontalPodAutoscaler(s). runtime dependencies: PostgreSQL. defining 26 API spec type(s) across 58 struct(s) with 208 total fields. with 171 operator config constants. reporting 20 status condition types. with 1 ingress route(s). integrates with management relationship via labels/annotations. kustomize overlays: config/certmanager, config/crd, config/default, config/manager, config/manifests, config/overlays/cert-manager, config/overlays/odh, config/overlays/openshift, config/overlays/rhoai, config/prometheus, config/rbac, config/scorecard, config/webhook. mounts 1 ConfigMap(s) as volumes: config.",
+  "summary": "ogx-k8s-operator is a Kubernetes component. managing 2 CRD(s): LlamaStackDistribution, OGXServer. deploying 2 workload(s) (deployment, ogx-k8s-operator-controller-manager) with 1 container(s). watching 10 resource type(s). exposing 2 service(s) on ports: 443, 8443. with 1 webhook(s) (1 validating). protected by 1 network policy/policies. with 2 PodDisruptionBudget(s). with 1 HorizontalPodAutoscaler(s). defining 23 API spec type(s) across 53 struct(s) with 187 total fields. with 78 operator config constants. reporting 11 status condition types. with 1 ingress route(s). integrates with management relationship via labels/annotations. kustomize overlays: config/certmanager, config/crd, config/default, config/manager, config/manifests, config/overlays/cert-manager, config/overlays/openshift, config/prometheus, config/rbac, config/scorecard, config/webhook.",
   "go_ast_mode": "full",
   "security_annotations": [
     {
@@ -5590,12 +4074,6 @@
     {
       "type": "GHA_MISSING_PERMISSIONS",
       "severity": "high",
-      "source": ".github/workflows/disconnected-readiness.yml",
-      "description": "Workflow \"Disconnected Readiness\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
-    },
-    {
-      "type": "GHA_MISSING_PERMISSIONS",
-      "severity": "high",
       "source": ".github/workflows/pre-commit.yml",
       "description": "Workflow \"Pre-commit\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
     },
@@ -5604,12 +4082,6 @@
       "severity": "high",
       "source": ".github/workflows/run-e2e-test.yml",
       "description": "Workflow \"Run E2E Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
-    },
-    {
-      "type": "GHA_MISSING_PERMISSIONS",
-      "severity": "high",
-      "source": ".github/workflows/run-ogx-module-e2e-test.yml",
-      "description": "Workflow \"Run OGX Module E2E Tests\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
     },
     {
       "type": "SCAFFOLDING_NAME_COLLISION",

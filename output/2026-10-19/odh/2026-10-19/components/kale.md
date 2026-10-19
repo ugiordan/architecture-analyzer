@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/kale |
-| Commit | 8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7 |
-| Extracted | 2026-10-19T04:11:52Z |
+| Repository | [opendatahub-io/kale](https://github.com/opendatahub-io/kale) |
+| Commit | [8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7](https://github.com/opendatahub-io/kale/commit/8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7) |
+| Extracted | 2026-10-19T10:36:03Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

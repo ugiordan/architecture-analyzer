@@ -449,8 +449,8 @@
     "severity": "medium",
     "message": "Security-sensitive function ensureUsageDashboard has high cyclomatic complexity (11), increasing review difficulty",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 521,
-    "node_id": "fn_97bb65950840b25d",
+    "line": 529,
+    "node_id": "fn_41dcacc29c8ddeae",
     "domain": "security"
   },
   {
@@ -458,8 +458,8 @@
     "severity": "medium",
     "message": "Security-sensitive function ensureUsageLogs has high cyclomatic complexity (21), increasing review difficulty",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 576,
-    "node_id": "fn_7a548845a9e5c568",
+    "line": 584,
+    "node_id": "fn_268db6f99a9c3af6",
     "domain": "security"
   },
   {
@@ -467,8 +467,17 @@
     "severity": "medium",
     "message": "Security-sensitive function syncTenantsHealth has high cyclomatic complexity (11), increasing review difficulty",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 972,
-    "node_id": "fn_b1b6a8a865b10725",
+    "line": 980,
+    "node_id": "fn_9ab0e645a5b4ac8c",
+    "domain": "security"
+  },
+  {
+    "rule_id": "CGA-010",
+    "severity": "medium",
+    "message": "Security-sensitive function TestStaleResourcesCleanupOnceAndRetry has high cyclomatic complexity (11), increasing review difficulty",
+    "file": "maas-controller/pkg/controller/maas/stale_resources_cleanup_test.go",
+    "line": 140,
+    "node_id": "fn_9f2d21cf65604c7f",
     "domain": "security"
   },
   {
@@ -762,109 +771,109 @@
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:298 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:306 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 298,
-    "node_id": "call_6f536449c78cd993",
+    "line": 306,
+    "node_id": "call_d5f2315c96cf508d",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:327 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:335 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 327,
-    "node_id": "call_35654e172357616e",
+    "line": 335,
+    "node_id": "call_96e5e0b57594e34e",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:406 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:414 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 406,
-    "node_id": "call_d15e0af3dc19891d",
+    "line": 414,
+    "node_id": "call_701177342ce02da9",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:417 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: maasv1alpha1.GroupVersion.String at maas-controller/pkg/controller/maas/self_deployment_controller.go:425 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 417,
-    "node_id": "call_72e227570de0dd69",
+    "line": 425,
+    "node_id": "call_4b5ea8962d592970",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026rbacv1.ClusterRoleBinding{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026netwv1.NetworkPolicy{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\t// Watch maas-discovery Deployment for reconvergence on external changes\n\t\tWatches(\n\t\t\t\u0026appsv1.Deployment{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\tdiscoveryNS := r.DiscoveryNamespace\n\t\t\t\tif discoveryNS == \"\" {\n\t\t\t\t\tdiscoveryNS = r.DeploymentNS\n\t\t\t\t}\n\t\t\t\treturn o.GetName() == discoveryDeploymentName \u0026\u0026 o.GetNamespace() == discoveryNS\n\t\t\t})),\n\t\t).\n\t\tComplete at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026rbacv1.ClusterRoleBinding{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026netwv1.NetworkPolicy{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\t// Watch maas-discovery Deployment for reconvergence on external changes\n\t\tWatches(\n\t\t\t\u0026appsv1.Deployment{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\tdiscoveryNS := r.DiscoveryNamespace\n\t\t\t\tif discoveryNS == \"\" {\n\t\t\t\t\tdiscoveryNS = r.DeploymentNS\n\t\t\t\t}\n\t\t\t\treturn o.GetName() == discoveryDeploymentName \u0026\u0026 o.GetNamespace() == discoveryNS\n\t\t\t})),\n\t\t).\n\t\tComplete at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_a4baafa929ad446b",
+    "line": 1075,
+    "node_id": "call_99e58ab14bb0a796",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026rbacv1.ClusterRoleBinding{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026netwv1.NetworkPolicy{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\t// Watch maas-discovery Deployment for reconvergence on external changes\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026rbacv1.ClusterRoleBinding{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026netwv1.NetworkPolicy{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\t// Watch maas-discovery Deployment for reconvergence on external changes\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_7c73057ea81f3a2a",
+    "line": 1075,
+    "node_id": "call_6d3ac03a38256ef4",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026rbacv1.ClusterRoleBinding{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026rbacv1.ClusterRoleBinding{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_842fe42a59b8a5eb",
+    "line": 1075,
+    "node_id": "call_03dd27ce4d26cd5b",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches(\n\t\t\t\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetNamespace() == r.MonitoringNamespace \u0026\u0026\n\t\t\t\t\to.GetLabels()[\"app.kubernetes.io/managed-by\"] == \"maas-controller\"\n\t\t\t})),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_2c027c47ad8b29ca",
+    "line": 1075,
+    "node_id": "call_91b0d387d9f37d60",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches(\n\t\t\t\u0026extv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(crdInOptionalAPIGroup()),\n\t\t).\n\t\t// Watch managed usage-log resources so deletions/modifications trigger reconciliation\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_c2c41584f94993dd",
+    "line": 1075,
+    "node_id": "call_25f28a2ea3b624f9",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.AITenant{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(aitenantReadyChanged()),\n\t\t).\n\t\t// Re-reconcile when optional operator CRDs (e.g. Perses from COO) are installed\n\t\t// so that resources previously skipped due to missing CRDs are applied immediately.\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_0f9b6ea6183cf229",
+    "line": 1075,
+    "node_id": "call_8a60b47f161aa318",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.MaasTenantConfig{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(defaultTenant),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_2468efe71fb69eb2",
+    "line": 1075,
+    "node_id": "call_bd0bea2be2aeb227",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1067 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026appsv1.Deployment{}, builder.WithPredicates(selfOnly)).\n\t\tWatches(\n\t\t\t\u0026maasv1alpha1.Config{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(func(_ context.Context, _ client.Object) []reconcile.Request {\n\t\t\t\treturn []reconcile.Request{{NamespacedName: types.NamespacedName{\n\t\t\t\t\tNamespace: r.DeploymentNS,\n\t\t\t\t\tName:      r.DeploymentName,\n\t\t\t\t}}}\n\t\t\t}),\n\t\t\tbuilder.WithPredicates(cfgSingleton),\n\t\t).\n\t\tWatches at maas-controller/pkg/controller/maas/self_deployment_controller.go:1075 (v1alpha1/v1beta1 may change between versions)",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 1067,
-    "node_id": "call_4fb130546a38291a",
+    "line": 1075,
+    "node_id": "call_b8908b6591a25f3e",
     "domain": "upgrade"
   },
   {
@@ -1043,8 +1052,8 @@
     "severity": "low",
     "message": "Function Reconcile is tested with fake client but never with envtest",
     "file": "maas-controller/pkg/controller/maas/self_deployment_controller.go",
-    "line": 122,
-    "node_id": "fn_1b478a7d693ece9e",
+    "line": 126,
+    "node_id": "fn_94a90819928cd73b",
     "domain": "testing"
   },
   {
@@ -8421,6 +8430,51 @@
   {
     "rule_id": "CGA-T03",
     "severity": "medium",
+    "message": "Test function TestCleanupStaleResources has no error path assertions",
+    "file": "maas-controller/pkg/controller/maas/stale_resources_cleanup_test.go",
+    "line": 42,
+    "node_id": "fn_86edec0e6cb165c7",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestCleanupStaleResourcesErrors has no error path assertions",
+    "file": "maas-controller/pkg/controller/maas/stale_resources_cleanup_test.go",
+    "line": 96,
+    "node_id": "fn_682bfd97a0e90ae2",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestStaleResourcesCleanupOnceAndRetry has no error path assertions",
+    "file": "maas-controller/pkg/controller/maas/stale_resources_cleanup_test.go",
+    "line": 140,
+    "node_id": "fn_9f2d21cf65604c7f",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestStaleResourcesCleanupConcurrent has no error path assertions",
+    "file": "maas-controller/pkg/controller/maas/stale_resources_cleanup_test.go",
+    "line": 188,
+    "node_id": "fn_4e8f95f16b342280",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestStaleUsageDashboardDisplayName has no error path assertions",
+    "file": "maas-controller/pkg/controller/maas/stale_resources_cleanup_test.go",
+    "line": 217,
+    "node_id": "fn_904a86fb1dd37e85",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
     "message": "Test function TestSubscriptionRateLimitID_StableAndShort has no error path assertions",
     "file": "maas-controller/pkg/controller/maas/subscription_ratelimit_id_test.go",
     "line": 9,
@@ -11058,206 +11112,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-api/internal/api_keys/store_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/api_keys/store_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/platform/tenantreconcile/maas_api_egress_networkpolicy_test.go has 17 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/platform/tenantreconcile/maas_api_egress_networkpolicy_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/providers_llmisvc_test.go has 23 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/providers_llmisvc_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-common/pkg/guardrail/compose_test.go has 14 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-common/pkg/guardrail/compose_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-common/pkg/guardrail/merge_test.go has 14 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-common/pkg/guardrail/merge_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-discovery/internal/handler/handler_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-discovery/internal/handler/handler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-discovery/internal/tlsprofile/config_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-discovery/internal/tlsprofile/config_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
     "message": "File maas-api/internal/models/maasmodelref_test.go has 9 non-table-driven tests (consolidation opportunity)",
     "file": "maas-api/internal/models/maasmodelref_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/providers_external_test.go has 22 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/providers_external_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/api_keys/keygen_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/api_keys/keygen_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/multitenancy_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/multitenancy_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/logger/otel_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/logger/otel_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/aitenant_controller_test.go has 69 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/aitenant_controller_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/reconciler/externalmodel/resources_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/reconciler/externalmodel/resources_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-discovery/internal/tlsprofile/fetch_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-discovery/internal/tlsprofile/fetch_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/platform/tenantreconcile/params_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/platform/tenantreconcile/params_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/platform/tenantreconcile/postrender_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/platform/tenantreconcile/postrender_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/tlsprofile/config_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/tlsprofile/config_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/authpolicy/checker_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/authpolicy/checker_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/providers_test.go has 13 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/providers_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/cross_namespace_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/cross_namespace_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/ratetier_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/ratetier_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/auth/cached_admin_checker_test.go has 21 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/auth/cached_admin_checker_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11274,8 +11130,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/maassubscription_unlimited_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/maassubscription_unlimited_test.go",
+    "message": "File maas-controller/pkg/controller/maas/maassubscription_controller_test.go has 18 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/maassubscription_controller_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11283,116 +11139,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-api/internal/tracing/middleware_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/tracing/middleware_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/tenant_reconcile_test.go has 24 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/tenant_reconcile_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-discovery/internal/gateway/metadata_test.go has 21 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-discovery/internal/gateway/metadata_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/platform/tenantreconcile/platform_context_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/platform/tenantreconcile/platform_context_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/metrics/prometheus_test.go has 16 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/metrics/prometheus_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/maassubscription_inferenceobjective_test.go has 35 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/maassubscription_inferenceobjective_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/tenantref_gateway_test.go has 16 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/tenantref_gateway_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-discovery/internal/cache/entitlement_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-discovery/internal/cache/entitlement_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/conflict_detection_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/conflict_detection_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/api_keys/service_test.go has 28 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/api_keys/service_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/tlsprofile/fetch_test.go has 14 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/tlsprofile/fetch_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/cmd/manager/main_test.go has 27 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/cmd/manager/main_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/maasmodelref_controller_test.go has 33 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/maasmodelref_controller_test.go",
+    "message": "File maas-discovery/internal/tlsprofile/config_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-discovery/internal/tlsprofile/config_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11409,8 +11157,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-api/internal/tenant/handler_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/tenant/handler_test.go",
+    "message": "File maas-discovery/internal/tlsprofile/fetch_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-discovery/internal/tlsprofile/fetch_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11418,8 +11166,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/maassubscription_controller_test.go has 18 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/maassubscription_controller_test.go",
+    "message": "File maas-api/internal/auth/cached_admin_checker_test.go has 21 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/auth/cached_admin_checker_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11427,8 +11175,80 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-controller/pkg/oteljson/oteljson_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/oteljson/oteljson_test.go",
+    "message": "File maas-api/internal/api_keys/keygen_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/api_keys/keygen_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/platform/tenantreconcile/params_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/platform/tenantreconcile/params_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/platform/tenantreconcile/platform_context_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/platform/tenantreconcile/platform_context_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/tracing/middleware_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/tracing/middleware_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/tenantref_gateway_test.go has 16 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/tenantref_gateway_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/platform/tenantreconcile/maas_api_egress_networkpolicy_test.go has 17 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/platform/tenantreconcile/maas_api_egress_networkpolicy_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/conflict_detection_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/conflict_detection_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/maassubscription_unlimited_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/maassubscription_unlimited_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/self_deployment_controller_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/self_deployment_controller_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11445,98 +11265,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File maas-api/internal/metrics/server_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/metrics/server_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/maasauthpolicy_oidc_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/maasauthpolicy_oidc_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/logger/redaction_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/logger/redaction_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/platform/tenantreconcile/pipeline_praxis_test.go has 22 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/platform/tenantreconcile/pipeline_praxis_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-discovery/internal/cache/informer_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-discovery/internal/cache/informer_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/subscription/handler_test.go has 37 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/subscription/handler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/token/parse_groups_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/token/parse_groups_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/cmd/server_test.go has 17 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/cmd/server_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/api/maas/v1alpha1/maassubscription_validation_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/api/maas/v1alpha1/maassubscription_validation_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-api/internal/middleware/request_id_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-api/internal/middleware/request_id_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File maas-controller/pkg/controller/maas/self_deployment_controller_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "maas-controller/pkg/controller/maas/self_deployment_controller_test.go",
+    "message": "File maas-controller/pkg/controller/maas/providers_external_test.go has 22 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/providers_external_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -11562,8 +11292,332 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
+    "message": "File maas-discovery/internal/cache/informer_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-discovery/internal/cache/informer_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-discovery/internal/cache/entitlement_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-discovery/internal/cache/entitlement_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/middleware/request_id_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/middleware/request_id_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-common/pkg/guardrail/merge_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-common/pkg/guardrail/merge_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/platform/tenantreconcile/pipeline_praxis_test.go has 22 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/platform/tenantreconcile/pipeline_praxis_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/reconciler/externalmodel/resources_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/reconciler/externalmodel/resources_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/token/parse_groups_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/token/parse_groups_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/cross_namespace_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/cross_namespace_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/tlsprofile/config_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/tlsprofile/config_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/ratetier_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/ratetier_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/authpolicy/checker_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/authpolicy/checker_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/maassubscription_inferenceobjective_test.go has 35 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/maassubscription_inferenceobjective_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/logger/otel_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/logger/otel_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/logger/redaction_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/logger/redaction_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/providers_llmisvc_test.go has 23 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/providers_llmisvc_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/platform/tenantreconcile/postrender_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/platform/tenantreconcile/postrender_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/tenant/handler_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/tenant/handler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/cmd/manager/main_test.go has 27 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/cmd/manager/main_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/aitenant_controller_test.go has 69 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/aitenant_controller_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/tenant_reconcile_test.go has 24 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/tenant_reconcile_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-discovery/internal/handler/handler_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-discovery/internal/handler/handler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-common/pkg/guardrail/compose_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-common/pkg/guardrail/compose_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/maasmodelref_controller_test.go has 33 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/maasmodelref_controller_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/multitenancy_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/multitenancy_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/api_keys/service_test.go has 28 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/api_keys/service_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/metrics/server_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/metrics/server_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/metrics/prometheus_test.go has 16 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/metrics/prometheus_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/cmd/server_test.go has 17 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/cmd/server_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/tlsprofile/fetch_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/tlsprofile/fetch_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/api_keys/store_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/api_keys/store_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-api/internal/subscription/handler_test.go has 37 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-api/internal/subscription/handler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/maasauthpolicy_oidc_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/maasauthpolicy_oidc_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-discovery/internal/gateway/metadata_test.go has 21 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-discovery/internal/gateway/metadata_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
     "message": "File maas-controller/pkg/platform/tenantreconcile/patch_test.go has 7 non-table-driven tests (consolidation opportunity)",
     "file": "maas-controller/pkg/platform/tenantreconcile/patch_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/api/maas/v1alpha1/maassubscription_validation_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/api/maas/v1alpha1/maassubscription_validation_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/controller/maas/providers_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/controller/maas/providers_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File maas-controller/pkg/oteljson/oteljson_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "maas-controller/pkg/oteljson/oteljson_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"

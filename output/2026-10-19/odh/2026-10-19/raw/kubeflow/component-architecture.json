@@ -1,8 +1,8 @@
 {
   "component": "kubeflow",
   "repo": "opendatahub-io/kubeflow",
-  "commit_sha": "2a500da8344feda010c989eb2bd24fee9a0acd51",
-  "extracted_at": "2026-10-19T04:05:54Z",
+  "commit_sha": "78275ec99a53c646273bff4a3db0a52b8ecc5a69",
+  "extracted_at": "2026-10-19T10:33:27Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "rbac": {},
@@ -518,6 +518,41 @@
     }
   ],
   "network_policies": [
+    {
+      "name": "notebook-controller-allow-ingress",
+      "source": "components/notebook-controller/config/overlays/openshift/network-policies.yaml",
+      "pod_selector": {
+        "app": "notebook-controller"
+      },
+      "policy_types": [
+        "Ingress"
+      ],
+      "ingress_rules": [
+        {
+          "from": [],
+          "ports": [
+            {
+              "port": 8443,
+              "protocol": "TCP"
+            }
+          ]
+        },
+        {
+          "from": [],
+          "ports": [
+            {
+              "port": 8081,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ],
+      "issues": [
+        "ingress rule 1 allows traffic from all sources (no 'from' selector)",
+        "ingress rule 2 allows traffic from all sources (no 'from' selector)",
+        "policyTypes does not include Egress (all egress traffic is allowed)"
+      ]
+    },
     {
       "name": "odh-notebook-controller-allow-ingress",
       "source": "components/odh-notebook-controller/config/overlays/openshift/network-policies.yaml",
@@ -2127,8 +2162,22 @@
     "status_conditions": "none",
     "webhooks": "sparse"
   },
-  "summary": "kubeflow is a Kubernetes component. deploying 9 workload(s) (controller-manager, controller-manager, controller-manager, controller-manager, deployment, deployment, deployment, manager, manager) with 10 container(s). watching 12 resource type(s). exposing 3 service(s) on ports: 443, 8443. with 2 webhook(s) (1 validating, 1 mutating). protected by 1 network policy/policies. connecting to external services: requests. runtime dependencies: MLflow, image-registry. with 137 operator config constants (2 image references, 27 env vars). exposing 5 Prometheus metrics. integrates with Istio, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization.",
+  "summary": "kubeflow is a Kubernetes component. deploying 9 workload(s) (controller-manager, controller-manager, controller-manager, controller-manager, deployment, deployment, deployment, manager, manager) with 10 container(s). watching 12 resource type(s). exposing 3 service(s) on ports: 443, 8443. with 2 webhook(s) (1 validating, 1 mutating). protected by 2 network policy/policies. connecting to external services: requests. runtime dependencies: MLflow, image-registry. with 137 operator config constants (2 image references, 27 env vars). exposing 5 Prometheus metrics. integrates with Istio, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization.",
   "security_annotations": [
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7.0.1",
+      "source": ".github/workflows/code-quality.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7.0.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7.0.1",
+      "source": ".github/workflows/code-quality.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7.0.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
@@ -2177,20 +2226,6 @@
       "resource": "golangci/golangci-lint-action@v9",
       "source": ".github/workflows/code-quality.yaml",
       "description": "Action \"golangci/golangci-lint-action\" uses mutable ref \"v9\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7.0.1",
-      "source": ".github/workflows/code-quality.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7.0.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7.0.1",
-      "source": ".github/workflows/code-quality.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7.0.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

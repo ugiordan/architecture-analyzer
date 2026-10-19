@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | IBM/ai4rag |
-| Commit | d9ead459f3dc988092eef481f2167a38035ec028 |
-| Extracted | 2026-10-19T04:12:26Z |
+| Repository | [IBM/ai4rag](https://github.com/IBM/ai4rag) |
+| Commit | [d9ead459f3dc988092eef481f2167a38035ec028](https://github.com/IBM/ai4rag/commit/d9ead459f3dc988092eef481f2167a38035ec028) |
+| Extracted | 2026-10-19T10:36:12Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

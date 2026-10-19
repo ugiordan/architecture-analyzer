@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | brancz/kube-rbac-proxy |
-| Commit | bb65950b20d5f14f641d19a4568604cd298f88dc |
-| Extracted | 2026-10-19T04:12:19Z |
+| Repository | [opendatahub-io/kube-rbac-proxy](https://github.com/opendatahub-io/kube-rbac-proxy) |
+| Commit | [bb65950b20d5f14f641d19a4568604cd298f88dc](https://github.com/opendatahub-io/kube-rbac-proxy/commit/bb65950b20d5f14f641d19a4568604cd298f88dc) |
+| Extracted | 2026-10-19T10:36:18Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -19,7 +19,7 @@
 
 | Method | Path | Description | Source |
 |--------|------|-------------|--------|
-| * | / |  | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:347`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go#L347) |
+| * | / |  | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:347`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go#L347) |
 
 
 ## Dependencies
@@ -60,47 +60,47 @@
 
 | Name | Value | Source |
 |------|-------|--------|
-| auditShutdownTimeout | 5 * time.Second | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go) |
-| defaultAuthTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/options/options.go) |
-| defaultUpstreamTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/options/options.go) |
-| errUpstreamTimeout | errors.New("upstream timeout") | [`cmd/kube-rbac-proxy/app/transport.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/transport.go) |
-| auditTruncationMarker | [truncated] | [`pkg/audit/audit.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
-| defaultQueueSize | 1024 | [`pkg/audit/audit.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
-| maxAuditDynamicStringSize | 256 | [`pkg/audit/audit.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
-| maxAuditEventSize | 64 &lt;&lt; 10 | [`pkg/audit/audit.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
-| maxAuditPathSize | 1024 | [`pkg/audit/audit.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
-| activityID | 99 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| activityName | Inference | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| aiOperationProfile | ai_operation | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| categoryName | Application Activity | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| categoryUID | 6 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| className | API Activity | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| classUID | 6003 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapActivityID | 99 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapActivityName | Audit Event Loss | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapCategoryName | Uncategorized | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapCategoryUID | 0 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapClassName | Base Event | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapClassUID | 0 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapSeverityID | 3 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapSeverityName | Medium | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapStatusCode | audit_queue_full | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| gapTypeUID | 99 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| ocsfVersion | 1.9.0 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| productName | kube-rbac-proxy | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| resourceRoleTargetID | 1 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| resourceRoleTargetName | Target | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| severityID | 1 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| severityName | Informational | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| statusFailureID | 2 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| statusFailureName | Failure | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| statusSuccessID | 1 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| statusSuccessName | Success | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| typeUID | 600399 | [`pkg/audit/event.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
-| ProfileMetadata | metadata | [`pkg/audit/profile.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/profile.go) |
-| ProfileNone | none | [`pkg/audit/profile.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/profile.go) |
-| _ | (*DelegatingAuthenticator)(nil) | [`pkg/authn/delegating.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/authn/delegating.go) |
-| _ | (*OIDCAuthenticator)(nil) | [`pkg/authn/oidc.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/authn/oidc.go) |
-| ErrEndpointMethodNotAllowed | errors.New("HTTP method not allowed for matched authorization endpoint") | [`pkg/authz/endpoints.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/authz/endpoints.go) |
-| authorizationBadRequestBody | Bad Request. The request or configuration is malformed. | [`pkg/filters/auth.go`](https://github.com/brancz/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/filters/auth.go) |
+| auditShutdownTimeout | 5 * time.Second | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go) |
+| defaultAuthTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/options/options.go) |
+| defaultUpstreamTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/options/options.go) |
+| errUpstreamTimeout | errors.New("upstream timeout") | [`cmd/kube-rbac-proxy/app/transport.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/cmd/kube-rbac-proxy/app/transport.go) |
+| auditTruncationMarker | [truncated] | [`pkg/audit/audit.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
+| defaultQueueSize | 1024 | [`pkg/audit/audit.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
+| maxAuditDynamicStringSize | 256 | [`pkg/audit/audit.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
+| maxAuditEventSize | 64 &lt;&lt; 10 | [`pkg/audit/audit.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
+| maxAuditPathSize | 1024 | [`pkg/audit/audit.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/audit.go) |
+| activityID | 99 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| activityName | Inference | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| aiOperationProfile | ai_operation | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| categoryName | Application Activity | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| categoryUID | 6 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| className | API Activity | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| classUID | 6003 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapActivityID | 99 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapActivityName | Audit Event Loss | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapCategoryName | Uncategorized | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapCategoryUID | 0 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapClassName | Base Event | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapClassUID | 0 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapSeverityID | 3 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapSeverityName | Medium | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapStatusCode | audit_queue_full | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| gapTypeUID | 99 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| ocsfVersion | 1.9.0 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| productName | kube-rbac-proxy | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| resourceRoleTargetID | 1 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| resourceRoleTargetName | Target | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| severityID | 1 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| severityName | Informational | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| statusFailureID | 2 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| statusFailureName | Failure | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| statusSuccessID | 1 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| statusSuccessName | Success | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| typeUID | 600399 | [`pkg/audit/event.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/event.go) |
+| ProfileMetadata | metadata | [`pkg/audit/profile.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/profile.go) |
+| ProfileNone | none | [`pkg/audit/profile.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/audit/profile.go) |
+| _ | (*DelegatingAuthenticator)(nil) | [`pkg/authn/delegating.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/authn/delegating.go) |
+| _ | (*OIDCAuthenticator)(nil) | [`pkg/authn/oidc.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/authn/oidc.go) |
+| ErrEndpointMethodNotAllowed | errors.New("HTTP method not allowed for matched authorization endpoint") | [`pkg/authz/endpoints.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/authz/endpoints.go) |
+| authorizationBadRequestBody | Bad Request. The request or configuration is malformed. | [`pkg/filters/auth.go`](https://github.com/opendatahub-io/kube-rbac-proxy/blob/bb65950b20d5f14f641d19a4568604cd298f88dc/pkg/filters/auth.go) |
 

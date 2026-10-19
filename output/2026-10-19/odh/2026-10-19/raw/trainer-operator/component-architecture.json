@@ -5,8 +5,8 @@
     "Kubeflow Trainer operator"
   ],
   "repo": "opendatahub-io/trainer-operator",
-  "commit_sha": "3fce910b63f79db79ef3ebfb6687baabdd8d9c80",
-  "extracted_at": "2026-10-19T04:06:09Z",
+  "commit_sha": "ab55bc88be012f2b6105440fd157fe1b07033ed0",
+  "extracted_at": "2026-10-19T10:33:40Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -1685,22 +1685,22 @@
     {
       "type": "Watches",
       "gvk": "/v1/ConfigMap",
-      "source": "internal/controller/trainer_controller.go:200"
-    },
-    {
-      "type": "Watches",
-      "gvk": "/v1/Service",
       "source": "internal/controller/trainer_controller.go:199"
     },
     {
       "type": "Watches",
+      "gvk": "/v1/Service",
+      "source": "internal/controller/trainer_controller.go:198"
+    },
+    {
+      "type": "Watches",
       "gvk": "admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration",
-      "source": "internal/controller/trainer_controller.go:201"
+      "source": "internal/controller/trainer_controller.go:200"
     },
     {
       "type": "Watches",
       "gvk": "apps/v1/Deployment",
-      "source": "internal/controller/trainer_controller.go:197"
+      "source": "internal/controller/trainer_controller.go:196"
     }
   ],
   "dependencies": {
@@ -1728,11 +1728,11 @@
       },
       {
         "module": "github.com/opendatahub-io/odh-platform-utilities",
-        "version": "v0.4.0"
+        "version": "v0.5.0"
       },
       {
         "module": "github.com/opendatahub-io/odh-platform-utilities/framework",
-        "version": "v0.0.0-20260805122551-b8da1945829a"
+        "version": "v0.0.0-20261008120904-ac2a1a5991a3"
       },
       {
         "module": "github.com/openshift/api",
@@ -2198,7 +2198,7 @@
     },
     {
       "name": "degradedCondition",
-      "value": "string(common.ConditionTypeDegraded)",
+      "value": "fwapi.ConditionTypeDegraded",
       "category": "general",
       "source": "internal/controller/trainer_controller.go"
     },

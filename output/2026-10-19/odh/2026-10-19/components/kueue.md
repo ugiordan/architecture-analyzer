@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/kueue |
-| Commit | 52c764c101ae0bb8cbf7aa3f3126a724222c3bad |
-| Extracted | 2026-10-19T04:09:57Z |
+| Repository | [opendatahub-io/kueue](https://github.com/opendatahub-io/kueue) |
+| Commit | [52c764c101ae0bb8cbf7aa3f3126a724222c3bad](https://github.com/opendatahub-io/kueue/commit/52c764c101ae0bb8cbf7aa3f3126a724222c3bad) |
+| Extracted | 2026-10-19T10:35:19Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -29,15 +29,15 @@
 |------|------|-----------|------------|----------|------------------|----------|
 | AppWrapper-webhook | validating |  |  |  |  |  |
 | AppWrapper-webhook | mutating |  |  |  |  |  |
-| ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
+| ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
@@ -47,20 +47,20 @@
 | MpiJobWebhook-webhook | validating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
-| RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayClusterWebhook-webhook | validating |  |  |  |  |  |
+| RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | validating |  |  |  |  |  |
 | RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | validating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
-| Webhook-webhook | validating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
-| WorkloadWebhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | validating |  |  |  |  |  |
+| WorkloadWebhook-webhook | mutating |  |  |  |  |  |
 | mdeployment.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/opendatahub-io/kueue/blob/52c764c101ae0bb8cbf7aa3f3126a724222c3bad/config/rhoai/mutating_webhook_patch.yaml) |
 | mjob.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/opendatahub-io/kueue/blob/52c764c101ae0bb8cbf7aa3f3126a724222c3bad/config/rhoai/mutating_webhook_patch.yaml) |
 | mpod.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/opendatahub-io/kueue/blob/52c764c101ae0bb8cbf7aa3f3126a724222c3bad/config/rhoai/mutating_webhook_patch.yaml) |
@@ -95,8 +95,8 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| labels | set | priorityClass != "" &amp;&amp; podTemplateSpec.Labels == nil |
-| annotations | set | podTemplateSpec.Annotations == nil |
+| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
+| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
 
 ### Webhook-webhook Behavior
 
@@ -109,8 +109,8 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
-| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
+| labels | set | priorityClass != "" &amp;&amp; podTemplateSpec.Labels == nil |
+| annotations | set | podTemplateSpec.Annotations == nil |
 
 
 ## HTTP Endpoints

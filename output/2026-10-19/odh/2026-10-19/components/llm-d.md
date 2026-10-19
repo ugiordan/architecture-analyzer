@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | llm-d/llm-d |
-| Commit | 188e66d95d851bdc9c621fa4f117df23f46fd964 |
-| Extracted | 2026-10-19T04:12:22Z |
+| Repository | [llm-d/llm-d](https://github.com/llm-d/llm-d) |
+| Commit | [188e66d95d851bdc9c621fa4f117df23f46fd964](https://github.com/llm-d/llm-d/commit/188e66d95d851bdc9c621fa4f117df23f46fd964) |
+| Extracted | 2026-10-19T10:36:11Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

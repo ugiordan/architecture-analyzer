@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/workload-variant-autoscaler |
-| Commit | a73864b62974986d2000e5bcbb235fe101cc2556 |
-| Extracted | 2026-10-19T04:11:29Z |
+| Repository | [opendatahub-io/workload-variant-autoscaler](https://github.com/opendatahub-io/workload-variant-autoscaler) |
+| Commit | [a73864b62974986d2000e5bcbb235fe101cc2556](https://github.com/opendatahub-io/workload-variant-autoscaler/commit/a73864b62974986d2000e5bcbb235fe101cc2556) |
+| Extracted | 2026-10-19T10:35:47Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/notebooks |
-| Commit | 665345189a71fece3ed502e4fd6625c488b83194 |
-| Extracted | 2026-10-19T04:06:01Z |
+| Repository | [opendatahub-io/notebooks](https://github.com/opendatahub-io/notebooks) |
+| Commit | [665345189a71fece3ed502e4fd6625c488b83194](https://github.com/opendatahub-io/notebooks/commit/665345189a71fece3ed502e4fd6625c488b83194) |
+| Extracted | 2026-10-19T10:33:28Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/kube-auth-proxy |
-| Commit | b2d77d885fbc1df2cdf3c29f4722156a9e03c8ad |
-| Extracted | 2026-10-19T04:09:41Z |
+| Repository | [opendatahub-io/kube-auth-proxy](https://github.com/opendatahub-io/kube-auth-proxy) |
+| Commit | [b2d77d885fbc1df2cdf3c29f4722156a9e03c8ad](https://github.com/opendatahub-io/kube-auth-proxy/commit/b2d77d885fbc1df2cdf3c29f4722156a9e03c8ad) |
+| Extracted | 2026-10-19T10:33:56Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

@@ -2,7 +2,7 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-10-19T04:17:39Z  
+**Generated**: 2026-10-19T10:42:06Z  
 **Components**: 44  
 
 ## How to Find Information
@@ -61,7 +61,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | kube-auth-proxy |  | 0 | 0 | 42 | [kube-auth-proxy.md](components/kube-auth-proxy.md) |
 | kube-rbac-proxy |  | 0 | 0 | 15 | [kube-rbac-proxy.md](components/kube-rbac-proxy.md) |
 | kubeflow |  | 0 | 3 | 41 | [kubeflow.md](components/kubeflow.md) |
-| kuberay |  | 0 | 2 | 126 | [kuberay.md](components/kuberay.md) |
+| kuberay |  | 0 | 1 | 72 | [kuberay.md](components/kuberay.md) |
 | kueue |  | 2 | 2 | 43 | [kueue.md](components/kueue.md) |
 | llama-stack |  | 0 | 1 | 112 | [llama-stack.md](components/llama-stack.md) |
 | llama-stack-provider-trustyai-garak |  | 0 | 0 | 213 | [llama-stack-provider-trustyai-garak.md](components/llama-stack-provider-trustyai-garak.md) |
@@ -78,8 +78,8 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | models-as-a-service |  | 0 | 5 | 71 | [models-as-a-service.md](components/models-as-a-service.md) |
 | notebooks |  | 0 | 10 | 15 | [notebooks.md](components/notebooks.md) |
 | odh-dashboard | ODH Dashboard | 0 | 19 | 245 | [odh-dashboard.md](components/odh-dashboard.md) |
-| odh-model-controller | ODH Model Controller, omc | 1 | 3 | 51 | [odh-model-controller.md](components/odh-model-controller.md) |
-| ogx-k8s-operator |  | 2 | 2 | 33 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
+| odh-model-controller | ODH Model Controller, omc | 1 | 3 | 48 | [odh-model-controller.md](components/odh-model-controller.md) |
+| ogx-k8s-operator |  | 2 | 2 | 16 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | opendatahub-operator | ODH operator, odh-operator | 0 | 3 | 99 | [opendatahub-operator.md](components/opendatahub-operator.md) |
 | praxis-extproc |  | 0 | 1 | 0 | [praxis-extproc.md](components/praxis-extproc.md) |
 | spark-operator |  | 3 | 1 | 38 | [spark-operator.md](components/spark-operator.md) |

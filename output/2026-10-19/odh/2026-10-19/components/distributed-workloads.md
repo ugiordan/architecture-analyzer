@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/distributed-workloads |
-| Commit | 01e1d4806d9ebbe7304962ec48768cb06908e827 |
-| Extracted | 2026-10-19T04:09:39Z |
+| Repository | [opendatahub-io/distributed-workloads](https://github.com/opendatahub-io/distributed-workloads) |
+| Commit | [01e1d4806d9ebbe7304962ec48768cb06908e827](https://github.com/opendatahub-io/distributed-workloads/commit/01e1d4806d9ebbe7304962ec48768cb06908e827) |
+| Extracted | 2026-10-19T10:34:16Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

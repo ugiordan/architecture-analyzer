@@ -1,8 +1,8 @@
 {
   "component": "llm-d-inference-scheduler",
-  "repo": "llm-d/llm-d-inference-scheduler",
+  "repo": "opendatahub-io/llm-d-inference-scheduler",
   "commit_sha": "3be585728775239784a979e8e40bf7400ac75763",
-  "extracted_at": "2026-10-19T04:10:22Z",
+  "extracted_at": "2026-10-19T10:35:28Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -12801,14 +12801,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "clusterrole",
+      "context": "rolebinding",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "rolebinding",
+      "context": "clusterrolebinding",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -12822,7 +12822,7 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "clusterrolebinding",
+      "context": "clusterrole",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -13093,6 +13093,20 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "actions/attest@v4",
+      "source": ".github/workflows/ci-build-images.yaml",
+      "description": "Action \"actions/attest\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-build-images.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "docker/login-action@v4",
       "source": ".github/workflows/ci-build-images.yaml",
       "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -13124,20 +13138,6 @@
       "resource": "docker/login-action@v4",
       "source": ".github/workflows/ci-build-images.yaml",
       "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-build-images.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/attest@v4",
-      "source": ".github/workflows/ci-build-images.yaml",
-      "description": "Action \"actions/attest\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -13450,16 +13450,16 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "1Password/check-signed-commits-action@v1",
+      "resource": "actions/checkout@v7",
       "source": ".github/workflows/ci-signed-commits.yaml",
-      "description": "Action \"1Password/check-signed-commits-action\" uses mutable ref \"v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/checkout@v7",
+      "resource": "1Password/check-signed-commits-action@v1",
       "source": ".github/workflows/ci-signed-commits.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"1Password/check-signed-commits-action\" uses mutable ref \"v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

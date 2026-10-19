@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/guardrails-detectors |
-| Commit | 424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a |
-| Extracted | 2026-10-19T04:10:00Z |
+| Repository | [opendatahub-io/guardrails-detectors](https://github.com/opendatahub-io/guardrails-detectors) |
+| Commit | [424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a](https://github.com/opendatahub-io/guardrails-detectors/commit/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a) |
+| Extracted | 2026-10-19T10:35:22Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

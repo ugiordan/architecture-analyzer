@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/llama-stack |
-| Commit | 8aa465518a3734ebfde409ff8ef7dde6e3f9cdeb |
-| Extracted | 2026-10-19T04:11:31Z |
+| Repository | [opendatahub-io/llama-stack](https://github.com/opendatahub-io/llama-stack) |
+| Commit | [8aa465518a3734ebfde409ff8ef7dde6e3f9cdeb](https://github.com/opendatahub-io/llama-stack/commit/8aa465518a3734ebfde409ff8ef7dde6e3f9cdeb) |
+| Extracted | 2026-10-19T10:35:53Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

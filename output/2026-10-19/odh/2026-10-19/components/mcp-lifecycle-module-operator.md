@@ -8,10 +8,10 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/mcp-lifecycle-module-operator |
+| Repository | [opendatahub-io/mcp-lifecycle-module-operator](https://github.com/opendatahub-io/mcp-lifecycle-module-operator) |
 | Aliases | MCP Lifecycle Module operator, MCP Lifecycle operator |
-| Commit | fbea1831c8427aff8fe59634ec0df7c14ff93660 |
-| Extracted | 2026-10-19T04:06:09Z |
+| Commit | [22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/commit/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d) |
+| Extracted | 2026-10-19T10:33:44Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -20,14 +20,14 @@
 
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
-| MCPLifecycleOperator | components.platform.opendatahub.io | v1alpha1 | Cluster | 34 | self.metadata.name == 'default' | YAML | [`config/crd/bases/components.platform.opendatahub.io_mcplifecycleoperators.yaml`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/config/crd/bases/components.platform.opendatahub.io_mcplifecycleoperators.yaml) |
+| MCPLifecycleOperator | components.platform.opendatahub.io | v1alpha1 | Cluster | 34 | self.metadata.name == 'default' | YAML | [`config/crd/bases/components.platform.opendatahub.io_mcplifecycleoperators.yaml`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/config/crd/bases/components.platform.opendatahub.io_mcplifecycleoperators.yaml) |
 
 
 ## Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| webhook-service | ClusterIP | 443/TCP | [`config/manifests/mcp-lifecycle-operator/webhook/service.yaml`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/config/manifests/mcp-lifecycle-operator/webhook/service.yaml) |
+| webhook-service | ClusterIP | 443/TCP | [`config/manifests/mcp-lifecycle-operator/webhook/service.yaml`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/config/manifests/mcp-lifecycle-operator/webhook/service.yaml) |
 
 
 ## Ingress Routing
@@ -79,7 +79,7 @@
 
 | Name | Rules Summary | Source |
 |------|---------------|--------|
-| manager-role | 36 resources | [`config/rbac/role.yaml`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/config/rbac/role.yaml) |
+| manager-role | 36 resources | [`config/rbac/role.yaml`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/config/rbac/role.yaml) |
 
 ### Cluster Role Bindings
 
@@ -132,17 +132,17 @@
 
 | GVK | Watch Type | Source |
 |-----|-----------|--------|
-| api/v1alpha1/MCPLifecycleOperator | For | [`internal/controller/mcplifecycleoperator_reconciler.go:709`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L709) |
-| /v1/ConfigMap | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:710`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L710) |
-| /v1/Service | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:713`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L713) |
-| /v1/ServiceAccount | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:712`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L712) |
-| apiextensions.k8s.io/v1/CustomResourceDefinition | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:718`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L718) |
-| apps/v1/Deployment | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:711`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L711) |
-| config/v1/APIServer | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:721`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L721) |
-| rbac.authorization.k8s.io/v1/ClusterRole | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:714`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L714) |
-| rbac.authorization.k8s.io/v1/ClusterRoleBinding | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:715`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L715) |
-| rbac.authorization.k8s.io/v1/Role | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:716`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L716) |
-| rbac.authorization.k8s.io/v1/RoleBinding | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:717`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go#L717) |
+| api/v1alpha1/MCPLifecycleOperator | For | [`internal/controller/mcplifecycleoperator_reconciler.go:709`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L709) |
+| /v1/ConfigMap | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:710`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L710) |
+| /v1/Service | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:713`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L713) |
+| /v1/ServiceAccount | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:712`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L712) |
+| apiextensions.k8s.io/v1/CustomResourceDefinition | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:718`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L718) |
+| apps/v1/Deployment | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:711`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L711) |
+| config/v1/APIServer | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:721`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L721) |
+| rbac.authorization.k8s.io/v1/ClusterRole | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:714`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L714) |
+| rbac.authorization.k8s.io/v1/ClusterRoleBinding | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:715`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L715) |
+| rbac.authorization.k8s.io/v1/Role | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:716`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L716) |
+| rbac.authorization.k8s.io/v1/RoleBinding | Watches | [`internal/controller/mcplifecycleoperator_reconciler.go:717`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go#L717) |
 
 
 ## Dockerfiles
@@ -165,67 +165,67 @@
 
 | Name | Value | Source |
 |------|-------|--------|
-| AddToScheme | SchemeBuilder.AddToScheme | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/groupversion_info.go) |
-| GroupVersion | schema.GroupVersion{Group: "components.platform.opendatahub.io", Version: "v1alpha1"} | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/groupversion_info.go) |
-| SchemeBuilder | &amp;scheme.Builder{GroupVersion: GroupVersion} | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/groupversion_info.go) |
-| featureConditionTypes | map[string]bool{ 	ConditionMCPLifecycleOperatorAvailable: true, } | [`api/v1alpha1/mcplifecycleoperator_lifecycle.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_lifecycle.go) |
-| MCPLifecycleOperatorInstanceName | default | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go) |
-| MCPLifecycleOperatorKind | MCPLifecycleOperator | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go) |
-| MCPLifecycleOperatorServiceName | mcplifecycleoperator | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go) |
-| _ | (*MCPLifecycleOperator)(nil) | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go) |
-| scheme | runtime.NewScheme() | [`cmd/main.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/cmd/main.go) |
-| stripManagedFields | cache.TransformStripManagedFields() | [`cmd/main.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/cmd/main.go) |
-| gatewayCRDName | gateways.gateway.networking.k8s.io | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/gateway_discovery.go) |
-| gatewayGVR | schema.GroupVersionResource{ 	Group:		"gateway.networking.k8s.io", 	Version:	"v1", 	Resource:	"gateways", } | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/gateway_discovery.go) |
-| mcpGatewayExtensionCRDName | mcpgatewayextensions.mcp.kuadrant.io | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/gateway_discovery.go) |
-| mcpGatewayExtensionGVR | schema.GroupVersionResource{ 	Group:		"mcp.kuadrant.io", 	Version:	"v1", 	Resource:	"mcpgatewayextensions", } | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/gateway_discovery.go) |
-| conversionCheckMaxRestarts | 3 | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| conversionCheckPageLimit | 500 | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| defaultRequeueDelay | 10 * time.Second | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| distributionNameKey | distribution.name | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| distributionStandalone | Standalone | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| distributionVersionKey | distribution.version | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| mcpServerGVR | schema.GroupVersionResource{ 	Group:		"mcp.x-k8s.io", 	Version:	"v1beta1", 	Resource:	"mcpservers", } | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| platformConfigName | "odh-" + v1alpha1.MCPLifecycleOperatorServiceName + "-config" | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| platformReleaseName | platform | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| platformVersionKey | platformVersion | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| reasonConversionCheckFailed | ConversionCheckFailed | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| reasonConversionCheckPending | ConversionCheckPending | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/mcplifecycleoperator_reconciler.go) |
-| maxStorageMigrationRetries | 5 | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| reasonStorageMigrationFailed | StorageMigrationFailed | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| reasonStorageMigrationPending | StorageMigrationPending | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| reasonStorageMigrationRunning | StorageMigrationRunning | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| reasonStorageMigrationSucceeded | StorageMigrationSucceeded | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| storageMigrationAttemptAnnotation | mcp.x-k8s.io/storage-migration-attempt | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| storageMigrationName | mcpservers-v1beta1 | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| storageMigrationPendingMessage | "The migration.k8s.io storage-version migrator API is not available yet; " + 	"install the storage-version migrator to migrate stored MCPServer objects to v1beta1" | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| storageMigrationRequeueDelay | time.Minute | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| storageVersionMigrationGVR | schema.GroupVersionResource{ 	Group:		"migration.k8s.io", 	Version:	"v1alpha1", 	Resource:	"storageversionmigrations", } | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| svmConditionFailed | Failed | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| svmConditionSucceeded | Succeeded | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/controller/storage_migration.go) |
-| DefaultOperandNamespace | mcp-lifecycle-operator-system | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| certManagerInjectCAAnnotation | cert-manager.io/inject-ca-from | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| envPropagateTLS | PROPAGATE_TLS_ENV_VARS | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| envTLSCipherSuites | TLS_CIPHER_SUITES | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| envTLSGroups | TLS_GROUPS | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| envTLSMinVersion | TLS_MIN_VERSION | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| networkPolicyPostureFlag | --network-policy-default-posture | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| networkPolicyRestrictedPosture | restricted | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
-| operandYAMLPath | resources/mcp-lifecycle-operator.yaml | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/internal/manifests/kustomize.go) |
+| AddToScheme | SchemeBuilder.AddToScheme | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/groupversion_info.go) |
+| GroupVersion | schema.GroupVersion{Group: "components.platform.opendatahub.io", Version: "v1alpha1"} | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/groupversion_info.go) |
+| SchemeBuilder | &amp;scheme.Builder{GroupVersion: GroupVersion} | [`api/v1alpha1/groupversion_info.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/groupversion_info.go) |
+| featureConditionTypes | map[string]bool{ 	ConditionMCPLifecycleOperatorAvailable: true, } | [`api/v1alpha1/mcplifecycleoperator_lifecycle.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_lifecycle.go) |
+| MCPLifecycleOperatorInstanceName | default | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go) |
+| MCPLifecycleOperatorKind | MCPLifecycleOperator | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go) |
+| MCPLifecycleOperatorServiceName | mcplifecycleoperator | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go) |
+| _ | (*MCPLifecycleOperator)(nil) | [`api/v1alpha1/mcplifecycleoperator_types.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go) |
+| scheme | runtime.NewScheme() | [`cmd/main.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/cmd/main.go) |
+| stripManagedFields | cache.TransformStripManagedFields() | [`cmd/main.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/cmd/main.go) |
+| gatewayCRDName | gateways.gateway.networking.k8s.io | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/gateway_discovery.go) |
+| gatewayGVR | schema.GroupVersionResource{ 	Group:		"gateway.networking.k8s.io", 	Version:	"v1", 	Resource:	"gateways", } | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/gateway_discovery.go) |
+| mcpGatewayExtensionCRDName | mcpgatewayextensions.mcp.kuadrant.io | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/gateway_discovery.go) |
+| mcpGatewayExtensionGVR | schema.GroupVersionResource{ 	Group:		"mcp.kuadrant.io", 	Version:	"v1", 	Resource:	"mcpgatewayextensions", } | [`internal/controller/gateway_discovery.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/gateway_discovery.go) |
+| conversionCheckMaxRestarts | 3 | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| conversionCheckPageLimit | 500 | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| defaultRequeueDelay | 10 * time.Second | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| distributionNameKey | distribution.name | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| distributionStandalone | Standalone | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| distributionVersionKey | distribution.version | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| mcpServerGVR | schema.GroupVersionResource{ 	Group:		"mcp.x-k8s.io", 	Version:	"v1beta1", 	Resource:	"mcpservers", } | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| platformConfigName | "odh-" + v1alpha1.MCPLifecycleOperatorServiceName + "-config" | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| platformReleaseName | platform | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| platformVersionKey | platformVersion | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| reasonConversionCheckFailed | ConversionCheckFailed | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| reasonConversionCheckPending | ConversionCheckPending | [`internal/controller/mcplifecycleoperator_reconciler.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/mcplifecycleoperator_reconciler.go) |
+| maxStorageMigrationRetries | 5 | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| reasonStorageMigrationFailed | StorageMigrationFailed | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| reasonStorageMigrationPending | StorageMigrationPending | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| reasonStorageMigrationRunning | StorageMigrationRunning | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| reasonStorageMigrationSucceeded | StorageMigrationSucceeded | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| storageMigrationAttemptAnnotation | mcp.x-k8s.io/storage-migration-attempt | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| storageMigrationName | mcpservers-v1beta1 | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| storageMigrationPendingMessage | "The migration.k8s.io storage-version migrator API is not available yet; " + 	"install the storage-version migrator to migrate stored MCPServer objects to v1beta1" | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| storageMigrationRequeueDelay | time.Minute | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| storageVersionMigrationGVR | schema.GroupVersionResource{ 	Group:		"migration.k8s.io", 	Version:	"v1alpha1", 	Resource:	"storageversionmigrations", } | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| svmConditionFailed | Failed | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| svmConditionSucceeded | Succeeded | [`internal/controller/storage_migration.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/controller/storage_migration.go) |
+| DefaultOperandNamespace | mcp-lifecycle-operator-system | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| certManagerInjectCAAnnotation | cert-manager.io/inject-ca-from | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| envPropagateTLS | PROPAGATE_TLS_ENV_VARS | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| envTLSCipherSuites | TLS_CIPHER_SUITES | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| envTLSGroups | TLS_GROUPS | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| envTLSMinVersion | TLS_MIN_VERSION | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| networkPolicyPostureFlag | --network-policy-default-posture | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| networkPolicyRestrictedPosture | restricted | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
+| operandYAMLPath | resources/mcp-lifecycle-operator.yaml | [`internal/manifests/kustomize.go`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/internal/manifests/kustomize.go) |
 
 
 ## API Types
 
 | Type Name | Kind | Fields | Spec? | Source |
 |-----------|------|--------|-------|--------|
-| MCPLifecycleOperator |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:103`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L103) |
-| MCPLifecycleOperatorList |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:114`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L114) |
-| Distribution |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:35`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L35) |
-| MCPGatewayInfo |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:44`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L44) |
-| GatewayRef |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:57`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L57) |
-| ListenerRef |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:68`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L68) |
-| MCPLifecycleOperatorSpec |  | 0 | true | [`api/v1alpha1/mcplifecycleoperator_types.go:76`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L76) |
-| MCPLifecycleOperatorStatus |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:81`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/fbea1831c8427aff8fe59634ec0df7c14ff93660/api/v1alpha1/mcplifecycleoperator_types.go#L81) |
+| MCPLifecycleOperator |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:103`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L103) |
+| MCPLifecycleOperatorList |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:114`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L114) |
+| Distribution |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:35`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L35) |
+| MCPGatewayInfo |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:44`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L44) |
+| GatewayRef |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:57`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L57) |
+| ListenerRef |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:68`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L68) |
+| MCPLifecycleOperatorSpec |  | 0 | true | [`api/v1alpha1/mcplifecycleoperator_types.go:76`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L76) |
+| MCPLifecycleOperatorStatus |  | 0 | false | [`api/v1alpha1/mcplifecycleoperator_types.go:81`](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/blob/22d00cf35f169e4fb3f01d71ca2e2b4be59d8b6d/api/v1alpha1/mcplifecycleoperator_types.go#L81) |
 
 
 ## Reconciliation Sequences

@@ -1,8 +1,8 @@
 {
   "component": "trainer",
-  "repo": "kubeflow/trainer",
+  "repo": "opendatahub-io/trainer",
   "commit_sha": "ec0109e47105f6038de0b47b66ab5f2ef4557347",
-  "extracted_at": "2026-10-19T04:07:45Z",
+  "extracted_at": "2026-10-19T10:33:39Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -21,19 +21,19 @@
       "fields_count": 1307,
       "validation_rules": [
         "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
+        "self \u003e= 1",
+        "self \u003e= 1",
         "!self.exists(c, c == 'node')",
-        "self \u003e= 1",
-        "self \u003e= 1",
         "[has(self.coscheduling),has(self.volcano)].filter(x,x==true).size() \u003c= 1",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
         "self == oldSelf",
-        "self == oldSelf",
-        "self == oldSelf",
         "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
+        "self == oldSelf",
         "self == oldSelf",
         "!has(oldSelf.schedulingConstraints) || has(self.schedulingConstraints)",
         "!has(oldSelf.disruptionMode) || has(self.disruptionMode)",
         "!has(oldSelf.resourceClaims) || has(self.resourceClaims)",
+        "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
@@ -66,8 +66,8 @@
         "[has(self.random),has(self.grid)].filter(x,x==true).size() == 1",
         "!has(self.name) \u0026\u0026 !has(self.namespace)",
         "self == oldSelf",
-        "!has(self.claims) || size(self.claims) == 0",
         "self \u003e= 1",
+        "!has(self.claims) || size(self.claims) == 0",
         "self == oldSelf",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
@@ -95,8 +95,6 @@
       "validation_rules": [
         "self.metadata.name.matches('^[a-z]([-a-z0-9]*[a-z0-9])?$')",
         "size(self.metadata.name) \u003c= 63",
-        "!has(self.claims) || size(self.claims) == 0",
-        "self \u003e= 1",
         "self == oldSelf",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
@@ -105,6 +103,8 @@
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
+        "self \u003e= 1",
+        "!has(self.claims) || size(self.claims) == 0",
         "has(self.lastUpdatedTime)"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml"
@@ -123,8 +123,10 @@
       ],
       "fields_count": 1307,
       "validation_rules": [
+        "[has(self.coscheduling),has(self.volcano)].filter(x,x==true).size() \u003c= 1",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
         "self == oldSelf",
+        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
@@ -136,12 +138,10 @@
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
-        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
         "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
-        "self \u003e= 1",
         "!self.exists(c, c == 'node')",
         "self \u003e= 1",
-        "[has(self.coscheduling),has(self.volcano)].filter(x,x==true).size() \u003c= 1"
+        "self \u003e= 1"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml"
     }

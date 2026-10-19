@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/mlflow |
-| Commit | 06275d92fd1cde40b0aba617b36a6083cec5fc60 |
-| Extracted | 2026-10-19T04:11:54Z |
+| Repository | [opendatahub-io/mlflow](https://github.com/opendatahub-io/mlflow) |
+| Commit | [06275d92fd1cde40b0aba617b36a6083cec5fc60](https://github.com/opendatahub-io/mlflow/commit/06275d92fd1cde40b0aba617b36a6083cec5fc60) |
+| Extracted | 2026-10-19T10:35:55Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 

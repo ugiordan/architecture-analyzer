@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | opendatahub-io/praxis-extproc |
-| Commit | 06db0b9e5fece6b523332a5990346abd8148c5e9 |
-| Extracted | 2026-10-19T04:11:52Z |
+| Repository | [opendatahub-io/praxis-extproc](https://github.com/opendatahub-io/praxis-extproc) |
+| Commit | [b8f42fac95e26e4fb1b42da2abdbddb368b534f0](https://github.com/opendatahub-io/praxis-extproc/commit/b8f42fac95e26e4fb1b42da2abdbddb368b534f0) |
+| Extracted | 2026-10-19T10:35:59Z |
 | Analyzer Version | dev |
 | Data Coverage | full |
 
@@ -19,7 +19,7 @@
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| payload-processing | ClusterIP | 9004/TCP | [`deploy/base/instance/service.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/06db0b9e5fece6b523332a5990346abd8148c5e9/deploy/base/instance/service.yaml) |
+| payload-processing | ClusterIP | 9004/TCP | [`deploy/base/instance/service.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/b8f42fac95e26e4fb1b42da2abdbddb368b534f0/deploy/base/instance/service.yaml) |
 
 
 ## Network Policies
@@ -55,8 +55,8 @@
 
 | Name | Data Keys | Source |
 |------|-----------|--------|
-| payload-processing-plugins | extproc.yaml, pre-extproc.yaml | [`deploy/base/config/configmap.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/06db0b9e5fece6b523332a5990346abd8148c5e9/deploy/base/config/configmap.yaml) |
-| payload-processing-plugins | extproc.yaml | [`deploy/overlays/demo/workload/configmap-patch.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/06db0b9e5fece6b523332a5990346abd8148c5e9/deploy/overlays/demo/workload/configmap-patch.yaml) |
+| payload-processing-plugins | extproc.yaml, pre-extproc.yaml | [`deploy/base/config/configmap.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/b8f42fac95e26e4fb1b42da2abdbddb368b534f0/deploy/base/config/configmap.yaml) |
+| payload-processing-plugins | extproc.yaml | [`deploy/overlays/demo/workload/configmap-patch.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/b8f42fac95e26e4fb1b42da2abdbddb368b534f0/deploy/overlays/demo/workload/configmap-patch.yaml) |
 
 
 ## Dockerfiles

@@ -5,8 +5,8 @@
     "omc"
   ],
   "repo": "opendatahub-io/odh-model-controller",
-  "commit_sha": "001f6e98d66aa7ba4f3d91c93e3f223d3dfdcaf6",
-  "extracted_at": "2026-10-19T04:06:26Z",
+  "commit_sha": "ae915515229f70a54b35392cf3aee41894b8ce72",
+  "extracted_at": "2026-10-19T10:33:47Z",
   "analyzer_version": "dev",
   "schema_version": "2",
   "crds": [
@@ -201,8 +201,7 @@
           },
           {
             "apiGroups": [
-              "",
-              "events.k8s.io"
+              ""
             ],
             "resources": [
               "events"
@@ -289,23 +288,6 @@
             "verbs": [
               "get",
               "list",
-              "watch"
-            ]
-          },
-          {
-            "apiGroups": [
-              "grid.praxis.fast"
-            ],
-            "resources": [
-              "inferenceproviders"
-            ],
-            "verbs": [
-              "create",
-              "delete",
-              "get",
-              "list",
-              "patch",
-              "update",
               "watch"
             ]
           },
@@ -518,17 +500,6 @@
               "patch",
               "update",
               "watch"
-            ]
-          },
-          {
-            "apiGroups": [
-              "resource.k8s.io"
-            ],
-            "resources": [
-              "resourceclaimtemplates"
-            ],
-            "verbs": [
-              "get"
             ]
           },
           {
@@ -852,7 +823,7 @@
       "containers": [
         {
           "name": "server",
-          "image": "quay.io/opendatahub/odh-model-serving-api:odh-incubating",
+          "image": "quay.io/opendatahub/odh-model-serving-api:odh-stable",
           "ports": [
             {
               "name": "https",
@@ -920,7 +891,7 @@
       "containers": [
         {
           "name": "manager",
-          "image": "quay.io/opendatahub/odh-model-controller:odh-incubating",
+          "image": "quay.io/opendatahub/odh-model-controller:odh-stable",
           "ports": [
             {
               "name": "webhook-server",
@@ -1007,7 +978,7 @@
       "type": "For",
       "gvk": "/v1/ConfigMap",
       "controller": "ConfigMapReconciler",
-      "source": "internal/controller/core/configmap_controller.go:171"
+      "source": "internal/controller/core/configmap_controller.go:157"
     },
     {
       "type": "For",
@@ -1025,13 +996,13 @@
       "type": "For",
       "gvk": "apis/v1/Gateway",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1027"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1003"
     },
     {
       "type": "For",
       "gvk": "nim/v1/Account",
       "controller": "AccountReconciler",
-      "source": "internal/controller/nim/account_controller.go:115"
+      "source": "internal/controller/nim/account_controller.go:86"
     },
     {
       "type": "For",
@@ -1044,12 +1015,6 @@
       "gvk": "serving/v1alpha1/ServingRuntime",
       "controller": "ServingRuntimeReconciler",
       "source": "internal/controller/serving/servingruntime_controller.go:418"
-    },
-    {
-      "type": "For",
-      "gvk": "serving/v1alpha2/LLMInferenceService",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:87"
     },
     {
       "type": "For",
@@ -1067,7 +1032,7 @@
       "type": "Owns",
       "gvk": "/v1/ConfigMap",
       "controller": "AccountReconciler",
-      "source": "internal/controller/nim/account_controller.go:132"
+      "source": "internal/controller/nim/account_controller.go:87"
     },
     {
       "type": "Owns",
@@ -1090,14 +1055,14 @@
     {
       "type": "Owns",
       "gvk": "/v1/Secret",
-      "controller": "InferenceServiceReconciler",
-      "source": "internal/controller/serving/inferenceservice_controller.go:206"
+      "controller": "AccountReconciler",
+      "source": "internal/controller/nim/account_controller.go:88"
     },
     {
       "type": "Owns",
       "gvk": "/v1/Secret",
-      "controller": "AccountReconciler",
-      "source": "internal/controller/nim/account_controller.go:133"
+      "controller": "InferenceServiceReconciler",
+      "source": "internal/controller/serving/inferenceservice_controller.go:206"
     },
     {
       "type": "Owns",
@@ -1121,13 +1086,7 @@
       "type": "Owns",
       "gvk": "api/v1/AuthPolicy",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1033"
-    },
-    {
-      "type": "Owns",
-      "gvk": "keda/v1alpha1/TriggerAuthentication",
-      "controller": "InferenceServiceReconciler",
-      "source": "internal/controller/serving/inferenceservice_controller.go:272"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1009"
     },
     {
       "type": "Owns",
@@ -1137,15 +1096,21 @@
     },
     {
       "type": "Owns",
-      "gvk": "monitoring/v1/PodMonitor",
+      "gvk": "keda/v1alpha1/TriggerAuthentication",
       "controller": "InferenceServiceReconciler",
-      "source": "internal/controller/serving/inferenceservice_controller.go:210"
+      "source": "internal/controller/serving/inferenceservice_controller.go:272"
     },
     {
       "type": "Owns",
       "gvk": "monitoring/v1/PodMonitor",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1036"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1012"
+    },
+    {
+      "type": "Owns",
+      "gvk": "monitoring/v1/PodMonitor",
+      "controller": "InferenceServiceReconciler",
+      "source": "internal/controller/serving/inferenceservice_controller.go:210"
     },
     {
       "type": "Owns",
@@ -1163,7 +1128,7 @@
       "type": "Owns",
       "gvk": "networking/v1alpha3/EnvoyFilter",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1030"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1006"
     },
     {
       "type": "Owns",
@@ -1174,8 +1139,8 @@
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/Role",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:88"
+      "controller": "LLMInferenceServiceReconciler",
+      "source": "internal/controller/serving/llm/llm_inferenceservice_controller.go:163"
     },
     {
       "type": "Owns",
@@ -1185,9 +1150,9 @@
     },
     {
       "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/Role",
-      "controller": "LLMInferenceServiceReconciler",
-      "source": "internal/controller/serving/llm/llm_inferenceservice_controller.go:163"
+      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
+      "controller": "InferenceServiceReconciler",
+      "source": "internal/controller/serving/inferenceservice_controller.go:212"
     },
     {
       "type": "Owns",
@@ -1198,20 +1163,8 @@
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:88"
-    },
-    {
-      "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
       "controller": "ServingRuntimeReconciler",
       "source": "internal/controller/serving/servingruntime_controller.go:420"
-    },
-    {
-      "type": "Owns",
-      "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
-      "controller": "InferenceServiceReconciler",
-      "source": "internal/controller/serving/inferenceservice_controller.go:212"
     },
     {
       "type": "Owns",
@@ -1229,13 +1182,25 @@
       "type": "Owns",
       "gvk": "template/v1/Template",
       "controller": "AccountReconciler",
-      "source": "internal/controller/nim/account_controller.go:134"
+      "source": "internal/controller/nim/account_controller.go:89"
+    },
+    {
+      "type": "Watches",
+      "gvk": "/v1/ConfigMap",
+      "controller": "GatewayReconciler",
+      "source": "internal/controller/serving/llm/gateway_controller.go:1062"
+    },
+    {
+      "type": "Watches",
+      "gvk": "/v1/ConfigMap",
+      "controller": "AccountReconciler",
+      "source": "internal/controller/nim/account_controller.go:103"
     },
     {
       "type": "Watches",
       "gvk": "/v1/Namespace",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1073"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1049"
     },
     {
       "type": "Watches",
@@ -1245,27 +1210,15 @@
     },
     {
       "type": "Watches",
-      "gvk": "/v1/Namespace",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:89"
-    },
-    {
-      "type": "Watches",
-      "gvk": "/v1/Secret",
-      "controller": "AccountReconciler",
-      "source": "internal/controller/nim/account_controller.go:135"
-    },
-    {
-      "type": "Watches",
       "gvk": "/v1/Secret",
       "controller": "InferenceServiceReconciler",
       "source": "internal/controller/serving/inferenceservice_controller.go:244"
     },
     {
       "type": "Watches",
-      "gvk": "/v1/ServiceAccount",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:90"
+      "gvk": "/v1/Secret",
+      "controller": "AccountReconciler",
+      "source": "internal/controller/nim/account_controller.go:90"
     },
     {
       "type": "Watches",
@@ -1287,18 +1240,6 @@
     },
     {
       "type": "Watches",
-      "gvk": "apis/v1/Gateway",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:111"
-    },
-    {
-      "type": "Watches",
-      "gvk": "nim/v1/Account",
-      "controller": "AccountReconciler",
-      "source": "internal/controller/nim/account_controller.go:116"
-    },
-    {
-      "type": "Watches",
       "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
       "controller": "ServingRuntimeReconciler",
       "source": "internal/controller/serving/servingruntime_controller.go:452"
@@ -1313,19 +1254,13 @@
       "type": "Watches",
       "gvk": "serving/v1alpha2/LLMInferenceService",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1040"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1016"
     },
     {
       "type": "Watches",
       "gvk": "serving/v1alpha2/LLMInferenceServiceConfig",
       "controller": "GatewayReconciler",
-      "source": "internal/controller/serving/llm/gateway_controller.go:1058"
-    },
-    {
-      "type": "Watches",
-      "gvk": "serving/v1alpha2/LLMInferenceServiceConfig",
-      "controller": "GridInferenceProviderReconciler",
-      "source": "internal/controller/serving/llm/grid_controller.go:91"
+      "source": "internal/controller/serving/llm/gateway_controller.go:1034"
     },
     {
       "type": "resource_ops",
@@ -1357,7 +1292,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/nim/account_controller.go",
-            "line": 195
+            "line": 135
           }
         },
         {
@@ -1367,7 +1302,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/nim/account_controller.go",
-            "line": 222
+            "line": 162
           }
         },
         {
@@ -1445,7 +1380,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
-            "line": 196
+            "line": 195
           }
         },
         {
@@ -1455,7 +1390,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
-            "line": 204
+            "line": 203
           }
         },
         {
@@ -1465,7 +1400,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
-            "line": 272
+            "line": 262
           }
         },
         {
@@ -1475,27 +1410,27 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
-            "line": 281
+            "line": 271
           }
         },
         {
           "kind": "PodMonitor",
           "group": "monitoring",
           "verb": "create",
+          "source": {
+            "type": "go_ast",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
+            "line": 375
+          }
+        },
+        {
+          "kind": "PodMonitor",
+          "group": "monitoring",
+          "verb": "update",
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
             "line": 385
-          }
-        },
-        {
-          "kind": "PodMonitor",
-          "group": "monitoring",
-          "verb": "update",
-          "source": {
-            "type": "go_ast",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/controller/serving/llm/gateway_controller.go",
-            "line": 395
           }
         }
       ]
@@ -1504,10 +1439,6 @@
   "dependencies": {
     "go_version": "1.26.7",
     "go_modules": [
-      {
-        "module": "github.com/evanphx/json-patch/v5",
-        "version": "v5.9.11"
-      },
       {
         "module": "github.com/fsnotify/fsnotify",
         "version": "v1.10.0"
@@ -1519,10 +1450,6 @@
       {
         "module": "github.com/go-logr/zapr",
         "version": "v1.3.0"
-      },
-      {
-        "module": "github.com/google/cel-go",
-        "version": "v0.27.0"
       },
       {
         "module": "github.com/google/uuid",
@@ -1735,10 +1662,6 @@
         "purpose": "Kubernetes Gateway API"
       },
       {
-        "module": "sigs.k8s.io/json",
-        "version": "v0.0.0-20250730193827-2d320260d730"
-      },
-      {
         "module": "sigs.k8s.io/yaml",
         "version": "v1.6.0",
         "category": "serialization",
@@ -1919,7 +1842,7 @@
       "overlays": [
         "config/overlays/odh"
       ],
-      "target_type": "llmISVCValidatorV1alpha2"
+      "target_type": "llmISVCDefaulterV1alpha2"
     },
     {
       "name": "connection-llmisvc-v1alpha2.odh-model-controller.opendatahub.io",
@@ -1958,7 +1881,7 @@
       "overlays": [
         "config/overlays/odh"
       ],
-      "target_type": "llmISVCValidatorV1alpha2"
+      "target_type": "llmISVCDefaulterV1alpha2"
     },
     {
       "name": "minferencegraph-v1alpha1.odh-model-controller.opendatahub.io",
@@ -2119,89 +2042,11 @@
           "source": {
             "type": "go_handler",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/odh-model-controller/internal/webhook/serving/v1beta1/inferenceservice_webhook.go",
-            "line": 98
+            "line": 96
           }
         }
       ],
       "target_type": "InferenceServiceCustomValidator"
-    },
-    {
-      "name": "validating.llmisvc-v1alpha1.odh-model-controller.opendatahub.io",
-      "type": "validating",
-      "service_ref": "opendatahub/odh-model-controller-webhook-service",
-      "path": "/validate-serving-kserve-io-v1alpha1-llminferenceservice",
-      "port": 9443,
-      "failure_policy": "Fail",
-      "rules": [
-        {
-          "apiGroups": [
-            "serving.kserve.io"
-          ],
-          "apiVersions": [
-            "v1alpha1"
-          ],
-          "resources": [
-            "llminferenceservices"
-          ],
-          "operations": [
-            "CREATE",
-            "UPDATE"
-          ]
-        }
-      ],
-      "sources": [
-        {
-          "type": "yaml_manifest",
-          "file": "config/webhook/manifests.yaml"
-        },
-        {
-          "type": "kustomize_overlay",
-          "file": "kustomize:config/overlays/odh (validating.odh-model-controller.opendatahub.io)"
-        }
-      ],
-      "overlays": [
-        "config/overlays/odh"
-      ],
-      "target_type": "llmISVCValidatorV1alpha2"
-    },
-    {
-      "name": "validating.llmisvc-v1alpha2.odh-model-controller.opendatahub.io",
-      "type": "validating",
-      "service_ref": "opendatahub/odh-model-controller-webhook-service",
-      "path": "/validate-serving-kserve-io-v1alpha2-llminferenceservice",
-      "port": 9443,
-      "failure_policy": "Fail",
-      "rules": [
-        {
-          "apiGroups": [
-            "serving.kserve.io"
-          ],
-          "apiVersions": [
-            "v1alpha2"
-          ],
-          "resources": [
-            "llminferenceservices"
-          ],
-          "operations": [
-            "CREATE",
-            "UPDATE"
-          ]
-        }
-      ],
-      "sources": [
-        {
-          "type": "yaml_manifest",
-          "file": "config/webhook/manifests.yaml"
-        },
-        {
-          "type": "kustomize_overlay",
-          "file": "kustomize:config/overlays/odh (validating.odh-model-controller.opendatahub.io)"
-        }
-      ],
-      "overlays": [
-        "config/overlays/odh"
-      ],
-      "target_type": "llmISVCValidatorV1alpha2"
     },
     {
       "name": "validating.nim.account.odh-model-controller.opendatahub.io",
@@ -2383,11 +2228,6 @@
     "cache_scope": "cluster-wide",
     "filtered_types": [
       {
-        "type": "corev1.ConfigMap",
-        "filter_kind": "label",
-        "filter": "label selector"
-      },
-      {
         "type": "corev1.Pod",
         "filter_kind": "label",
         "filter": "component=predictor"
@@ -2412,13 +2252,6 @@
     "gomemlimit": "1800MiB",
     "memory_limit": "2Gi",
     "gomemlimit_ratio": 87.9,
-    "implicit_informers": [
-      {
-        "type": "resourcev1.ResourceClaimTemplate",
-        "source": "internal/webhook/serving/hardwareprofile/dra.go:38",
-        "risk": "medium"
-      }
-    ],
     "issues": [
       "Cache bypass (DisableFor) configured for corev1.ConfigMap. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)",
       "Type Account is watched but has no cache filter (cluster-wide informer)",
@@ -3625,54 +3458,6 @@
       "source": "internal/controller/nim/handlers/validation_handler.go"
     },
     {
-      "name": "GridAllowedLabel",
-      "value": "grid.opendatahub.io/allowed",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "GridGatewayNamespacesEnv",
-      "value": "GRID_GATEWAY_NAMESPACES",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "GridServingAnnotation",
-      "value": "grid.opendatahub.io/serving",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "gridFinalizer",
-      "value": "grid.praxis.fast/inference-provider",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "gridSourceName",
-      "value": "grid.praxis.fast/source-name",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "gridSourceNamespace",
-      "value": "grid.praxis.fast/source-namespace",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "gridSourceUID",
-      "value": "grid.praxis.fast/source-uid",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_config.go"
-    },
-    {
-      "name": "gridProviderGVK",
-      "value": "schema.GroupVersionKind{Group: \"grid.praxis.fast\", Version: \"v1alpha1\", Kind: \"InferenceProvider\"}",
-      "category": "general",
-      "source": "internal/controller/serving/llm/grid_controller.go"
-    },
-    {
       "name": "managedByLabel",
       "value": "app.kubernetes.io/managed-by",
       "category": "general",
@@ -3986,19 +3771,6 @@
       "source": "internal/controller/utils/utils.go"
     },
     {
-      "name": "_",
-      "value": "(*ConfigMapNameSource)(nil)",
-      "type": "source.SyncingSource",
-      "category": "general",
-      "source": "internal/informercache/configmap_source.go"
-    },
-    {
-      "name": "configMapGVR",
-      "value": "schema.GroupVersionResource{Version: \"v1\", Resource: \"configmaps\"}",
-      "category": "general",
-      "source": "internal/informercache/configmap_source.go"
-    },
-    {
       "name": "PlatformTypeEnv",
       "value": "ODH_PLATFORM_TYPE",
       "category": "general",
@@ -4147,13 +3919,6 @@
       "source": "internal/webhook/nim/v1/account_webhook.go"
     },
     {
-      "name": "DRAClaimName",
-      "value": "hwp-dra",
-      "category": "general",
-      "doc": "DRAClaimName is the pod-local name reserved for HardwareProfile DRA claims.",
-      "source": "internal/webhook/serving/hardwareprofile/dra.go"
-    },
-    {
       "name": "HardwareProfileAnnotationName",
       "value": "opendatahub.io/hardware-profile-name",
       "category": "general",
@@ -4212,7 +3977,7 @@
     },
     {
       "name": "_",
-      "value": "\u0026llmISVCValidatorV1alpha2{}",
+      "value": "\u0026llmISVCDefaulterV1alpha2{}",
       "category": "general",
       "source": "internal/webhook/serving/v1alpha2/llminferenceservice_webhook.go"
     },
@@ -4549,7 +4314,7 @@
       "integration": "management relationship",
       "type": "label",
       "context": "source-code",
-      "source": "internal/controller/serving/llm/gateway_controller.go:444"
+      "source": "internal/controller/serving/llm/gateway_controller.go:434"
     },
     {
       "label": "app.kubernetes.io/managed-by",
@@ -4591,14 +4356,14 @@
       "integration": "Kueue",
       "type": "label",
       "context": "source-code",
-      "source": "internal/webhook/serving/hardwareprofile/resolver.go:49"
+      "source": "internal/webhook/serving/hardwareprofile/resolver.go:47"
     },
     {
       "label": "prometheus.io/port",
       "integration": "Prometheus",
       "type": "label",
       "context": "source-code",
-      "source": "internal/controller/utils/nim.go:500"
+      "source": "internal/controller/utils/nim.go:496"
     },
     {
       "label": "serving.kserve.io/inferenceservice",
@@ -4621,7 +4386,7 @@
         "odh-model-controller-parameters"
       ],
       "namespace": "opendatahub",
-      "replacements": 59,
+      "replacements": 38,
       "source": "config/base/kustomization.yaml"
     },
     {
@@ -4919,7 +4684,7 @@
     "status_conditions": "none",
     "webhooks": "rich"
   },
-  "summary": "odh-model-controller (also known as: ODH Model Controller, omc) is a Kubernetes component. managing 1 CRD(s): Account. deploying 2 workload(s) (odh-model-controller, model-serving-api) with 2 container(s). watching 27 resource type(s). exposing 3 service(s) on ports: 443, 8080, 8443. with 10 webhook(s) (5 validating, 5 mutating). protected by 1 network policy/policies. connecting to external services: s3. runtime dependencies: OpenTelemetry Collector, knative-local-gateway, kubernetes. defining 1 API spec type(s) across 4 struct(s) with 18 total fields. with 209 operator config constants (1 env vars). following 8 reconciliation steps across 8 controller(s). with 3 ingress route(s). integrates with KServe, Kueue, Prometheus, management relationship via labels/annotations. kustomize overlays: config/base, config/certmanager, config/crd/external, config/crd, config/default, config/manager, config/overlays/odh, config/overlays/odh/rbac/openshift, config/overlays/xks/cert-manager, config/overlays/xks, config/prometheus, config/rbac, config/runtimes, config/runtimes/vllm, config/runtimes/vllm-omni, config/runtimes-fast-1, config/runtimes-fast-2, config/server, config/webhook. references components: kserve (import), kubeflow (import).",
+  "summary": "odh-model-controller (also known as: ODH Model Controller, omc) is a Kubernetes component. managing 1 CRD(s): Account. deploying 2 workload(s) (odh-model-controller, model-serving-api) with 2 container(s). watching 27 resource type(s). exposing 3 service(s) on ports: 443, 8080, 8443. with 8 webhook(s) (3 validating, 5 mutating). protected by 1 network policy/policies. connecting to external services: s3. runtime dependencies: OpenTelemetry Collector, knative-local-gateway, kubernetes. defining 1 API spec type(s) across 4 struct(s) with 18 total fields. with 198 operator config constants (1 env vars). following 8 reconciliation steps across 8 controller(s). with 3 ingress route(s). integrates with KServe, Kueue, Prometheus, management relationship via labels/annotations. kustomize overlays: config/base, config/certmanager, config/crd/external, config/crd, config/default, config/manager, config/overlays/odh, config/overlays/odh/rbac/openshift, config/overlays/xks/cert-manager, config/overlays/xks, config/prometheus, config/rbac, config/runtimes, config/runtimes/vllm, config/runtimes/vllm-omni, config/runtimes-fast-1, config/runtimes-fast-2, config/server, config/webhook. references components: kserve (import), kubeflow (import).",
   "go_ast_mode": "full",
   "security_annotations": [
     {
@@ -5016,9 +4781,23 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "docker/setup-qemu-action@v3",
+      "source": ".github/workflows/build.yaml",
+      "description": "Action \"docker/setup-qemu-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "docker/setup-buildx-action@v3",
       "source": ".github/workflows/build.yaml",
       "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/login-action@v3",
+      "source": ".github/workflows/build.yaml",
+      "description": "Action \"docker/login-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -5044,23 +4823,9 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "docker/setup-qemu-action@v3",
-      "source": ".github/workflows/build.yaml",
-      "description": "Action \"docker/setup-qemu-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
       "resource": "docker/setup-buildx-action@v3",
       "source": ".github/workflows/build.yaml",
       "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/login-action@v3",
-      "source": ".github/workflows/build.yaml",
-      "description": "Action \"docker/login-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

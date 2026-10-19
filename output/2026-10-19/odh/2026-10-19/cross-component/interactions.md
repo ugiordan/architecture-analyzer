@@ -3,7 +3,7 @@
 
 ## Summary
 
-106 interactions across 40 components.
+104 interactions across 40 components.
 
 ## All Interactions
 
@@ -47,7 +47,6 @@
 | kubeflow | data-science-pipelines-operator | go-module | import dependency |
 | kubeflow | odh-platform-utilities | go-module | import dependency |
 | kubeflow | operator-chaos | go-module | import dependency |
-| kuberay | vllm | component-ref:import | python import: vllm |
 | llama-stack | model-registry | component-ref:import | python import: ogx.providers.utils.inference.model_registry |
 | llama-stack | vllm | component-ref:provider | directory: src/ogx/providers/remote/inference/vllm |
 | llama-stack-provider-trustyai-garak | eval-hub | component-ref:import | python import: evalhub.adapter |
@@ -98,7 +97,6 @@
 | odh-model-controller | kserve-autogluon-server | watches-crd:LLMInferenceService | controller watch |
 | odh-model-controller | kserve-autogluon-server | watches-crd:ServingRuntime | controller watch |
 | odh-model-controller | kubeflow | component-ref:import | go import: github.com/kubeflow/hub/pkg/inferenceservice-controller |
-| ogx-k8s-operator | odh-platform-utilities | go-module | import dependency |
 | opendatahub-operator | kserve | component-ref:import | go import: github.com/opendatahub-io/opendatahub-operator/v2/internal/controller/modules/kserve |
 | opendatahub-operator | kueue | component-ref:config | file: internal/controller/components/kueue/kueue_config.go |
 | opendatahub-operator | kueue | component-ref:provider | directory: internal/controller/components/kueue |
@@ -173,7 +171,6 @@
 
 ### kuberay
 
-**Depends on:** vllm (component-ref:import)  
 **Used by:** codeflare-operator (component-ref:import)  
 
 ### kueue
@@ -251,11 +248,10 @@
 
 ### odh-platform-utilities
 
-**Used by:** data-science-pipelines-operator (go-module), kserve (go-module), kubeflow (go-module), mcp-lifecycle-module-operator (go-module), model-registry-operator (go-module), odh-dashboard (go-module), ogx-k8s-operator (go-module), opendatahub-operator (go-module), spark-operator (go-module), trainer-operator (go-module), trustyai-service-operator (go-module)  
+**Used by:** data-science-pipelines-operator (go-module), kserve (go-module), kubeflow (go-module), mcp-lifecycle-module-operator (go-module), model-registry-operator (go-module), odh-dashboard (go-module), opendatahub-operator (go-module), spark-operator (go-module), trainer-operator (go-module), trustyai-service-operator (go-module)  
 
 ### ogx-k8s-operator
 
-**Depends on:** odh-platform-utilities (go-module)  
 **Used by:** odh-dashboard (go-module)  
 
 ### opendatahub-operator
@@ -287,7 +283,7 @@
 
 ### vllm
 
-**Used by:** kserve (component-ref:import), kserve-autogluon-server (component-ref:import), kuberay (component-ref:import), llama-stack (component-ref:provider), llm-d (component-ref:import), llm-d-inference-scheduler (component-ref:adapter), llm-d-kv-cache (component-ref:adapter), llm-d-kv-cache (component-ref:import), lm-evaluation-harness (component-ref:import)  
+**Used by:** kserve (component-ref:import), kserve-autogluon-server (component-ref:import), llama-stack (component-ref:provider), llm-d (component-ref:import), llm-d-inference-scheduler (component-ref:adapter), llm-d-kv-cache (component-ref:adapter), llm-d-kv-cache (component-ref:import), lm-evaluation-harness (component-ref:import)  
 
 ### workload-variant-autoscaler
 
