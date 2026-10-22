@@ -27037,11 +27037,11 @@
 
 <h1 id="model-registry-operator">model-registry-operator<a class="headerlink" href="#model-registry-operator" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-10-21</strong> (2026-10-21)</p>
+<p><strong>Architecture snapshot: 2026-10-22</strong> (2026-10-22)</p>
 </blockquote>
 <p><strong>Repository:</strong> opendatahub-io/model-registry-operator<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-10-21T04:07:49Z</p>
+<strong>Extracted:</strong> 2026-10-22T04:08:19Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -27073,7 +27073,7 @@
 </tr>
 <tr>
 <td>Controller Watches</td>
-<td>33</td>
+<td>35</td>
 </tr>
 </tbody>
 </table>
@@ -27130,16 +27130,18 @@
     class owned_17 owned
     controller --&gt;|"Owns"| owned_18["ValidatingWebhookConfiguration"]
     class owned_18 owned
-    watch_19["ImageStream"] --&gt;|"Watches"| controller
+    watch_19["APIServer"] --&gt;|"Watches"| controller
     class watch_19 external
-    watch_20["Pod"] --&gt;|"Watches"| controller
+    watch_20["ImageStream"] --&gt;|"Watches"| controller
     class watch_20 external
-    controller -.-&gt;|"depends on"| odh_21["odh-platform-utilities"]
-    class odh_21 dep
+    watch_21["Pod"] --&gt;|"Watches"| controller
+    class watch_21 external
     controller -.-&gt;|"depends on"| odh_22["odh-platform-utilities"]
     class odh_22 dep
-    controller -.-&gt;|"depends on"| odh_23["operator-chaos"]
-    class odh_23 dep</code></pre>
+    controller -.-&gt;|"depends on"| odh_23["odh-platform-utilities"]
+    class odh_23 dep
+    controller -.-&gt;|"depends on"| odh_24["operator-chaos"]
+    class odh_24 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -27163,7 +27165,7 @@
 <td>113</td>
 <td>6</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/model-registry-operator/blob/01e38c5c12b5c17d05d52c42745baa107ca8acae/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml"><code>config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/model-registry-operator/blob/21e533630607a5b1ceff4b514a148d7b06ef2749/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml"><code>config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -27248,7 +27250,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 21, 2026 04:20:22 UTC">October 21, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 22, 2026 04:19:57 UTC">October 22, 2026</span>
   </span>
 
     
