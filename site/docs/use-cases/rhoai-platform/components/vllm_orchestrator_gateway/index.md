@@ -1,11 +1,11 @@
 # vllm-orchestrator-gateway
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-24** (2026-10-24)
 
 
 **Repository:** red-hat-data-services/vllm-orchestrator-gateway  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:19:40Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-24T04:11:10Z
 
 ## Summary
 

@@ -13,6 +13,8 @@ graph LR
 
     notebooks_downstream["notebooks-downstream"]:::component
     notebooks_downstream --> svc_0["notebook\nClusterIP: 8888/TCP"]:::svc
+    notebooks_downstream -.-> ext_requests[["requests\napi"]]:::ext
+    notebooks_downstream -.-> ext_minio[["minio\nobject-storage"]]:::ext
 ```
 
 ### Services

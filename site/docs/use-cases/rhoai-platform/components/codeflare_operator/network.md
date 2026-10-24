@@ -17,8 +17,15 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| webhook-service | ClusterIP | 443/TCP | [`config/webhook/service.yaml`](https://github.com/project-codeflare/codeflare-operator/blob/7c44564dcefd68bacf6cf7f759e6be92e4d95c11/config/webhook/service.yaml) |
+| webhook-service | ClusterIP | 443/TCP | [`config/webhook/service.yaml`](https://github.com/red-hat-data-services/codeflare-operator/blob/6b74024f8f7835d0a470a1ebc4fc4184dc36f3a3/config/webhook/service.yaml) |
+
+### Ingress / Routing
+
+| Kind | Name | Hosts | Paths | TLS | Source |
+|------|------|-------|-------|-----|--------|
+| Ingress | rbac-inferred |  |  | no | [`rbac/manager-role`](https://github.com/red-hat-data-services/codeflare-operator/blob/6b74024f8f7835d0a470a1ebc4fc4184dc36f3a3/rbac/manager-role) |
+| Route | rbac-inferred |  |  | no | [`rbac/manager-role`](https://github.com/red-hat-data-services/codeflare-operator/blob/6b74024f8f7835d0a470a1ebc4fc4184dc36f3a3/rbac/manager-role) |
 
 !!! warning "No Network Policies"
-    No NetworkPolicy resources found. All pod-to-pod traffic is allowed by default.
+    No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.
 

@@ -1,11 +1,11 @@
 # fms-hf-tuning
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-24** (2026-10-24)
 
 
 **Repository:** red-hat-data-services/fms-hf-tuning  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:16:47Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-24T04:10:31Z
 
 ## Summary
 

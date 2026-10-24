@@ -1,11 +1,11 @@
 # fms-guardrails-orchestrator
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-24** (2026-10-24)
 
 
 **Repository:** opendatahub-io/fms-guardrails-orchestrator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:10:01Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-24T04:07:54Z
 
 ## Summary
 

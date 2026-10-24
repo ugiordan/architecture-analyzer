@@ -11,18 +11,40 @@ graph LR
 
     kubeflow["kubeflow"]:::component
     kubeflow --> svc_0["service\nClusterIP: 443/TCP"]:::svc
-    kubeflow --> svc_1["service\nClusterIP: 8080/TCP"]:::svc
+    kubeflow --> svc_1["service\nClusterIP: 8443/TCP"]:::svc
     kubeflow --> svc_2["webhook-service\nClusterIP: 443/TCP"]:::svc
+    kubeflow -.-> ext_requests[["requests\napi"]]:::ext
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| service | ClusterIP | 443/TCP | [`components/notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/5ef9a4f393b2c13794eaeef3d4bf459bbd3693c7/components/notebook-controller/config/manager/service.yaml) |
-| service | ClusterIP | 8080/TCP | [`components/odh-notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/5ef9a4f393b2c13794eaeef3d4bf459bbd3693c7/components/odh-notebook-controller/config/manager/service.yaml) |
-| webhook-service | ClusterIP | 443/TCP | [`components/odh-notebook-controller/config/webhook/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/5ef9a4f393b2c13794eaeef3d4bf459bbd3693c7/components/odh-notebook-controller/config/webhook/service.yaml) |
+| service | ClusterIP | 443/TCP | [`components/notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/51dbb056f926629f86c31f0970037a19b3b93b0e/components/notebook-controller/config/manager/service.yaml) |
+| service | ClusterIP | 8443/TCP | [`components/odh-notebook-controller/config/manager/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/51dbb056f926629f86c31f0970037a19b3b93b0e/components/odh-notebook-controller/config/manager/service.yaml) |
+| webhook-service | ClusterIP | 443/TCP | [`components/odh-notebook-controller/config/webhook/service.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/51dbb056f926629f86c31f0970037a19b3b93b0e/components/odh-notebook-controller/config/webhook/service.yaml) |
 
-!!! warning "No Network Policies"
-    No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.
+### Network Policies
+
+| Name | Policy Types | Source |
+|------|-------------|--------|
+| notebook-controller-allow-ingress | Ingress | [`components/notebook-controller/config/overlays/openshift/network-policies.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/51dbb056f926629f86c31f0970037a19b3b93b0e/components/notebook-controller/config/overlays/openshift/network-policies.yaml) |
+| odh-notebook-controller-allow-ingress | Ingress | [`components/odh-notebook-controller/config/overlays/openshift/network-policies.yaml`](https://github.com/red-hat-data-services/kubeflow/blob/51dbb056f926629f86c31f0970037a19b3b93b0e/components/odh-notebook-controller/config/overlays/openshift/network-policies.yaml) |
+
+## Network Policy Graph
+
+Visual representation of NetworkPolicy rules. Ingress rules show what traffic is allowed into pods, egress rules show what traffic is allowed out.
+
+```mermaid
+graph LR
+    classDef policy fill:#e74c3c,stroke:#c0392b,color:#fff
+    classDef pod fill:#3498db,stroke:#2980b9,color:#fff
+    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
+
+    kubeflow["kubeflow\nPods"]:::pod
+    np_0_notebook_controller_allow_ingress{{"notebook-controller-allow-ingress\nIngress"}}:::policy
+    np_0_notebook_controller_allow_ingress --> kubeflow
+    np_1_odh_notebook_controller_allow_ingress{{"odh-notebook-controller-allow-ingress\nIngress"}}:::policy
+    np_1_odh_notebook_controller_allow_ingress --> kubeflow
+```
 

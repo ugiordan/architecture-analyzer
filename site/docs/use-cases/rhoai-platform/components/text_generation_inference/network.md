@@ -11,6 +11,7 @@ graph LR
 
     text_generation_inference["text-generation-inference"]:::component
     text_generation_inference --> svc_0["inference-server\nClusterIP: 8033/TCP"]:::svc
+    text_generation_inference -.-> ext_grpc[["grpc\ngrpc"]]:::ext
 ```
 
 ### Services
