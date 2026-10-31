@@ -2,8 +2,6 @@
 
 ## Service Map
 
-*2 unique services (3 total, duplicates from test fixtures collapsed).*
-
 ```mermaid
 graph LR
     classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
@@ -12,32 +10,33 @@ graph LR
     classDef ext fill:#e74c3c,stroke:#c0392b,color:#fff
 
     spark_operator["spark-operator"]:::component
-    spark_operator --> svc_0["spark-operator-webhook-svc\nClusterIP: 443/TCP"]:::svc
-    spark_operator --> svc_1["the-service\nLoadBalancer: 8666/TCP"]:::svc
-    spark_operator -.-> ext_postgres[["postgres\ndatabase"]]:::ext
-    spark_operator -.-> ext_sqlite[["sqlite\ndatabase"]]:::ext
-    spark_operator -.-> ext_grpc[["grpc\ngrpc"]]:::ext
+    spark_operator --> svc_0["spark-operator-controller-metrics\nClusterIP: 8080/TCP"]:::svc
+    spark_operator --> svc_1["spark-operator-webhook-metrics\nClusterIP: 8080/TCP"]:::svc
+    spark_operator --> svc_2["spark-operator-webhook-svc\nClusterIP: 443/TCP"]:::svc
 ```
 
 ### Services
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| spark-operator-webhook-svc | ClusterIP | 443/TCP | [`kustomize:config/overlays/odh`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/kustomize:config/overlays/odh) |
-| the-service | LoadBalancer | 8666/TCP | [`.gomod-cache/k8s.io/cli-runtime@v0.32.5/artifacts/kustomization/service.yaml`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/.gomod-cache/k8s.io/cli-runtime@v0.32.5/artifacts/kustomization/service.yaml) |
-| the-service | LoadBalancer | 8666/TCP | [`.gopath-loader/pkg/mod/k8s.io/cli-runtime@v0.32.5/artifacts/kustomization/service.yaml`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/.gopath-loader/pkg/mod/k8s.io/cli-runtime@v0.32.5/artifacts/kustomization/service.yaml) |
+| spark-operator-controller-metrics | ClusterIP | 8080/TCP | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
+| spark-operator-webhook-metrics | ClusterIP | 8080/TCP | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
+| spark-operator-webhook-svc | ClusterIP | 443/TCP | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
 
 ### Ingress / Routing
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| Ingress | rbac-inferred |  |  | no | [`rbac/spark-operator-controller`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/rbac/spark-operator-controller) |
+| Ingress | rbac-inferred |  |  | no | [`rbac/spark-operator-controller`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/rbac/spark-operator-controller) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| spark-operator-allow-internal | Ingress | [`kustomize:config/overlays/odh`](https://github.com/kubeflow/spark-operator/blob/bc7885e2d34a9a0293672c1e8155e5446dcc0722/kustomize:config/overlays/odh) |
+| spark-operator-allow-egress | Egress | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
+| spark-operator-allow-internal | Ingress | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
+| spark-operator-allow-metrics | Ingress | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
+| spark-operator-allow-webhook | Ingress | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/spark-operator/blob/bf909c6e354deff65a4742ad7c874f0af9cd9137/kustomize:config/overlays/odh) |
 
 ## Network Policy Graph
 
@@ -50,7 +49,13 @@ graph LR
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
 
     spark_operator["spark-operator\nPods"]:::pod
-    np_0_spark_operator_allow_internal{{"spark-operator-allow-internal\nIngress"}}:::policy
-    np_0_spark_operator_allow_internal --> spark_operator
+    np_0_spark_operator_allow_egress{{"spark-operator-allow-egress\nEgress"}}:::policy
+    np_0_spark_operator_allow_egress --> spark_operator
+    np_1_spark_operator_allow_internal{{"spark-operator-allow-internal\nIngress"}}:::policy
+    np_1_spark_operator_allow_internal --> spark_operator
+    np_2_spark_operator_allow_metrics{{"spark-operator-allow-metrics\nIngress"}}:::policy
+    np_2_spark_operator_allow_metrics --> spark_operator
+    np_3_spark_operator_allow_webhook{{"spark-operator-allow-webhook\nIngress"}}:::policy
+    np_3_spark_operator_allow_webhook --> spark_operator
 ```
 

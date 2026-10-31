@@ -26,3 +26,7 @@ sequenceDiagram
 
 ConfigMaps and Helm values that control this component's runtime behavior.
 
+### Helm
+
+**Chart:** mlflow v3.16.1
+

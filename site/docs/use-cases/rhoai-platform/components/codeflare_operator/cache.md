@@ -15,14 +15,13 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 
 ### Issues
 
-- No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune)
-- No cache configuration: all informers are cluster-wide (OOM risk)
+- No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior
+- No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns
 - Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)
 - Type Ingress is watched but has no cache filter (cluster-wide informer)
 - Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)
 - Type RayCluster is watched but has no cache filter (cluster-wide informer)
 - Type Route is watched but has no cache filter (cluster-wide informer)
-- Type Secret is watched but has no cache filter (cluster-wide informer)
 - Type Service is watched but has no cache filter (cluster-wide informer)
 - Type ServiceAccount is watched but has no cache filter (cluster-wide informer)
 

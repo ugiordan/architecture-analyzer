@@ -1,11 +1,11 @@
 # llama-stack
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-10-31** (2026-10-31)
 
 
 **Repository:** opendatahub-io/llama-stack  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:14:22Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-10-31T05:02:13Z
 
 ## Summary
 

@@ -14,9 +14,7 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `Dockerfile.konflux` | $RELEASE_BASE_IMAGE | 5 | ovms |  |  |  | Unpinned base image: $BASE_IMAGE; Unpinned base image: base_build; Unpinned base image: $BUILD_IMAGE; Unpinned base image: $BUILD_IMAGE; Unpinned base image: $RELEASE_BASE_IMAGE |
-| `Dockerfile.redhat` | $RELEASE_BASE_IMAGE | 5 | ovms |  |  |  | Unpinned base image: $BASE_IMAGE; Unpinned base image: base_build; Unpinned base image: $BUILD_IMAGE; Unpinned base image: $BUILD_IMAGE; Unpinned base image: $RELEASE_BASE_IMAGE |
-| `Dockerfile.ubuntu` | $BASE_IMAGE | 5 | ovms |  |  |  | Unpinned base image: $BASE_IMAGE; Unpinned base image: base_build; Unpinned base image: $BUILD_IMAGE; Unpinned base image: $BUILD_IMAGE; Unpinned base image: $BASE_IMAGE |
+| `Dockerfile.konflux` | quay.io/aipcc/base-images/cpu-el9.8@sha256:b42ea43cf2b44fd5d7c662067ccff0a831eeca22f949300590d79dd12b2cf110 | 1 | ovms |  |  |  |  |
 | `ci/Dockerfile` | $BUILD_IMAGE | 1 |  |  |  |  | Unpinned base image: $BUILD_IMAGE; No USER directive found (defaults to root) |
 | `ci/Dockerfile.coverity` | $BUILD_IMAGE | 1 |  |  |  |  | Unpinned base image: $BUILD_IMAGE; No USER directive found (defaults to root) |
 | `client/go/kserve-api/Dockerfile` | golang:1.24.0 | 1 |  |  |  |  | No USER directive found (defaults to root) |
