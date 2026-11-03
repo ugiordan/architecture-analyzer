@@ -318,14 +318,19 @@ type InternalODH struct {
 }
 
 // CargoCrate is a single Rust crate dependency from a Cargo.toml manifest.
-// Version holds the version requirement, or the git ref / path for git and
-// path dependencies (with Kind distinguishing them).
+// Version holds the version requirement. Kind marks git/path sources, whose
+// reference (tag/branch/rev or path) is carried in Ref.
 type CargoCrate struct {
 	Name     string `json:"name"`
 	Version  string `json:"version,omitempty"`
 	Category string `json:"category,omitempty"` // dependency kind: "" (normal), "dev", "build", "workspace"
 	Source   string `json:"source,omitempty"`   // which manifest file it came from
 	Kind     string `json:"kind,omitempty"`     // "", "git", "path"
+	Ref      string `json:"ref,omitempty"`      // git tag/branch/rev or path for git/path deps
+
+	// workspaceInherit marks `dep = { workspace = true }` declarations that
+	// must be resolved against [workspace.dependencies]; never serialized.
+	workspaceInherit bool `json:"-"`
 }
 
 // SecretRef is a reference to a Kubernetes Secret (name only, never values).

@@ -795,14 +795,15 @@ func renderDependenciesMarkdownSection(b *strings.Builder, data map[string]inter
 	}
 	if len(cargoCrates) > 0 {
 		b.WriteString("### Cargo Crates\n\n")
-		b.WriteString("| Crate | Version | Category | Kind |\n")
-		b.WriteString("|-------|---------|----------|------|\n")
+		b.WriteString("| Crate | Version | Category | Kind | Ref |\n")
+		b.WriteString("|-------|---------|----------|------|-----|\n")
 		for _, crate := range cargoCrates {
-			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n",
+			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s |\n",
 				escapeMdCell(getStr(crate, "name", "")),
 				escapeMdCell(getStr(crate, "version", "")),
 				escapeMdCell(getStr(crate, "category", "")),
 				escapeMdCell(getStr(crate, "kind", "")),
+				escapeMdCell(getStr(crate, "ref", "")),
 			))
 		}
 		b.WriteString("\n")

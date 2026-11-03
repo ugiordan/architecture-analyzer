@@ -55,9 +55,9 @@ func TestExtractCargoDeps(t *testing.T) {
 	expect := []CargoCrate{
 		{Name: "async-trait", Version: "0.1.89"},
 		{Name: "clap", Version: "4.6.1"},
-		{Name: "praxis-ai-filters", Version: "v0.9.0", Kind: "git"},
+		{Name: "praxis-ai-filters", Version: "", Kind: "git", Ref: "v0.9.0"},
 		{Name: "praxis-core (praxis-proxy-core)", Version: "0.7.4"},
-		{Name: "praxis-proto (praxis-proxy-proto)", Version: "proto", Kind: "path"},
+		{Name: "praxis-proto (praxis-proxy-proto)", Version: "", Kind: "path", Ref: "proto"},
 		{Name: "openssl", Version: "0.10.81"},
 	}
 	for _, want := range expect {
@@ -71,6 +71,9 @@ func TestExtractCargoDeps(t *testing.T) {
 		}
 		if got.Kind != want.Kind {
 			t.Errorf("%s kind: got %q, want %q", want.Name, got.Kind, want.Kind)
+		}
+		if got.Ref != want.Ref {
+			t.Errorf("%s ref: got %q, want %q", want.Name, got.Ref, want.Ref)
 		}
 	}
 
@@ -104,6 +107,23 @@ func TestExtractRustVersion(t *testing.T) {
 	}
 	if v := extractRustVersion(dir); v != "1.96" {
 		t.Errorf("rust version: got %q, want 1.96", v)
+	}
+}
+
+func TestExtractRustVersionWorkspacePackage(t *testing.T) {
+	dir := t.TempDir()
+	manifest := `[workspace]
+members = ["crate-a"]
+
+[workspace.package]
+rust-version = "1.85"
+edition = "2021"
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(manifest), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if v := extractRustVersion(dir); v != "1.85" {
+		t.Errorf("rust version: got %q, want 1.85", v)
 	}
 }
 
@@ -149,6 +169,211 @@ prost = "0.14.3"
 	// The workspace table itself must not be misfiled as a normal dependency.
 	if got, ok := byName["members"]; ok {
 		t.Errorf("unexpected crate from [workspace] table: %+v", got)
+	}
+}
+
+func TestExtractCargoDepsWorkspaceExclude(t *testing.T) {
+	dir := t.TempDir()
+	root := `[workspace]
+members = ["app"]
+exclude = ["vendored-thing"]
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "app"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	app := `[package]
+name = "app"
+
+[dependencies]
+serde = "1.0.228"
+`
+	if err := os.WriteFile(filepath.Join(dir, "app", "Cargo.toml"), []byte(app), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "vendored-thing", "nested"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	excluded := `[package]
+name = "vendored-thing"
+
+[dependencies]
+serde = "0.9.0"
+sneaky = "1.0.0"
+`
+	if err := os.WriteFile(filepath.Join(dir, "vendored-thing", "Cargo.toml"), []byte(excluded), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	for _, c := range crates {
+		if c.Name == "sneaky" {
+			t.Errorf("excluded package dependency leaked into results: %+v", c)
+		}
+		if c.Name == "serde" && c.Version == "0.9.0" {
+			t.Errorf("excluded package overrode member dependency: %+v", c)
+		}
+	}
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+	if got, ok := byName["serde"]; !ok || got.Version != "1.0.228" || got.Source != filepath.Join("app", "Cargo.toml") {
+		t.Errorf("member dependency serde: got %+v, ok=%v", got, ok)
+	}
+}
+
+func TestExtractCargoDepsWorkspaceInherit(t *testing.T) {
+	dir := t.TempDir()
+	root := `[workspace]
+members = ["app"]
+
+[workspace.dependencies]
+regex = "1.10.3"
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "app"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	member := `[package]
+name = "app"
+
+[dependencies]
+regex = { workspace = true }
+`
+	if err := os.WriteFile(filepath.Join(dir, "app", "Cargo.toml"), []byte(member), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+	got, ok := byName["regex"]
+	if !ok {
+		t.Fatalf("missing regex dependency; got %+v", crates)
+	}
+	if got.Version != "1.10.3" {
+		t.Errorf("inherited version: got %q, want 1.10.3", got.Version)
+	}
+	if got.Category != "" {
+		t.Errorf("inherited dependency category: got %q, want \"\" (member-level)", got.Category)
+	}
+	if got.Source != filepath.Join("app", "Cargo.toml") {
+		t.Errorf("inherited dependency source: got %q, want member manifest", got.Source)
+	}
+}
+
+func TestExtractCargoDepsVersionAndGitCombo(t *testing.T) {
+	dir := t.TempDir()
+	manifest := `[package]
+name = "combo"
+
+[dependencies]
+foo = { version = "1.10.3", git = "https://github.com/example/foo.git", branch = "next" }
+bar = { version = "2.0.0", path = "../bar" }
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(manifest), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+
+	if got, ok := byName["foo"]; !ok {
+		t.Fatalf("missing foo; got %+v", crates)
+	} else {
+		if got.Version != "1.10.3" {
+			t.Errorf("foo version: got %q, want 1.10.3", got.Version)
+		}
+		if got.Kind != "git" {
+			t.Errorf("foo kind: got %q, want git", got.Kind)
+		}
+		if got.Ref != "next" {
+			t.Errorf("foo ref: got %q, want next", got.Ref)
+		}
+	}
+	if got, ok := byName["bar"]; !ok {
+		t.Fatalf("missing bar; got %+v", crates)
+	} else {
+		if got.Version != "2.0.0" {
+			t.Errorf("bar version: got %q, want 2.0.0", got.Version)
+		}
+		if got.Kind != "path" {
+			t.Errorf("bar kind: got %q, want path", got.Kind)
+		}
+		if got.Ref != "../bar" {
+			t.Errorf("bar ref: got %q, want ../bar", got.Ref)
+		}
+	}
+}
+
+func TestExtractCargoDepsSubtables(t *testing.T) {
+	dir := t.TempDir()
+	manifest := `[package]
+name = "subtables"
+
+[dependencies.awesome]
+version = "1.3.5"
+
+[dev-dependencies.old]
+git = "https://github.com/example/old.git"
+tag = "v1"
+
+[package.metadata.dependencies]
+something = "not-a-crate"
+
+[target.'cfg(unix)'.dependencies.unix-only]
+version = "0.1"
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(manifest), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+
+	if got, ok := byName["awesome"]; !ok || got.Version != "1.3.5" || got.Category != "" {
+		t.Errorf("dependency subtable awesome: got %+v, ok=%v", got, ok)
+	}
+	if got, ok := byName["old"]; !ok || got.Category != "dev" || got.Kind != "git" || got.Ref != "v1" {
+		t.Errorf("dev dependency subtable old: got %+v, ok=%v", got, ok)
+	}
+	if got, ok := byName["unix-only"]; !ok || got.Version != "0.1" {
+		t.Errorf("target dependency subtable unix-only: got %+v, ok=%v", got, ok)
+	}
+	for _, name := range []string{"version", "git", "tag", "something"} {
+		if _, ok := byName[name]; ok {
+			t.Errorf("subtable field %q leaked as a crate", name)
+		}
+	}
+}
+
+func TestMergeCrateEmptyVersionDoesNotReplace(t *testing.T) {
+	seen := map[string]CargoCrate{
+		"regex": {Name: "regex", Version: "1.10.3", Category: "workspace"},
+	}
+	mergeCrate(seen, CargoCrate{Name: "regex", Version: "", Category: ""})
+	if seen["regex"].Version != "1.10.3" {
+		t.Errorf("empty version replaced versioned entry: %+v", seen["regex"])
+	}
+
+	// A versioned normal dependency still takes precedence over the
+	// workspace-level entry.
+	mergeCrate(seen, CargoCrate{Name: "regex", Version: "1.10.3", Category: ""})
+	if seen["regex"].Category != "" {
+		t.Errorf("versioned normal dependency did not take precedence: %+v", seen["regex"])
 	}
 }
 
