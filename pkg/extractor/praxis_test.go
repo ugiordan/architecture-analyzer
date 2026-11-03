@@ -62,6 +62,8 @@ data:
       allow_unbounded_body: true
 `
 
+// writeConfigmap writes a ConfigMap fixture at the conventional deploy/base
+// path so ConfigMap discovery patterns pick it up.
 func writeConfigmap(t *testing.T, dir, content string) {
 	t.Helper()
 	if err := os.MkdirAll(filepath.Join(dir, "deploy", "base", "config"), 0755); err != nil {
@@ -72,6 +74,9 @@ func writeConfigmap(t *testing.T, dir, content string) {
 	}
 }
 
+// TestExtractPraxisPipelines verifies extraction of both pipelines from a
+// real praxis-extproc ConfigMap fixture, including ordering, server fields,
+// chain and filter order, and insecure options.
 func TestExtractPraxisPipelines(t *testing.T) {
 	dir := t.TempDir()
 	writeConfigmap(t, dir, samplePraxisConfigmap)
@@ -122,6 +127,8 @@ func TestExtractPraxisPipelines(t *testing.T) {
 	}
 }
 
+// TestExtractPraxisPipelinesNonPraxisConfigmap verifies that ConfigMap data
+// values without the Praxis shape produce no pipelines.
 func TestExtractPraxisPipelinesNonPraxisConfigmap(t *testing.T) {
 	dir := t.TempDir()
 	writeConfigmap(t, dir, `apiVersion: v1
@@ -143,6 +150,8 @@ data:
 	}
 }
 
+// TestExtractPraxisPipelinesChainsOnly verifies that a pipeline with
+// filter_chains but no server block is still recognized.
 func TestExtractPraxisPipelinesChainsOnly(t *testing.T) {
 	// A pipeline with filter_chains but no server block is still recognized.
 	dir := t.TempDir()
@@ -171,6 +180,8 @@ data:
 	}
 }
 
+// TestExtractPraxisPipelinesDisabledInsecureOptions verifies that only
+// enabled insecure options are surfaced.
 func TestExtractPraxisPipelinesDisabledInsecureOptions(t *testing.T) {
 	// Only enabled insecure options are surfaced.
 	dir := t.TempDir()
@@ -195,6 +206,9 @@ data:
 	}
 }
 
+// TestExtractPraxisPipelinesServerWithoutGRPCAddress verifies that a
+// server map without grpc_address, or a field name matched only in a
+// comment, is not accepted as a pipeline.
 func TestExtractPraxisPipelinesServerWithoutGRPCAddress(t *testing.T) {
 	// A server map without grpc_address (and no filter_chains) must not be
 	// accepted, even when the substring pre-check matches a comment or
@@ -220,6 +234,8 @@ data:
 	}
 }
 
+// TestPraxisPipelinesDataCoverage verifies the praxis_pipelines coverage
+// classification.
 func TestPraxisPipelinesDataCoverage(t *testing.T) {
 	dir := t.TempDir()
 	writeConfigmap(t, dir, samplePraxisConfigmap)

@@ -60,6 +60,8 @@ func TestRenderComponentMarkdown_BasicStructure(t *testing.T) {
 	}
 }
 
+// TestRenderComponentMarkdown_PraxisPipelines verifies the rendered Praxis
+// Pipelines section: title, server table, chain flow, and insecure options.
 func TestRenderComponentMarkdown_PraxisPipelines(t *testing.T) {
 	data := map[string]interface{}{
 		"component": "praxis-extproc",
@@ -102,6 +104,8 @@ func TestRenderComponentMarkdown_PraxisPipelines(t *testing.T) {
 	}
 }
 
+// TestRenderComponentMarkdown_PraxisPipelinesSanitization verifies that
+// YAML-derived names cannot inject backticks or newlines into the report.
 func TestRenderComponentMarkdown_PraxisPipelinesSanitization(t *testing.T) {
 	data := map[string]interface{}{
 		"component": "praxis-extproc",

@@ -103,6 +103,8 @@ func escapeLabel(text string) string {
 }
 
 // escapeMdCell escapes characters that break markdown table cells.
+// escapeMdCell escapes a value for safe use inside a Markdown table cell:
+// HTML-significant characters, pipes, and newlines are neutralized.
 func escapeMdCell(text string) string {
 	text = strings.ReplaceAll(text, "&", "&amp;")
 	text = strings.ReplaceAll(text, "<", "&lt;")
