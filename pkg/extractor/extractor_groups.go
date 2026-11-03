@@ -47,7 +47,7 @@ type extractorGroup struct {
 var allGroups = []extractorGroup{
 	{
 		name:        GroupK8sCore,
-		description: "Core K8s resources: RBAC, Services, Deployments, NetworkPolicies, Secrets, ConfigMaps",
+		description: "Core K8s resources: RBAC, Services, Deployments, NetworkPolicies, Secrets, ConfigMaps, Praxis pipelines",
 		extract: func(ctx *extractContext, arch *ComponentArchitecture) {
 			arch.RBAC = extractRBAC(ctx.absPath)
 			arch.Services = extractServices(ctx.absPath)
@@ -55,6 +55,7 @@ var allGroups = []extractorGroup{
 			arch.NetworkPolicies = extractAllNetworkPolicies(ctx.absPath)
 			arch.Secrets = extractSecrets(ctx.absPath)
 			arch.ConfigMaps = extractConfigMaps(ctx.absPath)
+			arch.PraxisPipelines = extractPraxisPipelines(ctx.absPath)
 		},
 	},
 	{

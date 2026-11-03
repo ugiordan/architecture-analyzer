@@ -60,6 +60,48 @@ func TestRenderComponentMarkdown_BasicStructure(t *testing.T) {
 	}
 }
 
+func TestRenderComponentMarkdown_PraxisPipelines(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name":      "extproc.yaml",
+				"configmap": "payload-processing-plugins",
+				"source":    "deploy/base/config/configmap.yaml",
+				"server": map[string]interface{}{
+					"grpc_address":    "0.0.0.0:9004",
+					"health_address":  "0.0.0.0:50052",
+					"metrics_address": "0.0.0.0:9090",
+					"tls_mode":        "self_signed",
+				},
+				"filter_chains": []interface{}{
+					map[string]interface{}{
+						"name": "ipp",
+						"filters": []interface{}{
+							map[string]interface{}{"filter": "headers"},
+							map[string]interface{}{"filter": "request_id"},
+						},
+					},
+				},
+				"insecure_options": []interface{}{"allow_unbounded_body"},
+			},
+		},
+	}
+	result := RenderComponentMarkdown(data)
+	for _, want := range []string{
+		"## Praxis Pipelines",
+		"payload-processing-plugins/extproc.yaml",
+		"0.0.0.0:9004",
+		"self_signed",
+		"headers -> request_id",
+		"allow_unbounded_body",
+	} {
+		if !strings.Contains(result, want) {
+			t.Errorf("missing %q in rendered markdown", want)
+		}
+	}
+}
+
 func TestRenderComponentMarkdown_EmptySectionsOmitted(t *testing.T) {
 	data := map[string]interface{}{
 		"component":        "minimal",

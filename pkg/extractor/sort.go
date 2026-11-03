@@ -104,6 +104,16 @@ func SortOutput(arch *ComponentArchitecture) {
 		return arch.ConfigMaps[i].Name < arch.ConfigMaps[j].Name
 	})
 
+	// Praxis pipelines: sort by configmap, then data key. Chain and filter
+	// order is preserved: it is semantically significant.
+	sort.Slice(arch.PraxisPipelines, func(i, j int) bool {
+		a, b := arch.PraxisPipelines[i], arch.PraxisPipelines[j]
+		if a.ConfigMap != b.ConfigMap {
+			return a.ConfigMap < b.ConfigMap
+		}
+		return a.Name < b.Name
+	})
+
 	// HTTPEndpoints: sort by path, then method
 	sort.Slice(arch.HTTPEndpoints, func(i, j int) bool {
 		a, b := arch.HTTPEndpoints[i], arch.HTTPEndpoints[j]
