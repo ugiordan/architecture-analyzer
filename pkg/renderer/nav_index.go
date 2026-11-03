@@ -111,6 +111,7 @@ func RenderNavIndex(platformData map[string]interface{}) string {
 			depCount += len(getSlice(d, "internal_odh"))
 			depCount += len(getSlice(d, "go_modules"))
 			depCount += len(getSlice(d, "python_packages"))
+			depCount += len(getSlice(d, "cargo_crates"))
 		}
 		depCount += len(getSlice(cd, "external_connections"))
 		depCount += len(getSlice(cd, "runtime_dependencies"))

@@ -139,11 +139,17 @@ func extractDependencies(repoPath string, modulePrefixes []string) *DependencyDa
 	// Extract Python package dependencies
 	pythonPackages := extractPythonDeps(repoPath)
 
+	// Extract Rust crate dependencies
+	cargoCrates := extractCargoDeps(repoPath)
+	rustVersion := extractRustVersion(repoPath)
+
 	return &DependencyData{
 		GoVersion:         goVersion,
 		Toolchain:         toolchain,
 		GoModules:         goModules,
 		PythonPackages:    pythonPackages,
+		CargoCrates:       cargoCrates,
+		RustVersion:       rustVersion,
 		ReplaceDirectives: replaceDirectives,
 		InternalODH:       internalODH,
 		Issues:            issues,

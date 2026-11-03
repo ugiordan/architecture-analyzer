@@ -274,12 +274,14 @@ type ResourceOp struct {
 	Source    SourceRef `json:"source"`
 }
 
-// DependencyData holds Go module and Python package dependencies.
+// DependencyData holds Go module, Python package, and Rust crate dependencies.
 type DependencyData struct {
 	GoVersion         string              `json:"go_version,omitempty"`
 	Toolchain         string              `json:"toolchain,omitempty"`
 	GoModules         []GoModule          `json:"go_modules,omitempty"`
 	PythonPackages    []PythonPackage     `json:"python_packages,omitempty"`
+	CargoCrates       []CargoCrate        `json:"cargo_crates,omitempty"`
+	RustVersion       string              `json:"rust_version,omitempty"`
 	ReplaceDirectives []ReplaceDirective  `json:"replace_directives,omitempty"`
 	InternalODH       []InternalODH       `json:"internal_odh,omitempty"`
 	Issues            []string            `json:"issues,omitempty"`
@@ -313,6 +315,17 @@ type GoModule struct {
 type InternalODH struct {
 	Component   string `json:"component"`
 	Interaction string `json:"interaction"`
+}
+
+// CargoCrate is a single Rust crate dependency from a Cargo.toml manifest.
+// Version holds the version requirement, or the git ref / path for git and
+// path dependencies (with Kind distinguishing them).
+type CargoCrate struct {
+	Name     string `json:"name"`
+	Version  string `json:"version,omitempty"`
+	Category string `json:"category,omitempty"` // dependency kind: "" (normal), "dev", "build", "workspace"
+	Source   string `json:"source,omitempty"`   // which manifest file it came from
+	Kind     string `json:"kind,omitempty"`     // "", "git", "path"
 }
 
 // SecretRef is a reference to a Kubernetes Secret (name only, never values).
