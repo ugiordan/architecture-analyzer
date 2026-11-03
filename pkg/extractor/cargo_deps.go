@@ -350,8 +350,8 @@ func parseCargoToml(fpath, repoPath string) ([]CargoCrate, string) {
 			}
 			if qm := cargoVersionStringRE.FindStringSubmatch(value); qm != nil {
 				subFields[key] = qm[1]
-			} else if bm := cargoBoolFieldRE.FindStringSubmatch(value); bm != nil {
-				subFields[key] = bm[2]
+			} else if value == "true" || value == "false" {
+				subFields[key] = value
 			}
 			if subName == "" {
 				subName, subCategory = depName, category

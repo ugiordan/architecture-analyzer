@@ -533,6 +533,50 @@ foo.version = "1.2"
 	}
 }
 
+func TestExtractCargoDepsSubtableWorkspaceInherit(t *testing.T) {
+	dir := t.TempDir()
+	root := `[workspace]
+members = ["app"]
+
+[workspace.dependencies]
+serde = "1.0.228"
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "app"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	member := `[package]
+name = "app"
+
+[dependencies.serde]
+workspace = true
+`
+	if err := os.WriteFile(filepath.Join(dir, "app", "Cargo.toml"), []byte(member), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+	got, ok := byName["serde"]
+	if !ok {
+		t.Fatalf("missing serde dependency; got %+v", crates)
+	}
+	if got.Version != "1.0.228" {
+		t.Errorf("inherited version: got %q, want 1.0.228", got.Version)
+	}
+	if got.Category != "" {
+		t.Errorf("inherited dependency category: got %q, want \"\" (member-level)", got.Category)
+	}
+	if got.Source != filepath.Join("app", "Cargo.toml") {
+		t.Errorf("inherited dependency source: got %q, want member manifest", got.Source)
+	}
+}
+
 func TestMergeCrateEmptyVersionDoesNotReplace(t *testing.T) {
 	seen := map[string]CargoCrate{
 		"regex": {Name: "regex", Version: "1.10.3", Category: "workspace"},
