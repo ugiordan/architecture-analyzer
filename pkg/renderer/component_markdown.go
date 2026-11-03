@@ -774,10 +774,10 @@ func renderPraxisPipelinesMarkdownSection(b *strings.Builder, data map[string]in
 		}
 
 		for _, c := range getSlice(p, "filter_chains") {
-			chainName := getStr(c, "name", "")
+			chainName := sanitizeMdValue(getStr(c, "name", ""))
 			var filters []string
 			for _, f := range getSlice(c, "filters") {
-				filters = append(filters, getStr(f, "filter", ""))
+				filters = append(filters, sanitizeMdValue(getStr(f, "filter", "")))
 			}
 			// Chain and filter names are plain identifiers rendered inside
 			// code spans and arrows; cell escaping would show entities
@@ -790,6 +790,9 @@ func renderPraxisPipelinesMarkdownSection(b *strings.Builder, data map[string]in
 		}
 
 		if opts := getStringSlice(p, "insecure_options"); len(opts) > 0 {
+			for i, o := range opts {
+				opts[i] = sanitizeMdValue(o)
+			}
 			b.WriteString(fmt.Sprintf("Insecure options: %s\n\n", strings.Join(opts, ", ")))
 		}
 

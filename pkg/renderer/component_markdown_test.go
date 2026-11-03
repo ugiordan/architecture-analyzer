@@ -102,6 +102,40 @@ func TestRenderComponentMarkdown_PraxisPipelines(t *testing.T) {
 	}
 }
 
+func TestRenderComponentMarkdown_PraxisPipelinesSanitization(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name":      "extproc.yaml",
+				"configmap": "payload-processing-plugins",
+				"filter_chains": []interface{}{
+					map[string]interface{}{
+						"name": "ev`il\n# injected heading",
+						"filters": []interface{}{
+							map[string]interface{}{"filter": "json`body\n**bold**"},
+						},
+					},
+				},
+				"insecure_options": []interface{}{"allow`unbounded\n- bullet"},
+			},
+		},
+	}
+	result := RenderComponentMarkdown(data)
+
+	// Backticks and newlines from YAML-derived values must not survive into
+	// the rendered markdown: they could close code spans or alter structure.
+	if strings.Contains(result, "ev`il") || strings.Contains(result, "json`body") || strings.Contains(result, "allow`unbounded") {
+		t.Error("raw backtick from YAML-derived value leaked into markdown")
+	}
+	if strings.Contains(result, "\n# injected heading") {
+		t.Error("newline from YAML-derived value altered markdown structure")
+	}
+	if !strings.Contains(result, "Chain `ev'il # injected heading`") {
+		t.Errorf("sanitized chain name missing from output:\n%s", result)
+	}
+}
+
 func TestRenderComponentMarkdown_EmptySectionsOmitted(t *testing.T) {
 	data := map[string]interface{}{
 		"component":        "minimal",

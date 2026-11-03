@@ -195,6 +195,31 @@ data:
 	}
 }
 
+func TestExtractPraxisPipelinesServerWithoutGRPCAddress(t *testing.T) {
+	// A server map without grpc_address (and no filter_chains) must not be
+	// accepted, even when the substring pre-check matches a comment or
+	// another field.
+	dir := t.TempDir()
+	writeConfigmap(t, dir, `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: not-praxis
+data:
+  mention.yaml: |
+    # grpc_address appears only in this comment
+    logger:
+      level: info
+  serverish.yaml: |
+    server:
+      mode: opaque
+      grpc_address_note: not the real field
+`)
+
+	if pipelines := extractPraxisPipelines(dir); len(pipelines) != 0 {
+		t.Errorf("expected no pipelines, got %+v", pipelines)
+	}
+}
+
 func TestPraxisPipelinesDataCoverage(t *testing.T) {
 	dir := t.TempDir()
 	writeConfigmap(t, dir, samplePraxisConfigmap)

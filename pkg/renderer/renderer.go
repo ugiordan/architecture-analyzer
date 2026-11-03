@@ -112,6 +112,16 @@ func escapeMdCell(text string) string {
 	return text
 }
 
+// sanitizeMdValue makes a YAML-derived value safe for inline Markdown
+// output outside table cells: backticks are replaced so they cannot open or
+// close code spans, and newlines are collapsed so the value cannot alter
+// the document structure.
+func sanitizeMdValue(text string) string {
+	text = strings.ReplaceAll(text, "`", "'")
+	text = strings.ReplaceAll(text, "\n", " ")
+	return text
+}
+
 
 // RoleSummary holds computed permission breadth for a single RBAC role.
 type RoleSummary struct {

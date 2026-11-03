@@ -64,8 +64,13 @@ func parsePraxisPipeline(value string) (*PraxisPipeline, bool) {
 	for _, m := range parseYAMLFromBytes([]byte(value)) {
 		chains, hasChains := m["filter_chains"].([]interface{})
 		server, hasServer := m["server"].(map[string]interface{})
-		if !hasChains && !hasServer {
-			continue
+		// Server-only values are accepted only with a real grpc_address; the
+		// earlier substring check may have matched the field name in a
+		// comment or another field.
+		if !hasChains {
+			if !hasServer || mapStr(server, "grpc_address") == "" {
+				continue
+			}
 		}
 
 		pipeline := &PraxisPipeline{}
