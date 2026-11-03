@@ -69,6 +69,9 @@ func SortOutput(arch *ComponentArchitecture) {
 		sort.Slice(arch.Dependencies.PythonPackages, func(i, j int) bool {
 			return arch.Dependencies.PythonPackages[i].Name < arch.Dependencies.PythonPackages[j].Name
 		})
+		sort.Slice(arch.Dependencies.CargoCrates, func(i, j int) bool {
+			return arch.Dependencies.CargoCrates[i].Name < arch.Dependencies.CargoCrates[j].Name
+		})
 		sort.Slice(arch.Dependencies.InternalODH, func(i, j int) bool {
 			return arch.Dependencies.InternalODH[i].Component < arch.Dependencies.InternalODH[j].Component
 		})

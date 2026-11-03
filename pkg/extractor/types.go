@@ -274,12 +274,14 @@ type ResourceOp struct {
 	Source    SourceRef `json:"source"`
 }
 
-// DependencyData holds Go module and Python package dependencies.
+// DependencyData holds Go module, Python package, and Rust crate dependencies.
 type DependencyData struct {
 	GoVersion         string              `json:"go_version,omitempty"`
 	Toolchain         string              `json:"toolchain,omitempty"`
 	GoModules         []GoModule          `json:"go_modules,omitempty"`
 	PythonPackages    []PythonPackage     `json:"python_packages,omitempty"`
+	CargoCrates       []CargoCrate        `json:"cargo_crates,omitempty"`
+	RustVersion       string              `json:"rust_version,omitempty"`
 	ReplaceDirectives []ReplaceDirective  `json:"replace_directives,omitempty"`
 	InternalODH       []InternalODH       `json:"internal_odh,omitempty"`
 	Issues            []string            `json:"issues,omitempty"`
@@ -313,6 +315,34 @@ type GoModule struct {
 type InternalODH struct {
 	Component   string `json:"component"`
 	Interaction string `json:"interaction"`
+}
+
+// CargoCrate is a single Rust crate dependency from a Cargo.toml manifest.
+// Version holds the version requirement. Kind marks git/path sources, whose
+// reference (tag/branch/rev or path) is carried in Ref.
+type CargoCrate struct {
+	Name     string `json:"name"`
+	Version  string `json:"version,omitempty"`
+	Category string `json:"category,omitempty"` // dependency kind: "" (normal), "dev", "build", "workspace"
+	Source   string `json:"source,omitempty"`   // which manifest file it came from
+	Kind     string `json:"kind,omitempty"`     // "", "git", "path"
+	Ref      string `json:"ref,omitempty"`      // git tag/branch/rev or path for git/path deps
+
+	// workspaceInherit marks `dep = { workspace = true }` declarations that
+	// must be resolved against [workspace.dependencies]; never serialized.
+	workspaceInherit bool `json:"-"`
+	// key is the declared TOML key (before any package rename), used to
+	// index and resolve workspace inheritance; never serialized.
+	key string `json:"-"`
+}
+
+// cargoCrateKey returns the declared TOML key of a crate, falling back to
+// its display name.
+func cargoCrateKey(c CargoCrate) string {
+	if c.key != "" {
+		return c.key
+	}
+	return c.Name
 }
 
 // SecretRef is a reference to a Kubernetes Secret (name only, never values).

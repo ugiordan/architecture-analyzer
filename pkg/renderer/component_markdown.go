@@ -748,13 +748,15 @@ func renderDependenciesMarkdownSection(b *strings.Builder, data map[string]inter
 	extConns := getSlice(data, "external_connections")
 	runtimeDeps := getSlice(data, "runtime_dependencies")
 	pythonPkgs := []map[string]interface{}(nil)
+	cargoCrates := []map[string]interface{}(nil)
 	var goModules, internalODH []map[string]interface{}
 	if deps != nil {
 		goModules = getSlice(deps, "go_modules")
 		internalODH = getSlice(deps, "internal_odh")
 		pythonPkgs = getSlice(deps, "python_packages")
+		cargoCrates = getSlice(deps, "cargo_crates")
 	}
-	if len(goModules) == 0 && len(internalODH) == 0 && len(pythonPkgs) == 0 && len(extConns) == 0 && len(runtimeDeps) == 0 {
+	if len(goModules) == 0 && len(internalODH) == 0 && len(pythonPkgs) == 0 && len(cargoCrates) == 0 && len(extConns) == 0 && len(runtimeDeps) == 0 {
 		return
 	}
 	b.WriteString("\n## Dependencies\n\n")
@@ -787,6 +789,21 @@ func renderDependenciesMarkdownSection(b *strings.Builder, data map[string]inter
 				escapeMdCell(getStr(pkg, "version", "")),
 				escapeMdCell(getStr(pkg, "category", "")),
 				getBool(pkg, "required", false),
+			))
+		}
+		b.WriteString("\n")
+	}
+	if len(cargoCrates) > 0 {
+		b.WriteString("### Cargo Crates\n\n")
+		b.WriteString("| Crate | Version | Category | Kind | Ref |\n")
+		b.WriteString("|-------|---------|----------|------|-----|\n")
+		for _, crate := range cargoCrates {
+			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s |\n",
+				escapeMdCell(getStr(crate, "name", "")),
+				escapeMdCell(getStr(crate, "version", "")),
+				escapeMdCell(getStr(crate, "category", "")),
+				escapeMdCell(getStr(crate, "kind", "")),
+				escapeMdCell(getStr(crate, "ref", "")),
 			))
 		}
 		b.WriteString("\n")
