@@ -140,6 +140,25 @@ func TestRenderComponentMarkdown_PraxisPipelinesSanitization(t *testing.T) {
 	}
 }
 
+func TestRenderComponentMarkdown_PraxisPipelinesSanitizationDoesNotMutateInput(t *testing.T) {
+	// getStringSlice may return the input []string without copying; the
+	// renderer must sanitize into a separate slice.
+	options := []string{"allow`unbounded", "plain"}
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name":             "extproc.yaml",
+				"insecure_options": options,
+			},
+		},
+	}
+	RenderComponentMarkdown(data)
+	if options[0] != "allow`unbounded" || options[1] != "plain" {
+		t.Errorf("input insecure_options slice was mutated: %v", options)
+	}
+}
+
 func TestRenderComponentMarkdown_EmptySectionsOmitted(t *testing.T) {
 	data := map[string]interface{}{
 		"component":        "minimal",

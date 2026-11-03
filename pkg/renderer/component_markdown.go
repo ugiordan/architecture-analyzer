@@ -790,10 +790,13 @@ func renderPraxisPipelinesMarkdownSection(b *strings.Builder, data map[string]in
 		}
 
 		if opts := getStringSlice(p, "insecure_options"); len(opts) > 0 {
+			// Build a separate slice: getStringSlice may alias the input
+			// data, which must not be mutated.
+			sanitized := make([]string, len(opts))
 			for i, o := range opts {
-				opts[i] = sanitizeMdValue(o)
+				sanitized[i] = sanitizeMdValue(o)
 			}
-			b.WriteString(fmt.Sprintf("Insecure options: %s\n\n", strings.Join(opts, ", ")))
+			b.WriteString(fmt.Sprintf("Insecure options: %s\n\n", strings.Join(sanitized, ", ")))
 		}
 
 		if src := getStr(p, "source", ""); src != "" {
