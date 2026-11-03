@@ -39,7 +39,7 @@ var (
 	copyFromRE   = regexp.MustCompile(`--from=(\S+)`)
 
 	runRE             = regexp.MustCompile(`(?i)^RUN\s+(.+)`)
-	goBuildRE         = regexp.MustCompile(`go\s+build\b`)
+		goBuildRE         = regexp.MustCompile(`\bgo\s+build\b`)
 	goBuildOutputRE   = regexp.MustCompile(`-o\s+(\S+)`)
 	goBuildEntryRE    = regexp.MustCompile(`\s((?:\./)?(?:[\w./-]+\.go|[\w./-]+/\.\.\.|\.(?:/[\w./-]+)+/?))$`)
 	npmBuildRE        = regexp.MustCompile(`(?:npm\s+run|yarn\s+run|yarn|pnpm(?:\s+run)?)\s+(build\S*)`)

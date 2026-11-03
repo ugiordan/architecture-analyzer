@@ -356,6 +356,21 @@ COPY --from=builder /workspace/manager .
 	}
 }
 
+func TestBuildCommandCargoBuildIsNotGoBuild(t *testing.T) {
+	dockerfile := `FROM rust:1.86 AS builder
+RUN cargo build --release -p praxis-extproc
+`
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "Dockerfile"), []byte(dockerfile), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	result := extractDockerfiles(dir)
+	if len(result[0].BuildCommands) != 0 {
+		t.Fatalf("expected no Go build command, got %+v", result[0].BuildCommands)
+	}
+}
+
 func TestBuildCommandNpm(t *testing.T) {
 	dockerfile := `FROM node:20 AS builder
 COPY package*.json ./
