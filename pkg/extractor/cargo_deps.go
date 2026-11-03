@@ -14,7 +14,8 @@ var (
 	// [dev-dependencies.foo] (target/platform-specific).
 	cargoSectionRE = regexp.MustCompile(`^\[([^\]]+)\]`)
 	// cargoEntryRE matches `name = "version"` or `name = { ... }` lines.
-	cargoEntryRE = regexp.MustCompile(`^([A-Za-z0-9_-]+)\s*=\s*(.+)$`)
+	// Keys may contain dots for TOML dotted-key syntax (serde.workspace = true).
+	cargoEntryRE = regexp.MustCompile(`^([A-Za-z0-9_.-]+)\s*=\s*(.+)$`)
 	// cargoVersionStringRE matches a bare version requirement string value.
 	cargoVersionStringRE = regexp.MustCompile(`^"([^"]*)"`)
 	// cargoTableFieldRE extracts a `field = "value"` pair inside a table value.
@@ -23,8 +24,9 @@ var (
 	cargoBoolFieldRE = regexp.MustCompile(`(\w+)\s*=\s*(true|false)`)
 	// cargoRustVersionRE matches rust-version under [package] or [workspace.package].
 	cargoRustVersionRE = regexp.MustCompile(`^rust-version\s*=\s*"([^"]*)"`)
-	// cargoWorkspaceExcludeRE matches `exclude = [...]` under [workspace].
-	cargoWorkspaceExcludeRE = regexp.MustCompile(`^exclude\s*=\s*(\[.*\])`)
+	// cargoWorkspaceExcludeRE matches the start of `exclude = [...]` under
+	// [workspace], whether or not the array closes on the same line.
+	cargoWorkspaceExcludeRE = regexp.MustCompile(`^exclude\s*=\s*(\[.*)?$`)
 	// cargoQuotedItemRE extracts a quoted string from an array literal.
 	cargoQuotedItemRE = regexp.MustCompile(`"([^"]*)"`)
 )
@@ -51,12 +53,21 @@ var cargoDepListSections = []struct {
 func cargoSectionInfo(section string) (category, depName string, isDep bool) {
 	s := section
 	if strings.HasPrefix(s, "target.") {
-		// Strip the target.'cfg(...)' prefix: find the closing quote of the
-		// cfg expression followed by a dot.
-		if idx := strings.Index(s, "'."); idx >= 0 && idx+2 < len(s) {
-			s = s[idx+2:]
+		rest := s[len("target."):]
+		if strings.HasPrefix(rest, "'") {
+			// Quoted cfg expression: strip target.'cfg(...)'.
+			if idx := strings.Index(rest, "'."); idx >= 0 && idx+2 < len(rest) {
+				s = rest[idx+2:]
+			} else {
+				return "", "", false
+			}
 		} else {
-			return "", "", false
+			// Bare target triple: strip target.x86_64-unknown-linux-gnu.
+			if idx := strings.Index(rest, "."); idx >= 0 && idx+1 < len(rest) {
+				s = rest[idx+1:]
+			} else {
+				return "", "", false
+			}
 		}
 	}
 	for _, base := range cargoDepListSections {
@@ -192,7 +203,9 @@ func extractCargoDeps(repoPath string) []CargoCrate {
 		parsed[i] = deps
 		for _, dep := range deps {
 			if dep.Category == "workspace" {
-				wsDeps[dep.Name] = dep
+				// Index by declared key so renamed entries stay findable by
+				// members using the local alias.
+				wsDeps[cargoCrateKey(dep)] = dep
 			}
 		}
 	}
@@ -201,7 +214,7 @@ func extractCargoDeps(repoPath string) []CargoCrate {
 	for _, deps := range parsed {
 		for _, dep := range deps {
 			if dep.workspaceInherit {
-				if ws, ok := wsDeps[dep.Name]; ok {
+				if ws, ok := wsDeps[cargoCrateKey(dep)]; ok {
 					if dep.Version == "" {
 						dep.Version = ws.Version
 					}
@@ -211,6 +224,9 @@ func extractCargoDeps(repoPath string) []CargoCrate {
 					if dep.Ref == "" {
 						dep.Ref = ws.Ref
 					}
+					// Adopt the resolved display name so the member entry
+					// merges with the workspace entry instead of duplicating.
+					dep.Name = ws.Name
 				}
 			}
 			mergeCrate(seen, dep)
@@ -229,15 +245,18 @@ func extractCargoDeps(repoPath string) []CargoCrate {
 
 // extractRustVersion returns the rust-version declared in the root manifest
 // ([package] rust-version, falling back to an inheritable
-// [workspace.package] rust-version), or "" when absent.
+// [workspace.package] rust-version), or "" when absent. Only the literal
+// root manifest is read: under ExtractAll's active FileIndex, glob patterns
+// can match nested manifests (e.g. Cargo/Cargo.toml) whose versions must
+// not win over the root's.
 func extractRustVersion(repoPath string) string {
-	rootPath := findFiles(repoPath, []string{"Cargo.toml"})
-	for _, fpath := range rootPath {
-		if _, rustVersion := parseCargoToml(fpath, repoPath); rustVersion != "" {
-			return rustVersion
-		}
+	rootManifest := filepath.Join(repoPath, "Cargo.toml")
+	info, err := os.Lstat(rootManifest)
+	if err != nil || info.IsDir() || info.Mode()&os.ModeSymlink != 0 {
+		return ""
 	}
-	return ""
+	_, rustVersion := parseCargoToml(rootManifest, repoPath)
+	return rustVersion
 }
 
 // parseCargoToml parses one Cargo.toml manifest, returning its crate
@@ -260,14 +279,30 @@ func parseCargoToml(fpath, repoPath string) ([]CargoCrate, string) {
 	var subName, subCategory string
 	var subFields map[string]string
 
+	// Dotted-key state: `serde.workspace = true` lines accumulate fields
+	// per declared key until the next section header.
+	type dottedEntry struct {
+		category string
+		fields   map[string]string
+	}
+	var dotted map[string]dottedEntry
+
 	flushSubtable := func() {
 		if subName == "" {
 			return
 		}
-		crate := CargoCrate{Name: subName, Category: subCategory, Source: source}
+		crate := CargoCrate{Name: subName, key: subName, Category: subCategory, Source: source}
 		applyCrateFields(&crate, subFields)
 		crates = append(crates, crate)
 		subName, subCategory, subFields = "", "", nil
+	}
+	flushDotted := func() {
+		for name, entry := range dotted {
+			crate := CargoCrate{Name: name, key: name, Category: entry.category, Source: source}
+			applyCrateFields(&crate, entry.fields)
+			crates = append(crates, crate)
+		}
+		dotted = nil
 	}
 
 	for _, rawLine := range strings.Split(string(data), "\n") {
@@ -278,6 +313,7 @@ func parseCargoToml(fpath, repoPath string) ([]CargoCrate, string) {
 
 		if m := cargoSectionRE.FindStringSubmatch(line); m != nil {
 			flushSubtable()
+			flushDotted()
 			section = m[1]
 			continue
 		}
@@ -323,7 +359,32 @@ func parseCargoToml(fpath, repoPath string) ([]CargoCrate, string) {
 			continue
 		}
 
-		crate := CargoCrate{Name: key, Category: category, Source: source}
+		// Dotted-key syntax: `serde.workspace = true` declares a field of
+		// the dependency named by the first path segment.
+		if dotIdx := strings.Index(key, "."); dotIdx > 0 && dotIdx < len(key)-1 {
+			base, field := key[:dotIdx], key[dotIdx+1:]
+			var val string
+			if qm := cargoVersionStringRE.FindStringSubmatch(value); qm != nil {
+				val = qm[1]
+			} else if value == "true" || value == "false" {
+				val = value
+			} else {
+				continue
+			}
+			if dotted == nil {
+				dotted = make(map[string]dottedEntry)
+			}
+			entry := dotted[base]
+			if entry.fields == nil {
+				entry.category = category
+				entry.fields = make(map[string]string)
+			}
+			entry.fields[field] = val
+			dotted[base] = entry
+			continue
+		}
+
+		crate := CargoCrate{Name: key, key: key, Category: category, Source: source}
 		if vm := cargoVersionStringRE.FindStringSubmatch(value); vm != nil {
 			crate.Version = vm[1]
 		} else if strings.HasPrefix(value, "{") {
@@ -334,6 +395,7 @@ func parseCargoToml(fpath, repoPath string) ([]CargoCrate, string) {
 		crates = append(crates, crate)
 	}
 	flushSubtable()
+	flushDotted()
 
 	rustVersion := packageRV
 	if rustVersion == "" {

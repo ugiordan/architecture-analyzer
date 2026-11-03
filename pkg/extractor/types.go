@@ -331,6 +331,18 @@ type CargoCrate struct {
 	// workspaceInherit marks `dep = { workspace = true }` declarations that
 	// must be resolved against [workspace.dependencies]; never serialized.
 	workspaceInherit bool `json:"-"`
+	// key is the declared TOML key (before any package rename), used to
+	// index and resolve workspace inheritance; never serialized.
+	key string `json:"-"`
+}
+
+// cargoCrateKey returns the declared TOML key of a crate, falling back to
+// its display name.
+func cargoCrateKey(c CargoCrate) string {
+	if c.key != "" {
+		return c.key
+	}
+	return c.Name
 }
 
 // SecretRef is a reference to a Kubernetes Secret (name only, never values).

@@ -3,6 +3,7 @@ package extractor
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -356,6 +357,178 @@ version = "0.1"
 	for _, name := range []string{"version", "git", "tag", "something"} {
 		if _, ok := byName[name]; ok {
 			t.Errorf("subtable field %q leaked as a crate", name)
+		}
+	}
+}
+
+func TestExtractCargoDepsMultilineExclude(t *testing.T) {
+	dir := t.TempDir()
+	root := `[workspace]
+members = ["app"]
+exclude = [
+    "vendored-thing",
+    "also-excluded",
+]
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	for _, excluded := range []string{"vendored-thing", "also-excluded"} {
+		if err := os.MkdirAll(filepath.Join(dir, excluded), 0755); err != nil {
+			t.Fatal(err)
+		}
+		manifest := "[package]\nname = \"x\"\n\n[dependencies]\nsneaky = \"1.0.0\"\n"
+		if err := os.WriteFile(filepath.Join(dir, excluded, "Cargo.toml"), []byte(manifest), 0644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "app"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "app", "Cargo.toml"), []byte("[package]\nname = \"app\"\n"), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	if len(crates) != 0 {
+		t.Errorf("excluded package dependencies leaked into results: %+v", crates)
+	}
+}
+
+func TestExtractCargoDepsBareTargetSection(t *testing.T) {
+	dir := t.TempDir()
+	manifest := `[package]
+name = "bare-target"
+
+[target.x86_64-unknown-linux-gnu.dependencies]
+foo = "1.0.0"
+
+[target.'cfg(windows)'.dev-dependencies]
+win-only = "0.1"
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(manifest), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+	if got, ok := byName["foo"]; !ok || got.Version != "1.0.0" {
+		t.Errorf("bare target dependency foo: got %+v, ok=%v", got, ok)
+	}
+	if got, ok := byName["win-only"]; !ok || got.Category != "dev" {
+		t.Errorf("quoted target dev-dependency win-only: got %+v, ok=%v", got, ok)
+	}
+}
+
+func TestExtractCargoDepsWorkspaceInheritRenamed(t *testing.T) {
+	dir := t.TempDir()
+	root := `[workspace]
+members = ["app"]
+
+[workspace.dependencies]
+alias = { package = "actual", version = "1.2.3" }
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "app"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	member := `[package]
+name = "app"
+
+[dependencies]
+alias = { workspace = true }
+`
+	if err := os.WriteFile(filepath.Join(dir, "app", "Cargo.toml"), []byte(member), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	var renamed []CargoCrate
+	for _, c := range crates {
+		if strings.Contains(c.Name, "alias") || strings.Contains(c.Name, "actual") {
+			renamed = append(renamed, c)
+		}
+	}
+	if len(renamed) != 1 {
+		t.Fatalf("expected a single resolved entry, got %+v", renamed)
+	}
+	got := renamed[0]
+	if got.Name != "alias (actual)" {
+		t.Errorf("resolved name: got %q, want %q", got.Name, "alias (actual)")
+	}
+	if got.Version != "1.2.3" {
+		t.Errorf("resolved version: got %q, want 1.2.3", got.Version)
+	}
+	if got.Category != "" {
+		t.Errorf("resolved category: got %q, want \"\" (member-level)", got.Category)
+	}
+}
+
+func TestExtractRustVersionRootManifestOnly(t *testing.T) {
+	dir := t.TempDir()
+	root := "[package]\nname = \"root\"\nrust-version = \"1.90\"\n"
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	// A nested manifest whose basename is Cargo.toml (e.g. inside a directory
+	// named Cargo) must not override the root's rust-version.
+	if err := os.MkdirAll(filepath.Join(dir, "Cargo"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	nested := "[package]\nname = \"nested\"\nrust-version = \"1.50\"\n"
+	if err := os.WriteFile(filepath.Join(dir, "Cargo", "Cargo.toml"), []byte(nested), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if v := extractRustVersion(dir); v != "1.90" {
+		t.Errorf("rust version: got %q, want 1.90 (root manifest)", v)
+	}
+}
+
+func TestExtractCargoDepsDottedKeys(t *testing.T) {
+	dir := t.TempDir()
+	root := `[workspace]
+members = ["app"]
+
+[workspace.dependencies]
+serde = "1.0.228"
+`
+	if err := os.WriteFile(filepath.Join(dir, "Cargo.toml"), []byte(root), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "app"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	member := `[package]
+name = "app"
+
+[dependencies]
+serde.workspace = true
+foo.version = "1.2"
+`
+	if err := os.WriteFile(filepath.Join(dir, "app", "Cargo.toml"), []byte(member), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	crates := extractCargoDeps(dir)
+	byName := make(map[string]CargoCrate, len(crates))
+	for _, c := range crates {
+		byName[c.Name] = c
+	}
+	if got, ok := byName["serde"]; !ok || got.Version != "1.0.228" || got.Category != "" {
+		t.Errorf("dotted workspace inheritance serde: got %+v, ok=%v", got, ok)
+	}
+	if got, ok := byName["foo"]; !ok || got.Version != "1.2" {
+		t.Errorf("dotted version declaration foo: got %+v, ok=%v", got, ok)
+	}
+	// Dotted field names must not leak as crates.
+	for _, name := range []string{"workspace", "version"} {
+		if _, ok := byName[name]; ok {
+			t.Errorf("dotted field %q leaked as a crate", name)
 		}
 	}
 }
