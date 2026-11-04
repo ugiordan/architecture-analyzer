@@ -95,8 +95,10 @@ func TestRenderComponentMarkdown_PraxisPipelines(t *testing.T) {
 		"payload-processing-plugins/extproc.yaml",
 		"0.0.0.0:9004",
 		"self_signed",
-		"headers -> request_id",
-		"allow_unbounded_body",
+		// Filter and option names are markup-encoded outside code spans:
+		// underscores are backslash-escaped and render literally.
+		"headers -> request\\_id",
+		"allow\\_unbounded\\_body",
 	} {
 		if !strings.Contains(result, want) {
 			t.Errorf("missing %q in rendered markdown", want)
@@ -156,6 +158,48 @@ func TestRenderComponentMarkdown_PraxisPipelinesSanitizationDoesNotMutateInput(t
 	RenderComponentMarkdown(data)
 	if options[0] != "allow`unbounded" || options[1] != "plain" {
 		t.Errorf("input insecure_options slice was mutated: %v", options)
+	}
+}
+
+func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
+	// TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding verifies
+	// that filter names and insecure-option keys rendered outside code
+	// spans have HTML and Markdown markup encoded, so they display
+	// literally instead of becoming tags, links, or emphasis.
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name": "extproc.yaml",
+				"filter_chains": []interface{}{
+					map[string]interface{}{
+						"name": "chain",
+						"filters": []interface{}{
+							map[string]interface{}{"filter": "<step>injected</step>"},
+							map[string]interface{}{"filter": "[click](http://evil.example)"},
+						},
+					},
+				},
+				"insecure_options": []interface{}{"*emphasized*"},
+			},
+		},
+	}
+	result := RenderComponentMarkdown(data)
+
+	if strings.Contains(result, "<step>") {
+		t.Error("raw HTML tag from filter name leaked into markdown")
+	}
+	if !strings.Contains(result, "&lt;step&gt;") {
+		t.Error("filter name HTML not entity-encoded")
+	}
+	if strings.Contains(result, "[click](http://evil.example)") {
+		t.Error("raw markdown link from filter name leaked into markdown")
+	}
+	if !strings.Contains(result, "\\[click\\]") {
+		t.Error("filter name link syntax not backslash-escaped")
+	}
+	if strings.Contains(result, "*emphasized*") {
+		t.Error("raw emphasis marker from insecure option leaked into markdown")
 	}
 }
 

@@ -236,6 +236,24 @@ data:
 
 // TestPraxisPipelinesDataCoverage verifies the praxis_pipelines coverage
 // classification.
+func TestExtractPraxisPipelinesEmptyChainsOnly(t *testing.T) {
+	// TestExtractPraxisPipelinesEmptyChainsOnly verifies that an empty
+	// filter_chains list without a server is not accepted as a pipeline.
+	dir := t.TempDir()
+	writeConfigmap(t, dir, `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: empty-chains
+data:
+  pipeline.yaml: |
+    filter_chains: []
+`)
+
+	if pipelines := extractPraxisPipelines(dir); len(pipelines) != 0 {
+		t.Errorf("expected no pipelines from empty filter_chains, got %+v", pipelines)
+	}
+}
+
 func TestPraxisPipelinesDataCoverage(t *testing.T) {
 	dir := t.TempDir()
 	writeConfigmap(t, dir, samplePraxisConfigmap)

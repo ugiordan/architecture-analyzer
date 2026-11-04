@@ -115,12 +115,28 @@ func escapeMdCell(text string) string {
 }
 
 // sanitizeMdValue makes a YAML-derived value safe for inline Markdown
-// output outside table cells: backticks are replaced so they cannot open or
-// close code spans, and newlines are collapsed so the value cannot alter
+// output inside code spans: backticks are replaced so they cannot open or
+// close the span, and newlines are collapsed so the value cannot alter
 // the document structure.
 func sanitizeMdValue(text string) string {
 	text = strings.ReplaceAll(text, "`", "'")
 	text = strings.ReplaceAll(text, "\n", " ")
+	return text
+}
+
+// sanitizeMdInline makes a YAML-derived value safe for Markdown output
+// outside code spans and table cells: in addition to the code-span rules,
+// HTML-significant characters are entity-encoded and Markdown emphasis and
+// link characters are backslash-escaped so the value renders literally.
+func sanitizeMdInline(text string) string {
+	text = sanitizeMdValue(text)
+	text = strings.ReplaceAll(text, "&", "&amp;")
+	text = strings.ReplaceAll(text, "<", "&lt;")
+	text = strings.ReplaceAll(text, ">", "&gt;")
+	text = strings.ReplaceAll(text, "[", "\\[")
+	text = strings.ReplaceAll(text, "]", "\\]")
+	text = strings.ReplaceAll(text, "*", "\\*")
+	text = strings.ReplaceAll(text, "_", "\\_")
 	return text
 }
 

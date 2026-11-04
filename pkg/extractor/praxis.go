@@ -66,8 +66,9 @@ func parsePraxisPipeline(value string) (*PraxisPipeline, bool) {
 		server, hasServer := m["server"].(map[string]interface{})
 		// Server-only values are accepted only with a real grpc_address; the
 		// earlier substring check may have matched the field name in a
-		// comment or another field.
-		if !hasChains {
+		// comment or another field. Chains-only values must carry at least
+		// one chain: an empty filter_chains list alone is not a pipeline.
+		if !hasChains || len(chains) == 0 {
 			if !hasServer || mapStr(server, "grpc_address") == "" {
 				continue
 			}
