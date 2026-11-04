@@ -48,6 +48,7 @@ type ComponentArchitecture struct {
 	Helm            *HelmData          `json:"helm,omitempty"`
 	Webhooks        []WebhookConfig    `json:"webhooks,omitempty"`
 	ConfigMaps      []ConfigMapRef     `json:"configmaps,omitempty"`
+	PraxisPipelines []PraxisPipeline   `json:"praxis_pipelines,omitempty"`
 	HTTPEndpoints   []HTTPEndpoint     `json:"http_endpoints,omitempty"`
 	IngressRouting      []IngressResource  `json:"ingress_routing,omitempty"`
 	ExternalConnections []ExternalConnection `json:"external_connections,omitempty"`
@@ -443,6 +444,37 @@ type ConfigMapRef struct {
 	DataKeys     []string `json:"data_keys,omitempty"`
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 	Source       string   `json:"source"`
+}
+
+// PraxisPipeline is a Praxis ExtProc filter pipeline configuration embedded
+// as YAML in a ConfigMap data value. Only known structural fields are
+// captured; arbitrary ConfigMap values are never copied verbatim.
+type PraxisPipeline struct {
+	Name            string              `json:"name"`      // ConfigMap data key
+	ConfigMap       string              `json:"configmap"` // ConfigMap metadata name
+	Source          string              `json:"source"`    // manifest file it came from
+	Server          *PraxisServer       `json:"server,omitempty"`
+	Chains          []PraxisFilterChain `json:"filter_chains,omitempty"`
+	InsecureOptions []string            `json:"insecure_options,omitempty"`
+}
+
+// PraxisServer holds the listen addresses and TLS mode of a Praxis pipeline.
+type PraxisServer struct {
+	GRPCAddress    string `json:"grpc_address,omitempty"`
+	HealthAddress  string `json:"health_address,omitempty"`
+	MetricsAddress string `json:"metrics_address,omitempty"`
+	TLSMode        string `json:"tls_mode,omitempty"`
+}
+
+// PraxisFilterChain is a named, ordered chain of Praxis filters.
+type PraxisFilterChain struct {
+	Name    string         `json:"name"`
+	Filters []PraxisFilter `json:"filters,omitempty"`
+}
+
+// PraxisFilter is a single filter step within a chain. Order is significant.
+type PraxisFilter struct {
+	Filter string `json:"filter"`
 }
 
 // HTTPEndpoint represents an HTTP route registration found in source code.

@@ -292,6 +292,9 @@ func RenderComponentMarkdown(data map[string]interface{}) string {
 		}
 	})
 
+	// Praxis pipelines (embedded in ConfigMaps)
+	renderPraxisPipelinesMarkdownSection(&b, data)
+
 	// Helm
 	renderHelmMarkdownSection(&b, data)
 
@@ -740,6 +743,69 @@ func renderSecurityContextMarkdownSection(b *strings.Builder, data map[string]in
 			escapeMdCell(sc.container), sc.runAsNonRoot, sc.readOnlyFS, escapeMdCell(sc.capabilities)))
 	}
 	b.WriteString("\n")
+}
+
+// renderPraxisPipelinesMarkdownSection renders Praxis ExtProc filter
+// pipeline configurations embedded in ConfigMaps.
+func renderPraxisPipelinesMarkdownSection(b *strings.Builder, data map[string]interface{}) {
+	pipelines := getSlice(data, "praxis_pipelines")
+	if len(pipelines) == 0 {
+		return
+	}
+	b.WriteString("\n## Praxis Pipelines\n\n")
+	for _, p := range pipelines {
+		name := getStr(p, "name", "")
+		configMap := getStr(p, "configmap", "")
+		title := name
+		if configMap != "" {
+			title = configMap + "/" + name
+		}
+		b.WriteString(fmt.Sprintf("### %s\n\n", escapeMdCell(title)))
+
+		if server := getMap(p, "server"); server != nil {
+			b.WriteString("| gRPC | Health | Metrics | TLS |\n")
+			b.WriteString("|------|--------|---------|-----|\n")
+			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n\n",
+				escapeMdCell(getStr(server, "grpc_address", "")),
+				escapeMdCell(getStr(server, "health_address", "")),
+				escapeMdCell(getStr(server, "metrics_address", "")),
+				escapeMdCell(getStr(server, "tls_mode", "")),
+			))
+		}
+
+		for _, c := range getSlice(p, "filter_chains") {
+			chainName := sanitizeMdValue(getStr(c, "name", ""))
+			var filters []string
+			for _, f := range getSlice(c, "filters") {
+				// Filter names render outside code spans: HTML and Markdown
+				// markup must be encoded so values render literally.
+				filters = append(filters, sanitizeMdInline(getStr(f, "filter", "")))
+			}
+			// Chain and filter names are plain identifiers rendered inside
+			// code spans and arrows; cell escaping would show entities
+			// literally there.
+			if chainName != "" {
+				b.WriteString(fmt.Sprintf("**Chain `%s`**: %s\n\n", chainName, strings.Join(filters, " -> ")))
+			} else {
+				b.WriteString(fmt.Sprintf("**Chain**: %s\n\n", strings.Join(filters, " -> ")))
+			}
+		}
+
+		if opts := getStringSlice(p, "insecure_options"); len(opts) > 0 {
+			// Build a separate slice: getStringSlice may alias the input
+			// data, which must not be mutated. Option keys render outside
+			// code spans, so markup is encoded.
+			sanitized := make([]string, len(opts))
+			for i, o := range opts {
+				sanitized[i] = sanitizeMdInline(o)
+			}
+			b.WriteString(fmt.Sprintf("Insecure options: %s\n\n", strings.Join(sanitized, ", ")))
+		}
+
+		if src := getStr(p, "source", ""); src != "" {
+			b.WriteString(fmt.Sprintf("Source: %s\n\n", sourceLink(data, src)))
+		}
+	}
 }
 
 // renderDependenciesMarkdownSection renders the composite dependencies section.

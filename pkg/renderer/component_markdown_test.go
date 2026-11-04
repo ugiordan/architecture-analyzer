@@ -2,8 +2,12 @@
 package renderer
 
 import (
+	"bytes"
 	"strings"
 	"testing"
+
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
 )
 
 func TestRenderComponentMarkdown_BasicStructure(t *testing.T) {
@@ -58,6 +62,208 @@ func TestRenderComponentMarkdown_BasicStructure(t *testing.T) {
 	if !strings.Contains(result, "test-svc") {
 		t.Error("missing service name in table")
 	}
+}
+
+// TestRenderComponentMarkdown_PraxisPipelines verifies the rendered Praxis
+// Pipelines section: title, server table, chain flow, and insecure options.
+func TestRenderComponentMarkdown_PraxisPipelines(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name":      "extproc.yaml",
+				"configmap": "payload-processing-plugins",
+				"source":    "deploy/base/config/configmap.yaml",
+				"server": map[string]interface{}{
+					"grpc_address":    "0.0.0.0:9004",
+					"health_address":  "0.0.0.0:50052",
+					"metrics_address": "0.0.0.0:9090",
+					"tls_mode":        "self_signed",
+				},
+				"filter_chains": []interface{}{
+					map[string]interface{}{
+						"name": "ipp",
+						"filters": []interface{}{
+							map[string]interface{}{"filter": "headers"},
+							map[string]interface{}{"filter": "request_id"},
+						},
+					},
+				},
+				"insecure_options": []interface{}{"allow_unbounded_body"},
+			},
+		},
+	}
+	result := RenderComponentMarkdown(data)
+	for _, want := range []string{
+		"## Praxis Pipelines",
+		"payload-processing-plugins/extproc.yaml",
+		"0.0.0.0:9004",
+		"self_signed",
+		// Filter and option names are markup-encoded outside code spans:
+		// underscores are backslash-escaped and render literally.
+		"headers -> request\\_id",
+		"allow\\_unbounded\\_body",
+	} {
+		if !strings.Contains(result, want) {
+			t.Errorf("missing %q in rendered markdown", want)
+		}
+	}
+}
+
+// TestRenderComponentMarkdown_PraxisPipelinesSanitization verifies that
+// YAML-derived names cannot inject backticks or newlines into the report.
+func TestRenderComponentMarkdown_PraxisPipelinesSanitization(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name":      "extproc.yaml",
+				"configmap": "payload-processing-plugins",
+				"filter_chains": []interface{}{
+					map[string]interface{}{
+						"name": "ev`il\n# injected heading",
+						"filters": []interface{}{
+							map[string]interface{}{"filter": "json`body\n**bold**"},
+						},
+					},
+				},
+				"insecure_options": []interface{}{"allow`unbounded\n- bullet"},
+			},
+		},
+	}
+	result := RenderComponentMarkdown(data)
+
+	// Backticks and newlines from YAML-derived values must not survive into
+	// the rendered markdown: they could close code spans or alter structure.
+	if strings.Contains(result, "ev`il") || strings.Contains(result, "json`body") || strings.Contains(result, "allow`unbounded") {
+		t.Error("raw backtick from YAML-derived value leaked into markdown")
+	}
+	if strings.Contains(result, "\n# injected heading") {
+		t.Error("newline from YAML-derived value altered markdown structure")
+	}
+	if !strings.Contains(result, "Chain `ev'il # injected heading`") {
+		t.Errorf("sanitized chain name missing from output:\n%s", result)
+	}
+}
+
+func TestRenderComponentMarkdown_PraxisPipelinesSanitizationDoesNotMutateInput(t *testing.T) {
+	// getStringSlice may return the input []string without copying; the
+	// renderer must sanitize into a separate slice.
+	options := []string{"allow`unbounded", "plain"}
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name":             "extproc.yaml",
+				"insecure_options": options,
+			},
+		},
+	}
+	RenderComponentMarkdown(data)
+	if options[0] != "allow`unbounded" || options[1] != "plain" {
+		t.Errorf("input insecure_options slice was mutated: %v", options)
+	}
+}
+
+func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
+	// TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding verifies
+	// that filter names and insecure-option keys rendered outside code
+	// spans have HTML and Markdown markup encoded, so they display
+	// literally instead of becoming tags, links, or emphasis.
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"praxis_pipelines": []interface{}{
+			map[string]interface{}{
+				"name": "extproc.yaml",
+				"filter_chains": []interface{}{
+					map[string]interface{}{
+						"name": "chain",
+						"filters": []interface{}{
+							map[string]interface{}{"filter": "<step>injected</step>"},
+							map[string]interface{}{"filter": "[click](http://evil.example)"},
+							map[string]interface{}{"filter": `\[literal\](https://example.invalid)`},
+							map[string]interface{}{"filter": `\~disabled~`},
+							map[string]interface{}{"filter": "ok\r\r# forged"},
+						},
+					},
+				},
+				"insecure_options": []interface{}{"*emphasized*"},
+			},
+		},
+	}
+	result := RenderComponentMarkdown(data)
+
+	if strings.Contains(result, "<step>") {
+		t.Error("raw HTML tag from filter name leaked into markdown")
+	}
+	if !strings.Contains(result, "&lt;step&gt;") {
+		t.Error("filter name HTML not entity-encoded")
+	}
+	if strings.Contains(result, "[click](http://evil.example)") {
+		t.Error("raw markdown link from filter name leaked into markdown")
+	}
+	if !strings.Contains(result, "\\[click\\]") {
+		t.Error("filter name link syntax not backslash-escaped")
+	}
+	if strings.Contains(result, "*emphasized*") {
+		t.Error("raw emphasis marker from insecure option leaked into markdown")
+	}
+	// Pre-escaped brackets in the input must not survive as a GFM link:
+	// existing backslashes are doubled before punctuation escaping, so the
+	// output carries \\\[literal\\\] and renders literally.
+	if strings.Contains(result, "[literal](") {
+		t.Error("unescaped link syntax from pre-escaped filter name leaked into markdown")
+	}
+	if !strings.Contains(result, "\\\\\\[literal") {
+		t.Error("pre-escaped filter name not fully escaped (expected doubled backslash then escaped bracket)")
+	}
+	// The URL itself must not form a GFM autolink: the scheme colon is
+	// escaped, so the scheme delimiter is broken in the source.
+	if strings.Contains(result, "(https://") {
+		t.Error("unescaped URL after opening parenthesis leaked into markdown")
+	}
+	if !strings.Contains(result, "https\\://example.invalid") {
+		t.Error("URL scheme colon not escaped against GFM autolinks")
+	}
+	// Strikethrough delimiters are escaped after backslash doubling, so
+	// \~disabled~ renders literally instead of struck through.
+	if !strings.Contains(result, "\\\\\\~disabled\\~") {
+		t.Error("strikethrough delimiter not fully escaped")
+	}
+
+	// Rendered GFM must contain no clickable link and no strikethrough
+	// originating from the filter values: linkify, inline links, and
+	// strikethrough are all active GFM extensions here.
+	rendered := renderGFM(t, result)
+	for _, host := range []string{"evil.example", "example.invalid"} {
+		if strings.Contains(rendered, "href=\"http://"+host) ||
+			strings.Contains(rendered, "href=\"https://"+host) {
+			t.Errorf("filter value produced a clickable link to %s in rendered GFM", host)
+		}
+	}
+	if strings.Contains(rendered, "<del>") {
+		t.Error("filter value produced strikethrough in rendered GFM")
+	}
+	// Carriage returns are line endings in GFM: a value like "ok\r\r# forged"
+	// must not start a heading in the rendered report.
+	if strings.Contains(result, "\r") {
+		t.Error("carriage return from filter value leaked into markdown")
+	}
+	if strings.Contains(rendered, "<h1>forged") || strings.Contains(rendered, ">forged</h1>") {
+		t.Error("carriage return created a forged heading in rendered GFM")
+	}
+}
+
+// renderGFM renders markdown to HTML with the GFM extensions (linkify,
+// strikethrough, tables) so tests can assert on rendered behavior rather
+// than only the markdown source.
+func renderGFM(t *testing.T, markdown string) string {
+	t.Helper()
+	var buf bytes.Buffer
+	if err := goldmark.New(goldmark.WithExtensions(extension.GFM)).Convert([]byte(markdown), &buf); err != nil {
+		t.Fatalf("goldmark convert: %v", err)
+	}
+	return buf.String()
 }
 
 func TestRenderComponentMarkdown_EmptySectionsOmitted(t *testing.T) {

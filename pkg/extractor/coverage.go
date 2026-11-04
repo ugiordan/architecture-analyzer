@@ -21,6 +21,7 @@ func computeDataCoverage(arch *ComponentArchitecture) map[string]string {
 	cov["runtime_dependencies"] = classifyCoverage(len(arch.RuntimeDependencies), 0)
 	cov["secrets"] = classifyCoverage(len(arch.Secrets), 0)
 	cov["configmaps"] = classifyCoverage(len(arch.ConfigMaps), 0)
+	cov["praxis_pipelines"] = classifyCoverage(len(arch.PraxisPipelines), 0)
 	cov["dockerfiles"] = classifyCoverage(len(arch.Dockerfiles), 0)
 	cov["api_types"] = classifyCoverage(len(arch.APITypes), 0)
 
