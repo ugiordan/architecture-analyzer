@@ -183,6 +183,7 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 							map[string]interface{}{"filter": "[click](http://evil.example)"},
 							map[string]interface{}{"filter": `\[literal\](https://example.invalid)`},
 							map[string]interface{}{"filter": `\~disabled~`},
+							map[string]interface{}{"filter": "ok\r\r# forged"},
 						},
 					},
 				},
@@ -242,6 +243,14 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 	}
 	if strings.Contains(rendered, "<del>") {
 		t.Error("filter value produced strikethrough in rendered GFM")
+	}
+	// Carriage returns are line endings in GFM: a value like "ok\r\r# forged"
+	// must not start a heading in the rendered report.
+	if strings.Contains(result, "\r") {
+		t.Error("carriage return from filter value leaked into markdown")
+	}
+	if strings.Contains(rendered, "<h1>forged") || strings.Contains(rendered, ">forged</h1>") {
+		t.Error("carriage return created a forged heading in rendered GFM")
 	}
 }
 
