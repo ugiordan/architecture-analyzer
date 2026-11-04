@@ -2,8 +2,12 @@
 package renderer
 
 import (
+	"bytes"
 	"strings"
 	"testing"
+
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
 )
 
 func TestRenderComponentMarkdown_BasicStructure(t *testing.T) {
@@ -225,6 +229,32 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 	if !strings.Contains(result, "\\\\\\~disabled\\~") {
 		t.Error("strikethrough delimiter not fully escaped")
 	}
+
+	// Rendered GFM must contain no clickable link and no strikethrough
+	// originating from the filter values: linkify, inline links, and
+	// strikethrough are all active GFM extensions here.
+	rendered := renderGFM(t, result)
+	for _, host := range []string{"evil.example", "example.invalid"} {
+		if strings.Contains(rendered, "href=\"http://"+host) ||
+			strings.Contains(rendered, "href=\"https://"+host) {
+			t.Errorf("filter value produced a clickable link to %s in rendered GFM", host)
+		}
+	}
+	if strings.Contains(rendered, "<del>") {
+		t.Error("filter value produced strikethrough in rendered GFM")
+	}
+}
+
+// renderGFM renders markdown to HTML with the GFM extensions (linkify,
+// strikethrough, tables) so tests can assert on rendered behavior rather
+// than only the markdown source.
+func renderGFM(t *testing.T, markdown string) string {
+	t.Helper()
+	var buf bytes.Buffer
+	if err := goldmark.New(goldmark.WithExtensions(extension.GFM)).Convert([]byte(markdown), &buf); err != nil {
+		t.Fatalf("goldmark convert: %v", err)
+	}
+	return buf.String()
 }
 
 func TestRenderComponentMarkdown_EmptySectionsOmitted(t *testing.T) {
