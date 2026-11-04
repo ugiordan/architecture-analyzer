@@ -178,6 +178,7 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 							map[string]interface{}{"filter": "<step>injected</step>"},
 							map[string]interface{}{"filter": "[click](http://evil.example)"},
 							map[string]interface{}{"filter": `\[literal\](https://example.invalid)`},
+							map[string]interface{}{"filter": `\~disabled~`},
 						},
 					},
 				},
@@ -210,6 +211,19 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 	}
 	if !strings.Contains(result, "\\\\\\[literal") {
 		t.Error("pre-escaped filter name not fully escaped (expected doubled backslash then escaped bracket)")
+	}
+	// The URL itself must not form a GFM autolink: the scheme colon is
+	// escaped, so the scheme delimiter is broken in the source.
+	if strings.Contains(result, "(https://") {
+		t.Error("unescaped URL after opening parenthesis leaked into markdown")
+	}
+	if !strings.Contains(result, "https\\://example.invalid") {
+		t.Error("URL scheme colon not escaped against GFM autolinks")
+	}
+	// Strikethrough delimiters are escaped after backslash doubling, so
+	// \~disabled~ renders literally instead of struck through.
+	if !strings.Contains(result, "\\\\\\~disabled\\~") {
+		t.Error("strikethrough delimiter not fully escaped")
 	}
 }
 
