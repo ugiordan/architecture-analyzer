@@ -177,6 +177,7 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 						"filters": []interface{}{
 							map[string]interface{}{"filter": "<step>injected</step>"},
 							map[string]interface{}{"filter": "[click](http://evil.example)"},
+							map[string]interface{}{"filter": `\[literal\](https://example.invalid)`},
 						},
 					},
 				},
@@ -200,6 +201,15 @@ func TestRenderComponentMarkdown_PraxisPipelinesInlineEncoding(t *testing.T) {
 	}
 	if strings.Contains(result, "*emphasized*") {
 		t.Error("raw emphasis marker from insecure option leaked into markdown")
+	}
+	// Pre-escaped brackets in the input must not survive as a GFM link:
+	// existing backslashes are doubled before punctuation escaping, so the
+	// output carries \\\[literal\\\] and renders literally.
+	if strings.Contains(result, "[literal](") {
+		t.Error("unescaped link syntax from pre-escaped filter name leaked into markdown")
+	}
+	if !strings.Contains(result, "\\\\\\[literal") {
+		t.Error("pre-escaped filter name not fully escaped (expected doubled backslash then escaped bracket)")
 	}
 }
 

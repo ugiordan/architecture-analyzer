@@ -128,8 +128,11 @@ func sanitizeMdValue(text string) string {
 // outside code spans and table cells: in addition to the code-span rules,
 // HTML-significant characters are entity-encoded and Markdown emphasis and
 // link characters are backslash-escaped so the value renders literally.
+// Existing backslashes are doubled first: otherwise an input like
+// \[x\](url) would leave GFM a live link after punctuation escaping.
 func sanitizeMdInline(text string) string {
 	text = sanitizeMdValue(text)
+	text = strings.ReplaceAll(text, `\`, `\\`)
 	text = strings.ReplaceAll(text, "&", "&amp;")
 	text = strings.ReplaceAll(text, "<", "&lt;")
 	text = strings.ReplaceAll(text, ">", "&gt;")
