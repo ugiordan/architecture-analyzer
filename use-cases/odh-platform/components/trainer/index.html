@@ -26879,6 +26879,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#internal-platform-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Platform Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#key-external-dependencies" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -27026,11 +27037,11 @@
 
 <h1 id="trainer">trainer<a class="headerlink" href="#trainer" title="Permanent link">¶</a></h1>
 <blockquote>
-<p><strong>Architecture snapshot: 2026-11-06</strong> (2026-11-06)</p>
+<p><strong>Architecture snapshot: 2026-11-07</strong> (2026-11-07)</p>
 </blockquote>
 <p><strong>Repository:</strong> opendatahub-io/trainer<br>
 <strong>Analyzer:</strong> arch-analyzer dev<br>
-<strong>Extracted:</strong> 2026-11-06T05:56:39Z</p>
+<strong>Extracted:</strong> 2026-11-07T05:28:28Z</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -27046,7 +27057,7 @@
 </tr>
 <tr>
 <td>Deployments</td>
-<td>3</td>
+<td>4</td>
 </tr>
 <tr>
 <td>Services</td>
@@ -27062,7 +27073,7 @@
 </tr>
 <tr>
 <td>Controller Watches</td>
-<td>5</td>
+<td>9</td>
 </tr>
 </tbody>
 </table>
@@ -27078,12 +27089,14 @@
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
 
     subgraph controller["trainer Controller"]
-        dep_1["kubeflow-trainer-controller-manager"]
+        dep_1["controller-manager"]
         class dep_1 controller
         dep_2["kubeflow-trainer-controller-manager"]
         class dep_2 controller
         dep_3["kubeflow-trainer-controller-manager"]
         class dep_3 controller
+        dep_4["kubeflow-trainer-controller-manager"]
+        class dep_4 controller
     end
 
     crd_ClusterTrainingRuntime{{"ClusterTrainingRuntime\ntrainer.kubeflow.org/v1alpha1"}}
@@ -27095,12 +27108,24 @@
     class crd_TrainJob crd
     crd_TrainingRuntime{{"TrainingRuntime\ntrainer.kubeflow.org/v1alpha1"}}
     class crd_TrainingRuntime crd
-    controller --&gt;|"Owns"| owned_4["Deployment"]
-    class owned_4 owned
-    controller --&gt;|"Owns"| owned_5["Service"]
+    controller --&gt;|"Owns"| owned_5["Deployment"]
     class owned_5 owned
-    controller --&gt;|"Owns"| owned_6["TrainJob"]
-    class owned_6 owned</code></pre>
+    controller --&gt;|"Owns"| owned_6["Service"]
+    class owned_6 owned
+    controller --&gt;|"Owns"| owned_7["TrainJob"]
+    class owned_7 owned
+    watch_8["ConfigMap"] --&gt;|"Watches"| controller
+    class watch_8 external
+    watch_9["Deployment"] --&gt;|"Watches"| controller
+    class watch_9 external
+    watch_10["Service"] --&gt;|"Watches"| controller
+    class watch_10 external
+    watch_11["ValidatingWebhookConfiguration"] --&gt;|"Watches"| controller
+    class watch_11 external
+    controller -.-&gt;|"depends on"| odh_12["odh-platform-utilities"]
+    class odh_12 dep
+    controller -.-&gt;|"depends on"| odh_13["odh-platform-utilities"]
+    class odh_13 dep</code></pre>
 <h3 id="crds">CRDs<a class="headerlink" href="#crds" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -27124,7 +27149,7 @@
 <td>1307</td>
 <td>19</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/trainer/blob/05fb5798007ec72829b443168f0c5f043136918d/manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml"><code>manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml"><code>manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml</code></a></td>
 </tr>
 <tr>
 <td>trainer.kubeflow.org</td>
@@ -27134,7 +27159,7 @@
 <td>729</td>
 <td>21</td>
 <td>YAML + Go AST</td>
-<td><a href="https://github.com/opendatahub-io/trainer/blob/05fb5798007ec72829b443168f0c5f043136918d/manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml"><code>manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml"><code>manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml</code></a></td>
 </tr>
 <tr>
 <td>trainer.kubeflow.org</td>
@@ -27144,7 +27169,7 @@
 <td>708</td>
 <td>14</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/trainer/blob/05fb5798007ec72829b443168f0c5f043136918d/manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml"><code>manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml"><code>manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml</code></a></td>
 </tr>
 <tr>
 <td>trainer.kubeflow.org</td>
@@ -27154,11 +27179,30 @@
 <td>1307</td>
 <td>19</td>
 <td>YAML</td>
-<td><a href="https://github.com/opendatahub-io/trainer/blob/05fb5798007ec72829b443168f0c5f043136918d/manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml"><code>manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml</code></a></td>
+<td><a href="https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml"><code>manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml</code></a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">¶</a></h2>
+<h3 id="internal-platform-dependencies">Internal Platform Dependencies<a class="headerlink" href="#internal-platform-dependencies" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Interaction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>odh-platform-utilities</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-platform-utilities</td>
+</tr>
+<tr>
+<td>odh-platform-utilities</td>
+<td>Go module dependency: github.com/opendatahub-io/odh-platform-utilities/framework</td>
+</tr>
+</tbody>
+</table>
 <h3 id="key-external-dependencies">Key External Dependencies<a class="headerlink" href="#key-external-dependencies" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -27173,6 +27217,14 @@
 <td>v1.4.4</td>
 </tr>
 <tr>
+<td>github.com/go-logr/logr</td>
+<td>v1.4.4</td>
+</tr>
+<tr>
+<td>github.com/operator-framework/api</td>
+<td>v0.42.0</td>
+</tr>
+<tr>
 <td>github.com/prometheus/client_golang</td>
 <td>v1.25.0</td>
 </tr>
@@ -27182,6 +27234,18 @@
 </tr>
 <tr>
 <td>k8s.io/api</td>
+<td>v0.37.1</td>
+</tr>
+<tr>
+<td>k8s.io/api</td>
+<td>v0.37.1</td>
+</tr>
+<tr>
+<td>k8s.io/apiextensions-apiserver</td>
+<td>v0.37.1</td>
+</tr>
+<tr>
+<td>k8s.io/apimachinery</td>
 <td>v0.37.1</td>
 </tr>
 <tr>
@@ -27195,6 +27259,14 @@
 <tr>
 <td>k8s.io/client-go</td>
 <td>v0.37.1</td>
+</tr>
+<tr>
+<td>k8s.io/client-go</td>
+<td>v0.37.1</td>
+</tr>
+<tr>
+<td>sigs.k8s.io/controller-runtime</td>
+<td>v0.25.2</td>
 </tr>
 <tr>
 <td>sigs.k8s.io/controller-runtime</td>
@@ -27224,7 +27296,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2026 06:09:55 UTC">November 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 7, 2026 05:41:10 UTC">November 7, 2026</span>
   </span>
 
     
