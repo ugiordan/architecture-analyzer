@@ -1,11 +1,11 @@
 # model-metadata-collection
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-11-07** (2026-11-07)
 
 
-**Repository:** opendatahub-io/model-metadata-collection  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:17:59Z
+**Repository:** red-hat-data-services/model-metadata-collection  
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-11-07T05:35:32Z
 
 ## Summary
 
@@ -48,6 +48,4 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| google.golang.org/grpc | v1.68.1 |
-| google.golang.org/grpc | v1.68.1 |
 

@@ -14,6 +14,6 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `Dockerfile` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | caikit |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest; Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
+| `Dockerfile` | registry.redhat.io/ubi9/ubi-minimal-pqc@sha256:8a842ac769de709143e4edeace516f2008dfdc431b64670ad3353fa323b44736 | 2 | caikit |  |  |  |  |
 | `Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | caikit |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest; Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
 

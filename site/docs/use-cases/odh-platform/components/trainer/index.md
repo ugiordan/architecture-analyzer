@@ -1,22 +1,22 @@
 # trainer
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-11-07** (2026-11-07)
 
 
-**Repository:** kubeflow/trainer  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:07:40Z
+**Repository:** opendatahub-io/trainer  
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-11-07T05:28:28Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| CRDs | 3 |
-| Deployments | 20 |
-| Services | 2 |
-| Secrets | 2 |
-| Cluster Roles | 8 |
-| Controller Watches | 17 |
+| CRDs | 4 |
+| Deployments | 4 |
+| Services | 0 |
+| Secrets | 1 |
+| Cluster Roles | 11 |
+| Controller Watches | 9 |
 
 ## Component Architecture
 
@@ -35,193 +35,78 @@ graph LR
     subgraph controller["trainer Controller"]
         dep_1["controller-manager"]
         class dep_1 controller
-        dep_2["controller-manager"]
+        dep_2["kubeflow-trainer-controller-manager"]
         class dep_2 controller
-        dep_3["controller-manager"]
+        dep_3["kubeflow-trainer-controller-manager"]
         class dep_3 controller
-        dep_4["controller-manager"]
+        dep_4["kubeflow-trainer-controller-manager"]
         class dep_4 controller
-        dep_5["controller-manager"]
-        class dep_5 controller
-        dep_6["controller-manager"]
-        class dep_6 controller
-        dep_7["controller-manager"]
-        class dep_7 controller
-        dep_8["controller-manager"]
-        class dep_8 controller
-        dep_9["controller-manager"]
-        class dep_9 controller
-        dep_10["controller-manager"]
-        class dep_10 controller
-        dep_11["controller-manager"]
-        class dep_11 controller
-        dep_12["controller-manager"]
-        class dep_12 controller
-        dep_13["controller-manager"]
-        class dep_13 controller
-        dep_14["controller-manager"]
-        class dep_14 controller
-        dep_15["kubeflow-trainer-controller-manager"]
-        class dep_15 controller
-        dep_16["kubeflow-trainer-controller-manager"]
-        class dep_16 controller
-        dep_17["kubeflow-trainer-controller-manager"]
-        class dep_17 controller
-        dep_18["kubeflow-trainer-controller-manager"]
-        class dep_18 controller
-        dep_19["peaks"]
-        class dep_19 controller
-        dep_20["peaks"]
-        class dep_20 controller
     end
 
     crd_ClusterTrainingRuntime{{"ClusterTrainingRuntime\ntrainer.kubeflow.org/v1alpha1"}}
     class crd_ClusterTrainingRuntime crd
+    crd_OptimizationJob{{"OptimizationJob\ntrainer.kubeflow.org/v1alpha1"}}
+    class crd_OptimizationJob crd
+    crd_OptimizationJob -->|"For (reconciles)"| controller
     crd_TrainJob{{"TrainJob\ntrainer.kubeflow.org/v1alpha1"}}
     class crd_TrainJob crd
     crd_TrainingRuntime{{"TrainingRuntime\ntrainer.kubeflow.org/v1alpha1"}}
     class crd_TrainingRuntime crd
-    controller -->|"Owns"| owned_21["Job"]
-    class owned_21 owned
-    controller -->|"Owns"| owned_22["Service"]
-    class owned_22 owned
-    watch_23["Pod"] -->|"Watches"| controller
-    class watch_23 external
+    controller -->|"Owns"| owned_5["Deployment"]
+    class owned_5 owned
+    controller -->|"Owns"| owned_6["Service"]
+    class owned_6 owned
+    controller -->|"Owns"| owned_7["TrainJob"]
+    class owned_7 owned
+    watch_8["ConfigMap"] -->|"Watches"| controller
+    class watch_8 external
+    watch_9["Deployment"] -->|"Watches"| controller
+    class watch_9 external
+    watch_10["Service"] -->|"Watches"| controller
+    class watch_10 external
+    watch_11["ValidatingWebhookConfiguration"] -->|"Watches"| controller
+    class watch_11 external
+    controller -.->|"depends on"| odh_12["odh-platform-utilities"]
+    class odh_12 dep
+    controller -.->|"depends on"| odh_13["odh-platform-utilities"]
+    class odh_13 dep
 ```
 
 ### CRDs
 
 | Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
 |-------|---------|------|-------|--------|------------------|-----------|--------|
-| trainer.kubeflow.org | v1alpha1 | ClusterTrainingRuntime | Cluster | 1246 | 9 | YAML | [`manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml`](https://github.com/kubeflow/trainer/blob/51baadf644cd5d2c1672f1c658be46ad82f01b44/manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml) |
-| trainer.kubeflow.org | v1alpha1 | TrainJob | Namespaced | 562 | 5 | YAML | [`manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml`](https://github.com/kubeflow/trainer/blob/51baadf644cd5d2c1672f1c658be46ad82f01b44/manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml) |
-| trainer.kubeflow.org | v1alpha1 | TrainingRuntime | Namespaced | 1246 | 9 | YAML | [`manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml`](https://github.com/kubeflow/trainer/blob/51baadf644cd5d2c1672f1c658be46ad82f01b44/manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml) |
+| trainer.kubeflow.org | v1alpha1 | ClusterTrainingRuntime | Cluster | 1307 | 19 | YAML | [`manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml`](https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml) |
+| trainer.kubeflow.org | v1alpha1 | OptimizationJob | Namespaced | 729 | 21 | YAML + Go AST | [`manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml`](https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml) |
+| trainer.kubeflow.org | v1alpha1 | TrainJob | Namespaced | 708 | 14 | YAML | [`manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml`](https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml) |
+| trainer.kubeflow.org | v1alpha1 | TrainingRuntime | Namespaced | 1307 | 19 | YAML | [`manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml`](https://github.com/opendatahub-io/trainer/blob/f69018cc3ec50eeadd125a3c26576d569a46f9f5/manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml) |
 
 ## Dependencies
+
+### Internal Platform Dependencies
+
+| Component | Interaction |
+|-----------|-------------|
+| odh-platform-utilities | Go module dependency: github.com/opendatahub-io/odh-platform-utilities |
+| odh-platform-utilities | Go module dependency: github.com/opendatahub-io/odh-platform-utilities/framework |
 
 ### Key External Dependencies
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.3.0 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.2 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.22.0 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.62.0 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.62.0 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.15.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.72.1 |
-| google.golang.org/grpc | v1.72.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.33.4 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/api | v0.33.4 |
-| k8s.io/api | v0.34.1 |
-| k8s.io/apiextensions-apiserver | v0.33.4 |
-| k8s.io/apiextensions-apiserver | v0.34.1 |
-| k8s.io/apiextensions-apiserver | v0.34.1 |
-| k8s.io/apiextensions-apiserver | v0.33.4 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.33.4 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apimachinery | v0.33.4 |
-| k8s.io/apimachinery | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/apiserver | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.33.4 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.33.4 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| k8s.io/client-go | v0.34.1 |
-| sigs.k8s.io/controller-runtime | v0.22.3 |
-| sigs.k8s.io/controller-runtime | v0.22.3 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
-| sigs.k8s.io/controller-runtime | v0.22.1 |
-| sigs.k8s.io/controller-runtime | v0.22.3 |
-| sigs.k8s.io/controller-runtime | v0.22.1 |
+| github.com/go-logr/logr | v1.4.4 |
+| github.com/go-logr/logr | v1.4.4 |
+| github.com/operator-framework/api | v0.42.0 |
+| github.com/prometheus/client_golang | v1.25.0 |
+| google.golang.org/grpc | v1.84.0 |
+| k8s.io/api | v0.37.1 |
+| k8s.io/api | v0.37.1 |
+| k8s.io/apiextensions-apiserver | v0.37.1 |
+| k8s.io/apimachinery | v0.37.1 |
+| k8s.io/apimachinery | v0.37.1 |
+| k8s.io/apiserver | v0.37.1 |
+| k8s.io/client-go | v0.37.1 |
+| k8s.io/client-go | v0.37.1 |
+| sigs.k8s.io/controller-runtime | v0.25.2 |
+| sigs.k8s.io/controller-runtime | v0.25.2 |
 

@@ -8,7 +8,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 
 | Property | Value |
 |----------|-------|
-| Manager file | `cmd/controller/main.go` |
+| Manager file | `clients/ui/bff/cmd/main.go` |
 | Cache scope | cluster-wide |
 | DefaultTransform | no |
 | Memory limit | 128Mi |

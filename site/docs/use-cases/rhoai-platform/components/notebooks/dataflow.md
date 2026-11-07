@@ -26,7 +26,6 @@ sequenceDiagram
     Note right of notebook: notebook:8888/TCP []
     Note right of notebook: notebook:8888/TCP []
     Note right of notebook: notebook:8888/TCP []
-    Note right of notebook: notebook:8888/TCP []
 ```
 
 ## Configuration

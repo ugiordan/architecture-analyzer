@@ -6,20 +6,21 @@ Kubernetes resources this controller monitors for changes. Each watch triggers r
 
 | Type | GVK | Source |
 |------|-----|--------|
-| For | api/v1/Notebook | [`components/odh-notebook-controller/controllers/notebook_controller.go:737`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L737) |
-| For | api/v1beta1/Notebook | [`components/notebook-controller/controllers/culling_controller.go:580`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/controllers/culling_controller.go#L580) |
-| For | api/v1beta1/Notebook | [`components/notebook-controller/controllers/notebook_controller.go:801`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/controllers/notebook_controller.go#L801) |
-| Owns | /v1/ConfigMap | [`components/odh-notebook-controller/controllers/notebook_controller.go:741`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L741) |
-| Owns | /v1/Secret | [`components/odh-notebook-controller/controllers/notebook_controller.go:740`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L740) |
-| Owns | /v1/Service | [`components/odh-notebook-controller/controllers/notebook_controller.go:739`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L739) |
-| Owns | /v1/Service | [`components/notebook-controller/controllers/notebook_controller.go:803`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/controllers/notebook_controller.go#L803) |
-| Owns | /v1/ServiceAccount | [`components/odh-notebook-controller/controllers/notebook_controller.go:738`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L738) |
-| Owns | apps/v1/StatefulSet | [`components/notebook-controller/controllers/notebook_controller.go:802`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/controllers/notebook_controller.go#L802) |
-| Owns | networking.k8s.io/v1/NetworkPolicy | [`components/odh-notebook-controller/controllers/notebook_controller.go:742`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L742) |
-| Owns | rbac.authorization.k8s.io/v1/RoleBinding | [`components/odh-notebook-controller/controllers/notebook_controller.go:743`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L743) |
-| Watches | /v1/ConfigMap | [`components/odh-notebook-controller/controllers/notebook_controller.go:818`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L818) |
-| Watches | apis/v1/HTTPRoute | [`components/odh-notebook-controller/controllers/notebook_controller.go:747`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L747) |
-| Watches | apis/v1beta1/ReferenceGrant | [`components/odh-notebook-controller/controllers/notebook_controller.go:777`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_controller.go#L777) |
+| For | api/v1/Notebook | [`components/odh-notebook-controller/controllers/notebook_controller.go:776`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L776) |
+| For | api/v1beta1/Notebook | [`components/notebook-controller/controllers/culling_controller.go:580`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/notebook-controller/controllers/culling_controller.go#L580) |
+| For | api/v1beta1/Notebook | [`components/notebook-controller/controllers/notebook_controller.go:801`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/notebook-controller/controllers/notebook_controller.go#L801) |
+| Owns | /v1/ConfigMap | [`components/odh-notebook-controller/controllers/notebook_controller.go:780`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L780) |
+| Owns | /v1/Secret | [`components/odh-notebook-controller/controllers/notebook_controller.go:779`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L779) |
+| Owns | /v1/Service | [`components/odh-notebook-controller/controllers/notebook_controller.go:778`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L778) |
+| Owns | /v1/Service | [`components/notebook-controller/controllers/notebook_controller.go:803`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/notebook-controller/controllers/notebook_controller.go#L803) |
+| Owns | /v1/ServiceAccount | [`components/odh-notebook-controller/controllers/notebook_controller.go:777`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L777) |
+| Owns | apps/v1/StatefulSet | [`components/notebook-controller/controllers/notebook_controller.go:802`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/notebook-controller/controllers/notebook_controller.go#L802) |
+| Owns | networking.k8s.io/v1/NetworkPolicy | [`components/odh-notebook-controller/controllers/notebook_controller.go:781`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L781) |
+| Owns | rbac.authorization.k8s.io/v1/RoleBinding | [`components/odh-notebook-controller/controllers/notebook_controller.go:782`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L782) |
+| Watches | /v1/ConfigMap | [`components/odh-notebook-controller/controllers/notebook_controller.go:855`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L855) |
+| Watches | /v1/Namespace | [`components/odh-notebook-controller/controllers/notebook_controller.go:856`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L856) |
+| Watches | apis/v1/HTTPRoute | [`components/odh-notebook-controller/controllers/notebook_controller.go:786`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L786) |
+| Watches | apis/v1beta1/ReferenceGrant | [`components/odh-notebook-controller/controllers/notebook_controller.go:816`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_controller.go#L816) |
 
 ## Reconciliation Flow
 
@@ -46,12 +47,13 @@ sequenceDiagram
     controller_manager->>KubernetesAPI: Create/Update NetworkPolicy
     controller_manager->>KubernetesAPI: Create/Update RoleBinding
     KubernetesAPI-->>+controller_manager: Watch ConfigMap (informer)
+    KubernetesAPI-->>+controller_manager: Watch Namespace (informer)
     KubernetesAPI-->>+controller_manager: Watch HTTPRoute (informer)
     KubernetesAPI-->>+controller_manager: Watch ReferenceGrant (informer)
 
     Note over controller_manager: Exposed Services
     Note right of controller_manager: service:443/TCP []
-    Note right of controller_manager: service:8080/TCP [metrics]
+    Note right of controller_manager: service:8443/TCP [metrics]
     Note right of controller_manager: webhook-service:443/TCP [webhook]
 ```
 
@@ -59,8 +61,8 @@ sequenceDiagram
 
 | Name | Type | Path | Failure Policy | Service | Overlays | Enable Condition | Sources |
 |------|------|------|----------------|---------|----------|------------------|----------|
-| notebooks-validation.opendatahub.io | validating | /validate-notebook-v1 | fail |  |  |  | [`components/odh-notebook-controller/controllers/notebook_validating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_validating_webhook.go), [`components/odh-notebook-controller/controllers/notebook_validating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_validating_webhook.go) |
-| notebooks.opendatahub.io | mutating | /mutate-notebook-v1 | fail |  |  |  | [`components/odh-notebook-controller/controllers/notebook_mutating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_mutating_webhook.go), [`components/odh-notebook-controller/controllers/notebook_mutating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/controllers/notebook_mutating_webhook.go) |
+| notebooks-validation.opendatahub.io | validating | /validate-notebook-v1 | fail |  |  |  | [`components/odh-notebook-controller/controllers/notebook_validating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_validating_webhook.go), [`components/odh-notebook-controller/controllers/notebook_validating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_validating_webhook.go) |
+| notebooks.opendatahub.io | mutating | /mutate-notebook-v1 | fail |  |  |  | [`components/odh-notebook-controller/controllers/notebook_mutating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_mutating_webhook.go), [`components/odh-notebook-controller/controllers/notebook_mutating_webhook.go`](https://github.com/opendatahub-io/kubeflow/blob/5b3bfe32fbb55c586003c9b77d9869ed693c7025/components/odh-notebook-controller/controllers/notebook_mutating_webhook.go) |
 
 ## Configuration
 

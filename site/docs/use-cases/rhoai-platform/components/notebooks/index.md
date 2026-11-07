@@ -1,19 +1,19 @@
 # notebooks
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-11-07** (2026-11-07)
 
 
 **Repository:** red-hat-data-services/notebooks  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:06:27Z
+**Analyzer:** arch-analyzer dev  
+**Extracted:** 2026-11-07T05:30:29Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 0 |
-| Deployments | 8 |
-| Services | 8 |
+| Deployments | 7 |
+| Services | 7 |
 | Secrets | 0 |
 | Cluster Roles | 0 |
 | Controller Watches | 0 |
@@ -47,8 +47,6 @@ graph LR
         class dep_6 controller
         dep_7["notebook"]
         class dep_7 controller
-        dep_8["notebook"]
-        class dep_8 controller
     end
 ```
 
