@@ -37,6 +37,7 @@ jobs:
       rhoai-repos: ${{ steps.parse.outputs.rhoai-repos }}
       run-odh: ${{ steps.parse.outputs.run-odh }}
       run-rhoai: ${{ steps.parse.outputs.run-rhoai }}
+      started: ${{ steps.parse.outputs.started }}
     steps:
       - uses: actions/checkout@v6
       - name: Parse scan-config.yaml
@@ -72,16 +73,45 @@ jobs:
             echo "run-rhoai=false" >> "$GITHUB_OUTPUT"
           fi
 
+          # Workflow start (UTC RFC3339), captured before any analysis
+          # begins: the aggregate job uses it as this run's data-gathering
+          # cutoff for the snapshot freshness comparison. The github
+          # context has no run_started_at property.
+          echo "started=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Full history: the analyzer version is derived from the latest
+          # non-scan-state commit, which can be behind HEAD when the
+          # previous run committed scan state to main.
+          fetch-depth: 0
       - uses: actions/setup-go@v6
         with:
           go-version: '1.26'
           cache-dependency-path: go.sum
       - name: Build analyzer
-        run: go build -o arch-analyzer ./cmd/arch-analyzer/
+        # Inject the latest non-state commit as the analyzer version: the
+        # aggregate job commits scan-state updates (.last-scan-shas.json)
+        # directly to main, and those must not change the version or every
+        # run would force a full rescan. The exclusion matches the exact
+        # state-commit subject so a merge that merely mentions the words
+        # cannot be excluded. analyze-repo.sh skips repos only when both
+        # the repo HEAD and this version are unchanged, so every real
+        # merge to main still forces a full rescan.
+        run: |
+          # Compare against commit subjects only: git log --grep matches
+          # message bodies too, and a merge body quoting the state subject
+          # must not be excluded from version selection.
+          STATE_SUBJECT='chore: update last-scan-shas [skip ci] (scan-state)'
+          VERSION_SHA="$(git log --format='%h%x09%s' | awk -F'\t' -v s="$STATE_SUBJECT" '$2 != s {print $1; exit}')"
+          if [ -z "$VERSION_SHA" ]; then
+            echo "::error::could not determine analyzer version: no non-scan-state commit found" >&2
+            exit 1
+          fi
+          go build -ldflags "-X main.version=${VERSION_SHA}" -o arch-analyzer ./cmd/arch-analyzer/
       - name: Upload analyzer binary
         uses: actions/upload-artifact@v7
         with:
@@ -106,6 +136,14 @@ jobs:
             scripts
             scan-config.yaml
             .last-scan-shas.json
+      - name: Refresh scan state from latest main
+        # A queued run's checkout is pinned to the dispatch-time commit;
+        # read the latest committed scan state so skip decisions reflect
+        # runs that committed state while this one waited in the queue.
+        run: |
+          if git fetch origin main 2>/dev/null; then
+            git show origin/main:.last-scan-shas.json > .last-scan-shas.json 2>/dev/null || true
+          fi
       - name: Download analyzer
         uses: actions/download-artifact@v8
         with:
@@ -155,6 +193,14 @@ jobs:
             scripts
             scan-config.yaml
             .last-scan-shas.json
+      - name: Refresh scan state from latest main
+        # A queued run's checkout is pinned to the dispatch-time commit;
+        # read the latest committed scan state so skip decisions reflect
+        # runs that committed state while this one waited in the queue.
+        run: |
+          if git fetch origin main 2>/dev/null; then
+            git show origin/main:.last-scan-shas.json > .last-scan-shas.json 2>/dev/null || true
+          fi
       - name: Download analyzer
         uses: actions/download-artifact@v8
         with:
@@ -238,6 +284,25 @@ jobs:
           path: rhoai-results/
           merge-multiple: true
 
+      - name: Carry forward skipped repos from latest snapshot
+        # Select platforms from the parsed configuration, not from artifact
+        # directories: when every repo in a platform skips, no artifacts are
+        # uploaded and download-artifact leaves no directory behind. Create
+        # the directory so carry-forward still restores that platform.
+        run: |
+          DIRS=()
+          if [ "${{ needs.parse-config.outputs.run-odh }}" = "true" ]; then
+            mkdir -p odh-results
+            DIRS+=(odh-results)
+          fi
+          if [ "${{ needs.parse-config.outputs.run-rhoai }}" = "true" ]; then
+            mkdir -p rhoai-results
+            DIRS+=(rhoai-results)
+          fi
+          if [ ${#DIRS[@]} -gt 0 ]; then
+            bash scripts/carry-forward-snapshot-results.sh "${DIRS[@]}"
+          fi
+
       - name: Aggregate and generate docs
         env:
           VERSION: ${{ steps.version.outputs.label }}
@@ -261,6 +326,50 @@ jobs:
               "platform-output/rhoai/${VERSION}/platform-architecture.json"
           fi
 
+      - name: Check snapshot freshness
+        # A lagging concurrent run must not publish older results over a
+        # newer snapshot for the same date. Per enabled platform, compare
+        # the existing snapshot's publication timestamp with this run's
+        # start (captured before analysis began). Stale platforms are
+        # skipped during publication; a stale platform also holds back
+        # docs, Pages, and scan state so older data cannot overwrite
+        # newer results anywhere.
+        id: freshness
+        env:
+          VERSION: ${{ steps.version.outputs.label }}
+          RUN_STARTED_AT: ${{ needs.parse-config.outputs.started }}
+        run: |
+          if ! git ls-remote --heads origin snapshots | grep -q snapshots; then
+            echo "No snapshots branch; nothing to compare"
+            echo "stale-odh=false" >> "$GITHUB_OUTPUT"
+            echo "stale-rhoai=false" >> "$GITHUB_OUTPUT"
+            echo "any-stale=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch origin snapshots
+          SNAP_DIR="$(mktemp -d)"
+          git worktree add "$SNAP_DIR" origin/snapshots
+          stale_odh=false
+          stale_rhoai=false
+          for platform in odh rhoai; do
+            [ -d "platform-output/${platform}" ] || continue
+            meta="$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/snapshot-metadata.json"
+            [ -f "$meta" ] || continue
+            IS_NEWER=$(python3 -c "import json, sys; ts = json.load(open('${meta}')).get('timestamp', ''); print('yes' if ts and ts > sys.argv[1] else 'no')" "$RUN_STARTED_AT")
+            if [ "$IS_NEWER" = "yes" ]; then
+              echo "::warning::${platform} snapshot ${VERSION} was published after this run's data was gathered; keeping the newer snapshot"
+              if [ "$platform" = "odh" ]; then stale_odh=true; else stale_rhoai=true; fi
+            fi
+          done
+          echo "stale-odh=${stale_odh}" >> "$GITHUB_OUTPUT"
+          echo "stale-rhoai=${stale_rhoai}" >> "$GITHUB_OUTPUT"
+          if [ "$stale_odh" = "true" ] || [ "$stale_rhoai" = "true" ]; then
+            echo "any-stale=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "any-stale=false" >> "$GITHUB_OUTPUT"
+          fi
+          git worktree remove "$SNAP_DIR" --force
+
       - name: Update scan SHAs for skip-on-no-change
         run: |
           python3 scripts/update-scan-shas.py \
@@ -281,12 +390,15 @@ jobs:
         run: python3 scripts/generate-nav.py site/docs site/mkdocs.yml
 
       - name: Commit generated platform docs
+        # Held back when any platform is stale: deploying older docs over
+        # a newer snapshot's results would regress the site.
+        if: steps.freshness.outputs.any-stale != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/ .last-scan-shas.json
+          git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/
           git reset -- .github/
           if git diff --cached --quiet; then
             echo "No platform doc changes to commit"
@@ -298,7 +410,8 @@ jobs:
             if ! gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
               gh pr create --title "chore: update generated platform docs" \
                 --body "Auto-generated platform documentation update. This PR is force-pushed on each CI run." \
-                --base main --head "$BRANCH" || true
+                --base main --head "$BRANCH" \
+                || echo "::warning::failed to create generated-docs PR (check the 'Allow GitHub Actions to create and approve pull requests' repository setting)"
             fi
           fi
 
@@ -310,8 +423,11 @@ jobs:
         run: mkdocs gh-deploy --force
 
       - name: Publish snapshot to snapshots branch
+        id: publish
         env:
           VERSION: ${{ steps.version.outputs.label }}
+          STALE_ODH: ${{ steps.freshness.outputs.stale-odh }}
+          STALE_RHOAI: ${{ steps.freshness.outputs.stale-rhoai }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -326,12 +442,38 @@ jobs:
             git worktree add --orphan -b snapshots "$SNAP_DIR"
           fi
 
-          # Copy versioned output
-          if [ -d platform-output ] && [ "$(ls -A platform-output)" ]; then
-            mkdir -p "$SNAP_DIR/output/${VERSION}"
-            cp -r platform-output/* "$SNAP_DIR/output/${VERSION}/"
-          else
-            echo "No platform output to snapshot"
+          # Copy versioned output per enabled platform (its results
+          # directory exists), skipping platforms whose snapshot was
+          # published after this run's data was gathered (see the
+          # freshness check): their newer results are preserved and this
+          # run's other platforms still publish. An enabled platform with
+          # no output (no configured repos) removes its previous snapshot
+          # for this version so the snapshots branch matches the site.
+          changed=false
+          for platform in odh rhoai; do
+            [ -d "${platform}-results" ] || continue
+            stale_var="STALE_$(echo "$platform" | tr '[:lower:]' '[:upper:]')"
+            if [ "${!stale_var}" = "true" ]; then
+              echo "::warning::keeping newer ${platform} snapshot for ${VERSION}"
+              continue
+            fi
+            if [ -d "platform-output/${platform}" ]; then
+              # Remove any previous snapshot for this platform and
+              # version first: a plain copy would merge with it and keep
+              # files this run no longer produces.
+              rm -rf "$SNAP_DIR/output/${VERSION}/${platform}"
+              mkdir -p "$SNAP_DIR/output/${VERSION}"
+              cp -r "platform-output/${platform}" "$SNAP_DIR/output/${VERSION}/"
+              changed=true
+            elif [ -d "$SNAP_DIR/output/${VERSION}/${platform}" ]; then
+              echo "Removing ${platform} snapshot for ${VERSION} (platform has no output)"
+              git -C "$SNAP_DIR" rm -rf -q "output/${VERSION}/${platform}"
+              changed=true
+            fi
+          done
+          if [ "$changed" != "true" ]; then
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            git worktree remove "$SNAP_DIR" --force
             exit 0
           fi
 
@@ -339,6 +481,8 @@ jobs:
           for platform_dir in odh-results rhoai-results; do
             [ -d "$platform_dir" ] || continue
             platform=$(echo "$platform_dir" | sed 's/-results//')
+            stale_var="STALE_$(echo "$platform" | tr '[:lower:]' '[:upper:]')"
+            [ "${!stale_var}" = "true" ] && continue
             find "$platform_dir" -name "component-architecture.json" -o -name "security-findings.json" | while read -r f; do
               # Extract org/repo from path: platform-results/org/repo/file.json
               rel="${f#${platform_dir}/}"
@@ -352,10 +496,13 @@ jobs:
             echo "Copied ${count} raw files for ${platform}"
           done
 
-          # Commit and tag
+          # Commit and tag. Stage with -A from the worktree root so
+          # deletions are staged even when they remove the last platform
+          # under this version (the version directory may no longer
+          # exist on disk).
           (
             cd "$SNAP_DIR"
-            git add "output/${VERSION}/"
+            git add -A
             git commit -m "snapshot: ${VERSION}" || echo "No changes to commit"
             git tag -f "arch/${VERSION}"
           )
@@ -367,6 +514,12 @@ jobs:
       - name: Prune old date-stamped snapshots
         if: steps.version.outputs.is_dated == 'true'
         run: |
+          # Skip when the snapshots branch does not exist yet (first run
+          # with no platform output publishes nothing).
+          if ! git ls-remote --heads origin snapshots | grep -q snapshots; then
+            echo "No snapshots branch to prune"
+            exit 0
+          fi
           KEEP=10
           git fetch origin snapshots
           SNAP_DIR="/tmp/snapshots-prune"
@@ -384,11 +537,30 @@ jobs:
             echo "Pruning $TO_DELETE old date-stamped snapshots (keeping $KEEP)..."
             echo "$DATED_DIRS" | head -n "$TO_DELETE" | while read -r dir; do
               DATE_LABEL=$(basename "$dir")
+              # Never delete a snapshot that is the newest one carrying a
+              # platform's raw results: carry-forward must be able to
+              # restore skipped repos when that platform runs again after
+              # a long absence.
+              SKIP_DELETE=false
+              for platform in odh rhoai; do
+                [ -d "${dir}/${platform}" ] || continue
+                NEWER_WITH_PLATFORM=$(ls -d output/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] 2>/dev/null | sort \
+                  | awk -v d="output/${DATE_LABEL}" '$0 > d' \
+                  | while read -r newer; do [ -d "${newer}/${platform}" ] && echo "$newer" && break; done)
+                if [ -z "$NEWER_WITH_PLATFORM" ]; then
+                  echo "  Keeping ${dir}: newest snapshot carrying ${platform}"
+                  SKIP_DELETE=true
+                  break
+                fi
+              done
+              if [ "$SKIP_DELETE" = "true" ]; then
+                continue
+              fi
               echo "  Removing: $dir (tag arch/${DATE_LABEL})"
               git rm -rf "$dir"
               git push origin --delete "arch/${DATE_LABEL}" 2>/dev/null || true
             done
-            git commit -m "prune: remove old date-stamped snapshots (kept $KEEP)"
+            git commit -m "prune: remove old date-stamped snapshots (kept $KEEP)" || echo "Nothing pruned"
             git push origin HEAD:snapshots
           else
             echo "Only $COUNT date-stamped snapshots, nothing to prune (keep $KEEP)"
@@ -396,3 +568,74 @@ jobs:
 
           cd "$GITHUB_WORKSPACE"
           git worktree remove "$SNAP_DIR" --force
+
+      - name: Commit scan SHAs to main
+        # Runs last, after the snapshot is published and the site deployed:
+        # if any earlier publication step fails, the state stays unchanged
+        # so the next run rescans and republishes instead of skipping and
+        # carrying forward older raw results. The skip-on-no-change
+        # mechanism only works when analyze jobs can read the previous
+        # run's SHAs from main. The workflow has no push trigger, so this
+        # direct commit cannot retrigger it. Custom-label runs do not
+        # advance the shared skip state: their raw results are published
+        # under the custom label, which dated carry-forward does not
+        # restore, so letting them advance the state would strand that
+        # data.
+        if: github.ref == 'refs/heads/main' && steps.version.outputs.is_dated == 'true' && steps.freshness.outputs.any-stale != 'true'
+        run: |
+          # Only advance the shared skip state for a snapshot that survives
+          # pruning: a backdated date-shaped label would be published and
+          # then pruned (only the newest dated snapshots are kept), leaving
+          # later skips with no restorable data. A stale platform also
+          # holds back the state entirely: its entries describe data that
+          # was not published, and the cost is only an extra rescan of the
+          # unaffected platform on the next run.
+          if [ "${{ steps.version.outputs.label }}" != "$(date -u +%Y-%m-%d)" ]; then
+            echo "Snapshot label ${{ steps.version.outputs.label }} is not today's date; not advancing scan state"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Push from a separate clean worktree based on the latest
+          # origin/main: this checkout holds uncommitted generated docs,
+          # which would make an in-place rebase refuse to start.
+          STATE_DIR="$(mktemp -d)"
+          git fetch origin main
+          git worktree add --detach "$STATE_DIR" origin/main
+          if (
+            cd "$STATE_DIR"
+            # Merge our scan state with the current state on main instead
+            # of overwriting it: concurrent runs can finish out of order,
+            # and an older run must not replace a newer run's entries.
+            # Per repo, the entry with the newer scanned_at wins.
+            python3 "${GITHUB_WORKSPACE}/scripts/merge-scan-shas.py" \
+              "${GITHUB_WORKSPACE}/.last-scan-shas.json" \
+              "${STATE_DIR}/.last-scan-shas.json" \
+              "${STATE_DIR}/.last-scan-shas.json"
+            git add .last-scan-shas.json
+            if git diff --cached --quiet; then
+              echo "No scan SHA changes to commit"
+              exit 0
+            fi
+            git commit -m "chore: update last-scan-shas [skip ci] (scan-state)"
+            # main may advance while the scan runs; rebase the one-file
+            # state commit onto the latest main and retry, bounded. Never
+            # force-push. A failed push only costs a full rescan next run.
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              git fetch origin main
+              if ! git rebase origin/main; then
+                echo "::warning::rebase of scan-state commit failed, abandoning it"
+                git rebase --abort 2>/dev/null || true
+                exit 1
+              fi
+            done
+            exit 1
+          ); then
+            echo "Scan SHAs committed to main"
+          else
+            echo "::warning::could not push scan SHAs to main; next run will rescan"
+          fi
+          git worktree remove --force "$STATE_DIR" || true

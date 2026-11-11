@@ -14,9 +14,21 @@ import sys
 
 def find_arch_jsons(dirs):
     for d in dirs:
+        # Results directories are named "<platform>-results"; the scan
+        # state is keyed by platform and repo so a repository scanned
+        # under multiple platforms keeps separate entries.
+        platform = os.path.basename(d.rstrip("/")).removesuffix("-results")
         for root, _, files in os.walk(d):
             if "component-architecture.json" in files:
-                yield os.path.join(root, "component-architecture.json")
+                # Partial results from a failed analysis (marked by
+                # analyze-repo.sh) must not advance the skip state. The
+                # marker sits beside the result, or in the parent when
+                # full-analysis wrote a versioned subdirectory.
+                if "_failed" in files or os.path.exists(
+                    os.path.join(os.path.dirname(root), "_failed")
+                ):
+                    continue
+                yield platform, os.path.join(root, "component-architecture.json")
 
 
 def main():
@@ -33,14 +45,22 @@ def main():
         with open(output) as f:
             existing = json.load(f)
 
-    for path in find_arch_jsons(dirs):
+    for platform, path in find_arch_jsons(dirs):
         with open(path) as f:
             data = json.load(f)
         repo = data.get("repo", "")
         sha = data.get("commit_sha", "")
         ver = data.get("analyzer_version", "")
+        # extracted_at (UTC RFC3339) records when the data was produced;
+        # the state commit merges concurrent runs by keeping the newer
+        # entry per repo.
+        scanned_at = data.get("extracted_at", "")
         if repo and sha:
-            existing[repo] = {"commit_sha": sha, "analyzer_version": ver}
+            existing[f"{platform}/{repo}"] = {
+                "commit_sha": sha,
+                "analyzer_version": ver,
+                "scanned_at": scanned_at,
+            }
 
     with open(output, "w") as f:
         json.dump(existing, f, indent=2, sort_keys=True)
