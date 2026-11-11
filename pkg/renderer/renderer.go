@@ -103,12 +103,52 @@ func escapeLabel(text string) string {
 }
 
 // escapeMdCell escapes characters that break markdown table cells.
+// escapeMdCell escapes a value for safe use inside a Markdown table cell:
+// HTML-significant characters, pipes, and line endings (both forms: GFM
+// treats carriage returns as line endings too) are neutralized.
 func escapeMdCell(text string) string {
 	text = strings.ReplaceAll(text, "&", "&amp;")
 	text = strings.ReplaceAll(text, "<", "&lt;")
 	text = strings.ReplaceAll(text, ">", "&gt;")
 	text = strings.ReplaceAll(text, "|", "\\|")
+	text = strings.ReplaceAll(text, "\r", " ")
 	text = strings.ReplaceAll(text, "\n", " ")
+	return text
+}
+
+// sanitizeMdValue makes a YAML-derived value safe for inline Markdown
+// output inside code spans: backticks are replaced so they cannot open or
+// close the span, and newlines and carriage returns are collapsed so the
+// value cannot alter the document structure (GFM treats both as line
+// endings).
+func sanitizeMdValue(text string) string {
+	text = strings.ReplaceAll(text, "`", "'")
+	text = strings.ReplaceAll(text, "\r", " ")
+	text = strings.ReplaceAll(text, "\n", " ")
+	return text
+}
+
+// sanitizeMdInline makes a YAML-derived value safe for Markdown output
+// outside code spans and table cells: in addition to the code-span rules,
+// HTML-significant characters are entity-encoded and Markdown emphasis,
+// link, and strikethrough characters are backslash-escaped so the value
+// renders literally. Existing backslashes are doubled first: otherwise an
+// input like \[x\](url) would leave GFM a live link after punctuation
+// escaping. Colons and leading www. dots are escaped so bare URLs cannot
+// form GFM autolinks.
+func sanitizeMdInline(text string) string {
+	text = sanitizeMdValue(text)
+	text = strings.ReplaceAll(text, `\`, `\\`)
+	text = strings.ReplaceAll(text, "&", "&amp;")
+	text = strings.ReplaceAll(text, "<", "&lt;")
+	text = strings.ReplaceAll(text, ">", "&gt;")
+	text = strings.ReplaceAll(text, "[", "\\[")
+	text = strings.ReplaceAll(text, "]", "\\]")
+	text = strings.ReplaceAll(text, "*", "\\*")
+	text = strings.ReplaceAll(text, "_", "\\_")
+	text = strings.ReplaceAll(text, "~", "\\~")
+	text = strings.ReplaceAll(text, ":", "\\:")
+	text = strings.ReplaceAll(text, "www.", "www\\.")
 	return text
 }
 
