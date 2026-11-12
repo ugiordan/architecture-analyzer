@@ -41,6 +41,13 @@ func init() {
 	domains.Register(netpolicy.New())
 }
 
+func normalizeFindings(findings []query.Finding) []query.Finding {
+	if findings == nil {
+		return []query.Finding{}
+	}
+	return findings
+}
+
 // versionLabelRe validates version labels for snapshot output directories.
 var versionLabelRe = regexp.MustCompile(`^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$`)
 
@@ -65,21 +72,23 @@ func applyVersion(outputDir, ver string) string {
 
 // snapshotMetadata holds version and provenance information written alongside output.
 type snapshotMetadata struct {
-	Version         string            `json:"version"`
-	Timestamp       string            `json:"timestamp"`
-	AnalyzerVersion string            `json:"analyzer_version"`
-	ReposAnalyzed   map[string]string `json:"repos_analyzed"`
-	Platform        string            `json:"platform,omitempty"`
+	Version              string            `json:"version"`
+	Timestamp            string            `json:"timestamp"`
+	AnalyzerVersion      string            `json:"analyzer_version"`
+	ReposAnalyzed        map[string]string `json:"repos_analyzed"`
+	RepoAnalyzerVersions map[string]string `json:"repo_analyzer_versions,omitempty"`
+	Platform             string            `json:"platform,omitempty"`
 }
 
 // writeSnapshotMetadata writes snapshot-metadata.json to the given directory.
-func writeSnapshotMetadata(dir, ver string, repos map[string]string, platform string) error {
+func writeSnapshotMetadata(dir, ver string, repos, repoAnalyzerVersions map[string]string, platform string) error {
 	meta := snapshotMetadata{
-		Version:         ver,
-		Timestamp:       time.Now().UTC().Format(time.RFC3339),
-		AnalyzerVersion: version,
-		ReposAnalyzed:   repos,
-		Platform:        platform,
+		Version:              ver,
+		Timestamp:            time.Now().UTC().Format(time.RFC3339),
+		AnalyzerVersion:      version,
+		ReposAnalyzed:        repos,
+		RepoAnalyzerVersions: repoAnalyzerVersions,
+		Platform:             platform,
 	}
 	path := filepath.Join(dir, "snapshot-metadata.json")
 	return writeJSON(path, meta)
@@ -438,7 +447,8 @@ func cmdAnalyze(args []string) error {
 
 	if *ver != "" {
 		repos := map[string]string{arch.Repo: arch.CommitSHA}
-		if err := writeSnapshotMetadata(outDir, *ver, repos, ""); err != nil {
+		repoAnalyzerVersions := map[string]string{arch.Repo: arch.AnalyzerVersion}
+		if err := writeSnapshotMetadata(outDir, *ver, repos, repoAnalyzerVersions, ""); err != nil {
 			return fmt.Errorf("writing snapshot metadata: %w", err)
 		}
 		fmt.Printf("Snapshot metadata written to: %s/snapshot-metadata.json\n", outDir)
@@ -517,11 +527,11 @@ func cmdAggregate(args []string) error {
 	}
 
 	if *ver != "" {
-		repos, err := collectRepoSHAs(resultsDir)
+		repos, repoAnalyzerVersions, err := collectRepoSHAs(resultsDir)
 		if err != nil {
 			return fmt.Errorf("collecting repo SHAs: %w", err)
 		}
-		if err := writeSnapshotMetadata(outDir, *ver, repos, *platform); err != nil {
+		if err := writeSnapshotMetadata(outDir, *ver, repos, repoAnalyzerVersions, *platform); err != nil {
 			return fmt.Errorf("writing snapshot metadata: %w", err)
 		}
 		fmt.Printf("Snapshot metadata written to: %s/snapshot-metadata.json\n", outDir)
@@ -1008,7 +1018,7 @@ func cmdFullAnalysis(args []string) error {
 		printFindings(cpg, findings)
 
 		findingsPath := filepath.Join(outDir, "security-findings.json")
-		if wErr := outputJSON(findingsPath, findings); wErr != nil {
+		if wErr := outputJSON(findingsPath, normalizeFindings(findings)); wErr != nil {
 			fmt.Fprintf(os.Stderr, "Warning: failed to write findings: %v\n", wErr)
 		} else {
 			fmt.Printf("Findings written to: %s\n", findingsPath)
@@ -1071,7 +1081,8 @@ func cmdFullAnalysis(args []string) error {
 
 	if *ver != "" && archResult != nil {
 		repos := map[string]string{archResult.Repo: archResult.CommitSHA}
-		if err := writeSnapshotMetadata(outDir, *ver, repos, ""); err != nil {
+		repoAnalyzerVersions := map[string]string{archResult.Repo: archResult.AnalyzerVersion}
+		if err := writeSnapshotMetadata(outDir, *ver, repos, repoAnalyzerVersions, ""); err != nil {
 			return fmt.Errorf("writing snapshot metadata: %w", err)
 		}
 		fmt.Printf("Snapshot metadata written to: %s/snapshot-metadata.json\n", outDir)
@@ -1113,9 +1124,9 @@ func reorderArgs(fs *flag.FlagSet, args []string) []string {
 
 var secAnnotationRulePrefix = map[string]string{
 	"RBAC_CLUSTER_SCOPE_SENSITIVE": "SEC-RBAC",
-	"ROUTE_NO_TLS":                "SEC-ROUTE",
-	"SECRET_IN_CONTAINER_ARGS":    "SEC-SECRET",
-	"CRD_CONFUSED_DEPUTY":         "SEC-CRD",
+	"ROUTE_NO_TLS":                 "SEC-ROUTE",
+	"SECRET_IN_CONTAINER_ARGS":     "SEC-SECRET",
+	"CRD_CONFUSED_DEPUTY":          "SEC-CRD",
 	"MISSING_AUTH_REQUIREMENT":     "SEC-AUTH",
 }
 
