@@ -21,6 +21,10 @@ on:
 
 concurrency:
   group: snapshots
+  # Keep pending runs queued (FIFO) instead of letting a newer run
+  # replace them, so manual runs are not silently dropped while a
+  # scheduled run is in progress.
+  queue: max
   cancel-in-progress: false
 
 env:
@@ -72,16 +76,32 @@ jobs:
             echo "run-rhoai=false" >> "$GITHUB_OUTPUT"
           fi
 
+
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Full history: the analyzer version is derived from the latest
+          # non-scan-state commit, which can be behind HEAD when the
+          # previous run committed scan state to main.
+          fetch-depth: 0
       - uses: actions/setup-go@v6
         with:
           go-version: '1.26'
           cache-dependency-path: go.sum
       - name: Build analyzer
-        run: go build -o arch-analyzer ./cmd/arch-analyzer/
+        # Only commits touching analyzer code, dependencies, scan config, or
+        # the repository-analysis wrapper change this version. Generated docs
+        # and scan-state commits must not force a full rescan.
+        run: |
+          VERSION_SHA="$(git log -1 --format='%H' -- \
+            go.mod go.sum cmd/arch-analyzer pkg scan-config.yaml scripts/analyze-repo.sh)"
+          if [ -z "$VERSION_SHA" ]; then
+            echo "::error::could not determine analyzer version: no analyzer-input commit found" >&2
+            exit 1
+          fi
+          go build -ldflags "-X main.version=${VERSION_SHA}" -o arch-analyzer ./cmd/arch-analyzer/
       - name: Upload analyzer binary
         uses: actions/upload-artifact@v7
         with:
@@ -106,6 +126,21 @@ jobs:
             scripts
             scan-config.yaml
             .last-scan-shas.json
+      - name: Refresh scan state from latest main
+        # A queued run's checkout is pinned to the dispatch-time commit;
+        # read the latest committed scan state so skip decisions reflect
+        # runs that committed state while this one waited in the queue.
+        run: |
+          if git fetch origin main 2>/dev/null; then
+            tmp=$(mktemp .last-scan-shas.json.XXXXXX)
+            if git show origin/main:.last-scan-shas.json > "$tmp" 2>/dev/null && \
+                mv "$tmp" .last-scan-shas.json; then
+              :
+            else
+              rm -f "$tmp"
+              echo "::warning::Could not refresh scan state; using checked-out state"
+            fi
+          fi
       - name: Download analyzer
         uses: actions/download-artifact@v8
         with:
@@ -155,6 +190,21 @@ jobs:
             scripts
             scan-config.yaml
             .last-scan-shas.json
+      - name: Refresh scan state from latest main
+        # A queued run's checkout is pinned to the dispatch-time commit;
+        # read the latest committed scan state so skip decisions reflect
+        # runs that committed state while this one waited in the queue.
+        run: |
+          if git fetch origin main 2>/dev/null; then
+            tmp=$(mktemp .last-scan-shas.json.XXXXXX)
+            if git show origin/main:.last-scan-shas.json > "$tmp" 2>/dev/null && \
+                mv "$tmp" .last-scan-shas.json; then
+              :
+            else
+              rm -f "$tmp"
+              echo "::warning::Could not refresh scan state; using checked-out state"
+            fi
+          fi
       - name: Download analyzer
         uses: actions/download-artifact@v8
         with:
@@ -191,8 +241,23 @@ jobs:
     needs: [parse-config, build, analyze-odh, analyze-rhoai]
     if: always()
     runs-on: ubuntu-latest
+    # The github-pages environment applies the repository's deployment
+    # branch policy to the Pages deployment, including manual runs.
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       contents: write
+      pull-requests: write
+      pages: write
+      id-token: write
+    concurrency:
+      # Serialize Pages deployments across overlapping runs. queue: max
+      # keeps pending runs queued (FIFO) instead of letting a newer run
+      # replace them, so manual custom-label runs are not silently dropped.
+      group: pages
+      queue: max
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v6
         with:
@@ -215,6 +280,7 @@ jobs:
           if [ -z "$ver" ]; then
             ver="$(date -u +%Y-%m-%d)"
           fi
+          python3 scripts/snapshot_provenance.py validate-version "$ver"
           echo "label=${ver}" >> "$GITHUB_OUTPUT"
           if echo "$ver" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
             echo "is_dated=true" >> "$GITHUB_OUTPUT"
@@ -238,37 +304,222 @@ jobs:
           path: rhoai-results/
           merge-multiple: true
 
+      - name: Refresh scan state from latest main
+        # Queued runs retain their dispatch-time checkout. Refresh scan
+        # state and site content from main, but keep analyzer source and
+        # version pinned to the run that produced the analysis artifacts.
+        run: |
+          git fetch origin main
+          tmp=$(mktemp .last-scan-shas.json.XXXXXX)
+          if git show origin/main:.last-scan-shas.json > "$tmp" 2>/dev/null && \
+              mv "$tmp" .last-scan-shas.json; then
+            :
+          else
+            rm -f "$tmp"
+            echo "::warning::Could not refresh scan state; using checked-out state"
+          fi
+          git restore --source=origin/main --staged --worktree -- site/ docs/
+          for path in .generated-platform-provenance.json; do
+            rm -rf "$path"
+            if git cat-file -e "origin/main:${path}" 2>/dev/null; then
+              git checkout origin/main -- "$path"
+            fi
+          done
+
+      - name: Carry forward skipped repos from latest snapshot
+        # Select platforms from the parsed configuration, not from artifact
+        # directories: when every repo in a platform skips, no artifacts are
+        # uploaded and download-artifact leaves no directory behind. Create
+        # the directory so carry-forward still restores that platform.
+        # Process independently so one broken platform does not block
+        # snapshot publication for the other; failed platforms are held
+        # back and their scan state is invalidated for a rescan next run.
+        id: carry-forward
+        run: |
+          FAILED=()
+          if [ "${{ needs.parse-config.outputs.run-odh }}" = "true" ]; then
+            mkdir -p odh-results
+            if ! bash scripts/carry-forward-snapshot-results.sh odh-results; then
+              FAILED+=(odh)
+            fi
+          fi
+          if [ "${{ needs.parse-config.outputs.run-rhoai }}" = "true" ]; then
+            mkdir -p rhoai-results
+            if ! bash scripts/carry-forward-snapshot-results.sh rhoai-results; then
+              FAILED+=(rhoai)
+            fi
+          fi
+          echo "failed-platforms=${FAILED[*]}" >> "$GITHUB_OUTPUT"
+          if [ ${#FAILED[@]} -gt 0 ]; then
+            echo "Carry-forward failed for: ${FAILED[*]}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Aggregate and generate docs
         env:
           VERSION: ${{ steps.version.outputs.label }}
+          FAILED_PLATFORMS: ${{ steps.carry-forward.outputs.failed-platforms }}
         run: |
 
-          if [ -d odh-results ] && [ "$(ls -A odh-results)" ]; then
-            echo "=== Aggregating ODH ==="
-            ./arch-analyzer aggregate -output-dir platform-output/odh -version "$VERSION" -platform odh \
-              -scan-config scan-config.yaml odh-results
-            echo "=== Generating ODH docs ==="
-            ./arch-analyzer docs -output-dir site/docs/use-cases/odh-platform -prefix odh-platform \
-              "platform-output/odh/${VERSION}/platform-architecture.json"
+          # Remove the previously committed generated docs for each
+          # enabled platform (its results directory exists), even when it
+          # has no configured repos, so stale pages do not linger on the
+          # deployed site.
+          if [ -d odh-results ]; then
+            if [[ " ${FAILED_PLATFORMS} " == *" odh "* ]]; then
+              echo "::warning::Keeping previous ODH docs because carry-forward failed"
+            else
+              rm -rf site/docs/use-cases/odh-platform
+            fi
+            if [ "$(ls -A odh-results)" ] && [[ " ${FAILED_PLATFORMS} " != *" odh "* ]]; then
+              echo "=== Aggregating ODH ==="
+              ./arch-analyzer aggregate -output-dir platform-output/odh -version "$VERSION" -platform odh \
+                -scan-config scan-config.yaml odh-results
+              echo "=== Generating ODH docs ==="
+              ./arch-analyzer docs -output-dir site/docs/use-cases/odh-platform -prefix odh-platform \
+                "platform-output/odh/${VERSION}/platform-architecture.json"
+            fi
           fi
 
-          if [ -d rhoai-results ] && [ "$(ls -A rhoai-results)" ]; then
-            echo "=== Aggregating RHOAI ==="
-            ./arch-analyzer aggregate -output-dir platform-output/rhoai -version "$VERSION" -platform rhoai \
-              -scan-config scan-config.yaml rhoai-results
-            echo "=== Generating RHOAI docs ==="
-            ./arch-analyzer docs -output-dir site/docs/use-cases/rhoai-platform -prefix rhoai-platform \
-              "platform-output/rhoai/${VERSION}/platform-architecture.json"
+          if [ -d rhoai-results ]; then
+            if [[ " ${FAILED_PLATFORMS} " == *" rhoai "* ]]; then
+              echo "::warning::Keeping previous RHOAI docs because carry-forward failed"
+            else
+              rm -rf site/docs/use-cases/rhoai-platform
+            fi
+            if [ "$(ls -A rhoai-results)" ] && [[ " ${FAILED_PLATFORMS} " != *" rhoai "* ]]; then
+              echo "=== Aggregating RHOAI ==="
+              ./arch-analyzer aggregate -output-dir platform-output/rhoai -version "$VERSION" -platform rhoai \
+                -scan-config scan-config.yaml rhoai-results
+              echo "=== Generating RHOAI docs ==="
+              ./arch-analyzer docs -output-dir site/docs/use-cases/rhoai-platform -prefix rhoai-platform \
+                "platform-output/rhoai/${VERSION}/platform-architecture.json"
+            fi
           fi
+
+      - name: Stamp snapshot run provenance
+        env:
+          VERSION: ${{ steps.version.outputs.label }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          for platform in odh rhoai; do
+            metadata="platform-output/${platform}/${VERSION}/snapshot-metadata.json"
+            if [ -f "$metadata" ]; then
+              python3 scripts/snapshot_provenance.py stamp "$metadata" "$RUN_NUMBER" "$RUN_ATTEMPT"
+            fi
+          done
+
+      - name: Update generated-docs provenance
+        id: generated-provenance
+        env:
+          VERSION: ${{ steps.version.outputs.label }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          RUN_ODH: ${{ needs.parse-config.outputs.run-odh }}
+          RUN_RHOAI: ${{ needs.parse-config.outputs.run-rhoai }}
+          FAILED_PLATFORMS: ${{ steps.carry-forward.outputs.failed-platforms }}
+        run: |
+          BRANCH="chore/update-generated-platform-docs"
+          GENERATED_REF=""
+          SNAPSHOT_REF=""
+          if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
+            git fetch origin "+refs/heads/${BRANCH}:refs/remotes/origin/${BRANCH}"
+            GENERATED_REF="origin/${BRANCH}"
+          fi
+          if git ls-remote --heads origin snapshots | grep -q snapshots; then
+            git fetch origin +refs/heads/snapshots:refs/remotes/origin/snapshots
+            SNAPSHOT_REF="origin/snapshots"
+          fi
+          ENABLED=()
+          [ "$RUN_ODH" = "true" ] && ENABLED+=(odh)
+          [ "$RUN_RHOAI" = "true" ] && ENABLED+=(rhoai)
+          python3 scripts/generated_platform_docs.py update \
+            "$GITHUB_WORKSPACE" ".generated-platform-provenance.json" \
+            platform-output "$VERSION" "$RUN_NUMBER" "$RUN_ATTEMPT" \
+            "${ENABLED[*]}" "$FAILED_PLATFORMS" "$GENERATED_REF" "$SNAPSHOT_REF"
+
+      - name: Check snapshot freshness
+        # Check same-label freshness for snapshot writes, and cross-label
+        # freshness for docs/Pages/state: an older rerun must not overwrite
+        # newer platform data merely because it uses a different label.
+        id: freshness
+        env:
+          VERSION: ${{ steps.version.outputs.label }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          CHECK_ODH: ${{ needs.parse-config.outputs.run-odh }}
+          CHECK_RHOAI: ${{ needs.parse-config.outputs.run-rhoai }}
+          FAILED_PLATFORMS: ${{ steps.carry-forward.outputs.failed-platforms }}
+          DOCS_STALE_PLATFORMS: ${{ steps.generated-provenance.outputs.docs-stale-platforms }}
+        run: |
+          if ! git ls-remote --heads origin snapshots | grep -q snapshots; then
+            echo "No snapshots branch; nothing to compare"
+            echo "stale-odh=false" >> "$GITHUB_OUTPUT"
+            echo "stale-rhoai=false" >> "$GITHUB_OUTPUT"
+            echo "platform-stale-odh=false" >> "$GITHUB_OUTPUT"
+            echo "platform-stale-rhoai=false" >> "$GITHUB_OUTPUT"
+            echo "any-stale=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch origin snapshots
+          SNAP_DIR="$(mktemp -d)"
+          git worktree add "$SNAP_DIR" origin/snapshots
+          stale_odh=false
+          stale_rhoai=false
+          platform_stale_odh=false
+          platform_stale_rhoai=false
+          for platform in odh rhoai; do
+            enabled_var="CHECK_$(echo "$platform" | tr '[:lower:]' '[:upper:]')"
+            [ "${!enabled_var}" = "true" ] || continue
+            if [[ " ${FAILED_PLATFORMS} " == *" ${platform} "* ]]; then
+              continue
+            fi
+            meta="$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/snapshot-metadata.json"
+            if [ -f "$meta" ]; then
+              LABEL_NEWER=$(python3 scripts/snapshot_provenance.py is-newer "$meta" "$RUN_NUMBER" "$RUN_ATTEMPT")
+              if [ "$LABEL_NEWER" = "yes" ]; then
+                echo "::warning::${platform} snapshot ${VERSION} is newer than this run; preserving that label"
+                if [ "$platform" = "odh" ]; then stale_odh=true; else stale_rhoai=true; fi
+              fi
+            fi
+            PLATFORM_NEWER=$(python3 scripts/generated_platform_docs.py platform-newer \
+              "$GITHUB_WORKSPACE" origin/snapshots "$platform" "$RUN_NUMBER" "$RUN_ATTEMPT")
+            if [ "$PLATFORM_NEWER" = "yes" ]; then
+              echo "::warning::a newer ${platform} snapshot exists under another label; blocking docs, Pages, and scan-state publication"
+              if [ "$platform" = "odh" ]; then platform_stale_odh=true; else platform_stale_rhoai=true; fi
+            fi
+          done
+          if [ -n "${DOCS_STALE_PLATFORMS}" ]; then
+            echo "::warning::no docs source matches the latest published snapshot for: ${DOCS_STALE_PLATFORMS}"
+            platform_stale_odh=true
+            platform_stale_rhoai=true
+          fi
+          echo "stale-odh=${stale_odh}" >> "$GITHUB_OUTPUT"
+          echo "stale-rhoai=${stale_rhoai}" >> "$GITHUB_OUTPUT"
+          echo "platform-stale-odh=${platform_stale_odh}" >> "$GITHUB_OUTPUT"
+          echo "platform-stale-rhoai=${platform_stale_rhoai}" >> "$GITHUB_OUTPUT"
+          if [ "$platform_stale_odh" = "true" ] || [ "$platform_stale_rhoai" = "true" ]; then
+            echo "any-stale=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "any-stale=false" >> "$GITHUB_OUTPUT"
+          fi
+          git worktree remove "$SNAP_DIR" --force
 
       - name: Update scan SHAs for skip-on-no-change
         run: |
+          INVALIDATE_ARGS=()
+          if [ -n "${FAILED_PLATFORMS}" ]; then
+            INVALIDATE_ARGS+=(--invalidate-platforms "${FAILED_PLATFORMS}")
+          fi
           python3 scripts/update-scan-shas.py \
             ${odh_dir:+odh-results} ${rhoai_dir:+rhoai-results} \
+            "${INVALIDATE_ARGS[@]}" \
+            --invalidations-output .last-scan-shas-invalidations-run.json \
             -o .last-scan-shas.json
         env:
           odh_dir: ${{ needs.analyze-odh.result != 'skipped' && 'yes' || '' }}
           rhoai_dir: ${{ needs.analyze-rhoai.result != 'skipped' && 'yes' || '' }}
+          FAILED_PLATFORMS: ${{ steps.carry-forward.outputs.failed-platforms }}
 
       - name: Upload platform artifacts
         uses: actions/upload-artifact@v7
@@ -280,38 +531,37 @@ jobs:
       - name: Generate platform nav
         run: python3 scripts/generate-nav.py site/docs site/mkdocs.yml
 
-      - name: Commit generated platform docs
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add site/docs/use-cases/*-platform/ site/mkdocs.yml docs/ .last-scan-shas.json
-          git reset -- .github/
-          if git diff --cached --quiet; then
-            echo "No platform doc changes to commit"
-          else
-            BRANCH="chore/update-generated-platform-docs"
-            git checkout -b "$BRANCH"
-            git commit -m "chore: update generated platform docs [skip ci]"
-            git push origin "$BRANCH" --force
-            if ! gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
-              gh pr create --title "chore: update generated platform docs" \
-                --body "Auto-generated platform documentation update. This PR is force-pushed on each CI run." \
-                --base main --head "$BRANCH" || true
-            fi
-          fi
-
       - name: Install MkDocs dependencies
         run: pip install -r site/requirements.txt
 
-      - name: Deploy to GitHub Pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Build site
         working-directory: site
-        run: mkdocs gh-deploy --force
+        # The git-revision-date plugin needs the full history already
+        # fetched by this job's checkout.
+        run: mkdocs build
+
+      - name: Upload Pages artifact
+        # Held back when any platform is stale so older data cannot
+        # replace a newer deployment. Failed platforms retain their last
+        # generated docs while healthy platforms can deploy.
+        if: steps.freshness.outputs.any-stale != 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/site
 
       - name: Publish snapshot to snapshots branch
+        id: publish
         env:
           VERSION: ${{ steps.version.outputs.label }}
+          STALE_ODH: ${{ steps.freshness.outputs.stale-odh }}
+          STALE_RHOAI: ${{ steps.freshness.outputs.stale-rhoai }}
+          ANY_STALE: ${{ steps.freshness.outputs.any-stale }}
+          FAILED_PLATFORMS: ${{ steps.carry-forward.outputs.failed-platforms }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -326,12 +576,62 @@ jobs:
             git worktree add --orphan -b snapshots "$SNAP_DIR"
           fi
 
-          # Copy versioned output
-          if [ -d platform-output ] && [ "$(ls -A platform-output)" ]; then
-            mkdir -p "$SNAP_DIR/output/${VERSION}"
-            cp -r platform-output/* "$SNAP_DIR/output/${VERSION}/"
-          else
-            echo "No platform output to snapshot"
+          # If any enabled platform has a newer snapshot under any label,
+          # do not publish older data for another label/platform from this
+          # lagging run. The docs, Pages, and scan-state steps use the same
+          # freshness gate.
+          if [ "$ANY_STALE" = "true" ]; then
+            echo "::warning::at least one platform has newer published data; skipping this run's snapshot publication"
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            git worktree remove "$SNAP_DIR" --force
+            exit 0
+          fi
+
+          # Copy versioned output per enabled platform (its results
+          # directory exists), skipping platforms whose snapshot was
+          # published after this run's data was gathered (see the
+          # freshness check): their newer results are preserved and this
+          # run's other platforms still publish. An enabled platform with
+          # no output (no configured repos) removes its previous snapshot
+          # for this version so the snapshots branch matches the site.
+          changed=false
+          for platform in odh rhoai; do
+            [ -d "${platform}-results" ] || continue
+            if [[ " ${FAILED_PLATFORMS} " == *" ${platform} "* ]]; then
+              echo "::warning::preserving previous ${platform} snapshot because carry-forward failed"
+              continue
+            fi
+            stale_var="STALE_$(echo "$platform" | tr '[:lower:]' '[:upper:]')"
+            if [ "${!stale_var}" = "true" ]; then
+              echo "::warning::keeping newer ${platform} snapshot for ${VERSION}"
+              continue
+            fi
+            if [ -d "platform-output/${platform}" ]; then
+              # Remove any previous snapshot for this platform and
+              # version first: a plain copy would merge with it and keep
+              # files this run no longer produces.
+              rm -rf "$SNAP_DIR/output/${VERSION}/${platform}"
+              mkdir -p "$SNAP_DIR/output/${VERSION}"
+              cp -r "platform-output/${platform}" "$SNAP_DIR/output/${VERSION}/"
+              changed=true
+            else
+              if [ -d "$SNAP_DIR/output/${VERSION}/${platform}" ]; then
+                echo "Removing ${platform} snapshot for ${VERSION} (platform has no output)"
+                git -C "$SNAP_DIR" rm -rf -q "output/${VERSION}/${platform}"
+              fi
+              # Always write a provenance tombstone, even if this is the
+              # first publication for the label. A delayed rerun must not
+              # resurrect the platform after it was intentionally empty.
+              tombstone="$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/snapshot-metadata.json"
+              mkdir -p "$(dirname "$tombstone")"
+              python3 scripts/snapshot_provenance.py removed \
+                "$tombstone" "$VERSION" "$platform" "$RUN_NUMBER" "$RUN_ATTEMPT"
+              changed=true
+            fi
+          done
+          if [ "$changed" != "true" ]; then
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            git worktree remove "$SNAP_DIR" --force
             exit 0
           fi
 
@@ -339,23 +639,49 @@ jobs:
           for platform_dir in odh-results rhoai-results; do
             [ -d "$platform_dir" ] || continue
             platform=$(echo "$platform_dir" | sed 's/-results//')
-            find "$platform_dir" -name "component-architecture.json" -o -name "security-findings.json" | while read -r f; do
+            if [[ " ${FAILED_PLATFORMS} " == *" ${platform} "* ]]; then
+              echo "::warning::not copying raw files for failed platform ${platform}"
+              continue
+            fi
+            stale_var="STALE_$(echo "$platform" | tr '[:lower:]' '[:upper:]')"
+            [ "${!stale_var}" = "true" ] && continue
+            find "$platform_dir" -type f \
+              \( -name "component-architecture.json" -o -name "security-findings.json" \) \
+              | while IFS= read -r f; do
               # Extract org/repo from path: platform-results/org/repo/file.json
               rel="${f#${platform_dir}/}"
               repo_path=$(dirname "$rel")
+              failed_dir="${platform_dir}/${repo_path}"
+              skip_failed=false
+              while [ "$failed_dir" != "$platform_dir" ] && [[ "$failed_dir" == "${platform_dir}/"* ]]; do
+                if [ -f "${failed_dir}/_failed" ]; then
+                  echo "::warning::not copying raw files from failed repo ${repo_path}"
+                  skip_failed=true
+                  break
+                fi
+                failed_dir=$(dirname "$failed_dir")
+              done
+              [ "$skip_failed" = "true" ] && continue
               repo_name=$(basename "$repo_path")
               dest="$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/raw/${repo_name}"
               mkdir -p "$dest"
               cp "$f" "$dest/"
             done
-            count=$(find "$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/raw" -name "*.json" 2>/dev/null | wc -l | tr -d ' ')
+            raw_dir="$SNAP_DIR/output/${VERSION}/${platform}/${VERSION}/raw"
+            count=0
+            if [ -d "$raw_dir" ]; then
+              count=$(find "$raw_dir" -type f -name "*.json" | wc -l | tr -d ' ')
+            fi
             echo "Copied ${count} raw files for ${platform}"
           done
 
-          # Commit and tag
+          # Commit and tag. Stage with -A from the worktree root so
+          # deletions are staged even when they remove the last platform
+          # under this version (the version directory may no longer
+          # exist on disk).
           (
             cd "$SNAP_DIR"
-            git add "output/${VERSION}/"
+            git add -A
             git commit -m "snapshot: ${VERSION}" || echo "No changes to commit"
             git tag -f "arch/${VERSION}"
           )
@@ -364,9 +690,42 @@ jobs:
           (cd "$SNAP_DIR" && git push origin HEAD:snapshots && git push origin "arch/${VERSION}" --force)
           git worktree remove "$SNAP_DIR" --force
 
+      - name: Commit generated platform docs
+        # Publish generated provenance only after the matching snapshot is
+        # pushed; skipped or stale snapshots must not advance this branch.
+        if: steps.freshness.outputs.any-stale != 'true' && steps.publish.outputs.skipped != 'true' && steps.carry-forward.outputs.failed-platforms == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A site/docs/use-cases/ site/mkdocs.yml docs/ .generated-platform-provenance.json
+          git reset -- .github/
+          if git diff --cached --quiet; then
+            echo "No platform doc changes to commit"
+          else
+            BRANCH="chore/update-generated-platform-docs"
+            git checkout -b "$BRANCH"
+            git commit -m "chore: update generated platform docs [skip ci]"
+            git push origin "$BRANCH" --force
+            if ! gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number' | grep -q .; then
+              gh pr create --title "chore: update generated platform docs" \
+                --body "Auto-generated platform documentation update. This PR is force-pushed on each CI run." \
+                --base main --head "$BRANCH" \
+                || echo "::warning::failed to create generated-docs PR (check the 'Allow GitHub Actions to create and approve pull requests' repository setting)"
+            fi
+          fi
+
       - name: Prune old date-stamped snapshots
         if: steps.version.outputs.is_dated == 'true'
+        continue-on-error: true
         run: |
+          # Skip when the snapshots branch does not exist yet (first run
+          # with no platform output publishes nothing).
+          if ! git ls-remote --heads origin snapshots | grep -q snapshots; then
+            echo "No snapshots branch to prune"
+            exit 0
+          fi
           KEEP=10
           git fetch origin snapshots
           SNAP_DIR="/tmp/snapshots-prune"
@@ -375,24 +734,230 @@ jobs:
 
           cd "$SNAP_DIR"
 
-          # List date-stamped snapshot dirs, sorted oldest first
-          DATED_DIRS=$(ls -d output/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] 2>/dev/null | sort)
-          COUNT=$(echo "$DATED_DIRS" | grep -c . || true)
+          # List date-stamped snapshots, sorted oldest first.
+          DATED_DIRS=()
+          TODAY="$(date -u +%Y-%m-%d)"
+          if [ -d output ]; then
+            while IFS= read -r dir; do DATED_DIRS+=("$dir"); done < <(
+              find output -mindepth 1 -maxdepth 1 -type d \
+                -regextype posix-extended \
+                -regex 'output/[0-9]{4}-[0-9]{2}-[0-9]{2}' \
+                | awk -F/ -v today="$TODAY" '$2 <= today' | sort
+            )
+          fi
+          COUNT=${#DATED_DIRS[@]}
+
+          has_platform_raw() {
+            local snapshot="$1"
+            local platform="$2"
+            local component
+            [ -d "${snapshot}/${platform}" ] || return 1
+            while IFS= read -r component; do
+              [ -f "$(dirname "$component")/security-findings.json" ] && return 0
+            done < <(find "${snapshot}/${platform}" -type f -name "component-architecture.json")
+            return 1
+          }
 
           if [ "$COUNT" -gt "$KEEP" ]; then
             TO_DELETE=$((COUNT - KEEP))
-            echo "Pruning $TO_DELETE old date-stamped snapshots (keeping $KEEP)..."
-            echo "$DATED_DIRS" | head -n "$TO_DELETE" | while read -r dir; do
+            DELETED=0
+            echo "Pruning up to $TO_DELETE old date-stamped snapshots (keeping $KEEP plus latest raw per platform)..."
+            # Only consider the originally oldest COUNT - KEEP dates. A
+            # protected metadata/raw snapshot is retained in addition to
+            # the newest KEEP dates; it must not make a newer snapshot a
+            # deletion candidate.
+            for ((i=0; i<TO_DELETE && DELETED<TO_DELETE; i++)); do
+              dir="${DATED_DIRS[$i]}"
               DATE_LABEL=$(basename "$dir")
+              SKIP_DELETE=false
+              for platform in odh rhoai; do
+                CURRENT_META="${dir}/${platform}/${DATE_LABEL}/snapshot-metadata.json"
+                if [ -f "$CURRENT_META" ]; then
+                  LATEST_META=$(python3 "$GITHUB_WORKSPACE/scripts/generated_platform_docs.py" \
+                    latest-snapshot-path "$SNAP_DIR" HEAD "$platform")
+                  if [ "$CURRENT_META" = "$LATEST_META" ]; then
+                    echo "  Keeping ${dir}: latest metadata (including removal tombstone) for ${platform}"
+                    SKIP_DELETE=true
+                    break
+                  fi
+                fi
+                if ! has_platform_raw "$dir" "$platform"; then
+                  continue
+                fi
+                NEWER_WITH_RAW=false
+                for ((j=i+1; j<COUNT; j++)); do
+                  if has_platform_raw "${DATED_DIRS[$j]}" "$platform"; then
+                    NEWER_WITH_RAW=true
+                    break
+                  fi
+                done
+                if [ "$NEWER_WITH_RAW" != "true" ]; then
+                  echo "  Keeping ${dir}: newest snapshot with raw data for ${platform}"
+                  SKIP_DELETE=true
+                  break
+                fi
+              done
+              if [ "$SKIP_DELETE" = "true" ]; then
+                continue
+              fi
               echo "  Removing: $dir (tag arch/${DATE_LABEL})"
               git rm -rf "$dir"
               git push origin --delete "arch/${DATE_LABEL}" 2>/dev/null || true
+              DELETED=$((DELETED + 1))
             done
-            git commit -m "prune: remove old date-stamped snapshots (kept $KEEP)"
-            git push origin HEAD:snapshots
+            if [ "$DELETED" -gt 0 ]; then
+              git commit -m "prune: remove old date-stamped snapshots (kept $KEEP)"
+              git push origin HEAD:snapshots
+            else
+              echo "No eligible snapshots to prune; retaining latest raw snapshot per platform"
+            fi
           else
             echo "Only $COUNT date-stamped snapshots, nothing to prune (keep $KEEP)"
           fi
 
           cd "$GITHUB_WORKSPACE"
           git worktree remove "$SNAP_DIR" --force
+
+      - name: Deploy to GitHub Pages
+        # Expose the site only after its matching snapshot is published.
+        # A failed snapshot push must never leave Pages ahead of the raw
+        # snapshot data that subsequent carry-forward will trust.
+        if: steps.freshness.outputs.any-stale != 'true' && steps.publish.outputs.skipped != 'true'
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      - name: Commit scan SHAs to main
+        # Runs after the snapshot is published and the site deployed:
+        # if any earlier publication step fails, the state stays unchanged
+        # so the next run rescans and republishes instead of skipping and
+        # carrying forward older raw results. The skip-on-no-change
+        # mechanism only works when analyze jobs can read the previous
+        # run's SHAs from main. The workflow has no push trigger, so this
+        # direct commit cannot retrigger it. Custom-label runs do not
+        # advance the shared skip state: their raw results are published
+        # under the custom label, which dated carry-forward does not
+        # restore, so letting them advance the state would strand that
+        # data.
+        if: github.ref == 'refs/heads/main' && steps.version.outputs.is_dated == 'true' && steps.freshness.outputs.any-stale != 'true'
+        run: |
+          # Only advance the shared skip state for a snapshot that survives
+          # pruning: a backdated date-shaped label would be published and
+          # then pruned (only the newest dated snapshots are kept), leaving
+          # later skips with no restorable data. A stale platform also
+          # holds back the state entirely: its entries describe data that
+          # was not published, and the cost is only an extra rescan of the
+          # unaffected platform on the next run.
+          if [ "${{ steps.version.outputs.label }}" != "$(date -u +%Y-%m-%d)" ]; then
+            echo "Snapshot label ${{ steps.version.outputs.label }} is not today's date; not advancing scan state"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Push from a separate clean worktree based on the latest
+          # origin/main: this checkout holds uncommitted generated docs,
+          # which would make an in-place rebase refuse to start.
+          STATE_DIR="$(mktemp -d)"
+          git fetch origin main
+          git worktree add --detach "$STATE_DIR" origin/main
+          if (
+            cd "$STATE_DIR" || exit 1
+            # Merge our scan state with the current state on main instead
+            # of overwriting it: concurrent runs can finish out of order,
+            # and an older run must not replace a newer run's entries.
+            # Per repo, the entry with the newer scanned_at wins.
+            python3 "${GITHUB_WORKSPACE}/scripts/merge-scan-shas.py" \
+              "${GITHUB_WORKSPACE}/.last-scan-shas.json" \
+              "${STATE_DIR}/.last-scan-shas.json" \
+              "${STATE_DIR}/.last-scan-shas.json" \
+              "${GITHUB_WORKSPACE}/.last-scan-shas-invalidations-run.json" \
+              "${STATE_DIR}/.last-scan-shas-invalidations.json" \
+              "${STATE_DIR}/.last-scan-shas-invalidations.json" || exit 1
+            git add .last-scan-shas.json .last-scan-shas-invalidations.json || exit 1
+            git diff --cached --quiet
+            diff_status=$?
+            if [ "$diff_status" -eq 0 ]; then
+              echo "No scan SHA changes to commit"
+              exit 0
+            fi
+            if [ "$diff_status" -ne 1 ]; then
+              echo "::error::could not inspect scan-state changes"
+              exit "$diff_status"
+            fi
+            git commit -m "chore: update last-scan-shas [skip ci] (scan-state)" || exit 1
+            # main may advance while the scan runs; rebase the scan-state
+            # commit onto the latest main and retry, bounded. Never
+            # force-push. A failed push only costs a full rescan next run.
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              git fetch origin main || exit 1
+              if ! git rebase origin/main; then
+                echo "::warning::rebase of scan-state commit failed, abandoning it"
+                git rebase --abort 2>/dev/null || true
+                exit 1
+              fi
+            done
+            exit 1
+          ); then
+            echo "Scan SHAs committed to main"
+          else
+            echo "::warning::could not push scan SHAs to main; next run will rescan"
+          fi
+          git worktree remove --force "$STATE_DIR" || true
+
+      - name: Commit scan-state invalidations when publication is stale
+        if: github.ref == 'refs/heads/main' && steps.version.outputs.is_dated == 'true' && steps.freshness.outputs.any-stale == 'true'
+        run: |
+          RUN_INVALIDATIONS="${GITHUB_WORKSPACE}/.last-scan-shas-invalidations-run.json"
+          if [ ! -f "$RUN_INVALIDATIONS" ]; then
+            echo "No run invalidation file; nothing to persist"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          STATE_DIR="$(mktemp -d)"
+          git fetch origin main
+          git worktree add --detach "$STATE_DIR" origin/main
+          printf '{}\n' > "$STATE_DIR/.empty-scan-shas.json"
+          if (
+            cd "$STATE_DIR" || exit 1
+            python3 "${GITHUB_WORKSPACE}/scripts/merge-scan-shas.py" \
+              "$STATE_DIR/.empty-scan-shas.json" \
+              "$STATE_DIR/.last-scan-shas.json" \
+              "$STATE_DIR/.last-scan-shas.json" \
+              "$RUN_INVALIDATIONS" \
+              "$STATE_DIR/.last-scan-shas-invalidations.json" \
+              "$STATE_DIR/.last-scan-shas-invalidations.json" || exit 1
+            git add .last-scan-shas.json .last-scan-shas-invalidations.json || exit 1
+            git diff --cached --quiet
+            diff_status=$?
+            if [ "$diff_status" -eq 0 ]; then
+              echo "No scan-state invalidations to commit"
+              exit 0
+            fi
+            if [ "$diff_status" -ne 1 ]; then
+              echo "::error::could not inspect scan-state invalidations"
+              exit "$diff_status"
+            fi
+            git commit -m "chore: update last-scan-shas [skip ci] (scan-state)" || exit 1
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              git fetch origin main || exit 1
+              if ! git rebase origin/main; then
+                echo "::warning::rebase of scan-state invalidation commit failed, abandoning it"
+                git rebase --abort 2>/dev/null || true
+                exit 1
+              fi
+            done
+            exit 1
+          ); then
+            echo "Scan-state invalidations committed to main"
+          else
+            echo "::error::could not persist scan-state invalidations"
+            exit 1
+          fi
+          git worktree remove --force "$STATE_DIR" || true

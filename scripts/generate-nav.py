@@ -115,10 +115,6 @@ def main():
     mkdocs_path = sys.argv[2]
 
     platforms = find_platforms(docs_dir)
-    if not platforms:
-        print("No *-platform/ directories found, skipping nav generation")
-        return
-
     all_nav_lines = []
     for platform in platforms:
         nav_lines = build_platform_nav(docs_dir, platform)

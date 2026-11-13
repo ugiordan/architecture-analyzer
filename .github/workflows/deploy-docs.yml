@@ -18,34 +18,74 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Never cancel an in-flight run: this workflow shares the pages group
+  # with analyze-all.yml, whose aggregate job publishes snapshots and
+  # commits scan state; a doc push must not cancel that mid-run. Pending
+  # runs queue (FIFO) rather than being replaced, matching analyze-all.
+  queue: max
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      should-deploy: ${{ steps.sync-generated.outputs.should-deploy }}
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
+      - name: Sync latest generated platform docs
+        id: sync-generated
+        # Select platform docs by their recorded run provenance, not branch
+        # ancestry: scan-state commits and generated-doc commits can be
+        # siblings. Refresh main after the queue, overlay only platform trees
+        # whose provenance matches the latest published snapshots, and skip
+        # deployment if neither source represents the current data.
+        run: |
+          BRANCH="chore/update-generated-platform-docs"
+          git fetch origin main
+          git checkout --detach origin/main
+          GENERATED_REF=""
+          SNAPSHOT_REF=""
+          if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
+            git fetch origin "+refs/heads/${BRANCH}:refs/remotes/origin/${BRANCH}"
+            GENERATED_REF="origin/${BRANCH}"
+          fi
+          if git ls-remote --heads origin snapshots | grep -q snapshots; then
+            git fetch origin +refs/heads/snapshots:refs/remotes/origin/snapshots
+            SNAPSHOT_REF="origin/snapshots"
+          fi
+          python3 scripts/generated_platform_docs.py sync \
+            "$GITHUB_WORKSPACE" "$GENERATED_REF" "$SNAPSHOT_REF" \
+            .generated-platform-provenance.json
+          if grep -q '^should-deploy=true$' "$GITHUB_OUTPUT"; then
+            python3 scripts/generate-nav.py site/docs site/mkdocs.yml
+          fi
+
       - uses: actions/setup-python@v6
+        if: steps.sync-generated.outputs.should-deploy == 'true'
         with:
           python-version: "3.12"
 
       - name: Install MkDocs dependencies
+        if: steps.sync-generated.outputs.should-deploy == 'true'
         run: pip install -r site/requirements.txt
 
       - name: Build site
+        if: steps.sync-generated.outputs.should-deploy == 'true'
         working-directory: site
         run: mkdocs build --strict 2>&1 || mkdocs build
 
       - name: Upload Pages artifact
+        if: steps.sync-generated.outputs.should-deploy == 'true'
         uses: actions/upload-pages-artifact@v4
         with:
           path: site/site
 
   deploy:
     needs: build
+    if: needs.build.outputs.should-deploy == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
