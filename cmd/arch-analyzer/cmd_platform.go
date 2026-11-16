@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"bufio"
 	"github.com/ugiordan/architecture-analyzer/pkg/aggregator"
 	"github.com/ugiordan/architecture-analyzer/pkg/config"
-	"bufio"
 	"github.com/ugiordan/architecture-analyzer/pkg/extractor"
 	"github.com/ugiordan/architecture-analyzer/pkg/validator"
 )
@@ -82,7 +82,6 @@ func detectOrgFromRepo(repoPath string) string {
 	}
 	return ""
 }
-
 
 func cmdBuildConfig(args []string) error {
 	fs := flag.NewFlagSet("build-config", flag.ExitOnError)
@@ -274,10 +273,11 @@ func cmdPlatforms(args []string) error {
 }
 
 // collectRepoSHAs scans a results directory for component-architecture.json files
-// and extracts repo -> commit_sha pairs for snapshot metadata.
+// and extracts repo -> commit_sha and repo -> analyzer_version maps for snapshot metadata.
 // Supports both flat (results/<repo>/) and org-namespaced (results/<org>/<repo>/) layouts.
-func collectRepoSHAs(resultsDir string) (map[string]string, error) {
+func collectRepoSHAs(resultsDir string) (map[string]string, map[string]string, error) {
 	repos := make(map[string]string)
+	repoAnalyzerVersions := make(map[string]string)
 	err := filepath.Walk(resultsDir, func(path string, fi os.FileInfo, walkErr error) error {
 		if walkErr != nil || fi.IsDir() || fi.Name() != "component-architecture.json" {
 			return nil
@@ -289,15 +289,19 @@ func collectRepoSHAs(resultsDir string) (map[string]string, error) {
 		}
 		repo, _ := data["repo"].(string)
 		sha, _ := data["commit_sha"].(string)
+		analyzerVersion, _ := data["analyzer_version"].(string)
 		if repo != "" {
 			repos[repo] = sha
+			if analyzerVersion != "" {
+				repoAnalyzerVersions[repo] = analyzerVersion
+			}
 		}
 		return nil
 	})
 	if err != nil {
-		return repos, fmt.Errorf("scanning results directory %s: %w", resultsDir, err)
+		return repos, repoAnalyzerVersions, fmt.Errorf("scanning results directory %s: %w", resultsDir, err)
 	}
-	return repos, nil
+	return repos, repoAnalyzerVersions, nil
 }
 
 // runSecurityScan runs domain annotations, taint propagation, legacy queries,
