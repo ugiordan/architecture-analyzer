@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/agents-operator](https://github.com/red-hat-data-services/agents-operator) |
 | Commit | [a12017a8ae6ef5b079699207f7d9f5b2fde40e0b](https://github.com/red-hat-data-services/agents-operator/commit/a12017a8ae6ef5b079699207f7d9f5b2fde40e0b) |
-| Extracted | 2026-11-16T05:49:52Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:07:47Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

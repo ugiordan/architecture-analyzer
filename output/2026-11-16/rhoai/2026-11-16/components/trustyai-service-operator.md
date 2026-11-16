@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/trustyai-service-operator](https://github.com/red-hat-data-services/trustyai-service-operator) |
 | Aliases | TrustyAI operator |
 | Commit | [c4c1fe45ae8cdfbd229ff23efb4c25a7a04aca22](https://github.com/red-hat-data-services/trustyai-service-operator/commit/c4c1fe45ae8cdfbd229ff23efb4c25a7a04aca22) |
-| Extracted | 2026-11-16T05:47:49Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:06:24Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -56,7 +56,7 @@
 **trustyai-service-operator-controller-manager / manager**
 
 - Ports: 0/TCP (webhook-server)
-- Env: `RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE=quay.io/evalhub/community-lighteval:v0.7.2`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE=quay.io/evalhub/community-inspect:v0.7.2`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`
+- Env: `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE=quay.io/evalhub/community-lighteval:v0.7.2`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE=quay.io/evalhub/community-inspect:v0.7.2`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`
 
 
 

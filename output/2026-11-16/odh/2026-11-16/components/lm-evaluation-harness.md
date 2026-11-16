@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/lm-evaluation-harness](https://github.com/opendatahub-io/lm-evaluation-harness) |
 | Commit | [c42df70e5f3ac1ec6e240c99563ae27750a00856](https://github.com/opendatahub-io/lm-evaluation-harness/commit/c42df70e5f3ac1ec6e240c99563ae27750a00856) |
-| Extracted | 2026-11-16T05:51:17Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:10:15Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

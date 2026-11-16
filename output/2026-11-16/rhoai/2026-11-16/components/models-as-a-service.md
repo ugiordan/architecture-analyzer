@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/models-as-a-service](https://github.com/red-hat-data-services/models-as-a-service) |
 | Commit | [18f735dc74c96a27041c37b60088806e65c7b45f](https://github.com/red-hat-data-services/models-as-a-service/commit/18f735dc74c96a27041c37b60088806e65c7b45f) |
-| Extracted | 2026-11-16T05:50:24Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:06:37Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

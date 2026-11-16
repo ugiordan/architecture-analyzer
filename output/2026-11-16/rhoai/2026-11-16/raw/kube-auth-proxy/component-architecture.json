@@ -1,9 +1,9 @@
 {
   "component": "kube-auth-proxy",
   "repo": "red-hat-data-services/kube-auth-proxy",
-  "commit_sha": "b85f2bde9dd0f0e7d1bff6ed38d74d05c6fe308b",
-  "extracted_at": "2026-11-16T05:51:09Z",
-  "analyzer_version": "dev",
+  "commit_sha": "3a2452487285678cdd0923a255df3f8c1423228b",
+  "extracted_at": "2026-11-16T23:09:09Z",
+  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
   "schema_version": "2",
   "rbac": {},
   "dependencies": {
@@ -374,6 +374,20 @@
       "name": "authOnlyPath",
       "value": "/auth",
       "category": "general",
+      "source": "oauthproxy.go"
+    },
+    {
+      "name": "backchannelLogoutTimeout",
+      "value": "5 * time.Second",
+      "category": "timeout",
+      "doc": "backchannelLogoutTimeout bounds the end-session POST so sign-out can never\nhang waiting for a provider that does not answer.",
+      "source": "oauthproxy.go"
+    },
+    {
+      "name": "backendLogoutTimeout",
+      "value": "10 * time.Second",
+      "category": "timeout",
+      "doc": "backendLogoutTimeout bounds the --backend-logout-url request so sign-out\ncan never hang on an unresponsive backend.",
       "source": "oauthproxy.go"
     },
     {
@@ -1239,7 +1253,7 @@
     {
       "name": "kubernetes",
       "type": "service",
-      "source": "oauthproxy.go:63",
+      "source": "oauthproxy.go:64",
       "evidence": "dns:kubernetes.default.svc",
       "required": true
     }
@@ -1271,7 +1285,7 @@
     "status_conditions": "none",
     "webhooks": "none"
   },
-  "summary": "kube-auth-proxy is a Kubernetes component. connecting to external services: redis. runtime dependencies: Redis, kubernetes. with 132 operator config constants (2 env vars). exposing 2 Prometheus metrics.",
+  "summary": "kube-auth-proxy is a Kubernetes component. connecting to external services: redis. runtime dependencies: Redis, kubernetes. with 134 operator config constants (2 env vars). exposing 2 Prometheus metrics.",
   "go_ast_mode": "full",
   "security_annotations": [
     {

@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/rhods-operator](https://github.com/red-hat-data-services/rhods-operator) |
 | Aliases | opendatahub-operator, RHODS operator |
 | Commit | [382a621fe2120718c74bf08e6c8ddc773f1bd0a9](https://github.com/red-hat-data-services/rhods-operator/commit/382a621fe2120718c74bf08e6c8ddc773f1bd0a9) |
-| Extracted | 2026-11-16T05:49:53Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:08:15Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -37,14 +37,14 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| instancesNamespace | set | aiHub.ManagementState == operatorv1.Managed &amp;&amp; aiHub.InstancesNamespace == "" |
+| registriesNamespace | set | modelRegistry.ManagementState == operatorv1.Managed &amp;&amp; modelRegistry.RegistriesNamespace == "" |
 | nim.managementState | set | kserve.ManagementState == operatorv1.Managed &amp;&amp; kserve.NIM.ManagementState == "" |
 
 ### Defaulter-webhook Behavior
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| registriesNamespace | set | modelRegistry.ManagementState == operatorv1.Managed &amp;&amp; modelRegistry.RegistriesNamespace == "" |
+| instancesNamespace | set | aiHub.ManagementState == operatorv1.Managed &amp;&amp; aiHub.InstancesNamespace == "" |
 | nim.managementState | set | kserve.ManagementState == operatorv1.Managed &amp;&amp; kserve.NIM.ManagementState == "" |
 
 

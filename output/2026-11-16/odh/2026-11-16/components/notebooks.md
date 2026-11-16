@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/notebooks](https://github.com/opendatahub-io/notebooks) |
 | Commit | [724661558d68377454ca26de81067742664aed22](https://github.com/opendatahub-io/notebooks/commit/724661558d68377454ca26de81067742664aed22) |
-| Extracted | 2026-11-16T05:47:23Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:05:52Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [llm-d/llm-d](https://github.com/llm-d/llm-d) |
 | Commit | [565373b741e90bffa27930b4669c6e1f222f6225](https://github.com/llm-d/llm-d/commit/565373b741e90bffa27930b4669c6e1f222f6225) |
-| Extracted | 2026-11-16T05:54:33Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:13:26Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

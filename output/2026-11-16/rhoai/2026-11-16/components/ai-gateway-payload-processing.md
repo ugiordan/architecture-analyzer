@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/ai-gateway-payload-processing](https://github.com/red-hat-data-services/ai-gateway-payload-processing) |
 | Commit | [3c066846306842ce47524ae24d4bb8ce6a090c6c](https://github.com/red-hat-data-services/ai-gateway-payload-processing/commit/3c066846306842ce47524ae24d4bb8ce6a090c6c) |
-| Extracted | 2026-11-16T05:54:11Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:13:07Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/data-science-pipelines](https://github.com/red-hat-data-services/data-science-pipelines) |
 | Aliases | DSP, dsp |
 | Commit | [e9022595503ca68821104bc487d82bb21c2b24f3](https://github.com/red-hat-data-services/data-science-pipelines/commit/e9022595503ca68821104bc487d82bb21c2b24f3) |
-| Extracted | 2026-11-16T05:47:58Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:06:29Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

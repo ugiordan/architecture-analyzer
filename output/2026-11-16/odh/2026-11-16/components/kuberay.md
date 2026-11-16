@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/kuberay](https://github.com/opendatahub-io/kuberay) |
 | Commit | [e2b85bf7c3476dfd3224fa5cdaa67f235115eb53](https://github.com/opendatahub-io/kuberay/commit/e2b85bf7c3476dfd3224fa5cdaa67f235115eb53) |
-| Extracted | 2026-11-16T05:53:11Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:53Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

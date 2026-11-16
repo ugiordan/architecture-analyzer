@@ -1,9 +1,9 @@
 {
   "component": "spark-operator",
   "repo": "opendatahub-io/spark-operator",
-  "commit_sha": "0118c980f84fd701c90085ad909f3941aa61bcb2",
-  "extracted_at": "2026-11-16T05:47:31Z",
-  "analyzer_version": "dev",
+  "commit_sha": "9316dbddd8cbd3afa88ecc48ef80fd63163eef19",
+  "extracted_at": "2026-11-16T23:05:58Z",
+  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
   "schema_version": "2",
   "crds": [
     {
@@ -18,7 +18,7 @@
           "storage": true
         }
       ],
-      "fields_count": 95,
+      "fields_count": 110,
       "source": "config/crd/bases/sparkoperator.k8s.io_sparkconnects.yaml"
     },
     {
@@ -33,7 +33,12 @@
           "storage": true
         }
       ],
-      "fields_count": 1741,
+      "fields_count": 1742,
+      "validation_rules": [
+        "has(oldSelf.managedBy) == has(self.managedBy)",
+        "self in ['sparkoperator.k8s.io/spark-operator', 'kueue.x-k8s.io/multikueue']",
+        "self == oldSelf"
+      ],
       "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml"
     },
     {
@@ -48,7 +53,12 @@
           "storage": true
         }
       ],
-      "fields_count": 1744,
+      "fields_count": 1745,
+      "validation_rules": [
+        "has(oldSelf.managedBy) == has(self.managedBy)",
+        "self in ['sparkoperator.k8s.io/spark-operator', 'kueue.x-k8s.io/multikueue']",
+        "self == oldSelf"
+      ],
       "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml"
     }
   ],
@@ -72,19 +82,6 @@
               "patch",
               "update",
               "watch"
-            ]
-          },
-          {
-            "apiGroups": [
-              ""
-            ],
-            "resources": [
-              "events"
-            ],
-            "verbs": [
-              "create",
-              "patch",
-              "update"
             ]
           },
           {
@@ -122,6 +119,20 @@
           },
           {
             "apiGroups": [
+              "",
+              "events.k8s.io"
+            ],
+            "resources": [
+              "events"
+            ],
+            "verbs": [
+              "create",
+              "patch",
+              "update"
+            ]
+          },
+          {
+            "apiGroups": [
               "apiextensions.k8s.io"
             ],
             "resources": [
@@ -144,6 +155,23 @@
               "delete",
               "get",
               "update"
+            ]
+          },
+          {
+            "apiGroups": [
+              "networking.k8s.io"
+            ],
+            "resources": [
+              "networkpolicies"
+            ],
+            "verbs": [
+              "create",
+              "delete",
+              "get",
+              "list",
+              "patch",
+              "update",
+              "watch"
             ]
           },
           {
@@ -615,9 +643,6 @@
               "memory": "128Mi"
             }
           },
-          "env_vars": {
-            "OPERATOR_VERSION": "2.5.0"
-          },
           "liveness_probe": {
             "type": "httpGet",
             "path": "/healthz",
@@ -942,7 +967,7 @@
       "type": "For",
       "gvk": "api/v1alpha1/SparkConnect",
       "controller": "Reconciler",
-      "source": "internal/controller/sparkconnect/reconciler.go:117"
+      "source": "internal/controller/sparkconnect/reconciler.go:134"
     },
     {
       "type": "For",
@@ -1040,7 +1065,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/spark-operator/internal/controller/sparkapplication/controller.go",
-            "line": 743
+            "line": 753
           }
         }
       ]
@@ -1060,13 +1085,13 @@
       },
       {
         "module": "github.com/onsi/ginkgo/v2",
-        "version": "v2.28.1",
+        "version": "v2.27.2",
         "category": "testing",
         "purpose": "BDD testing framework"
       },
       {
         "module": "github.com/onsi/ginkgo/v2",
-        "version": "v2.27.2",
+        "version": "v2.28.1",
         "category": "testing",
         "purpose": "BDD testing framework"
       },
@@ -1135,6 +1160,10 @@
         "version": "v0.14.0"
       },
       {
+        "module": "gopkg.in/inf.v0",
+        "version": "v0.9.1"
+      },
+      {
         "module": "gopkg.in/yaml.v3",
         "version": "v3.0.1",
         "category": "serialization",
@@ -1146,13 +1175,13 @@
       },
       {
         "module": "k8s.io/api",
-        "version": "v0.35.4",
+        "version": "v0.35.2",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
       {
         "module": "k8s.io/api",
-        "version": "v0.35.2",
+        "version": "v0.35.4",
         "category": "k8s-api",
         "purpose": "Kubernetes API types"
       },
@@ -1206,19 +1235,19 @@
       },
       {
         "module": "k8s.io/klog/v2",
-        "version": "v2.140.0",
+        "version": "v2.130.1",
         "category": "k8s-api",
         "purpose": "Kubernetes logging library"
       },
       {
         "module": "k8s.io/kube-openapi",
-        "version": "v0.0.0-20260317180543-43fb72c5454a",
+        "version": "v0.0.0-20250910181357-589584f1c912",
         "category": "k8s-api",
         "purpose": "Kubernetes OpenAPI schema generation"
       },
       {
         "module": "k8s.io/utils",
-        "version": "v0.0.0-20260210185600-b8788abfbbc2",
+        "version": "v0.0.0-20251002143259-bc988d571ff4",
         "category": "k8s-api",
         "purpose": "Kubernetes utility library"
       },
@@ -1591,7 +1620,7 @@
   ],
   "helm": {
     "chart_name": "spark-operator",
-    "chart_version": "2.5.0-rc.0"
+    "chart_version": "2.6.0-rc.0"
   },
   "webhooks": [
     {
@@ -1936,37 +1965,37 @@
       "name": "DefaultTimeToLive",
       "default": false,
       "pre_release": "Alpha",
-      "source": "pkg/features/features.go:114"
+      "source": "pkg/features/features.go:113"
     },
     {
       "name": "LoadSparkDefaults",
       "default": false,
       "pre_release": "Alpha",
-      "source": "pkg/features/features.go:110"
+      "source": "pkg/features/features.go:109"
     },
     {
       "name": "MyFeature",
       "default": false,
       "pre_release": "Alpha",
-      "source": "pkg/features/features.go:88"
+      "source": "pkg/features/features.go:87"
     },
     {
       "name": "OperandNetworkPolicy",
       "default": false,
       "pre_release": "Alpha",
-      "source": "pkg/features/features.go:116"
+      "source": "pkg/features/features.go:115"
     },
     {
       "name": "PartialRestart",
       "default": false,
       "pre_release": "Alpha",
-      "source": "pkg/features/features.go:108"
+      "source": "pkg/features/features.go:107"
     },
     {
       "name": "RestSubmitter",
       "default": false,
       "pre_release": "Alpha",
-      "source": "pkg/features/features.go:112"
+      "source": "pkg/features/features.go:111"
     }
   ],
   "cache_config": {
@@ -1976,17 +2005,17 @@
     "implicit_informers": [
       {
         "type": "corev1.Pod",
-        "source": "internal/controller/sparkapplication/controller.go:1362",
+        "source": "internal/controller/sparkapplication/controller.go:1376",
         "risk": "high"
       },
       {
         "type": "networkingv1.Ingress",
-        "source": "internal/controller/sparkapplication/controller.go:1377",
+        "source": "internal/controller/sparkapplication/controller.go:1391",
         "risk": "medium"
       }
     ],
     "issues": [
-      "Implicit informer for corev1.Pod via client.Get at internal/controller/sparkapplication/controller.go:1362 (cluster-wide, OOM risk). This bypasses cache filters and creates a full cluster-wide watch",
+      "Implicit informer for corev1.Pod via client.Get at internal/controller/sparkapplication/controller.go:1376 (cluster-wide, OOM risk). This bypasses cache filters and creates a full cluster-wide watch",
       "No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior",
       "No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns",
       "Type ClusterRole is watched but has no cache filter (cluster-wide informer)",
@@ -2016,6 +2045,37 @@
     }
   ],
   "api_types": [
+    {
+      "name": "Dependencies",
+      "doc": "Dependencies specifies the Maven dependencies of a Spark Connect server.",
+      "fields": [
+        {
+          "name": "Jars",
+          "type": "[]string",
+          "json_tag": "jars,omitempty",
+          "doc": "Jars is a list of JAR files the Spark Connect server depends on."
+        },
+        {
+          "name": "Packages",
+          "type": "[]string",
+          "json_tag": "packages,omitempty",
+          "doc": "Packages is a list of maven coordinates of jars to include on the driver and executor classpaths. This will search the local maven repo, then maven central and any additional remote repositories given by the \"repositories\" option. Each package should be of the form \"groupId:artifactId:version\"."
+        },
+        {
+          "name": "ExcludePackages",
+          "type": "[]string",
+          "json_tag": "excludePackages,omitempty",
+          "doc": "ExcludePackages is a list of \"groupId:artifactId\", to exclude while resolving the dependencies provided in Packages to avoid dependency conflicts."
+        },
+        {
+          "name": "Repositories",
+          "type": "[]string",
+          "json_tag": "repositories,omitempty",
+          "doc": "Repositories is a list of additional remote repositories to search for the maven coordinate given with the \"packages\" option."
+        }
+      ],
+      "source": "api/v1alpha1/common_types.go:53"
+    },
     {
       "name": "DynamicAllocation",
       "doc": "DynamicAllocation contains configuration options for dynamic allocation.",
@@ -2057,7 +2117,30 @@
           "doc": "ShuffleTrackingTimeout controls the timeout in milliseconds for executors that are holding shuffle data if shuffle tracking is enabled (true by default if dynamic allocation is enabled)."
         }
       ],
-      "source": "api/v1alpha1/common_types.go:53"
+      "source": "api/v1alpha1/common_types.go:74"
+    },
+    {
+      "name": "ExecutorSpec",
+      "doc": "ExecutorSpec is specification of the executor.",
+      "fields": [
+        {
+          "name": "SparkPodSpec",
+          "type": "SparkPodSpec",
+          "json_tag": ",inline",
+          "embedded": true
+        },
+        {
+          "name": "Instances",
+          "type": "*int32",
+          "json_tag": "instances,omitempty",
+          "doc": "Instances is the number of executor instances.",
+          "markers": [
+            "+kubebuilder:validation:Minimum=0"
+          ]
+        }
+      ],
+      "source": "api/v1alpha1/sparkconnect_types.go:103",
+      "is_spec": true
     },
     {
       "name": "SparkPodSpec",
@@ -2067,16 +2150,34 @@
           "name": "Cores",
           "type": "*int32",
           "json_tag": "cores,omitempty",
-          "doc": "Cores maps to `spark.driver.cores` or `spark.executor.cores` for the driver and executors, respectively.",
+          "doc": "Cores is a shorthand for coreRequest on the server, and maps to `spark.executor.cores` for executors.",
           "markers": [
             "+kubebuilder:validation:Minimum=1"
           ]
+        },
+        {
+          "name": "CoreRequest",
+          "type": "*resource.Quantity",
+          "json_tag": "coreRequest,omitempty",
+          "doc": "CoreRequest is the physical CPU core request for the pod."
+        },
+        {
+          "name": "CoreLimit",
+          "type": "*resource.Quantity",
+          "json_tag": "coreLimit,omitempty",
+          "doc": "CoreLimit is the physical CPU core limit for the pod."
         },
         {
           "name": "Memory",
           "type": "*string",
           "json_tag": "memory,omitempty",
           "doc": "Memory is the amount of memory to request for the pod."
+        },
+        {
+          "name": "GPU",
+          "type": "*GPUSpec",
+          "json_tag": "gpu,omitempty",
+          "doc": "GPU specifies GPU resources for the pod and Spark resource scheduler. GPU discovery and per-task resource settings are configured through SparkConf."
         },
         {
           "name": "Template",
@@ -2090,7 +2191,36 @@
           ]
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:108",
+      "source": "api/v1alpha1/sparkconnect_types.go:113",
+      "is_spec": true
+    },
+    {
+      "name": "GPUSpec",
+      "doc": "GPUSpec defines the GPU resources requested for a Spark Connect server or executor pod. Name must be a Kubernetes extended resource name of the form \"\u003cvendor-domain\u003e/gpu\", for example \"nvidia.com/gpu\" or \"amd.com/gpu\". The vendor domain is passed to Spark as spark.{driver,executor}.resource.gpu.vendor, and the quantity as spark.{driver,executor}.resource.gpu.amount. GPU resource names whose suffix is not \"gpu\" (for example MIG profiles) are not supported by this field; configure them through the pod template and sparkConf instead. Setting a GPU does not configure GPU discovery. A discovery script or discovery plugin must be provided through sparkConf for Spark to start.",
+      "fields": [
+        {
+          "name": "Name",
+          "type": "string",
+          "json_tag": "name",
+          "doc": "Name is the Kubernetes GPU resource name, such as nvidia.com/gpu or amd.com/gpu. The vendor domain is used for Spark's GPU resource vendor configuration.",
+          "markers": [
+            "+kubebuilder:validation:MaxLength=257",
+            "+kubebuilder:validation:Pattern=\"^([a-z0-9]([-a-z0-9]*[a-z0-9])?\\\\.)*[a-z0-9]([-a-z0-9]*[a-z0-9])?/gpu$\""
+          ],
+          "required": true
+        },
+        {
+          "name": "Quantity",
+          "type": "int64",
+          "json_tag": "quantity",
+          "doc": "Quantity is the number of GPUs to request for each pod.",
+          "markers": [
+            "+kubebuilder:validation:Minimum=1"
+          ],
+          "required": true
+        }
+      ],
+      "source": "api/v1alpha1/sparkconnect_types.go:158",
       "is_spec": true
     },
     {
@@ -2134,7 +2264,7 @@
           "doc": "LastUpdateTime is the time at which the SparkConnect controller last updated the SparkConnect."
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:129",
+      "source": "api/v1alpha1/sparkconnect_types.go:171",
       "is_status": true
     },
     {
@@ -2159,7 +2289,7 @@
           "doc": "ServiceName is the name of the service that is exposing the Spark Connect server."
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:183",
+      "source": "api/v1alpha1/sparkconnect_types.go:225",
       "is_status": true
     },
     {
@@ -2190,7 +2320,7 @@
           "json_tag": "status,omitempty"
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:38"
+      "source": "api/v1alpha1/sparkconnect_types.go:39"
     },
     {
       "name": "SparkConnectList",
@@ -2215,7 +2345,7 @@
           "required": true
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:49"
+      "source": "api/v1alpha1/sparkconnect_types.go:50"
     },
     {
       "name": "SparkConnectSpec",
@@ -2247,6 +2377,12 @@
           "doc": "SparkConf carries user-specified Spark configuration properties as they would use the \"--conf\" option in spark-submit."
         },
         {
+          "name": "Deps",
+          "type": "Dependencies",
+          "json_tag": "deps,omitempty",
+          "doc": "Deps captures all possible types of dependencies of a Spark Connect server."
+        },
+        {
           "name": "Server",
           "type": "ServerSpec",
           "json_tag": "server",
@@ -2267,7 +2403,7 @@
           "doc": "DynamicAllocation configures dynamic allocation that becomes available for the Kubernetes scheduler backend since Spark 3.0."
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:56",
+      "source": "api/v1alpha1/sparkconnect_types.go:57",
       "is_spec": true
     },
     {
@@ -2287,30 +2423,7 @@
           "doc": "Service exposes the Spark connect server."
         }
       ],
-      "source": "api/v1alpha1/sparkconnect_types.go:89",
-      "is_spec": true
-    },
-    {
-      "name": "ExecutorSpec",
-      "doc": "ExecutorSpec is specification of the executor.",
-      "fields": [
-        {
-          "name": "SparkPodSpec",
-          "type": "SparkPodSpec",
-          "json_tag": ",inline",
-          "embedded": true
-        },
-        {
-          "name": "Instances",
-          "type": "*int32",
-          "json_tag": "instances,omitempty",
-          "doc": "Instances is the number of executor instances.",
-          "markers": [
-            "+kubebuilder:validation:Minimum=0"
-          ]
-        }
-      ],
-      "source": "api/v1alpha1/sparkconnect_types.go:98",
+      "source": "api/v1alpha1/sparkconnect_types.go:94",
       "is_spec": true
     },
     {
@@ -2530,7 +2643,7 @@
           "doc": "SubmissionAttempts is the total number of attempts to submit an application to run. Incremented upon each attempted submission of the application and reset upon invalidation and rerun."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:159",
+      "source": "api/v1beta2/sparkapplication_types.go:170",
       "is_status": true
     },
     {
@@ -2561,7 +2674,7 @@
           "json_tag": "status,omitempty"
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:201"
+      "source": "api/v1beta2/sparkapplication_types.go:212"
     },
     {
       "name": "SparkApplicationList",
@@ -2586,7 +2699,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:213"
+      "source": "api/v1beta2/sparkapplication_types.go:224"
     },
     {
       "name": "RestartPolicy",
@@ -2638,7 +2751,7 @@
           ]
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:242"
+      "source": "api/v1beta2/sparkapplication_types.go:255"
     },
     {
       "name": "BatchSchedulerConfiguration",
@@ -2663,7 +2776,7 @@
           "doc": "Resources stands for the resource list custom request for. Usually it is used to define the lower-bound limit. If specified, volcano scheduler will consider it as the resources requested."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:279"
+      "source": "api/v1beta2/sparkapplication_types.go:292"
     },
     {
       "name": "SparkUIConfiguration",
@@ -2712,12 +2825,23 @@
           "doc": "TlsHosts is useful If we need to declare SSL certificates to the ingress object"
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:293"
+      "source": "api/v1beta2/sparkapplication_types.go:306"
     },
     {
       "name": "SparkApplicationSpec",
       "doc": "SparkApplicationSpec defines the desired state of SparkApplication It carries every pieces of information a spark-submit command takes and recognizes.",
       "fields": [
+        {
+          "name": "ManagedBy",
+          "type": "*string",
+          "json_tag": "managedBy,omitempty",
+          "doc": "ManagedBy indicates the controller managing this SparkApplication. Set to \"sparkoperator.k8s.io/spark-operator\" for the built-in operator (default behavior when field is omitted) or \"kueue.x-k8s.io/multikueue\" to delegate reconciliation to MultiKueue. The field is immutable once set.",
+          "markers": [
+            "+kubebuilder:validation:XValidation:rule=\"self in ['sparkoperator.k8s.io/spark-operator', 'kueue.x-k8s.io/multikueue']\",message=\"managedBy must be 'sparkoperator.k8s.io/spark-operator' or 'kueue.x-k8s.io/multikueue'\"",
+            "+kubebuilder:validation:XValidation:rule=\"self == oldSelf\", message=\"managedBy is immutable\"",
+            "+kubebuilder:validation:MaxLength=253"
+          ]
+        },
         {
           "name": "Suspend",
           "type": "*bool",
@@ -2745,7 +2869,7 @@
           "name": "Mode",
           "type": "DeployMode",
           "json_tag": "mode,omitempty",
-          "doc": "Mode is the deployment mode of the Spark application.",
+          "doc": "Mode is the deployment mode of the Spark application. The client mode is deprecated and will be removed in the next API version.",
           "markers": [
             "+kubebuilder:validation:Enum={cluster,client}"
           ]
@@ -2932,7 +3056,10 @@
           "doc": "DriverPodDisruptionBudget controls whether a PodDisruptionBudget is created for the driver pod to prevent voluntary eviction (e.g. kubectl drain) while the application is running. A PDB is only created when this field is true AND the operator was started with --enable-driver-pdb. When unset or false, no PDB is created. The field has no effect when the operator-level gate is off."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:30",
+      "markers": [
+        "+kubebuilder:validation:XValidation:rule=\"has(oldSelf.managedBy) == has(self.managedBy)\",message=\"managedBy is immutable\""
+      ],
+      "source": "api/v1beta2/sparkapplication_types.go:31",
       "is_spec": true
     },
     {
@@ -2990,7 +3117,7 @@
           "doc": "TlsHosts is useful If we need to declare SSL certificates to the ingress object"
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:321"
+      "source": "api/v1beta2/sparkapplication_types.go:334"
     },
     {
       "name": "ApplicationState",
@@ -3008,7 +3135,7 @@
           "json_tag": "errorMessage,omitempty"
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:368"
+      "source": "api/v1beta2/sparkapplication_types.go:381"
     },
     {
       "name": "Dependencies",
@@ -3057,7 +3184,7 @@
           "doc": "Archives is a list of archives to be extracted into the working directory of each executor."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:398"
+      "source": "api/v1beta2/sparkapplication_types.go:411"
     },
     {
       "name": "SparkPodSpec",
@@ -3260,7 +3387,7 @@
           "doc": "ShareProcessNamespace settings for the pod, following the Kubernetes specifications."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:429",
+      "source": "api/v1beta2/sparkapplication_types.go:442",
       "is_spec": true
     },
     {
@@ -3331,7 +3458,7 @@
           "doc": "PriorityClassName is the name of the PriorityClass for the driver pod."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:535",
+      "source": "api/v1beta2/sparkapplication_types.go:548",
       "is_spec": true
     },
     {
@@ -3390,7 +3517,7 @@
           "doc": "PriorityClassName is the name of the PriorityClass for the executor pod."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:576",
+      "source": "api/v1beta2/sparkapplication_types.go:589",
       "is_spec": true
     },
     {
@@ -3410,7 +3537,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:606"
+      "source": "api/v1beta2/sparkapplication_types.go:619"
     },
     {
       "name": "DriverInfo",
@@ -3449,7 +3576,7 @@
           "json_tag": "podName,omitempty"
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:627"
+      "source": "api/v1beta2/sparkapplication_types.go:640"
     },
     {
       "name": "SecretInfo",
@@ -3475,7 +3602,7 @@
           "secret_ref": true
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:639"
+      "source": "api/v1beta2/sparkapplication_types.go:652"
     },
     {
       "name": "NameKey",
@@ -3494,7 +3621,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:646"
+      "source": "api/v1beta2/sparkapplication_types.go:659"
     },
     {
       "name": "Port",
@@ -3519,7 +3646,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:652"
+      "source": "api/v1beta2/sparkapplication_types.go:665"
     },
     {
       "name": "MonitoringSpec",
@@ -3558,7 +3685,7 @@
           "doc": "Prometheus is for configuring the Prometheus JMX exporter."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:659",
+      "source": "api/v1beta2/sparkapplication_types.go:672",
       "is_spec": true
     },
     {
@@ -3601,7 +3728,7 @@
           "doc": "Configuration is the content of the Prometheus configuration needed by the Prometheus JMX exporter. If not specified, the content in spark-docker/conf/prometheus.yaml will be used. Configuration has no effect if ConfigFile is set."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:679",
+      "source": "api/v1beta2/sparkapplication_types.go:692",
       "is_spec": true
     },
     {
@@ -3622,7 +3749,7 @@
           "required": true
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:703",
+      "source": "api/v1beta2/sparkapplication_types.go:716",
       "is_spec": true
     },
     {
@@ -3666,7 +3793,7 @@
           "doc": "ShuffleTrackingTimeout controls the timeout in milliseconds for executors that are holding shuffle data if shuffle tracking is enabled (true by default if dynamic allocation is enabled)."
         }
       ],
-      "source": "api/v1beta2/sparkapplication_types.go:711"
+      "source": "api/v1beta2/sparkapplication_types.go:724"
     }
   ],
   "operator_config": [
@@ -3807,6 +3934,14 @@
       "type": "SparkConnectState",
       "category": "general",
       "source": "api/v1alpha1/sparkconnect_types.go"
+    },
+    {
+      "name": "DefaultRestartPolicyRetryIntervalSeconds",
+      "value": "5",
+      "type": "int64",
+      "category": "timeout",
+      "doc": "DefaultRestartPolicyRetryIntervalSeconds is the retry interval, in seconds, used for\nRestartPolicy.OnFailureRetryInterval and RestartPolicy.OnSubmissionFailureRetryInterval\nwhen the RestartPolicy is OnFailure or Always and the interval is not specified.",
+      "source": "api/v1beta2/defaults.go"
     },
     {
       "name": "AddToScheme",
@@ -3989,6 +4124,7 @@
       "value": "client",
       "type": "DeployMode",
       "category": "general",
+      "doc": "Deprecated: client mode will be removed in the next API version, see https://github.com/kubeflow/spark-operator/issues/3253.",
       "source": "api/v1beta2/sparkapplication_types.go"
     },
     {
@@ -4003,6 +4139,7 @@
       "value": "in-cluster-client",
       "type": "DeployMode",
       "category": "general",
+      "doc": "Deprecated: in-cluster-client mode will be removed in the next API version, see https://github.com/kubeflow/spark-operator/issues/3253.",
       "source": "api/v1beta2/sparkapplication_types.go"
     },
     {
@@ -4419,6 +4556,13 @@
       "source": "internal/controller/sparkapplication/submission.go"
     },
     {
+      "name": "sparkVersionPlaceholder",
+      "value": "{{SPARK_VERSION}}",
+      "category": "general",
+      "doc": "sparkVersionPlaceholder is otherwise replaced by Spark with the version of the submitting\nSpark (the operator image or REST submitter), not the version the application runs.",
+      "source": "internal/controller/sparkapplication/submission.go"
+    },
+    {
       "name": "ExecutorPodTemplateFileName",
       "value": "executor-pod-template.yaml",
       "category": "general",
@@ -4433,9 +4577,23 @@
       "source": "internal/controller/sparkconnect/reconciler.go"
     },
     {
+      "name": "sparkConnectServerEntrypointScript",
+      "value": "host=\"${POD_IP}\"\ncase \"${host}\" in\n\\[*) ;;\n*:*) host=\"[${host}]\" ;;\nesac\nexec \"${SPARK_HOME}/sbin/start-connect-server.sh\" \"$@\" --conf \"spark.driver.host=${host}\"\n",
+      "category": "general",
+      "doc": "sparkConnectServerEntrypointScript starts the Spark Connect server with the\narguments it receives. It contains no user-supplied data: POD_IP is read from\nthe downward API and wrapped in brackets when it is an IPv6 address, and the\ngenerated options are forwarded verbatim through \"$@\".",
+      "source": "internal/controller/sparkconnect/reconciler.go"
+    },
+    {
       "name": "sparkConnectServerPort",
       "value": "15002",
       "category": "port",
+      "source": "internal/controller/sparkconnect/reconciler.go"
+    },
+    {
+      "name": "sparkConnectServerProcessName",
+      "value": "spark-connect-server",
+      "category": "general",
+      "doc": "sparkConnectServerProcessName is passed as $0 to the entrypoint shell so that\nshell diagnostics are attributed to a meaningful name.",
       "source": "internal/controller/sparkconnect/reconciler.go"
     },
     {
@@ -4618,6 +4776,12 @@
       "name": "_",
       "value": "\u0026SparkConnectValidator{}",
       "category": "general",
+      "source": "internal/webhook/sparkconnect_validator.go"
+    },
+    {
+      "name": "sparkConfCPUKeys",
+      "value": "[]string{\n\tcommon.SparkKubernetesExecutorRequestCores,\n\tcommon.SparkKubernetesExecutorLimitCores,\n}",
+      "category": "resource",
       "source": "internal/webhook/sparkconnect_validator.go"
     },
     {
@@ -5363,6 +5527,13 @@
       "source": "pkg/common/spark.go"
     },
     {
+      "name": "SparkDriverGPUDiscoveryScript",
+      "value": "spark.driver.resource.gpu.discoveryScript",
+      "category": "general",
+      "doc": "SparkDriverGPUDiscoveryScript is the configuration property for the driver GPU discovery script.",
+      "source": "pkg/common/spark.go"
+    },
+    {
       "name": "SparkDriverMemory",
       "value": "spark.driver.memory",
       "category": "resource",
@@ -5477,6 +5648,13 @@
       "value": "spark.executor.extraJavaOptions",
       "category": "general",
       "doc": "SparkExecutorExtraJavaOptions is the Spark configuration key for a string of extra JVM options to pass to executors.",
+      "source": "pkg/common/spark.go"
+    },
+    {
+      "name": "SparkExecutorGPUDiscoveryScript",
+      "value": "spark.executor.resource.gpu.discoveryScript",
+      "category": "general",
+      "doc": "SparkExecutorGPUDiscoveryScript is the configuration property for the executor GPU discovery script.",
       "source": "pkg/common/spark.go"
     },
     {
@@ -5934,6 +6112,20 @@
       "source": "pkg/common/spark.go"
     },
     {
+      "name": "SparkOperatorManagerName",
+      "value": "sparkoperator.k8s.io/spark-operator",
+      "category": "general",
+      "doc": "SparkOperatorManagerName is the default manager name for spec.managedBy.\nWhen the field is unset or equals this value, the built-in operator manages the application.",
+      "source": "pkg/common/spark.go"
+    },
+    {
+      "name": "SparkResourcesDiscoveryPlugin",
+      "value": "spark.resources.discoveryPlugin",
+      "category": "general",
+      "doc": "SparkResourcesDiscoveryPlugin is the configuration property for resource discovery plugins.",
+      "source": "pkg/common/spark.go"
+    },
+    {
       "name": "SparkRoleConnectServer",
       "value": "connect-server",
       "category": "general",
@@ -6005,7 +6197,7 @@
       "value": "OperandNetworkPolicy",
       "type": "featuregate.Feature",
       "category": "general",
-      "doc": "OperandNetworkPolicy enables the operator creating NetworkPolicies for the\noperand pods (driver, executor, and Spark Connect server/executor): allow-all\negress plus intra-Spark ingress, per workload namespace. Off by default; the\nRHOAI/ODH overlays enable it. Consumer ingress (UI/gRPC/metrics) is left to a\nuser-managed additive policy.\n\nowner: @alimaredia\nalpha: v2.6.0",
+      "doc": "OperandNetworkPolicy enables the operator creating NetworkPolicies for the\noperand pods (driver, executor, and Spark Connect server/executor): allow-all\negress plus intra-Spark ingress, per workload namespace. Off by default; the\nRHOAI/ODH overlays enable it.\n\nowner: @alimaredia\nalpha: v2.6.0",
       "source": "pkg/features/features.go"
     },
     {
@@ -6066,13 +6258,6 @@
       "value": "ctrl.Log.WithName(\"capabilities\")",
       "category": "general",
       "source": "pkg/util/capabilities.go"
-    },
-    {
-      "name": "terminationSignals",
-      "value": "[]os.Signal{syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT}",
-      "category": "general",
-      "doc": "terminationSignals are signals that cause the program to exit in the\nsupported platforms (linux, darwin, windows).",
-      "source": "pkg/util/interrupt.go"
     },
     {
       "name": "_",
@@ -6524,7 +6709,7 @@
       "api": "CoreV1Api",
       "operation": "get",
       "resource": "pulls",
-      "source": "hack/generate-changelog.py:37"
+      "source": "hack/generate-changelog.py:65"
     },
     {
       "api": "CoreV1Api",
@@ -6723,6 +6908,18 @@
       "source": "config/prometheus/kustomization.yaml"
     },
     {
+      "overlay": "config/public",
+      "resources": [
+        "role.yaml",
+        "rolebinding.yaml"
+      ],
+      "configmap_generators": [
+        "kubeflow-spark-public"
+      ],
+      "namespace": "spark-operator",
+      "source": "config/public/kustomization.yaml"
+    },
+    {
       "overlay": "config/rbac",
       "resources": [
         "clusterrolebinding.yaml",
@@ -6792,7 +6989,7 @@
     "status_conditions": "moderate",
     "webhooks": "rich"
   },
-  "summary": "spark-operator is a Kubernetes component. managing 3 CRD(s): ScheduledSparkApplication, SparkApplication, SparkConnect. deploying 4 workload(s) (spark-operator-webhook, controller-manager, spark-operator-controller, spark-operator-module-controller-manager) with 4 container(s). watching 15 resource type(s). exposing 3 service(s) on ports: 443, 8080. with 10 webhook(s) (3 validating, 4 mutating). protected by 4 network policy/policies. with 1 PodDisruptionBudget(s). runtime dependencies: kubernetes. defining 12 API spec type(s) across 35 struct(s) with 221 total fields. with 402 operator config constants (7 image references). following 1 reconciliation steps across 1 controller(s). reporting 4 status condition types. with 1 ingress route(s). Python k8s client with 14 API call(s). integrates with Prometheus, management relationship via labels/annotations. kustomize overlays: config/certmanager, config/crd, config/default, config/manager, config/overlays/driver-pdb, config/overlays/odh, config/overlays/rhoai, config/overlays/secure-metrics, config/pdb, config/prometheus, config/rbac, config/spark-rbac, config/webhook.",
+  "summary": "spark-operator is a Kubernetes component. managing 3 CRD(s): ScheduledSparkApplication, SparkApplication, SparkConnect. deploying 4 workload(s) (spark-operator-webhook, controller-manager, spark-operator-controller, spark-operator-module-controller-manager) with 4 container(s). watching 15 resource type(s). exposing 3 service(s) on ports: 443, 8080. with 10 webhook(s) (3 validating, 4 mutating). protected by 4 network policy/policies. with 1 PodDisruptionBudget(s). runtime dependencies: kubernetes. defining 13 API spec type(s) across 37 struct(s) with 232 total fields. with 410 operator config constants (7 image references). following 1 reconciliation steps across 1 controller(s). reporting 4 status condition types. with 1 ingress route(s). Python k8s client with 14 API call(s). integrates with Prometheus, management relationship via labels/annotations. kustomize overlays: config/certmanager, config/crd, config/default, config/manager, config/overlays/driver-pdb, config/overlays/odh, config/overlays/rhoai, config/overlays/secure-metrics, config/pdb, config/prometheus, config/public, config/rbac, config/spark-rbac, config/webhook.",
   "go_ast_mode": "full",
   "security_annotations": [
     {
@@ -6814,14 +7011,6 @@
       "field": "spec.image",
       "crd_kind": "SparkConnect",
       "description": "CRD SparkConnect has user-settable image field \"spec.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml",
-      "field": "spec.template.driver.image",
-      "crd_kind": "ScheduledSparkApplication",
-      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.driver.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -6850,18 +7039,10 @@
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
-      "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
-      "field": "spec.executor.image",
-      "crd_kind": "SparkApplication",
-      "description": "CRD SparkApplication has user-settable image field \"spec.executor.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
-      "field": "spec.imagePullPolicy",
-      "crd_kind": "SparkApplication",
-      "description": "CRD SparkApplication has user-settable image field \"spec.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml",
+      "field": "spec.template.driver.image",
+      "crd_kind": "ScheduledSparkApplication",
+      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.driver.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -6875,9 +7056,25 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
+      "field": "spec.imagePullPolicy",
+      "crd_kind": "SparkApplication",
+      "description": "CRD SparkApplication has user-settable image field \"spec.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
       "field": "spec.driver.image",
       "crd_kind": "SparkApplication",
       "description": "CRD SparkApplication has user-settable image field \"spec.driver.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
+      "field": "spec.executor.image",
+      "crd_kind": "SparkApplication",
+      "description": "CRD SparkApplication has user-settable image field \"spec.executor.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/llama-stack-provider-trustyai-garak](https://github.com/opendatahub-io/llama-stack-provider-trustyai-garak) |
 | Commit | [bd285bf5cf0b4296a8883ce0721d466aadeee196](https://github.com/opendatahub-io/llama-stack-provider-trustyai-garak/commit/bd285bf5cf0b4296a8883ce0721d466aadeee196) |
-| Extracted | 2026-11-16T05:52:16Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:10:48Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

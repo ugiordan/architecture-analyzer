@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/model-registry-operator](https://github.com/red-hat-data-services/model-registry-operator) |
 | Aliases | Model Registry operator |
 | Commit | [adb3362dd2bfe315e4e4a39917cc45b57651e796](https://github.com/red-hat-data-services/model-registry-operator/commit/adb3362dd2bfe315e4e4a39917cc45b57651e796) |
-| Extracted | 2026-11-16T05:47:44Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:06:04Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -20,7 +20,7 @@
 
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
-| ModelRegistry | modelregistry.opendatahub.io | v1beta1 | Namespaced | 113 | !(has(self.oauthProxy) &amp;&amp; has(self.kubeRBACProxy)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.generateDeployment) &amp;&amp; self.generateDeployment ? true : (size(self.host) &gt; 0 \|\| size(self.hostAddress) &gt; 0), has(self.database) &amp;&amp; size(self.database) &gt; 0 ? has(self.username) &amp;&amp; size(self.username) &gt; 0 : true, !(has(self.generateDeployment) &amp;&amp; self.generateDeployment) \|\| ((!has(self.host) \|\| size(self.host) == 0) &amp;&amp; (!has(self.hostAddress) \|\| size(self.hostAddress) == 0)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret) | YAML | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/red-hat-data-services/model-registry-operator/blob/adb3362dd2bfe315e4e4a39917cc45b57651e796/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
+| ModelRegistry | modelregistry.opendatahub.io | v1beta1 | Namespaced | 113 | !(has(self.oauthProxy) &amp;&amp; has(self.kubeRBACProxy)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.generateDeployment) &amp;&amp; self.generateDeployment ? true : (size(self.host) &gt; 0 \|\| size(self.hostAddress) &gt; 0), has(self.database) &amp;&amp; size(self.database) &gt; 0 ? has(self.username) &amp;&amp; size(self.username) &gt; 0 : true, !(has(self.generateDeployment) &amp;&amp; self.generateDeployment) \|\| ((!has(self.host) \|\| size(self.host) == 0) &amp;&amp; (!has(self.hostAddress) \|\| size(self.hostAddress) == 0)) | YAML | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/red-hat-data-services/model-registry-operator/blob/adb3362dd2bfe315e4e4a39917cc45b57651e796/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
 
 
 ## Webhooks
@@ -98,12 +98,12 @@
 **catalog-controller-manager / manager**
 
 - Ports: 0/TCP (webhook-server)
-- Env: `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`
+- Env: `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `ENABLE_WEBHOOKS=true`
 
 **model-registry-operator-controller-manager / manager**
 
 - Ports: 0/TCP (webhook-server), 0/TCP (https)
-- Env: `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `STORAGE_MIGRATION_TARGET_VERSION=v1beta1`, `ENABLE_WEBHOOKS=true`, `OAUTH_PROXY_IMAGE=quay.io/openshift/origin-oauth-proxy:latest`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_IMAGE=quay.io/opendatahub/model-registry:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `STORAGE_MIGRATION_SOURCE_VERSION=v1alpha1`, `CREATE_AUTH_RESOURCES=true`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`
+- Env: `STORAGE_MIGRATION_SOURCE_VERSION=v1alpha1`, `STORAGE_MIGRATION_TARGET_VERSION=v1beta1`, `CREATE_AUTH_RESOURCES=true`, `OAUTH_PROXY_IMAGE=quay.io/openshift/origin-oauth-proxy:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_IMAGE=quay.io/opendatahub/model-registry:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`
 
 **template-value / rest-container**
 

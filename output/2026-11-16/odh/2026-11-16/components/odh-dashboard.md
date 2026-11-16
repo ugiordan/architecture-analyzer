@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/odh-dashboard](https://github.com/opendatahub-io/odh-dashboard) |
 | Aliases | ODH Dashboard |
 | Commit | [8f06159e5c627df78a223746e8fef7c79e2ae228](https://github.com/opendatahub-io/odh-dashboard/commit/8f06159e5c627df78a223746e8fef7c79e2ae228) |
-| Extracted | 2026-11-16T05:47:22Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:06:02Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -37,9 +37,9 @@
 | GET | /api/v1alpha1/data/connections/ |  | [`packages/data-connect-hub/bff/internal/api/connections_handler.go:166`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/data-connect-hub/bff/internal/api/connections_handler.go#L166) |
 | POST | /api/v1alpha1/data/connections/ |  | [`packages/data-connect-hub/bff/internal/api/connection_readiness_handler.go:61`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/data-connect-hub/bff/internal/api/connection_readiness_handler.go#L61) |
 | POST | /api/v1alpha1/data/test/credentials |  | [`packages/data-connect-hub/bff/internal/api/test_credentials_handler.go:80`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/data-connect-hub/bff/internal/api/test_credentials_handler.go#L80) |
-| GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.yaml`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/model-registry/upstream/bff/openapi/swagger.yaml) |
 | GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/model-registry/upstream/bff/openapi/swagger.json) |
+| GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /namespaces |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | POST | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
@@ -69,9 +69,9 @@
 | GET | /workspaces/{namespace}/{name}/podtemplate/details |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /workspaces/{namespace}/{name}/podtemplate/logs/batch |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /workspaces/{namespace}/{name}/podtemplate/resources |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
-| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:65`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/distributions/core-bff/bff/internal/api/routes_model_serving.go#L65) |
 | * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:62`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/distributions/core-bff/bff/internal/api/routes_model_serving.go#L62) |
 | * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:63`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/distributions/core-bff/bff/internal/api/routes_model_serving.go#L63) |
+| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:65`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/distributions/core-bff/bff/internal/api/routes_model_serving.go#L65) |
 | * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:64`](https://github.com/opendatahub-io/odh-dashboard/blob/8f06159e5c627df78a223746e8fef7c79e2ae228/distributions/core-bff/bff/internal/api/routes_model_serving.go#L64) |
 
 

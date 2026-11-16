@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/model-registry](https://github.com/red-hat-data-services/model-registry) |
 | Commit | [c1ef19f7f3294aeb0a38cdc0c1ea83fe69720d53](https://github.com/red-hat-data-services/model-registry/commit/c1ef19f7f3294aeb0a38cdc0c1ea83fe69720d53) |
-| Extracted | 2026-11-16T05:50:05Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:08:46Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

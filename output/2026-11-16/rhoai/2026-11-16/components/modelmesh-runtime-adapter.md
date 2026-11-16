@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/modelmesh-runtime-adapter](https://github.com/red-hat-data-services/modelmesh-runtime-adapter) |
 | Commit | [cd9b54395a4f6af2072a6e6e53e4d8500779a997](https://github.com/red-hat-data-services/modelmesh-runtime-adapter/commit/cd9b54395a4f6af2072a6e6e53e4d8500779a997) |
-| Extracted | 2026-11-16T05:53:52Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:48Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

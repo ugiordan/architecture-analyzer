@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/workload-variant-autoscaler](https://github.com/red-hat-data-services/workload-variant-autoscaler) |
 | Commit | [68bf979de148f8c2f212cfd901b7754470bb839a](https://github.com/red-hat-data-services/workload-variant-autoscaler/commit/68bf979de148f8c2f212cfd901b7754470bb839a) |
-| Extracted | 2026-11-16T05:53:18Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:50Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

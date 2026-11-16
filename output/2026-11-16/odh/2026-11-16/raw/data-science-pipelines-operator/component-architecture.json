@@ -6,8 +6,8 @@
   ],
   "repo": "opendatahub-io/data-science-pipelines-operator",
   "commit_sha": "d3f57df3e3d1b07ea78c44d29e22ae665ac3e8fb",
-  "extracted_at": "2026-11-16T05:47:32Z",
-  "analyzer_version": "dev",
+  "extracted_at": "2026-11-16T23:06:13Z",
+  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
   "schema_version": "2",
   "crds": [
     {
@@ -42,14 +42,14 @@
       ],
       "fields_count": 290,
       "validation_rules": [
+        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
+        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.accessModes) \u0026\u0026 size(self.accessModes) \u003e 0",
         "has(self.storageClassName) \u0026\u0026 self.storageClassName != \"\"",
-        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
-        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
-        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
-        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
         "has(self.s3CredentialsSecret) || (has(self.credentialsMode) \u0026\u0026 self.credentialsMode.fromEnv)",
+        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
+        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
@@ -8230,25 +8230,17 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.workflowController.argoExecImage",
-      "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.workflowController.argoExecImage\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.workflowController.image",
-      "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.workflowController.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
       "field": "spec.database.mariaDB.image",
       "crd_kind": "DataSciencePipelinesApplication",
       "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.database.mariaDB.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
+      "field": "spec.objectStorage.minio.image",
+      "crd_kind": "DataSciencePipelinesApplication",
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.objectStorage.minio.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -8262,17 +8254,25 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.scheduledWorkflow.image",
+      "field": "spec.workflowController.image",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.scheduledWorkflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.workflowController.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.apiServer.image",
+      "field": "spec.workflowController.argoExecImage",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.workflowController.argoExecImage\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
+      "field": "spec.apiServer.managedPipelines.image",
+      "crd_kind": "DataSciencePipelinesApplication",
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.managedPipelines.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -8294,17 +8294,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.apiServer.managedPipelines.image",
+      "field": "spec.apiServer.image",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.managedPipelines.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.mlmd.grpc.image",
-      "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.mlmd.grpc.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -8318,9 +8310,17 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.objectStorage.minio.image",
+      "field": "spec.mlmd.grpc.image",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.objectStorage.minio.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.mlmd.grpc.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
+      "field": "spec.scheduledWorkflow.image",
+      "crd_kind": "DataSciencePipelinesApplication",
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.scheduledWorkflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "AUTH_BYPASS_ARG",
@@ -8365,16 +8365,16 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/checkout@v3",
+      "resource": "actions/github-script@v6",
       "source": ".github/workflows/build-prs.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/github-script\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/github-script@v6",
+      "resource": "actions/checkout@v3",
       "source": ".github/workflows/build-prs.yml",
-      "description": "Action \"actions/github-script\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/checkout\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -8529,16 +8529,16 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/github-script@v6",
+      "resource": "actions/checkout@v3",
       "source": ".github/workflows/release_create.yaml",
-      "description": "Action \"actions/github-script\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/checkout\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/checkout@v3",
+      "resource": "actions/github-script@v6",
       "source": ".github/workflows/release_create.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/github-script\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

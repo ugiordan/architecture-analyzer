@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/ml-metadata](https://github.com/red-hat-data-services/ml-metadata) |
 | Commit | [00671aab6a5e4f94b25d5c5538a6edf995133446](https://github.com/red-hat-data-services/ml-metadata/commit/00671aab6a5e4f94b25d5c5538a6edf995133446) |
-| Extracted | 2026-11-16T05:53:54Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:54Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

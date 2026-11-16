@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [llm-d/llm-d](https://github.com/llm-d/llm-d) |
 | Commit | [565373b741e90bffa27930b4669c6e1f222f6225](https://github.com/llm-d/llm-d/commit/565373b741e90bffa27930b4669c6e1f222f6225) |
-| Extracted | 2026-11-16T05:53:23Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:58Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -73,7 +73,7 @@
 
 - Args: `--config /etc/coordinator/coordinator.yaml`
 - Ports: 0/TCP (http), 0/TCP (metrics)
-- Env: `GOMAXPROCS=16`, `GOMEMLIMIT=28800MiB`
+- Env: `GOMEMLIMIT=28800MiB`, `GOMAXPROCS=16`
 
 **mooncake-master-store / mooncake-master-store**
 

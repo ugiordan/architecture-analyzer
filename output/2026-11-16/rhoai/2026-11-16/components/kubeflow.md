@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/kubeflow](https://github.com/red-hat-data-services/kubeflow) |
 | Commit | [330326dff961133b956010a26aa60cb422fd71e8](https://github.com/red-hat-data-services/kubeflow/commit/330326dff961133b956010a26aa60cb422fd71e8) |
-| Extracted | 2026-11-16T05:49:41Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:08:31Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

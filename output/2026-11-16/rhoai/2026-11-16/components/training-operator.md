@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/training-operator](https://github.com/red-hat-data-services/training-operator) |
 | Aliases | Training operator, Kubeflow Training operator |
 | Commit | [7035128a7182d7be1593c25258410f68ddc4a358](https://github.com/red-hat-data-services/training-operator/commit/7035128a7182d7be1593c25258410f68ddc4a358) |
-| Extracted | 2026-11-16T05:47:49Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:07:55Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/mlflow](https://github.com/opendatahub-io/mlflow) |
 | Commit | [fe151c604aeb23ccfe59ebf200fad6912dd58485](https://github.com/opendatahub-io/mlflow/commit/fe151c604aeb23ccfe59ebf200fad6912dd58485) |
-| Extracted | 2026-11-16T05:52:38Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:08Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

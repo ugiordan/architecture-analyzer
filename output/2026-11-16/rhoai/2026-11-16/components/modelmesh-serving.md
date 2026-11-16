@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/modelmesh-serving](https://github.com/red-hat-data-services/modelmesh-serving) |
 | Aliases | ModelMesh |
 | Commit | [2751b227f532385b73e407e5a6f09ee61920406a](https://github.com/red-hat-data-services/modelmesh-serving/commit/2751b227f532385b73e407e5a6f09ee61920406a) |
-| Extracted | 2026-11-16T05:48:57Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:08:49Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/caikit-tgis-serving](https://github.com/red-hat-data-services/caikit-tgis-serving) |
 | Commit | [c5b14ab09bdaef448b90ff3a70a0472f11d9b27e](https://github.com/red-hat-data-services/caikit-tgis-serving/commit/c5b14ab09bdaef448b90ff3a70a0472f11d9b27e) |
-| Extracted | 2026-11-16T05:53:36Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:42Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

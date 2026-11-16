@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/trainer-operator](https://github.com/opendatahub-io/trainer-operator) |
 | Aliases | Trainer operator, Kubeflow Trainer operator |
 | Commit | [4de61eec63c10b9144fb82e75fe8469eb039b73c](https://github.com/opendatahub-io/trainer-operator/commit/4de61eec63c10b9144fb82e75fe8469eb039b73c) |
-| Extracted | 2026-11-16T05:47:31Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:05:57Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

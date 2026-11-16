@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/odh-model-controller](https://github.com/red-hat-data-services/odh-model-controller) |
 | Aliases | ODH Model Controller, omc |
 | Commit | [d5964474f5f785a85ab388526b400a1059d2a76a](https://github.com/red-hat-data-services/odh-model-controller/commit/d5964474f5f785a85ab388526b400a1059d2a76a) |
-| Extracted | 2026-11-16T05:50:22Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:08:30Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

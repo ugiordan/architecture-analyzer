@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/odh-cli](https://github.com/red-hat-data-services/odh-cli) |
 | Commit | [2f6cc313f45c8a18af677a8af8cfe857e3a37405](https://github.com/red-hat-data-services/odh-cli/commit/2f6cc313f45c8a18af677a8af8cfe857e3a37405) |
-| Extracted | 2026-11-16T05:53:37Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:14Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -361,7 +361,7 @@
 | rhods-operator | trustyai-viewer-role | 2 |
 | rhods-operator | workbenches-editor-role | 2 |
 | rhods-operator | workbenches-viewer-role | 2 |
-| spark-operator | spark-operator-controller | 16 |
+| spark-operator | spark-operator-controller | 17 |
 | spark-operator | spark-operator-scheduledsparkapplication-editor-role | 2 |
 | spark-operator | spark-operator-scheduledsparkapplication-viewer-role | 2 |
 | spark-operator | spark-operator-sparkapplication-editor-role | 2 |

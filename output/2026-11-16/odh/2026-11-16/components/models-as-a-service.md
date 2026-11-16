@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/models-as-a-service](https://github.com/opendatahub-io/models-as-a-service) |
 | Commit | [68b70af1ac0da732a098170eaf7f44f56d6dd529](https://github.com/opendatahub-io/models-as-a-service/commit/68b70af1ac0da732a098170eaf7f44f56d6dd529) |
-| Extracted | 2026-11-16T05:47:21Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:05:53Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -320,7 +320,7 @@
 
 | Name | Type | Evidence |
 |------|------|----------|
-| PostgreSQL | database | uri:postgresql:// |
+| PostgreSQL | database | uri:postgres:// |
 | OpenTelemetry Collector | observability | env:OTEL_TRACES_EXPORTER |
 | kubernetes | service | dns:kubernetes.default.svc |
 | maas-api | service | dns:maas-api.redhat-ai-gateway-infra.svc.cluster.local |

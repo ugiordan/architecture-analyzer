@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/praxis-extproc](https://github.com/opendatahub-io/praxis-extproc) |
 | Commit | [814a177260f1d3ce5f2e62f5cdfd8c7c532ea710](https://github.com/opendatahub-io/praxis-extproc/commit/814a177260f1d3ce5f2e62f5cdfd8c7c532ea710) |
-| Extracted | 2026-11-16T05:52:57Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:23Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

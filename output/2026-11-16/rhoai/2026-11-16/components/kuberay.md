@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/kuberay](https://github.com/red-hat-data-services/kuberay) |
 | Commit | [92cba4a581d75481baf213fbd0ab05290da68989](https://github.com/red-hat-data-services/kuberay/commit/92cba4a581d75481baf213fbd0ab05290da68989) |
-| Extracted | 2026-11-16T05:51:44Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:10:16Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

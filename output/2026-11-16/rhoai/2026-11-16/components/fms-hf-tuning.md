@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/fms-hf-tuning](https://github.com/red-hat-data-services/fms-hf-tuning) |
 | Commit | [a7bca76112da7f30d9e3487d4b23058ce3fbb0d3](https://github.com/red-hat-data-services/fms-hf-tuning/commit/a7bca76112da7f30d9e3487d4b23058ce3fbb0d3) |
-| Extracted | 2026-11-16T05:53:39Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:29Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/batch-gateway](https://github.com/red-hat-data-services/batch-gateway) |
 | Commit | [05aadda60115e9c77dd92acade7508cf4a2d0a61](https://github.com/red-hat-data-services/batch-gateway/commit/05aadda60115e9c77dd92acade7508cf4a2d0a61) |
-| Extracted | 2026-11-16T05:53:15Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:50Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

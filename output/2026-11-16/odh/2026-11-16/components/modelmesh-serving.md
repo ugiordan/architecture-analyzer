@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/modelmesh-serving](https://github.com/opendatahub-io/modelmesh-serving) |
 | Aliases | ModelMesh |
 | Commit | [1fcf541d867ceb459fbc76aa1e2bef102c4816db](https://github.com/opendatahub-io/modelmesh-serving/commit/1fcf541d867ceb459fbc76aa1e2bef102c4816db) |
-| Extracted | 2026-11-16T05:47:27Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:06:12Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

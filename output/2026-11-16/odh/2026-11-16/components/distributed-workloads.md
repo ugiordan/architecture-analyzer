@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [opendatahub-io/distributed-workloads](https://github.com/opendatahub-io/distributed-workloads) |
-| Commit | [df3b5575d69548babf07180649e74b96725701fd](https://github.com/opendatahub-io/distributed-workloads/commit/df3b5575d69548babf07180649e74b96725701fd) |
-| Extracted | 2026-11-16T05:50:42Z |
-| Analyzer Version | dev |
+| Commit | [f78e52f27d2b10b8b5871c5b763879e66a218b7e](https://github.com/opendatahub-io/distributed-workloads/commit/f78e52f27d2b10b8b5871c5b763879e66a218b7e) |
+| Extracted | 2026-11-16T23:09:23Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -67,15 +67,15 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| get |  | [`tests/odh/resources/mnist_hpo.py:196`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/tests/odh/resources/mnist_hpo.py#L196) |
-| get |  | [`benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:143`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py#L143) |
-| get |  | [`tests/odh/resources/mnist_hpo.py:232`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/tests/odh/resources/mnist_hpo.py#L232) |
-| get |  | [`examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py:277`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py#L277) |
-| get |  | [`examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py:460`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py#L460) |
-| get |  | [`tests/trainer/resources/disconnected_env/prestage_models_datasets.py:219`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/tests/trainer/resources/disconnected_env/prestage_models_datasets.py#L219) |
-| get |  | [`benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:68`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py#L68) |
-| get |  | [`examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py:536`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py#L536) |
-| get |  | [`benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:69`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py#L69) |
-| list |  | [`tests/kfto/resources/download_mnist_datasets.py:43`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/tests/kfto/resources/download_mnist_datasets.py#L43) |
-| list |  | [`tests/trainer/resources/disconnected_env/prestage_models_datasets.py:614`](https://github.com/opendatahub-io/distributed-workloads/blob/df3b5575d69548babf07180649e74b96725701fd/tests/trainer/resources/disconnected_env/prestage_models_datasets.py#L614) |
+| get |  | [`tests/odh/resources/mnist_hpo.py:196`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/tests/odh/resources/mnist_hpo.py#L196) |
+| get |  | [`benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:143`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py#L143) |
+| get |  | [`tests/odh/resources/mnist_hpo.py:232`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/tests/odh/resources/mnist_hpo.py#L232) |
+| get |  | [`examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py:277`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py#L277) |
+| get |  | [`examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py:460`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py#L460) |
+| get |  | [`tests/trainer/resources/disconnected_env/prestage_models_datasets.py:219`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/tests/trainer/resources/disconnected_env/prestage_models_datasets.py#L219) |
+| get |  | [`benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:68`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py#L68) |
+| get |  | [`examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py:536`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/examples/ray-finetune-llm-deepspeed/ray_finetune_llm_deepspeed.py#L536) |
+| get |  | [`benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:69`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py#L69) |
+| list |  | [`tests/kfto/resources/download_mnist_datasets.py:43`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/tests/kfto/resources/download_mnist_datasets.py#L43) |
+| list |  | [`tests/trainer/resources/disconnected_env/prestage_models_datasets.py:614`](https://github.com/opendatahub-io/distributed-workloads/blob/f78e52f27d2b10b8b5871c5b763879e66a218b7e/tests/trainer/resources/disconnected_env/prestage_models_datasets.py#L614) |
 

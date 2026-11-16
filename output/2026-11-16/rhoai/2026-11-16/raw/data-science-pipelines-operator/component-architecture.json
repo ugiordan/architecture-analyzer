@@ -6,8 +6,8 @@
   ],
   "repo": "red-hat-data-services/data-science-pipelines-operator",
   "commit_sha": "193c52c2fc0dd4d8043dd64708a4d028e63f35b9",
-  "extracted_at": "2026-11-16T05:48:03Z",
-  "analyzer_version": "dev",
+  "extracted_at": "2026-11-16T23:07:50Z",
+  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
   "schema_version": "2",
   "crds": [
     {
@@ -42,17 +42,17 @@
       ],
       "fields_count": 290,
       "validation_rules": [
-        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
-        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
-        "has(self.s3CredentialsSecret) || (has(self.credentialsMode) \u0026\u0026 self.credentialsMode.fromEnv)",
-        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
-        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
-        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
-        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.accessModes) \u0026\u0026 size(self.accessModes) \u003e 0",
         "has(self.storageClassName) \u0026\u0026 self.storageClassName != \"\"",
+        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
+        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
+        "!has(self.additionalRules) || self.additionalRules.all(r, (has(r.ports) \u0026\u0026 size(r.ports) \u003e 0) || (has(r.to) \u0026\u0026 size(r.to) \u003e 0))",
+        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
+        "has(self.s3CredentialsSecret) || (has(self.credentialsMode) \u0026\u0026 self.credentialsMode.fromEnv)",
+        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
+        "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)",
         "has(self.resourceClaimName) != has(self.resourceClaimTemplateName)"
       ],
@@ -8285,33 +8285,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.apiServer.argoLauncherImage",
+      "field": "spec.database.mariaDB.image",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.argoLauncherImage\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.apiServer.image",
-      "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.apiServer.managedPipelines.image",
-      "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.managedPipelines.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.apiServer.argoDriverImage",
-      "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.argoDriverImage\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.database.mariaDB.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -8341,17 +8317,33 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.database.mariaDB.image",
+      "field": "spec.apiServer.argoDriverImage",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.database.mariaDB.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.argoDriverImage\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
-      "field": "spec.mlmd.envoy.image",
+      "field": "spec.apiServer.argoLauncherImage",
       "crd_kind": "DataSciencePipelinesApplication",
-      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.mlmd.envoy.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.argoLauncherImage\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
+      "field": "spec.apiServer.managedPipelines.image",
+      "crd_kind": "DataSciencePipelinesApplication",
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.managedPipelines.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
+      "field": "spec.apiServer.image",
+      "crd_kind": "DataSciencePipelinesApplication",
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.apiServer.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -8360,6 +8352,14 @@
       "field": "spec.mlmd.grpc.image",
       "crd_kind": "DataSciencePipelinesApplication",
       "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.mlmd.grpc.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml",
+      "field": "spec.mlmd.envoy.image",
+      "crd_kind": "DataSciencePipelinesApplication",
+      "description": "CRD DataSciencePipelinesApplication has user-settable image field \"spec.mlmd.envoy.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",

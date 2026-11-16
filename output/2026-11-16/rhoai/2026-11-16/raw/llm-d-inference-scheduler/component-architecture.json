@@ -2,8 +2,8 @@
   "component": "llm-d-inference-scheduler",
   "repo": "red-hat-data-services/llm-d-inference-scheduler",
   "commit_sha": "530982f83005d81c4910b3e1eb1d24bd5b0b7fd5",
-  "extracted_at": "2026-11-16T05:52:30Z",
-  "analyzer_version": "dev",
+  "extracted_at": "2026-11-16T23:11:00Z",
+  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
   "schema_version": "2",
   "crds": [
     {
@@ -6889,14 +6889,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "deployment-template",
+      "context": "deployment",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "deployment",
+      "context": "deployment-template",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
@@ -6917,13 +6917,6 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "clusterrole",
-      "source": "deploy/components/istio-control-plane/rbac.yaml"
-    },
-    {
-      "label": "app.kubernetes.io/managed-by",
-      "integration": "management relationship",
-      "type": "label",
       "context": "rolebinding",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
@@ -6939,6 +6932,13 @@
       "integration": "management relationship",
       "type": "label",
       "context": "clusterrolebinding",
+      "source": "deploy/components/istio-control-plane/rbac.yaml"
+    },
+    {
+      "label": "app.kubernetes.io/managed-by",
+      "integration": "management relationship",
+      "type": "label",
+      "context": "clusterrole",
       "source": "deploy/components/istio-control-plane/rbac.yaml"
     },
     {
@@ -7200,9 +7200,16 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "dorny/paths-filter@v4",
+      "resource": "actions/setup-go@v6",
       "source": ".github/workflows/ci-lint.yaml",
-      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"actions/setup-go\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/cache@v5",
+      "source": ".github/workflows/ci-lint.yaml",
+      "description": "Action \"actions/cache\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -7214,16 +7221,107 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/setup-go@v6",
+      "resource": "dorny/paths-filter@v4",
       "source": ".github/workflows/ci-lint.yaml",
-      "description": "Action \"actions/setup-go\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/cache@v5",
-      "source": ".github/workflows/ci-lint.yaml",
-      "description": "Action \"actions/cache\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/download-artifact@v8",
+      "source": ".github/workflows/ci-pr-checks.yaml",
+      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -7287,104 +7385,6 @@
       "resource": "actions/upload-artifact@v7",
       "source": ".github/workflows/ci-pr-checks.yaml",
       "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v6",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v6",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v6",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v6",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/download-artifact@v8",
-      "source": ".github/workflows/ci-pr-checks.yaml",
-      "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

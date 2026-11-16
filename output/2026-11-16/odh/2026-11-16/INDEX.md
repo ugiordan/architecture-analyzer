@@ -2,7 +2,7 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-11-16T06:00:26Z  
+**Generated**: 2026-11-16T23:18:18Z  
 **Components**: 44  
 
 ## How to Find Information
@@ -82,7 +82,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | ogx-k8s-operator |  | 2 | 2 | 16 | [ogx-k8s-operator.md](components/ogx-k8s-operator.md) |
 | opendatahub-operator | ODH operator, odh-operator | 0 | 3 | 100 | [opendatahub-operator.md](components/opendatahub-operator.md) |
 | praxis-extproc |  | 0 | 1 | 46 | [praxis-extproc.md](components/praxis-extproc.md) |
-| spark-operator |  | 3 | 3 | 40 | [spark-operator.md](components/spark-operator.md) |
+| spark-operator |  | 3 | 3 | 41 | [spark-operator.md](components/spark-operator.md) |
 | trainer |  | 4 | 0 | 71 | [trainer.md](components/trainer.md) |
 | trainer-operator | Trainer operator, Kubeflow Trainer operator | 1 | 0 | 20 | [trainer-operator.md](components/trainer-operator.md) |
 | trustyai-service-operator | TrustyAI operator | 5 | 3 | 43 | [trustyai-service-operator.md](components/trustyai-service-operator.md) |

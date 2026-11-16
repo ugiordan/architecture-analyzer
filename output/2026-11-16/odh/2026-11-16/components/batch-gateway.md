@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/batch-gateway](https://github.com/opendatahub-io/batch-gateway) |
 | Commit | [ba8194476249ced64a15f7196f7dc88e2b4ebd17](https://github.com/opendatahub-io/batch-gateway/commit/ba8194476249ced64a15f7196f7dc88e2b4ebd17) |
-| Extracted | 2026-11-16T05:51:35Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:10:47Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/kale](https://github.com/opendatahub-io/kale) |
 | Commit | [8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7](https://github.com/opendatahub-io/kale/commit/8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7) |
-| Extracted | 2026-11-16T05:52:55Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:09Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

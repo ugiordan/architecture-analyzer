@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/odh-deployer](https://github.com/red-hat-data-services/odh-deployer) |
 | Commit | [f315a7aad26bf15bfa83855846efb8c6fab98a91](https://github.com/red-hat-data-services/odh-deployer/commit/f315a7aad26bf15bfa83855846efb8c6fab98a91) |
-| Extracted | 2026-11-16T05:53:31Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:27Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

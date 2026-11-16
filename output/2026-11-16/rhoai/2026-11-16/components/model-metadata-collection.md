@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/model-metadata-collection](https://github.com/red-hat-data-services/model-metadata-collection) |
 | Commit | [fe872ce10ed7eb6d62f0764b46439d5f7d710486](https://github.com/red-hat-data-services/model-metadata-collection/commit/fe872ce10ed7eb6d62f0764b46439d5f7d710486) |
-| Extracted | 2026-11-16T05:53:52Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:12:54Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

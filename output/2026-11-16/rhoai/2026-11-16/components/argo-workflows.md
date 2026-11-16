@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/argo-workflows](https://github.com/red-hat-data-services/argo-workflows) |
 | Commit | [b4e22aef0c8754f8318de40d1b67a93e34b61c04](https://github.com/red-hat-data-services/argo-workflows/commit/b4e22aef0c8754f8318de40d1b67a93e34b61c04) |
-| Extracted | 2026-11-16T05:53:31Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:11:44Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -105,16 +105,16 @@
 | * | /oauth2/callback |  | [`server/apiserver/argoserver.go:408`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/server/apiserver/argoserver.go#L408) |
 | * | /oauth2/redirect |  | [`server/apiserver/argoserver.go:407`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/server/apiserver/argoserver.go#L407) |
 | POST | /template.execute |  | [`pkg/plugins/executor/swagger.yml`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/plugins/executor/swagger.yml) |
-| * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:833`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L833) |
-| * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:1043`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L1043) |
-| * | DELETE |  | [`pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:619`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go#L619) |
 | * | DELETE |  | [`pkg/apiclient/sensor/sensor.pb.gw.go:639`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/sensor/sensor.pb.gw.go#L639) |
-| * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1456`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflow/workflow.pb.gw.go#L1456) |
-| * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1841`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflow/workflow.pb.gw.go#L1841) |
 | * | DELETE |  | [`pkg/apiclient/eventsource/eventsource.pb.gw.go:584`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/eventsource/eventsource.pb.gw.go#L584) |
 | * | DELETE |  | [`pkg/apiclient/eventsource/eventsource.pb.gw.go:748`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/eventsource/eventsource.pb.gw.go#L748) |
-| * | DELETE |  | [`pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:452`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go#L452) |
 | * | DELETE |  | [`pkg/apiclient/sensor/sensor.pb.gw.go:826`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/sensor/sensor.pb.gw.go#L826) |
+| * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:833`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L833) |
+| * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1841`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflow/workflow.pb.gw.go#L1841) |
+| * | DELETE |  | [`pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go:1043`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/cronworkflow/cron-workflow.pb.gw.go#L1043) |
+| * | DELETE |  | [`pkg/apiclient/workflow/workflow.pb.gw.go:1456`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflow/workflow.pb.gw.go#L1456) |
+| * | DELETE |  | [`pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:452`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go#L452) |
+| * | DELETE |  | [`pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go:619`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/clusterworkflowtemplate/cluster-workflow-template.pb.gw.go#L619) |
 | * | DELETE |  | [`pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go:480`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflowarchive/workflow-archive.pb.gw.go#L480) |
 | * | DELETE |  | [`pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go:793`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go#L793) |
 | * | DELETE |  | [`pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go:626`](https://github.com/red-hat-data-services/argo-workflows/blob/b4e22aef0c8754f8318de40d1b67a93e34b61c04/pkg/apiclient/workflowtemplate/workflow-template.pb.gw.go#L626) |

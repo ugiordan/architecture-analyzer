@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/llm-d-inference-scheduler](https://github.com/opendatahub-io/llm-d-inference-scheduler) |
 | Commit | [669474c4b8151dbc6eb1d95ee05eda48d584e501](https://github.com/opendatahub-io/llm-d-inference-scheduler/commit/669474c4b8151dbc6eb1d95ee05eda48d584e501) |
-| Extracted | 2026-11-16T05:51:13Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:09:48Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

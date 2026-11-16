@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/vllm](https://github.com/red-hat-data-services/vllm) |
 | Commit | [b811c9e938c90baab85ded3f13c2f2b4f3fb6d55](https://github.com/red-hat-data-services/vllm/commit/b811c9e938c90baab85ded3f13c2f2b4f3fb6d55) |
-| Extracted | 2026-11-16T05:54:11Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:13:05Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

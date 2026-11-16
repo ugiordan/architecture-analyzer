@@ -2,8 +2,8 @@
   "component": "mlflow-operator",
   "repo": "opendatahub-io/mlflow-operator",
   "commit_sha": "518de9f9c6caa1c54f7e32456377e70ece7166a2",
-  "extracted_at": "2026-11-16T05:47:26Z",
-  "analyzer_version": "dev",
+  "extracted_at": "2026-11-16T23:06:08Z",
+  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
   "schema_version": "2",
   "crds": [
     {
@@ -97,9 +97,9 @@
         "!has(self.traceArchival) || !self.traceArchival.enabled || !has(self.storage) || !(((!has(self.env) || !self.env.exists(e, e.name == 'MLFLOW_BACKEND_STORE_URI')) \u0026\u0026 ((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom))) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom)) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')",
         "!has(oldSelf.storage) || (has(self.storage) \u0026\u0026 ((!has(oldSelf.storage.accessModes) \u0026\u0026 (!has(self.storage.accessModes) || self.storage.accessModes == ['ReadWriteOnce'])) || (has(oldSelf.storage.accessModes) \u0026\u0026 has(self.storage.accessModes) \u0026\u0026 self.storage.accessModes == oldSelf.storage.accessModes)))",
         "self.all(key, size(self[key]) \u003c= 63)",
+        "self.all(key, size(self[key]) \u003c= 63)",
         "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
-        "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
-        "self.all(key, size(self[key]) \u003c= 63)"
+        "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))"
       ],
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml"
     }

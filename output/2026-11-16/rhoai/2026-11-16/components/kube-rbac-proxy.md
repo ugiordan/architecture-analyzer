@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/kube-rbac-proxy](https://github.com/red-hat-data-services/kube-rbac-proxy) |
 | Commit | [12de3686be277816367433867776dcbe9a5cefe8](https://github.com/red-hat-data-services/kube-rbac-proxy/commit/12de3686be277816367433867776dcbe9a5cefe8) |
-| Extracted | 2026-11-16T05:51:23Z |
-| Analyzer Version | dev |
+| Extracted | 2026-11-16T23:09:52Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 

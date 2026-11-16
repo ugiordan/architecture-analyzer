@@ -2,7 +2,7 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-11-16T06:00:27Z  
+**Generated**: 2026-11-16T23:18:18Z  
 **Components**: 64  
 
 ## How to Find Information
@@ -94,7 +94,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | rest-proxy |  | 0 | 0 | 6 | [rest-proxy.md](components/rest-proxy.md) |
 | rhds-llama-stack-distribution |  | 0 | 0 | 0 | [rhds-llama-stack-distribution.md](components/rhds-llama-stack-distribution.md) |
 | rhods-operator | opendatahub-operator, RHODS operator | 0 | 3 | 100 | [rhods-operator.md](components/rhods-operator.md) |
-| spark-operator |  | 3 | 3 | 42 | [spark-operator.md](components/spark-operator.md) |
+| spark-operator |  | 3 | 3 | 43 | [spark-operator.md](components/spark-operator.md) |
 | text-generation-inference |  | 0 | 1 | 45 | [text-generation-inference.md](components/text-generation-inference.md) |
 | trainer |  | 4 | 0 | 71 | [trainer.md](components/trainer.md) |
 | training-operator | Training operator, Kubeflow Training operator | 6 | 1 | 22 | [training-operator.md](components/training-operator.md) |

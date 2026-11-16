@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [red-hat-data-services/pipelines-components](https://github.com/red-hat-data-services/pipelines-components) |
-| Commit | [9e1226975e48b40179378ff70b7166f97d5a3025](https://github.com/red-hat-data-services/pipelines-components/commit/9e1226975e48b40179378ff70b7166f97d5a3025) |
-| Extracted | 2026-11-16T05:53:57Z |
-| Analyzer Version | dev |
+| Commit | [f39415c2c881a47ed8ced42c587eee1731f2d854](https://github.com/red-hat-data-services/pipelines-components/commit/f39415c2c881a47ed8ced42c587eee1731f2d854) |
+| Extracted | 2026-11-16T23:12:58Z |
+| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
 | Data Coverage | full |
 
 
@@ -25,12 +25,12 @@
 | certifi | ==2026.10.23 \ |  | true |
 | cffi | ==2.1.1 \ |  | true |
 | charset-normalizer | ==3.5.2 \ |  | true |
-| click | ==8.5.0 \ |  | true |
+| click | ==8.5.1 \ |  | true |
 | click-option-group | ==0.5.7 \ |  | true |
 | cryptography | ==50.0.2 \ |  | true |
 | docstring-parser | ==0.18.0 \ |  | true |
 | durationpy | ==0.11 \ |  | true |
-| google-api-core | ==2.43.2 \ |  | true |
+| google-api-core | ==2.44.0 \ |  | true |
 | google-auth | ==2.62.1 \ |  | true |
 | google-cloud-core | ==2.8.0 \ |  | true |
 | google-cloud-storage | ==3.17.1 \ |  | true |
@@ -42,7 +42,7 @@
 | kfp-kubernetes | ==2.18.0 \ |  | true |
 | kfp-pipeline-spec | ==2.18.0 \ |  | true |
 | kfp-server-api | ==2.18.0 \ |  | true |
-| kubernetes | ==37.0.1 \ | k8s-client | true |
+| kubernetes | ==37.0.2 \ | k8s-client | true |
 | oauthlib | ==4.0.1 \ |  | true |
 | opentelemetry-api | ==1.45.2 \ | observability | true |
 | packaging | ==26.3 \ |  | true |
@@ -172,36 +172,36 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| get |  | [`components/training/finetuning/shared/training.py:136`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/finetuning/shared/training.py#L136) |
-| kind_ref |  | [`components/deployment/deploy_embedding_model/component.py:157`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/deployment/deploy_embedding_model/component.py#L157) |
-| kind_ref |  | [`components/deployment/deploy_embedding_model/component.py:77`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/deployment/deploy_embedding_model/component.py#L77) |
-| create |  | [`components/data_processing/parse_and_chunk/component.py:147`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L147) |
-| create |  | [`components/data_processing/ingest_to_milvus/component.py:130`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/ingest_to_milvus/component.py#L130) |
-| create |  | [`components/training/autorag/shared/assets_generator/starter_kit_templates/agentic_rag/proxychains_entrypoint.py:93`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/autorag/shared/assets_generator/starter_kit_templates/agentic_rag/proxychains_entrypoint.py#L93) |
-| create |  | [`components/evaluation/lm_eval/component.py:549`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/evaluation/lm_eval/component.py#L549) |
-| create |  | [`components/data_processing/ingest_to_milvus/component.py:139`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/ingest_to_milvus/component.py#L139) |
-| create |  | [`components/training/automl/shared/mlflow_callbacks.py:150`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/automl/shared/mlflow_callbacks.py#L150) |
-| create |  | [`scripts/generate_skeleton/generate_skeleton.py:547`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/scripts/generate_skeleton/generate_skeleton.py#L547) |
-| delete |  | [`components/training/automl/shared/mlflow_tracking.py:662`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/automl/shared/mlflow_tracking.py#L662) |
-| get |  | [`components/data_processing/ingest_to_milvus/component.py:222`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/ingest_to_milvus/component.py#L222) |
-| get |  | [`components/data_processing/parse_and_chunk/component.py:539`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L539) |
-| get |  | [`scripts/generate_managed_pipelines/pipeline_description.py:70`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/scripts/generate_managed_pipelines/pipeline_description.py#L70) |
-| get |  | [`components/data_processing/sdg/component.py:139`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/sdg/component.py#L139) |
-| get |  | [`components/training/finetuning/shared/training.py:159`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/finetuning/shared/training.py#L159) |
-| get |  | [`components/training/automl/shared/back_testing.py:190`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/automl/shared/back_testing.py#L190) |
-| get |  | [`components/data_processing/parse_and_chunk/component.py:330`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L330) |
-| get |  | [`components/data_processing/automl/tabular_data_loader/component.py:545`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/automl/tabular_data_loader/component.py#L545) |
-| get |  | [`components/data_processing/ingest_to_milvus/component.py:78`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/ingest_to_milvus/component.py#L78) |
-| get |  | [`components/training/automl/shared/timeseries_refit.py:86`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/automl/shared/timeseries_refit.py#L86) |
-| get |  | [`components/training/autorag/models_pre_selector/component.py:139`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/autorag/models_pre_selector/component.py#L139) |
-| get |  | [`scripts/generate_readme/category_index_generator.py:47`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/scripts/generate_readme/category_index_generator.py#L47) |
-| get |  | [`components/training/automl/shared/back_testing_charts.py:191`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/automl/shared/back_testing_charts.py#L191) |
-| list |  | [`components/data_processing/parse_and_chunk/component.py:503`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L503) |
-| list |  | [`components/training/finetuning/shared/training.py:39`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/training/finetuning/shared/training.py#L39) |
-| create |  | [`components/deployment/deploy_embedding_model/component.py:143`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/deployment/deploy_embedding_model/component.py#L143) |
-| delete |  | [`components/deployment/model_deployment/component.py:279`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/deployment/model_deployment/component.py#L279) |
-| get |  | [`components/data_processing/parse_and_chunk/component.py:697`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L697) |
-| patch |  | [`components/data_processing/parse_and_chunk/component.py:706`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L706) |
-| import |  | [`components/data_processing/parse_and_chunk/component.py:568`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L568) |
-| import |  | [`components/data_processing/parse_and_chunk/component.py:577`](https://github.com/red-hat-data-services/pipelines-components/blob/9e1226975e48b40179378ff70b7166f97d5a3025/components/data_processing/parse_and_chunk/component.py#L577) |
+| get |  | [`components/training/finetuning/shared/training.py:136`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/finetuning/shared/training.py#L136) |
+| kind_ref |  | [`components/deployment/deploy_embedding_model/component.py:157`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/deployment/deploy_embedding_model/component.py#L157) |
+| kind_ref |  | [`components/deployment/deploy_embedding_model/component.py:77`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/deployment/deploy_embedding_model/component.py#L77) |
+| create |  | [`components/data_processing/parse_and_chunk/component.py:147`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L147) |
+| create |  | [`components/data_processing/ingest_to_milvus/component.py:130`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/ingest_to_milvus/component.py#L130) |
+| create |  | [`components/training/autorag/shared/assets_generator/starter_kit_templates/agentic_rag/proxychains_entrypoint.py:93`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/autorag/shared/assets_generator/starter_kit_templates/agentic_rag/proxychains_entrypoint.py#L93) |
+| create |  | [`components/evaluation/lm_eval/component.py:549`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/evaluation/lm_eval/component.py#L549) |
+| create |  | [`components/data_processing/ingest_to_milvus/component.py:139`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/ingest_to_milvus/component.py#L139) |
+| create |  | [`components/training/automl/shared/mlflow_callbacks.py:150`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/automl/shared/mlflow_callbacks.py#L150) |
+| create |  | [`scripts/generate_skeleton/generate_skeleton.py:547`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/scripts/generate_skeleton/generate_skeleton.py#L547) |
+| delete |  | [`components/training/automl/shared/mlflow_tracking.py:662`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/automl/shared/mlflow_tracking.py#L662) |
+| get |  | [`components/data_processing/ingest_to_milvus/component.py:222`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/ingest_to_milvus/component.py#L222) |
+| get |  | [`components/data_processing/parse_and_chunk/component.py:539`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L539) |
+| get |  | [`scripts/generate_managed_pipelines/pipeline_description.py:70`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/scripts/generate_managed_pipelines/pipeline_description.py#L70) |
+| get |  | [`components/data_processing/sdg/component.py:139`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/sdg/component.py#L139) |
+| get |  | [`components/training/finetuning/shared/training.py:159`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/finetuning/shared/training.py#L159) |
+| get |  | [`components/training/automl/shared/back_testing.py:190`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/automl/shared/back_testing.py#L190) |
+| get |  | [`components/data_processing/parse_and_chunk/component.py:330`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L330) |
+| get |  | [`components/data_processing/automl/tabular_data_loader/component.py:545`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/automl/tabular_data_loader/component.py#L545) |
+| get |  | [`components/data_processing/ingest_to_milvus/component.py:78`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/ingest_to_milvus/component.py#L78) |
+| get |  | [`components/training/automl/shared/timeseries_refit.py:86`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/automl/shared/timeseries_refit.py#L86) |
+| get |  | [`components/training/autorag/models_pre_selector/component.py:118`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/autorag/models_pre_selector/component.py#L118) |
+| get |  | [`scripts/generate_readme/category_index_generator.py:47`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/scripts/generate_readme/category_index_generator.py#L47) |
+| get |  | [`components/training/automl/shared/back_testing_charts.py:191`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/automl/shared/back_testing_charts.py#L191) |
+| list |  | [`components/data_processing/parse_and_chunk/component.py:503`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L503) |
+| list |  | [`components/training/finetuning/shared/training.py:39`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/training/finetuning/shared/training.py#L39) |
+| create |  | [`components/deployment/deploy_embedding_model/component.py:143`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/deployment/deploy_embedding_model/component.py#L143) |
+| delete |  | [`components/deployment/model_deployment/component.py:279`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/deployment/model_deployment/component.py#L279) |
+| get |  | [`components/data_processing/parse_and_chunk/component.py:697`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L697) |
+| patch |  | [`components/data_processing/parse_and_chunk/component.py:706`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L706) |
+| import |  | [`components/data_processing/parse_and_chunk/component.py:568`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L568) |
+| import |  | [`components/data_processing/parse_and_chunk/component.py:577`](https://github.com/red-hat-data-services/pipelines-components/blob/f39415c2c881a47ed8ced42c587eee1731f2d854/components/data_processing/parse_and_chunk/component.py#L577) |
 
