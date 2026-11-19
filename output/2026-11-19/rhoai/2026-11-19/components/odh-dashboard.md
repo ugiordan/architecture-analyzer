@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/odh-dashboard](https://github.com/red-hat-data-services/odh-dashboard) |
 | Aliases | ODH Dashboard |
 | Commit | [f5657469b3d4096c522ebb96d896e4520867e898](https://github.com/red-hat-data-services/odh-dashboard/commit/f5657469b3d4096c522ebb96d896e4520867e898) |
-| Extracted | 2026-11-19T06:53:48Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:47:56Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -37,8 +37,8 @@
 | GET | /api/v1alpha1/data/connections/ |  | [`packages/data-connect-hub/bff/internal/api/connections_handler.go:166`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/data-connect-hub/bff/internal/api/connections_handler.go#L166) |
 | POST | /api/v1alpha1/data/connections/ |  | [`packages/data-connect-hub/bff/internal/api/connection_readiness_handler.go:61`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/data-connect-hub/bff/internal/api/connection_readiness_handler.go#L61) |
 | POST | /api/v1alpha1/data/test/credentials |  | [`packages/data-connect-hub/bff/internal/api/test_credentials_handler.go:80`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/data-connect-hub/bff/internal/api/test_credentials_handler.go#L80) |
-| GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/model-registry/upstream/bff/openapi/swagger.yaml) |
 | GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/model-registry/upstream/bff/openapi/swagger.json) |
+| GET | /healthcheck |  | [`packages/model-registry/upstream/bff/openapi/swagger.yaml`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/model-registry/upstream/bff/openapi/swagger.yaml) |
 | GET | /healthcheck |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /namespaces |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /persistentvolumeclaims/{namespace} |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
@@ -69,10 +69,10 @@
 | GET | /workspaces/{namespace}/{name}/podtemplate/details |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /workspaces/{namespace}/{name}/podtemplate/logs/batch |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
 | GET | /workspaces/{namespace}/{name}/podtemplate/resources |  | [`packages/notebooks/upstream/workspaces/backend/openapi/swagger.json`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/packages/notebooks/upstream/workspaces/backend/openapi/swagger.json) |
-| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:65`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L65) |
-| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:64`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L64) |
-| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:63`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L63) |
 | * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:62`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L62) |
+| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:63`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L63) |
+| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:64`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L64) |
+| * | GET  |  | [`distributions/core-bff/bff/internal/api/routes_model_serving.go:65`](https://github.com/red-hat-data-services/odh-dashboard/blob/f5657469b3d4096c522ebb96d896e4520867e898/distributions/core-bff/bff/internal/api/routes_model_serving.go#L65) |
 
 
 ## Services
@@ -116,30 +116,30 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| agent-ops-allow-ports |  | 0 | 0 |
-| allow-prometheus-scrape |  | 0 | 0 |
-| automl-allow-ports |  | 0 | 0 |
-| autorag-allow-ports |  | 0 | 0 |
-| dashboard-allow-ports |  | 0 | 0 |
-| dashboard-perses-access |  | 0 | 0 |
-| dashboard-perses-access |  | 0 | 0 |
-| dashboard-perses-egress |  | 0 | 0 |
-| data-connect-hub-allow-ports |  | 0 | 0 |
-| data-registry-allow-ports |  | 0 | 0 |
-| default-deny-ingress |  | 0 | 0 |
-| eval-hub-allow-ports |  | 0 | 0 |
-| gen-ai-allow-ports |  | 0 | 0 |
-| maas-allow-ports |  | 0 | 0 |
-| maas-portal |  | 0 | 0 |
-| maas-portal-perses |  | 0 | 0 |
-| mlflow-allow-ports |  | 0 | 0 |
-| model-registry-allow-ports |  | 0 | 0 |
-| notebooks-allow-ports |  | 0 | 0 |
-| rhaii-dashboard |  | 0 | 0 |
-| workspaces-backend |  | 0 | 0 |
-| workspaces-controller |  | 0 | 0 |
-| workspaces-controller |  | 0 | 0 |
-| workspaces-frontend |  | 0 | 0 |
+| agent-ops-allow-ports | deployment=agent-ops-ui | 1 | 3 |
+| allow-prometheus-scrape | app.kubernetes.io/component=controller-manager | 1 | 0 |
+| automl-allow-ports | deployment=automl-ui | 1 | 4 |
+| autorag-allow-ports | deployment=autorag-ui | 1 | 4 |
+| dashboard-allow-ports | deployment=odh-dashboard | 2 | 7 |
+| dashboard-perses-access | app.kubernetes.io/managed-by=perses-operator | 1 | 0 |
+| dashboard-perses-access | app.kubernetes.io/managed-by=perses-operator | 1 | 0 |
+| dashboard-perses-egress | app=rhods-dashboard, app.kubernetes.io/part-of=rhods-dashboard, app.opendatahub.io/rhods-dashboard=true, deployment=rhods-dashboard | 0 | 1 |
+| data-connect-hub-allow-ports | deployment=data-connect-hub-ui | 2 | 3 |
+| data-registry-allow-ports | deployment=data-registry-ui | 1 | 5 |
+| default-deny-ingress | (all pods) | 0 | 0 |
+| eval-hub-allow-ports | deployment=eval-hub-ui | 1 | 5 |
+| gen-ai-allow-ports | deployment=gen-ai-ui | 1 | 4 |
+| maas-allow-ports | deployment=maas-ui | 1 | 4 |
+| maas-portal | deployment=maas-portal | 1 | 4 |
+| maas-portal-perses | deployment=maas-portal | 0 | 1 |
+| mlflow-allow-ports | deployment=mlflow-ui | 1 | 5 |
+| model-registry-allow-ports | deployment=model-registry-ui | 1 | 4 |
+| notebooks-allow-ports | deployment=notebooks-ui | 1 | 3 |
+| rhaii-dashboard | deployment=rhaii-dashboard | 1 | 2 |
+| workspaces-backend | app=workspaces-backend, app.kubernetes.io/component=api | 1 | 0 |
+| workspaces-controller | app=workspaces-controller, app.kubernetes.io/component=controller-manager | 1 | 0 |
+| workspaces-controller | app=workspaces-controller, app.kubernetes.io/component=controller-manager | 2 | 0 |
+| workspaces-frontend | app=workspaces-frontend, app.kubernetes.io/component=ui | 1 | 0 |
 
 
 ## Deployments
@@ -177,109 +177,109 @@
 **agent-ops-ui / agent-ops-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8843 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (agent-ops-ui)
+- Ports: 8843/TCP (agent-ops-ui)
 
 **automl-ui / automl-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8643 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (automl-ui)
+- Ports: 8643/TCP (automl-ui)
 
 **autorag-ui / autorag-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8743 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (autorag-ui)
+- Ports: 8743/TCP (autorag-ui)
 
 **dashboard-operator / manager**
 
 - Args: `--namespace=$(OPERATOR_NAMESPACE) --leader-elect`
-- Ports: 0/TCP (metrics), 0/TCP (health)
+- Ports: 8443/TCP (metrics), 8081/TCP (health)
 
 **data-connect-hub-ui / data-connect-hub-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=9243 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (dch-ui)
+- Ports: 9243/TCP (dch-ui)
 
 **data-registry-ui / data-registry-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=9143 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt --data-registry-configmap-name=data-registry-config --data-registry-configmap-key=apiURL`
-- Ports: 0/TCP (data-registry)
+- Ports: 9143/TCP (data-registry)
 
 **eval-hub-ui / eval-hub-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8543 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (eval-hub-ui)
+- Ports: 8543/TCP (eval-hub-ui)
 
 **gen-ai-ui / gen-ai-ui**
 
 - Args: `--auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8143 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (gen-ai-ui)
+- Ports: 8143/TCP (gen-ai-ui)
 
 **maas-portal / maas-portal**
 
 - Args: `--deployment-mode=standalone --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --platform-type=OpenShift --namespace=dashboard-namespace --static-assets-dir=/static/maas-portal --mf-remotes-config=/etc/odh-dashboard/maas-portal-federation-config.json --port=8443 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (portal-ui)
+- Ports: 8443/TCP (portal-ui)
 
 **maas-ui / maas-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8243 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (maas-ui)
+- Ports: 8243/TCP (maas-ui)
 
 **mlflow-ui / mlflow-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8343 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (mlflow-ui)
+- Ports: 8343/TCP (mlflow-ui)
 
 **model-registry-ui / model-registry-ui**
 
 - Args: `--deployment-mode=federated --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8043 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (mr-ui)
+- Ports: 8043/TCP (mr-ui)
 
 **notebooks-ui / notebooks-ui**
 
 - Args: `--port=9043 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --static-assets-dir=/static`
-- Ports: 0/TCP (notebooks-ui)
+- Ports: 9043/TCP (notebooks-ui)
 
 **odh-dashboard / odh-dashboard**
 
-- Ports: 0/TCP
+- Ports: 8080/TCP
 
 **odh-dashboard / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:8443 --upstream=http://localhost:8080 --upstream-timeout=0 --config-file=/etc/kube-rbac-proxy/config-file.yaml --tls-cert-file=/etc/tls/private/tls.crt --tls-private-key-file=/etc/tls/private/tls.key --auth-header-fields-enabled=true --auth-header-user-field-name=X-Auth-Request-User --auth-header-groups-field-name=X-Auth-Request-Groups --proxy-endpoints-port=8444 --v=0`
-- Ports: 0/TCP (dashboard-ui), 0/TCP (proxy-health)
+- Ports: 8443/TCP (dashboard-ui), 8444/TCP (proxy-health)
 
 **odh-dashboard / core-bff**
 
 - Args: `--auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --port=8943 --cert-file=/etc/tls/private/tls.crt --key-file=/etc/tls/private/tls.key --bundle-paths=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt,/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,/etc/pki/tls/certs/odh-ca-bundle.crt,/etc/pki/tls/certs/odh-trusted-ca-bundle.crt`
-- Ports: 0/TCP (core-bff)
+- Ports: 8943/TCP (core-bff)
 
 **rhaii-dashboard / rhaii-dashboard**
 
 - Args: `--port=8443 --deployment-mode=standalone --auth-method=user_token --auth-token-header=x-forwarded-access-token --auth-token-prefix= --platform-type=XKS --static-assets-dir=/static`
-- Ports: 0/TCP (dashboard)
+- Ports: 8443/TCP (dashboard)
 
 **rhaii-dashboard / rhaii-dashboard**
 
-- Ports: 0/TCP (core-bff-api)
+- Ports: 4000/TCP (core-bff-api)
 
 **workspaces-backend / workspaces-backend**
 
-- Ports: 0/TCP (http-api)
+- Ports: 4000/TCP (http-api)
 
 **workspaces-controller / manager**
 
 - Args: `--leader-elect --health-probe-bind-address=:8081 --metrics-bind-address=:8443`
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **workspaces-controller / manager**
 
 - Command: `/manager`
 - Args: `--leader-elect --health-probe-bind-address=:8081 --metrics-bind-address=0`
-- Ports: 0/TCP (http), 0/TCP (https-webhook)
+- Ports: 8081/TCP (http), 9443/TCP (https-webhook)
 
 **workspaces-frontend / workspaces-frontend**
 
-- Ports: 0/TCP (http-ui)
+- Ports: 8080/TCP (http-ui)
 
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/model-registry](https://github.com/opendatahub-io/model-registry) |
 | Commit | [9e10913f47e145785c5cc1b9a632ec8f95a28d50](https://github.com/opendatahub-io/model-registry/commit/9e10913f47e145785c5cc1b9a632ec8f95a28d50) |
-| Extracted | 2026-11-19T06:52:34Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:12Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -49,18 +49,18 @@
 **minio / minio**
 
 - Args: `server /data --console-address :9001`
-- Ports: 0/TCP (minio), 0/TCP (console)
+- Ports: 9000/TCP (minio), 9001/TCP (console)
 
 **model-catalog-server / catalog**
 
 - Command: `/model-registry catalog`
 - Args: `--listen=0.0.0.0:8080 --catalogs-path=/catalog/sources.yaml --catalogs-path=/mcp-catalog/sources.yaml --catalogs-path=/skill-catalog/sources.yaml`
-- Ports: 0/TCP (http-api)
+- Ports: 8080/TCP (http-api)
 
 **seaweedfs / seaweedfs**
 
 - Args: `server -dir=/tmp -s3 -iam -filer -master.volumePreallocate=false`
-- Ports: 0/TCP (s3)
+- Ports: 8333/TCP (s3)
 
 
 

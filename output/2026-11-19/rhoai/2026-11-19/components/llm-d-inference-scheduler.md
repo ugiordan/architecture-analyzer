@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/llm-d-inference-scheduler](https://github.com/red-hat-data-services/llm-d-inference-scheduler) |
 | Commit | [530982f83005d81c4910b3e1eb1d24bd5b0b7fd5](https://github.com/red-hat-data-services/llm-d-inference-scheduler/commit/530982f83005d81c4910b3e1eb1d24bd5b0b7fd5) |
-| Extracted | 2026-11-19T06:57:05Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:51:36Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -92,33 +92,33 @@
 **${EPP_NAME} / epp**
 
 - Args: `--pool-name ${POOL_NAME} --pool-namespace ${NAMESPACE} --v 4 --zap-encoder json --grpc-port 9002 --grpc-health-port 9003 --config-file /etc/epp/epp-config.yaml --metrics-endpoint-auth=${METRICS_ENDPOINT_AUTH}`
-- Ports: 0/TCP, 0/TCP, 0/TCP, 0/TCP (metrics)
+- Ports: 5557/TCP, 9002/TCP, 9003/TCP, 9090/TCP (metrics)
 
 **${EPP_NAME} / vllm-render**
 
 - Command: `vllm launch render`
 - Args: `${MODEL_NAME} --port=8000`
-- Ports: 0/TCP (render-http)
+- Ports: 8000/TCP (render-http)
 
 **istiod-llm-d-gateway / discovery**
 
 - Args: `discovery --monitoringAddr=:15014 --log_output_level=default:info --domain cluster.local --keepaliveMaxServerConnectionAge 30m`
-- Ports: 0/TCP (http-debug), 0/TCP (grpc-xds), 0/TCP (tls-xds), 0/TCP (https-webhooks), 0/TCP (http-monitoring)
+- Ports: 8080/TCP (http-debug), 15010/TCP (grpc-xds), 15012/TCP (tls-xds), 15017/TCP (https-webhooks), 15014/TCP (http-monitoring)
 
 **vllm-d / vllm**
 
 - Args: `--port=8200 --model=${MODEL_NAME} --data-parallel-size=${VLLM_DATA_PARALLEL_SIZE} ${VLLM_EXTRA_ARGS_D}`
-- Ports: 0/TCP (http), 0/TCP (rank1), 0/TCP (rank2), 0/TCP (rank3), 0/TCP (rank4), 0/TCP (rank5), 0/TCP (rank6), 0/TCP (rank7)
+- Ports: 8200/TCP (http), 8201/TCP (rank1), 8202/TCP (rank2), 8203/TCP (rank3), 8204/TCP (rank4), 8205/TCP (rank5), 8206/TCP (rank6), 8207/TCP (rank7)
 
 **vllm-e / vllm**
 
 - Args: `--model=${MODEL_NAME} --port=8000 --data-parallel-size=${VLLM_DATA_PARALLEL_SIZE} --no-enable-prefix-caching --mm-encoder-only ${VLLM_EXTRA_ARGS_E}`
-- Ports: 0/TCP (encode-http), 0/TCP (encode-rank1), 0/TCP (encode-rank2), 0/TCP (encode-rank3), 0/TCP (encode-rank4), 0/TCP (encode-rank5), 0/TCP (encode-rank6), 0/TCP (encode-rank7)
+- Ports: 8000/TCP (encode-http), 8001/TCP (encode-rank1), 8002/TCP (encode-rank2), 8003/TCP (encode-rank3), 8004/TCP (encode-rank4), 8005/TCP (encode-rank5), 8006/TCP (encode-rank6), 8007/TCP (encode-rank7)
 
 **vllm-p / vllm**
 
 - Args: `--model=${MODEL_NAME} --port=8000 --data-parallel-size=${VLLM_DATA_PARALLEL_SIZE} ${VLLM_EXTRA_ARGS_P}`
-- Ports: 0/TCP (prefill-http), 0/TCP (prefill-rank1), 0/TCP (prefill-rank2), 0/TCP (prefill-rank3), 0/TCP (prefill-rank4), 0/TCP (prefill-rank5), 0/TCP (prefill-rank6), 0/TCP (prefill-rank7)
+- Ports: 8000/TCP (prefill-http), 8001/TCP (prefill-rank1), 8002/TCP (prefill-rank2), 8003/TCP (prefill-rank3), 8004/TCP (prefill-rank4), 8005/TCP (prefill-rank5), 8006/TCP (prefill-rank6), 8007/TCP (prefill-rank7)
 
 
 

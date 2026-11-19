@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/model-registry-operator](https://github.com/red-hat-data-services/model-registry-operator) |
 | Aliases | Model Registry operator |
 | Commit | [adb3362dd2bfe315e4e4a39917cc45b57651e796](https://github.com/red-hat-data-services/model-registry-operator/commit/adb3362dd2bfe315e4e4a39917cc45b57651e796) |
-| Extracted | 2026-11-19T06:52:27Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:38Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -20,7 +20,7 @@
 
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
-| ModelRegistry | modelregistry.opendatahub.io | v1beta1 | Namespaced | 113 | !(has(self.oauthProxy) &amp;&amp; has(self.kubeRBACProxy)), has(self.generateDeployment) &amp;&amp; self.generateDeployment ? true : (size(self.host) &gt; 0 \|\| size(self.hostAddress) &gt; 0), has(self.database) &amp;&amp; size(self.database) &gt; 0 ? has(self.username) &amp;&amp; size(self.username) &gt; 0 : true, !(has(self.generateDeployment) &amp;&amp; self.generateDeployment) \|\| ((!has(self.host) \|\| size(self.host) == 0) &amp;&amp; (!has(self.hostAddress) \|\| size(self.hostAddress) == 0)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.tlsCertificateSecret) == has(self.tlsKeySecret) | YAML | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/red-hat-data-services/model-registry-operator/blob/adb3362dd2bfe315e4e4a39917cc45b57651e796/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
+| ModelRegistry | modelregistry.opendatahub.io | v1beta1 | Namespaced | 113 | !(has(self.oauthProxy) &amp;&amp; has(self.kubeRBACProxy)), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.tlsCertificateSecret) == has(self.tlsKeySecret), has(self.generateDeployment) &amp;&amp; self.generateDeployment ? true : (size(self.host) &gt; 0 \|\| size(self.hostAddress) &gt; 0), has(self.database) &amp;&amp; size(self.database) &gt; 0 ? has(self.username) &amp;&amp; size(self.username) &gt; 0 : true, !(has(self.generateDeployment) &amp;&amp; self.generateDeployment) \|\| ((!has(self.host) \|\| size(self.host) == 0) &amp;&amp; (!has(self.hostAddress) \|\| size(self.hostAddress) == 0)) | YAML | [`config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml`](https://github.com/red-hat-data-services/model-registry-operator/blob/adb3362dd2bfe315e4e4a39917cc45b57651e796/config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml) |
 
 
 ## Webhooks
@@ -67,16 +67,16 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| catalog-controller-manager |  | 0 | 0 |
-| model-registry-operator-controller-manager |  | 0 | 0 |
-| template-value-egress |  | 0 | 0 |
-| template-value-egress |  | 0 | 0 |
-| template-value-https-route |  | 0 | 0 |
-| template-value-https-route |  | 0 | 0 |
-| template-value-postgres |  | 0 | 0 |
-| template-value-postgres |  | 0 | 0 |
-| template-value-postgres-egress |  | 0 | 0 |
-| template-value-postgres-egress |  | 0 | 0 |
+| catalog-controller-manager | control-plane=catalog-controller-manager | 1 | 1 |
+| model-registry-operator-controller-manager | control-plane=model-registry-operator | 2 | 1 |
+| template-value-egress | app=template-value, app.kubernetes.io/name=template-value, component=model-catalog | 0 | 1 |
+| template-value-egress | app=template-value, app.kubernetes.io/name=template-value, component=model-registry | 0 | 1 |
+| template-value-https-route | app=template-value, app.kubernetes.io/name=template-value, component=model-catalog | 1 | 0 |
+| template-value-https-route | app=template-value, app.kubernetes.io/name=template-value, component=model-registry | 1 | 0 |
+| template-value-postgres | app=template-value, app.kubernetes.io/name=template-value-postgres, component=template-value | 1 | 0 |
+| template-value-postgres | app=template-value, app.kubernetes.io/name=template-value-postgres, component=model-registry | 1 | 0 |
+| template-value-postgres-egress | app=template-value, app.kubernetes.io/name=template-value-postgres, component=template-value | 0 | 0 |
+| template-value-postgres-egress | app=template-value, app.kubernetes.io/name=template-value-postgres, component=model-registry | 0 | 0 |
 
 
 ## Deployments
@@ -97,13 +97,13 @@
 
 **catalog-controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
-- Env: `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`
+- Ports: 9443/TCP (webhook-server)
+- Env: `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`
 
 **model-registry-operator-controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server), 0/TCP (https)
-- Env: `CREATE_AUTH_RESOURCES=true`, `ENABLE_WEBHOOKS=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_IMAGE=quay.io/opendatahub/model-registry:latest`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `STORAGE_MIGRATION_SOURCE_VERSION=v1alpha1`, `OAUTH_PROXY_IMAGE=quay.io/openshift/origin-oauth-proxy:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `STORAGE_MIGRATION_TARGET_VERSION=v1beta1`
+- Ports: 9443/TCP (webhook-server), 8443/TCP (https)
+- Env: `RELATED_IMAGE_ODH_MODEL_REGISTRY_OPERATOR_IMAGE=quay.io/opendatahub/model-registry-operator:latest`, `RELATED_IMAGE_POSTGRESQL_16_IMAGE=quay.io/sclorg/postgresql-16-c10s:latest`, `ENABLE_WEBHOOKS=true`, `OAUTH_PROXY_IMAGE=quay.io/openshift/origin-oauth-proxy:latest`, `RELATED_IMAGE_ODH_MODEL_METADATA_COLLECTION_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `RELATED_IMAGE_ODH_MODEL_PERFORMANCE_DATA_IMAGE=quay.io/opendatahub/odh-model-metadata-collection:latest`, `STORAGE_MIGRATION_SOURCE_VERSION=v1alpha1`, `STORAGE_MIGRATION_TARGET_VERSION=v1beta1`, `CREATE_AUTH_RESOURCES=true`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_MODEL_REGISTRY_IMAGE=quay.io/opendatahub/model-registry:latest`
 
 **template-value / rest-container**
 
@@ -119,7 +119,7 @@ template-value template-value template-value --embedmd-database-dsn=template-val
 **template-value / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:template-value --upstream=http://127.0.0.1:template-value/ --proxy-endpoints-port=8888 --logtostderr=true --v=0 --config-file=/etc/kube-rbac-proxy/config-file.yaml --tls-cert-file=/etc/tls/private-cert/template-value --tls-private-key-file=/etc/tls/private-key/template-value template-value`
-- Ports: 0/TCP (https-proxy), 0/TCP (proxy-healthz)
+- Ports: 0/TCP (https-proxy), 8888/TCP (proxy-healthz)
 
 
 

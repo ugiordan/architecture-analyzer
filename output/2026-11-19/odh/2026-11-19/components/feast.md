@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/feast](https://github.com/opendatahub-io/feast) |
 | Commit | [7dd26424e54f217a95db2fa2d5c316a851cc22b7](https://github.com/opendatahub-io/feast/commit/7dd26424e54f217a95db2fa2d5c316a851cc22b7) |
-| Extracted | 2026-11-19T06:54:53Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:52Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

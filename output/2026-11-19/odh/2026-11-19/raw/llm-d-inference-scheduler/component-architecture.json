@@ -1,9 +1,9 @@
 {
   "component": "llm-d-inference-scheduler",
   "repo": "opendatahub-io/llm-d-inference-scheduler",
-  "commit_sha": "004f7e18fc8f096e1b0684b176a7058a10611b12",
-  "extracted_at": "2026-11-19T06:56:23Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "commit_sha": "028c340785c444af51b3b3b4e4875b6576342ce7",
+  "extracted_at": "2026-11-19T16:50:36Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -1337,7 +1337,7 @@
     },
     {
       "path": "Dockerfile.konflux.coordinator",
-      "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1788217333@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a",
+      "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1793092152@sha256:72187ec58a94bd958ff48e41881d7c5d8bc0b49586cc1661da5ba4d92374c206",
       "build_stage_images": [
         "registry.access.redhat.com/ubi9/go-toolset:1.27.3-1794518352@sha256:4053e919374d739ee6b0007e412d89256b0bd065e0bc690c2b3905bbaab6500e"
       ],
@@ -1398,7 +1398,7 @@
     },
     {
       "path": "Dockerfile.konflux.epp",
-      "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1788217333@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a",
+      "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1793092152@sha256:72187ec58a94bd958ff48e41881d7c5d8bc0b49586cc1661da5ba4d92374c206",
       "build_stage_images": [
         "registry.access.redhat.com/ubi9/go-toolset:1.27.3-1794518352@sha256:4053e919374d739ee6b0007e412d89256b0bd065e0bc690c2b3905bbaab6500e"
       ],
@@ -1446,7 +1446,7 @@
     },
     {
       "path": "Dockerfile.konflux.sidecar",
-      "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1788217333@sha256:3e009398a8aa8eec621393fbf308c5e622f174900e44e8d5fe224c637920924a",
+      "base_image": "registry.redhat.io/ubi9/ubi-minimal-pqc:9.8-1793092152@sha256:72187ec58a94bd958ff48e41881d7c5d8bc0b49586cc1661da5ba4d92374c206",
       "build_stage_images": [
         "registry.access.redhat.com/ubi9/go-toolset:1.27.3-1794518352@sha256:4053e919374d739ee6b0007e412d89256b0bd065e0bc690c2b3905bbaab6500e"
       ],
@@ -13276,14 +13276,14 @@
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "mutatingwebhookconfiguration",
+      "context": "validatingwebhookconfiguration",
       "source": "deploy/components/istio-control-plane/webhooks.yaml"
     },
     {
       "label": "app.kubernetes.io/managed-by",
       "integration": "management relationship",
       "type": "label",
-      "context": "validatingwebhookconfiguration",
+      "context": "mutatingwebhookconfiguration",
       "source": "deploy/components/istio-control-plane/webhooks.yaml"
     },
     {
@@ -13304,14 +13304,14 @@
       "label": "istio.io/rev",
       "integration": "Istio",
       "type": "label",
-      "context": "deployment-template",
+      "context": "deployment",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
       "label": "istio.io/rev",
       "integration": "Istio",
       "type": "label",
-      "context": "deployment",
+      "context": "deployment-template",
       "source": "deploy/components/istio-control-plane/deployment.yaml"
     },
     {
@@ -13584,34 +13584,6 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/cache@v6",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/cache\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-coordinator.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
       "resource": "actions/download-artifact@v8",
       "source": ".github/workflows/ci-coordinator.yaml",
       "description": "Action \"actions/download-artifact\" uses mutable ref \"v8\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -13650,6 +13622,34 @@
       "resource": "dorny/paths-filter@v4",
       "source": ".github/workflows/ci-coordinator.yaml",
       "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/cache@v6",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/cache\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/ci-coordinator.yaml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -13850,6 +13850,20 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "docker/login-action@v4",
+      "source": ".github/workflows/ci-release.yaml",
+      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/ci-release.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "actions/setup-go@v7",
       "source": ".github/workflows/ci-release.yaml",
       "description": "Action \"actions/setup-go\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -13865,36 +13879,8 @@
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
       "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/login-action@v4",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
       "source": ".github/workflows/ci-signed-commits.yaml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/md-link-check.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "dorny/paths-filter@v4",
-      "source": ".github/workflows/md-link-check.yml",
-      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -13923,6 +13909,20 @@
       "resource": "actions/cache/save@v6",
       "source": ".github/workflows/md-link-check.yml",
       "description": "Action \"actions/cache/save\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/md-link-check.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "dorny/paths-filter@v4",
+      "source": ".github/workflows/md-link-check.yml",
+      "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

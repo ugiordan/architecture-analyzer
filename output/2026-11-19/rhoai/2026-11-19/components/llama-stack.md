@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/llama-stack](https://github.com/red-hat-data-services/llama-stack) |
 | Commit | [5d65c017b088eab0f40c88fc92e7b4aac9834a27](https://github.com/red-hat-data-services/llama-stack/commit/5d65c017b088eab0f40c88fc92e7b4aac9834a27) |
-| Extracted | 2026-11-19T06:58:18Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:52:17Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

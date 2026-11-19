@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/model-registry](https://github.com/red-hat-data-services/model-registry) |
 | Commit | [c1ef19f7f3294aeb0a38cdc0c1ea83fe69720d53](https://github.com/red-hat-data-services/model-registry/commit/c1ef19f7f3294aeb0a38cdc0c1ea83fe69720d53) |
-| Extracted | 2026-11-19T06:53:32Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:17Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -49,18 +49,18 @@
 **minio / minio**
 
 - Args: `server /data --console-address :9001`
-- Ports: 0/TCP (minio), 0/TCP (console)
+- Ports: 9000/TCP (minio), 9001/TCP (console)
 
 **model-catalog-server / catalog**
 
 - Command: `/model-registry catalog`
 - Args: `--listen=0.0.0.0:8080 --catalogs-path=/catalog/sources.yaml --catalogs-path=/mcp-catalog/sources.yaml --catalogs-path=/skill-catalog/sources.yaml`
-- Ports: 0/TCP (http-api)
+- Ports: 8080/TCP (http-api)
 
 **seaweedfs / seaweedfs**
 
 - Args: `server -dir=/tmp -s3 -iam -filer -master.volumePreallocate=false`
-- Ports: 0/TCP (s3)
+- Ports: 8333/TCP (s3)
 
 
 

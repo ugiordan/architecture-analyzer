@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/modelmesh-serving](https://github.com/red-hat-data-services/modelmesh-serving) |
 | Aliases | ModelMesh |
 | Commit | [2751b227f532385b73e407e5a6f09ee61920406a](https://github.com/red-hat-data-services/modelmesh-serving/commit/2751b227f532385b73e407e5a6f09ee61920406a) |
-| Extracted | 2026-11-19T06:54:55Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:07Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -55,10 +55,10 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| etcd |  | 0 | 0 |
-| modelmesh-controller |  | 0 | 0 |
-| modelmesh-runtimes |  | 0 | 0 |
-| modelmesh-webhook |  | 0 | 0 |
+| etcd | app=model-mesh, app.kubernetes.io/part-of=model-mesh, component=model-mesh-etcd | 1 | 0 |
+| modelmesh-controller | app=model-mesh, app.kubernetes.io/managed-by=modelmesh-controller, app.kubernetes.io/part-of=model-mesh, control-plane=modelmesh-controller | 1 | 0 |
+| modelmesh-runtimes | app.kubernetes.io/managed-by=modelmesh-controller | 3 | 0 |
+| modelmesh-webhook | app=model-mesh, app.kubernetes.io/managed-by=modelmesh-controller, app.kubernetes.io/part-of=model-mesh, control-plane=modelmesh-controller | 1 | 0 |
 
 
 ## Deployments
@@ -75,7 +75,7 @@
 **controller-manager / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:8443 --upstream=http://127.0.0.1:8080/ --logtostderr=true --v=10`
-- Ports: 0/TCP (https)
+- Ports: 8443/TCP (https)
 
 **controller-manager / manager**
 
@@ -83,11 +83,11 @@
 
 **etcd / etcd**
 
-- Ports: 0/TCP (client), 0/TCP (server)
+- Ports: 2379/TCP (client), 2380/TCP (server)
 
 **modelmesh-controller / manager**
 
-- Ports: 0/TCP (webhook)
+- Ports: 9443/TCP (webhook)
 - Env: `ETCD_SECRET_NAME=model-serving-etcd`
 
 **template-value-template-value / mm**
@@ -97,7 +97,7 @@
 **template-value-template-value / oauth-proxy**
 
 - Args: `--https-address=:8443 --provider=openshift --openshift-service-account="template-value" --upstream=http://localhost:8008 --tls-cert=/etc/tls/private/tls.crt --tls-key=/etc/tls/private/tls.key --cookie-secret=SECRET --openshift-delegate-urls={"/": {"namespace": "template-value", "resource": "services", "verb": "get"}} --openshift-sar={"namespace": "template-value", "resource": "services", "verb": "get"} --skip-auth-regex='(^/metrics|^/apis/v1beta1/healthz)'`
-- Ports: 0/TCP (https)
+- Ports: 8443/TCP (https)
 
 
 

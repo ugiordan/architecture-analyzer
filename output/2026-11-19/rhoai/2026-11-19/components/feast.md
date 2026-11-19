@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/feast](https://github.com/red-hat-data-services/feast) |
 | Commit | [83f1abc148a9ffe3a698bff0bdf744dded4510bc](https://github.com/red-hat-data-services/feast/commit/83f1abc148a9ffe3a698bff0bdf744dded4510bc) |
-| Extracted | 2026-11-19T06:59:25Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:53:35Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

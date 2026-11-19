@@ -2,8 +2,8 @@
   "component": "trainer",
   "repo": "opendatahub-io/trainer",
   "commit_sha": "4d33029fab07032c092abfaf09def5f1c1e20da2",
-  "extracted_at": "2026-11-19T06:52:08Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:46:17Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -20,8 +20,15 @@
       ],
       "fields_count": 1307,
       "validation_rules": [
+        "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
+        "self \u003e= 1",
+        "self \u003e= 1",
+        "!self.exists(c, c == 'node')",
+        "(has(self.coscheduling)?1:0)+(has(self.volcano)?1:0) \u003c= 1",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
         "self == oldSelf",
+        "self == oldSelf",
+        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
@@ -31,14 +38,7 @@
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
-        "self == oldSelf",
-        "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
-        "self == oldSelf",
-        "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
-        "self \u003e= 1",
-        "self \u003e= 1",
-        "!self.exists(c, c == 'node')",
-        "(has(self.coscheduling)?1:0)+(has(self.volcano)?1:0) \u003c= 1"
+        "self == oldSelf"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_clustertrainingruntimes.yaml"
     },
@@ -60,8 +60,12 @@
         "self == oldSelf",
         "self.parallelTrials \u003c= self.numTrials",
         "!has(self.searchAlgorithm.grid) || self.parameters.all(p, has(p.searchSpace.categorical))",
+        "(has(self.uniform)?1:0)+(has(self.logUniform)?1:0)+(has(self.categorical)?1:0) == 1",
+        "double(self.min) \u003e 0.0",
+        "double(self.min) \u003c double(self.max)",
+        "double(self.min) \u003c double(self.max)",
+        "(has(self.random)?1:0)+(has(self.grid)?1:0) == 1",
         "!has(self.name) \u0026\u0026 !has(self.namespace)",
-        "self == oldSelf",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
         "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
         "self in ['trainer.kubeflow.org/trainjob-controller', 'kueue.x-k8s.io/multikueue']",
@@ -72,11 +76,7 @@
         "self == oldSelf",
         "self \u003e= 1",
         "!has(self.claims) || size(self.claims) == 0",
-        "(has(self.uniform)?1:0)+(has(self.logUniform)?1:0)+(has(self.categorical)?1:0) == 1",
-        "double(self.min) \u003e 0.0",
-        "double(self.min) \u003c double(self.max)",
-        "double(self.min) \u003c double(self.max)",
-        "(has(self.random)?1:0)+(has(self.grid)?1:0) == 1"
+        "self == oldSelf"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_optimizationjobs.yaml",
       "go_source": "go_ast_enriched"
@@ -98,16 +98,16 @@
         "self.metadata.name.matches('^[a-z]([-a-z0-9]*[a-z0-9])?$')",
         "size(self.metadata.name) \u003c= 63",
         "self == oldSelf",
-        "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
-        "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
-        "self in ['trainer.kubeflow.org/trainjob-controller', 'kueue.x-k8s.io/multikueue']",
-        "self == oldSelf",
-        "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
         "self \u003e= 1",
         "!has(self.claims) || size(self.claims) == 0",
+        "self == oldSelf",
+        "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
+        "self == '' || self.matches('^[A-Za-z][A-Za-z0-9+.-]*://.+$')",
+        "self in ['trainer.kubeflow.org/trainjob-controller', 'kueue.x-k8s.io/multikueue']",
+        "self == oldSelf",
         "has(self.lastUpdatedTime)"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_trainjobs.yaml"
@@ -126,14 +126,8 @@
       ],
       "fields_count": 1307,
       "validation_rules": [
-        "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
-        "self \u003e= 1",
-        "self \u003e= 1",
-        "!self.exists(c, c == 'node')",
         "(has(self.coscheduling)?1:0)+(has(self.volcano)?1:0) \u003c= 1",
         "!(has(self.startupPolicy) \u0026\u0026 self.startupPolicy.startupPolicyOrder == 'InOrder' \u0026\u0026 self.replicatedJobs.exists(x, has(x.dependsOn)))",
-        "self == oldSelf",
-        "self == oldSelf",
         "self == oldSelf",
         "!has(oldSelf.schedulingConstraints) || has(self.schedulingConstraints)",
         "!has(oldSelf.disruptionMode) || has(self.disruptionMode)",
@@ -142,9 +136,15 @@
         "self == oldSelf",
         "self == oldSelf",
         "self == oldSelf",
+        "self == oldSelf",
         "self.templates.all(t, !has(t.metadata.namespace) || size(t.metadata.namespace) == 0)",
         "self == oldSelf",
-        "self == oldSelf"
+        "self == oldSelf",
+        "self == oldSelf",
+        "[has(self.torch), has(self.mpi), has(self.jax), has(self.xgboost),has(self.flux)].filter(x, x).size() \u003c= 1",
+        "self \u003e= 1",
+        "self \u003e= 1",
+        "!self.exists(c, c == 'node')"
       ],
       "source": "manifests/base/crds/trainer.kubeflow.org_trainingruntimes.yaml"
     }

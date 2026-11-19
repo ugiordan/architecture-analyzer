@@ -5,8 +5,8 @@
   ],
   "repo": "red-hat-data-services/model-registry-operator",
   "commit_sha": "adb3362dd2bfe315e4e4a39917cc45b57651e796",
-  "extracted_at": "2026-11-19T06:52:27Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:46:38Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -29,11 +29,11 @@
       "fields_count": 113,
       "validation_rules": [
         "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
+        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
+        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
         "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
         "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
-        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
-        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
+        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
       ],
       "source": "config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml"
     }

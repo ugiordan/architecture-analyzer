@@ -2,8 +2,8 @@
   "component": "spark-operator",
   "repo": "red-hat-data-services/spark-operator",
   "commit_sha": "21113b917528bae08f74c7aa20c510639b102af1",
-  "extracted_at": "2026-11-19T06:54:15Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:49:16Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -7138,17 +7138,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml",
-      "field": "spec.template.imagePullPolicy",
+      "field": "spec.template.executor.image",
       "crd_kind": "ScheduledSparkApplication",
-      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml",
-      "field": "spec.template.driver.image",
-      "crd_kind": "ScheduledSparkApplication",
-      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.driver.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.executor.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -7162,9 +7154,17 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml",
-      "field": "spec.template.executor.image",
+      "field": "spec.template.driver.image",
       "crd_kind": "ScheduledSparkApplication",
-      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.executor.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.driver.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/sparkoperator.k8s.io_scheduledsparkapplications.yaml",
+      "field": "spec.template.imagePullPolicy",
+      "crd_kind": "ScheduledSparkApplication",
+      "description": "CRD ScheduledSparkApplication has user-settable image field \"spec.template.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -7178,9 +7178,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
-      "field": "spec.image",
+      "field": "spec.imagePullPolicy",
       "crd_kind": "SparkApplication",
-      "description": "CRD SparkApplication has user-settable image field \"spec.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD SparkApplication has user-settable image field \"spec.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -7194,9 +7194,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/sparkoperator.k8s.io_sparkapplications.yaml",
-      "field": "spec.imagePullPolicy",
+      "field": "spec.image",
       "crd_kind": "SparkApplication",
-      "description": "CRD SparkApplication has user-settable image field \"spec.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD SparkApplication has user-settable image field \"spec.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

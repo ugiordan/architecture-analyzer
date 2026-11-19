@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/praxis-extproc](https://github.com/opendatahub-io/praxis-extproc) |
 | Commit | [814a177260f1d3ce5f2e62f5cdfd8c7c532ea710](https://github.com/opendatahub-io/praxis-extproc/commit/814a177260f1d3ce5f2e62f5cdfd8c7c532ea710) |
-| Extracted | 2026-11-19T06:57:20Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:51:38Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -26,7 +26,7 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| payload-processing |  | 0 | 0 |
+| payload-processing | (all pods) | 2 | 2 |
 
 
 ## Deployments
@@ -40,7 +40,7 @@
 **payload-processing / payload-processing**
 
 - Args: `-c /etc/praxis/extproc.yaml`
-- Ports: 0/TCP (grpc), 0/TCP (health), 0/TCP (metrics)
+- Ports: 9004/TCP (grpc), 50052/TCP (health), 9090/TCP (metrics)
 
 
 

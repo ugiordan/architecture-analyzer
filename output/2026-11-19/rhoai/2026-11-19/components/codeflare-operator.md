@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/codeflare-operator](https://github.com/red-hat-data-services/codeflare-operator) |
 | Aliases | CodeFlare operator |
 | Commit | [f89edd9f015da4b1f466a7fe0b7a164b7da6c7c9](https://github.com/red-hat-data-services/codeflare-operator/commit/f89edd9f015da4b1f466a7fe0b7a164b7da6c7c9) |
-| Extracted | 2026-11-19T06:54:05Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:47:00Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -72,12 +72,12 @@
 
 **manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **manager / manager**
 
 - Command: `/manager`
-- Ports: 0/TCP (metrics)
+- Ports: 8080/TCP (metrics)
 
 
 

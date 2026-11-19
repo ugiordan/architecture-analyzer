@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/spark-operator](https://github.com/opendatahub-io/spark-operator) |
 | Commit | [9316dbddd8cbd3afa88ecc48ef80fd63163eef19](https://github.com/opendatahub-io/spark-operator/commit/9316dbddd8cbd3afa88ecc48ef80fd63163eef19) |
-| Extracted | 2026-11-19T06:52:01Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:15Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -60,10 +60,10 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| spark-operator-allow-egress |  | 0 | 0 |
-| spark-operator-allow-internal |  | 0 | 0 |
-| spark-operator-allow-metrics |  | 0 | 0 |
-| spark-operator-allow-webhook |  | 0 | 0 |
+| spark-operator-allow-egress | app.kubernetes.io/name=spark-operator | 0 | 1 |
+| spark-operator-allow-internal | sparkoperator.k8s.io/launched-by-spark-operator=true | 2 | 0 |
+| spark-operator-allow-metrics | app.kubernetes.io/name=spark-operator | 2 | 0 |
+| spark-operator-allow-webhook | app.kubernetes.io/name=spark-operator | 1 | 0 |
 
 
 ## Deployments
@@ -79,11 +79,11 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **spark-operator-controller / controller**
 
-- Ports: 0/TCP (metrics)
+- Ports: 8080/TCP (metrics)
 
 **spark-operator-module-controller-manager / manager**
 
@@ -92,7 +92,7 @@
 
 **spark-operator-webhook / webhook**
 
-- Ports: 0/TCP (webhook), 0/TCP (metrics)
+- Ports: 9443/TCP (webhook), 8080/TCP (metrics)
 
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/kueue](https://github.com/red-hat-data-services/kueue) |
 | Commit | [7a7e1286c12d1ea05a4f1d17ea6c99a0945fc2cf](https://github.com/red-hat-data-services/kueue/commit/7a7e1286c12d1ea05a4f1d17ea6c99a0945fc2cf) |
-| Extracted | 2026-11-19T06:56:41Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:51:09Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -29,26 +29,26 @@
 |------|------|-----------|------------|----------|------------------|----------|
 | AppWrapper-webhook | validating |  |  |  |  |  |
 | AppWrapper-webhook | mutating |  |  |  |  |  |
-| ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
+| ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | mutating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
-| JobWebhook-webhook | validating |  |  |  |  |  |
 | JobWebhook-webhook | mutating |  |  |  |  |  |
-| MpiJobWebhook-webhook | mutating |  |  |  |  |  |
+| JobWebhook-webhook | validating |  |  |  |  |  |
 | MpiJobWebhook-webhook | validating |  |  |  |  |  |
+| MpiJobWebhook-webhook | mutating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
-| RayClusterWebhook-webhook | validating |  |  |  |  |  |
 | RayClusterWebhook-webhook | mutating |  |  |  |  |  |
+| RayClusterWebhook-webhook | validating |  |  |  |  |  |
 | RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | validating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
@@ -56,9 +56,9 @@
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
-| Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
+| Webhook-webhook | mutating |  |  |  |  |  |
 | WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | mutating |  |  |  |  |  |
 | mdeployment.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/red-hat-data-services/kueue/blob/7a7e1286c12d1ea05a4f1d17ea6c99a0945fc2cf/config/rhoai/mutating_webhook_patch.yaml) |
@@ -170,7 +170,7 @@
 **controller-manager / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:8443 --upstream=http://127.0.0.1:8080/ --logtostderr=true --v=10`
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **controller-manager / manager**
 
@@ -178,15 +178,15 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (visibility)
+- Ports: 8082/TCP (visibility)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
@@ -198,11 +198,11 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (metrics), 0/TCP (https-metrics)
+- Ports: 8080/TCP (metrics), 8443/TCP (https-metrics)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 
 

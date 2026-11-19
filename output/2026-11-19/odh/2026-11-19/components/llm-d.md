@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [llm-d/llm-d](https://github.com/llm-d/llm-d) |
 | Commit | [fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03](https://github.com/llm-d/llm-d/commit/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03) |
-| Extracted | 2026-11-19T06:58:00Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:52:11Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -63,7 +63,7 @@
 **fma-requester / requester**
 
 - Args: `--proxy-port=8000`
-- Ports: 0/TCP (probes), 0/TCP (admin), 0/TCP (proxy)
+- Ports: 8080/TCP (probes), 8081/TCP (admin), 8000/TCP (proxy)
 
 **interactive-pod / benchmark-runner**
 
@@ -72,26 +72,26 @@
 **llm-d-coordinator / coordinator**
 
 - Args: `--config /etc/coordinator/coordinator.yaml`
-- Ports: 0/TCP (http), 0/TCP (metrics)
+- Ports: 8080/TCP (http), 9090/TCP (metrics)
 - Env: `GOMAXPROCS=16`, `GOMEMLIMIT=28800MiB`
 
 **mooncake-master-store / mooncake-master-store**
 
 - Command: `mooncake_master`
 - Args: `--config_path=/etc/mooncake/master.yaml --enable_offload`
-- Ports: 0/TCP (rpc), 0/TCP (metrics), 0/TCP (metadata)
+- Ports: 50051/TCP (rpc), 9003/TCP (metrics), 8080/TCP (metadata)
 
 **render / vllm-render**
 
 - Command: `vllm launch render`
 - Args: `openai/gpt-oss-120b --port=8000`
-- Ports: 0/TCP (render-http)
+- Ports: 8000/TCP (render-http)
 
 **render / vllm-render**
 
 - Command: `vllm launch render`
 - Args: `Qwen/Qwen3-32B --port=8000`
-- Ports: 0/TCP (render-http)
+- Ports: 8000/TCP (render-http)
 
 
 

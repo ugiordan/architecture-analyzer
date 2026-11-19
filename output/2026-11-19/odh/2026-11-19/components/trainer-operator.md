@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/trainer-operator](https://github.com/opendatahub-io/trainer-operator) |
 | Aliases | Trainer operator, Kubeflow Trainer operator |
 | Commit | [4de61eec63c10b9144fb82e75fe8469eb039b73c](https://github.com/opendatahub-io/trainer-operator/commit/4de61eec63c10b9144fb82e75fe8469eb039b73c) |
-| Extracted | 2026-11-19T06:52:06Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:21Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -27,8 +27,8 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| kubeflow-trainer-controller-manager |  | 0 | 0 |
-| kubeflow-trainer-controller-manager-egress |  | 0 | 0 |
+| kubeflow-trainer-controller-manager | app.kubernetes.io/component=manager, app.kubernetes.io/name=trainer, app.kubernetes.io/part-of=kubeflow | 3 | 0 |
+| kubeflow-trainer-controller-manager-egress | app.kubernetes.io/component=manager, app.kubernetes.io/name=trainer, app.kubernetes.io/part-of=kubeflow | 0 | 1 |
 
 
 ## Deployments
@@ -46,11 +46,11 @@
 
 - Command: `/manager`
 - Args: `--health-probe-bind-address=:8081 --metrics-bind-address=:8443 --metrics-secure=true --zap-log-level=info`
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **kubeflow-trainer-controller-manager / manager**
 
-- Ports: 0/TCP (health), 0/TCP (metrics), 0/TCP (webhook), 0/TCP (status-server)
+- Ports: 8081/TCP (health), 8443/TCP (metrics), 9443/TCP (webhook), 10443/TCP (status-server)
 
 **kubeflow-trainer-controller-manager / manager**
 

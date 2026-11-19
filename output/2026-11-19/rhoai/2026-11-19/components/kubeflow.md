@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/kubeflow](https://github.com/red-hat-data-services/kubeflow) |
 | Commit | [330326dff961133b956010a26aa60cb422fd71e8](https://github.com/red-hat-data-services/kubeflow/commit/330326dff961133b956010a26aa60cb422fd71e8) |
-| Extracted | 2026-11-19T06:52:00Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:10Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -36,8 +36,8 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| notebook-controller-allow-ports |  | 0 | 0 |
-| odh-notebook-controller-allow-ports |  | 0 | 0 |
+| notebook-controller-allow-ports | app=notebook-controller | 2 | 1 |
+| odh-notebook-controller-allow-ports | app=odh-notebook-controller | 3 | 1 |
 
 
 ## Deployments
@@ -59,7 +59,7 @@
 **controller-manager / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:8443 --upstream=http://127.0.0.1:8080/ --logtostderr=true --v=0`
-- Ports: 0/TCP (https)
+- Ports: 8443/TCP (https)
 
 **controller-manager / manager**
 
@@ -67,11 +67,11 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (metrics)
+- Ports: 8080/TCP (metrics)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 443/TCP (webhook-server)
 
 **deployment / manager**
 
@@ -80,18 +80,18 @@
 **deployment / manager**
 
 - Args: `--metrics-cert-path=/etc/metrics-certs`
-- Ports: 0/TCP (nbc-metrics)
+- Ports: 8443/TCP (nbc-metrics)
 
 **manager / manager**
 
 - Command: `/manager`
 - Args: `--kube-rbac-proxy-image kube-rbac-proxy_PLACEHOLDER`
-- Ports: 0/TCP (metrics), 0/TCP (health)
+- Ports: 8080/TCP (metrics), 8081/TCP (health)
 - Env: `GOMEMLIMIT=3600MiB`
 
 **manager / manager**
 
-- Ports: 0/TCP (metrics)
+- Ports: 8080/TCP (metrics)
 
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/distributed-workloads](https://github.com/red-hat-data-services/distributed-workloads) |
 | Commit | [857d7fd23f7f171a7c61debf8afb9b0c78b23606](https://github.com/red-hat-data-services/distributed-workloads/commit/857d7fd23f7f171a7c61debf8afb9b0c78b23606) |
-| Extracted | 2026-11-19T06:56:31Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:50:41Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

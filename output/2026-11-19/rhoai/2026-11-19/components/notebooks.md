@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/notebooks](https://github.com/red-hat-data-services/notebooks) |
 | Commit | [c767850ab40a45b9b445a7a48f30145915d4608f](https://github.com/red-hat-data-services/notebooks/commit/c767850ab40a45b9b445a7a48f30145915d4608f) |
-| Extracted | 2026-11-19T06:53:57Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:24Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -44,31 +44,31 @@
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 
 

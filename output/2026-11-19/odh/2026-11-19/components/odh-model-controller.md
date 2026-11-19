@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/odh-model-controller](https://github.com/opendatahub-io/odh-model-controller) |
 | Aliases | ODH Model Controller, omc |
 | Commit | [00341ee674bba659822135b5f6a05c70abd3a861](https://github.com/opendatahub-io/odh-model-controller/commit/00341ee674bba659822135b5f6a05c70abd3a861) |
-| Extracted | 2026-11-19T06:52:14Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:26Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -82,7 +82,7 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| odh-model-controller-webhook-allow-ingress |  | 0 | 0 |
+| odh-model-controller-webhook-allow-ingress | control-plane=odh-model-controller | 1 | 0 |
 
 
 ## Deployments
@@ -96,12 +96,12 @@
 
 **model-serving-api / server**
 
-- Ports: 0/TCP (https), 0/TCP (metrics)
+- Ports: 8443/TCP (https), 8080/TCP (metrics)
 - Env: `TLS_CERT_DIR=/tls`
 
 **odh-model-controller / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 - Env: `GOMEMLIMIT=1800MiB`, `KSERVE_STATE=managed`, `MODELREGISTRY_STATE=removed`, `NIM_STATE=managed`
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/text-generation-inference](https://github.com/red-hat-data-services/text-generation-inference) |
 | Commit | [fded01861025fff09ba5f9a49cda710fcfd3ca93](https://github.com/red-hat-data-services/text-generation-inference/commit/fded01861025fff09ba5f9a49cda710fcfd3ca93) |
-| Extracted | 2026-11-19T06:58:53Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:53:02Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -32,7 +32,7 @@
 
 **inference-server / server**
 
-- Ports: 0/TCP (http), 0/TCP (grpc)
+- Ports: 3000/TCP (http), 8033/TCP (grpc)
 
 
 

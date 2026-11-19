@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/opendatahub-operator](https://github.com/opendatahub-io/opendatahub-operator) |
 | Aliases | ODH operator, odh-operator |
 | Commit | [b68a6fb48734ef7d2de91a1383c34bf68c47499a](https://github.com/opendatahub-io/opendatahub-operator/commit/b68a6fb48734ef7d2de91a1383c34bf68c47499a) |
-| Extracted | 2026-11-19T06:52:00Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:22Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -37,14 +37,14 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| instancesNamespace | set | aiHub.ManagementState == operatorv1.Managed &amp;&amp; aiHub.InstancesNamespace == "" |
+| registriesNamespace | set | modelRegistry.ManagementState == operatorv1.Managed &amp;&amp; modelRegistry.RegistriesNamespace == "" |
 | nim.managementState | set | kserve.ManagementState == operatorv1.Managed &amp;&amp; kserve.NIM.ManagementState == "" |
 
 ### Defaulter-webhook Behavior
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
-| registriesNamespace | set | modelRegistry.ManagementState == operatorv1.Managed &amp;&amp; modelRegistry.RegistriesNamespace == "" |
+| instancesNamespace | set | aiHub.ManagementState == operatorv1.Managed &amp;&amp; aiHub.InstancesNamespace == "" |
 | nim.managementState | set | kserve.ManagementState == operatorv1.Managed &amp;&amp; kserve.NIM.ManagementState == "" |
 
 
@@ -61,8 +61,8 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| deny-all-cascade-test |  | 0 | 0 |
-| dscInit.Spec.ApplicationsNamespace |  | 0 | 0 |
+| deny-all-cascade-test | (all pods) | 0 | 0 |
+| dscInit.Spec.ApplicationsNamespace | (all pods) | 6 | 0 |
 
 
 ## Deployments
@@ -98,17 +98,17 @@
 
 - Command: `/cloudmanager`
 - Args: `aws --health-probe-bind-address=:8081 --metrics-bind-address=0.0.0.0:8080 --leader-elect`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 **azure-cloud-manager-operator / manager**
 
 - Command: `/cloudmanager`
 - Args: `azure --health-probe-bind-address=:8081 --metrics-bind-address=0.0.0.0:8080 --leader-elect`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
@@ -116,7 +116,7 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
@@ -126,13 +126,13 @@
 
 - Command: `/manager`
 - Args: `--leader-elect --operator-name=opendatahub`
-- Ports: 0/TCP (https)
+- Ports: 8443/TCP (https)
 
 **coreweave-cloud-manager-operator / manager**
 
 - Command: `/cloudmanager`
 - Args: `coreweave --health-probe-bind-address=:8081 --metrics-bind-address=0.0.0.0:8080 --leader-elect`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 **rhods-operator / rhods-operator**
 
@@ -140,7 +140,7 @@
 
 **rhods-operator / rhods-operator**
 
-- Ports: 0/TCP (webhook-server), 0/TCP (http)
+- Ports: 9443/TCP (webhook-server), 8080/TCP (http)
 
 **rhods-operator / rhods-operator**
 
@@ -148,7 +148,7 @@
 
 **rhods-operator / rhods-operator**
 
-- Ports: 0/TCP (webhook-server), 0/TCP (https)
+- Ports: 9443/TCP (webhook-server), 8443/TCP (https)
 
 **rhods-operator / rhods-operator**
 

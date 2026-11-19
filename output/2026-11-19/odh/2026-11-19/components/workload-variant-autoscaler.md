@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/workload-variant-autoscaler](https://github.com/opendatahub-io/workload-variant-autoscaler) |
 | Commit | [a73864b62974986d2000e5bcbb235fe101cc2556](https://github.com/opendatahub-io/workload-variant-autoscaler/commit/a73864b62974986d2000e5bcbb235fe101cc2556) |
-| Extracted | 2026-11-19T06:56:56Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:51:15Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -35,7 +35,7 @@
 
 - Command: `/manager`
 - Args: `--leader-elect=true --health-probe-bind-address=:8081 --config-file=/etc/wva/config.yaml --metrics-bind-address=:8443 --metrics-secure=true`
-- Ports: 0/TCP (healthz), 0/TCP (https)
+- Ports: 8081/TCP (healthz), 8443/TCP (https)
 
 
 

@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/codeflare-operator](https://github.com/opendatahub-io/codeflare-operator) |
 | Aliases | CodeFlare operator |
 | Commit | [fb0d403419a114d26adcf65215b6a89e723667d8](https://github.com/opendatahub-io/codeflare-operator/commit/fb0d403419a114d26adcf65215b6a89e723667d8) |
-| Extracted | 2026-11-19T06:52:06Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:18Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -72,12 +72,12 @@
 
 **manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **manager / manager**
 
 - Command: `/manager`
-- Ports: 0/TCP (metrics)
+- Ports: 8080/TCP (metrics)
 
 
 

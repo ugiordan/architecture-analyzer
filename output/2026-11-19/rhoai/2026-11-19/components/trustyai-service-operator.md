@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/trustyai-service-operator](https://github.com/red-hat-data-services/trustyai-service-operator) |
 | Aliases | TrustyAI operator |
 | Commit | [ad4777b7d5561ff1e5c14d459a61b4616a768c33](https://github.com/red-hat-data-services/trustyai-service-operator/commit/ad4777b7d5561ff1e5c14d459a61b4616a768c33) |
-| Extracted | 2026-11-19T06:54:45Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:23Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -40,9 +40,9 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| controller-manager-allow-traffic |  | 0 | 0 |
-| trustyai-service-operator-controller-manager-allow-egress |  | 0 | 0 |
-| trustyai-service-operator-controller-manager-allow-ports |  | 0 | 0 |
+| controller-manager-allow-traffic | app.kubernetes.io/name=trustyai-operator-module, control-plane=controller-manager | 1 | 1 |
+| trustyai-service-operator-controller-manager-allow-egress | app.kubernetes.io/part-of=trustyai, app.opendatahub.io/trustyai=true, control-plane=trustyai-service-operator | 0 | 1 |
+| trustyai-service-operator-controller-manager-allow-ports | app.kubernetes.io/part-of=trustyai, app.opendatahub.io/trustyai=true, control-plane=trustyai-service-operator | 3 | 0 |
 
 
 ## Deployments
@@ -55,8 +55,8 @@
 
 **trustyai-service-operator-controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
-- Env: `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE=quay.io/evalhub/community-inspect:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE=quay.io/evalhub/community-lighteval:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`, `GOMEMLIMIT=630MiB`
+- Ports: 9443/TCP (webhook-server)
+- Env: `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE=quay.io/evalhub/community-inspect:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE=quay.io/evalhub/community-lighteval:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`
 
 
 

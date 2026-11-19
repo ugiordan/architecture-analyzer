@@ -2,8 +2,8 @@
   "component": "mlflow-operator",
   "repo": "opendatahub-io/mlflow-operator",
   "commit_sha": "518de9f9c6caa1c54f7e32456377e70ece7166a2",
-  "extracted_at": "2026-11-19T06:52:05Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:46:16Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -39,9 +39,9 @@
       "fields_count": 6,
       "validation_rules": [
         "self.metadata.name == 'mlflow'",
-        "self == 'mlflow-artifact-connection'",
         "self == '' || !self.startsWith('/')",
-        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')"
+        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')",
+        "self == 'mlflow-artifact-connection'"
       ],
       "source": "config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml"
     },
@@ -98,8 +98,8 @@
         "!has(oldSelf.storage) || (has(self.storage) \u0026\u0026 ((!has(oldSelf.storage.accessModes) \u0026\u0026 (!has(self.storage.accessModes) || self.storage.accessModes == ['ReadWriteOnce'])) || (has(oldSelf.storage.accessModes) \u0026\u0026 has(self.storage.accessModes) \u0026\u0026 self.storage.accessModes == oldSelf.storage.accessModes)))",
         "self.all(key, size(self[key]) \u003c= 63)",
         "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
-        "self.all(key, size(self[key]) \u003c= 63)",
-        "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))"
+        "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
+        "self.all(key, size(self[key]) \u003c= 63)"
       ],
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml"
     }

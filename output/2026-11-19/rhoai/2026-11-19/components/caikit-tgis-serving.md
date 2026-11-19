@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/caikit-tgis-serving](https://github.com/red-hat-data-services/caikit-tgis-serving) |
 | Commit | [c5b14ab09bdaef448b90ff3a70a0472f11d9b27e](https://github.com/red-hat-data-services/caikit-tgis-serving/commit/c5b14ab09bdaef448b90ff3a70a0472f11d9b27e) |
-| Extracted | 2026-11-19T06:58:35Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:52:43Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -27,7 +27,7 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| allow-from-openshift-monitoring-ns |  | 0 | 0 |
+| allow-from-openshift-monitoring-ns | (all pods) | 1 | 0 |
 
 
 ## Dependencies

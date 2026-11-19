@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/mcp-lifecycle-module-operator](https://github.com/opendatahub-io/mcp-lifecycle-module-operator) |
 | Aliases | MCP Lifecycle Module operator, MCP Lifecycle operator |
 | Commit | [0e65149c890dbcb64765bf8cb4b76e19ca5a6d13](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/commit/0e65149c890dbcb64765bf8cb4b76e19ca5a6d13) |
-| Extracted | 2026-11-19T06:52:06Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:16Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -54,17 +54,17 @@
 
 - Command: `/manager`
 - Args: `--leader-elect --health-probe-bind-address=:8081`
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 - Env: `GOMEMLIMIT=482344960`
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
 - Args: `--leader-elect --health-probe-bind-address=:8081 --enable-webhook`
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 

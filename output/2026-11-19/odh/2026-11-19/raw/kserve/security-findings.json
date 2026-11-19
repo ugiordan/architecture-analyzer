@@ -1540,7 +1540,7 @@
   {
     "rule_id": "CGA-010",
     "severity": "medium",
-    "message": "Security-sensitive function Reconcile has high cyclomatic complexity (28), increasing review difficulty",
+    "message": "Security-sensitive function Reconcile has high cyclomatic complexity (29), increasing review difficulty",
     "file": "kserve-module/pkg/kservemodule/reconciler.go",
     "line": 180,
     "node_id": "fn_03be291e89c1757d",
@@ -1560,8 +1560,8 @@
     "severity": "medium",
     "message": "Security-sensitive function SetupWithManager has high cyclomatic complexity (11), increasing review difficulty",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 163,
-    "node_id": "fn_cabb52b6ee2444eb",
+    "line": 166,
+    "node_id": "fn_aff95ea93a446ebe",
     "domain": "security"
   },
   {
@@ -1578,8 +1578,8 @@
     "severity": "medium",
     "message": "Security-sensitive function attachHardwareProfileToInferenceServices has high cyclomatic complexity (22), increasing review difficulty",
     "file": "kserve-module/pkg/kservemodule/upgrade.go",
-    "line": 466,
-    "node_id": "fn_42fd761e704f1a42",
+    "line": 470,
+    "node_id": "fn_b092eb650ade4d79",
     "domain": "security"
   },
   {
@@ -1587,8 +1587,8 @@
     "severity": "medium",
     "message": "Security-sensitive function setHWPAnnotation has high cyclomatic complexity (11), increasing review difficulty",
     "file": "kserve-module/pkg/kservemodule/upgrade.go",
-    "line": 822,
-    "node_id": "fn_c1c654b0ae302237",
+    "line": 826,
+    "node_id": "fn_c6fffd20a48b8db6",
     "domain": "security"
   },
   {
@@ -2629,190 +2629,199 @@
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: platformv1alpha1.GroupVersion.String at kserve-module/pkg/kservemodule/ocsf_audit.go:222 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: platformv1alpha1.GroupVersion.String at kserve-module/pkg/kservemodule/ocsf_audit.go:345 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit.go",
-    "line": 222,
-    "node_id": "call_86a84048c482f8cd",
+    "line": 345,
+    "node_id": "call_2e5d879f3c61fc57",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: platformv1alpha1.GroupVersion.String at kserve-module/pkg/kservemodule/ocsf_audit.go:303 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: platformv1alpha1.GroupVersion.String at kserve-module/pkg/kservemodule/ocsf_audit.go:426 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit.go",
-    "line": 303,
-    "node_id": "call_d38e3b860b44955c",
+    "line": 426,
+    "node_id": "call_d22ff1789fb0978a",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata(\n\t\t\t\u0026apiextensionsv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(r.crdWatchPredicate()),\n\t\t).\n\t\tWatches(\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetName() == platformVersionConfigMap \u0026\u0026\n\t\t\t\t\to.GetNamespace() == r.getApplicationsNamespace()\n\t\t\t})),\n\t\t).\n\t\t// Watch Nodes so that newly added or relabeled nodes trigger\n\t\t// reconciliation of labelModelCacheNodes, and so a node gaining or losing an\n\t\t// accelerator in status.allocatable re-renders hardware-aware presets.\n\t\tWatches(\u0026corev1.Node{}, handler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(predicate.Or(\n\t\t\t\tpredicate.GenerationChangedPredicate{},\n\t\t\t\tpredicate.LabelChangedPredicate{},\n\t\t\t\tnodeAllocatableChangedPredicate(),\n\t\t\t)),\n\t\t).\n\t\tWatches at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata(\n\t\t\t\u0026apiextensionsv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(r.crdWatchPredicate()),\n\t\t).\n\t\tWatches(\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetName() == platformVersionConfigMap \u0026\u0026\n\t\t\t\t\to.GetNamespace() == r.getApplicationsNamespace()\n\t\t\t})),\n\t\t).\n\t\t// Watch Nodes so that newly added or relabeled nodes trigger\n\t\t// reconciliation of labelModelCacheNodes, and so a node gaining or losing an\n\t\t// accelerator in status.allocatable re-renders hardware-aware presets.\n\t\tWatches(\u0026corev1.Node{}, handler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(predicate.Or(\n\t\t\t\tpredicate.GenerationChangedPredicate{},\n\t\t\t\tpredicate.LabelChangedPredicate{},\n\t\t\t\tnodeAllocatableChangedPredicate(),\n\t\t\t)),\n\t\t).\n\t\tWatches at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_52ab901bc2b96c5a",
+    "line": 185,
+    "node_id": "call_808189bf11fa848f",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata(\n\t\t\t\u0026apiextensionsv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(r.crdWatchPredicate()),\n\t\t).\n\t\tWatches(\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetName() == platformVersionConfigMap \u0026\u0026\n\t\t\t\t\to.GetNamespace() == r.getApplicationsNamespace()\n\t\t\t})),\n\t\t).\n\t\t// Watch Nodes so that newly added or relabeled nodes trigger\n\t\t// reconciliation of labelModelCacheNodes, and so a node gaining or losing an\n\t\t// accelerator in status.allocatable re-renders hardware-aware presets.\n\t\tWatches at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata(\n\t\t\t\u0026apiextensionsv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(r.crdWatchPredicate()),\n\t\t).\n\t\tWatches(\u0026corev1.ConfigMap{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(predicate.NewPredicateFuncs(func(o client.Object) bool {\n\t\t\t\treturn o.GetName() == platformVersionConfigMap \u0026\u0026\n\t\t\t\t\to.GetNamespace() == r.getApplicationsNamespace()\n\t\t\t})),\n\t\t).\n\t\t// Watch Nodes so that newly added or relabeled nodes trigger\n\t\t// reconciliation of labelModelCacheNodes, and so a node gaining or losing an\n\t\t// accelerator in status.allocatable re-renders hardware-aware presets.\n\t\tWatches at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_794473d42b9ec0b6",
+    "line": 185,
+    "node_id": "call_9aa6ebf5a8859b27",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata(\n\t\t\t\u0026apiextensionsv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(r.crdWatchPredicate()),\n\t\t).\n\t\tWatches at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata(\n\t\t\t\u0026apiextensionsv1.CustomResourceDefinition{},\n\t\t\thandler.EnqueueRequestsFromMapFunc(mapToKserve),\n\t\t\tbuilder.WithPredicates(r.crdWatchPredicate()),\n\t\t).\n\t\tWatches at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_a45d29246b01d81f",
+    "line": 185,
+    "node_id": "call_77f4dedbc15738c0",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns(\u0026admissionregistrationv1.ValidatingWebhookConfiguration{}).\n\t\tWatchesMetadata at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_4093b3db716e97ac",
+    "line": 185,
+    "node_id": "call_fe98244ec26c4615",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns(\u0026admissionregistrationv1.MutatingWebhookConfiguration{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_9fbd7710d478304d",
+    "line": 185,
+    "node_id": "call_2a9d91aa3aacbf13",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns(\u0026rbacv1.ClusterRoleBinding{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_61dd26c723929c05",
+    "line": 185,
+    "node_id": "call_ec641c32e1d380e0",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns(\u0026rbacv1.ClusterRole{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_21bb8176b2fd7acb",
+    "line": 185,
+    "node_id": "call_3c8a007a24dcfb07",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns(\u0026rbacv1.RoleBinding{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_dc17664b56017a4a",
+    "line": 185,
+    "node_id": "call_d67c1bd33fe919b0",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns(\u0026rbacv1.Role{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_f83ba5650e76d3d3",
+    "line": 185,
+    "node_id": "call_b07dad1534af22a3",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns(\u0026networkingv1.NetworkPolicy{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_a97bc809c5e85d01",
+    "line": 185,
+    "node_id": "call_f48df3bd82becf47",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns(\u0026appsv1.DaemonSet{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_7ecf8b30793a9206",
+    "line": 185,
+    "node_id": "call_8273a3fe0fc1f080",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns(\u0026appsv1.Deployment{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_239b5c08373a0d16",
+    "line": 185,
+    "node_id": "call_fb0f570d1b9fd899",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns(\u0026corev1.PersistentVolumeClaim{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_a0996af3feaebe2a",
+    "line": 185,
+    "node_id": "call_ad87fecdb1ac095f",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns(\u0026corev1.PersistentVolume{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_20577822a3fbcacd",
+    "line": 185,
+    "node_id": "call_256552d975489261",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns(\u0026corev1.ServiceAccount{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_f31f7d05c16746a8",
+    "line": 185,
+    "node_id": "call_56d2b070d6570893",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns(\u0026corev1.Service{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_d9542cdfd6e1b4ae",
+    "line": 185,
+    "node_id": "call_83503a8a013f8f18",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns(\u0026corev1.Secret{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_ac3df2acf2f47b10",
+    "line": 185,
+    "node_id": "call_ea3e7e03556ad1ca",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns(\u0026corev1.ConfigMap{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_b09a7844a0cd0d2c",
+    "line": 185,
+    "node_id": "call_b235fbacef1fbd94",
     "domain": "upgrade"
   },
   {
     "rule_id": "CGA-U02",
     "severity": "low",
-    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:182 (v1alpha1/v1beta1 may change between versions)",
+    "message": "Pre-release API usage: ctrl.NewControllerManagedBy(mgr).\n\t\tFor(\u0026platformv1alpha1.Kserve{}).\n\t\tOwns at kserve-module/pkg/kservemodule/setup.go:185 (v1alpha1/v1beta1 may change between versions)",
     "file": "kserve-module/pkg/kservemodule/setup.go",
-    "line": 182,
-    "node_id": "call_2d37dbd6201119f8",
+    "line": 185,
+    "node_id": "call_7f677ac7bc5287f7",
+    "domain": "upgrade"
+  },
+  {
+    "rule_id": "CGA-U02",
+    "severity": "low",
+    "message": "Pre-release API usage: platformv1alpha1.GetManagementState at kserve-module/pkg/kservemodule/status.go:67 (v1alpha1/v1beta1 may change between versions)",
+    "file": "kserve-module/pkg/kservemodule/status.go",
+    "line": 67,
+    "node_id": "call_06a2791802a992d1",
     "domain": "upgrade"
   },
   {
@@ -7131,8 +7140,8 @@
     "severity": "medium",
     "message": "Test function TestReconcileOCSFAuditLoggingMetadataCreatesPolicy has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 24,
-    "node_id": "fn_5758ed9042bf85b2",
+    "line": 25,
+    "node_id": "fn_3ec1c3293afc3dd5",
     "domain": "testing"
   },
   {
@@ -7140,8 +7149,8 @@
     "severity": "medium",
     "message": "Test function TestReconcileOCSFAuditLoggingRepairsDriftAndIsIdempotent has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 69,
-    "node_id": "fn_29b0340eb9f0d893",
+    "line": 72,
+    "node_id": "fn_42d5face527e3f17",
     "domain": "testing"
   },
   {
@@ -7149,8 +7158,17 @@
     "severity": "medium",
     "message": "Test function TestReconcileOCSFAuditLoggingRemovedDeletesOnlyOwnedPolicy has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 93,
-    "node_id": "fn_d28f3b51dab8c63d",
+    "line": 99,
+    "node_id": "fn_4208dd4fa5adb8b1",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileOCSFAuditLoggingCleanupFailureMarksNotReady has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 125,
+    "node_id": "fn_4a8d423f5c06c3d9",
     "domain": "testing"
   },
   {
@@ -7158,8 +7176,62 @@
     "severity": "medium",
     "message": "Test function TestReconcileOCSFAuditLoggingReportsMissingOrIncompatibleRHCL has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 118,
-    "node_id": "fn_1c3c5a1bf43d0c00",
+    "line": 148,
+    "node_id": "fn_c859713c85bd7a1d",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestAuditLoggingCRDCapabilities has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 184,
+    "node_id": "fn_66e83930eba2f9b3",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestAuditLoggingCRDCapabilitiesRetriesTransientRead has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 218,
+    "node_id": "fn_e8823deed66989a4",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestAuditLoggingCRDCapabilitiesDoesNotRetryUnavailableCRD has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 238,
+    "node_id": "fn_2d2464cad1138204",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestInferenceServiceAuditLoggingUnavailableWhenKServeRemoved has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 248,
+    "node_id": "fn_cbc7630baa664a5d",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestOCSFPolicyStatusRequiresCurrentEnforcement has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 259,
+    "node_id": "fn_ceadfb5395542d36",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T03",
+    "severity": "medium",
+    "message": "Test function TestReconcileOCSFAuditLoggingRetriesPolicyStatusRead has no error path assertions",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 277,
+    "node_id": "fn_2e079cb799a1d2c0",
     "domain": "testing"
   },
   {
@@ -7167,8 +7239,8 @@
     "severity": "medium",
     "message": "Test function TestOCSFAuditLoggingWatchesTelemetryPolicyCRD has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 153,
-    "node_id": "fn_e83b4094e79b649e",
+    "line": 306,
+    "node_id": "fn_a66b54cdfb3a87c4",
     "domain": "testing"
   },
   {
@@ -7176,8 +7248,8 @@
     "severity": "medium",
     "message": "Test function TestOCSFAuditLoggingTelemetryPolicyWatchFiltersEvents has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 172,
-    "node_id": "fn_655d25c080cbedd2",
+    "line": 325,
+    "node_id": "fn_84adc585b54c9396",
     "domain": "testing"
   },
   {
@@ -7185,8 +7257,8 @@
     "severity": "medium",
     "message": "Test function TestOCSFAuditLoggingDoesNotChangeInferenceServiceConfigMapAuditProfile has no error path assertions",
     "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 209,
-    "node_id": "fn_4ed8eaacf5f9b2eb",
+    "line": 365,
+    "node_id": "fn_23d579813cc337cf",
     "domain": "testing"
   },
   {
@@ -24211,260 +24283,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/modelcache_cutover_test.go has 31 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/modelcache_cutover_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/egress_network_policy_odh_test.go has 14 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/egress_network_policy_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/otel/otel_reconciler_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/otel/otel_reconciler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/logger/marshaller_http_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/logger/marshaller_http_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/identity/factors_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/identity/factors_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/deployment/deployment_reconciler_odh_test.go has 19 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/deployment/deployment_reconciler_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/network_policy_odh_test.go has 24 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/network_policy_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/config_loader_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/config_loader_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha1/kernelcache/reconcilers/cache_prefetch_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha1/kernelcache/reconcilers/cache_prefetch_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/status_test.go has 16 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/status_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File tools/tf2openapi/types/tfsignaturedef_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "tools/tf2openapi/types/tfsignaturedef_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/apis/gie/v1alpha2pool/inferencepool_test.go has 13 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/apis/gie/v1alpha2pool/inferencepool_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha1/kernelcache/reconcilers/capture_cache_reconciler_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha1/kernelcache/reconcilers/capture_cache_reconciler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha1/kernelcache/reconcilers/capture_reconciler_test.go has 24 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha1/kernelcache/reconcilers/capture_reconciler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/monitoring_network_policy_odh_internal_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/monitoring_network_policy_odh_internal_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/router_discovery_additional_odh_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/router_discovery_additional_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_single_node_serviceaccount_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_single_node_serviceaccount_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kernelcache/mcv/pkg/cache/vllm_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "kernelcache/mcv/pkg/cache/vllm_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/tracing_test.go has 16 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/tracing_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_data_parallel_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_data_parallel_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_kvcache_evictor_test.go has 57 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_kvcache_evictor_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kernelcache/mcv/pkg/snapshot/snapshot_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "kernelcache/mcv/pkg/snapshot/snapshot_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_confidential_odh_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_confidential_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File qpext/cmd/qpext/main_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "qpext/cmd/qpext/main_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/scheduler_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/scheduler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File tools/tf2openapi/generator/generate_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "tools/tf2openapi/generator/generate_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/dependencies_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/dependencies_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/logger/marshaller_csv_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/logger/marshaller_csv_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/hardware_filter_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/hardware_filter_test.go",
+    "message": "File pkg/credentials/service_account_credentials_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/credentials/service_account_credentials_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -24481,188 +24301,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File pkg/tls/distro/resolve_test.go has 13 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/tls/distro/resolve_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/modelcache_test.go has 24 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/modelcache_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/tls/distro/workload_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/tls/distro/workload_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/webhook/admission/localmodelcache/localmodelcache_validator_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/webhook/admission/localmodelcache/localmodelcache_validator_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/resource_manager_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/resource_manager_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_test.go has 26 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/logger/handler_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/logger/handler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File cmd/router/main_test.go has 13 non-table-driven tests (consolidation opportunity)",
-    "file": "cmd/router/main_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/apis/serving/v1beta1/inference_service_validation_test.go has 18 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/apis/serving/v1beta1/inference_service_validation_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/ocsf_audit_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/preset_selfheal_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/preset_selfheal_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/apis/serving/v1alpha1/llm_inference_service_conversion_test.go has 26 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/apis/serving/v1alpha1/llm_inference_service_conversion_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/webhook/admission/kernelcache/selector_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/webhook/admission/kernelcache/selector_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/configmap_test.go has 18 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/configmap_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/config_presets_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/config_presets_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/managed_dra_test.go has 13 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/managed_dra_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/credentials/service_account_credentials_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/credentials/service_account_credentials_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/security/cert_sign_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/security/cert_sign_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File cmd/router/tls_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "cmd/router/tls_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/versioning_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/versioning_test.go",
+    "message": "File pkg/utils/utils_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/utils/utils_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -24679,267 +24319,6 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/config_merge_reconcile_test.go has 20 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/config_merge_reconcile_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/tracing_network_policy_odh_internal_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/tracing_network_policy_odh_internal_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/telemetry_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/telemetry_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_odh_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/logger/marshaller_parquet_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/logger/marshaller_parquet_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/agent/storage/s3_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/agent/storage/s3_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/apis/serving/v1beta1/configmap_test.go has 28 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/apis/serving/v1beta1/configmap_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/controller_handlers_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/controller_handlers_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_multi_node_serviceaccount_test.go has 18 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_multi_node_serviceaccount_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_lora_internal_test.go has 31 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_lora_internal_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/apis/serving/v1beta1/inference_service_defaults_test.go has 18 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/apis/serving/v1beta1/inference_service_defaults_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/localmodelcache/metadata_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/localmodelcache/metadata_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/tls/distro/adherence_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/tls/distro/adherence_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha1/kernelcachenode/watches_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha1/kernelcachenode/watches_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/identity/identity_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/identity/identity_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kernelcache/mcv/pkg/cache/cache_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "kernelcache/mcv/pkg/cache/cache_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/tracing_preset_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/tracing_preset_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/oteljson/oteljson_test.go has 9 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/oteljson/oteljson_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_platform_odh_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_platform_odh_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/nodegroup/nodes_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/nodegroup/nodes_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/runtimeoptions/resolver_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/runtimeoptions/resolver_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/utils/utils_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/utils/utils_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File cmd/llmisvc/migration_test.go has 8 non-table-driven tests (consolidation opportunity)",
-    "file": "cmd/llmisvc/migration_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/workload_disaggregated_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/workload_disaggregated_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/webhook/admission/pod/storage_initializer_injector_test.go has 28 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/webhook/admission/pod/storage_initializer_injector_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kernelcache/mcv/pkg/client/client_test.go has 12 non-table-driven tests (consolidation opportunity)",
-    "file": "kernelcache/mcv/pkg/client/client_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/reporter/credentials_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/reporter/credentials_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/logger/batch_timed_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/logger/batch_timed_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kserve-module/pkg/kservemodule/params_test.go has 16 non-table-driven tests (consolidation opportunity)",
-    "file": "kserve-module/pkg/kservemodule/params_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
     "message": "File kserve-module/pkg/kservemodule/components_test.go has 10 non-table-driven tests (consolidation opportunity)",
     "file": "kserve-module/pkg/kservemodule/components_test.go",
     "line": 1,
@@ -24949,89 +24328,8 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File pkg/webhook/admission/kernelcache/sidecar_test.go has 10 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/webhook/admission/kernelcache/sidecar_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1alpha2/llmisvc/metrics_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1alpha2/llmisvc/metrics_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/webhook/admission/llminferenceservice/defaulter_test.go has 25 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/webhook/admission/llminferenceservice/defaulter_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File tools/tf2openapi/types/tftensor_test.go has 15 non-table-driven tests (consolidation opportunity)",
-    "file": "tools/tf2openapi/types/tftensor_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/webhook/admission/localmodelnamespacecache/local_model_namespace_cache_validation_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/webhook/admission/localmodelnamespacecache/local_model_namespace_cache_validation_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kernelcache/mcv/pkg/cacheplan/cacheplan_test.go has 7 non-table-driven tests (consolidation opportunity)",
-    "file": "kernelcache/mcv/pkg/cacheplan/cacheplan_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File kernelcache/mcv/pkg/imgbuild/ocibuild_test.go has 11 non-table-driven tests (consolidation opportunity)",
-    "file": "kernelcache/mcv/pkg/imgbuild/ocibuild_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/utils/http_storage_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/utils/http_storage_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/keda/keda_reconciler_test.go has 32 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/keda/keda_reconciler_test.go",
-    "line": 1,
-    "node_id": "",
-    "domain": "testing"
-  },
-  {
-    "rule_id": "CGA-T04",
-    "severity": "low",
-    "message": "File pkg/kernelcache/captureconfig/config_test.go has 6 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/captureconfig/config_test.go",
+    "message": "File pkg/apis/serving/v1beta1/inference_service_validation_test.go has 18 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/apis/serving/v1beta1/inference_service_validation_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -25048,8 +24346,548 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
+    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/otel/otel_reconciler_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/otel/otel_reconciler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/modelcache_cutover_test.go has 31 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/modelcache_cutover_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/webhook/admission/localmodelnamespacecache/local_model_namespace_cache_validation_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/webhook/admission/localmodelnamespacecache/local_model_namespace_cache_validation_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/agent/storage/s3_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/agent/storage/s3_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/tracing_test.go has 16 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/tracing_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/captureconfig/config_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/captureconfig/config_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/logger/marshaller_http_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/logger/marshaller_http_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
     "message": "File pkg/apis/serving/v1beta1/inference_service_status_test.go has 10 non-table-driven tests (consolidation opportunity)",
     "file": "pkg/apis/serving/v1beta1/inference_service_status_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/identity/identity_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/identity/identity_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha1/kernelcachenode/watches_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha1/kernelcachenode/watches_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_data_parallel_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_data_parallel_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/oteljson/oteljson_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/oteljson/oteljson_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File cmd/router/tls_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "cmd/router/tls_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/preset_selfheal_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/preset_selfheal_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_test.go has 26 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/security/cert_sign_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/security/cert_sign_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/telemetry_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/telemetry_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/controller_handlers_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/controller_handlers_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/router_discovery_additional_odh_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/router_discovery_additional_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kernelcache/mcv/pkg/cache/vllm_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "kernelcache/mcv/pkg/cache/vllm_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/config_loader_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/config_loader_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/security/cert_verify_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/security/cert_verify_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/webhook/admission/kernelcache/sidecar_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/webhook/admission/kernelcache/sidecar_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_kvcache_evictor_test.go has 57 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_kvcache_evictor_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/runtimeoptions/resolver_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/runtimeoptions/resolver_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/scheduler_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/scheduler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/apis/gie/v1alpha2pool/inferencepool_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/apis/gie/v1alpha2pool/inferencepool_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_odh_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/reporter/credentials_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/reporter/credentials_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/versioning_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/versioning_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/apis/serving/v1alpha1/llm_inference_service_conversion_test.go has 26 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/apis/serving/v1alpha1/llm_inference_service_conversion_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/configmap_test.go has 18 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/configmap_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/nodegroup/nodes_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/nodegroup/nodes_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/config_presets_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/config_presets_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/metrics_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/metrics_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/params_test.go has 16 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/params_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/network_policy_odh_test.go has 24 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/network_policy_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/ocsf_audit_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/ocsf_audit_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/tls/distro/workload_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/tls/distro/workload_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/tls/distro/adherence_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/tls/distro/adherence_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File tools/tf2openapi/types/tfsignaturedef_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "tools/tf2openapi/types/tfsignaturedef_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kernelcache/mcv/pkg/imgbuild/ocibuild_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "kernelcache/mcv/pkg/imgbuild/ocibuild_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha1/kernelcache/reconcilers/cache_prefetch_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha1/kernelcache/reconcilers/cache_prefetch_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/apis/serving/v1beta1/configmap_test.go has 28 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/apis/serving/v1beta1/configmap_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/deployment/deployment_reconciler_odh_test.go has 19 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/deployment/deployment_reconciler_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kernelcache/mcv/pkg/client/client_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "kernelcache/mcv/pkg/client/client_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/dependencies_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/dependencies_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/tracing_network_policy_odh_internal_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/tracing_network_policy_odh_internal_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_disaggregated_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_disaggregated_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/resource_manager_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/resource_manager_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/tls/distro/resolve_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/tls/distro/resolve_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha1/kernelcache/reconcilers/capture_cache_reconciler_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha1/kernelcache/reconcilers/capture_cache_reconciler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File cmd/llmisvc/migration_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "cmd/llmisvc/migration_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/status_test.go has 16 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/status_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/logger/batch_timed_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/logger/batch_timed_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kernelcache/mcv/pkg/snapshot/snapshot_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "kernelcache/mcv/pkg/snapshot/snapshot_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/webhook/admission/kernelcache/selector_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/webhook/admission/kernelcache/selector_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kernelcache/mcv/pkg/cacheplan/cacheplan_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "kernelcache/mcv/pkg/cacheplan/cacheplan_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/webhook/admission/llminferenceservice/defaulter_test.go has 25 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/webhook/admission/llminferenceservice/defaulter_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/kernelcache/identity/factors_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/kernelcache/identity/factors_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/webhook/admission/pod/storage_initializer_injector_test.go has 28 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/webhook/admission/pod/storage_initializer_injector_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -25066,8 +24904,242 @@
   {
     "rule_id": "CGA-T04",
     "severity": "low",
-    "message": "File pkg/kernelcache/security/cert_verify_test.go has 13 non-table-driven tests (consolidation opportunity)",
-    "file": "pkg/kernelcache/security/cert_verify_test.go",
+    "message": "File pkg/controller/v1alpha1/kernelcache/reconcilers/capture_reconciler_test.go has 24 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha1/kernelcache/reconcilers/capture_reconciler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_platform_odh_test.go has 12 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha1/localmodel/reconcilers/sharedpvc_platform_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/keda/keda_reconciler_test.go has 32 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/keda/keda_reconciler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/webhook/admission/localmodelcache/localmodelcache_validator_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/webhook/admission/localmodelcache/localmodelcache_validator_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File qpext/cmd/qpext/main_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "qpext/cmd/qpext/main_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File tools/tf2openapi/types/tftensor_test.go has 15 non-table-driven tests (consolidation opportunity)",
+    "file": "tools/tf2openapi/types/tftensor_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File cmd/router/main_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "cmd/router/main_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1beta1/inferenceservice/reconcilers/service/service_reconciler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/hardware_filter_test.go has 10 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/hardware_filter_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/config_merge_reconcile_test.go has 20 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/config_merge_reconcile_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/monitoring_network_policy_odh_internal_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/monitoring_network_policy_odh_internal_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/tracing_preset_test.go has 9 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/tracing_preset_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/apis/serving/v1beta1/inference_service_defaults_test.go has 18 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/apis/serving/v1beta1/inference_service_defaults_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/managed_dra_test.go has 13 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/managed_dra_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_confidential_odh_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_confidential_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File tools/tf2openapi/generator/generate_test.go has 8 non-table-driven tests (consolidation opportunity)",
+    "file": "tools/tf2openapi/generator/generate_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/utils/http_storage_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/utils/http_storage_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/logger/handler_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/logger/handler_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_lora_internal_test.go has 31 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_lora_internal_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kernelcache/mcv/pkg/cache/cache_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "kernelcache/mcv/pkg/cache/cache_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File kserve-module/pkg/kservemodule/modelcache_test.go has 24 non-table-driven tests (consolidation opportunity)",
+    "file": "kserve-module/pkg/kservemodule/modelcache_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/egress_network_policy_odh_test.go has 14 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/egress_network_policy_odh_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_single_node_serviceaccount_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_single_node_serviceaccount_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/localmodelcache/metadata_test.go has 11 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/localmodelcache/metadata_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/logger/marshaller_csv_test.go has 6 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/logger/marshaller_csv_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/logger/marshaller_parquet_test.go has 7 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/logger/marshaller_parquet_test.go",
+    "line": 1,
+    "node_id": "",
+    "domain": "testing"
+  },
+  {
+    "rule_id": "CGA-T04",
+    "severity": "low",
+    "message": "File pkg/controller/v1alpha2/llmisvc/workload_multi_node_serviceaccount_test.go has 18 non-table-driven tests (consolidation opportunity)",
+    "file": "pkg/controller/v1alpha2/llmisvc/workload_multi_node_serviceaccount_test.go",
     "line": 1,
     "node_id": "",
     "domain": "testing"
@@ -25155,7 +25227,7 @@
   {
     "rule_id": "SEC-CRD-008",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.model.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25165,7 +25237,7 @@
   {
     "rule_id": "SEC-CRD-009",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.model.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25175,7 +25247,7 @@
   {
     "rule_id": "SEC-CRD-010",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25185,7 +25257,7 @@
   {
     "rule_id": "SEC-CRD-011",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25195,7 +25267,7 @@
   {
     "rule_id": "SEC-CRD-012",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25205,7 +25277,7 @@
   {
     "rule_id": "SEC-CRD-013",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25215,7 +25287,7 @@
   {
     "rule_id": "SEC-CRD-014",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.triton.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25225,7 +25297,7 @@
   {
     "rule_id": "SEC-CRD-015",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.triton.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25235,7 +25307,7 @@
   {
     "rule_id": "SEC-CRD-016",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.model.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25245,7 +25317,7 @@
   {
     "rule_id": "SEC-CRD-017",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.model.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25255,7 +25327,7 @@
   {
     "rule_id": "SEC-CRD-018",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25265,7 +25337,7 @@
   {
     "rule_id": "SEC-CRD-019",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25275,7 +25347,7 @@
   {
     "rule_id": "SEC-CRD-020",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25285,7 +25357,7 @@
   {
     "rule_id": "SEC-CRD-021",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25295,7 +25367,7 @@
   {
     "rule_id": "SEC-CRD-022",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25305,7 +25377,7 @@
   {
     "rule_id": "SEC-CRD-023",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25315,7 +25387,7 @@
   {
     "rule_id": "SEC-CRD-024",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25325,7 +25397,7 @@
   {
     "rule_id": "SEC-CRD-025",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25335,7 +25407,7 @@
   {
     "rule_id": "SEC-CRD-026",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.triton.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25345,7 +25417,7 @@
   {
     "rule_id": "SEC-CRD-027",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.triton.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25355,7 +25427,7 @@
   {
     "rule_id": "SEC-CRD-028",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",
@@ -25365,7 +25437,7 @@
   {
     "rule_id": "SEC-CRD-029",
     "severity": "high",
-    "message": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
+    "message": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions.",
     "file": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
     "line": 0,
     "node_id": "",

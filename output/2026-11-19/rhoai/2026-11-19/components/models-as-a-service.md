@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/models-as-a-service](https://github.com/red-hat-data-services/models-as-a-service) |
 | Commit | [18f735dc74c96a27041c37b60088806e65c7b45f](https://github.com/red-hat-data-services/models-as-a-service/commit/18f735dc74c96a27041c37b60088806e65c7b45f) |
-| Extracted | 2026-11-19T06:51:59Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:09Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -84,20 +84,20 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| maas-api-allow-cleanup |  | 0 | 0 |
-| maas-api-allow-deployment-ns |  | 0 | 0 |
-| maas-api-allow-gateway |  | 0 | 0 |
-| maas-api-allow-monitoring |  | 0 | 0 |
-| maas-api-cleanup-restrict |  | 0 | 0 |
-| maas-api-cleanup-restrict |  | 0 | 0 |
-| maas-api-egress-restrict |  | 0 | 0 |
-| maas-authorino-allow |  | 0 | 0 |
-| maas-authorino-allow |  | 0 | 0 |
-| maas-controller-allow-monitoring |  | 0 | 0 |
-| payload-processing |  | 0 | 0 |
-| usage-logs-collector-egress-restrict |  | 0 | 0 |
-| usage-tenancy-proxy-allow-perses |  | 0 | 0 |
-| usage-tenancy-proxy-egress-restrict |  | 0 | 0 |
+| maas-api-allow-cleanup | app.kubernetes.io/component=api, app.kubernetes.io/name=maas-api, app.kubernetes.io/part-of=models-as-a-service | 1 | 0 |
+| maas-api-allow-deployment-ns | app.kubernetes.io/component=api, app.kubernetes.io/part-of=models-as-a-service | 1 | 0 |
+| maas-api-allow-gateway | app.kubernetes.io/component=api, app.kubernetes.io/name=maas-api, app.kubernetes.io/part-of=models-as-a-service | 1 | 0 |
+| maas-api-allow-monitoring | app.kubernetes.io/name=maas-api | 1 | 0 |
+| maas-api-cleanup-restrict | app=maas-api-cleanup | 0 | 2 |
+| maas-api-cleanup-restrict | (all pods) | 0 | 2 |
+| maas-api-egress-restrict | app.kubernetes.io/component=api, app.kubernetes.io/name=maas-api, app.kubernetes.io/part-of=models-as-a-service | 0 | 2 |
+| maas-authorino-allow | app.kubernetes.io/name=maas-api | 1 | 0 |
+| maas-authorino-allow | app.kubernetes.io/part-of=models-as-a-service | 1 | 0 |
+| maas-controller-allow-monitoring | control-plane=maas-controller | 1 | 0 |
+| payload-processing | (all pods) | 2 | 3 |
+| usage-logs-collector-egress-restrict | app.kubernetes.io/component=opentelemetry-collector, app.kubernetes.io/name=usage-logs-collector | 0 | 2 |
+| usage-tenancy-proxy-allow-perses | app=usage-tenancy-proxy | 2 | 0 |
+| usage-tenancy-proxy-egress-restrict | app=usage-tenancy-proxy | 0 | 3 |
 
 
 ## Deployments
@@ -114,27 +114,27 @@
 
 **maas-api / maas-api**
 
-- Ports: 0/TCP (http), 0/TCP (https-metrics)
+- Ports: 8080/TCP (http), 9090/TCP (https-metrics)
 
 **maas-api / maas-api**
 
-- Ports: 0/TCP, 0/TCP (https), 0/TCP (https-metrics)
+- Ports: 0/TCP, 8443/TCP (https), 9090/TCP (https-metrics)
 
 **maas-controller / manager**
 
 - Command: `/manager`
 - Args: `--leader-elect --health-probe-bind-address=:8081 --metrics-bind-address=:8443 --metrics-secure=true --controller-namespace=$(CONTROLLER_NAMESPACE) --gateway-name=$(GATEWAY_NAME) --gateway-namespace=$(GATEWAY_NAMESPACE) --infra-namespace=$(INFRA_NAMESPACE) --maas-subscription-namespace=$(MAAS_SUBSCRIPTION_NAMESPACE) --aitenant-namespace=$(AITENANT_NAMESPACE) --monitoring-namespace=$(MONITORING_NAMESPACE) --enable-tenant-namespace-discovery --metadata-cache-ttl=60 --authz-cache-ttl=60 --log-format=otel-json`
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **maas-discovery / maas-discovery**
 
 - Args: `--tls-cert=/tls/tls.crt --tls-key=/tls/tls.key --aitenant-namespace=ai-tenants --gateway-namespace=openshift-ingress`
-- Ports: 0/TCP (https)
+- Ports: 8443/TCP (https)
 
 **payload-processing / payload-processing**
 
 - Args: `--config-file /config/custom-ipp-config.yaml --v=3 --tracing=true`
-- Ports: 0/TCP (grpc), 0/TCP (metrics)
+- Ports: 9004/TCP (grpc), 9005/TCP (metrics)
 
 
 
@@ -320,7 +320,7 @@
 
 | Name | Type | Evidence |
 |------|------|----------|
-| PostgreSQL | database | uri:postgres:// |
+| PostgreSQL | database | uri:postgresql:// |
 | OpenTelemetry Collector | observability | env:OTEL_TRACES_EXPORTER |
 | kubernetes | service | dns:kubernetes.default.svc |
 | maas-api | service | dns:maas-api.redhat-ai-gateway-infra.svc.cluster.local |

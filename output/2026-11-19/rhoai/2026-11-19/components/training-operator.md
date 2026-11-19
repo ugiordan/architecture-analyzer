@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/training-operator](https://github.com/red-hat-data-services/training-operator) |
 | Aliases | Training operator, Kubeflow Training operator |
 | Commit | [7035128a7182d7be1593c25258410f68ddc4a358](https://github.com/red-hat-data-services/training-operator/commit/7035128a7182d7be1593c25258410f68ddc4a358) |
-| Extracted | 2026-11-19T06:52:34Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:48:30Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -59,7 +59,7 @@
 **training-operator / training-operator**
 
 - Command: `/manager`
-- Ports: 0/TCP, 0/TCP (webhook-server)
+- Ports: 8080/TCP, 9443/TCP (webhook-server)
 - Env: `GOMEMLIMIT=460MiB`
 
 **training-operator / training-operator**
@@ -68,7 +68,7 @@
 
 **training-operator / training-operator**
 
-- Ports: 0/TCP (metrics)
+- Ports: 8080/TCP (metrics)
 
 
 

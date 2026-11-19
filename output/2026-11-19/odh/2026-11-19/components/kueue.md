@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/kueue](https://github.com/opendatahub-io/kueue) |
 | Commit | [52c764c101ae0bb8cbf7aa3f3126a724222c3bad](https://github.com/opendatahub-io/kueue/commit/52c764c101ae0bb8cbf7aa3f3126a724222c3bad) |
-| Extracted | 2026-11-19T06:55:46Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:54Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -32,8 +32,8 @@
 | ClusterQueueWebhook-webhook | validating |  |  |  |  |  |
 | ClusterQueueWebhook-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
-| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
+| JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | mutating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobControl-webhook | validating |  |  |  |  |  |
@@ -41,14 +41,14 @@
 | JobControl-webhook | validating |  |  |  |  |  |
 | JobSetWebhook-webhook | validating |  |  |  |  |  |
 | JobSetWebhook-webhook | mutating |  |  |  |  |  |
-| JobWebhook-webhook | validating |  |  |  |  |  |
 | JobWebhook-webhook | mutating |  |  |  |  |  |
-| MpiJobWebhook-webhook | validating |  |  |  |  |  |
+| JobWebhook-webhook | validating |  |  |  |  |  |
 | MpiJobWebhook-webhook | mutating |  |  |  |  |  |
+| MpiJobWebhook-webhook | validating |  |  |  |  |  |
 | Pod-webhook | mutating |  |  |  |  |  |
 | PodWebhook-webhook | validating |  |  |  |  |  |
-| RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayClusterWebhook-webhook | validating |  |  |  |  |  |
+| RayClusterWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | mutating |  |  |  |  |  |
 | RayJobWebhook-webhook | validating |  |  |  |  |  |
 | ResourceFlavorWebhook-webhook | mutating |  |  |  |  |  |
@@ -59,8 +59,8 @@
 | Webhook-webhook | validating |  |  |  |  |  |
 | Webhook-webhook | mutating |  |  |  |  |  |
 | Webhook-webhook | validating |  |  |  |  |  |
-| WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | WorkloadWebhook-webhook | mutating |  |  |  |  |  |
+| WorkloadWebhook-webhook | validating |  |  |  |  |  |
 | mdeployment.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/opendatahub-io/kueue/blob/52c764c101ae0bb8cbf7aa3f3126a724222c3bad/config/rhoai/mutating_webhook_patch.yaml) |
 | mjob.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/opendatahub-io/kueue/blob/52c764c101ae0bb8cbf7aa3f3126a724222c3bad/config/rhoai/mutating_webhook_patch.yaml) |
 | mpod.kb.io | mutating |  |  |  |  | [`config/rhoai/mutating_webhook_patch.yaml`](https://github.com/opendatahub-io/kueue/blob/52c764c101ae0bb8cbf7aa3f3126a724222c3bad/config/rhoai/mutating_webhook_patch.yaml) |
@@ -95,6 +95,13 @@
 
 | Field | Operation | Condition |
 |-------|-----------|----------|
+| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
+| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
+
+### Webhook-webhook Behavior
+
+| Field | Operation | Condition |
+|-------|-----------|----------|
 | spec.template.annotations | set | suspend &amp;&amp; deployment.Spec.Template.Annotations == nil |
 | spec.template.labels | set | suspend &amp;&amp; deployment.Spec.Template.Labels == nil |
 
@@ -104,13 +111,6 @@
 |-------|-----------|----------|
 | labels | set | priorityClass != "" &amp;&amp; podTemplateSpec.Labels == nil |
 | annotations | set | podTemplateSpec.Annotations == nil |
-
-### Webhook-webhook Behavior
-
-| Field | Operation | Condition |
-|-------|-----------|----------|
-| spec.template.annotations | set | suspend &amp;&amp; ss.Spec.Template.Annotations == nil |
-| spec.template.labels | set | suspend &amp;&amp; ss.Spec.Template.Labels == nil |
 
 
 ## HTTP Endpoints
@@ -170,7 +170,7 @@
 **controller-manager / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:8443 --upstream=http://127.0.0.1:8080/ --logtostderr=true --v=10`
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **controller-manager / manager**
 
@@ -178,15 +178,15 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (metrics)
+- Ports: 8443/TCP (metrics)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (visibility)
+- Ports: 8082/TCP (visibility)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
@@ -198,11 +198,11 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (metrics), 0/TCP (https-metrics)
+- Ports: 8080/TCP (metrics), 8443/TCP (https-metrics)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 
 

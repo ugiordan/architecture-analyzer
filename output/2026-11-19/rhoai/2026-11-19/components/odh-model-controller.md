@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/odh-model-controller](https://github.com/red-hat-data-services/odh-model-controller) |
 | Aliases | ODH Model Controller, omc |
 | Commit | [d5964474f5f785a85ab388526b400a1059d2a76a](https://github.com/red-hat-data-services/odh-model-controller/commit/d5964474f5f785a85ab388526b400a1059d2a76a) |
-| Extracted | 2026-11-19T06:53:52Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:48:56Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -82,7 +82,7 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| odh-model-controller-webhook-allow-ingress |  | 0 | 0 |
+| odh-model-controller-webhook-allow-ingress | control-plane=odh-model-controller | 1 | 0 |
 
 
 ## Deployments
@@ -96,13 +96,13 @@
 
 **model-serving-api / server**
 
-- Ports: 0/TCP (https), 0/TCP (metrics)
+- Ports: 8443/TCP (https), 8080/TCP (metrics)
 - Env: `TLS_CERT_DIR=/tls`
 
 **odh-model-controller / manager**
 
-- Ports: 0/TCP (webhook-server)
-- Env: `GOMEMLIMIT=1800MiB`, `KSERVE_STATE=managed`, `MODELREGISTRY_STATE=removed`, `NIM_STATE=managed`
+- Ports: 9443/TCP (webhook-server)
+- Env: `NIM_STATE=managed`, `GOMEMLIMIT=1800MiB`, `KSERVE_STATE=managed`, `MODELREGISTRY_STATE=removed`
 
 
 

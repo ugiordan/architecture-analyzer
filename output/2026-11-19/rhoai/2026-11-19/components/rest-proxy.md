@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/rest-proxy](https://github.com/red-hat-data-services/rest-proxy) |
 | Commit | [cdd1685b674af118a505a77b1de7c1a84b64fe95](https://github.com/red-hat-data-services/rest-proxy/commit/cdd1685b674af118a505a77b1de7c1a84b64fe95) |
-| Extracted | 2026-11-19T06:59:08Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:53:19Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/data-science-pipelines-operator](https://github.com/red-hat-data-services/data-science-pipelines-operator) |
 | Aliases | DSPO, dspo |
 | Commit | [193c52c2fc0dd4d8043dd64708a4d028e63f35b9](https://github.com/red-hat-data-services/data-science-pipelines-operator/commit/193c52c2fc0dd4d8043dd64708a4d028e63f35b9) |
-| Extracted | 2026-11-19T06:54:30Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:48:57Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -21,7 +21,7 @@
 | Kind | Group | Version | Scope | Fields | Validation Rules | Discovery | Source |
 |------|-------|---------|-------|--------|------------------|-----------|--------|
 | AIPipelines | components.platform.opendatahub.io | v1alpha1 | Cluster | 22 | self.metadata.name == 'default-aipipelines' | YAML | [`config/crd/bases/components.platform.opendatahub.io_aipipelines.yaml`](https://github.com/red-hat-data-services/data-science-pipelines-operator/blob/193c52c2fc0dd4d8043dd64708a4d028e63f35b9/config/crd/bases/components.platform.opendatahub.io_aipipelines.yaml) |
-| DataSciencePipelinesApplication | datasciencepipelinesapplications.opendatahub.io | v1 | Namespaced | 290 | has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), !has(self.additionalRules) \|\| self.additionalRules.all(r, (has(r.ports) &amp;&amp; size(r.ports) &gt; 0) \|\| (has(r.to) &amp;&amp; size(r.to) &gt; 0)), !has(self.additionalRules) \|\| self.additionalRules.all(r, (has(r.ports) &amp;&amp; size(r.ports) &gt; 0) \|\| (has(r.to) &amp;&amp; size(r.to) &gt; 0)), has(self.s3CredentialsSecret) \|\| (has(self.credentialsMode) &amp;&amp; self.credentialsMode.fromEnv), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.accessModes) &amp;&amp; size(self.accessModes) &gt; 0, has(self.storageClassName) &amp;&amp; self.storageClassName != "", has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName) | YAML | [`config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml`](https://github.com/red-hat-data-services/data-science-pipelines-operator/blob/193c52c2fc0dd4d8043dd64708a4d028e63f35b9/config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml) |
+| DataSciencePipelinesApplication | datasciencepipelinesapplications.opendatahub.io | v1 | Namespaced | 290 | has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.s3CredentialsSecret) \|\| (has(self.credentialsMode) &amp;&amp; self.credentialsMode.fromEnv), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), !has(self.additionalRules) \|\| self.additionalRules.all(r, (has(r.ports) &amp;&amp; size(r.ports) &gt; 0) \|\| (has(r.to) &amp;&amp; size(r.to) &gt; 0)), !has(self.additionalRules) \|\| self.additionalRules.all(r, (has(r.ports) &amp;&amp; size(r.ports) &gt; 0) \|\| (has(r.to) &amp;&amp; size(r.to) &gt; 0)), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.resourceClaimName) != has(self.resourceClaimTemplateName), has(self.accessModes) &amp;&amp; size(self.accessModes) &gt; 0, has(self.storageClassName) &amp;&amp; self.storageClassName != "" | YAML | [`config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml`](https://github.com/red-hat-data-services/data-science-pipelines-operator/blob/193c52c2fc0dd4d8043dd64708a4d028e63f35b9/config/crd/bases/datasciencepipelinesapplications.opendatahub.io_datasciencepipelinesapplications.yaml) |
 | ScheduledWorkflow | kubeflow.org | v1beta1 | Namespaced | 5 |  | YAML | [`config/crd/bases/scheduledworkflows.yaml`](https://github.com/red-hat-data-services/data-science-pipelines-operator/blob/193c52c2fc0dd4d8043dd64708a4d028e63f35b9/config/crd/bases/scheduledworkflows.yaml) |
 | Pipeline | pipelines.kubeflow.org | v2beta1 | Namespaced | 7 |  | YAML | [`config/crd/bases/pipelines.kubeflow.org_pipelines.yaml`](https://github.com/red-hat-data-services/data-science-pipelines-operator/blob/193c52c2fc0dd4d8043dd64708a4d028e63f35b9/config/crd/bases/pipelines.kubeflow.org_pipelines.yaml) |
 | PipelineVersion | pipelines.kubeflow.org | v2beta1 | Namespaced | 19 |  | YAML | [`config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml`](https://github.com/red-hat-data-services/data-science-pipelines-operator/blob/193c52c2fc0dd4d8043dd64708a4d028e63f35b9/config/crd/bases/pipelines.kubeflow.org_pipelineversions.yaml) |
@@ -63,14 +63,14 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| controller-manager |  | 0 | 0 |
-| ds-pipeline-drivers-template-value |  | 0 | 0 |
-| ds-pipeline-metadata-grpc-template-value |  | 0 | 0 |
-| mariadb-template-value |  | 0 | 0 |
-| minio-template-value |  | 0 | 0 |
-| template-value |  | 0 | 0 |
-| template-value |  | 0 | 0 |
-| template-value |  | 0 | 0 |
+| controller-manager | app.kubernetes.io/name=data-science-pipelines-operator | 3 | 0 |
+| ds-pipeline-drivers-template-value | (all pods) | 0 | 5 |
+| ds-pipeline-metadata-grpc-template-value | app=ds-pipeline-metadata-grpc-template-value, component=data-science-pipelines | 1 | 3 |
+| mariadb-template-value | app=mariadb-template-value, component=data-science-pipelines | 1 | 0 |
+| minio-template-value | app=minio-template-value, component=data-science-pipelines | 1 | 0 |
+| template-value | app=template-value, component=data-science-pipelines | 0 | 4 |
+| template-value | app=template-value, component=data-science-pipelines | 0 | 4 |
+| template-value | app=template-value, component=data-science-pipelines | 1 | 0 |
 
 
 ## Deployments
@@ -90,38 +90,38 @@
 
 **data-science-pipelines-operator-controller-manager / manager**
 
-- Env: `IMAGES_ARGO_EXEC=quay.io/opendatahub/ds-pipelines-argo-argoexec:3.6.12`, `IMAGES_LAUNCHER=quay.io/opendatahub/ds-pipelines-launcher:master`, `IMAGES_MARIADB=registry.redhat.io/rhel9/mariadb-105:latest`, `IMAGES_PIPELINES_COMPONENTS=quay.io/opendatahub/odh-pipelines-components:odh-stable`, `RELATED_IMAGE_ODH_AUTOML_IMAGE=quay.io/opendatahub/odh-automl:odh-stable`, `DSPO_REQUEUE_TIME=20s`, `IMAGES_DRIVER=quay.io/opendatahub/ds-pipelines-driver:master`, `IMAGES_MLMDGRPC=quay.io/opendatahub/mlmd-grpc-server:latest`, `RELATED_IMAGE_ODH_AUTORAG_IMAGE=quay.io/opendatahub/odh-autorag:odh-stable`, `ZAP_LOG_LEVEL=info`, `DSPO_ARGOWORKFLOWSCONTROLLERS="{\"managementState\":\"Managed\"}"`, `IMAGES_KUBE_RBAC_PROXY=registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:latest`, `IMAGES_MLMDENVOY=registry.redhat.io/openshift-service-mesh/proxyv2-rhel9:2.6`, `MANAGEDPIPELINES="{}"`, `MAX_CONCURRENT_RECONCILES=10`, `DSPO_PLATFORMVERSION="v0.0.0"`, `GOMEMLIMIT=3600MiB`, `IMAGES_APISERVER=quay.io/opendatahub/ds-pipelines-api-server:master`, `IMAGES_ARGO_WORKFLOWCONTROLLER=quay.io/opendatahub/ds-pipelines-argo-workflowcontroller:3.6.12`, `IMAGES_PERSISTENCEAGENT=quay.io/opendatahub/ds-pipelines-persistenceagent:master`, `IMAGES_SCHEDULEDWORKFLOW=quay.io/opendatahub/ds-pipelines-scheduledworkflow:master`, `DSPO_APISERVER_INCLUDE_OWNERREFERENCE=true`
+- Env: `IMAGES_SCHEDULEDWORKFLOW=quay.io/opendatahub/ds-pipelines-scheduledworkflow:master`, `DSPO_PLATFORMVERSION="v0.0.0"`, `IMAGES_APISERVER=quay.io/opendatahub/ds-pipelines-api-server:master`, `IMAGES_ARGO_EXEC=quay.io/opendatahub/ds-pipelines-argo-argoexec:3.6.12`, `IMAGES_MLMDGRPC=quay.io/opendatahub/mlmd-grpc-server:latest`, `RELATED_IMAGE_ODH_AUTOML_IMAGE=quay.io/opendatahub/odh-automl:odh-stable`, `DSPO_ARGOWORKFLOWSCONTROLLERS="{\"managementState\":\"Managed\"}"`, `GOMEMLIMIT=3600MiB`, `IMAGES_ARGO_WORKFLOWCONTROLLER=quay.io/opendatahub/ds-pipelines-argo-workflowcontroller:3.6.12`, `IMAGES_KUBE_RBAC_PROXY=registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9:latest`, `MANAGEDPIPELINES="{}"`, `RELATED_IMAGE_ODH_AUTORAG_IMAGE=quay.io/opendatahub/odh-autorag:odh-stable`, `DSPO_APISERVER_INCLUDE_OWNERREFERENCE=true`, `DSPO_REQUEUE_TIME=20s`, `IMAGES_DRIVER=quay.io/opendatahub/ds-pipelines-driver:master`, `IMAGES_LAUNCHER=quay.io/opendatahub/ds-pipelines-launcher:master`, `IMAGES_PIPELINES_COMPONENTS=quay.io/opendatahub/odh-pipelines-components:odh-stable`, `MAX_CONCURRENT_RECONCILES=10`, `ZAP_LOG_LEVEL=info`, `IMAGES_MARIADB=registry.redhat.io/rhel9/mariadb-105:latest`, `IMAGES_MLMDENVOY=registry.redhat.io/openshift-service-mesh/proxyv2-rhel9:2.6`, `IMAGES_PERSISTENCEAGENT=quay.io/opendatahub/ds-pipelines-persistenceagent:master`
 
 **ds-pipeline-workflow-controller-template-value / ds-pipeline-workflow-controller**
 
 - Command: `workflow-controller`
 - Args: `--configmap template-value ds-pipeline-workflow-controller-template-value --executor-image template-value --namespaced`
-- Ports: 0/TCP (metrics), 0/TCP
+- Ports: 9090/TCP (metrics), 6060/TCP
 
 **mariadb-template-value / mariadb**
 
-- Ports: 0/TCP
+- Ports: 3306/TCP
 
 **minio-template-value / minio**
 
 - Args: `server /data`
-- Ports: 0/TCP
+- Ports: 9000/TCP
 
 **template-value / ds-pipeline-api-server**
 
 - Command: `/bin/apiserver`
 - Args: `--config=/config -logtostderr=true --sampleconfig=/config/sample_config.json --tlsCertPath=/etc/tls/private/tls.crt --tlsCertKeyPath=/etc/tls/private/tls.key --pipelinesStoreKubernetes=true --disableWebhook=true --managedPipelinesDir=/config/managed-pipelines`
-- Ports: 0/TCP (http), 0/TCP (grpc)
+- Ports: 8888/TCP (http), 8887/TCP (grpc)
 
 **template-value / kube-rbac-proxy**
 
 - Args: `--secure-listen-address=0.0.0.0:8443 --proxy-endpoints-port=8444 --upstream=https://template-value:8888 --upstream-ca-file=template-value --upstream-ca-file=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt --upstream=http://localhost:8888 --tls-cert-file=/etc/tls/private/tls.crt --tls-private-key-file=/etc/tls/private/tls.key --tls-min-version=template-value --tls-cipher-suites=template-value --config-file=/etc/kube-rbac-proxy/config-file.yaml --ignore-paths=/healthz,/apis/v1beta1/healthz`
-- Ports: 0/TCP (proxy), 0/TCP (proxy-metrics)
+- Ports: 8443/TCP (proxy), 8444/TCP (proxy-metrics)
 
 **template-value / kube-rbac-proxy-metrics**
 
 - Args: `--secure-listen-address=0.0.0.0:8445 --proxy-endpoints-port=8446 --upstream=https://template-value:8888 --upstream-ca-file=template-value --upstream-ca-file=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt --upstream=http://localhost:8888 --tls-cert-file=/etc/tls/private/tls.crt --tls-private-key-file=/etc/tls/private/tls.key --tls-min-version=template-value --tls-cipher-suites=template-value --config-file=/etc/kube-rbac-proxy/metrics-config-file.yaml --allow-paths=/metrics`
-- Ports: 0/TCP (prom-metrics), 0/TCP (prom-health)
+- Ports: 8445/TCP (prom-metrics), 8446/TCP (prom-health)
 
 **template-value / ds-pipeline-persistenceagent**
 
@@ -135,7 +135,7 @@
 
 - Command: `/bin/apiserver`
 - Args: `--config=/config -logtostderr=true --sampleconfig=/config/sample_config.json --webhookPortFlag=:8443 --webhookTLSCertPath=/etc/webhook/certs/tls.crt --webhookTLSKeyPath=/etc/webhook/certs/tls.key --globalKubernetesWebhookMode=true`
-- Ports: 0/TCP (webhook)
+- Ports: 8443/TCP (webhook)
 
 
 

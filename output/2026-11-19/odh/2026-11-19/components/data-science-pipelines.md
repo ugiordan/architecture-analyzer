@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/data-science-pipelines](https://github.com/opendatahub-io/data-science-pipelines) |
 | Aliases | DSP, dsp |
 | Commit | [6a31fc1a55950a84174e00cfd73bdfabdb5e6114](https://github.com/opendatahub-io/data-science-pipelines/commit/6a31fc1a55950a84174e00cfd73bdfabdb5e6114) |
-| Extracted | 2026-11-19T06:52:08Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:46:23Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -53,7 +53,7 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| seaweedfs |  | 0 | 0 |
+| seaweedfs | (all pods) | 3 | 0 |
 
 
 ## Deployments
@@ -76,19 +76,19 @@
 **kubeflow-pipelines-profile-controller / profile-controller**
 
 - Command: `python /hooks/sync.py`
-- Ports: 0/TCP
+- Ports: 8080/TCP
 
 **ml-pipeline / ml-pipeline-api-server**
 
 - Command: `/bin/apiserver`
 - Args: `--config=/config --sampleconfig=/config/sample_config.json -logtostderr=true --webhookTLSCertPath=/etc/webhook/certs/tls.crt --webhookTLSKeyPath=/etc/webhook/certs/tls.key --pipelinesStoreKubernetes=true`
-- Ports: 0/TCP (webhook)
+- Ports: 8443/TCP (webhook)
 
 **ml-pipeline / ml-pipeline-api-server**
 
 - Command: `/bin/apiserver`
 - Args: `--config=/config --sampleconfig=/config/sample_config.json -logtostderr=true --webhookTLSCertPath=/etc/webhook/certs/tls.crt --webhookTLSKeyPath=/etc/webhook/certs/tls.key --pipelinesStoreKubernetes=true`
-- Ports: 0/TCP (webhook)
+- Ports: 8443/TCP (webhook)
 
 
 

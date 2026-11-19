@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/codeflare-sdk](https://github.com/red-hat-data-services/codeflare-sdk) |
 | Commit | [13658b82a7fd1bb1ba656d7e3d9a27a608cd49e4](https://github.com/red-hat-data-services/codeflare-sdk/commit/13658b82a7fd1bb1ba656d7e3d9a27a608cd49e4) |
-| Extracted | 2026-11-19T06:58:27Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:52:35Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

@@ -2,8 +2,8 @@
   "component": "mlflow-operator",
   "repo": "red-hat-data-services/mlflow-operator",
   "commit_sha": "a673aa40b1a8bd3cb225fdea7e87c332d29e26c5",
-  "extracted_at": "2026-11-19T06:52:49Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:48:36Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -39,9 +39,9 @@
       "fields_count": 6,
       "validation_rules": [
         "self.metadata.name == 'mlflow'",
+        "self == 'mlflow-artifact-connection'",
         "self == '' || !self.startsWith('/')",
-        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')",
-        "self == 'mlflow-artifact-connection'"
+        "self == '' || !self.matches(r'(^|.*/)\\.\\.(|/.*)$')"
       ],
       "source": "config/crd/mlflow.kubeflow.org_mlflowconfigs.yaml"
     },

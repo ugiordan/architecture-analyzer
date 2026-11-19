@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [IBM/ai4rag](https://github.com/IBM/ai4rag) |
 | Commit | [7e9544a1da3405c592b0f03eef418eeb2baec8f4](https://github.com/IBM/ai4rag/commit/7e9544a1da3405c592b0f03eef418eeb2baec8f4) |
-| Extracted | 2026-11-19T06:59:26Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:53:50Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

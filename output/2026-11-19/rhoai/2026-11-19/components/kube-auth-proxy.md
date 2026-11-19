@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/kube-auth-proxy](https://github.com/red-hat-data-services/kube-auth-proxy) |
 | Commit | [3a2452487285678cdd0923a255df3f8c1423228b](https://github.com/red-hat-data-services/kube-auth-proxy/commit/3a2452487285678cdd0923a255df3f8c1423228b) |
-| Extracted | 2026-11-19T06:54:52Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:25Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

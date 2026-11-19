@@ -1,9 +1,9 @@
 {
   "component": "kuberay",
   "repo": "red-hat-data-services/kuberay",
-  "commit_sha": "92cba4a581d75481baf213fbd0ab05290da68989",
-  "extracted_at": "2026-11-19T06:56:42Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "commit_sha": "77c605ea9d1017e4326c2f6636ab220274d17e9e",
+  "extracted_at": "2026-11-19T16:50:29Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "rbac": {
     "kubebuilder_markers": [
@@ -1144,6 +1144,52 @@
       ]
     },
     {
+      "path": "historyserver/Dockerfile.collector.konflux",
+      "base_image": "${RUNTIME_IMAGE}",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset@sha256:5f0dead6a152de46a19f51322ea8e06d0d9f282a4937d663cf5a226cb8744bc8"
+      ],
+      "stages": 2,
+      "user": "1000:1000",
+      "issues": [
+        "Unpinned base image: ${RUNTIME_IMAGE}"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "/historyserver/output/bin/collector"
+          ],
+          "destination": "/usr/local/bin/collector",
+          "from_stage": "builder",
+          "original_sources": [
+            "historyserver/go.mod",
+            "historyserver/go.sum",
+            "historyserver/cmd/collector/main.go",
+            "historyserver/pkg/collector/",
+            "historyserver/pkg/storage/",
+            "historyserver/pkg/utils/",
+            "historyserver/pkg/eventserver/",
+            "historyserver/pkg/compression/"
+          ]
+        }
+      ],
+      "build_commands": [
+        {
+          "tool": "go",
+          "command": "build",
+          "entry_point": "./cmd/collector/main.go",
+          "output": "output/bin/collector"
+        }
+      ]
+    },
+    {
       "path": "historyserver/Dockerfile.historyserver",
       "base_image": "gcr.io/distroless/base-debian12:nonroot",
       "build_stage_images": [
@@ -1197,6 +1243,54 @@
             "historyserver/output/bin/historyserver-${TARGETARCH}"
           ],
           "destination": "/usr/local/bin/historyserver"
+        }
+      ]
+    },
+    {
+      "path": "historyserver/Dockerfile.konflux",
+      "base_image": "${RUNTIME_IMAGE}",
+      "build_stage_images": [
+        "registry.access.redhat.com/ubi9/go-toolset@sha256:5f0dead6a152de46a19f51322ea8e06d0d9f282a4937d663cf5a226cb8744bc8"
+      ],
+      "stages": 2,
+      "user": "65532:65532",
+      "issues": [
+        "Unpinned base image: ${RUNTIME_IMAGE}"
+      ],
+      "architectures": [
+        "multi-arch"
+      ],
+      "build_args": {
+        "TARGETARCH": "",
+        "TARGETOS": ""
+      },
+      "copy_instructions": [
+        {
+          "sources": [
+            "/historyserver/output/bin/historyserver"
+          ],
+          "destination": "/usr/local/bin/historyserver",
+          "from_stage": "builder",
+          "original_sources": [
+            "historyserver/go.mod",
+            "historyserver/go.sum",
+            "historyserver/cmd/historyserver/main.go",
+            "historyserver/pkg/collector/",
+            "historyserver/pkg/historyserver/",
+            "historyserver/pkg/storage/",
+            "historyserver/pkg/utils/",
+            "historyserver/pkg/eventserver/",
+            "historyserver/pkg/compression/",
+            "historyserver/html/"
+          ]
+        }
+      ],
+      "build_commands": [
+        {
+          "tool": "go",
+          "command": "build",
+          "entry_point": "./cmd/historyserver/main.go",
+          "output": "output/bin/historyserver"
         }
       ]
     },
@@ -2183,10 +2277,22 @@
       "source": "apiserversdk/util/config.go"
     },
     {
+      "name": "commitID",
+      "value": "unknown",
+      "category": "general",
+      "source": "historyserver/cmd/collector/main.go"
+    },
+    {
       "name": "defaultDashboardAddress",
       "value": "http://localhost:8265",
       "category": "general",
       "source": "historyserver/cmd/collector/main.go"
+    },
+    {
+      "name": "commitID",
+      "value": "unknown",
+      "category": "general",
+      "source": "historyserver/cmd/historyserver/main.go"
     },
     {
       "name": "bufWriterSize",
@@ -9043,7 +9149,7 @@
     "status_conditions": "none",
     "webhooks": "rich"
   },
-  "summary": "kuberay is a Kubernetes component. deploying 4 workload(s) (kuberay-operator, kuberay-operator, kuberay-operator, kuberay-operator) with 4 container(s). watching 12 resource type(s). exposing 2 service(s) on ports: 443, 8080. Dockerfile EXPOSE ports: 3000. with 6 webhook(s) (4 validating, 2 mutating). connecting to external services: azure-blob, gcs, grpc, requests, urllib. runtime dependencies: MinIO/S3, Redis, S3, kuberay-apiserver-service. with 991 operator config constants (20 image references, 150 env vars). exposing 8 Prometheus metrics. Python k8s client with 30 API call(s) and 1 CRD kind reference(s). integrates with Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. references components: vllm (import).",
+  "summary": "kuberay is a Kubernetes component. deploying 4 workload(s) (kuberay-operator, kuberay-operator, kuberay-operator, kuberay-operator) with 4 container(s). watching 12 resource type(s). exposing 2 service(s) on ports: 443, 8080. Dockerfile EXPOSE ports: 3000. with 6 webhook(s) (4 validating, 2 mutating). connecting to external services: azure-blob, gcs, grpc, requests, urllib. runtime dependencies: MinIO/S3, Redis, S3, kuberay-apiserver-service. with 993 operator config constants (20 image references, 150 env vars). exposing 8 Prometheus metrics. Python k8s client with 30 API call(s) and 1 CRD kind reference(s). integrates with Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. references components: vllm (import).",
   "go_ast_mode": "full",
   "security_annotations": [
     {
@@ -9654,6 +9760,69 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "docker/setup-docker-action@v5",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"docker/setup-docker-action\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/login-action@v4",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/setup-buildx-action@v4",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/build-push-action@v7",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"docker/build-push-action\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-go@v6",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"actions/setup-go\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-go@v6",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"actions/setup-go\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v6",
+      "source": ".github/workflows/test-job.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "docker/login-action@v4",
       "source": ".github/workflows/test-job.yaml",
       "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -9706,69 +9875,6 @@
       "resource": "pre-commit/action@v3.0.1",
       "source": ".github/workflows/test-job.yaml",
       "description": "Action \"pre-commit/action\" uses mutable ref \"v3.0.1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/setup-go@v6",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"actions/setup-go\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v6",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/setup-docker-action@v5",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"docker/setup-docker-action\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/login-action@v4",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/setup-buildx-action@v4",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/build-push-action@v7",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"docker/build-push-action\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/setup-go@v6",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"actions/setup-go\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v6",
-      "source": ".github/workflows/test-job.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/vllm-spyre](https://github.com/red-hat-data-services/vllm-spyre) |
 | Commit | [68f7f31a79ce19a46fa518e0b589cc38ed38430f](https://github.com/red-hat-data-services/vllm-spyre/commit/68f7f31a79ce19a46fa518e0b589cc38ed38430f) |
-| Extracted | 2026-11-19T06:59:21Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:53:41Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

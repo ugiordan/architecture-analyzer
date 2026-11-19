@@ -4,9 +4,9 @@
     "KServe"
   ],
   "repo": "opendatahub-io/kserve",
-  "commit_sha": "68c4696cf142be2621b59b52ba197a3e31bd900c",
-  "extracted_at": "2026-11-19T06:57:57Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "commit_sha": "1eaf4aede4fee0509aee44be17ade1119b1ae521",
+  "extracted_at": "2026-11-19T16:52:42Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "crds": [
     {
@@ -386,8 +386,8 @@
       "validation_rules": [
         "self.artifact == oldSelf.artifact",
         "!has(self.nodeGroupRef) || self.nodeGroupRef.name.size() \u003e 0",
-        "self != '.' \u0026\u0026 self.split('/').all(segment, segment != '..')",
-        "self != '/' \u0026\u0026 self.split('/').all(segment, segment != '.' \u0026\u0026 segment != '..')"
+        "self != '/' \u0026\u0026 self.split('/').all(segment, segment != '.' \u0026\u0026 segment != '..')",
+        "self != '.' \u0026\u0026 self.split('/').all(segment, segment != '..')"
       ],
       "source": "config/crd/full/kernelcache/serving.kserve.io_kernelcaches.yaml"
     },
@@ -564,6 +564,7 @@
       ],
       "fields_count": 7327,
       "validation_rules": [
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.wva) \u0026\u0026 has(self.keda))",
@@ -596,85 +597,6 @@
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
-        "self.filter(f, f.type == 'CORS').size() \u003c= 1",
-        "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
-        "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
-        "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
-        "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
-        "!(has(self.cors) \u0026\u0026 self.type != 'CORS')",
-        "!(!has(self.cors) \u0026\u0026 self.type == 'CORS')",
-        "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
-        "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
-        "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
-        "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
-        "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
-        "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
-        "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
-        "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
-        "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
-        "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
-        "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
-        "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "self.protocol == 'GRPC' ? has(self.grpc) : true",
-        "has(self.grpc) ? self.protocol == 'GRPC' : true",
-        "self.protocol == 'HTTP' ? has(self.http) : true",
-        "has(self.http) ? self.protocol == 'HTTP' : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
-        "self.filter(f, f.type == 'CORS').size() \u003c= 1",
-        "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
-        "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
-        "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
-        "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
-        "!(has(self.cors) \u0026\u0026 self.type != 'CORS')",
-        "!(!has(self.cors) \u0026\u0026 self.type == 'CORS')",
-        "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
-        "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
-        "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
-        "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
-        "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
-        "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
-        "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
-        "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
-        "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
-        "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
-        "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
-        "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "self.protocol == 'GRPC' ? has(self.grpc) : true",
-        "has(self.grpc) ? self.protocol == 'GRPC' : true",
-        "self.protocol == 'HTTP' ? has(self.http) : true",
-        "has(self.http) ? self.protocol == 'HTTP' : true",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
         "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
         "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
@@ -689,9 +611,87 @@
         "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
         "!has(self.cookieConfig) || self.type == 'Cookie'",
         "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
+        "self.filter(f, f.type == 'CORS').size() \u003c= 1",
+        "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
+        "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
+        "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
+        "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
+        "!(has(self.cors) \u0026\u0026 self.type != 'CORS')",
+        "!(!has(self.cors) \u0026\u0026 self.type == 'CORS')",
+        "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
+        "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
+        "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
+        "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
+        "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
+        "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
+        "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
+        "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
+        "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
+        "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
+        "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
+        "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "self.protocol == 'GRPC' ? has(self.grpc) : true",
+        "has(self.grpc) ? self.protocol == 'GRPC' : true",
+        "self.protocol == 'HTTP' ? has(self.http) : true",
+        "has(self.http) ? self.protocol == 'HTTP' : true",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "!(self.exists(f, f.type == 'RequestRedirect') \u0026\u0026 self.exists(f, f.type == 'URLRewrite'))",
+        "self.filter(f, f.type == 'CORS').size() \u003c= 1",
+        "self.filter(f, f.type == 'RequestHeaderModifier').size() \u003c= 1",
+        "self.filter(f, f.type == 'ResponseHeaderModifier').size() \u003c= 1",
+        "self.filter(f, f.type == 'RequestRedirect').size() \u003c= 1",
+        "self.filter(f, f.type == 'URLRewrite').size() \u003c= 1",
+        "!(has(self.cors) \u0026\u0026 self.type != 'CORS')",
+        "!(!has(self.cors) \u0026\u0026 self.type == 'CORS')",
+        "!(has(self.requestHeaderModifier) \u0026\u0026 self.type != 'RequestHeaderModifier')",
+        "!(!has(self.requestHeaderModifier) \u0026\u0026 self.type == 'RequestHeaderModifier')",
+        "!(has(self.responseHeaderModifier) \u0026\u0026 self.type != 'ResponseHeaderModifier')",
+        "!(!has(self.responseHeaderModifier) \u0026\u0026 self.type == 'ResponseHeaderModifier')",
+        "!(has(self.requestMirror) \u0026\u0026 self.type != 'RequestMirror')",
+        "!(!has(self.requestMirror) \u0026\u0026 self.type == 'RequestMirror')",
+        "!(has(self.requestRedirect) \u0026\u0026 self.type != 'RequestRedirect')",
+        "!(!has(self.requestRedirect) \u0026\u0026 self.type == 'RequestRedirect')",
+        "!(has(self.urlRewrite) \u0026\u0026 self.type != 'URLRewrite')",
+        "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
+        "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
+        "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "self.protocol == 'GRPC' ? has(self.grpc) : true",
+        "has(self.grpc) ? self.protocol == 'GRPC' : true",
+        "self.protocol == 'HTTP' ? has(self.http) : true",
+        "has(self.http) ? self.protocol == 'HTTP' : true",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "self.kind != 'Service' || has(self.port)",
-        "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true"
+        "self.all(p1, self.exists_one(p2, p1.number==p2.number))"
       ],
       "source": "config/crd/full/llmisvc/serving.kserve.io_llminferenceservices.yaml"
     },
@@ -723,10 +723,10 @@
         "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
         "!has(self.keda) || !has(self.keda.idleReplicaCount) || has(self.minReplicas)",
         "!has(self.keda) || !has(self.keda.idleReplicaCount) || !has(self.minReplicas) || self.keda.idleReplicaCount \u003c self.minReplicas",
+        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "!has(self.keda) || !has(self.keda.advanced) || (size(self.keda.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.keda.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.keda.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.keda.advanced.scalingModifiers.metricType) == 0)",
         "!(has(self.hpa) \u0026\u0026 has(self.keda))",
         "has(self.hpa) || has(self.keda)",
-        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "!(has(self.wva) \u0026\u0026 has(self.keda))",
         "!has(self.keda) || size(self.keda.triggers) \u003e 0",
@@ -3131,7 +3131,7 @@
       "type": "For",
       "gvk": "apis/v1alpha1/Kserve",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:183"
+      "source": "kserve-module/pkg/kservemodule/setup.go:186"
     },
     {
       "type": "For",
@@ -3203,13 +3203,13 @@
       "type": "Owns",
       "gvk": "/v1/ConfigMap",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:184"
+      "source": "kserve-module/pkg/kservemodule/setup.go:187"
     },
     {
       "type": "Owns",
       "gvk": "/v1/PersistentVolume",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:188"
+      "source": "kserve-module/pkg/kservemodule/setup.go:191"
     },
     {
       "type": "Owns",
@@ -3221,7 +3221,7 @@
       "type": "Owns",
       "gvk": "/v1/PersistentVolumeClaim",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:189"
+      "source": "kserve-module/pkg/kservemodule/setup.go:192"
     },
     {
       "type": "Owns",
@@ -3239,7 +3239,7 @@
       "type": "Owns",
       "gvk": "/v1/Secret",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:185"
+      "source": "kserve-module/pkg/kservemodule/setup.go:188"
     },
     {
       "type": "Owns",
@@ -3257,7 +3257,7 @@
       "type": "Owns",
       "gvk": "/v1/Service",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:186"
+      "source": "kserve-module/pkg/kservemodule/setup.go:189"
     },
     {
       "type": "Owns",
@@ -3269,19 +3269,19 @@
       "type": "Owns",
       "gvk": "/v1/ServiceAccount",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:187"
+      "source": "kserve-module/pkg/kservemodule/setup.go:190"
     },
     {
       "type": "Owns",
       "gvk": "admissionregistration.k8s.io/v1/MutatingWebhookConfiguration",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:197"
+      "source": "kserve-module/pkg/kservemodule/setup.go:200"
     },
     {
       "type": "Owns",
       "gvk": "admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:198"
+      "source": "kserve-module/pkg/kservemodule/setup.go:201"
     },
     {
       "type": "Owns",
@@ -3311,7 +3311,7 @@
       "type": "Owns",
       "gvk": "apps/v1/DaemonSet",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:191"
+      "source": "kserve-module/pkg/kservemodule/setup.go:194"
     },
     {
       "type": "Owns",
@@ -3335,7 +3335,7 @@
       "type": "Owns",
       "gvk": "apps/v1/Deployment",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:190"
+      "source": "kserve-module/pkg/kservemodule/setup.go:193"
     },
     {
       "type": "Owns",
@@ -3401,7 +3401,7 @@
       "type": "Owns",
       "gvk": "networking.k8s.io/v1/NetworkPolicy",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:192"
+      "source": "kserve-module/pkg/kservemodule/setup.go:195"
     },
     {
       "type": "Owns",
@@ -3413,25 +3413,25 @@
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/ClusterRole",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:195"
+      "source": "kserve-module/pkg/kservemodule/setup.go:198"
     },
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/ClusterRoleBinding",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:196"
+      "source": "kserve-module/pkg/kservemodule/setup.go:199"
     },
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/Role",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:193"
+      "source": "kserve-module/pkg/kservemodule/setup.go:196"
     },
     {
       "type": "Owns",
       "gvk": "rbac.authorization.k8s.io/v1/RoleBinding",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:194"
+      "source": "kserve-module/pkg/kservemodule/setup.go:197"
     },
     {
       "type": "Owns",
@@ -3443,7 +3443,7 @@
       "type": "Owns",
       "gvk": "security/v1/SecurityContextConstraints",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:244"
+      "source": "kserve-module/pkg/kservemodule/setup.go:247"
     },
     {
       "type": "Owns",
@@ -3461,7 +3461,7 @@
       "type": "Watches",
       "gvk": "/v1/ConfigMap",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:204"
+      "source": "kserve-module/pkg/kservemodule/setup.go:207"
     },
     {
       "type": "Watches",
@@ -3509,7 +3509,7 @@
       "type": "Watches",
       "gvk": "/v1/Node",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:214"
+      "source": "kserve-module/pkg/kservemodule/setup.go:217"
     },
     {
       "type": "Watches",
@@ -3605,7 +3605,7 @@
       "type": "Watches",
       "gvk": "node/v1/RuntimeClass",
       "controller": "KserveModuleReconciler",
-      "source": "kserve-module/pkg/kservemodule/setup.go:221"
+      "source": "kserve-module/pkg/kservemodule/setup.go:224"
     },
     {
       "type": "Watches",
@@ -4761,7 +4761,7 @@
       }
     ],
     "issues": [
-      "k8s.io modules span multiple minor versions: v0.37 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/code-generator, k8s.io/component-helpers); v0.35 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go)"
+      "k8s.io modules span multiple minor versions: v0.35 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go); v0.37 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go, k8s.io/code-generator, k8s.io/component-helpers)"
     ]
   },
   "secrets_referenced": [
@@ -16169,20 +16169,26 @@
       "source": "kserve-module/pkg/kservemodule/modelexpress.go"
     },
     {
-      "name": "ocsfDependencyMessage",
-      "value": "LLMInferenceService OCSF audit logging requires RHCL 1.5.1 or later",
+      "name": "authorinoCRDName",
+      "value": "authorinos.operator.authorino.kuadrant.io",
       "category": "general",
       "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
     },
     {
-      "name": "reasonAuditLoggingConfigured",
-      "value": "OCSFAuditLoggingConfigured",
+      "name": "ocsfDependencyMessage",
+      "value": "LLMInferenceService OCSF audit logging is unavailable",
       "category": "general",
       "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
     },
     {
       "name": "reasonAuditLoggingDisabled",
       "value": "Disabled",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
+    },
+    {
+      "name": "reasonAuditLoggingEnforced",
+      "value": "OCSFAuditLoggingEnforced",
       "category": "general",
       "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
     },
@@ -16201,6 +16207,24 @@
     {
       "name": "reasonRHCLDependencyUnavailable",
       "value": "RHCLDependencyUnavailable",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
+    },
+    {
+      "name": "reasonTelemetryPolicyNotAccepted",
+      "value": "TelemetryPolicyNotAccepted",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
+    },
+    {
+      "name": "reasonTelemetryPolicyNotEnforced",
+      "value": "TelemetryPolicyNotEnforced",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
+    },
+    {
+      "name": "reasonTelemetryPolicyPending",
+      "value": "TelemetryPolicyPending",
       "category": "general",
       "source": "kserve-module/pkg/kservemodule/ocsf_audit.go"
     },
@@ -16265,20 +16289,45 @@
       "source": "kserve-module/pkg/kservemodule/setup.go"
     },
     {
-      "name": "ConditionAuditLoggingReady",
-      "value": "AuditLoggingReady",
-      "category": "general",
-      "source": "kserve-module/pkg/kservemodule/status.go"
-    },
-    {
       "name": "ConditionDependenciesAvailable",
       "value": "DependenciesAvailable",
       "category": "general",
       "source": "kserve-module/pkg/kservemodule/status.go"
     },
     {
+      "name": "ConditionISVCAuditLoggingAvailable",
+      "value": "InferenceServiceAuditLoggingAvailable",
+      "category": "general",
+      "doc": "Availability describes what can be configured. InferenceService reports\nactual configuration through AuditLoggingConfigured on each workload.",
+      "source": "kserve-module/pkg/kservemodule/status.go"
+    },
+    {
       "name": "ConditionKServeReady",
       "value": "KServeReady",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/status.go"
+    },
+    {
+      "name": "ConditionLLMISVCAuditLoggingAvailable",
+      "value": "LLMInferenceServiceAuditLoggingAvailable",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/status.go"
+    },
+    {
+      "name": "ConditionLLMISVCCustomAuditFieldsAvailable",
+      "value": "LLMInferenceServiceCustomAuditFieldsAvailable",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/status.go"
+    },
+    {
+      "name": "ConditionLLMISVCOCSFAuditLoggingAvailable",
+      "value": "LLMInferenceServiceOCSFAuditLoggingAvailable",
+      "category": "general",
+      "source": "kserve-module/pkg/kservemodule/status.go"
+    },
+    {
+      "name": "ConditionLLMISVCOCSFAuditLoggingReady",
+      "value": "LLMInferenceServiceOCSFAuditLoggingReady",
       "category": "general",
       "source": "kserve-module/pkg/kservemodule/status.go"
     },
@@ -16324,6 +16373,12 @@
       "value": "RemovalBlocked",
       "category": "general",
       "doc": "ReasonRemovalBlocked is the reason used when a component set to Removed\nstays deployed because resources only it can finalize still exist.",
+      "source": "kserve-module/pkg/kservemodule/status.go"
+    },
+    {
+      "name": "legacyConditionAuditLoggingReady",
+      "value": "AuditLoggingReady",
+      "category": "general",
       "source": "kserve-module/pkg/kservemodule/status.go"
     },
     {
@@ -33757,7 +33812,7 @@
     "status_conditions": "rich",
     "webhooks": "rich"
   },
-  "summary": "kserve (also known as: KServe) is a Kubernetes component. managing 17 CRD(s): ClusterStorageContainer, KernelCacheCapture, KernelCacheNodeGroup, KernelCacheNode, KernelCache, LLMInferenceServiceConfig, LLMInferenceService, LocalModelCache, LocalModelNamespaceCache, LocalModelNodeGroup, LocalModelNode, ClusterServingRuntime, InferenceGraph, InferenceService, ServingRuntime, TrainedModel, InferencePool. deploying 4 workload(s) (kserve-controller-manager, llmisvc-controller-manager, kserve-localmodel-controller-manager, kserve-module-controller-manager) with 4 container(s). watching 48 resource type(s). exposing 6 service(s) on ports: 443, 8443. with 25 webhook(s) (15 validating, 6 mutating). protected by 5 network policy/policies. connecting to external services: azure-blob, gcs, httpx, requests, s3, urllib, weaviate. runtime dependencies: OpenTelemetry Collector, knative-local-gateway, kubernetes. defining 72 API spec type(s) across 146 struct(s) with 479 total fields. with 2119 operator config constants (28 image references, 17 env vars). following 14 reconciliation steps across 11 controller(s). reporting 47 status condition types. with 3 ingress route(s). Python k8s client with 85 API call(s) and 1 CRD kind reference(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-auth-proxy for authentication. kustomize overlays: config/base, config/certmanager/kserve, config/certmanager, config/certmanager/llmisvc, config/certmanager/localmodel, config/clusterresources, config/components/kserve, config/components/llmisvc, config/components/localmodel, config/configmap, config/crd/external, config/crd/full/clusterstoragecontainer, config/crd/full/kernelcache, config/crd/full, config/crd/full/llmisvc, config/crd/full/localmodel, config/crd, config/crd/minimal/clusterstoragecontainer, config/crd/minimal/kernelcache, config/crd/minimal, config/crd/minimal/llmisvc, config/crd/minimal/localmodel, config/default, config/kernelcachenodes, config/llmisvc, config/llmisvcconfig, config/localmodelnodes, config/localmodels, config/manager, config/monitoring/llmisvc/dashboards, config/monitoring/llmisvc/dashboards-odc, config/monitoring/llmisvc, config/overlays/addons/kserve, config/overlays/addons/llmisvc, config/overlays/addons/localmodel, config/overlays/all, config/overlays/charts-localmodel, config/overlays/dev-image-config, config/overlays/development, config/overlays/kubeflow, config/overlays/odh/accelerators, config/overlays/odh/accelerators-fast/fast-1, config/overlays/odh/accelerators-fast/fast-2, config/overlays/odh/accelerators-fast, config/overlays/odh/confidential, config/overlays/odh, config/overlays/odh/llmisvcconfig, config/overlays/odh/rbac/inferencegraph, config/overlays/odh/rbac/inferenceservice, config/overlays/odh/rbac, config/overlays/odh/rbac/llmisvc, config/overlays/odh/rbac/models, config/overlays/odh/rbac/tls, config/overlays/odh-crds, config/overlays/odh-modelcache, config/overlays/odh-modelcache/rbac, config/overlays/odh-modelcache/rbac/localmodel, config/overlays/odh-modelcache/rbac/localmodelnode, config/overlays/odh-test/cert-manager, config/overlays/odh-test, config/overlays/odh-xks/cert-manager, config/overlays/odh-xks, config/overlays/standalone/kserve, config/overlays/standalone/llmisvc, config/overlays/test-llmisvc, config/overlays/test-modelcache, config/rbac/kernelcache, config/rbac/kernelcachenode, config/rbac, config/rbac/llmisvc, config/rbac/localmodel, config/rbac/localmodelnode, config/runtimes, config/storagecontainers, config/webhook, config/webhook/llmisvc, config/webhook/localmodel. references components: vllm (import). mounts 1 ConfigMap(s) as volumes: odh-trusted-ca-bundle.",
+  "summary": "kserve (also known as: KServe) is a Kubernetes component. managing 17 CRD(s): ClusterStorageContainer, KernelCacheCapture, KernelCacheNodeGroup, KernelCacheNode, KernelCache, LLMInferenceServiceConfig, LLMInferenceService, LocalModelCache, LocalModelNamespaceCache, LocalModelNodeGroup, LocalModelNode, ClusterServingRuntime, InferenceGraph, InferenceService, ServingRuntime, TrainedModel, InferencePool. deploying 4 workload(s) (kserve-controller-manager, llmisvc-controller-manager, kserve-localmodel-controller-manager, kserve-module-controller-manager) with 4 container(s). watching 48 resource type(s). exposing 6 service(s) on ports: 443, 8443. with 25 webhook(s) (15 validating, 6 mutating). protected by 5 network policy/policies. connecting to external services: azure-blob, gcs, httpx, requests, s3, urllib, weaviate. runtime dependencies: OpenTelemetry Collector, knative-local-gateway, kubernetes. defining 72 API spec type(s) across 146 struct(s) with 479 total fields. with 2128 operator config constants (28 image references, 17 env vars). following 14 reconciliation steps across 11 controller(s). reporting 47 status condition types. with 3 ingress route(s). Python k8s client with 85 API call(s) and 1 CRD kind reference(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-auth-proxy for authentication. kustomize overlays: config/base, config/certmanager/kserve, config/certmanager, config/certmanager/llmisvc, config/certmanager/localmodel, config/clusterresources, config/components/kserve, config/components/llmisvc, config/components/localmodel, config/configmap, config/crd/external, config/crd/full/clusterstoragecontainer, config/crd/full/kernelcache, config/crd/full, config/crd/full/llmisvc, config/crd/full/localmodel, config/crd, config/crd/minimal/clusterstoragecontainer, config/crd/minimal/kernelcache, config/crd/minimal, config/crd/minimal/llmisvc, config/crd/minimal/localmodel, config/default, config/kernelcachenodes, config/llmisvc, config/llmisvcconfig, config/localmodelnodes, config/localmodels, config/manager, config/monitoring/llmisvc/dashboards, config/monitoring/llmisvc/dashboards-odc, config/monitoring/llmisvc, config/overlays/addons/kserve, config/overlays/addons/llmisvc, config/overlays/addons/localmodel, config/overlays/all, config/overlays/charts-localmodel, config/overlays/dev-image-config, config/overlays/development, config/overlays/kubeflow, config/overlays/odh/accelerators, config/overlays/odh/accelerators-fast/fast-1, config/overlays/odh/accelerators-fast/fast-2, config/overlays/odh/accelerators-fast, config/overlays/odh/confidential, config/overlays/odh, config/overlays/odh/llmisvcconfig, config/overlays/odh/rbac/inferencegraph, config/overlays/odh/rbac/inferenceservice, config/overlays/odh/rbac, config/overlays/odh/rbac/llmisvc, config/overlays/odh/rbac/models, config/overlays/odh/rbac/tls, config/overlays/odh-crds, config/overlays/odh-modelcache, config/overlays/odh-modelcache/rbac, config/overlays/odh-modelcache/rbac/localmodel, config/overlays/odh-modelcache/rbac/localmodelnode, config/overlays/odh-test/cert-manager, config/overlays/odh-test, config/overlays/odh-xks/cert-manager, config/overlays/odh-xks, config/overlays/standalone/kserve, config/overlays/standalone/llmisvc, config/overlays/test-llmisvc, config/overlays/test-modelcache, config/rbac/kernelcache, config/rbac/kernelcachenode, config/rbac, config/rbac/llmisvc, config/rbac/localmodel, config/rbac/localmodelnode, config/runtimes, config/storagecontainers, config/webhook, config/webhook/llmisvc, config/webhook/localmodel. references components: vllm (import). mounts 1 ConfigMap(s) as volumes: odh-trusted-ca-bundle.",
   "go_ast_mode": "full",
   "security_annotations": [
     {
@@ -33831,65 +33886,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.paddle.imagePullPolicy",
+      "field": "spec.predictor.model.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.paddle.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.pytorch.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.pytorch.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.lightgbm.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.lightgbm.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.sklearn.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.sklearn.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.model.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -33903,57 +33902,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.model.imagePullPolicy",
+      "field": "spec.predictor.onnx.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.model.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.huggingface.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.huggingface.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.xgboost.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.xgboost.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.pmml.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.pmml.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -33967,9 +33918,17 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.onnx.imagePullPolicy",
+      "field": "spec.predictor.tensorflow.image",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.tensorflow.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -33991,17 +33950,113 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.tensorflow.imagePullPolicy",
+      "field": "spec.predictor.xgboost.image",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.tensorflow.image",
+      "field": "spec.predictor.xgboost.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.pytorch.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.pytorch.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.paddle.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.paddle.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.sklearn.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.sklearn.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.sklearn.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.huggingface.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.huggingface.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.lightgbm.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.lightgbm.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.pmml.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.pmml.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pmml.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "KUSTOMIZE_SECURITY_DELETION",

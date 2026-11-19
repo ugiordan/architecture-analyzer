@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/fms-guardrails-orchestrator](https://github.com/red-hat-data-services/fms-guardrails-orchestrator) |
 | Commit | [b83b104bbd26eb8c8bb7587ce0776910c9d5f897](https://github.com/red-hat-data-services/fms-guardrails-orchestrator/commit/b83b104bbd26eb8c8bb7587ce0776910c9d5f897) |
-| Extracted | 2026-11-19T06:56:40Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:51:14Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

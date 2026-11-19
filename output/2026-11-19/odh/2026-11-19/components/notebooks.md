@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/notebooks](https://github.com/opendatahub-io/notebooks) |
 | Commit | [91b1eaab0e7cc51de9cf3a7a554bd3d604f5b122](https://github.com/opendatahub-io/notebooks/commit/91b1eaab0e7cc51de9cf3a7a554bd3d604f5b122) |
-| Extracted | 2026-11-19T06:51:57Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:49:14Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -44,31 +44,31 @@
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 **notebook / notebook**
 
-- Ports: 0/TCP (notebook-port)
+- Ports: 8888/TCP (notebook-port)
 
 
 

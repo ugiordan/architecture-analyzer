@@ -6,8 +6,8 @@
   ],
   "repo": "opendatahub-io/opendatahub-operator",
   "commit_sha": "b68a6fb48734ef7d2de91a1383c34bf68c47499a",
-  "extracted_at": "2026-11-19T06:52:00Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:46:22Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "rbac": {
     "cluster_roles": [
@@ -3700,40 +3700,6 @@
     {
       "name": "Defaulter-webhook",
       "type": "mutating",
-      "path": "/mutate-datasciencecluster-v3",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "mutations": [
-        {
-          "field": "instancesNamespace",
-          "operation": "set",
-          "condition": "aiHub.ManagementState == operatorv1.Managed \u0026\u0026 aiHub.InstancesNamespace == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
-            "line": 105
-          }
-        },
-        {
-          "field": "nim.managementState",
-          "operation": "set",
-          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
-            "line": 115
-          }
-        }
-      ],
-      "target_type": "Defaulter"
-    },
-    {
-      "name": "Defaulter-webhook",
-      "type": "mutating",
       "path": "/mutate-datasciencecluster-v2",
       "sources": [
         {
@@ -3766,6 +3732,40 @@
       "target_type": "Defaulter"
     },
     {
+      "name": "Defaulter-webhook",
+      "type": "mutating",
+      "path": "/mutate-datasciencecluster-v3",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "mutations": [
+        {
+          "field": "instancesNamespace",
+          "operation": "set",
+          "condition": "aiHub.ManagementState == operatorv1.Managed \u0026\u0026 aiHub.InstancesNamespace == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
+            "line": 105
+          }
+        },
+        {
+          "field": "nim.managementState",
+          "operation": "set",
+          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/opendatahub-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
+            "line": 115
+          }
+        }
+      ],
+      "target_type": "Defaulter"
+    },
+    {
       "name": "Injector-webhook",
       "type": "mutating",
       "path": "/mutate-prometheus-monitors",
@@ -3776,18 +3776,6 @@
         }
       ],
       "target_type": "Injector"
-    },
-    {
-      "name": "Validator-webhook",
-      "type": "validating",
-      "path": "/validate-datasciencecluster-v3",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "Validator"
     },
     {
       "name": "Validator-webhook",
@@ -3829,6 +3817,18 @@
       "name": "Validator-webhook",
       "type": "validating",
       "path": "/validate-datasciencecluster-v2",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "Validator"
+    },
+    {
+      "name": "Validator-webhook",
+      "type": "validating",
+      "path": "/validate-datasciencecluster-v3",
       "sources": [
         {
           "type": "go_ast",

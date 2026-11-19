@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/workload-variant-autoscaler](https://github.com/red-hat-data-services/workload-variant-autoscaler) |
 | Commit | [68bf979de148f8c2f212cfd901b7754470bb839a](https://github.com/red-hat-data-services/workload-variant-autoscaler/commit/68bf979de148f8c2f212cfd901b7754470bb839a) |
-| Extracted | 2026-11-19T06:58:14Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:52:08Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -35,7 +35,7 @@
 
 - Command: `/manager`
 - Args: `--leader-elect=true --health-probe-bind-address=:8081 --config-file=/etc/wva/config.yaml --metrics-bind-address=:8443 --metrics-secure=true`
-- Ports: 0/TCP (healthz), 0/TCP (https)
+- Ports: 8081/TCP (healthz), 8443/TCP (https)
 
 
 

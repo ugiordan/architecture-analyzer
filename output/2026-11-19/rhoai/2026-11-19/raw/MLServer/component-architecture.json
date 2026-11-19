@@ -2,8 +2,8 @@
   "component": "MLServer",
   "repo": "red-hat-data-services/MLServer",
   "commit_sha": "cec8c2e5bde83bbc0a6d798d20ce3958c2182a53",
-  "extracted_at": "2026-11-19T06:58:42Z",
-  "analyzer_version": "305a3627b2349b72dd6253f49c9efa7c34c97e21",
+  "extracted_at": "2026-11-19T16:52:48Z",
+  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
   "schema_version": "2",
   "rbac": {},
   "dependencies": {
@@ -1071,6 +1071,27 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "actions/checkout@v4",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-python@v5",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/setup-python\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "snok/install-poetry@v1",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"snok/install-poetry\" uses mutable ref \"v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "easimon/maximize-build-space@master",
       "source": ".github/workflows/release.yml",
       "description": "Action \"easimon/maximize-build-space\" uses mutable ref \"master\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -1202,31 +1223,52 @@
       "description": "Action \"docker/login-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
+      "type": "GHA_MISSING_PERMISSIONS",
+      "severity": "high",
+      "source": ".github/workflows/security.yml",
+      "description": "Workflow \"Security Scan\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+    },
+    {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
       "resource": "actions/checkout@v4",
-      "source": ".github/workflows/release.yml",
+      "source": ".github/workflows/security.yml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/setup-python@v5",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"actions/setup-python\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "resource": "snyk/actions/python-3.10@master",
+      "source": ".github/workflows/security.yml",
+      "description": "Action \"snyk/actions/python-3.10\" uses mutable ref \"master\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "snok/install-poetry@v1",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"snok/install-poetry\" uses mutable ref \"v1\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+      "resource": "github/codeql-action/upload-sarif@v3",
+      "source": ".github/workflows/security.yml",
+      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
-      "type": "GHA_MISSING_PERMISSIONS",
-      "severity": "high",
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v4",
       "source": ".github/workflows/security.yml",
-      "description": "Workflow \"Security Scan\" has no top-level permissions block. Without explicit permissions, the GITHUB_TOKEN gets default permissions which may be overly broad (write access to contents, packages, etc.)."
+      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "snyk/actions/python-3.10@master",
+      "source": ".github/workflows/security.yml",
+      "description": "Action \"snyk/actions/python-3.10\" uses mutable ref \"master\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "github/codeql-action/upload-sarif@v3",
+      "source": ".github/workflows/security.yml",
+      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -1248,48 +1290,6 @@
       "resource": "snyk/actions/docker@master",
       "source": ".github/workflows/security.yml",
       "description": "Action \"snyk/actions/docker\" uses mutable ref \"master\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "github/codeql-action/upload-sarif@v3",
-      "source": ".github/workflows/security.yml",
-      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v4",
-      "source": ".github/workflows/security.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "snyk/actions/python-3.10@master",
-      "source": ".github/workflows/security.yml",
-      "description": "Action \"snyk/actions/python-3.10\" uses mutable ref \"master\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "github/codeql-action/upload-sarif@v3",
-      "source": ".github/workflows/security.yml",
-      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v4",
-      "source": ".github/workflows/security.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "snyk/actions/python-3.10@master",
-      "source": ".github/workflows/security.yml",
-      "description": "Action \"snyk/actions/python-3.10\" uses mutable ref \"master\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

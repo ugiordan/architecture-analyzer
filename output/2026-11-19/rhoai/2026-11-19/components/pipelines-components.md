@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/pipelines-components](https://github.com/red-hat-data-services/pipelines-components) |
 | Commit | [ee0c53d00755590ed1d8f6d8070c5b685c1a3de0](https://github.com/red-hat-data-services/pipelines-components/commit/ee0c53d00755590ed1d8f6d8070c5b685c1a3de0) |
-| Extracted | 2026-11-19T06:59:06Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:53:11Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 

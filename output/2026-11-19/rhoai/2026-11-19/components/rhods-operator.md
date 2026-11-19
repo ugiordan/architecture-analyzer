@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/rhods-operator](https://github.com/red-hat-data-services/rhods-operator) |
 | Aliases | opendatahub-operator, RHODS operator |
 | Commit | [382a621fe2120718c74bf08e6c8ddc773f1bd0a9](https://github.com/red-hat-data-services/rhods-operator/commit/382a621fe2120718c74bf08e6c8ddc773f1bd0a9) |
-| Extracted | 2026-11-19T06:52:08Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:48:37Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -61,8 +61,8 @@
 
 | Name | Pod Selector | Ingress Rules | Egress Rules |
 |------|-------------|---------------|--------------|
-| deny-all-cascade-test |  | 0 | 0 |
-| dscInit.Spec.ApplicationsNamespace |  | 0 | 0 |
+| deny-all-cascade-test | (all pods) | 0 | 0 |
+| dscInit.Spec.ApplicationsNamespace | (all pods) | 6 | 0 |
 
 
 ## Deployments
@@ -98,17 +98,17 @@
 
 - Command: `/cloudmanager`
 - Args: `aws --health-probe-bind-address=:8081 --metrics-bind-address=0.0.0.0:8080 --leader-elect`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 **azure-cloud-manager-operator / manager**
 
 - Command: `/cloudmanager`
 - Args: `azure --health-probe-bind-address=:8081 --metrics-bind-address=0.0.0.0:8080 --leader-elect`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
@@ -116,7 +116,7 @@
 
 **controller-manager / manager**
 
-- Ports: 0/TCP (webhook-server)
+- Ports: 9443/TCP (webhook-server)
 
 **controller-manager / manager**
 
@@ -126,13 +126,13 @@
 
 - Command: `/manager`
 - Args: `--leader-elect --operator-name=opendatahub`
-- Ports: 0/TCP (https)
+- Ports: 8443/TCP (https)
 
 **coreweave-cloud-manager-operator / manager**
 
 - Command: `/cloudmanager`
 - Args: `coreweave --health-probe-bind-address=:8081 --metrics-bind-address=0.0.0.0:8080 --leader-elect`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 **rhods-operator / rhods-operator**
 
@@ -140,7 +140,7 @@
 
 **rhods-operator / rhods-operator**
 
-- Ports: 0/TCP (webhook-server), 0/TCP (http)
+- Ports: 9443/TCP (webhook-server), 8080/TCP (http)
 
 **rhods-operator / rhods-operator**
 
@@ -148,7 +148,7 @@
 
 **rhods-operator / rhods-operator**
 
-- Ports: 0/TCP (webhook-server), 0/TCP (https)
+- Ports: 9443/TCP (webhook-server), 8443/TCP (https)
 
 **rhods-operator / rhods-operator**
 

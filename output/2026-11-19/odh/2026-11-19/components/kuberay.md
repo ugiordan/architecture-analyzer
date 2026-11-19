@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/kuberay](https://github.com/opendatahub-io/kuberay) |
 | Commit | [e2b85bf7c3476dfd3224fa5cdaa67f235115eb53](https://github.com/opendatahub-io/kuberay/commit/e2b85bf7c3476dfd3224fa5cdaa67f235115eb53) |
-| Extracted | 2026-11-19T06:57:47Z |
-| Analyzer Version | 305a3627b2349b72dd6253f49c9efa7c34c97e21 |
+| Extracted | 2026-11-19T16:51:50Z |
+| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
 | Data Coverage | full |
 
 
@@ -91,7 +91,7 @@
 **kuberay-operator / kuberay-operator**
 
 - Command: `/manager`
-- Ports: 0/TCP (http)
+- Ports: 8080/TCP (http)
 
 
 
