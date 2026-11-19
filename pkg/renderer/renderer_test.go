@@ -76,15 +76,15 @@ func sampleData() map[string]interface{} {
 					},
 				},
 			},
-			"roles":                []interface{}{},
-			"role_bindings":        []interface{}{},
-			"kubebuilder_markers":  []interface{}{},
+			"roles":               []interface{}{},
+			"role_bindings":       []interface{}{},
+			"kubebuilder_markers": []interface{}{},
 		},
 		"secrets_referenced": []interface{}{
 			map[string]interface{}{
-				"name":          "webhook-cert",
-				"type":          "kubernetes.io/tls",
-				"referenced_by": []interface{}{"test-controller-manager"},
+				"name":           "webhook-cert",
+				"type":           "kubernetes.io/tls",
+				"referenced_by":  []interface{}{"test-controller-manager"},
 				"provisioned_by": "cert-manager",
 			},
 		},
@@ -191,6 +191,52 @@ func TestComponentRenderer(t *testing.T) {
 	}
 	if !strings.Contains(out, "Owns") {
 		t.Error("should contain Owns relationship")
+	}
+}
+
+func TestComponentRendererDoesNotInventControllerWithoutControllerEvidence(t *testing.T) {
+	out := (&ComponentRenderer{}).Render(map[string]interface{}{"component": "mlflow"})
+	if strings.Contains(out, "Controller") {
+		t.Fatalf("expected non-operator component not to get a synthetic controller node:\n%s", out)
+	}
+	if !strings.Contains(out, "component_mlflow[\"mlflow\"]:::component") {
+		t.Fatalf("expected a component node for an application without Kubernetes controller resources:\n%s", out)
+	}
+}
+
+func TestComponentNetworkPageRendersNetworkPolicyRules(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"network_policies": []interface{}{
+			map[string]interface{}{
+				"name":         "payload-processing",
+				"policy_types": []interface{}{"Ingress", "Egress"},
+				"ingress_rules": []interface{}{
+					map[string]interface{}{
+						"from": []interface{}{map[string]interface{}{
+							"namespaceSelector": map[string]interface{}{
+								"matchLabels": map[string]interface{}{"kubernetes.io/metadata.name": "openshift-ingress"},
+							},
+						}},
+					},
+				},
+				"egress_rules": []interface{}{
+					map[string]interface{}{
+						"to": []interface{}{map[string]interface{}{
+							"ipBlock": map[string]interface{}{"cidr": "10.0.0.0/8"},
+						}},
+					},
+				},
+			},
+		},
+	}
+
+	out := renderComponentNetworkPage(data, "praxis-extproc")
+	if !strings.Contains(out, "ns: kubernetes.io/metadata.name=openshift-ingress") {
+		t.Errorf("expected ingress rule source in network graph:\n%s", out)
+	}
+	if !strings.Contains(out, "CIDR: 10.0.0.0/8") {
+		t.Errorf("expected egress rule destination in network graph:\n%s", out)
 	}
 }
 

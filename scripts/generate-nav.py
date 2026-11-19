@@ -68,6 +68,7 @@ def build_platform_nav(docs_dir, platform_dir):
             # Standard doc files in order
             doc_files = {
                 "index.md": "Overview",
+                "details.md": "Extracted Data",
                 "network.md": "Network",
                 "rbac.md": "RBAC",
                 "security.md": "Security",

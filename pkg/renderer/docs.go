@@ -102,6 +102,10 @@ func renderComponentDocs(data map[string]interface{}, pathPrefix string) []DocsP
 		Content: renderComponentIndexPage(data, component),
 	})
 	pages = append(pages, DocsPage{
+		Path:    prefix + "details.md",
+		Content: renderComponentDetailsPage(data, component),
+	})
+	pages = append(pages, DocsPage{
 		Path:    prefix + "network.md",
 		Content: renderComponentNetworkPage(data, component),
 	})
@@ -128,6 +132,13 @@ func renderComponentDocs(data map[string]interface{}, pathPrefix string) []DocsP
 	return pages
 }
 
+func renderComponentDetailsPage(data map[string]interface{}, component string) string {
+	content := RenderComponentMarkdown(data)
+	originalTitle := fmt.Sprintf("# %s\n", component)
+	detailsTitle := fmt.Sprintf("# %s: Extracted Data\n", component)
+	return strings.Replace(content, originalTitle, detailsTitle, 1)
+}
+
 // --- Component index page ---
 
 func renderComponentIndexPage(data map[string]interface{}, component string) string {
@@ -143,6 +154,7 @@ func renderComponentIndexPage(data map[string]interface{}, component string) str
 	}
 	b.WriteString(fmt.Sprintf("**Analyzer:** arch-analyzer %s  \n", version))
 	b.WriteString(fmt.Sprintf("**Extracted:** %s\n\n", extractedAt))
+	b.WriteString("See [Extracted Data](details.md) for full dependency and configuration details.\n\n")
 
 	// Summary table
 	crds := getSlice(data, "crds")
@@ -583,7 +595,7 @@ func renderNetworkPolicyGraph(b *strings.Builder, netpols []map[string]interface
 		b.WriteString(fmt.Sprintf("    %s{{\"%s\\n%s\"}}:::policy\n", npID, escapeLabel(npName), typeLabel))
 
 		// Show ingress sources
-		ingressRules := getSlice(np, "ingress")
+		ingressRules := getSlice(np, "ingress_rules")
 		for j, rule := range ingressRules {
 			fromPeers := getSlice(rule, "from")
 			if len(fromPeers) == 0 {
@@ -601,7 +613,7 @@ func renderNetworkPolicyGraph(b *strings.Builder, netpols []map[string]interface
 		b.WriteString(fmt.Sprintf("    %s --> %s\n", npID, compID))
 
 		// Show egress destinations
-		egressRules := getSlice(np, "egress")
+		egressRules := getSlice(np, "egress_rules")
 		for j, rule := range egressRules {
 			toPeers := getSlice(rule, "to")
 			if len(toPeers) == 0 {

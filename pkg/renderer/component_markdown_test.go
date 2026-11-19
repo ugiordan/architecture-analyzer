@@ -417,24 +417,106 @@ func TestRenderComponentMarkdown_NewSections(t *testing.T) {
 	}
 }
 
+func TestRenderComponentMarkdownRendersNetworkPolicyAndContainerPortDetails(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"network_policies": []interface{}{
+			map[string]interface{}{
+				"name":         "payload-processing",
+				"pod_selector": map[string]interface{}{"tier": "api", "app": "praxis"},
+				"ingress_rules": []interface{}{
+					map[string]interface{}{"ports": []interface{}{map[string]interface{}{"port": 9004, "protocol": "TCP"}}},
+					map[string]interface{}{"ports": []interface{}{map[string]interface{}{"port": 9090, "protocol": "TCP"}}},
+				},
+				"egress_rules": []interface{}{
+					map[string]interface{}{"ports": []interface{}{map[string]interface{}{"port": 443, "protocol": "TCP"}}},
+				},
+			},
+		},
+		"services": []interface{}{
+			map[string]interface{}{
+				"name":  "payload-processing",
+				"type":  "ClusterIP",
+				"ports": []interface{}{map[string]interface{}{"port": 9004, "protocol": "TCP"}},
+			},
+		},
+		"deployments": []interface{}{
+			map[string]interface{}{
+				"name": "payload-processing",
+				"containers": []interface{}{
+					map[string]interface{}{
+						"name": "extproc",
+						"ports": []interface{}{
+							map[string]interface{}{"name": "grpc", "containerPort": 9004, "protocol": "TCP"},
+							map[string]interface{}{"name": "metrics", "containerPort": 9090, "protocol": "TCP"},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	result := RenderComponentMarkdown(data)
+
+	if !strings.Contains(result, "| payload-processing | app=praxis, tier=api | 2 | 1 |") {
+		t.Error("network policy selector and rule counts should reflect extracted JSON")
+	}
+	if !strings.Contains(result, "| payload-processing | ClusterIP | 9004/TCP | ") {
+		t.Error("service port should continue to render from the port field")
+	}
+	if !strings.Contains(result, "- Ports: 9004/TCP (grpc), 9090/TCP (metrics)") {
+		t.Error("container ports should render from the containerPort field")
+	}
+}
+
+func TestRenderComponentDocsIncludesExtractedDataPage(t *testing.T) {
+	data := map[string]interface{}{
+		"component": "praxis-extproc",
+		"dependencies": map[string]interface{}{
+			"cargo_crates": []interface{}{
+				map[string]interface{}{"name": "tokio", "version": "1.53.3"},
+			},
+		},
+	}
+
+	pages := renderComponentDocs(data, "components/praxis_extproc")
+	var index, details string
+	for _, page := range pages {
+		switch page.Path {
+		case "components/praxis_extproc/index.md":
+			index = page.Content
+		case "components/praxis_extproc/details.md":
+			details = page.Content
+		}
+	}
+	if !strings.Contains(index, "[Extracted Data](details.md)") {
+		t.Error("component overview should link to the extracted-data page")
+	}
+	if !strings.Contains(details, "# praxis-extproc: Extracted Data") ||
+		!strings.Contains(details, "### Cargo Crates") ||
+		!strings.Contains(details, "tokio") {
+		t.Errorf("extracted-data page should include the full Markdown report:\n%s", details)
+	}
+}
+
 func TestRenderComponentMarkdown_RoundTrip(t *testing.T) {
 	// Build a data map with every possible field populated
 	data := map[string]interface{}{
-		"component":        "roundtrip-test",
-		"repo":             "org/roundtrip",
-		"commit_sha":       "abc123",
-		"extracted_at":     "2026-05-08T00:00:00Z",
-		"analyzer_version": "1.0.0",
-		"aliases":          []interface{}{"rt-test"},
-		"summary":          "A test component.",
-		"crds":             []interface{}{map[string]interface{}{"kind": "X", "group": "g", "version": "v1", "source": "a.go:1"}},
-		"webhooks":         []interface{}{map[string]interface{}{"name": "w1", "type": "validating"}},
-		"http_endpoints":   []interface{}{map[string]interface{}{"method": "GET", "path": "/health"}},
-		"services":         []interface{}{map[string]interface{}{"name": "svc", "type": "ClusterIP"}},
-		"ingress_routing":  []interface{}{map[string]interface{}{"name": "ing1"}},
-		"network_policies": []interface{}{map[string]interface{}{"name": "np1"}},
-		"deployments":      []interface{}{map[string]interface{}{"name": "dep1", "containers": []interface{}{map[string]interface{}{"name": "c1", "image": "img"}}}},
-		"rbac":             map[string]interface{}{"cluster_roles": []interface{}{map[string]interface{}{"name": "cr1", "rules": []interface{}{}}}},
+		"component":          "roundtrip-test",
+		"repo":               "org/roundtrip",
+		"commit_sha":         "abc123",
+		"extracted_at":       "2026-05-08T00:00:00Z",
+		"analyzer_version":   "1.0.0",
+		"aliases":            []interface{}{"rt-test"},
+		"summary":            "A test component.",
+		"crds":               []interface{}{map[string]interface{}{"kind": "X", "group": "g", "version": "v1", "source": "a.go:1"}},
+		"webhooks":           []interface{}{map[string]interface{}{"name": "w1", "type": "validating"}},
+		"http_endpoints":     []interface{}{map[string]interface{}{"method": "GET", "path": "/health"}},
+		"services":           []interface{}{map[string]interface{}{"name": "svc", "type": "ClusterIP"}},
+		"ingress_routing":    []interface{}{map[string]interface{}{"name": "ing1"}},
+		"network_policies":   []interface{}{map[string]interface{}{"name": "np1"}},
+		"deployments":        []interface{}{map[string]interface{}{"name": "dep1", "containers": []interface{}{map[string]interface{}{"name": "c1", "image": "img"}}}},
+		"rbac":               map[string]interface{}{"cluster_roles": []interface{}{map[string]interface{}{"name": "cr1", "rules": []interface{}{}}}},
 		"secrets_referenced": []interface{}{map[string]interface{}{"name": "s1"}},
 		"dependencies": map[string]interface{}{
 			"internal_odh":    []interface{}{map[string]interface{}{"component": "other"}},
@@ -462,11 +544,11 @@ func TestRenderComponentMarkdown_RoundTrip(t *testing.T) {
 		"configmap_volumes":          []interface{}{map[string]interface{}{"configmap_name": "cm1"}},
 		"pod_disruption_budgets":     []interface{}{map[string]interface{}{"name": "pdb1"}},
 		"horizontal_pod_autoscalers": []interface{}{map[string]interface{}{"name": "hpa1"}},
-		"python_k8s_calls":          []interface{}{map[string]interface{}{"operation": "create"}},
-		"template_files":            []interface{}{map[string]interface{}{"path": "tmpl.yaml"}},
-		"resource_defaults":         []interface{}{map[string]interface{}{"resource": "ctrl"}},
-		"platform_detection":        map[string]interface{}{"conditionals": []interface{}{map[string]interface{}{"check": "IsOCP"}}},
-		"data_coverage":             map[string]interface{}{"status": "full"},
+		"python_k8s_calls":           []interface{}{map[string]interface{}{"operation": "create"}},
+		"template_files":             []interface{}{map[string]interface{}{"path": "tmpl.yaml"}},
+		"resource_defaults":          []interface{}{map[string]interface{}{"resource": "ctrl"}},
+		"platform_detection":         map[string]interface{}{"conditionals": []interface{}{map[string]interface{}{"check": "IsOCP"}}},
+		"data_coverage":              map[string]interface{}{"status": "full"},
 	}
 
 	result := RenderComponentMarkdown(data)

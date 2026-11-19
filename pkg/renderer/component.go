@@ -21,6 +21,7 @@ func (r *ComponentRenderer) Render(data map[string]interface{}) string {
 	b.WriteString("\n")
 	b.WriteString("    classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff\n")
 	b.WriteString("    classDef controller fill:#3498db,stroke:#2980b9,color:#fff\n")
+	b.WriteString("    classDef component fill:#3498db,stroke:#2980b9,color:#fff\n")
 	b.WriteString("    classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff\n")
 	b.WriteString("    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff\n")
 	b.WriteString("    classDef dep fill:#f39c12,stroke:#e67e22,color:#fff\n")
@@ -57,21 +58,26 @@ func (r *ComponentRenderer) Render(data map[string]interface{}) string {
 		}
 	}
 
-	// Controller subgraph
-	b.WriteString(fmt.Sprintf("    subgraph controller[\"%s Controller\"]\n", escapeLabel(component)))
-	if len(deployments) > 0 {
-		for _, dep := range deployments {
-			depName := getStr(dep, "name", "")
-			depID := nextID("dep")
-			b.WriteString(fmt.Sprintf("        %s[\"%s\"]\n", depID, escapeLabel(depName)))
-			b.WriteString(fmt.Sprintf("        class %s controller\n", depID))
+	controllerID := "controller"
+	if len(deployments) > 0 || len(crds) > 0 || len(watches) > 0 {
+		b.WriteString(fmt.Sprintf("    subgraph controller[\"%s Controller\"]\n", escapeLabel(component)))
+		if len(deployments) > 0 {
+			for _, dep := range deployments {
+				depName := getStr(dep, "name", "")
+				depID := nextID("dep")
+				b.WriteString(fmt.Sprintf("        %s[\"%s\"]\n", depID, escapeLabel(depName)))
+				b.WriteString(fmt.Sprintf("        class %s controller\n", depID))
+			}
+		} else {
+			ctrlID := nextID("ctrl")
+			b.WriteString(fmt.Sprintf("        %s[\"Controller\"]\n", ctrlID))
+			b.WriteString(fmt.Sprintf("        class %s controller\n", ctrlID))
 		}
+		b.WriteString("    end\n")
 	} else {
-		ctrlID := nextID("ctrl")
-		b.WriteString(fmt.Sprintf("        %s[\"Controller\"]\n", ctrlID))
-		b.WriteString(fmt.Sprintf("        class %s controller\n", ctrlID))
+		controllerID = sanitizeID("component_" + component)
+		b.WriteString(fmt.Sprintf("    %s[\"%s\"]:::component\n", controllerID, escapeLabel(component)))
 	}
-	b.WriteString("    end\n")
 	b.WriteString("\n")
 
 	// CRDs watched via For
@@ -84,7 +90,7 @@ func (r *ComponentRenderer) Render(data map[string]interface{}) string {
 		b.WriteString(fmt.Sprintf("    %s{{\"%s\"}}\n", crdID, escapeLabel(label)))
 		b.WriteString(fmt.Sprintf("    class %s crd\n", crdID))
 		if forKinds[kind] {
-			b.WriteString(fmt.Sprintf("    %s -->|\"For (reconciles)\"| controller\n", crdID))
+			b.WriteString(fmt.Sprintf("    %s -->|\"For (reconciles)\"| %s\n", crdID, controllerID))
 		}
 	}
 
@@ -92,7 +98,7 @@ func (r *ComponentRenderer) Render(data map[string]interface{}) string {
 	sortedOwns := sortedKeys(ownsKinds)
 	for _, kind := range sortedOwns {
 		resID := nextID("owned")
-		b.WriteString(fmt.Sprintf("    controller -->|\"Owns\"| %s[\"%s\"]\n", resID, escapeLabel(kind)))
+		b.WriteString(fmt.Sprintf("    %s -->|\"Owns\"| %s[\"%s\"]\n", controllerID, resID, escapeLabel(kind)))
 		b.WriteString(fmt.Sprintf("    class %s owned\n", resID))
 	}
 
@@ -100,7 +106,7 @@ func (r *ComponentRenderer) Render(data map[string]interface{}) string {
 	sortedWatches := sortedKeys(watchesKinds)
 	for _, kind := range sortedWatches {
 		resID := nextID("watch")
-		b.WriteString(fmt.Sprintf("    %s[\"%s\"] -->|\"Watches\"| controller\n", resID, escapeLabel(kind)))
+		b.WriteString(fmt.Sprintf("    %s[\"%s\"] -->|\"Watches\"| %s\n", resID, escapeLabel(kind), controllerID))
 		b.WriteString(fmt.Sprintf("    class %s external\n", resID))
 	}
 
@@ -110,7 +116,7 @@ func (r *ComponentRenderer) Render(data map[string]interface{}) string {
 		for _, odhDep := range getSlice(deps, "internal_odh") {
 			comp := getStr(odhDep, "component", "")
 			depID := nextID("odh")
-			b.WriteString(fmt.Sprintf("    controller -.->|\"depends on\"| %s[\"%s\"]\n", depID, escapeLabel(comp)))
+			b.WriteString(fmt.Sprintf("    %s -.->|\"depends on\"| %s[\"%s\"]\n", controllerID, depID, escapeLabel(comp)))
 			b.WriteString(fmt.Sprintf("    class %s dep\n", depID))
 		}
 	}

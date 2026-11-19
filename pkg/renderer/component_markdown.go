@@ -3,6 +3,7 @@ package renderer
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -193,9 +194,9 @@ func RenderComponentMarkdown(data map[string]interface{}) string {
 		for _, np := range items {
 			b.WriteString(fmt.Sprintf("| %s | %s | %d | %d |\n",
 				escapeMdCell(getStr(np, "name", "")),
-				escapeMdCell(getStr(np, "pod_selector", "")),
-				getInt(np, "ingress_rule_count"),
-				getInt(np, "egress_rule_count"),
+				escapeMdCell(formatPodSelector(getMap(np, "pod_selector"))),
+				len(getSlice(np, "ingress_rules")),
+				len(getSlice(np, "egress_rules")),
 			))
 		}
 	})
@@ -1121,6 +1122,9 @@ func formatPorts(ports []map[string]interface{}) string {
 	parts := make([]string, 0, len(ports))
 	for _, p := range ports {
 		port := getInt(p, "port")
+		if port == 0 {
+			port = getInt(p, "containerPort")
+		}
 		proto := getStr(p, "protocol", "TCP")
 		name := getStr(p, "name", "")
 		if name != "" {
@@ -1128,6 +1132,22 @@ func formatPorts(ports []map[string]interface{}) string {
 		} else {
 			parts = append(parts, fmt.Sprintf("%d/%s", port, proto))
 		}
+	}
+	return strings.Join(parts, ", ")
+}
+
+func formatPodSelector(selector map[string]interface{}) string {
+	if len(selector) == 0 {
+		return "(all pods)"
+	}
+	keys := make([]string, 0, len(selector))
+	for key := range selector {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	parts := make([]string, 0, len(keys))
+	for _, key := range keys {
+		parts = append(parts, fmt.Sprintf("%s=%v", key, selector[key]))
 	}
 	return strings.Join(parts, ", ")
 }
