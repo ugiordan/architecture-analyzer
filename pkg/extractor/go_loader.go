@@ -10,7 +10,9 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
+	"syscall"
 	"time"
 
 	"golang.org/x/tools/go/packages"
@@ -47,11 +49,27 @@ func loadGoPackages(repoPath string) *GoPackageSet {
 		return nil
 	}
 
+	// Sweep gopath-loader-* directories left behind by killed runs
+	// (SIGKILL'd processes run no defers; observed: 110 leaked dirs,
+	// 2-4G each, ~267G of TMPDIR) before creating this run's dir.
+	sweepStaleGopaths()
+
 	// Create a temp directory for Go module/build caches outside the target repo.
 	gopath, err := os.MkdirTemp("", "gopath-loader-*")
 	if err != nil {
 		log.Printf("[go_loader] failed to create temp gopath: %v", err)
 		return nil
+	}
+	// Record the owner so concurrent and later runs can distinguish a
+	// live gopath from a leaked one (same owner.pid contract as the
+	// orchestrator's run-cwd sweep).
+	if err := os.WriteFile(
+		filepath.Join(gopath, "owner.pid"),
+		[]byte(strconv.Itoa(os.Getpid())), 0o644,
+	); err != nil {
+		// Best effort: without the pid file the sweep falls back to
+		// the age rule, which still reclaims the directory.
+		log.Printf("[go_loader] failed to record owner pid: %v", err)
 	}
 	defer cleanGopath(gopath)
 
@@ -155,7 +173,58 @@ func cleanGopath(dir string) {
 		}
 		return nil
 	})
-	os.RemoveAll(dir)
+	if err := os.RemoveAll(dir); err != nil {
+		// Never fatal (the load already stands), but never silent: a
+		// swallowed failure here is how multi-gigabyte gopaths
+		// accumulated unnoticed.
+		log.Printf("[go_loader] failed to remove gopath %s: %v", dir, err)
+	}
+}
+
+// processAlive reports whether pid names a running process. Signal 0
+// performs the existence check without delivering anything.
+func processAlive(pid int) bool {
+	proc, err := os.FindProcess(pid)
+	if err != nil {
+		return false
+	}
+	return proc.Signal(syscall.Signal(0)) == nil || err == syscall.EPERM
+}
+
+// sweepStaleGopaths removes gopath-loader-* directories under the
+// system temp dir that no live process owns. Runs that were SIGKILL'd
+// (cluster reapers, logout, crashed orchestrators) never execute their
+// deferred cleanup, and each leaked directory holds a full Go module
+// and build cache (2-4G observed, 267G accumulated over two days).
+//
+// A directory is stale when its recorded owner.pid names no live
+// process. Directories without a pid file (written by older builds)
+// are only swept after 24h, mirroring the orchestrator's run-cwd
+// sweep rule, so a concurrently created directory is never raced.
+func sweepStaleGopaths() {
+	matches, err := filepath.Glob(filepath.Join(os.TempDir(), "gopath-loader-*"))
+	if err != nil || len(matches) == 0 {
+		return
+	}
+	for _, dir := range matches {
+		info, statErr := os.Stat(dir)
+		if statErr != nil {
+			continue
+		}
+		pidBytes, readErr := os.ReadFile(filepath.Join(dir, "owner.pid"))
+		if readErr == nil {
+			if pid, convErr := strconv.Atoi(
+				strings.TrimSpace(string(pidBytes))); convErr == nil &&
+				pid > 0 && processAlive(pid) {
+				continue // live owner
+			}
+		} else if time.Since(info.ModTime()) < 24*time.Hour {
+			// No pid file and young: could be mid-creation by a
+			// concurrent loader (or a legacy dir); give it a day.
+			continue
+		}
+		cleanGopath(dir)
+	}
 }
 
 // loaderEnv builds a sanitized environment for go commands.
