@@ -1,0 +1,4933 @@
+{
+  "schema_version": 1,
+  "component": "llm-d",
+  "repo": "llm-d/llm-d",
+  "commit_sha": "d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "summary": "llm-d is a Kubernetes component. deploying 6 workload(s) (llm-d-coordinator, fma-requester, render, render, interactive-pod, mooncake-master-store) with 6 container(s). exposing 8 service(s) on ports: 50051, 50052, 6379, 8000, 8080, 9003. with 1 HorizontalPodAutoscaler(s). connecting to external services: requests, urllib. runtime dependencies: PostgreSQL, Redis. with 12 ingress route(s). Python k8s client with 4 API call(s). integrates with Istio, Kueue, Prometheus via labels/annotations. references components: vllm (import). mounts 2 ConfigMap(s) as volumes: llm-d-coordinator-config, mooncake-master-store-config.",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 24,
+    "functions": 315,
+    "test_functions": 0,
+    "call_sites": 2993,
+    "resolved_calls": 900,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "python",
+      "source_files": 24,
+      "functions": 315,
+      "test_functions": 0
+    },
+    {
+      "name": "unknown",
+      "source_files": 24,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "scripts",
+      "source_files": 10,
+      "functions": 159,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/seed-release-badges.py:217",
+          "complexity": 10,
+          "callers": 15,
+          "annotations": [
+            "sec:accesses_secret"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/assigned-issue-reminder.py:201",
+          "complexity": 8,
+          "callers": 15,
+          "annotations": [
+            "sec:accesses_secret"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/sync-slack-channels.py:215",
+          "complexity": 8,
+          "callers": 15
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/lint-dockerfile-envvars.py:201",
+          "complexity": 7,
+          "callers": 15,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/lint-envvars.py:135",
+          "complexity": 7,
+          "callers": 15
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/sync-nightly-matrix.py:59",
+          "complexity": 5,
+          "callers": 15
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/sync-release-matrix.py:126",
+          "complexity": 5,
+          "callers": 15
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/guide.py:2334",
+          "complexity": 4,
+          "callers": 15
+        },
+        {
+          "name": "error",
+          "language": "python",
+          "source": "scripts/guide.py:134",
+          "complexity": 1,
+          "callers": 111
+        },
+        {
+          "name": "extend",
+          "language": "python",
+          "source": "scripts/guide.py:137",
+          "complexity": 2,
+          "callers": 18
+        },
+        {
+          "name": "write",
+          "language": "python",
+          "source": "scripts/guide.py:1843",
+          "complexity": 4,
+          "callers": 11,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "_check_step_list",
+          "language": "python",
+          "source": "scripts/guide.py:376",
+          "complexity": 6,
+          "callers": 9
+        }
+      ],
+      "symbols_truncated": 147
+    },
+    {
+      "path": "docker/scripts/snapshot",
+      "source_files": 2,
+      "functions": 67,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "_sglang_server_args",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:568",
+          "complexity": 1,
+          "callers": 14
+        },
+        {
+          "name": "clear_cache",
+          "language": "python",
+          "source": "docker/scripts/snapshot/providers.py:43",
+          "complexity": 7,
+          "callers": 8
+        },
+        {
+          "name": "_sglang_modules",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:532",
+          "complexity": 1,
+          "callers": 8,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:200",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:227",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:252",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:281",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:308",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:339",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:371",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "run_test",
+          "language": "python",
+          "source": "docker/scripts/snapshot/test_providers.py:399",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "get_snapshot_provider",
+          "language": "python",
+          "source": "docker/scripts/snapshot/providers.py:104",
+          "complexity": 2,
+          "callers": 5
+        }
+      ],
+      "symbols_truncated": 55
+    },
+    {
+      "path": "guides/pod-snapshot/scripts",
+      "source_files": 2,
+      "functions": 26,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+          "complexity": 5,
+          "callers": 8
+        },
+        {
+          "name": "add",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+          "complexity": 2,
+          "callers": 19
+        },
+        {
+          "name": "run",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+          "complexity": 2,
+          "callers": 19,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "parse_ts",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:105",
+          "complexity": 6,
+          "callers": 6
+        },
+        {
+          "name": "is_restored",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:267",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "compute_cold_metrics",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:298",
+          "complexity": 5,
+          "callers": 3
+        },
+        {
+          "name": "event_ts",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:166",
+          "complexity": 3,
+          "callers": 3
+        },
+        {
+          "name": "json",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:150",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "missing_lines_detail",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/check_thresholds.py:80",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "pod_times",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:219",
+          "complexity": 8,
+          "callers": 2
+        },
+        {
+          "name": "pod_state",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/check_thresholds.py:67",
+          "complexity": 4,
+          "callers": 2
+        },
+        {
+          "name": "delta",
+          "language": "python",
+          "source": "guides/pod-snapshot/scripts/snapshot_timings.py:120",
+          "complexity": 2,
+          "callers": 2
+        }
+      ],
+      "symbols_truncated": 14
+    },
+    {
+      "path": "guides/batch-serving/asynchronous-processing/multitenant/scripts",
+      "source_files": 3,
+      "functions": 22,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+          "complexity": 3,
+          "callers": 10
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+          "complexity": 3,
+          "callers": 10
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+          "complexity": 2,
+          "callers": 10
+        },
+        {
+          "name": "check_port_open",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:34",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "check_port_open",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:36",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "check_port_open",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:27",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "query_prom",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:101",
+          "complexity": 4,
+          "callers": 2
+        },
+        {
+          "name": "start_port_forward",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:42",
+          "complexity": 2,
+          "callers": 2,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "start_port_forward",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:33",
+          "complexity": 2,
+          "callers": 2,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "monitor_drain",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:116",
+          "complexity": 7,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "enqueue_all",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:58",
+          "complexity": 5,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "get_redis_stats",
+          "language": "python",
+          "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:145",
+          "complexity": 4,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        }
+      ],
+      "symbols_truncated": 10
+    },
+    {
+      "path": "guides/agentic-api",
+      "source_files": 1,
+      "functions": 12,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:415",
+          "complexity": 4,
+          "callers": 8
+        },
+        {
+          "name": "http_json",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:29",
+          "complexity": 6,
+          "callers": 6
+        },
+        {
+          "name": "recv_exact",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:321",
+          "complexity": 3,
+          "callers": 5
+        },
+        {
+          "name": "extract_output_text",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:59",
+          "complexity": 8,
+          "callers": 3
+        },
+        {
+          "name": "verify_websocket_responses",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:351",
+          "complexity": 11,
+          "callers": 1
+        },
+        {
+          "name": "_ws_recv_frame",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:320",
+          "complexity": 9,
+          "callers": 1
+        },
+        {
+          "name": "verify_health_and_models",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:72",
+          "complexity": 6,
+          "callers": 1
+        },
+        {
+          "name": "verify_webhook_mode",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:153",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "_ws_send_text",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:302",
+          "complexity": 3,
+          "callers": 1
+        },
+        {
+          "name": "verify_http_stateful_responses",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:96",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "do_POST",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:158",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "log_message",
+          "language": "python",
+          "source": "guides/agentic-api/verify.py:181",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "guides/flow-control/scripts",
+      "source_files": 1,
+      "functions": 10,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:151",
+          "complexity": 45,
+          "callers": 8
+        },
+        {
+          "name": "add",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:329",
+          "complexity": 2,
+          "callers": 25
+        },
+        {
+          "name": "get_float_input",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:22",
+          "complexity": 4,
+          "callers": 7
+        },
+        {
+          "name": "print_header",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:42",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "get_int_input",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:32",
+          "complexity": 4,
+          "callers": 4
+        },
+        {
+          "name": "require_finite",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:107",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "validate_parameters",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:105",
+          "complexity": 13,
+          "callers": 1
+        },
+        {
+          "name": "calculate_memory_constraint",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:53",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "calculate_lookahead_buffer",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:91",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "calculate_compute_constraint",
+          "language": "python",
+          "source": "guides/flow-control/scripts/tuning_wizard.py:49",
+          "complexity": 1,
+          "callers": 1
+        }
+      ]
+    },
+    {
+      "path": "docker/scripts/snapshot/sglang",
+      "source_files": 2,
+      "functions": 7,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/launcher.py:82",
+          "complexity": 3,
+          "callers": 8
+        },
+        {
+          "name": "post",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/wrapper.py:86",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "_get_snapshot_provider_for_launch",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/launcher.py:32",
+          "complexity": 7,
+          "callers": 1
+        },
+        {
+          "name": "_wait_for_server",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/wrapper.py:26",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "_get_ssl_verify",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/wrapper.py:45",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "sglang_snapshot_callback",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/wrapper.py:55",
+          "complexity": 4,
+          "callers": 0
+        },
+        {
+          "name": "sglang_warmup_and_hold",
+          "language": "python",
+          "source": "docker/scripts/snapshot/sglang/wrapper.py:133",
+          "complexity": 2,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "docker/scripts/snapshot/vllm",
+      "source_files": 2,
+      "functions": 6,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "docker/scripts/snapshot/vllm/launcher.py:68",
+          "complexity": 2,
+          "callers": 8
+        },
+        {
+          "name": "_hook_api_server",
+          "language": "python",
+          "source": "docker/scripts/snapshot/vllm/launcher.py:27",
+          "complexity": 7,
+          "callers": 5
+        },
+        {
+          "name": "patch_vllm_lifespan",
+          "language": "python",
+          "source": "docker/scripts/snapshot/vllm/wrapper.py:44",
+          "complexity": 12,
+          "callers": 1
+        },
+        {
+          "name": "_is_eager_loading_configured",
+          "language": "python",
+          "source": "docker/scripts/snapshot/vllm/wrapper.py:35",
+          "complexity": 3,
+          "callers": 1
+        },
+        {
+          "name": "patched_lifespan",
+          "language": "python",
+          "source": "docker/scripts/snapshot/vllm/wrapper.py:66",
+          "complexity": 10,
+          "callers": 0
+        },
+        {
+          "name": "_build_app",
+          "language": "python",
+          "source": "docker/scripts/snapshot/vllm/launcher.py:51",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "guides/workload-autoscaling/slo-aware/benchmark-templates",
+      "source_files": 1,
+      "functions": 6,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+          "complexity": 5,
+          "callers": 8,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "promql_range",
+          "language": "python",
+          "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+          "complexity": 3,
+          "callers": 8,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "promql_scalar",
+          "language": "python",
+          "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:53",
+          "complexity": 2,
+          "callers": 4,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "offered_staircase",
+          "language": "python",
+          "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:88",
+          "complexity": 7,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "formula",
+          "language": "python",
+          "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:64",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "align",
+          "language": "python",
+          "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:78",
+          "complexity": 4,
+          "callers": 1
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "docker/scripts/snapshot/sglang/launcher.py:82"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "docker/scripts/snapshot/vllm/launcher.py:68"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/agentic-api/verify.py:415"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/flow-control/scripts/tuning_wizard.py:151"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/pod-snapshot/scripts/check_thresholds.py:179"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/assigned-issue-reminder.py:201"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/guide.py:2334"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/lint-dockerfile-envvars.py:201"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/lint-envvars.py:135"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/seed-release-badges.py:217"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/sync-nightly-matrix.py:59"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/sync-release-matrix.py:126"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/sync-slack-channels.py:215"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:191",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:203",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:215",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:333",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:334",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:335",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:336",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:337",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:338",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:339",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:340",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:341",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:343",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:344",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:345",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:346",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:201",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:220",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/lint-envvars.py:135",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/lint-envvars.py:154",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:124",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:126",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:127",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:128",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:129",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:130",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_range",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:37",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:131",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:187",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:188",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:194",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:197",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:200",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:201",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_float_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:22",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:217",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "print_header",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:42",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:186",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "print_header",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:42",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:191",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "print_header",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:42",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:216",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "print_header",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:42",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:274",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "print_header",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:42",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:299",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "print_header",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:42",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:325",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_int_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:32",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:192",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_int_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:32",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:193",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_int_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:32",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:205",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "get_int_input",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:32",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:214",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_scalar",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:53",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_scalar",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:53",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:143",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_scalar",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:53",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:144",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "promql_scalar",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:53",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:145",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-nightly-matrix.py:59",
+      "callee": "extract_matrix",
+      "callee_source": "scripts/matrix_common.py:269",
+      "call_site_source": "scripts/sync-nightly-matrix.py:70",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-nightly-matrix.py:59",
+      "callee": "replace_matrix",
+      "callee_source": "scripts/matrix_common.py:278",
+      "call_site_source": "scripts/sync-nightly-matrix.py:88",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "extract_matrix",
+      "callee_source": "scripts/matrix_common.py:269",
+      "call_site_source": "scripts/sync-release-matrix.py:161",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "replace_matrix",
+      "callee_source": "scripts/matrix_common.py:278",
+      "call_site_source": "scripts/sync-release-matrix.py:175",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "extract_matrix",
+      "callee_source": "scripts/matrix_common.py:269",
+      "call_site_source": "scripts/sync-slack-channels.py:237",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "replace_matrix",
+      "callee_source": "scripts/matrix_common.py:278",
+      "call_site_source": "scripts/sync-slack-channels.py:253",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "replace",
+      "callee_source": "scripts/guide.py:1442",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:119",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/guide.py:2334",
+      "callee": "report",
+      "callee_source": "scripts/guide.py:159",
+      "call_site_source": "scripts/guide.py:2343",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-nightly-matrix.py:59",
+      "callee": "discover_workflows",
+      "callee_source": "scripts/matrix_common.py:181",
+      "call_site_source": "scripts/sync-nightly-matrix.py:80",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "discover_workflows",
+      "callee_source": "scripts/matrix_common.py:181",
+      "call_site_source": "scripts/sync-release-matrix.py:153",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "callee": "start_port_forward",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:33",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:165",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "callee": "start_port_forward",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:42",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:165",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "callee": "start_port_forward",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:33",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:184",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "callee": "start_port_forward",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:42",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:184",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/assigned-issue-reminder.py:201",
+      "callee": "assignee_logins",
+      "callee_source": "scripts/assigned-issue-reminder.py:126",
+      "call_site_source": "scripts/assigned-issue-reminder.py:222",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/assigned-issue-reminder.py:201",
+      "callee": "graphql_nodes",
+      "callee_source": "scripts/assigned-issue-reminder.py:96",
+      "call_site_source": "scripts/assigned-issue-reminder.py:212",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/assigned-issue-reminder.py:201",
+      "callee": "graphql_nodes",
+      "callee_source": "scripts/assigned-issue-reminder.py:96",
+      "call_site_source": "scripts/assigned-issue-reminder.py:213",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/seed-release-badges.py:217",
+      "callee": "badge_file_name",
+      "callee_source": "scripts/matrix_common.py:35",
+      "call_site_source": "scripts/seed-release-badges.py:263",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/seed-release-badges.py:217",
+      "callee": "existing_badges",
+      "callee_source": "scripts/seed-release-badges.py:93",
+      "call_site_source": "scripts/seed-release-badges.py:276",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-nightly-matrix.py:59",
+      "callee": "read_readme",
+      "callee_source": "scripts/matrix_common.py:265",
+      "call_site_source": "scripts/sync-nightly-matrix.py:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "read_readme",
+      "callee_source": "scripts/matrix_common.py:265",
+      "call_site_source": "scripts/sync-release-matrix.py:160",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "docker/scripts/snapshot/sglang/launcher.py:82",
+      "callee": "_get_snapshot_provider_for_launch",
+      "callee_source": "docker/scripts/snapshot/sglang/launcher.py:32",
+      "call_site_source": "docker/scripts/snapshot/sglang/launcher.py:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/agentic-api/verify.py:415",
+      "callee": "verify_health_and_models",
+      "callee_source": "guides/agentic-api/verify.py:72",
+      "call_site_source": "guides/agentic-api/verify.py:440",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/agentic-api/verify.py:415",
+      "callee": "verify_http_stateful_responses",
+      "callee_source": "guides/agentic-api/verify.py:96",
+      "call_site_source": "guides/agentic-api/verify.py:443",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/agentic-api/verify.py:415",
+      "callee": "verify_webhook_mode",
+      "callee_source": "guides/agentic-api/verify.py:153",
+      "call_site_source": "guides/agentic-api/verify.py:444",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/agentic-api/verify.py:415",
+      "callee": "verify_websocket_responses",
+      "callee_source": "guides/agentic-api/verify.py:351",
+      "call_site_source": "guides/agentic-api/verify.py:448",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "callee": "clear_existing_results",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:51",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:175",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "callee": "enqueue_all",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:58",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:176",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "callee": "monitor_drain",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:116",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:177",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "callee": "start_prom_port_forward",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:39",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:172",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "callee": "get_redis_stats",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:145",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:197",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "calculate_compute_constraint",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:49",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:240",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "calculate_lookahead_buffer",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:91",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:270",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "calculate_memory_constraint",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:53",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:247",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "callee": "validate_parameters",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:105",
+      "call_site_source": "guides/flow-control/scripts/tuning_wizard.py:231",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "evaluate",
+      "callee_source": "guides/pod-snapshot/scripts/check_thresholds.py:86",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:205",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "load_pods",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:435",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:189",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "print_report",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:425",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:201",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "callee": "write_step_summary",
+      "callee_source": "guides/pod-snapshot/scripts/check_thresholds.py:164",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:211",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "align",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:78",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:134",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "formula",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:64",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:135",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "callee": "offered_staircase",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:88",
+      "call_site_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:158",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/assigned-issue-reminder.py:201",
+      "callee": "decide",
+      "callee_source": "scripts/assigned-issue-reminder.py:151",
+      "call_site_source": "scripts/assigned-issue-reminder.py:218",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/guide.py:2334",
+      "callee": "_selection_error",
+      "callee_source": "scripts/guide.py:1920",
+      "call_site_source": "scripts/guide.py:2336",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/guide.py:2334",
+      "callee": "build_parser",
+      "callee_source": "scripts/guide.py:2180",
+      "call_site_source": "scripts/guide.py:2335",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:201",
+      "callee": "lint_dockerfile",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:162",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:219",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/lint-envvars.py:135",
+      "callee": "lint_script",
+      "callee_source": "scripts/lint-envvars.py:95",
+      "call_site_source": "scripts/lint-envvars.py:150",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/seed-release-badges.py:217",
+      "callee": "matrix_badge_labels",
+      "callee_source": "scripts/matrix_common.py:236",
+      "call_site_source": "scripts/seed-release-badges.py:257",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/seed-release-badges.py:217",
+      "callee": "placeholder_json",
+      "callee_source": "scripts/seed-release-badges.py:73",
+      "call_site_source": "scripts/seed-release-badges.py:263",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/seed-release-badges.py:217",
+      "callee": "seed",
+      "callee_source": "scripts/seed-release-badges.py:172",
+      "call_site_source": "scripts/seed-release-badges.py:279",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/seed-release-badges.py:217",
+      "callee": "write_step_summary",
+      "callee_source": "scripts/seed-release-badges.py:191",
+      "call_site_source": "scripts/seed-release-badges.py:293",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-nightly-matrix.py:59",
+      "callee": "generate_table",
+      "callee_source": "scripts/sync-nightly-matrix.py:32",
+      "call_site_source": "scripts/sync-nightly-matrix.py:81",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "derive_series",
+      "callee_source": "scripts/sync-release-matrix.py:59",
+      "call_site_source": "scripts/sync-release-matrix.py:148",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "generate_section",
+      "callee_source": "scripts/sync-release-matrix.py:76",
+      "call_site_source": "scripts/sync-release-matrix.py:154",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-release-matrix.py:126",
+      "callee": "splice_section",
+      "callee_source": "scripts/sync-release-matrix.py:105",
+      "call_site_source": "scripts/sync-release-matrix.py:170",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "discover_nightly_names",
+      "callee_source": "scripts/sync-slack-channels.py:80",
+      "call_site_source": "scripts/sync-slack-channels.py:224",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "generate_trigger_list",
+      "callee_source": "scripts/sync-slack-channels.py:165",
+      "call_site_source": "scripts/sync-slack-channels.py:246",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "load_mapping",
+      "callee_source": "scripts/sync-slack-channels.py:59",
+      "call_site_source": "scripts/sync-slack-channels.py:223",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "read_notify_workflow",
+      "callee_source": "scripts/sync-slack-channels.py:183",
+      "call_site_source": "scripts/sync-slack-channels.py:236",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "run_audit",
+      "callee_source": "scripts/sync-slack-channels.py:194",
+      "call_site_source": "scripts/sync-slack-channels.py:227",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/sync-slack-channels.py:215",
+      "callee": "validate",
+      "callee_source": "scripts/sync-slack-channels.py:95",
+      "call_site_source": "scripts/sync-slack-channels.py:229",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "sglang_snapshot_callback",
+      "caller_source": "docker/scripts/snapshot/sglang/wrapper.py:55",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "docker/scripts/snapshot/sglang/wrapper.py:114",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "sglang_snapshot_callback",
+      "caller_source": "docker/scripts/snapshot/sglang/wrapper.py:55",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "docker/scripts/snapshot/sglang/wrapper.py:129",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "patched_lifespan",
+      "caller_source": "docker/scripts/snapshot/vllm/wrapper.py:66",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "docker/scripts/snapshot/vllm/wrapper.py:109",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "patched_lifespan",
+      "caller_source": "docker/scripts/snapshot/vllm/wrapper.py:66",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "docker/scripts/snapshot/vllm/wrapper.py:83",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "patched_lifespan",
+      "caller_source": "docker/scripts/snapshot/vllm/wrapper.py:66",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "docker/scripts/snapshot/vllm/wrapper.py:99",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "check_md",
+      "caller_source": "scripts/guide.py:1062",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:1083",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_md",
+      "caller_source": "scripts/guide.py:1062",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:1087",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2091",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2094",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2101",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2106",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2110",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2120",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2124",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2126",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2128",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2130",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2141",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2148",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2152",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2156",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2158",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:2160",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:344",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:347",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:349",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:354",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:358",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:360",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:367",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:369",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step",
+      "caller_source": "scripts/guide.py:342",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:373",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step_list",
+      "caller_source": "scripts/guide.py:376",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:387",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step_list",
+      "caller_source": "scripts/guide.py:376",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:393",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:409",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:414",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:419",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:421",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:425",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:430",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:440",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:448",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:453",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:459",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:464",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:469",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:472",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:475",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_verify",
+      "caller_source": "scripts/guide.py:495",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:497",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_verify",
+      "caller_source": "scripts/guide.py:495",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:501",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_verify",
+      "caller_source": "scripts/guide.py:495",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:505",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:515",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:519",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:525",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:530",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:622",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:626",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:634",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:637",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:641",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:655",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:658",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:661",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:684",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:688",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:693",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:701",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:705",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:708",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:712",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:717",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:719",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:724",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:728",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:730",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:732",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:734",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:736",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:741",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:746",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:750",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:752",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:756",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:758",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:762",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:775",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:779",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_support",
+      "caller_source": "scripts/guide.py:678",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:783",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_provider_overlays",
+      "caller_source": "scripts/guide.py:801",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:831",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:865",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:874",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:879",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:912",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:923",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:933",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:945",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:950",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:953",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:959",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_markers",
+      "caller_source": "scripts/guide.py:999",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:1009",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_markers",
+      "caller_source": "scripts/guide.py:999",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:1018",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_markers",
+      "caller_source": "scripts/guide.py:999",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:1022",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_markers",
+      "caller_source": "scripts/guide.py:999",
+      "callee": "error",
+      "callee_source": "scripts/guide.py:134",
+      "call_site_source": "scripts/guide.py:1030",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/guide.py:2135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/guide.py:435",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/guide.py:659",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/guide.py:920",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse_script_requirements",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:12",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:52",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:52",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "extract_required_vars",
+      "caller_source": "scripts/lint-envvars.py:12",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-envvars.py:31",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_locally_defined_vars",
+      "caller_source": "scripts/lint-envvars.py:36",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-envvars.py:60",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_locally_defined_vars",
+      "caller_source": "scripts/lint-envvars.py:36",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-envvars.py:66",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_locally_defined_vars",
+      "caller_source": "scripts/lint-envvars.py:36",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-envvars.py:72",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_used_vars",
+      "caller_source": "scripts/lint-envvars.py:77",
+      "callee": "add",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:329",
+      "call_site_source": "scripts/lint-envvars.py:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "monitor_drain",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:116",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:124",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "monitor_drain",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:116",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:136",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "clear_existing_results",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:51",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:53",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "enqueue_all",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:58",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:92",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "publish_message",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:93",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:116",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "get_redis_stats",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:145",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:150",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "get_redis_stats",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:145",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:158",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "publish_redis_queue",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:84",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:116",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "run",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:135",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "json",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:150",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:151",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "pod_times",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:219",
+      "callee": "run",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:132",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:245",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:391",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:393",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:395",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:396",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:397",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:398",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "csv_rows",
+      "caller_source": "guides/pod-snapshot/scripts/snapshot_timings.py:374",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "guides/pod-snapshot/scripts/snapshot_timings.py:400",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_manifest",
+      "caller_source": "scripts/guide.py:2084",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/guide.py:2135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_check_env",
+      "caller_source": "scripts/guide.py:405",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/guide.py:435",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_check_providers",
+      "caller_source": "scripts/guide.py:616",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/guide.py:659",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/guide.py:920",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse_script_requirements",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:12",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:52",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "scripts/lint-dockerfile-envvars.py:52",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-dockerfile-envvars.py:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "extract_required_vars",
+      "caller_source": "scripts/lint-envvars.py:12",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-envvars.py:31",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_locally_defined_vars",
+      "caller_source": "scripts/lint-envvars.py:36",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-envvars.py:60",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_locally_defined_vars",
+      "caller_source": "scripts/lint-envvars.py:36",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-envvars.py:66",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_locally_defined_vars",
+      "caller_source": "scripts/lint-envvars.py:36",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-envvars.py:72",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "find_used_vars",
+      "caller_source": "scripts/lint-envvars.py:77",
+      "callee": "add",
+      "callee_source": "guides/pod-snapshot/scripts/snapshot_timings.py:380",
+      "call_site_source": "scripts/lint-envvars.py:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_ws_send_text",
+      "caller_source": "guides/agentic-api/verify.py:302",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "guides/agentic-api/verify.py:311",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "_ws_send_text",
+      "caller_source": "guides/agentic-api/verify.py:302",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "guides/agentic-api/verify.py:314",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "_ws_send_text",
+      "caller_source": "guides/agentic-api/verify.py:302",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "guides/agentic-api/verify.py:315",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "recv_exact",
+      "caller_source": "guides/agentic-api/verify.py:321",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "guides/agentic-api/verify.py:327",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "enqueue_all",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:58",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:86",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "publish_redis_queue",
+      "caller_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:84",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:113",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "graphql_nodes",
+      "caller_source": "scripts/assigned-issue-reminder.py:96",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/assigned-issue-reminder.py:111",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_render_env_static",
+      "caller_source": "scripts/guide.py:1144",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1161",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_render_env_static",
+      "caller_source": "scripts/guide.py:1144",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1168",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_flatten_steps",
+      "caller_source": "scripts/guide.py:1205",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1218",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "render_steps",
+      "caller_source": "scripts/guide.py:1323",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1364",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "extend",
+      "caller_source": "scripts/guide.py:137",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_emit_env_lines",
+      "caller_source": "scripts/guide.py:1460",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1483",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:1768",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1781",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check",
+      "caller_source": "scripts/guide.py:1793",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:1802",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_support_repo",
+      "caller_source": "scripts/guide.py:838",
+      "callee": "extend",
+      "callee_source": "scripts/guide.py:137",
+      "call_site_source": "scripts/guide.py:884",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/assigned-issue-reminder.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/guide.py:2334",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/sync-slack-channels.py:215",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/lint-envvars.py:135",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/seed-release-badges.py:217",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/sync-release-matrix.py:126",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/sync-nightly-matrix.py:59",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/sync-nightly-matrix.py:59",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/sync-release-matrix.py:126",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/seed-release-badges.py:217",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/sync-slack-channels.py:215",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/assigned-issue-reminder.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/guide.py:2334",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "scripts/lint-envvars.py:135",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/guide.py:2334",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/sync-slack-channels.py:215",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/sync-nightly-matrix.py:59",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/seed-release-badges.py:217",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/sync-release-matrix.py:126",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/lint-envvars.py:135",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "scripts/assigned-issue-reminder.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/seed-release-badges.py:217",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/sync-nightly-matrix.py:59",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/sync-slack-channels.py:215",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/assigned-issue-reminder.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/sync-release-matrix.py:126",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/lint-envvars.py:135",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "scripts/guide.py:2334",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/seed-release-badges.py:217",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/assigned-issue-reminder.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/sync-nightly-matrix.py:59",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/guide.py:2334",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/sync-slack-channels.py:215",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/sync-release-matrix.py:126",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "scripts/lint-envvars.py:135",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/guide.py:2334",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/assigned-issue-reminder.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/sync-slack-channels.py:215",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/sync-release-matrix.py:126",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/sync-nightly-matrix.py:59",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/seed-release-badges.py:217",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/lint-envvars.py:135",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "scripts/lint-dockerfile-envvars.py:201",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_hooks_snapshot_before_server_reports_ready",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:591",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:599",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_snapshot_callback_trigger_failure_resumes_and_restores_status",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:677",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:689",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_snapshot_callback_release_or_resume_failure_kills_server",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:698",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:720",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_snapshot_callback_forwards_auth_headers_and_ssl_verify",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:727",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:734",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:795",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:828",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:829",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:830",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:831",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:832",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:833",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:834",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:835",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "_sglang_server_args",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:568",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:864",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "trigger",
+      "caller_source": "docker/scripts/snapshot/providers.py:66",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "docker/scripts/snapshot/providers.py:82",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_clear_cache_with_explicit_path_directory",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:35",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:41",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_clear_cache_with_explicit_path_file",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:48",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:50",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "test_clear_cache_removes_all_entries_in_directory",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:77",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:86",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "do_POST",
+      "caller_source": "guides/agentic-api/verify.py:158",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "guides/agentic-api/verify.py:179",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "write_step_summary",
+      "caller_source": "guides/pod-snapshot/scripts/check_thresholds.py:164",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "guides/pod-snapshot/scripts/check_thresholds.py:176",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "_cmd_render",
+      "caller_source": "scripts/guide.py:1949",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "scripts/guide.py:1972",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_render",
+      "caller_source": "scripts/guide.py:1949",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "scripts/guide.py:1984",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_emit",
+      "caller_source": "scripts/guide.py:1992",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "scripts/guide.py:2013",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_set_branch",
+      "caller_source": "scripts/guide.py:2037",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "scripts/guide.py:2057",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "write_step_summary",
+      "caller_source": "scripts/seed-release-badges.py:191",
+      "callee": "write",
+      "callee_source": "scripts/guide.py:1843",
+      "call_site_source": "scripts/seed-release-badges.py:214",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_warns_and_proceeds_without_memory_saver",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:857",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:873",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-pubsub.py:143",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/benchmark-heavy-redis.py:162",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:880",
+      "callee": "main",
+      "callee_source": "guides/batch-serving/asynchronous-processing/multitenant/scripts/stress-test-redis.py:167",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:885",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "comment",
+      "caller_source": "scripts/assigned-issue-reminder.py:175",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/assigned-issue-reminder.py:176",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "unassign",
+      "caller_source": "scripts/assigned-issue-reminder.py:190",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/assigned-issue-reminder.py:193",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "unassign",
+      "caller_source": "scripts/assigned-issue-reminder.py:190",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/assigned-issue-reminder.py:194",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "graphql_nodes",
+      "caller_source": "scripts/assigned-issue-reminder.py:96",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/assigned-issue-reminder.py:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_md",
+      "caller_source": "scripts/guide.py:1062",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:1072",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "render_md",
+      "caller_source": "scripts/guide.py:1433",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:1437",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:1768",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:1780",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check",
+      "caller_source": "scripts/guide.py:1793",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:1800",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_check",
+      "caller_source": "scripts/guide.py:1933",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:1938",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_render",
+      "caller_source": "scripts/guide.py:1949",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:1964",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_emit",
+      "caller_source": "scripts/guide.py:1992",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:2001",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_set_branch",
+      "caller_source": "scripts/guide.py:2037",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:2052",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_cmd_check_manifest",
+      "caller_source": "scripts/guide.py:2164",
+      "callee": "ok",
+      "callee_source": "scripts/guide.py:147",
+      "call_site_source": "scripts/guide.py:2172",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_step_list",
+      "caller_source": "scripts/guide.py:376",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:391",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_verify",
+      "caller_source": "scripts/guide.py:495",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:508",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_verify",
+      "caller_source": "scripts/guide.py:495",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:510",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:521",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:528",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_check_benchmark",
+      "caller_source": "scripts/guide.py:513",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:535",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:967",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:973",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "check_yaml",
+      "caller_source": "scripts/guide.py:940",
+      "callee": "_check_step_list",
+      "callee_source": "scripts/guide.py:376",
+      "call_site_source": "scripts/guide.py:980",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "seed_once",
+      "caller_source": "scripts/seed-release-badges.py:116",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/seed-release-badges.py:128",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "seed_once",
+      "caller_source": "scripts/seed-release-badges.py:116",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/seed-release-badges.py:146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "seed_once",
+      "caller_source": "scripts/seed-release-badges.py:116",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/seed-release-badges.py:162",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "existing_badges",
+      "caller_source": "scripts/seed-release-badges.py:93",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/seed-release-badges.py:95",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "existing_badges",
+      "caller_source": "scripts/seed-release-badges.py:93",
+      "callee": "api",
+      "callee_source": "scripts/github_api.py:18",
+      "call_site_source": "scripts/seed-release-badges.py:98",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "trigger",
+      "caller_source": "docker/scripts/snapshot/providers.py:66",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/providers.py:71",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_clear_cache_failure_raises_snapshot_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:102",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:109",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:176",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_disabled_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:210",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_empty_string_provider",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:235",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_not_available_skips_sleep_and_wake",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:260",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:284",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_unsupported_engine_logs_error",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:293",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:311",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_trigger_failure_handled_gracefully",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:317",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:342",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_clear_cache_with_explicit_path_directory",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:35",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:45",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_default_provider_unset",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:350",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:374",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:399",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:227",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:339",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:200",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:308",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:281",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:252",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_patch_vllm_lifespan_provider_gke_gvisor",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:382",
+      "callee": "run_test",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:371",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:402",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/sglang/launcher.py:82",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "guides/agentic-api/verify.py:415",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:439",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/vllm/launcher.py:68",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:445",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/agentic-api/verify.py:415",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/sglang/launcher.py:82",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_launcher_main_vllm_not_installed_raises",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:449",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/vllm/launcher.py:68",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_clear_cache_with_explicit_path_file",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:48",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:56",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_hooks_snapshot_before_server_reports_ready",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:591",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:616",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_clear_cache_with_env_var",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:62",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_warmup_and_hold_warmup_failure_skips_snapshot",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:660",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:666",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_snapshot_callback_trigger_failure_resumes_and_restores_status",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:677",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:684",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_snapshot_callback_release_or_resume_failure_kills_server",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:698",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:705",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_clear_cache_non_existent",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:72",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:75",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_snapshot_callback_forwards_auth_headers_and_ssl_verify",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:727",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:739",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_clear_cache_removes_all_entries_in_directory",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:77",
+      "callee": "clear_cache",
+      "callee_source": "docker/scripts/snapshot/providers.py:43",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:796",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "guides/agentic-api/verify.py:415",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/vllm/launcher.py:68",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_main",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:784",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/sglang/launcher.py:82",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:800",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "_sglang_modules",
+      "callee_source": "docker/scripts/snapshot/test_providers.py:532",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:840",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "guides/workload-autoscaling/slo-aware/benchmark-templates/plot_run.py:117",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "docker/scripts/snapshot/vllm/launcher.py:68",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "guides/flow-control/scripts/tuning_wizard.py:151",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "test_sglang_launcher_skips_hooks_when_disabled_or_unconfigured",
+      "caller_source": "docker/scripts/snapshot/test_providers.py:817",
+      "callee": "main",
+      "callee_source": "guides/pod-snapshot/scripts/check_thresholds.py:179",
+      "call_site_source": "docker/scripts/snapshot/test_providers.py:844",
+      "confidence": "UNCERTAIN"
+    }
+  ],
+  "call_relationships_truncated": 303,
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "sparse",
+    "configmaps": "rich",
+    "crds": "none",
+    "deployments": "rich",
+    "dockerfiles": "moderate",
+    "external_connections": "rich",
+    "ingress_routing": "rich",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "rich",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "moderate",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "sparse",
+    "secrets": "sparse",
+    "services": "rich",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}

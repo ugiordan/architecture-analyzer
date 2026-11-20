@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/data-science-pipelines](https://github.com/opendatahub-io/data-science-pipelines) |
 | Aliases | DSP, dsp |
 | Commit | [6a31fc1a55950a84174e00cfd73bdfabdb5e6114](https://github.com/opendatahub-io/data-science-pipelines/commit/6a31fc1a55950a84174e00cfd73bdfabdb5e6114) |
-| Extracted | 2026-11-20T06:41:21Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:28:43Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

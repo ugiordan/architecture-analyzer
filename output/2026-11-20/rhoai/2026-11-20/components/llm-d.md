@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [llm-d/llm-d](https://github.com/llm-d/llm-d) |
-| Commit | [fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03](https://github.com/llm-d/llm-d/commit/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03) |
-| Extracted | 2026-11-20T06:48:08Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Commit | [d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b](https://github.com/llm-d/llm-d/commit/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b) |
+| Extracted | 2026-11-20T22:35:58Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -19,14 +19,14 @@
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| decode | ClusterIP | 8000/TCP (vllm), 6379/TCP (ray-gcs) | [`guides/tiered-prefix-cache/modelserver/tpu/v7/vllm/native/cpu/multi-host/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/tiered-prefix-cache/modelserver/tpu/v7/vllm/native/cpu/multi-host/service.yaml) |
-| mooncake-client | ClusterIP | 50052/TCP (rpc) | [`helpers/mooncake-client/base/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/helpers/mooncake-client/base/service.yaml) |
-| mooncake-master-store | ClusterIP | 50051/TCP (rpc), 8080/TCP (metadata), 9003/TCP (metrics) | [`helpers/mooncake-master-store/base/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/helpers/mooncake-master-store/base/service.yaml) |
-| render | ClusterIP | 8000/TCP (render-http) | [`guides/coord-disaggregation/render/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/coord-disaggregation/render/service.yaml) |
-| render | ClusterIP | 8000/TCP (render-http) | [`guides/models/glm-5-2/render/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/models/glm-5-2/render/service.yaml) |
-| render | ClusterIP | 8000/TCP (render-http) | [`guides/p2p-kv-cache-sharing/render/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/p2p-kv-cache-sharing/render/service.yaml) |
-| render | ClusterIP | 8000/TCP (render-http) | [`guides/p2p-kv-cache-sharing/render/standalone/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/p2p-kv-cache-sharing/render/standalone/service.yaml) |
-| render | ClusterIP | 8000/TCP (render-http) | [`guides/precise-prefix-cache-routing/render/standalone/service.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/precise-prefix-cache-routing/render/standalone/service.yaml) |
+| decode | ClusterIP | 8000/TCP (vllm), 6379/TCP (ray-gcs) | [`guides/tiered-prefix-cache/modelserver/tpu/v7/vllm/native/cpu/multi-host/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/tiered-prefix-cache/modelserver/tpu/v7/vllm/native/cpu/multi-host/service.yaml) |
+| mooncake-client | ClusterIP | 50052/TCP (rpc) | [`helpers/mooncake-client/base/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/helpers/mooncake-client/base/service.yaml) |
+| mooncake-master-store | ClusterIP | 50051/TCP (rpc), 8080/TCP (metadata), 9003/TCP (metrics) | [`helpers/mooncake-master-store/base/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/helpers/mooncake-master-store/base/service.yaml) |
+| render | ClusterIP | 8000/TCP (render-http) | [`guides/coord-disaggregation/render/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/coord-disaggregation/render/service.yaml) |
+| render | ClusterIP | 8000/TCP (render-http) | [`guides/models/glm-5-2/render/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/models/glm-5-2/render/service.yaml) |
+| render | ClusterIP | 8000/TCP (render-http) | [`guides/p2p-kv-cache-sharing/render/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/p2p-kv-cache-sharing/render/service.yaml) |
+| render | ClusterIP | 8000/TCP (render-http) | [`guides/p2p-kv-cache-sharing/render/standalone/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/p2p-kv-cache-sharing/render/standalone/service.yaml) |
+| render | ClusterIP | 8000/TCP (render-http) | [`guides/precise-prefix-cache-routing/render/standalone/service.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/precise-prefix-cache-routing/render/standalone/service.yaml) |
 
 
 ## Ingress Routing
@@ -128,20 +128,19 @@
 
 | Name | Data Keys | Source |
 |------|-----------|--------|
-| deepseek-model-mapping | baseModel | [`guides/multi-model-routing/manifests/configmaps.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/multi-model-routing/manifests/configmaps.yaml) |
-| llm-d-coordinator-config | coordinator.yaml | [`guides/coord-disaggregation/coordinator/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/coord-disaggregation/coordinator/base/configmap.yaml) |
-| llm-d-inference-gateway | deployment, service | [`guides/recipes/gateway/istio/configmap.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/recipes/gateway/istio/configmap.yaml) |
-| mooncake-master-store-config | master.yaml | [`helpers/mooncake-master-store/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/helpers/mooncake-master-store/base/configmap.yaml) |
-| mooncake-store-config | mooncake_config.json | [`guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/cpu/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/cpu/base/configmap.yaml) |
-| mooncake-store-config | mooncake_config.json | [`guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/fs/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/fs/base/configmap.yaml) |
-| qwen-model-mapping | baseModel | [`guides/multi-model-routing/manifests/configmaps.yaml`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/multi-model-routing/manifests/configmaps.yaml) |
+| deepseek-model-mapping | baseModel | [`guides/multi-model-routing/manifests/configmaps.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/multi-model-routing/manifests/configmaps.yaml) |
+| llm-d-coordinator-config | coordinator.yaml | [`guides/coord-disaggregation/coordinator/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/coord-disaggregation/coordinator/base/configmap.yaml) |
+| llm-d-inference-gateway | deployment, service | [`guides/recipes/gateway/istio/configmap.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/recipes/gateway/istio/configmap.yaml) |
+| mooncake-master-store-config | master.yaml | [`helpers/mooncake-master-store/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/helpers/mooncake-master-store/base/configmap.yaml) |
+| mooncake-store-config | mooncake_config.json | [`guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/cpu/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/cpu/base/configmap.yaml) |
+| mooncake-store-config | mooncake_config.json | [`guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/fs/base/configmap.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/tiered-prefix-cache/modelserver/gpu/vllm/mooncake-store/fs/base/configmap.yaml) |
+| qwen-model-mapping | baseModel | [`guides/multi-model-routing/manifests/configmaps.yaml`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/multi-model-routing/manifests/configmaps.yaml) |
 
 
 ## Dockerfiles
 
 | Path | Base Image | Stages | Exposed Ports |
 |------|-----------|--------|---------------|
-| docker/Dockerfile.cpu | vllm-build | 0 |  |
 | docker/Dockerfile.rdma-tools | nvcr.io/nvidia/cuda:${CUDA_MAJOR}.${CUDA_MINOR}.${CUDA_PATCH}-runtime-ubi9 | 0 |  |
 | docker/Dockerfile.xpu | ${BASE_IMAGE} | 0 |  |
 | docker/Dockerfile.xpu-omni | vllm-omni | 0 |  |
@@ -187,8 +186,8 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| create |  | [`docker/scripts/snapshot/sglang/wrapper.py:37`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/docker/scripts/snapshot/sglang/wrapper.py#L37) |
-| create |  | [`guides/agentic-api/verify.py:360`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/guides/agentic-api/verify.py#L360) |
-| get |  | [`scripts/lint-dockerfile-envvars.py:187`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/scripts/lint-dockerfile-envvars.py#L187) |
-| replace |  | [`scripts/sync-nightly-matrix.py:88`](https://github.com/llm-d/llm-d/blob/fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03/scripts/sync-nightly-matrix.py#L88) |
+| create |  | [`docker/scripts/snapshot/sglang/wrapper.py:37`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/docker/scripts/snapshot/sglang/wrapper.py#L37) |
+| create |  | [`guides/agentic-api/verify.py:360`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/guides/agentic-api/verify.py#L360) |
+| get |  | [`scripts/lint-dockerfile-envvars.py:187`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/scripts/lint-dockerfile-envvars.py#L187) |
+| replace |  | [`scripts/sync-nightly-matrix.py:88`](https://github.com/llm-d/llm-d/blob/d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b/scripts/sync-nightly-matrix.py#L88) |
 

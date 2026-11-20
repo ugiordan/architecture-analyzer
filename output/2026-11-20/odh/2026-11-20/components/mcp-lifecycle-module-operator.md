@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/mcp-lifecycle-module-operator](https://github.com/opendatahub-io/mcp-lifecycle-module-operator) |
 | Aliases | MCP Lifecycle Module operator, MCP Lifecycle operator |
 | Commit | [0e65149c890dbcb64765bf8cb4b76e19ca5a6d13](https://github.com/opendatahub-io/mcp-lifecycle-module-operator/commit/0e65149c890dbcb64765bf8cb4b76e19ca5a6d13) |
-| Extracted | 2026-11-20T06:40:56Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:28:35Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

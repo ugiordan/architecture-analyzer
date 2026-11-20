@@ -2,7 +2,7 @@
 # Architecture Analyzer Output
 
 **Platform**: Platform  
-**Generated**: 2026-11-20T06:52:14Z  
+**Generated**: 2026-11-20T22:41:38Z  
 **Components**: 44  
 
 ## How to Find Information
@@ -66,7 +66,7 @@ Use these for deep-dive queries when the markdown docs don't have enough detail.
 | llama-stack |  | 0 | 1 | 110 | [llama-stack.md](components/llama-stack.md) |
 | llama-stack-provider-trustyai-garak |  | 0 | 0 | 213 | [llama-stack-provider-trustyai-garak.md](components/llama-stack-provider-trustyai-garak.md) |
 | llm-d |  | 0 | 8 | 9 | [llm-d.md](components/llm-d.md) |
-| llm-d-inference-scheduler |  | 2 | 4 | 66 | [llm-d-inference-scheduler.md](components/llm-d-inference-scheduler.md) |
+| llm-d-inference-scheduler |  | 2 | 0 | 69 | [llm-d-inference-scheduler.md](components/llm-d-inference-scheduler.md) |
 | llm-d-kv-cache |  | 0 | 0 | 37 | [llm-d-kv-cache.md](components/llm-d-kv-cache.md) |
 | lm-evaluation-harness |  | 0 | 0 | 33 | [lm-evaluation-harness.md](components/lm-evaluation-harness.md) |
 | mcp-lifecycle-module-operator | MCP Lifecycle Module operator, MCP Lifecycle operator | 1 | 1 | 20 | [mcp-lifecycle-module-operator.md](components/mcp-lifecycle-module-operator.md) |

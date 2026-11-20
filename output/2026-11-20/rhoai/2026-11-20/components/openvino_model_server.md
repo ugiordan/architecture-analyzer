@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [red-hat-data-services/openvino_model_server](https://github.com/red-hat-data-services/openvino_model_server) |
-| Commit | [0ea758dd84976ba7c8367fb8839b2134aee841ea](https://github.com/red-hat-data-services/openvino_model_server/commit/0ea758dd84976ba7c8367fb8839b2134aee841ea) |
-| Extracted | 2026-11-20T06:47:31Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Commit | [257c7d39d2ba85e002d7755ee2a19acc5b185927](https://github.com/red-hat-data-services/openvino_model_server/commit/257c7d39d2ba85e002d7755ee2a19acc5b185927) |
+| Extracted | 2026-11-20T22:35:14Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -121,16 +121,16 @@
 
 | Name | Value | Source |
 |------|-------|--------|
-| inputSize | 10 | [`client/go/kserve-api/grpc_infer_dummy.go`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/client/go/kserve-api/grpc_infer_dummy.go) |
-| outputSize | 10 | [`client/go/kserve-api/grpc_infer_dummy.go`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/client/go/kserve-api/grpc_infer_dummy.go) |
+| inputSize | 10 | [`client/go/kserve-api/grpc_infer_dummy.go`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/client/go/kserve-api/grpc_infer_dummy.go) |
+| outputSize | 10 | [`client/go/kserve-api/grpc_infer_dummy.go`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/client/go/kserve-api/grpc_infer_dummy.go) |
 
 
 ## Serving Runtime References
 
 | Runtime | CRD Kind | Source |
 |---------|----------|--------|
-|  |  | [`extras/kserve/kserve-openvino.yaml`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/extras/kserve/kserve-openvino.yaml) |
-|  |  | [`extras/openshift_AI/ServingRuntime.yaml`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/extras/openshift_AI/ServingRuntime.yaml) |
+|  |  | [`extras/kserve/kserve-openvino.yaml`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/extras/kserve/kserve-openvino.yaml) |
+|  |  | [`extras/openshift_AI/ServingRuntime.yaml`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/extras/openshift_AI/ServingRuntime.yaml) |
 
 
 ## Label Contracts
@@ -144,27 +144,27 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| create |  | [`demos/benchmark/python/client.py:332`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/benchmark/python/client.py#L332) |
-| create |  | [`tests/functional/fixtures/server_remote_models_fixtures.py:130`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/fixtures/server_remote_models_fixtures.py#L130) |
-| create |  | [`demos/benchmark/v3/benchmark.py:369`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/benchmark/v3/benchmark.py#L369) |
-| get |  | [`tests/functional/object_model/docker.py:155`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/object_model/docker.py#L155) |
-| get |  | [`tests/models/argmax_sum.py:41`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/models/argmax_sum.py#L41) |
-| get |  | [`tests/functional/utils/process.py:71`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/utils/process.py#L71) |
-| get |  | [`tests/functional/fixtures/server_multi_model_fixtures.py:40`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/fixtures/server_multi_model_fixtures.py#L40) |
-| get |  | [`tests/functional/object_model/docker.py:123`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/object_model/docker.py#L123) |
-| get |  | [`client/python/kserve-api/samples/http_model_metadata.py:35`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/client/python/kserve-api/samples/http_model_metadata.py#L35) |
-| get |  | [`tests/models/no_name_output.py:35`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/models/no_name_output.py#L35) |
-| get |  | [`tests/functional/utils/process.py:272`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/utils/process.py#L272) |
-| get |  | [`tests/functional/utils/process.py:70`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/utils/process.py#L70) |
-| get |  | [`tests/functional/object_model/docker.py:71`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/object_model/docker.py#L71) |
-| get |  | [`demos/common/stream_client/stream_client.py:150`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/common/stream_client/stream_client.py#L150) |
-| get |  | [`tests/functional/conftest.py:105`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/functional/conftest.py#L105) |
-| get |  | [`client/python/kserve-api/samples/grpc_server_metadata.py:30`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/client/python/kserve-api/samples/grpc_server_metadata.py#L30) |
-| get |  | [`demos/benchmark/python/main.py:119`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/benchmark/python/main.py#L119) |
-| get |  | [`demos/benchmark/python/client.py:204`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/benchmark/python/client.py#L204) |
-| get |  | [`demos/embeddings/ovms_mteb.py:52`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/embeddings/ovms_mteb.py#L52) |
-| get |  | [`demos/python_demos/clip_image_classification/download_model.py:39`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/python_demos/clip_image_classification/download_model.py#L39) |
-| get |  | [`tests/models/argmax_sum.py:42`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/tests/models/argmax_sum.py#L42) |
-| get |  | [`demos/bert_question_answering/python/bert_question_answering.py:222`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/bert_question_answering/python/bert_question_answering.py#L222) |
-| get |  | [`demos/bert_question_answering/python/bert_question_answering.py:168`](https://github.com/red-hat-data-services/openvino_model_server/blob/0ea758dd84976ba7c8367fb8839b2134aee841ea/demos/bert_question_answering/python/bert_question_answering.py#L168) |
+| create |  | [`demos/benchmark/python/client.py:332`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/benchmark/python/client.py#L332) |
+| create |  | [`tests/functional/fixtures/server_remote_models_fixtures.py:130`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/fixtures/server_remote_models_fixtures.py#L130) |
+| create |  | [`demos/benchmark/v3/benchmark.py:369`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/benchmark/v3/benchmark.py#L369) |
+| get |  | [`tests/functional/object_model/docker.py:155`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/object_model/docker.py#L155) |
+| get |  | [`tests/models/argmax_sum.py:41`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/models/argmax_sum.py#L41) |
+| get |  | [`tests/functional/utils/process.py:71`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/utils/process.py#L71) |
+| get |  | [`tests/functional/fixtures/server_multi_model_fixtures.py:40`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/fixtures/server_multi_model_fixtures.py#L40) |
+| get |  | [`tests/functional/object_model/docker.py:123`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/object_model/docker.py#L123) |
+| get |  | [`client/python/kserve-api/samples/http_model_metadata.py:35`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/client/python/kserve-api/samples/http_model_metadata.py#L35) |
+| get |  | [`tests/models/no_name_output.py:35`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/models/no_name_output.py#L35) |
+| get |  | [`tests/functional/utils/process.py:272`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/utils/process.py#L272) |
+| get |  | [`tests/functional/utils/process.py:70`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/utils/process.py#L70) |
+| get |  | [`tests/functional/object_model/docker.py:71`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/object_model/docker.py#L71) |
+| get |  | [`demos/common/stream_client/stream_client.py:150`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/common/stream_client/stream_client.py#L150) |
+| get |  | [`tests/functional/conftest.py:105`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/functional/conftest.py#L105) |
+| get |  | [`client/python/kserve-api/samples/grpc_server_metadata.py:30`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/client/python/kserve-api/samples/grpc_server_metadata.py#L30) |
+| get |  | [`demos/benchmark/python/main.py:119`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/benchmark/python/main.py#L119) |
+| get |  | [`demos/benchmark/python/client.py:204`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/benchmark/python/client.py#L204) |
+| get |  | [`demos/embeddings/ovms_mteb.py:52`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/embeddings/ovms_mteb.py#L52) |
+| get |  | [`demos/python_demos/clip_image_classification/download_model.py:39`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/python_demos/clip_image_classification/download_model.py#L39) |
+| get |  | [`tests/models/argmax_sum.py:42`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/tests/models/argmax_sum.py#L42) |
+| get |  | [`demos/bert_question_answering/python/bert_question_answering.py:222`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/bert_question_answering/python/bert_question_answering.py#L222) |
+| get |  | [`demos/bert_question_answering/python/bert_question_answering.py:168`](https://github.com/red-hat-data-services/openvino_model_server/blob/257c7d39d2ba85e002d7755ee2a19acc5b185927/demos/bert_question_answering/python/bert_question_answering.py#L168) |
 

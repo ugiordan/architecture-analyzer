@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/vllm-gaudi](https://github.com/red-hat-data-services/vllm-gaudi) |
 | Commit | [6c66cbc77235a1fb60f00f6b37fc652cd6f615c5](https://github.com/red-hat-data-services/vllm-gaudi/commit/6c66cbc77235a1fb60f00f6b37fc652cd6f615c5) |
-| Extracted | 2026-11-20T06:47:56Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:46Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

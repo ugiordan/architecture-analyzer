@@ -11,8 +11,8 @@
 | Repository | [red-hat-data-services/codeflare-operator](https://github.com/red-hat-data-services/codeflare-operator) |
 | Aliases | CodeFlare operator |
 | Commit | [f89edd9f015da4b1f466a7fe0b7a164b7da6c7c9](https://github.com/red-hat-data-services/codeflare-operator/commit/f89edd9f015da4b1f466a7fe0b7a164b7da6c7c9) |
-| Extracted | 2026-11-20T06:43:32Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:30:46Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

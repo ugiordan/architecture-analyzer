@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/trustyai-explainability](https://github.com/red-hat-data-services/trustyai-explainability) |
 | Commit | [5615afa361bcdae6cfce265e1439f75e6be4ab62](https://github.com/red-hat-data-services/trustyai-explainability/commit/5615afa361bcdae6cfce265e1439f75e6be4ab62) |
-| Extracted | 2026-11-20T06:47:25Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:20Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

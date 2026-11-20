@@ -4,9 +4,9 @@
     "ODH Dashboard"
   ],
   "repo": "opendatahub-io/odh-dashboard",
-  "commit_sha": "c68ce1dbe94d9a5550f77ab4f9dfab5d74fb6e8a",
-  "extracted_at": "2026-11-20T06:40:54Z",
-  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
+  "commit_sha": "e0371ef003c3c44a571a89113527df53f00fa0c7",
+  "extracted_at": "2026-11-20T22:28:31Z",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
   "schema_version": "2",
   "rbac": {
     "cluster_roles": [
@@ -731,28 +731,6 @@
             ],
             "verbs": [
               "create"
-            ]
-          },
-          {
-            "apiGroups": [
-              ""
-            ],
-            "resources": [
-              "namespaces"
-            ],
-            "verbs": [
-              "get"
-            ]
-          },
-          {
-            "apiGroups": [
-              "datasciencecluster.opendatahub.io"
-            ],
-            "resources": [
-              "datascienceclusters"
-            ],
-            "verbs": [
-              "list"
             ]
           }
         ]
@@ -8324,7 +8302,7 @@
     },
     {
       "path": "distributions/rhaii/Dockerfile",
-      "base_image": "${DISTROLESS_BASE_IMAGE}",
+      "base_image": "${RUNTIME_BASE_IMAGE}",
       "build_stage_images": [
         "${NODE_BASE_IMAGE}",
         "${GOLANG_BASE_IMAGE}"
@@ -8337,7 +8315,7 @@
       "issues": [
         "Unpinned base image: ${NODE_BASE_IMAGE}",
         "Unpinned base image: ${GOLANG_BASE_IMAGE}",
-        "Unpinned base image: ${DISTROLESS_BASE_IMAGE}"
+        "Unpinned base image: ${RUNTIME_BASE_IMAGE}"
       ],
       "architectures": [
         "multi-arch"
@@ -8349,9 +8327,9 @@
       "copy_instructions": [
         {
           "sources": [
-            "/usr/src/app/bff"
+            "/tmp/bff"
           ],
-          "destination": "./",
+          "destination": "./bff",
           "from_stage": "bff-builder",
           "original_sources": [
             "distributions/rhaii/distributions/core-bff/bff/go.mod",
@@ -8388,9 +8366,12 @@
           "destination": "./static/",
           "from_stage": "ui-builder",
           "original_sources": [
+            "distributions/rhaii/prefetch/pnpm/package.json",
+            "distributions/rhaii/prefetch/pnpm/package-lock.json",
             "distributions/rhaii/package.json",
             "distributions/rhaii/pnpm-lock.yaml",
             "distributions/rhaii/pnpm-workspace.yaml",
+            "distributions/rhaii/.npmrc",
             "distributions/rhaii/frontend/package.json",
             "distributions/rhaii/frontend/src/",
             "distributions/rhaii/packages/plugin-core/",
@@ -8419,9 +8400,12 @@
           "destination": "./static/_mf/modelServing/",
           "from_stage": "ui-builder",
           "original_sources": [
+            "distributions/rhaii/prefetch/pnpm/package.json",
+            "distributions/rhaii/prefetch/pnpm/package-lock.json",
             "distributions/rhaii/package.json",
             "distributions/rhaii/pnpm-lock.yaml",
             "distributions/rhaii/pnpm-workspace.yaml",
+            "distributions/rhaii/.npmrc",
             "distributions/rhaii/frontend/package.json",
             "distributions/rhaii/frontend/src/",
             "distributions/rhaii/packages/plugin-core/",
@@ -8457,7 +8441,7 @@
           "tool": "go",
           "command": "build",
           "entry_point": "./cmd",
-          "output": "bff"
+          "output": "/tmp/bff"
         }
       ]
     },
@@ -10926,17 +10910,17 @@
     {
       "method": "*",
       "path": "GET ",
-      "source": "distributions/core-bff/bff/internal/api/routes_model_serving.go:65"
-    },
-    {
-      "method": "*",
-      "path": "GET ",
       "source": "distributions/core-bff/bff/internal/api/routes_model_serving.go:64"
     },
     {
       "method": "*",
       "path": "GET ",
       "source": "distributions/core-bff/bff/internal/api/routes_model_serving.go:63"
+    },
+    {
+      "method": "*",
+      "path": "GET ",
+      "source": "distributions/core-bff/bff/internal/api/routes_model_serving.go:65"
     },
     {
       "method": "*",
@@ -14909,7 +14893,7 @@
     },
     {
       "name": "ValidTimeseriesPresets",
-      "value": "map[string]bool{\n\t\"speed\":\ttrue,\n\t\"balanced\":\ttrue,\n}",
+      "value": "map[string]bool{\n\t\"speed\":\ttrue,\n\t\"balanced\":\ttrue,\n\t\"quality\":\ttrue,\n}",
       "category": "general",
       "doc": "ValidTimeseriesPresets lists the valid preset strings for timeseries pipelines.",
       "source": "packages/automl/bff/internal/constants/automl.go"
@@ -18061,12 +18045,6 @@
       "source": "packages/eval-hub/bff/internal/api/app.go"
     },
     {
-      "name": "HardwareProfilesPath",
-      "value": "ApiPathPrefix + \"/hardwareprofiles\"",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/api/app.go"
-    },
-    {
       "name": "HealthCheckPath",
       "value": "/healthcheck",
       "category": "general",
@@ -18085,14 +18063,8 @@
       "source": "packages/eval-hub/bff/internal/api/app.go"
     },
     {
-      "name": "KueueAvailabilityPath",
-      "value": "ApiPathPrefix + \"/kueue/availability\"",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/api/app.go"
-    },
-    {
-      "name": "KueueWorkloadStatusesPath",
-      "value": "ApiPathPrefix + \"/kueue/workloads\"",
+      "name": "InfoPath",
+      "value": "ApiPathPrefix + \"/info\"",
       "category": "general",
       "source": "packages/eval-hub/bff/internal/api/app.go"
     },
@@ -18190,6 +18162,12 @@
       "value": "map[HandlerID]HandlerFactory{}",
       "category": "general",
       "source": "packages/eval-hub/bff/internal/api/extensions.go"
+    },
+    {
+      "name": "maxProviderPages",
+      "value": "100",
+      "category": "general",
+      "source": "packages/eval-hub/bff/internal/api/hardware_profile_validation_handler.go"
     },
     {
       "name": "errEmptyBody",
@@ -18585,168 +18563,6 @@
       "source": "packages/eval-hub/bff/internal/integrations/kubernetes/evalhub_cr.go"
     },
     {
-      "name": "hardwareProfileGVR",
-      "value": "schema.GroupVersionResource{\n\tGroup:\t\thardwareProfileGroup,\n\tVersion:\thardwareProfileVersion,\n\tResource:\thardwareProfileResource,\n}",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/hardware_profiles.go"
-    },
-    {
-      "name": "hardwareProfileGroup",
-      "value": "infrastructure.opendatahub.io",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/hardware_profiles.go"
-    },
-    {
-      "name": "hardwareProfileResource",
-      "value": "hardwareprofiles",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/hardware_profiles.go"
-    },
-    {
-      "name": "hardwareProfileVersion",
-      "value": "v1",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/hardware_profiles.go"
-    },
-    {
-      "name": "dscGVR",
-      "value": "schema.GroupVersionResource{Group: dscGroup, Version: dscVersion, Resource: dscResource}",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "dscGroup",
-      "value": "datasciencecluster.opendatahub.io",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "dscResource",
-      "value": "datascienceclusters",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "dscVersion",
-      "value": "v2",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "evalHubJobIDAnnotation",
-      "value": "eval-hub.github.io/job_id",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "evalHubJobIDLabel",
-      "value": "job_id",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueAvailabilityTTL",
-      "value": "15 * time.Second",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueCache",
-      "value": "newKueueAvailabilityCache(kueueAvailabilityTTL)",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueGroup",
-      "value": "kueue.x-k8s.io",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueManagedLabel",
-      "value": "kueue.x-k8s.io/managed",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueOperatorGVR",
-      "value": "schema.GroupVersionResource{\n\tGroup:\t\tkueueOperatorGroup,\n\tVersion:\tkueueOperatorVersion,\n\tResource:\tkueueOperatorResource,\n}",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueOperatorGroup",
-      "value": "kueue.openshift.io",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueOperatorResource",
-      "value": "kueues",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueOperatorVersion",
-      "value": "v1",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "kueueVersion",
-      "value": "v1beta2",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "legacyKueueManagedLabel",
-      "value": "kueue.openshift.io/managed",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "localQueueGVR",
-      "value": "schema.GroupVersionResource{Group: kueueGroup, Version: kueueVersion, Resource: localQueueResource}",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "localQueueResource",
-      "value": "localqueues",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "visibilityGroup",
-      "value": "visibility.kueue.x-k8s.io",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "visibilityLocalQueueGVR",
-      "value": "schema.GroupVersionResource{\n\tGroup:\t\tvisibilityGroup,\n\tVersion:\tvisibilityVersion,\n\tResource:\tlocalQueueResource,\n}",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "visibilityVersion",
-      "value": "v1beta2",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "workloadGVR",
-      "value": "schema.GroupVersionResource{Group: kueueGroup, Version: kueueVersion, Resource: workloadResource}",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
-      "name": "workloadResource",
-      "value": "workloads",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/integrations/kubernetes/kueue.go"
-    },
-    {
       "name": "errPortForwardManagerClosed",
       "value": "errors.New(\"port-forward manager is closing\")",
       "category": "general",
@@ -18757,41 +18573,6 @@
       "value": "30 * time.Second",
       "category": "timeout",
       "source": "packages/eval-hub/bff/internal/integrations/kubernetes/portforward.go"
-    },
-    {
-      "name": "KueueWorkloadStateAdmitted",
-      "value": "admitted",
-      "type": "KueueWorkloadState",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/models/kueue.go"
-    },
-    {
-      "name": "KueueWorkloadStateFinished",
-      "value": "finished",
-      "type": "KueueWorkloadState",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/models/kueue.go"
-    },
-    {
-      "name": "KueueWorkloadStateInadmissible",
-      "value": "inadmissible",
-      "type": "KueueWorkloadState",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/models/kueue.go"
-    },
-    {
-      "name": "KueueWorkloadStatePreempted",
-      "value": "preempted",
-      "type": "KueueWorkloadState",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/models/kueue.go"
-    },
-    {
-      "name": "KueueWorkloadStateQueued",
-      "value": "queued",
-      "type": "KueueWorkloadState",
-      "category": "general",
-      "source": "packages/eval-hub/bff/internal/models/kueue.go"
     },
     {
       "name": "lookupHostFn",
@@ -26883,7 +26664,7 @@
       "name": "vllm-cpu-runtime-amd64",
       "kind": "ServingRuntime",
       "container_image": "quay.io/rh-aiservices-bu/vllm-cpu-openai-ubi9:0.3",
-      "source": "packages/cypress/cypress/fixtures/resources/modelServing/singleModel/vllm_cpu_amd64_runtime.yaml"
+      "source": "packages/cypress/cypress/fixtures/resources/eval-hub/vllm_cpu_amd64_qwen_tool_calling_runtime.yaml"
     },
     {
       "name": "vllm-cpu-runtime-arm64",
@@ -27577,7 +27358,7 @@
     "status_conditions": "none",
     "webhooks": "sparse"
   },
-  "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 25 workload(s) (rhaii-dashboard, odh-dashboard, maas-portal, rhaii-dashboard, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 27 container(s). watching 7 resource type(s). exposing 19 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080, 8443. with 1 webhook(s) (1 validating). protected by 24 network policy/policies. with 2 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dch-default-dataconnectservice-flight, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-predictor, s, sample-support-agent. with 2458 operator config constants (37 image references, 1 env vars). with 6 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, config, import), trustyai-service-operator (import). mounts 4 ConfigMap(s) as volumes: autorag-router-ca-bundle, kube-rbac-proxy-config, maas-portal-federation-config, odh-trusted-ca-bundle.",
+  "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 25 workload(s) (rhaii-dashboard, odh-dashboard, maas-portal, rhaii-dashboard, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 27 container(s). watching 7 resource type(s). exposing 19 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080, 8443. with 1 webhook(s) (1 validating). protected by 24 network policy/policies. with 2 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dch-default-dataconnectservice-flight, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-predictor, s, sample-support-agent. with 2425 operator config constants (37 image references, 1 env vars). with 6 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, config, import), trustyai-service-operator (import). mounts 4 ConfigMap(s) as volumes: autorag-router-ca-bundle, kube-rbac-proxy-config, maas-portal-federation-config, odh-trusted-ca-bundle.",
   "security_annotations": [
     {
       "type": "RBAC_CLUSTER_SCOPE_SENSITIVE",

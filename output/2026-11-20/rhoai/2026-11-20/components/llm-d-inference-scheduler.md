@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/llm-d-inference-scheduler](https://github.com/red-hat-data-services/llm-d-inference-scheduler) |
 | Commit | [530982f83005d81c4910b3e1eb1d24bd5b0b7fd5](https://github.com/red-hat-data-services/llm-d-inference-scheduler/commit/530982f83005d81c4910b3e1eb1d24bd5b0b7fd5) |
-| Extracted | 2026-11-20T06:45:56Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:33:13Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

@@ -1,9 +1,9 @@
 {
   "component": "llm-d",
   "repo": "llm-d/llm-d",
-  "commit_sha": "fbc9d5c78bb25d9410f9587bc7e55ddc3db5ad03",
-  "extracted_at": "2026-11-20T06:46:44Z",
-  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
+  "commit_sha": "d83e85c37c0d0b7a1d6c3b3fa4302aa831558b6b",
+  "extracted_at": "2026-11-20T22:34:40Z",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
   "schema_version": "2",
   "rbac": {},
   "services": [
@@ -543,60 +543,6 @@
     }
   ],
   "dockerfiles": [
-    {
-      "path": "docker/Dockerfile.cpu",
-      "base_image": "vllm-build",
-      "build_stage_images": [
-        "ubuntu:25.10",
-        "base-common",
-        "base-common",
-        "base-${TARGETARCH}"
-      ],
-      "stages": 5,
-      "issues": [
-        "Unpinned base image: base-common",
-        "Unpinned base image: base-common",
-        "Unpinned base image: base-${TARGETARCH}",
-        "Unpinned base image: vllm-build",
-        "No USER directive found (defaults to root)"
-      ],
-      "architectures": [
-        "multi-arch"
-      ],
-      "build_args": {
-        "TARGETARCH": ""
-      },
-      "copy_instructions": [
-        {
-          "sources": [
-            "docker/docker/packages/common/runtime-otel-package-requirements.txt"
-          ],
-          "destination": "/workspace/runtime-otel-package-requirements.txt"
-        },
-        {
-          "sources": [
-            "docker/docker/scripts/cpu/install_nixl.py"
-          ],
-          "destination": "/workspace/install_nixl.py"
-        }
-      ],
-      "build_commands": [
-        {
-          "tool": "pip",
-          "command": "install",
-          "entry_point": "requirements/build/cpu.txt"
-        },
-        {
-          "tool": "pip",
-          "command": "install"
-        },
-        {
-          "tool": "pip",
-          "command": "install",
-          "entry_point": "/workspace/runtime-otel-package-requirements.txt"
-        }
-      ]
-    },
     {
       "path": "docker/Dockerfile.rdma-tools",
       "base_image": "nvcr.io/nvidia/cuda:${CUDA_MAJOR}.${CUDA_MINOR}.${CUDA_PATCH}-runtime-ubi9",
@@ -1154,7 +1100,7 @@
     "configmaps": "rich",
     "crds": "none",
     "deployments": "rich",
-    "dockerfiles": "rich",
+    "dockerfiles": "moderate",
     "external_connections": "rich",
     "ingress_routing": "rich",
     "kustomize_overlay_refs": "none",
@@ -1195,6 +1141,69 @@
       "resource": "actions/checkout@v7",
       "source": ".github/workflows/assigned-issue-reminder.yaml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/setup-buildx-action@v4",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/login-action@v4",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/metadata-action@v6",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"docker/metadata-action\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "docker/build-push-action@v7",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"docker/build-push-action\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "aquasecurity/trivy-action@v0.36.0",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"aquasecurity/trivy-action\" uses mutable ref \"v0.36.0\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "github/codeql-action/upload-sarif@v4",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "sigstore/cosign-installer@v3",
+      "source": ".github/workflows/build-image.yaml",
+      "description": "Action \"sigstore/cosign-installer\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -1321,118 +1330,6 @@
       "resource": "actions/checkout@v7",
       "source": ".github/workflows/build-image.yaml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/setup-buildx-action@v4",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/login-action@v4",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/build-push-action@v7",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/build-push-action\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "aquasecurity/trivy-action@v0.36.0",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"aquasecurity/trivy-action\" uses mutable ref \"v0.36.0\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "github/codeql-action/upload-sarif@v4.37.6",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v4.37.6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "sigstore/cosign-installer@v3",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"sigstore/cosign-installer\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/setup-buildx-action@v4",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/login-action@v4",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/metadata-action@v6",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/metadata-action\" uses mutable ref \"v6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/build-push-action@v7",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"docker/build-push-action\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "aquasecurity/trivy-action@v0.36.0",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"aquasecurity/trivy-action\" uses mutable ref \"v0.36.0\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "github/codeql-action/upload-sarif@v4",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "sigstore/cosign-installer@v3",
-      "source": ".github/workflows/build-image.yaml",
-      "description": "Action \"sigstore/cosign-installer\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -1551,48 +1448,6 @@
       "resource": "dorny/paths-filter@v4",
       "source": ".github/workflows/ci-pr-test.yaml",
       "description": "Action \"dorny/paths-filter\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/setup-buildx-action@v4",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"docker/setup-buildx-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/login-action@v4",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"docker/login-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "docker/build-push-action@v7",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"docker/build-push-action\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "aquasecurity/trivy-action@v0.36.0",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"aquasecurity/trivy-action\" uses mutable ref \"v0.36.0\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "github/codeql-action/upload-sarif@v4.37.6",
-      "source": ".github/workflows/ci-release.yaml",
-      "description": "Action \"github/codeql-action/upload-sarif\" uses mutable ref \"v4.37.6\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

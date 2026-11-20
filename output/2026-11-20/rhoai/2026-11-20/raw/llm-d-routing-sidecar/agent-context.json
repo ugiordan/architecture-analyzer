@@ -1,0 +1,666 @@
+{
+  "schema_version": 1,
+  "component": "llm-d-routing-sidecar",
+  "repo": "red-hat-data-services/llm-d-routing-sidecar",
+  "commit_sha": "214ed72b3bcd2ea0d66ae2f15d82e0037a726c06",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "summary": "llm-d-routing-sidecar is a Kubernetes component. deploying 1 workload(s) (0) with 1 container(s). exposing 1 service(s) on ports: 8080. with 24 operator config constants. with 2 ingress route(s). creates RBAC bindings to external roles: ${PROJECT_NAME}-exec-role.",
+  "repository_description": "This project provides a reverse proxy redirecting incoming requests to the prefill worker specified in the x-prefiller-host-port HTTP request header.",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 16,
+    "functions": 32,
+    "test_functions": 1,
+    "call_sites": 853,
+    "resolved_calls": 85,
+    "http_endpoints": 3,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "go",
+      "source_files": 16,
+      "functions": 32,
+      "test_functions": 1
+    },
+    {
+      "name": "unknown",
+      "source_files": 12,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "internal/proxy",
+      "source_files": 13,
+      "functions": 30,
+      "test_functions": 1,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "IsAllowed",
+          "language": "go",
+          "source": "internal/proxy/allowlist.go:176",
+          "complexity": 2,
+          "callers": 12
+        },
+        {
+          "name": "WriteHeader",
+          "language": "go",
+          "source": "internal/proxy/status_response_writer.go:45",
+          "complexity": 1,
+          "callers": 11
+        },
+        {
+          "name": "errorJSONInvalid",
+          "language": "go",
+          "source": "internal/proxy/errors.go:33",
+          "complexity": 2,
+          "callers": 10
+        },
+        {
+          "name": "Start",
+          "language": "go",
+          "source": "internal/proxy/proxy.go:148",
+          "complexity": 12,
+          "callers": 7
+        },
+        {
+          "name": "Start",
+          "language": "go",
+          "source": "internal/proxy/allowlist.go:103",
+          "complexity": 3,
+          "callers": 7,
+          "annotations": [
+            "sec:configures_cache",
+            "sec:crosses_namespace"
+          ]
+        },
+        {
+          "name": "Write",
+          "language": "go",
+          "source": "internal/proxy/status_response_writer.go:38",
+          "complexity": 2,
+          "callers": 6
+        },
+        {
+          "name": "normalizeHostPort",
+          "language": "go",
+          "source": "internal/proxy/allowlist.go:194",
+          "complexity": 2,
+          "callers": 6
+        },
+        {
+          "name": "errorBadGateway",
+          "language": "go",
+          "source": "internal/proxy/errors.go:62",
+          "complexity": 2,
+          "callers": 5
+        },
+        {
+          "name": "NewProxy",
+          "language": "go",
+          "source": "internal/proxy/proxy.go:112",
+          "complexity": 7,
+          "callers": 4
+        },
+        {
+          "name": "rebuildAllowlist",
+          "language": "go",
+          "source": "internal/proxy/allowlist.go:344",
+          "complexity": 4,
+          "callers": 4
+        },
+        {
+          "name": "prefillerProxyHandler",
+          "language": "go",
+          "source": "internal/proxy/proxy.go:280",
+          "complexity": 4,
+          "callers": 3
+        },
+        {
+          "name": "NewAllowlistValidator",
+          "language": "go",
+          "source": "internal/proxy/allowlist.go:68",
+          "complexity": 4,
+          "callers": 2
+        }
+      ],
+      "symbols_truncated": 18
+    },
+    {
+      "path": "cmd/llm-d-routing-sidecar",
+      "source_files": 1,
+      "functions": 1,
+      "test_functions": 0,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "go",
+          "source": "cmd/llm-d-routing-sidecar/main.go:30",
+          "complexity": 12,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "internal/signals",
+      "source_files": 2,
+      "functions": 1,
+      "test_functions": 0,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "SetupSignalHandler",
+          "language": "go",
+          "source": "internal/signals/signals.go:30",
+          "complexity": 1,
+          "callers": 1
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "cmd/llm-d-routing-sidecar/main.go:30"
+    },
+    {
+      "kind": "http",
+      "name": "mux.HandleFunc",
+      "path": "GET /health",
+      "trust_level": "untrusted",
+      "source": "internal/proxy/proxy.go:239"
+    },
+    {
+      "kind": "http",
+      "name": "mux.HandleFunc",
+      "path": "POST \"+ChatCompletionsPath",
+      "trust_level": "untrusted",
+      "source": "internal/proxy/proxy.go:242"
+    },
+    {
+      "kind": "http",
+      "name": "mux.HandleFunc",
+      "path": "POST \"+CompletionsPath",
+      "trust_level": "untrusted",
+      "source": "internal/proxy/proxy.go:243"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "cmd/llm-d-routing-sidecar/main.go:30",
+      "callee": "Start",
+      "callee_source": "internal/proxy/proxy.go:148",
+      "call_site_source": "cmd/llm-d-routing-sidecar/main.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llm-d-routing-sidecar/main.go:30",
+      "callee": "Start",
+      "callee_source": "internal/proxy/allowlist.go:103",
+      "call_site_source": "cmd/llm-d-routing-sidecar/main.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llm-d-routing-sidecar/main.go:30",
+      "callee": "NewProxy",
+      "callee_source": "internal/proxy/proxy.go:112",
+      "call_site_source": "cmd/llm-d-routing-sidecar/main.go:102",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llm-d-routing-sidecar/main.go:30",
+      "callee": "SetupSignalHandler",
+      "callee_source": "internal/signals/signals.go:30",
+      "call_site_source": "cmd/llm-d-routing-sidecar/main.go:53",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "chatCompletionsHandler",
+      "caller_source": "internal/proxy/chat_completions.go:31",
+      "callee": "IsAllowed",
+      "callee_source": "internal/proxy/allowlist.go:176",
+      "call_site_source": "internal/proxy/chat_completions.go:46",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/connector_lmcache.go:33",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/connector_lmcache.go:80",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/connector_nixl.go:35",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/connector_nixl.go:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:109",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:35",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "errorJSONInvalid",
+      "caller_source": "internal/proxy/errors.go:33",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/errors.go:57",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "errorBadGateway",
+      "caller_source": "internal/proxy/errors.go:62",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/errors.go:75",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "createRoutes",
+      "caller_source": "internal/proxy/proxy.go:234",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/proxy.go:240",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "createRoutes",
+      "caller_source": "internal/proxy/proxy.go:234",
+      "callee": "WriteHeader",
+      "callee_source": "internal/proxy/status_response_writer.go:45",
+      "call_site_source": "internal/proxy/proxy.go:272",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_lmcache.go:41",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_lmcache.go:57",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixl.go:106",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixl.go:167",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixl.go:43",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixl.go:76",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:116",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:153",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:43",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "errorJSONInvalid",
+      "callee_source": "internal/proxy/errors.go:33",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:86",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Start",
+      "caller_source": "internal/proxy/proxy.go:148",
+      "callee": "Start",
+      "callee_source": "internal/proxy/allowlist.go:103",
+      "call_site_source": "internal/proxy/proxy.go:153",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Start",
+      "caller_source": "internal/proxy/proxy.go:148",
+      "callee": "Start",
+      "callee_source": "internal/proxy/proxy.go:148",
+      "call_site_source": "internal/proxy/proxy.go:153",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "IsAllowed",
+      "caller_source": "internal/proxy/allowlist.go:176",
+      "callee": "normalizeHostPort",
+      "callee_source": "internal/proxy/allowlist.go:194",
+      "call_site_source": "internal/proxy/allowlist.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "Write",
+      "callee_source": "internal/proxy/status_response_writer.go:38",
+      "call_site_source": "internal/proxy/connector_lmcache.go:34",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "Write",
+      "callee_source": "internal/proxy/status_response_writer.go:38",
+      "call_site_source": "internal/proxy/connector_nixl.go:36",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "Write",
+      "callee_source": "internal/proxy/status_response_writer.go:38",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:36",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "errorJSONInvalid",
+      "caller_source": "internal/proxy/errors.go:33",
+      "callee": "Write",
+      "callee_source": "internal/proxy/status_response_writer.go:38",
+      "call_site_source": "internal/proxy/errors.go:58",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "errorBadGateway",
+      "caller_source": "internal/proxy/errors.go:62",
+      "callee": "Write",
+      "callee_source": "internal/proxy/status_response_writer.go:38",
+      "call_site_source": "internal/proxy/errors.go:76",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Write",
+      "caller_source": "internal/proxy/status_response_writer.go:38",
+      "callee": "Write",
+      "callee_source": "internal/proxy/status_response_writer.go:38",
+      "call_site_source": "internal/proxy/status_response_writer.go:42",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "errorBadGateway",
+      "callee_source": "internal/proxy/errors.go:62",
+      "call_site_source": "internal/proxy/connector_lmcache.go:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "errorBadGateway",
+      "callee_source": "internal/proxy/errors.go:62",
+      "call_site_source": "internal/proxy/connector_nixl.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "errorBadGateway",
+      "callee_source": "internal/proxy/errors.go:62",
+      "call_site_source": "internal/proxy/connector_nixl.go:86",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "errorBadGateway",
+      "callee_source": "internal/proxy/errors.go:62",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "errorBadGateway",
+      "callee_source": "internal/proxy/errors.go:62",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "onInferencePoolDelete",
+      "caller_source": "internal/proxy/allowlist.go:222",
+      "callee": "rebuildAllowlist",
+      "callee_source": "internal/proxy/allowlist.go:344",
+      "call_site_source": "internal/proxy/allowlist.go:237",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "onPodAdd",
+      "caller_source": "internal/proxy/allowlist.go:321",
+      "callee": "rebuildAllowlist",
+      "callee_source": "internal/proxy/allowlist.go:344",
+      "call_site_source": "internal/proxy/allowlist.go:325",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "onPodUpdate",
+      "caller_source": "internal/proxy/allowlist.go:329",
+      "callee": "rebuildAllowlist",
+      "callee_source": "internal/proxy/allowlist.go:344",
+      "call_site_source": "internal/proxy/allowlist.go:333",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "onPodDelete",
+      "caller_source": "internal/proxy/allowlist.go:337",
+      "callee": "rebuildAllowlist",
+      "callee_source": "internal/proxy/allowlist.go:344",
+      "call_site_source": "internal/proxy/allowlist.go:340",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runLMCacheProtocol",
+      "caller_source": "internal/proxy/connector_lmcache.go:26",
+      "callee": "prefillerProxyHandler",
+      "callee_source": "internal/proxy/proxy.go:280",
+      "call_site_source": "internal/proxy/connector_lmcache.go:67",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV1",
+      "caller_source": "internal/proxy/connector_nixl.go:28",
+      "callee": "prefillerProxyHandler",
+      "callee_source": "internal/proxy/proxy.go:280",
+      "call_site_source": "internal/proxy/connector_nixl.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "runNIXLProtocolV2",
+      "caller_source": "internal/proxy/connector_nixlv2.go:28",
+      "callee": "prefillerProxyHandler",
+      "callee_source": "internal/proxy/proxy.go:280",
+      "call_site_source": "internal/proxy/connector_nixlv2.go:94",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "onInferencePoolAdd",
+      "caller_source": "internal/proxy/allowlist.go:208",
+      "callee": "updatePodsForPool",
+      "callee_source": "internal/proxy/allowlist.go:241",
+      "call_site_source": "internal/proxy/allowlist.go:211",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "onInferencePoolUpdate",
+      "caller_source": "internal/proxy/allowlist.go:215",
+      "callee": "updatePodsForPool",
+      "callee_source": "internal/proxy/allowlist.go:241",
+      "call_site_source": "internal/proxy/allowlist.go:218",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "NewProxy",
+      "caller_source": "internal/proxy/proxy.go:112",
+      "callee": "NewAllowlistValidator",
+      "callee_source": "internal/proxy/allowlist.go:68",
+      "call_site_source": "internal/proxy/proxy.go:116",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updatePodsForPool",
+      "caller_source": "internal/proxy/allowlist.go:241",
+      "callee": "createPodInformer",
+      "callee_source": "internal/proxy/allowlist.go:268",
+      "call_site_source": "internal/proxy/allowlist.go:264",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "rebuildAllowlist",
+      "caller_source": "internal/proxy/allowlist.go:344",
+      "callee": "addPodToAllowlist",
+      "callee_source": "internal/proxy/allowlist.go:374",
+      "call_site_source": "internal/proxy/allowlist.go:365",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Start",
+      "caller_source": "internal/proxy/proxy.go:148",
+      "callee": "CreateSelfSignedTLSCertificate",
+      "callee_source": "internal/proxy/tls.go:33",
+      "call_site_source": "internal/proxy/proxy.go:182",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Start",
+      "caller_source": "internal/proxy/proxy.go:148",
+      "callee": "Stop",
+      "callee_source": "internal/proxy/allowlist.go:153",
+      "call_site_source": "internal/proxy/proxy.go:209",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Start",
+      "caller_source": "internal/proxy/proxy.go:148",
+      "callee": "createRoutes",
+      "callee_source": "internal/proxy/proxy.go:234",
+      "call_site_source": "internal/proxy/proxy.go:166",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "sparse",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "sparse",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "rich",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "moderate",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}

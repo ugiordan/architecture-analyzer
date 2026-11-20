@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/text-generation-inference](https://github.com/red-hat-data-services/text-generation-inference) |
 | Commit | [fded01861025fff09ba5f9a49cda710fcfd3ca93](https://github.com/red-hat-data-services/text-generation-inference/commit/fded01861025fff09ba5f9a49cda710fcfd3ca93) |
-| Extracted | 2026-11-20T06:47:31Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:28Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

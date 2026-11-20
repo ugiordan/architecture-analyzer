@@ -1,9 +1,9 @@
 {
   "component": "mlflow-operator",
   "repo": "red-hat-data-services/mlflow-operator",
-  "commit_sha": "a673aa40b1a8bd3cb225fdea7e87c332d29e26c5",
-  "extracted_at": "2026-11-20T06:41:49Z",
-  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
+  "commit_sha": "48d52754c9c889149259eba23cedd35f979ce0e1",
+  "extracted_at": "2026-11-20T22:29:48Z",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
   "schema_version": "2",
   "crds": [
     {
@@ -57,7 +57,7 @@
           "storage": true
         }
       ],
-      "fields_count": 379,
+      "fields_count": 384,
       "validation_rules": [
         "self.metadata.name == 'mlflow'",
         "self.metadata.name.size() \u003c= 40",
@@ -96,9 +96,9 @@
         "!has(self.replicas) || self.replicas \u003c= 1 || !has(self.storage) || (has(self.artifactsServer) \u0026\u0026 self.artifactsServer.enabled) || !(((!has(self.env) || !self.env.exists(e, e.name == 'MLFLOW_BACKEND_STORE_URI')) \u0026\u0026 ((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom))) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom) || (has(self.readReplicaBackendStoreUri) \u0026\u0026 (self.readReplicaBackendStoreUri.startsWith('sqlite://') || self.readReplicaBackendStoreUri.startsWith('sqlite+'))) || has(self.readReplicaBackendStoreUriFrom) || (has(self.serveArtifacts) \u0026\u0026 self.serveArtifacts \u0026\u0026 has(self.artifactsDestination) \u0026\u0026 self.artifactsDestination.startsWith('file://'))) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')",
         "!has(self.traceArchival) || !self.traceArchival.enabled || !has(self.storage) || !(((!has(self.env) || !self.env.exists(e, e.name == 'MLFLOW_BACKEND_STORE_URI')) \u0026\u0026 ((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom))) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom)) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')",
         "!has(oldSelf.storage) || (has(self.storage) \u0026\u0026 ((!has(oldSelf.storage.accessModes) \u0026\u0026 (!has(self.storage.accessModes) || self.storage.accessModes == ['ReadWriteOnce'])) || (has(oldSelf.storage.accessModes) \u0026\u0026 has(self.storage.accessModes) \u0026\u0026 self.storage.accessModes == oldSelf.storage.accessModes)))",
-        "self.all(key, size(self[key]) \u003c= 63)",
-        "self.all(key, size(self[key]) \u003c= 63)",
         "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))",
+        "self.all(key, size(self[key]) \u003c= 63)",
+        "self.all(key, size(self[key]) \u003c= 63)",
         "!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))"
       ],
       "source": "config/crd/bases/mlflow.opendatahub.io_mlflows.yaml"
@@ -1459,6 +1459,12 @@
         },
         {
           "sources": [
+            "mlflow-tests/images/.github/workflows/trace-analytics-prepopulation.yml"
+          ],
+          "destination": "./.github/workflows/trace-analytics-prepopulation.yml"
+        },
+        {
+          "sources": [
             "mlflow-tests/images/config"
           ],
           "destination": "./config"
@@ -1879,6 +1885,58 @@
       "source": "api/mlflowoperator/v1alpha1/mlflowoperator_types.go:91"
     },
     {
+      "name": "StartupProbeSpec",
+      "doc": "StartupProbeSpec configures startup probe timing while keeping the probe endpoint and success threshold managed by the operator.",
+      "fields": [
+        {
+          "name": "InitialDelaySeconds",
+          "type": "*int32",
+          "json_tag": "initialDelaySeconds,omitempty",
+          "doc": "InitialDelaySeconds is the delay before the first startup check.",
+          "markers": [
+            "+kubebuilder:default=0",
+            "+kubebuilder:validation:Minimum=0"
+          ],
+          "default": "0"
+        },
+        {
+          "name": "TimeoutSeconds",
+          "type": "*int32",
+          "json_tag": "timeoutSeconds,omitempty",
+          "doc": "TimeoutSeconds is the timeout for each startup check.",
+          "markers": [
+            "+kubebuilder:default=1",
+            "+kubebuilder:validation:Minimum=1"
+          ],
+          "default": "1"
+        },
+        {
+          "name": "PeriodSeconds",
+          "type": "*int32",
+          "json_tag": "periodSeconds,omitempty",
+          "doc": "PeriodSeconds is the interval between startup checks.",
+          "markers": [
+            "+kubebuilder:default=10",
+            "+kubebuilder:validation:Minimum=1"
+          ],
+          "default": "10"
+        },
+        {
+          "name": "FailureThreshold",
+          "type": "*int32",
+          "json_tag": "failureThreshold,omitempty",
+          "doc": "FailureThreshold is the number of consecutive failures before restarting. With the default period of 10 seconds, 18 failures allow approximately 180 seconds for startup. Successful startup ends this probe immediately.",
+          "markers": [
+            "+kubebuilder:default=18",
+            "+kubebuilder:validation:Minimum=1"
+          ],
+          "default": "18"
+        }
+      ],
+      "source": "api/v1/mlflow_types.go:29",
+      "is_spec": true
+    },
+    {
       "name": "ArtifactsServerSpec",
       "doc": "ArtifactsServerSpec configures the dedicated metadata-aware artifact-serving MLflow deployment.",
       "fields": [
@@ -1930,7 +1988,7 @@
       "markers": [
         "+kubebuilder:validation:XValidation:rule=\"!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))\",message=\"each artifactsServer.resourceClaims entry must set exactly one non-empty value: resourceClaimName or resourceClaimTemplateName\""
       ],
-      "source": "api/v1/mlflow_types.go:361",
+      "source": "api/v1/mlflow_types.go:398",
       "is_spec": true
     },
     {
@@ -1949,7 +2007,7 @@
           "required": true
         }
       ],
-      "source": "api/v1/mlflow_types.go:398",
+      "source": "api/v1/mlflow_types.go:435",
       "is_spec": true
     },
     {
@@ -1963,7 +2021,7 @@
           "doc": "SizeLimit caps the writable /tmp emptyDir volume. When omitted, the operator/chart default is used."
         }
       ],
-      "source": "api/v1/mlflow_types.go:407",
+      "source": "api/v1/mlflow_types.go:444",
       "is_spec": true
     },
     {
@@ -1998,7 +2056,7 @@
           "doc": "Resources for the garbage collection Job container."
         }
       ],
-      "source": "api/v1/mlflow_types.go:417",
+      "source": "api/v1/mlflow_types.go:454",
       "is_spec": true
     },
     {
@@ -2053,7 +2111,7 @@
       "markers": [
         "+kubebuilder:validation:XValidation:rule=\"!has(self.resourceClaims) || self.resourceClaims.all(c, ((has(c.resourceClaimName) \u0026\u0026 size(c.resourceClaimName) \u003e 0) != (has(c.resourceClaimTemplateName) \u0026\u0026 size(c.resourceClaimTemplateName) \u003e 0)))\",message=\"each traceRollups.resourceClaims entry must set exactly one non-empty value: resourceClaimName or resourceClaimTemplateName\""
       ],
-      "source": "api/v1/mlflow_types.go:442",
+      "source": "api/v1/mlflow_types.go:479",
       "is_spec": true
     },
     {
@@ -2128,7 +2186,7 @@
           "doc": "Resources for the trace archival CronJob container."
         }
       ],
-      "source": "api/v1/mlflow_types.go:485",
+      "source": "api/v1/mlflow_types.go:522",
       "is_spec": true
     },
     {
@@ -2151,7 +2209,7 @@
           ]
         }
       ],
-      "source": "api/v1/mlflow_types.go:537"
+      "source": "api/v1/mlflow_types.go:574"
     },
     {
       "name": "MLflowMigrationConfig",
@@ -2178,7 +2236,7 @@
           ]
         }
       ],
-      "source": "api/v1/mlflow_types.go:550"
+      "source": "api/v1/mlflow_types.go:587"
     },
     {
       "name": "MLflowAddressStatus",
@@ -2194,7 +2252,7 @@
           ]
         }
       ],
-      "source": "api/v1/mlflow_types.go:587",
+      "source": "api/v1/mlflow_types.go:624",
       "is_status": true
     },
     {
@@ -2247,8 +2305,85 @@
           ]
         }
       ],
-      "source": "api/v1/mlflow_types.go:595",
+      "source": "api/v1/mlflow_types.go:632",
       "is_status": true
+    },
+    {
+      "name": "TraceRollupsStatus",
+      "doc": "TraceRollupsStatus reports scheduler observations from the owned CronJob. A successful Job does not by itself prove that SQL partitions were materialized.",
+      "fields": [
+        {
+          "name": "LastScheduleTime",
+          "type": "*metav1.Time",
+          "json_tag": "lastScheduleTime,omitempty"
+        },
+        {
+          "name": "LastSuccessfulTime",
+          "type": "*metav1.Time",
+          "json_tag": "lastSuccessfulTime,omitempty"
+        }
+      ],
+      "source": "api/v1/mlflow_types.go:675",
+      "is_status": true
+    },
+    {
+      "name": "MLflow",
+      "doc": "MLflow is the Schema for the mlflows API",
+      "fields": [
+        {
+          "name": "TypeMeta",
+          "type": "metav1.TypeMeta",
+          "json_tag": ",inline",
+          "embedded": true
+        },
+        {
+          "name": "ObjectMeta",
+          "type": "metav1.ObjectMeta",
+          "json_tag": "metadata,omitzero",
+          "doc": "metadata is a standard object metadata",
+          "embedded": true
+        },
+        {
+          "name": "Spec",
+          "type": "MLflowSpec",
+          "json_tag": "spec",
+          "doc": "spec defines the desired state of MLflow",
+          "required": true
+        },
+        {
+          "name": "Status",
+          "type": "MLflowStatus",
+          "json_tag": "status,omitzero",
+          "doc": "status defines the observed state of MLflow",
+          "required": true
+        }
+      ],
+      "source": "api/v1/mlflow_types.go:693"
+    },
+    {
+      "name": "MLflowList",
+      "doc": "MLflowList contains a list of MLflow",
+      "fields": [
+        {
+          "name": "TypeMeta",
+          "type": "metav1.TypeMeta",
+          "json_tag": ",inline",
+          "embedded": true
+        },
+        {
+          "name": "ListMeta",
+          "type": "metav1.ListMeta",
+          "json_tag": "metadata,omitzero",
+          "embedded": true
+        },
+        {
+          "name": "Items",
+          "type": "[]MLflow",
+          "json_tag": "items",
+          "required": true
+        }
+      ],
+      "source": "api/v1/mlflow_types.go:712"
     },
     {
       "name": "MLflowSpec",
@@ -2280,6 +2415,12 @@
             "+kubebuilder:default:={mode:Automatic}"
           ],
           "default": "={mode:Automatic}"
+        },
+        {
+          "name": "StartupProbe",
+          "type": "*StartupProbeSpec",
+          "json_tag": "startupProbe,omitempty",
+          "doc": "StartupProbe configures startup timing for the tracking and dedicated artifact servers. Defaults allow approximately 180 seconds for initialization before restarting the container. Liveness and readiness checks wait for startup to succeed. The operator manages the HTTPS server-info endpoint."
         },
         {
           "name": "Resources",
@@ -2554,85 +2695,8 @@
         "+kubebuilder:validation:XValidation:rule=\"!has(self.traceArchival) || !self.traceArchival.enabled || !has(self.storage) || !(((!has(self.env) || !self.env.exists(e, e.name == 'MLFLOW_BACKEND_STORE_URI')) \u0026\u0026 ((has(self.backendStoreUri) \u0026\u0026 (self.backendStoreUri.startsWith('sqlite://') || self.backendStoreUri.startsWith('sqlite+'))) || has(self.backendStoreUriFrom))) || (has(self.registryStoreUri) \u0026\u0026 (self.registryStoreUri.startsWith('sqlite://') || self.registryStoreUri.startsWith('sqlite+'))) || has(self.registryStoreUriFrom)) || (size(self.storage.accessModes) \u003e 0 \u0026\u0026 self.storage.accessModes[0] == 'ReadWriteMany')\",message=\"trace archival with persistent metadata storage requires ReadWriteMany as its first access mode\"",
         "+kubebuilder:validation:XValidation:rule=\"!has(oldSelf.storage) || (has(self.storage) \u0026\u0026 ((!has(oldSelf.storage.accessModes) \u0026\u0026 (!has(self.storage.accessModes) || self.storage.accessModes == ['ReadWriteOnce'])) || (has(oldSelf.storage.accessModes) \u0026\u0026 has(self.storage.accessModes) \u0026\u0026 self.storage.accessModes == oldSelf.storage.accessModes)))\",message=\"storage and its accessModes are immutable once configured; an omitted legacy access mode may only be set to ReadWriteOnce\""
       ],
-      "source": "api/v1/mlflow_types.go:63",
+      "source": "api/v1/mlflow_types.go:93",
       "is_spec": true
-    },
-    {
-      "name": "TraceRollupsStatus",
-      "doc": "TraceRollupsStatus reports scheduler observations from the owned CronJob. A successful Job does not by itself prove that SQL partitions were materialized.",
-      "fields": [
-        {
-          "name": "LastScheduleTime",
-          "type": "*metav1.Time",
-          "json_tag": "lastScheduleTime,omitempty"
-        },
-        {
-          "name": "LastSuccessfulTime",
-          "type": "*metav1.Time",
-          "json_tag": "lastSuccessfulTime,omitempty"
-        }
-      ],
-      "source": "api/v1/mlflow_types.go:638",
-      "is_status": true
-    },
-    {
-      "name": "MLflow",
-      "doc": "MLflow is the Schema for the mlflows API",
-      "fields": [
-        {
-          "name": "TypeMeta",
-          "type": "metav1.TypeMeta",
-          "json_tag": ",inline",
-          "embedded": true
-        },
-        {
-          "name": "ObjectMeta",
-          "type": "metav1.ObjectMeta",
-          "json_tag": "metadata,omitzero",
-          "doc": "metadata is a standard object metadata",
-          "embedded": true
-        },
-        {
-          "name": "Spec",
-          "type": "MLflowSpec",
-          "json_tag": "spec",
-          "doc": "spec defines the desired state of MLflow",
-          "required": true
-        },
-        {
-          "name": "Status",
-          "type": "MLflowStatus",
-          "json_tag": "status,omitzero",
-          "doc": "status defines the observed state of MLflow",
-          "required": true
-        }
-      ],
-      "source": "api/v1/mlflow_types.go:656"
-    },
-    {
-      "name": "MLflowList",
-      "doc": "MLflowList contains a list of MLflow",
-      "fields": [
-        {
-          "name": "TypeMeta",
-          "type": "metav1.TypeMeta",
-          "json_tag": ",inline",
-          "embedded": true
-        },
-        {
-          "name": "ListMeta",
-          "type": "metav1.ListMeta",
-          "json_tag": "metadata,omitzero",
-          "embedded": true
-        },
-        {
-          "name": "Items",
-          "type": "[]MLflow",
-          "json_tag": "items",
-          "required": true
-        }
-      ],
-      "source": "api/v1/mlflow_types.go:675"
     }
   ],
   "operator_config": [
@@ -3704,7 +3768,7 @@
     "status_conditions": "moderate",
     "webhooks": "none"
   },
-  "summary": "mlflow-operator is a Kubernetes component. managing 3 CRD(s): MLflowOperator, MLflow, MLflowConfig. deploying 1 workload(s) (mlflow-operator-controller-manager) with 1 container(s). watching 15 resource type(s). exposing 1 service(s) on ports: 8443. Dockerfile EXPOSE ports: 8080. protected by 1 network policy/policies. connecting to external services: mlflow. runtime dependencies: MLflow, MySQL, PostgreSQL, mlflow-artifacts. defining 10 API spec type(s) across 24 struct(s) with 109 total fields. with 113 operator config constants. reporting 4 status condition types. with 1 ingress route(s). Python k8s client with 15 API call(s). integrates with management relationship via labels/annotations. kustomize overlays: config/admission, config/base, config/crd, config/manager, config/overlays/odh, config/overlays/openshift, config/overlays/rhoai, config/rbac. references components: mlflow (import).",
+  "summary": "mlflow-operator is a Kubernetes component. managing 3 CRD(s): MLflowOperator, MLflow, MLflowConfig. deploying 1 workload(s) (mlflow-operator-controller-manager) with 1 container(s). watching 15 resource type(s). exposing 1 service(s) on ports: 8443. Dockerfile EXPOSE ports: 8080. protected by 1 network policy/policies. connecting to external services: mlflow. runtime dependencies: MLflow, MySQL, PostgreSQL, mlflow-artifacts. defining 11 API spec type(s) across 25 struct(s) with 114 total fields. with 113 operator config constants. reporting 4 status condition types. with 1 ingress route(s). Python k8s client with 15 API call(s). integrates with management relationship via labels/annotations. kustomize overlays: config/admission, config/base, config/crd, config/manager, config/overlays/odh, config/overlays/openshift, config/overlays/rhoai, config/rbac. references components: mlflow (import).",
   "go_ast_mode": "full",
   "security_annotations": [
     {

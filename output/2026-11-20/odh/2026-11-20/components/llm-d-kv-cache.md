@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/llm-d-kv-cache](https://github.com/opendatahub-io/llm-d-kv-cache) |
 | Commit | [4dfbb070a34779dc120987d37c9cd852134a891e](https://github.com/opendatahub-io/llm-d-kv-cache/commit/4dfbb070a34779dc120987d37c9cd852134a891e) |
-| Extracted | 2026-11-20T06:44:55Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:32:53Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

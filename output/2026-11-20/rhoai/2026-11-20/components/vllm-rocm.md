@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/vllm-rocm](https://github.com/red-hat-data-services/vllm-rocm) |
 | Commit | [56ce83cec2eed9d4be68afb9c2861c4dbb1aaea8](https://github.com/red-hat-data-services/vllm-rocm/commit/56ce83cec2eed9d4be68afb9c2861c4dbb1aaea8) |
-| Extracted | 2026-11-20T06:47:56Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:52Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/llm-d-routing-sidecar](https://github.com/red-hat-data-services/llm-d-routing-sidecar) |
 | Commit | [214ed72b3bcd2ea0d66ae2f15d82e0037a726c06](https://github.com/red-hat-data-services/llm-d-routing-sidecar/commit/214ed72b3bcd2ea0d66ae2f15d82e0037a726c06) |
-| Extracted | 2026-11-20T06:45:58Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:33:55Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

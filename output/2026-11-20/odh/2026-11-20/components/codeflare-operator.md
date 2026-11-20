@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/codeflare-operator](https://github.com/opendatahub-io/codeflare-operator) |
 | Aliases | CodeFlare operator |
 | Commit | [fb0d403419a114d26adcf65215b6a89e723667d8](https://github.com/opendatahub-io/codeflare-operator/commit/fb0d403419a114d26adcf65215b6a89e723667d8) |
-| Extracted | 2026-11-20T06:42:39Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:28:36Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

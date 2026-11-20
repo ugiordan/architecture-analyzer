@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/guardrails-regex-detector](https://github.com/red-hat-data-services/guardrails-regex-detector) |
 | Commit | [5c6116749e66a3496f7a5ac7427219f294df7ec3](https://github.com/red-hat-data-services/guardrails-regex-detector/commit/5c6116749e66a3496f7a5ac7427219f294df7ec3) |
-| Extracted | 2026-11-20T06:47:20Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:07Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

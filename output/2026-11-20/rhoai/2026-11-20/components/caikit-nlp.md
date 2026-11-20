@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/caikit-nlp](https://github.com/red-hat-data-services/caikit-nlp) |
 | Commit | [057ce060da00b060dcf1127b408568b8fa3ba86e](https://github.com/red-hat-data-services/caikit-nlp/commit/057ce060da00b060dcf1127b408568b8fa3ba86e) |
-| Extracted | 2026-11-20T06:47:14Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:00Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

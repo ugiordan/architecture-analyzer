@@ -1,9 +1,9 @@
 {
   "component": "eval-hub",
   "repo": "opendatahub-io/eval-hub",
-  "commit_sha": "17194f8f0eb4b745a83ce0ecb12e14a5c0fa923c",
-  "extracted_at": "2026-11-20T06:45:23Z",
-  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
+  "commit_sha": "b5a967ce831b230a0814311f0b4d63db5b2e2a24",
+  "extracted_at": "2026-11-20T22:33:20Z",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
   "schema_version": "2",
   "rbac": {},
   "dependencies": {
@@ -73,7 +73,7 @@
       },
       {
         "module": "github.com/gomlx/go-huggingface",
-        "version": "v0.4.31"
+        "version": "v0.4.36"
       },
       {
         "module": "github.com/google/go-jsonnet",
@@ -89,7 +89,7 @@
       },
       {
         "module": "github.com/jackc/pgx/v5",
-        "version": "v5.12.0",
+        "version": "v5.13.0",
         "category": "storage",
         "purpose": "PostgreSQL database driver"
       },
@@ -450,7 +450,7 @@
       "type": "object-storage",
       "service": "s3",
       "target": "",
-      "source": "cmd/eval_runtime_init/main.go:123",
+      "source": "cmd/eval_runtime_init/main.go:135",
       "function": "runS3"
     }
   ],
@@ -461,7 +461,7 @@
   "operator_config": [
     {
       "name": "Version",
-      "value": "1.0.4",
+      "value": "1.1.0",
       "type": "string",
       "category": "general",
       "doc": "Version can be set during the compilation",
@@ -500,12 +500,6 @@
       "source": "cmd/eval_runtime_init/hf.go"
     },
     {
-      "name": "envHFTimeout",
-      "value": "TEST_DATA_HF_TIMEOUT",
-      "category": "timeout",
-      "source": "cmd/eval_runtime_init/hf.go"
-    },
-    {
       "name": "hfCacheDirName",
       "value": ".hf-cache",
       "category": "general",
@@ -515,18 +509,6 @@
     {
       "name": "hfTokenKey",
       "value": "token",
-      "category": "general",
-      "source": "cmd/eval_runtime_init/hf.go"
-    },
-    {
-      "name": "maxTerminationMessageBytes",
-      "value": "4096",
-      "category": "general",
-      "source": "cmd/eval_runtime_init/hf.go"
-    },
-    {
-      "name": "terminationMessagePath",
-      "value": "/dev/termination-log",
       "category": "general",
       "source": "cmd/eval_runtime_init/hf.go"
     },
@@ -580,12 +562,6 @@
       "source": "cmd/eval_runtime_init/main.go"
     },
     {
-      "name": "envGitTimeout",
-      "value": "TEST_DATA_GIT_TIMEOUT",
-      "category": "timeout",
-      "source": "cmd/eval_runtime_init/main.go"
-    },
-    {
       "name": "envGitURL",
       "value": "TEST_DATA_GIT_URL",
       "category": "general",
@@ -593,15 +569,16 @@
       "source": "cmd/eval_runtime_init/main.go"
     },
     {
-      "name": "envKey",
-      "value": "TEST_DATA_S3_KEY",
-      "category": "general",
+      "name": "envInitTimeout",
+      "value": "TEST_DATA_INIT_TIMEOUT",
+      "category": "timeout",
+      "doc": "Shared test data env vars",
       "source": "cmd/eval_runtime_init/main.go"
     },
     {
-      "name": "envS3Timeout",
-      "value": "TEST_DATA_S3_TIMEOUT",
-      "category": "timeout",
+      "name": "envKey",
+      "value": "TEST_DATA_S3_KEY",
+      "category": "general",
       "source": "cmd/eval_runtime_init/main.go"
     },
     {
@@ -621,6 +598,18 @@
       "value": "/var/run/secrets/test-data",
       "category": "general",
       "source": "cmd/eval_runtime_init/main.go"
+    },
+    {
+      "name": "maxTerminationMessageBytes",
+      "value": "4096",
+      "category": "general",
+      "source": "cmd/eval_runtime_init/termination.go"
+    },
+    {
+      "name": "terminationMessagePath",
+      "value": "/dev/termination-log",
+      "category": "general",
+      "source": "cmd/eval_runtime_init/termination.go"
     },
     {
       "name": "Version",
@@ -946,6 +935,12 @@
       "source": "internal/eval_hub/constants/http_codes.go"
     },
     {
+      "name": "HTTPCodeServiceUnavailable",
+      "value": "503",
+      "category": "general",
+      "source": "internal/eval_hub/constants/http_codes.go"
+    },
+    {
       "name": "HTTPCodeUnauthorized",
       "value": "401",
       "category": "general",
@@ -1147,6 +1142,37 @@
       "source": "internal/eval_hub/evalcards/persistence.go"
     },
     {
+      "name": "collectionGenerationBasePath",
+      "value": "/api/v1/evaluations/collections/generation",
+      "category": "general",
+      "doc": "collectionGenerationBasePath is the durable base path for the collection\ngeneration API.",
+      "source": "internal/eval_hub/handlers/collection_generation.go"
+    },
+    {
+      "name": "collectionGenerationModelAllowedFields",
+      "value": "map[string]struct{}{\n\t\"url\":\t{}, \"name\": {}, \"auth\": {}, \"parameters\": {}, \"card_url\": {},\n}",
+      "category": "general",
+      "source": "internal/eval_hub/handlers/collection_generation.go"
+    },
+    {
+      "name": "collectionGenerationMockDescription",
+      "value": "Temporary stateless collection-generation fixture.",
+      "category": "general",
+      "source": "internal/eval_hub/handlers/collection_generation_mock.go"
+    },
+    {
+      "name": "collectionGenerationMockID",
+      "value": "550e8400-e29b-41d4-a716-446655440099",
+      "category": "general",
+      "source": "internal/eval_hub/handlers/collection_generation_mock.go"
+    },
+    {
+      "name": "collectionGenerationMockName",
+      "value": "Mock generated collection",
+      "category": "general",
+      "source": "internal/eval_hub/handlers/collection_generation_mock.go"
+    },
+    {
       "name": "entireBenchmarkPatchPath",
       "value": "regexp.MustCompile(`^/benchmarks(?:/(-|\\d+))?$`)",
       "category": "general",
@@ -1201,6 +1227,13 @@
       "value": "createMessage(\n\tconstants.HTTPCodeBadRequest,\n\t\"The collection {{.CollectionID}} does not have any benchmarks.\",\n\t\"collection_empty\",\n)",
       "category": "general",
       "doc": "CollectionEmpty The collection {{.CollectionID}} does not have any benchmarks.",
+      "source": "internal/eval_hub/messages/messages.go"
+    },
+    {
+      "name": "CollectionGenerationNotConfigured",
+      "value": "createMessage(\n\tconstants.HTTPCodeServiceUnavailable,\n\t\"Collection generation is not configured.\",\n\t\"collection_generation_not_configured\",\n)",
+      "category": "general",
+      "doc": "CollectionGenerationNotConfigured The temporary generation API implementation is not active without mock=true.",
       "source": "internal/eval_hub/messages/messages.go"
     },
     {
@@ -1825,6 +1858,12 @@
       "name": "envTestDataHFSubPathName",
       "value": "TEST_DATA_HF_SUBPATH",
       "category": "general",
+      "source": "internal/eval_hub/runtimes/k8s/job_builders.go"
+    },
+    {
+      "name": "envTestDataInitTimeoutName",
+      "value": "TEST_DATA_INIT_TIMEOUT",
+      "category": "timeout",
       "source": "internal/eval_hub/runtimes/k8s/job_builders.go"
     },
     {
@@ -2550,6 +2589,24 @@
       "source": "internal/eval_hub/runtimes/shared/sidecar_job_info.go"
     },
     {
+      "name": "collectionClonesRoutePattern",
+      "value": "/api/v1/evaluations/collections/{collection_id}/clones",
+      "category": "general",
+      "source": "internal/eval_hub/server/collection_route_patterns.go"
+    },
+    {
+      "name": "collectionGenerationResourceRoutePattern",
+      "value": "/api/v1/evaluations/collections/generation/{id}",
+      "category": "general",
+      "source": "internal/eval_hub/server/collection_route_patterns.go"
+    },
+    {
+      "name": "collectionSubresourceRoutePattern",
+      "value": "/api/v1/evaluations/collections/{collection_id}/{id}",
+      "category": "general",
+      "source": "internal/eval_hub/server/collection_route_patterns.go"
+    },
+    {
       "name": "TenantHeader",
       "value": "X-Tenant",
       "category": "general",
@@ -3179,6 +3236,27 @@
       "source": "internal/runtimeenv/constants.go"
     },
     {
+      "name": "DefaultCollectionGenerationBenchmarks",
+      "value": "12",
+      "category": "general",
+      "doc": "DefaultCollectionGenerationBenchmarks is used when max_benchmarks is omitted.",
+      "source": "pkg/api/collection_generation.go"
+    },
+    {
+      "name": "MaxCollectionGenerationBenchmarks",
+      "value": "100",
+      "category": "general",
+      "doc": "MaxCollectionGenerationBenchmarks is the maximum number of benchmarks a proposal may select.",
+      "source": "pkg/api/collection_generation.go"
+    },
+    {
+      "name": "MaxCollectionGenerationGoalLength",
+      "value": "10_000",
+      "category": "general",
+      "doc": "MaxCollectionGenerationGoalLength is the maximum evaluation_goal length in characters.",
+      "source": "pkg/api/collection_generation.go"
+    },
+    {
       "name": "PatchOpAdd",
       "value": "add",
       "type": "PatchOp",
@@ -3731,7 +3809,7 @@
     {
       "name": "MLflow",
       "type": "service",
-      "source": "internal/eval_hub/runtimes/k8s/job_config.go:214",
+      "source": "internal/eval_hub/runtimes/k8s/job_config.go:216",
       "evidence": "go:os.Getenv(mlflowTrackingURIEnv→MLFLOW_TRACKING_URI)",
       "required": true
     }
@@ -3742,14 +3820,14 @@
       "integration": "Kueue",
       "type": "label",
       "context": "source-code",
-      "source": "internal/eval_hub/runtimes/k8s/job_builders.go:113"
+      "source": "internal/eval_hub/runtimes/k8s/job_builders.go:114"
     },
     {
       "label": "kueue.x-k8s.io/queue-name",
       "integration": "Kueue",
       "type": "label",
       "context": "source-code",
-      "source": "internal/eval_hub/runtimes/k8s/job_builders.go:112"
+      "source": "internal/eval_hub/runtimes/k8s/job_builders.go:113"
     }
   ],
   "python_k8s_calls": [
@@ -3801,7 +3879,7 @@
     "status_conditions": "none",
     "webhooks": "none"
   },
-  "summary": "eval-hub is a Kubernetes component. Dockerfile EXPOSE ports: 8080, 8081. connecting to external services: requests, s3. runtime dependencies: MLflow, S3. with 504 operator config constants (5 image references). exposing 8 Prometheus metrics. Python k8s client with 1 API call(s). integrates with Kueue via labels/annotations. references components: mlflow (config, import).",
+  "summary": "eval-hub is a Kubernetes component. Dockerfile EXPOSE ports: 8080, 8081. connecting to external services: requests, s3. runtime dependencies: MLflow, S3. with 516 operator config constants (5 image references). exposing 8 Prometheus metrics. Python k8s client with 1 API call(s). integrates with Kueue via labels/annotations. references components: mlflow (config, import).",
   "go_ast_mode": "syntax-only",
   "go_ast_warning": "majority of packages had type-checking errors, using syntax-only mode"
 }

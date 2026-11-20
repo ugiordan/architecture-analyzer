@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/notebooks-downstream](https://github.com/red-hat-data-services/notebooks-downstream) |
 | Commit | [8f013d48f20dfa211aeba1255bf38fdb07487d1a](https://github.com/red-hat-data-services/notebooks-downstream/commit/8f013d48f20dfa211aeba1255bf38fdb07487d1a) |
-| Extracted | 2026-11-20T06:47:02Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:34:38Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

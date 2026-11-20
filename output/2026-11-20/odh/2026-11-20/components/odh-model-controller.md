@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/odh-model-controller](https://github.com/opendatahub-io/odh-model-controller) |
 | Aliases | ODH Model Controller, omc |
 | Commit | [00341ee674bba659822135b5f6a05c70abd3a861](https://github.com/opendatahub-io/odh-model-controller/commit/00341ee674bba659822135b5f6a05c70abd3a861) |
-| Extracted | 2026-11-20T06:41:11Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:28:37Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -102,7 +102,7 @@
 **odh-model-controller / manager**
 
 - Ports: 9443/TCP (webhook-server)
-- Env: `GOMEMLIMIT=1800MiB`, `KSERVE_STATE=managed`, `MODELREGISTRY_STATE=removed`, `NIM_STATE=managed`
+- Env: `KSERVE_STATE=managed`, `MODELREGISTRY_STATE=removed`, `NIM_STATE=managed`, `GOMEMLIMIT=1800MiB`
 
 
 

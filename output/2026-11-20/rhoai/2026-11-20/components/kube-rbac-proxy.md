@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [red-hat-data-services/kube-rbac-proxy](https://github.com/red-hat-data-services/kube-rbac-proxy) |
-| Commit | [12de3686be277816367433867776dcbe9a5cefe8](https://github.com/red-hat-data-services/kube-rbac-proxy/commit/12de3686be277816367433867776dcbe9a5cefe8) |
-| Extracted | 2026-11-20T06:44:29Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Commit | [c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c](https://github.com/red-hat-data-services/kube-rbac-proxy/commit/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c) |
+| Extracted | 2026-11-20T22:32:15Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -19,7 +19,7 @@
 
 | Method | Path | Description | Source |
 |--------|------|-------------|--------|
-| * | / |  | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:369`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go#L369) |
+| * | / |  | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:369`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go#L369) |
 
 
 ## Dependencies
@@ -61,49 +61,49 @@
 
 | Name | Value | Source |
 |------|-------|--------|
-| auditShutdownTimeout | 5 * time.Second | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go) |
-| defaultAuthTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/options/options.go) |
-| defaultIdleTimeout | 60 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/options/options.go) |
-| defaultReadHeaderTimeout | 10 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/options/options.go) |
-| defaultUpstreamTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/options/options.go) |
-| errUpstreamTimeout | errors.New("upstream timeout") | [`cmd/kube-rbac-proxy/app/transport.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/cmd/kube-rbac-proxy/app/transport.go) |
-| auditTruncationMarker | [truncated] | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/audit.go) |
-| defaultQueueSize | 1024 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/audit.go) |
-| maxAuditDynamicStringSize | 256 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/audit.go) |
-| maxAuditEventSize | 64 &lt;&lt; 10 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/audit.go) |
-| maxAuditPathSize | 1024 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/audit.go) |
-| activityID | 99 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| activityName | Inference | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| aiOperationProfile | ai_operation | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| categoryName | Application Activity | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| categoryUID | 6 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| className | API Activity | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| classUID | 6003 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapActivityID | 99 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapActivityName | Audit Event Loss | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapCategoryName | Uncategorized | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapCategoryUID | 0 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapClassName | Base Event | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapClassUID | 0 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapSeverityID | 3 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapSeverityName | Medium | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapStatusCode | audit_queue_full | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| gapTypeUID | 99 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| ocsfVersion | 1.9.0 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| productName | kube-rbac-proxy | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| resourceRoleTargetID | 1 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| resourceRoleTargetName | Target | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| severityID | 1 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| severityName | Informational | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| statusFailureID | 2 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| statusFailureName | Failure | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| statusSuccessID | 1 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| statusSuccessName | Success | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| typeUID | 600399 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/event.go) |
-| ProfileMetadata | metadata | [`pkg/audit/profile.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/profile.go) |
-| ProfileNone | none | [`pkg/audit/profile.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/audit/profile.go) |
-| _ | (*DelegatingAuthenticator)(nil) | [`pkg/authn/delegating.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/authn/delegating.go) |
-| _ | (*OIDCAuthenticator)(nil) | [`pkg/authn/oidc.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/authn/oidc.go) |
-| ErrEndpointMethodNotAllowed | errors.New("HTTP method not allowed for matched authorization endpoint") | [`pkg/authz/endpoints.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/authz/endpoints.go) |
-| authorizationBadRequestBody | Bad Request. The request or configuration is malformed. | [`pkg/filters/auth.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/12de3686be277816367433867776dcbe9a5cefe8/pkg/filters/auth.go) |
+| auditShutdownTimeout | 5 * time.Second | [`cmd/kube-rbac-proxy/app/kube-rbac-proxy.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/kube-rbac-proxy.go) |
+| defaultAuthTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/options/options.go) |
+| defaultIdleTimeout | 60 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/options/options.go) |
+| defaultReadHeaderTimeout | 10 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/options/options.go) |
+| defaultUpstreamTimeout | 30 * time.Second | [`cmd/kube-rbac-proxy/app/options/options.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/options/options.go) |
+| errUpstreamTimeout | errors.New("upstream timeout") | [`cmd/kube-rbac-proxy/app/transport.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/cmd/kube-rbac-proxy/app/transport.go) |
+| auditTruncationMarker | [truncated] | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/audit.go) |
+| defaultQueueSize | 1024 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/audit.go) |
+| maxAuditDynamicStringSize | 256 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/audit.go) |
+| maxAuditEventSize | 64 &lt;&lt; 10 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/audit.go) |
+| maxAuditPathSize | 1024 | [`pkg/audit/audit.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/audit.go) |
+| activityID | 99 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| activityName | Inference | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| aiOperationProfile | ai_operation | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| categoryName | Application Activity | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| categoryUID | 6 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| className | API Activity | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| classUID | 6003 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapActivityID | 99 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapActivityName | Audit Event Loss | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapCategoryName | Uncategorized | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapCategoryUID | 0 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapClassName | Base Event | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapClassUID | 0 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapSeverityID | 3 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapSeverityName | Medium | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapStatusCode | audit_queue_full | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| gapTypeUID | 99 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| ocsfVersion | 1.9.0 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| productName | kube-rbac-proxy | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| resourceRoleTargetID | 1 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| resourceRoleTargetName | Target | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| severityID | 1 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| severityName | Informational | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| statusFailureID | 2 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| statusFailureName | Failure | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| statusSuccessID | 1 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| statusSuccessName | Success | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| typeUID | 600399 | [`pkg/audit/event.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/event.go) |
+| ProfileMetadata | metadata | [`pkg/audit/profile.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/profile.go) |
+| ProfileNone | none | [`pkg/audit/profile.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/audit/profile.go) |
+| _ | (*DelegatingAuthenticator)(nil) | [`pkg/authn/delegating.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/authn/delegating.go) |
+| _ | (*OIDCAuthenticator)(nil) | [`pkg/authn/oidc.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/authn/oidc.go) |
+| ErrEndpointMethodNotAllowed | errors.New("HTTP method not allowed for matched authorization endpoint") | [`pkg/authz/endpoints.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/authz/endpoints.go) |
+| authorizationBadRequestBody | Bad Request. The request or configuration is malformed. | [`pkg/filters/auth.go`](https://github.com/red-hat-data-services/kube-rbac-proxy/blob/c8a98fc1c54b8a91f1bede4d6d90b0c6ef717c0c/pkg/filters/auth.go) |
 

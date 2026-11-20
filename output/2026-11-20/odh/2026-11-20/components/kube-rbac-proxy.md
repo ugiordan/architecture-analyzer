@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/kube-rbac-proxy](https://github.com/opendatahub-io/kube-rbac-proxy) |
 | Commit | [0402d944071450e804af467966854c459936171b](https://github.com/opendatahub-io/kube-rbac-proxy/commit/0402d944071450e804af467966854c459936171b) |
-| Extracted | 2026-11-20T06:46:37Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:34:29Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

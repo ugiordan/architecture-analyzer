@@ -11,8 +11,8 @@
 | Repository | [opendatahub-io/trustyai-service-operator](https://github.com/opendatahub-io/trustyai-service-operator) |
 | Aliases | TrustyAI operator |
 | Commit | [caccdc66d6c743acbb3633907edae28e1c6dd753](https://github.com/opendatahub-io/trustyai-service-operator/commit/caccdc66d6c743acbb3633907edae28e1c6dd753) |
-| Extracted | 2026-11-20T06:41:04Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:30:12Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -56,7 +56,7 @@
 **trustyai-service-operator-controller-manager / manager**
 
 - Ports: 9443/TCP (webhook-server)
-- Env: `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE=quay.io/evalhub/community-inspect:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE=quay.io/evalhub/community-lighteval:v0.7.2-alpha.1`
+- Env: `GOMEMLIMIT=630MiB`, `RELATED_IMAGE_ODH_EVAL_HUB_IMAGE=quay.io/evalhub/evalhub:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE=quay.io/evalhub/community-inspect:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE=quay.io/trustyai/nemo-guardrails-server:latest`, `RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE=quay.io/evalhub/community-lighteval:v0.7.2-alpha.1`, `RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE=quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable`, `RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE=quay.io/opendatahub/ta-lmes-driver:latest`, `RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE=quay.io/opendatahub/ta-lmes-job:odh-stable`, `RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE=quay.io/trustyai/llama-stack-provider-trustyai-garak:latest`, `RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE=quay.io/opendatahub/trustyai-service:latest`
 
 
 

@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/fms-guardrails-orchestrator](https://github.com/opendatahub-io/fms-guardrails-orchestrator) |
 | Commit | [3a521981678748640f9f4abd0578bad6bf3d86ad](https://github.com/opendatahub-io/fms-guardrails-orchestrator/commit/3a521981678748640f9f4abd0578bad6bf3d86ad) |
-| Extracted | 2026-11-20T06:44:16Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:32:25Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

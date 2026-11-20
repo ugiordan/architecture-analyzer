@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/model-registry](https://github.com/opendatahub-io/model-registry) |
 | Commit | [9e10913f47e145785c5cc1b9a632ec8f95a28d50](https://github.com/opendatahub-io/model-registry/commit/9e10913f47e145785c5cc1b9a632ec8f95a28d50) |
-| Extracted | 2026-11-20T06:40:58Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:28:21Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

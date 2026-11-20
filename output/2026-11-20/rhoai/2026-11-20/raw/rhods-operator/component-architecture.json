@@ -5,9 +5,9 @@
     "RHODS operator"
   ],
   "repo": "red-hat-data-services/rhods-operator",
-  "commit_sha": "382a621fe2120718c74bf08e6c8ddc773f1bd0a9",
-  "extracted_at": "2026-11-20T06:41:24Z",
-  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
+  "commit_sha": "e9b848e62f761600ef361f76befc56520bd4d1c5",
+  "extracted_at": "2026-11-20T22:28:32Z",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
   "schema_version": "2",
   "rbac": {
     "cluster_roles": [
@@ -2920,7 +2920,7 @@
       }
     ],
     "issues": [
-      "k8s.io modules span multiple minor versions: v0.35 (k8s.io/apimachinery, k8s.io/client-go, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.36 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.37 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go)"
+      "k8s.io modules span multiple minor versions: v0.36 (k8s.io/api, k8s.io/apimachinery, k8s.io/client-go); v0.37 (k8s.io/api, k8s.io/apiextensions-apiserver, k8s.io/apimachinery, k8s.io/client-go); v0.35 (k8s.io/apimachinery, k8s.io/client-go, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go, k8s.io/api, k8s.io/apimachinery, k8s.io/client-go)"
     ]
   },
   "secrets_referenced": [
@@ -3927,7 +3927,7 @@
     {
       "name": "Validator-webhook",
       "type": "validating",
-      "path": "/validate-datasciencecluster-v2",
+      "path": "/validate-dscinitialization-v1",
       "sources": [
         {
           "type": "go_ast",
@@ -3939,7 +3939,19 @@
     {
       "name": "Validator-webhook",
       "type": "validating",
-      "path": "/validate-dscinitialization-v1",
+      "path": "/validate-gatewayconfig",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "Validator"
+    },
+    {
+      "name": "Validator-webhook",
+      "type": "validating",
+      "path": "/validate-datasciencecluster-v2",
       "sources": [
         {
           "type": "go_ast",
@@ -3964,18 +3976,6 @@
       "name": "Validator-webhook",
       "type": "validating",
       "path": "/validate-datasciencecluster-v3",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "Validator"
-    },
-    {
-      "name": "Validator-webhook",
-      "type": "validating",
-      "path": "/validate-gatewayconfig",
       "sources": [
         {
           "type": "go_ast",
@@ -5118,7 +5118,7 @@
           "doc": "Configures and enables Model Cache integration"
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:140"
+      "source": "api/components/v1alpha1/kserve_types.go:147"
     },
     {
       "name": "NimSpec",
@@ -5146,7 +5146,7 @@
           "default": "false"
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:178",
+      "source": "api/components/v1alpha1/kserve_types.go:185",
       "is_spec": true
     },
     {
@@ -5164,7 +5164,7 @@
           "default": "Removed"
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:191",
+      "source": "api/components/v1alpha1/kserve_types.go:198",
       "is_spec": true
     },
     {
@@ -5182,7 +5182,7 @@
           "default": "Removed"
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:199",
+      "source": "api/components/v1alpha1/kserve_types.go:206",
       "is_spec": true
     },
     {
@@ -5230,7 +5230,7 @@
         "+kubebuilder:validation:XValidation:rule=\"self.managementState != 'Managed' || (has(self.nodeNames) \u0026\u0026 size(self.nodeNames) \u003e 0) || (has(self.nodeSelector) \u0026\u0026 ((has(self.nodeSelector.matchLabels) \u0026\u0026 size(self.nodeSelector.matchLabels) \u003e 0) || (has(self.nodeSelector.matchExpressions) \u0026\u0026 size(self.nodeSelector.matchExpressions) \u003e 0)))\",message=\"one non-empty nodeNames or nodeSelector is required when managementState is Managed\"",
         "+kubebuilder:validation:XValidation:rule=\"!(has(self.nodeNames) \u0026\u0026 has(self.nodeSelector))\",message=\"nodeNames and nodeSelector are mutually exclusive\""
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:209",
+      "source": "api/components/v1alpha1/kserve_types.go:216",
       "is_spec": true
     },
     {
@@ -5244,7 +5244,7 @@
           "embedded": true
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:231",
+      "source": "api/components/v1alpha1/kserve_types.go:238",
       "is_status": true
     },
     {
@@ -5266,7 +5266,7 @@
           "embedded": true
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:236"
+      "source": "api/components/v1alpha1/kserve_types.go:243"
     },
     {
       "name": "DSCKserveV2",
@@ -5285,7 +5285,7 @@
           "embedded": true
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:244"
+      "source": "api/components/v1alpha1/kserve_types.go:251"
     },
     {
       "name": "DSCKserveStatus",
@@ -5304,7 +5304,7 @@
           "embedded": true
         }
       ],
-      "source": "api/components/v1alpha1/kserve_types.go:250",
+      "source": "api/components/v1alpha1/kserve_types.go:257",
       "is_status": true
     },
     {
@@ -5436,6 +5436,12 @@
             "+kubebuilder:default=Removed"
           ],
           "default": "Removed"
+        },
+        {
+          "name": "EnableLLMInferenceServiceStrictNetworkPolicy",
+          "type": "*bool",
+          "json_tag": "enableLLMInferenceServiceStrictNetworkPolicy,omitempty",
+          "doc": "Enables the strict per-LLMInferenceService NetworkPolicies that restrict traffic between the workload, scheduler and tokenizer Pods to what each service needs. When unset or false, KServe creates a single allow-all NetworkPolicy per service instead, which keeps the open behaviour of releases that did not restrict Pod traffic across upgrades."
         },
         {
           "name": "ModelCache",
@@ -10235,7 +10241,7 @@
       "name": "KserveV3StateAnnotation",
       "value": "conversion.opendatahub.io/kserve-v3-state",
       "category": "general",
-      "doc": "KserveV3StateAnnotation carries v3-only KServe settings (confidential\ncontainers and audit logging profile) through the v2 view, which has no\ncorresponding fields. It is conversion-owned metadata.",
+      "doc": "KserveV3StateAnnotation carries v3-only KServe settings (confidential\ncontainers, audit logging profile and the strict LLMInferenceService\nNetworkPolicy toggle) through the v2 view, which has no corresponding\nfields. It is conversion-owned metadata.",
       "source": "api/datasciencecluster/v2/datasciencecluster_conversion.go"
     },
     {
@@ -17919,7 +17925,7 @@
     "status_conditions": "rich",
     "webhooks": "rich"
   },
-  "summary": "rhods-operator (also known as: opendatahub-operator, RHODS operator) is a Kubernetes component. deploying 22 workload(s) (aws-cloud-manager-operator, aws-cloud-manager-operator, aws-cloud-manager-operator, azure-cloud-manager-operator, azure-cloud-manager-operator, azure-cloud-manager-operator, coreweave-cloud-manager-operator, coreweave-cloud-manager-operator, coreweave-cloud-manager-operator, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, rhods-operator, rhods-operator, rhods-operator, rhods-operator, rhods-operator, rhods-operator) with 22 container(s). watching 17 resource type(s). exposing 3 service(s) on ports: 443. with 12 webhook(s) (5 validating, 3 mutating). protected by 2 network policy/policies. connecting to external services: s3. runtime dependencies: MLflow. defining 50 API spec type(s) across 201 struct(s) with 569 total fields. with 1216 operator config constants (18 image references, 2 env vars). following 1 reconciliation steps across 1 controller(s). reporting 45 status condition types. integrates with Istio, Kueue, management relationship via labels/annotations. creates RBAC bindings to external roles: controller-manager-role. kustomize overlays: config/cloudmanager/aws/crd, config/cloudmanager/aws/default, config/cloudmanager/aws/local, config/cloudmanager/aws/rbac, config/cloudmanager/aws/rhoai, config/cloudmanager/azure/crd, config/cloudmanager/azure/default, config/cloudmanager/azure/local, config/cloudmanager/azure/rbac, config/cloudmanager/azure/rhoai, config/cloudmanager/coreweave/crd, config/cloudmanager/coreweave/default, config/cloudmanager/coreweave/local, config/cloudmanager/coreweave/rbac, config/cloudmanager/coreweave/rhoai, config/connectionAPI, config/crd, config/default, config/hardwareprofiles, config/manifests, config/osd-configs, config/prometheus, config/rbac, config/rhaii/certmanager, config/rhaii/crd, config/rhaii/odh, config/rhaii/odh-local, config/rhaii/odh-operator, config/rhaii/rhoai/certmanager, config/rhaii/rhoai/default, config/rhaii/rhoai/operator, config/rhaii/webhook, config/rhoai/crd, config/rhoai/default, config/rhoai/manifests, config/rhoai/rbac, config/rhoai/webhook, config/scorecard, config/segment, config/webhook. references components: kueue (config, provider), opendatahub-operator (import).",
+  "summary": "rhods-operator (also known as: opendatahub-operator, RHODS operator) is a Kubernetes component. deploying 22 workload(s) (aws-cloud-manager-operator, aws-cloud-manager-operator, aws-cloud-manager-operator, azure-cloud-manager-operator, azure-cloud-manager-operator, azure-cloud-manager-operator, coreweave-cloud-manager-operator, coreweave-cloud-manager-operator, coreweave-cloud-manager-operator, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, rhods-operator, rhods-operator, rhods-operator, rhods-operator, rhods-operator, rhods-operator) with 22 container(s). watching 17 resource type(s). exposing 3 service(s) on ports: 443. with 12 webhook(s) (5 validating, 3 mutating). protected by 2 network policy/policies. connecting to external services: s3. runtime dependencies: MLflow. defining 50 API spec type(s) across 201 struct(s) with 570 total fields. with 1216 operator config constants (18 image references, 2 env vars). following 1 reconciliation steps across 1 controller(s). reporting 45 status condition types. integrates with Istio, Kueue, management relationship via labels/annotations. creates RBAC bindings to external roles: controller-manager-role. kustomize overlays: config/cloudmanager/aws/crd, config/cloudmanager/aws/default, config/cloudmanager/aws/local, config/cloudmanager/aws/rbac, config/cloudmanager/aws/rhoai, config/cloudmanager/azure/crd, config/cloudmanager/azure/default, config/cloudmanager/azure/local, config/cloudmanager/azure/rbac, config/cloudmanager/azure/rhoai, config/cloudmanager/coreweave/crd, config/cloudmanager/coreweave/default, config/cloudmanager/coreweave/local, config/cloudmanager/coreweave/rbac, config/cloudmanager/coreweave/rhoai, config/connectionAPI, config/crd, config/default, config/hardwareprofiles, config/manifests, config/osd-configs, config/prometheus, config/rbac, config/rhaii/certmanager, config/rhaii/crd, config/rhaii/odh, config/rhaii/odh-local, config/rhaii/odh-operator, config/rhaii/rhoai/certmanager, config/rhaii/rhoai/default, config/rhaii/rhoai/operator, config/rhaii/webhook, config/rhoai/crd, config/rhoai/default, config/rhoai/manifests, config/rhoai/rbac, config/rhoai/webhook, config/scorecard, config/segment, config/webhook. references components: kueue (config, provider), opendatahub-operator (import).",
   "go_ast_mode": "full",
   "security_annotations": [
     {

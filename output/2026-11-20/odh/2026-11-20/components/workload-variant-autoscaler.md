@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/workload-variant-autoscaler](https://github.com/opendatahub-io/workload-variant-autoscaler) |
 | Commit | [a73864b62974986d2000e5bcbb235fe101cc2556](https://github.com/opendatahub-io/workload-variant-autoscaler/commit/a73864b62974986d2000e5bcbb235fe101cc2556) |
-| Extracted | 2026-11-20T06:45:26Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:33:28Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

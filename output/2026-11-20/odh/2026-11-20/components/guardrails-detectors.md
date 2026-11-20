@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [opendatahub-io/guardrails-detectors](https://github.com/opendatahub-io/guardrails-detectors) |
-| Commit | [424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a](https://github.com/opendatahub-io/guardrails-detectors/commit/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a) |
-| Extracted | 2026-11-20T06:44:35Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Commit | [bca96a86605a7277921585456bf88371deea73d1](https://github.com/opendatahub-io/guardrails-detectors/commit/bca96a86605a7277921585456bf88371deea73d1) |
+| Extracted | 2026-11-20T22:32:26Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -37,8 +37,8 @@
 
 | Runtime | CRD Kind | Source |
 |---------|----------|--------|
-|  |  | [`detectors/huggingface/deploy/servingruntime.yaml`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/huggingface/deploy/servingruntime.yaml) |
-|  |  | [`detectors/llm_judge/deploy/servingruntime.yaml`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/llm_judge/deploy/servingruntime.yaml) |
+|  |  | [`detectors/huggingface/deploy/servingruntime.yaml`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/huggingface/deploy/servingruntime.yaml) |
+|  |  | [`detectors/llm_judge/deploy/servingruntime.yaml`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/llm_judge/deploy/servingruntime.yaml) |
 
 
 ## Label Contracts
@@ -53,10 +53,10 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| get |  | [`detectors/built_in/app.py:52`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/built_in/app.py#L52) |
-| get |  | [`detectors/built_in/custom_detectors_wrapper.py:206`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/built_in/custom_detectors_wrapper.py#L206) |
-| get |  | [`detectors/huggingface/app.py:25`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/huggingface/app.py#L25) |
-| get |  | [`detectors/huggingface/detector.py:257`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/huggingface/detector.py#L257) |
-| get |  | [`detectors/built_in/app.py:75`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/built_in/app.py#L75) |
-| list |  | [`detectors/llm_judge/app.py:92`](https://github.com/opendatahub-io/guardrails-detectors/blob/424a8da7e4e6506c43dc69f02bd0a6e0ae3e996a/detectors/llm_judge/app.py#L92) |
+| get |  | [`detectors/built_in/app.py:52`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/built_in/app.py#L52) |
+| get |  | [`detectors/built_in/custom_detectors_wrapper.py:206`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/built_in/custom_detectors_wrapper.py#L206) |
+| get |  | [`detectors/huggingface/app.py:25`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/huggingface/app.py#L25) |
+| get |  | [`detectors/huggingface/detector.py:257`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/huggingface/detector.py#L257) |
+| get |  | [`detectors/built_in/app.py:75`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/built_in/app.py#L75) |
+| list |  | [`detectors/llm_judge/app.py:92`](https://github.com/opendatahub-io/guardrails-detectors/blob/bca96a86605a7277921585456bf88371deea73d1/detectors/llm_judge/app.py#L92) |
 

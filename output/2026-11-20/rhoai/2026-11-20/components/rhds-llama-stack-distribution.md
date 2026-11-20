@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/rhds-llama-stack-distribution](https://github.com/red-hat-data-services/rhds-llama-stack-distribution) |
 | Commit | [53fb2c2f9dbd960835ae7583bd4ab48694ac19b9](https://github.com/red-hat-data-services/rhds-llama-stack-distribution/commit/53fb2c2f9dbd960835ae7583bd4ab48694ac19b9) |
-| Extracted | 2026-11-20T06:47:44Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:35:31Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

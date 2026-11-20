@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [opendatahub-io/spark-operator](https://github.com/opendatahub-io/spark-operator) |
 | Commit | [1ca80c029a780e3bb153a014c7f49fd916ec3834](https://github.com/opendatahub-io/spark-operator/commit/1ca80c029a780e3bb153a014c7f49fd916ec3834) |
-| Extracted | 2026-11-20T06:40:55Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:28:28Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

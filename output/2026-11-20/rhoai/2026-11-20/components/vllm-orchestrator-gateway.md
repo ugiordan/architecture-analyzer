@@ -10,8 +10,8 @@
 |-------|-------|
 | Repository | [red-hat-data-services/vllm-orchestrator-gateway](https://github.com/red-hat-data-services/vllm-orchestrator-gateway) |
 | Commit | [863f687cc25e5b5fcfc006a76942c5b0ca396b9e](https://github.com/red-hat-data-services/vllm-orchestrator-gateway/commit/863f687cc25e5b5fcfc006a76942c5b0ca396b9e) |
-| Extracted | 2026-11-20T06:48:04Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Extracted | 2026-11-20T22:36:02Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 

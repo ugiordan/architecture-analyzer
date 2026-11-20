@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [red-hat-data-services/lm-evaluation-harness](https://github.com/red-hat-data-services/lm-evaluation-harness) |
-| Commit | [09c2fde56d68a5990e4ed3e9ed2b583309fbb189](https://github.com/red-hat-data-services/lm-evaluation-harness/commit/09c2fde56d68a5990e4ed3e9ed2b583309fbb189) |
-| Extracted | 2026-11-20T06:46:09Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Commit | [ed106267da141c559eec53111799982786515415](https://github.com/red-hat-data-services/lm-evaluation-harness/commit/ed106267da141c559eec53111799982786515415) |
+| Extracted | 2026-11-20T22:34:04Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -207,58 +207,58 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| create |  | [`lm_eval/models/api_models.py:157`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L157) |
-| create |  | [`lm_eval/evaluator.py:86`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/evaluator.py#L86) |
-| create |  | [`lm_eval/api/task.py:770`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/api/task.py#L770) |
-| create |  | [`lm_eval/models/api_models.py:404`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L404) |
-| create |  | [`main.py:1211`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/main.py#L1211) |
-| create |  | [`scripts/zeno_visualize.py:123`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/scripts/zeno_visualize.py#L123) |
-| create |  | [`lm_eval/loggers/evaluation_tracker.py:245`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/loggers/evaluation_tracker.py#L245) |
-| create |  | [`lm_eval/models/api_models.py:542`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L542) |
-| delete |  | [`lm_eval/decontamination/janitor.py:122`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/decontamination/janitor.py#L122) |
-| get |  | [`lm_eval/tasks/bigbench/push_bigbench_dataset.py:17`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/tasks/bigbench/push_bigbench_dataset.py#L17) |
-| get |  | [`lm_eval/api/task.py:1442`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/api/task.py#L1442) |
-| get |  | [`lm_eval/tasks/unitxt/task.py:142`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/tasks/unitxt/task.py#L142) |
-| get |  | [`lm_eval/models/api_models.py:585`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L585) |
-| get |  | [`lm_eval/models/api_models.py:616`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L616) |
-| get |  | [`metrics/trec_eval/trec_eval.py:130`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L130) |
-| get |  | [`lm_eval/models/hf_vlms.py:571`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/hf_vlms.py#L571) |
-| get |  | [`lm_eval/api/model.py:248`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/api/model.py#L248) |
-| get |  | [`lm_eval/api/task.py:1211`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/api/task.py#L1211) |
-| get |  | [`lm_eval/models/utils.py:427`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/utils.py#L427) |
-| get |  | [`lm_eval/evaluator.py:262`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/evaluator.py#L262) |
-| get |  | [`lm_eval/api/samplers.py:176`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/api/samplers.py#L176) |
-| get |  | [`lm_eval/tasks/bbh/_generate_configs.py:39`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/tasks/bbh/_generate_configs.py#L39) |
-| get |  | [`lm_eval/tasks/leaderboard/ifeval/instructions_util.py:37`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/tasks/leaderboard/ifeval/instructions_util.py#L37) |
-| get |  | [`metrics/coval/coval.py:184`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/coval/coval.py#L184) |
-| get |  | [`lm_eval/models/mamba_lm.py:112`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/mamba_lm.py#L112) |
-| get |  | [`metrics/trec_eval/trec_eval.py:129`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L129) |
-| get |  | [`lm_eval/models/neuron_optimum.py:583`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/neuron_optimum.py#L583) |
-| get |  | [`metrics/bertscore/bertscore.py:155`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/bertscore/bertscore.py#L155) |
-| get |  | [`lm_eval/tasks/ifeval/utils.py:39`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/tasks/ifeval/utils.py#L39) |
-| get |  | [`scripts/s3_downloader.py:91`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/scripts/s3_downloader.py#L91) |
-| get |  | [`metrics/bertscore/bertscore.py:31`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/bertscore/bertscore.py#L31) |
-| get |  | [`metrics/trec_eval/trec_eval.py:128`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L128) |
-| get |  | [`metrics/coval/coval.py:205`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/coval/coval.py#L205) |
-| get |  | [`lm_eval/evaluator.py:84`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/evaluator.py#L84) |
-| get |  | [`lm_eval/evaluator.py:349`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/evaluator.py#L349) |
-| get |  | [`metrics/trec_eval/trec_eval.py:137`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L137) |
-| get |  | [`lm_eval/models/api_models.py:622`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L622) |
-| get |  | [`scripts/s3_downloader.py:111`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/scripts/s3_downloader.py#L111) |
-| get |  | [`metrics/trec_eval/trec_eval.py:135`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L135) |
-| get |  | [`metrics/trec_eval/trec_eval.py:132`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L132) |
-| get |  | [`metrics/trec_eval/trec_eval.py:125`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L125) |
-| get |  | [`metrics/trec_eval/trec_eval.py:126`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L126) |
-| get |  | [`lm_eval/models/neuralmagic.py:267`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/neuralmagic.py#L267) |
-| get |  | [`metrics/trec_eval/trec_eval.py:124`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L124) |
-| get |  | [`lm_eval/models/api_models.py:748`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/api_models.py#L748) |
-| get |  | [`metrics/trec_eval/trec_eval.py:131`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L131) |
-| get |  | [`metrics/trec_eval/trec_eval.py:123`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/metrics/trec_eval/trec_eval.py#L123) |
-| get |  | [`lm_eval/api/task.py:954`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/api/task.py#L954) |
-| get |  | [`lm_eval/tasks/__init__.py:552`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/tasks/__init__.py#L552) |
-| get |  | [`scripts/cost_estimate.py:58`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/scripts/cost_estimate.py#L58) |
-| get |  | [`scripts/write_out.py:56`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/scripts/write_out.py#L56) |
-| get |  | [`lm_eval/models/anthropic_llms.py:182`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/models/anthropic_llms.py#L182) |
-| list |  | [`lm_eval/__main__.py:343`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/__main__.py#L343) |
-| list |  | [`lm_eval/loggers/evaluation_tracker.py:377`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/09c2fde56d68a5990e4ed3e9ed2b583309fbb189/lm_eval/loggers/evaluation_tracker.py#L377) |
+| create |  | [`lm_eval/models/api_models.py:157`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L157) |
+| create |  | [`lm_eval/evaluator.py:86`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/evaluator.py#L86) |
+| create |  | [`lm_eval/api/task.py:770`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/api/task.py#L770) |
+| create |  | [`lm_eval/models/api_models.py:404`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L404) |
+| create |  | [`main.py:1211`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/main.py#L1211) |
+| create |  | [`scripts/zeno_visualize.py:123`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/scripts/zeno_visualize.py#L123) |
+| create |  | [`lm_eval/loggers/evaluation_tracker.py:245`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/loggers/evaluation_tracker.py#L245) |
+| create |  | [`lm_eval/models/api_models.py:542`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L542) |
+| delete |  | [`lm_eval/decontamination/janitor.py:122`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/decontamination/janitor.py#L122) |
+| get |  | [`lm_eval/tasks/bigbench/push_bigbench_dataset.py:17`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/tasks/bigbench/push_bigbench_dataset.py#L17) |
+| get |  | [`lm_eval/api/task.py:1442`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/api/task.py#L1442) |
+| get |  | [`lm_eval/tasks/unitxt/task.py:142`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/tasks/unitxt/task.py#L142) |
+| get |  | [`lm_eval/models/api_models.py:585`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L585) |
+| get |  | [`lm_eval/models/api_models.py:616`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L616) |
+| get |  | [`metrics/trec_eval/trec_eval.py:130`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L130) |
+| get |  | [`lm_eval/models/hf_vlms.py:571`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/hf_vlms.py#L571) |
+| get |  | [`lm_eval/api/model.py:248`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/api/model.py#L248) |
+| get |  | [`lm_eval/api/task.py:1211`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/api/task.py#L1211) |
+| get |  | [`lm_eval/models/utils.py:427`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/utils.py#L427) |
+| get |  | [`lm_eval/evaluator.py:262`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/evaluator.py#L262) |
+| get |  | [`lm_eval/api/samplers.py:176`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/api/samplers.py#L176) |
+| get |  | [`lm_eval/tasks/bbh/_generate_configs.py:39`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/tasks/bbh/_generate_configs.py#L39) |
+| get |  | [`lm_eval/tasks/leaderboard/ifeval/instructions_util.py:37`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/tasks/leaderboard/ifeval/instructions_util.py#L37) |
+| get |  | [`metrics/coval/coval.py:184`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/coval/coval.py#L184) |
+| get |  | [`lm_eval/models/mamba_lm.py:112`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/mamba_lm.py#L112) |
+| get |  | [`metrics/trec_eval/trec_eval.py:129`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L129) |
+| get |  | [`lm_eval/models/neuron_optimum.py:583`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/neuron_optimum.py#L583) |
+| get |  | [`metrics/bertscore/bertscore.py:155`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/bertscore/bertscore.py#L155) |
+| get |  | [`lm_eval/tasks/ifeval/utils.py:39`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/tasks/ifeval/utils.py#L39) |
+| get |  | [`scripts/s3_downloader.py:91`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/scripts/s3_downloader.py#L91) |
+| get |  | [`metrics/bertscore/bertscore.py:31`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/bertscore/bertscore.py#L31) |
+| get |  | [`metrics/trec_eval/trec_eval.py:128`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L128) |
+| get |  | [`metrics/coval/coval.py:205`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/coval/coval.py#L205) |
+| get |  | [`lm_eval/evaluator.py:84`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/evaluator.py#L84) |
+| get |  | [`lm_eval/evaluator.py:349`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/evaluator.py#L349) |
+| get |  | [`metrics/trec_eval/trec_eval.py:137`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L137) |
+| get |  | [`lm_eval/models/api_models.py:622`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L622) |
+| get |  | [`scripts/s3_downloader.py:111`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/scripts/s3_downloader.py#L111) |
+| get |  | [`metrics/trec_eval/trec_eval.py:135`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L135) |
+| get |  | [`metrics/trec_eval/trec_eval.py:132`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L132) |
+| get |  | [`metrics/trec_eval/trec_eval.py:125`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L125) |
+| get |  | [`metrics/trec_eval/trec_eval.py:126`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L126) |
+| get |  | [`lm_eval/models/neuralmagic.py:267`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/neuralmagic.py#L267) |
+| get |  | [`metrics/trec_eval/trec_eval.py:124`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L124) |
+| get |  | [`lm_eval/models/api_models.py:748`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/api_models.py#L748) |
+| get |  | [`metrics/trec_eval/trec_eval.py:131`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L131) |
+| get |  | [`metrics/trec_eval/trec_eval.py:123`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/metrics/trec_eval/trec_eval.py#L123) |
+| get |  | [`lm_eval/api/task.py:954`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/api/task.py#L954) |
+| get |  | [`lm_eval/tasks/__init__.py:552`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/tasks/__init__.py#L552) |
+| get |  | [`scripts/cost_estimate.py:58`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/scripts/cost_estimate.py#L58) |
+| get |  | [`scripts/write_out.py:56`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/scripts/write_out.py#L56) |
+| get |  | [`lm_eval/models/anthropic_llms.py:182`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/models/anthropic_llms.py#L182) |
+| list |  | [`lm_eval/__main__.py:343`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/__main__.py#L343) |
+| list |  | [`lm_eval/loggers/evaluation_tracker.py:377`](https://github.com/red-hat-data-services/lm-evaluation-harness/blob/ed106267da141c559eec53111799982786515415/lm_eval/loggers/evaluation_tracker.py#L377) |
 

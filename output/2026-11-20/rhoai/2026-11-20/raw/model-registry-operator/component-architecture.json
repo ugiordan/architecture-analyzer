@@ -4,9 +4,9 @@
     "Model Registry operator"
   ],
   "repo": "red-hat-data-services/model-registry-operator",
-  "commit_sha": "adb3362dd2bfe315e4e4a39917cc45b57651e796",
-  "extracted_at": "2026-11-20T06:43:35Z",
-  "analyzer_version": "94514fc9c2093e131dcd1953126fe2eb0c3e8c9e",
+  "commit_sha": "3c3a420bd1b39f7d97013b600af7ca77d2ab55dc",
+  "extracted_at": "2026-11-20T22:28:55Z",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
   "schema_version": "2",
   "crds": [
     {
@@ -30,10 +30,10 @@
       "validation_rules": [
         "!(has(self.oauthProxy) \u0026\u0026 has(self.kubeRBACProxy))",
         "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
+        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)",
         "has(self.generateDeployment) \u0026\u0026 self.generateDeployment ? true : (size(self.host) \u003e 0 || size(self.hostAddress) \u003e 0)",
         "has(self.database) \u0026\u0026 size(self.database) \u003e 0 ? has(self.username) \u0026\u0026 size(self.username) \u003e 0 : true",
-        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))",
-        "has(self.tlsCertificateSecret) == has(self.tlsKeySecret)"
+        "!(has(self.generateDeployment) \u0026\u0026 self.generateDeployment) || ((!has(self.host) || size(self.host) == 0) \u0026\u0026 (!has(self.hostAddress) || size(self.hostAddress) == 0))"
       ],
       "source": "config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml"
     }
@@ -6271,6 +6271,14 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml",
+      "field": "spec.oauthProxy.image",
+      "crd_kind": "ModelRegistry",
+      "description": "CRD ModelRegistry has user-settable image field \"spec.oauthProxy.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml",
       "field": "spec.rest.image",
       "crd_kind": "ModelRegistry",
       "description": "CRD ModelRegistry has user-settable image field \"spec.rest.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
@@ -6282,14 +6290,6 @@
       "field": "spec.grpc.image",
       "crd_kind": "ModelRegistry",
       "description": "CRD ModelRegistry has user-settable image field \"spec.grpc.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/bases/modelregistry.opendatahub.io_modelregistries.yaml",
-      "field": "spec.oauthProxy.image",
-      "crd_kind": "ModelRegistry",
-      "description": "CRD ModelRegistry has user-settable image field \"spec.oauthProxy.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "MISSING_AUTH_REQUIREMENT",

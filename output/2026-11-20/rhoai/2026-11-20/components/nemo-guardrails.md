@@ -9,9 +9,9 @@
 | Field | Value |
 |-------|-------|
 | Repository | [red-hat-data-services/NeMo-Guardrails](https://github.com/red-hat-data-services/NeMo-Guardrails) |
-| Commit | [31eb66573b20ad7a5716fb0e75c1d984f3f92784](https://github.com/red-hat-data-services/NeMo-Guardrails/commit/31eb66573b20ad7a5716fb0e75c1d984f3f92784) |
-| Extracted | 2026-11-20T06:47:20Z |
-| Analyzer Version | 94514fc9c2093e131dcd1953126fe2eb0c3e8c9e |
+| Commit | [93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c](https://github.com/red-hat-data-services/NeMo-Guardrails/commit/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c) |
+| Extracted | 2026-11-20T22:35:07Z |
+| Analyzer Version | f62b7632f89631498789b54d78e8c552c27100c7 |
 | Data Coverage | full |
 
 
@@ -19,13 +19,13 @@
 
 | Method | Path | Description | Source |
 |--------|------|-------------|--------|
-| GET | / |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
-| GET | /healthz |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
-| GET | /v1/challenges |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
-| POST | /v1/chat/completions |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
-| GET | /v1/health |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
-| GET | /v1/models |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
-| GET | /v1/rails/configs |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/fern/openapi.yml) |
+| GET | / |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
+| GET | /healthz |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
+| GET | /v1/challenges |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
+| POST | /v1/chat/completions |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
+| GET | /v1/health |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
+| GET | /v1/models |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
+| GET | /v1/rails/configs |  | [`fern/openapi.yml`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/fern/openapi.yml) |
 
 
 ## Dependencies
@@ -219,63 +219,63 @@
 
 | Operation | Resource Kind | Source |
 |-----------|-------------|--------|
-| create |  | [`nemoguardrails/library/clavata/actions.py:217`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/clavata/actions.py#L217) |
-| create |  | [`nemoguardrails/guardrails/telemetry.py:210`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L210) |
-| create |  | [`nemoguardrails/library/sensitive_data_detection/actions.py:78`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/sensitive_data_detection/actions.py#L78) |
-| create |  | [`nemoguardrails/guardrails/async_work_queue.py:134`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/async_work_queue.py#L134) |
-| create |  | [`nemoguardrails/guardrails/telemetry.py:225`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L225) |
-| create |  | [`nemoguardrails/llm/models/initializer.py:52`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/llm/models/initializer.py#L52) |
-| create |  | [`nemoguardrails/evaluate/evaluate_factcheck.py:162`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_factcheck.py#L162) |
-| create |  | [`nemoguardrails/evaluate/evaluate_factcheck.py:64`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_factcheck.py#L64) |
-| create |  | [`nemoguardrails/guardrails/telemetry.py:314`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L314) |
-| create |  | [`examples/scripts/demo_streaming.py:66`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/examples/scripts/demo_streaming.py#L66) |
-| create |  | [`nemoguardrails/guardrails/telemetry.py:246`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L246) |
-| get |  | [`nemoguardrails/actions/action_dispatcher.py:67`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/actions/action_dispatcher.py#L67) |
-| get |  | [`scripts/discover_required_models.py:144`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/scripts/discover_required_models.py#L144) |
-| get |  | [`tests/conftest.py:34`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/tests/conftest.py#L34) |
-| get |  | [`nemoguardrails/library/jailbreak_detection/actions.py:114`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/jailbreak_detection/actions.py#L114) |
-| get |  | [`nemoguardrails/guardrails/compiled_rail.py:526`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/compiled_rail.py#L526) |
-| get |  | [`nemoguardrails/integrations/langchain/llm_adapter.py:244`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/integrations/langchain/llm_adapter.py#L244) |
-| get |  | [`nemoguardrails/evaluate/evaluate_moderation.py:199`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_moderation.py#L199) |
-| get |  | [`tests/conftest.py:96`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/tests/conftest.py#L96) |
-| get |  | [`nemoguardrails/guardrails/iorails.py:1518`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/iorails.py#L1518) |
-| get |  | [`nemoguardrails/actions/llm/generation.py:100`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/actions/llm/generation.py#L100) |
-| get |  | [`nemoguardrails/colang/v2_x/runtime/statemachine.py:1958`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/colang/v2_x/runtime/statemachine.py#L1958) |
-| get |  | [`nemoguardrails/evaluate/evaluate_topical.py:38`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_topical.py#L38) |
-| get |  | [`nemoguardrails/server/api.py:265`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/server/api.py#L265) |
-| get |  | [`nemoguardrails/evaluate/evaluate_hallucination.py:135`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_hallucination.py#L135) |
-| get |  | [`nemoguardrails/evaluate/data/topical/dataset_tools.py:131`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/data/topical/dataset_tools.py#L131) |
-| get |  | [`nemoguardrails/evaluate/evaluate_moderation.py:191`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_moderation.py#L191) |
-| get |  | [`nemoguardrails/llm/providers/__init__.py:69`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/llm/providers/__init__.py#L69) |
-| get |  | [`nemoguardrails/library/content_safety/actions.py:86`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/content_safety/actions.py#L86) |
-| get |  | [`nemoguardrails/guardrails/telemetry.py:191`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L191) |
-| get |  | [`tests/guardrails/metric_helpers.py:63`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/tests/guardrails/metric_helpers.py#L63) |
-| get |  | [`nemoguardrails/integrations/langchain/providers/trtllm/client.py:62`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/integrations/langchain/providers/trtllm/client.py#L62) |
-| get |  | [`nemoguardrails/integrations/langchain/providers/trtllm/client.py:56`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/integrations/langchain/providers/trtllm/client.py#L56) |
-| get |  | [`nemoguardrails/guardrails/async_work_queue.py:173`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/async_work_queue.py#L173) |
-| get |  | [`benchmark/embedding_backend/bench_embedding_backend.py:128`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/benchmark/embedding_backend/bench_embedding_backend.py#L128) |
-| get |  | [`tests/v2_x/chat.py:307`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/tests/v2_x/chat.py#L307) |
-| get |  | [`benchmark/aiperf/run_aiperf.py:305`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/benchmark/aiperf/run_aiperf.py#L305) |
-| get |  | [`nemoguardrails/colang/v2_x/lang/parser.py:104`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/colang/v2_x/lang/parser.py#L104) |
-| get |  | [`nemoguardrails/llm/providers/__init__.py:57`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/llm/providers/__init__.py#L57) |
-| get |  | [`nemoguardrails/rails/llm/config.py:686`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/rails/llm/config.py#L686) |
-| get |  | [`nemoguardrails/rails/llm/config.py:687`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/rails/llm/config.py#L687) |
-| get |  | [`nemoguardrails/actions/action_dispatcher.py:148`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/actions/action_dispatcher.py#L148) |
-| get |  | [`examples/scripts/demo_llama_index_guardrails.py:84`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/examples/scripts/demo_llama_index_guardrails.py#L84) |
-| get |  | [`nemoguardrails/evaluate/evaluate_hallucination.py:96`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/evaluate/evaluate_hallucination.py#L96) |
-| get |  | [`nemoguardrails/embeddings/providers/azureopenai.py:79`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/embeddings/providers/azureopenai.py#L79) |
-| get |  | [`nemoguardrails/library/jailbreak_detection/rail_config.py:102`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/jailbreak_detection/rail_config.py#L102) |
-| get |  | [`nemoguardrails/embeddings/providers/sentence_transformers.py:60`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/embeddings/providers/sentence_transformers.py#L60) |
-| get |  | [`nemoguardrails/guardrails/telemetry.py:339`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L339) |
-| get |  | [`nemoguardrails/llm/cache/lfu.py:314`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/llm/cache/lfu.py#L314) |
-| get |  | [`nemoguardrails/actions/v2_x/generation.py:292`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/actions/v2_x/generation.py#L292) |
-| get |  | [`nemoguardrails/library/attention/actions.py:225`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/attention/actions.py#L225) |
-| get |  | [`nemoguardrails/guardrails/telemetry.py:128`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/guardrails/telemetry.py#L128) |
-| get |  | [`examples/configs/tracing/working_example.py:134`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/examples/configs/tracing/working_example.py#L134) |
-| get |  | [`nemoguardrails/library/cleanlab/actions.py:59`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/cleanlab/actions.py#L59) |
-| get |  | [`nemoguardrails/integrations/langchain/providers/providers.py:74`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/integrations/langchain/providers/providers.py#L74) |
-| get |  | [`nemoguardrails/library/guardrails_ai/actions.py:115`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/library/guardrails_ai/actions.py#L115) |
-| list |  | [`nemoguardrails/embeddings/providers/fastembed.py:89`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/embeddings/providers/fastembed.py#L89) |
-| patch |  | [`nemoguardrails/__init__.py:29`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/__init__.py#L29) |
-| patch |  | [`nemoguardrails/cli/chat.py:23`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/31eb66573b20ad7a5716fb0e75c1d984f3f92784/nemoguardrails/cli/chat.py#L23) |
+| create |  | [`nemoguardrails/library/clavata/actions.py:217`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/clavata/actions.py#L217) |
+| create |  | [`nemoguardrails/guardrails/telemetry.py:210`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L210) |
+| create |  | [`nemoguardrails/library/sensitive_data_detection/actions.py:78`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/sensitive_data_detection/actions.py#L78) |
+| create |  | [`nemoguardrails/guardrails/async_work_queue.py:134`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/async_work_queue.py#L134) |
+| create |  | [`nemoguardrails/guardrails/telemetry.py:225`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L225) |
+| create |  | [`nemoguardrails/llm/models/initializer.py:52`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/llm/models/initializer.py#L52) |
+| create |  | [`nemoguardrails/evaluate/evaluate_factcheck.py:162`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_factcheck.py#L162) |
+| create |  | [`nemoguardrails/evaluate/evaluate_factcheck.py:64`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_factcheck.py#L64) |
+| create |  | [`nemoguardrails/guardrails/telemetry.py:314`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L314) |
+| create |  | [`examples/scripts/demo_streaming.py:66`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/examples/scripts/demo_streaming.py#L66) |
+| create |  | [`nemoguardrails/guardrails/telemetry.py:246`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L246) |
+| get |  | [`nemoguardrails/actions/action_dispatcher.py:67`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/actions/action_dispatcher.py#L67) |
+| get |  | [`scripts/discover_required_models.py:144`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/scripts/discover_required_models.py#L144) |
+| get |  | [`tests/conftest.py:34`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/tests/conftest.py#L34) |
+| get |  | [`nemoguardrails/library/jailbreak_detection/actions.py:114`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/jailbreak_detection/actions.py#L114) |
+| get |  | [`nemoguardrails/guardrails/compiled_rail.py:526`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/compiled_rail.py#L526) |
+| get |  | [`nemoguardrails/integrations/langchain/llm_adapter.py:244`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/integrations/langchain/llm_adapter.py#L244) |
+| get |  | [`nemoguardrails/evaluate/evaluate_moderation.py:199`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_moderation.py#L199) |
+| get |  | [`tests/conftest.py:96`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/tests/conftest.py#L96) |
+| get |  | [`nemoguardrails/guardrails/iorails.py:1518`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/iorails.py#L1518) |
+| get |  | [`nemoguardrails/actions/llm/generation.py:100`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/actions/llm/generation.py#L100) |
+| get |  | [`nemoguardrails/colang/v2_x/runtime/statemachine.py:1958`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/colang/v2_x/runtime/statemachine.py#L1958) |
+| get |  | [`nemoguardrails/evaluate/evaluate_topical.py:38`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_topical.py#L38) |
+| get |  | [`nemoguardrails/server/api.py:265`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/server/api.py#L265) |
+| get |  | [`nemoguardrails/evaluate/evaluate_hallucination.py:135`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_hallucination.py#L135) |
+| get |  | [`nemoguardrails/evaluate/data/topical/dataset_tools.py:131`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/data/topical/dataset_tools.py#L131) |
+| get |  | [`nemoguardrails/evaluate/evaluate_moderation.py:191`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_moderation.py#L191) |
+| get |  | [`nemoguardrails/llm/providers/__init__.py:69`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/llm/providers/__init__.py#L69) |
+| get |  | [`nemoguardrails/library/content_safety/actions.py:86`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/content_safety/actions.py#L86) |
+| get |  | [`nemoguardrails/guardrails/telemetry.py:191`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L191) |
+| get |  | [`tests/guardrails/metric_helpers.py:63`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/tests/guardrails/metric_helpers.py#L63) |
+| get |  | [`nemoguardrails/integrations/langchain/providers/trtllm/client.py:62`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/integrations/langchain/providers/trtllm/client.py#L62) |
+| get |  | [`nemoguardrails/integrations/langchain/providers/trtllm/client.py:56`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/integrations/langchain/providers/trtllm/client.py#L56) |
+| get |  | [`nemoguardrails/guardrails/async_work_queue.py:173`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/async_work_queue.py#L173) |
+| get |  | [`benchmark/embedding_backend/bench_embedding_backend.py:128`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/benchmark/embedding_backend/bench_embedding_backend.py#L128) |
+| get |  | [`tests/v2_x/chat.py:307`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/tests/v2_x/chat.py#L307) |
+| get |  | [`benchmark/aiperf/run_aiperf.py:305`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/benchmark/aiperf/run_aiperf.py#L305) |
+| get |  | [`nemoguardrails/colang/v2_x/lang/parser.py:104`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/colang/v2_x/lang/parser.py#L104) |
+| get |  | [`nemoguardrails/llm/providers/__init__.py:57`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/llm/providers/__init__.py#L57) |
+| get |  | [`nemoguardrails/rails/llm/config.py:686`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/rails/llm/config.py#L686) |
+| get |  | [`nemoguardrails/rails/llm/config.py:687`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/rails/llm/config.py#L687) |
+| get |  | [`nemoguardrails/actions/action_dispatcher.py:148`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/actions/action_dispatcher.py#L148) |
+| get |  | [`examples/scripts/demo_llama_index_guardrails.py:84`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/examples/scripts/demo_llama_index_guardrails.py#L84) |
+| get |  | [`nemoguardrails/evaluate/evaluate_hallucination.py:96`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/evaluate/evaluate_hallucination.py#L96) |
+| get |  | [`nemoguardrails/embeddings/providers/azureopenai.py:79`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/embeddings/providers/azureopenai.py#L79) |
+| get |  | [`nemoguardrails/library/jailbreak_detection/rail_config.py:102`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/jailbreak_detection/rail_config.py#L102) |
+| get |  | [`nemoguardrails/embeddings/providers/sentence_transformers.py:60`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/embeddings/providers/sentence_transformers.py#L60) |
+| get |  | [`nemoguardrails/guardrails/telemetry.py:339`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L339) |
+| get |  | [`nemoguardrails/llm/cache/lfu.py:314`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/llm/cache/lfu.py#L314) |
+| get |  | [`nemoguardrails/actions/v2_x/generation.py:292`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/actions/v2_x/generation.py#L292) |
+| get |  | [`nemoguardrails/library/attention/actions.py:225`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/attention/actions.py#L225) |
+| get |  | [`nemoguardrails/guardrails/telemetry.py:128`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/guardrails/telemetry.py#L128) |
+| get |  | [`examples/configs/tracing/working_example.py:134`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/examples/configs/tracing/working_example.py#L134) |
+| get |  | [`nemoguardrails/library/cleanlab/actions.py:59`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/cleanlab/actions.py#L59) |
+| get |  | [`nemoguardrails/integrations/langchain/providers/providers.py:74`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/integrations/langchain/providers/providers.py#L74) |
+| get |  | [`nemoguardrails/library/guardrails_ai/actions.py:115`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/library/guardrails_ai/actions.py#L115) |
+| list |  | [`nemoguardrails/embeddings/providers/fastembed.py:89`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/embeddings/providers/fastembed.py#L89) |
+| patch |  | [`nemoguardrails/__init__.py:29`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/__init__.py#L29) |
+| patch |  | [`nemoguardrails/cli/chat.py:23`](https://github.com/red-hat-data-services/NeMo-Guardrails/blob/93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c/nemoguardrails/cli/chat.py#L23) |
 

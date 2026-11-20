@@ -10,8 +10,8 @@
 |--------|-------|
 | Components | 44 |
 | CRDs | 99 |
-| Services | 86 |
-| Secrets | 68 |
+| Services | 82 |
+| Secrets | 65 |
 | Cluster Roles | 122 |
 | Cross-Component Dependencies | 53 |
 
@@ -198,9 +198,6 @@
 | odh-notebook-controller-webhook-cert | kubeflow | kubernetes.io/tls |
 | webhook-server-cert | kubeflow | Opaque |
 | webhook-server-cert | kueue | Opaque |
-| cacerts | llm-d-inference-scheduler | Opaque |
-| istio-kubeconfig | llm-d-inference-scheduler | Opaque |
-| istiod-tls | llm-d-inference-scheduler | Opaque |
 | mcplo-webhook-server-cert | mcp-lifecycle-module-operator | Opaque |
 | controller-manager-metrics-tls | mlflow-operator | Opaque |
 | aihub-controller-manager-metrics-tls | model-registry-operator | Opaque |
@@ -310,7 +307,7 @@
 | odh-dashboard | odh-dashboard-autorag | 4 |
 | odh-dashboard | odh-dashboard-data-connect-hub-ui | 3 |
 | odh-dashboard | odh-dashboard-data-registry-ui | 2 |
-| odh-dashboard | odh-dashboard-eval-hub | 4 |
+| odh-dashboard | odh-dashboard-eval-hub | 2 |
 | odh-dashboard | odh-dashboard-gen-ai | 19 |
 | odh-dashboard | odh-dashboard-maas | 4 |
 | odh-dashboard | odh-dashboard-mlflow | 3 |
@@ -415,10 +412,6 @@
 | kueue | visibility-server | ClusterIP | 443/TCP |
 | kueue | webhook-service | ClusterIP | 443/TCP |
 | llama-stack | cli-port-default | python-source | 8081/TCP |
-| llm-d-inference-scheduler | ${EPP_NAME} | ClusterIP | 9002/TCP, 5557/TCP, 9090/TCP |
-| llm-d-inference-scheduler | inference-gateway-istio-nodeport | NodePort | 15021/TCP, 80/TCP |
-| llm-d-inference-scheduler | istiod-llm-d-gateway | ClusterIP | 15010/TCP, 15012/TCP, 443/TCP, 15014/TCP |
-| llm-d-inference-scheduler | service | ClusterIP | 8080/TCP |
 | mcp-lifecycle-module-operator | webhook-service | ClusterIP | 443/TCP |
 | mlflow-operator | mlflow-operator-controller-manager-metrics-service | ClusterIP | 8443/TCP |
 | mlflow | env-port-default | python-source | 9137/TCP |
