@@ -23,6 +23,7 @@ class GenerateNavTest(unittest.TestCase):
             os.makedirs(component)
             for name, content in (
                 ("index.md", "# praxis-extproc\n"),
+                ("agent-context.md", "# praxis-extproc: Agent Context\n"),
                 ("details.md", "# praxis-extproc: Extracted Data\n"),
             ):
                 with open(os.path.join(component, name), "w") as f:
@@ -47,6 +48,10 @@ class GenerateNavTest(unittest.TestCase):
                 nav = f.read()
             self.assertIn(
                 "Extracted Data: use-cases/odh-platform/components/praxis_extproc/details.md",
+                nav,
+            )
+            self.assertIn(
+                "Agent Context: use-cases/odh-platform/components/praxis_extproc/agent-context.md",
                 nav,
             )
 

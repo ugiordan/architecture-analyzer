@@ -11,6 +11,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/ugiordan/architecture-analyzer/pkg/agentcontext"
 )
 
 // Aggregate reads all component-architecture.json files under resultsDir,
@@ -101,6 +103,24 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 			log.Printf("WARN: failed to parse %s: %v", jp, err)
 			continue
 		}
+		agentContextPath := filepath.Join(filepath.Dir(jp), "agent-context.json")
+		if info, statErr := os.Stat(agentContextPath); statErr == nil && info.Size() <= maxComponentFileSize {
+			contextRaw, contextErr := os.ReadFile(agentContextPath)
+			if contextErr != nil {
+				log.Printf("WARN: failed to read %s: %v", agentContextPath, contextErr)
+			} else {
+				var contextData map[string]interface{}
+				if err := json.Unmarshal(contextRaw, &contextData); err != nil {
+					log.Printf("WARN: failed to parse %s: %v", agentContextPath, err)
+				} else if !validAgentContext(data, contextData) {
+					log.Printf("WARN: skipping mismatched agent context %s", agentContextPath)
+				} else {
+					data["agent_context"] = contextData
+				}
+			}
+		} else if statErr == nil {
+			log.Printf("WARN: skipping oversized agent context %s (%d bytes)", agentContextPath, info.Size())
+		}
 		components = append(components, data)
 	}
 
@@ -118,12 +138,12 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 
 	// Dedup tracking maps
 	seenComponents := make(map[string]bool)
-	seenCRDs := make(map[string]bool)       // key: "owner|group|version|kind"
-	seenServices := make(map[string]bool)   // key: "owner|name|type"
-	seenSecrets := make(map[string]bool)    // key: "owner|name"
-	seenRBACRoles := make(map[string]bool)  // key: "owner|name"
-	seenWebhooks := make(map[string]bool)   // key: "owner|name"
-	seenDepEdges := make(map[string]bool)   // key: "from|to|type"
+	seenCRDs := make(map[string]bool)      // key: "owner|group|version|kind"
+	seenServices := make(map[string]bool)  // key: "owner|name|type"
+	seenSecrets := make(map[string]bool)   // key: "owner|name"
+	seenRBACRoles := make(map[string]bool) // key: "owner|name"
+	seenWebhooks := make(map[string]bool)  // key: "owner|name"
+	seenDepEdges := make(map[string]bool)  // key: "from|to|type"
 
 	// Alias tracking: maps each alias to the canonical component name
 	aliasToComponent := make(map[string]string)
@@ -492,6 +512,23 @@ func Aggregate(resultsDir string) (map[string]interface{}, error) {
 		result["aliases"] = aliasesIface
 	}
 	return result, nil
+}
+
+func validAgentContext(component, context map[string]interface{}) bool {
+	version, ok := context["schema_version"].(float64)
+	if !ok || version != agentcontext.SchemaVersion {
+		return false
+	}
+	if getString(context, "component", "") != getString(component, "component", "") {
+		return false
+	}
+	if contextRepo, componentRepo := getString(context, "repo", ""), getString(component, "repo", ""); contextRepo != "" && componentRepo != "" && contextRepo != componentRepo {
+		return false
+	}
+	if contextSHA, componentSHA := getString(context, "commit_sha", ""), getString(component, "commit_sha", ""); contextSHA != "" && componentSHA != "" && contextSHA != componentSHA {
+		return false
+	}
+	return true
 }
 
 // getStringSlice extracts a []string from a map value. Handles both

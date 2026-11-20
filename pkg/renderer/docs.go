@@ -106,6 +106,10 @@ func renderComponentDocs(data map[string]interface{}, pathPrefix string) []DocsP
 		Content: renderComponentDetailsPage(data, component),
 	})
 	pages = append(pages, DocsPage{
+		Path:    prefix + "agent-context.md",
+		Content: renderComponentAgentContextPage(data, component),
+	})
+	pages = append(pages, DocsPage{
 		Path:    prefix + "network.md",
 		Content: renderComponentNetworkPage(data, component),
 	})
@@ -154,7 +158,7 @@ func renderComponentIndexPage(data map[string]interface{}, component string) str
 	}
 	b.WriteString(fmt.Sprintf("**Analyzer:** arch-analyzer %s  \n", version))
 	b.WriteString(fmt.Sprintf("**Extracted:** %s\n\n", extractedAt))
-	b.WriteString("See [Extracted Data](details.md) for full dependency and configuration details.\n\n")
+	b.WriteString("See [Agent Context](agent-context.md) for repository structure and code relationships, and [Extracted Data](details.md) for dependency and configuration details.\n\n")
 
 	// Summary table
 	crds := getSlice(data, "crds")

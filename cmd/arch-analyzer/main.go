@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ugiordan/architecture-analyzer/pkg/agentcontext"
 	"github.com/ugiordan/architecture-analyzer/pkg/aggregator"
 	"github.com/ugiordan/architecture-analyzer/pkg/arch"
 	"github.com/ugiordan/architecture-analyzer/pkg/config"
@@ -990,7 +991,9 @@ func cmdFullAnalysis(args []string) error {
 
 	// Code graph scan with domains
 	fmt.Println("\n=== Code Graph Security Scan ===")
-	cpg, err := buildCPG(repoPath)
+	var cpg *graph.CPG
+	var findings []query.Finding
+	cpg, err = buildCPG(repoPath)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Warning: code graph build failed: %v\n", err)
 	} else {
@@ -998,10 +1001,11 @@ func cmdFullAnalysis(args []string) error {
 			cpg.ArchData = parsedArch
 		}
 
-		findings, scanErr := runSecurityScan(cpg, *domainList, archData)
+		scanFindings, scanErr := runSecurityScan(cpg, *domainList, archData)
 		if scanErr != nil {
 			return scanErr
 		}
+		findings = scanFindings
 
 		if *importSARIF != "" {
 			externalFindings, sarifErr := ingestSARIFFiles(cpg, *importSARIF)
@@ -1056,6 +1060,13 @@ func cmdFullAnalysis(args []string) error {
 			fmt.Fprintf(os.Stderr, "Warning: SrcLang write failed: %v\n", wErr)
 		}
 	}
+
+	agentContext := agentcontext.Build(repoPath, archResult, cpg)
+	agentContextPath := filepath.Join(outDir, "agent-context.json")
+	if err := writeJSON(agentContextPath, agentContext); err != nil {
+		return fmt.Errorf("writing agent context: %w", err)
+	}
+	fmt.Printf("Agent context written to: %s\n", agentContextPath)
 
 	// Schema extraction
 	fmt.Println("\n=== CRD Schema Extraction ===")

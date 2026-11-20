@@ -27,6 +27,23 @@ valid_security_findings() {
     python3 -c 'import json,sys; value=json.load(open(sys.argv[1])); sys.exit(0 if isinstance(value, list) else 1)' "$1" >/dev/null 2>&1
 }
 
+valid_agent_context() {
+    python3 -c '
+import json,sys
+try:
+    with open(sys.argv[1]) as f: context=json.load(f)
+    with open(sys.argv[2]) as f: component=json.load(f)
+except (OSError, ValueError, UnicodeError):
+    sys.exit(1)
+valid=(isinstance(context, dict) and isinstance(component, dict)
+    and context.get("schema_version") == 1
+    and context.get("component") == component.get("component")
+    and context.get("repo") == component.get("repo")
+    and context.get("commit_sha") == component.get("commit_sha"))
+sys.exit(0 if valid else 1)
+' "$1" "$2" >/dev/null 2>&1
+}
+
 valid_architecture() {
     python3 -c 'import json,sys; value=json.load(open(sys.argv[1])); valid=isinstance(value,dict) and isinstance(value.get("repo"),str) and bool(value.get("repo")) and isinstance(value.get("commit_sha"),str) and bool(value.get("commit_sha")); sys.exit(0 if valid else 1)' "$1" >/dev/null 2>&1
 }
@@ -85,7 +102,7 @@ mark_failed() {
     if [ -n "$dest" ]; then
         mkdir -p "$dest"
         if ! find "$dest" -type f \
-            \( -name "component-architecture.json" -o -name "security-findings.json" \) \
+            \( -name "component-architecture.json" -o -name "security-findings.json" -o -name "agent-context.json" \) \
             -delete 2>/dev/null; then
             echo "::error::Unable to remove partial outputs for ${key}; refusing carry-forward" >&2
             return 1
@@ -138,6 +155,8 @@ for results_dir in "${RESULTS_DIRS[@]}"; do
             if ! valid_architecture "${component_json}" || \
                 [ ! -f "${analysis_dir}/security-findings.json" ] || \
                 ! valid_security_findings "${analysis_dir}/security-findings.json" || \
+                [ ! -f "${analysis_dir}/agent-context.json" ] || \
+                ! valid_agent_context "${analysis_dir}/agent-context.json" "${component_json}" || \
                 [ -f "${repo_dir}/_failed" ] || [ -f "${analysis_dir}/_failed" ]; then
                 mark_failed "${key}"
                 MISSING_KEYS+=("${key}")

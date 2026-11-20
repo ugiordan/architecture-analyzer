@@ -239,7 +239,7 @@ if [ -n "${VERSION_LABEL}" ]; then
 fi
 if [ -d "${CLEANUP_DIR}" ]; then
     find "${CLEANUP_DIR}" -maxdepth 1 -type f \
-        \( -name "component-architecture.json" -o -name "security-findings.json" -o -name "_failed" \) \
+        \( -name "component-architecture.json" -o -name "security-findings.json" -o -name "agent-context.json" -o -name "_failed" \) \
         -delete 2>/dev/null || true
 fi
 rm -f "${OUTDIR}/_failed"

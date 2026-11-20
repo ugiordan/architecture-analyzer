@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/ugiordan/architecture-analyzer/pkg/agentcontext"
 )
 
 func TestAggregate_NoDir(t *testing.T) {
@@ -81,6 +83,17 @@ func TestAggregate_SingleComponent(t *testing.T) {
 	if err := os.WriteFile(filepath.Join(compDir, "component-architecture.json"), raw, 0o644); err != nil {
 		t.Fatal(err)
 	}
+	contextRaw, err := json.Marshal(map[string]interface{}{
+		"schema_version": agentcontext.SchemaVersion,
+		"component":      "comp-a",
+		"graph_status":   "available",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(compDir, "agent-context.json"), contextRaw, 0o644); err != nil {
+		t.Fatal(err)
+	}
 
 	result, err := Aggregate(dir)
 	if err != nil {
@@ -89,6 +102,10 @@ func TestAggregate_SingleComponent(t *testing.T) {
 
 	if result["component_count"] != 1 {
 		t.Errorf("expected component_count=1, got %v", result["component_count"])
+	}
+	componentData := result["component_data"].([]interface{})[0].(map[string]interface{})
+	if componentData["agent_context"] == nil {
+		t.Fatal("agent context sidecar was not attached to component data")
 	}
 
 	crds, ok := result["crds"].([]interface{})
@@ -112,6 +129,49 @@ func TestAggregate_SingleComponent(t *testing.T) {
 	}
 	if crdOwnership["Notebook"] != "comp-a" {
 		t.Error("Notebook CRD should be owned by comp-a")
+	}
+}
+
+func TestAggregate_SkipsOversizedAgentContext(t *testing.T) {
+	dir := t.TempDir()
+	compDir := filepath.Join(dir, "comp-a")
+	if err := os.MkdirAll(compDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	compData := map[string]interface{}{
+		"component":          "comp-a",
+		"crds":               []interface{}{},
+		"services":           []interface{}{},
+		"secrets_referenced": []interface{}{},
+		"controller_watches": []interface{}{},
+	}
+	raw, err := json.Marshal(compData)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(compDir, "component-architecture.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	contextFile, err := os.Create(filepath.Join(compDir, "agent-context.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := contextFile.Truncate(50*1024*1024 + 1); err != nil {
+		contextFile.Close()
+		t.Fatal(err)
+	}
+	contextFile.Close()
+
+	result, err := Aggregate(dir)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if result["component_count"] != 1 {
+		t.Fatalf("component must be kept when its sidecar is oversized, got %v", result["component_count"])
+	}
+	componentData := result["component_data"].([]interface{})[0].(map[string]interface{})
+	if componentData["agent_context"] != nil {
+		t.Fatal("oversized agent context must not be attached")
 	}
 }
 

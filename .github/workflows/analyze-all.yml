@@ -635,7 +635,7 @@ jobs:
             exit 0
           fi
 
-          # Copy per-component raw data (component-architecture.json + security-findings.json)
+          # Copy per-component raw data used by the published component pages.
           for platform_dir in odh-results rhoai-results; do
             [ -d "$platform_dir" ] || continue
             platform=$(echo "$platform_dir" | sed 's/-results//')
@@ -646,7 +646,7 @@ jobs:
             stale_var="STALE_$(echo "$platform" | tr '[:lower:]' '[:upper:]')"
             [ "${!stale_var}" = "true" ] && continue
             find "$platform_dir" -type f \
-              \( -name "component-architecture.json" -o -name "security-findings.json" \) \
+              \( -name "component-architecture.json" -o -name "security-findings.json" -o -name "agent-context.json" \) \
               | while IFS= read -r f; do
               # Extract org/repo from path: platform-results/org/repo/file.json
               rel="${f#${platform_dir}/}"
