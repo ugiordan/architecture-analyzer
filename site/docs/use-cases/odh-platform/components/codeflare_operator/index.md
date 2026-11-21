@@ -1,8 +1,13 @@
 # codeflare-operator
 
-**Repository:** project-codeflare/codeflare-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-07T15:03:41Z
+> **Architecture snapshot: 2026-11-21** (2026-11-21)
+
+
+**Repository:** opendatahub-io/codeflare-operator  
+**Analyzer:** arch-analyzer f62b7632f89631498789b54d78e8c552c27100c7  
+**Extracted:** 2026-11-21T06:33:22Z
+
+See [Agent Context](agent-context.md) for repository structure and code relationships, and [Extracted Data](details.md) for dependency and configuration details.
 
 ## Summary
 
@@ -13,7 +18,7 @@
 | Services | 1 |
 | Secrets | 1 |
 | Cluster Roles | 3 |
-| Controller Watches | 8 |
+| Controller Watches | 9 |
 
 ## Component Architecture
 
@@ -25,6 +30,7 @@ graph LR
 
     classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef controller fill:#3498db,stroke:#2980b9,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
     classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
@@ -58,9 +64,9 @@ graph LR
 
 ### CRDs
 
-| Group | Version | Kind | Scope | Fields | Validation Rules | Source |
-|-------|---------|------|-------|--------|------------------|--------|
-| workload.codeflare.dev | v1beta2 | AppWrapper | Namespaced | 50 | 0 | [`config/crd/crd-appwrapper.yml`](https://github.com/project-codeflare/codeflare-operator/blob/7c44564dcefd68bacf6cf7f759e6be92e4d95c11/config/crd/crd-appwrapper.yml) |
+| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
+|-------|---------|------|-------|--------|------------------|-----------|--------|
+| workload.codeflare.dev | v1beta2 | AppWrapper | Namespaced | 50 | 0 | YAML | [`config/crd/crd-appwrapper.yml`](https://github.com/opendatahub-io/codeflare-operator/blob/fb0d403419a114d26adcf65215b6a89e723667d8/config/crd/crd-appwrapper.yml) |
 
 ## Dependencies
 

@@ -1,11 +1,13 @@
 # batch-gateway
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-11-21** (2026-11-21)
 
 
-**Repository:** llm-d-incubation/batch-gateway  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:11:52Z
+**Repository:** opendatahub-io/batch-gateway  
+**Analyzer:** arch-analyzer f62b7632f89631498789b54d78e8c552c27100c7  
+**Extracted:** 2026-11-21T06:38:08Z
+
+See [Agent Context](agent-context.md) for repository structure and code relationships, and [Extracted Data](details.md) for dependency and configuration details.
 
 ## Summary
 
@@ -28,14 +30,12 @@ graph LR
 
     classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef controller fill:#3498db,stroke:#2980b9,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
     classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
 
-    subgraph controller["batch-gateway Controller"]
-        ctrl_1["Controller"]
-        class ctrl_1 controller
-    end
+    component_batch_gateway["batch-gateway"]:::component
 ```
 
 ### CRDs
@@ -48,33 +48,10 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.79.3 |
-| google.golang.org/grpc | v1.79.3 |
-| google.golang.org/grpc | v1.80.0 |
-| google.golang.org/grpc | v1.79.2 |
-| google.golang.org/grpc | v1.80.0 |
-| google.golang.org/grpc | v1.79.1 |
-| google.golang.org/grpc | v1.79.2 |
-| google.golang.org/grpc | v1.79.1 |
+| github.com/go-logr/logr | v1.4.4 |
+| github.com/prometheus/client_golang | v1.25.0 |
+| github.com/prometheus/client_model | v0.6.3 |
+| k8s.io/api | v0.37.2 |
+| k8s.io/apimachinery | v0.37.2 |
+| k8s.io/client-go | v0.37.2 |
 

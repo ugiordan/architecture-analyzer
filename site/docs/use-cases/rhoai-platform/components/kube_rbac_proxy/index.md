@@ -1,11 +1,13 @@
 # kube-rbac-proxy
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-11-21** (2026-11-21)
 
 
-**Repository:** brancz/kube-rbac-proxy  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:12:08Z
+**Repository:** red-hat-data-services/kube-rbac-proxy  
+**Analyzer:** arch-analyzer f62b7632f89631498789b54d78e8c552c27100c7  
+**Extracted:** 2026-11-21T06:37:07Z
+
+See [Agent Context](agent-context.md) for repository structure and code relationships, and [Extracted Data](details.md) for dependency and configuration details.
 
 ## Summary
 
@@ -28,14 +30,12 @@ graph LR
 
     classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef controller fill:#3498db,stroke:#2980b9,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
     classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
 
-    subgraph controller["kube-rbac-proxy Controller"]
-        ctrl_1["Controller"]
-        class ctrl_1 controller
-    end
+    component_kube_rbac_proxy["kube-rbac-proxy"]:::component
 ```
 
 ### CRDs
@@ -48,82 +48,8 @@ No CRDs found in analyzed sources.
 
 | Module | Version |
 |--------|---------|
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.1 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/go-logr/zapr | v1.3.0 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.20.5 |
-| github.com/prometheus/client_golang | v1.11.1 |
-| github.com/prometheus/client_golang | v1.11.1 |
-| github.com/prometheus/client_golang | v1.20.5 |
-| github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.69.2 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.72.2 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.72.2 |
-| google.golang.org/grpc | v1.69.4 |
-| google.golang.org/grpc | v1.72.2 |
-| google.golang.org/grpc | v1.69.4 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.72.2 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.69.2 |
-| google.golang.org/grpc | v1.56.3 |
-| google.golang.org/grpc | v1.56.3 |
 | k8s.io/api | v0.35.2 |
-| k8s.io/api | v0.35.2 |
-| k8s.io/api | v0.35.2 |
-| k8s.io/api | v0.35.2 |
-| k8s.io/api | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
-| k8s.io/apimachinery | v0.35.2 |
 | k8s.io/apimachinery | v0.35.2 |
 | k8s.io/apiserver | v0.35.2 |
-| k8s.io/client-go | v0.35.2 |
-| k8s.io/client-go | v0.35.2 |
-| k8s.io/client-go | v0.35.2 |
-| k8s.io/client-go | v0.35.2 |
 | k8s.io/client-go | v0.35.2 |
 

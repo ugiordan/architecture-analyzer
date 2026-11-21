@@ -8,26 +8,34 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 
 | Property | Value |
 |----------|-------|
-| Manager file | `cmd/trainer-controller-manager/main.go` |
-| Cache scope | cluster-wide |
-| DefaultTransform | no |
-| Memory limit | 4Gi |
+| Manager file | `rhoai/operator/cmd/main.go` |
+| Cache scope | namespace-scoped |
+| DefaultTransform | yes |
+| Memory limit | 512Mi |
+
+### Filtered Types
+
+| Type | Filter Kind | Filter |
+|------|-------------|--------|
+| admissionv1.ValidatingWebhookConfiguration | label | platformlabels.PlatformPartOf=trainerPartOf (constants, resolved at runtime) |
+| appsv1.Deployment | label | platformlabels.PlatformPartOf=trainerPartOf (constants, resolved at runtime) |
+| corev1.Service | label | platformlabels.PlatformPartOf=trainerPartOf (constants, resolved at runtime) |
+
+### Cache-Bypassed Types (DisableFor)
+
+- corev1.Namespace
 
 ### Implicit Informers (OOM Risk)
 
 | Type | Source | Risk |
 |------|--------|------|
-| corev1.Secret | `pkg/runtime/framework/plugins/mpi/mpi.go:256` | **HIGH** |
+| corev1.Secret | `pkg/runtime/framework/plugins/mpi/mpi.go:302` | **HIGH** |
 
 ### Issues
 
-- Implicit informer for corev1.Secret via client.Get at pkg/runtime/framework/plugins/mpi/mpi.go:256 (cluster-wide, OOM risk). This bypasses cache filters and creates a full cluster-wide watch
+- Implicit informer for corev1.Secret via client.Get at pkg/runtime/framework/plugins/mpi/mpi.go:302 (cluster-wide, OOM risk). This bypasses cache filters and creates a full cluster-wide watch
 - No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior
-- No cache configuration: all informers are cluster-wide (OOM risk). See https://book.kubebuilder.io/reference/watching-resources/filtering for cache filtering patterns
-- Type ElasticQuota is watched but has no cache filter (cluster-wide informer)
-- Type Job is watched but has no cache filter (cluster-wide informer)
-- Type JobSet is watched but has no cache filter (cluster-wide informer)
-- Type Pod is watched but has no cache filter (cluster-wide informer)
-- Type PodGroup is watched but has no cache filter (cluster-wide informer)
-- Type Service is watched but has no cache filter (cluster-wide informer)
+- Type ConfigMap is watched but has no cache filter (cluster-wide informer)
+- Type OptimizationJob is watched but has no cache filter (cluster-wide informer)
+- Type TrainJob is watched but has no cache filter (cluster-wide informer)
 

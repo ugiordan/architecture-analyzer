@@ -49,14 +49,16 @@ graph TD
     class res_18 resource
     cr_model_registry_retrieve_clusterrolebindings -->|get, list, watch| res_19["rbac.authorization.k8s.io: clusterrolebindings"]
     class res_19 resource
-    cr_model_registry_ui_services_reader -->|get, list, watch| res_20["core: services"]
+    cr_model_registry_ui_services_reader -->|get, list, watch| res_20["config.openshift.io: apiservers"]
     class res_20 resource
-    r_leader_election_role -->|get, list, watch, create, update, patch, delete| res_21["core: configmaps"]
+    cr_model_registry_ui_services_reader -->|get, list, watch| res_21["core: services"]
     class res_21 resource
-    r_leader_election_role -->|get, list, watch, create, update, patch, delete| res_22["coordination.k8s.io: leases"]
+    r_leader_election_role -->|get, list, watch, create, update, patch, delete| res_22["core: configmaps"]
     class res_22 resource
-    r_leader_election_role -->|create, patch| res_23["core: events"]
+    r_leader_election_role -->|get, list, watch, create, update, patch, delete| res_23["coordination.k8s.io: leases"]
     class res_23 resource
+    r_leader_election_role -->|create, patch| res_24["core: events"]
+    class res_24 resource
 ```
 
 ## Bindings
@@ -86,22 +88,9 @@ Per-rule breakdown of API groups, resources, and verbs for each role.
 | model-registry-manager-role | ClusterRole |  | inferenceservices | get, list, patch, update, watch |
 | model-registry-manager-role | ClusterRole |  | inferenceservices/finalizers | create, delete, get, list, patch, update, watch |
 | model-registry-retrieve-clusterrolebindings | ClusterRole |  | clusterrolebindings | get, list, watch |
+| model-registry-ui-services-reader | ClusterRole |  | apiservers | get, list, watch |
 | model-registry-ui-services-reader | ClusterRole |  | services | get, list, watch |
 | leader-election-role | Role |  | configmaps | get, list, watch, create, update, patch, delete |
 | leader-election-role | Role |  | leases | get, list, watch, create, update, patch, delete |
 | leader-election-role | Role |  | events | create, patch |
-
-### Cluster Roles
-
-| Name | Resources | Verbs | Source |
-|------|-----------|-------|--------|
-| metrics-auth-role | tokenreviews | create | [`manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml) |
-| metrics-auth-role | subjectaccessreviews | create | [`manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/controller/rbac/metrics_auth_role.yaml) |
-| metrics-reader |  | get | [`manifests/kustomize/options/controller/rbac/metrics_reader_role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/controller/rbac/metrics_reader_role.yaml) |
-| model-registry-create-sars | subjectaccessreviews | create | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
-| model-registry-manager-role | services | get, list, watch | [`manifests/kustomize/options/controller/rbac/role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/controller/rbac/role.yaml) |
-| model-registry-manager-role | inferenceservices | get, list, patch, update, watch | [`manifests/kustomize/options/controller/rbac/role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/controller/rbac/role.yaml) |
-| model-registry-manager-role | inferenceservices/finalizers | create, delete, get, list, patch, update, watch | [`manifests/kustomize/options/controller/rbac/role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/controller/rbac/role.yaml) |
-| model-registry-retrieve-clusterrolebindings | clusterrolebindings | get, list, watch | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
-| model-registry-ui-services-reader | services | get, list, watch | [`manifests/kustomize/options/ui/base/model-registry-ui-role.yaml`](https://github.com/kubeflow/model-registry/blob/fd68a656951df0e3e5b24b3d5b3489326d8b3c26/manifests/kustomize/options/ui/base/model-registry-ui-role.yaml) |
 

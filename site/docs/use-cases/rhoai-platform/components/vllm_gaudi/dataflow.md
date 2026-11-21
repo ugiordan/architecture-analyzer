@@ -16,10 +16,6 @@ sequenceDiagram
 
     participant KubernetesAPI as Kubernetes API
     participant vllm_gaudi as vllm-gaudi
-
-
-    Note over vllm_gaudi: Exposed Services
-    Note right of vllm_gaudi: cli-port-default:8000/TCP []
 ```
 
 ## Configuration

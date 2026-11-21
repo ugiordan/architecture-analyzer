@@ -19,9 +19,9 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| training-operator | training-operator | ? | ? | ? | [`manifests/base/deployment.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/base/deployment.yaml) |
-| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_config_patch.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/rhoai/manager_config_patch.yaml) |
-| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_metrics_patch.yaml`](https://github.com/kubeflow/training-operator/blob/e093b2b605bd16a138637ab0c1c9cfc73358a3d3/manifests/rhoai/manager_metrics_patch.yaml) |
+| training-operator | training-operator | ? | ? | ? | [`manifests/base/deployment.yaml`](https://github.com/red-hat-data-services/training-operator/blob/7035128a7182d7be1593c25258410f68ddc4a358/manifests/base/deployment.yaml) |
+| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_config_patch.yaml`](https://github.com/red-hat-data-services/training-operator/blob/7035128a7182d7be1593c25258410f68ddc4a358/manifests/rhoai/manager_config_patch.yaml) |
+| training-operator | training-operator | ? | ? | ? | [`manifests/rhoai/manager_metrics_patch.yaml`](https://github.com/red-hat-data-services/training-operator/blob/7035128a7182d7be1593c25258410f68ddc4a358/manifests/rhoai/manager_metrics_patch.yaml) |
 
 ## Build Security
 
@@ -31,24 +31,9 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 |------|------------|--------|------|-------|---------------|------|--------|
 | `build/images/kubectl-delivery/Dockerfile` | alpine:3.17 | 2 |  |  |  |  | No USER directive found (defaults to root) |
 | `build/images/training-operator/Dockerfile` | gcr.io/distroless/static:latest | 2 |  |  |  |  | Unpinned base image: gcr.io/distroless/static:latest; No USER directive found (defaults to root) |
-| `build/images/training-operator/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:b9b10f42d7eba7ad4a6d5ef26b7d34fdc892b2ffe59b8d0372ec884008569eb6 | 2 | ${USER}:${USER} |  |  |  |  |
+| `build/images/training-operator/Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal:9.8@sha256:f26ef64172ea61f5ac5ba4be8c5c738bf8760b22b3e5148ce7b40f7308ab32db | 2 | ${USER}:${USER} |  |  |  |  |
 | `build/images/training-operator/Dockerfile.multiarch` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 1 | 65532:65532 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
-| `build/images/training-operator/Dockerfile.rhoai` | registry.access.redhat.com/ubi9/ubi:latest | 2 | 65532:65532 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi:latest |
-| `examples/jax/cpu-demo/Dockerfile` | python:3.12 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/jax/jax-dist-spmd-mnist/Dockerfile` | python:3.13 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/pytorch/cpu-demo/Dockerfile` | python:3.8 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/pytorch/deepspeed-demo/Dockerfile` | deepspeed/deepspeed:v072_torch112_cu117 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/pytorch/elastic/echo/Dockerfile` | python:3.8-buster | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/pytorch/elastic/imagenet/Dockerfile` | $BASE_IMAGE | 1 | root |  |  |  | Unpinned base image: $BASE_IMAGE; Container runs as root user |
-| `examples/pytorch/mnist/Dockerfile` | nvcr.io/nvidia/pytorch:24.01-py3 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/pytorch/smoke-dist/Dockerfile` | nvcr.io/nvidia/pytorch:24.01-py3 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/tensorflow/dist-mnist/Dockerfile` | tensorflow/tensorflow:2.17.0 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/tensorflow/distribution_strategy/Dockerfile` | python:3.9 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/tensorflow/mnist_with_summaries/Dockerfile` | tensorflow/tensorflow:2.17.0 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/tensorflow/tf_sample/Dockerfile` | tensorflow/tensorflow:2.17.0 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/xgboost/lightgbm-dist/Dockerfile` | python:3.7 | 2 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/xgboost/smoke-dist/Dockerfile` | python:3.6 | 1 |  |  |  |  | No USER directive found (defaults to root) |
-| `examples/xgboost/xgboost-dist/Dockerfile` | python:3.6 | 1 |  |  |  |  | No USER directive found (defaults to root) |
+| `build/images/training-operator/Dockerfile.rhoai` | registry.access.redhat.com/ubi9/ubi:9.8@sha256:87f66688da4e206d5a1877088626c542288a5ccd97898cf363b588d57817e6be | 2 | 65532:65532 |  |  |  |  |
 | `sdk/python/Dockerfile.conformance` | python:3.10-alpine | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `sdk/python/kubeflow/storage_initializer/Dockerfile` | python:3.11 | 1 |  |  |  |  | No USER directive found (defaults to root) |
 | `sdk/python/kubeflow/trainer/Dockerfile` | nvcr.io/nvidia/pytorch:24.06-py3 | 1 |  |  |  |  | No USER directive found (defaults to root) |
