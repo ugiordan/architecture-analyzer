@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "component": "guardrails-regex-detector",
+  "repo": "red-hat-data-services/guardrails-regex-detector",
+  "commit_sha": "5c6116749e66a3496f7a5ac7427219f294df7ec3",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "summary": "guardrails-regex-detector is a Kubernetes component.",
+  "repository_description": "A lightweight HTTP server designed to parse text using predefined patterns or custom regular expressions.It serves as a detection service, primarily integrated with the FMS Guardrails Orchestrator.",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 2,
+    "functions": 7,
+    "test_functions": 0,
+    "call_sites": 88,
+    "resolved_calls": 5,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "rust",
+      "source_files": 2,
+      "functions": 7,
+      "test_functions": 0
+    },
+    {
+      "name": "unknown",
+      "source_files": 2,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "src",
+      "source_files": 2,
+      "functions": 7,
+      "test_functions": 0,
+      "languages": [
+        "rust",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "rust",
+          "source": "src/main.rs:15",
+          "complexity": 4,
+          "callers": 0
+        },
+        {
+          "name": "regex_match",
+          "language": "rust",
+          "source": "src/detectors.rs:74",
+          "complexity": 3,
+          "callers": 5
+        },
+        {
+          "name": "handle_text_contents",
+          "language": "rust",
+          "source": "src/detectors.rs:96",
+          "complexity": 7,
+          "callers": 0
+        },
+        {
+          "name": "credit_card_detector",
+          "language": "rust",
+          "source": "src/detectors.rs:62",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "email_address_detector",
+          "language": "rust",
+          "source": "src/detectors.rs:38",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "ssn_detector",
+          "language": "rust",
+          "source": "src/detectors.rs:50",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "test_regex_match",
+          "language": "rust",
+          "source": "src/detectors.rs:145",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "src/main.rs:15"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "test_regex_match",
+      "caller_source": "src/detectors.rs:145",
+      "callee": "regex_match",
+      "callee_source": "src/detectors.rs:74",
+      "call_site_source": "src/detectors.rs:163",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "email_address_detector",
+      "caller_source": "src/detectors.rs:38",
+      "callee": "regex_match",
+      "callee_source": "src/detectors.rs:74",
+      "call_site_source": "src/detectors.rs:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ssn_detector",
+      "caller_source": "src/detectors.rs:50",
+      "callee": "regex_match",
+      "callee_source": "src/detectors.rs:74",
+      "call_site_source": "src/detectors.rs:59",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "credit_card_detector",
+      "caller_source": "src/detectors.rs:62",
+      "callee": "regex_match",
+      "callee_source": "src/detectors.rs:74",
+      "call_site_source": "src/detectors.rs:71",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_text_contents",
+      "caller_source": "src/detectors.rs:96",
+      "callee": "regex_match",
+      "callee_source": "src/detectors.rs:74",
+      "call_site_source": "src/detectors.rs:127",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}
