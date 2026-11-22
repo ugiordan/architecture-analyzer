@@ -194,6 +194,8 @@ func ExtractAll(repoPath string, opts *ExtractOptions) (*ComponentArchitecture, 
 
 	arch.SecurityAnnotations = EvaluateSecurityAnnotations(arch, absPath)
 
+	ApplyAPITiers(arch, opts.APITiersConfig)
+
 	return arch, nil
 }
 

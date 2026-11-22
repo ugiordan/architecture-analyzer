@@ -74,8 +74,8 @@ func renderCRDTable(b *strings.Builder, data map[string]interface{}) {
 		return
 	}
 	b.WriteString("### CRDs\n\n")
-	b.WriteString("| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |\n")
-	b.WriteString("|-------|---------|------|-------|--------|------------------|-----------|--------|\n")
+	b.WriteString("| Group | Version | Kind | Scope | API Tier | Fields | Validation Rules | Discovery | Source |\n")
+	b.WriteString("|-------|---------|------|-------|----------|--------|------------------|-----------|--------|\n")
 	for _, crd := range crds {
 		rules := getStringSlice(crd, "validation_rules")
 		ruleCount := len(rules)
@@ -85,9 +85,10 @@ func renderCRDTable(b *strings.Builder, data map[string]interface{}) {
 		} else if goSrc == "go_ast_enriched" {
 			discovery = "YAML + Go AST"
 		}
-		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %d | %d | %s | %s |\n",
+		b.WriteString(fmt.Sprintf("| %s | %s | %s | %s | %s | %d | %d | %s | %s |\n",
 			escapeMdCell(getStr(crd, "group", "")), escapeMdCell(getStr(crd, "version", "")),
 			escapeMdCell(getStr(crd, "kind", "")), escapeMdCell(getStr(crd, "scope", "")),
+			escapeMdCell(getStr(crd, "api_tier", "")),
 			getInt(crd, "fields_count"), ruleCount,
 			discovery,
 			sourceLink(data, getStr(crd, "source", ""))))

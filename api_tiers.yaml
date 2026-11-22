@@ -1,0 +1,40 @@
+# api_tiers.yaml — API tier assignments for RHOAI
+# Consumed by arch-analyzer to enrich CRD extraction and generate the tier report.
+#
+# Tier values: Tier 1, Tier 2, Tier 4, Beta, Alpha
+# Wildcard ("*") is supported for kind and version fields.
+
+version: "rhoai-3.5"
+
+crds:
+  - group: kubeflow.org
+    kind: Notebook
+    version: v1
+    tier: "Tier 1"
+  - group: serving.kserve.io
+    kind: InferenceService
+    version: v1beta1
+    tier: "Tier 2"
+  - group: components.platform.opendatahub.io
+    kind: "*"
+    version: v1alpha1
+    tier: "Tier 4"
+
+rest_apis:
+  - name: "DSP Server API (REST endpoint) v2"
+    component: data-science-pipelines
+    tier: "Tier 2"
+  - name: "MLflow REST API v2 and v3"
+    component: mlflow
+    tier: "Tier 2"
+  - name: "Llama Stack REST API"
+    component: llama-stack
+    tier: "Alpha"
+
+sdks:
+  - name: "CodeFlare SDK 0.16.0"
+    component: codeflare-sdk
+    tier: "Tier 2"
+  - name: "TrustyAI Python library 0.6.0"
+    component: trustyai-explainability
+    tier: "Tier 2"
