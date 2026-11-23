@@ -2,6 +2,7 @@ package renderer
 
 import (
 	"fmt"
+	"html"
 	"sort"
 	"strings"
 )
@@ -9,8 +10,8 @@ import (
 func renderComponentAgentContextPage(data map[string]interface{}, component string) string {
 	var b strings.Builder
 	b.WriteString(fmt.Sprintf("# %s: Agent Context\n\n", component))
+	writeComponentPageNav(&b, data)
 	b.WriteString("Static-analysis context for repository-level code navigation. Use the source links to verify details. Call edges are analyzer-resolved relationships, not complete runtime traces.\n\n")
-	b.WriteString("Related pages: [Overview](index.md), [Extracted Data](details.md), [Security](security.md), [Network](network.md), [Dataflow](dataflow.md).\n\n")
 
 	ctx := getMap(data, "agent_context")
 	if ctx == nil {
@@ -20,7 +21,7 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 	}
 	if summary := getStr(ctx, "summary", ""); summary != "" {
 		b.WriteString("## Analyzer Architecture Summary\n\n")
-		b.WriteString(sanitizeMdInline(summary) + "\n\n")
+		writeSummaryBullets(&b, summary)
 	}
 
 	if description := getStr(ctx, "repository_description", ""); description != "" {
@@ -71,48 +72,57 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 
 	areas := getSlice(ctx, "source_areas")
 	if len(areas) > 0 {
-		b.WriteString("## Source Areas\n\n")
-		b.WriteString("Directories are grouped from parsed source locations. Symbols are ranked by reconciler/root status, resolved caller count, then complexity; this is a navigation aid, not a semantic module classification.\n\n")
-		b.WriteString("| Directory | Files | Functions | Tests | Languages | Representative symbols |\n|-----------|-------|-----------|-------|-----------|------------------------|\n")
+		writeContextSectionHeader(&b, "Source Areas", len(areas), getInt(ctx, "source_areas_truncated"), " directories")
+		b.WriteString("Directories are grouped from parsed source locations. Open a directory to see its representative symbols, ranked by reconciler/root status, resolved caller count, then complexity. This is a navigation aid, not a semantic module classification.\n\n")
+		b.WriteString("| Directory | Files | Functions | Tests | Languages |\n|-----------|-------|-----------|-------|-----------|\n")
 		for _, area := range areas {
-			var symbols []string
-			for _, symbol := range getSlice(area, "symbols") {
-				name := sanitizeMdValue(getStr(symbol, "name", ""))
-				entry := fmt.Sprintf("`%s` (%d callers", name, getInt(symbol, "callers"))
-				if complexity := getInt(symbol, "complexity"); complexity > 0 {
-					entry += fmt.Sprintf(", complexity %d", complexity)
-				}
-				if annotations := getStringSlice(symbol, "annotations"); len(annotations) > 0 {
-					cleaned := make([]string, len(annotations))
-					for i, annotation := range annotations {
-						cleaned[i] = "`" + sanitizeMdValue(annotation) + "`"
-					}
-					entry += ", annotations: " + strings.Join(cleaned, ", ")
-				}
-				if source := getStr(symbol, "source", ""); source != "" {
-					entry += ", " + sourceLink(data, source)
-				}
-				entry += ")"
-				symbols = append(symbols, entry)
-			}
-			b.WriteString(fmt.Sprintf("| `%s` | %d | %d | %d | %s | %s |\n",
+			b.WriteString(fmt.Sprintf("| `%s` | %d | %d | %d | %s |\n",
 				sanitizeMdValue(getStr(area, "path", "")),
 				getInt(area, "source_files"),
 				getInt(area, "functions"),
 				getInt(area, "test_functions"),
 				escapeMdCell(strings.Join(getStringSlice(area, "languages"), ", ")),
-				strings.Join(symbols, "; "),
 			))
 		}
 		b.WriteString("\n")
-		writeContextTruncation(&b, "source areas", getInt(ctx, "source_areas_truncated"))
 		for _, area := range areas {
-			writeContextTruncation(&b, "symbols in `"+sanitizeMdValue(getStr(area, "path", ""))+"`", getInt(area, "symbols_truncated"))
+			symbols := getSlice(area, "symbols")
+			if len(symbols) == 0 {
+				continue
+			}
+			b.WriteString("<details markdown>\n")
+			b.WriteString(fmt.Sprintf("<summary><code>%s</code> · %d symbol(s)</summary>\n\n",
+				html.EscapeString(getStr(area, "path", "")), len(symbols)))
+			b.WriteString("| Symbol | Callers | Complexity | Annotations | Source |\n|--------|---------|------------|-------------|--------|\n")
+			for _, symbol := range symbols {
+				complexity := getInt(symbol, "complexity")
+				complexityStr := ""
+				if complexity > 0 {
+					complexityStr = fmt.Sprintf("%d", complexity)
+				}
+				annotations := getStringSlice(symbol, "annotations")
+				cleaned := make([]string, len(annotations))
+				for i, annotation := range annotations {
+					cleaned[i] = "`" + sanitizeMdValue(annotation) + "`"
+				}
+				b.WriteString(fmt.Sprintf("| `%s` | %d | %s | %s | %s |\n",
+					sanitizeMdValue(getStr(symbol, "name", "")),
+					getInt(symbol, "callers"),
+					complexityStr,
+					escapeMdCell(strings.Join(cleaned, ", ")),
+					sourceLink(data, getStr(symbol, "source", "")),
+				))
+			}
+			b.WriteString("\n")
+			if omitted := getInt(area, "symbols_truncated"); omitted > 0 {
+				b.WriteString(fmt.Sprintf("*%d additional symbol(s) omitted in this directory.*\n\n", omitted))
+			}
+			b.WriteString("</details>\n\n")
 		}
 	}
 
 	if entryPoints := getSlice(ctx, "entry_points"); len(entryPoints) > 0 {
-		b.WriteString("## Entry Points\n\n")
+		writeContextSectionHeader(&b, "Entry Points", len(entryPoints), getInt(ctx, "entry_points_truncated"), "")
 		b.WriteString("| Kind | Name | Method | Path | Trust | Source |\n|------|------|--------|------|-------|--------|\n")
 		for _, entry := range entryPoints {
 			b.WriteString(fmt.Sprintf("| %s | `%s` | %s | `%s` | %s | %s |\n",
@@ -125,11 +135,10 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 			))
 		}
 		b.WriteString("\n")
-		writeContextTruncation(&b, "entry points", getInt(ctx, "entry_points_truncated"))
 	}
 
 	if controllers := getSlice(ctx, "controllers"); len(controllers) > 0 {
-		b.WriteString("## Controllers and Reconcile Sequences\n\n")
+		writeContextSectionHeader(&b, "Controllers and Reconcile Sequences", len(controllers), 0, "")
 		for _, controller := range controllers {
 			b.WriteString(fmt.Sprintf("### `%s`\n\n", sanitizeMdValue(getStr(controller, "name", ""))))
 			if source := getStr(controller, "source", ""); source != "" {
@@ -181,8 +190,9 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 	}
 
 	if calls := getSlice(ctx, "call_relationships"); len(calls) > 0 {
-		b.WriteString("## Call Relationships\n\n")
-		b.WriteString("Direct call edges from the code graph. Confidence reflects the analyzer's symbol-resolution result.\n\n")
+		writeContextSectionHeader(&b, "Call Relationships", len(calls), getInt(ctx, "call_relationships_truncated"), "")
+		b.WriteString("Direct call edges from the code graph, collapsed for readability. Confidence reflects the analyzer's symbol-resolution result.\n\n")
+		b.WriteString("<details markdown>\n<summary>Show call relationship table</summary>\n\n")
 		b.WriteString("| Caller | Callee | Confidence | Call site |\n|--------|--------|------------|-----------|\n")
 		for _, call := range calls {
 			caller := fmt.Sprintf("`%s` (%s)", sanitizeMdValue(getStr(call, "caller", "")), sourceLink(data, getStr(call, "caller_source", "")))
@@ -190,13 +200,13 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 			b.WriteString(fmt.Sprintf("| %s | %s | %s | %s |\n",
 				caller, callee, escapeMdCell(getStr(call, "confidence", "")), sourceLink(data, getStr(call, "call_site_source", ""))))
 		}
-		b.WriteString("\n")
-		writeContextTruncation(&b, "call relationships", getInt(ctx, "call_relationships_truncated"))
+		b.WriteString("\n</details>\n\n")
 	}
 
 	if tests := getSlice(ctx, "test_relationships"); len(tests) > 0 {
-		b.WriteString("## Tests and Targets\n\n")
-		b.WriteString("These links represent direct calls from functions classified as tests to non-test functions. They do not imply full behavioral coverage.\n\n")
+		writeContextSectionHeader(&b, "Tests and Targets", len(tests), getInt(ctx, "test_relationships_truncated"), "")
+		b.WriteString("These links represent direct calls from functions classified as tests to non-test functions. They do not imply full behavioral coverage. Collapsed for readability.\n\n")
+		b.WriteString("<details markdown>\n<summary>Show test relationship table</summary>\n\n")
 		b.WriteString("| Test | Target | Confidence |\n|------|--------|------------|\n")
 		for _, relation := range tests {
 			b.WriteString(fmt.Sprintf("| `%s` (%s) | `%s` (%s) | %s |\n",
@@ -207,12 +217,12 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 				escapeMdCell(getStr(relation, "confidence", "")),
 			))
 		}
-		b.WriteString("\n")
-		writeContextTruncation(&b, "test relationships", getInt(ctx, "test_relationships_truncated"))
+		b.WriteString("\n</details>\n\n")
 	}
 
 	if operations := getSlice(ctx, "operations"); len(operations) > 0 {
-		b.WriteString("## Storage and External Operations\n\n")
+		writeContextSectionHeader(&b, "Storage and External Operations", len(operations), getInt(ctx, "operations_truncated"), "")
+		b.WriteString("<details markdown>\n<summary>Show operations table</summary>\n\n")
 		b.WriteString("| Kind | Operation | Name | Target | Source |\n|------|-----------|------|--------|--------|\n")
 		for _, operation := range operations {
 			b.WriteString(fmt.Sprintf("| %s | %s | `%s` | `%s` | %s |\n",
@@ -223,12 +233,12 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 				sourceLink(data, getStr(operation, "source", "")),
 			))
 		}
-		b.WriteString("\n")
-		writeContextTruncation(&b, "operations", getInt(ctx, "operations_truncated"))
+		b.WriteString("\n</details>\n\n")
 	}
 
 	if flows := getSlice(ctx, "taint_flows"); len(flows) > 0 {
-		b.WriteString("## Taint Flows\n\n")
+		writeContextSectionHeader(&b, "Taint Flows", len(flows), getInt(ctx, "taint_flows_truncated"), "")
+		b.WriteString("<details markdown>\n<summary>Show taint flow table</summary>\n\n")
 		b.WriteString("| Flow | Confidence | Source | Sink |\n|------|------------|--------|------|\n")
 		for _, flow := range flows {
 			b.WriteString(fmt.Sprintf("| `%s` | %s | %s | %s |\n",
@@ -238,8 +248,7 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 				sourceLink(data, getStr(flow, "sink", "")),
 			))
 		}
-		b.WriteString("\n")
-		writeContextTruncation(&b, "taint flows", getInt(ctx, "taint_flows_truncated"))
+		b.WriteString("\n</details>\n\n")
 	}
 
 	if coverage := getMap(ctx, "coverage"); len(coverage) > 0 {
@@ -259,8 +268,13 @@ func renderComponentAgentContextPage(data map[string]interface{}, component stri
 	return b.String()
 }
 
-func writeContextTruncation(b *strings.Builder, label string, count int) {
-	if count > 0 {
-		b.WriteString(fmt.Sprintf("*%d additional %s omitted from this page; the sidecar records the omitted count.*\n\n", count, label))
+// writeContextSectionHeader renders a section header with the shown count and,
+// when the sidecar records omissions, the omitted count, so truncation is
+// visible before the reader reaches the data.
+func writeContextSectionHeader(b *strings.Builder, title string, shown, omitted int, unit string) {
+	b.WriteString(fmt.Sprintf("## %s (%d%s", title, shown, unit))
+	if omitted > 0 {
+		b.WriteString(fmt.Sprintf(" shown, %d omitted", omitted))
 	}
+	b.WriteString(")\n\n")
 }

@@ -54,6 +54,8 @@ class GenerateNavTest(unittest.TestCase):
                 "Agent Context: use-cases/odh-platform/components/praxis_extproc/agent-context.md",
                 nav,
             )
+            self.assertIn('        - "P":\n', nav)
+            self.assertIn("          - praxis-extproc:\n", nav)
 
     def test_empty_platform_list_clears_stale_nav_and_keeps_use_cases_index(self):
         with tempfile.TemporaryDirectory() as tmp:

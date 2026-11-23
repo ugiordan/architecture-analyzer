@@ -15,7 +15,7 @@ func TestRenderComponentAgentContextPage(t *testing.T) {
 			"repo":                   "example/demo",
 			"commit_sha":             "abc123",
 			"graph_status":           "available",
-			"summary":                "A demo component summary",
+			"summary":                "A demo component summary. It manages demo resources.",
 			"repository_description": "Demo project overview",
 			"description_source":     "README.md:3",
 			"graph": map[string]interface{}{
@@ -56,14 +56,19 @@ func TestRenderComponentAgentContextPage(t *testing.T) {
 	content := renderComponentAgentContextPage(data, "demo")
 	for _, want := range []string{
 		"# demo: Agent Context",
+		"[Extracted Data](details.md)",
 		"Analyzer Architecture Summary",
+		"- A demo component summary.",
+		"- It manages demo resources.",
 		"Untrusted Repository Text",
-		"Source Areas",
+		"Source Areas (1 directories)",
+		"<details markdown>",
 		"`pkg/server.go:12`",
 		"https://github.com/example/demo/blob/abc123/pkg/server.go#L12",
 		"GET /ready",
+		"Call Relationships (1)",
 		"CERTAIN",
-		"Tests and Targets",
+		"Tests and Targets (1)",
 		"go_ast",
 	} {
 		if !strings.Contains(content, want) {

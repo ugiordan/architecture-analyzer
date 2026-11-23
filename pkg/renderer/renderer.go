@@ -152,7 +152,6 @@ func sanitizeMdInline(text string) string {
 	return text
 }
 
-
 // RoleSummary holds computed permission breadth for a single RBAC role.
 type RoleSummary struct {
 	Name          string
@@ -216,6 +215,53 @@ func githubRepoURL(repo string) string {
 	return "https://github.com/" + repo
 }
 
+// summarySentences splits a generated architecture summary into its
+// constituent sentences. Summaries are built by joining sentences with
+// ". ", so the split preserves the generator's structure.
+func summarySentences(summary string) []string {
+	summary = strings.TrimSpace(summary)
+	if summary == "" {
+		return nil
+	}
+	trimmed := strings.TrimSuffix(summary, ".")
+	var out []string
+	for _, part := range strings.Split(trimmed, ". ") {
+		part = strings.TrimSpace(part)
+		if part != "" {
+			out = append(out, part)
+		}
+	}
+	return out
+}
+
+// writeSummaryBullets renders a generated summary as a bullet list so long
+// summaries stay readable. Single-sentence summaries render as a paragraph.
+func writeSummaryBullets(b *strings.Builder, summary string) {
+	sentences := summarySentences(summary)
+	if len(sentences) == 0 {
+		return
+	}
+	if len(sentences) == 1 {
+		b.WriteString(sanitizeMdInline(sentences[0]) + ".\n\n")
+		return
+	}
+	for _, sentence := range sentences {
+		b.WriteString("- " + sanitizeMdInline(sentence) + ".\n")
+	}
+	b.WriteString("\n")
+}
+
+// writeComponentPageNav renders the cross-page link bar shown at the top of
+// every per-component page. The Cache page only exists when cache data is
+// present, matching renderComponentDocs page emission.
+func writeComponentPageNav(b *strings.Builder, data map[string]interface{}) {
+	b.WriteString("[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md)")
+	if getMap(data, "cache_config") != nil {
+		b.WriteString(" · [Cache](cache.md)")
+	}
+	b.WriteString(" · [Dataflow](dataflow.md)\n\n")
+}
+
 // GetStr is the exported version of getStr for use by CLI commands.
 func GetStr(m map[string]interface{}, key, fallback string) string {
 	return getStr(m, key, fallback)
@@ -229,9 +275,19 @@ func GetSlice(m map[string]interface{}, key string) []map[string]interface{} {
 // helper to extract a string from a map with a default.
 // Package-local wrappers around maputil for backward compatibility.
 // All renderer code uses these lowercase names; they delegate to the shared package.
-func getStr(m map[string]interface{}, key, fallback string) string { return maputil.GetStr(m, key, fallback) }
-func getSlice(m map[string]interface{}, key string) []map[string]interface{} { return maputil.GetSlice(m, key) }
-func getMap(m map[string]interface{}, key string) map[string]interface{} { return maputil.GetMap(m, key) }
-func getStringSlice(m map[string]interface{}, key string) []string { return maputil.GetStringSlice(m, key) }
+func getStr(m map[string]interface{}, key, fallback string) string {
+	return maputil.GetStr(m, key, fallback)
+}
+func getSlice(m map[string]interface{}, key string) []map[string]interface{} {
+	return maputil.GetSlice(m, key)
+}
+func getMap(m map[string]interface{}, key string) map[string]interface{} {
+	return maputil.GetMap(m, key)
+}
+func getStringSlice(m map[string]interface{}, key string) []string {
+	return maputil.GetStringSlice(m, key)
+}
 func getInt(m map[string]interface{}, key string) int { return maputil.GetInt(m, key) }
-func getBool(m map[string]interface{}, key string, fallback bool) bool { return maputil.GetBool(m, key, fallback) }
+func getBool(m map[string]interface{}, key string, fallback bool) bool {
+	return maputil.GetBool(m, key, fallback)
+}

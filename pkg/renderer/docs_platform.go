@@ -35,7 +35,7 @@ func renderHTMLBarChart(b *strings.Builder, title string, items []chartItem, max
 		} else if item.value > 10 {
 			color = "#f39c12" // orange
 		}
-		b.WriteString(fmt.Sprintf("<div style=\"display: flex; align-items: center; gap: 8px;\">\n", ))
+		b.WriteString(fmt.Sprintf("<div style=\"display: flex; align-items: center; gap: 8px;\">\n"))
 		b.WriteString(fmt.Sprintf("  <span style=\"min-width: 220px; text-align: right; font-size: 0.85em; white-space: nowrap;\">%s</span>\n", html.EscapeString(item.name)))
 		b.WriteString(fmt.Sprintf("  <div style=\"flex: 1; background: var(--md-default-fg-color--lightest); border-radius: 4px; height: 22px; position: relative;\">\n"))
 		b.WriteString(fmt.Sprintf("    <div style=\"width: %d%%; background: %s; height: 100%%; border-radius: 4px; min-width: 20px;\"></div>\n", pct, color))
@@ -134,18 +134,32 @@ func renderPlatformIndexDocPage(data map[string]interface{}) string {
 		copy(sorted, components)
 		sort.Strings(sorted)
 
-		// Count CRDs per component
+		// Count CRDs, deployments, and services per component
 		crdCounts := make(map[string]int)
 		for _, crd := range crds {
 			owner := getStr(crd, "owner", "")
 			crdCounts[owner]++
 		}
+		deploymentCounts := make(map[string]int)
+		serviceCounts := make(map[string]int)
+		counted := make(map[string]bool)
+		for _, compData := range getSlice(data, "component_data") {
+			name := getStr(compData, "component", "")
+			// renderComponentDocs keeps the first record per component name;
+			// counts must use that same record so rows match linked pages.
+			if counted[name] {
+				continue
+			}
+			counted[name] = true
+			deploymentCounts[name] = len(getSlice(compData, "deployments"))
+			serviceCounts[name] = len(getSlice(compData, "services"))
+		}
 
-		b.WriteString("| Component | CRDs |\n")
-		b.WriteString("|-----------|------|\n")
+		b.WriteString("| Component | CRDs | Deployments | Services |\n")
+		b.WriteString("|-----------|------|-------------|----------|\n")
 		for _, comp := range sorted {
-			count := crdCounts[comp]
-			b.WriteString(fmt.Sprintf("| %s | %d |\n", comp, count))
+			b.WriteString(fmt.Sprintf("| [%s](components/%s/index.md) | %d | %d | %d |\n",
+				escapeMdCell(comp), sanitizeID(comp), crdCounts[comp], deploymentCounts[comp], serviceCounts[comp]))
 		}
 		b.WriteString("\n")
 	}

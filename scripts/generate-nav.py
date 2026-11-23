@@ -53,32 +53,40 @@ def build_platform_nav(docs_dir, platform_dir):
         if os.path.exists(os.path.join(platform_path, fname)):
             lines.append(f"      - {label}: use-cases/{platform_dir}/{fname}")
 
-    # Components
+    # Components, grouped alphabetically so the menu stays scannable
     components_dir = os.path.join(platform_path, "components")
     if os.path.isdir(components_dir):
         lines.append("      - Components:")
+        groups = {}
         for comp in sorted(os.listdir(components_dir)):
             comp_path = os.path.join(components_dir, comp)
             if not os.path.isdir(comp_path):
                 continue
-            # Display name: underscores to hyphens
-            comp_display = comp.replace("_", "-")
-            lines.append(f"        - {comp_display}:")
+            letter = comp[:1].upper()
+            if not letter.isalpha():
+                letter = "#"
+            groups.setdefault(letter, []).append((comp, comp_path))
+        for letter in sorted(groups):
+            lines.append(f'        - "{letter}":')
+            for comp, comp_path in groups[letter]:
+                # Display name: underscores to hyphens
+                comp_display = comp.replace("_", "-")
+                lines.append(f"          - {comp_display}:")
 
-            # Standard doc files in order
-            doc_files = {
-                "index.md": "Overview",
-                "agent-context.md": "Agent Context",
-                "details.md": "Extracted Data",
-                "network.md": "Network",
-                "rbac.md": "RBAC",
-                "security.md": "Security",
-                "cache.md": "Cache",
-                "dataflow.md": "Dataflow",
-            }
-            for fname, label in doc_files.items():
-                if os.path.exists(os.path.join(comp_path, fname)):
-                    lines.append(f"          - {label}: use-cases/{platform_dir}/components/{comp}/{fname}")
+                # Standard doc files in order
+                doc_files = {
+                    "index.md": "Overview",
+                    "agent-context.md": "Agent Context",
+                    "details.md": "Extracted Data",
+                    "network.md": "Network",
+                    "rbac.md": "RBAC",
+                    "security.md": "Security",
+                    "cache.md": "Cache",
+                    "dataflow.md": "Dataflow",
+                }
+                for fname, label in doc_files.items():
+                    if os.path.exists(os.path.join(comp_path, fname)):
+                        lines.append(f"            - {label}: use-cases/{platform_dir}/components/{comp}/{fname}")
 
     return lines
 

@@ -47,8 +47,8 @@ func TestRenderComponentMarkdown_BasicStructure(t *testing.T) {
 	if !strings.Contains(result, "# test-component") {
 		t.Error("missing component heading")
 	}
-	if !strings.Contains(result, "> test-component is a Kubernetes component") {
-		t.Error("missing summary blockquote")
+	if !strings.Contains(result, "test-component is a Kubernetes component") {
+		t.Error("missing summary text")
 	}
 	if !strings.Contains(result, "## CRDs") {
 		t.Error("missing CRDs section")

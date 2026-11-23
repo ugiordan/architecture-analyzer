@@ -153,12 +153,12 @@ func renderComponentIndexPage(data map[string]interface{}, component string) str
 	extractedAt := getStr(data, "extracted_at", "")
 
 	b.WriteString(fmt.Sprintf("# %s\n\n", component))
+	writeComponentPageNav(&b, data)
 	if repo != "" {
 		b.WriteString(fmt.Sprintf("**Repository:** %s  \n", repo))
 	}
 	b.WriteString(fmt.Sprintf("**Analyzer:** arch-analyzer %s  \n", version))
 	b.WriteString(fmt.Sprintf("**Extracted:** %s\n\n", extractedAt))
-	b.WriteString("See [Agent Context](agent-context.md) for repository structure and code relationships, and [Extracted Data](details.md) for dependency and configuration details.\n\n")
 
 	// Summary table
 	crds := getSlice(data, "crds")
@@ -208,6 +208,7 @@ func renderComponentNetworkPage(data map[string]interface{}, component string) s
 	var b strings.Builder
 
 	b.WriteString(fmt.Sprintf("# %s: Network\n\n", component))
+	writeComponentPageNav(&b, data)
 
 	services := getSlice(data, "services")
 	netpols := getSlice(data, "network_policies")
@@ -311,6 +312,7 @@ func renderComponentRBACPage(data map[string]interface{}, component string) stri
 	var b strings.Builder
 
 	b.WriteString(fmt.Sprintf("# %s: RBAC\n\n", component))
+	writeComponentPageNav(&b, data)
 
 	b.WriteString("ServiceAccount bindings, roles, and resource permissions.\n\n")
 
@@ -413,6 +415,7 @@ func renderComponentSecurityPage(data map[string]interface{}, component string) 
 	var b strings.Builder
 
 	b.WriteString(fmt.Sprintf("# %s: Security\n\n", component))
+	writeComponentPageNav(&b, data)
 
 	// Secrets
 	b.WriteString("## Secrets\n\n")
@@ -438,6 +441,7 @@ func renderComponentCachePage(data map[string]interface{}, component string) str
 	var b strings.Builder
 
 	b.WriteString(fmt.Sprintf("# %s: Cache Architecture\n\n", component))
+	writeComponentPageNav(&b, data)
 	b.WriteString("Controller-runtime cache configuration controls which Kubernetes resources are cached in-memory. ")
 	b.WriteString("Misconfigured caches (cluster-wide watches on high-cardinality types without filters) are a primary cause of operator OOM kills.\n\n")
 
@@ -452,6 +456,7 @@ func renderComponentDataflowPage(data map[string]interface{}, component string) 
 	var b strings.Builder
 
 	b.WriteString(fmt.Sprintf("# %s: Dataflow\n\n", component))
+	writeComponentPageNav(&b, data)
 
 	// Controller watch table
 	b.WriteString("## Controller Watches\n\n")

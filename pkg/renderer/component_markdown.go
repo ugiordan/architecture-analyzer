@@ -19,9 +19,9 @@ func RenderComponentMarkdown(data map[string]interface{}) string {
 	b.WriteString(autoGenHeader)
 	b.WriteString(fmt.Sprintf("# %s\n\n", component))
 
-	// Summary blockquote
+	// Summary bullets
 	if summary := getStr(data, "summary", ""); summary != "" {
-		b.WriteString(fmt.Sprintf("> %s\n\n", summary))
+		writeSummaryBullets(&b, summary)
 	}
 
 	// Metadata (always present)
