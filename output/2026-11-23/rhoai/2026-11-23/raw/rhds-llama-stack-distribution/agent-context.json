@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "component": "rhds-llama-stack-distribution",
+  "repo": "red-hat-data-services/rhds-llama-stack-distribution",
+  "commit_sha": "53fb2c2f9dbd960835ae7583bd4ab48694ac19b9",
+  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "summary": "rhds-llama-stack-distribution is a Kubernetes component.",
+  "repository_description": "This directory contains the necessary files to build an Open Data Hub-compatible container image for Llama Stack.",
+  "description_source": "README.md:5",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 2,
+    "functions": 14,
+    "test_functions": 0,
+    "call_sites": 175,
+    "resolved_calls": 17,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "python",
+      "source_files": 2,
+      "functions": 14,
+      "test_functions": 0
+    },
+    {
+      "name": "unknown",
+      "source_files": 2,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "distribution",
+      "source_files": 1,
+      "functions": 9,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "distribution/build.py:322",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "is_version_tag",
+          "language": "python",
+          "source": "distribution/build.py:73",
+          "complexity": 5,
+          "callers": 2
+        },
+        {
+          "name": "check_command_installed",
+          "language": "python",
+          "source": "distribution/build.py:100",
+          "complexity": 3,
+          "callers": 2
+        },
+        {
+          "name": "is_install_from_source",
+          "language": "python",
+          "source": "distribution/build.py:88",
+          "complexity": 3,
+          "callers": 2
+        },
+        {
+          "name": "get_dependencies",
+          "language": "python",
+          "source": "distribution/build.py:168",
+          "complexity": 17,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "check_llama_stack_version",
+          "language": "python",
+          "source": "distribution/build.py:112",
+          "complexity": 6,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "install_llama_stack_from_source",
+          "language": "python",
+          "source": "distribution/build.py:145",
+          "complexity": 5,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "generate_containerfile",
+          "language": "python",
+          "source": "distribution/build.py:287",
+          "complexity": 4,
+          "callers": 1,
+          "annotations": [
+            "arch:factory_method",
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "get_llama_stack_install",
+          "language": "python",
+          "source": "distribution/build.py:46",
+          "complexity": 4,
+          "callers": 1
+        }
+      ]
+    },
+    {
+      "path": "scripts",
+      "source_files": 1,
+      "functions": 5,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "load_external_providers_info",
+          "language": "python",
+          "source": "scripts/gen_distro_docs.py:89",
+          "complexity": 10,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "gen_distro_table",
+          "language": "python",
+          "source": "scripts/gen_distro_docs.py:132",
+          "complexity": 9,
+          "callers": 1
+        },
+        {
+          "name": "gen_distro_docs",
+          "language": "python",
+          "source": "scripts/gen_distro_docs.py:202",
+          "complexity": 8,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "extract_llama_stack_version",
+          "language": "python",
+          "source": "scripts/gen_distro_docs.py:36",
+          "complexity": 7,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "resolve_main_commit_hash",
+          "language": "python",
+          "source": "scripts/gen_distro_docs.py:12",
+          "complexity": 4,
+          "callers": 1,
+          "annotations": [
+            "sec:subprocess_call"
+          ]
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "distribution/build.py:322"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "check_command_installed",
+      "callee_source": "distribution/build.py:100",
+      "call_site_source": "distribution/build.py:323",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "check_command_installed",
+      "callee_source": "distribution/build.py:100",
+      "call_site_source": "distribution/build.py:326",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "is_install_from_source",
+      "callee_source": "distribution/build.py:88",
+      "call_site_source": "distribution/build.py:329",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "check_llama_stack_version",
+      "callee_source": "distribution/build.py:112",
+      "call_site_source": "distribution/build.py:331",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "generate_containerfile",
+      "callee_source": "distribution/build.py:287",
+      "call_site_source": "distribution/build.py:340",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "get_dependencies",
+      "callee_source": "distribution/build.py:168",
+      "call_site_source": "distribution/build.py:334",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "get_llama_stack_install",
+      "callee_source": "distribution/build.py:46",
+      "call_site_source": "distribution/build.py:337",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distribution/build.py:322",
+      "callee": "install_llama_stack_from_source",
+      "callee_source": "distribution/build.py:145",
+      "call_site_source": "distribution/build.py:324",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_llama_stack_install",
+      "caller_source": "distribution/build.py:46",
+      "callee": "is_install_from_source",
+      "callee_source": "distribution/build.py:88",
+      "call_site_source": "distribution/build.py:54",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_llama_stack_install",
+      "caller_source": "distribution/build.py:46",
+      "callee": "is_version_tag",
+      "callee_source": "distribution/build.py:73",
+      "call_site_source": "distribution/build.py:60",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_install_from_source",
+      "caller_source": "distribution/build.py:88",
+      "callee": "is_version_tag",
+      "callee_source": "distribution/build.py:73",
+      "call_site_source": "distribution/build.py:94",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "gen_distro_table",
+      "caller_source": "scripts/gen_distro_docs.py:132",
+      "callee": "load_external_providers_info",
+      "callee_source": "scripts/gen_distro_docs.py:89",
+      "call_site_source": "scripts/gen_distro_docs.py:140",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "gen_distro_docs",
+      "caller_source": "scripts/gen_distro_docs.py:202",
+      "callee": "extract_llama_stack_version",
+      "callee_source": "scripts/gen_distro_docs.py:36",
+      "call_site_source": "scripts/gen_distro_docs.py:213",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "gen_distro_docs",
+      "caller_source": "scripts/gen_distro_docs.py:202",
+      "callee": "gen_distro_table",
+      "callee_source": "scripts/gen_distro_docs.py:132",
+      "call_site_source": "scripts/gen_distro_docs.py:261",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "extract_llama_stack_version",
+      "caller_source": "scripts/gen_distro_docs.py:36",
+      "callee": "resolve_main_commit_hash",
+      "callee_source": "scripts/gen_distro_docs.py:12",
+      "call_site_source": "scripts/gen_distro_docs.py:60",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "moderate",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}
