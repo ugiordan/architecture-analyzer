@@ -3,7 +3,7 @@
   "component": "mlflow-operator",
   "repo": "red-hat-data-services/mlflow-operator",
   "commit_sha": "b30d9ec278f706e65979b1a8c3cadb431db60136",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "mlflow-operator is a Kubernetes component. managing 3 CRD(s): MLflowOperator, MLflow, MLflowConfig. deploying 1 workload(s) (mlflow-operator-controller-manager) with 1 container(s). watching 15 resource type(s). exposing 1 service(s) on ports: 8443. Dockerfile EXPOSE ports: 8080. protected by 1 network policy/policies. connecting to external services: mlflow. runtime dependencies: MLflow, MySQL, PostgreSQL, mlflow-artifacts. defining 11 API spec type(s) across 25 struct(s) with 114 total fields. with 113 operator config constants. reporting 4 status condition types. with 1 ingress route(s). Python k8s client with 15 API call(s). integrates with management relationship via labels/annotations. kustomize overlays: config/admission, config/base, config/crd, config/manager, config/overlays/odh, config/overlays/openshift, config/overlays/rhoai, config/rbac. references components: mlflow (import).",
   "repository_description": "A Kubernetes operator for managing MLflow deployments on OpenShift and Kubernetes.",
   "description_source": "README.md:3",
@@ -1450,6 +1450,14 @@
       "caller": "main",
       "caller_source": "cmd/main.go:167",
       "callee": "SetupWithManager",
+      "callee_source": "internal/controller/mlflow_controller.go:639",
+      "call_site_source": "cmd/main.go:460",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:167",
+      "callee": "SetupWithManager",
       "callee_source": "internal/controller/namespace_rbac_controller.go:70",
       "call_site_source": "cmd/main.go:460",
       "confidence": "UNCERTAIN"
@@ -1459,14 +1467,6 @@
       "caller_source": "cmd/main.go:167",
       "callee": "SetupWithManager",
       "callee_source": "internal/controller/mlflowoperator_controller.go:146",
-      "call_site_source": "cmd/main.go:460",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:167",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/mlflow_controller.go:639",
       "call_site_source": "cmd/main.go:460",
       "confidence": "UNCERTAIN"
     },
@@ -4050,6 +4050,14 @@
       "caller": "validateArtifactsServerMetadataStores",
       "caller_source": "internal/controller/artifacts_server_validation.go:44",
       "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/artifacts_server_validation.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "validateArtifactsServerMetadataStores",
+      "caller_source": "internal/controller/artifacts_server_validation.go:44",
+      "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/artifacts_server_validation.go:80",
       "confidence": "UNCERTAIN"
@@ -4058,23 +4066,7 @@
       "caller": "validateArtifactsServerMetadataStores",
       "caller_source": "internal/controller/artifacts_server_validation.go:44",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/artifacts_server_validation.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "validateArtifactsServerMetadataStores",
-      "caller_source": "internal/controller/artifacts_server_validation.go:44",
-      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/artifacts_server_validation.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "validateArtifactsServerMetadataStores",
-      "caller_source": "internal/controller/artifacts_server_validation.go:44",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/artifacts_server_validation.go:80",
       "confidence": "UNCERTAIN"
     },
@@ -4087,18 +4079,18 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Get",
-      "caller_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "caller": "validateArtifactsServerMetadataStores",
+      "caller_source": "internal/controller/artifacts_server_validation.go:44",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/artifacts_server_validation_test.go:42",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/artifacts_server_validation.go:80",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "Get",
       "caller_source": "internal/controller/artifacts_server_validation_test.go:40",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/artifacts_server_validation_test.go:42",
       "confidence": "UNCERTAIN"
     },
@@ -4114,6 +4106,14 @@
       "caller": "Get",
       "caller_source": "internal/controller/artifacts_server_validation_test.go:40",
       "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
+      "call_site_source": "internal/controller/artifacts_server_validation_test.go:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Get",
+      "caller_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/artifacts_server_validation_test.go:42",
       "confidence": "UNCERTAIN"
@@ -4122,7 +4122,7 @@
       "caller": "Get",
       "caller_source": "internal/controller/artifacts_server_validation_test.go:40",
       "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/artifacts_server_validation_test.go:42",
       "confidence": "UNCERTAIN"
     },
@@ -4138,14 +4138,6 @@
       "caller": "secret",
       "caller_source": "internal/controller/effective_env.go:115",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/effective_env.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "secret",
-      "caller_source": "internal/controller/effective_env.go:115",
-      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/effective_env.go:120",
       "confidence": "UNCERTAIN"
@@ -4154,7 +4146,7 @@
       "caller": "secret",
       "caller_source": "internal/controller/effective_env.go:115",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
       "call_site_source": "internal/controller/effective_env.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -4167,11 +4159,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "configMap",
-      "caller_source": "internal/controller/effective_env.go:130",
+      "caller": "secret",
+      "caller_source": "internal/controller/effective_env.go:115",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/effective_env.go:135",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/effective_env.go:120",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4207,26 +4199,26 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "configMap",
+      "caller_source": "internal/controller/effective_env.go:130",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/effective_env.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "scaleDownOwnedArtifactDeployment",
+      "caller_source": "internal/controller/migration.go:272",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/migration.go:278",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "scaleDownOwnedArtifactDeployment",
       "caller_source": "internal/controller/migration.go:272",
       "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/migration.go:278",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "scaleDownOwnedArtifactDeployment",
-      "caller_source": "internal/controller/migration.go:272",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/migration.go:278",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "scaleDownOwnedArtifactDeployment",
-      "caller_source": "internal/controller/migration.go:272",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/migration.go:278",
       "confidence": "UNCERTAIN"
     },
@@ -4242,7 +4234,15 @@
       "caller": "scaleDownOwnedArtifactDeployment",
       "caller_source": "internal/controller/migration.go:272",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/migration.go:278",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "scaleDownOwnedArtifactDeployment",
+      "caller_source": "internal/controller/migration.go:272",
+      "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/migration.go:278",
       "confidence": "UNCERTAIN"
     },
@@ -4250,7 +4250,23 @@
       "caller": "successfulMigrationJobForRollout",
       "caller_source": "internal/controller/migration.go:566",
       "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/migration.go:568",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "successfulMigrationJobForRollout",
+      "caller_source": "internal/controller/migration.go:566",
+      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/migration.go:568",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "successfulMigrationJobForRollout",
+      "caller_source": "internal/controller/migration.go:566",
+      "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/migration.go:568",
       "confidence": "UNCERTAIN"
     },
@@ -4266,22 +4282,6 @@
       "caller": "successfulMigrationJobForRollout",
       "caller_source": "internal/controller/migration.go:566",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/migration.go:568",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "successfulMigrationJobForRollout",
-      "caller_source": "internal/controller/migration.go:566",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/migration.go:568",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "successfulMigrationJobForRollout",
-      "caller_source": "internal/controller/migration.go:566",
-      "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/migration.go:568",
       "confidence": "UNCERTAIN"
@@ -4290,23 +4290,7 @@
       "caller": "activeMigrationDeployments",
       "caller_source": "internal/controller/migration.go:730",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/migration.go:739",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "activeMigrationDeployments",
-      "caller_source": "internal/controller/migration.go:730",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/migration.go:739",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "activeMigrationDeployments",
-      "caller_source": "internal/controller/migration.go:730",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/migration.go:739",
       "confidence": "UNCERTAIN"
     },
@@ -4322,7 +4306,23 @@
       "caller": "activeMigrationDeployments",
       "caller_source": "internal/controller/migration.go:730",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/migration.go:739",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "activeMigrationDeployments",
+      "caller_source": "internal/controller/migration.go:730",
+      "callee": "Get",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "call_site_source": "internal/controller/migration.go:739",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "activeMigrationDeployments",
+      "caller_source": "internal/controller/migration.go:730",
+      "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/migration.go:739",
       "confidence": "UNCERTAIN"
     },
@@ -4330,7 +4330,7 @@
       "caller": "handleMigration",
       "caller_source": "internal/controller/migration.go:821",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/migration.go:886",
       "confidence": "UNCERTAIN"
     },
@@ -4362,7 +4362,7 @@
       "caller": "handleMigration",
       "caller_source": "internal/controller/migration.go:821",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/migration.go:886",
       "confidence": "UNCERTAIN"
     },
@@ -4370,23 +4370,15 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflow_controller.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflow_controller.go:102",
+      "callee": "Get",
       "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/mlflow_controller.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflow_controller.go:102",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflow_controller.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflow_controller.go:102",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflow_controller.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -4402,7 +4394,7 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflow_controller.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -4411,7 +4403,7 @@
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
       "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflow_controller.go:303",
+      "call_site_source": "internal/controller/mlflow_controller.go:107",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4434,24 +4426,24 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
+      "call_site_source": "internal/controller/mlflow_controller.go:303",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflow_controller.go:102",
+      "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/mlflow_controller.go:303",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflow_controller.go:102",
+      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflow_controller.go:303",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflow_controller.go:102",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/mlflow_controller.go:303",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflow_controller.go:102",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/mlflow_controller.go:329",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4490,8 +4482,8 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflow_controller.go:360",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/mlflow_controller.go:329",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4499,6 +4491,14 @@
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflow_controller.go:360",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflow_controller.go:102",
+      "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflow_controller.go:360",
       "confidence": "UNCERTAIN"
     },
@@ -4530,7 +4530,15 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflow_controller.go:519",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflow_controller.go:102",
+      "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/mlflow_controller.go:519",
       "confidence": "UNCERTAIN"
     },
@@ -4554,15 +4562,7 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflow_controller.go:102",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/mlflow_controller.go:519",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflow_controller.go:102",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
       "call_site_source": "internal/controller/mlflow_controller.go:519",
       "confidence": "UNCERTAIN"
     },
@@ -4570,15 +4570,7 @@
       "caller": "applyObject",
       "caller_source": "internal/controller/mlflow_controller.go:609",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/mlflow_controller.go:615",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "applyObject",
-      "caller_source": "internal/controller/mlflow_controller.go:609",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
       "call_site_source": "internal/controller/mlflow_controller.go:615",
       "confidence": "UNCERTAIN"
     },
@@ -4594,7 +4586,7 @@
       "caller": "applyObject",
       "caller_source": "internal/controller/mlflow_controller.go:609",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/mlflow_controller.go:615",
       "confidence": "UNCERTAIN"
     },
@@ -4607,18 +4599,18 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "updateStatus",
-      "caller_source": "internal/controller/mlflow_controller.go:840",
+      "caller": "applyObject",
+      "caller_source": "internal/controller/mlflow_controller.go:609",
       "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflow_controller.go:844",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflow_controller.go:615",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "updateStatus",
       "caller_source": "internal/controller/mlflow_controller.go:840",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflow_controller.go:844",
       "confidence": "UNCERTAIN"
     },
@@ -4634,7 +4626,7 @@
       "caller": "updateStatus",
       "caller_source": "internal/controller/mlflow_controller.go:840",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflow_controller.go:844",
       "confidence": "UNCERTAIN"
     },
@@ -4642,8 +4634,40 @@
       "caller": "updateStatus",
       "caller_source": "internal/controller/mlflow_controller.go:840",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/mlflow_controller.go:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "updateStatus",
+      "caller_source": "internal/controller/mlflow_controller.go:840",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflow_controller.go:844",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "appendOwnerReference",
+      "caller_source": "internal/controller/mlflow_controller.go:859",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflow_controller.go:871",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "appendOwnerReference",
+      "caller_source": "internal/controller/mlflow_controller.go:859",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflow_controller.go:871",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "appendOwnerReference",
+      "caller_source": "internal/controller/mlflow_controller.go:859",
+      "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
+      "call_site_source": "internal/controller/mlflow_controller.go:871",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4658,31 +4682,7 @@
       "caller": "appendOwnerReference",
       "caller_source": "internal/controller/mlflow_controller.go:859",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/mlflow_controller.go:871",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "appendOwnerReference",
-      "caller_source": "internal/controller/mlflow_controller.go:859",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/mlflow_controller.go:871",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "appendOwnerReference",
-      "caller_source": "internal/controller/mlflow_controller.go:859",
-      "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/mlflow_controller.go:871",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "appendOwnerReference",
-      "caller_source": "internal/controller/mlflow_controller.go:859",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflow_controller.go:871",
       "confidence": "UNCERTAIN"
     },
@@ -4691,22 +4691,6 @@
       "caller_source": "internal/controller/mlflow_controller_test.go:50",
       "callee": "Get",
       "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflow_controller_test.go:62",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Get",
-      "caller_source": "internal/controller/mlflow_controller_test.go:50",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/mlflow_controller_test.go:62",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Get",
-      "caller_source": "internal/controller/mlflow_controller_test.go:50",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflow_controller_test.go:62",
       "confidence": "UNCERTAIN"
     },
@@ -4724,6 +4708,30 @@
       "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/mlflow_controller_test.go:62",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Get",
+      "caller_source": "internal/controller/mlflow_controller_test.go:50",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflow_controller_test.go:62",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Get",
+      "caller_source": "internal/controller/mlflow_controller_test.go:50",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflow_controller_test.go:62",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "desiredModuleReleases",
+      "caller_source": "internal/controller/mlflowoperator_controller.go:253",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflowoperator_controller.go:269",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4746,7 +4754,7 @@
       "caller": "desiredModuleReleases",
       "caller_source": "internal/controller/mlflowoperator_controller.go:253",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/mlflowoperator_controller.go:269",
       "confidence": "UNCERTAIN"
     },
@@ -4759,11 +4767,19 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "desiredModuleReleases",
-      "caller_source": "internal/controller/mlflowoperator_controller.go:253",
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflowoperator_controller.go:80",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller.go:269",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/mlflowoperator_controller.go:84",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/mlflowoperator_controller.go:80",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflowoperator_controller.go:84",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4786,32 +4802,8 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/mlflowoperator_controller.go:80",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/mlflowoperator_controller.go:84",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflowoperator_controller.go:80",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/mlflowoperator_controller.go:84",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/mlflowoperator_controller.go:80",
-      "callee": "Get",
       "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflowoperator_controller.go:84",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestMLflowOperatorReconcileBlocksReadyUntilRequiredProjectedFieldsExist",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:189",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:228",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4826,7 +4818,7 @@
       "caller": "TestMLflowOperatorReconcileBlocksReadyUntilRequiredProjectedFieldsExist",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:189",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:228",
       "confidence": "UNCERTAIN"
     },
@@ -4844,6 +4836,22 @@
       "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:228",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorReconcileBlocksReadyUntilRequiredProjectedFieldsExist",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:189",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:228",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorReconcileCreatesMetricsMonitorBeforeRequiredConfigIsAvailable",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:250",
+      "callee": "Get",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:281",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4874,14 +4882,6 @@
       "caller": "TestMLflowOperatorReconcileCreatesMetricsMonitorBeforeRequiredConfigIsAvailable",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:250",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:281",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestMLflowOperatorReconcileCreatesMetricsMonitorBeforeRequiredConfigIsAvailable",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:250",
-      "callee": "Get",
       "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:281",
       "confidence": "UNCERTAIN"
@@ -4890,14 +4890,6 @@
       "caller": "TestMLflowOperatorReconcileAllowsOptionalGatewayDomainToBeEmpty",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:288",
       "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:334",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestMLflowOperatorReconcileAllowsOptionalGatewayDomainToBeEmpty",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:288",
-      "callee": "Get",
       "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:334",
       "confidence": "UNCERTAIN"
@@ -4927,11 +4919,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestMLflowOperatorReconcileManagesMetricsServiceMonitor",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:31",
+      "caller": "TestMLflowOperatorReconcileAllowsOptionalGatewayDomainToBeEmpty",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:288",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:65",
+      "callee_source": "internal/controller/secret_references_test.go:245",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:334",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4954,7 +4946,7 @@
       "caller": "TestMLflowOperatorReconcileManagesMetricsServiceMonitor",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:31",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:65",
       "confidence": "UNCERTAIN"
     },
@@ -4962,7 +4954,15 @@
       "caller": "TestMLflowOperatorReconcileManagesMetricsServiceMonitor",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:31",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorReconcileManagesMetricsServiceMonitor",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:31",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:65",
       "confidence": "UNCERTAIN"
     },
@@ -4978,6 +4978,14 @@
       "caller": "TestMLflowOperatorReconcileKeepsModuleReleaseWhenPlatformConfigMissing",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:344",
       "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:390",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorReconcileKeepsModuleReleaseWhenPlatformConfigMissing",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:344",
+      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:390",
       "confidence": "UNCERTAIN"
@@ -4986,7 +4994,7 @@
       "caller": "TestMLflowOperatorReconcileKeepsModuleReleaseWhenPlatformConfigMissing",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:344",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:390",
       "confidence": "UNCERTAIN"
     },
@@ -4996,30 +5004,6 @@
       "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:390",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestMLflowOperatorReconcileKeepsModuleReleaseWhenPlatformConfigMissing",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:344",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:390",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestMLflowOperatorDeletionBlockedWhenMLflowInstancesExist",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:511",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:545",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestMLflowOperatorDeletionBlockedWhenMLflowInstancesExist",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:511",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:545",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5047,6 +5031,30 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestMLflowOperatorDeletionBlockedWhenMLflowInstancesExist",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:511",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:545",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorDeletionBlockedWhenMLflowInstancesExist",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:511",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:545",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorDeletionRemovesFinalizerWhenSafe",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:567",
+      "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:597",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "TestMLflowOperatorDeletionRemovesFinalizerWhenSafe",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:567",
       "callee": "Get",
@@ -5066,7 +5074,7 @@
       "caller": "TestMLflowOperatorDeletionRemovesFinalizerWhenSafe",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:567",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:597",
       "confidence": "UNCERTAIN"
     },
@@ -5079,18 +5087,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestMLflowOperatorDeletionRemovesFinalizerWhenSafe",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:567",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:597",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:93",
       "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -5106,7 +5106,7 @@
       "caller": "TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus",
       "caller_source": "internal/controller/mlflowoperator_controller_test.go:93",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -5124,6 +5124,22 @@
       "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
       "call_site_source": "internal/controller/mlflowoperator_controller_test.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:93",
+      "callee": "Get",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:155",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus",
+      "caller_source": "internal/controller/mlflowoperator_controller_test.go:93",
+      "callee": "Get",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:155",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5151,19 +5167,19 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:93",
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:155",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "call_site_source": "internal/controller/namespace_rbac_controller.go:139",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestMLflowOperatorReconcileAddsFinalizerAndReadyStatus",
-      "caller_source": "internal/controller/mlflowoperator_controller_test.go:93",
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/mlflowoperator_controller_test.go:155",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "call_site_source": "internal/controller/namespace_rbac_controller.go:139",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5186,14 +5202,6 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/namespace_rbac_controller.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/namespace_rbac_controller.go:135",
-      "callee": "Get",
       "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:139",
       "confidence": "UNCERTAIN"
@@ -5203,14 +5211,14 @@
       "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/namespace_rbac_controller.go:139",
+      "call_site_source": "internal/controller/namespace_rbac_controller.go:152",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "Reconcile",
       "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -5219,14 +5227,6 @@
       "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
-      "call_site_source": "internal/controller/namespace_rbac_controller.go:152",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/namespace_rbac_controller.go:135",
-      "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -5242,24 +5242,8 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/namespace_rbac_controller.go:135",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:152",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getAuthGroups",
-      "caller_source": "internal/controller/namespace_rbac_controller.go:177",
-      "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/namespace_rbac_controller.go:182",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getAuthGroups",
-      "caller_source": "internal/controller/namespace_rbac_controller.go:177",
-      "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
-      "call_site_source": "internal/controller/namespace_rbac_controller.go:182",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5274,6 +5258,22 @@
       "caller": "getAuthGroups",
       "caller_source": "internal/controller/namespace_rbac_controller.go:177",
       "callee": "Get",
+      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "call_site_source": "internal/controller/namespace_rbac_controller.go:182",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getAuthGroups",
+      "caller_source": "internal/controller/namespace_rbac_controller.go:177",
+      "callee": "Get",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/namespace_rbac_controller.go:182",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getAuthGroups",
+      "caller_source": "internal/controller/namespace_rbac_controller.go:177",
+      "callee": "Get",
       "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:182",
       "confidence": "UNCERTAIN"
@@ -5282,7 +5282,7 @@
       "caller": "getAuthGroups",
       "caller_source": "internal/controller/namespace_rbac_controller.go:177",
       "callee": "Get",
-      "callee_source": "internal/controller/mlflow_controller_test.go:50",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:182",
       "confidence": "UNCERTAIN"
     },
@@ -5290,7 +5290,7 @@
       "caller": "applyRoleBindings",
       "caller_source": "internal/controller/namespace_rbac_controller.go:212",
       "callee": "Get",
-      "callee_source": "internal/controller/secret_references_test.go:245",
+      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:257",
       "confidence": "UNCERTAIN"
     },
@@ -5306,14 +5306,6 @@
       "caller": "applyRoleBindings",
       "caller_source": "internal/controller/namespace_rbac_controller.go:212",
       "callee": "Get",
-      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
-      "call_site_source": "internal/controller/namespace_rbac_controller.go:257",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "applyRoleBindings",
-      "caller_source": "internal/controller/namespace_rbac_controller.go:212",
-      "callee": "Get",
       "callee_source": "internal/controller/mlflow_controller_test.go:50",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:257",
       "confidence": "UNCERTAIN"
@@ -5322,7 +5314,15 @@
       "caller": "applyRoleBindings",
       "caller_source": "internal/controller/namespace_rbac_controller.go:212",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:40",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
+      "call_site_source": "internal/controller/namespace_rbac_controller.go:257",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "applyRoleBindings",
+      "caller_source": "internal/controller/namespace_rbac_controller.go:212",
+      "callee": "Get",
+      "callee_source": "internal/controller/secret_references_test.go:245",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:257",
       "confidence": "UNCERTAIN"
     },
@@ -5330,7 +5330,7 @@
       "caller": "cleanupRoleBindings",
       "caller_source": "internal/controller/namespace_rbac_controller.go:278",
       "callee": "Get",
-      "callee_source": "internal/controller/artifacts_server_validation_test.go:50",
+      "callee_source": "internal/controller/namespace_rbac_controller_test.go:30",
       "call_site_source": "internal/controller/namespace_rbac_controller.go:281",
       "confidence": "UNCERTAIN"
     },

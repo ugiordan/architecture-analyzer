@@ -2,18 +2,18 @@
   "schema_version": 1,
   "component": "batch-gateway",
   "repo": "opendatahub-io/batch-gateway",
-  "commit_sha": "0b7c47a3b330ca654610acca11b509747134a07c",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "commit_sha": "4fc7beb115071ec4b3a31fde091ce177453e7a03",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "batch-gateway is a Kubernetes component. connecting to external services: gcs, redis, s3, urllib. runtime dependencies: OpenTelemetry Collector. with 285 operator config constants (3 env vars). exposing 28 Prometheus metrics.",
   "repository_description": "Batch Gateway is a high-performance system for processing large-scale batch inference jobs in Kubernetes environments. It provides an OpenAI-compatible API for submitting, tracking, and managing batch inference jobs.",
   "description_source": "README.md:14",
   "graph_status": "available",
   "graph": {
-    "source_files": 211,
-    "functions": 1844,
-    "test_functions": 642,
-    "call_sites": 22982,
-    "resolved_calls": 22605,
+    "source_files": 214,
+    "functions": 1855,
+    "test_functions": 649,
+    "call_sites": 23175,
+    "resolved_calls": 22789,
     "http_endpoints": 3,
     "storage_operations": 2,
     "external_calls": 0,
@@ -22,9 +22,9 @@
   "languages": [
     {
       "name": "go",
-      "source_files": 208,
-      "functions": 1786,
-      "test_functions": 642
+      "source_files": 211,
+      "functions": 1797,
+      "test_functions": 649
     },
     {
       "name": "python",
@@ -34,7 +34,7 @@
     },
     {
       "name": "unknown",
-      "source_files": 208,
+      "source_files": 211,
       "functions": 0,
       "test_functions": 0
     }
@@ -55,14 +55,14 @@
           "language": "go",
           "source": "internal/processor/worker/worker.go:126",
           "complexity": 6,
-          "callers": 537
+          "callers": 544
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/worker/broadcasters.go:98",
           "complexity": 2,
-          "callers": 537,
+          "callers": 544,
           "annotations": [
             "test:subtests"
           ]
@@ -142,9 +142,9 @@
     },
     {
       "path": "internal/processor/pipeline",
-      "source_files": 21,
-      "functions": 172,
-      "test_functions": 53,
+      "source_files": 22,
+      "functions": 176,
+      "test_functions": 56,
       "languages": [
         "go",
         "unknown"
@@ -155,87 +155,87 @@
           "language": "go",
           "source": "internal/processor/pipeline/result_router.go:119",
           "complexity": 15,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/pipeline/dispatcher_pre.go:45",
           "complexity": 12,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/pipeline/dispatcher_aimd.go:53",
           "complexity": 6,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/pipeline/dispatcher_async.go:42",
           "complexity": 6,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/pipeline/progress_tracker.go:73",
           "complexity": 4,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/pipeline/dispatcher_direct.go:30",
           "complexity": 2,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Run",
           "language": "go",
           "source": "internal/processor/pipeline/dispatcher_pre_test.go:18",
           "complexity": 2,
-          "callers": 554
+          "callers": 563
         },
         {
           "name": "Error",
           "language": "go",
           "source": "internal/processor/pipeline/request_item.go:53",
           "complexity": 1,
-          "callers": 344
+          "callers": 346
         },
         {
           "name": "len",
           "language": "go",
           "source": "internal/processor/pipeline/result_checkpointer_test.go:55",
           "complexity": 1,
-          "callers": 109
+          "callers": 113
         },
         {
           "name": "NewPendingRequests",
           "language": "go",
           "source": "internal/processor/pipeline/pending.go:25",
           "complexity": 1,
-          "callers": 69
+          "callers": 72
         },
         {
           "name": "Store",
           "language": "go",
           "source": "internal/processor/pipeline/pending.go:51",
           "complexity": 1,
-          "callers": 56
+          "callers": 59
         },
         {
           "name": "Wait",
           "language": "go",
-          "source": "internal/processor/pipeline/pending.go:149",
+          "source": "internal/processor/pipeline/pending.go:163",
           "complexity": 3,
           "callers": 49
         }
       ],
-      "symbols_truncated": 160
+      "symbols_truncated": 164
     },
     {
       "path": "internal/database/postgresql",
@@ -252,7 +252,7 @@
           "language": "go",
           "source": "internal/database/postgresql/batch_event.go:176",
           "complexity": 5,
-          "callers": 568
+          "callers": 575
         },
         {
           "name": "Close",
@@ -435,6 +435,103 @@
       "symbols_truncated": 55
     },
     {
+      "path": "pkg/clients/http",
+      "source_files": 3,
+      "functions": 60,
+      "test_functions": 40,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "Error",
+          "language": "go",
+          "source": "pkg/clients/http/http_client_errors.go:41",
+          "complexity": 1,
+          "callers": 317
+        },
+        {
+          "name": "Close",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:226",
+          "complexity": 3,
+          "callers": 41
+        },
+        {
+          "name": "testLogger",
+          "language": "go",
+          "source": "pkg/clients/http/http_client_test.go:44",
+          "complexity": 1,
+          "callers": 40
+        },
+        {
+          "name": "NewHTTPClient",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:111",
+          "complexity": 20,
+          "callers": 33
+        },
+        {
+          "name": "Post",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:240",
+          "complexity": 7,
+          "callers": 27
+        },
+        {
+          "name": "BuildTLSConfig",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:441",
+          "complexity": 16,
+          "callers": 19
+        },
+        {
+          "name": "computeBackoff",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:400",
+          "complexity": 3,
+          "callers": 5
+        },
+        {
+          "name": "IsRetryable",
+          "language": "go",
+          "source": "pkg/clients/http/http_client_errors.go:66",
+          "complexity": 1,
+          "callers": 5
+        },
+        {
+          "name": "HandleErrorResponse",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:284",
+          "complexity": 3,
+          "callers": 4
+        },
+        {
+          "name": "NewCapacityRetryContext",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:60",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "newRetryAfterFunc",
+          "language": "go",
+          "source": "pkg/clients/http/http_client.go:348",
+          "complexity": 8,
+          "callers": 3
+        },
+        {
+          "name": "containsString",
+          "language": "go",
+          "source": "pkg/clients/http/http_client_test.go:1293",
+          "complexity": 5,
+          "callers": 3
+        }
+      ],
+      "symbols_truncated": 48
+    },
+    {
       "path": "benchmarks",
       "source_files": 3,
       "functions": 58,
@@ -552,103 +649,6 @@
       "symbols_truncated": 46
     },
     {
-      "path": "pkg/clients/http",
-      "source_files": 3,
-      "functions": 57,
-      "test_functions": 38,
-      "languages": [
-        "go",
-        "unknown"
-      ],
-      "symbols": [
-        {
-          "name": "Error",
-          "language": "go",
-          "source": "pkg/clients/http/http_client_errors.go:41",
-          "complexity": 1,
-          "callers": 317
-        },
-        {
-          "name": "Close",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:226",
-          "complexity": 3,
-          "callers": 40
-        },
-        {
-          "name": "testLogger",
-          "language": "go",
-          "source": "pkg/clients/http/http_client_test.go:44",
-          "complexity": 1,
-          "callers": 39
-        },
-        {
-          "name": "NewHTTPClient",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:111",
-          "complexity": 20,
-          "callers": 32
-        },
-        {
-          "name": "Post",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:240",
-          "complexity": 7,
-          "callers": 26
-        },
-        {
-          "name": "BuildTLSConfig",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:416",
-          "complexity": 16,
-          "callers": 19
-        },
-        {
-          "name": "IsRetryable",
-          "language": "go",
-          "source": "pkg/clients/http/http_client_errors.go:66",
-          "complexity": 1,
-          "callers": 5
-        },
-        {
-          "name": "HandleErrorResponse",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:284",
-          "complexity": 3,
-          "callers": 4
-        },
-        {
-          "name": "computeBackoff",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:375",
-          "complexity": 3,
-          "callers": 4
-        },
-        {
-          "name": "NewCapacityRetryContext",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:60",
-          "complexity": 1,
-          "callers": 4
-        },
-        {
-          "name": "containsString",
-          "language": "go",
-          "source": "pkg/clients/http/http_client_test.go:1178",
-          "complexity": 5,
-          "callers": 3
-        },
-        {
-          "name": "NewDroppedReasonContext",
-          "language": "go",
-          "source": "pkg/clients/http/http_client.go:72",
-          "complexity": 1,
-          "callers": 3
-        }
-      ],
-      "symbols_truncated": 45
-    },
-    {
       "path": "internal/gc/collector",
       "source_files": 2,
       "functions": 56,
@@ -734,7 +734,7 @@
         {
           "name": "Delete",
           "language": "go",
-          "source": "internal/gc/collector/collector_test.go:907",
+          "source": "internal/gc/collector/collector_test.go:913",
           "complexity": 2,
           "callers": 7
         },
@@ -863,7 +863,7 @@
           "language": "go",
           "source": "internal/database/mock/mock_resumable_client_test.go:36",
           "complexity": 1,
-          "callers": 224
+          "callers": 226
         },
         {
           "name": "DBStore",
@@ -963,14 +963,14 @@
           "language": "go",
           "source": "internal/files_store/s3/client.go:117",
           "complexity": 7,
-          "callers": 119
+          "callers": 120
         },
         {
           "name": "Write",
           "language": "go",
           "source": "internal/files_store/s3/client.go:349",
           "complexity": 1,
-          "callers": 56
+          "callers": 58
         },
         {
           "name": "newMockS3Client",
@@ -1063,7 +1063,7 @@
           "language": "go",
           "source": "internal/files_store/retryclient/client.go:60",
           "complexity": 1,
-          "callers": 138
+          "callers": 139
         },
         {
           "name": "Store",
@@ -1160,7 +1160,7 @@
           "language": "go",
           "source": "internal/util/semaphore/semaphore.go:60",
           "complexity": 2,
-          "callers": 135
+          "callers": 136
         },
         {
           "name": "Acquire",
@@ -1257,28 +1257,28 @@
           "language": "go",
           "source": "internal/files_store/gcs/client.go:159",
           "complexity": 3,
-          "callers": 119
+          "callers": 120
         },
         {
           "name": "Write",
           "language": "go",
           "source": "internal/files_store/gcs/client_test.go:122",
           "complexity": 3,
-          "callers": 47
+          "callers": 49
         },
         {
           "name": "Write",
           "language": "go",
           "source": "internal/files_store/gcs/client.go:529",
           "complexity": 2,
-          "callers": 47
+          "callers": 49
         },
         {
           "name": "Write",
           "language": "go",
           "source": "internal/files_store/gcs/client_test.go:189",
           "complexity": 1,
-          "callers": 47
+          "callers": 49
         },
         {
           "name": "newMockBucket",
@@ -1449,23 +1449,23 @@
         {
           "name": "NewConfig",
           "language": "go",
-          "source": "internal/apiserver/common/config.go:149",
+          "source": "internal/apiserver/common/config.go:153",
           "complexity": 1,
           "callers": 139
         },
         {
           "name": "Load",
           "language": "go",
-          "source": "internal/apiserver/common/config.go:153",
+          "source": "internal/apiserver/common/config.go:157",
           "complexity": 3,
-          "callers": 84
+          "callers": 86
         },
         {
           "name": "WriteAPIError",
           "language": "go",
           "source": "internal/apiserver/common/rest.go:103",
           "complexity": 1,
-          "callers": 35,
+          "callers": 36,
           "annotations": [
             "handles_user_input"
           ]
@@ -1483,7 +1483,7 @@
         {
           "name": "Validate",
           "language": "go",
-          "source": "internal/apiserver/common/config.go:178",
+          "source": "internal/apiserver/common/config.go:182",
           "complexity": 12,
           "callers": 14
         },
@@ -1502,7 +1502,7 @@
           "language": "go",
           "source": "internal/apiserver/common/rest.go:123",
           "complexity": 2,
-          "callers": 7
+          "callers": 8
         },
         {
           "name": "RegisterHandler",
@@ -1514,7 +1514,7 @@
         {
           "name": "applyDefaults",
           "language": "go",
-          "source": "internal/apiserver/common/config.go:231",
+          "source": "internal/apiserver/common/config.go:235",
           "complexity": 9,
           "callers": 3
         },
@@ -1893,7 +1893,7 @@
           "language": "go",
           "source": "internal/gc/config/config.go:81",
           "complexity": 15,
-          "callers": 105
+          "callers": 107
         },
         {
           "name": "writeTempConfig",
@@ -2037,7 +2037,7 @@
           "language": "go",
           "source": "internal/shared/openai/apierror.go:36",
           "complexity": 2,
-          "callers": 40
+          "callers": 41
         },
         {
           "name": "IsValid",
@@ -2120,14 +2120,14 @@
           "language": "go",
           "source": "internal/files_store/fs/client.go:69",
           "complexity": 4,
-          "callers": 115
+          "callers": 116
         },
         {
           "name": "Write",
           "language": "go",
           "source": "internal/files_store/fs/client.go:239",
           "complexity": 1,
-          "callers": 46
+          "callers": 48
         },
         {
           "name": "Store",
@@ -2227,7 +2227,7 @@
           "language": "go",
           "source": "internal/util/otel/otel_test.go:43",
           "complexity": 1,
-          "callers": 244
+          "callers": 245
         },
         {
           "name": "WithValues",
@@ -2303,6 +2303,117 @@
       "symbols_truncated": 8
     },
     {
+      "path": "internal/apiserver/middleware",
+      "source_files": 7,
+      "functions": 18,
+      "test_functions": 7,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "WriteHeader",
+          "language": "go",
+          "source": "internal/apiserver/middleware/request_middleware.go:136",
+          "complexity": 1,
+          "callers": 73
+        },
+        {
+          "name": "Recovery",
+          "language": "go",
+          "source": "internal/apiserver/middleware/recovery_middleware.go:31",
+          "complexity": 6,
+          "callers": 4
+        },
+        {
+          "name": "StatusCode",
+          "language": "go",
+          "source": "internal/apiserver/middleware/request_middleware.go:141",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "wrapWithRequestMiddleware",
+          "language": "go",
+          "source": "internal/apiserver/middleware/request_middleware_test.go:42",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "newTestConfig",
+          "language": "go",
+          "source": "internal/apiserver/middleware/request_middleware_test.go:30",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "NewRequestMiddleware",
+          "language": "go",
+          "source": "internal/apiserver/middleware/request_middleware.go:49",
+          "complexity": 10,
+          "callers": 2
+        },
+        {
+          "name": "assertMissingTenantError",
+          "language": "go",
+          "source": "internal/apiserver/middleware/tenant_middleware_test.go:32",
+          "complexity": 4,
+          "callers": 2,
+          "annotations": [
+            "test:is_test_helper"
+          ]
+        },
+        {
+          "name": "RequireTenant",
+          "language": "go",
+          "source": "internal/apiserver/middleware/tenant_middleware.go:31",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "SecurityHeaders",
+          "language": "go",
+          "source": "internal/apiserver/middleware/security_headers_middleware.go:28",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "doTestRecoveryMiddlewareWithPanic",
+          "language": "go",
+          "source": "internal/apiserver/middleware/recovery_middleware_test.go:60",
+          "complexity": 10,
+          "callers": 0,
+          "annotations": [
+            "test:subtests"
+          ]
+        },
+        {
+          "name": "TestRequestMiddleware_RequestID",
+          "language": "go",
+          "source": "internal/apiserver/middleware/request_middleware_test.go:131",
+          "complexity": 8,
+          "callers": 0,
+          "annotations": [
+            "test:is_test_func",
+            "test:subtests"
+          ]
+        },
+        {
+          "name": "TestRequireTenant_MiddlewareChain",
+          "language": "go",
+          "source": "internal/apiserver/middleware/tenant_middleware_test.go:96",
+          "complexity": 7,
+          "callers": 0,
+          "annotations": [
+            "test:is_test_func",
+            "test:subtests"
+          ]
+        }
+      ],
+      "symbols_truncated": 6
+    },
+    {
       "path": "internal/files_store/mock",
       "source_files": 2,
       "functions": 17,
@@ -2317,7 +2428,7 @@
           "language": "go",
           "source": "internal/files_store/mock/mock_files_client.go:164",
           "complexity": 1,
-          "callers": 46
+          "callers": 48
         },
         {
           "name": "NewMockBatchFilesClient",
@@ -2522,121 +2633,6 @@
         }
       ],
       "symbols_truncated": 3
-    },
-    {
-      "path": "internal/apiserver/middleware",
-      "source_files": 5,
-      "functions": 14,
-      "test_functions": 5,
-      "languages": [
-        "go",
-        "unknown"
-      ],
-      "symbols": [
-        {
-          "name": "WriteHeader",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware.go:132",
-          "complexity": 1,
-          "callers": 69
-        },
-        {
-          "name": "Recovery",
-          "language": "go",
-          "source": "internal/apiserver/middleware/recovery_middleware.go:31",
-          "complexity": 6,
-          "callers": 4
-        },
-        {
-          "name": "StatusCode",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware.go:137",
-          "complexity": 1,
-          "callers": 4
-        },
-        {
-          "name": "wrapWithRequestMiddleware",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware_test.go:42",
-          "complexity": 1,
-          "callers": 3
-        },
-        {
-          "name": "NewRequestMiddleware",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware.go:49",
-          "complexity": 8,
-          "callers": 2
-        },
-        {
-          "name": "newTestConfig",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware_test.go:30",
-          "complexity": 1,
-          "callers": 2
-        },
-        {
-          "name": "doTestRecoveryMiddlewareWithPanic",
-          "language": "go",
-          "source": "internal/apiserver/middleware/recovery_middleware_test.go:60",
-          "complexity": 10,
-          "callers": 0,
-          "annotations": [
-            "test:subtests"
-          ]
-        },
-        {
-          "name": "TestRequestMiddleware_RequestID",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware_test.go:111",
-          "complexity": 8,
-          "callers": 0,
-          "annotations": [
-            "test:is_test_func",
-            "test:subtests"
-          ]
-        },
-        {
-          "name": "TestRequestMiddleware_TenantHeader",
-          "language": "go",
-          "source": "internal/apiserver/middleware/request_middleware_test.go:47",
-          "complexity": 5,
-          "callers": 0,
-          "annotations": [
-            "test:is_test_func",
-            "test:subtests",
-            "test:table_driven"
-          ]
-        },
-        {
-          "name": "doTestRecoveryMiddlewareNoPanic",
-          "language": "go",
-          "source": "internal/apiserver/middleware/recovery_middleware_test.go:39",
-          "complexity": 3,
-          "callers": 0
-        },
-        {
-          "name": "BenchmarkRecoveryMiddleware_NoPanic",
-          "language": "go",
-          "source": "internal/apiserver/middleware/recovery_middleware_test.go:144",
-          "complexity": 2,
-          "callers": 0,
-          "annotations": [
-            "test:is_test_func"
-          ]
-        },
-        {
-          "name": "BenchmarkRecoveryMiddleware_WithPanic",
-          "language": "go",
-          "source": "internal/apiserver/middleware/recovery_middleware_test.go:157",
-          "complexity": 2,
-          "callers": 0,
-          "annotations": [
-            "test:is_test_func"
-          ]
-        }
-      ],
-      "symbols_truncated": 2
     },
     {
       "path": "internal/util/com",
@@ -2873,14 +2869,14 @@
           "language": "go",
           "source": "internal/gc/podwatcher/watcher.go:85",
           "complexity": 3,
-          "callers": 467
+          "callers": 474
         },
         {
           "name": "New",
           "language": "go",
           "source": "internal/gc/podwatcher/watcher.go:57",
           "complexity": 4,
-          "callers": 113
+          "callers": 114
         },
         {
           "name": "readyPod",
@@ -3150,7 +3146,7 @@
           "language": "go",
           "source": "internal/shared/syncutil/mutex_map.go:21",
           "complexity": 1,
-          "callers": 80
+          "callers": 82
         },
         {
           "name": "Store",
@@ -3224,13 +3220,13 @@
           "name": "New",
           "language": "go",
           "source": "internal/apiserver/server/server.go:70",
-          "complexity": 7,
-          "callers": 115
+          "complexity": 8,
+          "callers": 116
         },
         {
           "name": "Start",
           "language": "go",
-          "source": "internal/apiserver/server/server.go:133",
+          "source": "internal/apiserver/server/server.go:137",
           "complexity": 19,
           "callers": 10
         },
@@ -4291,7 +4287,7 @@
       "caller": "main",
       "caller_source": "benchmarks/benchmark.py:2403",
       "callee": "load_profile",
-      "callee_source": "benchmarks/generate_prompts.py:320",
+      "callee_source": "benchmarks/benchmark.py:56",
       "call_site_source": "benchmarks/benchmark.py:2404",
       "confidence": "UNCERTAIN"
     },
@@ -4299,7 +4295,7 @@
       "caller": "main",
       "caller_source": "benchmarks/benchmark.py:2403",
       "callee": "load_profile",
-      "callee_source": "benchmarks/benchmark.py:56",
+      "callee_source": "benchmarks/generate_prompts.py:320",
       "call_site_source": "benchmarks/benchmark.py:2404",
       "confidence": "UNCERTAIN"
     },
@@ -4323,7 +4319,7 @@
       "caller": "main",
       "caller_source": "benchmarks/generate_prompts.py:329",
       "callee": "load_profile",
-      "callee_source": "benchmarks/generate_prompts.py:320",
+      "callee_source": "benchmarks/benchmark.py:56",
       "call_site_source": "benchmarks/generate_prompts.py:330",
       "confidence": "UNCERTAIN"
     },
@@ -4331,7 +4327,7 @@
       "caller": "main",
       "caller_source": "benchmarks/generate_prompts.py:329",
       "callee": "load_profile",
-      "callee_source": "benchmarks/benchmark.py:56",
+      "callee_source": "benchmarks/generate_prompts.py:320",
       "call_site_source": "benchmarks/generate_prompts.py:330",
       "confidence": "UNCERTAIN"
     },
@@ -5153,18 +5149,18 @@
     },
     {
       "caller": "TestRequestMiddleware_RequestID",
-      "caller_source": "internal/apiserver/middleware/request_middleware_test.go:111",
+      "caller_source": "internal/apiserver/middleware/request_middleware_test.go:131",
       "callee": "Run",
       "callee_source": "internal/database/postgresql/batch_event.go:176",
-      "call_site_source": "internal/apiserver/middleware/request_middleware_test.go:114",
+      "call_site_source": "internal/apiserver/middleware/request_middleware_test.go:134",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestRequestMiddleware_RequestID",
-      "caller_source": "internal/apiserver/middleware/request_middleware_test.go:111",
+      "caller_source": "internal/apiserver/middleware/request_middleware_test.go:131",
       "callee": "Run",
       "callee_source": "internal/database/postgresql/batch_event.go:176",
-      "call_site_source": "internal/apiserver/middleware/request_middleware_test.go:136",
+      "call_site_source": "internal/apiserver/middleware/request_middleware_test.go:156",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5172,7 +5168,23 @@
       "caller_source": "internal/apiserver/middleware/request_middleware_test.go:47",
       "callee": "Run",
       "callee_source": "internal/database/postgresql/batch_event.go:176",
-      "call_site_source": "internal/apiserver/middleware/request_middleware_test.go:86",
+      "call_site_source": "internal/apiserver/middleware/request_middleware_test.go:105",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestRequireTenant",
+      "caller_source": "internal/apiserver/middleware/tenant_middleware_test.go:47",
+      "callee": "Run",
+      "callee_source": "internal/database/postgresql/batch_event.go:176",
+      "call_site_source": "internal/apiserver/middleware/tenant_middleware_test.go:69",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestRequireTenant_MiddlewareChain",
+      "caller_source": "internal/apiserver/middleware/tenant_middleware_test.go:96",
+      "callee": "Run",
+      "callee_source": "internal/database/postgresql/batch_event.go:176",
+      "call_site_source": "internal/apiserver/middleware/tenant_middleware_test.go:134",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7492,7 +7504,7 @@
       "caller_source": "internal/gc/reconciler/reconciler_test.go:984",
       "callee": "Run",
       "callee_source": "internal/database/postgresql/batch_event.go:176",
-      "call_site_source": "internal/gc/reconciler/reconciler_test.go:1017",
+      "call_site_source": "internal/gc/reconciler/reconciler_test.go:1019",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8070,25 +8082,9 @@
       "callee_source": "internal/database/postgresql/batch_event.go:176",
       "call_site_source": "internal/util/semaphore/aimd_test.go:282",
       "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestAIMDNoCallbackWhenUnchanged",
-      "caller_source": "internal/util/semaphore/aimd_test.go:281",
-      "callee": "Run",
-      "callee_source": "internal/database/postgresql/batch_event.go:176",
-      "call_site_source": "internal/util/semaphore/aimd_test.go:296",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestAIMDInitialClamp",
-      "caller_source": "internal/util/semaphore/aimd_test.go:45",
-      "callee": "Run",
-      "callee_source": "internal/database/postgresql/batch_event.go:176",
-      "call_site_source": "internal/util/semaphore/aimd_test.go:59",
-      "confidence": "UNCERTAIN"
     }
   ],
-  "call_relationships_truncated": 22019,
+  "call_relationships_truncated": 22203,
   "test_relationships": [
     {
       "test": "TestBundledConfigValid",
@@ -8101,7 +8097,7 @@
       "test": "TestBundledConfigValid",
       "test_source": "cmd/batch-processor/main_test.go:9",
       "target": "NewConfig",
-      "target_source": "internal/apiserver/common/config.go:149",
+      "target_source": "internal/apiserver/common/config.go:153",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8115,7 +8111,7 @@
       "test": "TestBundledConfigValid",
       "test_source": "cmd/batch-processor/main_test.go:9",
       "target": "Validate",
-      "target_source": "internal/apiserver/common/config.go:178",
+      "target_source": "internal/apiserver/common/config.go:182",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9396,7 +9392,7 @@
       "test": "TestCancelBatchConcurrentWritesPostgres",
       "test_source": "internal/apiserver/batch/cancel_race_pg_test.go:39",
       "target": "DBDelete",
-      "target_source": "internal/gc/collector/collector_test.go:941",
+      "target_source": "internal/gc/collector/collector_test.go:947",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11195,7 +11191,7 @@
       "test": "TestBatchAPIExtraEndpoints",
       "test_source": "internal/apiserver/common/config_test.go:221",
       "target": "Validate",
-      "target_source": "internal/apiserver/common/config.go:178",
+      "target_source": "internal/apiserver/common/config.go:182",
       "confidence": "CERTAIN"
     },
     {
@@ -11279,7 +11275,7 @@
       "test": "TestServerConfigValidate_FileClientType",
       "test_source": "internal/apiserver/common/config_test.go:258",
       "target": "Validate",
-      "target_source": "internal/apiserver/common/config.go:178",
+      "target_source": "internal/apiserver/common/config.go:182",
       "confidence": "CERTAIN"
     },
     {
@@ -11314,7 +11310,7 @@
       "test": "TestServerConfig_PostgreSQLPoolMaxConnections",
       "test_source": "internal/apiserver/common/config_test.go:290",
       "target": "NewConfig",
-      "target_source": "internal/apiserver/common/config.go:149",
+      "target_source": "internal/apiserver/common/config.go:153",
       "confidence": "CERTAIN"
     },
     {
@@ -11398,14 +11394,14 @@
       "test": "TestServerConfig_PostgreSQLPoolMaxConnections",
       "test_source": "internal/apiserver/common/config_test.go:290",
       "target": "Validate",
-      "target_source": "internal/apiserver/common/config.go:178",
+      "target_source": "internal/apiserver/common/config.go:182",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestServerConfig_PostgreSQLPoolMaxConnections",
       "test_source": "internal/apiserver/common/config_test.go:290",
       "target": "loadFromFile",
-      "target_source": "internal/apiserver/common/config.go:214",
+      "target_source": "internal/apiserver/common/config.go:218",
       "confidence": "CERTAIN"
     },
     {
@@ -11440,14 +11436,14 @@
       "test": "TestAPIServerConfig",
       "test_source": "internal/apiserver/common/config_test.go:31",
       "target": "Load",
-      "target_source": "internal/apiserver/common/config.go:153",
+      "target_source": "internal/apiserver/common/config.go:157",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestAPIServerConfig",
       "test_source": "internal/apiserver/common/config_test.go:31",
       "target": "NewConfig",
-      "target_source": "internal/apiserver/common/config.go:149",
+      "target_source": "internal/apiserver/common/config.go:153",
       "confidence": "CERTAIN"
     },
     {
@@ -11538,7 +11534,7 @@
       "test": "TestGetInputHeader",
       "test_source": "internal/apiserver/common/config_test.go:329",
       "target": "GetInputHeader",
-      "target_source": "internal/apiserver/common/config.go:301",
+      "target_source": "internal/apiserver/common/config.go:305",
       "confidence": "CERTAIN"
     },
     {
@@ -11591,7 +11587,7 @@
       "confidence": "UNCERTAIN"
     }
   ],
-  "test_relationships_truncated": 8272,
+  "test_relationships_truncated": 8381,
   "operations": [
     {
       "kind": "DBOperation",

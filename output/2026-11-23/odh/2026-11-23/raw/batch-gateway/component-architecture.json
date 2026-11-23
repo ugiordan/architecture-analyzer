@@ -1,13 +1,13 @@
 {
   "component": "batch-gateway",
   "repo": "opendatahub-io/batch-gateway",
-  "commit_sha": "0b7c47a3b330ca654610acca11b509747134a07c",
-  "extracted_at": "2026-11-23T06:58:28Z",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "commit_sha": "4fc7beb115071ec4b3a31fde091ce177453e7a03",
+  "extracted_at": "2026-11-23T11:30:08Z",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "schema_version": "2",
   "rbac": {},
   "dependencies": {
-    "go_version": "1.26.0",
+    "go_version": "1.27.3",
     "go_modules": [
       {
         "module": "cloud.google.com/go/storage",
@@ -206,7 +206,7 @@
       "path": "docker/Dockerfile.apiserver",
       "base_image": "gcr.io/distroless/static:nonroot",
       "build_stage_images": [
-        "quay.io/projectquay/golang:1.27"
+        "golang:1.27.3"
       ],
       "stages": 2,
       "user": "65532:65532",
@@ -287,7 +287,7 @@
       "path": "docker/Dockerfile.gc",
       "base_image": "gcr.io/distroless/static:nonroot",
       "build_stage_images": [
-        "quay.io/projectquay/golang:1.27"
+        "golang:1.27.3"
       ],
       "stages": 2,
       "user": "65532:65532",
@@ -368,7 +368,7 @@
       "path": "docker/Dockerfile.processor",
       "base_image": "gcr.io/distroless/static:nonroot",
       "build_stage_images": [
-        "quay.io/projectquay/golang:1.27"
+        "golang:1.27.3"
       ],
       "stages": 2,
       "user": "65532:65532",
@@ -2653,7 +2653,8 @@
     "webhooks": "none"
   },
   "summary": "batch-gateway is a Kubernetes component. connecting to external services: gcs, redis, s3, urllib. runtime dependencies: OpenTelemetry Collector. with 285 operator config constants (3 env vars). exposing 28 Prometheus metrics.",
-  "go_ast_mode": "full",
+  "go_ast_mode": "syntax-only",
+  "go_ast_warning": "majority of packages had type-checking errors, using syntax-only mode",
   "security_annotations": [
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -2735,6 +2736,34 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/create-release.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-go@v7",
+      "source": ".github/workflows/create-release.yml",
+      "description": "Action \"actions/setup-go\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/upload-artifact@v7",
+      "source": ".github/workflows/create-release.yml",
+      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v7",
+      "source": ".github/workflows/create-release.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
       "resource": "docker/setup-qemu-action@v4",
       "source": ".github/workflows/create-release.yml",
       "description": "Action \"docker/setup-qemu-action\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -2794,34 +2823,6 @@
       "resource": "softprops/action-gh-release@v3",
       "source": ".github/workflows/create-release.yml",
       "description": "Action \"softprops/action-gh-release\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/create-release.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v7",
-      "source": ".github/workflows/create-release.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/setup-go@v7",
-      "source": ".github/workflows/create-release.yml",
-      "description": "Action \"actions/setup-go\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/upload-artifact@v7",
-      "source": ".github/workflows/create-release.yml",
-      "description": "Action \"actions/upload-artifact\" uses mutable ref \"v7\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

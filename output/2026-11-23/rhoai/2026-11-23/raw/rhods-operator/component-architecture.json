@@ -6,8 +6,8 @@
   ],
   "repo": "red-hat-data-services/rhods-operator",
   "commit_sha": "159de5894999c8a521e2673002ca2f367cebf0ff",
-  "extracted_at": "2026-11-23T06:56:12Z",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "extracted_at": "2026-11-23T11:27:59Z",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "schema_version": "2",
   "rbac": {
     "cluster_roles": [
@@ -3847,40 +3847,6 @@
     {
       "name": "Defaulter-webhook",
       "type": "mutating",
-      "path": "/mutate-datasciencecluster-v3",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "mutations": [
-        {
-          "field": "instancesNamespace",
-          "operation": "set",
-          "condition": "aiHub.ManagementState == operatorv1.Managed \u0026\u0026 aiHub.InstancesNamespace == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
-            "line": 105
-          }
-        },
-        {
-          "field": "nim.managementState",
-          "operation": "set",
-          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
-          "source": {
-            "type": "go_handler",
-            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
-            "line": 115
-          }
-        }
-      ],
-      "target_type": "Defaulter"
-    },
-    {
-      "name": "Defaulter-webhook",
-      "type": "mutating",
       "path": "/mutate-datasciencecluster-v2",
       "sources": [
         {
@@ -3913,6 +3879,40 @@
       "target_type": "Defaulter"
     },
     {
+      "name": "Defaulter-webhook",
+      "type": "mutating",
+      "path": "/mutate-datasciencecluster-v3",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "mutations": [
+        {
+          "field": "instancesNamespace",
+          "operation": "set",
+          "condition": "aiHub.ManagementState == operatorv1.Managed \u0026\u0026 aiHub.InstancesNamespace == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
+            "line": 105
+          }
+        },
+        {
+          "field": "nim.managementState",
+          "operation": "set",
+          "condition": "kserve.ManagementState == operatorv1.Managed \u0026\u0026 kserve.NIM.ManagementState == \"\"",
+          "source": {
+            "type": "go_handler",
+            "file": "/home/runner/work/_temp/arch-analyzer-repos/rhods-operator/internal/webhook/datasciencecluster/v3/defaulting.go",
+            "line": 115
+          }
+        }
+      ],
+      "target_type": "Defaulter"
+    },
+    {
       "name": "Injector-webhook",
       "type": "mutating",
       "path": "/mutate-prometheus-monitors",
@@ -3939,7 +3939,19 @@
     {
       "name": "Validator-webhook",
       "type": "validating",
-      "path": "/validate-dscinitialization-v1",
+      "path": "/validate-datasciencecluster-v3",
+      "sources": [
+        {
+          "type": "go_ast",
+          "file": ""
+        }
+      ],
+      "target_type": "Validator"
+    },
+    {
+      "name": "Validator-webhook",
+      "type": "validating",
+      "path": "/validate-dscinitialization-v2",
       "sources": [
         {
           "type": "go_ast",
@@ -3963,19 +3975,7 @@
     {
       "name": "Validator-webhook",
       "type": "validating",
-      "path": "/validate-datasciencecluster-v3",
-      "sources": [
-        {
-          "type": "go_ast",
-          "file": ""
-        }
-      ],
-      "target_type": "Validator"
-    },
-    {
-      "name": "Validator-webhook",
-      "type": "validating",
-      "path": "/validate-dscinitialization-v2",
+      "path": "/validate-dscinitialization-v1",
       "sources": [
         {
           "type": "go_ast",

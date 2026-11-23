@@ -3,7 +3,7 @@
   "component": "kale",
   "repo": "opendatahub-io/kale",
   "commit_sha": "8a9c986ae7309c5a2398e4b5d09ed07c2d7d37d7",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "kale is a Kubernetes component. connecting to external services: requests. 17 Python package dependencies (17 required), categories: 1 k8s-client. Python k8s client with 43 API call(s).",
   "repository_description": "Turn Jupyter Notebooks into ML Pipelines — In One Click",
   "description_source": "README.md:8",
@@ -1724,6 +1724,14 @@
       "caller": "main",
       "caller_source": "kale/cli.py:47",
       "callee": "run",
+      "callee_source": "kale/compiler.py:96",
+      "call_site_source": "kale/cli.py:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kale/cli.py:47",
+      "callee": "run",
       "callee_source": "kale/step.py:114",
       "call_site_source": "kale/cli.py:137",
       "confidence": "UNCERTAIN"
@@ -1739,9 +1747,9 @@
     {
       "caller": "main",
       "caller_source": "kale/cli.py:47",
-      "callee": "run",
-      "callee_source": "kale/compiler.py:96",
-      "call_site_source": "kale/cli.py:137",
+      "callee": "run_pipeline",
+      "callee_source": "kale/rpc/kfp.py:128",
+      "call_site_source": "kale/cli.py:152",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1755,16 +1763,8 @@
     {
       "caller": "main",
       "caller_source": "kale/cli.py:47",
-      "callee": "run_pipeline",
-      "callee_source": "kale/rpc/kfp.py:128",
-      "call_site_source": "kale/cli.py:152",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kale/cli.py:47",
       "callee": "upload_pipeline",
-      "callee_source": "kale/rpc/kfp.py:121",
+      "callee_source": "kale/common/kfputils.py:115",
       "call_site_source": "kale/cli.py:145",
       "confidence": "UNCERTAIN"
     },
@@ -1772,7 +1772,7 @@
       "caller": "main",
       "caller_source": "kale/cli.py:47",
       "callee": "upload_pipeline",
-      "callee_source": "kale/common/kfputils.py:115",
+      "callee_source": "kale/rpc/kfp.py:121",
       "call_site_source": "kale/cli.py:145",
       "confidence": "UNCERTAIN"
     },
@@ -2404,7 +2404,7 @@
       "caller": "read_json_from_file",
       "caller_source": "kale/common/utils.py:154",
       "callee": "load",
-      "callee_source": "kale/marshal/backend.py:145",
+      "callee_source": "kale/marshal/backend.py:251",
       "call_site_source": "kale/common/utils.py:158",
       "confidence": "UNCERTAIN"
     },
@@ -2412,7 +2412,7 @@
       "caller": "read_json_from_file",
       "caller_source": "kale/common/utils.py:154",
       "callee": "load",
-      "callee_source": "kale/marshal/backend.py:251",
+      "callee_source": "kale/marshal/backend.py:145",
       "call_site_source": "kale/common/utils.py:158",
       "confidence": "UNCERTAIN"
     },
@@ -2484,7 +2484,7 @@
       "caller": "_default_load",
       "caller_source": "kale/marshal/backend.py:150",
       "callee": "load",
-      "callee_source": "kale/marshal/backend.py:251",
+      "callee_source": "kale/marshal/backend.py:145",
       "call_site_source": "kale/marshal/backend.py:154",
       "confidence": "UNCERTAIN"
     },
@@ -2492,7 +2492,7 @@
       "caller": "_default_load",
       "caller_source": "kale/marshal/backend.py:150",
       "callee": "load",
-      "callee_source": "kale/marshal/backend.py:145",
+      "callee_source": "kale/marshal/backend.py:251",
       "call_site_source": "kale/marshal/backend.py:154",
       "confidence": "UNCERTAIN"
     },
@@ -2516,7 +2516,7 @@
       "caller": "unmarshal_data",
       "caller_source": "kale/rpc/nb.py:186",
       "callee": "load",
-      "callee_source": "kale/marshal/backend.py:145",
+      "callee_source": "kale/marshal/backend.py:251",
       "call_site_source": "kale/rpc/nb.py:195",
       "confidence": "UNCERTAIN"
     },
@@ -2524,7 +2524,7 @@
       "caller": "unmarshal_data",
       "caller_source": "kale/rpc/nb.py:186",
       "callee": "load",
-      "callee_source": "kale/marshal/backend.py:251",
+      "callee_source": "kale/marshal/backend.py:145",
       "call_site_source": "kale/rpc/nb.py:195",
       "confidence": "UNCERTAIN"
     },
@@ -3036,7 +3036,7 @@
       "caller": "format_success",
       "caller_source": "kale/rpc/run.py:40",
       "callee": "serialize",
-      "callee_source": "kale/rpc/utils.py:19",
+      "callee_source": "kale/rpc/errors.py:58",
       "call_site_source": "kale/rpc/run.py:42",
       "confidence": "UNCERTAIN"
     },
@@ -3044,7 +3044,7 @@
       "caller": "format_success",
       "caller_source": "kale/rpc/run.py:40",
       "callee": "serialize",
-      "callee_source": "kale/rpc/errors.py:58",
+      "callee_source": "kale/rpc/utils.py:19",
       "call_site_source": "kale/rpc/run.py:42",
       "confidence": "UNCERTAIN"
     },
@@ -3100,7 +3100,7 @@
       "caller": "run",
       "caller_source": "kale/rpc/run.py:64",
       "callee": "serialize",
-      "callee_source": "kale/rpc/utils.py:19",
+      "callee_source": "kale/rpc/errors.py:58",
       "call_site_source": "kale/rpc/run.py:82",
       "confidence": "UNCERTAIN"
     },
@@ -3108,7 +3108,7 @@
       "caller": "run",
       "caller_source": "kale/rpc/run.py:64",
       "callee": "serialize",
-      "callee_source": "kale/rpc/errors.py:58",
+      "callee_source": "kale/rpc/utils.py:19",
       "call_site_source": "kale/rpc/run.py:82",
       "confidence": "UNCERTAIN"
     },
@@ -3196,7 +3196,7 @@
       "caller": "updateValue",
       "caller_source": "labextension/src/components/AnnotationInput.tsx:59",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
+      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
       "call_site_source": "labextension/src/components/AnnotationInput.tsx:60",
       "confidence": "UNCERTAIN"
     },
@@ -3204,7 +3204,7 @@
       "caller": "updateValue",
       "caller_source": "labextension/src/components/AnnotationInput.tsx:59",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
+      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
       "call_site_source": "labextension/src/components/AnnotationInput.tsx:60",
       "confidence": "UNCERTAIN"
     },
@@ -3212,7 +3212,7 @@
       "caller": "updateSelected",
       "caller_source": "labextension/src/components/ExperimentInput.tsx:42",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
+      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
       "call_site_source": "labextension/src/components/ExperimentInput.tsx:45",
       "confidence": "UNCERTAIN"
     },
@@ -3220,7 +3220,7 @@
       "caller": "updateSelected",
       "caller_source": "labextension/src/components/ExperimentInput.tsx:42",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
+      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
       "call_site_source": "labextension/src/components/ExperimentInput.tsx:45",
       "confidence": "UNCERTAIN"
     },
@@ -3228,7 +3228,7 @@
       "caller": "updateValue",
       "caller_source": "labextension/src/components/ExperimentInput.tsx:48",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
+      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
       "call_site_source": "labextension/src/components/ExperimentInput.tsx:50",
       "confidence": "UNCERTAIN"
     },
@@ -3236,7 +3236,7 @@
       "caller": "updateValue",
       "caller_source": "labextension/src/components/ExperimentInput.tsx:48",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
+      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
       "call_site_source": "labextension/src/components/ExperimentInput.tsx:50",
       "confidence": "UNCERTAIN"
     },
@@ -3244,7 +3244,7 @@
       "caller": "handleChange",
       "caller_source": "labextension/src/components/Input.tsx:120",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
+      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
       "call_site_source": "labextension/src/components/Input.tsx:126",
       "confidence": "UNCERTAIN"
     },
@@ -3252,7 +3252,7 @@
       "caller": "handleChange",
       "caller_source": "labextension/src/components/Input.tsx:120",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
+      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
       "call_site_source": "labextension/src/components/Input.tsx:126",
       "confidence": "UNCERTAIN"
     },
@@ -3260,7 +3260,7 @@
       "caller": "Select",
       "caller_source": "labextension/src/components/Select.tsx:54",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
+      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
       "call_site_source": "labextension/src/components/Select.tsx:88",
       "confidence": "UNCERTAIN"
     },
@@ -3268,7 +3268,7 @@
       "caller": "Select",
       "caller_source": "labextension/src/components/Select.tsx:54",
       "callee": "updateValue",
-      "callee_source": "labextension/src/components/ExperimentInput.tsx:48",
+      "callee_source": "labextension/src/components/AnnotationInput.tsx:59",
       "call_site_source": "labextension/src/components/Select.tsx:88",
       "confidence": "UNCERTAIN"
     },
@@ -3636,6 +3636,14 @@
       "caller": "showMessage",
       "caller_source": "labextension/src/lib/NotebookUtils.tsx:137",
       "callee": "showDialog",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
+      "call_site_source": "labextension/src/lib/NotebookUtils.tsx:147",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "showMessage",
+      "caller_source": "labextension/src/lib/NotebookUtils.tsx:137",
+      "callee": "showDialog",
       "callee_source": "labextension/src/lib/RPCUtils.tsx:393",
       "call_site_source": "labextension/src/lib/NotebookUtils.tsx:147",
       "confidence": "UNCERTAIN"
@@ -3644,14 +3652,6 @@
       "caller": "showMessage",
       "caller_source": "labextension/src/lib/NotebookUtils.tsx:137",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
-      "call_site_source": "labextension/src/lib/NotebookUtils.tsx:147",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "showMessage",
-      "caller_source": "labextension/src/lib/NotebookUtils.tsx:137",
-      "callee": "showDialog",
       "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
       "call_site_source": "labextension/src/lib/NotebookUtils.tsx:147",
       "confidence": "UNCERTAIN"
@@ -3660,7 +3660,7 @@
       "caller": "showYesNoDialog",
       "caller_source": "labextension/src/lib/NotebookUtils.tsx:160",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
       "call_site_source": "labextension/src/lib/NotebookUtils.tsx:173",
       "confidence": "UNCERTAIN"
     },
@@ -3668,7 +3668,7 @@
       "caller": "showYesNoDialog",
       "caller_source": "labextension/src/lib/NotebookUtils.tsx:160",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
       "call_site_source": "labextension/src/lib/NotebookUtils.tsx:173",
       "confidence": "UNCERTAIN"
     },
@@ -3692,7 +3692,7 @@
       "caller": "globalUnhandledRejection",
       "caller_source": "labextension/src/lib/RPCUtils.tsx:24",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
       "call_site_source": "labextension/src/lib/RPCUtils.tsx:28",
       "confidence": "UNCERTAIN"
     },
@@ -3700,7 +3700,7 @@
       "caller": "globalUnhandledRejection",
       "caller_source": "labextension/src/lib/RPCUtils.tsx:24",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
       "call_site_source": "labextension/src/lib/RPCUtils.tsx:28",
       "confidence": "UNCERTAIN"
     },
@@ -3716,7 +3716,7 @@
       "caller": "_legacy_executeRpcAndShowRPCError",
       "caller_source": "labextension/src/lib/RPCUtils.tsx:309",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
       "call_site_source": "labextension/src/lib/RPCUtils.tsx:329",
       "confidence": "UNCERTAIN"
     },
@@ -3724,7 +3724,7 @@
       "caller": "_legacy_executeRpcAndShowRPCError",
       "caller_source": "labextension/src/lib/RPCUtils.tsx:309",
       "callee": "showDialog",
-      "callee_source": "labextension/src/lib/RPCUtils.tsx:357",
+      "callee_source": "labextension/src/lib/RPCUtils.tsx:375",
       "call_site_source": "labextension/src/lib/RPCUtils.tsx:329",
       "confidence": "UNCERTAIN"
     },
@@ -3884,7 +3884,7 @@
       "caller": "wrapped_save",
       "caller_source": "kale/marshal/backend.py:90",
       "callee": "save",
-      "callee_source": "kale/marshal/backend.py:233",
+      "callee_source": "kale/marshal/backend.py:115",
       "call_site_source": "kale/marshal/backend.py:105",
       "confidence": "UNCERTAIN"
     },
@@ -3892,7 +3892,7 @@
       "caller": "wrapped_save",
       "caller_source": "kale/marshal/backend.py:90",
       "callee": "save",
-      "callee_source": "kale/marshal/backend.py:115",
+      "callee_source": "kale/marshal/backend.py:233",
       "call_site_source": "kale/marshal/backend.py:105",
       "confidence": "UNCERTAIN"
     },
@@ -3916,6 +3916,14 @@
       "caller": "_save",
       "caller_source": "kale/marshal/decorator.py:96",
       "callee": "save",
+      "callee_source": "kale/marshal/backend.py:115",
+      "call_site_source": "kale/marshal/decorator.py:116",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_save",
+      "caller_source": "kale/marshal/decorator.py:96",
+      "callee": "save",
       "callee_source": "kale/marshal/backend.py:233",
       "call_site_source": "kale/marshal/decorator.py:116",
       "confidence": "UNCERTAIN"
@@ -3924,15 +3932,7 @@
       "caller": "_save",
       "caller_source": "kale/marshal/decorator.py:96",
       "callee": "save",
-      "callee_source": "kale/marshal/backend.py:115",
-      "call_site_source": "kale/marshal/decorator.py:116",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "_save",
-      "caller_source": "kale/marshal/decorator.py:96",
-      "callee": "save",
-      "callee_source": "kale/marshal/backend.py:115",
+      "callee_source": "kale/marshal/backend.py:233",
       "call_site_source": "kale/marshal/decorator.py:124",
       "confidence": "UNCERTAIN"
     },
@@ -3940,7 +3940,7 @@
       "caller": "_save",
       "caller_source": "kale/marshal/decorator.py:96",
       "callee": "save",
-      "callee_source": "kale/marshal/backend.py:233",
+      "callee_source": "kale/marshal/backend.py:115",
       "call_site_source": "kale/marshal/decorator.py:124",
       "confidence": "UNCERTAIN"
     },
@@ -4188,7 +4188,7 @@
       "caller": "_run_compiled_code",
       "caller_source": "kale/compiler.py:338",
       "callee": "run_pipeline",
-      "callee_source": "kale/rpc/kfp.py:128",
+      "callee_source": "kale/common/kfputils.py:154",
       "call_site_source": "kale/compiler.py:342",
       "confidence": "UNCERTAIN"
     },
@@ -4196,7 +4196,7 @@
       "caller": "_run_compiled_code",
       "caller_source": "kale/compiler.py:338",
       "callee": "run_pipeline",
-      "callee_source": "kale/common/kfputils.py:154",
+      "callee_source": "kale/rpc/kfp.py:128",
       "call_site_source": "kale/compiler.py:342",
       "confidence": "UNCERTAIN"
     },
@@ -4228,7 +4228,7 @@
       "caller": "compile_and_run",
       "caller_source": "kale/compiler.py:82",
       "callee": "run",
-      "callee_source": "kale/pipeline.py:240",
+      "callee_source": "kale/step.py:114",
       "call_site_source": "kale/compiler.py:85",
       "confidence": "UNCERTAIN"
     },
@@ -4236,7 +4236,7 @@
       "caller": "compile_and_run",
       "caller_source": "kale/compiler.py:82",
       "callee": "run",
-      "callee_source": "kale/step.py:114",
+      "callee_source": "kale/pipeline.py:240",
       "call_site_source": "kale/compiler.py:85",
       "confidence": "UNCERTAIN"
     },
@@ -4948,31 +4948,7 @@
       "caller": "__init__",
       "caller_source": "kale/config/config.py:150",
       "callee": "_validate",
-      "callee_source": "kale/config/config.py:243",
-      "call_site_source": "kale/config/config.py:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__init__",
-      "caller_source": "kale/config/config.py:150",
-      "callee": "_validate",
       "callee_source": "kale/config/validators.py:64",
-      "call_site_source": "kale/config/config.py:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__init__",
-      "caller_source": "kale/config/config.py:150",
-      "callee": "_validate",
-      "callee_source": "kale/config/validators.py:45",
-      "call_site_source": "kale/config/config.py:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__init__",
-      "caller_source": "kale/config/config.py:150",
-      "callee": "_validate",
-      "callee_source": "kale/config/validators.py:27",
       "call_site_source": "kale/config/config.py:180",
       "confidence": "UNCERTAIN"
     },
@@ -4988,7 +4964,15 @@
       "caller": "__init__",
       "caller_source": "kale/config/config.py:150",
       "callee": "_validate",
-      "callee_source": "kale/config/validators.py:198",
+      "callee_source": "kale/config/validators.py:27",
+      "call_site_source": "kale/config/config.py:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "kale/config/config.py:150",
+      "callee": "_validate",
+      "callee_source": "kale/config/config.py:243",
       "call_site_source": "kale/config/config.py:180",
       "confidence": "UNCERTAIN"
     },
@@ -5004,6 +4988,14 @@
       "caller": "__init__",
       "caller_source": "kale/config/config.py:150",
       "callee": "_validate",
+      "callee_source": "kale/config/validators.py:88",
+      "call_site_source": "kale/config/config.py:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "kale/config/config.py:150",
+      "callee": "_validate",
       "callee_source": "kale/config/validators.py:108",
       "call_site_source": "kale/config/config.py:180",
       "confidence": "UNCERTAIN"
@@ -5012,7 +5004,15 @@
       "caller": "__init__",
       "caller_source": "kale/config/config.py:150",
       "callee": "_validate",
-      "callee_source": "kale/config/validators.py:88",
+      "callee_source": "kale/config/validators.py:198",
+      "call_site_source": "kale/config/config.py:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "kale/config/config.py:150",
+      "callee": "_validate",
+      "callee_source": "kale/config/validators.py:45",
       "call_site_source": "kale/config/config.py:180",
       "confidence": "UNCERTAIN"
     },
@@ -5052,7 +5052,31 @@
       "caller": "__call__",
       "caller_source": "kale/config/validators.py:30",
       "callee": "_validate",
-      "callee_source": "kale/config/validators.py:27",
+      "callee_source": "kale/config/validators.py:205",
+      "call_site_source": "kale/config/validators.py:32",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__call__",
+      "caller_source": "kale/config/validators.py:30",
+      "callee": "_validate",
+      "callee_source": "kale/config/validators.py:45",
+      "call_site_source": "kale/config/validators.py:32",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__call__",
+      "caller_source": "kale/config/validators.py:30",
+      "callee": "_validate",
+      "callee_source": "kale/config/validators.py:88",
+      "call_site_source": "kale/config/validators.py:32",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__call__",
+      "caller_source": "kale/config/validators.py:30",
+      "callee": "_validate",
+      "callee_source": "kale/config/validators.py:64",
       "call_site_source": "kale/config/validators.py:32",
       "confidence": "UNCERTAIN"
     },
@@ -5084,14 +5108,6 @@
       "caller": "__call__",
       "caller_source": "kale/config/validators.py:30",
       "callee": "_validate",
-      "callee_source": "kale/config/validators.py:45",
-      "call_site_source": "kale/config/validators.py:32",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__call__",
-      "caller_source": "kale/config/validators.py:30",
-      "callee": "_validate",
       "callee_source": "kale/config/validators.py:215",
       "call_site_source": "kale/config/validators.py:32",
       "confidence": "UNCERTAIN"
@@ -5100,23 +5116,7 @@
       "caller": "__call__",
       "caller_source": "kale/config/validators.py:30",
       "callee": "_validate",
-      "callee_source": "kale/config/validators.py:88",
-      "call_site_source": "kale/config/validators.py:32",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__call__",
-      "caller_source": "kale/config/validators.py:30",
-      "callee": "_validate",
-      "callee_source": "kale/config/validators.py:64",
-      "call_site_source": "kale/config/validators.py:32",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__call__",
-      "caller_source": "kale/config/validators.py:30",
-      "callee": "_validate",
-      "callee_source": "kale/config/validators.py:205",
+      "callee_source": "kale/config/validators.py:27",
       "call_site_source": "kale/config/validators.py:32",
       "confidence": "UNCERTAIN"
     },

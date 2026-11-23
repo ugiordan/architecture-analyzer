@@ -3,7 +3,7 @@
   "component": "kueue",
   "repo": "opendatahub-io/kueue",
   "commit_sha": "52c764c101ae0bb8cbf7aa3f3126a724222c3bad",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "kueue is a Kubernetes component. managing 2 CRD(s): ClusterQueue, LocalQueue. deploying 11 workload(s) (controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager) with 11 container(s). watching 14 resource type(s). exposing 2 service(s) on ports: 443. Dockerfile EXPOSE ports: 8080. with 41 webhook(s) (21 validating, 20 mutating). defining 11 API spec type(s) across 89 struct(s) with 284 total fields. with 635 operator config constants. following 11 reconciliation steps across 4 controller(s). exposing 33 Prometheus metrics. reporting 3 status condition types. Python k8s client with 4 API call(s) and 1 CRD kind reference(s). integrates with Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/alpha-enabled, config/components/certmanager, config/components/crd, config/components/internalcert, config/components/kueue-viz, config/components/manager, config/components/prometheus, config/components/rbac, config/components/visibility, config/components/visibility-apf, config/components/webhook, config/default, config/dev, config/kueue-viz, config/prometheus, config/rhoai, config/visibility-apf. mounts 1 ConfigMap(s) as volumes: manager-config.",
   "repository_description": "[GoReport Widget]: https://goreportcard.com/badge/github.com/kubernetes-sigs/kueue [GoReport Status]: https://goreportcard.com/report/github.com/kubernetes-sigs/kueue",
   "description_source": "README.md:6",
@@ -10901,30 +10901,6 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/kueue/v1alpha1/kueue_client.go:82",
-      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
-      "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
-      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
-      "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
-      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
-      "callee": "New",
       "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_cq.go:54",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
       "confidence": "UNCERTAIN"
@@ -10933,7 +10909,15 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_lq.go:54",
+      "callee_source": "pkg/visibility/api/v1beta1/local_queue.go:40",
+      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
+      "callee": "New",
+      "callee_source": "client-go/clientset/versioned/typed/kueue/v1beta1/kueue_client.go:122",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
       "confidence": "UNCERTAIN"
     },
@@ -10957,7 +10941,7 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/local_queue.go:40",
+      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
       "confidence": "UNCERTAIN"
     },
@@ -10973,8 +10957,32 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/kueue/v1beta1/kueue_client.go:122",
+      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_lq.go:54",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
+      "callee": "New",
+      "callee_source": "client-go/clientset/versioned/typed/kueue/v1alpha1/kueue_client.go:82",
+      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
+      "callee": "New",
+      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
+      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_lq.go:54",
+      "call_site_source": "cmd/kueue/main.go:121",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10989,7 +10997,47 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
+      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
+      "call_site_source": "cmd/kueue/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
+      "call_site_source": "cmd/kueue/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/kueue/v1alpha1/interface.go:37",
+      "call_site_source": "cmd/kueue/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/kueue/v1beta1/interface.go:53",
+      "call_site_source": "cmd/kueue/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
       "callee_source": "client-go/clientset/versioned/typed/kueue/v1alpha1/kueue_client.go:82",
+      "call_site_source": "cmd/kueue/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/visibility/v1beta1/interface.go:39",
       "call_site_source": "cmd/kueue/main.go:121",
       "confidence": "UNCERTAIN"
     },
@@ -11013,111 +11061,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_lq.go:54",
-      "call_site_source": "cmd/kueue/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
-      "call_site_source": "cmd/kueue/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
       "callee_source": "client-go/informers/externalversions/visibility/v1beta1/interface.go:39",
-      "call_site_source": "cmd/kueue/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/informers/externalversions/kueue/v1alpha1/interface.go:37",
-      "call_site_source": "cmd/kueue/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
-      "call_site_source": "cmd/kueue/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/informers/externalversions/kueue/v1beta1/interface.go:53",
-      "call_site_source": "cmd/kueue/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/informers/externalversions/kueue/v1alpha1/interface.go:37",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/kueue/v1alpha1/kueue_client.go:82",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/informers/externalversions/visibility/v1beta1/interface.go:39",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/informers/externalversions/kueue/v1beta1/interface.go:53",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/kueue/v1beta1/kueue_client.go:122",
-      "call_site_source": "cmd/kueue/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_lq.go:54",
       "call_site_source": "cmd/kueue/main.go:166",
       "confidence": "UNCERTAIN"
     },
@@ -11133,6 +11077,14 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
+      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_lq.go:54",
+      "call_site_source": "cmd/kueue/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
       "callee_source": "pkg/visibility/api/v1beta1/local_queue.go:40",
       "call_site_source": "cmd/kueue/main.go:166",
       "confidence": "UNCERTAIN"
@@ -11141,16 +11093,8 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_cq.go:54",
-      "call_site_source": "cmd/kueue/main.go:221",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "New",
-      "callee_source": "client-go/informers/externalversions/visibility/v1beta1/interface.go:39",
-      "call_site_source": "cmd/kueue/main.go:221",
+      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
+      "call_site_source": "cmd/kueue/main.go:166",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11158,22 +11102,46 @@
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
       "callee_source": "client-go/informers/externalversions/kueue/v1beta1/interface.go:53",
-      "call_site_source": "cmd/kueue/main.go:221",
+      "call_site_source": "cmd/kueue/main.go:166",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
-      "call_site_source": "cmd/kueue/main.go:221",
+      "callee_source": "client-go/clientset/versioned/typed/kueue/v1alpha1/kueue_client.go:82",
+      "call_site_source": "cmd/kueue/main.go:166",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
-      "callee_source": "pkg/visibility/api/v1beta1/local_queue.go:40",
+      "callee_source": "client-go/clientset/versioned/typed/kueue/v1beta1/kueue_client.go:122",
+      "call_site_source": "cmd/kueue/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
+      "call_site_source": "cmd/kueue/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/kueue/v1alpha1/interface.go:37",
+      "call_site_source": "cmd/kueue/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/kueue/v1alpha1/interface.go:37",
       "call_site_source": "cmd/kueue/main.go:221",
       "confidence": "UNCERTAIN"
     },
@@ -11189,7 +11157,23 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
-      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
+      "callee_source": "pkg/visibility/api/v1beta1/pending_workloads_cq.go:54",
+      "call_site_source": "cmd/kueue/main.go:221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "pkg/visibility/api/v1beta1/local_queue.go:40",
+      "call_site_source": "cmd/kueue/main.go:221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "pkg/visibility/api/v1beta1/cluster_queue.go:40",
       "call_site_source": "cmd/kueue/main.go:221",
       "confidence": "UNCERTAIN"
     },
@@ -11205,7 +11189,15 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "New",
-      "callee_source": "client-go/informers/externalversions/kueue/v1alpha1/interface.go:37",
+      "callee_source": "client-go/clientset/versioned/typed/visibility/v1beta1/visibility_client.go:87",
+      "call_site_source": "cmd/kueue/main.go:221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/visibility/v1beta1/interface.go:39",
       "call_site_source": "cmd/kueue/main.go:221",
       "confidence": "UNCERTAIN"
     },
@@ -11219,26 +11211,10 @@
     },
     {
       "caller": "main",
-      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
-      "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/list/list_workload.go:255",
-      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
-      "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/list/list_clusterqueue.go:160",
-      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
-      "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/list/list_localqueue.go:149",
-      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "New",
+      "callee_source": "client-go/informers/externalversions/kueue/v1beta1/interface.go:53",
+      "call_site_source": "cmd/kueue/main.go:221",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11261,7 +11237,7 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
-      "callee_source": "pkg/controller/jobs/pod/pod_controller.go:265",
+      "callee_source": "cmd/kueuectl/app/list/list_localqueue.go:149",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11269,7 +11245,23 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/create/create_clusterqueue.go:249",
+      "callee_source": "cmd/kueuectl/app/list/list_clusterqueue.go:160",
+      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
+      "callee": "Run",
+      "callee_source": "cmd/kueuectl/app/list/list_workload.go:255",
+      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
+      "callee": "Run",
+      "callee_source": "pkg/controller/jobs/pod/pod_controller.go:265",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11293,7 +11285,7 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/resume/resume_clusterqueue.go:111",
+      "callee_source": "cmd/kueuectl/app/create/create_clusterqueue.go:249",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11301,7 +11293,7 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/resume/resume_localqueue.go:122",
+      "callee_source": "cmd/kueuectl/app/resume/resume_clusterqueue.go:111",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11325,6 +11317,14 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
+      "callee_source": "cmd/kueuectl/app/resume/resume_localqueue.go:122",
+      "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
+      "callee": "Run",
       "callee_source": "cmd/kueuectl/app/delete/delete_workload.go:190",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
@@ -11341,7 +11341,7 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
-      "callee_source": "cmd/kueuectl/app/options/update_workload_activation_options.go:98",
+      "callee_source": "pkg/util/routine/wrapper.go:36",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11349,7 +11349,7 @@
       "caller": "main",
       "caller_source": "cmd/experimental/kueue-viz/backend/main.go:32",
       "callee": "Run",
-      "callee_source": "pkg/util/routine/wrapper.go:36",
+      "callee_source": "cmd/kueuectl/app/options/update_workload_activation_options.go:98",
       "call_site_source": "cmd/experimental/kueue-viz/backend/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11517,6 +11517,14 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
+      "callee_source": "pkg/controller/jobs/leaderworkerset/leaderworkerset_webhook.go:67",
+      "call_site_source": "cmd/kueue/main.go:185",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "Default",
       "callee_source": "pkg/controller/jobs/job/job_webhook.go:77",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
@@ -11525,7 +11533,23 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/controller/jobframework/noop_webhook.go:40",
+      "callee_source": "pkg/controller/jobs/statefulset/statefulset_webhook.go:69",
+      "call_site_source": "cmd/kueue/main.go:185",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "Default",
+      "callee_source": "pkg/controller/jobs/rayjob/rayjob_webhook.go:75",
+      "call_site_source": "cmd/kueue/main.go:185",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "Default",
+      "callee_source": "pkg/controller/jobs/raycluster/raycluster_webhook.go:78",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
     },
@@ -11549,39 +11573,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/controller/jobs/rayjob/rayjob_webhook.go:75",
-      "call_site_source": "cmd/kueue/main.go:185",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "Default",
-      "callee_source": "pkg/controller/jobs/leaderworkerset/leaderworkerset_webhook.go:67",
-      "call_site_source": "cmd/kueue/main.go:185",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "Default",
-      "callee_source": "pkg/controller/jobs/statefulset/statefulset_webhook.go:69",
-      "call_site_source": "cmd/kueue/main.go:185",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "Default",
-      "callee_source": "pkg/controller/jobs/raycluster/raycluster_webhook.go:78",
-      "call_site_source": "cmd/kueue/main.go:185",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "Default",
-      "callee_source": "pkg/controller/jobframework/base_webhook.go:65",
+      "callee_source": "pkg/controller/jobframework/noop_webhook.go:40",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
     },
@@ -11597,14 +11589,6 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/util/useragent/useragent.go:50",
-      "call_site_source": "cmd/kueue/main.go:185",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "Default",
       "callee_source": "pkg/controller/jobs/deployment/deployment_webhook.go:66",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
@@ -11613,7 +11597,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/webhooks/cohort_webhook.go:40",
+      "callee_source": "pkg/util/useragent/useragent.go:50",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
     },
@@ -11621,7 +11605,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/controller/jobframework/webhook/defaulter_test.go:57",
+      "callee_source": "pkg/controller/jobframework/base_webhook.go:65",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
     },
@@ -11637,7 +11621,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/webhooks/workload_webhook.go:56",
+      "callee_source": "pkg/webhooks/resourceflavor_webhook.go:52",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
     },
@@ -11645,7 +11629,23 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Default",
-      "callee_source": "pkg/webhooks/resourceflavor_webhook.go:52",
+      "callee_source": "pkg/controller/jobframework/webhook/defaulter_test.go:57",
+      "call_site_source": "cmd/kueue/main.go:185",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "Default",
+      "callee_source": "pkg/webhooks/cohort_webhook.go:40",
+      "call_site_source": "cmd/kueue/main.go:185",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "Default",
+      "callee_source": "pkg/webhooks/workload_webhook.go:56",
       "call_site_source": "cmd/kueue/main.go:185",
       "confidence": "UNCERTAIN"
     },
@@ -11669,22 +11669,6 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithExcludedResourcePrefixes",
-      "callee_source": "pkg/cache/cache.go:79",
-      "call_site_source": "cmd/kueue/main.go:211",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "WithExcludedResourcePrefixes",
-      "callee_source": "pkg/queue/manager.go:69",
-      "call_site_source": "cmd/kueue/main.go:211",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "WithExcludedResourcePrefixes",
       "callee_source": "pkg/workload/workload.go:98",
       "call_site_source": "cmd/kueue/main.go:211",
       "confidence": "UNCERTAIN"
@@ -11694,7 +11678,7 @@
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithExcludedResourcePrefixes",
       "callee_source": "pkg/queue/manager.go:69",
-      "call_site_source": "cmd/kueue/main.go:212",
+      "call_site_source": "cmd/kueue/main.go:211",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11702,7 +11686,7 @@
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithExcludedResourcePrefixes",
       "callee_source": "pkg/cache/cache.go:79",
-      "call_site_source": "cmd/kueue/main.go:212",
+      "call_site_source": "cmd/kueue/main.go:211",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11716,9 +11700,17 @@
     {
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
-      "callee": "WithFairSharing",
-      "callee_source": "pkg/scheduler/scheduler.go:105",
-      "call_site_source": "cmd/kueue/main.go:219",
+      "callee": "WithExcludedResourcePrefixes",
+      "callee_source": "pkg/queue/manager.go:69",
+      "call_site_source": "cmd/kueue/main.go:212",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "WithExcludedResourcePrefixes",
+      "callee_source": "pkg/cache/cache.go:79",
+      "call_site_source": "cmd/kueue/main.go:212",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11726,6 +11718,14 @@
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithFairSharing",
       "callee_source": "pkg/controller/core/clusterqueue_controller.go:111",
+      "call_site_source": "cmd/kueue/main.go:219",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "WithFairSharing",
+      "callee_source": "pkg/scheduler/scheduler.go:105",
       "call_site_source": "cmd/kueue/main.go:219",
       "confidence": "UNCERTAIN"
     },
@@ -11741,14 +11741,6 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithResourceTransformations",
-      "callee_source": "pkg/workload/workload.go:105",
-      "call_site_source": "cmd/kueue/main.go:215",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "WithResourceTransformations",
       "callee_source": "pkg/queue/manager.go:76",
       "call_site_source": "cmd/kueue/main.go:215",
       "confidence": "UNCERTAIN"
@@ -11765,7 +11757,15 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithResourceTransformations",
-      "callee_source": "pkg/queue/manager.go:76",
+      "callee_source": "pkg/workload/workload.go:105",
+      "call_site_source": "cmd/kueue/main.go:215",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "WithResourceTransformations",
+      "callee_source": "pkg/workload/workload.go:105",
       "call_site_source": "cmd/kueue/main.go:216",
       "confidence": "UNCERTAIN"
     },
@@ -11781,7 +11781,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithResourceTransformations",
-      "callee_source": "pkg/workload/workload.go:105",
+      "callee_source": "pkg/queue/manager.go:76",
       "call_site_source": "cmd/kueue/main.go:216",
       "confidence": "UNCERTAIN"
     },
@@ -11805,6 +11805,14 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithFairSharing",
+      "callee_source": "pkg/cache/cache.go:92",
+      "call_site_source": "cmd/kueue/main.go:219",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/kueue/main.go:106",
+      "callee": "WithFairSharing",
       "callee_source": "client-go/applyconfiguration/kueue/v1beta1/clusterqueuespec.go:128",
       "call_site_source": "cmd/kueue/main.go:219",
       "confidence": "UNCERTAIN"
@@ -11814,14 +11822,6 @@
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "WithFairSharing",
       "callee_source": "client-go/applyconfiguration/kueue/v1beta1/clusterqueuestatus.go:117",
-      "call_site_source": "cmd/kueue/main.go:219",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/kueue/main.go:106",
-      "callee": "WithFairSharing",
-      "callee_source": "pkg/cache/cache.go:92",
       "call_site_source": "cmd/kueue/main.go:219",
       "confidence": "UNCERTAIN"
     },
@@ -11933,7 +11933,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Start",
-      "callee_source": "pkg/scheduler/scheduler.go:143",
+      "callee_source": "pkg/util/kubeversion/kubeversion.go:61",
       "call_site_source": "cmd/kueue/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -11941,7 +11941,7 @@
       "caller": "main",
       "caller_source": "cmd/kueue/main.go:106",
       "callee": "Start",
-      "callee_source": "pkg/util/kubeversion/kubeversion.go:61",
+      "callee_source": "pkg/scheduler/scheduler.go:143",
       "call_site_source": "cmd/kueue/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12013,7 +12013,119 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1354",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1309",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
       "call_site_source": "cmd/importer/pod/check_test.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -12037,31 +12149,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/check_test.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -12093,72 +12181,8 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1354",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12166,22 +12190,6 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/check_test.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -12189,15 +12197,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
       "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -12214,6 +12214,14 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
       "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -12237,55 +12245,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -12301,31 +12261,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1354",
       "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -12341,6 +12277,70 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/check_test.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1268",
       "call_site_source": "cmd/importer/pod/check_test.go:114",
       "confidence": "UNCERTAIN"
@@ -12349,7 +12349,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
       "call_site_source": "cmd/importer/pod/check_test.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -12357,7 +12357,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
       "call_site_source": "cmd/importer/pod/check_test.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -12373,31 +12373,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
       "call_site_source": "cmd/importer/pod/check_test.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -12414,86 +12390,6 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1354",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:711",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/check_test.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
       "call_site_source": "cmd/importer/pod/check_test.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -12517,8 +12413,64 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12526,14 +12478,46 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "call_site_source": "cmd/importer/pod/check_test.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12557,7 +12541,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12565,23 +12549,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/check_test.go:123",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:123",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12597,7 +12565,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12613,6 +12581,14 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1135",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
@@ -12621,7 +12597,23 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12637,7 +12629,23 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12661,7 +12669,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12669,7 +12677,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
       "call_site_source": "cmd/importer/pod/check_test.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -12677,15 +12685,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:123",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12693,15 +12693,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12710,38 +12702,6 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12765,14 +12725,6 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1286",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
@@ -12789,14 +12741,6 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1243",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
@@ -12805,7 +12749,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12813,7 +12757,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12821,15 +12765,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/check_test.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12845,7 +12781,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
       "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -12853,32 +12789,8 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12886,6 +12798,110 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/check_test.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -12894,6 +12910,14 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
       "call_site_source": "cmd/importer/pod/check_test.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -12925,38 +12949,6 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1081",
       "call_site_source": "cmd/importer/pod/check_test.go:140",
       "confidence": "UNCERTAIN"
@@ -12965,7 +12957,39 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1309",
       "call_site_source": "cmd/importer/pod/check_test.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -12981,7 +13005,135 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1354",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1309",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "call_site_source": "cmd/importer/pod/check_test.go:140",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
       "call_site_source": "cmd/importer/pod/check_test.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -13037,159 +13189,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1354",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/check_test.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1354",
       "call_site_source": "cmd/importer/pod/check_test.go:143",
       "confidence": "UNCERTAIN"
     },
@@ -13197,7 +13197,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
       "call_site_source": "cmd/importer/pod/check_test.go:143",
       "confidence": "UNCERTAIN"
     },
@@ -13221,7 +13221,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "callee_source": "pkg/util/testing/wrappers.go:1354",
       "call_site_source": "cmd/importer/pod/check_test.go:143",
       "confidence": "UNCERTAIN"
     },
@@ -13270,14 +13270,6 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/check_test.go:143",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
       "call_site_source": "cmd/importer/pod/check_test.go:143",
       "confidence": "UNCERTAIN"
     },
@@ -13325,6 +13317,14 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:143",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/check_test.go:143",
       "confidence": "UNCERTAIN"
@@ -13357,119 +13357,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1286",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1354",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/check_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
       "call_site_source": "cmd/importer/pod/check_test.go:57",
       "confidence": "UNCERTAIN"
     },
@@ -13485,7 +13373,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
       "call_site_source": "cmd/importer/pod/check_test.go:57",
       "confidence": "UNCERTAIN"
     },
@@ -13525,7 +13413,215 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1354",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1309",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1354",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1309",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
       "call_site_source": "cmd/importer/pod/check_test.go:63",
       "confidence": "UNCERTAIN"
     },
@@ -13557,7 +13653,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
       "call_site_source": "cmd/importer/pod/check_test.go:63",
       "confidence": "UNCERTAIN"
     },
@@ -13565,7 +13661,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
       "call_site_source": "cmd/importer/pod/check_test.go:63",
       "confidence": "UNCERTAIN"
     },
@@ -13581,14 +13677,6 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:916",
       "call_site_source": "cmd/importer/pod/check_test.go:63",
       "confidence": "UNCERTAIN"
@@ -13597,55 +13685,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:711",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
       "call_site_source": "cmd/importer/pod/check_test.go:63",
       "confidence": "UNCERTAIN"
     },
@@ -13654,7 +13694,7 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13662,38 +13702,6 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1354",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
       "call_site_source": "cmd/importer/pod/check_test.go:80",
       "confidence": "UNCERTAIN"
     },
@@ -13701,23 +13709,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:711",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
       "call_site_source": "cmd/importer/pod/check_test.go:80",
       "confidence": "UNCERTAIN"
     },
@@ -13741,6 +13733,54 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1477",
       "call_site_source": "cmd/importer/pod/check_test.go:80",
       "confidence": "UNCERTAIN"
@@ -13757,7 +13797,39 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/check_test.go:80",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/check_test.go:80",
       "confidence": "UNCERTAIN"
     },
@@ -13773,23 +13845,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1354",
       "call_site_source": "cmd/importer/pod/check_test.go:80",
       "confidence": "UNCERTAIN"
     },
@@ -13806,118 +13862,6 @@
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
-      "call_site_source": "cmd/importer/pod/check_test.go:80",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:711",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -13933,7 +13877,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -13941,7 +13885,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -13949,7 +13893,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -13957,7 +13901,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -13965,23 +13909,7 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1309",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/check_test.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCheckNamespace",
-      "caller_source": "cmd/importer/pod/check_test.go:38",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -14005,6 +13933,14 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1477",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
@@ -14013,6 +13949,14 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1354",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
@@ -14021,7 +13965,63 @@
       "caller": "TestCheckNamespace",
       "caller_source": "cmd/importer/pod/check_test.go:38",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/check_test.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCheckNamespace",
+      "caller_source": "cmd/importer/pod/check_test.go:38",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
       "call_site_source": "cmd/importer/pod/check_test.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -14029,7 +14029,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -14037,7 +14037,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "callee_source": "pkg/util/testing/wrappers.go:1172",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -14046,6 +14046,14 @@
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1354",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -14069,15 +14077,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -14093,7 +14093,31 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1172",
+      "callee_source": "pkg/util/testing/wrappers.go:1286",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1268",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -14117,30 +14141,6 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:756",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
@@ -14157,31 +14157,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/import_test.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -14197,32 +14173,16 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14230,39 +14190,7 @@
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:756",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:916",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "call_site_source": "cmd/importer/pod/import_test.go:112",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14277,15 +14205,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/import_test.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
       "call_site_source": "cmd/importer/pod/import_test.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -14341,6 +14261,22 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1268",
       "call_site_source": "cmd/importer/pod/import_test.go:115",
       "confidence": "UNCERTAIN"
@@ -14349,7 +14285,23 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/import_test.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -14365,88 +14317,32 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1055",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1243",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1553",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1496",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:87",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1477",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:577",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:711",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14454,6 +14350,22 @@
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/import_test.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1055",
       "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -14469,7 +14381,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:989",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
       "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -14477,15 +14389,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/import_test.go:126",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
       "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -14509,6 +14413,78 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:577",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1243",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:87",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1286",
       "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
@@ -14525,6 +14501,14 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1553",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1172",
       "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
@@ -14533,8 +14517,8 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1268",
-      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "callee_source": "pkg/util/testing/wrappers.go:1081",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14542,14 +14526,14 @@
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:989",
-      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "call_site_source": "cmd/importer/pod/import_test.go:126",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:455",
+      "callee_source": "pkg/util/testing/wrappers.go:1135",
       "call_site_source": "cmd/importer/pod/import_test.go:131",
       "confidence": "UNCERTAIN"
     },
@@ -14565,7 +14549,47 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:60",
+      "callee_source": "pkg/util/testing/wrappers.go:1477",
+      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:916",
+      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:756",
+      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:711",
+      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:1496",
+      "call_site_source": "cmd/importer/pod/import_test.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestImportNamespace",
+      "caller_source": "cmd/importer/pod/import_test.go:36",
+      "callee": "Obj",
+      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/import_test.go:131",
       "confidence": "UNCERTAIN"
     },
@@ -14581,31 +14605,7 @@
       "caller": "TestImportNamespace",
       "caller_source": "cmd/importer/pod/import_test.go:36",
       "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1081",
-      "call_site_source": "cmd/importer/pod/import_test.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
       "callee_source": "pkg/util/testing/wrappers.go:1172",
-      "call_site_source": "cmd/importer/pod/import_test.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:1135",
-      "call_site_source": "cmd/importer/pod/import_test.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestImportNamespace",
-      "caller_source": "cmd/importer/pod/import_test.go:36",
-      "callee": "Obj",
-      "callee_source": "pkg/util/testing/wrappers.go:646",
       "call_site_source": "cmd/importer/pod/import_test.go:131",
       "confidence": "UNCERTAIN"
     }

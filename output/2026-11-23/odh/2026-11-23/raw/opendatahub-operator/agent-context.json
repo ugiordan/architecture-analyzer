@@ -2,8 +2,8 @@
   "schema_version": 1,
   "component": "opendatahub-operator",
   "repo": "opendatahub-io/opendatahub-operator",
-  "commit_sha": "140ba5d1fe24bec66422963bb1b03aedbb000531",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "commit_sha": "770dc3799b2dea2bff9917ce5ace48dcb978d059",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "opendatahub-operator (also known as: ODH operator, odh-operator) is a Kubernetes component. deploying 22 workload(s) (aws-cloud-manager-operator, aws-cloud-manager-operator, aws-cloud-manager-operator, azure-cloud-manager-operator, azure-cloud-manager-operator, azure-cloud-manager-operator, coreweave-cloud-manager-operator, coreweave-cloud-manager-operator, coreweave-cloud-manager-operator, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, controller-manager, rhods-operator, rhods-operator, rhods-operator, rhods-operator, rhods-operator, rhods-operator) with 22 container(s). watching 17 resource type(s). exposing 3 service(s) on ports: 443. with 12 webhook(s) (5 validating, 3 mutating). protected by 2 network policy/policies. connecting to external services: s3. runtime dependencies: MLflow. defining 50 API spec type(s) across 201 struct(s) with 571 total fields. with 1223 operator config constants (18 image references, 2 env vars). following 1 reconciliation steps across 1 controller(s). reporting 45 status condition types. integrates with Istio, Kueue, management relationship via labels/annotations. creates RBAC bindings to external roles: controller-manager-role. kustomize overlays: config/cloudmanager/aws/crd, config/cloudmanager/aws/default, config/cloudmanager/aws/local, config/cloudmanager/aws/rbac, config/cloudmanager/aws/rhoai, config/cloudmanager/azure/crd, config/cloudmanager/azure/default, config/cloudmanager/azure/local, config/cloudmanager/azure/rbac, config/cloudmanager/azure/rhoai, config/cloudmanager/coreweave/crd, config/cloudmanager/coreweave/default, config/cloudmanager/coreweave/local, config/cloudmanager/coreweave/rbac, config/cloudmanager/coreweave/rhoai, config/connectionAPI, config/crd, config/default, config/hardwareprofiles, config/manifests, config/osd-configs, config/prometheus, config/rbac, config/rhaii/certmanager, config/rhaii/crd, config/rhaii/odh, config/rhaii/odh-local, config/rhaii/odh-operator, config/rhaii/rhoai/certmanager, config/rhaii/rhoai/default, config/rhaii/rhoai/operator, config/rhaii/webhook, config/rhoai/crd, config/rhoai/default, config/rhoai/manifests, config/rhoai/rbac, config/rhoai/webhook, config/scorecard, config/segment, config/webhook. references components: kserve (import), kueue (config, provider), mlflow-operator (import), spark-operator (import), trainer (import).",
   "repository_description": "This operator is the primary operator for Open Data Hub. It is responsible for enabling Data science applications like Jupyter Notebooks, Datascience pipelines etc. The operator makes use of DataScienceCluster CRD to deploy and configure these applications.",
   "description_source": "README.md:3",
@@ -3808,7 +3808,7 @@
         {
           "name": "BuildModuleCR",
           "language": "go",
-          "source": "internal/controller/modules/aihub/handler.go:94",
+          "source": "internal/controller/modules/aihub/handler.go:95",
           "complexity": 6,
           "callers": 12
         },
@@ -3822,21 +3822,21 @@
         {
           "name": "WriteDSCComponentStatus",
           "language": "go",
-          "source": "internal/controller/modules/aihub/handler.go:74",
+          "source": "internal/controller/modules/aihub/handler.go:75",
           "complexity": 6,
           "callers": 11
         },
         {
           "name": "IsEnabled",
           "language": "go",
-          "source": "internal/controller/modules/aihub/handler.go:55",
+          "source": "internal/controller/modules/aihub/handler.go:56",
           "complexity": 2,
           "callers": 10
         },
         {
           "name": "PopulatePlatformModule",
           "language": "go",
-          "source": "internal/controller/modules/aihub/handler.go:59",
+          "source": "internal/controller/modules/aihub/handler.go:60",
           "complexity": 3,
           "callers": 7
         },
@@ -3850,7 +3850,7 @@
         {
           "name": "GetReadyConditionType",
           "language": "go",
-          "source": "internal/controller/modules/aihub/handler.go:70",
+          "source": "internal/controller/modules/aihub/handler.go:71",
           "complexity": 1,
           "callers": 1
         },
@@ -13460,7 +13460,7 @@
       "caller": "main",
       "caller_source": "cmd/health-check/main.go:33",
       "callee": "String",
-      "callee_source": "pkg/webhook/utils.go:56",
+      "callee_source": "pkg/controller/dag/dag.go:24",
       "call_site_source": "cmd/health-check/main.go:37",
       "confidence": "UNCERTAIN"
     },
@@ -13476,7 +13476,7 @@
       "caller": "main",
       "caller_source": "cmd/health-check/main.go:33",
       "callee": "String",
-      "callee_source": "pkg/controller/dag/dag.go:24",
+      "callee_source": "pkg/webhook/utils.go:56",
       "call_site_source": "cmd/health-check/main.go:37",
       "confidence": "UNCERTAIN"
     },
@@ -13508,14 +13508,6 @@
       "caller": "main",
       "caller_source": "cmd/health-check/main.go:33",
       "callee": "String",
-      "callee_source": "pkg/webhook/utils.go:96",
-      "call_site_source": "cmd/health-check/main.go:43",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/health-check/main.go:33",
-      "callee": "String",
       "callee_source": "pkg/controller/dag/dag.go:24",
       "call_site_source": "cmd/health-check/main.go:43",
       "confidence": "UNCERTAIN"
@@ -13533,6 +13525,22 @@
       "caller_source": "cmd/health-check/main.go:33",
       "callee": "String",
       "callee_source": "pkg/webhook/utils.go:96",
+      "call_site_source": "cmd/health-check/main.go:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/health-check/main.go:33",
+      "callee": "String",
+      "callee_source": "pkg/webhook/utils.go:96",
+      "call_site_source": "cmd/health-check/main.go:45",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/health-check/main.go:33",
+      "callee": "String",
+      "callee_source": "pkg/controller/dag/dag.go:24",
       "call_site_source": "cmd/health-check/main.go:45",
       "confidence": "UNCERTAIN"
     },
@@ -13542,30 +13550,6 @@
       "callee": "String",
       "callee_source": "pkg/webhook/utils.go:56",
       "call_site_source": "cmd/health-check/main.go:45",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/health-check/main.go:33",
-      "callee": "String",
-      "callee_source": "pkg/controller/dag/dag.go:24",
-      "call_site_source": "cmd/health-check/main.go:45",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/health-check/main.go:33",
-      "callee": "String",
-      "callee_source": "pkg/controller/dag/dag.go:24",
-      "call_site_source": "cmd/health-check/main.go:47",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/health-check/main.go:33",
-      "callee": "String",
-      "callee_source": "pkg/webhook/utils.go:56",
-      "call_site_source": "cmd/health-check/main.go:47",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13581,7 +13565,15 @@
       "caller_source": "cmd/health-check/main.go:33",
       "callee": "String",
       "callee_source": "pkg/webhook/utils.go:56",
-      "call_site_source": "cmd/health-check/main.go:49",
+      "call_site_source": "cmd/health-check/main.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/health-check/main.go:33",
+      "callee": "String",
+      "callee_source": "pkg/controller/dag/dag.go:24",
+      "call_site_source": "cmd/health-check/main.go:47",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13597,6 +13589,14 @@
       "caller_source": "cmd/health-check/main.go:33",
       "callee": "String",
       "callee_source": "pkg/webhook/utils.go:96",
+      "call_site_source": "cmd/health-check/main.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/health-check/main.go:33",
+      "callee": "String",
+      "callee_source": "pkg/webhook/utils.go:56",
       "call_site_source": "cmd/health-check/main.go:49",
       "confidence": "UNCERTAIN"
     },
@@ -13668,24 +13668,16 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "call_site_source": "cmd/main.go:253",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:253",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
-      "call_site_source": "cmd/main.go:253",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
-      "call_site_source": "cmd/main.go:258",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13701,7 +13693,7 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
-      "call_site_source": "cmd/main.go:264",
+      "call_site_source": "cmd/main.go:258",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13717,6 +13709,14 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "call_site_source": "cmd/main.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Error",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:282",
       "confidence": "UNCERTAIN"
     },
@@ -13724,7 +13724,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:282",
       "confidence": "UNCERTAIN"
     },
@@ -13764,24 +13764,16 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "call_site_source": "cmd/main.go:314",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:314",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
-      "call_site_source": "cmd/main.go:314",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
-      "call_site_source": "cmd/main.go:328",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13796,8 +13788,8 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
-      "call_site_source": "cmd/main.go:331",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "call_site_source": "cmd/main.go:328",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13813,7 +13805,7 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
-      "call_site_source": "cmd/main.go:339",
+      "call_site_source": "cmd/main.go:331",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13829,7 +13821,7 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
-      "call_site_source": "cmd/main.go:344",
+      "call_site_source": "cmd/main.go:339",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13845,7 +13837,7 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
-      "call_site_source": "cmd/main.go:350",
+      "call_site_source": "cmd/main.go:344",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13861,7 +13853,7 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
-      "call_site_source": "cmd/main.go:356",
+      "call_site_source": "cmd/main.go:350",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13876,7 +13868,15 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "call_site_source": "cmd/main.go:356",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Error",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:423",
       "confidence": "UNCERTAIN"
     },
@@ -13884,7 +13884,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:423",
       "confidence": "UNCERTAIN"
     },
@@ -13924,7 +13924,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:505",
       "confidence": "UNCERTAIN"
     },
@@ -13932,7 +13932,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:505",
       "confidence": "UNCERTAIN"
     },
@@ -13972,7 +13972,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:528",
       "confidence": "UNCERTAIN"
     },
@@ -13980,7 +13980,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:528",
       "confidence": "UNCERTAIN"
     },
@@ -14004,14 +14004,6 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
-      "call_site_source": "cmd/main.go:555",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:555",
       "confidence": "UNCERTAIN"
@@ -14021,6 +14013,14 @@
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "call_site_source": "cmd/main.go:555",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Error",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:560",
       "confidence": "UNCERTAIN"
     },
@@ -14028,7 +14028,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:560",
       "confidence": "UNCERTAIN"
     },
@@ -14068,6 +14068,14 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "call_site_source": "cmd/main.go:594",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Error",
       "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:594",
       "confidence": "UNCERTAIN"
@@ -14076,15 +14084,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
-      "call_site_source": "cmd/main.go:594",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
       "call_site_source": "cmd/main.go:601",
       "confidence": "UNCERTAIN"
     },
@@ -14092,7 +14092,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Error",
-      "callee_source": "cmd/loglint/testdata/src/a/a.go:7",
+      "callee_source": "cmd/loglint/testdata/src/a/a.go:14",
       "call_site_source": "cmd/main.go:601",
       "confidence": "UNCERTAIN"
     },
@@ -14604,7 +14604,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Add",
-      "callee_source": "pkg/controller/provision/unified.go:221",
+      "callee_source": "pkg/controller/provision/unified.go:56",
       "call_site_source": "cmd/main.go:553",
       "confidence": "UNCERTAIN"
     },
@@ -14612,7 +14612,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Add",
-      "callee_source": "pkg/controller/provision/unified.go:56",
+      "callee_source": "pkg/controller/provision/unified.go:221",
       "call_site_source": "cmd/main.go:553",
       "confidence": "UNCERTAIN"
     },
@@ -14628,7 +14628,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Add",
-      "callee_source": "internal/controller/services/registry/registry.go:37",
+      "callee_source": "internal/controller/services/registry/registry.go:84",
       "call_site_source": "cmd/main.go:553",
       "confidence": "UNCERTAIN"
     },
@@ -14636,7 +14636,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Add",
-      "callee_source": "internal/controller/services/registry/registry.go:84",
+      "callee_source": "internal/controller/services/registry/registry.go:37",
       "call_site_source": "cmd/main.go:553",
       "confidence": "UNCERTAIN"
     },
@@ -14668,7 +14668,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "GetScheme",
-      "callee_source": "internal/controller/modules/modules_controller_watch_test.go:26",
+      "callee_source": "pkg/controller/reconciler/reconciler_finalizer_test.go:55",
       "call_site_source": "cmd/main.go:501",
       "confidence": "UNCERTAIN"
     },
@@ -14676,7 +14676,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "GetScheme",
-      "callee_source": "pkg/controller/reconciler/reconciler_finalizer_test.go:55",
+      "callee_source": "internal/controller/modules/modules_controller_watch_test.go:26",
       "call_site_source": "cmd/main.go:501",
       "confidence": "UNCERTAIN"
     },
@@ -14764,7 +14764,7 @@
       "caller": "main",
       "caller_source": "cmd/manifest-tools/main.go:9",
       "callee": "Execute",
-      "callee_source": "cmd/component-codegen/cmd/root.go:22",
+      "callee_source": "cmd/cloudmanager/app/root.go:84",
       "call_site_source": "cmd/manifest-tools/main.go:10",
       "confidence": "UNCERTAIN"
     },
@@ -14772,7 +14772,7 @@
       "caller": "main",
       "caller_source": "cmd/manifest-tools/main.go:9",
       "callee": "Execute",
-      "callee_source": "cmd/cloudmanager/app/root.go:84",
+      "callee_source": "cmd/component-codegen/cmd/root.go:22",
       "call_site_source": "cmd/manifest-tools/main.go:10",
       "confidence": "UNCERTAIN"
     },
@@ -14780,7 +14780,7 @@
       "caller": "main",
       "caller_source": "cmd/test-retry/main.go:10",
       "callee": "Execute",
-      "callee_source": "cmd/cloudmanager/app/root.go:84",
+      "callee_source": "cmd/component-codegen/cmd/root.go:22",
       "call_site_source": "cmd/test-retry/main.go:12",
       "confidence": "UNCERTAIN"
     },
@@ -14788,7 +14788,7 @@
       "caller": "main",
       "caller_source": "cmd/test-retry/main.go:10",
       "callee": "Execute",
-      "callee_source": "cmd/component-codegen/cmd/root.go:22",
+      "callee_source": "cmd/cloudmanager/app/root.go:84",
       "call_site_source": "cmd/test-retry/main.go:12",
       "confidence": "UNCERTAIN"
     },
@@ -14916,15 +14916,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/serving/mutating_llmisvc.go:40",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/serving/mutating_isvc.go:42",
+      "callee_source": "internal/webhook/datasciencecluster/v3/validating.go:44",
       "call_site_source": "cmd/main.go:499",
       "confidence": "UNCERTAIN"
     },
@@ -14933,22 +14925,6 @@
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
       "callee_source": "internal/webhook/datasciencecluster/v2/defaulting.go:42",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/datasciencecluster/v3/defaulting.go:44",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/datasciencecluster/v3/validating.go:44",
       "call_site_source": "cmd/main.go:499",
       "confidence": "UNCERTAIN"
     },
@@ -14965,7 +14941,15 @@
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
       "callee_source": "internal/webhook/datasciencecluster/v3/defaulting.go:44",
-      "call_site_source": "cmd/main.go:592",
+      "call_site_source": "cmd/main.go:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/webhook/serving/mutating_llmisvc.go:40",
+      "call_site_source": "cmd/main.go:499",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14973,6 +14957,14 @@
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
       "callee_source": "internal/webhook/serving/mutating_isvc.go:42",
+      "call_site_source": "cmd/main.go:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/webhook/serving/mutating_llmisvc.go:40",
       "call_site_source": "cmd/main.go:592",
       "confidence": "UNCERTAIN"
     },
@@ -14988,7 +14980,15 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/serving/mutating_llmisvc.go:40",
+      "callee_source": "internal/webhook/datasciencecluster/v2/validating.go:46",
+      "call_site_source": "cmd/main.go:592",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/webhook/datasciencecluster/v3/defaulting.go:44",
       "call_site_source": "cmd/main.go:592",
       "confidence": "UNCERTAIN"
     },
@@ -15004,7 +15004,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/datasciencecluster/v2/validating.go:46",
+      "callee_source": "internal/webhook/serving/mutating_isvc.go:42",
       "call_site_source": "cmd/main.go:592",
       "confidence": "UNCERTAIN"
     },
@@ -15044,7 +15044,39 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
+      "callee_source": "internal/controller/services/setup/setup_controller.go:99",
+      "call_site_source": "cmd/main.go:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
       "callee_source": "internal/webhook/gateway/validating.go:38",
+      "call_site_source": "cmd/main.go:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/controller/dscinitialization/dscinitialization_controller.go:288",
+      "call_site_source": "cmd/main.go:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/webhook/dscinitialization/v1/validating.go:45",
+      "call_site_source": "cmd/main.go:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/webhook/monitoring/mutating.go:52",
       "call_site_source": "cmd/main.go:499",
       "confidence": "UNCERTAIN"
     },
@@ -15069,54 +15101,6 @@
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
       "callee_source": "internal/webhook/dscinitialization/v1/validating.go:45",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/monitoring/mutating.go:52",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/dscinitialization/dscinitialization_controller.go:288",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/services/setup/setup_controller.go:99",
-      "call_site_source": "cmd/main.go:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/services/setup/setup_controller.go:99",
-      "call_site_source": "cmd/main.go:592",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/dscinitialization/dscinitialization_controller.go:288",
-      "call_site_source": "cmd/main.go:592",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/gateway/validating.go:38",
       "call_site_source": "cmd/main.go:592",
       "confidence": "UNCERTAIN"
     },
@@ -15125,6 +15109,14 @@
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
       "callee_source": "internal/webhook/dscinitialization/v2/validating.go:45",
+      "call_site_source": "cmd/main.go:592",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/webhook/gateway/validating.go:38",
       "call_site_source": "cmd/main.go:592",
       "confidence": "UNCERTAIN"
     },
@@ -15148,7 +15140,15 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "SetupWithManager",
-      "callee_source": "internal/webhook/dscinitialization/v1/validating.go:45",
+      "callee_source": "internal/controller/dscinitialization/dscinitialization_controller.go:288",
+      "call_site_source": "cmd/main.go:592",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/controller/services/setup/setup_controller.go:99",
       "call_site_source": "cmd/main.go:592",
       "confidence": "UNCERTAIN"
     },
@@ -15196,6 +15196,14 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Init",
+      "callee_source": "internal/controller/components/registry/registry_test.go:28",
+      "call_site_source": "cmd/main.go:286",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:237",
+      "callee": "Init",
       "callee_source": "internal/controller/components/kueue/kueue.go:68",
       "call_site_source": "cmd/main.go:286",
       "confidence": "UNCERTAIN"
@@ -15204,7 +15212,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Init",
-      "callee_source": "internal/controller/datasciencecluster/datasciencecluster_controller_support_test.go:37",
+      "callee_source": "internal/controller/components/registry/registry_foreach_fallback_test.go:27",
       "call_site_source": "cmd/main.go:286",
       "confidence": "UNCERTAIN"
     },
@@ -15212,7 +15220,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Init",
-      "callee_source": "internal/controller/components/registry/registry_test.go:28",
+      "callee_source": "internal/controller/services/certconfigmapgenerator/certconfigmapgenerator.go:23",
       "call_site_source": "cmd/main.go:286",
       "confidence": "UNCERTAIN"
     },
@@ -15236,7 +15244,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Init",
-      "callee_source": "internal/controller/components/registry/registry_foreach_fallback_test.go:27",
+      "callee_source": "internal/controller/components/registry/readiness_test.go:37",
       "call_site_source": "cmd/main.go:286",
       "confidence": "UNCERTAIN"
     },
@@ -15252,15 +15260,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "Init",
-      "callee_source": "internal/controller/services/certconfigmapgenerator/certconfigmapgenerator.go:23",
-      "call_site_source": "cmd/main.go:286",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:237",
-      "callee": "Init",
-      "callee_source": "internal/controller/components/registry/readiness_test.go:37",
+      "callee_source": "internal/controller/datasciencecluster/datasciencecluster_controller_support_test.go:37",
       "call_site_source": "cmd/main.go:286",
       "confidence": "UNCERTAIN"
     },
@@ -15308,14 +15308,6 @@
       "caller": "main",
       "caller_source": "cmd/cloudmanager/main.go:10",
       "callee": "NewCmd",
-      "callee_source": "cmd/cloudmanager/aws/cmd.go:12",
-      "call_site_source": "cmd/cloudmanager/main.go:11",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/cloudmanager/main.go:10",
-      "callee": "NewCmd",
       "callee_source": "cmd/cloudmanager/coreweave/cmd.go:12",
       "call_site_source": "cmd/cloudmanager/main.go:11",
       "confidence": "UNCERTAIN"
@@ -15325,15 +15317,7 @@
       "caller_source": "cmd/cloudmanager/main.go:10",
       "callee": "NewCmd",
       "callee_source": "cmd/cloudmanager/aws/cmd.go:12",
-      "call_site_source": "cmd/cloudmanager/main.go:12",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/cloudmanager/main.go:10",
-      "callee": "NewCmd",
-      "callee_source": "cmd/cloudmanager/coreweave/cmd.go:12",
-      "call_site_source": "cmd/cloudmanager/main.go:12",
+      "call_site_source": "cmd/cloudmanager/main.go:11",
       "confidence": "UNCERTAIN"
     },
     {
@@ -15349,6 +15333,22 @@
       "caller_source": "cmd/cloudmanager/main.go:10",
       "callee": "NewCmd",
       "callee_source": "cmd/cloudmanager/coreweave/cmd.go:12",
+      "call_site_source": "cmd/cloudmanager/main.go:12",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/cloudmanager/main.go:10",
+      "callee": "NewCmd",
+      "callee_source": "cmd/cloudmanager/aws/cmd.go:12",
+      "call_site_source": "cmd/cloudmanager/main.go:12",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/cloudmanager/main.go:10",
+      "callee": "NewCmd",
+      "callee_source": "cmd/cloudmanager/azure/cmd.go:12",
       "call_site_source": "cmd/cloudmanager/main.go:13",
       "confidence": "UNCERTAIN"
     },
@@ -15356,7 +15356,7 @@
       "caller": "main",
       "caller_source": "cmd/cloudmanager/main.go:10",
       "callee": "NewCmd",
-      "callee_source": "cmd/cloudmanager/azure/cmd.go:12",
+      "callee_source": "cmd/cloudmanager/coreweave/cmd.go:12",
       "call_site_source": "cmd/cloudmanager/main.go:13",
       "confidence": "UNCERTAIN"
     },
@@ -15476,7 +15476,7 @@
       "caller": "main",
       "caller_source": "cmd/manifest-tools/main.go:9",
       "callee": "NewRootCommand",
-      "callee_source": "cmd/test-retry/pkg/cli/root.go:10",
+      "callee_source": "cmd/manifest-tools/pkg/cli/root.go:12",
       "call_site_source": "cmd/manifest-tools/main.go:10",
       "confidence": "UNCERTAIN"
     },
@@ -15484,7 +15484,7 @@
       "caller": "main",
       "caller_source": "cmd/manifest-tools/main.go:9",
       "callee": "NewRootCommand",
-      "callee_source": "cmd/manifest-tools/pkg/cli/root.go:12",
+      "callee_source": "cmd/test-retry/pkg/cli/root.go:10",
       "call_site_source": "cmd/manifest-tools/main.go:10",
       "confidence": "UNCERTAIN"
     },
@@ -15500,7 +15500,7 @@
       "caller": "main",
       "caller_source": "cmd/test-retry/main.go:10",
       "callee": "NewRootCommand",
-      "callee_source": "cmd/test-retry/pkg/cli/root.go:10",
+      "callee_source": "cmd/manifest-tools/pkg/cli/root.go:12",
       "call_site_source": "cmd/test-retry/main.go:11",
       "confidence": "UNCERTAIN"
     },
@@ -15508,7 +15508,7 @@
       "caller": "main",
       "caller_source": "cmd/test-retry/main.go:10",
       "callee": "NewRootCommand",
-      "callee_source": "cmd/manifest-tools/pkg/cli/root.go:12",
+      "callee_source": "cmd/test-retry/pkg/cli/root.go:10",
       "call_site_source": "cmd/test-retry/main.go:11",
       "confidence": "UNCERTAIN"
     },
@@ -15604,7 +15604,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "RegisterAllWebhooks",
-      "callee_source": "internal/webhook/webhook.go:36",
+      "callee_source": "internal/webhook/nowebhook.go:8",
       "call_site_source": "cmd/main.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -15612,7 +15612,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:237",
       "callee": "RegisterAllWebhooks",
-      "callee_source": "internal/webhook/nowebhook.go:8",
+      "callee_source": "internal/webhook/webhook.go:36",
       "call_site_source": "cmd/main.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -16626,10 +16626,10 @@
     },
     {
       "caller": "BuildModuleCR",
-      "caller_source": "internal/controller/modules/aihub/handler.go:94",
+      "caller_source": "internal/controller/modules/aihub/handler.go:95",
       "callee": "New",
       "callee_source": "cmd/test-retry/pkg/snapshot/snapshot.go:21",
-      "call_site_source": "internal/controller/modules/aihub/handler.go:101",
+      "call_site_source": "internal/controller/modules/aihub/handler.go:102",
       "confidence": "INFERRED"
     },
     {

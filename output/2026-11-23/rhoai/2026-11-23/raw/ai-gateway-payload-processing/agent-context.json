@@ -3,7 +3,7 @@
   "component": "ai-gateway-payload-processing",
   "repo": "red-hat-data-services/ai-gateway-payload-processing",
   "commit_sha": "e9ba47c465ac1fd9242bb39b6628a0e0cbfe707a",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "ai-gateway-payload-processing is a Kubernetes component. managing 2 CRD(s): ExternalModel, ExternalProvider. watching 4 resource type(s). defining 2 API spec type(s) across 14 struct(s) with 48 total fields. with 148 operator config constants. reporting 1 status condition types. integrates with management relationship via labels/annotations.",
   "repository_description": "This repository contains Payload Processing plugins that will be connected to an AI Gateway via a pluggable IPP (Inference Payload Processor) framework developed as part of llm-d.",
   "description_source": "README.md:3",
@@ -2424,7 +2424,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:33",
       "callee": "WithName",
-      "callee_source": "pkg/plugins/nemo/request_guard.go:85",
+      "callee_source": "pkg/plugins/nemo/response_guard.go:85",
       "call_site_source": "cmd/main.go:45",
       "confidence": "UNCERTAIN"
     },
@@ -2432,7 +2432,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:33",
       "callee": "WithName",
-      "callee_source": "pkg/plugins/nemo/response_guard.go:85",
+      "callee_source": "pkg/plugins/nemo/request_guard.go:85",
       "call_site_source": "cmd/main.go:45",
       "confidence": "UNCERTAIN"
     },
@@ -2464,14 +2464,6 @@
       "caller": "main",
       "caller_source": "cmd/main.go:33",
       "callee": "WithName",
-      "callee_source": "pkg/plugins/api-translation/plugin.go:94",
-      "call_site_source": "cmd/main.go:45",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:33",
-      "callee": "WithName",
       "callee_source": "pkg/plugins/stream-usage-enforcer/plugin.go:46",
       "call_site_source": "cmd/main.go:45",
       "confidence": "UNCERTAIN"
@@ -2480,7 +2472,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:33",
       "callee": "WithName",
-      "callee_source": "pkg/plugins/maas-headers-guard/plugin.go:80",
+      "callee_source": "pkg/plugins/api-translation/plugin.go:94",
       "call_site_source": "cmd/main.go:45",
       "confidence": "UNCERTAIN"
     },
@@ -2489,6 +2481,14 @@
       "caller_source": "cmd/main.go:33",
       "callee": "WithName",
       "callee_source": "pkg/plugins/model-provider-resolver/plugin.go:152",
+      "call_site_source": "cmd/main.go:45",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:33",
+      "callee": "WithName",
+      "callee_source": "pkg/plugins/maas-headers-guard/plugin.go:80",
       "call_site_source": "cmd/main.go:45",
       "confidence": "UNCERTAIN"
     },
@@ -2528,7 +2528,7 @@
       "caller": "reconcileHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler.go:138",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler.go:157",
       "confidence": "UNCERTAIN"
     },
@@ -2536,7 +2536,7 @@
       "caller": "reconcileHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler.go:138",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler.go:157",
       "confidence": "UNCERTAIN"
     },
@@ -2544,7 +2544,7 @@
       "caller": "deleteOwnedHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler.go:244",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler.go:246",
       "confidence": "UNCERTAIN"
     },
@@ -2552,7 +2552,7 @@
       "caller": "deleteOwnedHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler.go:244",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler.go:246",
       "confidence": "UNCERTAIN"
     },
@@ -2560,7 +2560,7 @@
       "caller": "applyHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler.go:269",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler.go:271",
       "confidence": "UNCERTAIN"
     },
@@ -2568,7 +2568,7 @@
       "caller": "applyHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler.go:269",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler.go:271",
       "confidence": "UNCERTAIN"
     },
@@ -2608,6 +2608,14 @@
       "caller": "TestReconcile_CreatesHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:184",
       "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:195",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_CreatesHTTPRoute",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:184",
+      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:195",
       "confidence": "UNCERTAIN"
@@ -2616,15 +2624,7 @@
       "caller": "TestReconcile_CreatesHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:184",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:195",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_CreatesHTTPRoute",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:184",
-      "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:223",
       "confidence": "UNCERTAIN"
     },
@@ -2632,7 +2632,7 @@
       "caller": "TestReconcile_CreatesHTTPRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:184",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:223",
       "confidence": "UNCERTAIN"
     },
@@ -2672,7 +2672,7 @@
       "caller": "TestReconcile_ProviderNamespace",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:230",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:259",
       "confidence": "UNCERTAIN"
     },
@@ -2680,7 +2680,7 @@
       "caller": "TestReconcile_ProviderNamespace",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:230",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:259",
       "confidence": "UNCERTAIN"
     },
@@ -2688,6 +2688,14 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:276",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_ProviderNamespaceUpdate",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
+      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:276",
       "confidence": "UNCERTAIN"
@@ -2696,15 +2704,7 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:276",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_ProviderNamespaceUpdate",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
-      "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:282",
       "confidence": "UNCERTAIN"
     },
@@ -2712,7 +2712,7 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:282",
       "confidence": "UNCERTAIN"
     },
@@ -2736,7 +2736,7 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:299",
       "confidence": "UNCERTAIN"
     },
@@ -2744,7 +2744,7 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:299",
       "confidence": "UNCERTAIN"
     },
@@ -2768,7 +2768,7 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:307",
       "confidence": "UNCERTAIN"
     },
@@ -2776,7 +2776,7 @@
       "caller": "TestReconcile_ProviderNamespaceUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:266",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:307",
       "confidence": "UNCERTAIN"
     },
@@ -2816,7 +2816,7 @@
       "caller": "TestReconcile_AGCServedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:347",
       "confidence": "UNCERTAIN"
     },
@@ -2824,7 +2824,7 @@
       "caller": "TestReconcile_AGCServedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:347",
       "confidence": "UNCERTAIN"
     },
@@ -2880,14 +2880,6 @@
       "caller": "TestReconcile_AGCServedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_AGCServedTransition",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
-      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:366",
       "confidence": "UNCERTAIN"
@@ -2897,7 +2889,7 @@
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:373",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:366",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2913,7 +2905,7 @@
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:379",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:373",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2925,11 +2917,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestReconcile_AGCManagedTransition",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
+      "caller": "TestReconcile_AGCServedTransition",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:340",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:391",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:379",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2945,6 +2937,14 @@
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:391",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_AGCManagedTransition",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
+      "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:394",
       "confidence": "UNCERTAIN"
     },
@@ -2952,7 +2952,7 @@
       "caller": "TestReconcile_AGCManagedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:394",
       "confidence": "UNCERTAIN"
     },
@@ -2976,7 +2976,7 @@
       "caller": "TestReconcile_AGCManagedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:417",
       "confidence": "UNCERTAIN"
     },
@@ -2984,7 +2984,7 @@
       "caller": "TestReconcile_AGCManagedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:417",
       "confidence": "UNCERTAIN"
     },
@@ -3008,7 +3008,7 @@
       "caller": "TestReconcile_AGCManagedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:427",
       "confidence": "UNCERTAIN"
     },
@@ -3016,7 +3016,7 @@
       "caller": "TestReconcile_AGCManagedTransition",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:383",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:427",
       "confidence": "UNCERTAIN"
     },
@@ -3040,7 +3040,7 @@
       "caller": "TestReconcile_MixedReferenceHandoff",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:475",
       "confidence": "UNCERTAIN"
     },
@@ -3048,7 +3048,7 @@
       "caller": "TestReconcile_MixedReferenceHandoff",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:475",
       "confidence": "UNCERTAIN"
     },
@@ -3072,14 +3072,6 @@
       "caller": "TestReconcile_MixedReferenceHandoff",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:488",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_MixedReferenceHandoff",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
-      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:488",
       "confidence": "UNCERTAIN"
@@ -3089,7 +3081,7 @@
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:496",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:488",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3104,8 +3096,8 @@
       "caller": "TestReconcile_MixedReferenceHandoff",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:502",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:496",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3121,7 +3113,7 @@
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:509",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:502",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3136,7 +3128,15 @@
       "caller": "TestReconcile_MixedReferenceHandoff",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:509",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_MixedReferenceHandoff",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
+      "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:512",
       "confidence": "UNCERTAIN"
     },
@@ -3144,7 +3144,7 @@
       "caller": "TestReconcile_MixedReferenceHandoff",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:466",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:512",
       "confidence": "UNCERTAIN"
     },
@@ -3152,7 +3152,7 @@
       "caller": "TestReconcile_MixedReferenceLocalFailureKeepsRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:516",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:531",
       "confidence": "UNCERTAIN"
     },
@@ -3160,7 +3160,7 @@
       "caller": "TestReconcile_MixedReferenceLocalFailureKeepsRoute",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:516",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:531",
       "confidence": "UNCERTAIN"
     },
@@ -3184,7 +3184,7 @@
       "caller": "TestReconcile_MissingProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:540",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:549",
       "confidence": "UNCERTAIN"
     },
@@ -3192,7 +3192,7 @@
       "caller": "TestReconcile_MissingProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:540",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:549",
       "confidence": "UNCERTAIN"
     },
@@ -3200,7 +3200,7 @@
       "caller": "TestReconcile_UnresolvedPathPlaceholder",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:555",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:576",
       "confidence": "UNCERTAIN"
     },
@@ -3208,7 +3208,7 @@
       "caller": "TestReconcile_UnresolvedPathPlaceholder",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:555",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:576",
       "confidence": "UNCERTAIN"
     },
@@ -3232,6 +3232,14 @@
       "caller": "TestReconcile_ProviderEndpointUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:582",
       "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:598",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_ProviderEndpointUpdate",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:582",
+      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:598",
       "confidence": "UNCERTAIN"
@@ -3240,15 +3248,7 @@
       "caller": "TestReconcile_ProviderEndpointUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:582",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:598",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_ProviderEndpointUpdate",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:582",
-      "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:605",
       "confidence": "UNCERTAIN"
     },
@@ -3256,7 +3256,7 @@
       "caller": "TestReconcile_ProviderEndpointUpdate",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:582",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:605",
       "confidence": "UNCERTAIN"
     },
@@ -3296,6 +3296,14 @@
       "caller": "TestReconcile_TwoModelsOneProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:638",
       "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:652",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_TwoModelsOneProvider",
+      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:638",
+      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:652",
       "confidence": "UNCERTAIN"
@@ -3304,15 +3312,7 @@
       "caller": "TestReconcile_TwoModelsOneProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:638",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:652",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_TwoModelsOneProvider",
-      "caller_source": "pkg/controller/externalmodel/reconciler_test.go:638",
-      "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:654",
       "confidence": "UNCERTAIN"
     },
@@ -3320,7 +3320,7 @@
       "caller": "TestReconcile_TwoModelsOneProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:638",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:654",
       "confidence": "UNCERTAIN"
     },
@@ -3328,7 +3328,7 @@
       "caller": "TestReconcile_CustomPortProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:675",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:689",
       "confidence": "UNCERTAIN"
     },
@@ -3336,7 +3336,7 @@
       "caller": "TestReconcile_CustomPortProvider",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:675",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:689",
       "confidence": "UNCERTAIN"
     },
@@ -3344,7 +3344,7 @@
       "caller": "TestReconcile_SpecModelName",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:789",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:800",
       "confidence": "UNCERTAIN"
     },
@@ -3352,7 +3352,7 @@
       "caller": "TestReconcile_SpecModelName",
       "caller_source": "pkg/controller/externalmodel/reconciler_test.go:789",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalmodel/reconciler_test.go:800",
       "confidence": "UNCERTAIN"
     },
@@ -3360,7 +3360,7 @@
       "caller": "cleanupTransport",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:268",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:273",
       "confidence": "UNCERTAIN"
     },
@@ -3368,7 +3368,7 @@
       "caller": "cleanupTransport",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:268",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:273",
       "confidence": "UNCERTAIN"
     },
@@ -3392,7 +3392,7 @@
       "caller": "validateSecretRef",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:301",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:307",
       "confidence": "UNCERTAIN"
     },
@@ -3400,7 +3400,7 @@
       "caller": "validateSecretRef",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:301",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:307",
       "confidence": "UNCERTAIN"
     },
@@ -3408,7 +3408,7 @@
       "caller": "applyService",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:345",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:347",
       "confidence": "UNCERTAIN"
     },
@@ -3416,7 +3416,7 @@
       "caller": "applyService",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:345",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:347",
       "confidence": "UNCERTAIN"
     },
@@ -3440,7 +3440,7 @@
       "caller": "Reconcile",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:80",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:85",
       "confidence": "UNCERTAIN"
     },
@@ -3448,7 +3448,7 @@
       "caller": "Reconcile",
       "caller_source": "pkg/controller/externalprovider/reconciler.go:80",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler.go:85",
       "confidence": "UNCERTAIN"
     },
@@ -3488,7 +3488,7 @@
       "caller": "TestReconcile_CreatesResources",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:176",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:187",
       "confidence": "UNCERTAIN"
     },
@@ -3496,7 +3496,7 @@
       "caller": "TestReconcile_CreatesResources",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:176",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:187",
       "confidence": "UNCERTAIN"
     },
@@ -3536,7 +3536,7 @@
       "caller": "TestReconcile_UpdateEndpoint",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:217",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:233",
       "confidence": "UNCERTAIN"
     },
@@ -3544,7 +3544,7 @@
       "caller": "TestReconcile_UpdateEndpoint",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:217",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:233",
       "confidence": "UNCERTAIN"
     },
@@ -3584,7 +3584,7 @@
       "caller": "addAIGCFinalizer",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:376",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:379",
       "confidence": "UNCERTAIN"
     },
@@ -3592,7 +3592,7 @@
       "caller": "addAIGCFinalizer",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:376",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:379",
       "confidence": "UNCERTAIN"
     },
@@ -3600,7 +3600,7 @@
       "caller": "removeAIGCFinalizer",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:384",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:387",
       "confidence": "UNCERTAIN"
     },
@@ -3608,7 +3608,7 @@
       "caller": "removeAIGCFinalizer",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:384",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:387",
       "confidence": "UNCERTAIN"
     },
@@ -3616,7 +3616,7 @@
       "caller": "waitForNoService",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:398",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:401",
       "confidence": "UNCERTAIN"
     },
@@ -3624,7 +3624,7 @@
       "caller": "waitForNoService",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:398",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:401",
       "confidence": "UNCERTAIN"
     },
@@ -3632,7 +3632,7 @@
       "caller": "waitForNoUnstructured",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:405",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:410",
       "confidence": "UNCERTAIN"
     },
@@ -3640,7 +3640,7 @@
       "caller": "waitForNoUnstructured",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:405",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:410",
       "confidence": "UNCERTAIN"
     },
@@ -3648,14 +3648,6 @@
       "caller": "TestReconcile_DeferWhenAIGCClaimsProvider",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:414",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
-      "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:435",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_DeferWhenAIGCClaimsProvider",
-      "caller_source": "pkg/controller/externalprovider/reconciler_test.go:414",
-      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:435",
       "confidence": "UNCERTAIN"
@@ -3665,6 +3657,14 @@
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:414",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:435",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_DeferWhenAIGCClaimsProvider",
+      "caller_source": "pkg/controller/externalprovider/reconciler_test.go:414",
+      "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:440",
       "confidence": "UNCERTAIN"
     },
@@ -3672,7 +3672,7 @@
       "caller": "TestReconcile_DeferWhenAIGCClaimsProvider",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:414",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:440",
       "confidence": "UNCERTAIN"
     },
@@ -3680,7 +3680,7 @@
       "caller": "TestReconcile_DeferFromCreationWhenAIGCClaimPrecedes",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:447",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:459",
       "confidence": "UNCERTAIN"
     },
@@ -3688,7 +3688,7 @@
       "caller": "TestReconcile_DeferFromCreationWhenAIGCClaimPrecedes",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:447",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:459",
       "confidence": "UNCERTAIN"
     },
@@ -3712,7 +3712,7 @@
       "caller": "TestReconcile_CleanupSkipsForeignObjects",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:479",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:510",
       "confidence": "UNCERTAIN"
     },
@@ -3720,7 +3720,7 @@
       "caller": "TestReconcile_CleanupSkipsForeignObjects",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:479",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:510",
       "confidence": "UNCERTAIN"
     },
@@ -3728,7 +3728,7 @@
       "caller": "TestReconcile_DeleteProvider",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:677",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:687",
       "confidence": "UNCERTAIN"
     },
@@ -3736,7 +3736,7 @@
       "caller": "TestReconcile_DeleteProvider",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:677",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:687",
       "confidence": "UNCERTAIN"
     },
@@ -3824,14 +3824,6 @@
       "caller": "TestReconcile_MissingSecret",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:766",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:776",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_MissingSecret",
-      "caller_source": "pkg/controller/externalprovider/reconciler_test.go:766",
-      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:776",
       "confidence": "UNCERTAIN"
@@ -3841,6 +3833,14 @@
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:766",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:776",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_MissingSecret",
+      "caller_source": "pkg/controller/externalprovider/reconciler_test.go:766",
+      "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:784",
       "confidence": "UNCERTAIN"
     },
@@ -3848,7 +3848,7 @@
       "caller": "TestReconcile_MissingSecret",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:766",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:784",
       "confidence": "UNCERTAIN"
     },
@@ -3872,14 +3872,6 @@
       "caller": "TestReconcile_APIKeyWithTLSDisabled",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:826",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:840",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_APIKeyWithTLSDisabled",
-      "caller_source": "pkg/controller/externalprovider/reconciler_test.go:826",
-      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:840",
       "confidence": "UNCERTAIN"
@@ -3889,6 +3881,14 @@
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:826",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:840",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_APIKeyWithTLSDisabled",
+      "caller_source": "pkg/controller/externalprovider/reconciler_test.go:826",
+      "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:848",
       "confidence": "UNCERTAIN"
     },
@@ -3896,7 +3896,7 @@
       "caller": "TestReconcile_APIKeyWithTLSDisabled",
       "caller_source": "pkg/controller/externalprovider/reconciler_test.go:826",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/externalprovider/reconciler_test.go:848",
       "confidence": "UNCERTAIN"
     },
@@ -3936,7 +3936,7 @@
       "caller": "applyProvider",
       "caller_source": "pkg/controller/legacymigration/reconciler.go:160",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/legacymigration/reconciler.go:162",
       "confidence": "UNCERTAIN"
     },
@@ -3944,7 +3944,7 @@
       "caller": "applyProvider",
       "caller_source": "pkg/controller/legacymigration/reconciler.go:160",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/legacymigration/reconciler.go:162",
       "confidence": "UNCERTAIN"
     },
@@ -3984,7 +3984,7 @@
       "caller": "waitForNewProvider",
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:144",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -3992,7 +3992,7 @@
       "caller": "waitForNewProvider",
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:144",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -4016,14 +4016,6 @@
       "caller": "TestReconcile_UpdateLegacyCR",
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:216",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
-      "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:226",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReconcile_UpdateLegacyCR",
-      "caller_source": "pkg/controller/legacymigration/reconciler_test.go:216",
-      "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:226",
       "confidence": "UNCERTAIN"
@@ -4033,6 +4025,14 @@
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:216",
       "callee": "Get",
       "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:226",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcile_UpdateLegacyCR",
+      "caller_source": "pkg/controller/legacymigration/reconciler_test.go:216",
+      "callee": "Get",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:233",
       "confidence": "UNCERTAIN"
     },
@@ -4040,7 +4040,7 @@
       "caller": "TestReconcile_UpdateLegacyCR",
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:216",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:233",
       "confidence": "UNCERTAIN"
     },
@@ -4096,7 +4096,7 @@
       "caller": "TestReconcile_DoesNotOverwriteManualCRs",
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:269",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:297",
       "confidence": "UNCERTAIN"
     },
@@ -4104,7 +4104,7 @@
       "caller": "TestReconcile_DoesNotOverwriteManualCRs",
       "caller_source": "pkg/controller/legacymigration/reconciler_test.go:269",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/controller/legacymigration/reconciler_test.go:297",
       "confidence": "UNCERTAIN"
     },
@@ -4144,7 +4144,7 @@
       "caller": "GenerateAuthHeaders",
       "caller_source": "pkg/plugins/apikey-injection/auth-generator/sigv4_auth_generator.go:109",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/plugins/apikey-injection/auth-generator/sigv4_auth_generator.go:147",
       "confidence": "UNCERTAIN"
     },
@@ -4152,7 +4152,7 @@
       "caller": "GenerateAuthHeaders",
       "caller_source": "pkg/plugins/apikey-injection/auth-generator/sigv4_auth_generator.go:109",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/plugins/apikey-injection/auth-generator/sigv4_auth_generator.go:147",
       "confidence": "UNCERTAIN"
     },
@@ -4192,7 +4192,7 @@
       "caller": "Reconcile",
       "caller_source": "pkg/plugins/model-provider-resolver/external_model_reconciler.go:47",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
       "call_site_source": "pkg/plugins/model-provider-resolver/external_model_reconciler.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -4200,7 +4200,7 @@
       "caller": "Reconcile",
       "caller_source": "pkg/plugins/model-provider-resolver/external_model_reconciler.go:47",
       "callee": "Get",
-      "callee_source": "pkg/plugins/model-provider-resolver/external_provider_reconciler_test.go:40",
+      "callee_source": "pkg/plugins/model-provider-resolver/external_model_reconciler_test.go:43",
       "call_site_source": "pkg/plugins/model-provider-resolver/external_model_reconciler.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -5368,23 +5368,15 @@
       "caller": "TranslateRequestWithConfig",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:84",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:85",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TranslateRequestWithConfig",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:84",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:85",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TranslateRequestWithConfig",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:84",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:85",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TranslateRequestWithConfig",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:84",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:85",
       "confidence": "UNCERTAIN"
     },
@@ -5397,18 +5389,18 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestVertexAnthropicPassthrough_TranslateRequest_RequiresConfig",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:150",
+      "caller": "TranslateRequestWithConfig",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:84",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:153",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:85",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestVertexAnthropicPassthrough_TranslateRequest_RequiresConfig",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:150",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:153",
       "confidence": "UNCERTAIN"
     },
@@ -5424,7 +5416,15 @@
       "caller": "TestVertexAnthropicPassthrough_TranslateRequest_RequiresConfig",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:150",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:153",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexAnthropicPassthrough_TranslateRequest_RequiresConfig",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:150",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_passthrough_test.go:153",
       "confidence": "UNCERTAIN"
     },
@@ -5432,7 +5432,7 @@
       "caller": "TestVertexAnthropic_TranslateRequest_BaseMethodReturnsError",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_test.go:183",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_test.go:189",
       "confidence": "UNCERTAIN"
     },
@@ -5440,7 +5440,7 @@
       "caller": "TestVertexAnthropic_TranslateRequest_BaseMethodReturnsError",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_test.go:183",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic_test.go:189",
       "confidence": "UNCERTAIN"
     },
@@ -5464,15 +5464,7 @@
       "caller": "TestVertexOpenAI_TranslateRequest_PassthroughAllChatParams",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:26",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:43",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_PassthroughAllChatParams",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:26",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:43",
       "confidence": "UNCERTAIN"
     },
@@ -5488,7 +5480,15 @@
       "caller": "TestVertexOpenAI_TranslateRequest_PassthroughAllChatParams",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:26",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_PassthroughAllChatParams",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:26",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:43",
       "confidence": "UNCERTAIN"
     },
@@ -5496,23 +5496,7 @@
       "caller": "TestVertexOpenAI_TranslateRequest_MissingModel",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:52",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_MissingModel",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:52",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_MissingModel",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:52",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:57",
       "confidence": "UNCERTAIN"
     },
@@ -5525,11 +5509,19 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestVertexOpenAI_TranslateRequest_EmptyModel",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:62",
+      "caller": "TestVertexOpenAI_TranslateRequest_MissingModel",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:52",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_MissingModel",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:52",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:68",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:57",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5544,6 +5536,14 @@
       "caller": "TestVertexOpenAI_TranslateRequest_EmptyModel",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:62",
       "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:68",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_EmptyModel",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:62",
+      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:68",
       "confidence": "UNCERTAIN"
@@ -5554,6 +5554,22 @@
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:68",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_MissingMessages",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:73",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:78",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_MissingMessages",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:73",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:78",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5569,22 +5585,6 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:73",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:78",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_MissingMessages",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:73",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:78",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_MissingMessages",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:73",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:78",
       "confidence": "UNCERTAIN"
     },
@@ -5592,23 +5592,7 @@
       "caller": "TestVertexOpenAI_TranslateRequest_EmptyMessages",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:83",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:89",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_EmptyMessages",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:83",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:89",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestVertexOpenAI_TranslateRequest_EmptyMessages",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:83",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -5617,6 +5601,22 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:83",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:89",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_EmptyMessages",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:83",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:89",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestVertexOpenAI_TranslateRequest_EmptyMessages",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:83",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai_test.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -5625,6 +5625,14 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:102",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:111",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_DeveloperRole",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:102",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:111",
       "confidence": "UNCERTAIN"
     },
@@ -5641,14 +5649,6 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:102",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:111",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_DeveloperRole",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:102",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:111",
       "confidence": "UNCERTAIN"
     },
@@ -5656,23 +5656,7 @@
       "caller": "TestTranslateRequest_SystemAndDeveloperConcatenated",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:120",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:130",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_SystemAndDeveloperConcatenated",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:120",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:130",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_SystemAndDeveloperConcatenated",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:120",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:130",
       "confidence": "UNCERTAIN"
     },
@@ -5681,6 +5665,22 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:120",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_SystemAndDeveloperConcatenated",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:120",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_SystemAndDeveloperConcatenated",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:120",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:130",
       "confidence": "UNCERTAIN"
     },
@@ -5720,6 +5720,14 @@
       "caller": "TestGetFloat_IntTypes",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1538",
       "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1545",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestGetFloat_IntTypes",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1538",
+      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1545",
       "confidence": "UNCERTAIN"
@@ -5736,14 +5744,6 @@
       "caller": "TestGetFloat_IntTypes",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1538",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1545",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestGetFloat_IntTypes",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1538",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1545",
       "confidence": "UNCERTAIN"
@@ -5760,14 +5760,6 @@
       "caller": "TestGetFloat_UnsupportedType",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1553",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1559",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestGetFloat_UnsupportedType",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1553",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1559",
       "confidence": "UNCERTAIN"
@@ -5776,6 +5768,14 @@
       "caller": "TestGetFloat_UnsupportedType",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1553",
       "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1559",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestGetFloat_UnsupportedType",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1553",
+      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1559",
       "confidence": "UNCERTAIN"
@@ -5784,7 +5784,7 @@
       "caller": "TestGetInt_IntTypes",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1566",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1581",
       "confidence": "UNCERTAIN"
     },
@@ -5793,14 +5793,6 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1566",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1581",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestGetInt_IntTypes",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1566",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1581",
       "confidence": "UNCERTAIN"
     },
@@ -5813,6 +5805,14 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestGetInt_IntTypes",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1566",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1581",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "TestGetInt_UnsupportedType",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:1589",
       "callee": "TranslateRequest",
@@ -5848,7 +5848,7 @@
       "caller": "TestTranslateRequest_MaxTokens",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:160",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:197",
       "confidence": "UNCERTAIN"
     },
@@ -5857,14 +5857,6 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:160",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:197",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_MaxTokens",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:160",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:197",
       "confidence": "UNCERTAIN"
     },
@@ -5877,10 +5869,26 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestTranslateRequest_MaxTokens",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:160",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:197",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "TestTranslateRequest_StopString",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:214",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_StopString",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:214",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:221",
       "confidence": "UNCERTAIN"
     },
@@ -5897,14 +5905,6 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:214",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:221",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_StopString",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:214",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:221",
       "confidence": "UNCERTAIN"
     },
@@ -5928,7 +5928,7 @@
       "caller": "TestTranslateRequest_InvalidModelCharacters",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:228",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:252",
       "confidence": "UNCERTAIN"
     },
@@ -5936,7 +5936,7 @@
       "caller": "TestTranslateRequest_InvalidModelCharacters",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:228",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:252",
       "confidence": "UNCERTAIN"
     },
@@ -5944,7 +5944,15 @@
       "caller": "TestTranslateRequest_ValidModelNames",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:259",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:277",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_ValidModelNames",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:259",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:277",
       "confidence": "UNCERTAIN"
     },
@@ -5960,15 +5968,7 @@
       "caller": "TestTranslateRequest_ValidModelNames",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:259",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:277",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_ValidModelNames",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:259",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:277",
       "confidence": "UNCERTAIN"
     },
@@ -5976,15 +5976,7 @@
       "caller": "TestTranslateRequest_MissingModel",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:283",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:288",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_MissingModel",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:283",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:288",
       "confidence": "UNCERTAIN"
     },
@@ -6000,7 +5992,15 @@
       "caller": "TestTranslateRequest_MissingModel",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:283",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:288",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_MissingModel",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:283",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:288",
       "confidence": "UNCERTAIN"
     },
@@ -6016,14 +6016,6 @@
       "caller": "TestTranslateRequest_MissingMessages",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:293",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:298",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_MissingMessages",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:293",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:298",
       "confidence": "UNCERTAIN"
@@ -6037,10 +6029,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestTranslateRequest_MissingMessages",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:293",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:298",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "TestTranslateRequest_BasicChat",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:30",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:38",
       "confidence": "UNCERTAIN"
     },
@@ -6064,7 +6064,7 @@
       "caller": "TestTranslateRequest_BasicChat",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:30",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:38",
       "confidence": "UNCERTAIN"
     },
@@ -6080,7 +6080,7 @@
       "caller": "TestTranslateRequest_EmptyMessagesArray",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:303",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:309",
       "confidence": "UNCERTAIN"
     },
@@ -6096,8 +6096,24 @@
       "caller": "TestTranslateRequest_EmptyMessagesArray",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:303",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:309",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_OnlySystemMessage",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:314",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:322",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_OnlySystemMessage",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:314",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:322",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6117,42 +6133,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestTranslateRequest_OnlySystemMessage",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:314",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:322",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_OnlySystemMessage",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:314",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:322",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_ToolRoleTranslated",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:327",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:350",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "TestTranslateRequest_ToolRoleTranslated",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:327",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:350",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_ToolRoleTranslated",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:327",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:350",
       "confidence": "UNCERTAIN"
     },
@@ -6161,6 +6145,22 @@
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:327",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:350",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_ToolRoleTranslated",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:327",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:350",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_ToolRoleTranslated",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:327",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:350",
       "confidence": "UNCERTAIN"
     },
@@ -6168,7 +6168,7 @@
       "caller": "TestTranslateRequest_FunctionRoleTranslated",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:373",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -6176,7 +6176,7 @@
       "caller": "TestTranslateRequest_FunctionRoleTranslated",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:373",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -6200,14 +6200,6 @@
       "caller": "TestTranslateRequest_FunctionRoleMissingName",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:396",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:404",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_FunctionRoleMissingName",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:396",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:404",
       "confidence": "UNCERTAIN"
@@ -6224,6 +6216,14 @@
       "caller": "TestTranslateRequest_FunctionRoleMissingName",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:396",
       "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:404",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_FunctionRoleMissingName",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:396",
+      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:404",
       "confidence": "UNCERTAIN"
@@ -6232,23 +6232,15 @@
       "caller": "TestTranslateRequest_UnknownRoleRejected",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:409",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:417",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_UnknownRoleRejected",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:409",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:417",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_UnknownRoleRejected",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:409",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:417",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_UnknownRoleRejected",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:409",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:417",
       "confidence": "UNCERTAIN"
     },
@@ -6261,10 +6253,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestTranslateRequest_UnknownRoleRejected",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:409",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:417",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "TestTranslateRequest_ContentParts",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:422",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:436",
       "confidence": "UNCERTAIN"
     },
@@ -6272,7 +6272,7 @@
       "caller": "TestTranslateRequest_ContentParts",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:422",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:436",
       "confidence": "UNCERTAIN"
     },
@@ -6288,7 +6288,7 @@
       "caller": "TestTranslateRequest_ContentParts",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:422",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:436",
       "confidence": "UNCERTAIN"
     },
@@ -6296,23 +6296,15 @@
       "caller": "TestTranslateRequest_EmptyContentString",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:446",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:454",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_EmptyContentString",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:446",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:454",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_EmptyContentString",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:446",
-      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:454",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_EmptyContentString",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:446",
+      "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:454",
       "confidence": "UNCERTAIN"
     },
@@ -6325,11 +6317,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestTranslateRequest_PathIncludesModel",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:462",
+      "caller": "TestTranslateRequest_EmptyContentString",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:446",
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:468",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:454",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6344,6 +6336,14 @@
       "caller": "TestTranslateRequest_PathIncludesModel",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:462",
       "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:468",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_PathIncludesModel",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:462",
+      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:468",
       "confidence": "UNCERTAIN"
@@ -6354,14 +6354,6 @@
       "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:468",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestTranslateRequest_NoGenerationConfigWhenNoParams",
-      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:473",
-      "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
-      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:479",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6376,6 +6368,14 @@
       "caller": "TestTranslateRequest_NoGenerationConfigWhenNoParams",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:473",
       "callee": "TranslateRequest",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:479",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestTranslateRequest_NoGenerationConfigWhenNoParams",
+      "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:473",
+      "callee": "TranslateRequest",
       "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_openai.go:47",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:479",
       "confidence": "UNCERTAIN"
@@ -6384,7 +6384,7 @@
       "caller": "TestTranslateRequest_NoGenerationConfigWhenNoParams",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:473",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:479",
       "confidence": "UNCERTAIN"
     },
@@ -6392,7 +6392,7 @@
       "caller": "TestTranslateRequest_ImageDataURI",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:486",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:502",
       "confidence": "UNCERTAIN"
     },
@@ -6408,7 +6408,7 @@
       "caller": "TestTranslateRequest_ImageDataURI",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:486",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:77",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:502",
       "confidence": "UNCERTAIN"
     },
@@ -6416,7 +6416,7 @@
       "caller": "TestTranslateRequest_ImageDataURI",
       "caller_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:486",
       "callee": "TranslateRequest",
-      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex.go:50",
+      "callee_source": "pkg/plugins/api-translation/translator/vertex/vertex_anthropic.go:124",
       "call_site_source": "pkg/plugins/api-translation/translator/vertex/vertex_test.go:502",
       "confidence": "UNCERTAIN"
     }

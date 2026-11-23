@@ -3,7 +3,7 @@
   "component": "model-registry",
   "repo": "red-hat-data-services/model-registry",
   "commit_sha": "b8ce0bfba281c6a153c4d64db94cc076cb4036ef",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "model-registry is a Kubernetes component. deploying 4 workload(s) (model-catalog-server, minio, seaweedfs, controller-manager) with 4 container(s). watching 1 resource type(s). exposing 1 service(s) on ports: 8080. Dockerfile EXPOSE ports: 8080. connecting to external services: aiohttp, requests, s3, urllib. runtime dependencies: MinIO/S3, MySQL, PostgreSQL, S3, dynatrace-mcp-server, image-registry, kubernetes-mcp-server. with 877 operator config constants (5 image references, 70 env vars). Python k8s client with 39 API call(s). integrates with Istio, management relationship via labels/annotations. references components: kserve (import), kubeflow (import). mounts 4 ConfigMap(s) as volumes: mcp-catalog-sources, model-catalog-sources, seaweedfs-filer-config, skill-catalog-sources.",
   "repository_description": "Kubeflow Hub is an umbrella project including the **Model Registry**, which provides a central repository for model developers to store and manage models, versions, and artifact metadata; and the **Catalog**, which enables federated discovery across external catalogs.",
   "description_source": "README.md:9",
@@ -16051,7 +16051,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
       "call_site_source": "clients/ui/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
     },
@@ -16067,24 +16067,8 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
-      "call_site_source": "clients/ui/bff/cmd/main.go:147",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "clients/ui/bff/cmd/main.go:183",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
-      "call_site_source": "clients/ui/bff/cmd/main.go:183",
+      "call_site_source": "clients/ui/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16123,7 +16107,15 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "call_site_source": "clients/ui/bff/cmd/main.go:183",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -16139,6 +16131,38 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "clients/ui/bff/cmd/main.go:183",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
@@ -16163,7 +16187,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
+      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -16180,23 +16204,7 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "call_site_source": "clients/ui/bff/cmd/main.go:229",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16219,14 +16227,6 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "clients/ui/bff/cmd/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
       "call_site_source": "clients/ui/bff/cmd/main.go:229",
       "confidence": "UNCERTAIN"
@@ -16235,39 +16235,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
     },
@@ -16291,8 +16259,48 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "clients/ui/bff/cmd/main.go:255",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16307,7 +16315,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
       "call_site_source": "clients/ui/bff/cmd/main.go:255",
       "confidence": "UNCERTAIN"
     },
@@ -16323,15 +16331,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "clients/ui/bff/cmd/main.go:255",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
       "call_site_source": "clients/ui/bff/cmd/main.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -16339,7 +16339,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
       "call_site_source": "clients/ui/bff/cmd/main.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -16403,22 +16403,6 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "cmd/controller/main.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
-      "call_site_source": "cmd/controller/main.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
       "call_site_source": "cmd/controller/main.go:145",
       "confidence": "UNCERTAIN"
@@ -16427,6 +16411,30 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
+      "call_site_source": "cmd/controller/main.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
+      "call_site_source": "cmd/controller/main.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "cmd/controller/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
       "call_site_source": "cmd/controller/main.go:154",
       "confidence": "UNCERTAIN"
@@ -16443,7 +16451,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
       "call_site_source": "cmd/controller/main.go:154",
       "confidence": "UNCERTAIN"
     },
@@ -16451,8 +16459,8 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
-      "call_site_source": "cmd/controller/main.go:154",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
+      "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16460,22 +16468,6 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "cmd/controller/main.go:161",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
-      "call_site_source": "cmd/controller/main.go:161",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader.go:26",
       "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -16492,6 +16484,30 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "call_site_source": "cmd/controller/main.go:161",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "call_site_source": "cmd/controller/main.go:165",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
+      "call_site_source": "cmd/controller/main.go:165",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
       "call_site_source": "cmd/controller/main.go:165",
       "confidence": "UNCERTAIN"
     },
@@ -16508,15 +16524,15 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
-      "call_site_source": "cmd/controller/main.go:165",
+      "call_site_source": "cmd/controller/main.go:171",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "cmd/controller/main.go:165",
+      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
+      "call_site_source": "cmd/controller/main.go:171",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16537,18 +16553,10 @@
     },
     {
       "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
+      "caller_source": "cmd/csi/main.go:25",
       "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
-      "call_site_source": "cmd/controller/main.go:171",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/api_test.go:990",
-      "call_site_source": "cmd/controller/main.go:171",
+      "call_site_source": "cmd/csi/main.go:79",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16564,14 +16572,6 @@
       "caller_source": "cmd/csi/main.go:25",
       "callee": "Error",
       "callee_source": "catalog/internal/catalog/modelcatalog/yaml_catalog.go:335",
-      "call_site_source": "cmd/csi/main.go:79",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/csi/main.go:25",
-      "callee": "Error",
-      "callee_source": "catalog/internal/catalog/modelcatalog/loader_test.go:202",
       "call_site_source": "cmd/csi/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -16883,6 +16883,14 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "call_site_source": "clients/ui/bff/cmd/main.go:183",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
@@ -16899,31 +16907,23 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:183",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -16955,7 +16955,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
     },
@@ -16979,16 +16979,8 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:255",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17004,6 +16996,14 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "call_site_source": "clients/ui/bff/cmd/main.go:255",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -17011,7 +17011,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -17035,14 +17035,6 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
-      "call_site_source": "cmd/controller/main.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
       "call_site_source": "cmd/controller/main.go:145",
       "confidence": "UNCERTAIN"
@@ -17052,7 +17044,7 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
-      "call_site_source": "cmd/controller/main.go:154",
+      "call_site_source": "cmd/controller/main.go:145",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17068,6 +17060,14 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
+      "call_site_source": "cmd/controller/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
       "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -17075,7 +17075,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -17099,7 +17099,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -17107,7 +17107,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
       "call_site_source": "cmd/controller/main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -17115,7 +17115,7 @@
       "caller": "main",
       "caller_source": "cmd/csi/main.go:25",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/csi/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -17123,7 +17123,7 @@
       "caller": "main",
       "caller_source": "cmd/csi/main.go:25",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1/error.go:32",
+      "callee_source": "catalog/internal/server/openapi/v1/error.go:50",
       "call_site_source": "cmd/csi/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -17267,14 +17267,6 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:147",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
@@ -17284,7 +17276,7 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:183",
+      "call_site_source": "clients/ui/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17292,6 +17284,14 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:183",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -17323,14 +17323,6 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
@@ -17348,7 +17340,7 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:229",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17364,14 +17356,14 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "call_site_source": "clients/ui/bff/cmd/main.go:229",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
     },
@@ -17395,7 +17387,15 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:255",
       "confidence": "UNCERTAIN"
     },
@@ -17403,7 +17403,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:255",
       "confidence": "UNCERTAIN"
     },
@@ -17459,14 +17459,6 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
-      "call_site_source": "cmd/controller/main.go:154",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
       "call_site_source": "cmd/controller/main.go:154",
       "confidence": "UNCERTAIN"
@@ -17476,6 +17468,14 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
+      "call_site_source": "cmd/controller/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
       "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -17483,7 +17483,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:32",
+      "callee_source": "catalog/internal/server/openapi/v1alpha1/error.go:50",
       "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -17819,14 +17819,6 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:147",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
@@ -17843,7 +17835,15 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:50",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:147",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -17851,7 +17851,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:50",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -17875,7 +17875,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "callee_source": "internal/server/openapi/v1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -17883,7 +17883,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -17892,14 +17892,6 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:183",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -17908,7 +17900,7 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "call_site_source": "clients/ui/bff/cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17924,14 +17916,6 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -17947,7 +17931,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -17956,6 +17940,14 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -17964,6 +17956,14 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -17987,14 +17987,6 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:229",
       "confidence": "UNCERTAIN"
@@ -18003,6 +17995,38 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:242",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
@@ -18019,23 +18043,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
     },
@@ -18052,14 +18060,6 @@
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:50",
-      "call_site_source": "clients/ui/bff/cmd/main.go:242",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:242",
       "confidence": "UNCERTAIN"
     },
@@ -18075,14 +18075,6 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:255",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "clients/ui/bff/cmd/main.go:255",
       "confidence": "UNCERTAIN"
@@ -18099,8 +18091,8 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
-      "call_site_source": "clients/ui/bff/cmd/main.go:260",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:255",
       "confidence": "UNCERTAIN"
     },
     {
@@ -18115,6 +18107,14 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "clients/ui/bff/cmd/main.go:260",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "clients/ui/bff/cmd/main.go:260",
       "confidence": "UNCERTAIN"
@@ -18131,7 +18131,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "cmd/controller/main.go:134",
       "confidence": "UNCERTAIN"
     },
@@ -18147,14 +18147,6 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
-      "call_site_source": "cmd/controller/main.go:134",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "cmd/controller/main.go:134",
       "confidence": "UNCERTAIN"
@@ -18163,7 +18155,15 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "cmd/controller/main.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -18179,7 +18179,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "cmd/controller/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -18187,7 +18187,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "cmd/controller/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -18203,7 +18203,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:154",
       "confidence": "UNCERTAIN"
     },
@@ -18219,7 +18219,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "cmd/controller/main.go:154",
       "confidence": "UNCERTAIN"
     },
@@ -18228,14 +18228,6 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
-      "call_site_source": "cmd/controller/main.go:161",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -18259,7 +18251,15 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "call_site_source": "cmd/controller/main.go:161",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:165",
       "confidence": "UNCERTAIN"
     },
@@ -18267,14 +18267,6 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
-      "call_site_source": "cmd/controller/main.go:165",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:50",
       "call_site_source": "cmd/controller/main.go:165",
       "confidence": "UNCERTAIN"
@@ -18284,6 +18276,14 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:50",
+      "call_site_source": "cmd/controller/main.go:165",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "cmd/controller/main.go:165",
       "confidence": "UNCERTAIN"
     },
@@ -18299,14 +18299,6 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
-      "call_site_source": "cmd/controller/main.go:171",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Error",
       "callee_source": "internal/server/openapi/v1/error.go:50",
       "call_site_source": "cmd/controller/main.go:171",
       "confidence": "UNCERTAIN"
@@ -18316,6 +18308,14 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Error",
       "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "call_site_source": "cmd/controller/main.go:171",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Error",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/controller/main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -18331,7 +18331,7 @@
       "caller": "main",
       "caller_source": "cmd/csi/main.go:25",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
+      "callee_source": "internal/server/openapi/v1/error.go:32",
       "call_site_source": "cmd/csi/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -18347,7 +18347,7 @@
       "caller": "main",
       "caller_source": "cmd/csi/main.go:25",
       "callee": "Error",
-      "callee_source": "internal/server/openapi/v1/error.go:32",
+      "callee_source": "internal/server/openapi/v1alpha3/error.go:32",
       "call_site_source": "cmd/csi/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -18371,7 +18371,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "GetClient",
-      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:143",
+      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:64",
       "call_site_source": "clients/ui/bff/cmd/main.go:172",
       "confidence": "UNCERTAIN"
     },
@@ -18379,7 +18379,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "GetClient",
-      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/factory.go:41",
+      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:143",
       "call_site_source": "clients/ui/bff/cmd/main.go:172",
       "confidence": "UNCERTAIN"
     },
@@ -18395,8 +18395,16 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "GetClient",
-      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:64",
+      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/factory.go:41",
       "call_site_source": "clients/ui/bff/cmd/main.go:172",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "GetClient",
+      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:64",
+      "call_site_source": "cmd/controller/main.go:150",
       "confidence": "UNCERTAIN"
     },
     {
@@ -18411,7 +18419,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "GetClient",
-      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:64",
+      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:143",
       "call_site_source": "cmd/controller/main.go:150",
       "confidence": "UNCERTAIN"
     },
@@ -18420,14 +18428,6 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "GetClient",
       "callee_source": "clients/ui/bff/internal/integrations/kubernetes/factory.go:41",
-      "call_site_source": "cmd/controller/main.go:150",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "GetClient",
-      "callee_source": "clients/ui/bff/internal/integrations/kubernetes/k8mocks/mock_factory.go:143",
       "call_site_source": "cmd/controller/main.go:150",
       "confidence": "UNCERTAIN"
     },
@@ -18443,15 +18443,7 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Start",
-      "callee_source": "catalog/internal/plugin/registry_test.go:23",
-      "call_site_source": "clients/ui/bff/cmd/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "clients/ui/bff/cmd/main.go:92",
-      "callee": "Start",
-      "callee_source": "catalog/internal/plugin/base.go:57",
+      "callee_source": "catalog/internal/plugin/server_test.go:43",
       "call_site_source": "clients/ui/bff/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
@@ -18467,8 +18459,24 @@
       "caller": "main",
       "caller_source": "clients/ui/bff/cmd/main.go:92",
       "callee": "Start",
-      "callee_source": "catalog/internal/plugin/server_test.go:43",
+      "callee_source": "catalog/internal/plugin/base.go:57",
       "call_site_source": "clients/ui/bff/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "clients/ui/bff/cmd/main.go:92",
+      "callee": "Start",
+      "callee_source": "catalog/internal/plugin/registry_test.go:23",
+      "call_site_source": "clients/ui/bff/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/controller/main.go:45",
+      "callee": "Start",
+      "callee_source": "catalog/internal/plugin/server_test.go:43",
+      "call_site_source": "cmd/controller/main.go:170",
       "confidence": "UNCERTAIN"
     },
     {
@@ -18483,7 +18491,7 @@
       "caller": "main",
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Start",
-      "callee_source": "catalog/internal/plugin/server_test.go:43",
+      "callee_source": "catalog/internal/plugin/base.go:57",
       "call_site_source": "cmd/controller/main.go:170",
       "confidence": "UNCERTAIN"
     },
@@ -18492,14 +18500,6 @@
       "caller_source": "cmd/controller/main.go:45",
       "callee": "Start",
       "callee_source": "catalog/internal/plugin/registry_test.go:23",
-      "call_site_source": "cmd/controller/main.go:170",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/controller/main.go:45",
-      "callee": "Start",
-      "callee_source": "catalog/internal/plugin/base.go:57",
       "call_site_source": "cmd/controller/main.go:170",
       "confidence": "UNCERTAIN"
     },
@@ -18531,7 +18531,7 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:1421",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5633",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -18539,167 +18539,7 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6676",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6846",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7049",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7252",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7400",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7596",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7798",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7946",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6325",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8127",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:94",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6144",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:267",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8282",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8452",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8622",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8792",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8962",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9132",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9302",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9472",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9823",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -18715,7 +18555,159 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9823",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9472",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9302",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9132",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8962",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8792",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8622",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8452",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8282",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8127",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7946",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7798",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7596",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7400",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7252",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7049",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6846",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6676",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6495",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6325",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6144",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -18739,30 +18731,6 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5633",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:398",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:567",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:5485",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
@@ -18772,46 +18740,6 @@
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:5286",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:67",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:292",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:471",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:616",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:765",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -18859,14 +18787,6 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:33",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:4103",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
@@ -18883,87 +18803,7 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:183",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:436",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:648",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:820",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1029",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1281",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1483",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1620",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1783",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:3713",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:94",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -18987,39 +18827,7 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:267",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:3201",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:398",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:578",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:94",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -19043,38 +18851,6 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:267",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:398",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:37",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:204",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:2656",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
@@ -19083,47 +18859,7 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:384",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:551",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6495",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:731",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:2472",
-      "call_site_source": "gorm-gen/main.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "gorm-gen/main.go:178",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:908",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -19155,7 +18891,7 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:1075",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:1765",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -19163,7 +18899,15 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:1765",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:1598",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:1421",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -19179,7 +18923,263 @@
       "caller": "main",
       "caller_source": "gorm-gen/main.go:178",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:1598",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:1075",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:908",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:731",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:551",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:384",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:204",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:37",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:398",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:267",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:94",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:578",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:398",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:267",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:94",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1783",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1620",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1483",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1281",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1029",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:820",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:648",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:436",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:183",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:33",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:765",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:616",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:471",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:292",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:67",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:567",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:398",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:267",
+      "call_site_source": "gorm-gen/main.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "gorm-gen/main.go:178",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:94",
       "call_site_source": "gorm-gen/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -19187,7 +19187,7 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5485",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:94",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19195,7 +19195,135 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8962",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:267",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:398",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:567",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:67",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:292",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:471",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:616",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:765",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:33",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:183",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:436",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:648",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:820",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1029",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1281",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1483",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1620",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19243,22 +19371,6 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6676",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6495",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
       "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:94",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
@@ -19275,23 +19387,7 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1483",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
       "callee_source": "catalog/pkg/openapi/api_skill_catalog_service.go:398",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6846",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19315,14 +19411,6 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6325",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:384",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
@@ -19331,231 +19419,7 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6144",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1281",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:551",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7049",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1029",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:820",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:648",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:436",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5976",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:183",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5780",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7252",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:33",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7400",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5633",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:765",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:616",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:471",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:292",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:67",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:567",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5286",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:398",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:267",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8282",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8452",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:94",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7596",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7798",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19603,14 +19467,6 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1620",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:1598",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
@@ -19619,47 +19475,7 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5090",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:4888",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:4670",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:1765",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8622",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8792",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19683,135 +19499,7 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:4467",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:4299",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:7946",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:4103",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:3935",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9823",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:3713",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:3514",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:3364",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9642",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:3201",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9472",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:8127",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:3024",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:2840",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:2656",
-      "call_site_source": "main.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:8",
-      "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:9302",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:2302",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19827,6 +19515,294 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:2656",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:2840",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:3024",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:3201",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:3364",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:3514",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:3713",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:3935",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:4103",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:4299",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:4467",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:4670",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:4888",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5090",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5286",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5485",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5633",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5780",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:5976",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6144",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6325",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6495",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6676",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:6846",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7049",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7252",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7400",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7596",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7798",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:7946",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8127",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8282",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8452",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8622",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8792",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:8962",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
       "callee_source": "pkg/openapi/api_model_registry_service.go:9132",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
@@ -19835,7 +19811,31 @@
       "caller": "main",
       "caller_source": "main.go:8",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:2302",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9302",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9472",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9642",
+      "call_site_source": "main.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:8",
+      "callee": "Execute",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:9823",
       "call_site_source": "main.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -19843,7 +19843,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:5633",
+      "callee_source": "catalog/pkg/openapi/api_serving_runtime_catalog_service.go:398",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19851,7 +19851,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:1945",
+      "callee_source": "pkg/openapi/api_model_registry_service.go:204",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19859,7 +19859,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:820",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:94",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19867,7 +19867,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:6846",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:267",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19875,7 +19875,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1029",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:398",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19883,7 +19883,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "pkg/openapi/api_model_registry_service.go:4103",
+      "callee_source": "catalog/pkg/openapi/api_agent_catalog_service.go:567",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19891,7 +19891,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1281",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:67",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -19899,7 +19899,7 @@
       "caller": "main",
       "caller_source": "tools/catalog-gen/main.go:13",
       "callee": "Execute",
-      "callee_source": "catalog/pkg/openapi/api_model_catalog_service.go:1483",
+      "callee_source": "catalog/pkg/openapi/api_mcp_catalog_service.go:292",
       "call_site_source": "tools/catalog-gen/main.go:22",
       "confidence": "UNCERTAIN"
     }

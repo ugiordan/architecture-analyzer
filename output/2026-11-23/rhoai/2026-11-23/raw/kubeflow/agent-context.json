@@ -3,7 +3,7 @@
   "component": "kubeflow",
   "repo": "red-hat-data-services/kubeflow",
   "commit_sha": "849815959083b80716d53b367ed17887d7df935c",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "kubeflow is a Kubernetes component. deploying 9 workload(s) (controller-manager, controller-manager, controller-manager, controller-manager, deployment, deployment, deployment, manager, manager) with 10 container(s). watching 12 resource type(s). exposing 3 service(s) on ports: 443, 8443. with 2 webhook(s) (1 validating, 1 mutating). protected by 2 network policy/policies. connecting to external services: requests. runtime dependencies: MLflow, image-registry. with 157 operator config constants (2 image references, 27 env vars). exposing 5 Prometheus metrics. integrates with Istio, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization.",
   "repository_description": "This repository is forked from the Kubeflow upstream repository.",
   "description_source": "README.md:3",
@@ -1241,14 +1241,6 @@
       "caller": "main",
       "caller_source": "components/notebook-controller/main.go:60",
       "callee": "SetupWithManager",
-      "callee_source": "components/notebook-controller/controllers/culling_controller.go:570",
-      "call_site_source": "components/notebook-controller/main.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "components/notebook-controller/main.go:60",
-      "callee": "SetupWithManager",
       "callee_source": "components/notebook-controller/controllers/notebook_controller.go:778",
       "call_site_source": "components/notebook-controller/main.go:131",
       "confidence": "UNCERTAIN"
@@ -1258,15 +1250,7 @@
       "caller_source": "components/notebook-controller/main.go:60",
       "callee": "SetupWithManager",
       "callee_source": "components/notebook-controller/controllers/culling_controller.go:570",
-      "call_site_source": "components/notebook-controller/main.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "components/notebook-controller/main.go:60",
-      "callee": "SetupWithManager",
-      "callee_source": "components/notebook-controller/controllers/notebook_controller.go:778",
-      "call_site_source": "components/notebook-controller/main.go:137",
+      "call_site_source": "components/notebook-controller/main.go:131",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1282,6 +1266,22 @@
       "caller_source": "components/notebook-controller/main.go:60",
       "callee": "SetupWithManager",
       "callee_source": "components/notebook-controller/controllers/notebook_controller.go:778",
+      "call_site_source": "components/notebook-controller/main.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "components/notebook-controller/main.go:60",
+      "callee": "SetupWithManager",
+      "callee_source": "components/notebook-controller/controllers/culling_controller.go:570",
+      "call_site_source": "components/notebook-controller/main.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "components/notebook-controller/main.go:60",
+      "callee": "SetupWithManager",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_controller.go:774",
       "call_site_source": "components/notebook-controller/main.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -1297,24 +1297,8 @@
       "caller": "main",
       "caller_source": "components/notebook-controller/main.go:60",
       "callee": "SetupWithManager",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_controller.go:774",
+      "callee_source": "components/notebook-controller/controllers/notebook_controller.go:778",
       "call_site_source": "components/notebook-controller/main.go:149",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "components/odh-notebook-controller/main.go:294",
-      "callee": "SetupWithManager",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_controller.go:774",
-      "call_site_source": "components/odh-notebook-controller/main.go:404",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "components/odh-notebook-controller/main.go:294",
-      "callee": "SetupWithManager",
-      "callee_source": "components/notebook-controller/controllers/culling_controller.go:570",
-      "call_site_source": "components/odh-notebook-controller/main.go:404",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1330,6 +1314,22 @@
       "caller_source": "components/odh-notebook-controller/main.go:294",
       "callee": "SetupWithManager",
       "callee_source": "components/notebook-controller/controllers/culling_controller.go:570",
+      "call_site_source": "components/odh-notebook-controller/main.go:404",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "components/odh-notebook-controller/main.go:294",
+      "callee": "SetupWithManager",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_controller.go:774",
+      "call_site_source": "components/odh-notebook-controller/main.go:404",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "components/odh-notebook-controller/main.go:294",
+      "callee": "SetupWithManager",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_controller.go:774",
       "call_site_source": "components/odh-notebook-controller/main.go:478",
       "confidence": "UNCERTAIN"
     },
@@ -1337,7 +1337,7 @@
       "caller": "main",
       "caller_source": "components/odh-notebook-controller/main.go:294",
       "callee": "SetupWithManager",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_controller.go:774",
+      "callee_source": "components/notebook-controller/controllers/culling_controller.go:570",
       "call_site_source": "components/odh-notebook-controller/main.go:478",
       "confidence": "UNCERTAIN"
     },
@@ -1457,7 +1457,7 @@
       "caller": "Deployment",
       "caller_source": "components/common/reconcilehelper/util.go:18",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/common/reconcilehelper/util.go:21",
       "confidence": "UNCERTAIN"
     },
@@ -1473,7 +1473,7 @@
       "caller": "Deployment",
       "caller_source": "components/common/reconcilehelper/util.go:18",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/common/reconcilehelper/util.go:21",
       "confidence": "UNCERTAIN"
     },
@@ -1513,7 +1513,7 @@
       "caller": "VirtualService",
       "caller_source": "components/common/reconcilehelper/util.go:74",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/common/reconcilehelper/util.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -1521,7 +1521,7 @@
       "caller": "VirtualService",
       "caller_source": "components/common/reconcilehelper/util.go:74",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/common/reconcilehelper/util.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -1529,14 +1529,6 @@
       "caller": "getNotebookResourceResponse",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:244",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
-      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:259",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getNotebookResourceResponse",
-      "caller_source": "components/notebook-controller/controllers/culling_controller.go:244",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:259",
       "confidence": "UNCERTAIN"
@@ -1545,6 +1537,14 @@
       "caller": "getNotebookResourceResponse",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:244",
       "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:259",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getNotebookResourceResponse",
+      "caller_source": "components/notebook-controller/controllers/culling_controller.go:244",
+      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:259",
       "confidence": "UNCERTAIN"
@@ -1553,14 +1553,6 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
-      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:108",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:108",
       "confidence": "UNCERTAIN"
@@ -1577,8 +1569,8 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:122",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:108",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1594,6 +1586,14 @@
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:122",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:122",
       "confidence": "UNCERTAIN"
     },
@@ -1609,7 +1609,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -1617,7 +1617,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -1649,22 +1649,6 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:174",
       "confidence": "UNCERTAIN"
@@ -1674,6 +1658,22 @@
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/notebook-controller/controllers/culling_controller.go:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:92",
       "confidence": "UNCERTAIN"
     },
@@ -1689,7 +1689,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/culling_controller.go:87",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/notebook-controller/controllers/culling_controller.go:92",
       "confidence": "UNCERTAIN"
     },
@@ -1729,7 +1729,7 @@
       "caller": "nbNameFromInvolvedObject",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:705",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:713",
       "confidence": "UNCERTAIN"
     },
@@ -1737,7 +1737,7 @@
       "caller": "nbNameFromInvolvedObject",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:705",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:713",
       "confidence": "UNCERTAIN"
     },
@@ -1753,7 +1753,7 @@
       "caller": "nbNameExists",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:731",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:732",
       "confidence": "UNCERTAIN"
     },
@@ -1761,7 +1761,7 @@
       "caller": "nbNameExists",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:731",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:732",
       "confidence": "UNCERTAIN"
     },
@@ -1769,6 +1769,14 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
+      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:100",
       "confidence": "UNCERTAIN"
@@ -1785,14 +1793,6 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:112",
       "confidence": "UNCERTAIN"
@@ -1801,7 +1801,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -1809,7 +1809,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -1841,14 +1841,6 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:214",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:214",
       "confidence": "UNCERTAIN"
@@ -1866,6 +1858,14 @@
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:214",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:246",
       "confidence": "UNCERTAIN"
     },
@@ -1881,24 +1881,8 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:246",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:271",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:271",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1907,6 +1891,30 @@
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:271",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:271",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:271",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getNotebookResourceResponse",
+      "caller_source": "components/notebook-controller/pkg/culler/culler.go:152",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/notebook-controller/pkg/culler/culler.go:163",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1922,14 +1930,6 @@
       "caller_source": "components/notebook-controller/pkg/culler/culler.go:152",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/notebook-controller/pkg/culler/culler.go:163",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getNotebookResourceResponse",
-      "caller_source": "components/notebook-controller/pkg/culler/culler.go:152",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/notebook-controller/pkg/culler/culler.go:163",
       "confidence": "UNCERTAIN"
     },
@@ -1961,7 +1961,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/pkg/tls/watcher.go:56",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/notebook-controller/pkg/tls/watcher.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -1969,7 +1969,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/pkg/tls/watcher.go:56",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/notebook-controller/pkg/tls/watcher.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -1985,7 +1985,7 @@
       "caller": "startPinnedProxy",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_image_test.go:99",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_image_test.go:160",
       "confidence": "UNCERTAIN"
     },
@@ -1993,7 +1993,7 @@
       "caller": "startPinnedProxy",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_image_test.go:99",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_image_test.go:160",
       "confidence": "UNCERTAIN"
     },
@@ -2009,7 +2009,7 @@
       "caller": "loadKubeRbacProxyTLS",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls.go:113",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls.go:118",
       "confidence": "UNCERTAIN"
     },
@@ -2025,7 +2025,7 @@
       "caller": "loadKubeRbacProxyTLS",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls.go:113",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls.go:118",
       "confidence": "UNCERTAIN"
     },
@@ -2057,7 +2057,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:356",
       "confidence": "UNCERTAIN"
     },
@@ -2065,7 +2065,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:356",
       "confidence": "UNCERTAIN"
     },
@@ -2105,14 +2105,6 @@
       "caller": "notebookControllerConfig",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:112",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "notebookControllerConfig",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:112",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:114",
       "confidence": "UNCERTAIN"
@@ -2121,6 +2113,14 @@
       "caller": "notebookControllerConfig",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:112",
       "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "notebookControllerConfig",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:112",
+      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:114",
       "confidence": "UNCERTAIN"
@@ -2129,7 +2129,7 @@
       "caller": "RemoveReconciliationLock",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:179",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:190",
       "confidence": "UNCERTAIN"
     },
@@ -2145,7 +2145,7 @@
       "caller": "RemoveReconciliationLock",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:179",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:190",
       "confidence": "UNCERTAIN"
     },
@@ -2177,14 +2177,6 @@
       "caller": "Reconcile",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:214",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:308",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:214",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:308",
       "confidence": "UNCERTAIN"
@@ -2194,6 +2186,14 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:214",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:308",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:214",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:308",
       "confidence": "UNCERTAIN"
     },
@@ -2225,6 +2225,14 @@
       "caller": "CreateNotebookCertConfigMap",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:571",
       "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:589",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "CreateNotebookCertConfigMap",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:571",
+      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:589",
       "confidence": "UNCERTAIN"
@@ -2241,8 +2249,8 @@
       "caller": "CreateNotebookCertConfigMap",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:571",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:589",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:646",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2262,22 +2270,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "CreateNotebookCertConfigMap",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:571",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:646",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "IsConfigMapDeleted",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:677",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:686",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "IsConfigMapDeleted",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:677",
       "callee": "Get",
@@ -2294,10 +2286,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "IsConfigMapDeleted",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:677",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:686",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "checkCertConfigMapWithError",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller_test.go:2008",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller_test.go:2011",
       "confidence": "UNCERTAIN"
     },
@@ -2313,7 +2313,7 @@
       "caller": "checkCertConfigMapWithError",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller_test.go:2008",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller_test.go:2011",
       "confidence": "UNCERTAIN"
     },
@@ -2321,7 +2321,7 @@
       "caller": "extractElyraRuntimeConfigInfo",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:189",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -2337,7 +2337,7 @@
       "caller": "extractElyraRuntimeConfigInfo",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:189",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -2345,7 +2345,7 @@
       "caller": "SyncElyraRuntimeConfigSecret",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:305",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:367",
       "confidence": "UNCERTAIN"
     },
@@ -2361,7 +2361,7 @@
       "caller": "SyncElyraRuntimeConfigSecret",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:305",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:367",
       "confidence": "UNCERTAIN"
     },
@@ -2377,7 +2377,7 @@
       "caller": "MountElyraRuntimeConfigSecret",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:403",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:407",
       "confidence": "UNCERTAIN"
     },
@@ -2385,7 +2385,7 @@
       "caller": "MountElyraRuntimeConfigSecret",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:403",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:407",
       "confidence": "UNCERTAIN"
     },
@@ -2401,7 +2401,7 @@
       "caller": "getDSPAInstance",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:49",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:51",
       "confidence": "UNCERTAIN"
     },
@@ -2409,16 +2409,8 @@
       "caller": "getDSPAInstance",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:49",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:51",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getGatewayInstance",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:68",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:70",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:51",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2435,6 +2427,22 @@
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:70",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getGatewayInstance",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:68",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:70",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestConfigMapHandlerCABundles",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:176",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:231",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2450,14 +2458,6 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:176",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:231",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestConfigMapHandlerCABundles",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:176",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:231",
       "confidence": "UNCERTAIN"
     },
@@ -2465,7 +2465,7 @@
       "caller": "TestNotebookIngressAssignment",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:360",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:476",
       "confidence": "UNCERTAIN"
     },
@@ -2473,7 +2473,7 @@
       "caller": "TestNotebookIngressAssignment",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:360",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:476",
       "confidence": "UNCERTAIN"
     },
@@ -2497,7 +2497,7 @@
       "caller": "TestNotebookIngressAssignment",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:360",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:496",
       "confidence": "UNCERTAIN"
     },
@@ -2505,7 +2505,7 @@
       "caller": "TestNotebookIngressAssignment",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:360",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:496",
       "confidence": "UNCERTAIN"
     },
@@ -2521,7 +2521,7 @@
       "caller": "TestIngressConfigHandler",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:63",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:167",
       "confidence": "UNCERTAIN"
     },
@@ -2529,8 +2529,24 @@
       "caller": "TestIngressConfigHandler",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:63",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:167",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ReconcileKubeRbacProxyService",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:128",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:137",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ReconcileKubeRbacProxyService",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:128",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:137",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2539,30 +2555,6 @@
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ReconcileKubeRbacProxyService",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:128",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ReconcileKubeRbacProxyService",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:128",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:137",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ReconcileKubeRbacProxyConfigMap",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:210",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:219",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2578,6 +2570,14 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:210",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:219",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ReconcileKubeRbacProxyConfigMap",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:210",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:219",
       "confidence": "UNCERTAIN"
     },
@@ -2593,7 +2593,7 @@
       "caller": "ReconcileKubeRbacProxyClusterRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:318",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:327",
       "confidence": "UNCERTAIN"
     },
@@ -2601,7 +2601,7 @@
       "caller": "ReconcileKubeRbacProxyClusterRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:318",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:327",
       "confidence": "UNCERTAIN"
     },
@@ -2633,14 +2633,6 @@
       "caller": "ReconcileMLflowRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:147",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:157",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ReconcileMLflowRoleBinding",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:147",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:157",
       "confidence": "UNCERTAIN"
@@ -2649,6 +2641,14 @@
       "caller": "ReconcileMLflowRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:147",
       "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:157",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ReconcileMLflowRoleBinding",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:147",
+      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:157",
       "confidence": "UNCERTAIN"
@@ -2657,6 +2657,14 @@
       "caller": "CheckAndMountCACertBundle",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:734",
       "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:741",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "CheckAndMountCACertBundle",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:734",
+      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:741",
       "confidence": "UNCERTAIN"
@@ -2673,15 +2681,7 @@
       "caller": "CheckAndMountCACertBundle",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:734",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:741",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "CheckAndMountCACertBundle",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:734",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:750",
       "confidence": "UNCERTAIN"
     },
@@ -2689,7 +2689,7 @@
       "caller": "CheckAndMountCACertBundle",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:734",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:750",
       "confidence": "UNCERTAIN"
     },
@@ -2699,6 +2699,14 @@
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:750",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "SetContainerImageFromRegistry",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:899",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:944",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2714,14 +2722,6 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:899",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:944",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "SetContainerImageFromRegistry",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:899",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mutating_webhook.go:944",
       "confidence": "UNCERTAIN"
     },
@@ -2747,6 +2747,14 @@
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_network.go:150",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileNetworkPolicy",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_network.go:82",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_network.go:85",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2762,14 +2770,6 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_network.go:82",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_network.go:85",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileNetworkPolicy",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_network.go:82",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_network.go:85",
       "confidence": "UNCERTAIN"
     },
@@ -2809,7 +2809,7 @@
       "caller": "deleteOAuthClient",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_oauth.go:67",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_oauth.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -2817,7 +2817,7 @@
       "caller": "deleteOAuthClient",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_oauth.go:67",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_oauth.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -2825,7 +2825,7 @@
       "caller": "readWorkbenchProbeTimeout",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout.go:39",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout.go:49",
       "confidence": "UNCERTAIN"
     },
@@ -2841,7 +2841,7 @@
       "caller": "readWorkbenchProbeTimeout",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout.go:39",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout.go:49",
       "confidence": "UNCERTAIN"
     },
@@ -2849,14 +2849,6 @@
       "caller": "checkRoleExists",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "checkRoleExists",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
-      "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:65",
       "confidence": "UNCERTAIN"
@@ -2874,6 +2866,22 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "checkRoleExists",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:76",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "checkRoleExists",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:76",
       "confidence": "UNCERTAIN"
     },
@@ -2882,14 +2890,6 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:76",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "checkRoleExists",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:61",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:76",
       "confidence": "UNCERTAIN"
     },
@@ -2915,14 +2915,6 @@
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:109",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ReconcileReferenceGrant",
-      "caller_source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:81",
-      "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
-      "call_site_source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:89",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2938,6 +2930,14 @@
       "caller_source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:81",
       "callee": "Get",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "call_site_source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:89",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ReconcileReferenceGrant",
+      "caller_source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:81",
+      "callee": "Get",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_referencegrant.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -2969,7 +2969,7 @@
       "caller": "MountPipelineRuntimeImages",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:216",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:220",
       "confidence": "UNCERTAIN"
     },
@@ -2977,7 +2977,7 @@
       "caller": "MountPipelineRuntimeImages",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:216",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_probe_timeout_retry_test.go:35",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:220",
       "confidence": "UNCERTAIN"
     },
@@ -3001,7 +3001,7 @@
       "caller": "getRuntimeConfigMap",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:28",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
+      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:30",
       "confidence": "UNCERTAIN"
     },
@@ -3009,7 +3009,7 @@
       "caller": "getRuntimeConfigMap",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:28",
       "callee": "Get",
-      "callee_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:676",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:509",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_runtime.go:30",
       "confidence": "UNCERTAIN"
     },
@@ -3033,7 +3033,7 @@
       "caller": "Service",
       "caller_source": "components/common/reconcilehelper/util.go:46",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/common/reconcilehelper/util.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -3041,7 +3041,7 @@
       "caller": "Service",
       "caller_source": "components/common/reconcilehelper/util.go:46",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/common/reconcilehelper/util.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -3049,7 +3049,7 @@
       "caller": "VirtualService",
       "caller_source": "components/common/reconcilehelper/util.go:74",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/common/reconcilehelper/util.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -3057,7 +3057,7 @@
       "caller": "VirtualService",
       "caller_source": "components/common/reconcilehelper/util.go:74",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/common/reconcilehelper/util.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -3081,6 +3081,14 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Create",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:176",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
+      "callee": "Create",
       "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:176",
       "confidence": "UNCERTAIN"
@@ -3089,15 +3097,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:176",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
-      "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:217",
       "confidence": "UNCERTAIN"
     },
@@ -3105,7 +3105,7 @@
       "caller": "Reconcile",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:94",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:217",
       "confidence": "UNCERTAIN"
     },
@@ -3129,7 +3129,7 @@
       "caller": "configMapHandler",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:939",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:952",
       "confidence": "UNCERTAIN"
     },
@@ -3137,7 +3137,7 @@
       "caller": "configMapHandler",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_controller.go:939",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_controller.go:952",
       "confidence": "UNCERTAIN"
     },
@@ -3145,7 +3145,7 @@
       "caller": "SyncElyraRuntimeConfigSecret",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:305",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:371",
       "confidence": "UNCERTAIN"
     },
@@ -3153,7 +3153,7 @@
       "caller": "SyncElyraRuntimeConfigSecret",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:305",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_dspa_secret.go:371",
       "confidence": "UNCERTAIN"
     },
@@ -3225,7 +3225,7 @@
       "caller": "TestIngressConfigHandler",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:63",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:157",
       "confidence": "UNCERTAIN"
     },
@@ -3233,7 +3233,7 @@
       "caller": "TestIngressConfigHandler",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:63",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_ingress_test.go:157",
       "confidence": "UNCERTAIN"
     },
@@ -3241,7 +3241,7 @@
       "caller": "ReconcileKubeRbacProxyService",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:128",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -3249,7 +3249,7 @@
       "caller": "ReconcileKubeRbacProxyService",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:128",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -3273,7 +3273,7 @@
       "caller": "ReconcileKubeRbacProxyClusterRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:318",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:335",
       "confidence": "UNCERTAIN"
     },
@@ -3281,7 +3281,7 @@
       "caller": "ReconcileKubeRbacProxyClusterRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:318",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_kube_rbac_auth.go:335",
       "confidence": "UNCERTAIN"
     },
@@ -3305,7 +3305,7 @@
       "caller": "ReconcileMLflowRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:147",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:163",
       "confidence": "UNCERTAIN"
     },
@@ -3313,7 +3313,7 @@
       "caller": "ReconcileMLflowRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:147",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_mlflow.go:163",
       "confidence": "UNCERTAIN"
     },
@@ -3337,7 +3337,7 @@
       "caller": "reconcileNetworkPolicy",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_network.go:82",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_network.go:103",
       "confidence": "UNCERTAIN"
     },
@@ -3345,7 +3345,7 @@
       "caller": "reconcileNetworkPolicy",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_network.go:82",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_network.go:103",
       "confidence": "UNCERTAIN"
     },
@@ -3369,7 +3369,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:89",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:119",
       "confidence": "UNCERTAIN"
     },
@@ -3377,7 +3377,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:89",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_rbac.go:119",
       "confidence": "UNCERTAIN"
     },
@@ -3401,7 +3401,7 @@
       "caller": "reconcileHTTPRoute",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_route.go:144",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_route.go:199",
       "confidence": "UNCERTAIN"
     },
@@ -3409,7 +3409,7 @@
       "caller": "reconcileHTTPRoute",
       "caller_source": "components/odh-notebook-controller/controllers/notebook_route.go:144",
       "callee": "Create",
-      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:491",
+      "callee_source": "components/odh-notebook-controller/controllers/notebook_network_test.go:517",
       "call_site_source": "components/odh-notebook-controller/controllers/notebook_route.go:199",
       "confidence": "UNCERTAIN"
     },
@@ -3961,7 +3961,23 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:46",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:46",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -3985,23 +4001,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:47",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:46",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:47",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:46",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -4009,31 +4009,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -4049,7 +4025,31 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -4057,15 +4057,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:47",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:46",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
       "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -4089,6 +4081,14 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:46",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
@@ -4097,7 +4097,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -4105,7 +4105,23 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -4121,15 +4137,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -4143,30 +4151,6 @@
     },
     {
       "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:46",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:47",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:46",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:47",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
@@ -4185,7 +4169,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -4199,10 +4183,18 @@
     },
     {
       "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
+      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:46",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:46",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:47",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4210,22 +4202,6 @@
       "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -4246,27 +4222,27 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "caller": "DeepCopyObject",
+      "caller_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:95",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:96",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4281,23 +4257,15 @@
       "caller": "generateStatefulSet",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
@@ -4313,7 +4281,7 @@
       "caller": "generateStatefulSet",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
@@ -4321,7 +4289,15 @@
       "caller": "generateStatefulSet",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
@@ -4337,7 +4313,39 @@
       "caller": "generateStatefulSet",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
@@ -4353,95 +4361,39 @@
       "caller": "generateStatefulSet",
       "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "generateStatefulSet",
-      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
-      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "caller": "generateStatefulSet",
+      "caller_source": "components/notebook-controller/controllers/notebook_controller.go:433",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/notebook-controller/controllers/notebook_controller.go:469",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -4449,7 +4401,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -4465,22 +4417,6 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
@@ -4489,15 +4425,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -4513,6 +4441,22 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
@@ -4521,7 +4465,31 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -4530,6 +4498,22 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -4538,7 +4522,7 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4546,23 +4530,7 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:349",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4570,14 +4538,6 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
       "confidence": "UNCERTAIN"
     },
@@ -4593,63 +4553,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
       "confidence": "UNCERTAIN"
     },
@@ -4665,6 +4569,14 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
       "confidence": "UNCERTAIN"
@@ -4673,8 +4585,120 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:351",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4689,118 +4713,6 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
       "confidence": "UNCERTAIN"
@@ -4817,8 +4729,112 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4841,7 +4857,15 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
       "confidence": "UNCERTAIN"
     },
@@ -4850,6 +4874,14 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
       "confidence": "UNCERTAIN"
     },
@@ -4882,14 +4914,6 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
       "confidence": "UNCERTAIN"
     },
@@ -4937,30 +4961,6 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:381",
       "confidence": "UNCERTAIN"
@@ -4969,7 +4969,55 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -4985,7 +5033,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -5001,7 +5049,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -5009,7 +5057,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:85",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -5017,7 +5065,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -5025,7 +5073,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -5033,7 +5081,23 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:36",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
       "confidence": "UNCERTAIN"
     },
@@ -5043,6 +5107,22 @@
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5050,70 +5130,22 @@
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
       "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:382",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:85",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
@@ -5129,39 +5161,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:61",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:148",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:36",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
+      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:61",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
@@ -5177,23 +5177,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:109",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1/zz_generated.deepcopy.go:132",
-      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
-      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
-      "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:148",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
@@ -5209,7 +5193,7 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:109",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:109",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     },
@@ -5217,7 +5201,23 @@
       "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
       "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
       "callee": "DeepCopy",
-      "callee_source": "components/notebook-controller/api/v1beta1/zz_generated.deepcopy.go:132",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:61",
+      "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInvalidStrictProfileLeavesPodTemplateUnchanged",
+      "caller_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:323",
+      "callee": "DeepCopy",
+      "callee_source": "components/notebook-controller/api/v1alpha1/zz_generated.deepcopy.go:36",
       "call_site_source": "components/odh-notebook-controller/controllers/kube_rbac_proxy_tls_test.go:396",
       "confidence": "UNCERTAIN"
     }

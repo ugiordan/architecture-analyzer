@@ -3,7 +3,7 @@
   "component": "agents-operator",
   "repo": "opendatahub-io/agents-operator",
   "commit_sha": "f3227ee249b7edb9cd6988b4514e0b265e7174b0",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "agents-operator is a Kubernetes component. deploying 3 workload(s) (bundle-service, controller-manager, controller-manager) with 3 container(s). watching 14 resource type(s). exposing 2 service(s) on ports: 443, 8080. Dockerfile EXPOSE ports: 8080, 8081, 8090, 8888, 9090, 9091, 9093, 9094, 9901, 9999, 15123, 15124. with 3 webhook(s) (1 validating, 2 mutating). protected by 1 network policy/policies. connecting to external services: urllib. runtime dependencies: Keycloak, OpenTelemetry Collector, echo-agent, echo-upstream, email-agent, finance-agent, mlflow. with 484 operator config constants (1 env vars). exposing 11 Prometheus metrics. with 1 ingress route(s). Python k8s client with 13 API call(s). integrates with Istio, Prometheus, management relationship via labels/annotations.",
   "repository_description": "Kagenti Operator** is a Kubernetes operator that automates the deployment, discovery, and security of AI agents in Kubernetes clusters. It provides workload identity (SPIFFE), mutual authentication (OAuth2/Keycloak), agent-to-agent trust (A2A signature verification), and observability (MLflow tracing) — all declaratively managed through Custom Resources.",
   "description_source": "README.md:6",
@@ -10679,7 +10679,7 @@
       "caller": "main",
       "caller_source": "authbridge/cmd/authbridge-envoy/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "authbridge/cmd/authbridge-envoy/main.go:275",
       "confidence": "UNCERTAIN"
     },
@@ -10687,7 +10687,7 @@
       "caller": "main",
       "caller_source": "authbridge/cmd/authbridge-envoy/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "authbridge/cmd/authbridge-envoy/main.go:275",
       "confidence": "UNCERTAIN"
     },
@@ -10695,7 +10695,7 @@
       "caller": "main",
       "caller_source": "authbridge/cmd/authbridge-lite/main.go:84",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "authbridge/cmd/authbridge-lite/main.go:303",
       "confidence": "UNCERTAIN"
     },
@@ -10703,7 +10703,7 @@
       "caller": "main",
       "caller_source": "authbridge/cmd/authbridge-lite/main.go:84",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "authbridge/cmd/authbridge-lite/main.go:303",
       "confidence": "UNCERTAIN"
     },
@@ -10791,7 +10791,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/agentcard-signer/main.go:48",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/agentcard-signer/main.go:50",
       "confidence": "UNCERTAIN"
     },
@@ -10799,7 +10799,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/agentcard-signer/main.go:48",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/agentcard-signer/main.go:50",
       "confidence": "UNCERTAIN"
     },
@@ -10807,14 +10807,6 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
-      "callee": "Error",
       "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:121",
       "confidence": "UNCERTAIN"
@@ -10824,6 +10816,14 @@
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
+      "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:132",
       "confidence": "UNCERTAIN"
     },
@@ -10831,7 +10831,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:132",
       "confidence": "UNCERTAIN"
     },
@@ -10855,7 +10855,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:70",
       "confidence": "UNCERTAIN"
     },
@@ -10863,7 +10863,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:70",
       "confidence": "UNCERTAIN"
     },
@@ -10887,7 +10887,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -10895,7 +10895,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/bundle-service/main.go:43",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/bundle-service/main.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -10903,6 +10903,14 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "call_site_source": "kagenti-operator/cmd/main.go:285",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:285",
       "confidence": "UNCERTAIN"
@@ -10911,15 +10919,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
-      "call_site_source": "kagenti-operator/cmd/main.go:285",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:294",
       "confidence": "UNCERTAIN"
     },
@@ -10927,7 +10927,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:294",
       "confidence": "UNCERTAIN"
     },
@@ -10951,14 +10951,6 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
-      "call_site_source": "kagenti-operator/cmd/main.go:314",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:314",
       "confidence": "UNCERTAIN"
@@ -10968,6 +10960,14 @@
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
       "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "call_site_source": "kagenti-operator/cmd/main.go:314",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:339",
       "confidence": "UNCERTAIN"
     },
@@ -10975,7 +10975,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:339",
       "confidence": "UNCERTAIN"
     },
@@ -10999,7 +10999,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:408",
       "confidence": "UNCERTAIN"
     },
@@ -11007,7 +11007,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:408",
       "confidence": "UNCERTAIN"
     },
@@ -11143,24 +11143,16 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "call_site_source": "kagenti-operator/cmd/main.go:527",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:527",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
-      "call_site_source": "kagenti-operator/cmd/main.go:527",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
-      "call_site_source": "kagenti-operator/cmd/main.go:535",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11175,7 +11167,15 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "call_site_source": "kagenti-operator/cmd/main.go:535",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:542",
       "confidence": "UNCERTAIN"
     },
@@ -11183,7 +11183,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:542",
       "confidence": "UNCERTAIN"
     },
@@ -11223,7 +11223,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:572",
       "confidence": "UNCERTAIN"
     },
@@ -11231,7 +11231,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:572",
       "confidence": "UNCERTAIN"
     },
@@ -11271,24 +11271,16 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "call_site_source": "kagenti-operator/cmd/main.go:623",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:623",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
-      "call_site_source": "kagenti-operator/cmd/main.go:623",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
-      "call_site_source": "kagenti-operator/cmd/main.go:629",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11303,8 +11295,8 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:654",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "call_site_source": "kagenti-operator/cmd/main.go:629",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11320,7 +11312,7 @@
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:665",
+      "call_site_source": "kagenti-operator/cmd/main.go:654",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11336,6 +11328,14 @@
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "call_site_source": "kagenti-operator/cmd/main.go:665",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:677",
       "confidence": "UNCERTAIN"
     },
@@ -11343,7 +11343,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:677",
       "confidence": "UNCERTAIN"
     },
@@ -11383,7 +11383,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:728",
       "confidence": "UNCERTAIN"
     },
@@ -11391,7 +11391,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:728",
       "confidence": "UNCERTAIN"
     },
@@ -11415,7 +11415,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:753",
       "confidence": "UNCERTAIN"
     },
@@ -11423,7 +11423,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:753",
       "confidence": "UNCERTAIN"
     },
@@ -11447,14 +11447,6 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:777",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
       "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:777",
       "confidence": "UNCERTAIN"
@@ -11464,7 +11456,7 @@
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:787",
+      "call_site_source": "kagenti-operator/cmd/main.go:777",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11479,7 +11471,15 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "call_site_source": "kagenti-operator/cmd/main.go:787",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:799",
       "confidence": "UNCERTAIN"
     },
@@ -11487,7 +11487,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:799",
       "confidence": "UNCERTAIN"
     },
@@ -11527,6 +11527,14 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "call_site_source": "kagenti-operator/cmd/main.go:836",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
       "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:836",
       "confidence": "UNCERTAIN"
@@ -11535,15 +11543,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:836",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:851",
       "confidence": "UNCERTAIN"
     },
@@ -11551,7 +11551,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:851",
       "confidence": "UNCERTAIN"
     },
@@ -11575,24 +11575,16 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "call_site_source": "kagenti-operator/cmd/main.go:876",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
       "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:876",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:876",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "kagenti-operator/cmd/main.go:94",
-      "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:884",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11608,7 +11600,7 @@
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
-      "call_site_source": "kagenti-operator/cmd/main.go:890",
+      "call_site_source": "kagenti-operator/cmd/main.go:884",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11624,6 +11616,14 @@
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "call_site_source": "kagenti-operator/cmd/main.go:890",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "kagenti-operator/cmd/main.go:94",
+      "callee": "Error",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "kagenti-operator/cmd/main.go:894",
       "confidence": "UNCERTAIN"
     },
@@ -11631,7 +11631,7 @@
       "caller": "main",
       "caller_source": "kagenti-operator/cmd/main.go:94",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "kagenti-operator/cmd/main.go:894",
       "confidence": "UNCERTAIN"
     },
@@ -11687,7 +11687,7 @@
       "caller": "main",
       "caller_source": "token-broker/cmd/main.go:226",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
+      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
       "call_site_source": "token-broker/cmd/main.go:334",
       "confidence": "UNCERTAIN"
     },
@@ -11695,7 +11695,7 @@
       "caller": "main",
       "caller_source": "token-broker/cmd/main.go:226",
       "callee": "Error",
-      "callee_source": "authbridge/authlib/plugins/tokenexchange/exchange/errors.go:13",
+      "callee_source": "authbridge/authlib/listener/reverseproxy/server.go:41",
       "call_site_source": "token-broker/cmd/main.go:334",
       "confidence": "UNCERTAIN"
     },
@@ -13297,14 +13297,6 @@
       "callee": "Error",
       "callee_source": "authbridge/authlib/reloader/reloader_test.go:264",
       "call_site_source": "token-broker/cmd/main.go:367",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "token-broker/cmd/main.go:226",
-      "callee": "Get",
-      "callee_source": "kagenti-operator/internal/bundleservice/cache/etag.go:16",
-      "call_site_source": "token-broker/cmd/main.go:302",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13312,6 +13304,14 @@
       "caller_source": "token-broker/cmd/main.go:226",
       "callee": "Get",
       "callee_source": "kagenti-operator/internal/bundleservice/cache/bundle.go:44",
+      "call_site_source": "token-broker/cmd/main.go:302",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "token-broker/cmd/main.go:226",
+      "callee": "Get",
+      "callee_source": "kagenti-operator/internal/bundleservice/cache/etag.go:16",
       "call_site_source": "token-broker/cmd/main.go:302",
       "confidence": "UNCERTAIN"
     },
@@ -13359,24 +13359,16 @@
       "caller": "main",
       "caller_source": "token-broker/cmd/main.go:226",
       "callee": "Get",
+      "callee_source": "kagenti-operator/cmd/main_test.go:127",
+      "call_site_source": "token-broker/cmd/main.go:302",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "token-broker/cmd/main.go:226",
+      "callee": "Get",
       "callee_source": "authbridge/authlib/plugins/tokenexchange/cache/cache.go:49",
       "call_site_source": "token-broker/cmd/main.go:302",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "token-broker/cmd/main.go:226",
-      "callee": "Get",
-      "callee_source": "kagenti-operator/cmd/main_test.go:127",
-      "call_site_source": "token-broker/cmd/main.go:302",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "token-broker/cmd/main.go:226",
-      "callee": "Get",
-      "callee_source": "kagenti-operator/cmd/main_test.go:127",
-      "call_site_source": "token-broker/cmd/main.go:305",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13391,8 +13383,8 @@
       "caller": "main",
       "caller_source": "token-broker/cmd/main.go:226",
       "callee": "Get",
-      "callee_source": "kagenti-operator/internal/webhook/config/loader.go:106",
-      "call_site_source": "token-broker/cmd/main.go:302",
+      "callee_source": "kagenti-operator/cmd/main_test.go:127",
+      "call_site_source": "token-broker/cmd/main.go:305",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13400,6 +13392,14 @@
       "caller_source": "token-broker/cmd/main.go:226",
       "callee": "Get",
       "callee_source": "kagenti-operator/internal/webhook/config/feature_gate_loader.go:90",
+      "call_site_source": "token-broker/cmd/main.go:302",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "token-broker/cmd/main.go:226",
+      "callee": "Get",
+      "callee_source": "kagenti-operator/internal/webhook/config/loader.go:106",
       "call_site_source": "token-broker/cmd/main.go:302",
       "confidence": "UNCERTAIN"
     },

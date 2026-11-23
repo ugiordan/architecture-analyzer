@@ -3,7 +3,7 @@
   "component": "trainer",
   "repo": "opendatahub-io/trainer",
   "commit_sha": "4d33029fab07032c092abfaf09def5f1c1e20da2",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "trainer is a Kubernetes component. managing 4 CRD(s): ClusterTrainingRuntime, OptimizationJob, TrainingRuntime, TrainJob. deploying 4 workload(s) (kubeflow-trainer-controller-manager, kubeflow-trainer-controller-manager, kubeflow-trainer-controller-manager, controller-manager) with 4 container(s). watching 7 resource type(s). with 5 webhook(s) (4 validating, 1 mutating). protected by 2 network policy/policies. connecting to external services: grpc, s3. defining 6 API spec type(s) across 66 struct(s) with 192 total fields. with 311 operator config constants (9 image references, 4 env vars). following 2 reconciliation steps across 2 controller(s). exposing 5 Prometheus metrics. Python k8s client with 7 API call(s). integrates with management relationship via labels/annotations. mounts 1 ConfigMap(s) as volumes: kubeflow-trainer-config.",
   "graph_status": "available",
   "graph": {
@@ -5289,14 +5289,6 @@
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/runtime/core/core.go:35",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/trainer-controller-manager/main.go:78",
-      "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
       "call_site_source": "cmd/trainer-controller-manager/main.go:178",
       "confidence": "UNCERTAIN"
@@ -5306,6 +5298,14 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/runtime/core/core.go:35",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/trainer-controller-manager/main.go:78",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
       "call_site_source": "cmd/trainer-controller-manager/main.go:97",
       "confidence": "UNCERTAIN"
     },
@@ -5313,7 +5313,7 @@
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
+      "callee_source": "pkg/runtime/core/core.go:35",
       "call_site_source": "cmd/trainer-controller-manager/main.go:97",
       "confidence": "UNCERTAIN"
     },
@@ -5347,14 +5347,6 @@
       "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
       "call_site_source": "rhoai/operator/cmd/main.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/core/core.go:35",
-      "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5370,6 +5362,14 @@
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
       "callee_source": "pkg/runtime/core/core.go:35",
+      "call_site_source": "rhoai/operator/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/core/core.go:35",
       "call_site_source": "rhoai/operator/cmd/main.go:90",
       "confidence": "UNCERTAIN"
     },
@@ -5379,6 +5379,14 @@
       "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
       "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
+      "call_site_source": "rhoai/operator/cmd/main.go:93",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5391,14 +5399,6 @@
     },
     {
       "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/volcano/volcano.go:73",
-      "call_site_source": "rhoai/operator/cmd/main.go:93",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/mpi/mpi.go:69",
@@ -5481,7 +5481,7 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/torch/torch.go:55",
+      "callee_source": "pkg/runtime/framework/plugins/mpi/mpi.go:69",
       "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
@@ -5489,7 +5489,7 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/mpi/mpi.go:69",
+      "callee_source": "pkg/runtime/framework/plugins/torch/torch.go:55",
       "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
@@ -5593,7 +5593,7 @@
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
+      "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
       "call_site_source": "cmd/trainer-controller-manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
@@ -5609,8 +5609,16 @@
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
+      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
       "call_site_source": "cmd/trainer-controller-manager/main.go:124",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/trainer-controller-manager/main.go:78",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5626,14 +5634,6 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/trainer-controller-manager/main.go:78",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
       "call_site_source": "cmd/trainer-controller-manager/main.go:178",
       "confidence": "UNCERTAIN"
     },
@@ -5665,7 +5665,7 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
+      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
       "call_site_source": "rhoai/operator/cmd/main.go:159",
       "confidence": "UNCERTAIN"
     },
@@ -5681,7 +5681,7 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
+      "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
       "call_site_source": "rhoai/operator/cmd/main.go:159",
       "confidence": "UNCERTAIN"
     },
@@ -5713,14 +5713,6 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
-      "call_site_source": "rhoai/operator/cmd/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
       "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
@@ -5737,8 +5729,8 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
-      "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "callee_source": "pkg/runtime/framework/plugins/xgboost/xgboost.go:45",
+      "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5762,6 +5754,14 @@
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
+      "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/trainjobstatus/trainjobstatus.go:68",
       "call_site_source": "rhoai/operator/cmd/main.go:93",
       "confidence": "UNCERTAIN"
     },
@@ -5777,16 +5777,8 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/trainjobstatus/trainjobstatus.go:68",
+      "callee_source": "pkg/runtime/framework/plugins/coscheduling/coscheduling.go:69",
       "call_site_source": "rhoai/operator/cmd/main.go:93",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/trainer-controller-manager/main.go:78",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5794,14 +5786,6 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:124",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/trainer-controller-manager/main.go:78",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
       "call_site_source": "cmd/trainer-controller-manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
@@ -5818,23 +5802,15 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/trainer-controller-manager/main.go:78",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
+      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5850,15 +5826,23 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:97",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:97",
+      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/trainer-controller-manager/main.go:78",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5879,170 +5863,178 @@
     },
     {
       "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "rhoai/operator/cmd/main.go:159",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "rhoai/operator/cmd/main.go:159",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
-      "call_site_source": "rhoai/operator/cmd/main.go:159",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
-      "call_site_source": "rhoai/operator/cmd/main.go:159",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "rhoai/operator/cmd/main.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
-      "call_site_source": "rhoai/operator/cmd/main.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "rhoai/operator/cmd/main.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
-      "call_site_source": "rhoai/operator/cmd/main.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "rhoai/operator/cmd/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
-      "call_site_source": "rhoai/operator/cmd/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "rhoai/operator/cmd/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
-      "call_site_source": "rhoai/operator/cmd/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
-      "call_site_source": "rhoai/operator/cmd/main.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "rhoai/operator/cmd/main.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
-      "call_site_source": "rhoai/operator/cmd/main.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "rhoai/operator/cmd/main.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
-      "call_site_source": "rhoai/operator/cmd/main.go:93",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
-      "call_site_source": "rhoai/operator/cmd/main.go:93",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
-      "call_site_source": "rhoai/operator/cmd/main.go:93",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
-      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
-      "call_site_source": "rhoai/operator/cmd/main.go:93",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:97",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:124",
+      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:97",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
+      "call_site_source": "rhoai/operator/cmd/main.go:159",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
+      "call_site_source": "rhoai/operator/cmd/main.go:159",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
+      "call_site_source": "rhoai/operator/cmd/main.go:159",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
+      "call_site_source": "rhoai/operator/cmd/main.go:159",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
+      "call_site_source": "rhoai/operator/cmd/main.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
+      "call_site_source": "rhoai/operator/cmd/main.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
+      "call_site_source": "rhoai/operator/cmd/main.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
+      "call_site_source": "rhoai/operator/cmd/main.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
+      "call_site_source": "rhoai/operator/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
+      "call_site_source": "rhoai/operator/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
+      "call_site_source": "rhoai/operator/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
+      "call_site_source": "rhoai/operator/cmd/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
+      "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
+      "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
+      "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
+      "call_site_source": "rhoai/operator/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/plainml/plainml.go:38",
+      "call_site_source": "rhoai/operator/cmd/main.go:93",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/trainer/interface.go:39",
+      "call_site_source": "rhoai/operator/cmd/main.go:93",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/clientset.go:114",
+      "call_site_source": "rhoai/operator/cmd/main.go:93",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/runtime/framework/plugins/jax/jax.go:44",
+      "call_site_source": "rhoai/operator/cmd/main.go:93",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6058,15 +6050,7 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/trainer-controller-manager/main.go:78",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/v1alpha1/interface.go:44",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6074,7 +6058,7 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
-      "call_site_source": "cmd/trainer-controller-manager/main.go:97",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6082,6 +6066,22 @@
       "caller_source": "cmd/trainer-controller-manager/main.go:78",
       "callee": "New",
       "callee_source": "pkg/client/informers/externalversions/trainer/v1alpha1/interface.go:44",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:178",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/trainer-controller-manager/main.go:78",
+      "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/trainer/v1alpha1/interface.go:44",
+      "call_site_source": "cmd/trainer-controller-manager/main.go:97",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/trainer-controller-manager/main.go:78",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
       "call_site_source": "cmd/trainer-controller-manager/main.go:97",
       "confidence": "UNCERTAIN"
     },
@@ -6105,14 +6105,6 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/trainer/v1alpha1/interface.go:44",
-      "call_site_source": "rhoai/operator/cmd/main.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "rhoai/operator/cmd/main.go:72",
-      "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
       "call_site_source": "rhoai/operator/cmd/main.go:168",
       "confidence": "UNCERTAIN"
@@ -6122,6 +6114,14 @@
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
       "callee_source": "pkg/client/informers/externalversions/trainer/v1alpha1/interface.go:44",
+      "call_site_source": "rhoai/operator/cmd/main.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "rhoai/operator/cmd/main.go:72",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
       "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
@@ -6129,7 +6129,7 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/typed/trainer/v1alpha1/trainer_client.go:94",
+      "callee_source": "pkg/client/informers/externalversions/trainer/v1alpha1/interface.go:44",
       "call_site_source": "rhoai/operator/cmd/main.go:177",
       "confidence": "UNCERTAIN"
     },
@@ -6241,7 +6241,7 @@
       "caller": "main",
       "caller_source": "pkg/initializers/dataset/__main__.py:28",
       "callee": "load_config",
-      "callee_source": "pkg/initializers/dataset/cache.py:64",
+      "callee_source": "pkg/initializers/dataset/huggingface.py:32",
       "call_site_source": "pkg/initializers/dataset/__main__.py:59",
       "confidence": "UNCERTAIN"
     },
@@ -6249,7 +6249,7 @@
       "caller": "main",
       "caller_source": "pkg/initializers/dataset/__main__.py:28",
       "callee": "load_config",
-      "callee_source": "pkg/initializers/dataset/huggingface.py:32",
+      "callee_source": "pkg/initializers/dataset/cache.py:64",
       "call_site_source": "pkg/initializers/dataset/__main__.py:59",
       "confidence": "UNCERTAIN"
     },
@@ -6265,7 +6265,7 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "Start",
-      "callee_source": "pkg/metrics/instrumentation.go:233",
+      "callee_source": "pkg/metrics/instrumentation.go:78",
       "call_site_source": "rhoai/operator/cmd/main.go:217",
       "confidence": "UNCERTAIN"
     },
@@ -6273,16 +6273,8 @@
       "caller": "main",
       "caller_source": "rhoai/operator/cmd/main.go:72",
       "callee": "Start",
-      "callee_source": "pkg/metrics/instrumentation.go:78",
+      "callee_source": "pkg/metrics/instrumentation.go:233",
       "call_site_source": "rhoai/operator/cmd/main.go:217",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "pkg/initializers/dataset/__main__.py:28",
-      "callee": "download_dataset",
-      "callee_source": "pkg/initializers/dataset/s3.py:34",
-      "call_site_source": "pkg/initializers/dataset/__main__.py:60",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6298,6 +6290,14 @@
       "caller_source": "pkg/initializers/dataset/__main__.py:28",
       "callee": "download_dataset",
       "callee_source": "pkg/initializers/dataset/huggingface.py:36",
+      "call_site_source": "pkg/initializers/dataset/__main__.py:60",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "pkg/initializers/dataset/__main__.py:28",
+      "callee": "download_dataset",
+      "callee_source": "pkg/initializers/dataset/s3.py:34",
       "call_site_source": "pkg/initializers/dataset/__main__.py:60",
       "confidence": "UNCERTAIN"
     },
@@ -6337,14 +6337,6 @@
       "caller": "main",
       "caller_source": "pkg/initializers/model/__main__.py:30",
       "callee": "download_model",
-      "callee_source": "pkg/initializers/model/huggingface.py:36",
-      "call_site_source": "pkg/initializers/model/__main__.py:48",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "pkg/initializers/model/__main__.py:30",
-      "callee": "download_model",
       "callee_source": "pkg/initializers/model/s3.py:34",
       "call_site_source": "pkg/initializers/model/__main__.py:48",
       "confidence": "UNCERTAIN"
@@ -6352,9 +6344,9 @@
     {
       "caller": "main",
       "caller_source": "pkg/initializers/model/__main__.py:30",
-      "callee": "load_config",
-      "callee_source": "pkg/initializers/model/s3.py:30",
-      "call_site_source": "pkg/initializers/model/__main__.py:43",
+      "callee": "download_model",
+      "callee_source": "pkg/initializers/model/huggingface.py:36",
+      "call_site_source": "pkg/initializers/model/__main__.py:48",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6362,6 +6354,14 @@
       "caller_source": "pkg/initializers/model/__main__.py:30",
       "callee": "load_config",
       "callee_source": "pkg/initializers/model/huggingface.py:32",
+      "call_site_source": "pkg/initializers/model/__main__.py:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "pkg/initializers/model/__main__.py:30",
+      "callee": "load_config",
+      "callee_source": "pkg/initializers/model/s3.py:30",
       "call_site_source": "pkg/initializers/model/__main__.py:43",
       "confidence": "UNCERTAIN"
     },
@@ -6537,7 +6537,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_volume_health_condition.py:76",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_azure_file_persistent_volume_source.py:70",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -6545,7 +6545,615 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_options.py:69",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_windows_security_context_options.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map_node_config_source.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map_env_source.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map_projection.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map_volume_source.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container.py:122",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_extended_resource_request.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_image.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_port.py:81",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_resize_policy.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_restart_rule.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_restart_rule_on_exit_codes.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_state.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_state_running.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_state_terminated.py:74",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_state_waiting.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_status.py:97",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_container_user.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_csi_persistent_volume_source.py:77",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_csi_volume_source.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_daemon_endpoint.py:67",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_downward_api_projection.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_downward_api_volume_file.py:73",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_downward_api_volume_source.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_empty_dir_volume_source.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_endpoint_address.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_endpoint_port.py:80",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map.py:73",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_component_status_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_endpoint_subset.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_endpoints.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_endpoints_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_env_from_source.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_env_var.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_env_var_source.py:76",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_ephemeral_container.py:123",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_ephemeral_container_common.py:122",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_ephemeral_volume_source.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_event.py:88",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_event_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_event_series.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_event_source.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_eviction_responder.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_exec_action.py:67",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_fc_volume_source.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_file_key_selector.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_flex_persistent_volume_source.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_flex_volume_source.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_flocker_volume_source.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_gce_persistent_disk_volume_source.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_git_repo_volume_source.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_glusterfs_persistent_volume_source.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_glusterfs_volume_source.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_grpc_action.py:79",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_host_alias.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_host_ip.py:67",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_host_path_volume_source.py:78",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_http_get_action.py:94",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_http_header.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_image_volume_source.py:78",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_image_volume_status.py:67",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_iscsi_persistent_volume_source.py:78",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_iscsi_volume_source.py:78",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_key_to_path.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_lifecycle.py:80",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_lifecycle_handler.py:74",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range_item.py:73",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range_spec.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_linux_container_user.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_list.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_load_balancer_ingress.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_load_balancer_status.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_local_object_reference.py:67",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_local_volume_source.py:68",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -7673,7 +8281,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_local_object_reference.py:67",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_volume_health_condition.py:76",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -7761,7 +8369,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_windows_security_context_options.py:70",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_config_map_key_selector.py:69",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8265,6 +8873,134 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_component_status.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_component_condition.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_cluster_trust_bundle_projection.py:73",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_client_ip_config.py:67",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_cinder_volume_source.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_cinder_persistent_volume_source.py:71",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_ceph_fs_volume_source.py:73",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_ceph_fs_persistent_volume_source.py:73",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_capabilities.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_binding.py:72",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_azure_file_volume_source.py:69",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_success_policy.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_azure_disk_volume_source.py:92",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_aws_elastic_block_store_volume_source.py:70",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_avoid_pods.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_attached_volume.py:68",
+      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
+      "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_owner_reference.py:72",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
@@ -8329,7 +9065,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status.py:76",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_app_armor_profile.py:75",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8337,7 +9073,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_cause.py:69",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_affinity.py:72",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8345,7 +9081,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_details.py:73",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_uncounted_terminated_pods.py:68",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8353,7 +9089,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table.py:74",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_success_policy_rule.py:68",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8361,7 +9097,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_column_definition.py:71",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_success_policy.py:68",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8369,7 +9105,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_local_volume_source.py:68",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_pod_failure_policy_rule.py:78",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8377,7 +9113,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_row.py:70",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_pod_failure_policy_on_pod_conditions_pattern.py:68",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8385,7 +9121,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_row_condition.py:70",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_pod_failure_policy_on_exit_codes_requirement.py:76",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8393,7 +9129,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_timestamp.py:68",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_pod_failure_policy.py:68",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     },
@@ -8401,743 +9137,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_type_meta.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_update_options.py:71",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_watch_event.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_runtime_type_meta.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_load_balancer_status.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_load_balancer_ingress.py:71",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_list.py:71",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_linux_container_user.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range_spec.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_runtime_unknown.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_apimachinery_pkg_util_intstr_int_or_string.py:142",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range_item.py:73",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_limit_range.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_lifecycle_handler.py:74",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_lifecycle.py:80",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_key_to_path.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_iscsi_volume_source.py:78",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_iscsi_persistent_volume_source.py:78",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_image_volume_status.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_image_volume_source.py:78",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_http_header.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_http_get_action.py:94",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_host_path_volume_source.py:78",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_host_ip.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_host_alias.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_grpc_action.py:79",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_glusterfs_volume_source.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_glusterfs_persistent_volume_source.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_git_repo_volume_source.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_gce_persistent_disk_volume_source.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_flocker_volume_source.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_flex_volume_source.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_coordinator.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_depends_on.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_failure_policy.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_failure_policy_rule.py:71",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_job_set.py:74",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_job_set_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_core_v1_flex_persistent_volume_source.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_job_set_spec.py:83",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_job_set_status.py:75",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_network.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_replicated_job.py:73",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_replicated_job_status.py:74",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_startup_policy.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_success_policy.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_volume_claim_policy.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/jobset_v1alpha2_volume_retention_policy.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/scheduling_v1beta1_network_topology_spec.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_algorithm.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_bayesian_algorithm.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_best_trial.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_categorical_space.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_cluster_training_runtime.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_cluster_training_runtime_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_container_patch.py:75",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_coscheduling_pod_group_policy_source.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_custom_algorithm.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_dataset_initializer.py:71",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_early_stopping.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_env_injection.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_env_injection_target.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_flux_ml_policy_source.py:67",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_initializer.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_int_space.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_job_set_spec_patch.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_job_set_template_patch.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_job_set_template_spec.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_job_spec_patch.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_job_status.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_job_template_patch.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_log_normal_space.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_log_uniform_space.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_metric.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_ml_policy.py:75",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_ml_policy_source.py:74",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_model_initializer.py:71",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_mpiml_policy_source.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_normal_space.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_objective.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_optimization_job.py:74",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_optimization_job_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_optimization_job_spec.py:76",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_optimization_job_status.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_optimization_storage.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_parameter.py:69",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_parameter_assignment.py:68",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_pod_group_policy.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_pod_group_policy_source.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_pod_spec_patch.py:87",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_pod_template_patch.py:70",
-      "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:60",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_trainer_api/models/trainer_v1alpha1_random_algorithm.py:67",
+      "callee_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_batch_v1_job_template_spec.py:70",
       "call_site_source": "api/python_api/kubeflow_trainer_api/models/io_k8s_api_autoscaling_v2_container_resource_metric_source.py:63",
       "confidence": "UNCERTAIN"
     }

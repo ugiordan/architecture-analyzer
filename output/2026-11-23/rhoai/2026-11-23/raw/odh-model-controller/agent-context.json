@@ -3,7 +3,7 @@
   "component": "odh-model-controller",
   "repo": "red-hat-data-services/odh-model-controller",
   "commit_sha": "5ea9b19b7abecf3e9ec03e7395f8fc3aeb2fc559",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "odh-model-controller (also known as: ODH Model Controller, omc) is a Kubernetes component. managing 1 CRD(s): Account. deploying 2 workload(s) (odh-model-controller, model-serving-api) with 2 container(s). watching 27 resource type(s). exposing 3 service(s) on ports: 443, 8080, 8443. with 10 webhook(s) (5 validating, 5 mutating). protected by 1 network policy/policies. connecting to external services: s3. runtime dependencies: OpenTelemetry Collector, knative-local-gateway, kubernetes. defining 1 API spec type(s) across 4 struct(s) with 18 total fields. with 215 operator config constants (1 env vars). following 8 reconciliation steps across 8 controller(s). with 3 ingress route(s). integrates with KServe, Kueue, Prometheus, management relationship via labels/annotations. kustomize overlays: config/base, config/certmanager, config/crd/external, config/crd, config/default, config/manager, config/overlays/odh, config/overlays/odh/rbac/openshift, config/overlays/xks/cert-manager, config/overlays/xks, config/prometheus, config/rbac, config/runtimes, config/runtimes/vllm, config/runtimes/vllm-omni, config/runtimes-fast-1, config/runtimes-fast-2, config/server, config/webhook. references components: kserve (import), kubeflow (import).",
   "repository_description": "// TODO(user): Add simple overview of use/purpose",
   "description_source": "README.md:3",
@@ -3673,7 +3673,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:91",
       "callee": "Start",
-      "callee_source": "internal/controller/testing/config.go:101",
+      "callee_source": "internal/informercache/configmap_source.go:68",
       "call_site_source": "cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -3681,7 +3681,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:91",
       "callee": "Start",
-      "callee_source": "internal/informercache/configmap_source.go:68",
+      "callee_source": "internal/controller/testing/config.go:101",
       "call_site_source": "cmd/main.go:183",
       "confidence": "UNCERTAIN"
     },
@@ -3729,6 +3729,14 @@
       "caller": "main",
       "caller_source": "cmd/main.go:91",
       "callee": "SetupWithManager",
+      "callee_source": "internal/controller/core/secret_controller.go:249",
+      "call_site_source": "cmd/main.go:176",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:91",
+      "callee": "SetupWithManager",
       "callee_source": "internal/controller/core/pod_controller.go:50",
       "call_site_source": "cmd/main.go:176",
       "confidence": "UNCERTAIN"
@@ -3737,7 +3745,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:91",
       "callee": "SetupWithManager",
-      "callee_source": "internal/controller/core/secret_controller.go:249",
+      "callee_source": "internal/controller/serving/llm/llm_inferenceservice_controller.go:158",
       "call_site_source": "cmd/main.go:176",
       "confidence": "UNCERTAIN"
     },
@@ -3770,14 +3778,6 @@
       "caller_source": "cmd/main.go:91",
       "callee": "SetupWithManager",
       "callee_source": "internal/controller/serving/llm/grid_controller.go:102",
-      "call_site_source": "cmd/main.go:176",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:91",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/serving/llm/llm_inferenceservice_controller.go:158",
       "call_site_source": "cmd/main.go:176",
       "confidence": "UNCERTAIN"
     },
@@ -5185,7 +5185,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/core/configmap_controller.go:191",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/core/configmap_controller.go:197",
       "confidence": "UNCERTAIN"
     },
@@ -5193,7 +5193,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/core/configmap_controller.go:191",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/core/configmap_controller.go:197",
       "confidence": "UNCERTAIN"
     },
@@ -5201,7 +5201,7 @@
       "caller": "TestUpdateSecret_Concurrent",
       "caller_source": "internal/controller/core/pod_controller_test.go:290",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/core/pod_controller_test.go:365",
       "confidence": "UNCERTAIN"
     },
@@ -5209,7 +5209,7 @@
       "caller": "TestUpdateSecret_Concurrent",
       "caller_source": "internal/controller/core/pod_controller_test.go:290",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/core/pod_controller_test.go:365",
       "confidence": "UNCERTAIN"
     },
@@ -5217,7 +5217,7 @@
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/core/secret_controller.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -5225,7 +5225,7 @@
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/core/secret_controller.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -5281,7 +5281,7 @@
       "caller": "createTestKedaSA",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:156",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:169",
       "confidence": "UNCERTAIN"
     },
@@ -5289,7 +5289,7 @@
       "caller": "createTestKedaSA",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:156",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:169",
       "confidence": "UNCERTAIN"
     },
@@ -5297,7 +5297,7 @@
       "caller": "createTestKedaSecret",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:174",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:191",
       "confidence": "UNCERTAIN"
     },
@@ -5305,7 +5305,7 @@
       "caller": "createTestKedaSecret",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:174",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:191",
       "confidence": "UNCERTAIN"
     },
@@ -5393,7 +5393,7 @@
       "caller": "RequiredResources",
       "caller_source": "internal/controller/serving/llm/fixture/required_resources.go:33",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/llm/fixture/required_resources.go:35",
       "confidence": "UNCERTAIN"
     },
@@ -5401,7 +5401,7 @@
       "caller": "RequiredResources",
       "caller_source": "internal/controller/serving/llm/fixture/required_resources.go:33",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/llm/fixture/required_resources.go:35",
       "confidence": "UNCERTAIN"
     },
@@ -5425,7 +5425,7 @@
       "caller": "RequiredResources",
       "caller_source": "internal/controller/serving/llm/fixture/required_resources.go:33",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/llm/fixture/required_resources.go:43",
       "confidence": "UNCERTAIN"
     },
@@ -5433,7 +5433,7 @@
       "caller": "RequiredResources",
       "caller_source": "internal/controller/serving/llm/fixture/required_resources.go:33",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/llm/fixture/required_resources.go:43",
       "confidence": "UNCERTAIN"
     },
@@ -5441,7 +5441,7 @@
       "caller": "httpRouteAuthPolicyProcessDelta",
       "caller_source": "internal/controller/serving/llm/reconcilers/kserve_authpolicy_reconciler.go:197",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/llm/reconcilers/kserve_authpolicy_reconciler.go:235",
       "confidence": "UNCERTAIN"
     },
@@ -5449,7 +5449,7 @@
       "caller": "httpRouteAuthPolicyProcessDelta",
       "caller_source": "internal/controller/serving/llm/reconcilers/kserve_authpolicy_reconciler.go:197",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/llm/reconcilers/kserve_authpolicy_reconciler.go:235",
       "confidence": "UNCERTAIN"
     },
@@ -5489,7 +5489,7 @@
       "caller": "createSecret",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:327",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:330",
       "confidence": "UNCERTAIN"
     },
@@ -5497,7 +5497,7 @@
       "caller": "createSecret",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:327",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:330",
       "confidence": "UNCERTAIN"
     },
@@ -5537,7 +5537,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_metrics_dashboard_reconciler.go:162",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_metrics_dashboard_reconciler.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5545,7 +5545,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_metrics_dashboard_reconciler.go:162",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_metrics_dashboard_reconciler.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5553,7 +5553,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_metrics_service_reconciler.go:129",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_metrics_service_reconciler.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -5561,7 +5561,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_metrics_service_reconciler.go:129",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_metrics_service_reconciler.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -5569,7 +5569,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_metrics_servicemonitor_reconciler.go:133",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_metrics_servicemonitor_reconciler.go:144",
       "confidence": "UNCERTAIN"
     },
@@ -5577,7 +5577,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_metrics_servicemonitor_reconciler.go:133",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_metrics_servicemonitor_reconciler.go:144",
       "confidence": "UNCERTAIN"
     },
@@ -5585,7 +5585,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:270",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:284",
       "confidence": "UNCERTAIN"
     },
@@ -5593,7 +5593,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:270",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:284",
       "confidence": "UNCERTAIN"
     },
@@ -5601,7 +5601,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/serviceaccount_reconciler.go:89",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/reconcilers/serviceaccount_reconciler.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -5609,7 +5609,7 @@
       "caller": "processDelta",
       "caller_source": "internal/controller/serving/reconcilers/serviceaccount_reconciler.go:89",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/reconcilers/serviceaccount_reconciler.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -5633,7 +5633,7 @@
       "caller": "reconcileDefaultRayServerCertSecretInUserNS",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:347",
       "confidence": "UNCERTAIN"
     },
@@ -5641,7 +5641,7 @@
       "caller": "reconcileDefaultRayServerCertSecretInUserNS",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:347",
       "confidence": "UNCERTAIN"
     },
@@ -5665,7 +5665,7 @@
       "caller": "CreateNamespaceIfNotExists",
       "caller_source": "internal/controller/testing/utils.go:64",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/testing/utils.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -5673,7 +5673,7 @@
       "caller": "CreateNamespaceIfNotExists",
       "caller_source": "internal/controller/testing/utils.go:64",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/testing/utils.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -5681,7 +5681,7 @@
       "caller": "recreateSecret",
       "caller_source": "internal/controller/utils/cert.go:256",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/authpolicy.go:206",
+      "callee_source": "internal/controller/resources/envoyfilter.go:139",
       "call_site_source": "internal/controller/utils/cert.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -5689,7 +5689,7 @@
       "caller": "recreateSecret",
       "caller_source": "internal/controller/utils/cert.go:256",
       "callee": "Create",
-      "callee_source": "internal/controller/resources/envoyfilter.go:139",
+      "callee_source": "internal/controller/resources/authpolicy.go:206",
       "call_site_source": "internal/controller/utils/cert.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -5745,14 +5745,6 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/core/configmap_controller.go:134",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/core/configmap_controller.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/core/configmap_controller.go:134",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/configmap_controller.go:139",
       "confidence": "UNCERTAIN"
@@ -5761,6 +5753,14 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/core/configmap_controller.go:134",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/core/configmap_controller.go:139",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/core/configmap_controller.go:134",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/configmap_controller.go:139",
       "confidence": "UNCERTAIN"
@@ -5769,7 +5769,7 @@
       "caller": "deleteStorageSecret",
       "caller_source": "internal/controller/core/configmap_controller.go:236",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/configmap_controller.go:239",
       "confidence": "UNCERTAIN"
     },
@@ -5785,7 +5785,7 @@
       "caller": "deleteStorageSecret",
       "caller_source": "internal/controller/core/configmap_controller.go:236",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/configmap_controller.go:239",
       "confidence": "UNCERTAIN"
     },
@@ -5793,7 +5793,7 @@
       "caller": "reconcileConfigMap",
       "caller_source": "internal/controller/core/configmap_controller.go:63",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/configmap_controller.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -5809,8 +5809,16 @@
       "caller": "reconcileConfigMap",
       "caller_source": "internal/controller/core/configmap_controller.go:63",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/configmap_controller.go:73",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileConfigMap",
+      "caller_source": "internal/controller/core/configmap_controller.go:63",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/core/configmap_controller.go:96",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5830,22 +5838,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "reconcileConfigMap",
-      "caller_source": "internal/controller/core/configmap_controller.go:63",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/core/configmap_controller.go:96",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "expectKServeCABundleData",
-      "caller_source": "internal/controller/core/configmap_controller_test.go:268",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/core/configmap_controller_test.go:271",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "expectKServeCABundleData",
       "caller_source": "internal/controller/core/configmap_controller_test.go:268",
       "callee": "Get",
@@ -5862,10 +5854,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "expectKServeCABundleData",
+      "caller_source": "internal/controller/core/configmap_controller_test.go:268",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/core/configmap_controller_test.go:271",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "expectKServeCABundleAbsent",
       "caller_source": "internal/controller/core/configmap_controller_test.go:278",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/configmap_controller_test.go:281",
       "confidence": "UNCERTAIN"
     },
@@ -5881,7 +5881,7 @@
       "caller": "expectKServeCABundleAbsent",
       "caller_source": "internal/controller/core/configmap_controller_test.go:278",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/configmap_controller_test.go:281",
       "confidence": "UNCERTAIN"
     },
@@ -5889,7 +5889,7 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/core/pod_controller.go:102",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/pod_controller.go:109",
       "confidence": "UNCERTAIN"
     },
@@ -5897,7 +5897,7 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/core/pod_controller.go:102",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/pod_controller.go:109",
       "confidence": "UNCERTAIN"
     },
@@ -5913,7 +5913,7 @@
       "caller": "reconcileRayTls",
       "caller_source": "internal/controller/core/pod_controller.go:123",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/pod_controller.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -5921,7 +5921,7 @@
       "caller": "reconcileRayTls",
       "caller_source": "internal/controller/core/pod_controller.go:123",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/pod_controller.go:126",
       "confidence": "UNCERTAIN"
     },
@@ -5931,6 +5931,14 @@
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/pod_controller.go:126",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "updateSecret",
+      "caller_source": "internal/controller/core/pod_controller.go:140",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/core/pod_controller.go:153",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5946,14 +5954,6 @@
       "caller_source": "internal/controller/core/pod_controller.go:140",
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/core/pod_controller.go:153",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "updateSecret",
-      "caller_source": "internal/controller/core/pod_controller.go:140",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/pod_controller.go:153",
       "confidence": "UNCERTAIN"
     },
@@ -5969,7 +5969,7 @@
       "caller": "addOrUpdateRayServerCert",
       "caller_source": "internal/controller/core/pod_controller.go:167",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/pod_controller.go:174",
       "confidence": "UNCERTAIN"
     },
@@ -5977,7 +5977,7 @@
       "caller": "addOrUpdateRayServerCert",
       "caller_source": "internal/controller/core/pod_controller.go:167",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/pod_controller.go:174",
       "confidence": "UNCERTAIN"
     },
@@ -5985,7 +5985,7 @@
       "caller": "TestUpdateSecret_Concurrent",
       "caller_source": "internal/controller/core/pod_controller_test.go:290",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/pod_controller_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -5993,7 +5993,7 @@
       "caller": "TestUpdateSecret_Concurrent",
       "caller_source": "internal/controller/core/pod_controller_test.go:290",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/pod_controller_test.go:349",
       "confidence": "UNCERTAIN"
     },
@@ -6017,24 +6017,16 @@
       "caller": "TestUpdateSecret_Concurrent",
       "caller_source": "internal/controller/core/pod_controller_test.go:290",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/core/pod_controller_test.go:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestUpdateSecret_Concurrent",
+      "caller_source": "internal/controller/core/pod_controller_test.go:290",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/pod_controller_test.go:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestUpdateSecret_Concurrent",
-      "caller_source": "internal/controller/core/pod_controller_test.go:290",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/core/pod_controller_test.go:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestUpdateSecret_Concurrent",
-      "caller_source": "internal/controller/core/pod_controller_test.go:290",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/core/pod_controller_test.go:376",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6054,11 +6046,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/core/secret_controller.go:226",
+      "caller": "TestUpdateSecret_Concurrent",
+      "caller_source": "internal/controller/core/pod_controller_test.go:290",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/core/secret_controller.go:232",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/core/pod_controller_test.go:376",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6074,6 +6066,14 @@
       "caller_source": "internal/controller/core/secret_controller.go:226",
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/core/secret_controller.go:232",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/core/secret_controller.go:226",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/secret_controller.go:232",
       "confidence": "UNCERTAIN"
     },
@@ -6105,6 +6105,22 @@
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/core/secret_controller.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileSecret",
+      "caller_source": "internal/controller/core/secret_controller.go:90",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/core/secret_controller.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileSecret",
+      "caller_source": "internal/controller/core/secret_controller.go:90",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/secret_controller.go:117",
       "confidence": "UNCERTAIN"
@@ -6114,22 +6130,6 @@
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/core/secret_controller.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileSecret",
-      "caller_source": "internal/controller/core/secret_controller.go:90",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/core/secret_controller.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileSecret",
-      "caller_source": "internal/controller/core/secret_controller.go:90",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/secret_controller.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -6137,7 +6137,7 @@
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/secret_controller.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -6161,7 +6161,7 @@
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/secret_controller.go:167",
       "confidence": "UNCERTAIN"
     },
@@ -6169,7 +6169,7 @@
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/core/secret_controller.go:90",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/secret_controller.go:167",
       "confidence": "UNCERTAIN"
     },
@@ -6177,14 +6177,6 @@
       "caller": "updateSecretData",
       "caller_source": "internal/controller/core/secret_controller_test.go:209",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/core/secret_controller_test.go:212",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "updateSecretData",
-      "caller_source": "internal/controller/core/secret_controller_test.go:209",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/secret_controller_test.go:212",
       "confidence": "UNCERTAIN"
@@ -6193,6 +6185,14 @@
       "caller": "updateSecretData",
       "caller_source": "internal/controller/core/secret_controller_test.go:209",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/core/secret_controller_test.go:212",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "updateSecretData",
+      "caller_source": "internal/controller/core/secret_controller_test.go:209",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/core/secret_controller_test.go:212",
       "confidence": "UNCERTAIN"
@@ -6201,14 +6201,6 @@
       "caller": "updateSecretLabel",
       "caller_source": "internal/controller/core/secret_controller_test.go:234",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/core/secret_controller_test.go:237",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "updateSecretLabel",
-      "caller_source": "internal/controller/core/secret_controller_test.go:234",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/secret_controller_test.go:237",
       "confidence": "UNCERTAIN"
@@ -6217,6 +6209,14 @@
       "caller": "updateSecretLabel",
       "caller_source": "internal/controller/core/secret_controller_test.go:234",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/core/secret_controller_test.go:237",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "updateSecretLabel",
+      "caller_source": "internal/controller/core/secret_controller_test.go:234",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/secret_controller_test.go:237",
       "confidence": "UNCERTAIN"
@@ -6233,7 +6233,7 @@
       "caller": "GetResourceByName",
       "caller_source": "internal/controller/core/test_helpers.go:31",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/core/test_helpers.go:32",
       "confidence": "UNCERTAIN"
     },
@@ -6241,7 +6241,7 @@
       "caller": "GetResourceByName",
       "caller_source": "internal/controller/core/test_helpers.go:31",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/core/test_helpers.go:32",
       "confidence": "UNCERTAIN"
     },
@@ -6249,14 +6249,6 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/nim/account_controller.go:181",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/nim/account_controller.go:186",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Reconcile",
-      "caller_source": "internal/controller/nim/account_controller.go:181",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/nim/account_controller.go:186",
       "confidence": "UNCERTAIN"
@@ -6265,6 +6257,14 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/nim/account_controller.go:181",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/nim/account_controller.go:186",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "internal/controller/nim/account_controller.go:181",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/nim/account_controller.go:186",
       "confidence": "UNCERTAIN"
@@ -6273,14 +6273,6 @@
       "caller": "loadSecret",
       "caller_source": "internal/controller/nim/handlers/api_key_manager.go:92",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/nim/handlers/api_key_manager.go:103",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "loadSecret",
-      "caller_source": "internal/controller/nim/handlers/api_key_manager.go:92",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/nim/handlers/api_key_manager.go:103",
       "confidence": "UNCERTAIN"
@@ -6289,6 +6281,14 @@
       "caller": "loadSecret",
       "caller_source": "internal/controller/nim/handlers/api_key_manager.go:92",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/nim/handlers/api_key_manager.go:103",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "loadSecret",
+      "caller_source": "internal/controller/nim/handlers/api_key_manager.go:92",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/nim/handlers/api_key_manager.go:103",
       "confidence": "UNCERTAIN"
@@ -6297,7 +6297,7 @@
       "caller": "shouldReconcile",
       "caller_source": "internal/controller/nim/handlers/configmap_handler.go:210",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/nim/handlers/configmap_handler.go:226",
       "confidence": "UNCERTAIN"
     },
@@ -6313,7 +6313,7 @@
       "caller": "shouldReconcile",
       "caller_source": "internal/controller/nim/handlers/configmap_handler.go:210",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/nim/handlers/configmap_handler.go:226",
       "confidence": "UNCERTAIN"
     },
@@ -6321,14 +6321,6 @@
       "caller": "getSelectedModelList",
       "caller_source": "internal/controller/nim/handlers/handlers.go:134",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/nim/handlers/handlers.go:150",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getSelectedModelList",
-      "caller_source": "internal/controller/nim/handlers/handlers.go:134",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/nim/handlers/handlers.go:150",
       "confidence": "UNCERTAIN"
@@ -6337,6 +6329,14 @@
       "caller": "getSelectedModelList",
       "caller_source": "internal/controller/nim/handlers/handlers.go:134",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/nim/handlers/handlers.go:150",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getSelectedModelList",
+      "caller_source": "internal/controller/nim/handlers/handlers.go:134",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/nim/handlers/handlers.go:150",
       "confidence": "UNCERTAIN"
@@ -6345,14 +6345,6 @@
       "caller": "Get",
       "caller_source": "internal/controller/resources/authpolicy.go:182",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/authpolicy.go:185",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Get",
-      "caller_source": "internal/controller/resources/authpolicy.go:182",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/authpolicy.go:185",
       "confidence": "UNCERTAIN"
@@ -6366,11 +6358,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "FetchClusterRoleBinding",
-      "caller_source": "internal/controller/resources/clusterrolebinding.go:51",
+      "caller": "Get",
+      "caller_source": "internal/controller/resources/authpolicy.go:182",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/resources/clusterrolebinding.go:53",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/authpolicy.go:185",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6387,6 +6379,22 @@
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/clusterrolebinding.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "FetchClusterRoleBinding",
+      "caller_source": "internal/controller/resources/clusterrolebinding.go:51",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/resources/clusterrolebinding.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeleteClusterRoleBinding",
+      "caller_source": "internal/controller/resources/clusterrolebinding.go:64",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/resources/clusterrolebinding.go:66",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6402,14 +6410,6 @@
       "caller_source": "internal/controller/resources/clusterrolebinding.go:64",
       "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/clusterrolebinding.go:66",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeleteClusterRoleBinding",
-      "caller_source": "internal/controller/resources/clusterrolebinding.go:64",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/clusterrolebinding.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -6417,7 +6417,7 @@
       "caller": "FetchConfigMap",
       "caller_source": "internal/controller/resources/configmap.go:39",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/configmap.go:41",
       "confidence": "UNCERTAIN"
     },
@@ -6433,7 +6433,7 @@
       "caller": "FetchConfigMap",
       "caller_source": "internal/controller/resources/configmap.go:39",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/resources/configmap.go:41",
       "confidence": "UNCERTAIN"
     },
@@ -6465,14 +6465,6 @@
       "caller": "FetchNetworkPolicy",
       "caller_source": "internal/controller/resources/networkpolicy.go:44",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/networkpolicy.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "FetchNetworkPolicy",
-      "caller_source": "internal/controller/resources/networkpolicy.go:44",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/networkpolicy.go:46",
       "confidence": "UNCERTAIN"
@@ -6481,6 +6473,14 @@
       "caller": "FetchNetworkPolicy",
       "caller_source": "internal/controller/resources/networkpolicy.go:44",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/networkpolicy.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "FetchNetworkPolicy",
+      "caller_source": "internal/controller/resources/networkpolicy.go:44",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/networkpolicy.go:46",
       "confidence": "UNCERTAIN"
@@ -6489,6 +6489,14 @@
       "caller": "DeleteNetworkPolicy",
       "caller_source": "internal/controller/resources/networkpolicy.go:57",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/networkpolicy.go:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeleteNetworkPolicy",
+      "caller_source": "internal/controller/resources/networkpolicy.go:57",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/networkpolicy.go:59",
       "confidence": "UNCERTAIN"
@@ -6502,26 +6510,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeleteNetworkPolicy",
-      "caller_source": "internal/controller/resources/networkpolicy.go:57",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/networkpolicy.go:59",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "FetchPodMonitor",
       "caller_source": "internal/controller/resources/podmonitor.go:44",
       "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/podmonitor.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "FetchPodMonitor",
-      "caller_source": "internal/controller/resources/podmonitor.go:44",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/podmonitor.go:46",
       "confidence": "UNCERTAIN"
     },
@@ -6534,10 +6526,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "FetchPodMonitor",
+      "caller_source": "internal/controller/resources/podmonitor.go:44",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/resources/podmonitor.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "DeletePodMonitor",
       "caller_source": "internal/controller/resources/podmonitor.go:57",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/podmonitor.go:59",
       "confidence": "UNCERTAIN"
     },
@@ -6553,7 +6553,7 @@
       "caller": "DeletePodMonitor",
       "caller_source": "internal/controller/resources/podmonitor.go:57",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/resources/podmonitor.go:59",
       "confidence": "UNCERTAIN"
     },
@@ -6569,7 +6569,7 @@
       "caller": "FetchRoute",
       "caller_source": "internal/controller/resources/route.go:45",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/route.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -6577,7 +6577,7 @@
       "caller": "FetchRoute",
       "caller_source": "internal/controller/resources/route.go:45",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/resources/route.go:47",
       "confidence": "UNCERTAIN"
     },
@@ -6585,7 +6585,7 @@
       "caller": "DeleteRoute",
       "caller_source": "internal/controller/resources/route.go:58",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/resources/route.go:60",
       "confidence": "UNCERTAIN"
     },
@@ -6593,7 +6593,7 @@
       "caller": "DeleteRoute",
       "caller_source": "internal/controller/resources/route.go:58",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/route.go:60",
       "confidence": "UNCERTAIN"
     },
@@ -6603,14 +6603,6 @@
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/route.go:60",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Get",
-      "caller_source": "internal/controller/resources/secret.go:40",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/resources/secret.go:42",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6626,6 +6618,14 @@
       "caller_source": "internal/controller/resources/secret.go:40",
       "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/secret.go:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Get",
+      "caller_source": "internal/controller/resources/secret.go:40",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/secret.go:42",
       "confidence": "UNCERTAIN"
     },
@@ -6657,14 +6657,6 @@
       "caller": "FetchServiceAccount",
       "caller_source": "internal/controller/resources/serviceaccount.go:44",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/resources/serviceaccount.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "FetchServiceAccount",
-      "caller_source": "internal/controller/resources/serviceaccount.go:44",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/resources/serviceaccount.go:46",
       "confidence": "UNCERTAIN"
@@ -6673,6 +6665,14 @@
       "caller": "FetchServiceAccount",
       "caller_source": "internal/controller/resources/serviceaccount.go:44",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/resources/serviceaccount.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "FetchServiceAccount",
+      "caller_source": "internal/controller/resources/serviceaccount.go:44",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/serviceaccount.go:46",
       "confidence": "UNCERTAIN"
@@ -6681,6 +6681,14 @@
       "caller": "DeleteServiceAccount",
       "caller_source": "internal/controller/resources/serviceaccount.go:57",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/serviceaccount.go:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeleteServiceAccount",
+      "caller_source": "internal/controller/resources/serviceaccount.go:57",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/serviceaccount.go:59",
       "confidence": "UNCERTAIN"
@@ -6691,22 +6699,6 @@
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/resources/serviceaccount.go:59",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeleteServiceAccount",
-      "caller_source": "internal/controller/resources/serviceaccount.go:57",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/serviceaccount.go:59",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "FetchServiceMonitor",
-      "caller_source": "internal/controller/resources/servicemonitor.go:44",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/resources/servicemonitor.go:46",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6723,6 +6715,22 @@
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/resources/servicemonitor.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "FetchServiceMonitor",
+      "caller_source": "internal/controller/resources/servicemonitor.go:44",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/servicemonitor.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeleteServiceMonitor",
+      "caller_source": "internal/controller/resources/servicemonitor.go:57",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/resources/servicemonitor.go:59",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6738,14 +6746,6 @@
       "caller_source": "internal/controller/resources/servicemonitor.go:57",
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/resources/servicemonitor.go:59",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeleteServiceMonitor",
-      "caller_source": "internal/controller/resources/servicemonitor.go:57",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/resources/servicemonitor.go:59",
       "confidence": "UNCERTAIN"
     },
@@ -6761,7 +6761,7 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/serving/inferencegraph_controller.go:56",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/inferencegraph_controller.go:60",
       "confidence": "UNCERTAIN"
     },
@@ -6769,7 +6769,7 @@
       "caller": "Reconcile",
       "caller_source": "internal/controller/serving/inferencegraph_controller.go:56",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/inferencegraph_controller.go:60",
       "confidence": "UNCERTAIN"
     },
@@ -6825,7 +6825,7 @@
       "caller": "checkRouteTimeout",
       "caller_source": "internal/controller/serving/inferenceservice_controller_test.go:934",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/inferenceservice_controller_test.go:936",
       "confidence": "UNCERTAIN"
     },
@@ -6841,7 +6841,7 @@
       "caller": "checkRouteTimeout",
       "caller_source": "internal/controller/serving/inferenceservice_controller_test.go:934",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/inferenceservice_controller_test.go:936",
       "confidence": "UNCERTAIN"
     },
@@ -6849,14 +6849,6 @@
       "caller": "getAllKedaTestResources",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:134",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getAllKedaTestResources",
-      "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:134",
       "confidence": "UNCERTAIN"
@@ -6874,7 +6866,7 @@
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:138",
+      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:134",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6897,15 +6889,15 @@
       "caller": "getAllKedaTestResources",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:142",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:138",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "getAllKedaTestResources",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:142",
       "confidence": "UNCERTAIN"
     },
@@ -6921,7 +6913,15 @@
       "caller": "getAllKedaTestResources",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:142",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getAllKedaTestResources",
+      "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -6937,8 +6937,16 @@
       "caller": "getAllKedaTestResources",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:146",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "getAllKedaTestResources",
+      "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:150",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6958,14 +6966,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "getAllKedaTestResources",
-      "caller_source": "internal/controller/serving/keda_fixtures_test.go:131",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:150",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "createTestKedaSA",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:156",
       "callee": "Get",
@@ -6977,7 +6977,7 @@
       "caller": "createTestKedaSA",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:156",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:170",
       "confidence": "UNCERTAIN"
     },
@@ -6985,7 +6985,7 @@
       "caller": "createTestKedaSA",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:156",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:170",
       "confidence": "UNCERTAIN"
     },
@@ -7001,7 +7001,7 @@
       "caller": "createTestKedaSecret",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:174",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:192",
       "confidence": "UNCERTAIN"
     },
@@ -7009,16 +7009,8 @@
       "caller": "createTestKedaSecret",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:174",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:192",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "createTestKedaRole",
-      "caller_source": "internal/controller/serving/keda_fixtures_test.go:196",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:211",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7033,8 +7025,24 @@
       "caller": "createTestKedaRole",
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:196",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:211",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "createTestKedaRole",
+      "caller_source": "internal/controller/serving/keda_fixtures_test.go:196",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:211",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "createTestKedaRoleBinding",
+      "caller_source": "internal/controller/serving/keda_fixtures_test.go:215",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:231",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7050,14 +7058,6 @@
       "caller_source": "internal/controller/serving/keda_fixtures_test.go:215",
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/keda_fixtures_test.go:231",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "createTestKedaRoleBinding",
-      "caller_source": "internal/controller/serving/keda_fixtures_test.go:215",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/keda_fixtures_test.go:231",
       "confidence": "UNCERTAIN"
     },
@@ -7089,14 +7089,6 @@
       "caller": "CreateHTTPRouteForLLMService",
       "caller_source": "internal/controller/serving/llm/fixture/common_helpers.go:30",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/llm/fixture/common_helpers.go:40",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "CreateHTTPRouteForLLMService",
-      "caller_source": "internal/controller/serving/llm/fixture/common_helpers.go:30",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/llm/fixture/common_helpers.go:40",
       "confidence": "UNCERTAIN"
@@ -7105,6 +7097,14 @@
       "caller": "CreateHTTPRouteForLLMService",
       "caller_source": "internal/controller/serving/llm/fixture/common_helpers.go:30",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/serving/llm/fixture/common_helpers.go:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "CreateHTTPRouteForLLMService",
+      "caller_source": "internal/controller/serving/llm/fixture/common_helpers.go:30",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/llm/fixture/common_helpers.go:40",
       "confidence": "UNCERTAIN"
@@ -7121,7 +7121,7 @@
       "caller": "GetResourceByName",
       "caller_source": "internal/controller/serving/llm/fixture/common_helpers.go:47",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/llm/fixture/common_helpers.go:48",
       "confidence": "UNCERTAIN"
     },
@@ -7129,7 +7129,7 @@
       "caller": "GetResourceByName",
       "caller_source": "internal/controller/serving/llm/fixture/common_helpers.go:47",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/llm/fixture/common_helpers.go:48",
       "confidence": "UNCERTAIN"
     },
@@ -7161,14 +7161,6 @@
       "caller": "reconcileTriggerAuthentication",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:174",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileTriggerAuthentication",
-      "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:174",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:179",
       "confidence": "UNCERTAIN"
@@ -7182,11 +7174,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "reconcileServiceAccount",
-      "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:241",
+      "caller": "reconcileTriggerAuthentication",
+      "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:174",
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:246",
+      "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:179",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7206,6 +7198,22 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "reconcileServiceAccount",
+      "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:241",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/secret.go:40",
+      "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:246",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileSecret",
+      "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:293",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:298",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "reconcileSecret",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:293",
       "callee": "Get",
@@ -7218,14 +7226,6 @@
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:293",
       "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
-      "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:298",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileSecret",
-      "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:293",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:298",
       "confidence": "UNCERTAIN"
     },
@@ -7233,7 +7233,7 @@
       "caller": "reconcileRole",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:354",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:359",
       "confidence": "UNCERTAIN"
     },
@@ -7249,7 +7249,7 @@
       "caller": "reconcileRole",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:354",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:359",
       "confidence": "UNCERTAIN"
     },
@@ -7257,7 +7257,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:419",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:424",
       "confidence": "UNCERTAIN"
     },
@@ -7265,7 +7265,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:419",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:424",
       "confidence": "UNCERTAIN"
     },
@@ -7289,7 +7289,7 @@
       "caller": "removeOwnerReferenceFromObject",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:508",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:516",
       "confidence": "UNCERTAIN"
     },
@@ -7297,7 +7297,7 @@
       "caller": "removeOwnerReferenceFromObject",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:508",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:516",
       "confidence": "UNCERTAIN"
     },
@@ -7305,7 +7305,7 @@
       "caller": "resourcesExist",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:89",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:91",
       "confidence": "UNCERTAIN"
     },
@@ -7321,7 +7321,7 @@
       "caller": "resourcesExist",
       "caller_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:89",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/reconcilers/keda_prometheus_auth.go:91",
       "confidence": "UNCERTAIN"
     },
@@ -7329,7 +7329,7 @@
       "caller": "checkRouteTargetPort",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:218",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:227",
       "confidence": "UNCERTAIN"
     },
@@ -7337,7 +7337,7 @@
       "caller": "checkRouteTargetPort",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:218",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:227",
       "confidence": "UNCERTAIN"
     },
@@ -7345,7 +7345,7 @@
       "caller": "checkRouteTargetPort",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:218",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:227",
       "confidence": "UNCERTAIN"
     },
@@ -7353,7 +7353,7 @@
       "caller": "applyCanaryTrafficSplits",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:311",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:331",
       "confidence": "UNCERTAIN"
     },
@@ -7361,7 +7361,7 @@
       "caller": "applyCanaryTrafficSplits",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:311",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:331",
       "confidence": "UNCERTAIN"
     },
@@ -7369,7 +7369,7 @@
       "caller": "applyCanaryTrafficSplits",
       "caller_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:311",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/reconcilers/kserve_raw_route_reconciler.go:331",
       "confidence": "UNCERTAIN"
     },
@@ -7377,7 +7377,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:148",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -7385,7 +7385,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:148",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -7393,7 +7393,7 @@
       "caller": "reconcileRoleBinding",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:148",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -7425,6 +7425,14 @@
       "caller": "reconcileMultiNodeSR",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:279",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/serving/servingruntime_controller.go:287",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileMultiNodeSR",
+      "caller_source": "internal/controller/serving/servingruntime_controller.go:279",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:287",
       "confidence": "UNCERTAIN"
@@ -7435,30 +7443,6 @@
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:287",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileMultiNodeSR",
-      "caller_source": "internal/controller/serving/servingruntime_controller.go:279",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/serving/servingruntime_controller.go:287",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileDefaultRayServerCertSecretInUserNS",
-      "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/serving/servingruntime_controller.go:314",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "reconcileDefaultRayServerCertSecretInUserNS",
-      "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
-      "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
-      "call_site_source": "internal/controller/serving/servingruntime_controller.go:314",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7473,8 +7457,16 @@
       "caller": "reconcileDefaultRayServerCertSecretInUserNS",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
       "callee": "Get",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/serving/servingruntime_controller.go:314",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileDefaultRayServerCertSecretInUserNS",
+      "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
+      "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/serving/servingruntime_controller.go:345",
+      "call_site_source": "internal/controller/serving/servingruntime_controller.go:314",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7490,6 +7482,14 @@
       "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
       "callee": "Get",
       "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "call_site_source": "internal/controller/serving/servingruntime_controller.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "reconcileDefaultRayServerCertSecretInUserNS",
+      "caller_source": "internal/controller/serving/servingruntime_controller.go:301",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -7497,7 +7497,7 @@
       "caller": "foundRB",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:94",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/envoyfilter.go:115",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -7505,7 +7505,7 @@
       "caller": "foundRB",
       "caller_source": "internal/controller/serving/servingruntime_controller.go:94",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/envoyfilter.go:115",
+      "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/serving/servingruntime_controller.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -7569,14 +7569,6 @@
       "caller": "Do",
       "caller_source": "internal/controller/testdata/nvidia_api_mock.go:41",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/authpolicy.go:182",
-      "call_site_source": "internal/controller/testdata/nvidia_api_mock.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Do",
-      "caller_source": "internal/controller/testdata/nvidia_api_mock.go:41",
-      "callee": "Get",
       "callee_source": "internal/controller/resources/secret.go:40",
       "call_site_source": "internal/controller/testdata/nvidia_api_mock.go:121",
       "confidence": "UNCERTAIN"
@@ -7594,6 +7586,14 @@
       "caller_source": "internal/controller/testdata/nvidia_api_mock.go:41",
       "callee": "Get",
       "callee_source": "internal/controller/resources/authpolicy.go:182",
+      "call_site_source": "internal/controller/testdata/nvidia_api_mock.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Do",
+      "caller_source": "internal/controller/testdata/nvidia_api_mock.go:41",
+      "callee": "Get",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/testdata/nvidia_api_mock.go:46",
       "confidence": "UNCERTAIN"
     },
@@ -7617,7 +7617,7 @@
       "caller": "Do",
       "caller_source": "internal/controller/testdata/nvidia_api_mock.go:41",
       "callee": "Get",
-      "callee_source": "internal/controller/resources/secret.go:40",
+      "callee_source": "internal/controller/resources/authpolicy.go:182",
       "call_site_source": "internal/controller/testdata/nvidia_api_mock.go:55",
       "confidence": "UNCERTAIN"
     }

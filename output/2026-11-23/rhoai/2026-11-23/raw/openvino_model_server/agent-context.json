@@ -3,7 +3,7 @@
   "component": "openvino_model_server",
   "repo": "red-hat-data-services/openvino_model_server",
   "commit_sha": "257c7d39d2ba85e002d7755ee2a19acc5b185927",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "openvino_model_server is a Kubernetes component. Dockerfile EXPOSE ports: 8000, 9000, 11888. connecting to external services: aiohttp, grpc, mongodb, openai, requests, urllib, weaviate. 15 Python package dependencies (15 required), categories: 1 ml-framework, 1 numerical. with 2 operator config constants. Python k8s client with 23 API call(s). integrates with management relationship via labels/annotations.",
   "repository_description": "Model Server hosts models and makes them accessible to software components over standard network protocols: a client sends a request to the model server, which performs model inference and sends a response back to the client. Model Server offers many advantages for efficient model deployment:",
   "description_source": "README.md:3",
@@ -2124,7 +2124,31 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:69",
+      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
+      "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
+      "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
       "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -2140,40 +2164,8 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
+      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:69",
       "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
-      "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
-      "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:128",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2188,7 +2180,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
       "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:128",
       "confidence": "UNCERTAIN"
     },
@@ -2196,7 +2188,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
+      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
       "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:128",
       "confidence": "UNCERTAIN"
     },
@@ -2220,6 +2212,14 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
       "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
+      "callee": "parseFlags",
       "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:69",
       "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:128",
       "confidence": "UNCERTAIN"
@@ -2228,7 +2228,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
+      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
       "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
       "confidence": "UNCERTAIN"
     },
@@ -2236,7 +2236,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "callee_source": "client/go/kserve-api/grpc_infer_resnet.go:71",
       "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
       "confidence": "UNCERTAIN"
     },
@@ -2245,14 +2245,6 @@
       "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
       "callee": "parseFlags",
       "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
       "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
       "confidence": "UNCERTAIN"
     },
@@ -2268,7 +2260,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
+      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
       "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
       "confidence": "UNCERTAIN"
     },
@@ -2276,16 +2268,16 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_infer_resnet.go:71",
+      "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
       "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_model_ready.go:88",
+      "caller_source": "client/go/kserve-api/grpc_model_metadata.go:89",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_model_ready.go:89",
+      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
+      "call_site_source": "client/go/kserve-api/grpc_model_metadata.go:90",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2300,7 +2292,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_model_ready.go:88",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
+      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
       "call_site_source": "client/go/kserve-api/grpc_model_ready.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -2324,7 +2316,15 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_model_ready.go:88",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
+      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "call_site_source": "client/go/kserve-api/grpc_model_ready.go:89",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_model_ready.go:88",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
       "call_site_source": "client/go/kserve-api/grpc_model_ready.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -2340,7 +2340,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_live.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
       "call_site_source": "client/go/kserve-api/grpc_server_live.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -2348,7 +2348,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_live.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
+      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
       "call_site_source": "client/go/kserve-api/grpc_server_live.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -2372,14 +2372,6 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_live.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_server_live.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_server_live.go:81",
-      "callee": "parseFlags",
       "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
       "call_site_source": "client/go/kserve-api/grpc_server_live.go:82",
       "confidence": "UNCERTAIN"
@@ -2388,32 +2380,16 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_live.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
+      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
       "call_site_source": "client/go/kserve-api/grpc_server_live.go:82",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
-      "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
-      "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
+      "caller_source": "client/go/kserve-api/grpc_server_live.go:81",
       "callee": "parseFlags",
       "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
+      "call_site_source": "client/go/kserve-api/grpc_server_live.go:82",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2436,7 +2412,15 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
+      "callee_source": "client/go/kserve-api/grpc_server_live.go:60",
+      "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
       "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -2450,10 +2434,18 @@
     },
     {
       "caller": "main",
-      "caller_source": "client/go/kserve-api/grpc_server_ready.go:81",
+      "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
-      "call_site_source": "client/go/kserve-api/grpc_server_ready.go:82",
+      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
+      "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_server_metadata.go:81",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_model_ready.go:62",
+      "call_site_source": "client/go/kserve-api/grpc_server_metadata.go:82",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2468,7 +2460,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_ready.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
+      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:69",
       "call_site_source": "client/go/kserve-api/grpc_server_ready.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -2476,7 +2468,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_server_ready.go:81",
       "callee": "parseFlags",
-      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:69",
+      "callee_source": "client/go/kserve-api/grpc_model_metadata.go:62",
       "call_site_source": "client/go/kserve-api/grpc_server_ready.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -2493,6 +2485,14 @@
       "caller_source": "client/go/kserve-api/grpc_server_ready.go:81",
       "callee": "parseFlags",
       "callee_source": "client/go/kserve-api/grpc_server_ready.go:60",
+      "call_site_source": "client/go/kserve-api/grpc_server_ready.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "client/go/kserve-api/grpc_server_ready.go:81",
+      "callee": "parseFlags",
+      "callee_source": "client/go/kserve-api/grpc_server_metadata.go:60",
       "call_site_source": "client/go/kserve-api/grpc_server_ready.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -2516,7 +2516,7 @@
       "caller": "main",
       "caller_source": "demos/bert_question_answering/python/bert_question_answering.py:96",
       "callee": "predict",
-      "callee_source": "demos/benchmark/python/client_tfs.py:195",
+      "callee_source": "demos/benchmark/python/client_kfs.py:205",
       "call_site_source": "demos/bert_question_answering/python/bert_question_answering.py:183",
       "confidence": "UNCERTAIN"
     },
@@ -2524,7 +2524,7 @@
       "caller": "main",
       "caller_source": "demos/bert_question_answering/python/bert_question_answering.py:96",
       "callee": "predict",
-      "callee_source": "demos/benchmark/python/client_kfs.py:205",
+      "callee_source": "demos/benchmark/python/client_tfs.py:195",
       "call_site_source": "demos/bert_question_answering/python/bert_question_answering.py:183",
       "confidence": "UNCERTAIN"
     },
@@ -2548,7 +2548,7 @@
       "caller": "main",
       "caller_source": "demos/bert_question_answering/python/bert_question_answering.py:96",
       "callee": "get_score",
-      "callee_source": "demos/bert_question_answering/python/bert_question_answering.py:194",
+      "callee_source": "demos/bert_question_answering/python/utils.py:120",
       "call_site_source": "demos/bert_question_answering/python/bert_question_answering.py:198",
       "confidence": "UNCERTAIN"
     },
@@ -2556,7 +2556,7 @@
       "caller": "main",
       "caller_source": "demos/bert_question_answering/python/bert_question_answering.py:96",
       "callee": "get_score",
-      "callee_source": "demos/bert_question_answering/python/utils.py:120",
+      "callee_source": "demos/bert_question_answering/python/bert_question_answering.py:194",
       "call_site_source": "demos/bert_question_answering/python/bert_question_answering.py:198",
       "confidence": "UNCERTAIN"
     },
@@ -2604,7 +2604,7 @@
       "caller": "main",
       "caller_source": "windows_change_test_configs.py:32",
       "callee": "help",
-      "callee_source": "windows_set_ovms_version.py:26",
+      "callee_source": "windows_change_test_configs.py:18",
       "call_site_source": "windows_change_test_configs.py:33",
       "confidence": "UNCERTAIN"
     },
@@ -2612,7 +2612,7 @@
       "caller": "main",
       "caller_source": "windows_change_test_configs.py:32",
       "callee": "help",
-      "callee_source": "windows_change_test_configs.py:18",
+      "callee_source": "windows_set_ovms_version.py:26",
       "call_site_source": "windows_change_test_configs.py:33",
       "confidence": "UNCERTAIN"
     },
@@ -2620,7 +2620,7 @@
       "caller": "main",
       "caller_source": "windows_set_ovms_version.py:55",
       "callee": "help",
-      "callee_source": "windows_change_test_configs.py:18",
+      "callee_source": "windows_set_ovms_version.py:26",
       "call_site_source": "windows_set_ovms_version.py:58",
       "confidence": "UNCERTAIN"
     },
@@ -2628,7 +2628,7 @@
       "caller": "main",
       "caller_source": "windows_set_ovms_version.py:55",
       "callee": "help",
-      "callee_source": "windows_set_ovms_version.py:26",
+      "callee_source": "windows_change_test_configs.py:18",
       "call_site_source": "windows_set_ovms_version.py:58",
       "confidence": "UNCERTAIN"
     },
@@ -2684,7 +2684,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
       "callee": "readFloat32",
-      "callee_source": "client/go/kserve-api/grpc_infer_resnet.go:119",
+      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:111",
       "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:144",
       "confidence": "UNCERTAIN"
     },
@@ -2692,7 +2692,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_dummy.go:119",
       "callee": "readFloat32",
-      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:111",
+      "callee_source": "client/go/kserve-api/grpc_infer_resnet.go:119",
       "call_site_source": "client/go/kserve-api/grpc_infer_dummy.go:144",
       "confidence": "UNCERTAIN"
     },
@@ -2700,7 +2700,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
       "callee": "ModelInferRequest",
-      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:78",
+      "callee_source": "client/go/kserve-api/grpc_infer_resnet.go:82",
       "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:167",
       "confidence": "UNCERTAIN"
     },
@@ -2708,7 +2708,7 @@
       "caller": "main",
       "caller_source": "client/go/kserve-api/grpc_infer_resnet.go:127",
       "callee": "ModelInferRequest",
-      "callee_source": "client/go/kserve-api/grpc_infer_resnet.go:82",
+      "callee_source": "client/go/kserve-api/grpc_infer_dummy.go:78",
       "call_site_source": "client/go/kserve-api/grpc_infer_resnet.go:167",
       "confidence": "UNCERTAIN"
     },
@@ -3492,15 +3492,7 @@
       "caller": "async_request_speech2text",
       "caller_source": "demos/benchmark/v3/benchmark.py:163",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:58",
-      "call_site_source": "demos/benchmark/v3/benchmark.py:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "async_request_speech2text",
-      "caller_source": "demos/benchmark/v3/benchmark.py:163",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
       "call_site_source": "demos/benchmark/v3/benchmark.py:174",
       "confidence": "UNCERTAIN"
     },
@@ -3516,7 +3508,15 @@
       "caller": "async_request_speech2text",
       "caller_source": "demos/benchmark/v3/benchmark.py:163",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "call_site_source": "demos/benchmark/v3/benchmark.py:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "async_request_speech2text",
+      "caller_source": "demos/benchmark/v3/benchmark.py:163",
+      "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/benchmark/v3/benchmark.py:174",
       "confidence": "UNCERTAIN"
     },
@@ -3524,6 +3524,14 @@
       "caller": "export_text_generation_model",
       "caller_source": "demos/common/export_models/export_model.py:378",
       "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "call_site_source": "demos/common/export_models/export_model.py:478",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "export_text_generation_model",
+      "caller_source": "demos/common/export_models/export_model.py:378",
+      "callee": "write",
       "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/export_models/export_model.py:478",
       "confidence": "UNCERTAIN"
@@ -3540,14 +3548,6 @@
       "caller": "export_text_generation_model",
       "caller_source": "demos/common/export_models/export_model.py:378",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
-      "call_site_source": "demos/common/export_models/export_model.py:478",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "export_text_generation_model",
-      "caller_source": "demos/common/export_models/export_model.py:378",
-      "callee": "write",
       "callee_source": "demos/common/stream_client/stream_client.py:50",
       "call_site_source": "demos/common/export_models/export_model.py:478",
       "confidence": "UNCERTAIN"
@@ -3564,6 +3564,14 @@
       "caller": "export_embeddings_model_ov",
       "caller_source": "demos/common/export_models/export_model.py:482",
       "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "call_site_source": "demos/common/export_models/export_model.py:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "export_embeddings_model_ov",
+      "caller_source": "demos/common/export_models/export_model.py:482",
+      "callee": "write",
       "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/export_models/export_model.py:499",
       "confidence": "UNCERTAIN"
@@ -3577,22 +3585,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "export_embeddings_model_ov",
-      "caller_source": "demos/common/export_models/export_model.py:482",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
-      "call_site_source": "demos/common/export_models/export_model.py:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "export_text2speech_model",
-      "caller_source": "demos/common/export_models/export_model.py:503",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
-      "call_site_source": "demos/common/export_models/export_model.py:514",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "export_text2speech_model",
       "caller_source": "demos/common/export_models/export_model.py:503",
       "callee": "write",
@@ -3612,6 +3604,14 @@
       "caller": "export_text2speech_model",
       "caller_source": "demos/common/export_models/export_model.py:503",
       "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "call_site_source": "demos/common/export_models/export_model.py:514",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "export_text2speech_model",
+      "caller_source": "demos/common/export_models/export_model.py:503",
+      "callee": "write",
       "callee_source": "demos/common/stream_client/stream_client.py:74",
       "call_site_source": "demos/common/export_models/export_model.py:514",
       "confidence": "UNCERTAIN"
@@ -3620,7 +3620,7 @@
       "caller": "export_speech2text_model",
       "caller_source": "demos/common/export_models/export_model.py:518",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:58",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
       "call_site_source": "demos/common/export_models/export_model.py:529",
       "confidence": "UNCERTAIN"
     },
@@ -3636,7 +3636,7 @@
       "caller": "export_speech2text_model",
       "caller_source": "demos/common/export_models/export_model.py:518",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/export_models/export_model.py:529",
       "confidence": "UNCERTAIN"
     },
@@ -3652,7 +3652,7 @@
       "caller": "export_rerank_model_ov",
       "caller_source": "demos/common/export_models/export_model.py:533",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/export_models/export_model.py:546",
       "confidence": "UNCERTAIN"
     },
@@ -3660,7 +3660,7 @@
       "caller": "export_rerank_model_ov",
       "caller_source": "demos/common/export_models/export_model.py:533",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:58",
+      "callee_source": "demos/common/stream_client/stream_client.py:74",
       "call_site_source": "demos/common/export_models/export_model.py:546",
       "confidence": "UNCERTAIN"
     },
@@ -3676,7 +3676,7 @@
       "caller": "export_rerank_model_ov",
       "caller_source": "demos/common/export_models/export_model.py:533",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
       "call_site_source": "demos/common/export_models/export_model.py:546",
       "confidence": "UNCERTAIN"
     },
@@ -3684,15 +3684,7 @@
       "caller": "export_image_generation_model",
       "caller_source": "demos/common/export_models/export_model.py:551",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
-      "call_site_source": "demos/common/export_models/export_model.py:654",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "export_image_generation_model",
-      "caller_source": "demos/common/export_models/export_model.py:551",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/export_models/export_model.py:654",
       "confidence": "UNCERTAIN"
     },
@@ -3708,7 +3700,15 @@
       "caller": "export_image_generation_model",
       "caller_source": "demos/common/export_models/export_model.py:551",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:58",
+      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "call_site_source": "demos/common/export_models/export_model.py:654",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "export_image_generation_model",
+      "caller_source": "demos/common/export_models/export_model.py:551",
+      "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
       "call_site_source": "demos/common/export_models/export_model.py:654",
       "confidence": "UNCERTAIN"
     },
@@ -3716,7 +3716,7 @@
       "caller": "display",
       "caller_source": "demos/common/stream_client/stream_client.py:156",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:58",
+      "callee_source": "demos/common/stream_client/stream_client.py:74",
       "call_site_source": "demos/common/stream_client/stream_client.py:165",
       "confidence": "UNCERTAIN"
     },
@@ -3732,7 +3732,7 @@
       "caller": "display",
       "caller_source": "demos/common/stream_client/stream_client.py:156",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/stream_client/stream_client.py:165",
       "confidence": "UNCERTAIN"
     },
@@ -3740,7 +3740,7 @@
       "caller": "display",
       "caller_source": "demos/common/stream_client/stream_client.py:156",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
       "call_site_source": "demos/common/stream_client/stream_client.py:165",
       "confidence": "UNCERTAIN"
     },
@@ -3756,7 +3756,7 @@
       "caller": "write",
       "caller_source": "demos/common/stream_client/stream_client.py:58",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:58",
+      "callee_source": "demos/common/stream_client/stream_client.py:74",
       "call_site_source": "demos/common/stream_client/stream_client.py:59",
       "confidence": "UNCERTAIN"
     },
@@ -3772,7 +3772,7 @@
       "caller": "write",
       "caller_source": "demos/common/stream_client/stream_client.py:58",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "callee_source": "demos/common/stream_client/stream_client.py:58",
       "call_site_source": "demos/common/stream_client/stream_client.py:59",
       "confidence": "UNCERTAIN"
     },
@@ -3812,15 +3812,7 @@
       "caller": "download_file",
       "caller_source": "demos/continuous_batching/long_context/custom_dataset.py:26",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:74",
-      "call_site_source": "demos/continuous_batching/long_context/custom_dataset.py:32",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "download_file",
-      "caller_source": "demos/continuous_batching/long_context/custom_dataset.py:26",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
       "call_site_source": "demos/continuous_batching/long_context/custom_dataset.py:32",
       "confidence": "UNCERTAIN"
     },
@@ -3836,24 +3828,16 @@
       "caller": "download_file",
       "caller_source": "demos/continuous_batching/long_context/custom_dataset.py:26",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
       "call_site_source": "demos/continuous_batching/long_context/custom_dataset.py:32",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "replace_string_in_file",
-      "caller_source": "windows_change_test_configs.py:24",
+      "caller": "download_file",
+      "caller_source": "demos/continuous_batching/long_context/custom_dataset.py:26",
       "callee": "write",
       "callee_source": "demos/common/stream_client/stream_client.py:74",
-      "call_site_source": "windows_change_test_configs.py:29",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "replace_string_in_file",
-      "caller_source": "windows_change_test_configs.py:24",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
-      "call_site_source": "windows_change_test_configs.py:29",
+      "call_site_source": "demos/continuous_batching/long_context/custom_dataset.py:32",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3868,7 +3852,23 @@
       "caller": "replace_string_in_file",
       "caller_source": "windows_change_test_configs.py:24",
       "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "call_site_source": "windows_change_test_configs.py:29",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "replace_string_in_file",
+      "caller_source": "windows_change_test_configs.py:24",
+      "callee": "write",
       "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "call_site_source": "windows_change_test_configs.py:29",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "replace_string_in_file",
+      "caller_source": "windows_change_test_configs.py:24",
+      "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
       "call_site_source": "windows_change_test_configs.py:29",
       "confidence": "UNCERTAIN"
     },
@@ -3876,15 +3876,7 @@
       "caller": "replace_in_file",
       "caller_source": "windows_set_ovms_version.py:37",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:66",
-      "call_site_source": "windows_set_ovms_version.py:43",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "replace_in_file",
-      "caller_source": "windows_set_ovms_version.py:37",
-      "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:74",
+      "callee_source": "demos/common/stream_client/stream_client.py:50",
       "call_site_source": "windows_set_ovms_version.py:43",
       "confidence": "UNCERTAIN"
     },
@@ -3900,7 +3892,15 @@
       "caller": "replace_in_file",
       "caller_source": "windows_set_ovms_version.py:37",
       "callee": "write",
-      "callee_source": "demos/common/stream_client/stream_client.py:50",
+      "callee_source": "demos/common/stream_client/stream_client.py:66",
+      "call_site_source": "windows_set_ovms_version.py:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "replace_in_file",
+      "caller_source": "windows_set_ovms_version.py:37",
+      "callee": "write",
+      "callee_source": "demos/common/stream_client/stream_client.py:74",
       "call_site_source": "windows_set_ovms_version.py:43",
       "confidence": "UNCERTAIN"
     },
@@ -3924,7 +3924,7 @@
       "caller": "get_paragraphs",
       "caller_source": "demos/bert_question_answering/python/html_reader.py:44",
       "callee": "decode",
-      "callee_source": "demos/horizontal_text_detection/python/horizontal_text_detection.py:52",
+      "callee_source": "demos/horizontal_text_detection/python/client.py:42",
       "call_site_source": "demos/bert_question_answering/python/html_reader.py:59",
       "confidence": "UNCERTAIN"
     },
@@ -3932,7 +3932,7 @@
       "caller": "get_paragraphs",
       "caller_source": "demos/bert_question_answering/python/html_reader.py:44",
       "callee": "decode",
-      "callee_source": "demos/horizontal_text_detection/python/client.py:42",
+      "callee_source": "demos/horizontal_text_detection/python/horizontal_text_detection.py:52",
       "call_site_source": "demos/bert_question_answering/python/html_reader.py:59",
       "confidence": "UNCERTAIN"
     },
@@ -4244,14 +4244,6 @@
       "caller": "run_workload",
       "caller_source": "demos/benchmark/python/client.py:530",
       "callee": "predict",
-      "callee_source": "demos/benchmark/python/client_tfs.py:195",
-      "call_site_source": "demos/benchmark/python/client.py:568",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "run_workload",
-      "caller_source": "demos/benchmark/python/client.py:530",
-      "callee": "predict",
       "callee_source": "demos/benchmark/python/client_kfs.py:205",
       "call_site_source": "demos/benchmark/python/client.py:568",
       "confidence": "UNCERTAIN"
@@ -4261,6 +4253,14 @@
       "caller_source": "demos/benchmark/python/client.py:530",
       "callee": "predict",
       "callee_source": "demos/benchmark/python/client.py:123",
+      "call_site_source": "demos/benchmark/python/client.py:568",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "run_workload",
+      "caller_source": "demos/benchmark/python/client.py:530",
+      "callee": "predict",
+      "callee_source": "demos/benchmark/python/client_tfs.py:195",
       "call_site_source": "demos/benchmark/python/client.py:568",
       "confidence": "UNCERTAIN"
     },
@@ -4332,7 +4332,23 @@
       "caller": "callback",
       "caller_source": "demos/common/stream_client/stream_client.py:142",
       "callee": "release",
+      "callee_source": "demos/common/stream_client/stream_client.py:68",
+      "call_site_source": "demos/common/stream_client/stream_client.py:143",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "callback",
+      "caller_source": "demos/common/stream_client/stream_client.py:142",
+      "callee": "release",
       "callee_source": "demos/common/stream_client/stream_client.py:52",
+      "call_site_source": "demos/common/stream_client/stream_client.py:143",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "callback",
+      "caller_source": "demos/common/stream_client/stream_client.py:142",
+      "callee": "release",
+      "callee_source": "demos/common/stream_client/stream_client.py:60",
       "call_site_source": "demos/common/stream_client/stream_client.py:143",
       "confidence": "UNCERTAIN"
     },
@@ -4345,19 +4361,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "callback",
-      "caller_source": "demos/common/stream_client/stream_client.py:142",
-      "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:68",
-      "call_site_source": "demos/common/stream_client/stream_client.py:143",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "callback",
-      "caller_source": "demos/common/stream_client/stream_client.py:142",
-      "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:60",
-      "call_site_source": "demos/common/stream_client/stream_client.py:143",
+      "caller": "start",
+      "caller_source": "demos/common/stream_client/stream_client.py:176",
+      "callee": "dtype",
+      "callee_source": "demos/common/stream_client/stream_client.py:42",
+      "call_site_source": "demos/common/stream_client/stream_client.py:213",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4380,8 +4388,24 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:42",
-      "call_site_source": "demos/common/stream_client/stream_client.py:213",
+      "callee_source": "demos/common/stream_client/stream_client.py:36",
+      "call_site_source": "demos/common/stream_client/stream_client.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "start",
+      "caller_source": "demos/common/stream_client/stream_client.py:176",
+      "callee": "dtype",
+      "callee_source": "demos/common/stream_client/stream_client.py:36",
+      "call_site_source": "demos/common/stream_client/stream_client.py:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "start",
+      "caller_source": "demos/common/stream_client/stream_client.py:176",
+      "callee": "dtype",
+      "callee_source": "demos/common/stream_client/stream_client.py:30",
+      "call_site_source": "demos/common/stream_client/stream_client.py:230",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4404,14 +4428,6 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:30",
-      "call_site_source": "demos/common/stream_client/stream_client.py:230",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "start",
-      "caller_source": "demos/common/stream_client/stream_client.py:176",
-      "callee": "dtype",
       "callee_source": "demos/common/stream_client/stream_client.py:42",
       "call_site_source": "demos/common/stream_client/stream_client.py:230",
       "confidence": "UNCERTAIN"
@@ -4419,17 +4435,9 @@
     {
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
-      "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:36",
-      "call_site_source": "demos/common/stream_client/stream_client.py:230",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "start",
-      "caller_source": "demos/common/stream_client/stream_client.py:176",
-      "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:36",
-      "call_site_source": "demos/common/stream_client/stream_client.py:230",
+      "callee": "release",
+      "callee_source": "demos/common/stream_client/stream_client.py:60",
+      "call_site_source": "demos/common/stream_client/stream_client.py:252",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4437,6 +4445,14 @@
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "release",
       "callee_source": "demos/common/stream_client/stream_client.py:77",
+      "call_site_source": "demos/common/stream_client/stream_client.py:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "start",
+      "caller_source": "demos/common/stream_client/stream_client.py:176",
+      "callee": "release",
+      "callee_source": "demos/common/stream_client/stream_client.py:52",
       "call_site_source": "demos/common/stream_client/stream_client.py:252",
       "confidence": "UNCERTAIN"
     },
@@ -4452,16 +4468,8 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:52",
-      "call_site_source": "demos/common/stream_client/stream_client.py:252",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "start",
-      "caller_source": "demos/common/stream_client/stream_client.py:176",
-      "callee": "release",
       "callee_source": "demos/common/stream_client/stream_client.py:60",
-      "call_site_source": "demos/common/stream_client/stream_client.py:252",
+      "call_site_source": "demos/common/stream_client/stream_client.py:254",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4476,7 +4484,7 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:60",
+      "callee_source": "demos/common/stream_client/stream_client.py:77",
       "call_site_source": "demos/common/stream_client/stream_client.py:254",
       "confidence": "UNCERTAIN"
     },
@@ -4489,26 +4497,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "start",
-      "caller_source": "demos/common/stream_client/stream_client.py:176",
-      "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:77",
-      "call_site_source": "demos/common/stream_client/stream_client.py:254",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "release",
       "caller_source": "demos/common/stream_client/stream_client.py:68",
       "callee": "release",
       "callee_source": "demos/common/stream_client/stream_client.py:52",
-      "call_site_source": "demos/common/stream_client/stream_client.py:69",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "release",
-      "caller_source": "demos/common/stream_client/stream_client.py:68",
-      "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:77",
       "call_site_source": "demos/common/stream_client/stream_client.py:69",
       "confidence": "UNCERTAIN"
     },
@@ -4529,11 +4521,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "thread_function",
-      "caller_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:115",
+      "caller": "release",
+      "caller_source": "demos/common/stream_client/stream_client.py:68",
       "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:68",
-      "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:190",
+      "callee_source": "demos/common/stream_client/stream_client.py:77",
+      "call_site_source": "demos/common/stream_client/stream_client.py:69",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4548,7 +4540,7 @@
       "caller": "thread_function",
       "caller_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:115",
       "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:52",
+      "callee_source": "demos/common/stream_client/stream_client.py:68",
       "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:190",
       "confidence": "UNCERTAIN"
     },
@@ -4564,16 +4556,8 @@
       "caller": "thread_function",
       "caller_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:115",
       "callee": "release",
-      "callee_source": "demos/common/stream_client/stream_client.py:60",
-      "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:208",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "thread_function",
-      "caller_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:115",
-      "callee": "release",
       "callee_source": "demos/common/stream_client/stream_client.py:52",
-      "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:208",
+      "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:190",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4593,11 +4577,19 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "execute",
-      "caller_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:30",
-      "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:36",
-      "call_site_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:40",
+      "caller": "thread_function",
+      "caller_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:115",
+      "callee": "release",
+      "callee_source": "demos/common/stream_client/stream_client.py:60",
+      "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:208",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "thread_function",
+      "caller_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:115",
+      "callee": "release",
+      "callee_source": "demos/common/stream_client/stream_client.py:52",
+      "call_site_source": "demos/person_vehicle_bike_detection/python/person_vehicle_bike_detection.py:208",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4620,7 +4612,15 @@
       "caller": "execute",
       "caller_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:30",
       "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:42",
+      "callee_source": "demos/common/stream_client/stream_client.py:36",
+      "call_site_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "execute",
+      "caller_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:30",
+      "callee": "dtype",
+      "callee_source": "demos/common/stream_client/stream_client.py:30",
       "call_site_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:41",
       "confidence": "UNCERTAIN"
     },
@@ -4636,7 +4636,7 @@
       "caller": "execute",
       "caller_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:30",
       "callee": "dtype",
-      "callee_source": "demos/common/stream_client/stream_client.py:30",
+      "callee_source": "demos/common/stream_client/stream_client.py:42",
       "call_site_source": "demos/python_demos/clip_image_classification/servable/preprocess.py:41",
       "confidence": "UNCERTAIN"
     },
@@ -5124,7 +5124,7 @@
       "caller": "exec_single_client",
       "caller_source": "demos/benchmark/python/main.py:124",
       "callee": "get_model_metadata",
-      "callee_source": "demos/benchmark/python/client.py:115",
+      "callee_source": "demos/benchmark/python/client_tfs.py:89",
       "call_site_source": "demos/benchmark/python/main.py:137",
       "confidence": "UNCERTAIN"
     },
@@ -5140,7 +5140,7 @@
       "caller": "exec_single_client",
       "caller_source": "demos/benchmark/python/main.py:124",
       "callee": "get_model_metadata",
-      "callee_source": "demos/benchmark/python/client_tfs.py:89",
+      "callee_source": "demos/benchmark/python/client.py:115",
       "call_site_source": "demos/benchmark/python/main.py:137",
       "confidence": "UNCERTAIN"
     },
@@ -5260,6 +5260,14 @@
       "caller": "exec_single_client",
       "caller_source": "demos/benchmark/python/main.py:124",
       "callee": "show_server_status",
+      "callee_source": "demos/benchmark/python/client_tfs.py:65",
+      "call_site_source": "demos/benchmark/python/main.py:133",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "exec_single_client",
+      "caller_source": "demos/benchmark/python/main.py:124",
+      "callee": "show_server_status",
       "callee_source": "demos/benchmark/python/client.py:111",
       "call_site_source": "demos/benchmark/python/main.py:133",
       "confidence": "UNCERTAIN"
@@ -5277,14 +5285,6 @@
       "caller_source": "demos/benchmark/python/main.py:124",
       "callee": "show_server_status",
       "callee_source": "demos/benchmark/python/client_tfs.py:65",
-      "call_site_source": "demos/benchmark/python/main.py:133",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "exec_single_client",
-      "caller_source": "demos/benchmark/python/main.py:124",
-      "callee": "show_server_status",
-      "callee_source": "demos/benchmark/python/client.py:111",
       "call_site_source": "demos/benchmark/python/main.py:142",
       "confidence": "UNCERTAIN"
     },
@@ -5292,7 +5292,7 @@
       "caller": "exec_single_client",
       "caller_source": "demos/benchmark/python/main.py:124",
       "callee": "show_server_status",
-      "callee_source": "demos/benchmark/python/client_tfs.py:65",
+      "callee_source": "demos/benchmark/python/client.py:111",
       "call_site_source": "demos/benchmark/python/main.py:142",
       "confidence": "UNCERTAIN"
     },
@@ -5452,7 +5452,7 @@
       "caller": "__init__",
       "caller_source": "demos/benchmark/python/client.py:176",
       "callee": "get_stub",
-      "callee_source": "demos/benchmark/python/client.py:107",
+      "callee_source": "demos/benchmark/python/client_kfs.py:56",
       "call_site_source": "demos/benchmark/python/client.py:204",
       "confidence": "UNCERTAIN"
     },
@@ -5460,7 +5460,7 @@
       "caller": "__init__",
       "caller_source": "demos/benchmark/python/client.py:176",
       "callee": "get_stub",
-      "callee_source": "demos/benchmark/python/client_kfs.py:56",
+      "callee_source": "demos/benchmark/python/client.py:107",
       "call_site_source": "demos/benchmark/python/client.py:204",
       "confidence": "UNCERTAIN"
     },
@@ -5532,7 +5532,7 @@
       "caller": "prepare_data",
       "caller_source": "demos/benchmark/python/client.py:258",
       "callee": "prepare_batch_requests",
-      "callee_source": "demos/benchmark/python/client_kfs.py:135",
+      "callee_source": "demos/benchmark/python/client_tfs.py:159",
       "call_site_source": "demos/benchmark/python/client.py:301",
       "confidence": "UNCERTAIN"
     },
@@ -5540,7 +5540,7 @@
       "caller": "prepare_data",
       "caller_source": "demos/benchmark/python/client.py:258",
       "callee": "prepare_batch_requests",
-      "callee_source": "demos/benchmark/python/client_tfs.py:159",
+      "callee_source": "demos/benchmark/python/client_kfs.py:135",
       "call_site_source": "demos/benchmark/python/client.py:301",
       "confidence": "UNCERTAIN"
     },
@@ -5644,7 +5644,23 @@
       "caller": "__init__",
       "caller_source": "demos/benchmark/python/metrics.py:22",
       "callee": "__init__",
+      "callee_source": "demos/benchmark/python/db_exporter.py:27",
+      "call_site_source": "demos/benchmark/python/metrics.py:24",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "demos/benchmark/python/metrics.py:22",
+      "callee": "__init__",
       "callee_source": "demos/benchmark/python/metrics.py:189",
+      "call_site_source": "demos/benchmark/python/metrics.py:24",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "demos/benchmark/python/metrics.py:22",
+      "callee": "__init__",
+      "callee_source": "demos/benchmark/python/metrics.py:22",
       "call_site_source": "demos/benchmark/python/metrics.py:24",
       "confidence": "UNCERTAIN"
     },
@@ -5660,23 +5676,7 @@
       "caller": "__init__",
       "caller_source": "demos/benchmark/python/metrics.py:22",
       "callee": "__init__",
-      "callee_source": "demos/benchmark/python/db_exporter.py:27",
-      "call_site_source": "demos/benchmark/python/metrics.py:24",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__init__",
-      "caller_source": "demos/benchmark/python/metrics.py:22",
-      "callee": "__init__",
       "callee_source": "demos/benchmark/python/main.py:186",
-      "call_site_source": "demos/benchmark/python/metrics.py:24",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "__init__",
-      "caller_source": "demos/benchmark/python/metrics.py:22",
-      "callee": "__init__",
-      "callee_source": "demos/benchmark/python/metrics.py:22",
       "call_site_source": "demos/benchmark/python/metrics.py:24",
       "confidence": "UNCERTAIN"
     },
@@ -5732,7 +5732,7 @@
       "caller": "append_tokens",
       "caller_source": "demos/bert_question_answering/python/bert_question_answering.py:42",
       "callee": "append_offset",
-      "callee_source": "demos/bert_question_answering/python/bert_question_answering.py:46",
+      "callee_source": "demos/bert_question_answering/python/tokens_bert.py:27",
       "call_site_source": "demos/bert_question_answering/python/bert_question_answering.py:43",
       "confidence": "UNCERTAIN"
     },
@@ -5740,7 +5740,7 @@
       "caller": "append_tokens",
       "caller_source": "demos/bert_question_answering/python/bert_question_answering.py:42",
       "callee": "append_offset",
-      "callee_source": "demos/bert_question_answering/python/tokens_bert.py:27",
+      "callee_source": "demos/bert_question_answering/python/bert_question_answering.py:46",
       "call_site_source": "demos/bert_question_answering/python/bert_question_answering.py:43",
       "confidence": "UNCERTAIN"
     },
@@ -5748,7 +5748,7 @@
       "caller": "__init__",
       "caller_source": "demos/bert_question_answering/python/html_reader.py:24",
       "callee": "__init__",
-      "callee_source": "demos/bert_question_answering/python/bert_question_answering.py:30",
+      "callee_source": "demos/bert_question_answering/python/tokens_bert.py:22",
       "call_site_source": "demos/bert_question_answering/python/html_reader.py:25",
       "confidence": "UNCERTAIN"
     },
@@ -5764,7 +5764,7 @@
       "caller": "__init__",
       "caller_source": "demos/bert_question_answering/python/html_reader.py:24",
       "callee": "__init__",
-      "callee_source": "demos/bert_question_answering/python/tokens_bert.py:22",
+      "callee_source": "demos/bert_question_answering/python/bert_question_answering.py:30",
       "call_site_source": "demos/bert_question_answering/python/html_reader.py:25",
       "confidence": "UNCERTAIN"
     },
@@ -5804,14 +5804,6 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "init",
-      "callee_source": "demos/common/stream_client/stream_client.py:64",
-      "call_site_source": "demos/common/stream_client/stream_client.py:218",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "start",
-      "caller_source": "demos/common/stream_client/stream_client.py:176",
-      "callee": "init",
       "callee_source": "demos/common/stream_client/stream_client.py:72",
       "call_site_source": "demos/common/stream_client/stream_client.py:218",
       "confidence": "UNCERTAIN"
@@ -5820,7 +5812,7 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "init",
-      "callee_source": "demos/common/stream_client/stream_client.py:56",
+      "callee_source": "demos/common/stream_client/stream_client.py:64",
       "call_site_source": "demos/common/stream_client/stream_client.py:218",
       "confidence": "UNCERTAIN"
     },
@@ -5835,8 +5827,16 @@
     {
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
+      "callee": "init",
+      "callee_source": "demos/common/stream_client/stream_client.py:56",
+      "call_site_source": "demos/common/stream_client/stream_client.py:218",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "start",
+      "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "string",
-      "callee_source": "demos/common/stream_client/stream_client.py:38",
+      "callee_source": "demos/common/stream_client/stream_client.py:32",
       "call_site_source": "demos/common/stream_client/stream_client.py:231",
       "confidence": "UNCERTAIN"
     },
@@ -5852,7 +5852,7 @@
       "caller": "start",
       "caller_source": "demos/common/stream_client/stream_client.py:176",
       "callee": "string",
-      "callee_source": "demos/common/stream_client/stream_client.py:32",
+      "callee_source": "demos/common/stream_client/stream_client.py:38",
       "call_site_source": "demos/common/stream_client/stream_client.py:231",
       "confidence": "UNCERTAIN"
     },

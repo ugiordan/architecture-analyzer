@@ -3,7 +3,7 @@
   "component": "spark-operator",
   "repo": "red-hat-data-services/spark-operator",
   "commit_sha": "ac9502083f1e85364afe4913cc8fda08a9533f9c",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "spark-operator is a Kubernetes component. managing 3 CRD(s): ScheduledSparkApplication, SparkApplication, SparkConnect. deploying 4 workload(s) (spark-operator-webhook, controller-manager, spark-operator-controller, spark-operator-module-controller-manager) with 4 container(s). watching 15 resource type(s). exposing 3 service(s) on ports: 443, 8080. with 10 webhook(s) (3 validating, 4 mutating). protected by 4 network policy/policies. with 1 PodDisruptionBudget(s). runtime dependencies: kubernetes. 2 Python package dependencies (2 required). defining 13 API spec type(s) across 37 struct(s) with 232 total fields. with 410 operator config constants (7 image references). following 1 reconciliation steps across 1 controller(s). reporting 4 status condition types. with 1 ingress route(s). Python k8s client with 14 API call(s). integrates with Prometheus, management relationship via labels/annotations. kustomize overlays: config/certmanager, config/crd, config/default, config/manager, config/overlays/driver-pdb, config/overlays/odh, config/overlays/rhoai, config/overlays/secure-metrics, config/pdb, config/prometheus, config/public, config/rbac, config/spark-rbac, config/webhook.",
   "repository_description": "The Kubernetes Operator for Apache Spark aims to make specifying and running Spark applications as easy and idiomatic as running other workloads on Kubernetes. It uses Kubernetes custom resources for specifying, running, and surfacing status of Spark applications.",
   "description_source": "README.md:13",
@@ -3717,24 +3717,16 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/api/interface.go:41",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:52",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/clientset.go:125",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:52",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/api/interface.go:41",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:52",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/api/interface.go:41",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:58",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3749,6 +3741,14 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
+      "callee_source": "pkg/client/informers/externalversions/api/interface.go:41",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:58",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "New",
       "callee_source": "pkg/client/informers/externalversions/api/v1beta2/interface.go:39",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:46",
       "confidence": "UNCERTAIN"
@@ -3765,6 +3765,14 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/typed/api/v1beta2/api_client.go:83",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/typed/api/v1alpha1/api_client.go:78",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:46",
       "confidence": "UNCERTAIN"
@@ -3773,15 +3781,7 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/typed/api/v1beta2/api_client.go:83",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/typed/api/v1beta2/api_client.go:83",
+      "callee_source": "pkg/client/clientset/versioned/typed/api/v1alpha1/api_client.go:78",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -3789,7 +3789,7 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
-      "callee_source": "pkg/client/informers/externalversions/api/v1beta2/interface.go:39",
+      "callee_source": "pkg/client/clientset/versioned/typed/api/v1beta2/api_client.go:83",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -3805,8 +3805,16 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/typed/api/v1alpha1/api_client.go:78",
+      "callee_source": "pkg/client/informers/externalversions/api/v1beta2/interface.go:39",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:52",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "New",
+      "callee_source": "pkg/client/clientset/versioned/typed/api/v1alpha1/api_client.go:78",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:58",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3830,14 +3838,6 @@
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "New",
       "callee_source": "pkg/client/clientset/versioned/typed/api/v1beta2/api_client.go:83",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:58",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "New",
-      "callee_source": "pkg/client/clientset/versioned/typed/api/v1alpha1/api_client.go:78",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:58",
       "confidence": "UNCERTAIN"
     },
@@ -3861,31 +3861,7 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "SetupWithManager",
-      "callee_source": "spark-operator-module/pkg/sparkoperatormodule/setup.go:20",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/validatingwebhookconfiguration/controller.go:59",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/sparkconnect/reconciler.go:117",
-      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
-      "callee": "SetupWithManager",
-      "callee_source": "internal/controller/sparkapplication/controller.go:270",
+      "callee_source": "internal/controller/mutatingwebhookconfiguration/controller.go:59",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -3901,7 +3877,31 @@
       "caller": "main",
       "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
       "callee": "SetupWithManager",
-      "callee_source": "internal/controller/mutatingwebhookconfiguration/controller.go:59",
+      "callee_source": "internal/controller/sparkapplication/controller.go:270",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/controller/sparkconnect/reconciler.go:117",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "SetupWithManager",
+      "callee_source": "internal/controller/validatingwebhookconfiguration/controller.go:59",
+      "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "spark-operator-module/cmd/spark-operator-module/main.go:33",
+      "callee": "SetupWithManager",
+      "callee_source": "spark-operator-module/pkg/sparkoperatormodule/setup.go:20",
       "call_site_source": "spark-operator-module/cmd/spark-operator-module/main.go:79",
       "confidence": "UNCERTAIN"
     },
@@ -3925,7 +3925,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_prometheus_spec.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_list.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -3933,7 +3933,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_rule.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_column_definition.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -3941,87 +3941,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_update_options.py:71",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_watch_event.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_runtime_type_meta.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_runtime_unknown.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_util_intstr_int_or_string.py:142",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_dependencies.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_dynamic_allocation.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_executor_spec.py:76",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_gpu_spec.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_server_spec.py:77",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_connect.py:74",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_connect_server_status.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -4037,7 +3957,551 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_delete_options.py:75",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_connect.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_connect_status.py:75",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_pod_spec.py:75",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_application_state.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_batch_scheduler_configuration.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_dependencies.py:73",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_driver_info.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_driver_ingress_configuration.py:85",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_driver_spec.py:123",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_dynamic_allocation.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_executor_spec.py:121",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_app_armor_profile.py:75",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_monitoring_spec.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_name_key.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_name_path.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_port.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_prometheus_spec.py:71",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_restart_policy.py:71",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application_spec.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application_status.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_secret_info.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application_spec.py:110",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application_status.py:78",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_pod_spec.py:112",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_ui_configuration.py:84",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_server_spec.py:77",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_runtime_type_meta.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_watch_event.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_update_options.py:71",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_type_meta.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_gpu_spec.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_executor_spec.py:76",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_dynamic_allocation.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_dependencies.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_timestamp.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_row_condition.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_row.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_options.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_util_intstr_int_or_string.py:142",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_details.py:73",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_cause.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status.py:76",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_server_address_by_client_cidr.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_root_paths.py:67",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_preconditions.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_patch_options.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_partial_object_metadata_list.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_partial_object_metadata.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_owner_reference.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_object_meta.py:84",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_managed_fields_entry.py:74",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list_options.py:78",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list_meta.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list.py:71",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_label_selector_requirement.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_label_selector.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_internal_event.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_resource.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_kind.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_for_discovery.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_resource.py:68",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_kind.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -4046,6 +4510,30 @@
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_get_options.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_field_selector_requirement.py:69",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_delete_options.py:75",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_create_options.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -4301,7 +4789,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_field_selector_requirement.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_rule.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -4782,182 +5270,6 @@
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_scale_io_volume_source.py:77",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_timestamp.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_row_condition.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_row.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_options.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table_column_definition.py:71",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_table.py:74",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_details.py:73",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_cause.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status.py:76",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_kind.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_server_address_by_client_cidr.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_root_paths.py:67",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_preconditions.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_patch_options.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_partial_object_metadata_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_partial_object_metadata.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_owner_reference.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_object_meta.py:84",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_managed_fields_entry.py:74",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list_options.py:78",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list_meta.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -6213,6 +6525,14 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_runtime_unknown.py:70",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "to_json",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_restart_rule_on_exit_codes.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
@@ -6293,7 +6613,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_list.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_azure_disk_volume_source.py:92",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -6429,14 +6749,6 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_azure_disk_volume_source.py:92",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_aws_elastic_block_store_volume_source.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
@@ -6461,23 +6773,7 @@
       "caller": "to_json",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_app_armor_profile.py:75",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_connect_server_status.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_gpu_spec.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
       "confidence": "UNCERTAIN"
     },
@@ -6490,306 +6786,58 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "caller": "to_dict",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_connect_status.py:75",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_service_port.py:83",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "caller": "to_dict",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_pod_spec.py:75",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map.py:73",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_application_state.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_batch_scheduler_configuration.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_dependencies.py:73",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_driver_info.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_driver_ingress_configuration.py:85",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_driver_spec.py:123",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_dynamic_allocation.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_executor_spec.py:121",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_gpu_spec.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_monitoring_spec.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_name_key.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_name_path.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_port.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_label_selector_requirement.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_restart_policy.py:71",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application.py:74",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application_spec.py:74",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_scheduled_spark_application_status.py:74",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_secret_info.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application.py:74",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application_spec.py:110",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_application_status.py:78",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "caller": "to_dict",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_pod_spec.py:112",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "caller": "to_dict",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
       "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1beta2_spark_ui_configuration.py:84",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_label_selector.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_internal_event.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_resource.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_for_discovery.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_resource.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_kind.py:69",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "caller": "to_dict",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_create_options.py:71",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/spark_v1alpha1_spark_pod_spec.py:75",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "to_json",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:62",
+      "caller": "to_dict",
+      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_type_meta.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:65",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
+      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_node_condition.py:73",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_app_armor_profile.py:75",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6797,7 +6845,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_source.py:126",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_attached_volume.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6805,7 +6853,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_service_spec.py:149",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_avoid_pods.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6813,7 +6861,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_service_status.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_aws_elastic_block_store_volume_source.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6821,7 +6869,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_session_affinity_config.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_azure_disk_volume_source.py:92",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6829,7 +6877,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_sleep_action.py:67",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_azure_file_persistent_volume_source.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6837,7 +6885,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_storage_os_persistent_volume_source.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_azure_file_volume_source.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6845,7 +6893,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_storage_os_volume_source.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_binding.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6853,7 +6901,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_sysctl.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_capabilities.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6861,7 +6909,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_taint.py:78",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_ceph_fs_persistent_volume_source.py:73",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6869,7 +6917,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_tcp_socket_action.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_ceph_fs_volume_source.py:73",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6877,7 +6925,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_toleration.py:91",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_cinder_persistent_volume_source.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6885,7 +6933,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_topology_selector_label_requirement.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_cinder_volume_source.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6893,7 +6941,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_topology_selector_term.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_client_ip_config.py:67",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6901,7 +6949,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_topology_spread_constraint.py:102",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_cluster_trust_bundle_projection.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6909,7 +6957,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_typed_local_object_reference.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_component_condition.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6917,7 +6965,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_typed_object_reference.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_component_status.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6925,7 +6973,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume.py:127",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_component_status_list.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6933,7 +6981,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_device.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_file_key_selector.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6941,7 +6989,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_mount.py:83",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_env_source.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6949,7 +6997,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_mount_status.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_key_selector.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6957,7 +7005,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_node_affinity.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_list.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6965,7 +7013,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_projection.py:78",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_node_config_source.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6973,7 +7021,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_volume_resource_requirements.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_projection.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6981,7 +7029,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_api_resource.py:76",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_config_map_volume_source.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6989,7 +7037,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_vsphere_virtual_disk_volume_source.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container.py:122",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -6997,7 +7045,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_weighted_pod_affinity_term.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_extended_resource_request.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7005,7 +7053,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_windows_security_context_options.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_image.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7013,7 +7061,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_workload_reference.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_port.py:81",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7021,7 +7069,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_http_ingress_path.py:77",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_resize_policy.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7029,7 +7077,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_http_ingress_rule_value.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_restart_rule.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7037,7 +7085,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress.py:74",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_restart_rule_on_exit_codes.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7045,7 +7093,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_backend.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_state.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7053,7 +7101,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_class.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_state_running.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7061,7 +7109,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_class_list.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_status_details.py:73",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7069,7 +7117,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_class_parameters_reference.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_state_waiting.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7077,7 +7125,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_class_spec.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_status.py:97",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7085,7 +7133,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_list.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_container_user.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7093,7 +7141,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_load_balancer_ingress.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_csi_persistent_volume_source.py:77",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7101,7 +7149,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_load_balancer_status.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_csi_volume_source.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7109,7 +7157,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_serialized_reference.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_daemon_endpoint.py:67",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7117,7 +7165,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_rule.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_downward_api_projection.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7125,7 +7173,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_rule_value.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_downward_api_volume_file.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7133,7 +7181,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_service_backend.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_downward_api_volume_source.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7141,7 +7189,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_spec.py:73",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_empty_dir_volume_source.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7149,7 +7197,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_status.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_endpoint_address.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7157,7 +7205,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ingress_tls.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_endpoint_port.py:80",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7165,7 +7213,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ip_address.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_endpoint_subset.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7173,7 +7221,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ip_address_list.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_endpoints.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7181,7 +7229,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ip_address_spec.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_endpoints_list.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7189,7 +7237,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_ip_block.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_env_from_source.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7197,7 +7245,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_env_var.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7205,7 +7253,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy_egress_rule.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_env_var_source.py:76",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7213,7 +7261,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy_ingress_rule.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_ephemeral_container.py:123",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7221,7 +7269,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy_list.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_ephemeral_container_common.py:122",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7229,7 +7277,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy_peer.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_ephemeral_volume_source.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7237,7 +7285,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy_port.py:80",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_event.py:88",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7245,7 +7293,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_network_policy_spec.py:84",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_event_list.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7253,7 +7301,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_parent_reference.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_event_series.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7261,7 +7309,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_service_backend_port.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_event_source.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7269,7 +7317,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_service_cidr.py:74",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_exec_action.py:67",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7277,7 +7325,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_service_cidr_list.py:72",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_fc_volume_source.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7285,7 +7333,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_service_cidr_spec.py:67",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_replication_controller.py:74",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7293,7 +7341,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_networking_v1_service_cidr_status.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_flex_persistent_volume_source.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7301,7 +7349,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_api_resource_int64_amount.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_flex_volume_source.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7309,7 +7357,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_api_resource_quantity.py:142",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_flocker_volume_source.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7317,7 +7365,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_api_group.py:74",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_gce_persistent_disk_volume_source.py:70",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7325,7 +7373,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_api_group_list.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_git_repo_volume_source.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7341,7 +7389,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_api_resource_list.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_glusterfs_volume_source.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7349,7 +7397,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_api_versions.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_grpc_action.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7357,7 +7405,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_apply_options.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_host_alias.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7365,7 +7413,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_condition.py:73",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_host_ip.py:67",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7373,7 +7421,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_create_options.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_host_path_volume_source.py:78",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7381,7 +7429,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_delete_options.py:75",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_http_get_action.py:83",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7389,7 +7437,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_field_selector_requirement.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_http_header.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7397,7 +7445,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_get_options.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_image_volume_source.py:78",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7405,7 +7453,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_kind.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_iscsi_persistent_volume_source.py:78",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7413,7 +7461,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_resource.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_iscsi_volume_source.py:78",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7421,7 +7469,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_key_to_path.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7429,7 +7477,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_for_discovery.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_lifecycle.py:80",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7437,7 +7485,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_kind.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_lifecycle_handler.py:74",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7445,7 +7493,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_group_version_resource.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_limit_range.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7453,7 +7501,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_internal_event.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_limit_range_item.py:73",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7461,7 +7509,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_label_selector.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_limit_range_list.py:72",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7469,7 +7517,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_label_selector_requirement.py:69",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_limit_range_spec.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7477,7 +7525,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list.py:71",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_linux_container_user.py:69",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7485,7 +7533,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list_meta.py:70",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_list.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7493,7 +7541,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_list_options.py:78",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_load_balancer_ingress.py:71",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7501,7 +7549,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_managed_fields_entry.py:74",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_load_balancer_status.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7509,7 +7557,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_object_meta.py:84",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_local_object_reference.py:67",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     },
@@ -7517,55 +7565,7 @@
       "caller": "to_dict",
       "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
       "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_owner_reference.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_dict",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_partial_object_metadata.py:70",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_dict",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_partial_object_metadata_list.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_dict",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_patch_options.py:72",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_dict",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_preconditions.py:68",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_dict",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_root_paths.py:67",
-      "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "to_dict",
-      "caller_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:72",
-      "callee": "to_dict",
-      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_apimachinery_pkg_apis_meta_v1_server_address_by_client_cidr.py:68",
+      "callee_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_local_volume_source.py:68",
       "call_site_source": "api/python_api/kubeflow_spark_api/models/io_k8s_api_core_v1_affinity.py:92",
       "confidence": "UNCERTAIN"
     }

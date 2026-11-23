@@ -4,9 +4,9 @@
     "TrustyAI operator"
   ],
   "repo": "opendatahub-io/trustyai-service-operator",
-  "commit_sha": "caccdc66d6c743acbb3633907edae28e1c6dd753",
-  "extracted_at": "2026-11-23T06:53:55Z",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "commit_sha": "65a2dce45eb9dec26366fb567a3072ff39cdf1a1",
+  "extracted_at": "2026-11-23T11:25:17Z",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "schema_version": "2",
   "crds": [
     {
@@ -1351,7 +1351,7 @@
       "containers": [
         {
           "name": "manager",
-          "image": "quay.io/opendatahub/trustyai-service-operator:latest",
+          "image": "quay.io/opendatahub/trustyai-service-operator:odh-stable",
           "ports": [
             {
               "name": "webhook-server",
@@ -1399,11 +1399,11 @@
             "RELATED_IMAGE_ODH_EVAL_HUB_INSPECTAI_IMAGE": "quay.io/evalhub/community-inspect:v0.7.2-alpha.1",
             "RELATED_IMAGE_ODH_EVAL_HUB_LIGHTEVAL_IMAGE": "quay.io/evalhub/community-lighteval:v0.7.2-alpha.1",
             "RELATED_IMAGE_ODH_KUBE_RBAC_PROXY_IMAGE": "quay.io/opendatahub/odh-kube-rbac-proxy:odh-stable",
-            "RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE": "quay.io/opendatahub/ta-lmes-driver:latest",
+            "RELATED_IMAGE_ODH_TA_LMES_DRIVER_IMAGE": "quay.io/opendatahub/ta-lmes-driver:odh-stable",
             "RELATED_IMAGE_ODH_TA_LMES_JOB_IMAGE": "quay.io/opendatahub/ta-lmes-job:odh-stable",
             "RELATED_IMAGE_ODH_TRUSTYAI_GARAK_LLS_PROVIDER_DSP_IMAGE": "quay.io/trustyai/llama-stack-provider-trustyai-garak:latest",
             "RELATED_IMAGE_ODH_TRUSTYAI_NEMO_GUARDRAILS_SERVER_IMAGE": "quay.io/trustyai/nemo-guardrails-server:latest",
-            "RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE": "quay.io/opendatahub/trustyai-service:latest"
+            "RELATED_IMAGE_ODH_TRUSTYAI_SERVICE_PY_IMAGE": "quay.io/trustyai/trustyai-service-python:latest"
           },
           "liveness_probe": {
             "type": "httpGet",
@@ -1553,7 +1553,7 @@
       "type": "For",
       "gvk": "evalhub/v1/EvalHub",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:400"
+      "source": "controllers/evalhub/evalhub_controller.go:409"
     },
     {
       "type": "For",
@@ -1583,13 +1583,13 @@
       "type": "Owns",
       "gvk": "/v1/ConfigMap",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:404"
+      "source": "controllers/evalhub/evalhub_controller.go:413"
     },
     {
       "type": "Owns",
       "gvk": "/v1/Service",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:403"
+      "source": "controllers/evalhub/evalhub_controller.go:412"
     },
     {
       "type": "Owns",
@@ -1607,7 +1607,7 @@
       "type": "Owns",
       "gvk": "apps/v1/Deployment",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:401"
+      "source": "controllers/evalhub/evalhub_controller.go:410"
     },
     {
       "type": "Owns",
@@ -1625,7 +1625,7 @@
       "type": "Owns",
       "gvk": "monitoring/v1/ServiceMonitor",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:419"
+      "source": "controllers/evalhub/evalhub_controller.go:428"
     },
     {
       "type": "Owns",
@@ -1649,7 +1649,7 @@
       "type": "Owns",
       "gvk": "networking.k8s.io/v1/NetworkPolicy",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:402"
+      "source": "controllers/evalhub/evalhub_controller.go:411"
     },
     {
       "type": "Owns",
@@ -1661,13 +1661,13 @@
       "type": "Watches",
       "gvk": "/v1/ConfigMap",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:416"
+      "source": "controllers/evalhub/evalhub_controller.go:425"
     },
     {
       "type": "Watches",
       "gvk": "/v1/Namespace",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:415"
+      "source": "controllers/evalhub/evalhub_controller.go:424"
     },
     {
       "type": "Watches",
@@ -1679,7 +1679,7 @@
       "type": "Watches",
       "gvk": "/v1/Pod",
       "controller": "EvalHubReconciler",
-      "source": "controllers/evalhub/evalhub_controller.go:409"
+      "source": "controllers/evalhub/evalhub_controller.go:418"
     },
     {
       "type": "Watches",
@@ -1704,7 +1704,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/configmap.go",
-            "line": 165
+            "line": 173
           }
         },
         {
@@ -1713,7 +1713,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/configmap.go",
-            "line": 170
+            "line": 178
           }
         },
         {
@@ -1723,7 +1723,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/deployment.go",
-            "line": 66
+            "line": 74
           }
         },
         {
@@ -1733,7 +1733,7 @@
           "source": {
             "type": "go_ast",
             "file": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/deployment.go",
-            "line": 77
+            "line": 85
           }
         },
         {
@@ -2287,6 +2287,24 @@
   },
   "api_types": [
     {
+      "name": "EvalHubInitSpec",
+      "doc": "EvalHubInitSpec configures eval-runtime-init containers launched by EvalHub.",
+      "fields": [
+        {
+          "name": "TestDataTimeout",
+          "type": "string",
+          "json_tag": "testDataTimeout,omitempty",
+          "doc": "TestDataTimeout configures the timeout for eval-runtime-init test-data downloads. Omit to use the EvalHub default (10m).",
+          "markers": [
+            "+kubebuilder:validation:MaxLength=64",
+            "+kubebuilder:validation:Pattern=`^((\\d+(\\.\\d+)?(ns|us|µs|ms|s|m|h))+)$`"
+          ]
+        }
+      ],
+      "source": "api/evalhub/v1/evalhub_types.go:109",
+      "is_spec": true
+    },
+    {
       "name": "EvalHubMCPSpec",
       "doc": "EvalHubMCPSpec defines the optional MCP server deployment configuration.",
       "fields": [
@@ -2351,7 +2369,7 @@
           "secret_ref": true
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:109",
+      "source": "api/evalhub/v1/evalhub_types.go:119",
       "is_spec": true
     },
     {
@@ -2387,7 +2405,7 @@
           "doc": "Conditions contains detailed status conditions for the MCP server."
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:151",
+      "source": "api/evalhub/v1/evalhub_types.go:161",
       "is_status": true
     },
     {
@@ -2401,7 +2419,7 @@
           "doc": "TLS configures trust for the MLflow tracking server's TLS certificate."
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:169",
+      "source": "api/evalhub/v1/evalhub_types.go:179",
       "is_spec": true
     },
     {
@@ -2415,7 +2433,7 @@
           "doc": "CABundle optionally references a ConfigMap in the EvalHub instance namespace holding additional PEM-encoded CA certificate(s) to trust for the MLflow tracking server connection (for example, the CA that signs the MLflow public Route). It is merged with the in-cluster service-serving CA and the ODH trusted CA bundle, so EvalHub can reach MLflow over either its internal Service hostname or its public Route. Optional: when omitted, only the service-serving CA and the ODH trusted CA bundle are trusted."
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:176",
+      "source": "api/evalhub/v1/evalhub_types.go:186",
       "is_spec": true
     },
     {
@@ -2443,7 +2461,7 @@
           "default": "=\"ca-bundle.crt\""
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:188"
+      "source": "api/evalhub/v1/evalhub_types.go:198"
     },
     {
       "name": "EvalHubSpec",
@@ -2505,6 +2523,12 @@
           "doc": "OpenTelemetry configuration for observability. When set, the operator includes OTEL settings in the generated config. When omitted, the service uses its defaults (OTEL disabled)."
         },
         {
+          "name": "Init",
+          "type": "*EvalHubInitSpec",
+          "json_tag": "init,omitempty",
+          "doc": "Init configures eval-runtime-init containers launched by EvalHub, not EvalHub startup."
+        },
+        {
           "name": "MCP",
           "type": "*EvalHubMCPSpec",
           "json_tag": "mcp,omitempty",
@@ -2528,7 +2552,7 @@
           "default": "=multi"
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:199",
+      "source": "api/evalhub/v1/evalhub_types.go:209",
       "is_spec": true
     },
     {
@@ -2555,7 +2579,44 @@
           ]
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:262"
+      "source": "api/evalhub/v1/evalhub_types.go:276"
+    },
+    {
+      "name": "EvalHub",
+      "doc": "EvalHub is the Schema for the evalhubs API",
+      "fields": [
+        {
+          "name": "TypeMeta",
+          "type": "metav1.TypeMeta",
+          "json_tag": ",inline",
+          "embedded": true
+        },
+        {
+          "name": "ObjectMeta",
+          "type": "metav1.ObjectMeta",
+          "json_tag": "metadata,omitempty",
+          "embedded": true
+        },
+        {
+          "name": "Spec",
+          "type": "EvalHubSpec",
+          "json_tag": "spec,omitempty"
+        },
+        {
+          "name": "Status",
+          "type": "EvalHubStatus",
+          "json_tag": "status,omitempty"
+        }
+      ],
+      "markers": [
+        "+kubebuilder:object:root=true",
+        "+kubebuilder:storageversion",
+        "+kubebuilder:subresource:status",
+        "+kubebuilder:printcolumn:name=\"Phase\",type=string,JSONPath=`.status.phase`",
+        "+kubebuilder:printcolumn:name=\"Ready\",type=string,JSONPath=`.status.ready`",
+        "+kubebuilder:printcolumn:name=\"Age\",type=date,JSONPath=`.metadata.creationTimestamp`"
+      ],
+      "source": "api/evalhub/v1/evalhub_types.go:28"
     },
     {
       "name": "EvalHubStatus",
@@ -2625,45 +2686,8 @@
           "doc": "MCP contains status information for the optional MCP server."
         }
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:276",
+      "source": "api/evalhub/v1/evalhub_types.go:290",
       "is_status": true
-    },
-    {
-      "name": "EvalHub",
-      "doc": "EvalHub is the Schema for the evalhubs API",
-      "fields": [
-        {
-          "name": "TypeMeta",
-          "type": "metav1.TypeMeta",
-          "json_tag": ",inline",
-          "embedded": true
-        },
-        {
-          "name": "ObjectMeta",
-          "type": "metav1.ObjectMeta",
-          "json_tag": "metadata,omitempty",
-          "embedded": true
-        },
-        {
-          "name": "Spec",
-          "type": "EvalHubSpec",
-          "json_tag": "spec,omitempty"
-        },
-        {
-          "name": "Status",
-          "type": "EvalHubStatus",
-          "json_tag": "status,omitempty"
-        }
-      ],
-      "markers": [
-        "+kubebuilder:object:root=true",
-        "+kubebuilder:storageversion",
-        "+kubebuilder:subresource:status",
-        "+kubebuilder:printcolumn:name=\"Phase\",type=string,JSONPath=`.status.phase`",
-        "+kubebuilder:printcolumn:name=\"Ready\",type=string,JSONPath=`.status.ready`",
-        "+kubebuilder:printcolumn:name=\"Age\",type=date,JSONPath=`.metadata.creationTimestamp`"
-      ],
-      "source": "api/evalhub/v1/evalhub_types.go:28"
     },
     {
       "name": "EvalHubList",
@@ -2691,7 +2715,7 @@
       "markers": [
         "+kubebuilder:object:root=true"
       ],
-      "source": "api/evalhub/v1/evalhub_types.go:312"
+      "source": "api/evalhub/v1/evalhub_types.go:326"
     },
     {
       "name": "DatabaseSpec",
@@ -2889,7 +2913,7 @@
           "doc": "Conditions contains detailed status conditions for the MCP server."
         }
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:107",
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:108",
       "is_status": true
     },
     {
@@ -2952,7 +2976,7 @@
           "doc": "MCP optionally enables an MCP server deployment connected to this EvalHub instance."
         }
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:125",
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:126",
       "is_spec": true
     },
     {
@@ -2987,9 +3011,10 @@
         "+kubebuilder:subresource:status",
         "+kubebuilder:printcolumn:name=\"Phase\",type=string,JSONPath=`.status.phase`",
         "+kubebuilder:printcolumn:name=\"Ready\",type=string,JSONPath=`.status.ready`",
-        "+kubebuilder:printcolumn:name=\"Age\",type=date,JSONPath=`.metadata.creationTimestamp`"
+        "+kubebuilder:printcolumn:name=\"Age\",type=date,JSONPath=`.metadata.creationTimestamp`",
+        "+kubebuilder:deprecatedversion:warning=\"v1alpha1 does not expose new v1 fields; use v1\""
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:15"
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:16"
     },
     {
       "name": "EvalHubStatus",
@@ -3059,7 +3084,7 @@
           "doc": "MCP contains status information for the optional MCP server."
         }
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:167",
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:168",
       "is_status": true
     },
     {
@@ -3088,7 +3113,7 @@
       "markers": [
         "+kubebuilder:object:root=true"
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:203"
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:204"
     },
     {
       "name": "DatabaseSpec",
@@ -3132,7 +3157,7 @@
           "default": "=5"
         }
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:24",
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:25",
       "is_spec": true
     },
     {
@@ -3193,7 +3218,7 @@
           "json_tag": "enableLogs,omitempty"
         }
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:44",
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:45",
       "is_spec": true
     },
     {
@@ -3261,7 +3286,7 @@
           "secret_ref": true
         }
       ],
-      "source": "api/evalhub/v1alpha1/evalhub_types.go:65",
+      "source": "api/evalhub/v1alpha1/evalhub_types.go:66",
       "is_spec": true
     },
     {
@@ -5850,6 +5875,12 @@
     {
       "name": "evalHubAuthConfigMapKey",
       "value": "auth.yaml",
+      "category": "general",
+      "source": "controllers/evalhub/constants.go"
+    },
+    {
+      "name": "evalHubConfigHashAnnotation",
+      "value": "trustyai.opendatahub.io/evalhub-config-hash",
       "category": "general",
       "source": "controllers/evalhub/constants.go"
     },
@@ -9781,7 +9812,7 @@
     "status_conditions": "rich",
     "webhooks": "none"
   },
-  "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 18 resource type(s). exposing 3 service(s) on ports: 443, 8443. protected by 3 network policy/policies. runtime dependencies: OpenTelemetry Collector. defining 25 API spec type(s) across 77 struct(s) with 330 total fields. with 564 operator config constants (31 image references, 7 env vars). following 27 reconciliation steps across 4 controller(s). reporting 15 status condition types. integrates with Istio, KServe, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
+  "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 18 resource type(s). exposing 3 service(s) on ports: 443, 8443. protected by 3 network policy/policies. runtime dependencies: OpenTelemetry Collector. defining 26 API spec type(s) across 78 struct(s) with 332 total fields. with 565 operator config constants (31 image references, 7 env vars). following 27 reconciliation steps across 4 controller(s). reporting 15 status condition types. integrates with Istio, KServe, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
   "go_ast_mode": "full",
   "security_annotations": [
     {

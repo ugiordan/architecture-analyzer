@@ -3,7 +3,7 @@
   "component": "kserve-autogluon-server",
   "repo": "opendatahub-io/kserve-autogluon-server",
   "commit_sha": "aad6612fe382c04130a0675500087545cb6edc3f",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "kserve-autogluon-server is a Kubernetes component. managing 12 CRD(s): ClusterStorageContainer, LLMInferenceServiceConfig, LLMInferenceService, LocalModelCache, LocalModelNamespaceCache, LocalModelNodeGroup, LocalModelNode, ClusterServingRuntime, InferenceGraph, InferenceService, ServingRuntime, TrainedModel. deploying 3 workload(s) (kserve-controller-manager, llmisvc-controller-manager, kserve-localmodel-controller-manager) with 4 container(s). watching 32 resource type(s). exposing 6 service(s) on ports: 443, 8443. with 24 webhook(s) (15 validating, 5 mutating). connecting to external services: azure-blob, gcs, httpx, requests, s3, weaviate. runtime dependencies: knative-local-gateway. defining 47 API spec type(s) across 90 struct(s) with 303 total fields. with 1162 operator config constants (3 image references, 13 env vars). following 12 reconciliation steps across 9 controller(s). reporting 34 status condition types. with 3 ingress route(s). Python k8s client with 68 API call(s). integrates with Istio, KServe, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/certmanager/kserve, config/certmanager, config/certmanager/llmisvc, config/certmanager/localmodel, config/clusterresources, config/components/kserve, config/components/llmisvc, config/components/localmodel, config/configmap, config/crd/full/clusterstoragecontainer, config/crd/full, config/crd/full/llmisvc, config/crd/full/localmodel, config/crd, config/crd/minimal/clusterstoragecontainer, config/crd/minimal, config/crd/minimal/llmisvc, config/crd/minimal/localmodel, config/default, config/llmisvc, config/llmisvcconfig, config/localmodelnodes, config/localmodels, config/manager, config/overlays/addons/kserve, config/overlays/addons/llmisvc, config/overlays/addons/localmodel, config/overlays/all, config/overlays/dev-image-config, config/overlays/development, config/overlays/kubeflow, config/overlays/llmisvc, config/overlays/standalone/kserve, config/overlays/standalone/llmisvc, config/overlays/test-llmisvc, config/overlays/test-modelcache, config/overlays/version-template/cluster-resources, config/overlays/version-template, config/rbac, config/rbac/llmisvc, config/rbac/localmodel, config/rbac/localmodelnode, config/runtimes, config/storagecontainers, config/webhook, config/webhook/llmisvc, config/webhook/localmodel. references components: kserve (client, import, provider), vllm (import).",
   "repository_description": "KServe is a standardized distributed generative and predictive AI inference platform for scalable, multi-framework deployment on Kubernetes.",
   "description_source": "README.md:10",
@@ -10058,7 +10058,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/agent/main.go:233",
       "confidence": "UNCERTAIN"
     },
@@ -10066,7 +10066,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/agent/main.go:233",
       "confidence": "UNCERTAIN"
     },
@@ -10082,7 +10082,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -10098,8 +10098,16 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/llmisvc/main.go:144",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10114,7 +10122,7 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:144",
       "confidence": "UNCERTAIN"
     },
@@ -10123,7 +10131,7 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/llmisvc/main.go:144",
+      "call_site_source": "cmd/llmisvc/main.go:151",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10139,14 +10147,6 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/llmisvc/main.go:151",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:151",
       "confidence": "UNCERTAIN"
     },
@@ -10178,6 +10178,14 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/llmisvc/main.go:232",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/llmisvc/main.go:232",
       "confidence": "UNCERTAIN"
@@ -10188,22 +10196,6 @@
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/llmisvc/main.go:232",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/llmisvc/main.go:232",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:239",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10227,7 +10219,7 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:244",
+      "call_site_source": "cmd/llmisvc/main.go:239",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10250,16 +10242,8 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/llmisvc/main.go:252",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/llmisvc/main.go:252",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/llmisvc/main.go:244",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10268,6 +10252,30 @@
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/llmisvc/main.go:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/llmisvc/main.go:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/llmisvc/main.go:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/llmisvc/main.go:260",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10283,14 +10291,6 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:260",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:260",
       "confidence": "UNCERTAIN"
     },
@@ -10346,6 +10346,14 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/llmisvc/main.go:289",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/llmisvc/main.go:289",
       "confidence": "UNCERTAIN"
@@ -10362,8 +10370,8 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/llmisvc/main.go:289",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/llmisvc/main.go:300",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10378,7 +10386,7 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:300",
       "confidence": "UNCERTAIN"
     },
@@ -10386,8 +10394,8 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/llmisvc/main.go:300",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/llmisvc/main.go:308",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10411,14 +10419,14 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:308",
+      "call_site_source": "cmd/llmisvc/main.go:315",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:315",
       "confidence": "UNCERTAIN"
     },
@@ -10434,8 +10442,8 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/llmisvc/main.go:315",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/llmisvc/main.go:320",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10459,22 +10467,6 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:320",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:324",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:324",
       "confidence": "UNCERTAIN"
     },
@@ -10491,6 +10483,14 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/llmisvc/main.go:324",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/llmisvc/main.go:366",
       "confidence": "UNCERTAIN"
     },
@@ -10506,8 +10506,16 @@
       "caller": "main",
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/llmisvc/main.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/llmisvc/main.go:372",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10523,14 +10531,6 @@
       "caller_source": "cmd/llmisvc/main.go:123",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/llmisvc/main.go:372",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/llmisvc/main.go:123",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/llmisvc/main.go:372",
       "confidence": "UNCERTAIN"
     },
@@ -10538,7 +10538,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodel/main.go:116",
       "confidence": "UNCERTAIN"
     },
@@ -10546,7 +10546,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/localmodel/main.go:116",
       "confidence": "UNCERTAIN"
     },
@@ -10586,14 +10586,6 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/localmodel/main.go:138",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/localmodel/main.go:83",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/localmodel/main.go:138",
       "confidence": "UNCERTAIN"
@@ -10611,7 +10603,7 @@
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/localmodel/main.go:150",
+      "call_site_source": "cmd/localmodel/main.go:138",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10619,6 +10611,14 @@
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/localmodel/main.go:150",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/localmodel/main.go:83",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/localmodel/main.go:150",
       "confidence": "UNCERTAIN"
     },
@@ -10642,7 +10642,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/localmodel/main.go:160",
       "confidence": "UNCERTAIN"
     },
@@ -10650,7 +10650,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodel/main.go:160",
       "confidence": "UNCERTAIN"
     },
@@ -10682,6 +10682,14 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/localmodel/main.go:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/localmodel/main.go:83",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodel/main.go:173",
       "confidence": "UNCERTAIN"
@@ -10698,8 +10706,16 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/localmodel/main.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/localmodel/main.go:83",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/localmodel/main.go:173",
+      "call_site_source": "cmd/localmodel/main.go:177",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10714,23 +10730,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/localmodel/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/localmodel/main.go:83",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/localmodel/main.go:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/localmodel/main.go:83",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/localmodel/main.go:184",
       "confidence": "UNCERTAIN"
     },
@@ -10738,7 +10738,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodel/main.go:184",
       "confidence": "UNCERTAIN"
     },
@@ -10762,6 +10762,14 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/localmodel/main.go:91",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/localmodel/main.go:83",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodel/main.go:91",
       "confidence": "UNCERTAIN"
@@ -10770,15 +10778,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/localmodel/main.go:91",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/localmodel/main.go:83",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodel/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -10786,7 +10786,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodel/main.go:83",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/localmodel/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -10834,6 +10834,14 @@
       "caller": "main",
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/localmodelnode/main.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/localmodelnode/main.go:76",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/localmodelnode/main.go:117",
       "confidence": "UNCERTAIN"
@@ -10843,14 +10851,6 @@
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/localmodelnode/main.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/localmodelnode/main.go:76",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodelnode/main.go:133",
       "confidence": "UNCERTAIN"
     },
@@ -10866,7 +10866,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodelnode/main.go:133",
       "confidence": "UNCERTAIN"
     },
@@ -10882,7 +10882,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodelnode/main.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -10890,7 +10890,7 @@
       "caller": "main",
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/localmodelnode/main.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -10922,14 +10922,6 @@
       "caller": "main",
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/localmodelnode/main.go:91",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/localmodelnode/main.go:76",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/localmodelnode/main.go:91",
       "confidence": "UNCERTAIN"
@@ -10938,6 +10930,14 @@
       "caller": "main",
       "caller_source": "cmd/localmodelnode/main.go:76",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/localmodelnode/main.go:91",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/localmodelnode/main.go:76",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/localmodelnode/main.go:91",
       "confidence": "UNCERTAIN"
@@ -10954,14 +10954,6 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/manager/main.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/manager/main.go:107",
       "confidence": "UNCERTAIN"
@@ -10970,8 +10962,8 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/manager/main.go:114",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/manager/main.go:107",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10979,6 +10971,14 @@
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/manager/main.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -10994,14 +10994,6 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/manager/main.go:123",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/manager/main.go:123",
       "confidence": "UNCERTAIN"
@@ -11012,6 +11004,22 @@
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/manager/main.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/manager/main.go:140",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11027,14 +11035,6 @@
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/manager/main.go:140",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:140",
       "confidence": "UNCERTAIN"
     },
@@ -11066,6 +11066,14 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/manager/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/manager/main.go:154",
       "confidence": "UNCERTAIN"
@@ -11076,22 +11084,6 @@
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/manager/main.go:154",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/manager/main.go:154",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/manager/main.go:159",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11114,8 +11106,8 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/manager/main.go:164",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/manager/main.go:159",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11139,7 +11131,7 @@
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/manager/main.go:171",
+      "call_site_source": "cmd/manager/main.go:164",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11162,6 +11154,22 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/manager/main.go:171",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/manager/main.go:187",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/manager/main.go:187",
       "confidence": "UNCERTAIN"
@@ -11178,22 +11186,6 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "cmd/manager/main.go:187",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/manager/main.go:202",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:202",
       "confidence": "UNCERTAIN"
@@ -11211,6 +11203,14 @@
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/manager/main.go:202",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:217",
       "confidence": "UNCERTAIN"
     },
@@ -11226,16 +11226,8 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/manager/main.go:217",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/manager/main.go:231",
+      "call_site_source": "cmd/manager/main.go:217",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11259,14 +11251,14 @@
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/manager/main.go:250",
+      "call_site_source": "cmd/manager/main.go:231",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/manager/main.go:250",
       "confidence": "UNCERTAIN"
     },
@@ -11283,6 +11275,14 @@
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "cmd/manager/main.go:250",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:258",
       "confidence": "UNCERTAIN"
     },
@@ -11290,7 +11290,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/manager/main.go:258",
       "confidence": "UNCERTAIN"
     },
@@ -11306,7 +11306,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/manager/main.go:267",
       "confidence": "UNCERTAIN"
     },
@@ -11314,7 +11314,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:267",
       "confidence": "UNCERTAIN"
     },
@@ -11324,6 +11324,14 @@
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/manager/main.go:267",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "cmd/manager/main.go:274",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11346,14 +11354,6 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "cmd/manager/main.go:274",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "cmd/manager/main.go:280",
       "confidence": "UNCERTAIN"
@@ -11362,6 +11362,14 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "cmd/manager/main.go:280",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:280",
       "confidence": "UNCERTAIN"
@@ -11370,15 +11378,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "cmd/manager/main.go:280",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "cmd/manager/main.go:287",
       "confidence": "UNCERTAIN"
     },
@@ -11394,7 +11394,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "cmd/manager/main.go:287",
       "confidence": "UNCERTAIN"
     },
@@ -11442,7 +11442,23 @@
       "caller": "main",
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "qpext/cmd/qpext/main.go:326",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "qpext/cmd/qpext/main.go:312",
+      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "qpext/cmd/qpext/main.go:326",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "qpext/cmd/qpext/main.go:312",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "qpext/cmd/qpext/main.go:326",
       "confidence": "UNCERTAIN"
     },
@@ -11459,22 +11475,6 @@
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
-      "call_site_source": "qpext/cmd/qpext/main.go:326",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "qpext/cmd/qpext/main.go:312",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "qpext/cmd/qpext/main.go:326",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "qpext/cmd/qpext/main.go:312",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "qpext/cmd/qpext/main.go:350",
       "confidence": "UNCERTAIN"
     },
@@ -11482,7 +11482,7 @@
       "caller": "main",
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
       "call_site_source": "qpext/cmd/qpext/main.go:350",
       "confidence": "UNCERTAIN"
     },
@@ -11514,7 +11514,7 @@
       "caller": "main",
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "qpext/cmd/qpext/main.go:350",
       "confidence": "UNCERTAIN"
     },
@@ -11522,7 +11522,7 @@
       "caller": "main",
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "qpext/cmd/qpext/main.go:357",
       "confidence": "UNCERTAIN"
     },
@@ -11546,14 +11546,6 @@
       "caller": "main",
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "qpext/cmd/qpext/main.go:357",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "qpext/cmd/qpext/main.go:312",
-      "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "qpext/cmd/qpext/main.go:357",
       "confidence": "UNCERTAIN"
@@ -11562,24 +11554,16 @@
       "caller": "main",
       "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "qpext/cmd/qpext/main.go:357",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "tools/tf2openapi/cmd/main.go:31",
+      "caller_source": "qpext/cmd/qpext/main.go:312",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
-      "call_site_source": "tools/tf2openapi/cmd/main.go:43",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "tools/tf2openapi/cmd/main.go:31",
-      "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
-      "call_site_source": "tools/tf2openapi/cmd/main.go:43",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_validation.go:43",
+      "call_site_source": "qpext/cmd/qpext/main.go:357",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11595,6 +11579,22 @@
       "caller_source": "tools/tf2openapi/cmd/main.go:31",
       "callee": "Error",
       "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
+      "call_site_source": "tools/tf2openapi/cmd/main.go:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tools/tf2openapi/cmd/main.go:31",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "call_site_source": "tools/tf2openapi/cmd/main.go:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tools/tf2openapi/cmd/main.go:31",
+      "callee": "Error",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
       "call_site_source": "tools/tf2openapi/cmd/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -11610,7 +11610,7 @@
       "caller": "main",
       "caller_source": "tools/tf2openapi/cmd/main.go:31",
       "callee": "Error",
-      "callee_source": "pkg/controller/v1alpha2/llmisvc/router_discovery.go:519",
+      "callee_source": "pkg/controller/v1alpha2/llmisvc/config_merge.go:630",
       "call_site_source": "tools/tf2openapi/cmd/main.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -12162,7 +12162,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "pkg/constants/constants.go:753",
+      "callee_source": "pkg/constants/constants.go:749",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12170,7 +12170,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "pkg/constants/constants.go:749",
+      "callee_source": "pkg/constants/constants.go:753",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12202,63 +12202,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:872",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:310",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:168",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:240",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:147",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:87",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:48",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph.pb.go:79",
+      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:113",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12274,7 +12218,527 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:113",
+      "callee_source": "tools/tf2openapi/generated/framework/graph.pb.go:79",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:48",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:87",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:663",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:763",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:824",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:872",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:920",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:968",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:1024",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/saved_model.pb.go:47",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:147",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:240",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:316",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:371",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:427",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:490",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:58",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:113",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:562",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/iterator.pb.go:45",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:55",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:138",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:189",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:43",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:103",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:168",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:230",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:310",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:403",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:89",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:178",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:84",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:581",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:513",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:205",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:260",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:333",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:447",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/reader_base.pb.go:45",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:60",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:150",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/resource_handle.pb.go:54",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:44",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:108",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:192",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:255",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:361",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:521",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:575",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:43",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:104",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:200",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:268",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:319",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:387",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:464",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:561",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:84",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:249",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_description.pb.go:45",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_shape.pb.go:60",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_shape.pb.go:122",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:48",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:347",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:107",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12362,55 +12826,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:250",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:55",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:482",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:406",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:337",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:275",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:144",
+      "callee_source": "tools/tf2openapi/generated/framework/allocation_description.pb.go:51",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12426,7 +12842,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/allocation_description.pb.go:51",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:144",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12434,231 +12850,7 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:371",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:427",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:490",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:562",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:113",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:58",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/saved_model.pb.go:47",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/iterator.pb.go:45",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:55",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:138",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:1024",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:968",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:920",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:230",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:824",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:763",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:189",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:403",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:89",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:178",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:43",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:663",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:581",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:513",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:84",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:205",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:260",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:103",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:347",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:275",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -12674,719 +12866,87 @@
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:333",
+      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:250",
       "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:447",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:69",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/lib/core/error_codes.pb.go:200",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/versions.pb.go:57",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/reader_base.pb.go:45",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:60",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:150",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/variable.pb.go:150",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:316",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/types.pb.go:190",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:107",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:48",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/resource_handle.pb.go:54",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_shape.pb.go:122",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_shape.pb.go:60",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_description.pb.go:45",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:249",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:44",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:108",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:192",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:84",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:561",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:464",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:387",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:319",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:268",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:200",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:104",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:43",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:575",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:521",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:361",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/agent/main.go:138",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:255",
-      "call_site_source": "cmd/agent/main.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
       "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:337",
-      "call_site_source": "cmd/manager/main.go:229",
+      "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:84",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:872",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:268",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:920",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:663",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:319",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:387",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:464",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:561",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:968",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:1024",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/saved_model.pb.go:47",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:58",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:113",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:333",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:447",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:260",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:205",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:275",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:178",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:89",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:403",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/lib/core/error_codes.pb.go:200",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/versions.pb.go:57",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:310",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:230",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/variable.pb.go:150",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/variable.pb.go:54",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:168",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/reader_base.pb.go:45",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/iterator.pb.go:45",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:55",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:200",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:69",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/types.pb.go:190",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:144",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:104",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:43",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:763",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:138",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:48",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_shape.pb.go:122",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:575",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:60",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:189",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/allocation_description.pb.go:51",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:64",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:107",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:824",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:249",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:150",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/resource_handle.pb.go:54",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
+      "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
       "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:406",
-      "call_site_source": "cmd/manager/main.go:229",
+      "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
+      "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
       "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:482",
-      "call_site_source": "cmd/manager/main.go:229",
+      "call_site_source": "cmd/agent/main.go:249",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/types.pb.go:190",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
       "callee": "String",
       "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:55",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:69",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/lib/core/error_codes.pb.go:200",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/versions.pb.go:57",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/agent/main.go:138",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/variable.pb.go:150",
+      "call_site_source": "cmd/agent/main.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:490",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13394,7 +12954,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:250",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:255",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13402,79 +12962,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:312",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:84",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:40",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:120",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:44",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:279",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:340",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:42",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:581",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:43",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_description.pb.go:45",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13490,7 +12978,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:103",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_shape.pb.go:122",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13498,7 +12986,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:156",
+      "callee_source": "tools/tf2openapi/generated/framework/versions.pb.go:57",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13506,7 +12994,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:230",
+      "callee_source": "tools/tf2openapi/generated/lib/core/error_codes.pb.go:200",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13514,7 +13002,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:42",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:69",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13522,7 +13010,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:513",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:221",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13538,7 +13026,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:108",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:48",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13546,7 +13034,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:113",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor_slice.pb.go:107",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13554,7 +13042,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:204",
+      "callee_source": "tools/tf2openapi/generated/framework/types.pb.go:190",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13562,7 +13050,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph.pb.go:79",
+      "callee_source": "tools/tf2openapi/generated/framework/variable.pb.go:54",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13570,7 +13058,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:192",
+      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:138",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13578,7 +13066,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:48",
+      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:189",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13586,7 +13074,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:87",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:43",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13594,7 +13082,55 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:255",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:968",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:249",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/tensor.pb.go:84",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:513",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:581",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:663",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:561",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13610,7 +13146,343 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/tensor_description.pb.go:45",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:87",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:48",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph.pb.go:79",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:204",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:113",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/function.pb.go:42",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:230",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:156",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:103",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/device_attributes.pb.go:42",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:340",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:279",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:120",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/cost_graph.pb.go:40",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:312",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:250",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/attr_value.pb.go:55",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:482",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:406",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:337",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:275",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:144",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/api_def.pb.go:64",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/allocation_description.pb.go:51",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:464",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:387",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:319",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:103",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:168",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:260",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:230",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/kernel_def.pb.go:55",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/iterator.pb.go:45",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:562",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:427",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:333",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:447",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:268",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:200",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:104",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:310",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:403",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:89",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13634,14 +13506,6 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:361",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
       "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:371",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
@@ -13650,7 +13514,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:427",
+      "callee_source": "tools/tf2openapi/generated/framework/summary.pb.go:43",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13658,15 +13522,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/log_memory.pb.go:103",
-      "call_site_source": "cmd/manager/main.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/manager/main.go:99",
-      "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:221",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:575",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13682,7 +13538,7 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:562",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:1024",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },
@@ -13690,7 +13546,151 @@
       "caller": "main",
       "caller_source": "cmd/manager/main.go:99",
       "callee": "String",
-      "callee_source": "tools/tf2openapi/generated/framework/graph_transfer_info.pb.go:490",
+      "callee_source": "tools/tf2openapi/generated/protobuf/saved_model.pb.go:47",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:58",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/reader_base.pb.go:45",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:361",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:763",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/variable.pb.go:150",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:192",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/node_def.pb.go:178",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:84",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:920",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/op_def.pb.go:205",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:108",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/step_stats.pb.go:44",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/resource_handle.pb.go:54",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/saver.pb.go:113",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:872",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:60",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/framework/remote_fused_graph_execute_info.pb.go:150",
+      "call_site_source": "cmd/manager/main.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/manager/main.go:99",
+      "callee": "String",
+      "callee_source": "tools/tf2openapi/generated/protobuf/meta_graph.pb.go:824",
       "call_site_source": "cmd/manager/main.go:229",
       "confidence": "UNCERTAIN"
     },

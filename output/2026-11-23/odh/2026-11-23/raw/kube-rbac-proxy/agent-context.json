@@ -3,7 +3,7 @@
   "component": "kube-rbac-proxy",
   "repo": "opendatahub-io/kube-rbac-proxy",
   "commit_sha": "0402d944071450e804af467966854c459936171b",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "kube-rbac-proxy is a Kubernetes component. Dockerfile EXPOSE ports: 8080. with 45 operator config constants.",
   "repository_description": "NOTE: This project is *alpha* stage. Flags, configuration, behavior and design may change significantly in following releases.",
   "description_source": "README.md:5",
@@ -1634,7 +1634,7 @@
       "caller": "TestSourceEndpoint",
       "caller_source": "pkg/audit/address_test.go:27",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/address_test.go:74",
       "confidence": "UNCERTAIN"
     },
@@ -1642,7 +1642,7 @@
       "caller": "TestSourceEndpoint",
       "caller_source": "pkg/audit/address_test.go:27",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/address_test.go:74",
       "confidence": "UNCERTAIN"
     },
@@ -1650,7 +1650,7 @@
       "caller": "TestDestinationEndpoint",
       "caller_source": "pkg/audit/address_test.go:91",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/address_test.go:104",
       "confidence": "UNCERTAIN"
     },
@@ -1658,7 +1658,7 @@
       "caller": "TestDestinationEndpoint",
       "caller_source": "pkg/audit/address_test.go:91",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/address_test.go:104",
       "confidence": "UNCERTAIN"
     },
@@ -1666,14 +1666,6 @@
       "caller": "TestSinkWriteLossIsReportedBeforeNextEventAndAtShutdown",
       "caller_source": "pkg/audit/audit_test.go:1069",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
-      "call_site_source": "pkg/audit/audit_test.go:1081",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSinkWriteLossIsReportedBeforeNextEventAndAtShutdown",
-      "caller_source": "pkg/audit/audit_test.go:1069",
-      "callee": "Run",
       "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/audit_test.go:1081",
       "confidence": "UNCERTAIN"
@@ -1683,6 +1675,14 @@
       "caller_source": "pkg/audit/audit_test.go:1069",
       "callee": "Run",
       "callee_source": "pkg/authn/oidc.go:92",
+      "call_site_source": "pkg/audit/audit_test.go:1081",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSinkWriteLossIsReportedBeforeNextEventAndAtShutdown",
+      "caller_source": "pkg/audit/audit_test.go:1069",
+      "callee": "Run",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/audit_test.go:1117",
       "confidence": "UNCERTAIN"
     },
@@ -1690,7 +1690,7 @@
       "caller": "TestSinkWriteLossIsReportedBeforeNextEventAndAtShutdown",
       "caller_source": "pkg/audit/audit_test.go:1069",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/audit_test.go:1117",
       "confidence": "UNCERTAIN"
     },
@@ -1698,7 +1698,7 @@
       "caller": "TestStaticResourceMetadata",
       "caller_source": "pkg/audit/audit_test.go:1360",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/audit_test.go:1374",
       "confidence": "UNCERTAIN"
     },
@@ -1706,7 +1706,7 @@
       "caller": "TestStaticResourceMetadata",
       "caller_source": "pkg/audit/audit_test.go:1360",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/audit_test.go:1374",
       "confidence": "UNCERTAIN"
     },
@@ -1762,7 +1762,7 @@
       "caller": "TestBoundedAuditEventReportsOriginalSizeInKilobytes",
       "caller_source": "pkg/audit/audit_test.go:538",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/audit_test.go:551",
       "confidence": "UNCERTAIN"
     },
@@ -1770,7 +1770,7 @@
       "caller": "TestBoundedAuditEventReportsOriginalSizeInKilobytes",
       "caller_source": "pkg/audit/audit_test.go:538",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/audit_test.go:551",
       "confidence": "UNCERTAIN"
     },
@@ -1778,7 +1778,7 @@
       "caller": "TestCapturedUpgradeStatusIsUsedWhenResponseMetricsRemainSynthetic",
       "caller_source": "pkg/audit/audit_test.go:672",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/audit_test.go:693",
       "confidence": "UNCERTAIN"
     },
@@ -1786,7 +1786,7 @@
       "caller": "TestCapturedUpgradeStatusIsUsedWhenResponseMetricsRemainSynthetic",
       "caller_source": "pkg/audit/audit_test.go:672",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/audit_test.go:693",
       "confidence": "UNCERTAIN"
     },
@@ -1794,7 +1794,7 @@
       "caller": "TestProfileValidation",
       "caller_source": "pkg/audit/profile_test.go:24",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/audit/profile_test.go:37",
       "confidence": "UNCERTAIN"
     },
@@ -1802,7 +1802,7 @@
       "caller": "TestProfileValidation",
       "caller_source": "pkg/audit/profile_test.go:24",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/audit/profile_test.go:37",
       "confidence": "UNCERTAIN"
     },
@@ -1826,7 +1826,7 @@
       "caller": "Run",
       "caller_source": "pkg/authn/oidc.go:92",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/authn/oidc.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -1834,7 +1834,7 @@
       "caller": "Run",
       "caller_source": "pkg/authn/oidc.go:92",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/authn/oidc.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -1842,7 +1842,7 @@
       "caller": "TestStaticAuthorizer",
       "caller_source": "pkg/authz/auth_test.go:27",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/authz/auth_test.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -1850,7 +1850,7 @@
       "caller": "TestStaticAuthorizer",
       "caller_source": "pkg/authz/auth_test.go:27",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/authz/auth_test.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -1906,7 +1906,7 @@
       "caller": "TestProxyWithOIDCSupport",
       "caller_source": "pkg/filters/auth_test.go:361",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/filters/auth_test.go:412",
       "confidence": "UNCERTAIN"
     },
@@ -1914,7 +1914,7 @@
       "caller": "TestProxyWithOIDCSupport",
       "caller_source": "pkg/filters/auth_test.go:361",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/filters/auth_test.go:412",
       "confidence": "UNCERTAIN"
     },
@@ -1938,7 +1938,7 @@
       "caller": "TestAllowPath",
       "caller_source": "pkg/filters/path_test.go:28",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/filters/path_test.go:58",
       "confidence": "UNCERTAIN"
     },
@@ -1946,7 +1946,7 @@
       "caller": "TestAllowPath",
       "caller_source": "pkg/filters/path_test.go:28",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/filters/path_test.go:58",
       "confidence": "UNCERTAIN"
     },
@@ -1970,7 +1970,7 @@
       "caller": "TestGeneratingAuthorizerAttributes",
       "caller_source": "pkg/proxy/proxy_test.go:31",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/proxy/proxy_test.go:325",
       "confidence": "UNCERTAIN"
     },
@@ -1978,7 +1978,7 @@
       "caller": "TestGeneratingAuthorizerAttributes",
       "caller_source": "pkg/proxy/proxy_test.go:31",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/proxy/proxy_test.go:325",
       "confidence": "UNCERTAIN"
     },
@@ -1986,7 +1986,7 @@
       "caller": "TestMain",
       "caller_source": "pkg/tls/reloader_test.go:108",
       "callee": "Run",
-      "callee_source": "pkg/authn/oidc.go:92",
+      "callee_source": "pkg/authn/delegating.go:84",
       "call_site_source": "pkg/tls/reloader_test.go:124",
       "confidence": "UNCERTAIN"
     },
@@ -1994,8 +1994,16 @@
       "caller": "TestMain",
       "caller_source": "pkg/tls/reloader_test.go:108",
       "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
+      "callee_source": "pkg/authn/oidc.go:92",
       "call_site_source": "pkg/tls/reloader_test.go:124",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReloader",
+      "caller_source": "pkg/tls/reloader_test.go:38",
+      "callee": "Run",
+      "callee_source": "pkg/authn/delegating.go:84",
+      "call_site_source": "pkg/tls/reloader_test.go:92",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2007,14 +2015,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestReloader",
-      "caller_source": "pkg/tls/reloader_test.go:38",
-      "callee": "Run",
-      "callee_source": "pkg/authn/delegating.go:84",
-      "call_site_source": "pkg/tls/reloader_test.go:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "TestH2CShutdownSendsGoAway",
       "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
       "callee": "Close",
@@ -2034,7 +2034,7 @@
       "caller": "TestH2CShutdownSendsGoAway",
       "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:56",
       "confidence": "UNCERTAIN"
     },
@@ -2050,7 +2050,7 @@
       "caller": "TestH2CShutdownSendsGoAway",
       "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:56",
       "confidence": "UNCERTAIN"
     },
@@ -2058,7 +2058,7 @@
       "caller": "TestH2CShutdownSendsGoAway",
       "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:88",
       "confidence": "UNCERTAIN"
     },
@@ -2067,22 +2067,6 @@
       "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:88",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestH2CShutdownSendsGoAway",
-      "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
-      "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:88",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestH2CShutdownSendsGoAway",
-      "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:88",
       "confidence": "UNCERTAIN"
     },
@@ -2095,6 +2079,22 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestH2CShutdownSendsGoAway",
+      "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:88",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestH2CShutdownSendsGoAway",
+      "caller_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:32",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "call_site_source": "cmd/kube-rbac-proxy/app/h2c_shutdown_legacy_test.go:88",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
@@ -2106,7 +2106,7 @@
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:358",
       "confidence": "UNCERTAIN"
     },
@@ -2114,7 +2114,7 @@
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:358",
       "confidence": "UNCERTAIN"
     },
@@ -2138,31 +2138,7 @@
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
-      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
       "confidence": "UNCERTAIN"
     },
@@ -2178,6 +2154,30 @@
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:430",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
+      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:468",
       "confidence": "UNCERTAIN"
@@ -2186,15 +2186,7 @@
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:468",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:468",
       "confidence": "UNCERTAIN"
     },
@@ -2210,7 +2202,15 @@
       "caller": "Run",
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:468",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:468",
       "confidence": "UNCERTAIN"
     },
@@ -2227,14 +2227,6 @@
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:509",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:509",
       "confidence": "UNCERTAIN"
     },
@@ -2252,6 +2244,30 @@
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:509",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:276",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy.go:509",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestConfigureHTTP2ServerSupportsPlaintextH2C",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1256",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestConfigureHTTP2ServerSupportsPlaintextH2C",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1256",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2283,7 +2299,7 @@
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1256",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1266",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2291,7 +2307,7 @@
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1256",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1266",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2299,22 +2315,6 @@
       "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1266",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestConfigureHTTP2ServerSupportsPlaintextH2C",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1266",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestConfigureHTTP2ServerSupportsPlaintextH2C",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1246",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1266",
       "confidence": "UNCERTAIN"
     },
@@ -2332,6 +2332,14 @@
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:1266",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "closeAuditLogger",
+      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:58",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:62",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2367,26 +2375,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "closeAuditLogger",
-      "caller_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:58",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "cmd/kube-rbac-proxy/app/kube-rbac-proxy_test.go:62",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "Close",
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:134",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Close",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:134",
       "confidence": "UNCERTAIN"
     },
@@ -2395,6 +2387,14 @@
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Close",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:134",
       "confidence": "UNCERTAIN"
     },
@@ -2410,7 +2410,7 @@
       "caller": "Close",
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:134",
       "confidence": "UNCERTAIN"
     },
@@ -2419,14 +2419,6 @@
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:147",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Close",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:147",
       "confidence": "UNCERTAIN"
     },
@@ -2455,19 +2447,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "RoundTrip",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "caller": "Close",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "RoundTrip",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:100",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:147",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2490,24 +2474,24 @@
       "caller": "RoundTrip",
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:100",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestUpstreamTimeoutPreservesStreamingBody",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:146",
+      "caller": "RoundTrip",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:168",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:100",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestUpstreamTimeoutPreservesStreamingBody",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:146",
+      "caller": "RoundTrip",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:168",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:100",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2535,26 +2519,26 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestUpstreamTimeoutPreservesProtocolUpgradeBody",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:179",
+      "caller": "TestUpstreamTimeoutPreservesStreamingBody",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:146",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:195",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:168",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestUpstreamTimeoutPreservesProtocolUpgradeBody",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:179",
+      "caller": "TestUpstreamTimeoutPreservesStreamingBody",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:146",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:195",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:168",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestUpstreamTimeoutPreservesProtocolUpgradeBody",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:179",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:195",
       "confidence": "UNCERTAIN"
     },
@@ -2570,7 +2554,23 @@
       "caller": "TestUpstreamTimeoutPreservesProtocolUpgradeBody",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:179",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:195",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestUpstreamTimeoutPreservesProtocolUpgradeBody",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:179",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:195",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestUpstreamTimeoutPreservesProtocolUpgradeBody",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:179",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:195",
       "confidence": "UNCERTAIN"
     },
@@ -2586,14 +2586,6 @@
       "caller": "TestUpstreamTimeoutBodyCloseCancelsChildContext",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:201",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:226",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestUpstreamTimeoutBodyCloseCancelsChildContext",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:201",
-      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:226",
       "confidence": "UNCERTAIN"
@@ -2610,6 +2602,14 @@
       "caller": "TestUpstreamTimeoutBodyCloseCancelsChildContext",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:201",
       "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:226",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestUpstreamTimeoutBodyCloseCancelsChildContext",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:201",
+      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:226",
       "confidence": "UNCERTAIN"
@@ -2619,6 +2619,14 @@
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:236",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:246",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestUpstreamTimeoutBodyCloseCancelsExactlyOnce",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:236",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:246",
       "confidence": "UNCERTAIN"
     },
@@ -2642,24 +2650,8 @@
       "caller": "TestUpstreamTimeoutBodyCloseCancelsExactlyOnce",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:236",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:246",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestUpstreamTimeoutBodyCloseCancelsExactlyOnce",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:236",
-      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:246",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestUpstreamTimeoutUsesRemainingRequestBudget",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:426",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:458",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2690,6 +2682,14 @@
       "caller": "TestUpstreamTimeoutUsesRemainingRequestBudget",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:426",
       "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:458",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestUpstreamTimeoutUsesRemainingRequestBudget",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:426",
+      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:458",
       "confidence": "UNCERTAIN"
@@ -2698,7 +2698,23 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:607",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInitTransportWithClientCertAuth",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
+      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:607",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInitTransportWithClientCertAuth",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:607",
       "confidence": "UNCERTAIN"
     },
@@ -2722,23 +2738,7 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:607",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInitTransportWithClientCertAuth",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:607",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInitTransportWithClientCertAuth",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:613",
       "confidence": "UNCERTAIN"
     },
@@ -2746,15 +2746,7 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:613",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInitTransportWithClientCertAuth",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:613",
       "confidence": "UNCERTAIN"
     },
@@ -2770,7 +2762,15 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:613",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInitTransportWithClientCertAuth",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:613",
       "confidence": "UNCERTAIN"
     },
@@ -2818,7 +2818,7 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:650",
       "confidence": "UNCERTAIN"
     },
@@ -2827,14 +2827,6 @@
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
-      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:650",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInitTransportWithClientCertAuth",
-      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:650",
       "confidence": "UNCERTAIN"
     },
@@ -2851,6 +2843,14 @@
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
+      "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:650",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInitTransportWithClientCertAuth",
+      "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:99",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:650",
       "confidence": "UNCERTAIN"
     },
@@ -2858,7 +2858,23 @@
       "caller": "writeTempFile",
       "caller_source": "pkg/tls/reloader_test.go:312",
       "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
+      "call_site_source": "pkg/tls/reloader_test.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "writeTempFile",
+      "caller_source": "pkg/tls/reloader_test.go:312",
+      "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:77",
+      "call_site_source": "pkg/tls/reloader_test.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "writeTempFile",
+      "caller_source": "pkg/tls/reloader_test.go:312",
+      "callee": "Close",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "pkg/tls/reloader_test.go:317",
       "confidence": "UNCERTAIN"
     },
@@ -2875,22 +2891,6 @@
       "caller_source": "pkg/tls/reloader_test.go:312",
       "callee": "Close",
       "callee_source": "cmd/kube-rbac-proxy/app/transport.go:130",
-      "call_site_source": "pkg/tls/reloader_test.go:317",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeTempFile",
-      "caller_source": "pkg/tls/reloader_test.go:312",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:86",
-      "call_site_source": "pkg/tls/reloader_test.go:317",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeTempFile",
-      "caller_source": "pkg/tls/reloader_test.go:312",
-      "callee": "Close",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:143",
       "call_site_source": "pkg/tls/reloader_test.go:317",
       "confidence": "UNCERTAIN"
     },
@@ -4186,7 +4186,7 @@
       "caller": "RoundTrip",
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:88",
       "confidence": "UNCERTAIN"
     },
@@ -4194,7 +4194,7 @@
       "caller": "RoundTrip",
       "caller_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport.go:88",
       "confidence": "UNCERTAIN"
     },
@@ -4202,7 +4202,7 @@
       "caller": "TestUpstreamTimeoutReturnsDeadlineExceeded",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:115",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:132",
       "confidence": "UNCERTAIN"
     },
@@ -4210,7 +4210,7 @@
       "caller": "TestUpstreamTimeoutReturnsDeadlineExceeded",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:115",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:132",
       "confidence": "UNCERTAIN"
     },
@@ -4250,7 +4250,7 @@
       "caller": "TestUpstreamTimeoutBodyCloseCancelsChildContext",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:201",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:215",
       "confidence": "UNCERTAIN"
     },
@@ -4258,7 +4258,7 @@
       "caller": "TestUpstreamTimeoutBodyCloseCancelsChildContext",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:201",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:215",
       "confidence": "UNCERTAIN"
     },
@@ -4266,7 +4266,7 @@
       "caller": "TestUpstreamTimeoutNilBodyCancelsChildContext",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:255",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:266",
       "confidence": "UNCERTAIN"
     },
@@ -4274,7 +4274,7 @@
       "caller": "TestUpstreamTimeoutNilBodyCancelsChildContext",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:255",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:266",
       "confidence": "UNCERTAIN"
     },
@@ -4298,7 +4298,7 @@
       "caller": "TestUpstreamTimeoutPreservesParentCancellation",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:307",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:343",
       "confidence": "UNCERTAIN"
     },
@@ -4306,7 +4306,7 @@
       "caller": "TestUpstreamTimeoutPreservesParentCancellation",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:307",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:343",
       "confidence": "UNCERTAIN"
     },
@@ -4314,7 +4314,7 @@
       "caller": "TestUpstreamTimeoutIncludesRequestWrite",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:372",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:404",
       "confidence": "UNCERTAIN"
     },
@@ -4322,7 +4322,7 @@
       "caller": "TestUpstreamTimeoutIncludesRequestWrite",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:372",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:404",
       "confidence": "UNCERTAIN"
     },
@@ -4330,7 +4330,7 @@
       "caller": "TestUpstreamTimeoutUsesRemainingRequestBudget",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:426",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:454",
       "confidence": "UNCERTAIN"
     },
@@ -4338,7 +4338,7 @@
       "caller": "TestUpstreamTimeoutUsesRemainingRequestBudget",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:426",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:454",
       "confidence": "UNCERTAIN"
     },
@@ -4362,7 +4362,7 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:646",
       "confidence": "UNCERTAIN"
     },
@@ -4370,7 +4370,7 @@
       "caller": "TestInitTransportWithClientCertAuth",
       "caller_source": "cmd/kube-rbac-proxy/app/transport_test.go:583",
       "callee": "RoundTrip",
-      "callee_source": "cmd/kube-rbac-proxy/app/transport_test.go:49",
+      "callee_source": "cmd/kube-rbac-proxy/app/transport.go:52",
       "call_site_source": "cmd/kube-rbac-proxy/app/transport_test.go:646",
       "confidence": "UNCERTAIN"
     },

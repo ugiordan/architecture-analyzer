@@ -2,18 +2,18 @@
   "schema_version": 1,
   "component": "trustyai-service-operator",
   "repo": "opendatahub-io/trustyai-service-operator",
-  "commit_sha": "caccdc66d6c743acbb3633907edae28e1c6dd753",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
-  "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 18 resource type(s). exposing 3 service(s) on ports: 443, 8443. protected by 3 network policy/policies. runtime dependencies: OpenTelemetry Collector. defining 25 API spec type(s) across 77 struct(s) with 330 total fields. with 564 operator config constants (31 image references, 7 env vars). following 27 reconciliation steps across 4 controller(s). reporting 15 status condition types. integrates with Istio, KServe, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
+  "commit_sha": "65a2dce45eb9dec26366fb567a3072ff39cdf1a1",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 18 resource type(s). exposing 3 service(s) on ports: 443, 8443. protected by 3 network policy/policies. runtime dependencies: OpenTelemetry Collector. defining 26 API spec type(s) across 78 struct(s) with 332 total fields. with 565 operator config constants (31 image references, 7 env vars). following 27 reconciliation steps across 4 controller(s). reporting 15 status condition types. integrates with Istio, KServe, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
   "repository_description": "The TrustyAI Kubernetes Operator aims at simplifying the deployment and management of various TrustyAI Kubernetes components, such as:",
   "description_source": "README.md:9",
   "graph_status": "available",
   "graph": {
     "source_files": 242,
-    "functions": 1663,
-    "test_functions": 390,
-    "call_sites": 23915,
-    "resolved_calls": 20971,
+    "functions": 1673,
+    "test_functions": 393,
+    "call_sites": 24040,
+    "resolved_calls": 21501,
     "http_endpoints": 0,
     "storage_operations": 0,
     "external_calls": 0,
@@ -23,8 +23,8 @@
     {
       "name": "go",
       "source_files": 242,
-      "functions": 1663,
-      "test_functions": 390
+      "functions": 1673,
+      "test_functions": 393
     },
     {
       "name": "unknown",
@@ -37,8 +37,8 @@
     {
       "path": "controllers/evalhub",
       "source_files": 56,
-      "functions": 386,
-      "test_functions": 89,
+      "functions": 392,
+      "test_functions": 90,
       "languages": [
         "go",
         "unknown"
@@ -63,7 +63,7 @@
           "language": "go",
           "source": "controllers/evalhub/evaluation_job_failure_reconciler.go:163",
           "complexity": 6,
-          "callers": 122
+          "callers": 123
         },
         {
           "name": "Delete",
@@ -80,6 +80,13 @@
           "callers": 36
         },
         {
+          "name": "generateConfigData",
+          "language": "go",
+          "source": "controllers/evalhub/configmap.go:183",
+          "complexity": 9,
+          "callers": 26
+        },
+        {
           "name": "Add",
           "language": "go",
           "source": "controllers/evalhub/evalhub_tenant_namespaces.go:29",
@@ -90,8 +97,8 @@
           "name": "reconcileDeployment",
           "language": "go",
           "source": "controllers/evalhub/deployment.go:25",
-          "complexity": 11,
-          "callers": 25
+          "complexity": 2,
+          "callers": 24
         },
         {
           "name": "performReconcile",
@@ -110,7 +117,7 @@
         {
           "name": "evalHubConfigMapName",
           "language": "go",
-          "source": "controllers/evalhub/configmap.go:122",
+          "source": "controllers/evalhub/configmap.go:128",
           "complexity": 2,
           "callers": 19
         },
@@ -120,16 +127,9 @@
           "source": "controllers/evalhub/suite_test.go:122",
           "complexity": 1,
           "callers": 19
-        },
-        {
-          "name": "equalNetworkPolicyLabels",
-          "language": "go",
-          "source": "controllers/evalhub/network_policy_test.go:556",
-          "complexity": 4,
-          "callers": 17
         }
       ],
-      "symbols_truncated": 374
+      "symbols_truncated": 380
     },
     {
       "path": "controllers/tas",
@@ -264,7 +264,7 @@
           "language": "go",
           "source": "controllers/lmes/network_policy_test.go:63",
           "complexity": 1,
-          "callers": 63
+          "callers": 64
         },
         {
           "name": "NewDefaultPermissionConfig",
@@ -350,7 +350,7 @@
           "language": "go",
           "source": "controllers/utils/status.go:119",
           "complexity": 2,
-          "callers": 70
+          "callers": 71
         },
         {
           "name": "GetNamespace",
@@ -546,84 +546,84 @@
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:115",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:131",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:147",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:172",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:211",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:230",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:262",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:341",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:35",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:376",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:441",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/lmes/v1alpha1/zz_generated.deepcopy.go:456",
           "complexity": 2,
-          "callers": 103
+          "callers": 107
         }
       ],
       "symbols_truncated": 84
@@ -837,8 +837,8 @@
     {
       "path": "api/evalhub/v1alpha1",
       "source_files": 5,
-      "functions": 48,
-      "test_functions": 8,
+      "functions": 50,
+      "test_functions": 10,
       "languages": [
         "go",
         "unknown"
@@ -849,63 +849,63 @@
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:128",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:150",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:202",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:243",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:258",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:36",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:55",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/evalhub/v1alpha1/zz_generated.deepcopy.go:87",
           "complexity": 2,
-          "callers": 106
+          "callers": 110
         },
         {
           "name": "SetStatus",
           "language": "go",
-          "source": "api/evalhub/v1alpha1/evalhub_types.go:214",
+          "source": "api/evalhub/v1alpha1/evalhub_types.go:215",
           "complexity": 5,
-          "callers": 70
+          "callers": 71
         },
         {
           "name": "DeepCopyInto",
@@ -929,7 +929,7 @@
           "callers": 20
         }
       ],
-      "symbols_truncated": 36
+      "symbols_truncated": 38
     },
     {
       "path": "pkg/tracing",
@@ -1029,6 +1029,103 @@
       "symbols_truncated": 33
     },
     {
+      "path": "api/evalhub/v1",
+      "source_files": 3,
+      "functions": 43,
+      "test_functions": 0,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:117",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:158",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:180",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:249",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:290",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:310",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:330",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:345",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:36",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:365",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:51",
+          "complexity": 2,
+          "callers": 105
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/evalhub/v1/zz_generated.deepcopy.go:70",
+          "complexity": 2,
+          "callers": 105
+        }
+      ],
+      "symbols_truncated": 31
+    },
+    {
       "path": "controllers/lmes/driver",
       "source_files": 2,
       "functions": 43,
@@ -1043,7 +1140,7 @@
           "language": "go",
           "source": "controllers/lmes/driver/driver.go:144",
           "complexity": 3,
-          "callers": 224
+          "callers": 228
         },
         {
           "name": "Shutdown",
@@ -1063,6 +1160,13 @@
           "callers": 15
         },
         {
+          "name": "Write",
+          "language": "go",
+          "source": "controllers/lmes/driver/driver.go:374",
+          "complexity": 5,
+          "callers": 15
+        },
+        {
           "name": "setupTest",
           "language": "go",
           "source": "controllers/lmes/driver/driver_test.go:60",
@@ -1078,13 +1182,6 @@
           "annotations": [
             "test:error_path"
           ]
-        },
-        {
-          "name": "Write",
-          "language": "go",
-          "source": "controllers/lmes/driver/driver.go:374",
-          "complexity": 5,
-          "callers": 11
         },
         {
           "name": "GetStatus",
@@ -1135,103 +1232,6 @@
       "symbols_truncated": 31
     },
     {
-      "path": "api/evalhub/v1",
-      "source_files": 3,
-      "functions": 41,
-      "test_functions": 0,
-      "languages": [
-        "go",
-        "unknown"
-      ],
-      "symbols": [
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:102",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:143",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:165",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:229",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:270",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:290",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:310",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:325",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:345",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:36",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:51",
-          "complexity": 2,
-          "callers": 101
-        },
-        {
-          "name": "DeepCopy",
-          "language": "go",
-          "source": "api/evalhub/v1/zz_generated.deepcopy.go:70",
-          "complexity": 2,
-          "callers": 101
-        }
-      ],
-      "symbols_truncated": 29
-    },
-    {
       "path": "api/nemo_guardrails/v1alpha1",
       "source_files": 3,
       "functions": 33,
@@ -1246,84 +1246,84 @@
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:123",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:142",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:174",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:223",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:286",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:306",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:328",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:357",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:377",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:399",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:41",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:56",
           "complexity": 2,
-          "callers": 101
+          "callers": 105
         }
       ],
       "symbols_truncated": 21
@@ -1343,63 +1343,63 @@
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:103",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:135",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:166",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:188",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:34",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:49",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:69",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1alpha1/zz_generated.deepcopy.go:84",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "SetStatus",
           "language": "go",
           "source": "api/tas/v1alpha1/trustyaiservice_types.go:120",
           "complexity": 4,
-          "callers": 70
+          "callers": 71
         },
         {
           "name": "IsMigration",
@@ -1440,49 +1440,49 @@
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:115",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:141",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:158",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:33",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:49",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:64",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "trustyai-operator-module/pkg/apis/v1alpha1/zz_generated.deepcopy.go:83",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopyInto",
@@ -1537,63 +1537,63 @@
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:103",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:135",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:166",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:188",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:33",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:53",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:68",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/tas/v1/zz_generated.deepcopy.go:84",
           "complexity": 2,
-          "callers": 100
+          "callers": 104
         },
         {
           "name": "SetStatus",
           "language": "go",
           "source": "api/tas/v1/trustyaiservice_types.go:155",
           "complexity": 7,
-          "callers": 70
+          "callers": 71
         },
         {
           "name": "IsMigration",
@@ -2235,14 +2235,14 @@
           "language": "go",
           "source": "api/common/ca_bundle.go:31",
           "complexity": 2,
-          "callers": 98
+          "callers": 102
         },
         {
           "name": "DeepCopy",
           "language": "go",
           "source": "api/common/condition.go:31",
           "complexity": 2,
-          "callers": 98
+          "callers": 102
         },
         {
           "name": "DeepCopyInto",
@@ -2414,47 +2414,47 @@
         {
           "type": "For",
           "gvk": "evalhub/v1/EvalHub",
-          "source": "controllers/evalhub/evalhub_controller.go:400"
+          "source": "controllers/evalhub/evalhub_controller.go:409"
         },
         {
           "type": "Owns",
           "gvk": "/v1/ConfigMap",
-          "source": "controllers/evalhub/evalhub_controller.go:404"
+          "source": "controllers/evalhub/evalhub_controller.go:413"
         },
         {
           "type": "Owns",
           "gvk": "/v1/Service",
-          "source": "controllers/evalhub/evalhub_controller.go:403"
+          "source": "controllers/evalhub/evalhub_controller.go:412"
         },
         {
           "type": "Owns",
           "gvk": "apps/v1/Deployment",
-          "source": "controllers/evalhub/evalhub_controller.go:401"
+          "source": "controllers/evalhub/evalhub_controller.go:410"
         },
         {
           "type": "Owns",
           "gvk": "monitoring/v1/ServiceMonitor",
-          "source": "controllers/evalhub/evalhub_controller.go:419"
+          "source": "controllers/evalhub/evalhub_controller.go:428"
         },
         {
           "type": "Owns",
           "gvk": "networking.k8s.io/v1/NetworkPolicy",
-          "source": "controllers/evalhub/evalhub_controller.go:402"
+          "source": "controllers/evalhub/evalhub_controller.go:411"
         },
         {
           "type": "Watches",
           "gvk": "/v1/ConfigMap",
-          "source": "controllers/evalhub/evalhub_controller.go:416"
+          "source": "controllers/evalhub/evalhub_controller.go:425"
         },
         {
           "type": "Watches",
           "gvk": "/v1/Namespace",
-          "source": "controllers/evalhub/evalhub_controller.go:415"
+          "source": "controllers/evalhub/evalhub_controller.go:424"
         },
         {
           "type": "Watches",
           "gvk": "/v1/Pod",
-          "source": "controllers/evalhub/evalhub_controller.go:409"
+          "source": "controllers/evalhub/evalhub_controller.go:418"
         }
       ],
       "steps": [
@@ -2747,24 +2747,24 @@
             {
               "kind": "ConfigMap",
               "verb": "create",
-              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/configmap.go:165"
+              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/configmap.go:173"
             },
             {
               "kind": "ConfigMap",
               "verb": "update",
-              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/configmap.go:170"
+              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/configmap.go:178"
             },
             {
               "kind": "Deployment",
               "group": "apps",
               "verb": "create",
-              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/deployment.go:66"
+              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/deployment.go:74"
             },
             {
               "kind": "Deployment",
               "group": "apps",
               "verb": "update",
-              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/deployment.go:77"
+              "source": "/home/runner/work/_temp/arch-analyzer-repos/trustyai-service-operator/controllers/evalhub/deployment.go:85"
             },
             {
               "kind": "EvalHub",
@@ -2871,7 +2871,7 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/evalhub/evalhub_controller.go:397",
+      "callee_source": "controllers/nemo_guardrails/nemoguardrail_controller.go:376",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -2887,16 +2887,8 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/nemo_guardrails/nemoguardrail_controller.go:376",
+      "callee_source": "controllers/evalhub/evalhub_controller.go:406",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
-      "callee": "SetupWithManager",
-      "callee_source": "controllers/evalhub/evalhub_controller.go:397",
-      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2919,23 +2911,7 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
-      "callee_source": "pkg/tls/watcher.go:108",
-      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
-      "callee": "SetupWithManager",
-      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
-      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
-      "callee": "SetupWithManager",
-      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
+      "callee_source": "controllers/evalhub/evalhub_controller.go:406",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -2943,7 +2919,31 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
+      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
+      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
+      "callee": "SetupWithManager",
       "callee_source": "pkg/tls/watcher.go:108",
+      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
+      "callee": "SetupWithManager",
+      "callee_source": "pkg/tls/watcher.go:108",
+      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
+      "callee": "SetupWithManager",
+      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -3013,82 +3013,82 @@
     },
     {
       "caller": "reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1001",
+      "caller_source": "controllers/evalhub/configmap.go:1073",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:1017",
+      "call_site_source": "controllers/evalhub/configmap.go:1089",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:1059",
+      "call_site_source": "controllers/evalhub/configmap.go:1131",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:1071",
+      "call_site_source": "controllers/evalhub/configmap.go:1143",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:1086",
+      "call_site_source": "controllers/evalhub/configmap.go:1158",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:1111",
+      "call_site_source": "controllers/evalhub/configmap.go:1183",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "reconcileConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:133",
+      "caller": "reconcileConfigMapWithData",
+      "caller_source": "controllers/evalhub/configmap.go:147",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:145",
+      "call_site_source": "controllers/evalhub/configmap.go:159",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "getImageFromConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:510",
+      "caller_source": "controllers/evalhub/configmap.go:582",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:527",
+      "call_site_source": "controllers/evalhub/configmap.go:599",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileProviderConfigMaps",
-      "caller_source": "controllers/evalhub/configmap.go:595",
+      "caller_source": "controllers/evalhub/configmap.go:667",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:647",
+      "call_site_source": "controllers/evalhub/configmap.go:719",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileCollectionConfigMaps",
-      "caller_source": "controllers/evalhub/configmap.go:688",
+      "caller_source": "controllers/evalhub/configmap.go:760",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/configmap.go:768",
+      "call_site_source": "controllers/evalhub/configmap.go:840",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "reconcileDeployment",
-      "caller_source": "controllers/evalhub/deployment.go:25",
+      "caller": "reconcileDeploymentWithConfigData",
+      "caller_source": "controllers/evalhub/deployment.go:33",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/deployment.go:40",
+      "call_site_source": "controllers/evalhub/deployment.go:48",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3101,26 +3101,26 @@
     },
     {
       "caller": "deleteClusterRoleBinding",
-      "caller_source": "controllers/evalhub/evalhub_controller.go:632",
+      "caller_source": "controllers/evalhub/evalhub_controller.go:641",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/evalhub_controller.go:638",
+      "call_site_source": "controllers/evalhub/evalhub_controller.go:647",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "updateStatus",
-      "caller_source": "controllers/evalhub/evalhub_controller.go:653",
+      "caller_source": "controllers/evalhub/evalhub_controller.go:662",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/evalhub_controller.go:658",
+      "call_site_source": "controllers/evalhub/evalhub_controller.go:667",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "updateMCPStatus",
-      "caller_source": "controllers/evalhub/evalhub_controller.go:705",
+      "caller_source": "controllers/evalhub/evalhub_controller.go:714",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/evalhub_controller.go:736",
+      "call_site_source": "controllers/evalhub/evalhub_controller.go:745",
       "confidence": "UNCERTAIN"
     },
     {
@@ -3652,304 +3652,320 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestEvalHubReconciler_updateStatus",
-      "caller_source": "controllers/evalhub/unit_test.go:153",
+      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:1072",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:200",
+      "call_site_source": "controllers/evalhub/unit_test.go:1107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:1072",
+      "callee": "Get",
+      "callee_source": "controllers/lmes/dsc_config_test.go:205",
+      "call_site_source": "controllers/evalhub/unit_test.go:1164",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:1072",
+      "callee": "Get",
+      "callee_source": "controllers/lmes/dsc_config_test.go:205",
+      "call_site_source": "controllers/evalhub/unit_test.go:1209",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_updateStatus",
-      "caller_source": "controllers/evalhub/unit_test.go:153",
+      "caller_source": "controllers/evalhub/unit_test.go:154",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:239",
+      "call_site_source": "controllers/evalhub/unit_test.go:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_updateStatus",
+      "caller_source": "controllers/evalhub/unit_test.go:154",
+      "callee": "Get",
+      "callee_source": "controllers/lmes/dsc_config_test.go:205",
+      "call_site_source": "controllers/evalhub/unit_test.go:240",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDeployment_WithDB",
-      "caller_source": "controllers/evalhub/unit_test.go:1574",
+      "caller_source": "controllers/evalhub/unit_test.go:1653",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1628",
+      "call_site_source": "controllers/evalhub/unit_test.go:1707",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:1713",
+      "caller_source": "controllers/evalhub/unit_test.go:1792",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1772",
+      "call_site_source": "controllers/evalhub/unit_test.go:1851",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:1713",
+      "caller_source": "controllers/evalhub/unit_test.go:1792",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1881",
+      "call_site_source": "controllers/evalhub/unit_test.go:1960",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:1924",
+      "caller_source": "controllers/evalhub/unit_test.go:2003",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1979",
+      "call_site_source": "controllers/evalhub/unit_test.go:2058",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:1924",
+      "caller_source": "controllers/evalhub/unit_test.go:2003",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2045",
+      "call_site_source": "controllers/evalhub/unit_test.go:2124",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileCollectionConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:2097",
+      "caller_source": "controllers/evalhub/unit_test.go:2176",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2152",
+      "call_site_source": "controllers/evalhub/unit_test.go:2231",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileCollectionConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:2097",
+      "caller_source": "controllers/evalhub/unit_test.go:2176",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2218",
+      "call_site_source": "controllers/evalhub/unit_test.go:2297",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2273",
+      "caller_source": "controllers/evalhub/unit_test.go:2352",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2312",
+      "call_site_source": "controllers/evalhub/unit_test.go:2391",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2273",
+      "caller_source": "controllers/evalhub/unit_test.go:2352",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2365",
+      "call_site_source": "controllers/evalhub/unit_test.go:2444",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2273",
+      "caller_source": "controllers/evalhub/unit_test.go:2352",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2399",
+      "call_site_source": "controllers/evalhub/unit_test.go:2478",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantMLFlowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2412",
+      "caller_source": "controllers/evalhub/unit_test.go:2491",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2450",
+      "call_site_source": "controllers/evalhub/unit_test.go:2529",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantMLFlowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2412",
+      "caller_source": "controllers/evalhub/unit_test.go:2491",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2471",
+      "call_site_source": "controllers/evalhub/unit_test.go:2550",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantMLFlowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2412",
+      "caller_source": "controllers/evalhub/unit_test.go:2491",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2486",
+      "call_site_source": "controllers/evalhub/unit_test.go:2565",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2546",
+      "call_site_source": "controllers/evalhub/unit_test.go:2625",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2555",
+      "call_site_source": "controllers/evalhub/unit_test.go:2634",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2566",
+      "call_site_source": "controllers/evalhub/unit_test.go:2645",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2583",
+      "call_site_source": "controllers/evalhub/unit_test.go:2662",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2594",
+      "call_site_source": "controllers/evalhub/unit_test.go:2673",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2637",
+      "call_site_source": "controllers/evalhub/unit_test.go:2716",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2690",
+      "call_site_source": "controllers/evalhub/unit_test.go:2769",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2699",
+      "call_site_source": "controllers/evalhub/unit_test.go:2778",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2739",
+      "call_site_source": "controllers/evalhub/unit_test.go:2818",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2770",
+      "call_site_source": "controllers/evalhub/unit_test.go:2849",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2829",
+      "call_site_source": "controllers/evalhub/unit_test.go:2908",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2835",
+      "call_site_source": "controllers/evalhub/unit_test.go:2914",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2841",
+      "call_site_source": "controllers/evalhub/unit_test.go:2920",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2871",
+      "call_site_source": "controllers/evalhub/unit_test.go:2950",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2912",
+      "call_site_source": "controllers/evalhub/unit_test.go:2991",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2927",
+      "call_site_source": "controllers/evalhub/unit_test.go:3006",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:2971",
+      "call_site_source": "controllers/evalhub/unit_test.go:3050",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3023",
+      "call_site_source": "controllers/evalhub/unit_test.go:3102",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileService",
-      "caller_source": "controllers/evalhub/unit_test.go:28",
+      "caller_source": "controllers/evalhub/unit_test.go:29",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:62",
+      "call_site_source": "controllers/evalhub/unit_test.go:63",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createApplicationsHardwareProfilesReaderRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:3033",
+      "caller_source": "controllers/evalhub/unit_test.go:3112",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3074",
+      "call_site_source": "controllers/evalhub/unit_test.go:3153",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createApplicationsHardwareProfilesReaderRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:3033",
+      "caller_source": "controllers/evalhub/unit_test.go:3112",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3176",
+      "call_site_source": "controllers/evalhub/unit_test.go:3255",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createApplicationsHardwareProfilesReaderRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:3033",
-      "callee": "Get",
-      "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3182",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3112",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
       "call_site_source": "controllers/evalhub/unit_test.go:3261",
@@ -3957,202 +3973,186 @@
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3287",
+      "call_site_source": "controllers/evalhub/unit_test.go:3340",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3309",
+      "call_site_source": "controllers/evalhub/unit_test.go:3366",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3332",
+      "call_site_source": "controllers/evalhub/unit_test.go:3388",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
+      "callee": "Get",
+      "callee_source": "controllers/lmes/dsc_config_test.go:205",
+      "call_site_source": "controllers/evalhub/unit_test.go:3411",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupDiscoveryConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:3337",
+      "caller_source": "controllers/evalhub/unit_test.go:3416",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3368",
+      "call_site_source": "controllers/evalhub/unit_test.go:3447",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupDiscoveryConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:3337",
+      "caller_source": "controllers/evalhub/unit_test.go:3416",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3393",
+      "call_site_source": "controllers/evalhub/unit_test.go:3472",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupDiscoveryConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:3337",
+      "caller_source": "controllers/evalhub/unit_test.go:3416",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:3414",
+      "call_site_source": "controllers/evalhub/unit_test.go:3493",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsServiceAccount",
-      "caller_source": "controllers/evalhub/unit_test.go:360",
+      "caller_source": "controllers/evalhub/unit_test.go:439",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:396",
+      "call_site_source": "controllers/evalhub/unit_test.go:475",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsServiceAccount",
-      "caller_source": "controllers/evalhub/unit_test.go:360",
+      "caller_source": "controllers/evalhub/unit_test.go:439",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:426",
+      "call_site_source": "controllers/evalhub/unit_test.go:505",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsServiceAccount",
-      "caller_source": "controllers/evalhub/unit_test.go:360",
+      "caller_source": "controllers/evalhub/unit_test.go:439",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:438",
+      "call_site_source": "controllers/evalhub/unit_test.go:517",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsAPIAccessRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:465",
+      "caller_source": "controllers/evalhub/unit_test.go:544",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:501",
+      "call_site_source": "controllers/evalhub/unit_test.go:580",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsAPIAccessRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:465",
+      "caller_source": "controllers/evalhub/unit_test.go:544",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:528",
+      "call_site_source": "controllers/evalhub/unit_test.go:607",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsAPIAccessRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:465",
+      "caller_source": "controllers/evalhub/unit_test.go:544",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:551",
+      "call_site_source": "controllers/evalhub/unit_test.go:630",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createAPIAccessRole",
-      "caller_source": "controllers/evalhub/unit_test.go:564",
+      "caller_source": "controllers/evalhub/unit_test.go:643",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:598",
+      "call_site_source": "controllers/evalhub/unit_test.go:677",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createAPIAccessRole",
-      "caller_source": "controllers/evalhub/unit_test.go:564",
+      "caller_source": "controllers/evalhub/unit_test.go:643",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:635",
+      "call_site_source": "controllers/evalhub/unit_test.go:714",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createAPIAccessRoleBinding_RefersToRole",
-      "caller_source": "controllers/evalhub/unit_test.go:646",
+      "caller_source": "controllers/evalhub/unit_test.go:725",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:681",
+      "call_site_source": "controllers/evalhub/unit_test.go:760",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createMLFlowAccessRoleBinding_JobsRole",
-      "caller_source": "controllers/evalhub/unit_test.go:694",
+      "caller_source": "controllers/evalhub/unit_test.go:773",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:734",
+      "call_site_source": "controllers/evalhub/unit_test.go:813",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createMLFlowAccessRoleBinding_JobsRole",
-      "caller_source": "controllers/evalhub/unit_test.go:694",
+      "caller_source": "controllers/evalhub/unit_test.go:773",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:765",
+      "call_site_source": "controllers/evalhub/unit_test.go:844",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createMLFlowAccessRoleBinding_JobsRole",
-      "caller_source": "controllers/evalhub/unit_test.go:694",
+      "caller_source": "controllers/evalhub/unit_test.go:773",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:794",
+      "call_site_source": "controllers/evalhub/unit_test.go:873",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupClusterRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:808",
+      "caller_source": "controllers/evalhub/unit_test.go:887",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:858",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:874",
-      "callee": "Get",
-      "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:905",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:874",
-      "callee": "Get",
-      "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:984",
+      "call_site_source": "controllers/evalhub/unit_test.go:937",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:88",
+      "caller_source": "controllers/evalhub/unit_test.go:89",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:133",
+      "call_site_source": "controllers/evalhub/unit_test.go:134",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:993",
+      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:953",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1028",
+      "call_site_source": "controllers/evalhub/unit_test.go:1063",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:993",
+      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:953",
       "callee": "Get",
       "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1085",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:993",
-      "callee": "Get",
-      "callee_source": "controllers/lmes/dsc_config_test.go:205",
-      "call_site_source": "controllers/evalhub/unit_test.go:1130",
+      "call_site_source": "controllers/evalhub/unit_test.go:984",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5597,82 +5597,82 @@
     },
     {
       "caller": "reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1001",
+      "caller_source": "controllers/evalhub/configmap.go:1073",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:1017",
+      "call_site_source": "controllers/evalhub/configmap.go:1089",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:1059",
+      "call_site_source": "controllers/evalhub/configmap.go:1131",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:1071",
+      "call_site_source": "controllers/evalhub/configmap.go:1143",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:1086",
+      "call_site_source": "controllers/evalhub/configmap.go:1158",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:1051",
+      "caller_source": "controllers/evalhub/configmap.go:1123",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:1111",
+      "call_site_source": "controllers/evalhub/configmap.go:1183",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "reconcileConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:133",
+      "caller": "reconcileConfigMapWithData",
+      "caller_source": "controllers/evalhub/configmap.go:147",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:145",
+      "call_site_source": "controllers/evalhub/configmap.go:159",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "getImageFromConfigMap",
-      "caller_source": "controllers/evalhub/configmap.go:510",
+      "caller_source": "controllers/evalhub/configmap.go:582",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:527",
+      "call_site_source": "controllers/evalhub/configmap.go:599",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileProviderConfigMaps",
-      "caller_source": "controllers/evalhub/configmap.go:595",
+      "caller_source": "controllers/evalhub/configmap.go:667",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:647",
+      "call_site_source": "controllers/evalhub/configmap.go:719",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "reconcileCollectionConfigMaps",
-      "caller_source": "controllers/evalhub/configmap.go:688",
+      "caller_source": "controllers/evalhub/configmap.go:760",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/configmap.go:768",
+      "call_site_source": "controllers/evalhub/configmap.go:840",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "reconcileDeployment",
-      "caller_source": "controllers/evalhub/deployment.go:25",
+      "caller": "reconcileDeploymentWithConfigData",
+      "caller_source": "controllers/evalhub/deployment.go:33",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/deployment.go:40",
+      "call_site_source": "controllers/evalhub/deployment.go:48",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5685,26 +5685,26 @@
     },
     {
       "caller": "deleteClusterRoleBinding",
-      "caller_source": "controllers/evalhub/evalhub_controller.go:632",
+      "caller_source": "controllers/evalhub/evalhub_controller.go:641",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/evalhub_controller.go:638",
+      "call_site_source": "controllers/evalhub/evalhub_controller.go:647",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "updateStatus",
-      "caller_source": "controllers/evalhub/evalhub_controller.go:653",
+      "caller_source": "controllers/evalhub/evalhub_controller.go:662",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/evalhub_controller.go:658",
+      "call_site_source": "controllers/evalhub/evalhub_controller.go:667",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "updateMCPStatus",
-      "caller_source": "controllers/evalhub/evalhub_controller.go:705",
+      "caller_source": "controllers/evalhub/evalhub_controller.go:714",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/evalhub_controller.go:736",
+      "call_site_source": "controllers/evalhub/evalhub_controller.go:745",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6236,304 +6236,320 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestEvalHubReconciler_updateStatus",
-      "caller_source": "controllers/evalhub/unit_test.go:153",
+      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:1072",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:200",
+      "call_site_source": "controllers/evalhub/unit_test.go:1107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:1072",
+      "callee": "Get",
+      "callee_source": "controllers/utils/network_policy_test.go:530",
+      "call_site_source": "controllers/evalhub/unit_test.go:1164",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:1072",
+      "callee": "Get",
+      "callee_source": "controllers/utils/network_policy_test.go:530",
+      "call_site_source": "controllers/evalhub/unit_test.go:1209",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_updateStatus",
-      "caller_source": "controllers/evalhub/unit_test.go:153",
+      "caller_source": "controllers/evalhub/unit_test.go:154",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:239",
+      "call_site_source": "controllers/evalhub/unit_test.go:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_updateStatus",
+      "caller_source": "controllers/evalhub/unit_test.go:154",
+      "callee": "Get",
+      "callee_source": "controllers/utils/network_policy_test.go:530",
+      "call_site_source": "controllers/evalhub/unit_test.go:240",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDeployment_WithDB",
-      "caller_source": "controllers/evalhub/unit_test.go:1574",
+      "caller_source": "controllers/evalhub/unit_test.go:1653",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1628",
+      "call_site_source": "controllers/evalhub/unit_test.go:1707",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:1713",
+      "caller_source": "controllers/evalhub/unit_test.go:1792",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1772",
+      "call_site_source": "controllers/evalhub/unit_test.go:1851",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:1713",
+      "caller_source": "controllers/evalhub/unit_test.go:1792",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1881",
+      "call_site_source": "controllers/evalhub/unit_test.go:1960",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:1924",
+      "caller_source": "controllers/evalhub/unit_test.go:2003",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1979",
+      "call_site_source": "controllers/evalhub/unit_test.go:2058",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileProviderConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:1924",
+      "caller_source": "controllers/evalhub/unit_test.go:2003",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2045",
+      "call_site_source": "controllers/evalhub/unit_test.go:2124",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileCollectionConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:2097",
+      "caller_source": "controllers/evalhub/unit_test.go:2176",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2152",
+      "call_site_source": "controllers/evalhub/unit_test.go:2231",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileCollectionConfigMaps_singleTenancy",
-      "caller_source": "controllers/evalhub/unit_test.go:2097",
+      "caller_source": "controllers/evalhub/unit_test.go:2176",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2218",
+      "call_site_source": "controllers/evalhub/unit_test.go:2297",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2273",
+      "caller_source": "controllers/evalhub/unit_test.go:2352",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2312",
+      "call_site_source": "controllers/evalhub/unit_test.go:2391",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2273",
+      "caller_source": "controllers/evalhub/unit_test.go:2352",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2365",
+      "call_site_source": "controllers/evalhub/unit_test.go:2444",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2273",
+      "caller_source": "controllers/evalhub/unit_test.go:2352",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2399",
+      "call_site_source": "controllers/evalhub/unit_test.go:2478",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantMLFlowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2412",
+      "caller_source": "controllers/evalhub/unit_test.go:2491",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2450",
+      "call_site_source": "controllers/evalhub/unit_test.go:2529",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantMLFlowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2412",
+      "caller_source": "controllers/evalhub/unit_test.go:2491",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2471",
+      "call_site_source": "controllers/evalhub/unit_test.go:2550",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createTenantMLFlowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:2412",
+      "caller_source": "controllers/evalhub/unit_test.go:2491",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2486",
+      "call_site_source": "controllers/evalhub/unit_test.go:2565",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2546",
+      "call_site_source": "controllers/evalhub/unit_test.go:2625",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2555",
+      "call_site_source": "controllers/evalhub/unit_test.go:2634",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2566",
+      "call_site_source": "controllers/evalhub/unit_test.go:2645",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2583",
+      "call_site_source": "controllers/evalhub/unit_test.go:2662",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2594",
+      "call_site_source": "controllers/evalhub/unit_test.go:2673",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2637",
+      "call_site_source": "controllers/evalhub/unit_test.go:2716",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2690",
+      "call_site_source": "controllers/evalhub/unit_test.go:2769",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2699",
+      "call_site_source": "controllers/evalhub/unit_test.go:2778",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2739",
+      "call_site_source": "controllers/evalhub/unit_test.go:2818",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2770",
+      "call_site_source": "controllers/evalhub/unit_test.go:2849",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2829",
+      "call_site_source": "controllers/evalhub/unit_test.go:2908",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2835",
+      "call_site_source": "controllers/evalhub/unit_test.go:2914",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2841",
+      "call_site_source": "controllers/evalhub/unit_test.go:2920",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2871",
+      "call_site_source": "controllers/evalhub/unit_test.go:2950",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2912",
+      "call_site_source": "controllers/evalhub/unit_test.go:2991",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2927",
+      "call_site_source": "controllers/evalhub/unit_test.go:3006",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:2971",
+      "call_site_source": "controllers/evalhub/unit_test.go:3050",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileTenantNamespaces",
-      "caller_source": "controllers/evalhub/unit_test.go:2493",
+      "caller_source": "controllers/evalhub/unit_test.go:2572",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3023",
+      "call_site_source": "controllers/evalhub/unit_test.go:3102",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileService",
-      "caller_source": "controllers/evalhub/unit_test.go:28",
+      "caller_source": "controllers/evalhub/unit_test.go:29",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:62",
+      "call_site_source": "controllers/evalhub/unit_test.go:63",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createApplicationsHardwareProfilesReaderRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:3033",
+      "caller_source": "controllers/evalhub/unit_test.go:3112",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3074",
+      "call_site_source": "controllers/evalhub/unit_test.go:3153",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createApplicationsHardwareProfilesReaderRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:3033",
+      "caller_source": "controllers/evalhub/unit_test.go:3112",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3176",
+      "call_site_source": "controllers/evalhub/unit_test.go:3255",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createApplicationsHardwareProfilesReaderRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:3033",
-      "callee": "Get",
-      "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3182",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3112",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
       "call_site_source": "controllers/evalhub/unit_test.go:3261",
@@ -6541,202 +6557,186 @@
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3287",
+      "call_site_source": "controllers/evalhub/unit_test.go:3340",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3309",
+      "call_site_source": "controllers/evalhub/unit_test.go:3366",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:3231",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3332",
+      "call_site_source": "controllers/evalhub/unit_test.go:3388",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestEvalHubReconciler_reconcileDiscoveryConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:3310",
+      "callee": "Get",
+      "callee_source": "controllers/utils/network_policy_test.go:530",
+      "call_site_source": "controllers/evalhub/unit_test.go:3411",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupDiscoveryConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:3337",
+      "caller_source": "controllers/evalhub/unit_test.go:3416",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3368",
+      "call_site_source": "controllers/evalhub/unit_test.go:3447",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupDiscoveryConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:3337",
+      "caller_source": "controllers/evalhub/unit_test.go:3416",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3393",
+      "call_site_source": "controllers/evalhub/unit_test.go:3472",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupDiscoveryConfigMaps",
-      "caller_source": "controllers/evalhub/unit_test.go:3337",
+      "caller_source": "controllers/evalhub/unit_test.go:3416",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:3414",
+      "call_site_source": "controllers/evalhub/unit_test.go:3493",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsServiceAccount",
-      "caller_source": "controllers/evalhub/unit_test.go:360",
+      "caller_source": "controllers/evalhub/unit_test.go:439",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:396",
+      "call_site_source": "controllers/evalhub/unit_test.go:475",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsServiceAccount",
-      "caller_source": "controllers/evalhub/unit_test.go:360",
+      "caller_source": "controllers/evalhub/unit_test.go:439",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:426",
+      "call_site_source": "controllers/evalhub/unit_test.go:505",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsServiceAccount",
-      "caller_source": "controllers/evalhub/unit_test.go:360",
+      "caller_source": "controllers/evalhub/unit_test.go:439",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:438",
+      "call_site_source": "controllers/evalhub/unit_test.go:517",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsAPIAccessRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:465",
+      "caller_source": "controllers/evalhub/unit_test.go:544",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:501",
+      "call_site_source": "controllers/evalhub/unit_test.go:580",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsAPIAccessRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:465",
+      "caller_source": "controllers/evalhub/unit_test.go:544",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:528",
+      "call_site_source": "controllers/evalhub/unit_test.go:607",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createJobsAPIAccessRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:465",
+      "caller_source": "controllers/evalhub/unit_test.go:544",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:551",
+      "call_site_source": "controllers/evalhub/unit_test.go:630",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createAPIAccessRole",
-      "caller_source": "controllers/evalhub/unit_test.go:564",
+      "caller_source": "controllers/evalhub/unit_test.go:643",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:598",
+      "call_site_source": "controllers/evalhub/unit_test.go:677",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createAPIAccessRole",
-      "caller_source": "controllers/evalhub/unit_test.go:564",
+      "caller_source": "controllers/evalhub/unit_test.go:643",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:635",
+      "call_site_source": "controllers/evalhub/unit_test.go:714",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createAPIAccessRoleBinding_RefersToRole",
-      "caller_source": "controllers/evalhub/unit_test.go:646",
+      "caller_source": "controllers/evalhub/unit_test.go:725",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:681",
+      "call_site_source": "controllers/evalhub/unit_test.go:760",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createMLFlowAccessRoleBinding_JobsRole",
-      "caller_source": "controllers/evalhub/unit_test.go:694",
+      "caller_source": "controllers/evalhub/unit_test.go:773",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:734",
+      "call_site_source": "controllers/evalhub/unit_test.go:813",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createMLFlowAccessRoleBinding_JobsRole",
-      "caller_source": "controllers/evalhub/unit_test.go:694",
+      "caller_source": "controllers/evalhub/unit_test.go:773",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:765",
+      "call_site_source": "controllers/evalhub/unit_test.go:844",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_createMLFlowAccessRoleBinding_JobsRole",
-      "caller_source": "controllers/evalhub/unit_test.go:694",
+      "caller_source": "controllers/evalhub/unit_test.go:773",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:794",
+      "call_site_source": "controllers/evalhub/unit_test.go:873",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_cleanupClusterRoleBinding",
-      "caller_source": "controllers/evalhub/unit_test.go:808",
+      "caller_source": "controllers/evalhub/unit_test.go:887",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:858",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:874",
-      "callee": "Get",
-      "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:905",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:874",
-      "callee": "Get",
-      "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:984",
+      "call_site_source": "controllers/evalhub/unit_test.go:937",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestEvalHubReconciler_reconcileConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:88",
+      "caller_source": "controllers/evalhub/unit_test.go:89",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:133",
+      "call_site_source": "controllers/evalhub/unit_test.go:134",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:993",
+      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:953",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1028",
+      "call_site_source": "controllers/evalhub/unit_test.go:1063",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:993",
+      "caller": "TestEvalHubReconciler_reconcileMLflowCABundleConfigMap",
+      "caller_source": "controllers/evalhub/unit_test.go:953",
       "callee": "Get",
       "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1085",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestEvalHubReconciler_reconcileServiceCAConfigMap",
-      "caller_source": "controllers/evalhub/unit_test.go:993",
-      "callee": "Get",
-      "callee_source": "controllers/utils/network_policy_test.go:530",
-      "call_site_source": "controllers/evalhub/unit_test.go:1130",
+      "call_site_source": "controllers/evalhub/unit_test.go:984",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6836,7 +6836,7 @@
       "confidence": "UNCERTAIN"
     }
   ],
-  "call_relationships_truncated": 17188,
+  "call_relationships_truncated": 17707,
   "test_relationships": [
     {
       "test": "TestConvertFrom",
@@ -6881,78 +6881,113 @@
       "confidence": "CERTAIN"
     },
     {
-      "test": "TestConvertToPreservesV1OnlyOTELFields",
+      "test": "TestConvertFromDropsV1OnlyInit",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:198",
+      "target": "ConvertFrom",
+      "target_source": "api/evalhub/v1alpha1/conversion.go:95",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestConvertFromDropsV1OnlyInit",
       "test_source": "api/evalhub/v1alpha1/conversion_test.go:198",
       "target": "ConvertTo",
       "target_source": "api/evalhub/v1alpha1/conversion.go:12",
       "confidence": "CERTAIN"
     },
     {
-      "test": "TestConvertToPreservesV1OnlyOTELFields",
+      "test": "TestConvertFromDropsV1OnlyInit",
       "test_source": "api/evalhub/v1alpha1/conversion_test.go:198",
       "target": "int32Ptr",
       "target_source": "api/evalhub/v1alpha1/conversion_test.go:14",
       "confidence": "CERTAIN"
     },
     {
+      "test": "TestConvertToPreservesPrePopulatedV1OnlyInit",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:224",
+      "target": "ConvertTo",
+      "target_source": "api/evalhub/v1alpha1/conversion.go:12",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestConvertToPreservesPrePopulatedV1OnlyInit",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:224",
+      "target": "int32Ptr",
+      "target_source": "api/evalhub/v1alpha1/conversion_test.go:14",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestConvertToPreservesV1OnlyOTELFields",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:248",
+      "target": "ConvertTo",
+      "target_source": "api/evalhub/v1alpha1/conversion.go:12",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestConvertToPreservesV1OnlyOTELFields",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:248",
+      "target": "int32Ptr",
+      "target_source": "api/evalhub/v1alpha1/conversion_test.go:14",
+      "confidence": "CERTAIN"
+    },
+    {
       "test": "TestConvertFromDropsV1OnlyOTELFields",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:250",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:300",
       "target": "ConvertFrom",
       "target_source": "api/evalhub/v1alpha1/conversion.go:95",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertFromDropsV1OnlyOTELFields",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:250",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:300",
       "target": "int32Ptr",
       "target_source": "api/evalhub/v1alpha1/conversion_test.go:14",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertDeepCopyIsolation",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:278",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:328",
       "target": "ConvertTo",
       "target_source": "api/evalhub/v1alpha1/conversion.go:12",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertDeepCopyIsolation",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:278",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:328",
       "target": "fullEvalHubV1Alpha1",
       "target_source": "api/evalhub/v1alpha1/conversion_test.go:16",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertToDefaultsTenancyMulti",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:302",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:352",
       "target": "ConvertTo",
       "target_source": "api/evalhub/v1alpha1/conversion.go:12",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertToDefaultsTenancyMulti",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:302",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:352",
       "target": "IsMultiTenancy",
-      "target_source": "api/evalhub/v1/evalhub_types.go:395",
+      "target_source": "api/evalhub/v1/evalhub_types.go:409",
       "confidence": "INFERRED"
     },
     {
       "test": "TestConvertToDefaultsTenancyMulti",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:302",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:352",
       "target": "int32Ptr",
       "target_source": "api/evalhub/v1alpha1/conversion_test.go:14",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertFromDropsTenancy",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:322",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:372",
       "target": "ConvertFrom",
       "target_source": "api/evalhub/v1alpha1/conversion.go:95",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestConvertFromDropsTenancy",
-      "test_source": "api/evalhub/v1alpha1/conversion_test.go:322",
+      "test_source": "api/evalhub/v1alpha1/conversion_test.go:372",
       "target": "int32Ptr",
       "target_source": "api/evalhub/v1alpha1/conversion_test.go:14",
       "confidence": "CERTAIN"
@@ -7353,7 +7388,7 @@
       "test": "TestReconcileCollectionConfigMapsRejectsUnselectedOverrideWithoutCollections",
       "test_source": "controllers/evalhub/collection_overrides_test.go:130",
       "target": "reconcileCollectionConfigMaps",
-      "target_source": "controllers/evalhub/configmap.go:688",
+      "target_source": "controllers/evalhub/configmap.go:760",
       "confidence": "CERTAIN"
     },
     {
@@ -7388,7 +7423,7 @@
       "test": "TestReconcileCollectionConfigMapsAppliesSystemCollectionOverride",
       "test_source": "controllers/evalhub/collection_overrides_test.go:142",
       "target": "reconcileCollectionConfigMaps",
-      "target_source": "controllers/evalhub/configmap.go:688",
+      "target_source": "controllers/evalhub/configmap.go:760",
       "confidence": "CERTAIN"
     },
     {
@@ -7423,14 +7458,14 @@
       "test": "TestReconcileCollectionConfigMapsDoesNotPartiallyUpdateOnInvalidOverride",
       "test_source": "controllers/evalhub/collection_overrides_test.go:204",
       "target": "reconcileCollectionConfigMaps",
-      "target_source": "controllers/evalhub/configmap.go:688",
+      "target_source": "controllers/evalhub/configmap.go:760",
       "confidence": "CERTAIN"
     },
     {
       "test": "TestReconcileCollectionConfigMapsRejectsOverrideForTenantFallback",
       "test_source": "controllers/evalhub/collection_overrides_test.go:256",
       "target": "reconcileCollectionConfigMaps",
-      "target_source": "controllers/evalhub/configmap.go:688",
+      "target_source": "controllers/evalhub/configmap.go:760",
       "confidence": "CERTAIN"
     },
     {
@@ -7451,7 +7486,7 @@
       "test": "TestRenderCollectionConfigMapData",
       "test_source": "controllers/evalhub/collection_overrides_test.go:29",
       "target": "renderCollectionConfigMapData",
-      "target_source": "controllers/evalhub/configmap.go:827",
+      "target_source": "controllers/evalhub/configmap.go:899",
       "confidence": "CERTAIN"
     },
     {
@@ -7465,7 +7500,7 @@
       "test": "TestCollectionOverridesByName",
       "test_source": "controllers/evalhub/collection_overrides_test.go:98",
       "target": "collectionOverridesByName",
-      "target_source": "controllers/evalhub/configmap.go:798",
+      "target_source": "controllers/evalhub/configmap.go:870",
       "confidence": "CERTAIN"
     },
     {
@@ -8970,35 +9005,28 @@
       "test": "TestEvalHubPodIdentityPredicates",
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:102",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
     {
       "test": "TestEvalHubPodIdentityPredicates",
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:143",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:158",
       "confidence": "UNCERTAIN"
     },
     {
       "test": "TestEvalHubPodIdentityPredicates",
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:165",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:180",
       "confidence": "UNCERTAIN"
     },
     {
       "test": "TestEvalHubPodIdentityPredicates",
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestEvalHubPodIdentityPredicates",
-      "test_source": "controllers/evalhub/pod_watch_test.go:108",
-      "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:270",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:249",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9019,7 +9047,7 @@
       "test": "TestEvalHubPodIdentityPredicates",
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:325",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:330",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9040,6 +9068,13 @@
       "test": "TestEvalHubPodIdentityPredicates",
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:365",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "test": "TestEvalHubPodIdentityPredicates",
+      "test_source": "controllers/evalhub/pod_watch_test.go:108",
+      "target": "DeepCopy",
       "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:51",
       "confidence": "UNCERTAIN"
     },
@@ -9048,6 +9083,13 @@
       "test_source": "controllers/evalhub/pod_watch_test.go:108",
       "target": "DeepCopy",
       "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:70",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "test": "TestEvalHubPodIdentityPredicates",
+      "test_source": "controllers/evalhub/pod_watch_test.go:108",
+      "target": "DeepCopy",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:93",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9859,7 +9901,7 @@
       "test": "TestManagedTLSProfilesAndHTTPConfig",
       "test_source": "controllers/evalhub/tls_contract_test.go:153",
       "target": "buildDeploymentSpec",
-      "target_source": "controllers/evalhub/deployment.go:82",
+      "target_source": "controllers/evalhub/deployment.go:90",
       "confidence": "CERTAIN"
     },
     {
@@ -9880,7 +9922,7 @@
       "test": "TestManagedTLSProfilesAndHTTPConfig",
       "test_source": "controllers/evalhub/tls_contract_test.go:153",
       "target": "generateConfigData",
-      "target_source": "controllers/evalhub/configmap.go:175",
+      "target_source": "controllers/evalhub/configmap.go:183",
       "confidence": "CERTAIN"
     },
     {
@@ -9922,35 +9964,28 @@
       "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:102",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
     {
       "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:143",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:158",
       "confidence": "UNCERTAIN"
     },
     {
       "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:165",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:180",
       "confidence": "UNCERTAIN"
     },
     {
       "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:229",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:270",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:249",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9971,7 +10006,7 @@
       "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
-      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:325",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:330",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9992,6 +10027,13 @@
       "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:365",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
+      "test_source": "controllers/evalhub/tls_contract_test.go:204",
+      "target": "DeepCopy",
       "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:51",
       "confidence": "UNCERTAIN"
     },
@@ -10000,6 +10042,13 @@
       "test_source": "controllers/evalhub/tls_contract_test.go:204",
       "target": "DeepCopy",
       "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:70",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
+      "test_source": "controllers/evalhub/tls_contract_test.go:204",
+      "target": "DeepCopy",
+      "target_source": "api/evalhub/v1/zz_generated.deepcopy.go:93",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10288,58 +10337,9 @@
       "target": "DeepCopy",
       "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:306",
       "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:328",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:357",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:377",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:399",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:41",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:56",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "test": "TestManagedTLSPolicyChangesRefreshExistingDeployments",
-      "test_source": "controllers/evalhub/tls_contract_test.go:204",
-      "target": "DeepCopy",
-      "target_source": "api/nemo_guardrails/v1alpha1/zz_generated.deepcopy.go:76",
-      "confidence": "UNCERTAIN"
     }
   ],
-  "test_relationships_truncated": 3573,
+  "test_relationships_truncated": 3695,
   "coverage": {
     "api_types": "rich",
     "component_refs": "moderate",

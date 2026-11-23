@@ -3,7 +3,7 @@
   "component": "eval-hub",
   "repo": "red-hat-data-services/eval-hub",
   "commit_sha": "3e9ccc99182089813e6a1ee613e8042a878f01bb",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "eval-hub is a Kubernetes component. Dockerfile EXPOSE ports: 8080, 8081. connecting to external services: requests, s3. runtime dependencies: MLflow, S3. with 545 operator config constants (5 image references). exposing 8 Prometheus metrics. Python k8s client with 1 API call(s). integrates with Kueue via labels/annotations. references components: mlflow (config, import).",
   "repository_description": "A lightweight REST API service for orchestrating LLM evaluations across multiple backends. Written in Go, it routes evaluation requests to frameworks like lm-evaluation-harness, RAGAS, Garak, and GuideLLM orchestrated via a complementary SDK, tracks experiments via MLflow, and runs natively on OpenShift.",
   "description_source": "README.md:17",
@@ -4834,6 +4834,14 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
+      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
+      "call_site_source": "cmd/eval_hub/main.go:235",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
       "call_site_source": "cmd/eval_hub/main.go:235",
       "confidence": "UNCERTAIN"
@@ -4850,22 +4858,6 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
-      "call_site_source": "cmd/eval_hub/main.go:235",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
-      "call_site_source": "cmd/eval_hub/main.go:244",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
       "call_site_source": "cmd/eval_hub/main.go:244",
       "confidence": "UNCERTAIN"
@@ -4890,8 +4882,8 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
-      "call_site_source": "cmd/eval_hub/main.go:251",
+      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
+      "call_site_source": "cmd/eval_hub/main.go:244",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4914,7 +4906,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
+      "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
       "call_site_source": "cmd/eval_hub/main.go:251",
       "confidence": "UNCERTAIN"
     },
@@ -4923,7 +4915,7 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
-      "call_site_source": "cmd/eval_hub/main.go:258",
+      "call_site_source": "cmd/eval_hub/main.go:251",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4954,6 +4946,22 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
+      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
+      "call_site_source": "cmd/eval_hub/main.go:258",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
+      "call_site_source": "cmd/eval_hub/main.go:265",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
       "call_site_source": "cmd/eval_hub/main.go:265",
       "confidence": "UNCERTAIN"
@@ -4972,22 +4980,6 @@
       "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
       "call_site_source": "cmd/eval_hub/main.go:265",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
-      "call_site_source": "cmd/eval_hub/main.go:265",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_runtime_init/main.go:69",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
-      "call_site_source": "cmd/eval_runtime_init/main.go:73",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5000,6 +4992,30 @@
     },
     {
       "caller": "main",
+      "caller_source": "cmd/eval_runtime_init/main.go:69",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
+      "call_site_source": "cmd/eval_runtime_init/main.go:73",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
+      "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
+      "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
@@ -5019,15 +5035,7 @@
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
       "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
-      "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:465",
-      "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
+      "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5056,14 +5064,6 @@
     },
     {
       "caller": "main",
-      "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/handlers/handlers_test.go:104",
-      "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "pkg/mlflowclient/schemas.go:31",
@@ -5202,7 +5202,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/execution_context.go:190",
+      "callee_source": "internal/eval_hub/server/server.go:708",
       "call_site_source": "cmd/eval_hub/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -5226,7 +5226,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
+      "callee_source": "internal/eval_hub/server/execution_context.go:190",
       "call_site_source": "cmd/eval_hub/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -5234,14 +5234,6 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/execution_context.go:190",
-      "call_site_source": "cmd/eval_hub/main.go:235",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
       "callee_source": "internal/eval_hub/server/server.go:708",
       "call_site_source": "cmd/eval_hub/main.go:235",
       "confidence": "UNCERTAIN"
@@ -5258,7 +5250,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
+      "callee_source": "internal/eval_hub/server/execution_context.go:190",
       "call_site_source": "cmd/eval_hub/main.go:235",
       "confidence": "UNCERTAIN"
     },
@@ -5266,8 +5258,8 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/execution_context.go:190",
-      "call_site_source": "cmd/eval_hub/main.go:244",
+      "callee_source": "internal/eval_hub/server/server.go:708",
+      "call_site_source": "cmd/eval_hub/main.go:235",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5299,14 +5291,14 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "internal/eval_hub/server/execution_context.go:190",
-      "call_site_source": "cmd/eval_hub/main.go:251",
+      "call_site_source": "cmd/eval_hub/main.go:244",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/execution_context.go:190",
+      "callee_source": "internal/eval_hub/server/server.go:708",
       "call_site_source": "cmd/eval_hub/main.go:251",
       "confidence": "UNCERTAIN"
     },
@@ -5322,7 +5314,15 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
+      "callee_source": "internal/eval_hub/server/execution_context.go:190",
+      "call_site_source": "cmd/eval_hub/main.go:251",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/server/execution_context.go:190",
       "call_site_source": "cmd/eval_hub/main.go:251",
       "confidence": "UNCERTAIN"
     },
@@ -5362,7 +5362,15 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/execution_context.go:190",
+      "callee_source": "internal/eval_hub/server/server.go:708",
+      "call_site_source": "cmd/eval_hub/main.go:265",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/server/server.go:708",
       "call_site_source": "cmd/eval_hub/main.go:265",
       "confidence": "UNCERTAIN"
     },
@@ -5378,24 +5386,8 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
+      "callee_source": "internal/eval_hub/server/execution_context.go:190",
       "call_site_source": "cmd/eval_hub/main.go:265",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
-      "call_site_source": "cmd/eval_hub/main.go:265",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_runtime_init/main.go:69",
-      "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
-      "call_site_source": "cmd/eval_runtime_init/main.go:73",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5408,6 +5400,14 @@
     },
     {
       "caller": "main",
+      "caller_source": "cmd/eval_runtime_init/main.go:69",
+      "callee": "Error",
+      "callee_source": "internal/eval_hub/server/server.go:708",
+      "call_site_source": "cmd/eval_runtime_init/main.go:73",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
       "callee_source": "internal/eval_hub/server/execution_context.go:190",
@@ -5458,7 +5458,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/server.go:708",
+      "callee_source": "internal/eval_hub/server/execution_context.go:190",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
       "confidence": "UNCERTAIN"
     },
@@ -5466,7 +5466,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
-      "callee_source": "internal/eval_hub/server/execution_context.go:190",
+      "callee_source": "internal/eval_hub/server/server.go:708",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
       "confidence": "UNCERTAIN"
     },
@@ -6018,30 +6018,6 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_hub/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_hub/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:194",
-      "call_site_source": "cmd/eval_hub/main.go:200",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_hub/main.go:200",
       "confidence": "UNCERTAIN"
@@ -6058,7 +6034,31 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
+      "call_site_source": "cmd/eval_hub/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
+      "call_site_source": "cmd/eval_hub/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:203",
+      "call_site_source": "cmd/eval_hub/main.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_hub/main.go:200",
       "confidence": "UNCERTAIN"
     },
@@ -6074,23 +6074,23 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_hub/main.go:235",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_hub/main.go:235",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:203",
+      "call_site_source": "cmd/eval_hub/main.go:235",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
+      "call_site_source": "cmd/eval_hub/main.go:235",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
       "call_site_source": "cmd/eval_hub/main.go:235",
       "confidence": "UNCERTAIN"
     },
@@ -6114,7 +6114,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:203",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
       "call_site_source": "cmd/eval_hub/main.go:244",
       "confidence": "UNCERTAIN"
     },
@@ -6130,15 +6130,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_hub/main.go:244",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:194",
+      "callee_source": "internal/agent/llm/client.go:203",
       "call_site_source": "cmd/eval_hub/main.go:244",
       "confidence": "UNCERTAIN"
     },
@@ -6155,6 +6147,14 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:203",
+      "call_site_source": "cmd/eval_hub/main.go:244",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_hub/main.go:244",
       "confidence": "UNCERTAIN"
     },
@@ -6186,14 +6186,6 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:203",
-      "call_site_source": "cmd/eval_hub/main.go:251",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_hub/main.go:251",
       "confidence": "UNCERTAIN"
@@ -6211,6 +6203,14 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:203",
+      "call_site_source": "cmd/eval_hub/main.go:251",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
       "call_site_source": "cmd/eval_hub/main.go:258",
       "confidence": "UNCERTAIN"
     },
@@ -6219,6 +6219,14 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:194",
+      "call_site_source": "cmd/eval_hub/main.go:258",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Error",
+      "callee_source": "internal/agent/llm/client.go:203",
       "call_site_source": "cmd/eval_hub/main.go:258",
       "confidence": "UNCERTAIN"
     },
@@ -6251,14 +6259,14 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
       "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_hub/main.go:258",
+      "call_site_source": "cmd/eval_hub/main.go:265",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
+      "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_hub/main.go:265",
       "confidence": "UNCERTAIN"
     },
@@ -6292,30 +6300,6 @@
       "callee": "Error",
       "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
       "call_site_source": "cmd/eval_hub/main.go:265",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:194",
-      "call_site_source": "cmd/eval_hub/main.go:265",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_runtime_init/main.go:69",
-      "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:203",
-      "call_site_source": "cmd/eval_runtime_init/main.go:73",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_runtime_init/main.go:69",
-      "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_runtime_init/main.go:73",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6328,6 +6312,22 @@
     },
     {
       "caller": "main",
+      "caller_source": "cmd/eval_runtime_init/main.go:69",
+      "callee": "Error",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
+      "call_site_source": "cmd/eval_runtime_init/main.go:73",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_runtime_init/main.go:69",
+      "callee": "Error",
+      "callee_source": "internal/agent/llm/client.go:203",
+      "call_site_source": "cmd/eval_runtime_init/main.go:73",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:194",
@@ -6362,14 +6362,6 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
-      "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
-      "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:203",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
       "confidence": "UNCERTAIN"
@@ -6378,8 +6370,8 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:194",
-      "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:144",
+      "call_site_source": "cmd/eval_runtime_sidecar/main.go:113",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6402,6 +6394,14 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
+      "callee_source": "internal/agent/llm/client.go:203",
+      "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
+      "callee": "Error",
       "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
       "confidence": "UNCERTAIN"
@@ -6410,7 +6410,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Error",
-      "callee_source": "internal/agent/llm/client.go:203",
+      "callee_source": "internal/agent/llm/client.go:194",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:122",
       "confidence": "UNCERTAIN"
     },
@@ -6594,6 +6594,14 @@
       "caller": "main",
       "caller_source": "cmd/validate_configs/main.go:14",
       "callee": "String",
+      "callee_source": "pkg/api/common.go:22",
+      "call_site_source": "cmd/validate_configs/main.go:15",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/validate_configs/main.go:14",
+      "callee": "String",
       "callee_source": "pkg/api/common.go:30",
       "call_site_source": "cmd/validate_configs/main.go:15",
       "confidence": "UNCERTAIN"
@@ -6603,14 +6611,6 @@
       "caller_source": "cmd/validate_configs/main.go:14",
       "callee": "String",
       "callee_source": "pkg/api/evaluations.go:69",
-      "call_site_source": "cmd/validate_configs/main.go:15",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/validate_configs/main.go:14",
-      "callee": "String",
-      "callee_source": "pkg/api/common.go:22",
       "call_site_source": "cmd/validate_configs/main.go:15",
       "confidence": "UNCERTAIN"
     },
@@ -6674,6 +6674,22 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
+      "callee_source": "internal/eval_hub/evalcards/export_budgets_test.go:37",
+      "call_site_source": "cmd/eval_hub/main.go:243",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Close",
+      "callee_source": "internal/eval_hub/evalcards/oci_factory.go:159",
+      "call_site_source": "cmd/eval_hub/main.go:243",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Close",
       "callee_source": "internal/eval_hub/evalcards/oci_publisher.go:41",
       "call_site_source": "cmd/eval_hub/main.go:243",
       "confidence": "UNCERTAIN"
@@ -6691,15 +6707,15 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
       "callee_source": "internal/eval_hub/evalcards/export_budgets_test.go:37",
-      "call_site_source": "cmd/eval_hub/main.go:243",
+      "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
-      "callee_source": "internal/eval_hub/evalcards/oci_factory.go:159",
-      "call_site_source": "cmd/eval_hub/main.go:243",
+      "callee_source": "internal/eval_hub/evalcards/persistence_test.go:367",
+      "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6716,30 +6732,6 @@
       "callee": "Close",
       "callee_source": "internal/eval_hub/evalcards/oci_publisher.go:41",
       "call_site_source": "cmd/eval_hub/main.go:250",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Close",
-      "callee_source": "internal/eval_hub/evalcards/persistence_test.go:367",
-      "call_site_source": "cmd/eval_hub/main.go:250",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Close",
-      "callee_source": "internal/eval_hub/evalcards/export_budgets_test.go:37",
-      "call_site_source": "cmd/eval_hub/main.go:250",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Close",
-      "callee_source": "internal/eval_hub/runtimes/k8s/k8s_runtime.go:109",
-      "call_site_source": "cmd/eval_hub/main.go:243",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6762,6 +6754,14 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
+      "callee_source": "internal/eval_hub/runtimes/k8s/k8s_runtime.go:109",
+      "call_site_source": "cmd/eval_hub/main.go:243",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Close",
       "callee_source": "internal/eval_hub/runtimes/k8s/k8s_helper.go:97",
       "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
@@ -6770,7 +6770,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
-      "callee_source": "internal/eval_hub/runtimes/k8s/k8s_runtime.go:109",
+      "callee_source": "internal/eval_hub/runtimes/k8s/k8s_runtime_unit_test.go:164",
       "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
     },
@@ -6778,7 +6778,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
-      "callee_source": "internal/eval_hub/runtimes/k8s/k8s_runtime_unit_test.go:164",
+      "callee_source": "internal/eval_hub/runtimes/k8s/k8s_runtime.go:109",
       "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
     },
@@ -6802,7 +6802,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
-      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:425",
+      "callee_source": "internal/agent/llm/client_test.go:385",
       "call_site_source": "cmd/eval_hub/main.go:243",
       "confidence": "UNCERTAIN"
     },
@@ -6818,32 +6818,8 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
-      "callee_source": "internal/agent/llm/client_test.go:385",
-      "call_site_source": "cmd/eval_hub/main.go:243",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Close",
       "callee_source": "internal/agent/llm/client_test.go:377",
       "call_site_source": "cmd/eval_hub/main.go:243",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Close",
-      "callee_source": "internal/agent/llm/client_test.go:377",
-      "call_site_source": "cmd/eval_hub/main.go:250",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Close",
-      "callee_source": "internal/agent/llm/client_test.go:385",
-      "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6851,6 +6827,30 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Close",
       "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:425",
+      "call_site_source": "cmd/eval_hub/main.go:243",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Close",
+      "callee_source": "internal/eval_hub/handlers/results_export_async_test.go:425",
+      "call_site_source": "cmd/eval_hub/main.go:250",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Close",
+      "callee_source": "internal/agent/llm/client_test.go:385",
+      "call_site_source": "cmd/eval_hub/main.go:250",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Close",
+      "callee_source": "internal/agent/llm/client_test.go:377",
       "call_site_source": "cmd/eval_hub/main.go:250",
       "confidence": "UNCERTAIN"
     },
@@ -6882,7 +6882,7 @@
       "caller": "main",
       "caller_source": "cmd/validate_configs/main.go:14",
       "callee": "NewValidator",
-      "callee_source": "internal/testhelpers/version.go:65",
+      "callee_source": "internal/eval_hub/validation/validator.go:31",
       "call_site_source": "cmd/validate_configs/main.go:19",
       "confidence": "UNCERTAIN"
     },
@@ -6890,7 +6890,7 @@
       "caller": "main",
       "caller_source": "cmd/validate_configs/main.go:14",
       "callee": "NewValidator",
-      "callee_source": "internal/eval_hub/validation/validator.go:31",
+      "callee_source": "internal/testhelpers/version.go:65",
       "call_site_source": "cmd/validate_configs/main.go:19",
       "confidence": "UNCERTAIN"
     },
@@ -7106,7 +7106,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Shutdown",
-      "callee_source": "internal/eval_hub/server/metrics_server.go:71",
+      "callee_source": "internal/eval_hub/server/server.go:697",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -7114,7 +7114,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Shutdown",
-      "callee_source": "internal/eval_hub/server/server.go:697",
+      "callee_source": "internal/eval_hub/server/metrics_server.go:71",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -7178,7 +7178,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Shutdown",
-      "callee_source": "internal/otel/oteltest/logs.go:54",
+      "callee_source": "internal/otel/oteltest/collector.go:48",
       "call_site_source": "cmd/eval_hub/main.go:264",
       "confidence": "UNCERTAIN"
     },
@@ -7186,7 +7186,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Shutdown",
-      "callee_source": "internal/otel/oteltest/collector.go:48",
+      "callee_source": "internal/otel/oteltest/logs.go:54",
       "call_site_source": "cmd/eval_hub/main.go:264",
       "confidence": "UNCERTAIN"
     },
@@ -7226,14 +7226,6 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Start",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:87",
-      "call_site_source": "cmd/eval_hub/main.go:199",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/eval_hub/main.go:59",
-      "callee": "Start",
       "callee_source": "internal/eval_hub/server/metrics_server.go:61",
       "call_site_source": "cmd/eval_hub/main.go:199",
       "confidence": "UNCERTAIN"
@@ -7250,8 +7242,8 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Start",
-      "callee_source": "internal/eval_hub/server/metrics_server.go:61",
-      "call_site_source": "cmd/eval_hub/main.go:207",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:87",
+      "call_site_source": "cmd/eval_hub/main.go:199",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7259,6 +7251,14 @@
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "Start",
       "callee_source": "internal/eval_runtime_sidecar/server/server.go:87",
+      "call_site_source": "cmd/eval_hub/main.go:207",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/eval_hub/main.go:59",
+      "callee": "Start",
+      "callee_source": "internal/eval_hub/server/metrics_server.go:61",
       "call_site_source": "cmd/eval_hub/main.go:207",
       "confidence": "UNCERTAIN"
     },
@@ -7282,7 +7282,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Start",
-      "callee_source": "internal/eval_runtime_sidecar/server/server.go:87",
+      "callee_source": "internal/eval_hub/server/server.go:649",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -7290,7 +7290,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_runtime_sidecar/main.go:42",
       "callee": "Start",
-      "callee_source": "internal/eval_hub/server/server.go:649",
+      "callee_source": "internal/eval_runtime_sidecar/server/server.go:87",
       "call_site_source": "cmd/eval_runtime_sidecar/main.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -7306,7 +7306,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "GetPort",
-      "callee_source": "internal/eval_hub/server/metrics_server.go:76",
+      "callee_source": "internal/eval_hub/server/server.go:113",
       "call_site_source": "cmd/eval_hub/main.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -7314,7 +7314,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "GetPort",
-      "callee_source": "internal/eval_hub/server/server.go:113",
+      "callee_source": "internal/eval_hub/server/metrics_server.go:76",
       "call_site_source": "cmd/eval_hub/main.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -7666,7 +7666,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "TLSEnabled",
-      "callee_source": "internal/evalhub_mcp/config/config.go:108",
+      "callee_source": "internal/eval_hub/config/service_config.go:62",
       "call_site_source": "cmd/eval_hub/main.go:184",
       "confidence": "UNCERTAIN"
     },
@@ -7674,7 +7674,7 @@
       "caller": "main",
       "caller_source": "cmd/eval_hub/main.go:59",
       "callee": "TLSEnabled",
-      "callee_source": "internal/eval_hub/config/service_config.go:62",
+      "callee_source": "internal/evalhub_mcp/config/config.go:108",
       "call_site_source": "cmd/eval_hub/main.go:184",
       "confidence": "UNCERTAIN"
     },

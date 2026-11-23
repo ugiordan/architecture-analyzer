@@ -3,7 +3,7 @@
   "component": "feast",
   "repo": "opendatahub-io/feast",
   "commit_sha": "7dd26424e54f217a95db2fa2d5c316a851cc22b7",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "feast is a Kubernetes component. deploying 3 workload(s) (controller-manager, controller-manager, controller-manager) with 3 container(s). watching 13 resource type(s). exposing 1 service(s) on ports: 6566. Dockerfile EXPOSE ports: 3000, 8000, 8080. connecting to external services: azure-blob, elasticsearch, gcs, grpc, httpx, milvus, mlflow, mongodb, mysql, pinecone, postgres, qdrant, redis, requests, s3, sqlalchemy, sqlite, urllib, weaviate. runtime dependencies: HashiCorp Vault, MLflow, MongoDB, OpenTelemetry Collector, PostgreSQL, S3. 29 Python package dependencies (29 required), categories: 1 data, 1 database, 1 numerical, 1 observability, 1 web-server, 2 serialization, 2 web-framework. with 407 operator config constants (6 image references, 11 env vars). exposing 1 Prometheus metrics. Python k8s client with 252 API call(s). integrates with management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. references components: mlflow (import).",
   "graph_status": "available",
   "graph": {
@@ -16325,7 +16325,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/add_cpu_torch_hashes.py:44",
       "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/base.py:63",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/pandas_backend.py:16",
       "call_site_source": "infra/scripts/add_cpu_torch_hashes.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -16333,7 +16333,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/add_cpu_torch_hashes.py:44",
       "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/pandas_backend.py:16",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/base.py:63",
       "call_site_source": "infra/scripts/add_cpu_torch_hashes.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -16341,7 +16341,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/release/bump_file_versions.py:13",
       "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/polars_backend.py:21",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/pandas_backend.py:16",
       "call_site_source": "infra/scripts/release/bump_file_versions.py:66",
       "confidence": "UNCERTAIN"
     },
@@ -16349,7 +16349,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/release/bump_file_versions.py:13",
       "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/pandas_backend.py:16",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/polars_backend.py:21",
       "call_site_source": "infra/scripts/release/bump_file_versions.py:66",
       "confidence": "UNCERTAIN"
     },
@@ -16365,7 +16365,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/polars_backend.py:21",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/base.py:63",
       "call_site_source": "scripts/localcloud-test.py:372",
       "confidence": "UNCERTAIN"
     },
@@ -16381,8 +16381,16 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/base.py:63",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/polars_backend.py:21",
       "call_site_source": "scripts/localcloud-test.py:372",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "join",
+      "callee_source": "sdk/python/feast/infra/compute_engines/backends/pandas_backend.py:16",
+      "call_site_source": "scripts/localcloud-test.py:384",
       "confidence": "UNCERTAIN"
     },
     {
@@ -16398,14 +16406,6 @@
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "join",
       "callee_source": "sdk/python/feast/infra/compute_engines/backends/polars_backend.py:21",
-      "call_site_source": "scripts/localcloud-test.py:384",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "join",
-      "callee_source": "sdk/python/feast/infra/compute_engines/backends/pandas_backend.py:16",
       "call_site_source": "scripts/localcloud-test.py:384",
       "confidence": "UNCERTAIN"
     },
@@ -16525,14 +16525,6 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
-      "callee_source": "go/internal/feast/onlineserving/serving.go:683",
-      "call_site_source": "infra/feast-operator/cmd/main.go:149",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "infra/feast-operator/cmd/main.go:109",
-      "callee": "Error",
       "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
       "call_site_source": "infra/feast-operator/cmd/main.go:149",
       "confidence": "UNCERTAIN"
@@ -16542,6 +16534,14 @@
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
       "callee_source": "go/internal/feast/onlineserving/serving.go:683",
+      "call_site_source": "infra/feast-operator/cmd/main.go:149",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "infra/feast-operator/cmd/main.go:109",
+      "callee": "Error",
+      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
       "call_site_source": "infra/feast-operator/cmd/main.go:155",
       "confidence": "UNCERTAIN"
     },
@@ -16549,7 +16549,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
-      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
+      "callee_source": "go/internal/feast/onlineserving/serving.go:683",
       "call_site_source": "infra/feast-operator/cmd/main.go:155",
       "confidence": "UNCERTAIN"
     },
@@ -16589,7 +16589,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
-      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
+      "callee_source": "go/internal/feast/onlineserving/serving.go:683",
       "call_site_source": "infra/feast-operator/cmd/main.go:264",
       "confidence": "UNCERTAIN"
     },
@@ -16597,7 +16597,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
-      "callee_source": "go/internal/feast/onlineserving/serving.go:683",
+      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
       "call_site_source": "infra/feast-operator/cmd/main.go:264",
       "confidence": "UNCERTAIN"
     },
@@ -16669,6 +16669,14 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
+      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
+      "call_site_source": "infra/feast-operator/cmd/main.go:323",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "infra/feast-operator/cmd/main.go:109",
+      "callee": "Error",
       "callee_source": "go/internal/feast/onlineserving/serving.go:683",
       "call_site_source": "infra/feast-operator/cmd/main.go:323",
       "confidence": "UNCERTAIN"
@@ -16677,15 +16685,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
-      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
-      "call_site_source": "infra/feast-operator/cmd/main.go:323",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "infra/feast-operator/cmd/main.go:109",
-      "callee": "Error",
-      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
+      "callee_source": "go/internal/feast/onlineserving/serving.go:683",
       "call_site_source": "infra/feast-operator/cmd/main.go:329",
       "confidence": "UNCERTAIN"
     },
@@ -16693,7 +16693,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "Error",
-      "callee_source": "go/internal/feast/onlineserving/serving.go:683",
+      "callee_source": "infra/feast-operator/internal/controller/capabilities/capabilities.go:169",
       "call_site_source": "infra/feast-operator/cmd/main.go:329",
       "confidence": "UNCERTAIN"
     },
@@ -16709,71 +16709,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/redis.py:384",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/snowflake.py:220",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
       "callee_source": "sdk/python/feast/infra/online_stores/online_store.py:878",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/sqlite.py:1024",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/faiss_online_store.py:30",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/dynamodb.py:346",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/sqlite.py:434",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/bigtable.py:229",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/faiss_online_store.py:63",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16789,7 +16725,31 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/datastore.py:454",
+      "callee_source": "sdk/python/feast/infra/online_stores/redis.py:384",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/sqlite.py:1024",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/faiss_online_store.py:63",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/faiss_online_store.py:30",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16813,7 +16773,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/milvus_online_store/milvus.py:792",
+      "callee_source": "sdk/python/feast/infra/online_stores/snowflake.py:220",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16821,7 +16781,39 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/snowflake/snowflake_engine.py:135",
+      "callee_source": "sdk/python/feast/infra/online_stores/sqlite.py:434",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/bigtable.py:229",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/dynamodb.py:346",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/datastore.py:454",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/milvus_online_store/milvus.py:792",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16837,7 +16829,23 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
+      "callee_source": "sdk/python/feast/infra/compute_engines/snowflake/snowflake_engine.py:135",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
       "callee_source": "sdk/python/feast/infra/compute_engines/trino/compute.py:149",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/pinecone_online_store/pinecone.py:372",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16861,79 +16869,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/pinecone_online_store/pinecone.py:372",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/hbase_online_store/hbase.py:180",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/singlestore_online_store/singlestore.py:184",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/hazelcast_online_store/hazelcast_online_store.py:253",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
       "callee_source": "sdk/python/feast/infra/online_stores/postgres_online_store/postgres.py:726",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/spark/compute.py:59",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/qdrant_online_store/qdrant.py:339",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/aws_lambda/lambda_engine.py:95",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/cassandra_online_store/cassandra_online_store.py:671",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/ray/compute.py:68",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16949,31 +16885,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/local/compute.py:39",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:134",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/couchbase_online_store/couchbase.py:218",
-      "call_site_source": "scripts/localcloud-test.py:353",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/localcloud-test.py:190",
-      "callee": "update",
-      "callee_source": "sdk/python/feast/infra/compute_engines/flink/compute.py:78",
+      "callee_source": "sdk/python/feast/infra/online_stores/cassandra_online_store/cassandra_online_store.py:671",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -16989,6 +16901,38 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/scylladb_online_store/scylladb.py:430",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/singlestore_online_store/singlestore.py:184",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/couchbase_online_store/couchbase.py:218",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/qdrant_online_store/qdrant.py:339",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
       "callee_source": "sdk/python/feast/infra/online_stores/mysql_online_store/mysql.py:250",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
@@ -16997,7 +16941,23 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/aerospike_online_store/aerospike.py:934",
+      "callee_source": "sdk/python/feast/infra/compute_engines/spark/compute.py:59",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/hazelcast_online_store/hazelcast_online_store.py:253",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/compute_engines/aws_lambda/lambda_engine.py:95",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -17013,7 +16973,47 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "update",
-      "callee_source": "sdk/python/feast/infra/online_stores/scylladb_online_store/scylladb.py:430",
+      "callee_source": "sdk/python/feast/infra/compute_engines/flink/compute.py:78",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/compute_engines/kubernetes/k8s_engine.py:134",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/compute_engines/local/compute.py:39",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/hbase_online_store/hbase.py:180",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/compute_engines/ray/compute.py:68",
+      "call_site_source": "scripts/localcloud-test.py:353",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/localcloud-test.py:190",
+      "callee": "update",
+      "callee_source": "sdk/python/feast/infra/online_stores/aerospike_online_store/aerospike.py:934",
       "call_site_source": "scripts/localcloud-test.py:353",
       "confidence": "UNCERTAIN"
     },
@@ -17021,15 +17021,7 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "to_dict",
-      "callee_source": "sdk/python/feast/table_format.py:258",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "to_dict",
-      "callee_source": "sdk/python/feast/online_response.py:62",
+      "callee_source": "sdk/python/feast/table_format.py:517",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17045,14 +17037,6 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "to_dict",
-      "callee_source": "sdk/python/feast/table_format.py:157",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "to_dict",
       "callee_source": "sdk/python/feast/document_labeling.py:22",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
@@ -17061,7 +17045,15 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "to_dict",
-      "callee_source": "sdk/python/feast/table_format.py:517",
+      "callee_source": "sdk/python/feast/table_format.py:258",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "to_dict",
+      "callee_source": "sdk/python/feast/table_format.py:157",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17070,6 +17062,14 @@
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "to_dict",
       "callee_source": "sdk/python/feast/table_format.py:69",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "to_dict",
+      "callee_source": "sdk/python/feast/online_response.py:62",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17117,7 +17117,7 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "to_dict",
-      "callee_source": "sdk/python/feast/dqm/profilers/profiler.py:95",
+      "callee_source": "sdk/python/feast/infra/registry/base_registry.py:1166",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17125,16 +17125,8 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "to_dict",
-      "callee_source": "sdk/python/feast/infra/registry/base_registry.py:1166",
+      "callee_source": "sdk/python/feast/dqm/profilers/profiler.py:95",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
-      "callee": "table",
-      "callee_source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark_source.py:115",
-      "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17157,6 +17149,14 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
       "callee": "table",
+      "callee_source": "sdk/python/feast/infra/offline_stores/contrib/spark_offline_store/spark_source.py:115",
+      "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
+      "callee": "table",
       "callee_source": "docs/presentations/feast-chronon-summit/build_deck.py:86",
       "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
       "confidence": "UNCERTAIN"
@@ -17165,7 +17165,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/release/bump_file_versions.py:13",
       "callee": "resolve",
-      "callee_source": "sdk/python/feast/credentials.py:361",
+      "callee_source": "sdk/python/feast/vector_store_utils.py:53",
       "call_site_source": "infra/scripts/release/bump_file_versions.py:36",
       "confidence": "UNCERTAIN"
     },
@@ -17173,7 +17173,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/release/bump_file_versions.py:13",
       "callee": "resolve",
-      "callee_source": "sdk/python/feast/vector_store_utils.py:53",
+      "callee_source": "sdk/python/feast/credentials.py:248",
       "call_site_source": "infra/scripts/release/bump_file_versions.py:36",
       "confidence": "UNCERTAIN"
     },
@@ -17189,7 +17189,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/release/bump_file_versions.py:13",
       "callee": "resolve",
-      "callee_source": "sdk/python/feast/credentials.py:279",
+      "callee_source": "sdk/python/feast/credentials.py:361",
       "call_site_source": "infra/scripts/release/bump_file_versions.py:36",
       "confidence": "UNCERTAIN"
     },
@@ -17197,7 +17197,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/release/bump_file_versions.py:13",
       "callee": "resolve",
-      "callee_source": "sdk/python/feast/credentials.py:248",
+      "callee_source": "sdk/python/feast/credentials.py:279",
       "call_site_source": "infra/scripts/release/bump_file_versions.py:36",
       "confidence": "UNCERTAIN"
     },
@@ -17213,7 +17213,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "resolve",
-      "callee_source": "sdk/python/feast/credentials.py:157",
+      "callee_source": "sdk/python/feast/credentials.py:248",
       "call_site_source": "scripts/localcloud-test.py:381",
       "confidence": "UNCERTAIN"
     },
@@ -17221,7 +17221,7 @@
       "caller": "main",
       "caller_source": "scripts/localcloud-test.py:190",
       "callee": "resolve",
-      "callee_source": "sdk/python/feast/credentials.py:248",
+      "callee_source": "sdk/python/feast/credentials.py:157",
       "call_site_source": "scripts/localcloud-test.py:381",
       "confidence": "UNCERTAIN"
     },
@@ -17247,22 +17247,6 @@
       "callee": "resolve",
       "callee_source": "sdk/python/feast/vector_store_utils.py:53",
       "call_site_source": "scripts/localcloud-test.py:381",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
-      "callee": "table",
-      "callee_source": "sdk/python/feast/infra/offline_stores/contrib/trino_offline_store/trino_source.py:50",
-      "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
-      "callee": "table",
-      "callee_source": "sdk/python/feast/infra/offline_stores/contrib/trino_offline_store/trino_source.py:43",
-      "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
       "confidence": "UNCERTAIN"
     },
     {
@@ -17283,25 +17267,25 @@
     },
     {
       "caller": "main",
+      "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
+      "callee": "table",
+      "callee_source": "sdk/python/feast/infra/offline_stores/contrib/trino_offline_store/trino_source.py:43",
+      "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/infra/utils/hbase_utils.py:179",
+      "callee": "table",
+      "callee_source": "sdk/python/feast/infra/offline_stores/contrib/trino_offline_store/trino_source.py:50",
+      "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:190",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "list_feature_views",
       "callee_source": "sdk/python/feast/infra/registry/caching_registry.py:193",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "list_feature_views",
-      "callee_source": "sdk/python/feast/infra/registry/snowflake.py:903",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "list_feature_views",
-      "callee_source": "sdk/python/feast/infra/registry/proto_registry_utils.py:340",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
       "confidence": "UNCERTAIN"
     },
@@ -17325,6 +17309,14 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "list_feature_views",
+      "callee_source": "sdk/python/feast/feature_store.py:792",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "list_feature_views",
       "callee_source": "sdk/python/feast/infra/registry/base_registry.py:529",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
       "confidence": "UNCERTAIN"
@@ -17333,7 +17325,15 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "list_feature_views",
-      "callee_source": "sdk/python/feast/feature_store.py:792",
+      "callee_source": "sdk/python/feast/infra/registry/proto_registry_utils.py:340",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "list_feature_views",
+      "callee_source": "sdk/python/feast/infra/registry/snowflake.py:903",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:35",
       "confidence": "UNCERTAIN"
     },
@@ -17445,7 +17445,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/add_cpu_torch_hashes.py:44",
       "callee": "read_text",
-      "callee_source": "sdk/python/feast/infra/ray_initializer.py:226",
+      "callee_source": "sdk/python/feast/infra/ray_initializer.py:446",
       "call_site_source": "infra/scripts/add_cpu_torch_hashes.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17453,7 +17453,7 @@
       "caller": "main",
       "caller_source": "infra/scripts/add_cpu_torch_hashes.py:44",
       "callee": "read_text",
-      "callee_source": "sdk/python/feast/infra/ray_initializer.py:446",
+      "callee_source": "sdk/python/feast/infra/ray_initializer.py:226",
       "call_site_source": "infra/scripts/add_cpu_torch_hashes.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17557,7 +17557,7 @@
       "caller": "main",
       "caller_source": "go/main.go:68",
       "callee": "StartHttpServer",
-      "callee_source": "go/main.go:56",
+      "callee_source": "go/main.go:250",
       "call_site_source": "go/main.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -17565,7 +17565,7 @@
       "caller": "main",
       "caller_source": "go/main.go:68",
       "callee": "StartHttpServer",
-      "callee_source": "go/main.go:250",
+      "callee_source": "go/main.go:56",
       "call_site_source": "go/main.go:137",
       "confidence": "UNCERTAIN"
     },
@@ -17725,7 +17725,7 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/passthrough_provider.py:321",
+      "callee_source": "sdk/python/feast/infra/provider.py:468",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17733,7 +17733,7 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/provider.py:468",
+      "callee_source": "sdk/python/feast/infra/passthrough_provider.py:321",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17749,7 +17749,7 @@
       "caller": "main",
       "caller_source": "go/main.go:68",
       "callee": "StartGrpcServer",
-      "callee_source": "go/main.go:174",
+      "callee_source": "go/main_test.go:38",
       "call_site_source": "go/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -17757,7 +17757,7 @@
       "caller": "main",
       "caller_source": "go/main.go:68",
       "callee": "StartGrpcServer",
-      "callee_source": "go/main_test.go:38",
+      "callee_source": "go/main.go:174",
       "call_site_source": "go/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -17797,7 +17797,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "SetupWithManager",
-      "callee_source": "infra/feast-operator/internal/controller/notebook_configmap_controller.go:485",
+      "callee_source": "infra/feast-operator/internal/controller/featurestore_controller.go:911",
       "call_site_source": "infra/feast-operator/cmd/main.go:312",
       "confidence": "UNCERTAIN"
     },
@@ -17805,7 +17805,7 @@
       "caller": "main",
       "caller_source": "infra/feast-operator/cmd/main.go:109",
       "callee": "SetupWithManager",
-      "callee_source": "infra/feast-operator/internal/controller/featurestore_controller.go:911",
+      "callee_source": "infra/feast-operator/internal/controller/notebook_configmap_controller.go:485",
       "call_site_source": "infra/feast-operator/cmd/main.go:312",
       "confidence": "UNCERTAIN"
     },
@@ -17816,6 +17816,22 @@
       "callee_source": "sdk/python/feast/infra/utils/hbase_utils.py:137",
       "call_site_source": "sdk/python/feast/infra/utils/hbase_utils.py:211",
       "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "retrieve_online_documents_v2",
+      "callee_source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:290",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "retrieve_online_documents_v2",
+      "callee_source": "sdk/python/feast/infra/online_stores/scylladb_online_store/scylladb.py:647",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
@@ -17837,47 +17853,7 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/online_stores/scylladb_online_store/scylladb.py:647",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/online_stores/elasticsearch_online_store/elasticsearch.py:454",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/online_stores/online_store.py:973",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/online_stores/remote.py:446",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "retrieve_online_documents_v2",
       "callee_source": "sdk/python/feast/infra/online_stores/postgres_online_store/postgres.py:966",
-      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
-      "callee": "retrieve_online_documents_v2",
-      "callee_source": "sdk/python/feast/infra/online_stores/mongodb_online_store/mongodb.py:290",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },
@@ -17893,7 +17869,31 @@
       "caller": "main",
       "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
       "callee": "retrieve_online_documents_v2",
+      "callee_source": "sdk/python/feast/infra/online_stores/remote.py:446",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "retrieve_online_documents_v2",
       "callee_source": "sdk/python/feast/infra/online_stores/qdrant_online_store/qdrant.py:458",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "retrieve_online_documents_v2",
+      "callee_source": "sdk/python/feast/infra/online_stores/online_store.py:973",
+      "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:31",
+      "callee": "retrieve_online_documents_v2",
+      "callee_source": "sdk/python/feast/infra/online_stores/elasticsearch_online_store/elasticsearch.py:454",
       "call_site_source": "sdk/python/feast/templates/ray_rag/feature_repo/test_workflow.py:49",
       "confidence": "UNCERTAIN"
     },

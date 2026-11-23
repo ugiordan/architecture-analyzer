@@ -3,7 +3,7 @@
   "component": "data-science-pipelines-operator",
   "repo": "red-hat-data-services/data-science-pipelines-operator",
   "commit_sha": "f3d8d77fc79c8a6c75cf06d087745cae5eb33265",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "data-science-pipelines-operator (also known as: DSPO, dspo) is a Kubernetes component. managing 5 CRD(s): AIPipelines, DataSciencePipelinesApplication, Pipeline, PipelineVersion, ScheduledWorkflow. deploying 8 workload(s) (data-science-pipelines-operator-controller-manager, template-value, mariadb-template-value, minio-template-value, template-value, template-value, template-value, ds-pipeline-workflow-controller-template-value) with 10 container(s). watching 15 resource type(s). exposing 8 service(s) on ports: 3306, 80, 8443, 8445, 8887, 8888, 9000, 9090. with 2 webhook(s) (1 validating, 1 mutating). protected by 8 network policy/policies. connecting to external services: minio, requests. defining 7 API spec type(s) across 42 struct(s) with 158 total fields. with 163 operator config constants (15 image references). following 9 reconciliation steps across 1 controller(s). exposing 9 Prometheus metrics. reporting 14 status condition types. with 4 ingress route(s). integrates with Istio via labels/annotations. deploys Envoy sidecar for traffic management. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/argo/crds, config/argo, config/base, config/configmaps, config/crd, config/manager, config/manifests, config/overlays/kind-tests, config/overlays/make-deploy, config/overlays/odh/argo, config/overlays/odh/dspo, config/overlays/odh, config/overlays/openshift, config/overlays/rhoai/argo, config/overlays/rhoai/dspo/applications, config/overlays/rhoai/dspo, config/overlays/rhoai, config/prometheus, config/prometheus/monitor, config/prometheus/rhoai, config/rbac. mounts 6 ConfigMap(s) as volumes: data-science-pipelines-operator-dspo-config, ds-pipelines-mariadb-tls-config-template-value, kube-rbac-proxy-config-template-value, sample-config-template-value, sample-pipeline-template-value, template-value.",
   "repository_description": "The Data Science Pipelines Operator (DSPO) is an OpenShift Operator that is used to deploy single namespace scoped Data Science Pipeline stacks onto individual OCP namespaces.",
   "description_source": "README.md:3",
@@ -1479,7 +1479,7 @@
       "caller": "main",
       "caller_source": "main.go:166",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/aipipelines_argo_controller.go:331",
+      "callee_source": "controllers/aipipelines_controller.go:160",
       "call_site_source": "main.go:352",
       "confidence": "UNCERTAIN"
     },
@@ -1495,7 +1495,7 @@
       "caller": "main",
       "caller_source": "main.go:166",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/aipipelines_controller.go:160",
+      "callee_source": "controllers/aipipelines_argo_controller.go:331",
       "call_site_source": "main.go:352",
       "confidence": "UNCERTAIN"
     },
@@ -1527,6 +1527,14 @@
       "caller": "main",
       "caller_source": "main.go:166",
       "callee": "SetupWithManager",
+      "callee_source": "controllers/aipipelines_argo_controller.go:331",
+      "call_site_source": "main.go:389",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:166",
+      "callee": "SetupWithManager",
       "callee_source": "controllers/aipipelines_controller.go:160",
       "call_site_source": "main.go:389",
       "confidence": "UNCERTAIN"
@@ -1543,8 +1551,8 @@
       "caller": "main",
       "caller_source": "main.go:166",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/aipipelines_argo_controller.go:331",
-      "call_site_source": "main.go:389",
+      "callee_source": "controllers/aipipelines_controller.go:160",
+      "call_site_source": "main.go:434",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1560,14 +1568,6 @@
       "caller_source": "main.go:166",
       "callee": "SetupWithManager",
       "callee_source": "controllers/aipipelines_argo_controller.go:331",
-      "call_site_source": "main.go:434",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "main.go:166",
-      "callee": "SetupWithManager",
-      "callee_source": "controllers/aipipelines_controller.go:160",
       "call_site_source": "main.go:434",
       "confidence": "UNCERTAIN"
     },

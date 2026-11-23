@@ -3,7 +3,7 @@
   "component": "kuberay",
   "repo": "opendatahub-io/kuberay",
   "commit_sha": "e2b85bf7c3476dfd3224fa5cdaa67f235115eb53",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "kuberay is a Kubernetes component. deploying 1 workload(s) (kuberay-operator) with 1 container(s). watching 7 resource type(s). exposing 1 service(s) on ports: 8080. connecting to external services: grpc, requests. runtime dependencies: Redis. with 366 operator config constants (11 image references, 27 env vars). exposing 4 Prometheus metrics. Python k8s client with 23 API call(s) and 1 CRD kind reference(s). integrates with Prometheus, management relationship via labels/annotations.",
   "repository_description": "KubeRay is a powerful, open-source Kubernetes operator that simplifies the deployment and management of Ray applications on Kubernetes. It offers several key components:",
   "description_source": "README.md:6",
@@ -3454,14 +3454,6 @@
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "New",
-      "callee_source": "ray-operator/pkg/client/clientset/versioned/clientset.go:98",
-      "call_site_source": "ray-operator/main.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "ray-operator/main.go:54",
-      "callee": "New",
       "callee_source": "ray-operator/controllers/ray/batchscheduler/volcano/volcano_scheduler.go:149",
       "call_site_source": "ray-operator/main.go:107",
       "confidence": "UNCERTAIN"
@@ -3471,6 +3463,22 @@
       "caller_source": "ray-operator/main.go:54",
       "callee": "New",
       "callee_source": "ray-operator/pkg/client/clientset/versioned/clientset.go:98",
+      "call_site_source": "ray-operator/main.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "ray-operator/main.go:54",
+      "callee": "New",
+      "callee_source": "ray-operator/pkg/client/clientset/versioned/clientset.go:98",
+      "call_site_source": "ray-operator/main.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "ray-operator/main.go:54",
+      "callee": "New",
+      "callee_source": "ray-operator/controllers/ray/batchscheduler/volcano/volcano_scheduler.go:149",
       "call_site_source": "ray-operator/main.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -3486,22 +3494,6 @@
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "New",
-      "callee_source": "ray-operator/controllers/ray/batchscheduler/volcano/volcano_scheduler.go:149",
-      "call_site_source": "ray-operator/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "ray-operator/main.go:54",
-      "callee": "New",
-      "callee_source": "ray-operator/controllers/ray/batchscheduler/interface/interface.go:59",
-      "call_site_source": "ray-operator/main.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "ray-operator/main.go:54",
-      "callee": "New",
       "callee_source": "ray-operator/pkg/client/informers/externalversions/ray/v1/interface.go:26",
       "call_site_source": "ray-operator/main.go:107",
       "confidence": "UNCERTAIN"
@@ -3518,6 +3510,14 @@
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "New",
+      "callee_source": "ray-operator/controllers/ray/batchscheduler/interface/interface.go:59",
+      "call_site_source": "ray-operator/main.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "ray-operator/main.go:54",
+      "callee": "New",
       "callee_source": "ray-operator/pkg/client/informers/externalversions/ray/v1/interface.go:26",
       "call_site_source": "ray-operator/main.go:115",
       "confidence": "UNCERTAIN"
@@ -3526,7 +3526,7 @@
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "New",
-      "callee_source": "ray-operator/pkg/client/clientset/versioned/typed/ray/v1/ray_client.go:77",
+      "callee_source": "ray-operator/controllers/ray/batchscheduler/interface/interface.go:59",
       "call_site_source": "ray-operator/main.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -3534,7 +3534,7 @@
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "New",
-      "callee_source": "ray-operator/controllers/ray/batchscheduler/interface/interface.go:59",
+      "callee_source": "ray-operator/pkg/client/clientset/versioned/typed/ray/v1/ray_client.go:77",
       "call_site_source": "ray-operator/main.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -3606,14 +3606,6 @@
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "SetupWithManager",
-      "callee_source": "ray-operator/controllers/ray/raycluster_controller.go:1114",
-      "call_site_source": "ray-operator/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "ray-operator/main.go:54",
-      "callee": "SetupWithManager",
       "callee_source": "ray-operator/controllers/ray/rayservice_controller.go:315",
       "call_site_source": "ray-operator/main.go:166",
       "confidence": "UNCERTAIN"
@@ -3631,14 +3623,14 @@
       "caller_source": "ray-operator/main.go:54",
       "callee": "SetupWithManager",
       "callee_source": "ray-operator/controllers/ray/raycluster_controller.go:1114",
-      "call_site_source": "ray-operator/main.go:168",
+      "call_site_source": "ray-operator/main.go:166",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "ray-operator/main.go:54",
       "callee": "SetupWithManager",
-      "callee_source": "ray-operator/controllers/ray/rayservice_controller.go:315",
+      "callee_source": "ray-operator/controllers/ray/raycluster_controller.go:1114",
       "call_site_source": "ray-operator/main.go:168",
       "confidence": "UNCERTAIN"
     },
@@ -3647,6 +3639,14 @@
       "caller_source": "ray-operator/main.go:54",
       "callee": "SetupWithManager",
       "callee_source": "ray-operator/controllers/ray/rayjob_controller.go:480",
+      "call_site_source": "ray-operator/main.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "ray-operator/main.go:54",
+      "callee": "SetupWithManager",
+      "callee_source": "ray-operator/controllers/ray/rayservice_controller.go:315",
       "call_site_source": "ray-operator/main.go:168",
       "confidence": "UNCERTAIN"
     },
@@ -3758,135 +3758,7 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:439",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:463",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -3902,119 +3774,7 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:261",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:309",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:336",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:355",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:387",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:482",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:514",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:554",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:578",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:595",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:615",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:661",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:683",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:745",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -4030,7 +3790,7 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:683",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -4038,7 +3798,7 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:661",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -4046,7 +3806,135 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:615",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:595",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:578",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:554",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:514",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:482",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:463",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:439",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:387",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:355",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:336",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:309",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:261",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:210",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -4094,22 +3982,6 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:210",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "UpdateRayService",
-      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
@@ -4134,7 +4006,135 @@
       "caller": "UpdateRayService",
       "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "UpdateRayService",
+      "caller_source": "apiserver/pkg/manager/resource_manager.go:327",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
       "call_site_source": "apiserver/pkg/manager/resource_manager.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -4142,7 +4142,95 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:482",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4158,7 +4246,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:554",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4166,7 +4254,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:578",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4174,7 +4262,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:595",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4182,7 +4270,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:615",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4190,7 +4278,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:661",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4198,7 +4286,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:683",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4206,7 +4294,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:706",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4214,7 +4302,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4222,7 +4310,39 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:482",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4294,38 +4414,6 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:210",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
@@ -4334,23 +4422,15 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:175",
+      "call_site_source": "apiserver/pkg/util/job.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewRayJob",
+      "caller_source": "apiserver/pkg/util/job.go:20",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:554",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4382,14 +4462,6 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:33",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
@@ -4398,7 +4470,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:578",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4406,7 +4478,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:595",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4414,7 +4486,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:615",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4422,7 +4494,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:661",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4430,7 +4502,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:745",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4438,7 +4510,7 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:683",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -4446,87 +4518,15 @@
       "caller": "NewRayJob",
       "caller_source": "apiserver/pkg/util/job.go:20",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "callee_source": "ray-operator/apis/ray/v1alpha1/zz_generated.deepcopy.go:706",
       "call_site_source": "apiserver/pkg/util/job.go:94",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "NewRayJob",
-      "caller_source": "apiserver/pkg/util/job.go:20",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "apiserver/pkg/util/job.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
       "confidence": "UNCERTAIN"
     },
@@ -4534,111 +4534,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
       "confidence": "UNCERTAIN"
     },
@@ -4654,6 +4550,110 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
       "confidence": "UNCERTAIN"
@@ -4670,23 +4670,23 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
       "confidence": "UNCERTAIN"
     },
@@ -4702,6 +4702,14 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
       "confidence": "UNCERTAIN"
@@ -4710,23 +4718,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:113",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4742,7 +4734,31 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4758,63 +4774,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4830,22 +4790,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
@@ -4854,7 +4798,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4862,7 +4806,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4870,7 +4814,23 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4886,7 +4846,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4894,7 +4854,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4902,7 +4862,47 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:109",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:117",
       "confidence": "UNCERTAIN"
     },
@@ -4910,55 +4910,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -4974,7 +4926,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -4982,7 +4934,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -4990,7 +4942,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -4998,63 +4950,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -5070,7 +4966,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -5078,7 +4974,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -5086,7 +4982,31 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
       "confidence": "UNCERTAIN"
     },
@@ -5096,6 +5016,158 @@
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:17",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5222,8 +5294,24 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5231,70 +5319,6 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:21",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
       "confidence": "UNCERTAIN"
     },
@@ -5303,54 +5327,6 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
       "confidence": "UNCERTAIN"
     },
@@ -5382,7 +5358,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
       "confidence": "UNCERTAIN"
     },
@@ -5390,79 +5366,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
       "confidence": "UNCERTAIN"
     },
@@ -5478,7 +5382,103 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:13",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:27",
       "confidence": "UNCERTAIN"
     },
@@ -5486,7 +5486,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
       "confidence": "UNCERTAIN"
     },
@@ -5495,22 +5495,6 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
       "confidence": "UNCERTAIN"
     },
@@ -5566,6 +5550,22 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
       "confidence": "UNCERTAIN"
@@ -5574,7 +5574,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
       "confidence": "UNCERTAIN"
     },
@@ -5599,14 +5599,6 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
       "confidence": "UNCERTAIN"
     },
@@ -5663,6 +5655,14 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:239",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:240",
       "confidence": "UNCERTAIN"
     },
@@ -5678,22 +5678,6 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
@@ -5702,15 +5686,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
     },
@@ -5726,7 +5702,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
     },
@@ -5758,14 +5734,6 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
@@ -5774,7 +5742,15 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
     },
@@ -5790,7 +5766,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
     },
@@ -5806,7 +5782,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
     },
@@ -5863,6 +5839,30 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:271",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:272",
       "confidence": "UNCERTAIN"
     },
@@ -5870,7 +5870,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:319",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:323",
       "confidence": "UNCERTAIN"
     },
@@ -5966,6 +5966,14 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:319",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:323",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:319",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:323",
       "confidence": "UNCERTAIN"
@@ -5975,14 +5983,6 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:319",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:323",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:319",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:323",
       "confidence": "UNCERTAIN"
     },
@@ -6062,14 +6062,6 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
       "confidence": "UNCERTAIN"
@@ -6078,71 +6070,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
       "confidence": "UNCERTAIN"
     },
@@ -6158,6 +6086,94 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
       "confidence": "UNCERTAIN"
@@ -6214,14 +6230,6 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
       "confidence": "UNCERTAIN"
@@ -6244,22 +6252,6 @@
     },
     {
       "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:365",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:366",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
@@ -6270,7 +6262,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
       "confidence": "UNCERTAIN"
     },
@@ -6278,7 +6270,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
       "confidence": "UNCERTAIN"
     },
@@ -6286,7 +6278,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
       "confidence": "UNCERTAIN"
     },
@@ -6294,7 +6286,55 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
       "confidence": "UNCERTAIN"
     },
@@ -6311,6 +6351,54 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
       "confidence": "UNCERTAIN"
     },
@@ -6342,119 +6430,31 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:397",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6463,6 +6463,94 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6486,62 +6574,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
@@ -6550,23 +6582,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6582,7 +6598,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6590,7 +6606,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:595",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6598,7 +6614,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6606,7 +6622,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6614,7 +6630,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
       "confidence": "UNCERTAIN"
     },
@@ -6622,23 +6638,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:453",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
@@ -6774,152 +6774,56 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:449",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:457",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6927,6 +6831,22 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -6966,7 +6886,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -6974,7 +6894,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -6982,7 +6902,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -6990,7 +6910,55 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
@@ -7014,56 +6982,40 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
+      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:492",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:493",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7078,55 +7030,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyObject",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
       "confidence": "UNCERTAIN"
     },
@@ -7142,7 +7046,31 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:160",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
       "confidence": "UNCERTAIN"
     },
@@ -7182,7 +7110,7 @@
       "caller": "DeepCopyObject",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
       "confidence": "UNCERTAIN"
     },
@@ -7211,6 +7139,102 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:514",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:554",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:524",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:525",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
       "callee": "DeepCopy",
@@ -7222,7 +7246,95 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
       "confidence": "UNCERTAIN"
     },
@@ -7262,126 +7374,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:482",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:463",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:439",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:387",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:355",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:336",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:309",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:122",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:99",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:33",
-      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
-      "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
       "confidence": "UNCERTAIN"
@@ -7399,6 +7391,14 @@
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
       "callee": "DeepCopy",
       "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:564",
+      "callee": "DeepCopy",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:570",
       "confidence": "UNCERTAIN"
     },
@@ -7406,7 +7406,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:693",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:229",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:175",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:697",
       "confidence": "UNCERTAIN"
     },
@@ -7414,7 +7414,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:693",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:261",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:578",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:697",
       "confidence": "UNCERTAIN"
     },
@@ -7422,7 +7422,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:693",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:745",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:615",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:697",
       "confidence": "UNCERTAIN"
     },
@@ -7430,7 +7430,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:693",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:706",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:661",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:697",
       "confidence": "UNCERTAIN"
     },
@@ -7438,7 +7438,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:693",
       "callee": "DeepCopy",
-      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:210",
+      "callee_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:683",
       "call_site_source": "ray-operator/apis/ray/v1/zz_generated.deepcopy.go:697",
       "confidence": "UNCERTAIN"
     }

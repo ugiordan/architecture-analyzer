@@ -3,7 +3,7 @@
   "component": "ogx-k8s-operator",
   "repo": "red-hat-data-services/ogx-k8s-operator",
   "commit_sha": "c20d5984b96822cfa23b6433f6920cb2b3cf6d24",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "ogx-k8s-operator is a Kubernetes component. managing 2 CRD(s): LlamaStackDistribution, OGXServer. deploying 3 workload(s) (deployment, ogx-k8s-operator-controller-manager, operator) with 2 container(s). watching 19 resource type(s). exposing 2 service(s) on ports: 443, 8443. with 1 webhook(s) (1 validating). protected by 1 network policy/policies. with 2 PodDisruptionBudget(s). with 1 HorizontalPodAutoscaler(s). runtime dependencies: PostgreSQL. defining 26 API spec type(s) across 58 struct(s) with 210 total fields. with 180 operator config constants. reporting 20 status condition types. with 1 ingress route(s). integrates with management relationship via labels/annotations. kustomize overlays: config/certmanager, config/crd, config/default, config/manager, config/manifests, config/overlays/cert-manager, config/overlays/odh, config/overlays/openshift, config/overlays/rhoai, config/prometheus, config/rbac, config/scorecard, config/webhook. mounts 1 ConfigMap(s) as volumes: config.",
   "repository_description": "This repo hosts a Kubernetes operator that creates and manages OGX (Open GenAI Stack) servers.",
   "description_source": "README.md:2",
@@ -1821,7 +1821,7 @@
       "caller": "main",
       "caller_source": "main.go:150",
       "callee": "Error",
-      "callee_source": "controllers/ogxserver_controller.go:731",
+      "callee_source": "controllers/ogxserver_controller.go:741",
       "call_site_source": "main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -1829,7 +1829,7 @@
       "caller": "main",
       "caller_source": "main.go:150",
       "callee": "Error",
-      "callee_source": "controllers/ogxserver_controller.go:741",
+      "callee_source": "controllers/ogxserver_controller.go:731",
       "call_site_source": "main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -1917,7 +1917,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1455",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1290",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -1925,23 +1925,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1613",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1423",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -1957,7 +1941,23 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2105",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2660",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2125,7 +2125,15 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:254",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2105",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2075",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2165,7 +2173,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1964",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2269,6 +2277,14 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1613",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1595",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
@@ -2293,15 +2309,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2660",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1423",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1455",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2333,14 +2341,6 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1290",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1265",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
@@ -2365,7 +2365,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:299",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1208",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2405,7 +2405,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1097",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2661,6 +2661,22 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:299",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:254",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:232",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
@@ -2669,7 +2685,31 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2075",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:175",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:153",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:83",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1964",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2693,47 +2733,7 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:83",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:153",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:175",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1009",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1208",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1097",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1014",
       "confidence": "UNCERTAIN"
     },
@@ -2741,7 +2741,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2185",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2417",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2749,7 +2749,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:497",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:758",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2766,6 +2766,78 @@
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:254",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:299",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:319",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:335",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:350",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:33",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2746",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2660",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2829,7 +2901,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2417",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1685",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2861,7 +2933,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2297",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:365",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2901,7 +2973,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1366",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2185",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2933,7 +3005,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:299",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2105",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -2981,7 +3053,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1964",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1715",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3045,6 +3117,14 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1731",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
@@ -3053,7 +3133,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1396",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1964",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3061,7 +3141,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1685",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:175",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3069,7 +3149,15 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1660",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:153",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:733",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3133,7 +3221,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1715",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1396",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3141,7 +3229,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:175",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1366",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3149,15 +3237,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:153",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:472",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1327",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3214,6 +3294,14 @@
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1168",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3301,14 +3389,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2660",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:879",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
@@ -3349,7 +3429,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:758",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2297",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3357,7 +3437,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:733",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1660",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3429,7 +3509,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2105",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:497",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3437,7 +3517,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1327",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:472",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
     },
@@ -3469,46 +3549,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2746",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:83",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
       "confidence": "UNCERTAIN"
@@ -3525,47 +3565,79 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2746",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:33",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:365",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:53",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:350",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:83",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:335",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:319",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:106",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:733",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:153",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:175",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:232",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -3574,6 +3646,46 @@
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:254",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:299",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:319",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:335",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:350",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:365",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -3685,7 +3797,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:175",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:733",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -3821,7 +3933,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:232",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1168",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
@@ -4269,127 +4381,15 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2746",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:350",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:335",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:319",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:299",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1168",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:153",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:83",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:53",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:365",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:101",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:33",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:112",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2746",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2437",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
       "confidence": "UNCERTAIN"
     },
@@ -4397,23 +4397,7 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2660",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
-      "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1265",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
       "confidence": "UNCERTAIN"
     },
@@ -4813,14 +4797,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1265",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1290",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
       "confidence": "UNCERTAIN"
@@ -5157,14 +5133,6 @@
       "caller": "DeepCopyInto",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2437",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopyInto",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2464",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
       "confidence": "UNCERTAIN"
@@ -5210,19 +5178,35 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:53",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2660",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:350",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2677",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2700",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:2746",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1021",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5637,6 +5621,14 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
       "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:83",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
+      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1327",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
       "confidence": "UNCERTAIN"
@@ -5749,14 +5741,6 @@
       "caller": "DeepCopy",
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
       "callee": "DeepCopyInto",
-      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:128",
-      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "DeepCopy",
-      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
-      "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:1019",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
       "confidence": "UNCERTAIN"
@@ -5814,6 +5798,22 @@
       "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
       "callee": "DeepCopyInto",
       "callee_source": "api/v1beta1/zz_generated.deepcopy.go:815",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:785",
+      "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1beta1/zz_generated.deepcopy.go:1030",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1beta1/zz_generated.deepcopy.go:758",
       "call_site_source": "api/v1beta1/zz_generated.deepcopy.go:1035",
       "confidence": "UNCERTAIN"
     }

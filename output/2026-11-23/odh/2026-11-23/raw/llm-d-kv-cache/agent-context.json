@@ -3,7 +3,7 @@
   "component": "llm-d-kv-cache",
   "repo": "opendatahub-io/llm-d-kv-cache",
   "commit_sha": "4dfbb070a34779dc120987d37c9cd852134a891e",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "llm-d-kv-cache is a Kubernetes component. deploying 2 workload(s) (llm-d-kv-cache-pvc-evictor, 0) with 2 container(s). connecting to external services: redis, sqlalchemy. runtime dependencies: OpenTelemetry Collector, Redis. with 106 operator config constants (2 env vars). exposing 11 Prometheus metrics. Python k8s client with 13 API call(s). references components: vllm (adapter, import).",
   "repository_description": "[!IMPORTANT] \u003e The **KV-Cache Indexer** — the kvcache, kvblock, and kvevents libraries \u003e that power KV-cache-aware routing — has moved to \u003e llm-d-router \u003e (llm-d/llm-d-router#1886). \u003e New development happens there. A few imports of deprecated modules remain in \u003e this repository; once removed, no scheduling-related logic will live here. Open \u003e PRs against these libraries should be replicated against llm-d-router.",
   "description_source": "README.md:8",
@@ -3778,22 +3778,6 @@
       "caller": "offerFile",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "offerFile",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "offerFile",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
       "confidence": "UNCERTAIN"
@@ -3802,7 +3786,7 @@
       "caller": "offerFile",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
       "confidence": "UNCERTAIN"
     },
@@ -3818,6 +3802,22 @@
       "caller": "offerFile",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "offerFile",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "offerFile",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
       "confidence": "UNCERTAIN"
@@ -3826,7 +3826,7 @@
       "caller": "offerFile",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:292",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler.go:320",
       "confidence": "UNCERTAIN"
     },
@@ -3834,22 +3834,6 @@
       "caller": "TestScanQueuesColdFileAndSkipsHotFile",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
       "confidence": "UNCERTAIN"
@@ -3858,23 +3842,7 @@
       "caller": "TestScanQueuesColdFileAndSkipsHotFile",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
       "confidence": "UNCERTAIN"
     },
@@ -3887,10 +3855,74 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestScanQueuesColdFileAndSkipsHotFile",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:17",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:31",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -3906,39 +3938,7 @@
       "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestRepeatedScansDoNotQueuePendingPathTwice",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:337",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:345",
       "confidence": "UNCERTAIN"
     },
@@ -3946,7 +3946,7 @@
       "caller": "TestScanProcessesRecursiveLayoutWithTwoCharacterBucket",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:73",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:83",
       "confidence": "UNCERTAIN"
     },
@@ -3962,7 +3962,15 @@
       "caller": "TestScanProcessesRecursiveLayoutWithTwoCharacterBucket",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:73",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:83",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestScanProcessesRecursiveLayoutWithTwoCharacterBucket",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:73",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:83",
       "confidence": "UNCERTAIN"
     },
@@ -3978,7 +3986,7 @@
       "caller": "TestScanProcessesRecursiveLayoutWithTwoCharacterBucket",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:73",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:83",
       "confidence": "UNCERTAIN"
     },
@@ -3986,15 +3994,7 @@
       "caller": "TestScanProcessesRecursiveLayoutWithTwoCharacterBucket",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:73",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:83",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestScanProcessesRecursiveLayoutWithTwoCharacterBucket",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:73",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/crawler/crawler_test.go:83",
       "confidence": "UNCERTAIN"
     },
@@ -4010,7 +4010,15 @@
       "caller": "flush",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -4026,22 +4034,6 @@
       "caller": "flush",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
       "confidence": "UNCERTAIN"
@@ -4050,7 +4042,15 @@
       "caller": "flush",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -4066,15 +4066,7 @@
       "caller": "flush",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
       "confidence": "UNCERTAIN"
     },
@@ -4083,22 +4075,6 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
       "confidence": "UNCERTAIN"
     },
@@ -4115,6 +4091,62 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:230",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "flush",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
       "confidence": "UNCERTAIN"
     },
@@ -4130,43 +4162,11 @@
       "caller": "flush",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "flush",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:132",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:231",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "acquire",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
       "callee": "Add",
@@ -4178,7 +4178,7 @@
       "caller": "acquire",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:278",
       "confidence": "UNCERTAIN"
     },
@@ -4194,6 +4194,22 @@
       "caller": "acquire",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:278",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "acquire",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:278",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "acquire",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:278",
       "confidence": "UNCERTAIN"
@@ -4207,30 +4223,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "acquire",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:278",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "acquire",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:265",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter.go:278",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushQueuesOldParentOnceForSeveralFiles",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:128",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "TestFlushQueuesOldParentOnceForSeveralFiles",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
       "callee": "Add",
@@ -4242,7 +4234,7 @@
       "caller": "TestFlushQueuesOldParentOnceForSeveralFiles",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:128",
       "confidence": "UNCERTAIN"
     },
@@ -4251,6 +4243,22 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushQueuesOldParentOnceForSeveralFiles",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushQueuesOldParentOnceForSeveralFiles",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:128",
       "confidence": "UNCERTAIN"
     },
@@ -4271,42 +4279,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestFlushQueuesOldParentOnceForSeveralFiles",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:114",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:128",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushReleasesPendingPath",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushReleasesPendingPath",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "TestFlushReleasesPendingPath",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushReleasesPendingPath",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
       "confidence": "UNCERTAIN"
     },
@@ -4330,7 +4306,31 @@
       "caller": "TestFlushReleasesPendingPath",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushReleasesPendingPath",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushReleasesPendingPath",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushReleasesPendingPath",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:401",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:413",
       "confidence": "UNCERTAIN"
     },
@@ -4338,30 +4338,6 @@
       "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
       "confidence": "UNCERTAIN"
@@ -4370,15 +4346,7 @@
       "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
       "confidence": "UNCERTAIN"
     },
@@ -4394,8 +4362,24 @@
       "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4403,6 +4387,14 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:428",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
       "confidence": "UNCERTAIN"
     },
@@ -4426,14 +4418,6 @@
       "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
       "confidence": "UNCERTAIN"
@@ -4442,6 +4426,22 @@
       "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReleasePathsAllowsCrawlerToQueueAgain",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:424",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:434",
       "confidence": "UNCERTAIN"
@@ -4450,23 +4450,23 @@
       "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
       "confidence": "UNCERTAIN"
     },
@@ -4482,6 +4482,14 @@
       "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
       "confidence": "UNCERTAIN"
@@ -4490,7 +4498,7 @@
       "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
       "confidence": "UNCERTAIN"
     },
@@ -4498,8 +4506,40 @@
       "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:459",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4514,47 +4554,7 @@
       "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushBatchKeepsFlushSolePendingPathOwner",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:439",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:476",
       "confidence": "UNCERTAIN"
     },
@@ -4570,23 +4570,15 @@
       "caller": "TestFlushQueuesOldParentBeforeDeletionUpdatesMtime",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:77",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:87",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushQueuesOldParentBeforeDeletionUpdatesMtime",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:77",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:87",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestFlushQueuesOldParentBeforeDeletionUpdatesMtime",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:77",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushQueuesOldParentBeforeDeletionUpdatesMtime",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:77",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:87",
       "confidence": "UNCERTAIN"
     },
@@ -4603,6 +4595,14 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:77",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestFlushQueuesOldParentBeforeDeletionUpdatesMtime",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:77",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/deleter/deleter_test.go:87",
       "confidence": "UNCERTAIN"
     },
@@ -4626,7 +4626,31 @@
       "caller": "TestCloseDeliversRecentlyQueuedEvents",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCloseDeliversRecentlyQueuedEvents",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCloseDeliversRecentlyQueuedEvents",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCloseDeliversRecentlyQueuedEvents",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
       "confidence": "UNCERTAIN"
     },
@@ -4650,16 +4674,8 @@
       "caller": "TestCloseDeliversRecentlyQueuedEvents",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCloseDeliversRecentlyQueuedEvents",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4667,14 +4683,22 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:104",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestCloseDeliversRecentlyQueuedEvents",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCloseDeliversRecentlyQueuedEvents",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
       "confidence": "UNCERTAIN"
     },
@@ -4698,31 +4722,7 @@
       "caller": "TestCloseDeliversRecentlyQueuedEvents",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCloseDeliversRecentlyQueuedEvents",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCloseDeliversRecentlyQueuedEvents",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCloseDeliversRecentlyQueuedEvents",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:63",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/events/publisher_test.go:91",
       "confidence": "UNCERTAIN"
     },
@@ -4731,6 +4731,38 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -4746,7 +4778,7 @@
       "caller": "TestDirCleanupDue",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
       "confidence": "UNCERTAIN"
     },
@@ -4754,8 +4786,8 @@
       "caller": "TestDirCleanupDue",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4763,30 +4795,6 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:22",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
       "confidence": "UNCERTAIN"
     },
@@ -4794,7 +4802,7 @@
       "caller": "TestDirCleanupDue",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
       "confidence": "UNCERTAIN"
     },
@@ -4802,7 +4810,7 @@
       "caller": "TestDirCleanupDue",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
       "confidence": "UNCERTAIN"
     },
@@ -4811,6 +4819,14 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
       "confidence": "UNCERTAIN"
     },
@@ -4820,46 +4836,6 @@
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:23",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirCleanupDue",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4882,7 +4858,23 @@
       "caller": "TestDirCleanupDue",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
       "confidence": "UNCERTAIN"
     },
@@ -4891,6 +4883,14 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirCleanupDue",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:12",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:24",
       "confidence": "UNCERTAIN"
     },
@@ -4899,14 +4899,6 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:39",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:41",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestDirModTime",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:39",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:41",
       "confidence": "UNCERTAIN"
     },
@@ -4938,7 +4930,7 @@
       "caller": "TestDirModTime",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:39",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:41",
       "confidence": "UNCERTAIN"
     },
@@ -4948,6 +4940,22 @@
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:41",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestDirModTime",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:39",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/filemeta/filemeta_test.go:41",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "waitForCacheRoot",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:113",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:114",
       "confidence": "UNCERTAIN"
     },
     {
@@ -4962,7 +4970,7 @@
       "caller": "waitForCacheRoot",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:113",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -4971,14 +4979,6 @@
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:113",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "waitForCacheRoot",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:113",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -5002,7 +5002,7 @@
       "caller": "waitForCacheRoot",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:113",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -5042,6 +5042,14 @@
       "caller": "startSupervisedWorker",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:154",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:161",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "startSupervisedWorker",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:154",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:161",
       "confidence": "UNCERTAIN"
@@ -5055,18 +5063,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "startSupervisedWorker",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:154",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:161",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "waitForMount",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -5082,7 +5082,15 @@
       "caller": "waitForMount",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "waitForMount",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -5098,39 +5106,23 @@
       "caller": "waitForMount",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "waitForMount",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "waitForMount",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:173",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "waitForMount",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:223",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service.go:224",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5138,7 +5130,7 @@
       "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5162,6 +5154,14 @@
       "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:173",
       "confidence": "UNCERTAIN"
@@ -5170,7 +5170,7 @@
       "caller": "TestStartSupervisedWorkerRestartsAfterPanic",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:165",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5178,31 +5178,15 @@
       "caller": "waitForCondition",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "waitForCondition",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "waitForCondition",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "waitForCondition",
-      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "waitForCondition",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
       "confidence": "UNCERTAIN"
     },
@@ -5226,7 +5210,23 @@
       "caller": "waitForCondition",
       "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "waitForCondition",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "waitForCondition",
+      "caller_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:190",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "kv_connectors/pvc_evictor/go/internal/service/service_test.go:192",
       "confidence": "UNCERTAIN"
     },
@@ -5234,14 +5234,6 @@
       "caller": "populateIndex",
       "caller_source": "pkg/kvcache/indexer_test.go:98",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/indexer_test.go:102",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "populateIndex",
-      "caller_source": "pkg/kvcache/indexer_test.go:98",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/indexer_test.go:102",
       "confidence": "UNCERTAIN"
@@ -5250,15 +5242,7 @@
       "caller": "populateIndex",
       "caller_source": "pkg/kvcache/indexer_test.go:98",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/indexer_test.go:102",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "populateIndex",
-      "caller_source": "pkg/kvcache/indexer_test.go:98",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/indexer_test.go:102",
       "confidence": "UNCERTAIN"
     },
@@ -5274,7 +5258,7 @@
       "caller": "populateIndex",
       "caller_source": "pkg/kvcache/indexer_test.go:98",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/indexer_test.go:102",
       "confidence": "UNCERTAIN"
     },
@@ -5282,7 +5266,23 @@
       "caller": "populateIndex",
       "caller_source": "pkg/kvcache/indexer_test.go:98",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/indexer_test.go:102",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "populateIndex",
+      "caller_source": "pkg/kvcache/indexer_test.go:98",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/indexer_test.go:102",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "populateIndex",
+      "caller_source": "pkg/kvcache/indexer_test.go:98",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/indexer_test.go:102",
       "confidence": "UNCERTAIN"
     },
@@ -5290,14 +5290,6 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
       "confidence": "UNCERTAIN"
@@ -5314,7 +5306,23 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5330,15 +5338,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:173",
       "confidence": "UNCERTAIN"
     },
@@ -5346,14 +5346,6 @@
       "caller": "Delete",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Delete",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
       "confidence": "UNCERTAIN"
@@ -5362,23 +5354,7 @@
       "caller": "Delete",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Delete",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Delete",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
       "confidence": "UNCERTAIN"
     },
@@ -5394,6 +5370,30 @@
       "caller": "Delete",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Delete",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Delete",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Delete",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:178",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:180",
       "confidence": "UNCERTAIN"
@@ -5402,7 +5402,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -5410,7 +5410,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -5434,7 +5434,15 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:249",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:249",
       "confidence": "UNCERTAIN"
     },
@@ -5450,15 +5458,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:262",
       "confidence": "UNCERTAIN"
     },
@@ -5466,7 +5466,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:262",
       "confidence": "UNCERTAIN"
     },
@@ -5490,7 +5490,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:262",
       "confidence": "UNCERTAIN"
     },
@@ -5506,7 +5506,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory.go:262",
       "confidence": "UNCERTAIN"
     },
@@ -5514,6 +5514,46 @@
       "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
       "confidence": "UNCERTAIN"
@@ -5530,16 +5570,16 @@
       "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5547,15 +5587,15 @@
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5563,38 +5603,6 @@
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:39",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
       "confidence": "UNCERTAIN"
     },
@@ -5610,39 +5618,15 @@
       "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "TestCostAwareKeyIndexBoundedUnderEviction",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:34",
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_internal_test.go:51",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -5658,7 +5642,23 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -5674,7 +5674,7 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:53",
       "confidence": "UNCERTAIN"
     },
@@ -5682,7 +5682,23 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
       "confidence": "UNCERTAIN"
     },
@@ -5706,30 +5722,6 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
       "confidence": "UNCERTAIN"
@@ -5738,7 +5730,15 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:63",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:69",
       "confidence": "UNCERTAIN"
     },
@@ -5747,6 +5747,14 @@
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:69",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:69",
       "confidence": "UNCERTAIN"
     },
@@ -5762,15 +5770,7 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:69",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:69",
       "confidence": "UNCERTAIN"
     },
@@ -5786,32 +5786,8 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:69",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestCostAwareIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5834,6 +5810,22 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
       "confidence": "UNCERTAIN"
@@ -5842,7 +5834,15 @@
       "caller": "TestCostAwareIndexSize",
       "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestCostAwareIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:44",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/cost_aware_memory_test.go:75",
       "confidence": "UNCERTAIN"
     },
@@ -5850,14 +5850,6 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:172",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:172",
       "confidence": "UNCERTAIN"
@@ -5866,7 +5858,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:172",
       "confidence": "UNCERTAIN"
     },
@@ -5882,6 +5874,14 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:172",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:172",
       "confidence": "UNCERTAIN"
@@ -5890,7 +5890,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:172",
       "confidence": "UNCERTAIN"
     },
@@ -5906,7 +5906,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:207",
       "confidence": "UNCERTAIN"
     },
@@ -5930,7 +5930,15 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:207",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:207",
       "confidence": "UNCERTAIN"
     },
@@ -5946,32 +5954,8 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:207",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:207",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Add",
-      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
       "confidence": "UNCERTAIN"
     },
     {
@@ -5986,7 +5970,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
       "confidence": "UNCERTAIN"
     },
@@ -5994,7 +5978,7 @@
       "caller": "Add",
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
       "confidence": "UNCERTAIN"
     },
@@ -6011,6 +5995,22 @@
       "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Add",
+      "caller_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory.go:218",
       "confidence": "UNCERTAIN"
     },
@@ -6018,7 +6018,7 @@
       "caller": "TestSpeculativeAnnotation",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
       "confidence": "UNCERTAIN"
     },
@@ -6026,15 +6026,7 @@
       "caller": "TestSpeculativeAnnotation",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeAnnotation",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
       "confidence": "UNCERTAIN"
     },
@@ -6058,24 +6050,8 @@
       "caller": "TestSpeculativeAnnotation",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeAnnotation",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeAnnotation",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6083,23 +6059,7 @@
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeAnnotation",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeAnnotation",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6107,6 +6067,14 @@
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeAnnotation",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -6122,7 +6090,39 @@
       "caller": "TestSpeculativeAnnotation",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeAnnotation",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeAnnotation",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeAnnotation",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeAnnotation",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:122",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -6130,31 +6130,7 @@
       "caller": "TestSpeculativeEvictThenEmpty",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeEvictThenEmpty",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeEvictThenEmpty",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestSpeculativeEvictThenEmpty",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
       "confidence": "UNCERTAIN"
     },
@@ -6170,7 +6146,7 @@
       "caller": "TestSpeculativeEvictThenEmpty",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
       "confidence": "UNCERTAIN"
     },
@@ -6178,7 +6154,31 @@
       "caller": "TestSpeculativeEvictThenEmpty",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeEvictThenEmpty",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeEvictThenEmpty",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestSpeculativeEvictThenEmpty",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:176",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:184",
       "confidence": "UNCERTAIN"
     },
@@ -6186,7 +6186,7 @@
       "caller": "TestAddWithNilEngineKeys",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:204",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:212",
       "confidence": "UNCERTAIN"
     },
@@ -6218,7 +6218,7 @@
       "caller": "TestAddWithNilEngineKeys",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:204",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:212",
       "confidence": "UNCERTAIN"
     },
@@ -6234,7 +6234,7 @@
       "caller": "TestAddWithNilEngineKeys",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:204",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:212",
       "confidence": "UNCERTAIN"
     },
@@ -6250,14 +6250,6 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:60",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInMemoryIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:60",
       "confidence": "UNCERTAIN"
@@ -6266,15 +6258,7 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:60",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInMemoryIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:60",
       "confidence": "UNCERTAIN"
     },
@@ -6298,7 +6282,23 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:60",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInMemoryIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:60",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInMemoryIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -6330,7 +6330,7 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -6354,7 +6354,7 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -6362,7 +6362,15 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:72",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInMemoryIndexSize",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -6378,7 +6386,7 @@
       "caller": "TestInMemoryIndexSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -6396,22 +6404,6 @@
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:72",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInMemoryIndexSize",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:45",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:72",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInMemoryIndexPodCacheSize",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:86",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:107",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6434,15 +6426,7 @@
       "caller": "TestInMemoryIndexPodCacheSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:86",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "TestInMemoryIndexPodCacheSize",
-      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:86",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -6458,7 +6442,23 @@
       "caller": "TestInMemoryIndexPodCacheSize",
       "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:86",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInMemoryIndexPodCacheSize",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:86",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestInMemoryIndexPodCacheSize",
+      "caller_source": "pkg/kvcache/kvblock/in_memory_test.go:86",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/in_memory_test.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -6466,7 +6466,7 @@
       "caller": "testClearBasic",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:164",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:169",
       "confidence": "UNCERTAIN"
     },
@@ -6482,7 +6482,7 @@
       "caller": "testClearBasic",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:164",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:169",
       "confidence": "UNCERTAIN"
     },
@@ -6498,7 +6498,15 @@
       "caller": "testClearBasic",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:164",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
+      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:169",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearBasic",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:164",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:169",
       "confidence": "UNCERTAIN"
     },
@@ -6508,22 +6516,6 @@
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:169",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearBasic",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:164",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:169",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearIsolatesOtherPods",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:183",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:189",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6546,6 +6538,14 @@
       "caller": "testClearIsolatesOtherPods",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:183",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:189",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearIsolatesOtherPods",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:183",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:189",
       "confidence": "UNCERTAIN"
@@ -6562,7 +6562,7 @@
       "caller": "testClearIsolatesOtherPods",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:183",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:189",
       "confidence": "UNCERTAIN"
     },
@@ -6570,8 +6570,32 @@
       "caller": "testClearIsolatesOtherPods",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:183",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:189",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearAllTiers",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearAllTiers",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearAllTiers",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6594,30 +6618,6 @@
       "caller": "testClearAllTiers",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
       "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearAllTiers",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearAllTiers",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearAllTiers",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:201",
-      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/redis.go:245",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
       "confidence": "UNCERTAIN"
@@ -6628,6 +6628,22 @@
       "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/traced_index_test.go:219",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:209",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearThenReAdd",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearThenReAdd",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
+      "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/traced_index.go:38",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
       "confidence": "UNCERTAIN"
     },
     {
@@ -6642,31 +6658,15 @@
       "caller": "testClearThenReAdd",
       "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
       "callee": "Add",
+      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:231",
+      "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "testClearThenReAdd",
+      "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
+      "callee": "Add",
       "callee_source": "pkg/kvcache/kvblock/in_memory.go:157",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearThenReAdd",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/instrumented_index.go:35",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearThenReAdd",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/redis.go:245",
-      "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "testClearThenReAdd",
-      "caller_source": "pkg/kvcache/kvblock/index_test.go:220",
-      "callee": "Add",
-      "callee_source": "pkg/kvcache/kvblock/cost_aware_memory.go:171",
       "call_site_source": "pkg/kvcache/kvblock/index_test.go:225",
       "confidence": "UNCERTAIN"
     }

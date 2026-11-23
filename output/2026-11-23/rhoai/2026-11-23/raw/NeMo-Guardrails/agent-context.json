@@ -3,7 +3,7 @@
   "component": "NeMo-Guardrails",
   "repo": "red-hat-data-services/NeMo-Guardrails",
   "commit_sha": "93abcf4bd29b90ed5fa45e26cdb3f9cbc982df2c",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "NeMo-Guardrails is a Kubernetes component. Dockerfile EXPOSE ports: 1337, 5000, 8000. connecting to external services: aiohttp, httpx, openai, redis, sqlalchemy, urllib. runtime dependencies: Redis. 137 Python package dependencies (137 required), categories: 1 grpc, 1 image-processing, 1 llm-sdk, 1 tokenizer, 1 web-server, 14 observability, 2 ml-framework, 2 numerical, 2 serialization, 3 web-framework. Python k8s client with 59 API call(s).",
   "repository_description": "LATEST RELEASE / DEVELOPMENT VERSION**: The develop branch tracks the latest top of tree development. The latest released version is 0.23.0.",
   "description_source": "README.md:16",
@@ -7732,7 +7732,7 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
+      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
@@ -7740,7 +7740,7 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
+      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
@@ -7764,7 +7764,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
+      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
       "confidence": "UNCERTAIN"
     },
@@ -7772,7 +7772,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
+      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
       "confidence": "UNCERTAIN"
     },
@@ -7828,7 +7828,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
+      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
       "call_site_source": "scripts/pre_download_required_models.py:174",
       "confidence": "UNCERTAIN"
     },
@@ -7836,7 +7836,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
+      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
       "call_site_source": "scripts/pre_download_required_models.py:174",
       "confidence": "UNCERTAIN"
     },
@@ -7860,6 +7860,14 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
+      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
+      "call_site_source": "scripts/pre_download_required_models.py:176",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
       "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
       "call_site_source": "scripts/pre_download_required_models.py:176",
       "confidence": "UNCERTAIN"
@@ -7868,15 +7876,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
-      "call_site_source": "scripts/pre_download_required_models.py:176",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
+      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
       "call_site_source": "scripts/pre_download_required_models.py:177",
       "confidence": "UNCERTAIN"
     },
@@ -7884,7 +7884,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
+      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
       "call_site_source": "scripts/pre_download_required_models.py:177",
       "confidence": "UNCERTAIN"
     },
@@ -7908,7 +7908,7 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
+      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
       "call_site_source": "scripts/telemetry_smoke.py:1349",
       "confidence": "UNCERTAIN"
     },
@@ -7916,7 +7916,7 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
-      "callee_source": "nemoguardrails/llm/cache/interface.py:36",
+      "callee_source": "nemoguardrails/llm/cache/lfu.py:154",
       "call_site_source": "scripts/telemetry_smoke.py:1349",
       "confidence": "UNCERTAIN"
     },
@@ -7924,15 +7924,7 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:253",
-      "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:206",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
@@ -7948,7 +7940,7 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
+      "callee_source": "nemoguardrails/embeddings/cache.py:166",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
@@ -7956,16 +7948,16 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "callee_source": "nemoguardrails/embeddings/cache.py:206",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:166",
+      "callee_source": "nemoguardrails/embeddings/cache.py:253",
+      "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
     {
@@ -7988,7 +7980,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:132",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:166",
       "confidence": "UNCERTAIN"
     },
@@ -8004,24 +7996,8 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:206",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
-      "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:132",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:166",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8044,7 +8020,31 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:132",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:206",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
       "confidence": "UNCERTAIN"
     },
@@ -8060,6 +8060,14 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:132",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:166",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
       "confidence": "UNCERTAIN"
@@ -8068,15 +8076,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:132",
+      "callee_source": "nemoguardrails/embeddings/cache.py:206",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
       "confidence": "UNCERTAIN"
     },
@@ -8084,7 +8084,7 @@
       "caller": "main",
       "caller_source": "scripts/discover_required_models.py:170",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:253",
+      "callee_source": "nemoguardrails/embeddings/cache.py:166",
       "call_site_source": "scripts/discover_required_models.py:171",
       "confidence": "UNCERTAIN"
     },
@@ -8100,15 +8100,7 @@
       "caller": "main",
       "caller_source": "scripts/discover_required_models.py:170",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:132",
-      "call_site_source": "scripts/discover_required_models.py:171",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/discover_required_models.py:170",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "callee_source": "nemoguardrails/embeddings/cache.py:253",
       "call_site_source": "scripts/discover_required_models.py:171",
       "confidence": "UNCERTAIN"
     },
@@ -8122,34 +8114,10 @@
     },
     {
       "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
+      "caller_source": "scripts/discover_required_models.py:170",
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:132",
-      "call_site_source": "scripts/pre_download_required_models.py:170",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:166",
-      "call_site_source": "scripts/pre_download_required_models.py:170",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:206",
-      "call_site_source": "scripts/pre_download_required_models.py:170",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:253",
-      "call_site_source": "scripts/pre_download_required_models.py:170",
+      "call_site_source": "scripts/discover_required_models.py:171",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8165,6 +8133,46 @@
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "call_site_source": "scripts/pre_download_required_models.py:170",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:253",
+      "call_site_source": "scripts/pre_download_required_models.py:170",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:132",
+      "call_site_source": "scripts/pre_download_required_models.py:170",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:206",
+      "call_site_source": "scripts/pre_download_required_models.py:170",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "call_site_source": "scripts/pre_download_required_models.py:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:206",
       "call_site_source": "scripts/pre_download_required_models.py:174",
       "confidence": "UNCERTAIN"
     },
@@ -8188,23 +8196,15 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:253",
+      "call_site_source": "scripts/pre_download_required_models.py:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:206",
-      "call_site_source": "scripts/pre_download_required_models.py:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:253",
-      "call_site_source": "scripts/pre_download_required_models.py:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:253",
       "call_site_source": "scripts/pre_download_required_models.py:175",
       "confidence": "UNCERTAIN"
     },
@@ -8220,7 +8220,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:206",
+      "callee_source": "nemoguardrails/embeddings/cache.py:132",
       "call_site_source": "scripts/pre_download_required_models.py:175",
       "confidence": "UNCERTAIN"
     },
@@ -8228,7 +8228,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:132",
+      "callee_source": "nemoguardrails/embeddings/cache.py:253",
       "call_site_source": "scripts/pre_download_required_models.py:175",
       "confidence": "UNCERTAIN"
     },
@@ -8238,6 +8238,30 @@
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:89",
       "call_site_source": "scripts/pre_download_required_models.py:175",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "call_site_source": "scripts/pre_download_required_models.py:176",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
+      "call_site_source": "scripts/pre_download_required_models.py:176",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:206",
+      "call_site_source": "scripts/pre_download_required_models.py:176",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8261,7 +8285,15 @@
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:89",
-      "call_site_source": "scripts/pre_download_required_models.py:176",
+      "call_site_source": "scripts/pre_download_required_models.py:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "call_site_source": "scripts/pre_download_required_models.py:177",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8269,22 +8301,6 @@
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:206",
-      "call_site_source": "scripts/pre_download_required_models.py:176",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:166",
-      "call_site_source": "scripts/pre_download_required_models.py:176",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:166",
       "call_site_source": "scripts/pre_download_required_models.py:177",
       "confidence": "UNCERTAIN"
     },
@@ -8300,24 +8316,16 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:206",
-      "call_site_source": "scripts/pre_download_required_models.py:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
-      "call_site_source": "scripts/pre_download_required_models.py:177",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:132",
       "call_site_source": "scripts/pre_download_required_models.py:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/telemetry_smoke.py:1215",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
+      "call_site_source": "scripts/telemetry_smoke.py:1343",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8340,7 +8348,7 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
+      "callee_source": "nemoguardrails/embeddings/cache.py:166",
       "call_site_source": "scripts/telemetry_smoke.py:1343",
       "confidence": "UNCERTAIN"
     },
@@ -8357,7 +8365,15 @@
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:166",
-      "call_site_source": "scripts/telemetry_smoke.py:1343",
+      "call_site_source": "scripts/telemetry_smoke.py:1349",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/telemetry_smoke.py:1215",
+      "callee": "get",
+      "callee_source": "nemoguardrails/embeddings/cache.py:89",
+      "call_site_source": "scripts/telemetry_smoke.py:1349",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8372,7 +8388,7 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:166",
+      "callee_source": "nemoguardrails/embeddings/cache.py:132",
       "call_site_source": "scripts/telemetry_smoke.py:1349",
       "confidence": "UNCERTAIN"
     },
@@ -8382,30 +8398,6 @@
       "callee": "get",
       "callee_source": "nemoguardrails/embeddings/cache.py:253",
       "call_site_source": "scripts/telemetry_smoke.py:1349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/telemetry_smoke.py:1215",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:132",
-      "call_site_source": "scripts/telemetry_smoke.py:1349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/telemetry_smoke.py:1215",
-      "callee": "get",
-      "callee_source": "nemoguardrails/embeddings/cache.py:89",
-      "call_site_source": "scripts/telemetry_smoke.py:1349",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
-      "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
-      "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8426,6 +8418,14 @@
     },
     {
       "caller": "main",
+      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
+      "callee": "get",
+      "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
+      "call_site_source": "benchmark/mock_llm_server/run_server.py:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
       "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
@@ -8452,14 +8452,6 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
-      "callee": "get",
       "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
       "confidence": "UNCERTAIN"
@@ -8476,7 +8468,15 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
+      "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:252",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "get",
+      "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
       "confidence": "UNCERTAIN"
     },
@@ -8484,7 +8484,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
+      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:385",
       "confidence": "UNCERTAIN"
     },
@@ -8548,14 +8548,6 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
-      "call_site_source": "scripts/pre_download_required_models.py:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/pre_download_required_models.py:169",
-      "callee": "get",
       "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
       "call_site_source": "scripts/pre_download_required_models.py:174",
       "confidence": "UNCERTAIN"
@@ -8573,7 +8565,7 @@
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
       "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
-      "call_site_source": "scripts/pre_download_required_models.py:175",
+      "call_site_source": "scripts/pre_download_required_models.py:174",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8597,6 +8589,14 @@
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
       "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
+      "call_site_source": "scripts/pre_download_required_models.py:175",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/pre_download_required_models.py:169",
+      "callee": "get",
+      "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
       "call_site_source": "scripts/pre_download_required_models.py:176",
       "confidence": "UNCERTAIN"
     },
@@ -8604,7 +8604,7 @@
       "caller": "main",
       "caller_source": "scripts/pre_download_required_models.py:169",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
+      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
       "call_site_source": "scripts/pre_download_required_models.py:176",
       "confidence": "UNCERTAIN"
     },
@@ -8652,6 +8652,14 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
+      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
+      "call_site_source": "scripts/telemetry_smoke.py:1343",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/telemetry_smoke.py:1215",
+      "callee": "get",
       "callee_source": "nemoguardrails/server/datastore/redis_store.py:58",
       "call_site_source": "scripts/telemetry_smoke.py:1343",
       "confidence": "UNCERTAIN"
@@ -8660,15 +8668,7 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
-      "call_site_source": "scripts/telemetry_smoke.py:1343",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "scripts/telemetry_smoke.py:1215",
-      "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
+      "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
       "call_site_source": "scripts/telemetry_smoke.py:1349",
       "confidence": "UNCERTAIN"
     },
@@ -8684,7 +8684,7 @@
       "caller": "main",
       "caller_source": "scripts/telemetry_smoke.py:1215",
       "callee": "get",
-      "callee_source": "nemoguardrails/server/datastore/datastore.py:34",
+      "callee_source": "nemoguardrails/server/datastore/memory_store.py:40",
       "call_site_source": "scripts/telemetry_smoke.py:1349",
       "confidence": "UNCERTAIN"
     },
@@ -8868,6 +8868,14 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "run",
+      "callee_source": "nemoguardrails/evaluate/evaluate_hallucination.py:174",
+      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
+      "callee": "run",
       "callee_source": "nemoguardrails/evaluate/evaluate_moderation.py:211",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
       "confidence": "UNCERTAIN"
@@ -8882,14 +8890,6 @@
     },
     {
       "caller": "main",
-      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
-      "callee": "run",
-      "callee_source": "nemoguardrails/evaluate/evaluate_hallucination.py:174",
-      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
       "caller_source": "nemoguardrails/evaluate/evaluate_factcheck.py:191",
       "callee": "run",
       "callee_source": "nemoguardrails/evaluate/evaluate_factcheck.py:157",
@@ -8910,14 +8910,6 @@
       "callee": "run",
       "callee_source": "nemoguardrails/evaluate/evaluate_moderation.py:211",
       "call_site_source": "nemoguardrails/evaluate/evaluate_factcheck.py:213",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/evaluate/evaluate_hallucination.py:198",
-      "callee": "run",
-      "callee_source": "nemoguardrails/evaluate/evaluate_factcheck.py:157",
-      "call_site_source": "nemoguardrails/evaluate/evaluate_hallucination.py:222",
       "confidence": "UNCERTAIN"
     },
     {
@@ -8933,6 +8925,14 @@
       "caller_source": "nemoguardrails/evaluate/evaluate_hallucination.py:198",
       "callee": "run",
       "callee_source": "nemoguardrails/evaluate/evaluate_hallucination.py:174",
+      "call_site_source": "nemoguardrails/evaluate/evaluate_hallucination.py:222",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/evaluate/evaluate_hallucination.py:198",
+      "callee": "run",
+      "callee_source": "nemoguardrails/evaluate/evaluate_factcheck.py:157",
       "call_site_source": "nemoguardrails/evaluate/evaluate_hallucination.py:222",
       "confidence": "UNCERTAIN"
     },
@@ -8956,6 +8956,14 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "run",
+      "callee_source": "nemoguardrails/eval/check.py:369",
+      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
+      "callee": "run",
       "callee_source": "benchmark/aiperf/run_aiperf.py:446",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
       "confidence": "UNCERTAIN"
@@ -8972,7 +8980,7 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "run",
-      "callee_source": "nemoguardrails/eval/check.py:369",
+      "callee_source": "benchmark/locust/run_locust.py:225",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
       "confidence": "UNCERTAIN"
     },
@@ -8981,14 +8989,6 @@
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "run",
       "callee_source": "benchmark/locust/run_locust.py:135",
-      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
-      "callee": "run",
-      "callee_source": "benchmark/locust/run_locust.py:225",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
       "confidence": "UNCERTAIN"
     },
@@ -9020,22 +9020,6 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "clear",
-      "callee_source": "nemoguardrails/embeddings/cache.py:294",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:98",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
-      "callee": "clear",
-      "callee_source": "nemoguardrails/embeddings/cache.py:212",
-      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:98",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
-      "callee": "clear",
       "callee_source": "nemoguardrails/llm/cache/lfu.py:251",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:98",
       "confidence": "UNCERTAIN"
@@ -9044,7 +9028,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
       "callee": "clear",
-      "callee_source": "nemoguardrails/embeddings/cache.py:178",
+      "callee_source": "nemoguardrails/embeddings/cache.py:212",
       "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:98",
       "confidence": "UNCERTAIN"
     },
@@ -9066,18 +9050,18 @@
     },
     {
       "caller": "main",
-      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
-      "callee": "run",
-      "callee_source": "nemoguardrails/actions/action_dispatcher.py:41",
-      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "clear",
+      "callee_source": "nemoguardrails/embeddings/cache.py:178",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:98",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
-      "callee": "run",
-      "callee_source": "nemoguardrails/integrations/langchain/utils.py:22",
-      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
+      "caller_source": "nemoguardrails/eval/ui/pages/1_Review.py:82",
+      "callee": "clear",
+      "callee_source": "nemoguardrails/embeddings/cache.py:294",
+      "call_site_source": "nemoguardrails/eval/ui/pages/1_Review.py:98",
       "confidence": "UNCERTAIN"
     },
     {
@@ -9092,7 +9076,23 @@
       "caller": "main",
       "caller_source": "benchmark/mock_llm_server/run_server.py:87",
       "callee": "run",
+      "callee_source": "nemoguardrails/actions/action_dispatcher.py:41",
+      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
+      "callee": "run",
       "callee_source": "nemoguardrails/guardrails/actions/tool_call_action.py:43",
+      "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "benchmark/mock_llm_server/run_server.py:87",
+      "callee": "run",
+      "callee_source": "nemoguardrails/integrations/langchain/utils.py:22",
       "call_site_source": "benchmark/mock_llm_server/run_server.py:103",
       "confidence": "UNCERTAIN"
     },
@@ -9196,14 +9196,6 @@
       "caller": "main",
       "caller_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:23",
       "callee": "read_dataset",
-      "callee_source": "nemoguardrails/evaluate/data/topical/dataset_tools.py:190",
-      "call_site_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:52",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:23",
-      "callee": "read_dataset",
       "callee_source": "nemoguardrails/evaluate/data/topical/dataset_tools.py:274",
       "call_site_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:52",
       "confidence": "UNCERTAIN"
@@ -9213,6 +9205,14 @@
       "caller_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:23",
       "callee": "read_dataset",
       "callee_source": "nemoguardrails/evaluate/data/topical/dataset_tools.py:190",
+      "call_site_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:52",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:23",
+      "callee": "read_dataset",
+      "callee_source": "nemoguardrails/evaluate/data/topical/dataset_tools.py:274",
       "call_site_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:60",
       "confidence": "UNCERTAIN"
     },
@@ -9220,7 +9220,7 @@
       "caller": "main",
       "caller_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:23",
       "callee": "read_dataset",
-      "callee_source": "nemoguardrails/evaluate/data/topical/dataset_tools.py:274",
+      "callee_source": "nemoguardrails/evaluate/data/topical/dataset_tools.py:190",
       "call_site_source": "nemoguardrails/evaluate/data/topical/create_colang_intent_file.py:60",
       "confidence": "UNCERTAIN"
     },

@@ -3,7 +3,7 @@
   "component": "praxis-extproc",
   "repo": "opendatahub-io/praxis-extproc",
   "commit_sha": "814a177260f1d3ce5f2e62f5cdfd8c7c532ea710",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "praxis-extproc is a Kubernetes component. deploying 1 workload(s) (payload-processing) with 1 container(s). exposing 1 service(s) on ports: 9004. Dockerfile EXPOSE ports: 9090, 50051, 50052. protected by 1 network policy/policies. integrates with management relationship via labels/annotations. mounts 1 ConfigMap(s) as volumes: payload-processing-plugins.",
   "repository_description": "[Envoy] [ExtProc] server that runs [Praxis] filter pipelines as an external processor. Enables header and body inspection, mutation, and rejection over gRPC without replacing Envoy.",
   "description_source": "README.md:7",
@@ -1296,14 +1296,6 @@
       "caller": "envoy_headers_to_response",
       "caller_source": "src/adapter.rs:382",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
-      "call_site_source": "src/adapter.rs:388",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "envoy_headers_to_response",
-      "caller_source": "src/adapter.rs:382",
-      "callee": "ok",
       "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "src/adapter.rs:388",
       "confidence": "UNCERTAIN"
@@ -1313,7 +1305,7 @@
       "caller_source": "src/adapter.rs:382",
       "callee": "ok",
       "callee_source": "xtask/src/fips/report.rs:145",
-      "call_site_source": "src/adapter.rs:391",
+      "call_site_source": "src/adapter.rs:388",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1325,6 +1317,22 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "envoy_headers_to_response",
+      "caller_source": "src/adapter.rs:382",
+      "callee": "ok",
+      "callee_source": "xtask/src/fips/report.rs:145",
+      "call_site_source": "src/adapter.rs:391",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "response_status",
+      "caller_source": "src/adapter.rs:412",
+      "callee": "ok",
+      "callee_source": "xtask/src/fips/report.rs:145",
+      "call_site_source": "src/adapter.rs:416",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "response_status",
       "caller_source": "src/adapter.rs:412",
       "callee": "ok",
@@ -1333,22 +1341,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "response_status",
-      "caller_source": "src/adapter.rs:412",
-      "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
-      "call_site_source": "src/adapter.rs:416",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "first_ip_in_header",
-      "caller_source": "src/adapter.rs:446",
-      "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
-      "call_site_source": "src/adapter.rs:447",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "first_ip_in_header",
       "caller_source": "src/adapter.rs:446",
       "callee": "ok",
@@ -1369,6 +1361,14 @@
       "caller_source": "src/adapter.rs:446",
       "callee": "ok",
       "callee_source": "xtask/src/fips/report.rs:145",
+      "call_site_source": "src/adapter.rs:447",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "first_ip_in_header",
+      "caller_source": "src/adapter.rs:446",
+      "callee": "ok",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "src/adapter.rs:447",
       "confidence": "UNCERTAIN"
     },
@@ -1376,7 +1376,7 @@
       "caller": "build_uri",
       "caller_source": "src/adapter.rs:74",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "src/adapter.rs:77",
       "confidence": "UNCERTAIN"
     },
@@ -1384,7 +1384,7 @@
       "caller": "build_uri",
       "caller_source": "src/adapter.rs:74",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "src/adapter.rs:77",
       "confidence": "UNCERTAIN"
     },
@@ -1408,7 +1408,7 @@
       "caller": "extract_bearer_token",
       "caller_source": "src/metrics.rs:446",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "src/metrics.rs:449",
       "confidence": "UNCERTAIN"
     },
@@ -1416,7 +1416,7 @@
       "caller": "extract_bearer_token",
       "caller_source": "src/metrics.rs:446",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "src/metrics.rs:449",
       "confidence": "UNCERTAIN"
     },
@@ -1488,7 +1488,7 @@
       "caller": "linkage",
       "caller_source": "xtask/src/fips/binary.rs:128",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/binary.rs:135",
       "confidence": "UNCERTAIN"
     },
@@ -1496,7 +1496,7 @@
       "caller": "linkage",
       "caller_source": "xtask/src/fips/binary.rs:128",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/binary.rs:135",
       "confidence": "UNCERTAIN"
     },
@@ -1520,7 +1520,7 @@
       "caller": "defined_symbols",
       "caller_source": "xtask/src/fips/binary.rs:184",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/binary.rs:200",
       "confidence": "UNCERTAIN"
     },
@@ -1528,7 +1528,7 @@
       "caller": "defined_symbols",
       "caller_source": "xtask/src/fips/binary.rs:184",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/binary.rs:200",
       "confidence": "UNCERTAIN"
     },
@@ -1536,7 +1536,7 @@
       "caller": "imports",
       "caller_source": "xtask/src/fips/binary.rs:225",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/binary.rs:237",
       "confidence": "UNCERTAIN"
     },
@@ -1544,7 +1544,7 @@
       "caller": "imports",
       "caller_source": "xtask/src/fips/binary.rs:225",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/binary.rs:237",
       "confidence": "UNCERTAIN"
     },
@@ -1568,24 +1568,16 @@
       "caller": "manifest",
       "caller_source": "xtask/src/fips/binary.rs:396",
       "callee": "ok",
+      "callee_source": "xtask/src/fips/report.rs:145",
+      "call_site_source": "xtask/src/fips/binary.rs:401",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "manifest",
+      "caller_source": "xtask/src/fips/binary.rs:396",
+      "callee": "ok",
       "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/binary.rs:401",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "manifest",
-      "caller_source": "xtask/src/fips/binary.rs:396",
-      "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
-      "call_site_source": "xtask/src/fips/binary.rs:401",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "manifest",
-      "caller_source": "xtask/src/fips/binary.rs:396",
-      "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
-      "call_site_source": "xtask/src/fips/binary.rs:413",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1597,11 +1589,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "producer",
-      "caller_source": "xtask/src/fips/binary.rs:523",
+      "caller": "manifest",
+      "caller_source": "xtask/src/fips/binary.rs:396",
       "callee": "ok",
       "callee_source": "xtask/src/fips/report.rs:145",
-      "call_site_source": "xtask/src/fips/binary.rs:526",
+      "call_site_source": "xtask/src/fips/binary.rs:413",
       "confidence": "UNCERTAIN"
     },
     {
@@ -1616,7 +1608,15 @@
       "caller": "producer",
       "caller_source": "xtask/src/fips/binary.rs:523",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
+      "call_site_source": "xtask/src/fips/binary.rs:526",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "producer",
+      "caller_source": "xtask/src/fips/binary.rs:523",
+      "callee": "ok",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/binary.rs:529",
       "confidence": "UNCERTAIN"
     },
@@ -1624,7 +1624,7 @@
       "caller": "producer",
       "caller_source": "xtask/src/fips/binary.rs:523",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/binary.rs:529",
       "confidence": "UNCERTAIN"
     },
@@ -1648,7 +1648,7 @@
       "caller": "provider_config",
       "caller_source": "xtask/src/fips/environment.rs:116",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/environment.rs:118",
       "confidence": "UNCERTAIN"
     },
@@ -1656,7 +1656,7 @@
       "caller": "provider_config",
       "caller_source": "xtask/src/fips/environment.rs:116",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/environment.rs:118",
       "confidence": "UNCERTAIN"
     },
@@ -1680,7 +1680,7 @@
       "caller": "first_line",
       "caller_source": "xtask/src/fips/environment.rs:57",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/environment.rs:58",
       "confidence": "UNCERTAIN"
     },
@@ -1688,7 +1688,7 @@
       "caller": "first_line",
       "caller_source": "xtask/src/fips/environment.rs:57",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/environment.rs:58",
       "confidence": "UNCERTAIN"
     },
@@ -1712,7 +1712,7 @@
       "caller": "section",
       "caller_source": "xtask/src/fips/graph.rs:96",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/graph.rs:123",
       "confidence": "UNCERTAIN"
     },
@@ -1720,7 +1720,7 @@
       "caller": "section",
       "caller_source": "xtask/src/fips/graph.rs:96",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/graph.rs:123",
       "confidence": "UNCERTAIN"
     },
@@ -1728,7 +1728,7 @@
       "caller": "section",
       "caller_source": "xtask/src/fips/guards.rs:72",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/guards.rs:77",
       "confidence": "UNCERTAIN"
     },
@@ -1736,7 +1736,7 @@
       "caller": "section",
       "caller_source": "xtask/src/fips/guards.rs:72",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/guards.rs:77",
       "confidence": "UNCERTAIN"
     },
@@ -1744,7 +1744,7 @@
       "caller": "kernel_flag",
       "caller_source": "xtask/src/fips/host_check.rs:207",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/host_check.rs:212",
       "confidence": "UNCERTAIN"
     },
@@ -1752,7 +1752,7 @@
       "caller": "kernel_flag",
       "caller_source": "xtask/src/fips/host_check.rs:207",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/host_check.rs:212",
       "confidence": "UNCERTAIN"
     },
@@ -1760,7 +1760,7 @@
       "caller": "boot_parameter",
       "caller_source": "xtask/src/fips/host_check.rs:223",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/host_check.rs:228",
       "confidence": "UNCERTAIN"
     },
@@ -1768,7 +1768,7 @@
       "caller": "boot_parameter",
       "caller_source": "xtask/src/fips/host_check.rs:223",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/host_check.rs:228",
       "confidence": "UNCERTAIN"
     },
@@ -1824,7 +1824,7 @@
       "caller": "module_verdict",
       "caller_source": "xtask/src/fips/host_check.rs:335",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/host_check.rs:340",
       "confidence": "UNCERTAIN"
     },
@@ -1832,7 +1832,7 @@
       "caller": "module_verdict",
       "caller_source": "xtask/src/fips/host_check.rs:335",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/host_check.rs:340",
       "confidence": "UNCERTAIN"
     },
@@ -1840,7 +1840,7 @@
       "caller": "image_crypto_policy",
       "caller_source": "xtask/src/fips/host_check.rs:377",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/host_check.rs:383",
       "confidence": "UNCERTAIN"
     },
@@ -1848,7 +1848,7 @@
       "caller": "image_crypto_policy",
       "caller_source": "xtask/src/fips/host_check.rs:377",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/host_check.rs:383",
       "confidence": "UNCERTAIN"
     },
@@ -1904,7 +1904,7 @@
       "caller": "first_line",
       "caller_source": "xtask/src/fips/host_check.rs:488",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/host_check.rs:118",
+      "callee_source": "xtask/src/fips/report.rs:145",
       "call_site_source": "xtask/src/fips/host_check.rs:489",
       "confidence": "UNCERTAIN"
     },
@@ -1912,7 +1912,7 @@
       "caller": "first_line",
       "caller_source": "xtask/src/fips/host_check.rs:488",
       "callee": "ok",
-      "callee_source": "xtask/src/fips/report.rs:145",
+      "callee_source": "xtask/src/fips/host_check.rs:118",
       "call_site_source": "xtask/src/fips/host_check.rs:489",
       "confidence": "UNCERTAIN"
     },
@@ -2232,7 +2232,7 @@
       "caller": "linkage",
       "caller_source": "xtask/src/fips/binary.rs:128",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/binary.rs:138",
       "confidence": "UNCERTAIN"
     },
@@ -2240,7 +2240,7 @@
       "caller": "linkage",
       "caller_source": "xtask/src/fips/binary.rs:128",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/binary.rs:138",
       "confidence": "UNCERTAIN"
     },
@@ -2264,7 +2264,7 @@
       "caller": "defined_symbols",
       "caller_source": "xtask/src/fips/binary.rs:184",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/binary.rs:188",
       "confidence": "UNCERTAIN"
     },
@@ -2272,7 +2272,7 @@
       "caller": "defined_symbols",
       "caller_source": "xtask/src/fips/binary.rs:184",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/binary.rs:188",
       "confidence": "UNCERTAIN"
     },
@@ -2312,7 +2312,7 @@
       "caller": "openssl_imports",
       "caller_source": "xtask/src/fips/binary.rs:264",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/binary.rs:280",
       "confidence": "UNCERTAIN"
     },
@@ -2320,7 +2320,7 @@
       "caller": "openssl_imports",
       "caller_source": "xtask/src/fips/binary.rs:264",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/binary.rs:280",
       "confidence": "UNCERTAIN"
     },
@@ -2344,14 +2344,6 @@
       "caller": "manifest",
       "caller_source": "xtask/src/fips/binary.rs:396",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
-      "call_site_source": "xtask/src/fips/binary.rs:398",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "manifest",
-      "caller_source": "xtask/src/fips/binary.rs:396",
-      "callee": "fail",
       "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/binary.rs:398",
       "confidence": "UNCERTAIN"
@@ -2361,7 +2353,7 @@
       "caller_source": "xtask/src/fips/binary.rs:396",
       "callee": "fail",
       "callee_source": "xtask/src/fips/report.rs:161",
-      "call_site_source": "xtask/src/fips/binary.rs:405",
+      "call_site_source": "xtask/src/fips/binary.rs:398",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2376,7 +2368,15 @@
       "caller": "manifest",
       "caller_source": "xtask/src/fips/binary.rs:396",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
+      "call_site_source": "xtask/src/fips/binary.rs:405",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "manifest",
+      "caller_source": "xtask/src/fips/binary.rs:396",
+      "callee": "fail",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/binary.rs:410",
       "confidence": "UNCERTAIN"
     },
@@ -2384,7 +2384,7 @@
       "caller": "manifest",
       "caller_source": "xtask/src/fips/binary.rs:396",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/binary.rs:410",
       "confidence": "UNCERTAIN"
     },
@@ -2456,7 +2456,7 @@
       "caller": "section",
       "caller_source": "xtask/src/fips/graph.rs:96",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/graph.rs:120",
       "confidence": "UNCERTAIN"
     },
@@ -2464,7 +2464,7 @@
       "caller": "section",
       "caller_source": "xtask/src/fips/graph.rs:96",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/graph.rs:120",
       "confidence": "UNCERTAIN"
     },
@@ -2488,7 +2488,7 @@
       "caller": "kernel_flag",
       "caller_source": "xtask/src/fips/host_check.rs:207",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/host_check.rs:214",
       "confidence": "UNCERTAIN"
     },
@@ -2496,7 +2496,7 @@
       "caller": "kernel_flag",
       "caller_source": "xtask/src/fips/host_check.rs:207",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:214",
       "confidence": "UNCERTAIN"
     },
@@ -2536,7 +2536,7 @@
       "caller": "fips_mode_setup",
       "caller_source": "xtask/src/fips/host_check.rs:260",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/host_check.rs:269",
       "confidence": "UNCERTAIN"
     },
@@ -2544,7 +2544,7 @@
       "caller": "fips_mode_setup",
       "caller_source": "xtask/src/fips/host_check.rs:260",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:269",
       "confidence": "UNCERTAIN"
     },
@@ -2552,7 +2552,7 @@
       "caller": "host_module",
       "caller_source": "xtask/src/fips/host_check.rs:277",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:279",
       "confidence": "UNCERTAIN"
     },
@@ -2560,7 +2560,7 @@
       "caller": "host_module",
       "caller_source": "xtask/src/fips/host_check.rs:277",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/host_check.rs:279",
       "confidence": "UNCERTAIN"
     },
@@ -2584,6 +2584,14 @@
       "caller": "host_module",
       "caller_source": "xtask/src/fips/host_check.rs:277",
       "callee": "fail",
+      "callee_source": "xtask/src/fips/report.rs:161",
+      "call_site_source": "xtask/src/fips/host_check.rs:299",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "host_module",
+      "caller_source": "xtask/src/fips/host_check.rs:277",
+      "callee": "fail",
       "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:299",
       "confidence": "UNCERTAIN"
@@ -2592,15 +2600,7 @@
       "caller": "host_module",
       "caller_source": "xtask/src/fips/host_check.rs:277",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
-      "call_site_source": "xtask/src/fips/host_check.rs:299",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "host_module",
-      "caller_source": "xtask/src/fips/host_check.rs:277",
-      "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:302",
       "confidence": "UNCERTAIN"
     },
@@ -2608,7 +2608,7 @@
       "caller": "host_module",
       "caller_source": "xtask/src/fips/host_check.rs:277",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/host_check.rs:302",
       "confidence": "UNCERTAIN"
     },
@@ -2632,7 +2632,7 @@
       "caller": "image_checks",
       "caller_source": "xtask/src/fips/host_check.rs:354",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:363",
       "confidence": "UNCERTAIN"
     },
@@ -2640,7 +2640,7 @@
       "caller": "image_checks",
       "caller_source": "xtask/src/fips/host_check.rs:354",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/host_check.rs:363",
       "confidence": "UNCERTAIN"
     },
@@ -2712,7 +2712,7 @@
       "caller": "the_attestation_counts_and_renders",
       "caller_source": "xtask/src/fips/host_check.rs:544",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/host_check.rs:134",
+      "callee_source": "xtask/src/fips/report.rs:161",
       "call_site_source": "xtask/src/fips/host_check.rs:549",
       "confidence": "UNCERTAIN"
     },
@@ -2720,7 +2720,7 @@
       "caller": "the_attestation_counts_and_renders",
       "caller_source": "xtask/src/fips/host_check.rs:544",
       "callee": "fail",
-      "callee_source": "xtask/src/fips/report.rs:161",
+      "callee_source": "xtask/src/fips/host_check.rs:134",
       "call_site_source": "xtask/src/fips/host_check.rs:549",
       "confidence": "UNCERTAIN"
     },
@@ -4272,7 +4272,7 @@
       "caller": "get",
       "caller_source": "src/config.rs:189",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/config.rs:190",
       "confidence": "UNCERTAIN"
     },
@@ -4280,7 +4280,7 @@
       "caller": "get",
       "caller_source": "src/config.rs:189",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/config.rs:190",
       "confidence": "UNCERTAIN"
     },
@@ -4288,7 +4288,7 @@
       "caller": "max_body_accumulation",
       "caller_source": "src/config.rs:221",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/config.rs:225",
       "confidence": "UNCERTAIN"
     },
@@ -4296,7 +4296,7 @@
       "caller": "max_body_accumulation",
       "caller_source": "src/config.rs:221",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/config.rs:225",
       "confidence": "UNCERTAIN"
     },
@@ -4304,7 +4304,7 @@
       "caller": "extract_bearer_token",
       "caller_source": "src/metrics.rs:446",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/metrics.rs:448",
       "confidence": "UNCERTAIN"
     },
@@ -4312,7 +4312,7 @@
       "caller": "extract_bearer_token",
       "caller_source": "src/metrics.rs:446",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/metrics.rs:448",
       "confidence": "UNCERTAIN"
     },
@@ -4336,7 +4336,7 @@
       "caller": "extract_bearer_token",
       "caller_source": "src/metrics.rs:446",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/metrics.rs:454",
       "confidence": "UNCERTAIN"
     },
@@ -4344,7 +4344,7 @@
       "caller": "extract_bearer_token",
       "caller_source": "src/metrics.rs:446",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/metrics.rs:454",
       "confidence": "UNCERTAIN"
     },
@@ -4384,7 +4384,7 @@
       "caller": "chunk_body",
       "caller_source": "src/response.rs:228",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/response.rs:239",
       "confidence": "UNCERTAIN"
     },
@@ -4392,7 +4392,7 @@
       "caller": "chunk_body",
       "caller_source": "src/response.rs:228",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/response.rs:239",
       "confidence": "UNCERTAIN"
     },
@@ -4400,7 +4400,7 @@
       "caller": "body_responses_streamed",
       "caller_source": "src/response.rs:314",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/response.rs:331",
       "confidence": "UNCERTAIN"
     },
@@ -4408,7 +4408,7 @@
       "caller": "body_responses_streamed",
       "caller_source": "src/response.rs:314",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/response.rs:331",
       "confidence": "UNCERTAIN"
     },
@@ -4416,6 +4416,14 @@
       "caller": "guardrail_phases",
       "caller_source": "src/response_mode.rs:129",
       "callee": "get",
+      "callee_source": "src/config.rs:138",
+      "call_site_source": "src/response_mode.rs:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "guardrail_phases",
+      "caller_source": "src/response_mode.rs:129",
+      "callee": "get",
       "callee_source": "src/config.rs:189",
       "call_site_source": "src/response_mode.rs:130",
       "confidence": "UNCERTAIN"
@@ -4424,15 +4432,7 @@
       "caller": "guardrail_phases",
       "caller_source": "src/response_mode.rs:129",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
-      "call_site_source": "src/response_mode.rs:130",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "guardrail_phases",
-      "caller_source": "src/response_mode.rs:129",
-      "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "src/response_mode.rs:134",
       "confidence": "UNCERTAIN"
     },
@@ -4440,7 +4440,7 @@
       "caller": "guardrail_phases",
       "caller_source": "src/response_mode.rs:129",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "src/response_mode.rs:134",
       "confidence": "UNCERTAIN"
     },
@@ -4464,14 +4464,6 @@
       "caller": "parse_manifest",
       "caller_source": "xtask/src/fips/binary.rs:493",
       "callee": "get",
-      "callee_source": "src/config.rs:189",
-      "call_site_source": "xtask/src/fips/binary.rs:499",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "parse_manifest",
-      "caller_source": "xtask/src/fips/binary.rs:493",
-      "callee": "get",
       "callee_source": "src/config.rs:138",
       "call_site_source": "xtask/src/fips/binary.rs:499",
       "confidence": "UNCERTAIN"
@@ -4481,6 +4473,14 @@
       "caller_source": "xtask/src/fips/binary.rs:493",
       "callee": "get",
       "callee_source": "src/config.rs:189",
+      "call_site_source": "xtask/src/fips/binary.rs:499",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parse_manifest",
+      "caller_source": "xtask/src/fips/binary.rs:493",
+      "callee": "get",
+      "callee_source": "src/config.rs:138",
       "call_site_source": "xtask/src/fips/binary.rs:506",
       "confidence": "UNCERTAIN"
     },
@@ -4488,7 +4488,7 @@
       "caller": "parse_manifest",
       "caller_source": "xtask/src/fips/binary.rs:493",
       "callee": "get",
-      "callee_source": "src/config.rs:138",
+      "callee_source": "src/config.rs:189",
       "call_site_source": "xtask/src/fips/binary.rs:506",
       "confidence": "UNCERTAIN"
     },

@@ -2,8 +2,8 @@
   "component": "feast",
   "repo": "opendatahub-io/feast",
   "commit_sha": "7dd26424e54f217a95db2fa2d5c316a851cc22b7",
-  "extracted_at": "2026-11-23T06:56:43Z",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "extracted_at": "2026-11-23T11:28:48Z",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "schema_version": "2",
   "rbac": {},
   "services": [
@@ -6732,13 +6732,6 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/checkout@v4",
-      "source": ".github/workflows/nightly-ci.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
       "resource": "actions/setup-python@v5",
       "source": ".github/workflows/nightly-ci.yml",
       "description": "Action \"actions/setup-python\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -6812,6 +6805,13 @@
       "resource": "astral-sh/setup-uv@v5",
       "source": ".github/workflows/nightly-ci.yml",
       "description": "Action \"astral-sh/setup-uv\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v4",
+      "source": ".github/workflows/nightly-ci.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -6939,13 +6939,13 @@
       "type": "GHA_PULL_REQUEST_TARGET",
       "severity": "critical",
       "source": ".github/workflows/pr_integration_tests.yml",
-      "description": "Workflow \"pr-integration-tests\" uses pull_request_target trigger and job \"mcp-feature-server-runtime\", step 1 checks out fork code (ref: refs/pull/${{ github.event.pull_request.number }}/merge). This allows arbitrary code from a fork PR to run with write access to the base repo's secrets and GITHUB_TOKEN."
+      "description": "Workflow \"pr-integration-tests\" uses pull_request_target trigger and job \"integration-test-python\", step 1 checks out fork code (ref: refs/pull/${{ github.event.pull_request.number }}/merge). This allows arbitrary code from a fork PR to run with write access to the base repo's secrets and GITHUB_TOKEN."
     },
     {
       "type": "GHA_PULL_REQUEST_TARGET",
       "severity": "critical",
       "source": ".github/workflows/pr_integration_tests.yml",
-      "description": "Workflow \"pr-integration-tests\" uses pull_request_target trigger and job \"integration-test-python\", step 1 checks out fork code (ref: refs/pull/${{ github.event.pull_request.number }}/merge). This allows arbitrary code from a fork PR to run with write access to the base repo's secrets and GITHUB_TOKEN."
+      "description": "Workflow \"pr-integration-tests\" uses pull_request_target trigger and job \"mcp-feature-server-runtime\", step 1 checks out fork code (ref: refs/pull/${{ github.event.pull_request.number }}/merge). This allows arbitrary code from a fork PR to run with write access to the base repo's secrets and GITHUB_TOKEN."
     },
     {
       "type": "GHA_UNPINNED_ACTION",
@@ -7257,20 +7257,6 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "google-github-actions/auth@v2",
-      "source": ".github/workflows/publish_images.yml",
-      "description": "Action \"google-github-actions/auth\" uses mutable ref \"v2\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "google-github-actions/setup-gcloud@v2",
-      "source": ".github/workflows/publish_images.yml",
-      "description": "Action \"google-github-actions/setup-gcloud\" uses mutable ref \"v2\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
       "resource": "actions/checkout@v4",
       "source": ".github/workflows/publish_images.yml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -7295,6 +7281,20 @@
       "resource": "docker/login-action@v3",
       "source": ".github/workflows/publish_images.yml",
       "description": "Action \"docker/login-action\" uses mutable ref \"v3\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "google-github-actions/auth@v2",
+      "source": ".github/workflows/publish_images.yml",
+      "description": "Action \"google-github-actions/auth\" uses mutable ref \"v2\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "google-github-actions/setup-gcloud@v2",
+      "source": ".github/workflows/publish_images.yml",
+      "description": "Action \"google-github-actions/setup-gcloud\" uses mutable ref \"v2\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_MISSING_PERMISSIONS",
@@ -7394,48 +7394,6 @@
     {
       "type": "GHA_UNPINNED_ACTION",
       "severity": "medium",
-      "resource": "actions/checkout@v4",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/setup-node@v4",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"actions/setup-node\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "Homebrew/actions/setup-homebrew@main",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"Homebrew/actions/setup-homebrew\" uses mutable ref \"main\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/setup-go@v5",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"actions/setup-go\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/checkout@v4",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
-      "resource": "actions/setup-node@v4",
-      "source": ".github/workflows/release.yml",
-      "description": "Action \"actions/setup-node\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
-    },
-    {
-      "type": "GHA_UNPINNED_ACTION",
-      "severity": "medium",
       "resource": "Homebrew/actions/setup-homebrew@main",
       "source": ".github/workflows/release.yml",
       "description": "Action \"Homebrew/actions/setup-homebrew\" uses mutable ref \"main\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
@@ -7467,6 +7425,48 @@
       "resource": "actions/checkout@v4",
       "source": ".github/workflows/release.yml",
       "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v4",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-node@v4",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/setup-node\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/checkout@v4",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/checkout\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-node@v4",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/setup-node\" uses mutable ref \"v4\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "Homebrew/actions/setup-homebrew@main",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"Homebrew/actions/setup-homebrew\" uses mutable ref \"main\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
+    },
+    {
+      "type": "GHA_UNPINNED_ACTION",
+      "severity": "medium",
+      "resource": "actions/setup-go@v5",
+      "source": ".github/workflows/release.yml",
+      "description": "Action \"actions/setup-go\" uses mutable ref \"v5\" instead of a SHA pin. A compromised action version can inject malicious code into the workflow."
     },
     {
       "type": "GHA_UNPINNED_ACTION",

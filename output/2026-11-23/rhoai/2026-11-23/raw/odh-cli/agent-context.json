@@ -3,7 +3,7 @@
   "component": "odh-cli",
   "repo": "red-hat-data-services/odh-cli",
   "commit_sha": "0500c874992870d15b4ce9cca77718cf2bdb1579",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "odh-cli is a Kubernetes component. with 1397 operator config constants (14 image references, 2 env vars). integrates with KServe, Kueue, management relationship via labels/annotations. deploys OAuth proxy sidecar for authentication. references components: data-science-pipelines (import, provider), kserve (import, provider), kueue (import, provider), llama-stack (import, provider), model-registry (import, provider), notebooks (import), opendatahub-operator (import), trainer (import), training-operator (import, provider).",
   "repository_description": "CLI tool for RHOAI (Red Hat OpenShift AI) for interacting with RHOAI deployments on Kubernetes.",
   "description_source": "README.md:3",
@@ -10609,6 +10609,14 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Error",
+      "callee_source": "pkg/util/errors/types.go:71",
+      "call_site_source": "cmd/main.go:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Error",
       "callee_source": "pkg/util/errors/types.go:48",
       "call_site_source": "cmd/main.go:75",
       "confidence": "UNCERTAIN"
@@ -10619,22 +10627,6 @@
       "callee": "Error",
       "callee_source": "pkg/util/errors/types.go:99",
       "call_site_source": "cmd/main.go:75",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Error",
-      "callee_source": "pkg/util/errors/types.go:71",
-      "call_site_source": "cmd/main.go:75",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "tools/gen-schemas/main.go:25",
-      "callee": "Error",
-      "callee_source": "pkg/util/errors/types.go:71",
-      "call_site_source": "tools/gen-schemas/main.go:52",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10657,7 +10649,7 @@
       "caller": "main",
       "caller_source": "tools/gen-schemas/main.go:25",
       "callee": "Error",
-      "callee_source": "pkg/util/errors/types.go:99",
+      "callee_source": "pkg/util/errors/types.go:71",
       "call_site_source": "tools/gen-schemas/main.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -10665,16 +10657,8 @@
       "caller": "main",
       "caller_source": "tools/gen-schemas/main.go:25",
       "callee": "Error",
-      "callee_source": "pkg/util/errors/errors_test.go:30",
-      "call_site_source": "tools/gen-schemas/main.go:59",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "tools/gen-schemas/main.go:25",
-      "callee": "Error",
-      "callee_source": "pkg/util/errors/types.go:48",
-      "call_site_source": "tools/gen-schemas/main.go:59",
+      "callee_source": "pkg/util/errors/types.go:99",
+      "call_site_source": "tools/gen-schemas/main.go:52",
       "confidence": "UNCERTAIN"
     },
     {
@@ -10695,49 +10679,25 @@
     },
     {
       "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/hardwareprofiles_ignorelist.go:302",
-      "call_site_source": "cmd/main.go:71",
+      "caller_source": "tools/gen-schemas/main.go:25",
+      "callee": "Error",
+      "callee_source": "pkg/util/errors/types.go:48",
+      "call_site_source": "tools/gen-schemas/main.go:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tools/gen-schemas/main.go:25",
+      "callee": "Error",
+      "callee_source": "pkg/util/errors/errors_test.go:30",
+      "call_site_source": "tools/gen-schemas/main.go:59",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/managed_isvc_config.go:129",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/serverless_to_raw.go:222",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/modelmesh_to_raw.go:840",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/modelmesh_to_raw.go:931",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/hardwareprofiles_ignorelist.go:245",
+      "callee_source": "pkg/migrate/actions/modelserving/add_owner_references.go:230",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10753,7 +10713,47 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/modelserving/add_owner_references.go:230",
+      "callee_source": "pkg/migrate/actions/modelserving/modelmesh_to_raw.go:931",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/modelserving/serverless_to_raw.go:222",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/modelserving/hardwareprofiles_ignorelist.go:245",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/modelserving/managed_isvc_config.go:129",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/modelserving/hardwareprofiles_ignorelist.go:302",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/modelserving/modelmesh_to_raw.go:840",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10817,14 +10817,6 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/trustyai/metrics/prepare_task.go:46",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
       "callee_source": "pkg/migrate/actions/trustyai/metrics/run_task.go:51",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
@@ -10833,7 +10825,15 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/training/verify_workloads.go:46",
+      "callee_source": "pkg/migrate/actions/trustyai/metrics/prepare_task.go:46",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/workbenches/verify/run_task.go:26",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10849,7 +10849,15 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/workbenches/verify/run_task.go:26",
+      "callee_source": "pkg/migrate/actions/training/verify_workloads.go:46",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/raycluster/backup.go:66",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10873,15 +10881,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/raycluster/backup.go:66",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/trustyai/data/run_task.go:59",
+      "callee_source": "pkg/migrate/actions/llamastack/backup/backup.go:110",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10897,15 +10897,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/llamastack/backup/backup.go:110",
-      "call_site_source": "cmd/main.go:71",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "cmd/main.go:68",
-      "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/trustyai/otelexporter/run_task.go:55",
+      "callee_source": "pkg/migrate/actions/trustyai/data/run_task.go:59",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10921,7 +10913,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/trustyai/deadlock/run_task.go:51",
+      "callee_source": "pkg/migrate/actions/trustyai/otelexporter/run_task.go:55",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10929,7 +10921,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/aipipelines/updatedsprole.go:43",
+      "callee_source": "pkg/migrate/actions/trustyai/deadlock/run_task.go:51",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10945,7 +10937,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/command_run_internal_test.go:30",
+      "callee_source": "pkg/migrate/actions/aipipelines/precheck.go:103",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10961,7 +10953,7 @@
       "caller": "main",
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
-      "callee_source": "pkg/migrate/actions/aipipelines/precheck.go:103",
+      "callee_source": "pkg/migrate/command_run_internal_test.go:30",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -10970,6 +10962,14 @@
       "caller_source": "cmd/main.go:68",
       "callee": "Execute",
       "callee_source": "pkg/migrate/actions/aipipelines/precheck.go:42",
+      "call_site_source": "cmd/main.go:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:68",
+      "callee": "Execute",
+      "callee_source": "pkg/migrate/actions/aipipelines/updatedsprole.go:43",
       "call_site_source": "cmd/main.go:71",
       "confidence": "UNCERTAIN"
     },
@@ -11041,7 +11041,7 @@
       "caller": "AddCommand",
       "caller_source": "cmd/backup/backup.go:62",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "cmd/backup/backup.go:84",
       "confidence": "UNCERTAIN"
     },
@@ -11049,7 +11049,7 @@
       "caller": "AddCommand",
       "caller_source": "cmd/backup/backup.go:62",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "cmd/backup/backup.go:84",
       "confidence": "UNCERTAIN"
     },
@@ -11057,6 +11057,14 @@
       "caller": "AddCommand",
       "caller_source": "cmd/diagnose/diagnose.go:57",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "cmd/diagnose/diagnose.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "AddCommand",
+      "caller_source": "cmd/diagnose/diagnose.go:57",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "cmd/diagnose/diagnose.go:74",
       "confidence": "UNCERTAIN"
@@ -11070,14 +11078,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "AddCommand",
-      "caller_source": "cmd/diagnose/diagnose.go:57",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "cmd/diagnose/diagnose.go:74",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "runDiagnostic",
       "caller_source": "cmd/diagnose/diagnose.go:90",
       "callee": "Errorf",
@@ -11089,14 +11089,6 @@
       "caller": "runDiagnostic",
       "caller_source": "cmd/diagnose/diagnose.go:90",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "cmd/diagnose/diagnose.go:119",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "runDiagnostic",
-      "caller_source": "cmd/diagnose/diagnose.go:90",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "cmd/diagnose/diagnose.go:119",
       "confidence": "UNCERTAIN"
@@ -11105,16 +11097,8 @@
       "caller": "runDiagnostic",
       "caller_source": "cmd/diagnose/diagnose.go:90",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "cmd/diagnose/diagnose.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "runDiagnostic",
-      "caller_source": "cmd/diagnose/diagnose.go:90",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "cmd/diagnose/diagnose.go:131",
+      "call_site_source": "cmd/diagnose/diagnose.go:119",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11129,8 +11113,16 @@
       "caller": "runDiagnostic",
       "caller_source": "cmd/diagnose/diagnose.go:90",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "cmd/diagnose/diagnose.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "runDiagnostic",
+      "caller_source": "cmd/diagnose/diagnose.go:90",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "cmd/diagnose/diagnose.go:139",
+      "call_site_source": "cmd/diagnose/diagnose.go:131",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11153,8 +11145,8 @@
       "caller": "runDiagnostic",
       "caller_source": "cmd/diagnose/diagnose.go:90",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "cmd/diagnose/diagnose.go:96",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "cmd/diagnose/diagnose.go:139",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11174,6 +11166,22 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "runDiagnostic",
+      "caller_source": "cmd/diagnose/diagnose.go:90",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "cmd/diagnose/diagnose.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "writeJSONVersion",
+      "caller_source": "cmd/version/version.go:25",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "cmd/version/version.go:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "writeJSONVersion",
       "caller_source": "cmd/version/version.go:25",
       "callee": "Errorf",
@@ -11190,30 +11198,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "writeJSONVersion",
-      "caller_source": "cmd/version/version.go:25",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "cmd/version/version.go:30",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeTextVersion",
-      "caller_source": "cmd/version/version.go:36",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "cmd/version/version.go:38",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeTextVersion",
-      "caller_source": "cmd/version/version.go:36",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "cmd/version/version.go:38",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "writeTextVersion",
       "caller_source": "cmd/version/version.go:36",
       "callee": "Errorf",
@@ -11222,11 +11206,19 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "AddCommand",
-      "caller_source": "cmd/version/version.go:45",
+      "caller": "writeTextVersion",
+      "caller_source": "cmd/version/version.go:36",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "cmd/version/version.go:76",
+      "call_site_source": "cmd/version/version.go:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "writeTextVersion",
+      "caller_source": "cmd/version/version.go:36",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "cmd/version/version.go:38",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11242,6 +11234,14 @@
       "caller_source": "cmd/version/version.go:45",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "cmd/version/version.go:76",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "AddCommand",
+      "caller_source": "cmd/version/version.go:45",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "cmd/version/version.go:76",
       "confidence": "UNCERTAIN"
     },
@@ -11249,7 +11249,7 @@
       "caller": "ShouldApplyChecks",
       "caller_source": "pkg/aipipelines/component.go:26",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/aipipelines/component.go:34",
       "confidence": "UNCERTAIN"
     },
@@ -11257,7 +11257,7 @@
       "caller": "ShouldApplyChecks",
       "caller_source": "pkg/aipipelines/component.go:26",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/aipipelines/component.go:34",
       "confidence": "UNCERTAIN"
     },
@@ -11297,6 +11297,14 @@
       "caller": "EffectiveManagementState",
       "caller_source": "pkg/aipipelines/component.go:63",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/aipipelines/component.go:66",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "EffectiveManagementState",
+      "caller_source": "pkg/aipipelines/component.go:63",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/aipipelines/component.go:66",
       "confidence": "UNCERTAIN"
@@ -11313,15 +11321,7 @@
       "caller": "EffectiveManagementState",
       "caller_source": "pkg/aipipelines/component.go:63",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/aipipelines/component.go:66",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "EffectiveManagementState",
-      "caller_source": "pkg/aipipelines/component.go:63",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/aipipelines/component.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -11329,7 +11329,7 @@
       "caller": "EffectiveManagementState",
       "caller_source": "pkg/aipipelines/component.go:63",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/aipipelines/component.go:72",
       "confidence": "UNCERTAIN"
     },
@@ -11377,6 +11377,14 @@
       "caller": "ListDSPAs",
       "caller_source": "pkg/aipipelines/dspa.go:16",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/aipipelines/dspa.go:26",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ListDSPAs",
+      "caller_source": "pkg/aipipelines/dspa.go:16",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/aipipelines/dspa.go:26",
       "confidence": "UNCERTAIN"
@@ -11386,14 +11394,6 @@
       "caller_source": "pkg/aipipelines/dspa.go:16",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/aipipelines/dspa.go:26",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ListDSPAs",
-      "caller_source": "pkg/aipipelines/dspa.go:16",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/aipipelines/dspa.go:31",
       "confidence": "UNCERTAIN"
     },
@@ -11417,6 +11417,14 @@
       "caller": "FindRolesNeedingFix",
       "caller_source": "pkg/aipipelines/rbac/scan.go:13",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/aipipelines/rbac/scan.go:16",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "FindRolesNeedingFix",
+      "caller_source": "pkg/aipipelines/rbac/scan.go:13",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/aipipelines/rbac/scan.go:16",
       "confidence": "UNCERTAIN"
@@ -11430,22 +11438,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "FindRolesNeedingFix",
-      "caller_source": "pkg/aipipelines/rbac/scan.go:13",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/aipipelines/rbac/scan.go:16",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/api/command.go:15",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/api/command.go:26",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "Run",
       "caller_source": "pkg/api/command.go:15",
       "callee": "Errorf",
@@ -11457,6 +11449,14 @@
       "caller": "Run",
       "caller_source": "pkg/api/command.go:15",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/api/command.go:26",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/api/command.go:15",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/api/command.go:26",
       "confidence": "UNCERTAIN"
@@ -11465,7 +11465,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command.go:127",
       "confidence": "UNCERTAIN"
     },
@@ -11473,7 +11473,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/command.go:127",
       "confidence": "UNCERTAIN"
     },
@@ -11497,14 +11497,6 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/command.go:144",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/backup/command.go:121",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command.go:144",
       "confidence": "UNCERTAIN"
@@ -11514,7 +11506,7 @@
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/command.go:172",
+      "call_site_source": "pkg/backup/command.go:144",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11537,8 +11529,8 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/command.go:177",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/command.go:172",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11561,6 +11553,22 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/command.go:177",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/backup/command.go:121",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/command.go:179",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/backup/command.go:121",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/command.go:179",
       "confidence": "UNCERTAIN"
@@ -11577,14 +11585,6 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/command.go:179",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/backup/command.go:121",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command.go:181",
       "confidence": "UNCERTAIN"
@@ -11593,7 +11593,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/command.go:181",
       "confidence": "UNCERTAIN"
     },
@@ -11601,8 +11601,24 @@
       "caller": "Run",
       "caller_source": "pkg/backup/command.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/command.go:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "runPipeline",
+      "caller_source": "pkg/backup/command.go:188",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/command.go:222",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "runPipeline",
+      "caller_source": "pkg/backup/command.go:188",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/backup/command.go:222",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11611,30 +11627,6 @@
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command.go:222",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "runPipeline",
-      "caller_source": "pkg/backup/command.go:188",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/command.go:222",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "runPipeline",
-      "caller_source": "pkg/backup/command.go:188",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/command.go:222",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeResource",
-      "caller_source": "pkg/backup/command.go:254",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/command.go:260",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11654,11 +11646,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "logDryRunResource",
-      "caller_source": "pkg/backup/command.go:276",
+      "caller": "writeResource",
+      "caller_source": "pkg/backup/command.go:254",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/command.go:285",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/backup/command.go:260",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11666,6 +11658,14 @@
       "caller_source": "pkg/backup/command.go:276",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/backup/command.go:285",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "logDryRunResource",
+      "caller_source": "pkg/backup/command.go:276",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command.go:285",
       "confidence": "UNCERTAIN"
     },
@@ -11681,7 +11681,7 @@
       "caller": "logDryRunResource",
       "caller_source": "pkg/backup/command.go:276",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/command.go:304",
       "confidence": "UNCERTAIN"
     },
@@ -11689,7 +11689,7 @@
       "caller": "logDryRunResource",
       "caller_source": "pkg/backup/command.go:276",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command.go:304",
       "confidence": "UNCERTAIN"
     },
@@ -11713,6 +11713,14 @@
       "caller": "Complete",
       "caller_source": "pkg/backup/command_options.go:42",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/command_options.go:46",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Complete",
+      "caller_source": "pkg/backup/command_options.go:42",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/command_options.go:46",
       "confidence": "UNCERTAIN"
@@ -11721,15 +11729,7 @@
       "caller": "Complete",
       "caller_source": "pkg/backup/command_options.go:42",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/command_options.go:46",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Complete",
-      "caller_source": "pkg/backup/command_options.go:42",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/command_options.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -11737,7 +11737,7 @@
       "caller": "Complete",
       "caller_source": "pkg/backup/command_options.go:42",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/command_options.go:52",
       "confidence": "UNCERTAIN"
     },
@@ -11761,7 +11761,7 @@
       "caller": "resolveConfigMaps",
       "caller_source": "pkg/backup/dependencies/dspa/resolver.go:152",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/dspa/resolver.go:181",
       "confidence": "UNCERTAIN"
     },
@@ -11769,7 +11769,7 @@
       "caller": "resolveConfigMaps",
       "caller_source": "pkg/backup/dependencies/dspa/resolver.go:152",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/dspa/resolver.go:181",
       "confidence": "UNCERTAIN"
     },
@@ -11777,7 +11777,7 @@
       "caller": "resolvePVCs",
       "caller_source": "pkg/backup/dependencies/dspa/resolver.go:197",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/dspa/resolver.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -11793,7 +11793,7 @@
       "caller": "resolvePVCs",
       "caller_source": "pkg/backup/dependencies/dspa/resolver.go:197",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/dependencies/dspa/resolver.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -11801,7 +11801,7 @@
       "caller": "resolveSecrets",
       "caller_source": "pkg/backup/dependencies/dspa/resolver.go:84",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/dspa/resolver.go:124",
       "confidence": "UNCERTAIN"
     },
@@ -11809,7 +11809,7 @@
       "caller": "resolveSecrets",
       "caller_source": "pkg/backup/dependencies/dspa/resolver.go:84",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/dspa/resolver.go:124",
       "confidence": "UNCERTAIN"
     },
@@ -11825,7 +11825,7 @@
       "caller": "ResolvePVCs",
       "caller_source": "pkg/backup/dependencies/helpers.go:112",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/helpers.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -11833,7 +11833,7 @@
       "caller": "ResolvePVCs",
       "caller_source": "pkg/backup/dependencies/helpers.go:112",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/helpers.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -11897,14 +11897,6 @@
       "caller": "ResolveConfigMaps",
       "caller_source": "pkg/backup/dependencies/helpers.go:22",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/dependencies/helpers.go:35",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ResolveConfigMaps",
-      "caller_source": "pkg/backup/dependencies/helpers.go:22",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/helpers.go:35",
       "confidence": "UNCERTAIN"
@@ -11918,10 +11910,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "ResolveConfigMaps",
+      "caller_source": "pkg/backup/dependencies/helpers.go:22",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/backup/dependencies/helpers.go:35",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "ResolveSecrets",
       "caller_source": "pkg/backup/dependencies/helpers.go:61",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/helpers.go:69",
       "confidence": "UNCERTAIN"
     },
@@ -11937,16 +11937,8 @@
       "caller": "ResolveSecrets",
       "caller_source": "pkg/backup/dependencies/helpers.go:61",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/dependencies/helpers.go:69",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "ResolveSecrets",
-      "caller_source": "pkg/backup/dependencies/helpers.go:61",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/dependencies/helpers.go:74",
+      "call_site_source": "pkg/backup/dependencies/helpers.go:69",
       "confidence": "UNCERTAIN"
     },
     {
@@ -11962,6 +11954,14 @@
       "caller_source": "pkg/backup/dependencies/helpers.go:61",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/dependencies/helpers.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "ResolveSecrets",
+      "caller_source": "pkg/backup/dependencies/helpers.go:61",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/dependencies/helpers.go:74",
       "confidence": "UNCERTAIN"
     },
@@ -11969,7 +11969,7 @@
       "caller": "extractContainers",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:101",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:104",
       "confidence": "UNCERTAIN"
     },
@@ -11977,7 +11977,7 @@
       "caller": "extractContainers",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:101",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:104",
       "confidence": "UNCERTAIN"
     },
@@ -11985,7 +11985,7 @@
       "caller": "extractContainers",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:101",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:104",
       "confidence": "UNCERTAIN"
     },
@@ -11993,7 +11993,7 @@
       "caller": "Resolve",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -12009,7 +12009,7 @@
       "caller": "Resolve",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -12017,14 +12017,6 @@
       "caller": "Resolve",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:73",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Resolve",
-      "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:73",
       "confidence": "UNCERTAIN"
@@ -12041,8 +12033,8 @@
       "caller": "Resolve",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:85",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:73",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12057,6 +12049,14 @@
       "caller": "Resolve",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:85",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Resolve",
+      "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:33",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:85",
       "confidence": "UNCERTAIN"
@@ -12065,7 +12065,7 @@
       "caller": "extractVolumes",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:92",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -12081,7 +12081,7 @@
       "caller": "extractVolumes",
       "caller_source": "pkg/backup/dependencies/notebooks/resolver.go:92",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/notebooks/resolver.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -12097,7 +12097,7 @@
       "caller": "GetResolver",
       "caller_source": "pkg/backup/dependencies/registry.go:36",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/dependencies/registry.go:43",
       "confidence": "UNCERTAIN"
     },
@@ -12105,8 +12105,16 @@
       "caller": "GetResolver",
       "caller_source": "pkg/backup/dependencies/registry.go:36",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/dependencies/registry.go:43",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/backup/pipeline/discovery.go:21",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/pipeline/discovery.go:28",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12122,14 +12130,6 @@
       "caller_source": "pkg/backup/pipeline/discovery.go:21",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/pipeline/discovery.go:28",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/backup/pipeline/discovery.go:21",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/pipeline/discovery.go:28",
       "confidence": "UNCERTAIN"
     },
@@ -12169,7 +12169,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/pipeline/discovery.go:21",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/discovery.go:38",
       "confidence": "UNCERTAIN"
     },
@@ -12177,7 +12177,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/pipeline/discovery.go:21",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/discovery.go:38",
       "confidence": "UNCERTAIN"
     },
@@ -12185,7 +12185,7 @@
       "caller": "logDependencies",
       "caller_source": "pkg/backup/pipeline/resolver.go:111",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/resolver.go:118",
       "confidence": "UNCERTAIN"
     },
@@ -12201,7 +12201,7 @@
       "caller": "logDependencies",
       "caller_source": "pkg/backup/pipeline/resolver.go:111",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/resolver.go:118",
       "confidence": "UNCERTAIN"
     },
@@ -12209,7 +12209,7 @@
       "caller": "logDependencies",
       "caller_source": "pkg/backup/pipeline/resolver.go:111",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/pipeline/resolver.go:121",
       "confidence": "UNCERTAIN"
     },
@@ -12217,7 +12217,7 @@
       "caller": "logDependencies",
       "caller_source": "pkg/backup/pipeline/resolver.go:111",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/resolver.go:121",
       "confidence": "UNCERTAIN"
     },
@@ -12233,32 +12233,24 @@
       "caller": "Run",
       "caller_source": "pkg/backup/pipeline/resolver.go:24",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/pipeline/resolver.go:39",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/backup/pipeline/resolver.go:24",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/pipeline/resolver.go:39",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/backup/pipeline/resolver.go:24",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/resolver.go:39",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "worker",
-      "caller_source": "pkg/backup/pipeline/resolver.go:46",
+      "caller": "Run",
+      "caller_source": "pkg/backup/pipeline/resolver.go:24",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/pipeline/resolver.go:54",
+      "call_site_source": "pkg/backup/pipeline/resolver.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/backup/pipeline/resolver.go:24",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/pipeline/resolver.go:39",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12274,6 +12266,14 @@
       "caller_source": "pkg/backup/pipeline/resolver.go:46",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/pipeline/resolver.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "worker",
+      "caller_source": "pkg/backup/pipeline/resolver.go:46",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/resolver.go:54",
       "confidence": "UNCERTAIN"
     },
@@ -12305,14 +12305,6 @@
       "caller": "worker",
       "caller_source": "pkg/backup/pipeline/resolver.go:46",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/pipeline/resolver.go:70",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "worker",
-      "caller_source": "pkg/backup/pipeline/resolver.go:46",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/resolver.go:70",
       "confidence": "UNCERTAIN"
@@ -12326,6 +12318,22 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "worker",
+      "caller_source": "pkg/backup/pipeline/resolver.go:46",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/backup/pipeline/resolver.go:70",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "resolveWorkload",
+      "caller_source": "pkg/backup/pipeline/resolver.go:78",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/pipeline/resolver.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "resolveWorkload",
       "caller_source": "pkg/backup/pipeline/resolver.go:78",
       "callee": "Errorf",
@@ -12346,7 +12354,7 @@
       "caller_source": "pkg/backup/pipeline/resolver.go:78",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/pipeline/resolver.go:94",
+      "call_site_source": "pkg/backup/pipeline/resolver.go:98",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12362,14 +12370,6 @@
       "caller_source": "pkg/backup/pipeline/resolver.go:78",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/backup/pipeline/resolver.go:98",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "resolveWorkload",
-      "caller_source": "pkg/backup/pipeline/resolver.go:78",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/resolver.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -12409,7 +12409,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/pipeline/writer.go:26",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/pipeline/writer.go:40",
       "confidence": "UNCERTAIN"
     },
@@ -12417,7 +12417,7 @@
       "caller": "Run",
       "caller_source": "pkg/backup/pipeline/writer.go:26",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/writer.go:40",
       "confidence": "UNCERTAIN"
     },
@@ -12426,14 +12426,6 @@
       "caller_source": "pkg/backup/pipeline/writer.go:48",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/backup/pipeline/writer.go:57",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeWorkloadWithDeps",
-      "caller_source": "pkg/backup/pipeline/writer.go:48",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/writer.go:57",
       "confidence": "UNCERTAIN"
     },
@@ -12450,6 +12442,14 @@
       "caller_source": "pkg/backup/pipeline/writer.go:48",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/pipeline/writer.go:57",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "writeWorkloadWithDeps",
+      "caller_source": "pkg/backup/pipeline/writer.go:48",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/writer.go:68",
       "confidence": "UNCERTAIN"
     },
@@ -12457,7 +12457,7 @@
       "caller": "writeWorkloadWithDeps",
       "caller_source": "pkg/backup/pipeline/writer.go:48",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/pipeline/writer.go:68",
       "confidence": "UNCERTAIN"
     },
@@ -12481,7 +12481,7 @@
       "caller": "writeWorkloadWithDepsDryRun",
       "caller_source": "pkg/backup/pipeline/writer.go:77",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/pipeline/writer.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -12489,7 +12489,7 @@
       "caller": "writeWorkloadWithDepsDryRun",
       "caller_source": "pkg/backup/pipeline/writer.go:77",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/backup/pipeline/writer.go:96",
       "confidence": "UNCERTAIN"
     },
@@ -12545,7 +12545,7 @@
       "caller": "WriteResourceToFile",
       "caller_source": "pkg/backup/resource_writer.go:17",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/resource_writer.go:29",
       "confidence": "UNCERTAIN"
     },
@@ -12561,8 +12561,16 @@
       "caller": "WriteResourceToFile",
       "caller_source": "pkg/backup/resource_writer.go:17",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/resource_writer.go:29",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "writeResourceToDir",
+      "caller_source": "pkg/backup/resource_writer.go:47",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/backup/resource_writer.go:62",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12577,14 +12585,6 @@
       "caller": "writeResourceToDir",
       "caller_source": "pkg/backup/resource_writer.go:47",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/backup/resource_writer.go:62",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "writeResourceToDir",
-      "caller_source": "pkg/backup/resource_writer.go:47",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/resource_writer.go:62",
       "confidence": "UNCERTAIN"
@@ -12593,7 +12593,7 @@
       "caller": "writeResourceToDir",
       "caller_source": "pkg/backup/resource_writer.go:47",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/resource_writer.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -12609,7 +12609,7 @@
       "caller": "writeResourceToDir",
       "caller_source": "pkg/backup/resource_writer.go:47",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/resource_writer.go:66",
       "confidence": "UNCERTAIN"
     },
@@ -12673,7 +12673,7 @@
       "caller": "WriteResourceToStdout",
       "caller_source": "pkg/backup/resource_writer.go:73",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/backup/resource_writer.go:88",
       "confidence": "UNCERTAIN"
     },
@@ -12681,7 +12681,7 @@
       "caller": "WriteResourceToStdout",
       "caller_source": "pkg/backup/resource_writer.go:73",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/backup/resource_writer.go:88",
       "confidence": "UNCERTAIN"
     },
@@ -12713,6 +12713,14 @@
       "caller": "RunWait",
       "caller_source": "pkg/cmd/wait.go:100",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/cmd/wait.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "RunWait",
+      "caller_source": "pkg/cmd/wait.go:100",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/cmd/wait.go:123",
       "confidence": "UNCERTAIN"
@@ -12726,26 +12734,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "RunWait",
-      "caller_source": "pkg/cmd/wait.go:100",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/cmd/wait.go:123",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "Set",
       "caller_source": "pkg/cmd/wait.go:42",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/cmd/wait.go:44",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Set",
-      "caller_source": "pkg/cmd/wait.go:42",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/cmd/wait.go:44",
       "confidence": "UNCERTAIN"
     },
@@ -12754,6 +12746,14 @@
       "caller_source": "pkg/cmd/wait.go:42",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/cmd/wait.go:44",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Set",
+      "caller_source": "pkg/cmd/wait.go:42",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/cmd/wait.go:44",
       "confidence": "UNCERTAIN"
     },
@@ -12785,14 +12785,6 @@
       "caller": "applyStdinInput",
       "caller_source": "pkg/components/commands.go:116",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/components/commands.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "applyStdinInput",
-      "caller_source": "pkg/components/commands.go:116",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/commands.go:120",
       "confidence": "UNCERTAIN"
@@ -12806,19 +12798,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Run",
-      "caller_source": "pkg/components/commands.go:155",
+      "caller": "applyStdinInput",
+      "caller_source": "pkg/components/commands.go:116",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/commands.go:168",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/components/commands.go:155",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/components/commands.go:168",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/components/commands.go:120",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12834,7 +12818,15 @@
       "caller_source": "pkg/components/commands.go:155",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/components/commands.go:174",
+      "call_site_source": "pkg/components/commands.go:168",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/components/commands.go:155",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/components/commands.go:168",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12850,6 +12842,14 @@
       "caller_source": "pkg/components/commands.go:155",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/components/commands.go:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/components/commands.go:155",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/commands.go:174",
       "confidence": "UNCERTAIN"
     },
@@ -12857,7 +12857,7 @@
       "caller": "Complete",
       "caller_source": "pkg/components/commands.go:229",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/commands.go:245",
       "confidence": "UNCERTAIN"
     },
@@ -12873,7 +12873,7 @@
       "caller": "Complete",
       "caller_source": "pkg/components/commands.go:229",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/commands.go:245",
       "confidence": "UNCERTAIN"
     },
@@ -12905,6 +12905,14 @@
       "caller": "applyStdinInput",
       "caller_source": "pkg/components/commands.go:269",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/components/commands.go:273",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "applyStdinInput",
+      "caller_source": "pkg/components/commands.go:269",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/commands.go:273",
       "confidence": "UNCERTAIN"
@@ -12918,22 +12926,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "applyStdinInput",
-      "caller_source": "pkg/components/commands.go:269",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/commands.go:273",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/components/commands.go:308",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/components/commands.go:321",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "Run",
       "caller_source": "pkg/components/commands.go:308",
       "callee": "Errorf",
@@ -12953,7 +12945,23 @@
       "caller": "Run",
       "caller_source": "pkg/components/commands.go:308",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/components/commands.go:321",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/components/commands.go:308",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/components/commands.go:327",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/components/commands.go:308",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/commands.go:327",
       "confidence": "UNCERTAIN"
     },
@@ -12966,11 +12974,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Run",
-      "caller_source": "pkg/components/commands.go:308",
+      "caller": "Complete",
+      "caller_source": "pkg/components/commands.go:76",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/commands.go:327",
+      "call_site_source": "pkg/components/commands.go:92",
       "confidence": "UNCERTAIN"
     },
     {
@@ -12990,18 +12998,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Complete",
-      "caller_source": "pkg/components/commands.go:76",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/commands.go:92",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "Run",
       "caller_source": "pkg/components/describe.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/describe.go:125",
       "confidence": "UNCERTAIN"
     },
@@ -13009,7 +13009,7 @@
       "caller": "Run",
       "caller_source": "pkg/components/describe.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/describe.go:125",
       "confidence": "UNCERTAIN"
     },
@@ -13025,7 +13025,7 @@
       "caller": "Run",
       "caller_source": "pkg/components/describe.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/describe.go:133",
       "confidence": "UNCERTAIN"
     },
@@ -13033,7 +13033,7 @@
       "caller": "Run",
       "caller_source": "pkg/components/describe.go:121",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/describe.go:133",
       "confidence": "UNCERTAIN"
     },
@@ -13043,6 +13043,14 @@
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/describe.go:133",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/components/describe.go:121",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/components/describe.go:144",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13062,22 +13070,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Run",
-      "caller_source": "pkg/components/describe.go:121",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/describe.go:144",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "outputJSON",
-      "caller_source": "pkg/components/describe.go:215",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/components/describe.go:222",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "outputJSON",
       "caller_source": "pkg/components/describe.go:215",
       "callee": "Errorf",
@@ -13094,10 +13086,18 @@
       "confidence": "UNCERTAIN"
     },
     {
+      "caller": "outputJSON",
+      "caller_source": "pkg/components/describe.go:215",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/components/describe.go:222",
+      "confidence": "UNCERTAIN"
+    },
+    {
       "caller": "outputYAML",
       "caller_source": "pkg/components/describe.go:228",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/describe.go:235",
       "confidence": "UNCERTAIN"
     },
@@ -13113,8 +13113,16 @@
       "caller": "outputYAML",
       "caller_source": "pkg/components/describe.go:228",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/describe.go:235",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Complete",
+      "caller_source": "pkg/components/describe.go:75",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/components/describe.go:87",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13134,18 +13142,10 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Complete",
-      "caller_source": "pkg/components/describe.go:75",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/components/describe.go:87",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "DiscoverComponents",
       "caller_source": "pkg/components/discovery.go:17",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/discovery.go:20",
       "confidence": "UNCERTAIN"
     },
@@ -13161,7 +13161,7 @@
       "caller": "DiscoverComponents",
       "caller_source": "pkg/components/discovery.go:17",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/discovery.go:20",
       "confidence": "UNCERTAIN"
     },
@@ -13169,7 +13169,7 @@
       "caller": "ExtractComponents",
       "caller_source": "pkg/components/discovery.go:27",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/discovery.go:30",
       "confidence": "UNCERTAIN"
     },
@@ -13185,7 +13185,7 @@
       "caller": "ExtractComponents",
       "caller_source": "pkg/components/discovery.go:27",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/discovery.go:30",
       "confidence": "UNCERTAIN"
     },
@@ -13193,7 +13193,7 @@
       "caller": "GetComponent",
       "caller_source": "pkg/components/discovery.go:56",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/discovery.go:59",
       "confidence": "UNCERTAIN"
     },
@@ -13201,7 +13201,7 @@
       "caller": "GetComponent",
       "caller_source": "pkg/components/discovery.go:56",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/discovery.go:59",
       "confidence": "UNCERTAIN"
     },
@@ -13217,7 +13217,7 @@
       "caller": "GetComponentFromDSC",
       "caller_source": "pkg/components/discovery.go:66",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/discovery.go:69",
       "confidence": "UNCERTAIN"
     },
@@ -13233,8 +13233,16 @@
       "caller": "GetComponentFromDSC",
       "caller_source": "pkg/components/discovery.go:66",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/discovery.go:69",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "GetComponentHealth",
+      "caller_source": "pkg/components/health.go:65",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/components/health.go:68",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13257,15 +13265,7 @@
       "caller": "GetComponentHealth",
       "caller_source": "pkg/components/health.go:65",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/health.go:68",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "GetComponentHealth",
-      "caller_source": "pkg/components/health.go:65",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/health.go:74",
       "confidence": "UNCERTAIN"
     },
@@ -13281,7 +13281,7 @@
       "caller": "GetComponentHealth",
       "caller_source": "pkg/components/health.go:65",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/health.go:74",
       "confidence": "UNCERTAIN"
     },
@@ -13289,7 +13289,7 @@
       "caller": "GetComponentHealth",
       "caller_source": "pkg/components/health.go:65",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/health.go:77",
       "confidence": "UNCERTAIN"
     },
@@ -13305,7 +13305,7 @@
       "caller": "GetComponentHealth",
       "caller_source": "pkg/components/health.go:65",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/health.go:77",
       "confidence": "UNCERTAIN"
     },
@@ -13321,7 +13321,7 @@
       "caller": "extractHealthFromCR",
       "caller_source": "pkg/components/health.go:88",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/health.go:93",
       "confidence": "UNCERTAIN"
     },
@@ -13329,8 +13329,16 @@
       "caller": "extractHealthFromCR",
       "caller_source": "pkg/components/health.go:88",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/health.go:93",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/components/list.go:116",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/components/list.go:120",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13346,14 +13354,6 @@
       "caller_source": "pkg/components/list.go:116",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/list.go:120",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Run",
-      "caller_source": "pkg/components/list.go:116",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/list.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -13393,14 +13393,6 @@
       "caller": "OutputTable",
       "caller_source": "pkg/components/list.go:189",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/components/list.go:204",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "OutputTable",
-      "caller_source": "pkg/components/list.go:189",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/list.go:204",
       "confidence": "UNCERTAIN"
@@ -13410,6 +13402,14 @@
       "caller_source": "pkg/components/list.go:189",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/components/list.go:204",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "OutputTable",
+      "caller_source": "pkg/components/list.go:189",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/list.go:209",
       "confidence": "UNCERTAIN"
     },
@@ -13441,7 +13441,7 @@
       "caller": "OutputJSON",
       "caller_source": "pkg/components/list.go:216",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/list.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -13449,7 +13449,7 @@
       "caller": "OutputJSON",
       "caller_source": "pkg/components/list.go:216",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/list.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -13457,6 +13457,14 @@
       "caller": "OutputYAML",
       "caller_source": "pkg/components/list.go:231",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/components/list.go:239",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "OutputYAML",
+      "caller_source": "pkg/components/list.go:231",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/list.go:239",
       "confidence": "UNCERTAIN"
@@ -13470,14 +13478,6 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "OutputYAML",
-      "caller_source": "pkg/components/list.go:231",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/list.go:239",
-      "confidence": "UNCERTAIN"
-    },
-    {
       "caller": "Complete",
       "caller_source": "pkg/components/list.go:74",
       "callee": "Errorf",
@@ -13505,7 +13505,7 @@
       "caller": "MutateComponentState",
       "caller_source": "pkg/components/mutate.go:28",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/components/mutate.go:31",
       "confidence": "UNCERTAIN"
     },
@@ -13521,7 +13521,7 @@
       "caller": "MutateComponentState",
       "caller_source": "pkg/components/mutate.go:28",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/components/mutate.go:31",
       "confidence": "UNCERTAIN"
     },
@@ -13553,6 +13553,14 @@
       "caller": "MutateComponentState",
       "caller_source": "pkg/components/mutate.go:28",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/components/mutate.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "MutateComponentState",
+      "caller_source": "pkg/components/mutate.go:28",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/components/mutate.go:49",
       "confidence": "UNCERTAIN"
@@ -13569,8 +13577,8 @@
       "caller": "MutateComponentState",
       "caller_source": "pkg/components/mutate.go:28",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/components/mutate.go:49",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/components/mutate.go:77",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13590,11 +13598,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "MutateComponentState",
-      "caller_source": "pkg/components/mutate.go:28",
+      "caller": "getSubscription",
+      "caller_source": "pkg/deps/check.go:268",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/components/mutate.go:77",
+      "call_site_source": "pkg/deps/check.go:279",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13614,11 +13622,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "getSubscription",
-      "caller_source": "pkg/deps/check.go:268",
+      "caller": "getCSV",
+      "caller_source": "pkg/deps/check.go:287",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/check.go:279",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/deps/check.go:298",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13634,14 +13642,6 @@
       "caller_source": "pkg/deps/check.go:287",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/deps/check.go:298",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "getCSV",
-      "caller_source": "pkg/deps/check.go:287",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/check.go:298",
       "confidence": "UNCERTAIN"
     },
@@ -13673,32 +13673,24 @@
       "caller": "CheckDependencies",
       "caller_source": "pkg/deps/check.go:94",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/check.go:101",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "CheckDependencies",
-      "caller_source": "pkg/deps/check.go:94",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/check.go:101",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "CheckDependencies",
-      "caller_source": "pkg/deps/check.go:94",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/check.go:101",
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Validate",
-      "caller_source": "pkg/deps/command.go:146",
+      "caller": "CheckDependencies",
+      "caller_source": "pkg/deps/check.go:94",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/command.go:155",
+      "call_site_source": "pkg/deps/check.go:101",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "CheckDependencies",
+      "caller_source": "pkg/deps/check.go:94",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/deps/check.go:101",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13714,6 +13706,14 @@
       "caller_source": "pkg/deps/command.go:146",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/deps/command.go:155",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Validate",
+      "caller_source": "pkg/deps/command.go:146",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/command.go:155",
       "confidence": "UNCERTAIN"
     },
@@ -13729,7 +13729,7 @@
       "caller": "Validate",
       "caller_source": "pkg/deps/command.go:146",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/command.go:164",
       "confidence": "UNCERTAIN"
     },
@@ -13737,7 +13737,7 @@
       "caller": "Validate",
       "caller_source": "pkg/deps/command.go:146",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/command.go:164",
       "confidence": "UNCERTAIN"
     },
@@ -13793,7 +13793,7 @@
       "caller": "Run",
       "caller_source": "pkg/deps/command.go:181",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/command.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -13801,7 +13801,7 @@
       "caller": "Run",
       "caller_source": "pkg/deps/command.go:181",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/command.go:224",
       "confidence": "UNCERTAIN"
     },
@@ -13817,7 +13817,7 @@
       "caller": "Run",
       "caller_source": "pkg/deps/command.go:181",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/command.go:239",
       "confidence": "UNCERTAIN"
     },
@@ -13833,7 +13833,7 @@
       "caller": "Run",
       "caller_source": "pkg/deps/command.go:181",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/command.go:239",
       "confidence": "UNCERTAIN"
     },
@@ -13841,7 +13841,7 @@
       "caller": "printJSON",
       "caller_source": "pkg/deps/command.go:335",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/command.go:340",
       "confidence": "UNCERTAIN"
     },
@@ -13857,7 +13857,7 @@
       "caller": "printJSON",
       "caller_source": "pkg/deps/command.go:335",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/command.go:340",
       "confidence": "UNCERTAIN"
     },
@@ -13889,14 +13889,6 @@
       "caller": "Complete",
       "caller_source": "pkg/deps/command.go:99",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/command.go:122",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Complete",
-      "caller_source": "pkg/deps/command.go:99",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/command.go:122",
       "confidence": "UNCERTAIN"
@@ -13910,11 +13902,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "fetchFile",
-      "caller_source": "pkg/deps/fetch.go:115",
+      "caller": "Complete",
+      "caller_source": "pkg/deps/command.go:99",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/fetch.go:123",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "call_site_source": "pkg/deps/command.go:122",
       "confidence": "UNCERTAIN"
     },
     {
@@ -13922,6 +13914,14 @@
       "caller_source": "pkg/deps/fetch.go:115",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/deps/fetch.go:123",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "fetchFile",
+      "caller_source": "pkg/deps/fetch.go:115",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/fetch.go:123",
       "confidence": "UNCERTAIN"
     },
@@ -13937,7 +13937,7 @@
       "caller": "fetchFile",
       "caller_source": "pkg/deps/fetch.go:115",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/fetch.go:128",
       "confidence": "UNCERTAIN"
     },
@@ -13953,7 +13953,7 @@
       "caller": "fetchFile",
       "caller_source": "pkg/deps/fetch.go:115",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/fetch.go:128",
       "confidence": "UNCERTAIN"
     },
@@ -14009,6 +14009,14 @@
       "caller": "fetchFile",
       "caller_source": "pkg/deps/fetch.go:115",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/fetch.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "fetchFile",
+      "caller_source": "pkg/deps/fetch.go:115",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/fetch.go:145",
       "confidence": "UNCERTAIN"
@@ -14022,11 +14030,19 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "fetchFile",
-      "caller_source": "pkg/deps/fetch.go:115",
+      "caller": "parseChartVersion",
+      "caller_source": "pkg/deps/fetch.go:152",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/deps/fetch.go:155",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "parseChartVersion",
+      "caller_source": "pkg/deps/fetch.go:152",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/fetch.go:145",
+      "call_site_source": "pkg/deps/fetch.go:155",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14034,22 +14050,6 @@
       "caller_source": "pkg/deps/fetch.go:152",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/fetch.go:155",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "parseChartVersion",
-      "caller_source": "pkg/deps/fetch.go:152",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/fetch.go:155",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "parseChartVersion",
-      "caller_source": "pkg/deps/fetch.go:152",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/fetch.go:155",
       "confidence": "UNCERTAIN"
     },
@@ -14105,14 +14105,6 @@
       "caller": "fetchAndParseManifest",
       "caller_source": "pkg/deps/fetch.go:65",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/fetch.go:83",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "fetchAndParseManifest",
-      "caller_source": "pkg/deps/fetch.go:65",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/fetch.go:83",
       "confidence": "UNCERTAIN"
@@ -14121,6 +14113,14 @@
       "caller": "fetchAndParseManifest",
       "caller_source": "pkg/deps/fetch.go:65",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/fetch.go:83",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "fetchAndParseManifest",
+      "caller_source": "pkg/deps/fetch.go:65",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/fetch.go:83",
       "confidence": "UNCERTAIN"
@@ -14129,14 +14129,6 @@
       "caller": "Validate",
       "caller_source": "pkg/deps/graph.go:54",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/graph.go:63",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "Validate",
-      "caller_source": "pkg/deps/graph.go:54",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/graph.go:63",
       "confidence": "UNCERTAIN"
@@ -14150,11 +14142,11 @@
       "confidence": "UNCERTAIN"
     },
     {
-      "caller": "Run",
-      "caller_source": "pkg/deps/graph.go:80",
+      "caller": "Validate",
+      "caller_source": "pkg/deps/graph.go:54",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/graph.go:83",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/graph.go:63",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14162,6 +14154,14 @@
       "caller_source": "pkg/deps/graph.go:80",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/deps/graph.go:83",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Run",
+      "caller_source": "pkg/deps/graph.go:80",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/graph.go:83",
       "confidence": "UNCERTAIN"
     },
@@ -14177,6 +14177,14 @@
       "caller": "createSubscription",
       "caller_source": "pkg/deps/install.go:1039",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/deps/install.go:1070",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "createSubscription",
+      "caller_source": "pkg/deps/install.go:1039",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/install.go:1070",
       "confidence": "UNCERTAIN"
@@ -14193,15 +14201,7 @@
       "caller": "createSubscription",
       "caller_source": "pkg/deps/install.go:1039",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
-      "call_site_source": "pkg/deps/install.go:1070",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "createSubscription",
-      "caller_source": "pkg/deps/install.go:1039",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/install.go:1077",
       "confidence": "UNCERTAIN"
     },
@@ -14209,7 +14209,7 @@
       "caller": "createSubscription",
       "caller_source": "pkg/deps/install.go:1039",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1077",
       "confidence": "UNCERTAIN"
     },
@@ -14249,7 +14249,7 @@
       "caller": "verifyExistingSubscription",
       "caller_source": "pkg/deps/install.go:1087",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1090",
       "confidence": "UNCERTAIN"
     },
@@ -14257,7 +14257,7 @@
       "caller": "verifyExistingSubscription",
       "caller_source": "pkg/deps/install.go:1087",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/install.go:1090",
       "confidence": "UNCERTAIN"
     },
@@ -14305,7 +14305,7 @@
       "caller": "clusterExtension",
       "caller_source": "pkg/deps/install.go:1130",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1132",
       "confidence": "UNCERTAIN"
     },
@@ -14313,7 +14313,7 @@
       "caller": "clusterExtension",
       "caller_source": "pkg/deps/install.go:1130",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/install.go:1132",
       "confidence": "UNCERTAIN"
     },
@@ -14321,6 +14321,14 @@
       "caller": "verifyExistingClusterExtension",
       "caller_source": "pkg/deps/install.go:1199",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/install.go:1207",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "verifyExistingClusterExtension",
+      "caller_source": "pkg/deps/install.go:1199",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1207",
       "confidence": "UNCERTAIN"
@@ -14337,30 +14345,6 @@
       "caller": "verifyExistingClusterExtension",
       "caller_source": "pkg/deps/install.go:1199",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/install.go:1207",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "verifyExistingClusterExtension",
-      "caller_source": "pkg/deps/install.go:1199",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/install.go:1212",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "verifyExistingClusterExtension",
-      "caller_source": "pkg/deps/install.go:1199",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/install.go:1212",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "verifyExistingClusterExtension",
-      "caller_source": "pkg/deps/install.go:1199",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1212",
       "confidence": "UNCERTAIN"
@@ -14369,8 +14353,16 @@
       "caller": "verifyExistingClusterExtension",
       "caller_source": "pkg/deps/install.go:1199",
       "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/install.go:1212",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "verifyExistingClusterExtension",
+      "caller_source": "pkg/deps/install.go:1199",
+      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/install.go:1217",
+      "call_site_source": "pkg/deps/install.go:1212",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14378,6 +14370,14 @@
       "caller_source": "pkg/deps/install.go:1199",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/install.go:1217",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "verifyExistingClusterExtension",
+      "caller_source": "pkg/deps/install.go:1199",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1217",
       "confidence": "UNCERTAIN"
     },
@@ -14387,14 +14387,6 @@
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1217",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "verifyExistingClusterExtension",
-      "caller_source": "pkg/deps/install.go:1199",
-      "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/install.go:1221",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14410,6 +14402,14 @@
       "caller_source": "pkg/deps/install.go:1199",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "call_site_source": "pkg/deps/install.go:1221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "verifyExistingClusterExtension",
+      "caller_source": "pkg/deps/install.go:1199",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1221",
       "confidence": "UNCERTAIN"
     },
@@ -14441,7 +14441,7 @@
       "caller": "tryCSVFromSubscription",
       "caller_source": "pkg/deps/install.go:1272",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1292",
       "confidence": "UNCERTAIN"
     },
@@ -14457,16 +14457,8 @@
       "caller": "tryCSVFromSubscription",
       "caller_source": "pkg/deps/install.go:1272",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
-      "call_site_source": "pkg/deps/install.go:1292",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "tryCSVFromSubscription",
-      "caller_source": "pkg/deps/install.go:1272",
-      "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:146",
-      "call_site_source": "pkg/deps/install.go:1306",
+      "call_site_source": "pkg/deps/install.go:1292",
       "confidence": "UNCERTAIN"
     },
     {
@@ -14481,7 +14473,7 @@
       "caller": "tryCSVFromSubscription",
       "caller_source": "pkg/deps/install.go:1272",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/install.go:1306",
       "confidence": "UNCERTAIN"
     },
@@ -14490,6 +14482,14 @@
       "caller_source": "pkg/deps/install.go:1272",
       "callee": "Errorf",
       "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "call_site_source": "pkg/deps/install.go:1306",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "tryCSVFromSubscription",
+      "caller_source": "pkg/deps/install.go:1272",
+      "callee": "Errorf",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1321",
       "confidence": "UNCERTAIN"
     },
@@ -14497,7 +14497,7 @@
       "caller": "tryCSVFromSubscription",
       "caller_source": "pkg/deps/install.go:1272",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1321",
       "confidence": "UNCERTAIN"
     },
@@ -14513,7 +14513,7 @@
       "caller": "findSucceededCSVInNamespace",
       "caller_source": "pkg/deps/install.go:1333",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1336",
       "confidence": "UNCERTAIN"
     },
@@ -14529,7 +14529,7 @@
       "caller": "findSucceededCSVInNamespace",
       "caller_source": "pkg/deps/install.go:1333",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1336",
       "confidence": "UNCERTAIN"
     },
@@ -14537,7 +14537,7 @@
       "caller": "waitForOperator",
       "caller_source": "pkg/deps/install.go:1366",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1395",
       "confidence": "UNCERTAIN"
     },
@@ -14553,7 +14553,7 @@
       "caller": "waitForOperator",
       "caller_source": "pkg/deps/install.go:1366",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:189",
       "call_site_source": "pkg/deps/install.go:1395",
       "confidence": "UNCERTAIN"
     },
@@ -14569,7 +14569,7 @@
       "caller": "waitForOperator",
       "caller_source": "pkg/deps/install.go:1366",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:146",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1402",
       "confidence": "UNCERTAIN"
     },
@@ -14577,7 +14577,7 @@
       "caller": "waitForOperator",
       "caller_source": "pkg/deps/install.go:1366",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:82",
+      "callee_source": "pkg/util/iostreams/iostreams.go:146",
       "call_site_source": "pkg/deps/install.go:1402",
       "confidence": "UNCERTAIN"
     },
@@ -14593,7 +14593,7 @@
       "caller": "waitForCSV",
       "caller_source": "pkg/deps/install.go:1408",
       "callee": "Errorf",
-      "callee_source": "pkg/util/iostreams/iostreams.go:189",
+      "callee_source": "pkg/util/iostreams/iostreams.go:82",
       "call_site_source": "pkg/deps/install.go:1455",
       "confidence": "UNCERTAIN"
     }

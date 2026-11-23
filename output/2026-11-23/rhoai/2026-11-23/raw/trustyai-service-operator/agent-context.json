@@ -3,7 +3,7 @@
   "component": "trustyai-service-operator",
   "repo": "red-hat-data-services/trustyai-service-operator",
   "commit_sha": "0b032317296ccf1d459e92ec319e9e818e2538d9",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "trustyai-service-operator (also known as: TrustyAI operator) is a Kubernetes component. managing 3 CRD(s): EvalHub, LMEvalJob, TrustyAIService. deploying 1 workload(s) (trustyai-service-operator-controller-manager) with 1 container(s). watching 18 resource type(s). exposing 3 service(s) on ports: 443, 8443. protected by 3 network policy/policies. runtime dependencies: OpenTelemetry Collector. defining 25 API spec type(s) across 77 struct(s) with 330 total fields. with 564 operator config constants (31 image references, 7 env vars). following 27 reconciliation steps across 4 controller(s). reporting 15 status condition types. integrates with Istio, KServe, Kueue, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. kustomize overlays: config/base, config/components/evalhub, config/components/job-mgr, config/components/lmes, config/components/nemo-guardrails, config/components/tas, config/components/webhook, config/configmaps/evalhub, config/configmaps, config/configmaps/nemo-guardrails, config/crd, config/manager, config/manifests, config/overlays/evalhub-only, config/overlays/lmes, config/overlays/mcp-guardrails, config/overlays/odh, config/overlays/odh/rbac/tls, config/overlays/odh-kueue, config/overlays/rhoai, config/overlays/rhoai/rbac/tls, config/overlays/testing, config/prometheus, config/rbac-base, config/scorecard. references components: eval-hub (import, provider), kserve (import), kube-rbac-proxy (config).",
   "repository_description": "The TrustyAI Kubernetes Operator aims at simplifying the deployment and management of various TrustyAI Kubernetes components, such as:",
   "description_source": "README.md:9",
@@ -2871,7 +2871,7 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/nemo_guardrails/nemoguardrail_controller.go:376",
+      "callee_source": "controllers/evalhub/evalhub_controller.go:397",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -2879,7 +2879,7 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
-      "callee_source": "controllers/evalhub/evalhub_controller.go:397",
+      "callee_source": "controllers/nemo_guardrails/nemoguardrail_controller.go:376",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
       "confidence": "UNCERTAIN"
     },
@@ -2889,14 +2889,6 @@
       "callee": "SetupWithManager",
       "callee_source": "controllers/lmes/lmevaljob_controller.go:304",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
-      "callee": "SetupWithManager",
-      "callee_source": "controllers/evalhub/evalhub_controller.go:397",
-      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
       "confidence": "UNCERTAIN"
     },
     {
@@ -2919,23 +2911,7 @@
       "caller": "main",
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
-      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
-      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
-      "callee": "SetupWithManager",
-      "callee_source": "pkg/tls/watcher.go:108",
-      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
-      "callee": "SetupWithManager",
-      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
+      "callee_source": "controllers/evalhub/evalhub_controller.go:397",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
       "confidence": "UNCERTAIN"
     },
@@ -2944,6 +2920,30 @@
       "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
       "callee": "SetupWithManager",
       "callee_source": "pkg/tls/watcher.go:108",
+      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
+      "callee": "SetupWithManager",
+      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
+      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:115",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
+      "callee": "SetupWithManager",
+      "callee_source": "pkg/tls/watcher.go:108",
+      "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:39",
+      "callee": "SetupWithManager",
+      "callee_source": "trustyai-operator-module/pkg/trustyaimodule/reconciler.go:504",
       "call_site_source": "trustyai-operator-module/cmd/trustyai-operator-module/main.go:152",
       "confidence": "UNCERTAIN"
     },

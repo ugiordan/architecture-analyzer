@@ -3,7 +3,7 @@
   "component": "mlflow",
   "repo": "opendatahub-io/mlflow",
   "commit_sha": "fe151c604aeb23ccfe59ebf200fad6912dd58485",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "mlflow is a Kubernetes component. exposing 1 service(s) on ports: 9137. Dockerfile EXPOSE ports: 5000. connecting to external services: aiohttp, azure-blob, gcs, httpx, mlflow, openai, postgres, redis, requests, s3, sqlalchemy, urllib. runtime dependencies: MLflow, OpenTelemetry Collector, PostgreSQL, Redis. 219 Python package dependencies (167 required), categories: 1 cloud-provider, 1 data, 1 image-processing, 1 k8s-client, 2 database, 2 llm-sdk, 2 numerical, 2 serialization, 2 web-server, 3 tokenizer, 4 web-framework, 5 ml-framework, 6 testing, 9 observability. Python k8s client with 499 API call(s). references components: model-registry (import).",
   "repository_description": "The Open Source AI Engineering Platform for Agents, LLMs \u0026 Models",
   "description_source": "README.md:1",
@@ -25104,7 +25104,7 @@
       "caller": "main",
       "caller_source": ".claude/hooks/lint.py:127",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
+      "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": ".claude/hooks/lint.py:129",
       "confidence": "UNCERTAIN"
     },
@@ -25120,7 +25120,7 @@
       "caller": "main",
       "caller_source": ".claude/hooks/lint.py:127",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": ".claude/hooks/lint.py:129",
       "confidence": "UNCERTAIN"
     },
@@ -25128,7 +25128,7 @@
       "caller": "main",
       "caller_source": ".claude/hooks/lint.py:127",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": ".claude/hooks/lint.py:129",
       "confidence": "UNCERTAIN"
     },
@@ -25136,14 +25136,6 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
-      "call_site_source": "dev/annotate_flaky_tests.py:180",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
       "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": "dev/annotate_flaky_tests.py:180",
       "confidence": "UNCERTAIN"
@@ -25160,6 +25152,14 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/annotate_flaky_tests.py:180",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
       "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/annotate_flaky_tests.py:180",
       "confidence": "UNCERTAIN"
@@ -25168,7 +25168,39 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
+      "callee_source": "mlflow/tracing/provider.py:154",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/annotate_flaky_tests.py:181",
       "confidence": "UNCERTAIN"
     },
@@ -25200,62 +25232,6 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
-      "call_site_source": "dev/annotate_flaky_tests.py:186",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/annotate_flaky_tests.py:186",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/annotate_flaky_tests.py:186",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/annotate_flaky_tests.py:186",
       "confidence": "UNCERTAIN"
@@ -25265,7 +25241,15 @@
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
       "callee_source": "mlflow/tracing/provider.py:154",
-      "call_site_source": "dev/annotate_flaky_tests.py:221",
+      "call_site_source": "dev/annotate_flaky_tests.py:186",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
+      "call_site_source": "dev/annotate_flaky_tests.py:186",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25273,7 +25257,7 @@
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
       "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/annotate_flaky_tests.py:221",
+      "call_site_source": "dev/annotate_flaky_tests.py:186",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25294,9 +25278,25 @@
     },
     {
       "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
       "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/annotate_flaky_tests.py:221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/provider.py:154",
+      "call_site_source": "dev/annotate_flaky_tests.py:221",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/benchmarks/gateway/run.py:668",
       "confidence": "UNCERTAIN"
     },
@@ -25305,14 +25305,6 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/tracing/provider.py:154",
-      "call_site_source": "dev/benchmarks/gateway/run.py:668",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/benchmarks/gateway/run.py:668",
       "confidence": "UNCERTAIN"
     },
@@ -25328,7 +25320,15 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
+      "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/benchmarks/gateway/run.py:668",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/benchmarks/gateway/run.py:679",
       "confidence": "UNCERTAIN"
     },
@@ -25344,7 +25344,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
+      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/benchmarks/gateway/run.py:679",
       "confidence": "UNCERTAIN"
     },
@@ -25352,7 +25352,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
+      "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": "dev/benchmarks/gateway/run.py:679",
       "confidence": "UNCERTAIN"
     },
@@ -25368,7 +25368,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/benchmarks/gateway/run.py:702",
       "confidence": "UNCERTAIN"
     },
@@ -25376,7 +25376,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/benchmarks/gateway/run.py:702",
       "confidence": "UNCERTAIN"
     },
@@ -25408,14 +25408,6 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/benchmarks/gateway/run.py:713",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
       "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
@@ -25424,16 +25416,8 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/benchmarks/gateway/run.py:724",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
       "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/benchmarks/gateway/run.py:724",
+      "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25449,6 +25433,22 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/benchmarks/gateway/run.py:724",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
+      "call_site_source": "dev/benchmarks/gateway/run.py:724",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/benchmarks/gateway/run.py:724",
       "confidence": "UNCERTAIN"
     },
@@ -25472,14 +25472,6 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/benchmarks/gateway/run.py:730",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
       "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": "dev/benchmarks/gateway/run.py:730",
       "confidence": "UNCERTAIN"
@@ -25488,16 +25480,8 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
-      "call_site_source": "dev/benchmarks/gateway/run.py:737",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
       "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/benchmarks/gateway/run.py:737",
+      "call_site_source": "dev/benchmarks/gateway/run.py:730",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25520,8 +25504,16 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
+      "call_site_source": "dev/benchmarks/gateway/run.py:737",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
-      "call_site_source": "dev/benchmarks/gateway/run.py:744",
+      "call_site_source": "dev/benchmarks/gateway/run.py:737",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25529,14 +25521,6 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/benchmarks/gateway/run.py:744",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/benchmarks/gateway/run.py:744",
       "confidence": "UNCERTAIN"
     },
@@ -25553,6 +25537,30 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/benchmarks/gateway/run.py:744",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/benchmarks/gateway/run.py:744",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/benchmarks/gateway/run.py:751",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/benchmarks/gateway/run.py:751",
       "confidence": "UNCERTAIN"
     },
@@ -25576,8 +25584,8 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/benchmarks/gateway/run.py:751",
+      "callee_source": "mlflow/tracing/provider.py:154",
+      "call_site_source": "dev/benchmarks/gateway/run.py:789",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25600,32 +25608,8 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
-      "call_site_source": "dev/benchmarks/gateway/run.py:789",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/benchmarks/gateway/run.py:789",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/benchmarks/gateway/run.py:797",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
-      "call_site_source": "dev/benchmarks/gateway/run.py:797",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25640,7 +25624,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
+      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/benchmarks/gateway/run.py:797",
       "confidence": "UNCERTAIN"
     },
@@ -25648,16 +25632,16 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
-      "call_site_source": "dev/benchmarks/gateway/run.py:802",
+      "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/benchmarks/gateway/run.py:797",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/benchmarks/gateway/run.py:802",
+      "callee_source": "mlflow/tracing/provider.py:154",
+      "call_site_source": "dev/benchmarks/gateway/run.py:797",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25673,6 +25657,22 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1650",
+      "call_site_source": "dev/benchmarks/gateway/run.py:802",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/benchmarks/gateway/run.py:802",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/benchmarks/gateway/run.py:802",
       "confidence": "UNCERTAIN"
     },
@@ -25680,7 +25680,7 @@
       "caller": "main",
       "caller_source": "dev/format.py:28",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/format.py:41",
       "confidence": "UNCERTAIN"
     },
@@ -25696,7 +25696,7 @@
       "caller": "main",
       "caller_source": "dev/format.py:28",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
+      "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": "dev/format.py:41",
       "confidence": "UNCERTAIN"
     },
@@ -25712,7 +25712,7 @@
       "caller": "main",
       "caller_source": "dev/ruff.py:28",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/ruff.py:40",
       "confidence": "UNCERTAIN"
     },
@@ -25736,7 +25736,7 @@
       "caller": "main",
       "caller_source": "dev/ruff.py:28",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
+      "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": "dev/ruff.py:40",
       "confidence": "UNCERTAIN"
     },
@@ -25744,7 +25744,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/update_changelog.py:247",
       "confidence": "UNCERTAIN"
     },
@@ -25752,7 +25752,15 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
+      "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/update_changelog.py:247",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_changelog.py:183",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/update_changelog.py:247",
       "confidence": "UNCERTAIN"
     },
@@ -25769,7 +25777,7 @@
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
       "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/update_changelog.py:247",
+      "call_site_source": "dev/update_changelog.py:248",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25800,15 +25808,15 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/update_changelog.py:248",
+      "callee_source": "mlflow/tracing/provider.py:154",
+      "call_site_source": "dev/update_changelog.py:249",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/update_changelog.py:249",
       "confidence": "UNCERTAIN"
     },
@@ -25833,30 +25841,6 @@
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/update_changelog.py:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_changelog.py:183",
-      "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/update_changelog.py:250",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_changelog.py:183",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
-      "call_site_source": "dev/update_changelog.py:250",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_changelog.py:183",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/provider.py:154",
       "call_site_source": "dev/update_changelog.py:250",
       "confidence": "UNCERTAIN"
     },
@@ -25872,7 +25856,23 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
+      "callee_source": "mlflow/tracing/provider.py:154",
+      "call_site_source": "dev/update_changelog.py:250",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_changelog.py:183",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
+      "call_site_source": "dev/update_changelog.py:250",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_changelog.py:183",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -25880,7 +25880,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
+      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -25896,7 +25896,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -25905,14 +25905,6 @@
       "caller_source": "dev/update_requirements.py:63",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1650",
-      "call_site_source": "dev/update_requirements.py:77",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_requirements.py:63",
-      "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/update_requirements.py:77",
       "confidence": "UNCERTAIN"
     },
@@ -25937,6 +25929,14 @@
       "caller_source": "dev/update_requirements.py:63",
       "callee": "get",
       "callee_source": "mlflow/entities/span.py:1617",
+      "call_site_source": "dev/update_requirements.py:77",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_requirements.py:63",
+      "callee": "get",
+      "callee_source": "mlflow/entities/span.py:1650",
       "call_site_source": "dev/update_requirements.py:89",
       "confidence": "UNCERTAIN"
     },
@@ -25944,7 +25944,7 @@
       "caller": "main",
       "caller_source": "dev/update_requirements.py:63",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1650",
+      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "dev/update_requirements.py:89",
       "confidence": "UNCERTAIN"
     },
@@ -25976,7 +25976,7 @@
       "caller": "main",
       "caller_source": "docs/scripts/build-all.py:61",
       "callee": "get",
-      "callee_source": "mlflow/tracing/destination.py:29",
+      "callee_source": "mlflow/entities/span.py:1617",
       "call_site_source": "docs/scripts/build-all.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -25992,7 +25992,7 @@
       "caller": "main",
       "caller_source": "docs/scripts/build-all.py:61",
       "callee": "get",
-      "callee_source": "mlflow/entities/span.py:1617",
+      "callee_source": "mlflow/tracing/destination.py:29",
       "call_site_source": "docs/scripts/build-all.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -26040,6 +26040,14 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
+      "callee_source": "mlflow/models/model_config.py:139",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
       "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/annotate_flaky_tests.py:181",
       "confidence": "UNCERTAIN"
@@ -26050,22 +26058,6 @@
       "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
       "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/utils/timeout.py:116",
-      "call_site_source": "dev/annotate_flaky_tests.py:186",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26081,6 +26073,14 @@
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
       "callee_source": "mlflow/tracing/utils/timeout.py:116",
+      "call_site_source": "dev/annotate_flaky_tests.py:186",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/models/model_config.py:139",
       "call_site_source": "dev/annotate_flaky_tests.py:221",
       "confidence": "UNCERTAIN"
     },
@@ -26088,7 +26088,7 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/models/model_config.py:139",
+      "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/annotate_flaky_tests.py:221",
       "confidence": "UNCERTAIN"
     },
@@ -26112,24 +26112,16 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
+      "callee_source": "mlflow/tracing/utils/timeout.py:116",
+      "call_site_source": "dev/benchmarks/gateway/run.py:679",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
       "call_site_source": "dev/benchmarks/gateway/run.py:679",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/utils/timeout.py:116",
-      "call_site_source": "dev/benchmarks/gateway/run.py:679",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/utils/timeout.py:116",
-      "call_site_source": "dev/benchmarks/gateway/run.py:702",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26145,6 +26137,14 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/tracing/utils/timeout.py:116",
+      "call_site_source": "dev/benchmarks/gateway/run.py:702",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/models/model_config.py:139",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
@@ -26152,7 +26152,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/models/model_config.py:139",
+      "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
@@ -26224,14 +26224,6 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/benchmarks/gateway/run.py:751",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
       "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/benchmarks/gateway/run.py:751",
       "confidence": "UNCERTAIN"
@@ -26241,7 +26233,7 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/benchmarks/gateway/run.py:789",
+      "call_site_source": "dev/benchmarks/gateway/run.py:751",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26257,7 +26249,7 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/benchmarks/gateway/run.py:797",
+      "call_site_source": "dev/benchmarks/gateway/run.py:789",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26273,7 +26265,7 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/benchmarks/gateway/run.py:802",
+      "call_site_source": "dev/benchmarks/gateway/run.py:797",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26286,10 +26278,10 @@
     },
     {
       "caller": "main",
-      "caller_source": "dev/format.py:28",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/format.py:41",
+      "call_site_source": "dev/benchmarks/gateway/run.py:802",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26302,10 +26294,10 @@
     },
     {
       "caller": "main",
-      "caller_source": "dev/ruff.py:28",
+      "caller_source": "dev/format.py:28",
       "callee": "get",
       "callee_source": "mlflow/models/model_config.py:139",
-      "call_site_source": "dev/ruff.py:40",
+      "call_site_source": "dev/format.py:41",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26314,6 +26306,22 @@
       "callee": "get",
       "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/ruff.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/ruff.py:28",
+      "callee": "get",
+      "callee_source": "mlflow/models/model_config.py:139",
+      "call_site_source": "dev/ruff.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_changelog.py:183",
+      "callee": "get",
+      "callee_source": "mlflow/tracing/utils/timeout.py:116",
+      "call_site_source": "dev/update_changelog.py:247",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26328,15 +26336,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/tracing/utils/timeout.py:116",
-      "call_site_source": "dev/update_changelog.py:247",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_changelog.py:183",
-      "callee": "get",
-      "callee_source": "mlflow/tracing/utils/timeout.py:116",
+      "callee_source": "mlflow/models/model_config.py:139",
       "call_site_source": "dev/update_changelog.py:248",
       "confidence": "UNCERTAIN"
     },
@@ -26344,7 +26344,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/models/model_config.py:139",
+      "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/update_changelog.py:248",
       "confidence": "UNCERTAIN"
     },
@@ -26368,7 +26368,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/tracing/utils/timeout.py:116",
+      "callee_source": "mlflow/models/model_config.py:139",
       "call_site_source": "dev/update_changelog.py:250",
       "confidence": "UNCERTAIN"
     },
@@ -26376,7 +26376,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/models/model_config.py:139",
+      "callee_source": "mlflow/tracing/utils/timeout.py:116",
       "call_site_source": "dev/update_changelog.py:250",
       "confidence": "UNCERTAIN"
     },
@@ -26720,14 +26720,6 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
       "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/annotate_flaky_tests.py:181",
       "confidence": "UNCERTAIN"
@@ -26737,7 +26729,7 @@
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
       "callee_source": "mlflow/environment_variables.py:75",
-      "call_site_source": "dev/annotate_flaky_tests.py:186",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26753,6 +26745,14 @@
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
       "callee_source": "mlflow/environment_variables.py:75",
+      "call_site_source": "dev/annotate_flaky_tests.py:186",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/annotate_flaky_tests.py:221",
       "confidence": "UNCERTAIN"
     },
@@ -26760,7 +26760,7 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/annotate_flaky_tests.py:221",
       "confidence": "UNCERTAIN"
     },
@@ -26816,7 +26816,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
@@ -26824,7 +26824,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
@@ -26848,24 +26848,16 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
+      "callee_source": "mlflow/environment_variables.py:41",
+      "call_site_source": "dev/benchmarks/gateway/run.py:730",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
       "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/benchmarks/gateway/run.py:730",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
-      "call_site_source": "dev/benchmarks/gateway/run.py:730",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
-      "call_site_source": "dev/benchmarks/gateway/run.py:737",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26881,6 +26873,14 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/environment_variables.py:41",
+      "call_site_source": "dev/benchmarks/gateway/run.py:737",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/benchmarks/gateway/run.py:744",
       "confidence": "UNCERTAIN"
     },
@@ -26888,7 +26888,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/benchmarks/gateway/run.py:744",
       "confidence": "UNCERTAIN"
     },
@@ -26928,6 +26928,14 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
+      "callee_source": "mlflow/environment_variables.py:41",
+      "call_site_source": "dev/benchmarks/gateway/run.py:797",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
       "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/benchmarks/gateway/run.py:797",
       "confidence": "UNCERTAIN"
@@ -26936,15 +26944,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
-      "call_site_source": "dev/benchmarks/gateway/run.py:797",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/benchmarks/gateway/run.py:802",
       "confidence": "UNCERTAIN"
     },
@@ -26952,7 +26952,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/benchmarks/gateway/run.py:802",
       "confidence": "UNCERTAIN"
     },
@@ -26992,7 +26992,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/update_changelog.py:247",
       "confidence": "UNCERTAIN"
     },
@@ -27000,7 +27000,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/update_changelog.py:247",
       "confidence": "UNCERTAIN"
     },
@@ -27024,14 +27024,6 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
-      "call_site_source": "dev/update_changelog.py:249",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_changelog.py:183",
-      "callee": "get",
       "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/update_changelog.py:249",
       "confidence": "UNCERTAIN"
@@ -27041,7 +27033,7 @@
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
       "callee_source": "mlflow/environment_variables.py:75",
-      "call_site_source": "dev/update_changelog.py:250",
+      "call_site_source": "dev/update_changelog.py:249",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27056,7 +27048,15 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
+      "call_site_source": "dev/update_changelog.py:250",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_changelog.py:183",
+      "callee": "get",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -27064,7 +27064,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -27072,7 +27072,7 @@
       "caller": "main",
       "caller_source": "dev/update_requirements.py:63",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "dev/update_requirements.py:77",
       "confidence": "UNCERTAIN"
     },
@@ -27080,7 +27080,7 @@
       "caller": "main",
       "caller_source": "dev/update_requirements.py:63",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "dev/update_requirements.py:77",
       "confidence": "UNCERTAIN"
     },
@@ -27104,7 +27104,7 @@
       "caller": "main",
       "caller_source": "docs/scripts/build-all.py:61",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:41",
+      "callee_source": "mlflow/environment_variables.py:75",
       "call_site_source": "docs/scripts/build-all.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -27112,16 +27112,8 @@
       "caller": "main",
       "caller_source": "docs/scripts/build-all.py:61",
       "callee": "get",
-      "callee_source": "mlflow/environment_variables.py:75",
+      "callee_source": "mlflow/environment_variables.py:41",
       "call_site_source": "docs/scripts/build-all.py:62",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": ".claude/hooks/lint.py:127",
-      "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
-      "call_site_source": ".claude/hooks/lint.py:129",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27129,6 +27121,14 @@
       "caller_source": ".claude/hooks/lint.py:127",
       "callee": "get",
       "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "call_site_source": ".claude/hooks/lint.py:129",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": ".claude/hooks/lint.py:127",
+      "callee": "get",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": ".claude/hooks/lint.py:129",
       "confidence": "UNCERTAIN"
     },
@@ -27160,6 +27160,14 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
+      "callee_source": "mlflow/demo/registry.py:30",
+      "call_site_source": "dev/annotate_flaky_tests.py:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
       "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/annotate_flaky_tests.py:181",
       "confidence": "UNCERTAIN"
@@ -27170,22 +27178,6 @@
       "callee": "get",
       "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
-      "call_site_source": "dev/annotate_flaky_tests.py:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/annotate_flaky_tests.py:162",
-      "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
-      "call_site_source": "dev/annotate_flaky_tests.py:186",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27200,7 +27192,15 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "callee_source": "mlflow/demo/registry.py:30",
+      "call_site_source": "dev/annotate_flaky_tests.py:186",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/annotate_flaky_tests.py:162",
+      "callee": "get",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/annotate_flaky_tests.py:221",
       "confidence": "UNCERTAIN"
     },
@@ -27208,7 +27208,7 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/annotate_flaky_tests.py:221",
       "confidence": "UNCERTAIN"
     },
@@ -27232,24 +27232,16 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "call_site_source": "dev/benchmarks/gateway/run.py:679",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
       "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/benchmarks/gateway/run.py:679",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
-      "call_site_source": "dev/benchmarks/gateway/run.py:679",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/benchmarks/gateway/run.py:654",
-      "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
-      "call_site_source": "dev/benchmarks/gateway/run.py:702",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27265,6 +27257,14 @@
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
       "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "call_site_source": "dev/benchmarks/gateway/run.py:702",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/benchmarks/gateway/run.py:654",
+      "callee": "get",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
@@ -27272,7 +27272,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/benchmarks/gateway/run.py:713",
       "confidence": "UNCERTAIN"
     },
@@ -27296,7 +27296,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/benchmarks/gateway/run.py:730",
       "confidence": "UNCERTAIN"
     },
@@ -27304,7 +27304,7 @@
       "caller": "main",
       "caller_source": "dev/benchmarks/gateway/run.py:654",
       "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/benchmarks/gateway/run.py:730",
       "confidence": "UNCERTAIN"
     },
@@ -27408,7 +27408,7 @@
       "caller": "main",
       "caller_source": "dev/format.py:28",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/format.py:41",
       "confidence": "UNCERTAIN"
     },
@@ -27416,7 +27416,7 @@
       "caller": "main",
       "caller_source": "dev/format.py:28",
       "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/format.py:41",
       "confidence": "UNCERTAIN"
     },
@@ -27456,6 +27456,14 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
+      "callee_source": "mlflow/demo/registry.py:30",
+      "call_site_source": "dev/update_changelog.py:248",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dev/update_changelog.py:183",
+      "callee": "get",
       "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/update_changelog.py:248",
       "confidence": "UNCERTAIN"
@@ -27464,15 +27472,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
-      "call_site_source": "dev/update_changelog.py:248",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dev/update_changelog.py:183",
-      "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/update_changelog.py:249",
       "confidence": "UNCERTAIN"
     },
@@ -27480,7 +27480,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/update_changelog.py:249",
       "confidence": "UNCERTAIN"
     },
@@ -27504,7 +27504,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -27512,7 +27512,7 @@
       "caller": "main",
       "caller_source": "dev/update_changelog.py:183",
       "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "dev/update_changelog.py:251",
       "confidence": "UNCERTAIN"
     },
@@ -27552,7 +27552,7 @@
       "caller": "main",
       "caller_source": "docs/scripts/build-all.py:61",
       "callee": "get",
-      "callee_source": "mlflow/demo/registry.py:30",
+      "callee_source": "mlflow/prompt/registry_utils.py:395",
       "call_site_source": "docs/scripts/build-all.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -27560,7 +27560,7 @@
       "caller": "main",
       "caller_source": "docs/scripts/build-all.py:61",
       "callee": "get",
-      "callee_source": "mlflow/prompt/registry_utils.py:395",
+      "callee_source": "mlflow/demo/registry.py:30",
       "call_site_source": "docs/scripts/build-all.py:62",
       "confidence": "UNCERTAIN"
     },
@@ -28104,7 +28104,7 @@
       "caller": "main",
       "caller_source": "mlflow/pyfunc/_mlflow_pyfunc_backend_predict.py:45",
       "callee": "format",
-      "callee_source": "mlflow/utils/docstring_utils.py:73",
+      "callee_source": "mlflow/utils/logging_utils.py:97",
       "call_site_source": "mlflow/pyfunc/_mlflow_pyfunc_backend_predict.py:56",
       "confidence": "UNCERTAIN"
     },
@@ -28112,7 +28112,7 @@
       "caller": "main",
       "caller_source": "mlflow/pyfunc/_mlflow_pyfunc_backend_predict.py:45",
       "callee": "format",
-      "callee_source": "mlflow/utils/logging_utils.py:97",
+      "callee_source": "mlflow/utils/docstring_utils.py:73",
       "call_site_source": "mlflow/pyfunc/_mlflow_pyfunc_backend_predict.py:56",
       "confidence": "UNCERTAIN"
     },
@@ -28168,7 +28168,7 @@
       "caller": "main",
       "caller_source": "dev/annotate_flaky_tests.py:162",
       "callee": "load",
-      "callee_source": "mlflow/models/model.py:782",
+      "callee_source": "mlflow/server/assistant/session.py:197",
       "call_site_source": "dev/annotate_flaky_tests.py:174",
       "confidence": "UNCERTAIN"
     }

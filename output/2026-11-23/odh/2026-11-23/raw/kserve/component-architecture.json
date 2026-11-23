@@ -5,8 +5,8 @@
   ],
   "repo": "opendatahub-io/kserve",
   "commit_sha": "1eaf4aede4fee0509aee44be17ade1119b1ae521",
-  "extracted_at": "2026-11-23T06:59:44Z",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "extracted_at": "2026-11-23T11:32:27Z",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "schema_version": "2",
   "crds": [
     {
@@ -408,8 +408,8 @@
         "self != '/' \u0026\u0026 self.split('/').all(segment, segment != '.' \u0026\u0026 segment != '..')",
         "self != '.' \u0026\u0026 self.split('/').all(segment, segment != '..')",
         "!has(self.profileRef) || self.profileRef.name.size() \u003e 0",
-        "self != '/' \u0026\u0026 self.split('/').all(segment, segment != '.' \u0026\u0026 segment != '..')",
-        "self != '.' \u0026\u0026 self.split('/').all(segment, segment != '..')"
+        "self != '.' \u0026\u0026 self.split('/').all(segment, segment != '..')",
+        "self != '/' \u0026\u0026 self.split('/').all(segment, segment != '.' \u0026\u0026 segment != '..')"
       ],
       "source": "config/crd/full/kernelcache/serving.kserve.io_kernelcachecaptures.yaml"
     },
@@ -480,8 +480,8 @@
         "has(self.nodeGroups) || has(self.pvcRef)",
         "has(self.pvcRef) == has(oldSelf.pvcRef)",
         "self == oldSelf",
-        "self.all(s, s.name != '')",
-        "self == oldSelf"
+        "self == oldSelf",
+        "self.all(s, s.name != '')"
       ],
       "source": "config/crd/full/localmodel/serving.kserve.io_localmodelnamespacecaches.yaml"
     },
@@ -565,6 +565,7 @@
       "fields_count": 7327,
       "validation_rules": [
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.wva) \u0026\u0026 has(self.keda))",
         "!has(self.keda) || size(self.keda.triggers) \u003e 0",
         "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
@@ -583,6 +584,17 @@
         "(has(self.filters) \u0026\u0026 self.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.requestRedirect) \u0026\u0026 has(f.requestRedirect.path) \u0026\u0026 f.requestRedirect.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.requestRedirect.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
         "(has(self.backendRefs) \u0026\u0026 self.backendRefs.exists_one(b, (has(b.filters) \u0026\u0026 b.filters.exists_one(f, has(f.urlRewrite) \u0026\u0026 has(f.urlRewrite.path) \u0026\u0026 f.urlRewrite.path.type == 'ReplacePrefixMatch' \u0026\u0026 has(f.urlRewrite.path.replacePrefixMatch))) )) ? ((size(self.matches) != 1 || !has(self.matches[0].path) || self.matches[0].path.type != 'PathPrefix') ? false : true) : true",
+        "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/../') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('%2f') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('%2F') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('#') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/..') : true",
+        "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/.') : true",
+        "self.type in ['Exact','PathPrefix'] || self.type == 'RegularExpression'",
+        "(self.type in ['Exact','PathPrefix']) ? self.value.matches(r\"\"\"^(?:[-A-Za-z0-9/._~!$\u0026'()*+,;=:@]|[%][0-9a-fA-F]{2})+$\"\"\") : true",
         "!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)",
         "!has(self.cookieConfig) || self.type == 'Cookie'",
         "!(has(self.request) \u0026\u0026 has(self.backendRequest) \u0026\u0026 duration(self.request) != duration('0s') \u0026\u0026 duration(self.backendRequest) \u003e duration(self.request))",
@@ -612,16 +624,16 @@
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
+        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
         "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!('*' in self \u0026\u0026 self.size() \u003e 1)",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.numerator \u003c= self.denominator",
         "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
         "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
         "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
@@ -646,6 +658,17 @@
         "!(!has(self.urlRewrite) \u0026\u0026 self.type == 'URLRewrite')",
         "!(has(self.extensionRef) \u0026\u0026 self.type != 'ExtensionRef')",
         "!(!has(self.extensionRef) \u0026\u0026 self.type == 'ExtensionRef')",
+        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
+        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
+        "self.numerator \u003c= self.denominator",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
+        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
+        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
+        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
+        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
         "!('*' in self \u0026\u0026 self.size() \u003e 1)",
@@ -654,31 +677,8 @@
         "self.protocol == 'HTTP' ? has(self.http) : true",
         "has(self.http) ? self.protocol == 'HTTP' : true",
         "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "!(has(self.percent) \u0026\u0026 has(self.fraction))",
-        "self.numerator \u003c= self.denominator",
-        "(size(self.group) == 0 \u0026\u0026 self.kind == 'Service') ? has(self.port) : true",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "self.type == 'ReplaceFullPath' ? has(self.replaceFullPath) : true",
-        "has(self.replaceFullPath) ? self.type == 'ReplaceFullPath' : true",
-        "self.type == 'ReplacePrefixMatch' ? has(self.replacePrefixMatch) : true",
-        "has(self.replacePrefixMatch) ? self.type == 'ReplacePrefixMatch' : true",
-        "(self.type in ['Exact','PathPrefix']) ? self.value.startsWith('/') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('//') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/./') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('/../') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('%2f') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('%2F') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.contains('#') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/..') : true",
-        "(self.type in ['Exact','PathPrefix']) ? !self.value.endsWith('/.') : true",
-        "self.type in ['Exact','PathPrefix'] || self.type == 'RegularExpression'",
-        "(self.type in ['Exact','PathPrefix']) ? self.value.matches(r\"\"\"^(?:[-A-Za-z0-9/._~!$\u0026'()*+,;=:@]|[%][0-9a-fA-F]{2})+$\"\"\") : true",
-        "self.kind != 'Service' || has(self.port)",
         "self.all(p1, self.exists_one(p2, p1.number==p2.number))",
-        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
+        "self.kind != 'Service' || has(self.port)",
         "!(has(self.wva) \u0026\u0026 has(self.keda))",
         "!has(self.keda) || size(self.keda.triggers) \u003e 0",
         "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
@@ -715,7 +715,6 @@
       "fields_count": 7253,
       "validation_rules": [
         "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
-        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.wva) \u0026\u0026 has(self.keda))",
         "!has(self.keda) || size(self.keda.triggers) \u003e 0",
         "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
@@ -723,11 +722,12 @@
         "!has(self.wva) || !has(self.wva.keda) || !has(self.wva.keda.idleReplicaCount) || !has(self.minReplicas) || self.wva.keda.idleReplicaCount \u003c self.minReplicas",
         "!has(self.keda) || !has(self.keda.idleReplicaCount) || has(self.minReplicas)",
         "!has(self.keda) || !has(self.keda.idleReplicaCount) || !has(self.minReplicas) || self.keda.idleReplicaCount \u003c self.minReplicas",
+        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
         "!has(self.keda) || !has(self.keda.advanced) || (size(self.keda.advanced.scalingModifiers.formula) == 0 \u0026\u0026 size(self.keda.advanced.scalingModifiers.target) == 0 \u0026\u0026 size(self.keda.advanced.scalingModifiers.activationTarget) == 0 \u0026\u0026 size(self.keda.advanced.scalingModifiers.metricType) == 0)",
         "!(has(self.hpa) \u0026\u0026 has(self.keda))",
         "has(self.hpa) || has(self.keda)",
         "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
-        "!has(self.advanced) || !has(self.advanced.horizontalPodAutoscalerConfig) || size(self.advanced.horizontalPodAutoscalerConfig.name) == 0",
+        "!(has(self.replicas) \u0026\u0026 has(self.scaling))",
         "!(has(self.wva) \u0026\u0026 has(self.keda))",
         "!has(self.keda) || size(self.keda.triggers) \u003e 0",
         "!has(self.minReplicas) || self.minReplicas \u003c= self.maxReplicas",
@@ -32236,6 +32236,13 @@
       "label": "sidecar.istio.io/inject",
       "integration": "Istio",
       "type": "annotation",
+      "context": "statefulset-template",
+      "source": "install/v0.6.0/kfserving_kubeflow.yaml"
+    },
+    {
+      "label": "sidecar.istio.io/inject",
+      "integration": "Istio",
+      "type": "annotation",
       "context": "deployment-template",
       "source": "install/v0.6.0/kfserving_kubeflow.yaml"
     },
@@ -32243,21 +32250,14 @@
       "label": "sidecar.istio.io/inject",
       "integration": "Istio",
       "type": "annotation",
-      "context": "statefulset-template",
-      "source": "install/v0.6.0/kfserving_kubeflow.yaml"
-    },
-    {
-      "label": "sidecar.istio.io/inject",
-      "integration": "Istio",
-      "type": "annotation",
-      "context": "statefulset-template",
+      "context": "deployment-template",
       "source": "install/v0.7.0-rc0/kserve_kubeflow.yaml"
     },
     {
       "label": "sidecar.istio.io/inject",
       "integration": "Istio",
       "type": "annotation",
-      "context": "deployment-template",
+      "context": "statefulset-template",
       "source": "install/v0.7.0-rc0/kserve_kubeflow.yaml"
     },
     {
@@ -32285,14 +32285,14 @@
       "label": "sidecar.istio.io/inject",
       "integration": "Istio",
       "type": "annotation",
-      "context": "deployment-template",
+      "context": "statefulset-template",
       "source": "install/v0.9.0-rc0/kserve_kubeflow.yaml"
     },
     {
       "label": "sidecar.istio.io/inject",
       "integration": "Istio",
       "type": "annotation",
-      "context": "statefulset-template",
+      "context": "deployment-template",
       "source": "install/v0.9.0-rc0/kserve_kubeflow.yaml"
     },
     {
@@ -33886,65 +33886,33 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.onnx.imagePullPolicy",
+      "field": "spec.predictor.huggingface.image",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.onnx.image",
+      "field": "spec.predictor.huggingface.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.paddle.imagePullPolicy",
+      "field": "spec.predictor.lightgbm.image",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.paddle.image",
+      "field": "spec.predictor.lightgbm.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.pytorch.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.pytorch.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.triton.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.triton.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.triton.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.triton.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -33966,25 +33934,81 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.huggingface.image",
+      "field": "spec.predictor.xgboost.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.huggingface.imagePullPolicy",
+      "field": "spec.predictor.xgboost.image",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.huggingface.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.model.imagePullPolicy",
+      "field": "spec.predictor.pytorch.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.model.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.pytorch.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.pytorch.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.triton.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.triton.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.triton.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.triton.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.tensorflow.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.tensorflow.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.onnx.image",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+    },
+    {
+      "type": "CRD_CONFUSED_DEPUTY",
+      "severity": "high",
+      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
+      "field": "spec.predictor.onnx.imagePullPolicy",
+      "crd_kind": "InferenceService",
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.onnx.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -33998,17 +34022,9 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.xgboost.imagePullPolicy",
+      "field": "spec.predictor.model.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.xgboost.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.xgboost.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.model.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
@@ -34030,33 +34046,17 @@
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.tensorflow.image",
+      "field": "spec.predictor.paddle.image",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "CRD_CONFUSED_DEPUTY",
       "severity": "high",
       "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.tensorflow.imagePullPolicy",
+      "field": "spec.predictor.paddle.imagePullPolicy",
       "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.tensorflow.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.lightgbm.image",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.image\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
-    },
-    {
-      "type": "CRD_CONFUSED_DEPUTY",
-      "severity": "high",
-      "source": "config/crd/full/serving.kserve.io_inferenceservices.yaml",
-      "field": "spec.predictor.lightgbm.imagePullPolicy",
-      "crd_kind": "InferenceService",
-      "description": "CRD InferenceService has user-settable image field \"spec.predictor.lightgbm.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
+      "description": "CRD InferenceService has user-settable image field \"spec.predictor.paddle.imagePullPolicy\". The operator deploys containers using this value with its own ServiceAccount. A user-controlled image runs with the operator's permissions."
     },
     {
       "type": "KUSTOMIZE_SECURITY_DELETION",

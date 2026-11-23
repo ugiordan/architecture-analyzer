@@ -3,7 +3,7 @@
   "component": "odh-dashboard",
   "repo": "red-hat-data-services/odh-dashboard",
   "commit_sha": "f5ec02f647d92dfa2a0ce774729371b944b0e14e",
-  "analyzer_version": "f62b7632f89631498789b54d78e8c552c27100c7",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
   "summary": "odh-dashboard (also known as: ODH Dashboard) is a Kubernetes component. deploying 25 workload(s) (rhaii-dashboard, odh-dashboard, maas-portal, rhaii-dashboard, agent-ops-ui, automl-ui, autorag-ui, data-connect-hub-ui, data-registry-ui, eval-hub-ui, gen-ai-ui, maas-ui, mlflow-ui, model-registry-ui, notebooks-ui, workspaces-backend, workspaces-frontend, workspaces-backend, workspaces-controller, workspaces-controller, workspaces-controller, workspaces-controller, dashboard-operator, workspaces-controller, workspaces-controller) with 27 container(s). watching 7 resource type(s). exposing 19 service(s) on ports: 4000, 443, 8043, 8080, 8143, 8243, 8343, 8443, 8543, 8643, 8743, 8843, 8943, 9043, 9143, 9243. Dockerfile EXPOSE ports: 4000, 8080, 8443. with 1 webhook(s) (1 validating). protected by 24 network policy/policies. with 2 PodDisruptionBudget(s). connecting to external services: postgres, s3. runtime dependencies: MLflow, MySQL, OpenTelemetry Collector, PostgreSQL, S3, dch-default-dataconnectservice-flight, dynatrace-mcp-server, image-registry, kubernetes, kubernetes-mcp-server, llama-32-3b-instruct-predictor, maas-api, mlflow, mock-evalhub, mock-predictor, s, sample-support-agent. with 2458 operator config constants (37 image references, 1 env vars). with 6 ingress route(s). integrates with Istio, KServe, Kueue, Prometheus, management relationship via labels/annotations. deploys kube-rbac-proxy sidecar for RBAC-based authorization. creates RBAC bindings to external roles: system:auth-delegator, system:image-puller. references components: eval-hub (client, import), kserve (import, provider), kubeflow (import), llama-stack (client, config, import), mlflow (import), model-registry (client, config, import), trustyai-service-operator (import). mounts 4 ConfigMap(s) as volumes: autorag-router-ca-bundle, kube-rbac-proxy-config, maas-portal-federation-config, odh-trusted-ca-bundle.",
   "repository_description": "[Dev setup \u0026 Requirements]: docs/dev-setup.md [Dashboard documentation]: docs/README.md [contributing guidelines]: CONTRIBUTING.md [issue]: https://github.com/opendatahub-io/odh-dashboard/issues/new/choose [definition of ready]: docs/definition-of-ready.md",
   "description_source": "README.md:1",
@@ -23440,6 +23440,14 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
       "confidence": "UNCERTAIN"
@@ -23448,15 +23456,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -23464,7 +23464,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -23488,24 +23488,16 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
       "confidence": "UNCERTAIN"
     },
     {
@@ -23521,6 +23513,14 @@
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -23528,7 +23528,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -23576,7 +23576,7 @@
       "caller": "main",
       "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
       "confidence": "UNCERTAIN"
     },
@@ -23584,7 +23584,7 @@
       "caller": "main",
       "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
       "confidence": "UNCERTAIN"
     },
@@ -23600,7 +23600,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:127",
       "confidence": "UNCERTAIN"
     },
@@ -23608,7 +23608,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:127",
       "confidence": "UNCERTAIN"
     },
@@ -23632,7 +23632,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
       "confidence": "UNCERTAIN"
     },
@@ -23640,7 +23640,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
       "confidence": "UNCERTAIN"
     },
@@ -23680,7 +23680,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -23688,7 +23688,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -23696,7 +23696,7 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
@@ -23704,7 +23704,7 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
@@ -23744,14 +23744,6 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:141",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
@@ -23761,7 +23753,7 @@
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:77",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
     },
     {
@@ -23776,6 +23768,22 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:77",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
@@ -23792,16 +23800,16 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/automl/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
     {
@@ -23816,15 +23824,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/automl/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/automl/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -23832,7 +23832,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/automl/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -23856,24 +23856,16 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/automl/bff/cmd/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/automl/bff/cmd/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/automl/bff/cmd/main.go:121",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/automl/bff/cmd/main.go:125",
       "confidence": "UNCERTAIN"
     },
     {
@@ -23889,7 +23881,7 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/automl/bff/cmd/main.go:135",
+      "call_site_source": "packages/automl/bff/cmd/main.go:125",
       "confidence": "UNCERTAIN"
     },
     {
@@ -23905,15 +23897,7 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/automl/bff/cmd/main.go:146",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/automl/bff/cmd/main.go:146",
+      "call_site_source": "packages/automl/bff/cmd/main.go:135",
       "confidence": "UNCERTAIN"
     },
     {
@@ -23929,6 +23913,22 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/automl/bff/cmd/main.go:146",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/automl/bff/cmd/main.go:146",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/automl/bff/cmd/main.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -23968,7 +23968,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/automl/bff/cmd/main.go:202",
       "confidence": "UNCERTAIN"
     },
@@ -23976,7 +23976,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/automl/bff/cmd/main.go:202",
       "confidence": "UNCERTAIN"
     },
@@ -24000,6 +24000,14 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:118",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/autorag/bff/cmd/main.go:118",
       "confidence": "UNCERTAIN"
@@ -24008,15 +24016,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:118",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -24024,7 +24024,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -24112,7 +24112,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/autorag/bff/cmd/main.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -24120,7 +24120,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/autorag/bff/cmd/main.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -24176,6 +24176,14 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
       "confidence": "UNCERTAIN"
@@ -24185,7 +24193,7 @@
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
     },
     {
@@ -24201,14 +24209,6 @@
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
     },
@@ -24240,7 +24240,7 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -24248,7 +24248,7 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -24264,14 +24264,6 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
-      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
@@ -24289,6 +24281,14 @@
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -24296,7 +24296,7 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -24320,7 +24320,7 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -24328,7 +24328,7 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:120",
       "confidence": "UNCERTAIN"
     },
@@ -24384,7 +24384,7 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -24392,7 +24392,7 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:171",
       "confidence": "UNCERTAIN"
     },
@@ -24400,14 +24400,6 @@
       "caller": "main",
       "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/eval-hub/bff/cmd/main.go:117",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/eval-hub/bff/cmd/main.go:117",
       "confidence": "UNCERTAIN"
@@ -24417,6 +24409,14 @@
       "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/eval-hub/bff/cmd/main.go:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/eval-hub/bff/cmd/main.go:130",
       "confidence": "UNCERTAIN"
     },
@@ -24424,7 +24424,7 @@
       "caller": "main",
       "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/eval-hub/bff/cmd/main.go:130",
       "confidence": "UNCERTAIN"
     },
@@ -24448,14 +24448,6 @@
       "caller": "main",
       "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/eval-hub/bff/cmd/main.go:75",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/eval-hub/bff/cmd/main.go:75",
       "confidence": "UNCERTAIN"
@@ -24465,6 +24457,14 @@
       "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/eval-hub/bff/cmd/main.go:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/eval-hub/bff/cmd/main.go:84",
       "confidence": "UNCERTAIN"
     },
@@ -24480,7 +24480,7 @@
       "caller": "main",
       "caller_source": "packages/eval-hub/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/eval-hub/bff/cmd/main.go:84",
       "confidence": "UNCERTAIN"
     },
@@ -24512,14 +24512,6 @@
       "caller": "main",
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/gen-ai/bff/cmd/main.go:141",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
-      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/gen-ai/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
@@ -24529,7 +24521,7 @@
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/gen-ai/bff/cmd/main.go:156",
+      "call_site_source": "packages/gen-ai/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
     },
     {
@@ -24560,7 +24552,15 @@
       "caller": "main",
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "call_site_source": "packages/gen-ai/bff/cmd/main.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/gen-ai/bff/cmd/main.go:187",
       "confidence": "UNCERTAIN"
     },
@@ -24568,7 +24568,7 @@
       "caller": "main",
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/gen-ai/bff/cmd/main.go:187",
       "confidence": "UNCERTAIN"
     },
@@ -24592,6 +24592,14 @@
       "caller": "main",
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "call_site_source": "packages/gen-ai/bff/cmd/main.go:210",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
+      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/gen-ai/bff/cmd/main.go:210",
       "confidence": "UNCERTAIN"
@@ -24600,15 +24608,7 @@
       "caller": "main",
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
-      "call_site_source": "packages/gen-ai/bff/cmd/main.go:210",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
-      "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/gen-ai/bff/cmd/main.go:215",
       "confidence": "UNCERTAIN"
     },
@@ -24616,7 +24616,7 @@
       "caller": "main",
       "caller_source": "packages/gen-ai/bff/cmd/main.go:32",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/gen-ai/bff/cmd/main.go:215",
       "confidence": "UNCERTAIN"
     },
@@ -24688,7 +24688,7 @@
       "caller": "main",
       "caller_source": "packages/maas/bff/cmd/main.go:19",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/maas/bff/cmd/main.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -24696,7 +24696,7 @@
       "caller": "main",
       "caller_source": "packages/maas/bff/cmd/main.go:19",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/maas/bff/cmd/main.go:89",
       "confidence": "UNCERTAIN"
     },
@@ -24816,14 +24816,6 @@
       "caller": "main",
       "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:101",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
-      "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:101",
       "confidence": "UNCERTAIN"
@@ -24833,7 +24825,7 @@
       "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
       "callee": "Error",
       "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
-      "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:110",
+      "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:101",
       "confidence": "UNCERTAIN"
     },
     {
@@ -24864,7 +24856,15 @@
       "caller": "main",
       "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:110",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
+      "callee": "Error",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
     },
@@ -24872,7 +24872,7 @@
       "caller": "main",
       "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
     },
@@ -24896,7 +24896,7 @@
       "caller": "main",
       "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -24904,7 +24904,7 @@
       "caller": "main",
       "caller_source": "packages/model-registry/upstream/bff/cmd/main.go:35",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/model-registry/upstream/bff/cmd/main.go:161",
       "confidence": "UNCERTAIN"
     },
@@ -24912,7 +24912,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:136",
       "confidence": "UNCERTAIN"
     },
@@ -24920,7 +24920,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:136",
       "confidence": "UNCERTAIN"
     },
@@ -24960,7 +24960,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:170",
       "confidence": "UNCERTAIN"
     },
@@ -24968,7 +24968,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:170",
       "confidence": "UNCERTAIN"
     },
@@ -25008,7 +25008,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:254",
       "confidence": "UNCERTAIN"
     },
@@ -25016,7 +25016,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:254",
       "confidence": "UNCERTAIN"
     },
@@ -25040,7 +25040,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:280",
       "confidence": "UNCERTAIN"
     },
@@ -25048,7 +25048,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:280",
       "confidence": "UNCERTAIN"
     },
@@ -25104,7 +25104,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:315",
       "confidence": "UNCERTAIN"
     },
@@ -25112,7 +25112,7 @@
       "caller": "main",
       "caller_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:80",
       "callee": "Error",
-      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/errors.go:17",
+      "callee_source": "packages/gen-ai/bff/internal/integrations/kubernetes/token_k8s_client.go:3481",
       "call_site_source": "packages/notebooks/upstream/workspaces/controller/cmd/main.go:315",
       "confidence": "UNCERTAIN"
     },
@@ -25168,30 +25168,6 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
       "confidence": "UNCERTAIN"
@@ -25200,7 +25176,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
       "confidence": "UNCERTAIN"
     },
@@ -25209,23 +25185,7 @@
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25233,6 +25193,22 @@
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:118",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
       "confidence": "UNCERTAIN"
     },
@@ -25249,6 +25225,46 @@
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:124",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
       "confidence": "UNCERTAIN"
     },
@@ -25264,7 +25280,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
       "confidence": "UNCERTAIN"
     },
@@ -25272,23 +25288,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:135",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -25296,7 +25296,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
       "confidence": "UNCERTAIN"
     },
@@ -25312,31 +25312,23 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:149",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:145",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -25352,6 +25344,14 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:149",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:149",
       "confidence": "UNCERTAIN"
@@ -25360,7 +25360,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:149",
       "confidence": "UNCERTAIN"
     },
@@ -25368,7 +25368,23 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
       "confidence": "UNCERTAIN"
     },
@@ -25384,32 +25400,8 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:166",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25417,14 +25409,6 @@
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
       "confidence": "UNCERTAIN"
     },
@@ -25440,6 +25424,14 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
       "confidence": "UNCERTAIN"
@@ -25448,7 +25440,15 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "dashboard-operator/cmd/manager/main.go:174",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "dashboard-operator/cmd/manager/main.go:41",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -25464,7 +25464,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:73",
       "confidence": "UNCERTAIN"
     },
@@ -25488,7 +25488,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:86",
       "confidence": "UNCERTAIN"
     },
@@ -25496,7 +25496,7 @@
       "caller": "main",
       "caller_source": "dashboard-operator/cmd/manager/main.go:41",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "dashboard-operator/cmd/manager/main.go:86",
       "confidence": "UNCERTAIN"
     },
@@ -25536,14 +25536,6 @@
       "caller": "main",
       "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "distributions/core-bff/bff/cmd/main.go:36",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "distributions/core-bff/bff/cmd/main.go:36",
       "confidence": "UNCERTAIN"
@@ -25560,6 +25552,14 @@
       "caller": "main",
       "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "distributions/core-bff/bff/cmd/main.go:36",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "distributions/core-bff/bff/cmd/main.go:36",
       "confidence": "UNCERTAIN"
@@ -25576,39 +25576,7 @@
       "caller": "main",
       "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
       "confidence": "UNCERTAIN"
     },
@@ -25624,7 +25592,23 @@
       "caller": "main",
       "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
       "confidence": "UNCERTAIN"
     },
@@ -25646,9 +25630,25 @@
     },
     {
       "caller": "main",
+      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "distributions/core-bff/bff/cmd/main.go:28",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "distributions/core-bff/bff/cmd/main.go:50",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:127",
       "confidence": "UNCERTAIN"
     },
@@ -25672,7 +25672,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:127",
       "confidence": "UNCERTAIN"
     },
@@ -25688,14 +25688,6 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:143",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:143",
       "confidence": "UNCERTAIN"
@@ -25712,6 +25704,22 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:143",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:143",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:143",
       "confidence": "UNCERTAIN"
@@ -25721,30 +25729,6 @@
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:143",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
       "confidence": "UNCERTAIN"
     },
@@ -25768,7 +25752,39 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:150",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -25792,22 +25808,6 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
       "confidence": "UNCERTAIN"
@@ -25832,6 +25832,14 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
       "confidence": "UNCERTAIN"
@@ -25848,23 +25856,7 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -25880,7 +25872,15 @@
       "caller": "main",
       "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/agent-ops/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/agent-ops/bff/cmd/main.go:94",
       "confidence": "UNCERTAIN"
     },
@@ -25888,31 +25888,7 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
@@ -25928,8 +25904,16 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:118",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
     {
@@ -25937,14 +25921,14 @@
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:118",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:118",
       "confidence": "UNCERTAIN"
     },
@@ -25960,6 +25944,22 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:118",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:118",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:118",
       "confidence": "UNCERTAIN"
@@ -25968,7 +25968,7 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:136",
       "confidence": "UNCERTAIN"
     },
@@ -25984,22 +25984,6 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:136",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:136",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:136",
       "confidence": "UNCERTAIN"
@@ -26008,8 +25992,16 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:136",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:141",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:136",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26025,6 +26017,14 @@
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:141",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:141",
       "confidence": "UNCERTAIN"
     },
@@ -26056,14 +26056,6 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:77",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:77",
       "confidence": "UNCERTAIN"
@@ -26080,6 +26072,14 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:77",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:77",
       "confidence": "UNCERTAIN"
@@ -26096,23 +26096,47 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
     },
@@ -26128,14 +26152,6 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
@@ -26144,40 +26160,8 @@
       "caller": "main",
       "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/ai-safety/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/ai-safety/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/automl/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/automl/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26192,7 +26176,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/automl/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -26200,7 +26184,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "packages/automl/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -26209,23 +26193,7 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/automl/bff/cmd/main.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/automl/bff/cmd/main.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/automl/bff/cmd/main.go:107",
+      "call_site_source": "packages/automl/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26233,6 +26201,14 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/automl/bff/cmd/main.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/automl/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -26249,6 +26225,30 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/automl/bff/cmd/main.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/automl/bff/cmd/main.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/automl/bff/cmd/main.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/automl/bff/cmd/main.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -26257,22 +26257,6 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/automl/bff/cmd/main.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/automl/bff/cmd/main.go:114",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/automl/bff/cmd/main.go:114",
       "confidence": "UNCERTAIN"
     },
@@ -26288,8 +26272,16 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/automl/bff/cmd/main.go:121",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/automl/bff/cmd/main.go:114",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/automl/bff/cmd/main.go:114",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26304,6 +26296,14 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/automl/bff/cmd/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/automl/bff/cmd/main.go:121",
       "confidence": "UNCERTAIN"
@@ -26322,6 +26322,14 @@
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/automl/bff/cmd/main.go:121",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/automl/bff/cmd/main.go:125",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26344,22 +26352,6 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/automl/bff/cmd/main.go:125",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/automl/bff/cmd/main.go:125",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/automl/bff/cmd/main.go:125",
       "confidence": "UNCERTAIN"
@@ -26368,7 +26360,39 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/automl/bff/cmd/main.go:125",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/automl/bff/cmd/main.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/automl/bff/cmd/main.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/automl/bff/cmd/main.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/automl/bff/cmd/main.go:135",
       "confidence": "UNCERTAIN"
     },
@@ -26385,38 +26409,6 @@
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/automl/bff/cmd/main.go:135",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/automl/bff/cmd/main.go:135",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/automl/bff/cmd/main.go:135",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/automl/bff/cmd/main.go:146",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/automl/bff/cmd/main.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -26432,7 +26424,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/automl/bff/cmd/main.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -26440,7 +26432,15 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/automl/bff/cmd/main.go:146",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/automl/bff/cmd/main.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -26456,7 +26456,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/automl/bff/cmd/main.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -26480,7 +26480,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/automl/bff/cmd/main.go:146",
       "confidence": "UNCERTAIN"
     },
@@ -26488,7 +26488,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/automl/bff/cmd/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -26504,7 +26504,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/automl/bff/cmd/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -26520,7 +26520,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "packages/automl/bff/cmd/main.go:179",
       "confidence": "UNCERTAIN"
     },
@@ -26528,23 +26528,7 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/automl/bff/cmd/main.go:195",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/automl/bff/cmd/main.go:195",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "packages/automl/bff/cmd/main.go:195",
       "confidence": "UNCERTAIN"
     },
@@ -26560,7 +26544,23 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/automl/bff/cmd/main.go:195",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/automl/bff/cmd/main.go:195",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/automl/bff/cmd/main.go:195",
       "confidence": "UNCERTAIN"
     },
@@ -26576,7 +26576,23 @@
       "caller": "main",
       "caller_source": "packages/automl/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/automl/bff/cmd/main.go:202",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/automl/bff/cmd/main.go:202",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/automl/bff/cmd/main.go:202",
       "confidence": "UNCERTAIN"
     },
@@ -26590,18 +26606,26 @@
     },
     {
       "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/automl/bff/cmd/main.go:202",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
-      "caller_source": "packages/automl/bff/cmd/main.go:20",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:102",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/automl/bff/cmd/main.go:202",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:102",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26624,16 +26648,8 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:102",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:102",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:118",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26641,7 +26657,7 @@
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:102",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:118",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26672,23 +26688,15 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:118",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
     },
     {
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:118",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -26697,30 +26705,6 @@
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:139",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -26744,6 +26728,22 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:139",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:139",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
@@ -26760,7 +26760,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/autorag/bff/cmd/main.go:139",
       "confidence": "UNCERTAIN"
     },
@@ -26768,7 +26768,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/autorag/bff/cmd/main.go:165",
       "confidence": "UNCERTAIN"
     },
@@ -26777,14 +26777,6 @@
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:165",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/autorag/bff/cmd/main.go:165",
       "confidence": "UNCERTAIN"
     },
@@ -26808,7 +26800,31 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:165",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:181",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/autorag/bff/cmd/main.go:181",
       "confidence": "UNCERTAIN"
     },
@@ -26824,23 +26840,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:181",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/autorag/bff/cmd/main.go:181",
       "confidence": "UNCERTAIN"
     },
@@ -26864,6 +26864,14 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:188",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/autorag/bff/cmd/main.go:188",
       "confidence": "UNCERTAIN"
@@ -26880,8 +26888,8 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:188",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:90",
       "confidence": "UNCERTAIN"
     },
     {
@@ -26896,23 +26904,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/autorag/bff/cmd/main.go:90",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/autorag/bff/cmd/main.go:20",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/autorag/bff/cmd/main.go:90",
       "confidence": "UNCERTAIN"
     },
@@ -26928,7 +26920,15 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/autorag/bff/cmd/main.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/autorag/bff/cmd/main.go:20",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/autorag/bff/cmd/main.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -26944,7 +26944,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/autorag/bff/cmd/main.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -26960,7 +26960,7 @@
       "caller": "main",
       "caller_source": "packages/autorag/bff/cmd/main.go:20",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
       "call_site_source": "packages/autorag/bff/cmd/main.go:95",
       "confidence": "UNCERTAIN"
     },
@@ -26968,15 +26968,7 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
       "confidence": "UNCERTAIN"
     },
@@ -26992,32 +26984,8 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:147",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:147",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27025,6 +26993,22 @@
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:131",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
     },
@@ -27048,16 +27032,8 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27065,15 +27041,7 @@
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:147",
       "confidence": "UNCERTAIN"
     },
     {
@@ -27089,6 +27057,46 @@
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:154",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
       "confidence": "UNCERTAIN"
     },
@@ -27104,22 +27112,6 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
       "confidence": "UNCERTAIN"
@@ -27128,6 +27120,46 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
@@ -27137,38 +27169,6 @@
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
     },
@@ -27200,7 +27200,7 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:86",
       "confidence": "UNCERTAIN"
     },
@@ -27208,22 +27208,6 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
       "confidence": "UNCERTAIN"
@@ -27232,15 +27216,7 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
-      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -27264,7 +27240,31 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -27280,7 +27280,7 @@
       "caller": "main",
       "caller_source": "packages/data-connect-hub/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/data-connect-hub/bff/cmd/main.go:98",
       "confidence": "UNCERTAIN"
     },
@@ -27297,6 +27297,38 @@
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
+      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
+      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -27329,38 +27361,6 @@
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
       "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
-      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:27",
-      "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:85",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:100",
       "confidence": "UNCERTAIN"
     },
@@ -27376,15 +27376,7 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
-      "call_site_source": "packages/data-registry/bff/cmd/main.go:107",
-      "confidence": "UNCERTAIN"
-    },
-    {
-      "caller": "main",
-      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
-      "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     },
@@ -27400,7 +27392,15 @@
       "caller": "main",
       "caller_source": "packages/data-registry/bff/cmd/main.go:21",
       "callee": "Error",
-      "callee_source": "packages/autox-core/services/kubernetes/errors.go:104",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:46",
+      "call_site_source": "packages/data-registry/bff/cmd/main.go:107",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "packages/data-registry/bff/cmd/main.go:21",
+      "callee": "Error",
+      "callee_source": "packages/autox-core/services/kubernetes/errors.go:71",
       "call_site_source": "packages/data-registry/bff/cmd/main.go:107",
       "confidence": "UNCERTAIN"
     }
