@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "component": "distributed-workloads",
+  "repo": "opendatahub-io/distributed-workloads",
+  "commit_sha": "f78e52f27d2b10b8b5871c5b763879e66a218b7e",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "distributed-workloads is a Kubernetes component. Python k8s client with 11 API call(s).",
+  "repository_description": "See SECURITY.md for our security policy, including the trust model for the training runtime images built in this repository.",
+  "description_source": "README.md:5",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 2,
+    "functions": 6,
+    "test_functions": 0,
+    "call_sites": 123,
+    "resolved_calls": 3,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "python",
+      "source_files": 2,
+      "functions": 6,
+      "test_functions": 0
+    },
+    {
+      "name": "unknown",
+      "source_files": 2,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "benchmarks/kftv2-mpi-ddp-sft",
+      "source_files": 1,
+      "functions": 5,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:133",
+          "complexity": 15,
+          "callers": 1,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "setup_distributed",
+          "language": "python",
+          "source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:56",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "format_sft_example",
+          "language": "python",
+          "source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:76",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "__call__",
+          "language": "python",
+          "source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:119",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:115",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "images/dataset/alpaca",
+      "source_files": 1,
+      "functions": 1,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "format_alpaca_fn",
+          "language": "python",
+          "source": "images/dataset/alpaca/alpaca_format.py:20",
+          "complexity": 2,
+          "callers": 0
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:133"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:133",
+      "callee": "setup_distributed",
+      "callee_source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:56",
+      "call_site_source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:134",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__call__",
+      "caller_source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:119",
+      "callee": "format_sft_example",
+      "callee_source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:76",
+      "call_site_source": "benchmarks/kftv2-mpi-ddp-sft/train_sft_ddp.py:121",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "rich",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}

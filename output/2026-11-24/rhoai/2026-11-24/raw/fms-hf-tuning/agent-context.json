@@ -1,0 +1,3995 @@
+{
+  "schema_version": 1,
+  "component": "fms-hf-tuning",
+  "repo": "red-hat-data-services/fms-hf-tuning",
+  "commit_sha": "a7bca76112da7f30d9e3487d4b23058ce3fbb0d3",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "fms-hf-tuning is a Kubernetes component. runtime dependencies: MLflow. 14 Python package dependencies (14 required), categories: 1 image-processing, 1 numerical, 2 ml-framework, 2 tokenizer. Python k8s client with 12 API call(s). references components: trainer (import).",
+  "repository_description": "Installation",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 52,
+    "functions": 280,
+    "test_functions": 0,
+    "call_sites": 1846,
+    "resolved_calls": 402,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "python",
+      "source_files": 52,
+      "functions": 280,
+      "test_functions": 0
+    },
+    {
+      "name": "unknown",
+      "source_files": 50,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "tuning/data",
+      "source_files": 8,
+      "functions": 67,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "__wrap_jinja_rendering_with_exception_handling",
+          "language": "python",
+          "source": "tuning/data/data_handlers.py:162",
+          "complexity": 5,
+          "callers": 6
+        },
+        {
+          "name": "load_dataset",
+          "language": "python",
+          "source": "tuning/data/data_processors.py:101",
+          "complexity": 26,
+          "callers": 5
+        },
+        {
+          "name": "is_pretokenized_dataset",
+          "language": "python",
+          "source": "tuning/data/setup_dataprocessor.py:49",
+          "complexity": 4,
+          "callers": 5
+        },
+        {
+          "name": "_load_dataset",
+          "language": "python",
+          "source": "tuning/data/data_processors.py:119",
+          "complexity": 13,
+          "callers": 4
+        },
+        {
+          "name": "resolve_iterable_dataset_features",
+          "language": "python",
+          "source": "tuning/data/utils.py:66",
+          "complexity": 4,
+          "callers": 4
+        },
+        {
+          "name": "get_data_collator",
+          "language": "python",
+          "source": "tuning/data/data_preprocessing_utils.py:34",
+          "complexity": 9,
+          "callers": 3,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "maybe_align_datasets",
+          "language": "python",
+          "source": "tuning/data/utils.py:134",
+          "complexity": 4,
+          "callers": 3
+        },
+        {
+          "name": "__get_dataset_features",
+          "language": "python",
+          "source": "tuning/data/utils.py:82",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "get_datapreprocessor",
+          "language": "python",
+          "source": "tuning/data/data_processors.py:668",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "_validate_dataprocessor_config",
+          "language": "python",
+          "source": "tuning/data/data_config.py:135",
+          "complexity": 19,
+          "callers": 2,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "_validate_dataset_config",
+          "language": "python",
+          "source": "tuning/data/data_config.py:78",
+          "complexity": 19,
+          "callers": 2
+        },
+        {
+          "name": "try_convert_bytes_dict_to_pil",
+          "language": "python",
+          "source": "tuning/data/utils.py:151",
+          "complexity": 15,
+          "callers": 2,
+          "annotations": [
+            "upgrade:migration"
+          ]
+        }
+      ],
+      "symbols_truncated": 55
+    },
+    {
+      "path": "scripts",
+      "source_files": 7,
+      "functions": 47,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/checkpoint_utils.py:181",
+          "complexity": 28,
+          "callers": 4,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/post_process_adapters_vLLM.py:26",
+          "complexity": 12,
+          "callers": 4,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/run_inference.py:301",
+          "complexity": 4,
+          "callers": 4,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/convert_to_hf_checkpoint.py:55",
+          "complexity": 3,
+          "callers": 4
+        },
+        {
+          "name": "load",
+          "language": "python",
+          "source": "scripts/run_inference.py:147",
+          "complexity": 18,
+          "callers": 12,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "parse_args",
+          "language": "python",
+          "source": "scripts/alpaca_to_sft_format.py:25",
+          "complexity": 1,
+          "callers": 9
+        },
+        {
+          "name": "cast_fp32_to_bf16",
+          "language": "python",
+          "source": "scripts/checkpoint_utils.py:38",
+          "complexity": 7,
+          "callers": 3
+        },
+        {
+          "name": "copy_any",
+          "language": "python",
+          "source": "scripts/checkpoint_utils.py:163",
+          "complexity": 7,
+          "callers": 3
+        },
+        {
+          "name": "convert_safetensors_file",
+          "language": "python",
+          "source": "scripts/checkpoint_utils.py:76",
+          "complexity": 5,
+          "callers": 3,
+          "annotations": [
+            "upgrade:migration"
+          ]
+        },
+        {
+          "name": "run",
+          "language": "python",
+          "source": "scripts/run_inference.py:264",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "copy_dir_drop",
+          "language": "python",
+          "source": "scripts/checkpoint_utils.py:130",
+          "complexity": 6,
+          "callers": 2
+        },
+        {
+          "name": "postprocess_output",
+          "language": "python",
+          "source": "scripts/run_evaluation.py:201",
+          "complexity": 4,
+          "callers": 2
+        }
+      ],
+      "symbols_truncated": 35
+    },
+    {
+      "path": "tuning/utils",
+      "source_files": 7,
+      "functions": 46,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "update_config",
+          "language": "python",
+          "source": "tuning/utils/config_utils.py:28",
+          "complexity": 8,
+          "callers": 3
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/utils/evaluator.py:111",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/utils/evaluator.py:15",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/utils/evaluator.py:9",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "copy_files_to_directory",
+          "language": "python",
+          "source": "tuning/utils/merge_model_utils.py:111",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "_eval_name",
+          "language": "python",
+          "source": "tuning/utils/evaluator.py:130",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "fetch_base_model_from_checkpoint",
+          "language": "python",
+          "source": "tuning/utils/merge_model_utils.py:86",
+          "complexity": 3,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "_eval_subscript",
+          "language": "python",
+          "source": "tuning/utils/evaluator.py:140",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "str_to_torch_dtype",
+          "language": "python",
+          "source": "tuning/utils/data_type_utils.py:23",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "raise_error",
+          "language": "python",
+          "source": "tuning/utils/evaluator.py:18",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "txt_to_obj",
+          "language": "python",
+          "source": "tuning/utils/config_utils.py:152",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "get_hf_peft_config",
+          "language": "python",
+          "source": "tuning/utils/config_utils.py:77",
+          "complexity": 10,
+          "callers": 0
+        }
+      ],
+      "symbols_truncated": 34
+    },
+    {
+      "path": "tuning/trackers",
+      "source_files": 7,
+      "functions": 31,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/aimstack_tracker.py:99",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/clearml_tracker.py:128",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/clearml_tracker.py:41",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/filelogging_tracker.py:34",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/filelogging_tracker.py:74",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/mlflow_tracker.py:110",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trackers/tracker.py:32",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "export_run_info",
+          "language": "python",
+          "source": "tuning/trackers/tracker.py:37",
+          "complexity": 5,
+          "callers": 3,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "setup",
+          "language": "python",
+          "source": "tuning/trackers/clearml_tracker.py:51",
+          "complexity": 13,
+          "callers": 2
+        },
+        {
+          "name": "setup",
+          "language": "python",
+          "source": "tuning/trackers/mlflow_tracker.py:45",
+          "complexity": 12,
+          "callers": 2
+        },
+        {
+          "name": "on_init_end",
+          "language": "python",
+          "source": "tuning/trackers/aimstack_tracker.py:46",
+          "complexity": 11,
+          "callers": 2
+        }
+      ],
+      "symbols_truncated": 19
+    },
+    {
+      "path": "tuning/trainercontroller/controllermetrics",
+      "source_files": 7,
+      "functions": 24,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+          "complexity": 3,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+          "complexity": 2,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "register",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/__init__.py:32",
+          "complexity": 1,
+          "callers": 5
+        },
+        {
+          "name": "_add_and_slide",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:53",
+          "complexity": 6,
+          "callers": 2
+        },
+        {
+          "name": "_create_vectors_if_not_exists",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:87",
+          "complexity": 3,
+          "callers": 2
+        },
+        {
+          "name": "get_name",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/metricshandler.py:52",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "compute",
+          "language": "python",
+          "source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:99",
+          "complexity": 5,
+          "callers": 1
+        }
+      ],
+      "symbols_truncated": 12
+    },
+    {
+      "path": "tuning/trainercontroller",
+      "source_files": 2,
+      "functions": 23,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "_actions_on_event",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:267",
+          "complexity": 1,
+          "callers": 14
+        },
+        {
+          "name": "on_init_end",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:285",
+          "complexity": 25,
+          "callers": 1,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "_take_control_actions",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:203",
+          "complexity": 14,
+          "callers": 1,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "on_save",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:572",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "should_tolerate",
+          "language": "python",
+          "source": "tuning/trainercontroller/patience.py:46",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "_compute_metrics",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:193",
+          "complexity": 3,
+          "callers": 1
+        },
+        {
+          "name": "register_metric_handlers",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:175",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "register_operation_handlers",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:184",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "_validate_rule",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:277",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:76",
+          "complexity": 22,
+          "callers": 0,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/patience.py:41",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "on_epoch_begin",
+          "language": "python",
+          "source": "tuning/trainercontroller/callback.py:458",
+          "complexity": 1,
+          "callers": 0
+        }
+      ],
+      "symbols_truncated": 11
+    },
+    {
+      "path": "tuning",
+      "source_files": 2,
+      "functions": 12,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:812",
+          "complexity": 17,
+          "callers": 2,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "main",
+          "language": "python",
+          "source": "tuning/fms-recommender.py:107",
+          "complexity": 4,
+          "callers": 2,
+          "annotations": [
+            "arch:factory_method",
+            "sec:subprocess_call"
+          ]
+        },
+        {
+          "name": "grab_flags",
+          "language": "python",
+          "source": "tuning/fms-recommender.py:27",
+          "complexity": 6,
+          "callers": 4
+        },
+        {
+          "name": "save",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:627",
+          "complexity": 5,
+          "callers": 3
+        },
+        {
+          "name": "train",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:104",
+          "complexity": 76,
+          "callers": 2,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "parse",
+          "language": "python",
+          "source": "tuning/fms-recommender.py:76",
+          "complexity": 7,
+          "callers": 2
+        },
+        {
+          "name": "load_yaml",
+          "language": "python",
+          "source": "tuning/fms-recommender.py:44",
+          "complexity": 5,
+          "callers": 2,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "_get_embedding_module_names",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:74",
+          "complexity": 7,
+          "callers": 1
+        },
+        {
+          "name": "nest_accelerate_flags",
+          "language": "python",
+          "source": "tuning/fms-recommender.py:55",
+          "complexity": 7,
+          "callers": 1
+        },
+        {
+          "name": "parse_arguments",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:703",
+          "complexity": 6,
+          "callers": 1
+        },
+        {
+          "name": "get_parser",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:656",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "tie_lora_weights",
+          "language": "python",
+          "source": "tuning/sft_trainer.py:419",
+          "complexity": 8,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "tuning/config/acceleration_configs",
+      "source_files": 4,
+      "functions": 12,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "checkpoint",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/fast_moe.py:99",
+          "complexity": 8,
+          "callers": 2,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "reset",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:64",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "get_callbacks",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/fast_moe.py:69",
+          "complexity": 13,
+          "callers": 1
+        },
+        {
+          "name": "on_save",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/fast_moe.py:87",
+          "complexity": 12,
+          "callers": 1
+        },
+        {
+          "name": "__post_init__",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:102",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "ensure_nested_dataclasses_initialized",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:24",
+          "complexity": 5,
+          "callers": 0
+        },
+        {
+          "name": "bool_or_int",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:43",
+          "complexity": 4,
+          "callers": 0
+        },
+        {
+          "name": "parsable_dataclass",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:76",
+          "complexity": 4,
+          "callers": 0
+        },
+        {
+          "name": "get_additional_accel_framework_callbacks",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/callbacks.py:5",
+          "complexity": 3,
+          "callers": 0
+        },
+        {
+          "name": "__call__",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:67",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/fast_moe.py:77",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/config/acceleration_configs/utils.py:59",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "tuning/trainercontroller/operations",
+      "source_files": 4,
+      "functions": 10,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/hfcontrols.py:20",
+          "complexity": 3,
+          "callers": 2
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/operation.py:13",
+          "complexity": 3,
+          "callers": 2
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/logcontrol.py:16",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "get_name",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/operation.py:29",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "register",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/__init__.py:13",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "act",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/operation.py:48",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "get_actions",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/operation.py:78",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "validate",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/operation.py:37",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "control_action",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/hfcontrols.py:34",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "should_log",
+          "language": "python",
+          "source": "tuning/trainercontroller/operations/logcontrol.py:32",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "build",
+      "source_files": 2,
+      "functions": 6,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "build/accelerate_launch.py:49",
+          "complexity": 25,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "process_accelerate_launch_args",
+          "language": "python",
+          "source": "build/utils.py:89",
+          "complexity": 19,
+          "callers": 1
+        },
+        {
+          "name": "copy_checkpoint",
+          "language": "python",
+          "source": "build/utils.py:27",
+          "complexity": 6,
+          "callers": 1
+        },
+        {
+          "name": "get_highest_checkpoint",
+          "language": "python",
+          "source": "build/utils.py:47",
+          "complexity": 5,
+          "callers": 0
+        },
+        {
+          "name": "_json_default",
+          "language": "python",
+          "source": "build/utils.py:70",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "serialize_args",
+          "language": "python",
+          "source": "build/utils.py:77",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "tuning/trainers",
+      "source_files": 1,
+      "functions": 2,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "tuning/trainers/sum_loss_sft_trainer.py:51",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "compute_loss",
+          "language": "python",
+          "source": "tuning/trainers/sum_loss_sft_trainer.py:86",
+          "complexity": 4,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "tuning/config",
+      "source_files": 1,
+      "functions": 0,
+      "test_functions": 0,
+      "languages": [
+        "python"
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "build/accelerate_launch.py:49"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/checkpoint_utils.py:181"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/convert_to_hf_checkpoint.py:55"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/post_process_adapters_vLLM.py:26"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/run_inference.py:301"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "tuning/fms-recommender.py:107"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "tuning/sft_trainer.py:812"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "build/accelerate_launch.py:49",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "build/accelerate_launch.py:134",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "build/accelerate_launch.py:49",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "build/accelerate_launch.py:167",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/post_process_adapters_vLLM.py:26",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "scripts/post_process_adapters_vLLM.py:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/run_inference.py:301",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "scripts/run_inference.py:342",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "scripts/checkpoint_utils.py:213",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/convert_to_hf_checkpoint.py:55",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "scripts/convert_to_hf_checkpoint.py:67",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/post_process_adapters_vLLM.py:26",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "scripts/post_process_adapters_vLLM.py:45",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/run_inference.py:301",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "scripts/run_inference.py:336",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/fms-recommender.py:107",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "tuning/fms-recommender.py:120",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "convert_safetensors_file",
+      "callee_source": "scripts/checkpoint_utils.py:76",
+      "call_site_source": "scripts/checkpoint_utils.py:270",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "copy_any",
+      "callee_source": "scripts/checkpoint_utils.py:163",
+      "call_site_source": "scripts/checkpoint_utils.py:255",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "copy_any",
+      "callee_source": "scripts/checkpoint_utils.py:163",
+      "call_site_source": "scripts/checkpoint_utils.py:274",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "copy_any",
+      "callee_source": "scripts/checkpoint_utils.py:163",
+      "call_site_source": "scripts/checkpoint_utils.py:302",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/run_inference.py:301",
+      "callee": "run",
+      "callee_source": "scripts/run_inference.py:264",
+      "call_site_source": "scripts/run_inference.py:359",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/fms-recommender.py:107",
+      "callee": "run",
+      "callee_source": "scripts/run_inference.py:264",
+      "call_site_source": "tuning/fms-recommender.py:154",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/sft_trainer.py:812",
+      "callee": "save",
+      "callee_source": "tuning/sft_trainer.py:627",
+      "call_site_source": "tuning/sft_trainer.py:927",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "convert_pt_pth",
+      "callee_source": "scripts/checkpoint_utils.py:61",
+      "call_site_source": "scripts/checkpoint_utils.py:263",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "convert_safetensors_file_inplace",
+      "callee_source": "scripts/checkpoint_utils.py:91",
+      "call_site_source": "scripts/checkpoint_utils.py:233",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "copy_dir_drop",
+      "callee_source": "scripts/checkpoint_utils.py:130",
+      "call_site_source": "scripts/checkpoint_utils.py:287",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "copy_dir_drop",
+      "callee_source": "scripts/checkpoint_utils.py:130",
+      "call_site_source": "scripts/checkpoint_utils.py:296",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/fms-recommender.py:107",
+      "callee": "parse",
+      "callee_source": "tuning/fms-recommender.py:76",
+      "call_site_source": "tuning/fms-recommender.py:126",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/sft_trainer.py:812",
+      "callee": "train",
+      "callee_source": "tuning/sft_trainer.py:104",
+      "call_site_source": "tuning/sft_trainer.py:880",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "build/accelerate_launch.py:49",
+      "callee": "process_accelerate_launch_args",
+      "callee_source": "build/utils.py:89",
+      "call_site_source": "build/accelerate_launch.py:78",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "convert_dir_of_safetensors",
+      "callee_source": "scripts/checkpoint_utils.py:98",
+      "call_site_source": "scripts/checkpoint_utils.py:282",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "convert_dir_of_safetensors_inplace",
+      "callee_source": "scripts/checkpoint_utils.py:113",
+      "call_site_source": "scripts/checkpoint_utils.py:239",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "convert_pt_pth_inplace",
+      "callee_source": "scripts/checkpoint_utils.py:69",
+      "call_site_source": "scripts/checkpoint_utils.py:231",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/checkpoint_utils.py:181",
+      "callee": "prune_dir_inplace",
+      "callee_source": "scripts/checkpoint_utils.py:147",
+      "call_site_source": "scripts/checkpoint_utils.py:249",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "scripts/convert_to_hf_checkpoint.py:55",
+      "callee": "get_base_model",
+      "callee_source": "scripts/convert_to_hf_checkpoint.py:26",
+      "call_site_source": "scripts/convert_to_hf_checkpoint.py:72",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/sft_trainer.py:812",
+      "callee": "get_parser",
+      "callee_source": "tuning/sft_trainer.py:656",
+      "call_site_source": "tuning/sft_trainer.py:813",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "tuning/sft_trainer.py:812",
+      "callee": "parse_arguments",
+      "callee_source": "tuning/sft_trainer.py:703",
+      "call_site_source": "tuning/sft_trainer.py:831",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:442",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_step_end",
+      "caller_source": "tuning/trainercontroller/callback.py:444",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:456",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_epoch_begin",
+      "caller_source": "tuning/trainercontroller/callback.py:458",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:470",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_epoch_end",
+      "caller_source": "tuning/trainercontroller/callback.py:472",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:484",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_prediction_step",
+      "caller_source": "tuning/trainercontroller/callback.py:486",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:498",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_predict",
+      "caller_source": "tuning/trainercontroller/callback.py:500",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:514",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_log",
+      "caller_source": "tuning/trainercontroller/callback.py:516",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:528",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_train_end",
+      "caller_source": "tuning/trainercontroller/callback.py:530",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:542",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_train_begin",
+      "caller_source": "tuning/trainercontroller/callback.py:544",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:556",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_evaluate",
+      "caller_source": "tuning/trainercontroller/callback.py:558",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:570",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_save",
+      "caller_source": "tuning/trainercontroller/callback.py:572",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:597",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_step_begin",
+      "caller_source": "tuning/trainercontroller/callback.py:599",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:611",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_optimizer_step",
+      "caller_source": "tuning/trainercontroller/callback.py:613",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:625",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_substep_end",
+      "caller_source": "tuning/trainercontroller/callback.py:627",
+      "callee": "_actions_on_event",
+      "callee_source": "tuning/trainercontroller/callback.py:267",
+      "call_site_source": "tuning/trainercontroller/callback.py:639",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_pt_pth",
+      "caller_source": "scripts/checkpoint_utils.py:61",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "scripts/checkpoint_utils.py:62",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "format_and_export_entities_file",
+      "caller_source": "scripts/pull_and_format_datasets.py:59",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "scripts/pull_and_format_datasets.py:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_apply_config_changes",
+      "caller_source": "scripts/run_inference.py:81",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "scripts/run_inference.py:98",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_yaml_or_json",
+      "caller_source": "tuning/data/utils.py:56",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "tuning/data/utils.py:62",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "get_json_config",
+      "caller_source": "tuning/utils/config_utils.py:128",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "tuning/utils/config_utils.py:147",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "fetch_base_model_from_checkpoint",
+      "caller_source": "tuning/utils/merge_model_utils.py:86",
+      "callee": "load",
+      "callee_source": "scripts/run_inference.py:147",
+      "call_site_source": "tuning/utils/merge_model_utils.py:103",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "process_accelerate_launch_args",
+      "caller_source": "build/utils.py:89",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "build/utils.py:174",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "parse_args",
+      "caller_source": "scripts/alpaca_to_sft_format.py:25",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "scripts/alpaca_to_sft_format.py:46",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse_and_validate_args",
+      "caller_source": "scripts/run_evaluation.py:21",
+      "callee": "parse_args",
+      "callee_source": "scripts/alpaca_to_sft_format.py:25",
+      "call_site_source": "scripts/run_evaluation.py:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "apply_custom_jinja_template",
+      "caller_source": "tuning/data/data_handlers.py:185",
+      "callee": "__wrap_jinja_rendering_with_exception_handling",
+      "callee_source": "tuning/data/data_handlers.py:162",
+      "call_site_source": "tuning/data/data_handlers.py:220",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "apply_tokenizer_chat_template",
+      "caller_source": "tuning/data/data_handlers.py:226",
+      "callee": "__wrap_jinja_rendering_with_exception_handling",
+      "callee_source": "tuning/data/data_handlers.py:162",
+      "call_site_source": "tuning/data/data_handlers.py:304",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "tokenize_and_apply_chat_template_with_masking",
+      "caller_source": "tuning/data/data_handlers.py:529",
+      "callee": "__wrap_jinja_rendering_with_exception_handling",
+      "callee_source": "tuning/data/data_handlers.py:162",
+      "call_site_source": "tuning/data/data_handlers.py:590",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "tokenize_and_apply_chat_template_with_masking",
+      "caller_source": "tuning/data/data_handlers.py:529",
+      "callee": "__wrap_jinja_rendering_with_exception_handling",
+      "callee_source": "tuning/data/data_handlers.py:162",
+      "call_site_source": "tuning/data/data_handlers.py:625",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "tokenize_and_apply_chat_template_with_masking",
+      "caller_source": "tuning/data/data_handlers.py:529",
+      "callee": "__wrap_jinja_rendering_with_exception_handling",
+      "callee_source": "tuning/data/data_handlers.py:162",
+      "call_site_source": "tuning/data/data_handlers.py:659",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "tokenize_and_apply_chat_template_with_masking",
+      "caller_source": "tuning/data/data_handlers.py:529",
+      "callee": "__wrap_jinja_rendering_with_exception_handling",
+      "callee_source": "tuning/data/data_handlers.py:162",
+      "call_site_source": "tuning/data/data_handlers.py:687",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:74",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:34",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:128",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:41",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:110",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/tracker.py:32",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:99",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:99",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:106",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:99",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:41",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/tracker.py:32",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:110",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:74",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:34",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:128",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:128",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:110",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:34",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:128",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/tracker.py:32",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:41",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:99",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/clearml_tracker.py:41",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:74",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:42",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:41",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/tracker.py:32",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:99",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:128",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:34",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:74",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:74",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:110",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:82",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:128",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:99",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:41",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:34",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/tracker.py:32",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:74",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:110",
+      "call_site_source": "tuning/trackers/hf_resource_scanner_tracker.py:34",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:34",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:27",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:110",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:99",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:128",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:74",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/clearml_tracker.py:41",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:110",
+      "callee": "__init__",
+      "callee_source": "tuning/trackers/tracker.py:32",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:117",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:40",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:51",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/loss.py:38",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:28",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:29",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:31",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:32",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:39",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_load_dataset",
+      "caller_source": "tuning/data/data_processors.py:119",
+      "callee": "load_dataset",
+      "callee_source": "tuning/data/data_processors.py:101",
+      "call_site_source": "tuning/data/data_processors.py:153",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_prepare_processed_datasets",
+      "caller_source": "tuning/data/data_processors.py:461",
+      "callee": "load_dataset",
+      "callee_source": "tuning/data/data_processors.py:101",
+      "call_site_source": "tuning/data/data_processors.py:480",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "is_pretokenized_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:49",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:378",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "is_pretokenized_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:49",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:379",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_pretokenized_dataset",
+      "caller_source": "tuning/data/setup_dataprocessor.py:49",
+      "callee": "load_dataset",
+      "callee_source": "tuning/data/data_processors.py:101",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:58",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup_train_dataset_for_odm",
+      "caller_source": "tuning/data/setup_dataprocessor.py:501",
+      "callee": "is_pretokenized_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:49",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:526",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup_train_dataset_for_odm",
+      "caller_source": "tuning/data/setup_dataprocessor.py:501",
+      "callee": "is_pretokenized_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:49",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:539",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "is_pretokenized_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:49",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:730",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_try_load_dataset",
+      "caller_source": "tuning/data/data_processors.py:177",
+      "callee": "_load_dataset",
+      "callee_source": "tuning/data/data_processors.py:119",
+      "call_site_source": "tuning/data/data_processors.py:195",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_try_load_dataset",
+      "caller_source": "tuning/data/data_processors.py:177",
+      "callee": "_load_dataset",
+      "callee_source": "tuning/data/data_processors.py:119",
+      "call_site_source": "tuning/data/data_processors.py:202",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_try_load_dataset",
+      "caller_source": "tuning/data/data_processors.py:177",
+      "callee": "_load_dataset",
+      "callee_source": "tuning/data/data_processors.py:119",
+      "call_site_source": "tuning/data/data_processors.py:214",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_try_load_dataset",
+      "caller_source": "tuning/data/data_processors.py:177",
+      "callee": "_load_dataset",
+      "callee_source": "tuning/data/data_processors.py:119",
+      "call_site_source": "tuning/data/data_processors.py:222",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:530",
+      "callee": "resolve_iterable_dataset_features",
+      "callee_source": "tuning/data/utils.py:66",
+      "call_site_source": "tuning/data/data_processors.py:604",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:530",
+      "callee": "resolve_iterable_dataset_features",
+      "callee_source": "tuning/data/utils.py:66",
+      "call_site_source": "tuning/data/data_processors.py:606",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "maybe_align_datasets",
+      "caller_source": "tuning/data/utils.py:134",
+      "callee": "resolve_iterable_dataset_features",
+      "callee_source": "tuning/data/utils.py:66",
+      "call_site_source": "tuning/data/utils.py:143",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_concatenate_datasets",
+      "caller_source": "tuning/data/utils.py:225",
+      "callee": "resolve_iterable_dataset_features",
+      "callee_source": "tuning/data/utils.py:66",
+      "call_site_source": "tuning/data/utils.py:238",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "grab_flags",
+      "callee_source": "tuning/fms-recommender.py:27",
+      "call_site_source": "tuning/fms-recommender.py:82",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "grab_flags",
+      "callee_source": "tuning/fms-recommender.py:27",
+      "call_site_source": "tuning/fms-recommender.py:83",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "grab_flags",
+      "callee_source": "tuning/fms-recommender.py:27",
+      "call_site_source": "tuning/fms-recommender.py:88",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "grab_flags",
+      "callee_source": "tuning/fms-recommender.py:27",
+      "call_site_source": "tuning/fms-recommender.py:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cast_fp32_to_bf16",
+      "caller_source": "scripts/checkpoint_utils.py:38",
+      "callee": "cast_fp32_to_bf16",
+      "callee_source": "scripts/checkpoint_utils.py:38",
+      "call_site_source": "scripts/checkpoint_utils.py:49",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cast_fp32_to_bf16",
+      "caller_source": "scripts/checkpoint_utils.py:38",
+      "callee": "cast_fp32_to_bf16",
+      "callee_source": "scripts/checkpoint_utils.py:38",
+      "call_site_source": "scripts/checkpoint_utils.py:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_pt_pth",
+      "caller_source": "scripts/checkpoint_utils.py:61",
+      "callee": "cast_fp32_to_bf16",
+      "callee_source": "scripts/checkpoint_utils.py:38",
+      "call_site_source": "scripts/checkpoint_utils.py:63",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_pt_pth",
+      "caller_source": "scripts/checkpoint_utils.py:61",
+      "callee": "save",
+      "callee_source": "tuning/sft_trainer.py:627",
+      "call_site_source": "scripts/checkpoint_utils.py:65",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "convert_safetensors_file_inplace",
+      "caller_source": "scripts/checkpoint_utils.py:91",
+      "callee": "convert_safetensors_file",
+      "callee_source": "scripts/checkpoint_utils.py:76",
+      "call_site_source": "scripts/checkpoint_utils.py:93",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_dir_of_safetensors",
+      "caller_source": "scripts/checkpoint_utils.py:98",
+      "callee": "convert_safetensors_file",
+      "callee_source": "scripts/checkpoint_utils.py:76",
+      "call_site_source": "scripts/checkpoint_utils.py:103",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_prediction_results",
+      "caller_source": "scripts/run_evaluation.py:142",
+      "callee": "run",
+      "callee_source": "scripts/run_inference.py:264",
+      "call_site_source": "scripts/run_evaluation.py:180",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkpoint",
+      "caller_source": "tuning/config/acceleration_configs/fast_moe.py:99",
+      "callee": "save",
+      "callee_source": "tuning/sft_trainer.py:627",
+      "call_site_source": "tuning/config/acceleration_configs/fast_moe.py:126",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:530",
+      "callee": "maybe_align_datasets",
+      "callee_source": "tuning/data/utils.py:134",
+      "call_site_source": "tuning/data/data_processors.py:566",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:530",
+      "callee": "maybe_align_datasets",
+      "callee_source": "tuning/data/utils.py:134",
+      "call_site_source": "tuning/data/data_processors.py:567",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "get_datapreprocessor",
+      "callee_source": "tuning/data/data_processors.py:668",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:362",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_pretokenized_dataset",
+      "caller_source": "tuning/data/setup_dataprocessor.py:49",
+      "callee": "get_datapreprocessor",
+      "callee_source": "tuning/data/data_processors.py:668",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup_train_dataset_for_odm",
+      "caller_source": "tuning/data/setup_dataprocessor.py:501",
+      "callee": "get_data_collator",
+      "callee_source": "tuning/data/data_preprocessing_utils.py:34",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:527",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup_train_dataset_for_odm",
+      "caller_source": "tuning/data/setup_dataprocessor.py:501",
+      "callee": "get_data_collator",
+      "callee_source": "tuning/data/data_preprocessing_utils.py:34",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:540",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "get_data_collator",
+      "callee_source": "tuning/data/data_preprocessing_utils.py:34",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:731",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataconfig_file",
+      "caller_source": "tuning/data/setup_dataprocessor.py:68",
+      "callee": "get_datapreprocessor",
+      "callee_source": "tuning/data/data_processors.py:668",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_validate_mergeable_datasets",
+      "caller_source": "tuning/data/utils.py:107",
+      "callee": "__get_dataset_features",
+      "callee_source": "tuning/data/utils.py:82",
+      "call_site_source": "tuning/data/utils.py:112",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_validate_mergeable_datasets",
+      "caller_source": "tuning/data/utils.py:107",
+      "callee": "__get_dataset_features",
+      "callee_source": "tuning/data/utils.py:82",
+      "call_site_source": "tuning/data/utils.py:118",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_concatenate_datasets",
+      "caller_source": "tuning/data/utils.py:225",
+      "callee": "maybe_align_datasets",
+      "callee_source": "tuning/data/utils.py:134",
+      "call_site_source": "tuning/data/utils.py:235",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_maybe_cast_columns",
+      "caller_source": "tuning/data/utils.py:90",
+      "callee": "__get_dataset_features",
+      "callee_source": "tuning/data/utils.py:82",
+      "call_site_source": "tuning/data/utils.py:100",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:46",
+      "callee": "export_run_info",
+      "callee_source": "tuning/trackers/tracker.py:37",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:79",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup",
+      "caller_source": "tuning/trackers/clearml_tracker.py:51",
+      "callee": "export_run_info",
+      "callee_source": "tuning/trackers/tracker.py:37",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:104",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:45",
+      "callee": "export_run_info",
+      "callee_source": "tuning/trackers/tracker.py:37",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:94",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "update_config",
+      "caller_source": "tuning/utils/config_utils.py:28",
+      "callee": "update_config",
+      "callee_source": "tuning/utils/config_utils.py:28",
+      "call_site_source": "tuning/utils/config_utils.py:31",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "create_tuning_config",
+      "caller_source": "tuning/utils/config_utils.py:47",
+      "callee": "update_config",
+      "callee_source": "tuning/utils/config_utils.py:28",
+      "call_site_source": "tuning/utils/config_utils.py:68",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "create_tuning_config",
+      "caller_source": "tuning/utils/config_utils.py:47",
+      "callee": "update_config",
+      "callee_source": "tuning/utils/config_utils.py:28",
+      "call_site_source": "tuning/utils/config_utils.py:71",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_dir_of_safetensors_inplace",
+      "caller_source": "scripts/checkpoint_utils.py:113",
+      "callee": "convert_safetensors_file_inplace",
+      "callee_source": "scripts/checkpoint_utils.py:91",
+      "call_site_source": "scripts/checkpoint_utils.py:118",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "copy_dir_drop",
+      "caller_source": "scripts/checkpoint_utils.py:130",
+      "callee": "_name_matches",
+      "callee_source": "scripts/checkpoint_utils.py:125",
+      "call_site_source": "scripts/checkpoint_utils.py:135",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "prune_dir_inplace",
+      "caller_source": "scripts/checkpoint_utils.py:147",
+      "callee": "_name_matches",
+      "callee_source": "scripts/checkpoint_utils.py:125",
+      "call_site_source": "scripts/checkpoint_utils.py:152",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_pt_pth_inplace",
+      "caller_source": "scripts/checkpoint_utils.py:69",
+      "callee": "_atomic_replace",
+      "callee_source": "scripts/checkpoint_utils.py:33",
+      "call_site_source": "scripts/checkpoint_utils.py:72",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_pt_pth_inplace",
+      "caller_source": "scripts/checkpoint_utils.py:69",
+      "callee": "convert_pt_pth",
+      "callee_source": "scripts/checkpoint_utils.py:61",
+      "call_site_source": "scripts/checkpoint_utils.py:71",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_safetensors_file_inplace",
+      "caller_source": "scripts/checkpoint_utils.py:91",
+      "callee": "_atomic_replace",
+      "callee_source": "scripts/checkpoint_utils.py:33",
+      "call_site_source": "scripts/checkpoint_utils.py:94",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_base_model",
+      "caller_source": "scripts/convert_to_hf_checkpoint.py:26",
+      "callee": "has_weights",
+      "callee_source": "scripts/convert_to_hf_checkpoint.py:18",
+      "call_site_source": "scripts/convert_to_hf_checkpoint.py:30",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_base_model",
+      "caller_source": "scripts/convert_to_hf_checkpoint.py:26",
+      "callee": "has_weights",
+      "callee_source": "scripts/convert_to_hf_checkpoint.py:18",
+      "call_site_source": "scripts/convert_to_hf_checkpoint.py:49",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_prediction_results",
+      "caller_source": "scripts/run_evaluation.py:142",
+      "callee": "postprocess_output",
+      "callee_source": "scripts/run_evaluation.py:201",
+      "call_site_source": "scripts/run_evaluation.py:186",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_prediction_results",
+      "caller_source": "scripts/run_evaluation.py:142",
+      "callee": "postprocess_output",
+      "callee_source": "scripts/run_evaluation.py:201",
+      "call_site_source": "scripts/run_evaluation.py:188",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "map_predictions_and_references_to_encoded_vectors",
+      "caller_source": "scripts/run_evaluation.py:226",
+      "callee": "get_encoded_vector",
+      "callee_source": "scripts/run_evaluation.py:274",
+      "call_site_source": "scripts/run_evaluation.py:260",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "map_predictions_and_references_to_encoded_vectors",
+      "caller_source": "scripts/run_evaluation.py:226",
+      "callee": "get_encoded_vector",
+      "callee_source": "scripts/run_evaluation.py:274",
+      "call_site_source": "scripts/run_evaluation.py:263",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__enter__",
+      "caller_source": "scripts/run_inference.py:130",
+      "callee": "_apply_config_changes",
+      "callee_source": "scripts/run_inference.py:81",
+      "call_site_source": "scripts/run_inference.py:132",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__exit__",
+      "caller_source": "scripts/run_inference.py:134",
+      "callee": "_apply_config_changes",
+      "callee_source": "scripts/run_inference.py:81",
+      "call_site_source": "scripts/run_inference.py:136",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load",
+      "caller_source": "scripts/run_inference.py:147",
+      "callee": "has_quantized_config",
+      "callee_source": "scripts/run_inference.py:371",
+      "call_site_source": "scripts/run_inference.py:190",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load",
+      "caller_source": "scripts/run_inference.py:147",
+      "callee": "has_quantized_config",
+      "callee_source": "scripts/run_inference.py:371",
+      "call_site_source": "scripts/run_inference.py:239",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_save",
+      "caller_source": "tuning/config/acceleration_configs/fast_moe.py:87",
+      "callee": "checkpoint",
+      "callee_source": "tuning/config/acceleration_configs/fast_moe.py:99",
+      "call_site_source": "tuning/config/acceleration_configs/fast_moe.py:165",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_save",
+      "caller_source": "tuning/config/acceleration_configs/fast_moe.py:87",
+      "callee": "checkpoint",
+      "callee_source": "tuning/config/acceleration_configs/fast_moe.py:99",
+      "call_site_source": "tuning/config/acceleration_configs/fast_moe.py:174",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__post_init__",
+      "caller_source": "tuning/config/acceleration_configs/utils.py:102",
+      "callee": "reset",
+      "callee_source": "tuning/config/acceleration_configs/utils.py:64",
+      "call_site_source": "tuning/config/acceleration_configs/utils.py:104",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/config/acceleration_configs/utils.py:59",
+      "callee": "reset",
+      "callee_source": "tuning/config/acceleration_configs/utils.py:64",
+      "call_site_source": "tuning/config/acceleration_configs/utils.py:62",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__call__",
+      "caller_source": "tuning/data/collators.py:33",
+      "callee": "try_convert_bytes_dict_to_pil",
+      "callee_source": "tuning/data/utils.py:151",
+      "call_site_source": "tuning/data/collators.py:72",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validate_data_config",
+      "caller_source": "tuning/data/data_config.py:256",
+      "callee": "_validate_dataprocessor_config",
+      "callee_source": "tuning/data/data_config.py:135",
+      "call_site_source": "tuning/data/data_config.py:257",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validate_data_config",
+      "caller_source": "tuning/data/data_config.py:256",
+      "callee": "_validate_dataset_config",
+      "callee_source": "tuning/data/data_config.py:78",
+      "call_site_source": "tuning/data/data_config.py:259",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_and_validate_data_config",
+      "caller_source": "tuning/data/data_config.py:262",
+      "callee": "_validate_dataprocessor_config",
+      "callee_source": "tuning/data/data_config.py:135",
+      "call_site_source": "tuning/data/data_config.py:278",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_and_validate_data_config",
+      "caller_source": "tuning/data/data_config.py:262",
+      "callee": "_validate_dataset_config",
+      "callee_source": "tuning/data/data_config.py:78",
+      "call_site_source": "tuning/data/data_config.py:276",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "prepare_multimodal_data_processor",
+      "caller_source": "tuning/data/data_handlers.py:349",
+      "callee": "try_convert_bytes_dict_to_pil",
+      "callee_source": "tuning/data/utils.py:151",
+      "call_site_source": "tuning/data/data_handlers.py:381",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_dataset",
+      "caller_source": "tuning/data/data_processors.py:101",
+      "callee": "_try_load_dataset",
+      "callee_source": "tuning/data/data_processors.py:177",
+      "call_site_source": "tuning/data/data_processors.py:225",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_dataset",
+      "caller_source": "tuning/data/data_processors.py:101",
+      "callee": "_try_load_dataset",
+      "callee_source": "tuning/data/data_processors.py:177",
+      "call_site_source": "tuning/data/data_processors.py:232",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:530",
+      "callee": "_prepare_processed_datasets",
+      "callee_source": "tuning/data/data_processors.py:461",
+      "call_site_source": "tuning/data/data_processors.py:539",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:530",
+      "callee": "_validate_sampling_ratios",
+      "callee_source": "tuning/data/data_processors.py:514",
+      "call_site_source": "tuning/data/data_processors.py:561",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:642",
+      "callee": "_prepare_processed_datasets",
+      "callee_source": "tuning/data/data_processors.py:461",
+      "call_site_source": "tuning/data/data_processors.py:649",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:642",
+      "callee": "_validate_sampling_ratios",
+      "callee_source": "tuning/data/data_processors.py:514",
+      "call_site_source": "tuning/data/data_processors.py:662",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "process_dataset_configs",
+      "callee_source": "tuning/data/data_processors.py:610",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:455",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "dump_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:460",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:688",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "dump_dataset",
+      "callee_source": "tuning/data/setup_dataprocessor.py:460",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:695",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataconfig_file",
+      "caller_source": "tuning/data/setup_dataprocessor.py:68",
+      "callee": "process_dataset_configs",
+      "callee_source": "tuning/data/data_processors.py:610",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:161",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "try_concatenate_datasets",
+      "caller_source": "tuning/data/utils.py:242",
+      "callee": "_concatenate_datasets",
+      "callee_source": "tuning/data/utils.py:225",
+      "call_site_source": "tuning/data/utils.py:279",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "try_concatenate_datasets",
+      "caller_source": "tuning/data/utils.py:242",
+      "callee": "_concatenate_datasets",
+      "callee_source": "tuning/data/utils.py:225",
+      "call_site_source": "tuning/data/utils.py:287",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_loader_for_filepath",
+      "caller_source": "tuning/data/utils.py:42",
+      "callee": "get_extension",
+      "callee_source": "tuning/data/utils.py:37",
+      "call_site_source": "tuning/data/utils.py:43",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_yaml_or_json",
+      "caller_source": "tuning/data/utils.py:56",
+      "callee": "get_extension",
+      "callee_source": "tuning/data/utils.py:37",
+      "call_site_source": "tuning/data/utils.py:58",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "load_yaml",
+      "callee_source": "tuning/fms-recommender.py:44",
+      "call_site_source": "tuning/fms-recommender.py:95",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "load_yaml",
+      "callee_source": "tuning/fms-recommender.py:44",
+      "call_site_source": "tuning/fms-recommender.py:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "on_init_end",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:46",
+      "call_site_source": "tuning/sft_trainer.py:617",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "track",
+      "callee_source": "tuning/trackers/tracker.py:63",
+      "call_site_source": "tuning/sft_trainer.py:581",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "train",
+      "callee_source": "tuning/sft_trainer.py:104",
+      "call_site_source": "tuning/sft_trainer.py:620",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:46",
+      "callee": "on_init_end",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:46",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trackers/aimstack_tracker.py:46",
+      "callee": "track",
+      "callee_source": "tuning/trackers/tracker.py:63",
+      "call_site_source": "tuning/trackers/aimstack_tracker.py:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup",
+      "caller_source": "tuning/trackers/clearml_tracker.py:51",
+      "callee": "setup",
+      "callee_source": "tuning/trackers/clearml_tracker.py:51",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "setup",
+      "caller_source": "tuning/trackers/clearml_tracker.py:51",
+      "callee": "setup",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:45",
+      "call_site_source": "tuning/trackers/clearml_tracker.py:71",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "on_log",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:37",
+      "callee": "_track_loss",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:52",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:48",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_log",
+      "caller_source": "tuning/trackers/filelogging_tracker.py:37",
+      "callee": "_track_loss",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:52",
+      "call_site_source": "tuning/trackers/filelogging_tracker.py:50",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:45",
+      "callee": "setup",
+      "callee_source": "tuning/trackers/clearml_tracker.py:51",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:62",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "setup",
+      "caller_source": "tuning/trackers/mlflow_tracker.py:45",
+      "callee": "setup",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:45",
+      "call_site_source": "tuning/trackers/mlflow_tracker.py:62",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "get_name",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:29",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "get_name",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:52",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "get_name",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:52",
+      "call_site_source": "tuning/trainercontroller/callback.py:333",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "get_name",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:29",
+      "call_site_source": "tuning/trainercontroller/callback.py:333",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "parse",
+      "callee_source": "tuning/fms-recommender.py:76",
+      "call_site_source": "tuning/trainercontroller/callback.py:401",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "compute",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:99",
+      "callee": "_add_and_slide",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:53",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "compute",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:99",
+      "callee": "_add_and_slide",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:53",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:135",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "compute",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:99",
+      "callee": "_create_vectors_if_not_exists",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:87",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "compute",
+      "caller_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:99",
+      "callee": "_create_vectors_if_not_exists",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:87",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:116",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/operations/hfcontrols.py:20",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/operations/hfcontrols.py:20",
+      "call_site_source": "tuning/trainercontroller/operations/hfcontrols.py:32",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/operations/hfcontrols.py:20",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:13",
+      "call_site_source": "tuning/trainercontroller/operations/hfcontrols.py:32",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/operations/hfcontrols.py:20",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/operations/logcontrol.py:16",
+      "call_site_source": "tuning/trainercontroller/operations/hfcontrols.py:32",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/operations/logcontrol.py:16",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:13",
+      "call_site_source": "tuning/trainercontroller/operations/logcontrol.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/operations/logcontrol.py:16",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/operations/logcontrol.py:16",
+      "call_site_source": "tuning/trainercontroller/operations/logcontrol.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/operations/logcontrol.py:16",
+      "callee": "__init__",
+      "callee_source": "tuning/trainercontroller/operations/hfcontrols.py:20",
+      "call_site_source": "tuning/trainercontroller/operations/logcontrol.py:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/utils/evaluator.py:111",
+      "callee": "__init__",
+      "callee_source": "tuning/utils/evaluator.py:111",
+      "call_site_source": "tuning/utils/evaluator.py:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/utils/evaluator.py:111",
+      "callee": "__init__",
+      "callee_source": "tuning/utils/evaluator.py:9",
+      "call_site_source": "tuning/utils/evaluator.py:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/utils/evaluator.py:111",
+      "callee": "__init__",
+      "callee_source": "tuning/utils/evaluator.py:15",
+      "call_site_source": "tuning/utils/evaluator.py:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/utils/evaluator.py:9",
+      "callee": "__init__",
+      "callee_source": "tuning/utils/evaluator.py:111",
+      "call_site_source": "tuning/utils/evaluator.py:10",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/utils/evaluator.py:9",
+      "callee": "__init__",
+      "callee_source": "tuning/utils/evaluator.py:9",
+      "call_site_source": "tuning/utils/evaluator.py:10",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/utils/evaluator.py:9",
+      "callee": "__init__",
+      "callee_source": "tuning/utils/evaluator.py:15",
+      "call_site_source": "tuning/utils/evaluator.py:10",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "copy_checkpoint",
+      "caller_source": "build/utils.py:27",
+      "callee": "copy_checkpoint",
+      "callee_source": "build/utils.py:27",
+      "call_site_source": "build/utils.py:41",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "convert_safetensors_file",
+      "caller_source": "scripts/checkpoint_utils.py:76",
+      "callee": "is_optim_tensor_name",
+      "callee_source": "scripts/checkpoint_utils.py:56",
+      "call_site_source": "scripts/checkpoint_utils.py:83",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "format_and_export_entities_file",
+      "caller_source": "scripts/pull_and_format_datasets.py:59",
+      "callee": "get_entites_output_text",
+      "callee_source": "scripts/pull_and_format_datasets.py:78",
+      "call_site_source": "scripts/pull_and_format_datasets.py:100",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_prediction_results",
+      "caller_source": "scripts/run_evaluation.py:142",
+      "callee": "get_formatted_example",
+      "callee_source": "scripts/run_evaluation.py:102",
+      "call_site_source": "scripts/run_evaluation.py:178",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "map_predictions_and_references_to_encoded_vectors",
+      "caller_source": "scripts/run_evaluation.py:226",
+      "callee": "extract_unique_labels",
+      "callee_source": "scripts/run_evaluation.py:313",
+      "call_site_source": "scripts/run_evaluation.py:252",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "scripts/run_inference.py:54",
+      "callee": "_locate_adapter_config",
+      "callee_source": "scripts/run_inference.py:64",
+      "call_site_source": "scripts/run_inference.py:57",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_apply_config_changes",
+      "caller_source": "scripts/run_inference.py:81",
+      "callee": "_get_old_config_values",
+      "callee_source": "scripts/run_inference.py:106",
+      "call_site_source": "scripts/run_inference.py:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_additional_accel_framework_callbacks",
+      "caller_source": "tuning/config/acceleration_configs/callbacks.py:5",
+      "callee": "get_callbacks",
+      "callee_source": "tuning/config/acceleration_configs/fast_moe.py:69",
+      "call_site_source": "tuning/config/acceleration_configs/callbacks.py:9",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__post_init__",
+      "caller_source": "tuning/config/acceleration_configs/utils.py:102",
+      "callee": "__post_init__",
+      "callee_source": "tuning/config/acceleration_configs/utils.py:102",
+      "call_site_source": "tuning/config/acceleration_configs/utils.py:106",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_and_validate_data_config",
+      "caller_source": "tuning/data/data_config.py:262",
+      "callee": "load_yaml_or_json",
+      "callee_source": "tuning/data/utils.py:56",
+      "call_site_source": "tuning/data/data_config.py:263",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_validate_dataset_config",
+      "caller_source": "tuning/data/data_config.py:78",
+      "callee": "_validate_data_handler_config",
+      "callee_source": "tuning/data/data_config.py:65",
+      "call_site_source": "tuning/data/data_config.py:116",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "render",
+      "caller_source": "tuning/data/data_handlers.py:213",
+      "callee": "render",
+      "callee_source": "tuning/data/data_handlers.py:213",
+      "call_site_source": "tuning/data/data_handlers.py:217",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "prepare_multimodal_data_processor",
+      "caller_source": "tuning/data/data_handlers.py:349",
+      "callee": "try_convert_image_to_rgb",
+      "callee_source": "tuning/data/utils.py:192",
+      "call_site_source": "tuning/data/data_handlers.py:409",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/data/data_handlers.py:77",
+      "callee": "__str__",
+      "callee_source": "tuning/data/data_handlers.py:90",
+      "call_site_source": "tuning/data/data_handlers.py:88",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "load_dataset",
+      "caller_source": "tuning/data/data_processors.py:101",
+      "callee": "try_concatenate_datasets",
+      "callee_source": "tuning/data/utils.py:242",
+      "call_site_source": "tuning/data/data_processors.py:235",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_try_load_dataset",
+      "caller_source": "tuning/data/data_processors.py:177",
+      "callee": "get_loader_for_filepath",
+      "callee_source": "tuning/data/utils.py:42",
+      "call_site_source": "tuning/data/data_processors.py:209",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_execute_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:323",
+      "callee": "__execute_filter_data_handler",
+      "callee_source": "tuning/data/data_processors.py:281",
+      "call_site_source": "tuning/data/data_processors.py:373",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_execute_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:323",
+      "callee": "__execute_map_data_handler",
+      "callee_source": "tuning/data/data_processors.py:289",
+      "call_site_source": "tuning/data/data_processors.py:375",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_execute_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:323",
+      "callee": "__execute_remove_data_handler",
+      "callee_source": "tuning/data/data_processors.py:267",
+      "call_site_source": "tuning/data/data_processors.py:367",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_execute_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:323",
+      "callee": "__execute_rename_data_handler",
+      "callee_source": "tuning/data/data_processors.py:239",
+      "call_site_source": "tuning/data/data_processors.py:371",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_execute_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:323",
+      "callee": "__execute_select_data_handler",
+      "callee_source": "tuning/data/data_processors.py:253",
+      "call_site_source": "tuning/data/data_processors.py:369",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_execute_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:323",
+      "callee": "_get_registered_datahandler",
+      "callee_source": "tuning/data/data_processors.py:91",
+      "call_site_source": "tuning/data/data_processors.py:326",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_prepare_processed_datasets",
+      "caller_source": "tuning/data/data_processors.py:461",
+      "callee": "_execute_data_handlers",
+      "callee_source": "tuning/data/data_processors.py:323",
+      "call_site_source": "tuning/data/data_processors.py:504",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_prepare_processed_datasets",
+      "caller_source": "tuning/data/data_processors.py:461",
+      "callee": "split_dataset",
+      "callee_source": "tuning/data/data_processors.py:385",
+      "call_site_source": "tuning/data/data_processors.py:484",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:610",
+      "callee": "_process_dataset_configs",
+      "callee_source": "tuning/data/data_processors.py:642",
+      "call_site_source": "tuning/data/data_processors.py:633",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "process_dataset_configs",
+      "caller_source": "tuning/data/data_processors.py:610",
+      "callee": "_process_dataset_configs",
+      "callee_source": "tuning/data/data_processors.py:530",
+      "call_site_source": "tuning/data/data_processors.py:633",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "get_datapreprocessor",
+      "caller_source": "tuning/data/data_processors.py:668",
+      "callee": "register_data_handlers",
+      "callee_source": "tuning/data/data_processors.py:81",
+      "call_site_source": "tuning/data/data_processors.py:682",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "register_data_handlers",
+      "caller_source": "tuning/data/data_processors.py:81",
+      "callee": "register_data_handler",
+      "callee_source": "tuning/data/data_processors.py:69",
+      "call_site_source": "tuning/data/data_processors.py:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "_get_chat_dataset_handlers",
+      "callee_source": "tuning/data/setup_dataprocessor.py:257",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:426",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "_get_dataset_formatting_handlers",
+      "callee_source": "tuning/data/setup_dataprocessor.py:200",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:431",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "_get_default_dataset_handlers",
+      "callee_source": "tuning/data/setup_dataprocessor.py:278",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:436",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "_get_pretokenized_dataset_handlers",
+      "callee_source": "tuning/data/setup_dataprocessor.py:167",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:415",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_process_raw_data_args",
+      "caller_source": "tuning/data/setup_dataprocessor.py:345",
+      "callee": "_get_vision_dataset_handlers",
+      "callee_source": "tuning/data/setup_dataprocessor.py:297",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:420",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "_process_raw_data_args",
+      "callee_source": "tuning/data/setup_dataprocessor.py:345",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:663",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "process_dataconfig_file",
+      "callee_source": "tuning/data/setup_dataprocessor.py:68",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:648",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataargs",
+      "caller_source": "tuning/data/setup_dataprocessor.py:583",
+      "callee": "setup_train_dataset_for_odm",
+      "callee_source": "tuning/data/setup_dataprocessor.py:501",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:714",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_dataconfig_file",
+      "caller_source": "tuning/data/setup_dataprocessor.py:68",
+      "callee": "load_and_validate_data_config",
+      "callee_source": "tuning/data/data_config.py:262",
+      "call_site_source": "tuning/data/setup_dataprocessor.py:100",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup_tokenizer",
+      "caller_source": "tuning/data/tokenizer_utils.py:174",
+      "callee": "get_special_tokens_dict",
+      "callee_source": "tuning/data/tokenizer_utils.py:31",
+      "call_site_source": "tuning/data/tokenizer_utils.py:186",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setup_tokenizer",
+      "caller_source": "tuning/data/tokenizer_utils.py:174",
+      "callee": "tokenizer_and_embedding_resize",
+      "callee_source": "tuning/data/tokenizer_utils.py:89",
+      "call_site_source": "tuning/data/tokenizer_utils.py:202",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "tokenizer_and_embedding_resize",
+      "caller_source": "tuning/data/tokenizer_utils.py:89",
+      "callee": "get_resized_input_embeddings",
+      "callee_source": "tuning/data/tokenizer_utils.py:144",
+      "call_site_source": "tuning/data/tokenizer_utils.py:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "maybe_align_datasets",
+      "caller_source": "tuning/data/utils.py:134",
+      "callee": "_maybe_cast_columns",
+      "callee_source": "tuning/data/utils.py:90",
+      "call_site_source": "tuning/data/utils.py:146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "maybe_align_datasets",
+      "caller_source": "tuning/data/utils.py:134",
+      "callee": "_validate_mergeable_datasets",
+      "callee_source": "tuning/data/utils.py:107",
+      "call_site_source": "tuning/data/utils.py:145",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse",
+      "caller_source": "tuning/fms-recommender.py:76",
+      "callee": "nest_accelerate_flags",
+      "callee_source": "tuning/fms-recommender.py:55",
+      "call_site_source": "tuning/fms-recommender.py:100",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "get_hf_callback",
+      "callee_source": "tuning/trackers/aimstack_tracker.py:110",
+      "call_site_source": "tuning/sft_trainer.py:279",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "get_hf_callback",
+      "callee_source": "tuning/trackers/filelogging_tracker.py:86",
+      "call_site_source": "tuning/sft_trainer.py:279",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "get_hf_callback",
+      "callee_source": "tuning/trackers/clearml_tracker.py:139",
+      "call_site_source": "tuning/sft_trainer.py:279",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "get_hf_callback",
+      "callee_source": "tuning/trackers/hf_resource_scanner_tracker.py:38",
+      "call_site_source": "tuning/sft_trainer.py:279",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "get_hf_callback",
+      "callee_source": "tuning/trackers/tracker.py:60",
+      "call_site_source": "tuning/sft_trainer.py:279",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "get_hf_callback",
+      "callee_source": "tuning/trackers/mlflow_tracker.py:121",
+      "call_site_source": "tuning/sft_trainer.py:279",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "on_init_end",
+      "callee_source": "tuning/trainercontroller/callback.py:285",
+      "call_site_source": "tuning/sft_trainer.py:617",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "train",
+      "caller_source": "tuning/sft_trainer.py:104",
+      "callee": "set_params",
+      "callee_source": "tuning/trackers/tracker.py:87",
+      "call_site_source": "tuning/sft_trainer.py:583",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "tie_lora_weights",
+      "caller_source": "tuning/sft_trainer.py:419",
+      "callee": "_get_embedding_module_names",
+      "callee_source": "tuning/sft_trainer.py:74",
+      "call_site_source": "tuning/sft_trainer.py:439",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "save",
+      "caller_source": "tuning/sft_trainer.py:627",
+      "callee": "on_save",
+      "callee_source": "tuning/trackers/clearml_tracker.py:123",
+      "call_site_source": "tuning/sft_trainer.py:651",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "save",
+      "caller_source": "tuning/sft_trainer.py:627",
+      "callee": "on_save",
+      "callee_source": "tuning/trainercontroller/callback.py:572",
+      "call_site_source": "tuning/sft_trainer.py:651",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "save",
+      "caller_source": "tuning/sft_trainer.py:627",
+      "callee": "on_save",
+      "callee_source": "tuning/config/acceleration_configs/fast_moe.py:87",
+      "call_site_source": "tuning/sft_trainer.py:651",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_register_trackers",
+      "caller_source": "tuning/trackers/tracker_factory.py:137",
+      "callee": "_register_aim_tracker",
+      "callee_source": "tuning/trackers/tracker_factory.py:64",
+      "call_site_source": "tuning/trackers/tracker_factory.py:140",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_register_trackers",
+      "caller_source": "tuning/trackers/tracker_factory.py:137",
+      "callee": "_register_clearml_tracker",
+      "callee_source": "tuning/trackers/tracker_factory.py:117",
+      "call_site_source": "tuning/trackers/tracker_factory.py:148",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_register_trackers",
+      "caller_source": "tuning/trackers/tracker_factory.py:137",
+      "callee": "_register_file_logging_tracker",
+      "callee_source": "tuning/trackers/tracker_factory.py:112",
+      "call_site_source": "tuning/trackers/tracker_factory.py:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_register_trackers",
+      "caller_source": "tuning/trackers/tracker_factory.py:137",
+      "callee": "_register_hf_resource_scanner_tracker",
+      "callee_source": "tuning/trackers/tracker_factory.py:96",
+      "call_site_source": "tuning/trackers/tracker_factory.py:146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_register_trackers",
+      "caller_source": "tuning/trackers/tracker_factory.py:137",
+      "callee": "_register_mlflow_tracker",
+      "callee_source": "tuning/trackers/tracker_factory.py:80",
+      "call_site_source": "tuning/trackers/tracker_factory.py:144",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_tracker",
+      "caller_source": "tuning/trackers/tracker_factory.py:151",
+      "callee": "_is_tracker_installed",
+      "callee_source": "tuning/trackers/tracker_factory.py:52",
+      "call_site_source": "tuning/trackers/tracker_factory.py:178",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_tracker",
+      "caller_source": "tuning/trackers/tracker_factory.py:151",
+      "callee": "_register_trackers",
+      "callee_source": "tuning/trackers/tracker_factory.py:137",
+      "call_site_source": "tuning/trackers/tracker_factory.py:175",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "compute",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:49",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "compute",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:79",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "compute",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:65",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "compute",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:65",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "compute",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:99",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_compute_metrics",
+      "caller_source": "tuning/trainercontroller/callback.py:193",
+      "callee": "compute",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:61",
+      "call_site_source": "tuning/trainercontroller/callback.py:201",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_take_control_actions",
+      "caller_source": "tuning/trainercontroller/callback.py:203",
+      "callee": "act",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:48",
+      "call_site_source": "tuning/trainercontroller/callback.py:256",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "_take_control_actions",
+      "caller_source": "tuning/trainercontroller/callback.py:203",
+      "callee": "should_tolerate",
+      "callee_source": "tuning/trainercontroller/patience.py:46",
+      "call_site_source": "tuning/trainercontroller/callback.py:247",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_actions_on_event",
+      "caller_source": "tuning/trainercontroller/callback.py:267",
+      "callee": "_compute_metrics",
+      "callee_source": "tuning/trainercontroller/callback.py:193",
+      "call_site_source": "tuning/trainercontroller/callback.py:274",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_actions_on_event",
+      "caller_source": "tuning/trainercontroller/callback.py:267",
+      "callee": "_take_control_actions",
+      "callee_source": "tuning/trainercontroller/callback.py:203",
+      "call_site_source": "tuning/trainercontroller/callback.py:275",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "_validate_rule",
+      "callee_source": "tuning/trainercontroller/callback.py:277",
+      "call_site_source": "tuning/trainercontroller/callback.py:386",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "get_actions",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:78",
+      "call_site_source": "tuning/trainercontroller/callback.py:368",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "on_init_end",
+      "caller_source": "tuning/trainercontroller/callback.py:285",
+      "callee": "get_events",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:60",
+      "call_site_source": "tuning/trainercontroller/callback.py:335",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/callback.py:76",
+      "callee": "register_metric_handlers",
+      "callee_source": "tuning/trainercontroller/callback.py:175",
+      "call_site_source": "tuning/trainercontroller/callback.py:162",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/callback.py:76",
+      "callee": "register_operation_handlers",
+      "callee_source": "tuning/trainercontroller/callback.py:184",
+      "call_site_source": "tuning/trainercontroller/callback.py:167",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/controllermetrics/per_process_state.py:56",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:69",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/controllermetrics/loss.py:40",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/controllermetrics/history_based_metrics.py:78",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/controllermetrics/eval_metrics.py:52",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:36",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/controllermetrics/trainingstate.py:56",
+      "call_site_source": "tuning/trainercontroller/controllermetrics/metricshandler.py:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "act",
+      "caller_source": "tuning/trainercontroller/operations/operation.py:48",
+      "callee": "validate",
+      "callee_source": "tuning/trainercontroller/operations/operation.py:37",
+      "call_site_source": "tuning/trainercontroller/operations/operation.py:65",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "tuning/trainers/sum_loss_sft_trainer.py:51",
+      "callee": "__init__",
+      "callee_source": "tuning/trainers/sum_loss_sft_trainer.py:51",
+      "call_site_source": "tuning/trainers/sum_loss_sft_trainer.py:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_json_config",
+      "caller_source": "tuning/utils/config_utils.py:128",
+      "callee": "txt_to_obj",
+      "callee_source": "tuning/utils/config_utils.py:152",
+      "call_site_source": "tuning/utils/config_utils.py:144",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_torch_dtype",
+      "caller_source": "tuning/utils/data_type_utils.py:41",
+      "callee": "str_to_torch_dtype",
+      "callee_source": "tuning/utils/data_type_utils.py:23",
+      "call_site_source": "tuning/utils/data_type_utils.py:59",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_eval_name",
+      "caller_source": "tuning/utils/evaluator.py:130",
+      "callee": "_eval_name",
+      "callee_source": "tuning/utils/evaluator.py:130",
+      "call_site_source": "tuning/utils/evaluator.py:138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_eval_subscript",
+      "caller_source": "tuning/utils/evaluator.py:140",
+      "callee": "_eval_subscript",
+      "callee_source": "tuning/utils/evaluator.py:140",
+      "call_site_source": "tuning/utils/evaluator.py:144",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_eval_subscript",
+      "caller_source": "tuning/utils/evaluator.py:140",
+      "callee": "raise_error",
+      "callee_source": "tuning/utils/evaluator.py:18",
+      "call_site_source": "tuning/utils/evaluator.py:143",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "post_process_vLLM_adapters_new_tokens",
+      "caller_source": "tuning/utils/merge_model_utils.py:123",
+      "callee": "copy_files_to_directory",
+      "callee_source": "tuning/utils/merge_model_utils.py:111",
+      "call_site_source": "tuning/utils/merge_model_utils.py:198",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "create_merged_model",
+      "caller_source": "tuning/utils/merge_model_utils.py:30",
+      "callee": "fetch_base_model_from_checkpoint",
+      "callee_source": "tuning/utils/merge_model_utils.py:86",
+      "call_site_source": "tuning/utils/merge_model_utils.py:69",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "sparse",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}
