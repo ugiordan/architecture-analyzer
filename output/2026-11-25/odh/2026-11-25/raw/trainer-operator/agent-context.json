@@ -1,0 +1,4732 @@
+{
+  "schema_version": 1,
+  "component": "trainer-operator",
+  "repo": "opendatahub-io/trainer-operator",
+  "commit_sha": "4de61eec63c10b9144fb82e75fe8469eb039b73c",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "trainer-operator (also known as: Trainer operator, Kubeflow Trainer operator) is a Kubernetes component. managing 1 CRD(s): Trainer. deploying 4 workload(s) (controller-manager, kubeflow-trainer-controller-manager, kubeflow-trainer-controller-manager, kubeflow-trainer-controller-manager) with 4 container(s). watching 4 resource type(s). protected by 2 network policy/policies. defining 1 API spec type(s) across 5 struct(s) with 14 total fields. with 50 operator config constants (7 image references). integrates with management relationship via labels/annotations. kustomize overlays: config/crd, config/default, config/manager, config/manifests, config/network-policy, config/prometheus, config/rbac, config/scorecard. mounts 1 ConfigMap(s) as volumes: kubeflow-trainer-config.",
+  "repository_description": "[!WARNING] \u003e This repository is archived and no longer maintained. The operator code has moved to the Trainer repository (rhoai/operator).",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 22,
+    "functions": 172,
+    "test_functions": 73,
+    "call_sites": 2098,
+    "resolved_calls": 390,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "go",
+      "source_files": 22,
+      "functions": 172,
+      "test_functions": 73
+    },
+    {
+      "name": "unknown",
+      "source_files": 22,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "internal/controller",
+      "source_files": 10,
+      "functions": 117,
+      "test_functions": 51,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "Resource",
+          "language": "go",
+          "source": "internal/controller/trainer_controller_test.go:712",
+          "complexity": 1,
+          "callers": 25
+        },
+        {
+          "name": "testRequest",
+          "language": "go",
+          "source": "internal/controller/trainer_controller_test.go:608",
+          "complexity": 1,
+          "callers": 13
+        },
+        {
+          "name": "getTrainer",
+          "language": "go",
+          "source": "internal/controller/trainer_controller_test.go:614",
+          "complexity": 1,
+          "callers": 11,
+          "annotations": [
+            "sec:calls_external",
+            "sec:crosses_namespace"
+          ]
+        },
+        {
+          "name": "readParams",
+          "language": "go",
+          "source": "internal/controller/params.go:108",
+          "complexity": 5,
+          "callers": 10
+        },
+        {
+          "name": "Namespace",
+          "language": "go",
+          "source": "internal/controller/trainer_controller_test.go:721",
+          "complexity": 1,
+          "callers": 10
+        },
+        {
+          "name": "applyOperandTLSOptions",
+          "language": "go",
+          "source": "internal/controller/manifests.go:89",
+          "complexity": 16,
+          "callers": 8
+        },
+        {
+          "name": "applyParamOverrides",
+          "language": "go",
+          "source": "internal/controller/params.go:84",
+          "complexity": 6,
+          "callers": 8
+        },
+        {
+          "name": "newUnstructured",
+          "language": "go",
+          "source": "internal/controller/trainer_controller_test.go:727",
+          "complexity": 3,
+          "callers": 7
+        },
+        {
+          "name": "newTestReconciler",
+          "language": "go",
+          "source": "internal/controller/trainer_controller_test.go:568",
+          "complexity": 2,
+          "callers": 7,
+          "annotations": [
+            "test:is_test_helper"
+          ]
+        },
+        {
+          "name": "resolveNamespace",
+          "language": "go",
+          "source": "internal/controller/trainer_controller.go:773",
+          "complexity": 2,
+          "callers": 7
+        },
+        {
+          "name": "mkOperandDeployment",
+          "language": "go",
+          "source": "internal/controller/manifests_test.go:74",
+          "complexity": 1,
+          "callers": 7
+        },
+        {
+          "name": "checkJobSetOperatorHealth",
+          "language": "go",
+          "source": "internal/controller/dependencies.go:114",
+          "complexity": 11,
+          "callers": 6
+        }
+      ],
+      "symbols_truncated": 105
+    },
+    {
+      "path": "internal/tls",
+      "source_files": 6,
+      "functions": 33,
+      "test_functions": 20,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "Get",
+          "language": "go",
+          "source": "internal/tls/profile_test.go:65",
+          "complexity": 1,
+          "callers": 18
+        },
+        {
+          "name": "TranslateProfile",
+          "language": "go",
+          "source": "internal/tls/operand.go:91",
+          "complexity": 8,
+          "callers": 12
+        },
+        {
+          "name": "Resolve",
+          "language": "go",
+          "source": "internal/tls/profile.go:47",
+          "complexity": 5,
+          "callers": 6
+        },
+        {
+          "name": "MetricsServerOptions",
+          "language": "go",
+          "source": "internal/tls/metrics.go:35",
+          "complexity": 3,
+          "callers": 4
+        },
+        {
+          "name": "testAPIServerClient",
+          "language": "go",
+          "source": "internal/tls/profile_test.go:48",
+          "complexity": 1,
+          "callers": 4,
+          "annotations": [
+            "test:uses_fake_client"
+          ]
+        },
+        {
+          "name": "SetupWatcher",
+          "language": "go",
+          "source": "internal/tls/profile.go:84",
+          "complexity": 3,
+          "callers": 3
+        },
+        {
+          "name": "newSecurityProfileWatcher",
+          "language": "go",
+          "source": "internal/tls/profile.go:96",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "testScheme",
+          "language": "go",
+          "source": "internal/tls/profile_test.go:42",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "writeTestServingCerts",
+          "language": "go",
+          "source": "internal/tls/metrics_test.go:85",
+          "complexity": 6,
+          "callers": 1,
+          "annotations": [
+            "sec:generates_cert"
+          ]
+        },
+        {
+          "name": "goCipherName",
+          "language": "go",
+          "source": "internal/tls/operand.go:61",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "resolveCipherID",
+          "language": "go",
+          "source": "internal/tls/operand.go:44",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "isTLS13CipherID",
+          "language": "go",
+          "source": "internal/tls/operand.go:144",
+          "complexity": 2,
+          "callers": 1
+        }
+      ],
+      "symbols_truncated": 21
+    },
+    {
+      "path": "api/v1alpha1",
+      "source_files": 5,
+      "functions": 20,
+      "test_functions": 2,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "DeepCopyInto",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+          "complexity": 5,
+          "callers": 14
+        },
+        {
+          "name": "DeepCopyInto",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+          "complexity": 3,
+          "callers": 14
+        },
+        {
+          "name": "DeepCopyInto",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+          "complexity": 1,
+          "callers": 14
+        },
+        {
+          "name": "DeepCopyInto",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+          "complexity": 1,
+          "callers": 14
+        },
+        {
+          "name": "DeepCopyInto",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+          "complexity": 1,
+          "callers": 14
+        },
+        {
+          "name": "GetConditions",
+          "language": "go",
+          "source": "api/v1alpha1/trainer_types.go:77",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "GetReleaseStatus",
+          "language": "go",
+          "source": "api/v1alpha1/trainer_types.go:85",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "DeepCopy",
+          "language": "go",
+          "source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+          "complexity": 2,
+          "callers": 2
+        }
+      ],
+      "symbols_truncated": 8
+    },
+    {
+      "path": "cmd",
+      "source_files": 1,
+      "functions": 2,
+      "test_functions": 0,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "go",
+          "source": "cmd/main.go:71",
+          "complexity": 14,
+          "callers": 0,
+          "annotations": [
+            "sec:configures_cache"
+          ]
+        },
+        {
+          "name": "init",
+          "language": "go",
+          "source": "cmd/main.go:61",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "cmd/main.go:71"
+    }
+  ],
+  "controllers": [
+    {
+      "name": "Unknown controller",
+      "watches": [
+        {
+          "type": "Watches",
+          "gvk": "/v1/ConfigMap",
+          "source": "internal/controller/trainer_controller.go:207"
+        },
+        {
+          "type": "Watches",
+          "gvk": "/v1/Service",
+          "source": "internal/controller/trainer_controller.go:206"
+        },
+        {
+          "type": "Watches",
+          "gvk": "admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration",
+          "source": "internal/controller/trainer_controller.go:208"
+        },
+        {
+          "type": "Watches",
+          "gvk": "apps/v1/Deployment",
+          "source": "internal/controller/trainer_controller.go:204"
+        }
+      ]
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:71",
+      "callee": "Resolve",
+      "callee_source": "internal/tls/profile.go:47",
+      "call_site_source": "cmd/main.go:97",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:71",
+      "callee": "MetricsServerOptions",
+      "callee_source": "internal/tls/metrics.go:35",
+      "call_site_source": "cmd/main.go:112",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:71",
+      "callee": "SetupWatcher",
+      "callee_source": "internal/tls/profile.go:84",
+      "call_site_source": "cmd/main.go:209",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "cmd/main.go:71",
+      "callee": "NewReconciler",
+      "callee_source": "internal/controller/trainer_controller.go:189",
+      "call_site_source": "cmd/main.go:188",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "cleanupTrainerResources",
+      "caller_source": "internal/controller/trainer_controller.go:585",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller.go:597",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanupTrainerResources",
+      "caller_source": "internal/controller/trainer_controller.go:585",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller.go:613",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "removeRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:627",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller.go:638",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "removeRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:627",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller.go:663",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:180",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:184",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:192",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:197",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:198",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:203",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:206",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:209",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:224",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:228",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:233",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:242",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:246",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:247",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:248",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:249",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:254",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:258",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:262",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Resource",
+      "callee_source": "internal/controller/trainer_controller_test.go:712",
+      "call_site_source": "internal/controller/trainer_controller_test.go:266",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ensureNamespace",
+      "caller_source": "internal/controller/trainer_controller.go:318",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller.go:323",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "getPlatformVersion",
+      "caller_source": "internal/controller/trainer_controller.go:685",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller.go:687",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:203",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:206",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:209",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:254",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:258",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:262",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:266",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:457",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:95",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "getTrainer",
+      "caller_source": "internal/controller/trainer_controller_test.go:614",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:616",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "cleanupTrainer",
+      "caller_source": "internal/controller/trainer_controller_test.go:629",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:631",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "cleanupTrainer",
+      "caller_source": "internal/controller/trainer_controller_test.go:629",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:640",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "cleanupNamespace",
+      "caller_source": "internal/controller/trainer_controller_test.go:645",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:647",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "deleteJobSetCRDAndWait",
+      "caller_source": "internal/controller/trainer_controller_test.go:694",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:696",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "deleteJobSetCRDAndWait",
+      "caller_source": "internal/controller/trainer_controller_test.go:694",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:700",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "Get",
+      "callee_source": "internal/tls/profile_test.go:65",
+      "call_site_source": "internal/controller/trainer_controller_test.go:127",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:116",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:116",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:116",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:116",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:116",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:127",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:134",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:144",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:144",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:144",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:144",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:144",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:30",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:39",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:47",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:48",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:48",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:48",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:48",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:48",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:49",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:58",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:58",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:58",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:58",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:58",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:74",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyInto",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:79",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:71",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:103",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:132",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:28",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopy",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "callee": "DeepCopyInto",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:44",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:90",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "TestReconcileManagedPopulatesReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:307",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:329",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:365",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:389",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:408",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:446",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:454",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:474",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:477",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:507",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:523",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:79",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:115",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "testRequest",
+      "callee_source": "internal/controller/trainer_controller_test.go:608",
+      "call_site_source": "internal/controller/trainer_controller_test.go:123",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "applyOperandTLSOptions",
+      "caller_source": "internal/controller/manifests.go:89",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/controller/manifests.go:90",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "TestTranslateProfileCustomTLS13NamesDropped",
+      "caller_source": "internal/tls/operand_test.go:104",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:105",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileGoNamesPassThrough",
+      "caller_source": "internal/tls/operand_test.go:123",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:124",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileEmptyVersionOmitted",
+      "caller_source": "internal/tls/operand_test.go:138",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:139",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileProjectsCurvePreferences",
+      "caller_source": "internal/tls/operand_test.go:151",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:157",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileOmitsCurvePreferencesWithoutGroups",
+      "caller_source": "internal/tls/operand_test.go:167",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:168",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileIntermediateProjectsGroupIDs",
+      "caller_source": "internal/tls/operand_test.go:177",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:180",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileFailsClosedOnUnsupportedGroups",
+      "caller_source": "internal/tls/operand_test.go:189",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:194",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileIntermediate",
+      "caller_source": "internal/tls/operand_test.go:28",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:29",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileModernOmitsCipherSuites",
+      "caller_source": "internal/tls/operand_test.go:50",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileOldKeepsLegacySuites",
+      "caller_source": "internal/tls/operand_test.go:68",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTranslateProfileFiltersRC4",
+      "caller_source": "internal/tls/operand_test.go:85",
+      "callee": "TranslateProfile",
+      "callee_source": "internal/tls/operand.go:91",
+      "call_site_source": "internal/tls/operand_test.go:86",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManagedPopulatesReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:307",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:332",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:368",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:392",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:411",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:448",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:480",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:510",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:526",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:82",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "getTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:614",
+      "call_site_source": "internal/controller/trainer_controller_test.go:118",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsUsesDefaults",
+      "caller_source": "internal/controller/imagestreams_test.go:27",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/imagestreams_test.go:34",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsEnvVarOverride",
+      "caller_source": "internal/controller/imagestreams_test.go:42",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/imagestreams_test.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "applyStaticParams",
+      "caller_source": "internal/controller/params.go:62",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params.go:72",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "applyParamOverrides",
+      "caller_source": "internal/controller/params.go:84",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params.go:94",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesOpenMPICPUImage",
+      "caller_source": "internal/controller/params_test.go:115",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params_test.go:126",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReadParams",
+      "caller_source": "internal/controller/params_test.go:27",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params_test.go:34",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestWriteParams",
+      "caller_source": "internal/controller/params_test.go:42",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params_test.go:51",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesFromEnv",
+      "caller_source": "internal/controller/params_test.go:56",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params_test.go:67",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyStaticParams",
+      "caller_source": "internal/controller/params_test.go:78",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params_test.go:87",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesOpenMPICUDAImage",
+      "caller_source": "internal/controller/params_test.go:99",
+      "callee": "readParams",
+      "callee_source": "internal/controller/params.go:108",
+      "call_site_source": "internal/controller/params_test.go:110",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanupTrainerResources",
+      "caller_source": "internal/controller/trainer_controller.go:585",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller.go:597",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanupTrainerResources",
+      "caller_source": "internal/controller/trainer_controller.go:585",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller.go:613",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "removeRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:627",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller.go:638",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "removeRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:627",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller.go:663",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller_test.go:192",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller_test.go:198",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller_test.go:209",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller_test.go:242",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller_test.go:249",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "Namespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:721",
+      "call_site_source": "internal/controller/trainer_controller_test.go:266",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsUsesDefaults",
+      "caller_source": "internal/controller/imagestreams_test.go:27",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/imagestreams_test.go:32",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsEnvVarOverride",
+      "caller_source": "internal/controller/imagestreams_test.go:42",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/imagestreams_test.go:50",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsMissingFile",
+      "caller_source": "internal/controller/imagestreams_test.go:60",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/imagestreams_test.go:65",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "caller_source": "internal/controller/manifests_test.go:120",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:126",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:143",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:149",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsNoConfigMapNoAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:157",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:161",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:184",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:197",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:93",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/manifests_test.go:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesOpenMPICPUImage",
+      "caller_source": "internal/controller/params_test.go:115",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/params_test.go:124",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesFromEnv",
+      "caller_source": "internal/controller/params_test.go:56",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/params_test.go:65",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesMissingParamsEnv",
+      "caller_source": "internal/controller/params_test.go:72",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/params_test.go:75",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyParamOverridesOpenMPICUDAImage",
+      "caller_source": "internal/controller/params_test.go:99",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/params_test.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderResourceSet",
+      "caller_source": "internal/controller/trainer_controller.go:402",
+      "callee": "applyOperandTLSOptions",
+      "callee_source": "internal/controller/manifests.go:89",
+      "call_site_source": "internal/controller/trainer_controller.go:433",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderResourceSet",
+      "caller_source": "internal/controller/trainer_controller.go:402",
+      "callee": "applyParamOverrides",
+      "callee_source": "internal/controller/params.go:84",
+      "call_site_source": "internal/controller/trainer_controller.go:414",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "caller_source": "internal/controller/manifests_test.go:120",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:148",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsNoConfigMapNoAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:157",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:160",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:93",
+      "callee": "mkOperandDeployment",
+      "callee_source": "internal/controller/manifests_test.go:74",
+      "call_site_source": "internal/controller/manifests_test.go:97",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "NewReconciler",
+      "caller_source": "internal/controller/trainer_controller.go:189",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller.go:200",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ensureNamespace",
+      "caller_source": "internal/controller/trainer_controller.go:318",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller.go:320",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderManifests",
+      "caller_source": "internal/controller/trainer_controller.go:348",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller.go:351",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updateReleases",
+      "caller_source": "internal/controller/trainer_controller.go:441",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller.go:444",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanup",
+      "caller_source": "internal/controller/trainer_controller.go:487",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller.go:490",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileNotFound",
+      "caller_source": "internal/controller/trainer_controller_test.go:131",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:135",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveNamespace",
+      "caller_source": "internal/controller/trainer_controller_test.go:158",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller_test.go:164",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveNamespace",
+      "caller_source": "internal/controller/trainer_controller_test.go:158",
+      "callee": "resolveNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:773",
+      "call_site_source": "internal/controller/trainer_controller_test.go:167",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:179",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:191",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:222",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:227",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:231",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "newUnstructured",
+      "callee_source": "internal/controller/trainer_controller_test.go:727",
+      "call_site_source": "internal/controller/trainer_controller_test.go:240",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManagedPopulatesReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:307",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:327",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:362",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:444",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:505",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:77",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "newTestReconciler",
+      "callee_source": "internal/controller/trainer_controller_test.go:568",
+      "call_site_source": "internal/controller/trainer_controller_test.go:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenHealthy",
+      "caller_source": "internal/controller/dependencies_test.go:320",
+      "callee": "checkJobSetOperatorHealth",
+      "callee_source": "internal/controller/dependencies.go:114",
+      "call_site_source": "internal/controller/dependencies_test.go:330",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenNoConditions",
+      "caller_source": "internal/controller/dependencies_test.go:335",
+      "callee": "checkJobSetOperatorHealth",
+      "callee_source": "internal/controller/dependencies.go:114",
+      "call_site_source": "internal/controller/dependencies_test.go:342",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenDegradedTrue",
+      "caller_source": "internal/controller/dependencies_test.go:348",
+      "callee": "checkJobSetOperatorHealth",
+      "callee_source": "internal/controller/dependencies.go:114",
+      "call_site_source": "internal/controller/dependencies_test.go:357",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenAvailableFalse",
+      "caller_source": "internal/controller/dependencies_test.go:365",
+      "callee": "checkJobSetOperatorHealth",
+      "callee_source": "internal/controller/dependencies.go:114",
+      "call_site_source": "internal/controller/dependencies_test.go:374",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWithMultipleDegradedConditions",
+      "caller_source": "internal/controller/dependencies_test.go:380",
+      "callee": "checkJobSetOperatorHealth",
+      "callee_source": "internal/controller/dependencies.go:114",
+      "call_site_source": "internal/controller/dependencies_test.go:390",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "caller_source": "internal/controller/manifests_test.go:120",
+      "callee": "mkOperandConfigMap",
+      "callee_source": "internal/controller/manifests_test.go:61",
+      "call_site_source": "internal/controller/manifests_test.go:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "mkOperandConfigMap",
+      "callee_source": "internal/controller/manifests_test.go:61",
+      "call_site_source": "internal/controller/manifests_test.go:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "mkOperandConfigMap",
+      "callee_source": "internal/controller/manifests_test.go:61",
+      "call_site_source": "internal/controller/manifests_test.go:148",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "mkOperandConfigMap",
+      "callee_source": "internal/controller/manifests_test.go:61",
+      "call_site_source": "internal/controller/manifests_test.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "mkOperandConfigMap",
+      "callee_source": "internal/controller/manifests_test.go:61",
+      "call_site_source": "internal/controller/manifests_test.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:93",
+      "callee": "mkOperandConfigMap",
+      "callee_source": "internal/controller/manifests_test.go:61",
+      "call_site_source": "internal/controller/manifests_test.go:97",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "checkJobSetOperatorHealth",
+      "callee_source": "internal/controller/dependencies.go:114",
+      "call_site_source": "internal/controller/trainer_controller.go:292",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManagedPopulatesReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:307",
+      "callee": "cleanupNamespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:645",
+      "call_site_source": "internal/controller/trainer_controller_test.go:324",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManagedPopulatesReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:307",
+      "callee": "cleanupTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:629",
+      "call_site_source": "internal/controller/trainer_controller_test.go:323",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManagedPopulatesReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:307",
+      "callee": "createJobSetCRD",
+      "callee_source": "internal/controller/trainer_controller_test.go:652",
+      "call_site_source": "internal/controller/trainer_controller_test.go:311",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "cleanupNamespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:645",
+      "call_site_source": "internal/controller/trainer_controller_test.go:359",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "cleanupTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:629",
+      "call_site_source": "internal/controller/trainer_controller_test.go:358",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformVersionHandshake",
+      "caller_source": "internal/controller/trainer_controller_test.go:339",
+      "callee": "createJobSetCRD",
+      "callee_source": "internal/controller/trainer_controller_test.go:652",
+      "call_site_source": "internal/controller/trainer_controller_test.go:343",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "cleanupNamespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:645",
+      "call_site_source": "internal/controller/trainer_controller_test.go:441",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "cleanupTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:629",
+      "call_site_source": "internal/controller/trainer_controller_test.go:440",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDeleteAndRecreate",
+      "caller_source": "internal/controller/trainer_controller_test.go:423",
+      "callee": "createJobSetCRD",
+      "callee_source": "internal/controller/trainer_controller_test.go:652",
+      "call_site_source": "internal/controller/trainer_controller_test.go:427",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "cleanupNamespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:645",
+      "call_site_source": "internal/controller/trainer_controller_test.go:502",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "cleanupTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:629",
+      "call_site_source": "internal/controller/trainer_controller_test.go:501",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "createJobSetCRD",
+      "callee_source": "internal/controller/trainer_controller_test.go:652",
+      "call_site_source": "internal/controller/trainer_controller_test.go:521",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "findCondition",
+      "callee_source": "internal/controller/trainer_controller_test.go:620",
+      "call_site_source": "internal/controller/trainer_controller_test.go:511",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "findCondition",
+      "callee_source": "internal/controller/trainer_controller_test.go:620",
+      "call_site_source": "internal/controller/trainer_controller_test.go:517",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "findCondition",
+      "callee_source": "internal/controller/trainer_controller_test.go:620",
+      "call_site_source": "internal/controller/trainer_controller_test.go:527",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "findCondition",
+      "callee_source": "internal/controller/trainer_controller_test.go:620",
+      "call_site_source": "internal/controller/trainer_controller_test.go:533",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestEnsureNamespaceAlreadyExists",
+      "caller_source": "internal/controller/trainer_controller_test.go:538",
+      "callee": "cleanupNamespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:645",
+      "call_site_source": "internal/controller/trainer_controller_test.go:547",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "cleanupNamespace",
+      "callee_source": "internal/controller/trainer_controller_test.go:645",
+      "call_site_source": "internal/controller/trainer_controller_test.go:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "cleanupTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:629",
+      "call_site_source": "internal/controller/trainer_controller_test.go:73",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "createJobSetCRD",
+      "callee_source": "internal/controller/trainer_controller_test.go:652",
+      "call_site_source": "internal/controller/trainer_controller_test.go:61",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "findCondition",
+      "callee_source": "internal/controller/trainer_controller_test.go:620",
+      "call_site_source": "internal/controller/trainer_controller_test.go:86",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileManaged",
+      "caller_source": "internal/controller/trainer_controller_test.go:57",
+      "callee": "findCondition",
+      "callee_source": "internal/controller/trainer_controller_test.go:620",
+      "call_site_source": "internal/controller/trainer_controller_test.go:90",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "cleanupTrainer",
+      "callee_source": "internal/controller/trainer_controller_test.go:629",
+      "call_site_source": "internal/controller/trainer_controller_test.go:111",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDelete",
+      "caller_source": "internal/controller/trainer_controller_test.go:99",
+      "callee": "createJobSetCRD",
+      "callee_source": "internal/controller/trainer_controller_test.go:652",
+      "call_site_source": "internal/controller/trainer_controller_test.go:103",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveFetchFallbacks",
+      "caller_source": "internal/tls/profile_test.go:190",
+      "callee": "Resolve",
+      "callee_source": "internal/tls/profile.go:47",
+      "call_site_source": "internal/tls/profile_test.go:229",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveRejectsUnusableStrictProfiles",
+      "caller_source": "internal/tls/profile_test.go:245",
+      "callee": "Resolve",
+      "callee_source": "internal/tls/profile.go:47",
+      "call_site_source": "internal/tls/profile_test.go:289",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveMapsMLKEMGroups",
+      "caller_source": "internal/tls/profile_test.go:296",
+      "callee": "Resolve",
+      "callee_source": "internal/tls/profile.go:47",
+      "call_site_source": "internal/tls/profile_test.go:309",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveMapsOpenSSLCipherName",
+      "caller_source": "internal/tls/profile_test.go:319",
+      "callee": "Resolve",
+      "callee_source": "internal/tls/profile.go:47",
+      "call_site_source": "internal/tls/profile_test.go:328",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveProfiles",
+      "caller_source": "internal/tls/profile_test.go:69",
+      "callee": "Resolve",
+      "callee_source": "internal/tls/profile.go:47",
+      "call_site_source": "internal/tls/profile_test.go:146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetAvailableWhenCRDNotEstablished",
+      "caller_source": "internal/controller/dependencies_test.go:106",
+      "callee": "checkJobSetAvailable",
+      "callee_source": "internal/controller/dependencies.go:47",
+      "call_site_source": "internal/controller/dependencies_test.go:137",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenHealthy",
+      "caller_source": "internal/controller/dependencies_test.go:320",
+      "callee": "newClientWithJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:471",
+      "call_site_source": "internal/controller/dependencies_test.go:329",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenHealthy",
+      "caller_source": "internal/controller/dependencies_test.go:320",
+      "callee": "newJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:451",
+      "call_site_source": "internal/controller/dependencies_test.go:324",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenNoConditions",
+      "caller_source": "internal/controller/dependencies_test.go:335",
+      "callee": "newClientWithJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:471",
+      "call_site_source": "internal/controller/dependencies_test.go:341",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenNoConditions",
+      "caller_source": "internal/controller/dependencies_test.go:335",
+      "callee": "newJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:451",
+      "call_site_source": "internal/controller/dependencies_test.go:339",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenDegradedTrue",
+      "caller_source": "internal/controller/dependencies_test.go:348",
+      "callee": "newClientWithJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:471",
+      "call_site_source": "internal/controller/dependencies_test.go:356",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenDegradedTrue",
+      "caller_source": "internal/controller/dependencies_test.go:348",
+      "callee": "newJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:451",
+      "call_site_source": "internal/controller/dependencies_test.go:352",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenAvailableFalse",
+      "caller_source": "internal/controller/dependencies_test.go:365",
+      "callee": "newClientWithJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:471",
+      "call_site_source": "internal/controller/dependencies_test.go:373",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWhenAvailableFalse",
+      "caller_source": "internal/controller/dependencies_test.go:365",
+      "callee": "newJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:451",
+      "call_site_source": "internal/controller/dependencies_test.go:369",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWithMultipleDegradedConditions",
+      "caller_source": "internal/controller/dependencies_test.go:380",
+      "callee": "newClientWithJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:471",
+      "call_site_source": "internal/controller/dependencies_test.go:389",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorHealthWithMultipleDegradedConditions",
+      "caller_source": "internal/controller/dependencies_test.go:380",
+      "callee": "newJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies_test.go:451",
+      "call_site_source": "internal/controller/dependencies_test.go:384",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetAvailableWhenCRDExistsAndEstablished",
+      "caller_source": "internal/controller/dependencies_test.go:52",
+      "callee": "checkJobSetAvailable",
+      "callee_source": "internal/controller/dependencies.go:47",
+      "call_site_source": "internal/controller/dependencies_test.go:83",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetAvailableWhenCRDDoesNotExist",
+      "caller_source": "internal/controller/dependencies_test.go:87",
+      "callee": "checkJobSetAvailable",
+      "callee_source": "internal/controller/dependencies.go:47",
+      "call_site_source": "internal/controller/dependencies_test.go:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "checkJobSetAvailable",
+      "callee_source": "internal/controller/dependencies.go:47",
+      "call_site_source": "internal/controller/trainer_controller.go:295",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "checkJobSetAvailable",
+      "callee_source": "internal/controller/dependencies.go:47",
+      "call_site_source": "internal/controller/trainer_controller.go:299",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "degradeDependency",
+      "callee_source": "internal/controller/trainer_controller.go:311",
+      "call_site_source": "internal/controller/trainer_controller.go:287",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "degradeDependency",
+      "callee_source": "internal/controller/trainer_controller.go:311",
+      "call_site_source": "internal/controller/trainer_controller.go:290",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "degradeDependency",
+      "callee_source": "internal/controller/trainer_controller.go:311",
+      "call_site_source": "internal/controller/trainer_controller.go:293",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "degradeDependency",
+      "callee_source": "internal/controller/trainer_controller.go:311",
+      "call_site_source": "internal/controller/trainer_controller.go:296",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "degradeDependency",
+      "callee_source": "internal/controller/trainer_controller.go:311",
+      "call_site_source": "internal/controller/trainer_controller.go:300",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanup",
+      "caller_source": "internal/controller/trainer_controller.go:487",
+      "callee": "removeRuntimeFinalizers",
+      "callee_source": "internal/controller/trainer_controller.go:627",
+      "call_site_source": "internal/controller/trainer_controller.go:494",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "withImmutableFieldRecovery",
+      "caller_source": "internal/controller/trainer_controller.go:518",
+      "callee": "isImmutableFieldError",
+      "callee_source": "internal/controller/trainer_controller.go:555",
+      "call_site_source": "internal/controller/trainer_controller.go:521",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "stripRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:564",
+      "callee": "removeRuntimeFinalizers",
+      "callee_source": "internal/controller/trainer_controller.go:627",
+      "call_site_source": "internal/controller/trainer_controller.go:565",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "caller_source": "internal/controller/trainer_controller_test.go:213",
+      "callee": "removeRuntimeFinalizers",
+      "callee_source": "internal/controller/trainer_controller.go:627",
+      "call_site_source": "internal/controller/trainer_controller_test.go:252",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersSkipsMissingRuntimeAPI",
+      "caller_source": "internal/controller/trainer_controller_test.go:271",
+      "callee": "removeRuntimeFinalizers",
+      "callee_source": "internal/controller/trainer_controller.go:627",
+      "call_site_source": "internal/controller/trainer_controller_test.go:278",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRemoveRuntimeFinalizersPropagatesListErrors",
+      "caller_source": "internal/controller/trainer_controller_test.go:281",
+      "callee": "removeRuntimeFinalizers",
+      "callee_source": "internal/controller/trainer_controller.go:627",
+      "call_site_source": "internal/controller/trainer_controller_test.go:289",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestIsImmutableFieldError",
+      "caller_source": "internal/controller/trainer_controller_test.go:557",
+      "callee": "isImmutableFieldError",
+      "callee_source": "internal/controller/trainer_controller.go:555",
+      "call_site_source": "internal/controller/trainer_controller_test.go:560",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestIsImmutableFieldError",
+      "caller_source": "internal/controller/trainer_controller_test.go:557",
+      "callee": "isImmutableFieldError",
+      "callee_source": "internal/controller/trainer_controller.go:555",
+      "call_site_source": "internal/controller/trainer_controller_test.go:561",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestIsImmutableFieldError",
+      "caller_source": "internal/controller/trainer_controller_test.go:557",
+      "callee": "isImmutableFieldError",
+      "callee_source": "internal/controller/trainer_controller.go:555",
+      "call_site_source": "internal/controller/trainer_controller_test.go:562",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestIsImmutableFieldError",
+      "caller_source": "internal/controller/trainer_controller_test.go:557",
+      "callee": "isImmutableFieldError",
+      "callee_source": "internal/controller/trainer_controller.go:555",
+      "call_site_source": "internal/controller/trainer_controller_test.go:563",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTrainerCommonTypeConversion",
+      "caller_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "callee": "GetConditions",
+      "callee_source": "api/v1alpha1/trainer_types.go:77",
+      "call_site_source": "api/v1alpha1/trainer_platformobject_test.go:36",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTrainerCommonTypeConversion",
+      "caller_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "callee": "GetConditions",
+      "callee_source": "api/v1alpha1/trainer_types.go:77",
+      "call_site_source": "api/v1alpha1/trainer_platformobject_test.go:36",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTrainerCommonTypeConversion",
+      "caller_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "callee": "GetConditions",
+      "callee_source": "api/v1alpha1/trainer_types.go:77",
+      "call_site_source": "api/v1alpha1/trainer_platformobject_test.go:37",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformObjectInterface",
+      "caller_source": "api/v1alpha1/trainer_types_test.go:27",
+      "callee": "GetConditions",
+      "callee_source": "api/v1alpha1/trainer_types.go:77",
+      "call_site_source": "api/v1alpha1/trainer_types_test.go:43",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMetricsServerOptions",
+      "caller_source": "internal/tls/metrics_test.go:36",
+      "callee": "MetricsServerOptions",
+      "callee_source": "internal/tls/metrics.go:35",
+      "call_site_source": "internal/tls/metrics_test.go:41",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMetricsServerOptions",
+      "caller_source": "internal/tls/metrics_test.go:36",
+      "callee": "MetricsServerOptions",
+      "callee_source": "internal/tls/metrics.go:35",
+      "call_site_source": "internal/tls/metrics_test.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMetricsServerOptions",
+      "caller_source": "internal/tls/metrics_test.go:36",
+      "callee": "MetricsServerOptions",
+      "callee_source": "internal/tls/metrics.go:35",
+      "call_site_source": "internal/tls/metrics_test.go:63",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveRejectsUnusableStrictProfiles",
+      "caller_source": "internal/tls/profile_test.go:245",
+      "callee": "testAPIServerClient",
+      "callee_source": "internal/tls/profile_test.go:48",
+      "call_site_source": "internal/tls/profile_test.go:289",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveMapsMLKEMGroups",
+      "caller_source": "internal/tls/profile_test.go:296",
+      "callee": "testAPIServerClient",
+      "callee_source": "internal/tls/profile_test.go:48",
+      "call_site_source": "internal/tls/profile_test.go:309",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveMapsOpenSSLCipherName",
+      "caller_source": "internal/tls/profile_test.go:319",
+      "callee": "testAPIServerClient",
+      "callee_source": "internal/tls/profile_test.go:48",
+      "call_site_source": "internal/tls/profile_test.go:328",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveProfiles",
+      "caller_source": "internal/tls/profile_test.go:69",
+      "callee": "testAPIServerClient",
+      "callee_source": "internal/tls/profile_test.go:48",
+      "call_site_source": "internal/tls/profile_test.go:146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTrainerCommonTypeConversion",
+      "caller_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "callee": "GetReleaseStatus",
+      "callee_source": "api/v1alpha1/trainer_types.go:85",
+      "call_site_source": "api/v1alpha1/trainer_platformobject_test.go:41",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformObjectInterface",
+      "caller_source": "api/v1alpha1/trainer_types_test.go:27",
+      "callee": "GetReleaseStatus",
+      "callee_source": "api/v1alpha1/trainer_types.go:85",
+      "call_site_source": "api/v1alpha1/trainer_types_test.go:48",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformObjectInterface",
+      "caller_source": "api/v1alpha1/trainer_types_test.go:27",
+      "callee": "GetReleaseStatus",
+      "callee_source": "api/v1alpha1/trainer_types.go:85",
+      "call_site_source": "api/v1alpha1/trainer_types_test.go:59",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorCRWhenCRDExistsButCRDoesNotExist",
+      "caller_source": "internal/controller/dependencies_test.go:151",
+      "callee": "checkJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies.go:78",
+      "call_site_source": "internal/controller/dependencies_test.go:203",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorCRWhenCRDAndCRExist",
+      "caller_source": "internal/controller/dependencies_test.go:207",
+      "callee": "checkJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies.go:78",
+      "call_site_source": "internal/controller/dependencies_test.go:268",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorInstalledWhenNoOperatorFound",
+      "caller_source": "internal/controller/dependencies_test.go:281",
+      "callee": "checkJobSetOperatorInstalled",
+      "callee_source": "internal/controller/dependencies.go:64",
+      "call_site_source": "internal/controller/dependencies_test.go:296",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorInstalledViaClusterExtension",
+      "caller_source": "internal/controller/dependencies_test.go:300",
+      "callee": "checkJobSetOperatorInstalled",
+      "callee_source": "internal/controller/dependencies.go:64",
+      "call_site_source": "internal/controller/dependencies_test.go:307",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "caller_source": "internal/controller/manifests_test.go:137",
+      "callee": "operandTestConfig",
+      "callee_source": "internal/controller/manifests_test.go:52",
+      "call_site_source": "internal/controller/manifests_test.go:140",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "caller_source": "internal/controller/manifests_test.go:168",
+      "callee": "operandTestConfig",
+      "callee_source": "internal/controller/manifests_test.go:52",
+      "call_site_source": "internal/controller/manifests_test.go:171",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:93",
+      "callee": "operandTestConfig",
+      "callee_source": "internal/controller/manifests_test.go:52",
+      "call_site_source": "internal/controller/manifests_test.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "applyStaticParams",
+      "caller_source": "internal/controller/params.go:62",
+      "callee": "writeParams",
+      "callee_source": "internal/controller/params.go:132",
+      "call_site_source": "internal/controller/params.go:81",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "applyParamOverrides",
+      "caller_source": "internal/controller/params.go:84",
+      "callee": "writeParams",
+      "callee_source": "internal/controller/params.go:132",
+      "call_site_source": "internal/controller/params.go:105",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestWriteParams",
+      "caller_source": "internal/controller/params_test.go:42",
+      "callee": "writeParams",
+      "callee_source": "internal/controller/params.go:132",
+      "call_site_source": "internal/controller/params_test.go:49",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyStaticParams",
+      "caller_source": "internal/controller/params_test.go:78",
+      "callee": "applyStaticParams",
+      "callee_source": "internal/controller/params.go:62",
+      "call_site_source": "internal/controller/params_test.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyStaticParamsMissingParamsEnv",
+      "caller_source": "internal/controller/params_test.go:93",
+      "callee": "applyStaticParams",
+      "callee_source": "internal/controller/params.go:62",
+      "call_site_source": "internal/controller/params_test.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "checkJobSetOperatorCR",
+      "callee_source": "internal/controller/dependencies.go:78",
+      "call_site_source": "internal/controller/trainer_controller.go:289",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "checkJobSetOperatorInstalled",
+      "callee_source": "internal/controller/dependencies.go:64",
+      "call_site_source": "internal/controller/trainer_controller.go:286",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderResourceSet",
+      "caller_source": "internal/controller/trainer_controller.go:402",
+      "callee": "applyStaticParams",
+      "callee_source": "internal/controller/params.go:62",
+      "call_site_source": "internal/controller/trainer_controller.go:418",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestGetComponentReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:293",
+      "callee": "newTestActions",
+      "callee_source": "internal/controller/trainer_controller_test.go:598",
+      "call_site_source": "internal/controller/trainer_controller_test.go:296",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestEnsureNamespaceAlreadyExists",
+      "caller_source": "internal/controller/trainer_controller_test.go:538",
+      "callee": "newTestActions",
+      "callee_source": "internal/controller/trainer_controller_test.go:598",
+      "call_site_source": "internal/controller/trainer_controller_test.go:549",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "newTestReconciler",
+      "caller_source": "internal/controller/trainer_controller_test.go:568",
+      "callee": "newTestActions",
+      "callee_source": "internal/controller/trainer_controller_test.go:598",
+      "call_site_source": "internal/controller/trainer_controller_test.go:571",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestSetupWatcherSkipsUnwatchableResult",
+      "caller_source": "internal/tls/profile_test.go:338",
+      "callee": "SetupWatcher",
+      "callee_source": "internal/tls/profile.go:84",
+      "call_site_source": "internal/tls/profile_test.go:339",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestSetupWatcherSkipsUnwatchableResult",
+      "caller_source": "internal/tls/profile_test.go:338",
+      "callee": "SetupWatcher",
+      "callee_source": "internal/tls/profile.go:84",
+      "call_site_source": "internal/tls/profile_test.go:340",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTrainerCommonTypeConversion",
+      "caller_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "callee": "SetConditions",
+      "callee_source": "api/v1alpha1/trainer_types.go:81",
+      "call_site_source": "api/v1alpha1/trainer_platformobject_test.go:32",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestTrainerCommonTypeConversion",
+      "caller_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "callee": "SetReleaseStatus",
+      "callee_source": "api/v1alpha1/trainer_types.go:89",
+      "call_site_source": "api/v1alpha1/trainer_platformobject_test.go:40",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformObjectInterface",
+      "caller_source": "api/v1alpha1/trainer_types_test.go:27",
+      "callee": "SetConditions",
+      "callee_source": "api/v1alpha1/trainer_types.go:81",
+      "call_site_source": "api/v1alpha1/trainer_types_test.go:42",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformObjectInterface",
+      "caller_source": "api/v1alpha1/trainer_types_test.go:27",
+      "callee": "SetReleaseStatus",
+      "callee_source": "api/v1alpha1/trainer_types.go:89",
+      "call_site_source": "api/v1alpha1/trainer_types_test.go:58",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:63",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:64",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:63",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:64",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:63",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:64",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:63",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:64",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:63",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:64",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:34",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:122",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:139",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:53",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "DeepCopyObject",
+      "caller_source": "api/v1alpha1/zz_generated.deepcopy.go:95",
+      "callee": "DeepCopy",
+      "callee_source": "api/v1alpha1/zz_generated.deepcopy.go:85",
+      "call_site_source": "api/v1alpha1/zz_generated.deepcopy.go:96",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "checkJobSetOperatorHealth",
+      "caller_source": "internal/controller/dependencies.go:114",
+      "callee": "isJobSetOperatorConditionDegraded",
+      "callee_source": "internal/controller/dependencies.go:99",
+      "call_site_source": "internal/controller/dependencies.go:148",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestGetJobSetMissingMessage",
+      "caller_source": "internal/controller/dependencies_test.go:141",
+      "callee": "getJobSetMissingMessage",
+      "callee_source": "internal/controller/dependencies.go:183",
+      "call_site_source": "internal/controller/dependencies_test.go:144",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestGetJobSetOperatorCRMissingMessage",
+      "caller_source": "internal/controller/dependencies_test.go:272",
+      "callee": "getJobSetOperatorCRMissingMessage",
+      "callee_source": "internal/controller/dependencies.go:177",
+      "call_site_source": "internal/controller/dependencies_test.go:275",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestGetJobSetOperatorNotInstalledMessage",
+      "caller_source": "internal/controller/dependencies_test.go:311",
+      "callee": "getJobSetOperatorNotInstalledMessage",
+      "callee_source": "internal/controller/dependencies.go:172",
+      "call_site_source": "internal/controller/dependencies_test.go:314",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestIsJobSetOperatorConditionDegraded",
+      "caller_source": "internal/controller/dependencies_test.go:397",
+      "callee": "isJobSetOperatorConditionDegraded",
+      "callee_source": "internal/controller/dependencies.go:99",
+      "call_site_source": "internal/controller/dependencies_test.go:416",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsUsesDefaults",
+      "caller_source": "internal/controller/imagestreams_test.go:27",
+      "callee": "createTestImageStreamManifests",
+      "callee_source": "internal/controller/imagestreams_test.go:68",
+      "call_site_source": "internal/controller/imagestreams_test.go:30",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveImageStreamParamsEnvVarOverride",
+      "caller_source": "internal/controller/imagestreams_test.go:42",
+      "callee": "createTestImageStreamManifests",
+      "callee_source": "internal/controller/imagestreams_test.go:68",
+      "call_site_source": "internal/controller/imagestreams_test.go:48",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "caller_source": "internal/controller/manifests_test.go:120",
+      "callee": "operandTLSBlock",
+      "callee_source": "internal/controller/manifests_test.go:82",
+      "call_site_source": "internal/controller/manifests_test.go:128",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestFilterConfigMaps",
+      "caller_source": "internal/controller/manifests_test.go:17",
+      "callee": "filterConfigMaps",
+      "callee_source": "internal/controller/manifests.go:57",
+      "call_site_source": "internal/controller/manifests_test.go:28",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRenderDefaultOverlayPlacesPrometheusRuleInOperatorNamespace",
+      "caller_source": "internal/controller/manifests_test.go:34",
+      "callee": "renderOverlay",
+      "callee_source": "internal/controller/manifests.go:41",
+      "call_site_source": "internal/controller/manifests_test.go:37",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "caller_source": "internal/controller/manifests_test.go:93",
+      "callee": "operandTLSBlock",
+      "callee_source": "internal/controller/manifests_test.go:82",
+      "call_site_source": "internal/controller/manifests_test.go:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "getJobSetMissingMessage",
+      "callee_source": "internal/controller/dependencies.go:183",
+      "call_site_source": "internal/controller/trainer_controller.go:300",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "getJobSetOperatorCRMissingMessage",
+      "callee_source": "internal/controller/dependencies.go:177",
+      "call_site_source": "internal/controller/trainer_controller.go:290",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "getJobSetOperatorNotInstalledMessage",
+      "callee_source": "internal/controller/dependencies.go:172",
+      "call_site_source": "internal/controller/trainer_controller.go:287",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderResourceSet",
+      "caller_source": "internal/controller/trainer_controller.go:402",
+      "callee": "filterConfigMaps",
+      "callee_source": "internal/controller/manifests.go:57",
+      "call_site_source": "internal/controller/trainer_controller.go:429",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderResourceSet",
+      "caller_source": "internal/controller/trainer_controller.go:402",
+      "callee": "renderOverlay",
+      "callee_source": "internal/controller/manifests.go:41",
+      "call_site_source": "internal/controller/trainer_controller.go:423",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updateReleases",
+      "caller_source": "internal/controller/trainer_controller.go:441",
+      "callee": "appendOrUpdateRelease",
+      "callee_source": "internal/controller/trainer_controller.go:763",
+      "call_site_source": "internal/controller/trainer_controller.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updateReleases",
+      "caller_source": "internal/controller/trainer_controller.go:441",
+      "callee": "appendOrUpdateRelease",
+      "callee_source": "internal/controller/trainer_controller.go:763",
+      "call_site_source": "internal/controller/trainer_controller.go:473",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updateReleases",
+      "caller_source": "internal/controller/trainer_controller.go:441",
+      "callee": "getComponentReleases",
+      "callee_source": "internal/controller/trainer_controller.go:729",
+      "call_site_source": "internal/controller/trainer_controller.go:446",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanup",
+      "caller_source": "internal/controller/trainer_controller.go:487",
+      "callee": "cleanupTrainerResources",
+      "callee_source": "internal/controller/trainer_controller.go:585",
+      "call_site_source": "internal/controller/trainer_controller.go:497",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "cleanupTrainerResources",
+      "caller_source": "internal/controller/trainer_controller.go:585",
+      "callee": "List",
+      "callee_source": "internal/controller/trainer_controller_test.go:723",
+      "call_site_source": "internal/controller/trainer_controller.go:597",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "removeRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:627",
+      "callee": "List",
+      "callee_source": "internal/controller/trainer_controller_test.go:723",
+      "call_site_source": "internal/controller/trainer_controller.go:638",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "caller_source": "internal/controller/trainer_controller_test.go:170",
+      "callee": "cleanupTrainerResources",
+      "callee_source": "internal/controller/trainer_controller.go:585",
+      "call_site_source": "internal/controller/trainer_controller_test.go:201",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestGetComponentReleases",
+      "caller_source": "internal/controller/trainer_controller_test.go:293",
+      "callee": "getComponentReleases",
+      "callee_source": "internal/controller/trainer_controller.go:729",
+      "call_site_source": "internal/controller/trainer_controller_test.go:298",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestReconcileDegradedWhenDependencyMissing",
+      "caller_source": "internal/controller/trainer_controller_test.go:484",
+      "callee": "deleteJobSetCRDAndWait",
+      "callee_source": "internal/controller/trainer_controller_test.go:694",
+      "call_site_source": "internal/controller/trainer_controller_test.go:488",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "newTestReconciler",
+      "caller_source": "internal/controller/trainer_controller_test.go:568",
+      "callee": "NewReconciler",
+      "callee_source": "internal/controller/trainer_controller.go:189",
+      "call_site_source": "internal/controller/trainer_controller_test.go:576",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "createJobSetCRD",
+      "caller_source": "internal/controller/trainer_controller_test.go:652",
+      "callee": "deleteJobSetCRDAndWait",
+      "callee_source": "internal/controller/trainer_controller_test.go:694",
+      "call_site_source": "internal/controller/trainer_controller_test.go:690",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "SetupWatcher",
+      "caller_source": "internal/tls/profile.go:84",
+      "callee": "newSecurityProfileWatcher",
+      "callee_source": "internal/tls/profile.go:96",
+      "call_site_source": "internal/tls/profile.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestResolveFetchFallbacks",
+      "caller_source": "internal/tls/profile_test.go:190",
+      "callee": "testScheme",
+      "callee_source": "internal/tls/profile_test.go:42",
+      "call_site_source": "internal/tls/profile_test.go:226",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestNewSecurityProfileWatcherInitialStateAndCallbacks",
+      "caller_source": "internal/tls/profile_test.go:343",
+      "callee": "newSecurityProfileWatcher",
+      "callee_source": "internal/tls/profile.go:96",
+      "call_site_source": "internal/tls/profile_test.go:384",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "testAPIServerClient",
+      "caller_source": "internal/tls/profile_test.go:48",
+      "callee": "testScheme",
+      "callee_source": "internal/tls/profile_test.go:42",
+      "call_site_source": "internal/tls/profile_test.go:49",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestPlatformObjectInterface",
+      "caller_source": "api/v1alpha1/trainer_types_test.go:27",
+      "callee": "GetStatus",
+      "callee_source": "api/v1alpha1/trainer_types.go:73",
+      "call_site_source": "api/v1alpha1/trainer_types_test.go:32",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestCheckJobSetOperatorInstalledViaClusterExtension",
+      "caller_source": "internal/controller/dependencies_test.go:300",
+      "callee": "newInstalledClusterExtension",
+      "callee_source": "internal/controller/dependencies_test.go:421",
+      "call_site_source": "internal/controller/dependencies_test.go:304",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ensureWorkDir",
+      "caller_source": "internal/controller/manifests.go:159",
+      "callee": "copyDir",
+      "callee_source": "internal/controller/manifests.go:168",
+      "call_site_source": "internal/controller/manifests.go:165",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "copyDir",
+      "caller_source": "internal/controller/manifests.go:168",
+      "callee": "copyFile",
+      "callee_source": "internal/controller/manifests.go:192",
+      "call_site_source": "internal/controller/manifests.go:188",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMain",
+      "caller_source": "internal/controller/suite_test.go:59",
+      "callee": "createTestImageStreams",
+      "callee_source": "internal/controller/suite_test.go:292",
+      "call_site_source": "internal/controller/suite_test.go:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMain",
+      "caller_source": "internal/controller/suite_test.go:59",
+      "callee": "createTestManifests",
+      "callee_source": "internal/controller/suite_test.go:192",
+      "call_site_source": "internal/controller/suite_test.go:130",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMain",
+      "caller_source": "internal/controller/suite_test.go:59",
+      "callee": "createTestRuntimes",
+      "callee_source": "internal/controller/suite_test.go:239",
+      "call_site_source": "internal/controller/suite_test.go:136",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMain",
+      "caller_source": "internal/controller/suite_test.go:59",
+      "callee": "findModuleCRDPath",
+      "callee_source": "internal/controller/suite_test.go:315",
+      "call_site_source": "internal/controller/suite_test.go:83",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMain",
+      "caller_source": "internal/controller/suite_test.go:59",
+      "callee": "getFirstFoundEnvTestBinaryDir",
+      "callee_source": "internal/controller/suite_test.go:177",
+      "call_site_source": "internal/controller/suite_test.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "NewReconciler",
+      "caller_source": "internal/controller/trainer_controller.go:189",
+      "callee": "readBootstrapRelease",
+      "callee_source": "internal/controller/trainer_controller.go:701",
+      "call_site_source": "internal/controller/trainer_controller.go:257",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "NewReconciler",
+      "caller_source": "internal/controller/trainer_controller.go:189",
+      "callee": "withImmutableFieldRecovery",
+      "callee_source": "internal/controller/trainer_controller.go:518",
+      "call_site_source": "internal/controller/trainer_controller.go:217",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "checkDependencies",
+      "caller_source": "internal/controller/trainer_controller.go:271",
+      "callee": "getJobSetMissingMessageOpenShift",
+      "callee_source": "internal/controller/dependencies.go:189",
+      "call_site_source": "internal/controller/trainer_controller.go:296",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderManifests",
+      "caller_source": "internal/controller/trainer_controller.go:348",
+      "callee": "renderResourceSet",
+      "callee_source": "internal/controller/trainer_controller.go:402",
+      "call_site_source": "internal/controller/trainer_controller.go:390",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "renderResourceSet",
+      "caller_source": "internal/controller/trainer_controller.go:402",
+      "callee": "ensureWorkDir",
+      "callee_source": "internal/controller/manifests.go:159",
+      "call_site_source": "internal/controller/trainer_controller.go:405",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updateReleases",
+      "caller_source": "internal/controller/trainer_controller.go:441",
+      "callee": "currentPlatformVersion",
+      "callee_source": "internal/controller/trainer_controller.go:754",
+      "call_site_source": "internal/controller/trainer_controller.go:461",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "updateReleases",
+      "caller_source": "internal/controller/trainer_controller.go:441",
+      "callee": "getPlatformVersion",
+      "callee_source": "internal/controller/trainer_controller.go:685",
+      "call_site_source": "internal/controller/trainer_controller.go:455",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "removeRuntimeFinalizers",
+      "caller_source": "internal/controller/trainer_controller.go:627",
+      "callee": "filterFinalizer",
+      "callee_source": "internal/controller/trainer_controller.go:675",
+      "call_site_source": "internal/controller/trainer_controller.go:655",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestEnsureNamespaceAlreadyExists",
+      "caller_source": "internal/controller/trainer_controller_test.go:538",
+      "callee": "ensureNamespace",
+      "callee_source": "internal/controller/trainer_controller.go:318",
+      "call_site_source": "internal/controller/trainer_controller_test.go:550",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "MetricsServerOptions",
+      "caller_source": "internal/tls/metrics.go:35",
+      "callee": "loadMetricsCertificate",
+      "callee_source": "internal/tls/metrics.go:51",
+      "call_site_source": "internal/tls/metrics.go:46",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestMetricsServerOptions",
+      "caller_source": "internal/tls/metrics_test.go:36",
+      "callee": "writeTestServingCerts",
+      "callee_source": "internal/tls/metrics_test.go:85",
+      "call_site_source": "internal/tls/metrics_test.go:78",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TranslateProfile",
+      "caller_source": "internal/tls/operand.go:91",
+      "callee": "goCipherName",
+      "callee_source": "internal/tls/operand.go:61",
+      "call_site_source": "internal/tls/operand.go:116",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TranslateProfile",
+      "caller_source": "internal/tls/operand.go:91",
+      "callee": "isTLS13CipherID",
+      "callee_source": "internal/tls/operand.go:144",
+      "call_site_source": "internal/tls/operand.go:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TranslateProfile",
+      "caller_source": "internal/tls/operand.go:91",
+      "callee": "resolveCipherID",
+      "callee_source": "internal/tls/operand.go:44",
+      "call_site_source": "internal/tls/operand.go:112",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "test_relationships": [
+    {
+      "test": "TestTrainerCommonTypeConversion",
+      "test_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "target": "GetConditions",
+      "target_source": "api/v1alpha1/trainer_types.go:77",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTrainerCommonTypeConversion",
+      "test_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "target": "GetReleaseStatus",
+      "target_source": "api/v1alpha1/trainer_types.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTrainerCommonTypeConversion",
+      "test_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "target": "SetConditions",
+      "target_source": "api/v1alpha1/trainer_types.go:81",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTrainerCommonTypeConversion",
+      "test_source": "api/v1alpha1/trainer_platformobject_test.go:27",
+      "target": "SetReleaseStatus",
+      "target_source": "api/v1alpha1/trainer_types.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformObjectInterface",
+      "test_source": "api/v1alpha1/trainer_types_test.go:27",
+      "target": "GetConditions",
+      "target_source": "api/v1alpha1/trainer_types.go:77",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformObjectInterface",
+      "test_source": "api/v1alpha1/trainer_types_test.go:27",
+      "target": "GetReleaseStatus",
+      "target_source": "api/v1alpha1/trainer_types.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformObjectInterface",
+      "test_source": "api/v1alpha1/trainer_types_test.go:27",
+      "target": "GetStatus",
+      "target_source": "api/v1alpha1/trainer_types.go:73",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformObjectInterface",
+      "test_source": "api/v1alpha1/trainer_types_test.go:27",
+      "target": "SetConditions",
+      "target_source": "api/v1alpha1/trainer_types.go:81",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformObjectInterface",
+      "test_source": "api/v1alpha1/trainer_types_test.go:27",
+      "target": "SetReleaseStatus",
+      "target_source": "api/v1alpha1/trainer_types.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetAvailableWhenCRDNotEstablished",
+      "test_source": "internal/controller/dependencies_test.go:106",
+      "target": "checkJobSetAvailable",
+      "target_source": "internal/controller/dependencies.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestGetJobSetMissingMessage",
+      "test_source": "internal/controller/dependencies_test.go:141",
+      "target": "getJobSetMissingMessage",
+      "target_source": "internal/controller/dependencies.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorCRWhenCRDExistsButCRDoesNotExist",
+      "test_source": "internal/controller/dependencies_test.go:151",
+      "target": "checkJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies.go:78",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorCRWhenCRDAndCRExist",
+      "test_source": "internal/controller/dependencies_test.go:207",
+      "target": "checkJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies.go:78",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestGetJobSetOperatorCRMissingMessage",
+      "test_source": "internal/controller/dependencies_test.go:272",
+      "target": "getJobSetOperatorCRMissingMessage",
+      "target_source": "internal/controller/dependencies.go:177",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorInstalledWhenNoOperatorFound",
+      "test_source": "internal/controller/dependencies_test.go:281",
+      "target": "checkJobSetOperatorInstalled",
+      "target_source": "internal/controller/dependencies.go:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorInstalledViaClusterExtension",
+      "test_source": "internal/controller/dependencies_test.go:300",
+      "target": "checkJobSetOperatorInstalled",
+      "target_source": "internal/controller/dependencies.go:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorInstalledViaClusterExtension",
+      "test_source": "internal/controller/dependencies_test.go:300",
+      "target": "newInstalledClusterExtension",
+      "target_source": "internal/controller/dependencies_test.go:421",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestGetJobSetOperatorNotInstalledMessage",
+      "test_source": "internal/controller/dependencies_test.go:311",
+      "target": "getJobSetOperatorNotInstalledMessage",
+      "target_source": "internal/controller/dependencies.go:172",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenHealthy",
+      "test_source": "internal/controller/dependencies_test.go:320",
+      "target": "checkJobSetOperatorHealth",
+      "target_source": "internal/controller/dependencies.go:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenHealthy",
+      "test_source": "internal/controller/dependencies_test.go:320",
+      "target": "newClientWithJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenHealthy",
+      "test_source": "internal/controller/dependencies_test.go:320",
+      "target": "newJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenNoConditions",
+      "test_source": "internal/controller/dependencies_test.go:335",
+      "target": "checkJobSetOperatorHealth",
+      "target_source": "internal/controller/dependencies.go:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenNoConditions",
+      "test_source": "internal/controller/dependencies_test.go:335",
+      "target": "newClientWithJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenNoConditions",
+      "test_source": "internal/controller/dependencies_test.go:335",
+      "target": "newJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenDegradedTrue",
+      "test_source": "internal/controller/dependencies_test.go:348",
+      "target": "checkJobSetOperatorHealth",
+      "target_source": "internal/controller/dependencies.go:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenDegradedTrue",
+      "test_source": "internal/controller/dependencies_test.go:348",
+      "target": "newClientWithJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenDegradedTrue",
+      "test_source": "internal/controller/dependencies_test.go:348",
+      "target": "newJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenAvailableFalse",
+      "test_source": "internal/controller/dependencies_test.go:365",
+      "target": "checkJobSetOperatorHealth",
+      "target_source": "internal/controller/dependencies.go:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenAvailableFalse",
+      "test_source": "internal/controller/dependencies_test.go:365",
+      "target": "newClientWithJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWhenAvailableFalse",
+      "test_source": "internal/controller/dependencies_test.go:365",
+      "target": "newJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWithMultipleDegradedConditions",
+      "test_source": "internal/controller/dependencies_test.go:380",
+      "target": "checkJobSetOperatorHealth",
+      "target_source": "internal/controller/dependencies.go:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWithMultipleDegradedConditions",
+      "test_source": "internal/controller/dependencies_test.go:380",
+      "target": "newClientWithJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetOperatorHealthWithMultipleDegradedConditions",
+      "test_source": "internal/controller/dependencies_test.go:380",
+      "target": "newJobSetOperatorCR",
+      "target_source": "internal/controller/dependencies_test.go:451",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestIsJobSetOperatorConditionDegraded",
+      "test_source": "internal/controller/dependencies_test.go:397",
+      "target": "isJobSetOperatorConditionDegraded",
+      "target_source": "internal/controller/dependencies.go:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetAvailableWhenCRDExistsAndEstablished",
+      "test_source": "internal/controller/dependencies_test.go:52",
+      "target": "checkJobSetAvailable",
+      "target_source": "internal/controller/dependencies.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCheckJobSetAvailableWhenCRDDoesNotExist",
+      "test_source": "internal/controller/dependencies_test.go:87",
+      "target": "checkJobSetAvailable",
+      "target_source": "internal/controller/dependencies.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsUsesDefaults",
+      "test_source": "internal/controller/imagestreams_test.go:27",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsUsesDefaults",
+      "test_source": "internal/controller/imagestreams_test.go:27",
+      "target": "createTestImageStreamManifests",
+      "target_source": "internal/controller/imagestreams_test.go:68",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsUsesDefaults",
+      "test_source": "internal/controller/imagestreams_test.go:27",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsEnvVarOverride",
+      "test_source": "internal/controller/imagestreams_test.go:42",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsEnvVarOverride",
+      "test_source": "internal/controller/imagestreams_test.go:42",
+      "target": "createTestImageStreamManifests",
+      "target_source": "internal/controller/imagestreams_test.go:68",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsEnvVarOverride",
+      "test_source": "internal/controller/imagestreams_test.go:42",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveImageStreamParamsMissingFile",
+      "test_source": "internal/controller/imagestreams_test.go:60",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "test_source": "internal/controller/manifests_test.go:120",
+      "target": "applyOperandTLSOptions",
+      "target_source": "internal/controller/manifests.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "test_source": "internal/controller/manifests_test.go:120",
+      "target": "mkOperandConfigMap",
+      "target_source": "internal/controller/manifests_test.go:61",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "test_source": "internal/controller/manifests_test.go:120",
+      "target": "mkOperandDeployment",
+      "target_source": "internal/controller/manifests_test.go:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsEmptyOperandConfig",
+      "test_source": "internal/controller/manifests_test.go:120",
+      "target": "operandTLSBlock",
+      "target_source": "internal/controller/manifests_test.go:82",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "test_source": "internal/controller/manifests_test.go:137",
+      "target": "applyOperandTLSOptions",
+      "target_source": "internal/controller/manifests.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "test_source": "internal/controller/manifests_test.go:137",
+      "target": "mkOperandConfigMap",
+      "target_source": "internal/controller/manifests_test.go:61",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "test_source": "internal/controller/manifests_test.go:137",
+      "target": "mkOperandDeployment",
+      "target_source": "internal/controller/manifests_test.go:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsHashRollsWithProfile",
+      "test_source": "internal/controller/manifests_test.go:137",
+      "target": "operandTestConfig",
+      "target_source": "internal/controller/manifests_test.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsNoConfigMapNoAnnotation",
+      "test_source": "internal/controller/manifests_test.go:157",
+      "target": "applyOperandTLSOptions",
+      "target_source": "internal/controller/manifests.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsNoConfigMapNoAnnotation",
+      "test_source": "internal/controller/manifests_test.go:157",
+      "target": "mkOperandDeployment",
+      "target_source": "internal/controller/manifests_test.go:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "test_source": "internal/controller/manifests_test.go:168",
+      "target": "applyOperandTLSOptions",
+      "target_source": "internal/controller/manifests.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "test_source": "internal/controller/manifests_test.go:168",
+      "target": "mkOperandConfigMap",
+      "target_source": "internal/controller/manifests_test.go:61",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "test_source": "internal/controller/manifests_test.go:168",
+      "target": "mkOperandDeployment",
+      "target_source": "internal/controller/manifests_test.go:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsGroupOnlyChangeRollsHash",
+      "test_source": "internal/controller/manifests_test.go:168",
+      "target": "operandTestConfig",
+      "target_source": "internal/controller/manifests_test.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestFilterConfigMaps",
+      "test_source": "internal/controller/manifests_test.go:17",
+      "target": "filterConfigMaps",
+      "target_source": "internal/controller/manifests.go:57",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRenderDefaultOverlayPlacesPrometheusRuleInOperatorNamespace",
+      "test_source": "internal/controller/manifests_test.go:34",
+      "target": "renderOverlay",
+      "target_source": "internal/controller/manifests.go:41",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "test_source": "internal/controller/manifests_test.go:93",
+      "target": "applyOperandTLSOptions",
+      "target_source": "internal/controller/manifests.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "test_source": "internal/controller/manifests_test.go:93",
+      "target": "mkOperandConfigMap",
+      "target_source": "internal/controller/manifests_test.go:61",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "test_source": "internal/controller/manifests_test.go:93",
+      "target": "mkOperandDeployment",
+      "target_source": "internal/controller/manifests_test.go:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "test_source": "internal/controller/manifests_test.go:93",
+      "target": "operandTLSBlock",
+      "target_source": "internal/controller/manifests_test.go:82",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyOperandTLSOptionsInjectsConfigAndAnnotation",
+      "test_source": "internal/controller/manifests_test.go:93",
+      "target": "operandTestConfig",
+      "target_source": "internal/controller/manifests_test.go:52",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesOpenMPICPUImage",
+      "test_source": "internal/controller/params_test.go:115",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesOpenMPICPUImage",
+      "test_source": "internal/controller/params_test.go:115",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReadParams",
+      "test_source": "internal/controller/params_test.go:27",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestWriteParams",
+      "test_source": "internal/controller/params_test.go:42",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestWriteParams",
+      "test_source": "internal/controller/params_test.go:42",
+      "target": "writeParams",
+      "target_source": "internal/controller/params.go:132",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesFromEnv",
+      "test_source": "internal/controller/params_test.go:56",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesFromEnv",
+      "test_source": "internal/controller/params_test.go:56",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesMissingParamsEnv",
+      "test_source": "internal/controller/params_test.go:72",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyStaticParams",
+      "test_source": "internal/controller/params_test.go:78",
+      "target": "applyStaticParams",
+      "target_source": "internal/controller/params.go:62",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyStaticParams",
+      "test_source": "internal/controller/params_test.go:78",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyStaticParamsMissingParamsEnv",
+      "test_source": "internal/controller/params_test.go:93",
+      "target": "applyStaticParams",
+      "target_source": "internal/controller/params.go:62",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesOpenMPICUDAImage",
+      "test_source": "internal/controller/params_test.go:99",
+      "target": "applyParamOverrides",
+      "target_source": "internal/controller/params.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestApplyParamOverridesOpenMPICUDAImage",
+      "test_source": "internal/controller/params_test.go:99",
+      "target": "readParams",
+      "target_source": "internal/controller/params.go:108",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMain",
+      "test_source": "internal/controller/suite_test.go:59",
+      "target": "createTestImageStreams",
+      "target_source": "internal/controller/suite_test.go:292",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMain",
+      "test_source": "internal/controller/suite_test.go:59",
+      "target": "createTestManifests",
+      "target_source": "internal/controller/suite_test.go:192",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMain",
+      "test_source": "internal/controller/suite_test.go:59",
+      "target": "createTestRuntimes",
+      "target_source": "internal/controller/suite_test.go:239",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMain",
+      "test_source": "internal/controller/suite_test.go:59",
+      "target": "findModuleCRDPath",
+      "target_source": "internal/controller/suite_test.go:315",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMain",
+      "test_source": "internal/controller/suite_test.go:59",
+      "target": "getFirstFoundEnvTestBinaryDir",
+      "target_source": "internal/controller/suite_test.go:177",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileNotFound",
+      "test_source": "internal/controller/trainer_controller_test.go:131",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveNamespace",
+      "test_source": "internal/controller/trainer_controller_test.go:158",
+      "target": "resolveNamespace",
+      "target_source": "internal/controller/trainer_controller.go:773",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "test_source": "internal/controller/trainer_controller_test.go:170",
+      "target": "Get",
+      "target_source": "internal/tls/profile_test.go:65",
+      "confidence": "INFERRED"
+    },
+    {
+      "test": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "test_source": "internal/controller/trainer_controller_test.go:170",
+      "target": "Namespace",
+      "target_source": "internal/controller/trainer_controller_test.go:721",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "test_source": "internal/controller/trainer_controller_test.go:170",
+      "target": "Resource",
+      "target_source": "internal/controller/trainer_controller_test.go:712",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "test_source": "internal/controller/trainer_controller_test.go:170",
+      "target": "cleanupTrainerResources",
+      "target_source": "internal/controller/trainer_controller.go:585",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestCleanupTrainerResourcesDeletesLabeledResources",
+      "test_source": "internal/controller/trainer_controller_test.go:170",
+      "target": "newUnstructured",
+      "target_source": "internal/controller/trainer_controller_test.go:727",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "test_source": "internal/controller/trainer_controller_test.go:213",
+      "target": "Get",
+      "target_source": "internal/tls/profile_test.go:65",
+      "confidence": "INFERRED"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "test_source": "internal/controller/trainer_controller_test.go:213",
+      "target": "Namespace",
+      "target_source": "internal/controller/trainer_controller_test.go:721",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "test_source": "internal/controller/trainer_controller_test.go:213",
+      "target": "Resource",
+      "target_source": "internal/controller/trainer_controller_test.go:712",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "test_source": "internal/controller/trainer_controller_test.go:213",
+      "target": "newUnstructured",
+      "target_source": "internal/controller/trainer_controller_test.go:727",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersStripsAllFinalizers",
+      "test_source": "internal/controller/trainer_controller_test.go:213",
+      "target": "removeRuntimeFinalizers",
+      "target_source": "internal/controller/trainer_controller.go:627",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersSkipsMissingRuntimeAPI",
+      "test_source": "internal/controller/trainer_controller_test.go:271",
+      "target": "removeRuntimeFinalizers",
+      "target_source": "internal/controller/trainer_controller.go:627",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRemoveRuntimeFinalizersPropagatesListErrors",
+      "test_source": "internal/controller/trainer_controller_test.go:281",
+      "target": "removeRuntimeFinalizers",
+      "target_source": "internal/controller/trainer_controller.go:627",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestGetComponentReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:293",
+      "target": "getComponentReleases",
+      "target_source": "internal/controller/trainer_controller.go:729",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestGetComponentReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:293",
+      "target": "newTestActions",
+      "target_source": "internal/controller/trainer_controller_test.go:598",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManagedPopulatesReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:307",
+      "target": "cleanupNamespace",
+      "target_source": "internal/controller/trainer_controller_test.go:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManagedPopulatesReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:307",
+      "target": "cleanupTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:629",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManagedPopulatesReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:307",
+      "target": "createJobSetCRD",
+      "target_source": "internal/controller/trainer_controller_test.go:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManagedPopulatesReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:307",
+      "target": "getTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:614",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManagedPopulatesReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:307",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManagedPopulatesReleases",
+      "test_source": "internal/controller/trainer_controller_test.go:307",
+      "target": "testRequest",
+      "target_source": "internal/controller/trainer_controller_test.go:608",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformVersionHandshake",
+      "test_source": "internal/controller/trainer_controller_test.go:339",
+      "target": "cleanupNamespace",
+      "target_source": "internal/controller/trainer_controller_test.go:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformVersionHandshake",
+      "test_source": "internal/controller/trainer_controller_test.go:339",
+      "target": "cleanupTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:629",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformVersionHandshake",
+      "test_source": "internal/controller/trainer_controller_test.go:339",
+      "target": "createJobSetCRD",
+      "target_source": "internal/controller/trainer_controller_test.go:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformVersionHandshake",
+      "test_source": "internal/controller/trainer_controller_test.go:339",
+      "target": "getTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:614",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformVersionHandshake",
+      "test_source": "internal/controller/trainer_controller_test.go:339",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestPlatformVersionHandshake",
+      "test_source": "internal/controller/trainer_controller_test.go:339",
+      "target": "testRequest",
+      "target_source": "internal/controller/trainer_controller_test.go:608",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "Get",
+      "target_source": "internal/tls/profile_test.go:65",
+      "confidence": "INFERRED"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "cleanupNamespace",
+      "target_source": "internal/controller/trainer_controller_test.go:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "cleanupTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:629",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "createJobSetCRD",
+      "target_source": "internal/controller/trainer_controller_test.go:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "getTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:614",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDeleteAndRecreate",
+      "test_source": "internal/controller/trainer_controller_test.go:423",
+      "target": "testRequest",
+      "target_source": "internal/controller/trainer_controller_test.go:608",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "cleanupNamespace",
+      "target_source": "internal/controller/trainer_controller_test.go:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "cleanupTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:629",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "createJobSetCRD",
+      "target_source": "internal/controller/trainer_controller_test.go:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "deleteJobSetCRDAndWait",
+      "target_source": "internal/controller/trainer_controller_test.go:694",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "findCondition",
+      "target_source": "internal/controller/trainer_controller_test.go:620",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "getTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:614",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDegradedWhenDependencyMissing",
+      "test_source": "internal/controller/trainer_controller_test.go:484",
+      "target": "testRequest",
+      "target_source": "internal/controller/trainer_controller_test.go:608",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestEnsureNamespaceAlreadyExists",
+      "test_source": "internal/controller/trainer_controller_test.go:538",
+      "target": "cleanupNamespace",
+      "target_source": "internal/controller/trainer_controller_test.go:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestEnsureNamespaceAlreadyExists",
+      "test_source": "internal/controller/trainer_controller_test.go:538",
+      "target": "ensureNamespace",
+      "target_source": "internal/controller/trainer_controller.go:318",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestEnsureNamespaceAlreadyExists",
+      "test_source": "internal/controller/trainer_controller_test.go:538",
+      "target": "newTestActions",
+      "target_source": "internal/controller/trainer_controller_test.go:598",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestIsImmutableFieldError",
+      "test_source": "internal/controller/trainer_controller_test.go:557",
+      "target": "isImmutableFieldError",
+      "target_source": "internal/controller/trainer_controller.go:555",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "Get",
+      "target_source": "internal/tls/profile_test.go:65",
+      "confidence": "INFERRED"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "cleanupNamespace",
+      "target_source": "internal/controller/trainer_controller_test.go:645",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "cleanupTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:629",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "createJobSetCRD",
+      "target_source": "internal/controller/trainer_controller_test.go:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "findCondition",
+      "target_source": "internal/controller/trainer_controller_test.go:620",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "getTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:614",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileManaged",
+      "test_source": "internal/controller/trainer_controller_test.go:57",
+      "target": "testRequest",
+      "target_source": "internal/controller/trainer_controller_test.go:608",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDelete",
+      "test_source": "internal/controller/trainer_controller_test.go:99",
+      "target": "Get",
+      "target_source": "internal/tls/profile_test.go:65",
+      "confidence": "INFERRED"
+    },
+    {
+      "test": "TestReconcileDelete",
+      "test_source": "internal/controller/trainer_controller_test.go:99",
+      "target": "cleanupTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:629",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDelete",
+      "test_source": "internal/controller/trainer_controller_test.go:99",
+      "target": "createJobSetCRD",
+      "target_source": "internal/controller/trainer_controller_test.go:652",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDelete",
+      "test_source": "internal/controller/trainer_controller_test.go:99",
+      "target": "getTrainer",
+      "target_source": "internal/controller/trainer_controller_test.go:614",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDelete",
+      "test_source": "internal/controller/trainer_controller_test.go:99",
+      "target": "newTestReconciler",
+      "target_source": "internal/controller/trainer_controller_test.go:568",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestReconcileDelete",
+      "test_source": "internal/controller/trainer_controller_test.go:99",
+      "target": "testRequest",
+      "target_source": "internal/controller/trainer_controller_test.go:608",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMetricsServerOptions",
+      "test_source": "internal/tls/metrics_test.go:36",
+      "target": "MetricsServerOptions",
+      "target_source": "internal/tls/metrics.go:35",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestMetricsServerOptions",
+      "test_source": "internal/tls/metrics_test.go:36",
+      "target": "writeTestServingCerts",
+      "target_source": "internal/tls/metrics_test.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileCustomTLS13NamesDropped",
+      "test_source": "internal/tls/operand_test.go:104",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileGoNamesPassThrough",
+      "test_source": "internal/tls/operand_test.go:123",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileEmptyVersionOmitted",
+      "test_source": "internal/tls/operand_test.go:138",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileProjectsCurvePreferences",
+      "test_source": "internal/tls/operand_test.go:151",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileOmitsCurvePreferencesWithoutGroups",
+      "test_source": "internal/tls/operand_test.go:167",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileIntermediateProjectsGroupIDs",
+      "test_source": "internal/tls/operand_test.go:177",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileFailsClosedOnUnsupportedGroups",
+      "test_source": "internal/tls/operand_test.go:189",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileIntermediate",
+      "test_source": "internal/tls/operand_test.go:28",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileModernOmitsCipherSuites",
+      "test_source": "internal/tls/operand_test.go:50",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileOldKeepsLegacySuites",
+      "test_source": "internal/tls/operand_test.go:68",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestTranslateProfileFiltersRC4",
+      "test_source": "internal/tls/operand_test.go:85",
+      "target": "TranslateProfile",
+      "target_source": "internal/tls/operand.go:91",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveFetchFallbacks",
+      "test_source": "internal/tls/profile_test.go:190",
+      "target": "Resolve",
+      "target_source": "internal/tls/profile.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveFetchFallbacks",
+      "test_source": "internal/tls/profile_test.go:190",
+      "target": "testScheme",
+      "target_source": "internal/tls/profile_test.go:42",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveRejectsUnusableStrictProfiles",
+      "test_source": "internal/tls/profile_test.go:245",
+      "target": "Resolve",
+      "target_source": "internal/tls/profile.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveRejectsUnusableStrictProfiles",
+      "test_source": "internal/tls/profile_test.go:245",
+      "target": "testAPIServerClient",
+      "target_source": "internal/tls/profile_test.go:48",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveMapsMLKEMGroups",
+      "test_source": "internal/tls/profile_test.go:296",
+      "target": "Resolve",
+      "target_source": "internal/tls/profile.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveMapsMLKEMGroups",
+      "test_source": "internal/tls/profile_test.go:296",
+      "target": "testAPIServerClient",
+      "target_source": "internal/tls/profile_test.go:48",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveMapsOpenSSLCipherName",
+      "test_source": "internal/tls/profile_test.go:319",
+      "target": "Resolve",
+      "target_source": "internal/tls/profile.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveMapsOpenSSLCipherName",
+      "test_source": "internal/tls/profile_test.go:319",
+      "target": "testAPIServerClient",
+      "target_source": "internal/tls/profile_test.go:48",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestSetupWatcherSkipsUnwatchableResult",
+      "test_source": "internal/tls/profile_test.go:338",
+      "target": "SetupWatcher",
+      "target_source": "internal/tls/profile.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestNewSecurityProfileWatcherInitialStateAndCallbacks",
+      "test_source": "internal/tls/profile_test.go:343",
+      "target": "newSecurityProfileWatcher",
+      "target_source": "internal/tls/profile.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveProfiles",
+      "test_source": "internal/tls/profile_test.go:69",
+      "target": "Resolve",
+      "target_source": "internal/tls/profile.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestResolveProfiles",
+      "test_source": "internal/tls/profile_test.go:69",
+      "target": "testAPIServerClient",
+      "target_source": "internal/tls/profile_test.go:48",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "moderate",
+    "component_refs": "none",
+    "configmap_volumes": "sparse",
+    "configmaps": "none",
+    "crds": "sparse",
+    "deployments": "moderate",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "rich",
+    "label_contracts": "rich",
+    "network_policies": "sparse",
+    "operator_config": "rich",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "rich",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "sparse",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}
