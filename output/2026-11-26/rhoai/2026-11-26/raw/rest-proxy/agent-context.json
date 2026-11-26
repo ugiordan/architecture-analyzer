@@ -1,0 +1,3026 @@
+{
+  "schema_version": 1,
+  "component": "rest-proxy",
+  "repo": "red-hat-data-services/rest-proxy",
+  "commit_sha": "cdd1685b674af118a505a77b1de7c1a84b64fe95",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "rest-proxy is a Kubernetes component. connecting to external services: grpc. with 46 operator config constants (18 env vars). references components: kserve (import).",
+  "repository_description": "This REST Proxy leverages gRPC-Gateway to create a reverse-proxy server which translates a RESTful HTTP API into gRPC. This allows sending inference requests using the KServe V2 REST Predict Protocol to platforms that expect the gRPC V2 Predict Protocol.",
+  "description_source": "README.md:5",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 9,
+    "functions": 219,
+    "test_functions": 6,
+    "call_sites": 713,
+    "resolved_calls": 346,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "go",
+      "source_files": 9,
+      "functions": 219,
+      "test_functions": 6
+    },
+    {
+      "name": "unknown",
+      "source_files": 9,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "gen",
+      "source_files": 3,
+      "functions": 184,
+      "test_functions": 0,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "file_grpc_predict_v2_proto_rawDescGZIP",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:1557",
+          "complexity": 1,
+          "callers": 18
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:1045",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:1118",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:1197",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:1263",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:138",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:179",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:230",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:285",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:330",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:375",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "String",
+          "language": "go",
+          "source": "gen/grpc_predict_v2.pb.go:440",
+          "complexity": 1,
+          "callers": 12
+        }
+      ],
+      "symbols_truncated": 172
+    },
+    {
+      "path": "proxy",
+      "source_files": 6,
+      "functions": 35,
+      "test_functions": 6,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "go",
+          "source": "proxy/main.go:135",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "sliceType",
+          "language": "go",
+          "source": "proxy/marshaler.go:57",
+          "complexity": 1,
+          "callers": 12
+        },
+        {
+          "name": "Marshal",
+          "language": "go",
+          "source": "proxy/marshaler.go:96",
+          "complexity": 3,
+          "callers": 8
+        },
+        {
+          "name": "NewDecoder",
+          "language": "go",
+          "source": "proxy/request.go:14",
+          "complexity": 3,
+          "callers": 6
+        },
+        {
+          "name": "parameterMapToJson",
+          "language": "go",
+          "source": "proxy/marshaler.go:191",
+          "complexity": 5,
+          "callers": 3
+        },
+        {
+          "name": "getIntegerEnv",
+          "language": "go",
+          "source": "proxy/main.go:56",
+          "complexity": 3,
+          "callers": 3
+        },
+        {
+          "name": "isSpace",
+          "language": "go",
+          "source": "proxy/request.go:174",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "elementCount",
+          "language": "go",
+          "source": "proxy/marshaler.go:172",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "transformResponse",
+          "language": "go",
+          "source": "proxy/marshaler.go:106",
+          "complexity": 17,
+          "callers": 1
+        },
+        {
+          "name": "unmarshalStringArray",
+          "language": "go",
+          "source": "proxy/bytes.go:101",
+          "complexity": 17,
+          "callers": 1
+        },
+        {
+          "name": "unmarshalBytesJson",
+          "language": "go",
+          "source": "proxy/bytes.go:22",
+          "complexity": 12,
+          "callers": 1
+        },
+        {
+          "name": "targetArray",
+          "language": "go",
+          "source": "proxy/request.go:93",
+          "complexity": 11,
+          "callers": 1
+        }
+      ],
+      "symbols_truncated": 23
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "proxy/main.go:135"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "proxy/main.go:135",
+      "callee": "run",
+      "callee_source": "proxy/main.go:68",
+      "call_site_source": "proxy/main.go:136",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:1064",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:1065",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:112",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:1137",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:1138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:1216",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:1217",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:1282",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:1283",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:157",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:158",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:198",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:199",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:249",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:250",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:304",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:305",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:349",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:350",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:394",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:395",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:459",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:460",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:522",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:523",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:626",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:627",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:71",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:72",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:739",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:740",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:832",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:833",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Descriptor",
+      "caller_source": "gen/grpc_predict_v2.pb.go:961",
+      "callee": "file_grpc_predict_v2_proto_rawDescGZIP",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1557",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:962",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:120",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:130",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:156",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:166",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:234",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:264",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:274",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:307",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:317",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:54",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1263",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:440",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:93",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:179",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1197",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1118",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:52",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:230",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:285",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:330",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:375",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1045",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:942",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:503",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:607",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:720",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "String",
+      "callee_source": "gen/grpc_predict_v2.pb.go:813",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:87",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "Marshal",
+      "caller_source": "proxy/marshaler.go:96",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/marshaler.go:103",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRESTResponse",
+      "caller_source": "proxy/marshaler_test.go:111",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/marshaler_test.go:114",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestBytesRESTResponse",
+      "caller_source": "proxy/marshaler_test.go:123",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/marshaler_test.go:126",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestBytesRESTResponseRawOutput",
+      "caller_source": "proxy/marshaler_test.go:135",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/marshaler_test.go:138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRESTResponseRawOutput",
+      "caller_source": "proxy/marshaler_test.go:147",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/marshaler_test.go:167",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "MarshalJSON",
+      "caller_source": "proxy/request.go:201",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/request.go:206",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "bytesRestRequest",
+      "caller_source": "proxy/request_test.go:149",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/request_test.go:150",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "bytesRestRequest",
+      "caller_source": "proxy/request_test.go:149",
+      "callee": "Marshal",
+      "callee_source": "proxy/marshaler.go:96",
+      "call_site_source": "proxy/request_test.go:153",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:90",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:150",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:135",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:150",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:171",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:90",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:171",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:99",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:205",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:153",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:205",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "callee": "NewDecoder",
+      "callee_source": "proxy/request.go:14",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:184",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:99",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:239",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:153",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:239",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "callee": "NewDecoder",
+      "callee_source": "proxy/request.go:14",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:218",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:153",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:286",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:99",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:286",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:153",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:329",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelInfer_1",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:99",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:329",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:90",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:66",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:150",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:66",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:150",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:99",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:90",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:99",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:241",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:150",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:247",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:241",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:90",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:247",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:241",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:90",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:254",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:241",
+      "callee": "ModelMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:150",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:254",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelInfer_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:259",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:153",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:265",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelInfer_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:259",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:99",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:265",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelInfer_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:259",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:99",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:272",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelInfer_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:259",
+      "callee": "ModelInfer",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:153",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:272",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "NewDecoder",
+      "caller_source": "proxy/request.go:14",
+      "callee": "NewDecoder",
+      "callee_source": "proxy/request.go:14",
+      "call_site_source": "proxy/request.go:18",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "NewDecoder",
+      "caller_source": "proxy/request.go:14",
+      "callee": "NewDecoder",
+      "callee_source": "proxy/request.go:14",
+      "call_site_source": "proxy/request.go:22",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRESTRequest",
+      "caller_source": "proxy/request_test.go:208",
+      "callee": "NewDecoder",
+      "callee_source": "proxy/request.go:14",
+      "call_site_source": "proxy/request_test.go:216",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestBytesRESTRequest",
+      "caller_source": "proxy/request_test.go:226",
+      "callee": "NewDecoder",
+      "callee_source": "proxy/request.go:14",
+      "call_site_source": "proxy/request_test.go:232",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "GetBoolParam",
+      "caller_source": "gen/grpc_predict_v2.pb.go:843",
+      "callee": "GetParameterChoice",
+      "callee_source": "gen/grpc_predict_v2.pb.go:836",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:844",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "GetInt64Param",
+      "caller_source": "gen/grpc_predict_v2.pb.go:850",
+      "callee": "GetParameterChoice",
+      "callee_source": "gen/grpc_predict_v2.pb.go:836",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:851",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "GetStringParam",
+      "caller_source": "gen/grpc_predict_v2.pb.go:857",
+      "callee": "GetParameterChoice",
+      "callee_source": "gen/grpc_predict_v2.pb.go:836",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:858",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parameterMapToJson",
+      "caller_source": "proxy/marshaler.go:191",
+      "callee": "GetParameterChoice",
+      "callee_source": "gen/grpc_predict_v2.pb.go:836",
+      "call_site_source": "proxy/marshaler.go:195",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "unmarshalStringArray",
+      "caller_source": "proxy/bytes.go:101",
+      "callee": "isSpace",
+      "callee_source": "proxy/request.go:174",
+      "call_site_source": "proxy/bytes.go:123",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "unmarshalBytesJson",
+      "caller_source": "proxy/bytes.go:22",
+      "callee": "isSpace",
+      "callee_source": "proxy/request.go:174",
+      "call_site_source": "proxy/bytes.go:40",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "proxy/main.go:68",
+      "callee": "getIntegerEnv",
+      "callee_source": "proxy/main.go:56",
+      "call_site_source": "proxy/main.go:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "proxy/main.go:68",
+      "callee": "getIntegerEnv",
+      "callee_source": "proxy/main.go:56",
+      "call_site_source": "proxy/main.go:122",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "proxy/main.go:68",
+      "callee": "getIntegerEnv",
+      "callee_source": "proxy/main.go:56",
+      "call_site_source": "proxy/main.go:83",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "transformResponse",
+      "caller_source": "proxy/marshaler.go:106",
+      "callee": "parameterMapToJson",
+      "callee_source": "proxy/marshaler.go:191",
+      "call_site_source": "proxy/marshaler.go:111",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "transformResponse",
+      "caller_source": "proxy/marshaler.go:106",
+      "callee": "parameterMapToJson",
+      "callee_source": "proxy/marshaler.go:191",
+      "call_site_source": "proxy/marshaler.go:120",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "UnmarshalJSON",
+      "caller_source": "proxy/request.go:125",
+      "callee": "isSpace",
+      "callee_source": "proxy/request.go:174",
+      "call_site_source": "proxy/request.go:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "MarshalJSON",
+      "caller_source": "proxy/request.go:201",
+      "callee": "parameterMapToJson",
+      "callee_source": "proxy/marshaler.go:191",
+      "call_site_source": "proxy/request.go:204",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerLive_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:169",
+      "callee": "ServerLive",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:54",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:175",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerLive_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:169",
+      "callee": "ServerLive",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:175",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerLive_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:169",
+      "callee": "ServerLive",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:54",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:182",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerLive_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:169",
+      "callee": "ServerLive",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:138",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:182",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:187",
+      "callee": "ServerReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:141",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:193",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:187",
+      "callee": "ServerReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:63",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:193",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:187",
+      "callee": "ServerReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:63",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:187",
+      "callee": "ServerReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:141",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:200",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:205",
+      "callee": "ModelReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:72",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:211",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:205",
+      "callee": "ModelReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:144",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:211",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:205",
+      "callee": "ModelReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:144",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:218",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ModelReady_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:205",
+      "callee": "ModelReady",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:72",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:218",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:223",
+      "callee": "ServerMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:147",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:223",
+      "callee": "ServerMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:81",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:229",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:223",
+      "callee": "ServerMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:147",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:236",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "_GRPCInferenceService_ServerMetadata_Handler",
+      "caller_source": "gen/grpc_predict_v2_grpc.pb.go:223",
+      "callee": "ServerMetadata",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:81",
+      "call_site_source": "gen/grpc_predict_v2_grpc.pb.go:236",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "unmarshalStringArray",
+      "caller_source": "proxy/bytes.go:101",
+      "callee": "elementCount",
+      "callee_source": "proxy/marshaler.go:172",
+      "call_site_source": "proxy/bytes.go:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "transformResponse",
+      "caller_source": "proxy/marshaler.go:106",
+      "callee": "elementCount",
+      "callee_source": "proxy/marshaler.go:172",
+      "call_site_source": "proxy/marshaler.go:133",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "init",
+      "caller_source": "gen/grpc_predict_v2.pb.go:1627",
+      "callee": "file_grpc_predict_v2_proto_init",
+      "callee_source": "gen/grpc_predict_v2.pb.go:1628",
+      "call_site_source": "gen/grpc_predict_v2.pb.go:1627",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerServer",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:338",
+      "callee": "local_request_GRPCInferenceService_ModelInfer_0",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:210",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:403",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerServer",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:338",
+      "callee": "local_request_GRPCInferenceService_ModelInfer_1",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:291",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:428",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerServer",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:338",
+      "callee": "local_request_GRPCInferenceService_ModelMetadata_0",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:71",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:353",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerServer",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:338",
+      "callee": "local_request_GRPCInferenceService_ModelMetadata_1",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:140",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:378",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerFromEndpoint",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:445",
+      "callee": "RegisterGRPCInferenceServiceHandler",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:470",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:465",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandler",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:470",
+      "callee": "NewGRPCInferenceServiceClient",
+      "callee_source": "gen/grpc_predict_v2_grpc.pb.go:50",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandler",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:470",
+      "callee": "RegisterGRPCInferenceServiceHandlerClient",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:479",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerClient",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:479",
+      "callee": "request_GRPCInferenceService_ModelInfer_0",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:176",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:536",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerClient",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:479",
+      "callee": "request_GRPCInferenceService_ModelInfer_1",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:248",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:558",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerClient",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:479",
+      "callee": "request_GRPCInferenceService_ModelMetadata_0",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:38",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:492",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RegisterGRPCInferenceServiceHandlerClient",
+      "caller_source": "gen/grpc_predict_v2.pb.gw.go:479",
+      "callee": "request_GRPCInferenceService_ModelMetadata_1",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:104",
+      "call_site_source": "gen/grpc_predict_v2.pb.gw.go:514",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "isBase64Content",
+      "caller_source": "proxy/bytes.go:177",
+      "callee": "GetStringParam",
+      "callee_source": "gen/grpc_predict_v2.pb.go:857",
+      "call_site_source": "proxy/bytes.go:178",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "unmarshalBytesJson",
+      "caller_source": "proxy/bytes.go:22",
+      "callee": "unmarshalNestedNumeric",
+      "callee_source": "proxy/bytes.go:74",
+      "call_site_source": "proxy/bytes.go:70",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "unmarshalBytesJson",
+      "caller_source": "proxy/bytes.go:22",
+      "callee": "unmarshalStringArray",
+      "callee_source": "proxy/bytes.go:101",
+      "call_site_source": "proxy/bytes.go:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "proxy/main.go:68",
+      "callee": "RegisterGRPCInferenceServiceHandlerFromEndpoint",
+      "callee_source": "gen/grpc_predict_v2.pb.gw.go:445",
+      "call_site_source": "proxy/main.go:116",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "transformResponse",
+      "caller_source": "proxy/marshaler.go:106",
+      "callee": "readBytes",
+      "callee_source": "proxy/marshaler.go:181",
+      "call_site_source": "proxy/marshaler.go:138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "transformResponse",
+      "caller_source": "proxy/marshaler.go:106",
+      "callee": "splitRawBytes",
+      "callee_source": "proxy/bytes.go:192",
+      "call_site_source": "proxy/marshaler.go:136",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Marshal",
+      "caller_source": "proxy/marshaler.go:96",
+      "callee": "transformResponse",
+      "callee_source": "proxy/marshaler.go:106",
+      "call_site_source": "proxy/marshaler.go:99",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRESTResponse",
+      "caller_source": "proxy/marshaler_test.go:111",
+      "callee": "generateProtoBufResponse",
+      "callee_source": "proxy/marshaler_test.go:28",
+      "call_site_source": "proxy/marshaler_test.go:113",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestBytesRESTResponse",
+      "caller_source": "proxy/marshaler_test.go:123",
+      "callee": "generateProtoBufBytesResponse",
+      "callee_source": "proxy/marshaler_test.go:54",
+      "call_site_source": "proxy/marshaler_test.go:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestBytesRESTResponseRawOutput",
+      "caller_source": "proxy/marshaler_test.go:135",
+      "callee": "generateProtoBufBytesResponseRawOutput",
+      "callee_source": "proxy/marshaler_test.go:77",
+      "call_site_source": "proxy/marshaler_test.go:137",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "UnmarshalJSON",
+      "caller_source": "proxy/request.go:125",
+      "callee": "expectedBracketCount",
+      "callee_source": "proxy/request.go:178",
+      "call_site_source": "proxy/request.go:167",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "UnmarshalJSON",
+      "caller_source": "proxy/request.go:125",
+      "callee": "unmarshalBytesJson",
+      "callee_source": "proxy/bytes.go:22",
+      "call_site_source": "proxy/request.go:127",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "NewDecoder",
+      "caller_source": "proxy/request.go:14",
+      "callee": "transformRequest",
+      "callee_source": "proxy/request.go:30",
+      "call_site_source": "proxy/request.go:25",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "UnmarshalJSON",
+      "caller_source": "proxy/request.go:64",
+      "callee": "isBase64Content",
+      "callee_source": "proxy/bytes.go:177",
+      "call_site_source": "proxy/request.go:77",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "UnmarshalJSON",
+      "caller_source": "proxy/request.go:64",
+      "callee": "targetArray",
+      "callee_source": "proxy/request.go:93",
+      "call_site_source": "proxy/request.go:70",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRESTRequest",
+      "caller_source": "proxy/request_test.go:208",
+      "callee": "generateProtoBufRequest",
+      "callee_source": "proxy/request_test.go:173",
+      "call_site_source": "proxy/request_test.go:219",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRESTRequest",
+      "caller_source": "proxy/request_test.go:208",
+      "callee": "restRequest",
+      "callee_source": "proxy/request_test.go:85",
+      "call_site_source": "proxy/request_test.go:215",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestBytesRESTRequest",
+      "caller_source": "proxy/request_test.go:226",
+      "callee": "bytesRestRequest",
+      "callee_source": "proxy/request_test.go:149",
+      "call_site_source": "proxy/request_test.go:231",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "test_relationships": [
+    {
+      "test": "TestRESTResponse",
+      "test_source": "proxy/marshaler_test.go:111",
+      "target": "Marshal",
+      "target_source": "proxy/marshaler.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRESTResponse",
+      "test_source": "proxy/marshaler_test.go:111",
+      "target": "generateProtoBufResponse",
+      "target_source": "proxy/marshaler_test.go:28",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestBytesRESTResponse",
+      "test_source": "proxy/marshaler_test.go:123",
+      "target": "Marshal",
+      "target_source": "proxy/marshaler.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestBytesRESTResponse",
+      "test_source": "proxy/marshaler_test.go:123",
+      "target": "generateProtoBufBytesResponse",
+      "target_source": "proxy/marshaler_test.go:54",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestBytesRESTResponseRawOutput",
+      "test_source": "proxy/marshaler_test.go:135",
+      "target": "Marshal",
+      "target_source": "proxy/marshaler.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestBytesRESTResponseRawOutput",
+      "test_source": "proxy/marshaler_test.go:135",
+      "target": "generateProtoBufBytesResponseRawOutput",
+      "target_source": "proxy/marshaler_test.go:77",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRESTResponseRawOutput",
+      "test_source": "proxy/marshaler_test.go:147",
+      "target": "Marshal",
+      "target_source": "proxy/marshaler.go:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRESTRequest",
+      "test_source": "proxy/request_test.go:208",
+      "target": "NewDecoder",
+      "target_source": "proxy/request.go:14",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRESTRequest",
+      "test_source": "proxy/request_test.go:208",
+      "target": "generateProtoBufRequest",
+      "target_source": "proxy/request_test.go:173",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRESTRequest",
+      "test_source": "proxy/request_test.go:208",
+      "target": "restRequest",
+      "target_source": "proxy/request_test.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestBytesRESTRequest",
+      "test_source": "proxy/request_test.go:226",
+      "target": "NewDecoder",
+      "target_source": "proxy/request.go:14",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestBytesRESTRequest",
+      "test_source": "proxy/request_test.go:226",
+      "target": "bytesRestRequest",
+      "target_source": "proxy/request_test.go:149",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "sparse",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "rich",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}

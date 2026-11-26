@@ -1,0 +1,1605 @@
+{
+  "schema_version": 1,
+  "component": "guardrails-detectors",
+  "repo": "opendatahub-io/guardrails-detectors",
+  "commit_sha": "bca96a86605a7277921585456bf88371deea73d1",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "guardrails-detectors is a Kubernetes component. Dockerfile EXPOSE ports: 8000, 8080. runtime dependencies: MinIO/S3. Python k8s client with 6 API call(s). integrates with Istio via labels/annotations.",
+  "repository_description": "FMS Guardrails Orchestrator is an open source project led by IBM which provides a server for invocation of detectors on text generation input and output, and standalone detections.",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 14,
+    "functions": 104,
+    "test_functions": 0,
+    "call_sites": 663,
+    "resolved_calls": 121,
+    "http_endpoints": 8,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "python",
+      "source_files": 14,
+      "functions": 104,
+      "test_functions": 0
+    },
+    {
+      "name": "unknown",
+      "source_files": 13,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "detectors/built_in",
+      "source_files": 5,
+      "functions": 43,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "get_regex_detections",
+          "language": "python",
+          "source": "detectors/built_in/regex_detectors.py:106",
+          "complexity": 2,
+          "callers": 7
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors_wrapper.py:156",
+          "complexity": 9,
+          "callers": 4
+        },
+        {
+          "name": "get_underlying_function",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors_wrapper.py:64",
+          "complexity": 2,
+          "callers": 4
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/built_in/base_detector_registry.py:10",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/built_in/file_type_detectors.py:172",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/built_in/regex_detectors.py:127",
+          "complexity": 1,
+          "callers": 4
+        },
+        {
+          "name": "get_detection_functions_from_params",
+          "language": "python",
+          "source": "detectors/built_in/base_detector_registry.py:31",
+          "complexity": 5,
+          "callers": 3
+        },
+        {
+          "name": "throw_internal_detector_error",
+          "language": "python",
+          "source": "detectors/built_in/base_detector_registry.py:22",
+          "complexity": 3,
+          "callers": 3,
+          "annotations": [
+            "sec:handles_request"
+          ]
+        },
+        {
+          "name": "digits_of",
+          "language": "python",
+          "source": "detectors/built_in/regex_detectors.py:57",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "static_code_analysis",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors_wrapper.py:111",
+          "complexity": 18,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "custom_func_wrapper",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors_wrapper.py:70",
+          "complexity": 9,
+          "callers": 1,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        },
+        {
+          "name": "handle_request",
+          "language": "python",
+          "source": "detectors/built_in/file_type_detectors.py:183",
+          "complexity": 9,
+          "callers": 1
+        }
+      ],
+      "symbols_truncated": 31
+    },
+    {
+      "path": "detectors/huggingface",
+      "source_files": 2,
+      "functions": 21,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "_is_numeric",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:336",
+          "complexity": 2,
+          "callers": 3
+        },
+        {
+          "name": "_resolve_params",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:354",
+          "complexity": 22,
+          "callers": 2
+        },
+        {
+          "name": "_parse_safe_labels_env",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:79",
+          "complexity": 7,
+          "callers": 2
+        },
+        {
+          "name": "process_token_classification",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:472",
+          "complexity": 17,
+          "callers": 1
+        },
+        {
+          "name": "initialize_model",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:157",
+          "complexity": 11,
+          "callers": 1
+        },
+        {
+          "name": "_parse_label_thresholds_env",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:41",
+          "complexity": 7,
+          "callers": 1
+        },
+        {
+          "name": "close",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:592",
+          "complexity": 7,
+          "callers": 1
+        },
+        {
+          "name": "process_sequence_classification",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:434",
+          "complexity": 7,
+          "callers": 1
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:118",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "get_probabilities",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:272",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "run",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:562",
+          "complexity": 5,
+          "callers": 1
+        },
+        {
+          "name": "_parse_max_length_env",
+          "language": "python",
+          "source": "detectors/huggingface/detector.py:63",
+          "complexity": 4,
+          "callers": 1
+        }
+      ],
+      "symbols_truncated": 9
+    },
+    {
+      "path": "detectors/common",
+      "source_files": 3,
+      "functions": 18,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "detectors/common/app.py:138",
+          "complexity": 10,
+          "callers": 0,
+          "annotations": [
+            "sec:file_access"
+          ]
+        },
+        {
+          "name": "instrument_runtime",
+          "language": "python",
+          "source": "detectors/common/instrumented_detector.py:11",
+          "complexity": 2,
+          "callers": 8
+        },
+        {
+          "name": "get_detector",
+          "language": "python",
+          "source": "detectors/common/app.py:123",
+          "complexity": 1,
+          "callers": 5
+        },
+        {
+          "name": "increment_detector_instruments",
+          "language": "python",
+          "source": "detectors/common/instrumented_detector.py:26",
+          "complexity": 6,
+          "callers": 4
+        },
+        {
+          "name": "cleanup_detector",
+          "language": "python",
+          "source": "detectors/common/app.py:131",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "get_all_detectors",
+          "language": "python",
+          "source": "detectors/common/app.py:127",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "set_detector",
+          "language": "python",
+          "source": "detectors/common/app.py:119",
+          "complexity": 1,
+          "callers": 3
+        },
+        {
+          "name": "set_instruments",
+          "language": "python",
+          "source": "detectors/common/instrumented_detector.py:20",
+          "complexity": 1,
+          "callers": 2
+        },
+        {
+          "name": "increment_error_instruments",
+          "language": "python",
+          "source": "detectors/common/instrumented_detector.py:45",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "parse_invalid_type_parameter_response",
+          "language": "python",
+          "source": "detectors/common/app.py:89",
+          "complexity": 2,
+          "callers": 1,
+          "annotations": [
+            "sec:handles_request"
+          ]
+        },
+        {
+          "name": "parse_missing_required_parameter_response",
+          "language": "python",
+          "source": "detectors/common/app.py:76",
+          "complexity": 2,
+          "callers": 1,
+          "annotations": [
+            "sec:handles_request"
+          ]
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/common/app.py:34",
+          "complexity": 1,
+          "callers": 1,
+          "annotations": [
+            "arch:factory_method"
+          ]
+        }
+      ],
+      "symbols_truncated": 6
+    },
+    {
+      "path": "detectors/llm_judge",
+      "source_files": 2,
+      "functions": 14,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "_validate_params",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:45",
+          "complexity": 6,
+          "callers": 2
+        },
+        {
+          "name": "_get_score",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:65",
+          "complexity": 3,
+          "callers": 2
+        },
+        {
+          "name": "close",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:177",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "_initialize_judge",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:34",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "analyze_content",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:111",
+          "complexity": 2,
+          "callers": 1,
+          "annotations": [
+            "sec:handles_request"
+          ]
+        },
+        {
+          "name": "analyze_generation",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:163",
+          "complexity": 1,
+          "callers": 1,
+          "annotations": [
+            "sec:handles_request"
+          ]
+        },
+        {
+          "name": "evaluate_single_content",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:74",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "evaluate_single_generation",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:130",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "list_available_metrics",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:182",
+          "complexity": 1,
+          "callers": 1
+        },
+        {
+          "name": "lifespan",
+          "language": "python",
+          "source": "detectors/llm_judge/app.py:20",
+          "complexity": 3,
+          "callers": 0
+        },
+        {
+          "name": "__init__",
+          "language": "python",
+          "source": "detectors/llm_judge/detector.py:19",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "detector_content_analysis_handler",
+          "language": "python",
+          "source": "detectors/llm_judge/app.py:47",
+          "complexity": 2,
+          "callers": 0,
+          "annotations": [
+            "arch:factory_method",
+            "sec:handles_request"
+          ]
+        }
+      ],
+      "symbols_truncated": 2
+    },
+    {
+      "path": "detectors/built_in/custom_detectors",
+      "source_files": 1,
+      "functions": 7,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "background_function",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:57",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "contains_word",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:13",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "has_metrics",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:45",
+          "complexity": 2,
+          "callers": 0
+        },
+        {
+          "name": "_this_function_will_not_be_exposed",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:28",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "function_that_needs_headers",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:31",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "function_that_needs_kwargs",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:34",
+          "complexity": 1,
+          "callers": 0
+        },
+        {
+          "name": "over_100_characters",
+          "language": "python",
+          "source": "detectors/built_in/custom_detectors/custom_detectors.py:9",
+          "complexity": 1,
+          "callers": 0
+        }
+      ]
+    },
+    {
+      "path": "scripts",
+      "source_files": 1,
+      "functions": 1,
+      "test_functions": 0,
+      "languages": [
+        "python",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "python",
+          "source": "scripts/generate_openapi.py:17",
+          "complexity": 5,
+          "callers": 1,
+          "annotations": [
+            "sec:file_access"
+          ]
+        }
+      ]
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "detectors/common/app.py:138"
+    },
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "scripts/generate_openapi.py:17"
+    },
+    {
+      "kind": "http",
+      "name": "list_metrics",
+      "method": "GET",
+      "path": "/api/v1/metrics",
+      "trust_level": "untrusted",
+      "source": "detectors/llm_judge/app.py:86"
+    },
+    {
+      "kind": "http",
+      "name": "detect_content",
+      "method": "POST",
+      "path": "/api/v1/text/contents",
+      "trust_level": "untrusted",
+      "source": "detectors/built_in/app.py:43"
+    },
+    {
+      "kind": "http",
+      "name": "detector_content_analysis_handler",
+      "method": "POST",
+      "path": "/api/v1/text/contents",
+      "trust_level": "untrusted",
+      "source": "detectors/llm_judge/app.py:47"
+    },
+    {
+      "kind": "http",
+      "name": "detector_unary_handler",
+      "method": "POST",
+      "path": "/api/v1/text/contents",
+      "trust_level": "untrusted",
+      "source": "detectors/huggingface/app.py:50"
+    },
+    {
+      "kind": "http",
+      "name": "detector_generation_analysis_handler",
+      "method": "POST",
+      "path": "/api/v1/text/generation",
+      "trust_level": "untrusted",
+      "source": "detectors/llm_judge/app.py:68"
+    },
+    {
+      "kind": "http",
+      "name": "metrics",
+      "method": "GET",
+      "path": "/metrics",
+      "trust_level": "untrusted",
+      "source": "detectors/built_in/app.py:36"
+    },
+    {
+      "kind": "http",
+      "name": "metrics",
+      "method": "GET",
+      "path": "/metrics",
+      "trust_level": "untrusted",
+      "source": "detectors/huggingface/app.py:33"
+    },
+    {
+      "kind": "http",
+      "name": "get_registry",
+      "method": "GET",
+      "path": "/registry",
+      "trust_level": "untrusted",
+      "source": "detectors/built_in/app.py:69"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "detectors/common/app.py:138",
+      "callee": "run",
+      "callee_source": "detectors/huggingface/detector.py:562",
+      "call_site_source": "detectors/common/app.py:187",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:204",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:216",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:190",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:194",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:198",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:202",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/regex_detectors.py:140",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/regex_detectors.py:149",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/regex_detectors.py:140",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/built_in/regex_detectors.py:153",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "run",
+      "caller_source": "detectors/huggingface/detector.py:562",
+      "callee": "instrument_runtime",
+      "callee_source": "detectors/common/instrumented_detector.py:11",
+      "call_site_source": "detectors/huggingface/detector.py:573",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "uk_post_code_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:100",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:103",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "email_address_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:14",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:17",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/regex_detectors.py:140",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:154",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ipv4_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:72",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:78",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ipv6_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:80",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:86",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ssn_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:89",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:92",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "us_phone_number_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:94",
+      "callee": "get_regex_detections",
+      "callee_source": "detectors/built_in/regex_detectors.py:106",
+      "call_site_source": "detectors/built_in/regex_detectors.py:97",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/huggingface/app.py:19",
+      "callee": "get_detector",
+      "callee_source": "detectors/common/app.py:123",
+      "call_site_source": "detectors/huggingface/app.py:25",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/llm_judge/app.py:20",
+      "callee": "get_detector",
+      "callee_source": "detectors/common/app.py:123",
+      "call_site_source": "detectors/llm_judge/app.py:26",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "detector_content_analysis_handler",
+      "caller_source": "detectors/llm_judge/app.py:47",
+      "callee": "get_detector",
+      "callee_source": "detectors/common/app.py:123",
+      "call_site_source": "detectors/llm_judge/app.py:52",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "detector_generation_analysis_handler",
+      "caller_source": "detectors/llm_judge/app.py:68",
+      "callee": "get_detector",
+      "callee_source": "detectors/common/app.py:123",
+      "call_site_source": "detectors/llm_judge/app.py:73",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "list_metrics",
+      "caller_source": "detectors/llm_judge/app.py:86",
+      "callee": "get_detector",
+      "callee_source": "detectors/common/app.py:123",
+      "call_site_source": "detectors/llm_judge/app.py:88",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/base_detector_registry.py:10",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/regex_detectors.py:127",
+      "call_site_source": "detectors/built_in/base_detector_registry.py:11",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/base_detector_registry.py:10",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/file_type_detectors.py:172",
+      "call_site_source": "detectors/built_in/base_detector_registry.py:11",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/base_detector_registry.py:10",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "call_site_source": "detectors/built_in/base_detector_registry.py:11",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/base_detector_registry.py:10",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/base_detector_registry.py:10",
+      "call_site_source": "detectors/built_in/base_detector_registry.py:11",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/base_detector_registry.py:10",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:157",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:157",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/file_type_detectors.py:172",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:157",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/regex_detectors.py:127",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:157",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "get_underlying_function",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:64",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:195",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:204",
+      "callee": "increment_detector_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:26",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:219",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "inner_layer_1",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:22",
+      "callee": "get_underlying_function",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:64",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:28",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "inner_layer_2",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:42",
+      "callee": "get_underlying_function",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:64",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "get_underlying_function",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:64",
+      "callee": "get_underlying_function",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:64",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:66",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/file_type_detectors.py:172",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/regex_detectors.py:127",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/file_type_detectors.py:172",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/file_type_detectors.py:172",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/file_type_detectors.py:172",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/file_type_detectors.py:172",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/base_detector_registry.py:10",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:173",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "increment_detector_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:26",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:215",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/regex_detectors.py:127",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/base_detector_registry.py:10",
+      "call_site_source": "detectors/built_in/regex_detectors.py:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/regex_detectors.py:127",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "call_site_source": "detectors/built_in/regex_detectors.py:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/regex_detectors.py:127",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/file_type_detectors.py:172",
+      "call_site_source": "detectors/built_in/regex_detectors.py:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/regex_detectors.py:127",
+      "callee": "__init__",
+      "callee_source": "detectors/built_in/regex_detectors.py:127",
+      "call_site_source": "detectors/built_in/regex_detectors.py:128",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/regex_detectors.py:140",
+      "callee": "increment_detector_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:26",
+      "call_site_source": "detectors/built_in/regex_detectors.py:158",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "run",
+      "caller_source": "detectors/huggingface/detector.py:562",
+      "callee": "increment_detector_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:26",
+      "call_site_source": "detectors/huggingface/detector.py:589",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/built_in/app.py:18",
+      "callee": "cleanup_detector",
+      "callee_source": "detectors/common/app.py:131",
+      "call_site_source": "detectors/built_in/app.py:27",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/built_in/app.py:18",
+      "callee": "set_detector",
+      "callee_source": "detectors/common/app.py:119",
+      "call_site_source": "detectors/built_in/app.py:24",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "detect_content",
+      "caller_source": "detectors/built_in/app.py:43",
+      "callee": "get_all_detectors",
+      "callee_source": "detectors/common/app.py:127",
+      "call_site_source": "detectors/built_in/app.py:52",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "get_registry",
+      "caller_source": "detectors/built_in/app.py:69",
+      "callee": "get_all_detectors",
+      "callee_source": "detectors/common/app.py:127",
+      "call_site_source": "detectors/built_in/app.py:71",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:204",
+      "callee": "get_detection_functions_from_params",
+      "callee_source": "detectors/built_in/base_detector_registry.py:31",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:206",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:204",
+      "callee": "throw_internal_detector_error",
+      "callee_source": "detectors/built_in/base_detector_registry.py:22",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:223",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "get_detection_functions_from_params",
+      "callee_source": "detectors/built_in/base_detector_registry.py:31",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:185",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "throw_internal_detector_error",
+      "callee_source": "detectors/built_in/base_detector_registry.py:22",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:208",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/regex_detectors.py:140",
+      "callee": "get_detection_functions_from_params",
+      "callee_source": "detectors/built_in/base_detector_registry.py:31",
+      "call_site_source": "detectors/built_in/regex_detectors.py:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/regex_detectors.py:140",
+      "callee": "throw_internal_detector_error",
+      "callee_source": "detectors/built_in/base_detector_registry.py:22",
+      "call_site_source": "detectors/built_in/regex_detectors.py:157",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/huggingface/app.py:19",
+      "callee": "cleanup_detector",
+      "callee_source": "detectors/common/app.py:131",
+      "call_site_source": "detectors/huggingface/app.py:28",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/huggingface/app.py:19",
+      "callee": "set_detector",
+      "callee_source": "detectors/common/app.py:119",
+      "call_site_source": "detectors/huggingface/app.py:21",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "detector_unary_handler",
+      "caller_source": "detectors/huggingface/app.py:50",
+      "callee": "get_all_detectors",
+      "callee_source": "detectors/common/app.py:127",
+      "call_site_source": "detectors/huggingface/app.py:53",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "_resolve_params",
+      "caller_source": "detectors/huggingface/detector.py:354",
+      "callee": "_is_numeric",
+      "callee_source": "detectors/huggingface/detector.py:336",
+      "call_site_source": "detectors/huggingface/detector.py:363",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_resolve_params",
+      "caller_source": "detectors/huggingface/detector.py:354",
+      "callee": "_is_numeric",
+      "callee_source": "detectors/huggingface/detector.py:336",
+      "call_site_source": "detectors/huggingface/detector.py:374",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_resolve_params",
+      "caller_source": "detectors/huggingface/detector.py:354",
+      "callee": "_is_numeric",
+      "callee_source": "detectors/huggingface/detector.py:336",
+      "call_site_source": "detectors/huggingface/detector.py:389",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/llm_judge/app.py:20",
+      "callee": "cleanup_detector",
+      "callee_source": "detectors/common/app.py:131",
+      "call_site_source": "detectors/llm_judge/app.py:29",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/llm_judge/app.py:20",
+      "callee": "set_detector",
+      "callee_source": "detectors/common/app.py:119",
+      "call_site_source": "detectors/llm_judge/app.py:23",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/built_in/app.py:18",
+      "callee": "set_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:20",
+      "call_site_source": "detectors/built_in/app.py:25",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "luhn_checksum",
+      "caller_source": "detectors/built_in/regex_detectors.py:55",
+      "callee": "digits_of",
+      "callee_source": "detectors/built_in/regex_detectors.py:57",
+      "call_site_source": "detectors/built_in/regex_detectors.py:59",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "luhn_checksum",
+      "caller_source": "detectors/built_in/regex_detectors.py:55",
+      "callee": "digits_of",
+      "callee_source": "detectors/built_in/regex_detectors.py:57",
+      "call_site_source": "detectors/built_in/regex_detectors.py:65",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/huggingface/app.py:19",
+      "callee": "set_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:20",
+      "call_site_source": "detectors/huggingface/app.py:22",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "_parse_safe_labels_env",
+      "callee_source": "detectors/huggingface/detector.py:79",
+      "call_site_source": "detectors/huggingface/detector.py:127",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "_parse_safe_labels_env",
+      "callee_source": "detectors/huggingface/detector.py:79",
+      "call_site_source": "detectors/huggingface/detector.py:143",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_sequence_classification",
+      "caller_source": "detectors/huggingface/detector.py:434",
+      "callee": "_resolve_params",
+      "callee_source": "detectors/huggingface/detector.py:354",
+      "call_site_source": "detectors/huggingface/detector.py:435",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_token_classification",
+      "caller_source": "detectors/huggingface/detector.py:472",
+      "callee": "_resolve_params",
+      "callee_source": "detectors/huggingface/detector.py:354",
+      "call_site_source": "detectors/huggingface/detector.py:473",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/llm_judge/app.py:20",
+      "callee": "close",
+      "callee_source": "detectors/llm_judge/detector.py:177",
+      "call_site_source": "detectors/llm_judge/app.py:28",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "evaluate_single_generation",
+      "caller_source": "detectors/llm_judge/detector.py:130",
+      "callee": "_get_score",
+      "callee_source": "detectors/llm_judge/detector.py:65",
+      "call_site_source": "detectors/llm_judge/detector.py:153",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "evaluate_single_generation",
+      "caller_source": "detectors/llm_judge/detector.py:130",
+      "callee": "_validate_params",
+      "callee_source": "detectors/llm_judge/detector.py:45",
+      "call_site_source": "detectors/llm_judge/detector.py:142",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "close",
+      "caller_source": "detectors/llm_judge/detector.py:177",
+      "callee": "close",
+      "callee_source": "detectors/llm_judge/detector.py:177",
+      "call_site_source": "detectors/llm_judge/detector.py:180",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "evaluate_single_content",
+      "caller_source": "detectors/llm_judge/detector.py:74",
+      "callee": "_get_score",
+      "callee_source": "detectors/llm_judge/detector.py:65",
+      "call_site_source": "detectors/llm_judge/detector.py:98",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "evaluate_single_content",
+      "caller_source": "detectors/llm_judge/detector.py:74",
+      "callee": "_validate_params",
+      "callee_source": "detectors/llm_judge/detector.py:45",
+      "call_site_source": "detectors/llm_judge/detector.py:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "detect_content",
+      "caller_source": "detectors/built_in/app.py:43",
+      "callee": "handle_request",
+      "callee_source": "detectors/built_in/regex_detectors.py:140",
+      "call_site_source": "detectors/built_in/app.py:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "detect_content",
+      "caller_source": "detectors/built_in/app.py:43",
+      "callee": "handle_request",
+      "callee_source": "detectors/built_in/file_type_detectors.py:183",
+      "call_site_source": "detectors/built_in/app.py:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "detect_content",
+      "caller_source": "detectors/built_in/app.py:43",
+      "callee": "handle_request",
+      "callee_source": "detectors/built_in/base_detector_registry.py:16",
+      "call_site_source": "detectors/built_in/app.py:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "detect_content",
+      "caller_source": "detectors/built_in/app.py:43",
+      "callee": "handle_request",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:204",
+      "call_site_source": "detectors/built_in/app.py:59",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "get_registry",
+      "caller_source": "detectors/built_in/app.py:69",
+      "callee": "get_registry",
+      "callee_source": "detectors/built_in/base_detector_registry.py:19",
+      "call_site_source": "detectors/built_in/app.py:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "get_registry",
+      "caller_source": "detectors/built_in/app.py:69",
+      "callee": "get_registry",
+      "callee_source": "detectors/built_in/app.py:69",
+      "call_site_source": "detectors/built_in/app.py:75",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "throw_internal_detector_error",
+      "caller_source": "detectors/built_in/base_detector_registry.py:22",
+      "callee": "increment_error_instruments",
+      "callee_source": "detectors/common/instrumented_detector.py:45",
+      "call_site_source": "detectors/built_in/base_detector_registry.py:26",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "add_instrument",
+      "callee_source": "detectors/common/instrumented_detector.py:23",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:199",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:156",
+      "callee": "static_code_analysis",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:111",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:160",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/custom_detectors_wrapper.py:204",
+      "callee": "custom_func_wrapper",
+      "callee_source": "detectors/built_in/custom_detectors_wrapper.py:70",
+      "call_site_source": "detectors/built_in/custom_detectors_wrapper.py:217",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_valid_xml_schema",
+      "caller_source": "detectors/built_in/file_type_detectors.py:139",
+      "callee": "is_valid_xml",
+      "callee_source": "detectors/built_in/file_type_detectors.py:123",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:141",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "is_valid_json_schema",
+      "callee_source": "detectors/built_in/file_type_detectors.py:35",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:191",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "is_valid_xml_schema",
+      "callee_source": "detectors/built_in/file_type_detectors.py:139",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:199",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_request",
+      "caller_source": "detectors/built_in/file_type_detectors.py:183",
+      "callee": "is_valid_yaml_schema",
+      "callee_source": "detectors/built_in/file_type_detectors.py:87",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:195",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_valid_json_schema",
+      "caller_source": "detectors/built_in/file_type_detectors.py:35",
+      "callee": "is_valid_json",
+      "callee_source": "detectors/built_in/file_type_detectors.py:19",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:37",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_valid_yaml_schema",
+      "caller_source": "detectors/built_in/file_type_detectors.py:87",
+      "callee": "is_valid_yaml",
+      "callee_source": "detectors/built_in/file_type_detectors.py:72",
+      "call_site_source": "detectors/built_in/file_type_detectors.py:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "credit_card_detector",
+      "caller_source": "detectors/built_in/regex_detectors.py:19",
+      "callee": "is_luhn_valid",
+      "callee_source": "detectors/built_in/regex_detectors.py:68",
+      "call_site_source": "detectors/built_in/regex_detectors.py:42",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "is_luhn_valid",
+      "caller_source": "detectors/built_in/regex_detectors.py:68",
+      "callee": "luhn_checksum",
+      "callee_source": "detectors/built_in/regex_detectors.py:55",
+      "call_site_source": "detectors/built_in/regex_detectors.py:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/common/app.py:34",
+      "callee": "__init__",
+      "callee_source": "detectors/common/app.py:34",
+      "call_site_source": "detectors/common/app.py:35",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/common/app.py:34",
+      "callee": "__init__",
+      "callee_source": "detectors/common/instrumented_detector.py:6",
+      "call_site_source": "detectors/common/app.py:35",
+      "confidence": "UNCERTAIN"
+    },
+    {
+      "caller": "validation_exception_handler",
+      "caller_source": "detectors/common/app.py:66",
+      "callee": "parse_generic_validation_response",
+      "callee_source": "detectors/common/app.py:102",
+      "call_site_source": "detectors/common/app.py:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validation_exception_handler",
+      "caller_source": "detectors/common/app.py:66",
+      "callee": "parse_invalid_type_parameter_response",
+      "callee_source": "detectors/common/app.py:89",
+      "call_site_source": "detectors/common/app.py:71",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validation_exception_handler",
+      "caller_source": "detectors/common/app.py:66",
+      "callee": "parse_missing_required_parameter_response",
+      "callee_source": "detectors/common/app.py:76",
+      "call_site_source": "detectors/common/app.py:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "lifespan",
+      "caller_source": "detectors/huggingface/app.py:19",
+      "callee": "close",
+      "callee_source": "detectors/huggingface/detector.py:592",
+      "call_site_source": "detectors/huggingface/app.py:27",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "__init__",
+      "callee_source": "detectors/huggingface/detector.py:118",
+      "call_site_source": "detectors/huggingface/detector.py:122",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "_get_model_max_length",
+      "callee_source": "detectors/huggingface/detector.py:345",
+      "call_site_source": "detectors/huggingface/detector.py:146",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "_parse_label_thresholds_env",
+      "callee_source": "detectors/huggingface/detector.py:41",
+      "call_site_source": "detectors/huggingface/detector.py:129",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "_parse_max_length_env",
+      "callee_source": "detectors/huggingface/detector.py:63",
+      "call_site_source": "detectors/huggingface/detector.py:130",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "_parse_threshold_env",
+      "callee_source": "detectors/huggingface/detector.py:26",
+      "call_site_source": "detectors/huggingface/detector.py:128",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "initialize_device",
+      "callee_source": "detectors/huggingface/detector.py:219",
+      "call_site_source": "detectors/huggingface/detector.py:155",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/huggingface/detector.py:118",
+      "callee": "initialize_model",
+      "callee_source": "detectors/huggingface/detector.py:157",
+      "call_site_source": "detectors/huggingface/detector.py:138",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "parse_output",
+      "caller_source": "detectors/huggingface/detector.py:236",
+      "callee": "get_probabilities",
+      "callee_source": "detectors/huggingface/detector.py:272",
+      "call_site_source": "detectors/huggingface/detector.py:257",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "process_causal_lm",
+      "caller_source": "detectors/huggingface/detector.py:301",
+      "callee": "parse_output",
+      "callee_source": "detectors/huggingface/detector.py:236",
+      "call_site_source": "detectors/huggingface/detector.py:321",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "_resolve_params",
+      "caller_source": "detectors/huggingface/detector.py:354",
+      "callee": "_is_positive_int",
+      "callee_source": "detectors/huggingface/detector.py:341",
+      "call_site_source": "detectors/huggingface/detector.py:414",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "detectors/huggingface/detector.py:562",
+      "callee": "process_causal_lm",
+      "callee_source": "detectors/huggingface/detector.py:301",
+      "call_site_source": "detectors/huggingface/detector.py:576",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "detectors/huggingface/detector.py:562",
+      "callee": "process_sequence_classification",
+      "callee_source": "detectors/huggingface/detector.py:434",
+      "call_site_source": "detectors/huggingface/detector.py:582",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "run",
+      "caller_source": "detectors/huggingface/detector.py:562",
+      "callee": "process_token_classification",
+      "callee_source": "detectors/huggingface/detector.py:472",
+      "call_site_source": "detectors/huggingface/detector.py:578",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "detector_content_analysis_handler",
+      "caller_source": "detectors/llm_judge/app.py:47",
+      "callee": "analyze_content",
+      "callee_source": "detectors/llm_judge/detector.py:111",
+      "call_site_source": "detectors/llm_judge/app.py:55",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "detector_generation_analysis_handler",
+      "caller_source": "detectors/llm_judge/app.py:68",
+      "callee": "analyze_generation",
+      "callee_source": "detectors/llm_judge/detector.py:163",
+      "call_site_source": "detectors/llm_judge/app.py:76",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "list_metrics",
+      "caller_source": "detectors/llm_judge/app.py:86",
+      "callee": "list_available_metrics",
+      "callee_source": "detectors/llm_judge/detector.py:182",
+      "call_site_source": "detectors/llm_judge/app.py:92",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "analyze_content",
+      "caller_source": "detectors/llm_judge/detector.py:111",
+      "callee": "evaluate_single_content",
+      "callee_source": "detectors/llm_judge/detector.py:74",
+      "call_site_source": "detectors/llm_judge/detector.py:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "analyze_generation",
+      "caller_source": "detectors/llm_judge/detector.py:163",
+      "callee": "evaluate_single_generation",
+      "callee_source": "detectors/llm_judge/detector.py:130",
+      "call_site_source": "detectors/llm_judge/detector.py:173",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "__init__",
+      "caller_source": "detectors/llm_judge/detector.py:19",
+      "callee": "_initialize_judge",
+      "callee_source": "detectors/llm_judge/detector.py:34",
+      "call_site_source": "detectors/llm_judge/detector.py:32",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "moderate",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "sparse",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "rich",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "sparse",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "sparse",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}
