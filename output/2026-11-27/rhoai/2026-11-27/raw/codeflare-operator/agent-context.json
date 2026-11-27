@@ -1,0 +1,2462 @@
+{
+  "schema_version": 1,
+  "component": "codeflare-operator",
+  "repo": "red-hat-data-services/codeflare-operator",
+  "commit_sha": "f89edd9f015da4b1f466a7fe0b7a164b7da6c7c9",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "codeflare-operator (also known as: CodeFlare operator) is a Kubernetes component. managing 1 CRD(s): AppWrapper. deploying 2 workload(s) (manager, manager) with 2 container(s). watching 8 resource type(s). exposing 1 service(s) on ports: 443. with 6 webhook(s) (3 validating, 3 mutating). with 36 operator config constants (2 image references). with 2 ingress route(s). integrates with management relationship via labels/annotations. deploys OAuth proxy sidecar for authentication. kustomize overlays: config/crd/appwrapper, config/crd, config/default, config/manager, config/manifests, config/odh-operator, config/prometheus, config/rbac, config/scorecard, config/webhook. references components: kuberay (import).",
+  "repository_description": "The CodeFlare-Operator has embedded two controllers, a RayCluster controller which creates resources including secrets, ingress, routes, service, serviceaccounts, clusterrolebinding resources; all needed for the RayClusters created to work as expected.",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 7,
+    "functions": 92,
+    "test_functions": 4,
+    "call_sites": 1521,
+    "resolved_calls": 284,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 0
+  },
+  "languages": [
+    {
+      "name": "go",
+      "source_files": 7,
+      "functions": 92,
+      "test_functions": 4
+    },
+    {
+      "name": "unknown",
+      "source_files": 7,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "pkg/controllers",
+      "source_files": 6,
+      "functions": 76,
+      "test_functions": 4,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "Info",
+          "language": "go",
+          "source": "pkg/controllers/support.go:180",
+          "complexity": 1,
+          "callers": 33
+        },
+        {
+          "name": "Error",
+          "language": "go",
+          "source": "pkg/controllers/support.go:184",
+          "complexity": 2,
+          "callers": 23
+        },
+        {
+          "name": "oauthServiceAccountNameFromCluster",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_controller.go:385",
+          "complexity": 2,
+          "callers": 13
+        },
+        {
+          "name": "ValidateUpdate",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_webhook.go:158",
+          "complexity": 4,
+          "callers": 12
+        },
+        {
+          "name": "upsert",
+          "language": "go",
+          "source": "pkg/controllers/support.go:108",
+          "complexity": 3,
+          "callers": 10
+        },
+        {
+          "name": "ownerRefForRayCluster",
+          "language": "go",
+          "source": "pkg/controllers/support.go:206",
+          "complexity": 1,
+          "callers": 10
+        },
+        {
+          "name": "contains",
+          "language": "go",
+          "source": "pkg/controllers/support.go:118",
+          "complexity": 4,
+          "callers": 8
+        },
+        {
+          "name": "RCCUniqueName",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_controller.go:710",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "shouldUseOldName",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_controller.go:117",
+          "complexity": 1,
+          "callers": 8
+        },
+        {
+          "name": "dashboardNameFromCluster",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_controller.go:403",
+          "complexity": 1,
+          "callers": 7
+        },
+        {
+          "name": "certVolumeMounts",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_webhook.go:294",
+          "complexity": 1,
+          "callers": 6
+        },
+        {
+          "name": "ValidateCreate",
+          "language": "go",
+          "source": "pkg/controllers/raycluster_webhook.go:141",
+          "complexity": 2,
+          "callers": 5
+        }
+      ],
+      "symbols_truncated": 64
+    },
+    {
+      "path": ".",
+      "source_files": 1,
+      "functions": 16,
+      "test_functions": 0,
+      "languages": [
+        "go",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "go",
+          "source": "main.go:102",
+          "complexity": 5,
+          "callers": 0,
+          "annotations": [
+            "sec:configures_cache"
+          ]
+        },
+        {
+          "name": "exitOnError",
+          "language": "go",
+          "source": "main.go:396",
+          "complexity": 2,
+          "callers": 21
+        },
+        {
+          "name": "isOpenShift",
+          "language": "go",
+          "source": "main.go:403",
+          "complexity": 4,
+          "callers": 2
+        },
+        {
+          "name": "setupRayClusterController",
+          "language": "go",
+          "source": "main.go:240",
+          "complexity": 2,
+          "callers": 2
+        },
+        {
+          "name": "waitForAPI",
+          "language": "go",
+          "source": "main.go:448",
+          "complexity": 8,
+          "callers": 1
+        },
+        {
+          "name": "loadIntoOrCreate",
+          "language": "go",
+          "source": "main.go:336",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "namespaceOrDie",
+          "language": "go",
+          "source": "main.go:379",
+          "complexity": 4,
+          "callers": 1
+        },
+        {
+          "name": "getClusterDomain",
+          "language": "go",
+          "source": "main.go:420",
+          "complexity": 3,
+          "callers": 1
+        },
+        {
+          "name": "setupProbeEndpoints",
+          "language": "go",
+          "source": "main.go:320",
+          "complexity": 3,
+          "callers": 1
+        },
+        {
+          "name": "createConfigMap",
+          "language": "go",
+          "source": "main.go:355",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "setupAppWrapperComponents",
+          "language": "go",
+          "source": "main.go:269",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "waitForRayClusterAPIandSetupController",
+          "language": "go",
+          "source": "main.go:259",
+          "complexity": 2,
+          "callers": 1
+        }
+      ],
+      "symbols_truncated": 4
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "main.go:102"
+    }
+  ],
+  "controllers": [
+    {
+      "name": "RayClusterReconciler",
+      "watches": [
+        {
+          "type": "For",
+          "gvk": "ray/v1/RayCluster",
+          "source": "pkg/controllers/raycluster_controller.go:680"
+        },
+        {
+          "type": "Owns",
+          "gvk": "/v1/Service",
+          "source": "pkg/controllers/raycluster_controller.go:682"
+        },
+        {
+          "type": "Owns",
+          "gvk": "/v1/ServiceAccount",
+          "source": "pkg/controllers/raycluster_controller.go:681"
+        },
+        {
+          "type": "Owns",
+          "gvk": "networking.k8s.io/v1/Ingress",
+          "source": "pkg/controllers/raycluster_controller.go:683"
+        },
+        {
+          "type": "Owns",
+          "gvk": "networking.k8s.io/v1/NetworkPolicy",
+          "source": "pkg/controllers/raycluster_controller.go:684"
+        },
+        {
+          "type": "Owns",
+          "gvk": "route/v1/Route",
+          "source": "pkg/controllers/raycluster_controller.go:704"
+        },
+        {
+          "type": "Watches",
+          "gvk": "rbac.authorization.k8s.io/v1/ClusterRoleBinding",
+          "source": "pkg/controllers/raycluster_controller.go:685"
+        }
+      ]
+    },
+    {
+      "name": "Unknown controller",
+      "watches": [
+        {
+          "type": "resource_ops",
+          "gvk": "programmatic",
+          "source": "go_ast",
+          "resource_ops": [
+            {
+              "kind": "RayCluster",
+              "group": "ray",
+              "verb": "update",
+              "source": "/home/runner/work/_temp/arch-analyzer-repos/codeflare-operator/pkg/controllers/raycluster_controller.go:139"
+            },
+            {
+              "kind": "ClusterRoleBinding",
+              "group": "rbac.authorization.k8s.io",
+              "verb": "delete",
+              "source": "/home/runner/work/_temp/arch-analyzer-repos/codeflare-operator/pkg/controllers/raycluster_controller.go:146"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:118",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:164",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:168",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:227",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:230",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:233",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:236",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:154",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:159",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:163",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:173",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:215",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:218",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:222",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:224",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:228",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:234",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:237",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "isOpenShift",
+      "callee_source": "main.go:403",
+      "call_site_source": "main.go:193",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "isOpenShift",
+      "callee_source": "main.go:403",
+      "call_site_source": "main.go:231",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "FilteredLogger",
+      "callee_source": "pkg/controllers/support.go:202",
+      "call_site_source": "main.go:115",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "getClusterDomain",
+      "callee_source": "main.go:420",
+      "call_site_source": "main.go:223",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "loadIntoOrCreate",
+      "callee_source": "main.go:336",
+      "call_site_source": "main.go:163",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "namespaceOrDie",
+      "callee_source": "main.go:379",
+      "call_site_source": "main.go:161",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "setupAppWrapperComponents",
+      "callee_source": "main.go:269",
+      "call_site_source": "main.go:234",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "setupCertManagement",
+      "callee_source": "main.go:293",
+      "call_site_source": "main.go:218",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "setupProbeEndpoints",
+      "callee_source": "main.go:320",
+      "call_site_source": "main.go:228",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "main.go:102",
+      "callee": "waitForRayClusterAPIandSetupController",
+      "callee_source": "main.go:259",
+      "call_site_source": "main.go:231",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setupRayClusterController",
+      "caller_source": "main.go:240",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:241",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "setupRayClusterController",
+      "caller_source": "main.go:240",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:243",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "setupAppWrapperComponents",
+      "caller_source": "main.go:269",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:272",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "setupAppWrapperControllerAndWebhooks",
+      "caller_source": "main.go:281",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:282",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "setupAppWrapperControllerAndWebhooks",
+      "caller_source": "main.go:281",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:284",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "isOpenShift",
+      "caller_source": "main.go:403",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:407",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "isOpenShift",
+      "caller_source": "main.go:403",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:412",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "isOpenShift",
+      "caller_source": "main.go:403",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:416",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "waitForAPI",
+      "caller_source": "main.go:448",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:464",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "waitForAPI",
+      "caller_source": "main.go:448",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "main.go:490",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:137",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:141",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:164",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:197",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:235",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:243",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:244",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:253",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:256",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:279",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "getKubeRayOperatorNamespace",
+      "caller_source": "pkg/controllers/raycluster_controller.go:331",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:344",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:82",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:93",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Info",
+      "caller_source": "pkg/controllers/support.go:180",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/support.go:181",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Error",
+      "caller_source": "pkg/controllers/support.go:184",
+      "callee": "Info",
+      "callee_source": "pkg/controllers/support.go:180",
+      "call_site_source": "pkg/controllers/support.go:187",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "exitOnError",
+      "caller_source": "main.go:396",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "main.go:398",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:130",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:141",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:156",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:161",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:174",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:179",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:190",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:200",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:206",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:212",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:218",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:231",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:238",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:253",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:264",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:275",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:300",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:305",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "getKubeRayOperatorNamespace",
+      "caller_source": "pkg/controllers/raycluster_controller.go:331",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:338",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Error",
+      "caller_source": "pkg/controllers/support.go:184",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/support.go:187",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Error",
+      "caller_source": "pkg/controllers/support.go:184",
+      "callee": "Error",
+      "callee_source": "pkg/controllers/support.go:184",
+      "call_site_source": "pkg/controllers/support.go:189",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForRayClusterAPIandSetupController",
+      "caller_source": "main.go:259",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:261",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForRayClusterAPIandSetupController",
+      "caller_source": "main.go:259",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:264",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setupAppWrapperControllerAndWebhooks",
+      "caller_source": "main.go:281",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:285",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setupAppWrapperControllerAndWebhooks",
+      "caller_source": "main.go:281",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:286",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "isAPIAvailable",
+      "caller_source": "main.go:436",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:438",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "isAPIAvailable",
+      "caller_source": "main.go:436",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:441",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForAPI",
+      "caller_source": "main.go:448",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:450",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForAPI",
+      "caller_source": "main.go:448",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:453",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForAPI",
+      "caller_source": "main.go:448",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:473",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForAPI",
+      "caller_source": "main.go:448",
+      "callee": "exitOnError",
+      "callee_source": "main.go:396",
+      "call_site_source": "main.go:483",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthClusterRoleBinding",
+      "caller_source": "pkg/controllers/raycluster_controller.go:367",
+      "callee": "oauthServiceAccountNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:385",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:374",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredServiceAccount",
+      "caller_source": "pkg/controllers/raycluster_controller.go:392",
+      "callee": "oauthServiceAccountNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:385",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:393",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "deleteHeadPodIfMissingImagePullSecrets",
+      "caller_source": "pkg/controllers/raycluster_controller.go:624",
+      "callee": "oauthServiceAccountNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:385",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:625",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateHeadGroupServiceAccountName",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:230",
+      "callee": "oauthServiceAccountNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:385",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:233",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthProxyContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:243",
+      "callee": "oauthServiceAccountNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:385",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:266",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "oauthServiceAccountNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:385",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:89",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:754",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:760",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:768",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:780",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:792",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:799",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:811",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:825",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:837",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:851",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:863",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "ValidateUpdate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:158",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:877",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredServiceAccount",
+      "caller_source": "pkg/controllers/raycluster_controller.go:392",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:400",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterRoute",
+      "caller_source": "pkg/controllers/raycluster_controller.go:411",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:422",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthService",
+      "caller_source": "pkg/controllers/raycluster_controller.go:439",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:454",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthSecret",
+      "caller_source": "pkg/controllers/raycluster_controller.go:465",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:474",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredCASecret",
+      "caller_source": "pkg/controllers/raycluster_controller.go:484",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:491",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredWorkersNetworkPolicy",
+      "caller_source": "pkg/controllers/raycluster_controller.go:544",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:558",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredHeadNetworkPolicy",
+      "caller_source": "pkg/controllers/raycluster_controller.go:568",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:621",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:106",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:111",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:120",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:130",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:134",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:87",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "upsert",
+      "callee_source": "pkg/controllers/support.go:108",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:98",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientRoute",
+      "caller_source": "pkg/controllers/support.go:39",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/support.go:47",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientIngress",
+      "caller_source": "pkg/controllers/support.go:50",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/support.go:58",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterIngress",
+      "caller_source": "pkg/controllers/support.go:81",
+      "callee": "ownerRefForRayCluster",
+      "callee_source": "pkg/controllers/support.go:206",
+      "call_site_source": "pkg/controllers/support.go:84",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "crbNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:360",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:364",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "crbNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:360",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:361",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthServiceAccountNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:385",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:389",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthServiceAccountNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:385",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:386",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthServiceNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:425",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:429",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthServiceNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:425",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:426",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthServiceTLSSecretName",
+      "caller_source": "pkg/controllers/raycluster_controller.go:432",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:436",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthServiceTLSSecretName",
+      "caller_source": "pkg/controllers/raycluster_controller.go:432",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:433",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthSecretNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:457",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:461",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthSecretNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:457",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:458",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "caSecretNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:477",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:481",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "caSecretNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:477",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:478",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "workerNWPNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:537",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:541",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "workerNWPNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:537",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:538",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "headNWPNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:561",
+      "callee": "RCCUniqueName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:710",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:565",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "headNWPNameFromCluster",
+      "caller_source": "pkg/controllers/raycluster_controller.go:561",
+      "callee": "shouldUseOldName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:117",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:562",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateOAuthProxyContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:193",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateOAuthProxyVolume",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:205",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:208",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateHeadInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:389",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:392",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateWorkerInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:401",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:406",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateCaVolumes",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:416",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:420",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateCaVolumes",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:416",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:427",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateHeadEnvVars",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:438",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:442",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateWorkerEnvVars",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:452",
+      "callee": "contains",
+      "callee_source": "pkg/controllers/support.go:118",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:458",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "dashboardNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:403",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:245",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredServiceAccount",
+      "caller_source": "pkg/controllers/raycluster_controller.go:392",
+      "callee": "dashboardNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:403",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:398",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterRoute",
+      "caller_source": "pkg/controllers/raycluster_controller.go:411",
+      "callee": "dashboardNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:403",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:412",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterIngress",
+      "caller_source": "pkg/controllers/support.go:81",
+      "callee": "dashboardNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:403",
+      "call_site_source": "pkg/controllers/support.go:82",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "rayHeadInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:357",
+      "callee": "certVolumeMounts",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:294",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:370",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "rayWorkerInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:375",
+      "callee": "certVolumeMounts",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:294",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:384",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "certVolumeMounts",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:294",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:110",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "certVolumeMounts",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:294",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:129",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "certVolumeMounts",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:294",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:547",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "callee": "certVolumeMounts",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:294",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:719",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterRoute",
+      "caller_source": "pkg/controllers/raycluster_controller.go:411",
+      "callee": "WithName",
+      "callee_source": "pkg/controllers/support.go:197",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:415",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterRoute",
+      "caller_source": "pkg/controllers/raycluster_controller.go:411",
+      "callee": "oauthServiceNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:425",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:415",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthService",
+      "caller_source": "pkg/controllers/raycluster_controller.go:439",
+      "callee": "oauthServiceNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:425",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:440",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthSecret",
+      "caller_source": "pkg/controllers/raycluster_controller.go:465",
+      "callee": "oauthSecretNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:457",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:471",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthProxyContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:243",
+      "callee": "oauthSecretNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:457",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:256",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "callee": "ValidateCreate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:141",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:349",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "callee": "ValidateCreate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:141",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:358",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "callee": "ValidateCreate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:141",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:370",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "callee": "ValidateCreate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:141",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:382",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "callee": "ValidateCreate",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:141",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:389",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "WithName",
+      "caller_source": "pkg/controllers/support.go:197",
+      "callee": "WithName",
+      "callee_source": "pkg/controllers/support.go:197",
+      "call_site_source": "pkg/controllers/support.go:198",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientRoute",
+      "caller_source": "pkg/controllers/support.go:39",
+      "callee": "WithName",
+      "callee_source": "pkg/controllers/support.go:197",
+      "call_site_source": "pkg/controllers/support.go:43",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "crbNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:360",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:150",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "rayClientNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:407",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:257",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthClusterRoleBinding",
+      "caller_source": "pkg/controllers/raycluster_controller.go:367",
+      "callee": "crbNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:360",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:369",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "rayHeadInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:357",
+      "callee": "rayClientNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:407",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:358",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "rayHeadInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:357",
+      "callee": "serviceNameFromCluster",
+      "callee_source": "pkg/controllers/support.go:35",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:360",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateHeadEnvVars",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:438",
+      "callee": "envVarList",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:309",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:441",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateWorkerEnvVars",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:452",
+      "callee": "envVarList",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:309",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:457",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "envVarList",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:309",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:119",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "envVarList",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:309",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:97",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientRoute",
+      "caller_source": "pkg/controllers/support.go:39",
+      "callee": "rayClientNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:407",
+      "call_site_source": "pkg/controllers/support.go:40",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientRoute",
+      "caller_source": "pkg/controllers/support.go:39",
+      "callee": "serviceNameFromCluster",
+      "callee_source": "pkg/controllers/support.go:35",
+      "call_site_source": "pkg/controllers/support.go:43",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientIngress",
+      "caller_source": "pkg/controllers/support.go:50",
+      "callee": "rayClientNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:407",
+      "call_site_source": "pkg/controllers/support.go:51",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredRayClientIngress",
+      "caller_source": "pkg/controllers/support.go:50",
+      "callee": "serviceNameFromCluster",
+      "callee_source": "pkg/controllers/support.go:35",
+      "call_site_source": "pkg/controllers/support.go:69",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredClusterIngress",
+      "caller_source": "pkg/controllers/support.go:81",
+      "callee": "serviceNameFromCluster",
+      "callee_source": "pkg/controllers/support.go:35",
+      "call_site_source": "pkg/controllers/support.go:94",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "caSecretNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:477",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:169",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredCASecret",
+      "caller_source": "pkg/controllers/raycluster_controller.go:484",
+      "callee": "caSecretNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:477",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:485",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "caVolumes",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:338",
+      "callee": "caSecretNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:477",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:344",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateCaVolumes",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:416",
+      "callee": "caVolumes",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:338",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:419",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "caVolumes",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:338",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:105",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "caVolumes",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:338",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:124",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withContainerName",
+      "callee_source": "pkg/controllers/support.go:135",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withContainerName",
+      "callee_source": "pkg/controllers/support.go:135",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:134",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withContainerName",
+      "callee_source": "pkg/controllers/support.go:135",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withVolumeName",
+      "callee_source": "pkg/controllers/support.go:146",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:106",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withVolumeName",
+      "callee_source": "pkg/controllers/support.go:146",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:125",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withVolumeName",
+      "callee_source": "pkg/controllers/support.go:146",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:87",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setupRayClusterController",
+      "caller_source": "main.go:240",
+      "callee": "SetupWithManager",
+      "callee_source": "pkg/controllers/raycluster_controller.go:668",
+      "call_site_source": "main.go:256",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "waitForRayClusterAPIandSetupController",
+      "caller_source": "main.go:259",
+      "callee": "setupRayClusterController",
+      "callee_source": "main.go:240",
+      "call_site_source": "main.go:261",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForRayClusterAPIandSetupController",
+      "caller_source": "main.go:259",
+      "callee": "setupRayClusterController",
+      "callee_source": "main.go:240",
+      "call_site_source": "main.go:264",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredCASecret",
+      "callee_source": "pkg/controllers/raycluster_controller.go:484",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:177",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredCASecret",
+      "callee_source": "pkg/controllers/raycluster_controller.go:484",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:188",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "getIngressHost",
+      "callee_source": "pkg/controllers/raycluster_controller.go:312",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:246",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "getIngressHost",
+      "callee_source": "pkg/controllers/raycluster_controller.go:312",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:258",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "isRayClusterSuspended",
+      "callee_source": "pkg/controllers/raycluster_controller.go:356",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "isRayClusterSuspended",
+      "callee_source": "pkg/controllers/raycluster_controller.go:356",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:242",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "isRayDashboardOAuthEnabled",
+      "callee_source": "pkg/controllers/raycluster_controller.go:322",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "isRayDashboardOAuthEnabled",
+      "callee_source": "pkg/controllers/raycluster_controller.go:322",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:242",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredOAuthService",
+      "caller_source": "pkg/controllers/raycluster_controller.go:439",
+      "callee": "oauthServiceTLSSecretName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:432",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:442",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:141",
+      "callee": "validateHeadGroupServiceAccountName",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:230",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:152",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:141",
+      "callee": "validateIngress",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:217",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:147",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:141",
+      "callee": "validateOAuthProxyContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:193",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:150",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:141",
+      "callee": "validateOAuthProxyVolume",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:205",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:151",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateHeadGroupServiceAccountName",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:230",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:174",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateIngress",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:217",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:169",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateOAuthProxyContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:193",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:172",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateOAuthProxyVolume",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:205",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:173",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateOAuthProxyContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:193",
+      "callee": "oauthProxyContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:243",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:196",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateOAuthProxyVolume",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:205",
+      "callee": "oauthProxyTLSSecretVolume",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:283",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:208",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "oauthProxyTLSSecretVolume",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:283",
+      "callee": "oauthServiceTLSSecretName",
+      "callee_source": "pkg/controllers/raycluster_controller.go:432",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:288",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateHeadInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:389",
+      "callee": "rayHeadInitContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:357",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:392",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "validateWorkerInitContainer",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:401",
+      "callee": "rayWorkerInitContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:375",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:406",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "oauthProxyContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:243",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:85",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "oauthProxyTLSSecretVolume",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:283",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:87",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "rayHeadInitContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:357",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:102",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "rayWorkerInitContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:375",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:134",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withEnvVarName",
+      "callee_source": "pkg/controllers/support.go:162",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:120",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Default",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:71",
+      "callee": "withEnvVarName",
+      "callee_source": "pkg/controllers/support.go:162",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:98",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestValidateCreate",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "callee": "Default",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:71",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:343",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "TestRayClusterWebhookDefault",
+      "caller_source": "pkg/controllers/raycluster_webhook_test.go:43",
+      "callee": "Default",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:71",
+      "call_site_source": "pkg/controllers/raycluster_webhook_test.go:97",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setupRayClusterController",
+      "caller_source": "main.go:240",
+      "callee": "SetupRayClusterWebhookWithManager",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:47",
+      "call_site_source": "main.go:245",
+      "confidence": "INFERRED"
+    },
+    {
+      "caller": "waitForRayClusterAPIandSetupController",
+      "caller_source": "main.go:259",
+      "callee": "isAPIAvailable",
+      "callee_source": "main.go:436",
+      "call_site_source": "main.go:260",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "waitForRayClusterAPIandSetupController",
+      "caller_source": "main.go:259",
+      "callee": "waitForAPI",
+      "callee_source": "main.go:448",
+      "call_site_source": "main.go:263",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "setupAppWrapperComponents",
+      "caller_source": "main.go:269",
+      "callee": "setupAppWrapperControllerAndWebhooks",
+      "callee_source": "main.go:281",
+      "call_site_source": "main.go:277",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "loadIntoOrCreate",
+      "caller_source": "main.go:336",
+      "callee": "createConfigMap",
+      "callee_source": "main.go:355",
+      "call_site_source": "main.go:339",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "deleteHeadPodIfMissingImagePullSecrets",
+      "callee_source": "pkg/controllers/raycluster_controller.go:624",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:224",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredClusterIngress",
+      "callee_source": "pkg/controllers/support.go:81",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:250",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredClusterRoute",
+      "callee_source": "pkg/controllers/raycluster_controller.go:411",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:198",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredHeadNetworkPolicy",
+      "callee_source": "pkg/controllers/raycluster_controller.go:568",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:298",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredOAuthClusterRoleBinding",
+      "callee_source": "pkg/controllers/raycluster_controller.go:367",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:229",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredOAuthSecret",
+      "callee_source": "pkg/controllers/raycluster_controller.go:465",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:204",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredOAuthService",
+      "callee_source": "pkg/controllers/raycluster_controller.go:439",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:210",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredRayClientIngress",
+      "callee_source": "pkg/controllers/support.go:50",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:262",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredRayClientRoute",
+      "callee_source": "pkg/controllers/support.go:39",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:236",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredServiceAccount",
+      "callee_source": "pkg/controllers/raycluster_controller.go:392",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:216",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "desiredWorkersNetworkPolicy",
+      "callee_source": "pkg/controllers/raycluster_controller.go:544",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:303",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "generateCACertificate",
+      "callee_source": "pkg/controllers/raycluster_controller.go:494",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:172",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "getKubeRayOperatorNamespace",
+      "callee_source": "pkg/controllers/raycluster_controller.go:331",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:273",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Reconcile",
+      "caller_source": "pkg/controllers/raycluster_controller.go:123",
+      "callee": "isMTLSEnabled",
+      "callee_source": "pkg/controllers/raycluster_controller.go:326",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:168",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredWorkersNetworkPolicy",
+      "caller_source": "pkg/controllers/raycluster_controller.go:544",
+      "callee": "workerNWPNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:537",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:546",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "desiredHeadNetworkPolicy",
+      "caller_source": "pkg/controllers/raycluster_controller.go:568",
+      "callee": "headNWPNameFromCluster",
+      "callee_source": "pkg/controllers/raycluster_controller.go:561",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:575",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "deleteHeadPodIfMissingImagePullSecrets",
+      "caller_source": "pkg/controllers/raycluster_controller.go:624",
+      "callee": "getHeadPod",
+      "callee_source": "pkg/controllers/raycluster_controller.go:654",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:630",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "RCCUniqueName",
+      "caller_source": "pkg/controllers/raycluster_controller.go:710",
+      "callee": "seededHash",
+      "callee_source": "pkg/controllers/support.go:219",
+      "call_site_source": "pkg/controllers/raycluster_controller.go:711",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateCaVolumes",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:416",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:183",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateHeadEnvVars",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:438",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:181",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateHeadInitContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:389",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:179",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateWorkerEnvVars",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:452",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:182",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "ValidateUpdate",
+      "caller_source": "pkg/controllers/raycluster_webhook.go:158",
+      "callee": "validateWorkerInitContainer",
+      "callee_source": "pkg/controllers/raycluster_webhook.go:401",
+      "call_site_source": "pkg/controllers/raycluster_webhook.go:180",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Init",
+      "caller_source": "pkg/controllers/support.go:173",
+      "callee": "Init",
+      "callee_source": "pkg/controllers/support.go:173",
+      "call_site_source": "pkg/controllers/support.go:174",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "Enabled",
+      "caller_source": "pkg/controllers/support.go:177",
+      "callee": "Enabled",
+      "callee_source": "pkg/controllers/support.go:177",
+      "call_site_source": "pkg/controllers/support.go:178",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "WithValues",
+      "caller_source": "pkg/controllers/support.go:193",
+      "callee": "WithValues",
+      "callee_source": "pkg/controllers/support.go:193",
+      "call_site_source": "pkg/controllers/support.go:194",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "test_relationships": [
+    {
+      "test": "TestValidateCreate",
+      "test_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "target": "Default",
+      "target_source": "pkg/controllers/raycluster_webhook.go:71",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestValidateCreate",
+      "test_source": "pkg/controllers/raycluster_webhook_test.go:232",
+      "target": "ValidateCreate",
+      "target_source": "pkg/controllers/raycluster_webhook.go:141",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestValidateUpdate",
+      "test_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "target": "ValidateUpdate",
+      "target_source": "pkg/controllers/raycluster_webhook.go:158",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestValidateUpdate",
+      "test_source": "pkg/controllers/raycluster_webhook_test.go:395",
+      "target": "certVolumeMounts",
+      "target_source": "pkg/controllers/raycluster_webhook.go:294",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "TestRayClusterWebhookDefault",
+      "test_source": "pkg/controllers/raycluster_webhook_test.go:43",
+      "target": "Default",
+      "target_source": "pkg/controllers/raycluster_webhook.go:71",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "sparse",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "sparse",
+    "deployments": "sparse",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "sparse",
+    "kustomize_overlay_refs": "rich",
+    "label_contracts": "moderate",
+    "network_policies": "none",
+    "operator_config": "rich",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "moderate",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "sparse",
+    "services": "sparse",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "rich"
+  }
+}
