@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "component": "vllm-orchestrator-gateway",
+  "repo": "red-hat-data-services/vllm-orchestrator-gateway",
+  "commit_sha": "863f687cc25e5b5fcfc006a76942c5b0ca396b9e",
+  "analyzer_version": "38b24267ad379636973f678b4ca92689c2c6fdf3",
+  "summary": "vllm-orchestrator-gateway is a Kubernetes component.",
+  "repository_description": "This gateway service enables controlled interaction with the FMS Guardrails Orchestrator by enforcing stricter access to its exposed endpoints. It provides a mechanism of configuring fixed detector pipelines, and then provides a unique /v1/chat/completions endpoint per configured detector pipeline. This allows for drop-in replacement of an unguardrailed chat completions model with a guardrailed one.",
+  "description_source": "README.md:3",
+  "graph_status": "available",
+  "graph": {
+    "source_files": 3,
+    "functions": 18,
+    "test_functions": 4,
+    "call_sites": 326,
+    "resolved_calls": 15,
+    "http_endpoints": 0,
+    "storage_operations": 0,
+    "external_calls": 0,
+    "taint_flows": 1
+  },
+  "languages": [
+    {
+      "name": "rust",
+      "source_files": 3,
+      "functions": 18,
+      "test_functions": 4
+    },
+    {
+      "name": "unknown",
+      "source_files": 3,
+      "functions": 0,
+      "test_functions": 0
+    }
+  ],
+  "source_areas": [
+    {
+      "path": "src",
+      "source_files": 3,
+      "functions": 18,
+      "test_functions": 4,
+      "languages": [
+        "rust",
+        "unknown"
+      ],
+      "symbols": [
+        {
+          "name": "main",
+          "language": "rust",
+          "source": "src/main.rs:59",
+          "complexity": 5,
+          "callers": 0
+        },
+        {
+          "name": "validate_registered_detectors",
+          "language": "rust",
+          "source": "src/config.rs:64",
+          "complexity": 10,
+          "callers": 5
+        },
+        {
+          "name": "get_orchestrator_detectors",
+          "language": "rust",
+          "source": "src/main.rs:32",
+          "complexity": 6,
+          "callers": 2
+        },
+        {
+          "name": "build_orchestrator_client",
+          "language": "rust",
+          "source": "src/main.rs:351",
+          "complexity": 15,
+          "callers": 1
+        },
+        {
+          "name": "handle_streaming_generation",
+          "language": "rust",
+          "source": "src/main.rs:259",
+          "complexity": 13,
+          "callers": 1,
+          "annotations": [
+            "sec:deserializes_input"
+          ]
+        },
+        {
+          "name": "orchestrator_streaming_request",
+          "language": "rust",
+          "source": "src/main.rs:478",
+          "complexity": 11,
+          "callers": 1,
+          "annotations": [
+            "sec:calls_external"
+          ]
+        },
+        {
+          "name": "orchestrator_post_request",
+          "language": "rust",
+          "source": "src/main.rs:408",
+          "complexity": 10,
+          "callers": 1,
+          "annotations": [
+            "sec:calls_external",
+            "sec:deserializes_input"
+          ]
+        },
+        {
+          "name": "handle_non_streaming_generation",
+          "language": "rust",
+          "source": "src/main.rs:201",
+          "complexity": 6,
+          "callers": 1
+        },
+        {
+          "name": "check_payload_detections",
+          "language": "rust",
+          "source": "src/main.rs:138",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "handle_chat_completions",
+          "language": "rust",
+          "source": "src/main.rs:154",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "with_server_default",
+          "language": "rust",
+          "source": "src/config.rs:40",
+          "complexity": 2,
+          "callers": 1
+        },
+        {
+          "name": "default",
+          "language": "rust",
+          "source": "src/config.rs:21",
+          "complexity": 1,
+          "callers": 0
+        }
+      ],
+      "symbols_truncated": 6
+    }
+  ],
+  "entry_points": [
+    {
+      "kind": "executable",
+      "name": "main",
+      "source": "src/main.rs:59"
+    }
+  ],
+  "call_relationships": [
+    {
+      "caller": "main",
+      "caller_source": "src/main.rs:59",
+      "callee": "validate_registered_detectors",
+      "callee_source": "src/config.rs:64",
+      "call_site_source": "src/main.rs:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "src/main.rs:59",
+      "callee": "build_orchestrator_client",
+      "callee_source": "src/main.rs:351",
+      "call_site_source": "src/main.rs:74",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "main",
+      "caller_source": "src/main.rs:59",
+      "callee": "handle_chat_completions",
+      "callee_source": "src/main.rs:154",
+      "call_site_source": "src/main.rs:96",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_validate_registered_detectors",
+      "caller_source": "src/config.rs:117",
+      "callee": "validate_registered_detectors",
+      "callee_source": "src/config.rs:64",
+      "call_site_source": "src/config.rs:137",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_validate_multiple_same_server_input_detectors",
+      "caller_source": "src/config.rs:142",
+      "callee": "validate_registered_detectors",
+      "callee_source": "src/config.rs:64",
+      "call_site_source": "src/config.rs:170",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_validate_multiple_same_server_output_detectors",
+      "caller_source": "src/config.rs:175",
+      "callee": "validate_registered_detectors",
+      "callee_source": "src/config.rs:64",
+      "call_site_source": "src/config.rs:203",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "test_validate_multiple_same_server_detectors",
+      "caller_source": "src/config.rs:207",
+      "callee": "validate_registered_detectors",
+      "callee_source": "src/config.rs:64",
+      "call_site_source": "src/config.rs:235",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_non_streaming_generation",
+      "caller_source": "src/main.rs:201",
+      "callee": "get_orchestrator_detectors",
+      "callee_source": "src/main.rs:32",
+      "call_site_source": "src/main.rs:213",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_streaming_generation",
+      "caller_source": "src/main.rs:259",
+      "callee": "get_orchestrator_detectors",
+      "callee_source": "src/main.rs:32",
+      "call_site_source": "src/main.rs:271",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "read_config",
+      "caller_source": "src/config.rs:56",
+      "callee": "with_server_default",
+      "callee_source": "src/config.rs:40",
+      "call_site_source": "src/config.rs:60",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_chat_completions",
+      "caller_source": "src/main.rs:154",
+      "callee": "handle_non_streaming_generation",
+      "callee_source": "src/main.rs:201",
+      "call_site_source": "src/main.rs:185",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_chat_completions",
+      "caller_source": "src/main.rs:154",
+      "callee": "handle_streaming_generation",
+      "callee_source": "src/main.rs:259",
+      "call_site_source": "src/main.rs:173",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_non_streaming_generation",
+      "caller_source": "src/main.rs:201",
+      "callee": "check_payload_detections",
+      "callee_source": "src/main.rs:138",
+      "call_site_source": "src/main.rs:245",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_non_streaming_generation",
+      "caller_source": "src/main.rs:201",
+      "callee": "orchestrator_post_request",
+      "callee_source": "src/main.rs:408",
+      "call_site_source": "src/main.rs:240",
+      "confidence": "CERTAIN"
+    },
+    {
+      "caller": "handle_streaming_generation",
+      "caller_source": "src/main.rs:259",
+      "callee": "orchestrator_streaming_request",
+      "callee_source": "src/main.rs:478",
+      "call_site_source": "src/main.rs:298",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "test_relationships": [
+    {
+      "test": "test_validate_registered_detectors",
+      "test_source": "src/config.rs:117",
+      "target": "validate_registered_detectors",
+      "target_source": "src/config.rs:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "test_validate_multiple_same_server_input_detectors",
+      "test_source": "src/config.rs:142",
+      "target": "validate_registered_detectors",
+      "target_source": "src/config.rs:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "test_validate_multiple_same_server_output_detectors",
+      "test_source": "src/config.rs:175",
+      "target": "validate_registered_detectors",
+      "target_source": "src/config.rs:64",
+      "confidence": "CERTAIN"
+    },
+    {
+      "test": "test_validate_multiple_same_server_detectors",
+      "test_source": "src/config.rs:207",
+      "target": "validate_registered_detectors",
+      "target_source": "src/config.rs:64",
+      "confidence": "CERTAIN"
+    }
+  ],
+  "taint_flows": [
+    {
+      "label": "sec:deserializes_input-\u003esec:calls_external",
+      "confidence": "CERTAIN",
+      "source": "src/main.rs:408",
+      "sink": "src/main.rs:420"
+    }
+  ],
+  "coverage": {
+    "api_types": "none",
+    "component_refs": "none",
+    "configmap_volumes": "none",
+    "configmaps": "none",
+    "crds": "none",
+    "deployments": "none",
+    "dockerfiles": "sparse",
+    "external_connections": "none",
+    "ingress_routing": "none",
+    "kustomize_overlay_refs": "none",
+    "label_contracts": "none",
+    "network_policies": "none",
+    "operator_config": "none",
+    "platform_detection": "none",
+    "praxis_pipelines": "none",
+    "prometheus_metrics": "none",
+    "python_k8s_calls": "none",
+    "rbac": "none",
+    "reconcile_sequences": "none",
+    "runtime_dependencies": "none",
+    "secrets": "none",
+    "services": "none",
+    "serving_runtime_refs": "none",
+    "status_conditions": "none",
+    "webhooks": "none"
+  }
+}
