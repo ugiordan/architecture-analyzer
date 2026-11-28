@@ -1,22 +1,24 @@
 # feast
 
-> **Architecture snapshot: 2026-05-20** (2026-05-20)
+> **Architecture snapshot: 2026-11-28** (2026-11-28)
 
 
-**Repository:** feast-dev/feast  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-20T04:20:29Z
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
+**Repository:** red-hat-data-services/feast  
+**Analyzer:** arch-analyzer 38b24267ad379636973f678b4ca92689c2c6fdf3  
+**Extracted:** 2026-11-28T07:19:48Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
 | CRDs | 0 |
-| Deployments | 2 |
+| Deployments | 3 |
 | Services | 1 |
-| Secrets | 0 |
+| Secrets | 1 |
 | Cluster Roles | 0 |
-| Controller Watches | 13 |
+| Controller Watches | 14 |
 
 ## Component Architecture
 
@@ -28,6 +30,7 @@ graph LR
 
     classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef controller fill:#3498db,stroke:#2980b9,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
     classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
@@ -37,32 +40,38 @@ graph LR
         class dep_1 controller
         dep_2["controller-manager"]
         class dep_2 controller
+        dep_3["controller-manager"]
+        class dep_3 controller
     end
 
-    controller -->|"Owns"| owned_3["ConfigMap"]
-    class owned_3 owned
-    controller -->|"Owns"| owned_4["CronJob"]
+    controller -->|"Owns"| owned_4["ConfigMap"]
     class owned_4 owned
-    controller -->|"Owns"| owned_5["Deployment"]
+    controller -->|"Owns"| owned_5["CronJob"]
     class owned_5 owned
-    controller -->|"Owns"| owned_6["HorizontalPodAutoscaler"]
+    controller -->|"Owns"| owned_6["Deployment"]
     class owned_6 owned
-    controller -->|"Owns"| owned_7["PersistentVolumeClaim"]
+    controller -->|"Owns"| owned_7["HorizontalPodAutoscaler"]
     class owned_7 owned
-    controller -->|"Owns"| owned_8["PodDisruptionBudget"]
+    controller -->|"Owns"| owned_8["NetworkPolicy"]
     class owned_8 owned
-    controller -->|"Owns"| owned_9["Role"]
+    controller -->|"Owns"| owned_9["PersistentVolumeClaim"]
     class owned_9 owned
-    controller -->|"Owns"| owned_10["RoleBinding"]
+    controller -->|"Owns"| owned_10["PodDisruptionBudget"]
     class owned_10 owned
-    controller -->|"Owns"| owned_11["Route"]
+    controller -->|"Owns"| owned_11["Role"]
     class owned_11 owned
-    controller -->|"Owns"| owned_12["Service"]
+    controller -->|"Owns"| owned_12["RoleBinding"]
     class owned_12 owned
-    controller -->|"Owns"| owned_13["ServiceAccount"]
+    controller -->|"Owns"| owned_13["Route"]
     class owned_13 owned
-    watch_14["FeatureStore"] -->|"Watches"| controller
-    class watch_14 external
+    controller -->|"Owns"| owned_14["Service"]
+    class owned_14 owned
+    controller -->|"Owns"| owned_15["ServiceAccount"]
+    class owned_15 owned
+    watch_16["FeatureStore"] -->|"Watches"| controller
+    class watch_16 external
+    controller -.->|"depends on"| odh_17["odh-platform-utilities"]
+    class odh_17 dep
 ```
 
 ### CRDs
@@ -71,90 +80,25 @@ No CRDs found in analyzed sources.
 
 ## Dependencies
 
+### Internal Platform Dependencies
+
+| Component | Interaction |
+|-----------|-------------|
+| odh-platform-utilities | Go module dependency: github.com/opendatahub-io/odh-platform-utilities |
+
 ### Key External Dependencies
 
 | Module | Version |
 |--------|---------|
 | github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.2.2 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/logr | v1.4.3 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/go-logr/stdr | v1.2.2 |
-| github.com/prometheus-operator/prometheus-operator/pkg/client | v0.75.0 |
+| github.com/prometheus-operator/prometheus-operator/pkg/client | v0.83.0 |
 | github.com/prometheus/client_golang | v1.23.2 |
-| github.com/prometheus/client_golang | v1.14.0 |
-| github.com/prometheus/client_golang | v1.14.0 |
-| github.com/prometheus/client_golang | v1.0.0 |
-| github.com/prometheus/client_golang | v1.0.0 |
-| github.com/prometheus/client_model | v0.3.0 |
-| github.com/prometheus/client_model | v0.6.1 |
+| github.com/prometheus/client_golang | v1.25.0 |
 | github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.3.0 |
-| github.com/prometheus/client_model | v0.6.1 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/client_model | v0.6.2 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/common | v0.66.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| github.com/prometheus/procfs | v0.16.1 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.59.0 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.61.1 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.59.0 |
-| google.golang.org/grpc | v1.73.0 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.71.1 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.58.2 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.73.0 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.61.1 |
-| google.golang.org/grpc | v1.63.2 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.70.0 |
-| google.golang.org/grpc | v1.75.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.75.1 |
-| google.golang.org/grpc | v1.76.0 |
-| google.golang.org/grpc | v1.74.2 |
-| google.golang.org/grpc | v1.71.0 |
-| google.golang.org/grpc | v1.58.2 |
-| google.golang.org/grpc/examples | v0.0.0-20230224211313-3775f633ce20 |
-| google.golang.org/grpc/examples | v0.0.0-20230224211313-3775f633ce20 |
-| k8s.io/api | v0.33.0 |
-| k8s.io/apiextensions-apiserver | v0.33.0 |
-| k8s.io/apimachinery | v0.33.0 |
-| k8s.io/client-go | v0.33.0 |
-| sigs.k8s.io/controller-runtime | v0.21.0 |
+| google.golang.org/grpc | v1.85.0 |
+| k8s.io/api | v0.35.4 |
+| k8s.io/apiextensions-apiserver | v0.35.4 |
+| k8s.io/apimachinery | v0.35.4 |
+| k8s.io/client-go | v0.35.4 |
+| sigs.k8s.io/controller-runtime | v0.23.3 |
 

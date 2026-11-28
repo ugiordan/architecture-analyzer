@@ -1,5 +1,7 @@
 # modelmesh-serving: Cache Architecture
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 Controller-runtime cache configuration controls which Kubernetes resources are cached in-memory. Misconfigured caches (cluster-wide watches on high-cardinality types without filters) are a primary cause of operator OOM kills.
 
 ## Cache Architecture
@@ -11,7 +13,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 | Manager file | `main.go` |
 | Cache scope | namespace-scoped |
 | DefaultTransform | no |
-| Memory limit | 300Mi |
+| Memory limit | 2Gi |
 
 ### Issues
 
@@ -20,15 +22,11 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 - Type ClusterServingRuntime is watched but has no cache filter (cluster-wide informer)
 - Type ConfigMap is watched but has no cache filter (cluster-wide informer)
 - Type Deployment is watched but has no cache filter (cluster-wide informer)
-- Type InferenceGraph is watched but has no cache filter (cluster-wide informer)
 - Type InferenceService is watched but has no cache filter (cluster-wide informer)
-- Type Kind is watched but has no cache filter (cluster-wide informer)
 - Type Namespace is watched but has no cache filter (cluster-wide informer)
 - Type Predictor is watched but has no cache filter (cluster-wide informer)
 - Type Secret is watched but has no cache filter (cluster-wide informer)
 - Type Service is watched but has no cache filter (cluster-wide informer)
 - Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)
 - Type ServingRuntime is watched but has no cache filter (cluster-wide informer)
-- Type TrainedModel is watched but has no cache filter (cluster-wide informer)
-- Type VirtualService is watched but has no cache filter (cluster-wide informer)
 

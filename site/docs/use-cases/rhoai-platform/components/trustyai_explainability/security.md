@@ -1,5 +1,7 @@
 # trustyai-explainability: Security
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Secrets
 
 Kubernetes secrets referenced by this component. Only names and types are shown, not values.
@@ -16,6 +18,8 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 |------|------------|--------|------|-------|---------------|------|--------|
 | `Dockerfile` | registry.access.redhat.com/ubi8/openjdk-17-runtime:latest | 2 | root |  |  |  | Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17:latest; Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17-runtime:latest; Container runs as root user |
 | `Dockerfile.konflux` | registry.access.redhat.com/ubi9/openjdk-17-runtime@sha256:07e1fcaaeb8d4210dccd781a47e123df5d3c917d868a4ff325739118403bbc7c | 2 |  |  |  |  | No USER directive found (defaults to root) |
+| `explainability-service/demo/logger/generator.Dockerfile` | registry.access.redhat.com/ubi8/python-311:latest | 1 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi8/python-311:latest; No USER directive found (defaults to root) |
+| `explainability-service/demo/logger/partial.Dockerfile` | registry.access.redhat.com/ubi8/python-311:latest | 1 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi8/python-311:latest; No USER directive found (defaults to root) |
 | `explainability-service/src/main/docker/Dockerfile.jvm` | registry.access.redhat.com/ubi8/openjdk-17:latest | 1 | 185 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17:latest |
 | `explainability-service/src/main/docker/Dockerfile.legacy-jar` | registry.access.redhat.com/ubi8/openjdk-17:latest | 1 | 185 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi8/openjdk-17:latest |
 | `explainability-service/src/main/docker/Dockerfile.native` | registry.access.redhat.com/ubi8/ubi-minimal:8.6 | 1 | 1001 |  |  |  |  |

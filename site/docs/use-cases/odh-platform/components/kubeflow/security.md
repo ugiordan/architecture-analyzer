@@ -1,5 +1,7 @@
 # kubeflow: Security
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 ## Secrets
 
 Kubernetes secrets referenced by this component. Only names and types are shown, not values.
@@ -8,6 +10,8 @@ Kubernetes secrets referenced by this component. Only names and types are shown,
 
 | Name | Type | Referenced By |
 |------|------|---------------|
+| kf-notebook-controller-metrics-tls | Opaque | deployment/deployment |
+| odh-notebook-controller-metrics-tls | Opaque | deployment/manager |
 | odh-notebook-controller-webhook-cert | kubernetes.io/tls | service/webhook-service |
 | webhook-server-cert | Opaque | deployment/controller-manager |
 
@@ -19,14 +23,16 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| controller-manager | kube-rbac-proxy | ? | ? | ? | [`components/notebook-controller/config/default/manager_auth_proxy_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/default/manager_auth_proxy_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_auth_proxy_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/default/manager_auth_proxy_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_image_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/default/manager_image_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_prometheus_metrics_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/default/manager_prometheus_metrics_patch.yaml) |
-| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_webhook_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/default/manager_webhook_patch.yaml) |
-| deployment | manager | ? | ? | ? | [`components/notebook-controller/config/manager/manager.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/manager/manager.yaml) |
-| deployment | manager | ? | ? | ? | [`components/notebook-controller/config/overlays/openshift/manager_openshift_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/notebook-controller/config/overlays/openshift/manager_openshift_patch.yaml) |
-| manager | manager | ? | ? | ? | [`components/odh-notebook-controller/config/manager/manager.yaml`](https://github.com/opendatahub-io/kubeflow/blob/f09b56e860ff88bcc05668b3f517791cdccd5b4d/components/odh-notebook-controller/config/manager/manager.yaml) |
+| controller-manager | kube-rbac-proxy | ? | ? | ? | [`components/notebook-controller/config/default/manager_auth_proxy_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/default/manager_auth_proxy_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_auth_proxy_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/default/manager_auth_proxy_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_image_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/default/manager_image_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_prometheus_metrics_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/default/manager_prometheus_metrics_patch.yaml) |
+| controller-manager | manager | ? | ? | ? | [`components/notebook-controller/config/default/manager_webhook_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/default/manager_webhook_patch.yaml) |
+| deployment | manager | ? | ? | ? | [`components/notebook-controller/config/manager/manager.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/manager/manager.yaml) |
+| deployment | manager | ? | ? | ? | [`components/notebook-controller/config/overlays/openshift/manager_openshift_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/overlays/openshift/manager_openshift_patch.yaml) |
+| deployment | manager | true | true | ? | [`components/notebook-controller/config/overlays/openshift/manager_tls_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/notebook-controller/config/overlays/openshift/manager_tls_patch.yaml) |
+| manager | manager | ? | ? | ? | [`components/odh-notebook-controller/config/manager/manager.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/odh-notebook-controller/config/manager/manager.yaml) |
+| manager | manager | ? | true | ? | [`components/odh-notebook-controller/config/overlays/openshift/manager_tls_patch.yaml`](https://github.com/opendatahub-io/kubeflow/blob/6b078dbe8bb560f7af91b933e8abb3fc26ea1bf1/components/odh-notebook-controller/config/overlays/openshift/manager_tls_patch.yaml) |
 
 ## Build Security
 

@@ -1,5 +1,7 @@
 # guardrails-detectors: Security
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Secrets
 
 Kubernetes secrets referenced by this component. Only names and types are shown, not values.
@@ -14,7 +16,7 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
-| `detectors/Dockerfile.builtIn` | builder | 3 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal; Unpinned base image: base; Unpinned base image: builder; No USER directive found (defaults to root) |
-| `detectors/Dockerfile.hf` | builder | 5 | root |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal; Unpinned base image: base; Unpinned base image: base; Unpinned base image: base; Unpinned base image: builder; Container runs as root user |
-| `detectors/Dockerfile.judge` | builder | 3 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal; Unpinned base image: base; Unpinned base image: builder; No USER directive found (defaults to root) |
+| `detectors/Dockerfile.builtIn` | builder | 3 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/python-312:latest; Unpinned base image: base; Unpinned base image: builder; No USER directive found (defaults to root) |
+| `detectors/Dockerfile.hf` | builder | 3 | 1001 |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/python-312:latest; Unpinned base image: base; Unpinned base image: builder |
+| `detectors/Dockerfile.judge` | builder | 3 |  |  |  |  | Unpinned base image: registry.access.redhat.com/ubi9/python-312:latest; Unpinned base image: base; Unpinned base image: builder; No USER directive found (defaults to root) |
 

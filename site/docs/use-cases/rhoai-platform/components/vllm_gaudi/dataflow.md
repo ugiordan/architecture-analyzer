@@ -1,5 +1,7 @@
 # vllm-gaudi: Dataflow
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Controller Watches
 
 Kubernetes resources this controller monitors for changes. Each watch triggers reconciliation when the watched resource is created, updated, or deleted.
@@ -16,10 +18,6 @@ sequenceDiagram
 
     participant KubernetesAPI as Kubernetes API
     participant vllm_gaudi as vllm-gaudi
-
-
-    Note over vllm_gaudi: Exposed Services
-    Note right of vllm_gaudi: cli-port-default:8000/TCP []
 ```
 
 ## Configuration

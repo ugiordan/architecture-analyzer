@@ -1,5 +1,7 @@
 # data-science-pipelines: Network
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 ## Service Map
 
 ```mermaid
@@ -11,11 +13,8 @@ graph LR
 
     data_science_pipelines["data-science-pipelines"]:::component
     data_science_pipelines --> svc_0["kubeflow-pipelines-profile-controller\nClusterIP: 80/TCP"]:::svc
-    data_science_pipelines --> svc_1["squid\nClusterIP: 3128/TCP"]:::svc
-    data_science_pipelines -.-> ext_postgres[["postgres\ndatabase"]]:::ext
-    data_science_pipelines -.-> ext_sqlite[["sqlite\ndatabase"]]:::ext
+    data_science_pipelines -.-> ext_requests[["requests\napi"]]:::ext
     data_science_pipelines -.-> ext_grpc[["grpc\ngrpc"]]:::ext
-    data_science_pipelines -.-> ext_azure_blob[["azure-blob\nobject-storage"]]:::ext
     data_science_pipelines -.-> ext_gcs[["gcs\nobject-storage"]]:::ext
     data_science_pipelines -.-> ext_minio[["minio\nobject-storage"]]:::ext
     data_science_pipelines -.-> ext_s3[["s3\nobject-storage"]]:::ext
@@ -25,21 +24,20 @@ graph LR
 
 | Name | Type | Ports | Source |
 |------|------|-------|--------|
-| kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP | [`manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/b73cf65084cbcc8ed3c331e92ae28553a3e67b03/manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml) |
-| squid | ClusterIP | 3128/TCP | [`.github/resources/squid/manifests/service.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/b73cf65084cbcc8ed3c331e92ae28553a3e67b03/.github/resources/squid/manifests/service.yaml) |
+| kubeflow-pipelines-profile-controller | ClusterIP | 80/TCP | [`manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml`](https://github.com/opendatahub-io/data-science-pipelines/blob/99d5da66f758d22eb96f8bda2ae46161100e75a6/manifests/kustomize/base/installs/multi-user/pipelines-profile-controller/service.yaml) |
 
 ### Ingress / Routing
 
 | Kind | Name | Hosts | Paths | TLS | Source |
 |------|------|-------|-------|-----|--------|
-| DestinationRule | rbac-inferred |  |  | no | [`rbac/kubeflow-metacontroller`](https://github.com/kubeflow/data-science-pipelines/blob/b73cf65084cbcc8ed3c331e92ae28553a3e67b03/rbac/kubeflow-metacontroller) |
-| Route | ml-pipeline-ui |  |  | yes | [`manifests/kustomize/env/openshift/base/route.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/b73cf65084cbcc8ed3c331e92ae28553a3e67b03/manifests/kustomize/env/openshift/base/route.yaml) |
+| DestinationRule | rbac-inferred |  |  | no | [`rbac/kubeflow-metacontroller`](https://github.com/opendatahub-io/data-science-pipelines/blob/99d5da66f758d22eb96f8bda2ae46161100e75a6/rbac/kubeflow-metacontroller) |
+| Route | ml-pipeline-ui |  |  | yes | [`manifests/kustomize/env/openshift/base/route.yaml`](https://github.com/opendatahub-io/data-science-pipelines/blob/99d5da66f758d22eb96f8bda2ae46161100e75a6/manifests/kustomize/env/openshift/base/route.yaml) |
 
 ### Network Policies
 
 | Name | Policy Types | Source |
 |------|-------------|--------|
-| seaweedfs | Ingress | [`manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml`](https://github.com/kubeflow/data-science-pipelines/blob/b73cf65084cbcc8ed3c331e92ae28553a3e67b03/manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml) |
+| seaweedfs | Ingress | [`manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml`](https://github.com/opendatahub-io/data-science-pipelines/blob/99d5da66f758d22eb96f8bda2ae46161100e75a6/manifests/kustomize/third-party/seaweedfs/base/seaweedfs/seaweedfs-networkpolicy.yaml) |
 
 ## Network Policy Graph
 
@@ -53,6 +51,12 @@ graph LR
 
     data_science_pipelines["data-science-pipelines\nPods"]:::pod
     np_0_seaweedfs{{"seaweedfs\nIngress"}}:::policy
+    src_0_0_0["all namespaces"]:::external
+    src_0_0_0 -->|ingress| np_0_seaweedfs
+    src_0_1_0["all namespaces"]:::external
+    src_0_1_0 -->|ingress| np_0_seaweedfs
+    src_0_2_0["all pods"]:::external
+    src_0_2_0 -->|ingress| np_0_seaweedfs
     np_0_seaweedfs --> data_science_pipelines
 ```
 

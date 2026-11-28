@@ -1,8 +1,13 @@
 # codeflare-operator
 
-**Repository:** project-codeflare/codeflare-operator  
-**Analyzer:** arch-analyzer 0.2.0  
-**Extracted:** 2026-05-07T15:03:41Z
+> **Architecture snapshot: 2026-11-28** (2026-11-28)
+
+
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
+**Repository:** red-hat-data-services/codeflare-operator  
+**Analyzer:** arch-analyzer 38b24267ad379636973f678b4ca92689c2c6fdf3  
+**Extracted:** 2026-11-28T07:15:01Z
 
 ## Summary
 
@@ -25,6 +30,7 @@ graph LR
 
     classDef crd fill:#e74c3c,stroke:#c0392b,color:#fff
     classDef controller fill:#3498db,stroke:#2980b9,color:#fff
+    classDef component fill:#3498db,stroke:#2980b9,color:#fff
     classDef owned fill:#2ecc71,stroke:#27ae60,color:#fff
     classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
     classDef dep fill:#f39c12,stroke:#e67e22,color:#fff
@@ -44,23 +50,21 @@ graph LR
     class owned_4 owned
     controller -->|"Owns"| owned_5["Route"]
     class owned_5 owned
-    controller -->|"Owns"| owned_6["Secret"]
+    controller -->|"Owns"| owned_6["Service"]
     class owned_6 owned
-    controller -->|"Owns"| owned_7["Service"]
+    controller -->|"Owns"| owned_7["ServiceAccount"]
     class owned_7 owned
-    controller -->|"Owns"| owned_8["ServiceAccount"]
-    class owned_8 owned
-    watch_9["ClusterRoleBinding"] -->|"Watches"| controller
-    class watch_9 external
-    controller -.->|"depends on"| odh_10["opendatahub-operator"]
-    class odh_10 dep
+    watch_8["ClusterRoleBinding"] -->|"Watches"| controller
+    class watch_8 external
+    controller -.->|"depends on"| odh_9["opendatahub-operator"]
+    class odh_9 dep
 ```
 
 ### CRDs
 
-| Group | Version | Kind | Scope | Fields | Validation Rules | Source |
-|-------|---------|------|-------|--------|------------------|--------|
-| workload.codeflare.dev | v1beta2 | AppWrapper | Namespaced | 50 | 0 | [`config/crd/crd-appwrapper.yml`](https://github.com/project-codeflare/codeflare-operator/blob/7c44564dcefd68bacf6cf7f759e6be92e4d95c11/config/crd/crd-appwrapper.yml) |
+| Group | Version | Kind | Scope | Fields | Validation Rules | Discovery | Source |
+|-------|---------|------|-------|--------|------------------|-----------|--------|
+| workload.codeflare.dev | v1beta2 | AppWrapper | Namespaced | 50 | 0 | YAML | [`config/crd/crd-appwrapper.yml`](https://github.com/red-hat-data-services/codeflare-operator/blob/f89edd9f015da4b1f466a7fe0b7a164b7da6c7c9/config/crd/crd-appwrapper.yml) |
 
 ## Dependencies
 

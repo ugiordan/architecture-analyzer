@@ -1,5 +1,7 @@
 # text-generation-inference: Network
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Service Map
 
 ```mermaid
@@ -11,6 +13,7 @@ graph LR
 
     text_generation_inference["text-generation-inference"]:::component
     text_generation_inference --> svc_0["inference-server\nClusterIP: 8033/TCP"]:::svc
+    text_generation_inference -.-> ext_grpc[["grpc\ngrpc"]]:::ext
 ```
 
 ### Services

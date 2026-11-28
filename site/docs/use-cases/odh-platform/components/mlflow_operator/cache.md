@@ -1,5 +1,7 @@
 # mlflow-operator: Cache Architecture
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 Controller-runtime cache configuration controls which Kubernetes resources are cached in-memory. Misconfigured caches (cluster-wide watches on high-cardinality types without filters) are a primary cause of operator OOM kills.
 
 ## Cache Architecture
@@ -21,11 +23,10 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 | batchv1.Job | label | label selector |
 | corev1.PersistentVolumeClaim | label | label selector |
 | corev1.Pod | label | label selector |
-| corev1.Secret | label | label selector |
 | corev1.Service | label | label selector |
 | corev1.ServiceAccount | label | label selector |
-| rbacv1.ClusterRole | label | label selector |
-| rbacv1.ClusterRoleBinding | label | label selector |
+| rbacv1.ClusterRole | field | field selector |
+| rbacv1.ClusterRoleBinding | field | field selector |
 
 ### Issues
 
@@ -35,5 +36,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 - Type CronJob is watched but has no cache filter (cluster-wide informer)
 - Type HTTPRoute is watched but has no cache filter (cluster-wide informer)
 - Type MLflow is watched but has no cache filter (cluster-wide informer)
+- Type MLflowOperator is watched but has no cache filter (cluster-wide informer)
+- Type Namespace is watched but has no cache filter (cluster-wide informer)
 - Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)
 

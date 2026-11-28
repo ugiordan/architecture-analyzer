@@ -1,0 +1,37 @@
+# praxis-extproc: Dataflow
+
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
+## Controller Watches
+
+Kubernetes resources this controller monitors for changes. Each watch triggers reconciliation when the watched resource is created, updated, or deleted.
+
+No controller watches found in analyzed sources.
+
+## Reconciliation Flow
+
+How the controller interacts with the Kubernetes API during reconciliation.
+
+```mermaid
+sequenceDiagram
+    %% Static dataflow for praxis-extproc
+
+    participant KubernetesAPI as Kubernetes API
+    participant payload_processing as payload-processing
+
+
+    Note over payload_processing: Exposed Services
+    Note right of payload_processing: payload-processing:9004/TCP []
+```
+
+## Configuration
+
+ConfigMaps and Helm values that control this component's runtime behavior.
+
+### ConfigMaps
+
+| Name | Data Keys | Source |
+|------|-----------|--------|
+| payload-processing-plugins | extproc.yaml, pre-extproc.yaml | [`deploy/base/config/configmap.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/853f14f6f304479114c05256ebcc99d170a29af8/deploy/base/config/configmap.yaml) |
+| payload-processing-plugins | extproc.yaml | [`deploy/overlays/demo/workload/configmap-patch.yaml`](https://github.com/opendatahub-io/praxis-extproc/blob/853f14f6f304479114c05256ebcc99d170a29af8/deploy/overlays/demo/workload/configmap-patch.yaml) |
+

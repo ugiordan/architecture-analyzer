@@ -1,27 +1,40 @@
 # trainer: Network
 
-## Service Map
-
-*1 unique services (2 total, duplicates from test fixtures collapsed).*
-
-```mermaid
-graph LR
-    classDef svc fill:#2ecc71,stroke:#27ae60,color:#fff
-    classDef test fill:#95a5a6,stroke:#7f8c8d,color:#fff
-    classDef component fill:#3498db,stroke:#2980b9,color:#fff
-    classDef ext fill:#e74c3c,stroke:#c0392b,color:#fff
-
-    trainer["trainer"]:::component
-    trainer --> svc_0["webhook-service\nClusterIP: 443/TCP"]:::svc
-```
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
 
 ### Services
 
-| Name | Type | Ports | Source |
-|------|------|-------|--------|
-| webhook-service | ClusterIP | 443/TCP | [`.gomod-cache/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gomod-cache/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml) |
-| webhook-service | ClusterIP | 443/TCP | [`.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml`](https://github.com/kubeflow/trainer/blob/4f5dac6692c032fe5257cd8209cb4653f6c3c51d/.gopath-loader/pkg/mod/sigs.k8s.io/jobset@v0.10.1/config/components/webhook/service.yaml) |
+No services found in analyzed sources.
 
-!!! warning "No Network Policies"
-    No NetworkPolicy resources were found in the analyzed sources. Network policies may exist in overlays, Helm values, or cluster-level configurations not captured by static analysis.
+### Network Policies
+
+| Name | Policy Types | Source |
+|------|-------------|--------|
+| kubeflow-trainer-controller-manager | Ingress | [`manifests/rhoai/networkpolicy-ingress.yaml`](https://github.com/red-hat-data-services/trainer/blob/2f3298cdf9a308731456dd30918a63aeff8fb5e8/manifests/rhoai/networkpolicy-ingress.yaml) |
+| kubeflow-trainer-controller-manager-egress | Egress | [`manifests/rhoai/networkpolicy-egress.yaml`](https://github.com/red-hat-data-services/trainer/blob/2f3298cdf9a308731456dd30918a63aeff8fb5e8/manifests/rhoai/networkpolicy-egress.yaml) |
+
+## Network Policy Graph
+
+Visual representation of NetworkPolicy rules. Ingress rules show what traffic is allowed into pods, egress rules show what traffic is allowed out.
+
+```mermaid
+graph LR
+    classDef policy fill:#e74c3c,stroke:#c0392b,color:#fff
+    classDef pod fill:#3498db,stroke:#2980b9,color:#fff
+    classDef external fill:#95a5a6,stroke:#7f8c8d,color:#fff
+
+    trainer["trainer\nPods"]:::pod
+    np_0_kubeflow_trainer_controller_manager{{"kubeflow-trainer-controller-manager\nIngress"}}:::policy
+    src_0_0_all["all pods"]:::external
+    src_0_0_all -->|ingress| np_0_kubeflow_trainer_controller_manager
+    src_0_1_0["all namespaces"]:::external
+    src_0_1_0 -->|ingress| np_0_kubeflow_trainer_controller_manager
+    src_0_2_0["ns: kubernetes.io/metadata.name=openshift-monitoring"]:::external
+    src_0_2_0 -->|ingress| np_0_kubeflow_trainer_controller_manager
+    np_0_kubeflow_trainer_controller_manager --> trainer
+    np_1_kubeflow_trainer_controller_manager_egress{{"kubeflow-trainer-controller-manager-egress\nEgress"}}:::policy
+    np_1_kubeflow_trainer_controller_manager_egress --> trainer
+    dst_1_0_all["all destinations"]:::external
+    trainer -->|egress| dst_1_0_all
+```
 

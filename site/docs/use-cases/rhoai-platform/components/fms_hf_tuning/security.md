@@ -1,5 +1,7 @@
 # fms-hf-tuning: Security
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Secrets
 
 Kubernetes secrets referenced by this component. Only names and types are shown, not values.
@@ -15,4 +17,5 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
 | `build/Dockerfile` | release-base | 6 | ${USER} |  |  |  | Unpinned base image: base; Unpinned base image: base; Unpinned base image: cuda-base; Unpinned base image: cuda-devel; Unpinned base image: release-base |
+| `build/nvcr.Dockerfile` | nvcr.io/nvidia/pytorch:${NVCR_IMAGE_VERSION} | 2 |  |  |  |  | No USER directive found (defaults to root) |
 

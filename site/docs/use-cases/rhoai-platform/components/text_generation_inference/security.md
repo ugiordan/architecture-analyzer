@@ -1,5 +1,7 @@
 # text-generation-inference: Security
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Secrets
 
 Kubernetes secrets referenced by this component. Only names and types are shown, not values.

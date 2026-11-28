@@ -1,5 +1,7 @@
 # notebooks-downstream: Network
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Service Map
 
 *1 unique services (13 total, duplicates from test fixtures collapsed).*
@@ -13,6 +15,8 @@ graph LR
 
     notebooks_downstream["notebooks-downstream"]:::component
     notebooks_downstream --> svc_0["notebook\nClusterIP: 8888/TCP"]:::svc
+    notebooks_downstream -.-> ext_requests[["requests\napi"]]:::ext
+    notebooks_downstream -.-> ext_minio[["minio\nobject-storage"]]:::ext
 ```
 
 ### Services

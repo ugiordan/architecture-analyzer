@@ -1,5 +1,7 @@
 # kserve-autogluon-server: Cache Architecture
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 Controller-runtime cache configuration controls which Kubernetes resources are cached in-memory. Misconfigured caches (cluster-wide watches on high-cardinality types without filters) are a primary cause of operator OOM kills.
 
 ## Cache Architecture
@@ -11,7 +13,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 | Manager file | `cmd/manager/main.go` |
 | Cache scope | cluster-wide |
 | DefaultTransform | no |
-| Memory limit | 128Mi |
+| Memory limit | 300Mi |
 
 ### Filtered Types
 
@@ -19,7 +21,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 |------|-------------|--------|
 | appsv1.Deployment | label | label selector |
 | autoscalingv2.HorizontalPodAutoscaler | label | label selector |
-| corev1.ConfigMap | label | label selector |
+| corev1.ConfigMap | namespace | namespace-scoped |
 | corev1.Pod | label | label selector |
 | corev1.Secret | label | label selector |
 
@@ -27,18 +29,10 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 
 - No DefaultTransform: managedFields cached for all objects (wasted memory). Add cache.DefaultTransform to strip managedFields and reduce memory footprint
 - No GOMEMLIMIT set in deployment (Go GC cannot pressure-tune). Set GOMEMLIMIT to 80-90% of container memory limit for optimal GC behavior
-- Type CloudEventSource is watched but has no cache filter (cluster-wide informer)
-- Type ClusterCloudEventSource is watched but has no cache filter (cluster-wide informer)
-- Type ClusterRole is watched but has no cache filter (cluster-wide informer)
-- Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)
 - Type ClusterServingRuntime is watched but has no cache filter (cluster-wide informer)
-- Type ClusterTriggerAuthentication is watched but has no cache filter (cluster-wide informer)
-- Type DaemonSet is watched but has no cache filter (cluster-wide informer)
 - Type Gateway is watched but has no cache filter (cluster-wide informer)
 - Type HTTPRoute is watched but has no cache filter (cluster-wide informer)
 - Type InferenceGraph is watched but has no cache filter (cluster-wide informer)
-- Type InferenceModelRewrite is watched but has no cache filter (cluster-wide informer)
-- Type InferenceObjective is watched but has no cache filter (cluster-wide informer)
 - Type InferencePool is watched but has no cache filter (cluster-wide informer)
 - Type InferenceService is watched but has no cache filter (cluster-wide informer)
 - Type Ingress is watched but has no cache filter (cluster-wide informer)
@@ -50,23 +44,13 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 - Type LocalModelNamespaceCache is watched but has no cache filter (cluster-wide informer)
 - Type LocalModelNode is watched but has no cache filter (cluster-wide informer)
 - Type Node is watched but has no cache filter (cluster-wide informer)
-- Type OpAMPBridge is watched but has no cache filter (cluster-wide informer)
 - Type OpenTelemetryCollector is watched but has no cache filter (cluster-wide informer)
 - Type PersistentVolume is watched but has no cache filter (cluster-wide informer)
 - Type PersistentVolumeClaim is watched but has no cache filter (cluster-wide informer)
-- Type PodDisruptionBudget is watched but has no cache filter (cluster-wide informer)
-- Type PodMonitor is watched but has no cache filter (cluster-wide informer)
-- Type Route is watched but has no cache filter (cluster-wide informer)
-- Type ScaledJob is watched but has no cache filter (cluster-wide informer)
 - Type ScaledObject is watched but has no cache filter (cluster-wide informer)
 - Type Service is watched but has no cache filter (cluster-wide informer)
-- Type ServiceAccount is watched but has no cache filter (cluster-wide informer)
-- Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)
 - Type ServingRuntime is watched but has no cache filter (cluster-wide informer)
-- Type StatefulSet is watched but has no cache filter (cluster-wide informer)
-- Type TargetAllocator is watched but has no cache filter (cluster-wide informer)
 - Type TrainedModel is watched but has no cache filter (cluster-wide informer)
-- Type TriggerAuthentication is watched but has no cache filter (cluster-wide informer)
 - Type VariantAutoscaling is watched but has no cache filter (cluster-wide informer)
 - Type VirtualService is watched but has no cache filter (cluster-wide informer)
 

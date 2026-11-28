@@ -1,5 +1,7 @@
 # data-science-pipelines-operator: Cache Architecture
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 Controller-runtime cache configuration controls which Kubernetes resources are cached in-memory. Misconfigured caches (cluster-wide watches on high-cardinality types without filters) are a primary cause of operator OOM kills.
 
 ## Cache Architecture
@@ -37,6 +39,9 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 
 - Cache bypass (DisableFor) configured for corev1.ConfigMap. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)
 - Cache bypass (DisableFor) configured for corev1.Secret. This is a common fix for OOM caused by informer cache flooding from high-cardinality types (e.g., opendatahub-io/model-registry-operator#457)
+- Type AIPipelines is watched but has no cache filter (cluster-wide informer)
+- Type ClusterRole is watched but has no cache filter (cluster-wide informer)
+- Type ClusterRoleBinding is watched but has no cache filter (cluster-wide informer)
 - Type DataSciencePipelinesApplication is watched but has no cache filter (cluster-wide informer)
 - Type Deployment is watched but has no cache filter (cluster-wide informer)
 - Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)

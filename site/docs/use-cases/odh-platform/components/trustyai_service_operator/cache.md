@@ -1,5 +1,7 @@
 # trustyai-service-operator: Cache Architecture
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 Controller-runtime cache configuration controls which Kubernetes resources are cached in-memory. Misconfigured caches (cluster-wide watches on high-cardinality types without filters) are a primary cause of operator OOM kills.
 
 ## Cache Architecture
@@ -8,7 +10,7 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 
 | Property | Value |
 |----------|-------|
-| Manager file | `cmd/main.go` |
+| Manager file | `trustyai-operator-module/cmd/trustyai-operator-module/main.go` |
 | Cache scope | cluster-wide |
 | DefaultTransform | no |
 | GOMEMLIMIT | 630MiB |
@@ -20,13 +22,17 @@ Controller-runtime cache configuration controls which Kubernetes resources are c
 - Type ConfigMap is watched but has no cache filter (cluster-wide informer)
 - Type Deployment is watched but has no cache filter (cluster-wide informer)
 - Type EvalHub is watched but has no cache filter (cluster-wide informer)
-- Type GuardrailsOrchestrator is watched but has no cache filter (cluster-wide informer)
-- Type InferenceService is watched but has no cache filter (cluster-wide informer)
 - Type Job is watched but has no cache filter (cluster-wide informer)
 - Type LMEvalJob is watched but has no cache filter (cluster-wide informer)
 - Type Namespace is watched but has no cache filter (cluster-wide informer)
 - Type NemoGuardrails is watched but has no cache filter (cluster-wide informer)
+- Type NetworkPolicy is watched but has no cache filter (cluster-wide informer)
+- Type Pod is watched but has no cache filter (cluster-wide informer)
+- Type RoleBinding is watched but has no cache filter (cluster-wide informer)
 - Type Service is watched but has no cache filter (cluster-wide informer)
+- Type ServiceAccount is watched but has no cache filter (cluster-wide informer)
+- Type ServiceMonitor is watched but has no cache filter (cluster-wide informer)
+- Type TrustyAI is watched but has no cache filter (cluster-wide informer)
 - Type TrustyAIService is watched but has no cache filter (cluster-wide informer)
 - Type Workload is watched but has no cache filter (cluster-wide informer)
 

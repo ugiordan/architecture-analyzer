@@ -1,5 +1,7 @@
 # model-registry-operator: Security
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Dataflow](dataflow.md)
+
 ## Secrets
 
 Kubernetes secrets referenced by this component. Only names and types are shown, not values.
@@ -8,6 +10,8 @@ Kubernetes secrets referenced by this component. Only names and types are shown,
 
 | Name | Type | Referenced By |
 |------|------|---------------|
+| aihub-controller-manager-metrics-tls | Opaque | deployment/aihub-controller-manager |
+| catalog-webhook-service | Opaque | deployment/catalog-controller-manager |
 | controller-manager-metrics-service | Opaque | deployment/controller-manager |
 | webhook-server-cert | Opaque | deployment/controller-manager |
 
@@ -19,7 +23,11 @@ SecurityContext settings on pod and container specs. These control privilege esc
 
 | Deployment | Container | RunAsNonRoot | ReadOnlyFS | Privileged | Source |
 |------------|-----------|--------------|------------|------------|--------|
-| model-registry-operator-controller-manager | manager | ? | ? | ? | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/model-registry-operator/blob/c15ae799915a05d37147cf8119691d15c61893f4/kustomize:config/overlays/odh) |
+| aihub-controller-manager | manager | ? | true | ? | [`config/overlays/aihub/manager.yaml`](https://github.com/opendatahub-io/model-registry-operator/blob/4ce9197a395094ebd5449f62e0715470b1a69f26/config/overlays/aihub/manager.yaml) |
+| catalog-controller-manager | manager | ? | true | ? | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/model-registry-operator/blob/4ce9197a395094ebd5449f62e0715470b1a69f26/kustomize:config/overlays/odh) |
+| model-registry-operator-controller-manager | manager | ? | ? | ? | [`kustomize:config/overlays/odh`](https://github.com/opendatahub-io/model-registry-operator/blob/4ce9197a395094ebd5449f62e0715470b1a69f26/kustomize:config/overlays/odh) |
+| template-value | rest-container | ? | ? | ? | [`internal/controller/config/templates/deployment.yaml.tmpl`](https://github.com/opendatahub-io/model-registry-operator/blob/4ce9197a395094ebd5449f62e0715470b1a69f26/internal/controller/config/templates/deployment.yaml.tmpl) |
+| template-value | kube-rbac-proxy | ? | ? | ? | [`internal/controller/config/templates/deployment.yaml.tmpl`](https://github.com/opendatahub-io/model-registry-operator/blob/4ce9197a395094ebd5449f62e0715470b1a69f26/internal/controller/config/templates/deployment.yaml.tmpl) |
 
 ## Build Security
 
@@ -28,5 +36,4 @@ Dockerfile patterns and base image analysis. Covers supply chain security: base 
 | Path | Base Image | Stages | User | Ports | Architectures | FIPS | Issues |
 |------|------------|--------|------|-------|---------------|------|--------|
 | `Dockerfile` | registry.access.redhat.com/ubi9/ubi-minimal:latest | 2 | 65532:65532 |  | multi-arch |  | Unpinned base image: registry.access.redhat.com/ubi9/ubi-minimal:latest |
-| `Dockerfile.konflux` | registry.access.redhat.com/ubi9/ubi-minimal@sha256:b9b10f42d7eba7ad4a6d5ef26b7d34fdc892b2ffe59b8d0372ec884008569eb6 | 2 | 65532:65532 |  |  |  |  |
 

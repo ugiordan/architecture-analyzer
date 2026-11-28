@@ -1,10 +1,22 @@
 # training-operator: Dataflow
 
+[Overview](index.md) · [Agent Context](agent-context.md) · [Extracted Data](details.md) · [Network](network.md) · [RBAC](rbac.md) · [Security](security.md) · [Cache](cache.md) · [Dataflow](dataflow.md)
+
 ## Controller Watches
 
 Kubernetes resources this controller monitors for changes. Each watch triggers reconciliation when the watched resource is created, updated, or deleted.
 
-No controller watches found.
+| Type | GVK | Source |
+|------|-----|--------|
+
+### Programmatic Resource Operations
+
+| Verb | Kind | Group | Condition |
+|------|------|-------|----------|
+| create | Pod |  |  |
+| create | HorizontalPodAutoscaler | autoscaling |  |
+| delete | HorizontalPodAutoscaler | autoscaling |  |
+| update | HorizontalPodAutoscaler | autoscaling |  |
 
 ## Reconciliation Flow
 
@@ -30,6 +42,16 @@ sequenceDiagram
     Note right of KubernetesAPI: TFJob (kubeflow.org/v1)
     Note right of KubernetesAPI: XGBoostJob (kubeflow.org/v1)
 ```
+
+### Webhooks
+
+| Name | Type | Path | Failure Policy | Service | Overlays | Enable Condition | Sources |
+|------|------|------|----------------|---------|----------|------------------|----------|
+| Webhook-webhook | validating | /validate-kubeflow-org-v1-jaxjob |  |  |  |  |  |
+| Webhook-webhook | validating | /validate-kubeflow-org-v1-paddlejob |  |  |  |  |  |
+| Webhook-webhook | validating | /validate-kubeflow-org-v1-pytorchjob |  |  |  |  |  |
+| Webhook-webhook | validating | /validate-kubeflow-org-v1-tfjob |  |  |  |  |  |
+| Webhook-webhook | validating | /validate-kubeflow-org-v1-xgboostjob |  |  |  |  |  |
 
 ## Configuration
 
